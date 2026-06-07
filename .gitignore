@@ -1,0 +1,7 @@
+# Uploaded files / extracted temp
+*.zip
+extracted/
+
+# OS
+.DS_Store
+Thumbs.db

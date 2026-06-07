@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily English Debug — 2026-06-01</title>
+  <style>
+    body {
+      font-family: "Segoe UI", "Microsoft JhengHei", sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 24px;
+      background: #f9f9f9;
+      color: #222;
+      line-height: 1.7;
+    }
+    h1 { font-size: 1.5rem; color: #1a1a2e; border-bottom: 3px solid #4a90d9; padding-bottom: 8px; }
+    h2 { font-size: 1.1rem; color: #4a90d9; margin-top: 2em; }
+    .tag {
+      display: inline-block;
+      background: #e8f0fe;
+      color: #1a56a4;
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 0.85rem;
+      margin: 2px 4px 2px 0;
+    }
+    .sentence-card {
+      background: #fff;
+      border-left: 4px solid #4a90d9;
+      padding: 14px 18px;
+      margin: 12px 0;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .sentence-card .en {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+    }
+    .sentence-card .meta { font-size: 0.88rem; color: #555; }
+    .sentence-card .meta span { font-weight: 600; color: #333; }
+    .drill-list { list-style: decimal; padding-left: 1.4em; }
+    .drill-list li { margin: 10px 0; }
+    .speaking-block {
+      background: #fff;
+      border: 1px solid #dde3f0;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 12px 0;
+    }
+    .speaking-block .situation {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .speaking-block .they { color: #555; font-style: italic; margin-bottom: 6px; }
+    .speaking-block .you { color: #1a7a3c; font-weight: 600; }
+    .bug-card {
+      background: #fff8f0;
+      border-left: 4px solid #e07b00;
+      padding: 14px 18px;
+      margin: 12px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .bug-card .label { font-size: 0.8rem; font-weight: 700; color: #e07b00; text-transform: uppercase; margin-bottom: 6px; }
+    .bug-card code { background: #f0e6d3; padding: 1px 6px; border-radius: 3px; font-family: monospace; }
+    .bug-card .good { color: #1a7a3c; font-weight: 600; }
+    .bug-card .bad { color: #c0392b; }
+    .answer-toggle summary {
+      cursor: pointer;
+      color: #4a90d9;
+      font-weight: 600;
+      margin: 8px 0;
+      user-select: none;
+    }
+    .answer-box {
+      background: #f0f6ff;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-top: 6px;
+    }
+    .answer-box ol { margin: 0; padding-left: 1.2em; }
+    .highlight {
+      background: #fffbe6;
+      border: 1px solid #f0c040;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 16px 0;
+    }
+    .highlight ol { margin: 0; padding-left: 1.2em; font-weight: 600; }
+    .day-badge {
+      display: inline-block;
+      background: #e6f4ea;
+      color: #1a7a3c;
+      border-radius: 4px;
+      padding: 1px 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .codex-note {
+      font-size: 0.78rem;
+      color: #888;
+      margin-top: 24px;
+      border-top: 1px solid #ddd;
+      padding-top: 8px;
+    }
+    hr { border: none; border-top: 1px solid #ddd; margin: 28px 0; }
+  </style>
+</head>
+<body>
+
+<h1>Daily English Debug — 2026-06-01 <span class="day-badge">Day 5</span></h1>
+
+<p>
+  <span class="tag">RMA 退修流程</span>
+  <span class="tag">升級與緊急處理</span>
+  <span class="tag">請求優先處理</span>
+</p>
+
+<hr>
+
+<h2>Part 1：今日 3 個核心句型</h2>
+
+<div class="sentence-card">
+  <div class="en">1. We'd like to initiate an RMA for this unit.</div>
+  <div class="meta">
+    <span>中文意思：</span>我們想針對這台設備啟動 RMA 退修流程。<br>
+    <span>適用場景：</span>通知原廠或客戶，需要走 RMA 流程退修。<br>
+    <span>注意：</span>initiate an RMA 是標準說法；We'd like to 比 We want to 語氣更正式有禮。
+  </div>
+</div>
+
+<div class="sentence-card">
+  <div class="en">2. Could you provide the RMA number so we can proceed with the return shipment?</div>
+  <div class="meta">
+    <span>中文意思：</span>請提供 RMA 編號，以便我們安排退回寄送。<br>
+    <span>適用場景：</span>等原廠給 RMA 授權碼，才能出貨退修。<br>
+    <span>注意：</span>so we can proceed with... 是工作 email 很好用的連接語，表示「這樣我們才能繼續…」。
+  </div>
+</div>
+
+<div class="sentence-card">
+  <div class="en">3. Please expedite the review, as this issue is blocking production.</div>
+  <div class="meta">
+    <span>中文意思：</span>此問題已影響產線，請協助加速審查。<br>
+    <span>適用場景：</span>問題緊急，需要對方提高優先順序處理。<br>
+    <span>注意：</span>expedite = 加速處理；as this issue is blocking production 是說明原因，語氣強但合理。
+  </div>
+</div>
+
+<hr>
+
+<h2>Part 2：中翻英練習</h2>
+
+<p>先自己翻，再展開答案對照。</p>
+
+<ol class="drill-list">
+  <li>這張板子再次發生故障，我們需要啟動 RMA 流程。</li>
+  <li>請提供 RMA 編號，以便我們將設備寄回給你們。</li>
+  <li>我們無法在現場解決此問題，請將案件升級至產品團隊。</li>
+  <li>此問題已導致產線停擺，請將此案件視為最高優先等級。</li>
+  <li>請在今天下班前提供簡短更新，並告知預計處理時程。</li>
+</ol>
+
+<details class="answer-toggle">
+  <summary>展開答案</summary>
+  <div class="answer-box">
+    <ol>
+      <li>The board has failed again. We'll need to initiate an RMA.</li>
+      <li>Could you provide the RMA number so we can ship the unit back to you?</li>
+      <li>We cannot resolve this issue at the field level. Please escalate the case to your product team.</li>
+      <li>This issue has brought the production line down. Please treat this case as the highest priority.</li>
+      <li>Could you provide a brief update by EOD and let us know the expected timeline?</li>
+    </ol>
+  </div>
+</details>
+
+<hr>
+
+<h2>Part 3：口說反應練習</h2>
+
+<p>直接用英文回答，不要停太久：</p>
+
+<div class="speaking-block">
+  <div class="situation">情境 1 — 原廠詢問退修原因</div>
+  <div class="they">They say: "Could you clarify why you need to return this unit?"</div>
+  <div class="you">You say: The unit is still not working after our local repair attempt. We'd like to return it for further service.</div>
+</div>
+
+<div class="speaking-block">
+  <div class="situation">情境 2 — 客戶催促進度（產線停擺）</div>
+  <div class="they">They say: "Do you have any update on this issue? Our production line is still down."</div>
+  <div class="you">You say: We've escalated the case internally and marked it as urgent. We'll send you an update by EOD.</div>
+</div>
+
+<div class="speaking-block">
+  <div class="situation">情境 3 — 原廠還沒給 RMA 編號</div>
+  <div class="they">They say: "We're still reviewing your RMA request."</div>
+  <div class="you">You say: Could you expedite the review? The customer is waiting, and we need the RMA number before we can ship the unit.</div>
+</div>
+
+<hr>
+
+<h2>Part 4：今日英文 Bug</h2>
+
+<div class="bug-card">
+  <div class="label">Bug 001 — "repair back" 中文直翻</div>
+  <p><strong>原句：</strong> <code class="bad">We need to repair back this unit.</code></p>
+  <p><strong>問題：</strong> 中文說「退修」直翻成 repair back，但英文沒有這種說法。</p>
+  <p><strong>正確寫法：</strong><br>
+    <span class="good">We need to send this unit back for repair.</span><br>
+    <span class="good">We'd like to return this unit for repair.</span><br>
+    <span class="good">We need to initiate an RMA and ship this unit back.</span>
+  </p>
+  <p><strong>套用：</strong> 「退修」= send back for repair / return for repair / initiate an RMA</p>
+</div>
+
+<div class="bug-card">
+  <div class="label">Bug 002 — "escalate for" 介系詞錯誤</div>
+  <p><strong>原句：</strong> <code class="bad">Please escalate this case for your product team.</code></p>
+  <p><strong>問題：</strong> escalate 要把事情往上傳遞「到」某個單位，介系詞應用 to，不是 for。</p>
+  <p><strong>正確寫法：</strong><br>
+    <span class="good">Please escalate this case to your product team.</span><br>
+    <span class="good">We're escalating this to our engineering lead.</span>
+  </p>
+  <p><strong>套用：</strong> escalate ... to [人/團隊]，固定用 to。for 是「為了…目的」，語意不同。</p>
+</div>
+
+<hr>
+
+<h2>Part 5：今天只要記住這三句</h2>
+
+<div class="highlight">
+  <ol>
+    <li>We'd like to initiate an RMA for this unit.</li>
+    <li>Could you provide the RMA number so we can proceed with the return shipment?</li>
+    <li>Please expedite the review, as this issue is blocking production.</li>
+  </ol>
+</div>
+
+<p class="codex-note">內容經 Codex 規劃並審查：Day 5 主題「RMA 退修 + 緊急升級」取材自新增的 escalation.md 與 rma_and_return.md，與前四次不重複。</p>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Debug Repo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", "Microsoft JhengHei", sans-serif;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+      background: #f4f6fb;
+      color: #1a1a2e;
+    }
+    header { text-align: center; padding: 28px 0 20px; }
+    header h1 { font-size: 1.4rem; margin: 0 0 6px; color: #1a1a2e; }
+    header p { font-size: .88rem; color: #666; margin: 0; }
+    section { margin-top: 28px; }
+    section h2 {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #888;
+      margin: 0 0 10px;
+    }
+    .card-list { display: flex; flex-direction: column; gap: 10px; }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 14px 16px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 4px rgba(0,0,0,.07);
+      transition: box-shadow .15s;
+    }
+    .card:hover, .card:active { box-shadow: 0 3px 10px rgba(0,0,0,.12); }
+    .card-left { display: flex; align-items: center; gap: 12px; }
+    .card-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .icon-drill { background: #e8f0fe; }
+    .icon-ref   { background: #e6f4ea; }
+    .card-title { font-size: .95rem; font-weight: 600; margin: 0 0 2px; }
+    .card-sub   { font-size: .78rem; color: #888; margin: 0; }
+    .badge {
+      font-size: .7rem; font-weight: 700;
+      background: #1a1a2e; color: #fff;
+      border-radius: 5px; padding: 2px 7px;
+      white-space: nowrap;
+    }
+    .badge-new { background: #2a9d5c; }
+    .arrow { color: #bbb; font-size: 1rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📘 English Debug Repo</h1>
+  <p>工作英文訓練系統 · 每日 10 分鐘</p>
+</header>
+
+<section>
+  <h2>每日練習</h2>
+  <div class="card-list">
+
+    <a class="card" href="drills/daily_2026-06-06.html">
+      <div class="card-left">
+        <div class="card-icon icon-drill">📝</div>
+        <div>
+          <div class="card-title">Day 7 — 2026-06-06</div>
+          <div class="card-sub">確認料號 / 規格 · 間歇性問題描述</div>
+        </div>
+      </div>
+      <span class="badge badge-new">最新</span>
+    </a>
+
+    <a class="card" href="drills/daily_2026-06-02.html">
+      <div class="card-left">
+        <div class="card-icon icon-drill">📝</div>
+        <div>
+          <div class="card-title">Day 6 — 2026-06-02</div>
+          <div class="card-sub">Follow-up email · 禮貌追蹤無回覆</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="drills/daily_2026-06-01.html">
+      <div class="card-left">
+        <div class="card-icon icon-drill">📝</div>
+        <div>
+          <div class="card-title">Day 5 — 2026-06-01</div>
+          <div class="card-sub">RMA 退修流程 · 升級與緊急處理</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="drills/daily_2026-05-31.html">
+      <div class="card-left">
+        <div class="card-icon icon-drill">📝</div>
+        <div>
+          <div class="card-title">Day 4 — 2026-05-31</div>
+          <div class="card-sub">索取除錯資訊 · log file · firmware</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+  </div>
+</section>
+
+<section>
+  <h2>句型庫</h2>
+  <div class="card-list">
+
+    <a class="card" href="sentence_bank/repair_status.md">
+      <div class="card-left">
+        <div class="card-icon icon-ref">🔧</div>
+        <div>
+          <div class="card-title">Repair Status</div>
+          <div class="card-sub">維修完成 · 等待驗證 · 測試通過</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="sentence_bank/technical_debug.md">
+      <div class="card-left">
+        <div class="card-icon icon-ref">🐛</div>
+        <div>
+          <div class="card-title">Technical Debug</div>
+          <div class="card-sub">問題描述 · 根本原因 · 索取資訊</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="sentence_bank/rma_and_return.md">
+      <div class="card-left">
+        <div class="card-icon icon-ref">📦</div>
+        <div>
+          <div class="card-title">RMA and Return</div>
+          <div class="card-sub">通知退修 · RMA 編號 · 退修處置</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="sentence_bank/escalation.md">
+      <div class="card-left">
+        <div class="card-icon icon-ref">🚨</div>
+        <div>
+          <div class="card-title">Escalation</div>
+          <div class="card-sub">升級處理 · 緊急標示 · 請求優先</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="sentence_bank/polite_requests.md">
+      <div class="card-left">
+        <div class="card-icon icon-ref">🤝</div>
+        <div>
+          <div class="card-title">Polite Requests</div>
+          <div class="card-sub">禮貌請求 · 追蹤回覆 · 解釋延遲</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+  </div>
+</section>
+
+</body>
+</html>
