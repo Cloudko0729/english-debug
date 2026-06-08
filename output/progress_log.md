@@ -153,3 +153,24 @@
 3. To avoid using the wrong replacement part, we need to verify the connector specification.
 
 **單字卡複習（5 張）：** Day 3–6 重點句型
+
+---
+
+## 2026-06-08 — 今日英文訓練 Day 8
+
+**主題：** 道歉 + 更新 ETA + Email Subject Line（Codex 規劃 + 審查通過）
+
+**新增 sentence_bank：**
+- email_subject_lines.md（[ETA Update] / [Status Update] / [Action Required] / [Follow-Up] 格式）
+- root_cause_report.md（根本原因說明、已採取動作、預防措施、結案格式）
+
+**新增 bug：**
+- Bug：Sorry for late update → Sorry for the delayed update（加 the，用 delayed）
+- Bug：need more two days → need two more days（數字放 more 前面）
+
+**今日 3 個核心句型：**
+1. Sorry for the delayed update. We expect to update you by [date/time].
+2. The delay was due to [reason]. The current ETA is [date].
+3. Subject: [ETA Update] RMA-XXXXX - [Brief Description]
+
+**單字卡複習（5 張）：** Day 4–7 重點句型
