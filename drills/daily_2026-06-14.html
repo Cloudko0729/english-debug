@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily English Debug — 2026-06-14</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; max-width: 820px; margin: 40px auto; padding: 0 24px 60px; background: #f9f9f9; color: #222; line-height: 1.7; }
+    h1 { font-size: 1.5rem; color: #1a1a2e; border-bottom: 3px solid #4a90d9; padding-bottom: 8px; }
+    h2 { font-size: 1.1rem; color: #4a90d9; margin-top: 2em; }
+    .tag { display: inline-block; background: #e8f0fe; color: #1a56a4; border-radius: 4px; padding: 2px 10px; font-size: .85rem; margin: 2px 4px 2px 0; }
+    .day-badge { display: inline-block; background: #e6f4ea; color: #1a7a3c; border-radius: 4px; padding: 1px 8px; font-size: .78rem; font-weight: 700; margin-left: 6px; vertical-align: middle; }
+    .sentence-card { background: #fff; border-left: 4px solid #4a90d9; padding: 14px 18px; margin: 12px 0; border-radius: 0 8px 8px 0; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+    .sentence-card .en { font-size: 1.05rem; font-weight: 600; color: #1a1a2e; margin-bottom: 6px; }
+    .sentence-card .meta { font-size: .88rem; color: #555; }
+    .sentence-card .meta span { font-weight: 600; color: #333; }
+    .drill-list { list-style: decimal; padding-left: 1.4em; }
+    .drill-list li { margin: 10px 0; }
+    .speaking-block { background: #fff; border: 1px solid #dde3f0; border-radius: 8px; padding: 14px 18px; margin: 12px 0; }
+    .speaking-block .situation { font-size: .8rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
+    .speaking-block .they { color: #555; font-style: italic; margin-bottom: 6px; }
+    .speaking-block .you { color: #1a7a3c; font-weight: 600; }
+    .bug-card { background: #fff8f0; border-left: 4px solid #e07b00; padding: 14px 18px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+    .bug-card .label { font-size: .8rem; font-weight: 700; color: #e07b00; text-transform: uppercase; margin-bottom: 6px; }
+    .bug-card code { background: #f0e6d3; padding: 1px 6px; border-radius: 3px; font-family: monospace; }
+    .bug-card .good { color: #1a7a3c; font-weight: 600; }
+    .bug-card .bad { color: #c0392b; }
+    .answer-toggle summary { cursor: pointer; color: #4a90d9; font-weight: 600; margin: 8px 0; user-select: none; }
+    .answer-box { background: #f0f6ff; border-radius: 6px; padding: 12px 16px; margin-top: 6px; }
+    .answer-box ol { margin: 0; padding-left: 1.2em; }
+    .highlight { background: #fffbe6; border: 1px solid #f0c040; border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
+    .highlight ol { margin: 0; padding-left: 1.2em; font-weight: 600; }
+    .codex-note { font-size: .78rem; color: #888; margin-top: 24px; border-top: 1px solid #ddd; padding-top: 8px; }
+    hr { border: none; border-top: 1px solid #ddd; margin: 28px 0; }
+    /* Flashcard */
+    .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin: 16px 0; }
+    .fc { height: 210px; perspective: 1000px; cursor: pointer; }
+    .fc-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .45s ease; }
+    .fc.flipped .fc-inner { transform: rotateY(180deg); }
+    .fc-front, .fc-back { position: absolute; inset: 0; border-radius: 10px; backface-visibility: hidden; -webkit-backface-visibility: hidden; padding: 16px; display: flex; flex-direction: column; }
+    .fc-front { background: #1a1a2e; color: #fff; justify-content: center; text-align: center; }
+    .fc-front .fc-day { font-size: .7rem; color: #88aadd; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+    .fc-front .fc-q { font-size: .95rem; font-weight: 600; line-height: 1.5; }
+    .fc-front .fc-hint { font-size: .72rem; color: #5577aa; margin-top: 12px; }
+    .fc-back { background: #fff; border: 2px solid #4a90d9; transform: rotateY(180deg); justify-content: flex-start; overflow-y: auto; font-size: .85rem; }
+    .fc-back .fc-ans { font-size: .9rem; font-weight: 600; color: #1a1a2e; margin-bottom: 8px; line-height: 1.45; }
+    .fc-back .fc-tags { margin-bottom: 8px; }
+    .fc-back .fc-tags span { background: #e8f0fe; color: #1a56a4; border-radius: 3px; padding: 1px 7px; margin: 0 3px 3px 0; font-size: .78rem; display: inline-block; }
+    .fc-back .fc-warn { font-size: .76rem; color: #c0392b; border-top: 1px solid #eee; padding-top: 6px; margin-top: 6px; }
+    .speak-btn { display: inline-flex; align-items: center; gap: 5px; background: #4a90d9; color: #fff; border: none; border-radius: 5px; padding: 4px 10px; font-size: .76rem; cursor: pointer; margin-top: 8px; }
+    .speak-btn:hover { background: #2a6ab9; }
+    .speak-btn svg { width: 13px; height: 13px; fill: currentColor; }
+  </style>
+</head>
+<body>
+
+<h1>Daily English Debug — 2026-06-14 <span class="day-badge">Day 9</span></h1>
+<p>
+  <span class="tag">保固外維修報價</span>
+  <span class="tag">quote / approve / proceed</span>
+  <span class="tag">複習單字卡 Day 5–8</span>
+</p>
+
+<hr>
+
+<h2>Part 1：今日 3 個核心句型</h2>
+
+<div class="sentence-card">
+  <div class="en">1. This unit is out of warranty, so a repair charge will apply.</div>
+  <div class="meta">
+    <span>中文意思：</span>這台設備已超過保固期，因此會產生維修費用。<br>
+    <span>適用場景：</span>客戶詢問為什麼這次維修需要付費。<br>
+    <span>注意：</span>不要寫 need pay money（太口語）；a repair charge will apply 才是業界慣用說法。
+  </div>
+</div>
+
+<div class="sentence-card">
+  <div class="en">2. We will provide a quotation before proceeding with the repair.</div>
+  <div class="meta">
+    <span>中文意思：</span>我們會先提供報價，再進行維修。<br>
+    <span>適用場景：</span>還沒開始付費維修前，先讓客戶知道流程。<br>
+    <span>注意：</span>proceed with the repair 是固定搭配，不能寫 proceed the repair。
+  </div>
+</div>
+
+<div class="sentence-card">
+  <div class="en">3. No repair work will be performed until we receive your approval.</div>
+  <div class="meta">
+    <span>中文意思：</span>在收到您的同意前，我們不會執行任何維修工作。<br>
+    <span>適用場景：</span>報價信結尾，避免客戶誤以為你已開始收費維修。<br>
+    <span>注意：</span>語氣清楚但不失禮，適合正式 email 收尾。
+  </div>
+</div>
+
+<hr>
+
+<h2>Part 2：中翻英練習</h2>
+<p>先自己翻，再展開答案對照。</p>
+<ol class="drill-list">
+  <li>這台設備已超過保固期，因此會產生維修費用。</li>
+  <li>我們會先提供報價，再進行維修。</li>
+  <li>報價包含檢測、更換零件、人工與最終測試。</li>
+  <li>請確認是否同意此維修費用，讓我們可以繼續處理。</li>
+  <li>如果您不同意報價，我們可以將設備原狀退回。</li>
+</ol>
+<details class="answer-toggle">
+  <summary>展開答案</summary>
+  <div class="answer-box">
+    <ol>
+      <li>This unit is out of warranty, so a repair charge will apply.</li>
+      <li>We will provide a quotation before proceeding with the repair.</li>
+      <li>The repair charge includes inspection, replacement parts, labor, and final testing.</li>
+      <li>Please confirm your approval of the repair charge so we can continue the repair process.</li>
+      <li>If the quotation is not approved, we can return the unit as-is.</li>
+    </ol>
+  </div>
+</details>
+
+<hr>
+
+<h2>Part 3：口說反應練習</h2>
+<p>直接用英文回答，不要停太久：</p>
+
+<div class="speaking-block">
+  <div class="situation">情境 1 — 客戶問為什麼這次 RMA 要收費</div>
+  <div class="they">They say: "Why do we need to pay for this repair?"</div>
+  <div class="you">Reference: This unit is out of warranty, so a repair charge will apply. We will provide a quotation before proceeding with the repair.</div>
+</div>
+
+<div class="speaking-block">
+  <div class="situation">情境 2 — 客戶擔心你們還沒報價就開始修</div>
+  <div class="they">They say: "Have you already started the repair?"</div>
+  <div class="you">Reference: No repair work will be performed until we receive your approval. We will wait for your confirmation first.</div>
+</div>
+
+<div class="speaking-block">
+  <div class="situation">情境 3 — 客戶說報價太高，問能否不修直接退回</div>
+  <div class="they">They say: "The quotation is too high. Can you return the unit without repair?"</div>
+  <div class="you">Reference: Yes, if the quotation is not approved, we can return the unit as-is. Please confirm how you would like us to proceed.</div>
+</div>
+
+<hr>
+
+<h2>Part 4：今日英文 Bug</h2>
+
+<div class="bug-card">
+  <div class="label">Bug 001 — "over warranty" / "pay repair money" 不專業</div>
+  <p><strong>原句：</strong> <code class="bad">This unit over warranty, so you need pay repair money.</code></p>
+  <p><strong>問題：</strong> over warranty 不自然；pay repair money 太口語且不專業。</p>
+  <p><strong>正確寫法：</strong><br>
+    <span class="good">This unit is out of warranty, so a repair charge will apply.</span><br>
+    <span class="good">The warranty period has expired, so this repair is chargeable.</span>
+  </p>
+  <p><strong>套用：</strong> 說明保固外維修、客戶需要付費時使用：out of warranty / a repair charge will apply / chargeable。</p>
+</div>
+
+<div class="bug-card">
+  <div class="label">Bug 002 — "agree this quotation" 缺介系詞</div>
+  <p><strong>原句：</strong> <code class="bad">We will repair after you agree this quotation.</code></p>
+  <p><strong>問題：</strong> agree 後缺介系詞；流程推進用 proceed with 才自然。</p>
+  <p><strong>正確寫法：</strong><br>
+    <span class="good">We will proceed with the repair after we receive your approval.</span><br>
+    <span class="good">Once you approve the quotation, we will arrange the repair accordingly.</span>
+  </p>
+  <p><strong>套用：</strong> approve the quotation（同意報價）/ proceed with the repair（進行維修）。</p>
+</div>
+
+<hr>
+
+<h2>Part 5：今天只要記住這三句</h2>
+<div class="highlight">
+  <ol>
+    <li>This unit is out of warranty, so a repair charge will apply.</li>
+    <li>We will provide a quotation before proceeding with the repair.</li>
+    <li>No repair work will be performed until we receive your approval.</li>
+  </ol>
+</div>
+
+<hr>
+
+<h2>複習單字卡 — Day 5 to 8</h2>
+<p style="font-size:.85rem;color:#666;margin-bottom:16px;">點卡片翻面複習，點 🔊 聽發音。</p>
+
+<div class="fc-grid">
+
+  <div class="fc" onclick="this.classList.toggle('flipped')">
+    <div class="fc-inner">
+      <div class="fc-front">
+        <div class="fc-day">Day 5</div>
+        <div class="fc-q">請提供 RMA 編號，我們才能安排退回。</div>
+        <div class="fc-hint">點擊翻面 →</div>
+      </div>
+      <div class="fc-back" onclick="event.stopPropagation()">
+        <div class="fc-ans">Could you provide the RMA number so we can proceed with the return shipment?</div>
+        <div class="fc-tags"><span>RMA number</span><span>return shipment</span><span>proceed with</span></div>
+        <button class="speak-btn" onclick="speak('Could you provide the RMA number so we can proceed with the return shipment?')">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>聽發音
+        </button>
+        <div class="fc-warn">❌ proceed the return → ✅ proceed with the return</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc" onclick="this.classList.toggle('flipped')">
+    <div class="fc-inner">
+      <div class="fc-front">
+        <div class="fc-day">Day 5</div>
+        <div class="fc-q">這個案子很急，會影響出貨時程。</div>
+        <div class="fc-hint">點擊翻面 →</div>
+      </div>
+      <div class="fc-back" onclick="event.stopPropagation()">
+        <div class="fc-ans">This is a high-priority issue and may affect our shipment schedule.</div>
+        <div class="fc-tags"><span>high-priority</span><span>affect schedule</span><span>shipment</span></div>
+        <button class="speak-btn" onclick="speak('This is a high-priority issue and may affect our shipment schedule.')">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>聽發音
+        </button>
+        <div class="fc-warn">❌ very hurry case → ✅ high-priority issue</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc" onclick="this.classList.toggle('flipped')">
+    <div class="fc-inner">
+      <div class="fc-front">
+        <div class="fc-day">Day 6</div>
+        <div class="fc-q">想確認您是否有時間看我們上一封信。</div>
+        <div class="fc-hint">點擊翻面 →</div>
+      </div>
+      <div class="fc-back" onclick="event.stopPropagation()">
+        <div class="fc-ans">Just checking if you have had a chance to review our previous email.</div>
+        <div class="fc-tags"><span>just checking</span><span>had a chance</span><span>previous email</span></div>
+        <button class="speak-btn" onclick="speak('Just checking if you have had a chance to review our previous email.')">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>聽發音
+        </button>
+        <div class="fc-warn">❌ Did you see my mail? → ✅ Have you had a chance to review our previous email?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc" onclick="this.classList.toggle('flipped')">
+    <div class="fc-inner">
+      <div class="fc-front">
+        <div class="fc-day">Day 7</div>
+        <div class="fc-q">請確認標籤上的完整料號。</div>
+        <div class="fc-hint">點擊翻面 →</div>
+      </div>
+      <div class="fc-back" onclick="event.stopPropagation()">
+        <div class="fc-ans">Please provide the full part number as shown on the label.</div>
+        <div class="fc-tags"><span>full part number</span><span>as shown</span><span>label</span></div>
+        <button class="speak-btn" onclick="speak('Please provide the full part number as shown on the label.')">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>聽發音
+        </button>
+        <div class="fc-warn">❌ part no. on sticker give us → ✅ provide the full part number as shown on the label</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc" onclick="this.classList.toggle('flipped')">
+    <div class="fc-inner">
+      <div class="fc-front">
+        <div class="fc-day">Day 8</div>
+        <div class="fc-q">因為需要額外測試，維修時間比預期久。</div>
+        <div class="fc-hint">點擊翻面 →</div>
+      </div>
+      <div class="fc-back" onclick="event.stopPropagation()">
+        <div class="fc-ans">The repair is taking longer than expected because additional testing is required.</div>
+        <div class="fc-tags"><span>longer than expected</span><span>additional testing</span><span>required</span></div>
+        <button class="speak-btn" onclick="speak('The repair is taking longer than expected because additional testing is required.')">
+          <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>聽發音
+        </button>
+        <div class="fc-warn">❌ cost more time → ✅ is taking longer than expected</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="codex-note">內容經 Codex 規劃並審查：Day 9 主題「保固外維修報價（quote / approve / proceed）」與前八次不重複。新增 sentence_bank：repair_charges_quotation.md。</p>
+
+<script>
+  function speak(text) {
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'en-US';
+    u.rate = 0.9;
+    window.speechSynthesis.speak(u);
+  }
+</script>
+</body>
+</html>

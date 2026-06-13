@@ -174,3 +174,25 @@
 3. Subject: [ETA Update] RMA-XXXXX - [Brief Description]
 
 **單字卡複習（5 張）：** Day 4–7 重點句型
+
+---
+
+## 2026-06-14 — 今日英文訓練 Day 9
+
+**主題：** 保固外維修報價（quote / approve / proceed）（Codex 規劃 + 審查通過）
+
+**新增 sentence_bank：**
+- repair_charges_quotation.md（保固狀態、費用內容、請客戶確認報價、付款後續流程）
+
+**新增 bug：**
+- Bug：This unit over warranty, you need pay repair money → out of warranty, a repair charge will apply
+- Bug：agree this quotation → approve the quotation / proceed with the repair（缺介系詞、固定搭配）
+
+**今日 3 個核心句型：**
+1. This unit is out of warranty, so a repair charge will apply.
+2. We will provide a quotation before proceeding with the repair.
+3. No repair work will be performed until we receive your approval.
+
+**單字卡複習（5 張）：** Day 5–8 重點句型
+
+**新增功能：** 成人每日工作英文測驗 adult_quiz.html（drills/quiz_bank.js 36 題，中翻英/抓中式英文/介系詞填空，答錯隔天優先再考）
