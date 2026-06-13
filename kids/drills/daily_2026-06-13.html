@@ -650,14 +650,45 @@ function showTotal() {
     document.getElementById("totalMsg").textContent = `還有 ${5 - done.length} 大題沒對答案喔！`;
     return;
   }
-  let c = 0, t = 0;
-  keys.forEach(k => { c += sectionScores[k][0]; t += sectionScores[k][1]; });
+  let c = 0, t = 0, perfectSections = 0;
+  keys.forEach(k => {
+    c += sectionScores[k][0];
+    t += sectionScores[k][1];
+    if (sectionScores[k][0] === sectionScores[k][1]) perfectSections++;
+  });
   const pct = Math.round(c / t * 100);
   document.getElementById("totalScore").textContent = `${c} / ${t}（${pct}分）`;
-  document.getElementById("totalMsg").textContent =
-    pct === 100 ? `🌟 太厲害了，${currentStudent}！滿分！` :
-    pct >= 80  ? `💪 很棒，${currentStudent}！再練一下紅色的題目！` :
-                 `📚 沒關係，明天弱點單字會再出現，繼續加油！`;
+
+  const coinMsg = awardCoins(c, perfectSections);
+
+  document.getElementById("totalMsg").innerHTML =
+    (pct === 100 ? `🌟 太厲害了，${currentStudent}！滿分！` :
+     pct >= 80  ? `💪 很棒，${currentStudent}！再練一下紅色的題目！` :
+                  `📚 沒關係，明天弱點單字會再出現，繼續加油！`)
+    + `<br>${coinMsg}`;
+}
+
+// ─── 發點數（每天每份只能領一次）────────────────────────────────────────────
+const DRILL_ID = "2026-06-13-animals";
+function awardCoins(correct, perfectSections) {
+  if (!currentStudent) return "";
+  const p = getProgress(currentStudent);
+  if (!p.coins) p.coins = { balance: 0, lifetimeEarned: 0, lifetimeSpent: 0, transactions: [], claimedDrills: {} };
+  const claimKey = DRILL.date + "::" + DRILL_ID;
+  if (p.coins.claimedDrills[claimKey]) {
+    return `🪙 今天這份的金幣已經領過囉（目前 ${p.coins.balance} 金幣）`;
+  }
+  const earned = correct * 5 + perfectSections * 10 + 30; // 每題5 + 每大題全對10 + 完成30
+  p.coins.balance += earned;
+  p.coins.lifetimeEarned += earned;
+  p.coins.transactions.push({
+    type: "earn", source: "dailyDrill", amount: earned,
+    balanceAfter: p.coins.balance, createdAt: new Date().toISOString(),
+    meta: { drillId: DRILL_ID, date: DRILL.date, correct, perfectSections }
+  });
+  p.coins.claimedDrills[claimKey] = { claimedAt: new Date().toISOString(), earned, correct, perfectSections };
+  saveProgress(currentStudent, p);
+  return `🪙 +${earned} 金幣！（共 ${p.coins.balance} 金幣）<br><a href="../island.html" style="color:#ffe27a;font-weight:700">👉 去蓋我的島嶼</a>`;
 }
 
 // ─── Init ────────────────────────────────────────────────────────────────────

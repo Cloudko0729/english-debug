@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Island 我的島嶼</title>
+  <style>
+    :root {
+      --bg: #d8f3ff;
+      --panel: #ffffff;
+      --primary: #2f80ed;
+      --primary-soft: #dbeafe;
+      --accent: #ffb703;
+      --gold: #f2a900;
+      --success: #2fbf71;
+      --danger: #ef476f;
+      --text: #243042;
+      --muted: #667085;
+      --border: #cfe3ee;
+      --sea: #5bb8e6;
+      --land: #b7e08a;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, "Noto Sans TC", sans-serif;
+      background: linear-gradient(#bfeaff, #d8f3ff);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+    header {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 16px;
+    }
+    header h1 { font-size: 1.4rem; }
+    header a { color: #ffe27a; font-size: .8rem; text-decoration: none; }
+
+    /* student + coins bar */
+    #topBar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 14px;
+      background: var(--accent);
+      flex-wrap: wrap;
+    }
+    .stu-group { display: flex; gap: 6px; }
+    .stu-btn {
+      padding: 5px 14px;
+      border: 2px solid #3a2a00;
+      border-radius: 18px;
+      background: transparent;
+      font-weight: 700;
+      font-size: .85rem;
+      cursor: pointer;
+      color: #3a2a00;
+    }
+    .stu-btn.active { background: #3a2a00; color: #fff; }
+    .coin-display {
+      background: #fff;
+      border-radius: 18px;
+      padding: 6px 16px;
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--gold);
+      box-shadow: 0 1px 3px rgba(0,0,0,.15);
+    }
+
+    /* stats */
+    #statsRow {
+      display: flex;
+      justify-content: space-around;
+      gap: 6px;
+      padding: 10px;
+      background: var(--primary-soft);
+      font-size: .8rem;
+      flex-wrap: wrap;
+    }
+    #statsRow div { text-align: center; }
+    #statsRow b { display: block; font-size: 1.1rem; color: var(--primary); }
+
+    main { max-width: 520px; margin: 0 auto; padding: 14px; }
+    #notice {
+      background: #fff7dc;
+      border: 2px solid var(--accent);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: .9rem;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    /* island grid */
+    #island {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 3px;
+      background: var(--sea);
+      padding: 8px;
+      border-radius: 14px;
+      box-shadow: inset 0 0 0 4px #3f9fd6, 0 3px 10px rgba(0,0,0,.2);
+    }
+    .tile {
+      aspect-ratio: 1;
+      background: var(--land);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(1.1rem, 6vw, 1.7rem);
+      cursor: pointer;
+      position: relative;
+      user-select: none;
+      transition: transform .1s;
+    }
+    .tile:active { transform: scale(.92); }
+    .tile.sea { background: var(--sea); cursor: default; }
+    .tile .lvl {
+      position: absolute;
+      bottom: 1px; right: 3px;
+      font-size: .6rem;
+      font-weight: 800;
+      color: #3a2a00;
+      background: rgba(255,255,255,.7);
+      border-radius: 4px;
+      padding: 0 3px;
+    }
+
+    /* build sheet */
+    #sheet {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      background: #fff;
+      border-radius: 18px 18px 0 0;
+      box-shadow: 0 -3px 16px rgba(0,0,0,.2);
+      padding: 16px 16px 24px;
+      transform: translateY(100%);
+      transition: transform .25s;
+      z-index: 50;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    #sheet.open { transform: translateY(0); }
+    #sheet h3 { font-size: 1rem; margin-bottom: 12px; text-align: center; }
+    .build-opt {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .build-opt:active { background: var(--primary-soft); }
+    .build-opt.locked { opacity: .5; }
+    .build-opt .emoji { font-size: 1.8rem; }
+    .build-opt .info { flex: 1; }
+    .build-opt .bname { font-weight: 700; font-size: .95rem; }
+    .build-opt .bdesc { font-size: .78rem; color: var(--muted); }
+    .build-opt .bcost { font-weight: 800; color: var(--gold); font-size: .95rem; white-space: nowrap; }
+    .sheet-close {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: var(--border);
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+
+    /* detail sheet reuse #sheet */
+    .detail-row { font-size: .9rem; margin-bottom: 8px; }
+    .detail-row b { color: var(--primary); }
+
+    /* toast */
+    #toast {
+      position: fixed;
+      top: 16px; left: 50%;
+      transform: translateX(-50%) translateY(-80px);
+      background: #243042;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-size: .9rem;
+      font-weight: 600;
+      transition: transform .3s;
+      z-index: 100;
+      max-width: 90%;
+      text-align: center;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+
+    #pickStudentMsg { text-align: center; padding: 40px 20px; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🏝️ My Island 我的島嶼</h1>
+  <a href="index.html">← 回首頁</a>
+</header>
+
+<div id="topBar">
+  <div class="stu-group">
+    <button class="stu-btn" onclick="selectStudent('albert')">Albert</button>
+    <button class="stu-btn" onclick="selectStudent('jonathan')">Jonathan</button>
+  </div>
+  <div class="coin-display" id="coinDisplay">🪙 —</div>
+</div>
+
+<div id="statsRow" style="display:none">
+  <div><b id="stPop">0</b>人口</div>
+  <div><b id="stCap">0</b>容量</div>
+  <div><b id="stBeauty">0</b>美化</div>
+  <div><b id="stProd">0</b>金幣/天</div>
+  <div><b id="stBld">0</b>建築</div>
+</div>
+
+<main>
+  <div id="notice"></div>
+  <div id="pickStudentMsg">👆 先選 Albert 或 Jonathan，開始蓋你的島！</div>
+  <div id="island" style="display:none"></div>
+</main>
+
+<!-- bottom sheet -->
+<div id="sheet">
+  <div id="sheetContent"></div>
+  <button class="sheet-close" onclick="closeSheet()">關閉</button>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ─── Building catalog (v1) ───────────────────────────────────────────────────
+const BUILDINGS = {
+  forest: { emoji: "🌲", name: "森林", cost: 90,  desc: "美化島嶼，越久越茂密",
+            beauty: [3, 6, 10], pop: [0,0,0], coin: [0,0,0], levelDays: [3, 7] },
+  farm:   { emoji: "🌾", name: "農場", cost: 120, desc: "每天生產金幣",
+            beauty: [0,0,0], pop: [0,0,0], coin: [15, 25, 40], levelDays: [4, 10] },
+  house:  { emoji: "🏠", name: "房子", cost: 180, desc: "增加人口容量",
+            beauty: [0,0,0], pop: [4, 8, 14], coin: [0,0,0], levelDays: [4, 10] },
+  town:   { emoji: "🏘️", name: "小鎮", cost: 450, desc: "人口 + 金幣，最強建築",
+            beauty: [0,0,0], pop: [12, 24, 40], coin: [20, 35, 55], levelDays: [7, 14] },
+};
+const BUILD_ORDER = ["forest", "farm", "house", "town"];
+const GRID = 7;
+
+// ─── State ───────────────────────────────────────────────────────────────────
+let currentStudent = null;
+let island = null;
+let selectedTile = null;
+
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+
+// ─── Progress (coins) storage — shared with drill pages ─────────────────────
+function getProgress(s) {
+  const raw = localStorage.getItem("kidsProgress." + s);
+  const p = raw ? JSON.parse(raw) : { wrongCounts: {}, sessions: 0, totalCorrect: 0, totalWrong: 0 };
+  if (!p.coins) p.coins = { balance: 0, lifetimeEarned: 0, lifetimeSpent: 0, transactions: [], claimedDrills: {} };
+  return p;
+}
+function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
+
+// ─── Island storage ──────────────────────────────────────────────────────────
+function newIsland(studentId) {
+  return {
+    schemaVersion: 1,
+    studentId,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    grid: { width: GRID, height: GRID },
+    season: "spring",
+    stats: { population: 0, populationCapacity: 0, beauty: 0, dailyCoinProduction: 0, totalBuildings: 0 },
+    lastProcessedDate: todayStr(),
+    buildings: [],
+    events: [],
+    settings: { emojiStyle: true, animationsEnabled: true },
+  };
+}
+function loadIsland(s) {
+  const raw = localStorage.getItem("kidsIsland." + s);
+  return raw ? JSON.parse(raw) : newIsland(s);
+}
+function saveIsland(s, isl) {
+  isl.updatedAt = new Date().toISOString();
+  localStorage.setItem("kidsIsland." + s, JSON.stringify(isl));
+}
+
+// ─── Daily tick: grow buildings + collect production ────────────────────────
+function runDailyTick() {
+  const today = todayStr();
+  if (island.lastProcessedDate === today) return 0;
+  // count number of days passed (at least 1)
+  let totalProduced = 0;
+  island.buildings.forEach(b => {
+    const cat = BUILDINGS[b.type];
+    b.activeDays = (b.activeDays || 0) + 1;
+    // level up by activeDays thresholds
+    if (b.level < 3) {
+      if (b.level === 1 && b.activeDays >= cat.levelDays[0]) b.level = 2;
+      else if (b.level === 2 && b.activeDays >= cat.levelDays[1]) b.level = 3;
+    }
+    // production
+    const produce = cat.coin[b.level - 1] || 0;
+    if (produce > 0 && b.lastProductionDate !== today) {
+      totalProduced += produce;
+      b.lastProductionDate = today;
+    }
+  });
+  island.lastProcessedDate = today;
+  if (totalProduced > 0) {
+    const p = getProgress(currentStudent);
+    p.coins.balance += totalProduced;
+    p.coins.lifetimeEarned += totalProduced;
+    p.coins.transactions.push({ type: "earn", source: "islandProduction", amount: totalProduced,
+      balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { date: today } });
+    saveProgress(currentStudent, p);
+    island.events.push({ id: "prod-" + today, type: "production", date: today,
+      message: `農場與小鎮生產了 ${totalProduced} 金幣`, coinsDelta: totalProduced, seen: false });
+  }
+  recalcStats();
+  saveIsland(currentStudent, island);
+  return totalProduced;
+}
+
+// ─── Stats ──────────────────────────────────────────────────────────────────
+function recalcStats() {
+  let pop = 0, cap = 0, beauty = 0, prod = 0;
+  island.buildings.forEach(b => {
+    const cat = BUILDINGS[b.type];
+    cap += cat.pop[b.level - 1] || 0;
+    beauty += cat.beauty[b.level - 1] || 0;
+    prod += cat.coin[b.level - 1] || 0;
+  });
+  // population grows toward capacity (simple: pop = capacity for v1)
+  pop = cap;
+  island.stats = { population: pop, populationCapacity: cap, beauty, dailyCoinProduction: prod, totalBuildings: island.buildings.length };
+}
+
+// ─── Render ──────────────────────────────────────────────────────────────────
+function render() {
+  const p = getProgress(currentStudent);
+  document.getElementById("coinDisplay").textContent = "🪙 " + p.coins.balance;
+  document.getElementById("stPop").textContent = island.stats.population;
+  document.getElementById("stCap").textContent = island.stats.populationCapacity;
+  document.getElementById("stBeauty").textContent = island.stats.beauty;
+  document.getElementById("stProd").textContent = island.stats.dailyCoinProduction;
+  document.getElementById("stBld").textContent = island.stats.totalBuildings;
+
+  const grid = document.getElementById("island");
+  grid.innerHTML = "";
+  const map = {};
+  island.buildings.forEach(b => { map[b.x + "_" + b.y] = b; });
+  for (let y = 0; y < GRID; y++) {
+    for (let x = 0; x < GRID; x++) {
+      const tile = document.createElement("div");
+      tile.className = "tile";
+      const b = map[x + "_" + y];
+      if (b) {
+        const cat = BUILDINGS[b.type];
+        tile.innerHTML = cat.emoji + (b.level > 1 ? `<span class="lvl">Lv${b.level}</span>` : "");
+        tile.onclick = () => openDetail(b);
+      } else {
+        tile.onclick = () => openBuild(x, y);
+      }
+      grid.appendChild(tile);
+    }
+  }
+}
+
+// ─── Build sheet ─────────────────────────────────────────────────────────────
+function openBuild(x, y) {
+  selectedTile = { x, y };
+  const p = getProgress(currentStudent);
+  const bal = p.coins.balance;
+  let html = `<h3>蓋什麼？（你有 🪙 ${bal}）</h3>`;
+  BUILD_ORDER.forEach(key => {
+    const c = BUILDINGS[key];
+    const afford = bal >= c.cost;
+    html += `
+      <div class="build-opt ${afford ? "" : "locked"}" ${afford ? `onclick="build('${key}')"` : ""}>
+        <div class="emoji">${c.emoji}</div>
+        <div class="info">
+          <div class="bname">${c.name}</div>
+          <div class="bdesc">${c.desc}</div>
+        </div>
+        <div class="bcost">🪙 ${c.cost}</div>
+      </div>`;
+  });
+  document.getElementById("sheetContent").innerHTML = html;
+  document.getElementById("sheet").classList.add("open");
+}
+
+function build(key) {
+  const c = BUILDINGS[key];
+  const p = getProgress(currentStudent);
+  if (p.coins.balance < c.cost) { toast("金幣不夠！"); return; }
+  p.coins.balance -= c.cost;
+  p.coins.lifetimeSpent += c.cost;
+  p.coins.transactions.push({ type: "spend", source: "islandBuild", amount: c.cost,
+    balanceAfter: p.coins.balance, createdAt: new Date().toISOString(),
+    meta: { buildingType: key, x: selectedTile.x, y: selectedTile.y } });
+  saveProgress(currentStudent, p);
+
+  island.buildings.push({
+    id: "b-" + Date.now() + "-" + selectedTile.x + "-" + selectedTile.y,
+    type: key, x: selectedTile.x, y: selectedTile.y, level: 1,
+    createdAt: new Date().toISOString(), lastProductionDate: null,
+    activeDays: 0, customName: "", state: { isProducing: c.coin[0] > 0, isDecorative: c.beauty[0] > 0 },
+  });
+  recalcStats();
+  saveIsland(currentStudent, island);
+  closeSheet();
+  render();
+  toast(`${c.emoji} ${c.name} 蓋好了！`);
+}
+
+function openDetail(b) {
+  const c = BUILDINGS[b.type];
+  const nextDays = b.level < 3 ? c.levelDays[b.level - 1] : null;
+  let html = `<h3>${c.emoji} ${c.name} Lv${b.level}</h3>`;
+  html += `<div class="detail-row">已經存在：<b>${b.activeDays}</b> 天</div>`;
+  if (c.coin[b.level-1] > 0) html += `<div class="detail-row">每天生產：<b>🪙 ${c.coin[b.level-1]}</b></div>`;
+  if (c.pop[b.level-1] > 0)  html += `<div class="detail-row">人口容量：<b>${c.pop[b.level-1]}</b></div>`;
+  if (c.beauty[b.level-1] > 0) html += `<div class="detail-row">美化分數：<b>${c.beauty[b.level-1]}</b></div>`;
+  if (nextDays) html += `<div class="detail-row" style="color:var(--muted)">再過 <b>${nextDays - b.activeDays}</b> 天升到 Lv${b.level+1} ⬆️</div>`;
+  else html += `<div class="detail-row" style="color:var(--success)">已經是最高等級！⭐</div>`;
+  document.getElementById("sheetContent").innerHTML = html;
+  document.getElementById("sheet").classList.add("open");
+}
+
+function closeSheet() { document.getElementById("sheet").classList.remove("open"); }
+
+// ─── Toast ──────────────────────────────────────────────────────────────────
+let toastTimer = null;
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+}
+
+// ─── Student select ──────────────────────────────────────────────────────────
+function selectStudent(name) {
+  currentStudent = name;
+  localStorage.setItem("kidsCurrentStudent", name);
+  document.querySelectorAll(".stu-btn").forEach(b => b.classList.toggle("active", b.textContent.toLowerCase() === name));
+  island = loadIsland(name);
+  document.getElementById("pickStudentMsg").style.display = "none";
+  document.getElementById("island").style.display = "grid";
+  document.getElementById("statsRow").style.display = "flex";
+  recalcStats();
+  const produced = runDailyTick();
+  render();
+  if (produced > 0) {
+    document.getElementById("notice").style.display = "block";
+    document.getElementById("notice").innerHTML = `🌅 新的一天！你的農場和小鎮生產了 <b>🪙 ${produced}</b> 金幣！`;
+  } else {
+    document.getElementById("notice").style.display = "none";
+  }
+}
+
+// auto restore
+const last = localStorage.getItem("kidsCurrentStudent");
+if (last) selectStudent(last);
+</script>
+</body>
+</html>

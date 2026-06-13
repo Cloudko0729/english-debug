@@ -119,6 +119,22 @@
 <div id="statsRow"></div>
 
 <section>
+  <h2>我的島嶼</h2>
+  <div class="card-list">
+    <a class="card" href="island.html" style="background:linear-gradient(135deg,#d8f3ff,#fff);border:2px solid #5bb8e6">
+      <div class="card-left">
+        <div class="card-icon" style="background:#bfeaff;font-size:1.4rem">🏝️</div>
+        <div>
+          <div class="card-title">My Island 我的島嶼</div>
+          <div class="card-sub">用答題賺的金幣蓋島！🪙 <span id="coinPeek">—</span></div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+  </div>
+</section>
+
+<section>
   <h2>每日練習</h2>
   <div class="card-list">
 
@@ -276,6 +292,9 @@ function pickStudent(name) {
   const row = document.getElementById("statsRow");
   row.style.display = "block";
   row.textContent = `${name.charAt(0).toUpperCase() + name.slice(1)} · Sessions: ${p.sessions || 0} · Accuracy: ${pct}% · Weak words: ${weakCount}`;
+  const coins = (p.coins && p.coins.balance) || 0;
+  const peek = document.getElementById("coinPeek");
+  if (peek) peek.textContent = coins;
 }
 
 // Auto-restore last student
