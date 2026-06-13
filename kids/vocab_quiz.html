@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Vocab Quiz 每日單字測驗</title>
+  <style>
+    :root {
+      --bg: #fff7dc; --panel: #fff; --primary: #2f80ed; --primary-soft: #dbeafe;
+      --accent: #ffb703; --gold: #f2a900; --success: #2fbf71; --danger: #ef476f;
+      --text: #243042; --muted: #667085; --border: #d9e2ec;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, "Noto Sans TC", sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    header { background: var(--primary); color: #fff; text-align: center; padding: 16px; }
+    header h1 { font-size: 1.4rem; }
+    header a { color: #ffe27a; font-size: .8rem; text-decoration: none; }
+
+    #studentBar { background: var(--accent); padding: 10px 16px; display: flex; align-items: center; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    #studentBar span { font-weight: 700; color: #3a2a00; }
+    .stu-btn { padding: 6px 18px; border: 2px solid #3a2a00; border-radius: 20px; background: transparent; font-weight: 700; cursor: pointer; color: #3a2a00; }
+    .stu-btn.active { background: #3a2a00; color: #fff; }
+
+    #infoBar { background: var(--primary-soft); padding: 8px 16px; text-align: center; font-size: .82rem; color: var(--primary); font-weight: 600; display: none; }
+
+    main { max-width: 600px; margin: 0 auto; padding: 16px; }
+    #pickMsg { text-align: center; padding: 40px 20px; color: var(--muted); }
+
+    /* progress bar */
+    #progressWrap { display: none; margin-bottom: 14px; }
+    #progressBar { height: 8px; background: var(--border); border-radius: 5px; overflow: hidden; }
+    #progressFill { height: 100%; width: 0; background: var(--success); transition: width .3s; }
+    #progressText { font-size: .8rem; color: var(--muted); margin-top: 4px; text-align: center; }
+
+    .q-card {
+      background: var(--panel); border: 2px solid var(--border); border-radius: 14px;
+      padding: 20px 16px; display: none;
+    }
+    .q-card.active { display: block; }
+    .q-tag { font-size: .75rem; color: var(--muted); margin-bottom: 8px; }
+    .q-tag.weak { color: var(--danger); font-weight: 700; }
+    .q-prompt { font-size: 1.7rem; font-weight: 800; text-align: center; margin: 10px 0 6px; }
+    .q-sub { text-align: center; font-size: .85rem; color: var(--muted); margin-bottom: 16px; }
+    .q-audio-btn {
+      display: block; margin: 0 auto 16px; background: var(--primary); color: #fff;
+      border: none; border-radius: 50%; width: 56px; height: 56px; font-size: 1.5rem; cursor: pointer;
+    }
+    .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .choice {
+      border: 2px solid var(--border); border-radius: 10px; background: #fff;
+      padding: 14px 8px; font-size: 1.05rem; font-weight: 600; cursor: pointer; min-height: 52px; color: var(--text);
+    }
+    .choice.right { border-color: var(--success); background: #d9f7e8; }
+    .choice.wrongpick { border-color: var(--danger); background: #fde0e8; }
+    .choice:disabled { cursor: default; }
+    .next-btn {
+      display: none; width: 100%; margin-top: 16px; padding: 12px; border: none;
+      background: var(--accent); color: #3a2a00; border-radius: 10px; font-weight: 800; font-size: 1rem; cursor: pointer;
+    }
+
+    /* result */
+    #result { display: none; text-align: center; background: var(--panel); border: 2px solid var(--border); border-radius: 14px; padding: 24px 16px; }
+    #result .big { font-size: 2rem; font-weight: 800; margin: 10px 0; }
+    #result .coin { color: var(--gold); font-weight: 800; font-size: 1.2rem; margin: 10px 0; }
+    #result a { display: inline-block; margin-top: 14px; color: var(--primary); font-weight: 700; }
+    .weak-list { text-align: left; background: #fef0f4; border-radius: 10px; padding: 12px; margin-top: 16px; font-size: .85rem; }
+    .weak-list b { color: var(--danger); }
+
+    #toast { position: fixed; top: 16px; left: 50%; transform: translateX(-50%) translateY(-80px); background: #243042; color: #fff; padding: 10px 18px; border-radius: 20px; font-size: .9rem; font-weight: 600; transition: transform .3s; z-index: 100; }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📝 每日單字測驗</h1>
+  <a href="index.html">← 回首頁</a>
+</header>
+
+<div id="studentBar">
+  <span>我是：</span>
+  <button class="stu-btn" onclick="selectStudent('albert')">Albert</button>
+  <button class="stu-btn" onclick="selectStudent('jonathan')">Jonathan</button>
+</div>
+<div id="infoBar"></div>
+
+<main>
+  <div id="pickMsg">👆 先選 Albert 或 Jonathan，開始今天的 20 題單字測驗！<br><br>不熟的單字會自動多出現，幫你加強記憶 💪</div>
+
+  <div id="progressWrap">
+    <div id="progressBar"><div id="progressFill"></div></div>
+    <div id="progressText"></div>
+  </div>
+
+  <div id="quizArea"></div>
+
+  <div id="result"></div>
+</main>
+
+<div id="toast"></div>
+
+<script src="wordbank.js"></script>
+<script>
+const QUIZ_SIZE = 20;
+const DRILL_ID = "vocab-quiz";
+const AUDIO_DIR = "audio/words/";
+
+let currentStudent = null;
+let quizWords = [];      // today's 20 word objects (+ isWeak flag)
+let questions = [];      // built question objects
+let qIndex = 0;
+let answers = [];        // per-question correctness
+
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+
+// ─── Progress storage ────────────────────────────────────────────────────────
+function getProgress(s) {
+  const raw = localStorage.getItem("kidsProgress." + s);
+  const p = raw ? JSON.parse(raw) : { wrongCounts: {}, sessions: 0, totalCorrect: 0, totalWrong: 0 };
+  if (!p.wrongCounts) p.wrongCounts = {};
+  if (!p.coins) p.coins = { balance: 0, lifetimeEarned: 0, lifetimeSpent: 0, transactions: [], claimedDrills: {} };
+  return p;
+}
+function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
+
+function recordResult(wordEn, correct) {
+  const p = getProgress(currentStudent);
+  if (!correct) {
+    p.wrongCounts[wordEn] = (p.wrongCounts[wordEn] || 0) + 1;
+    p.totalWrong = (p.totalWrong || 0) + 1;
+  } else {
+    p.totalCorrect = (p.totalCorrect || 0) + 1;
+    if (p.wrongCounts[wordEn] > 0) p.wrongCounts[wordEn] = Math.max(0, p.wrongCounts[wordEn] - 1);
+  }
+  saveProgress(currentStudent, p);
+}
+
+// ─── Build today's 20-word set (weak words prioritized) ─────────────────────
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function buildQuizSet() {
+  const p = getProgress(currentStudent);
+  const key = "vocabQuizSet." + currentStudent + "." + todayStr();
+  const saved = localStorage.getItem(key);
+  if (saved) return JSON.parse(saved);
+
+  const wc = p.wrongCounts || {};
+  // tier 1: weak (wrongCounts >= 2), tier 2: shaky (==1), tier 3: rest
+  const weak  = WORDBANK.filter(w => (wc[w.en] || 0) >= 2);
+  const shaky = WORDBANK.filter(w => (wc[w.en] || 0) === 1);
+  const rest  = WORDBANK.filter(w => !(wc[w.en] > 0));
+  shuffle(weak); shuffle(shaky); shuffle(rest);
+
+  const picked = [];
+  const pushUnique = (list) => { for (const w of list) { if (picked.length >= QUIZ_SIZE) break; picked.push(w); } };
+  pushUnique(weak);
+  pushUnique(shaky);
+  pushUnique(rest);
+
+  const set = picked.slice(0, QUIZ_SIZE).map(w => ({ ...w, isWeak: (wc[w.en] || 0) >= 2 }));
+  localStorage.setItem(key, JSON.stringify(set));
+  return set;
+}
+
+// ─── Build questions (mix EN->ZH and ZH->EN) ────────────────────────────────
+function buildQuestions() {
+  questions = quizWords.map((w, i) => {
+    const dir = Math.random() < 0.5 ? "en2zh" : "zh2en"; // 看英選中 or 看中選英
+    const pool = WORDBANK.filter(x => x.en !== w.en);
+    shuffle(pool);
+    const distractors = pool.slice(0, 3);
+    const opts = shuffle([w, ...distractors]);
+    return {
+      word: w,
+      dir,
+      prompt: dir === "en2zh" ? w.en : w.zh,
+      sub: dir === "en2zh" ? "選出中文意思" : "選出正確英文",
+      choices: opts.map(o => ({ label: dir === "en2zh" ? o.zh : o.en, correct: o.en === w.en })),
+    };
+  });
+}
+
+// ─── Render question ─────────────────────────────────────────────────────────
+function renderQuestion() {
+  const q = questions[qIndex];
+  document.getElementById("progressWrap").style.display = "block";
+  document.getElementById("progressFill").style.width = (qIndex / QUIZ_SIZE * 100) + "%";
+  document.getElementById("progressText").textContent = `第 ${qIndex + 1} / ${QUIZ_SIZE} 題`;
+
+  const area = document.getElementById("quizArea");
+  area.innerHTML = `
+    <div class="q-card active">
+      <div class="q-tag ${q.word.isWeak ? "weak" : ""}">${q.word.isWeak ? "⚠️ 加強單字" : "單字題"}</div>
+      <button class="q-audio-btn" onclick="playWord('${wordAudioKey(q.word.en)}', '${q.word.en}')">🔊</button>
+      <div class="q-prompt">${q.prompt}</div>
+      <div class="q-sub">${q.sub}</div>
+      <div class="choices">
+        ${q.choices.map((c, j) => `<button class="choice" id="ch_${j}" onclick="answer(${j})">${c.label}</button>`).join("")}
+      </div>
+      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">${qIndex === QUIZ_SIZE - 1 ? "看成績 🎉" : "下一題 →"}</button>
+    </div>`;
+  // auto play audio for the word
+  playWord(wordAudioKey(q.word.en), q.word.en);
+}
+
+function answer(j) {
+  const q = questions[qIndex];
+  const buttons = document.querySelectorAll(".choice");
+  buttons.forEach((b, k) => {
+    b.disabled = true;
+    if (q.choices[k].correct) b.classList.add("right");
+    else if (k === j) b.classList.add("wrongpick");
+  });
+  const ok = q.choices[j].correct;
+  answers[qIndex] = ok;
+  recordResult(q.word.en, ok);
+  document.getElementById("nextBtn").style.display = "block";
+}
+
+function nextQuestion() {
+  qIndex++;
+  if (qIndex >= QUIZ_SIZE) { showResult(); return; }
+  renderQuestion();
+}
+
+// ─── Audio ───────────────────────────────────────────────────────────────────
+let curAudio = null;
+function playWord(key, fallback) {
+  if (curAudio) { curAudio.pause(); curAudio = null; }
+  const a = new Audio(AUDIO_DIR + key + ".mp3");
+  curAudio = a;
+  a.play().catch(() => {
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(fallback);
+    u.lang = "en-US"; u.rate = 0.85;
+    window.speechSynthesis.speak(u);
+  });
+}
+
+// ─── Result + coins ──────────────────────────────────────────────────────────
+function showResult() {
+  document.getElementById("quizArea").innerHTML = "";
+  document.getElementById("progressFill").style.width = "100%";
+  document.getElementById("progressText").textContent = `完成！${QUIZ_SIZE} / ${QUIZ_SIZE} 題`;
+
+  const correct = answers.filter(x => x).length;
+  const coinMsg = awardCoins(correct);
+
+  // words answered wrong this round
+  const wrongWords = questions.filter((q, i) => !answers[i]).map(q => q.word);
+
+  let html = `<div>🎯 今日單字測驗完成</div>
+    <div class="big">${correct} / ${QUIZ_SIZE}</div>
+    <div class="coin">${coinMsg}</div>`;
+  if (wrongWords.length) {
+    html += `<div class="weak-list">這次答錯、明天會再出現的單字：<br>` +
+      wrongWords.map(w => `<b>${w.en}</b> ${w.zh}`).join("、") + `</div>`;
+  } else {
+    html += `<div class="weak-list" style="background:#e6faf0;color:var(--success)">全部答對！太強了 🌟</div>`;
+  }
+  html += `<a href="island.html">🏝️ 用金幣去蓋島嶼</a>`;
+  document.getElementById("result").innerHTML = html;
+  document.getElementById("result").style.display = "block";
+  updateInfoBar();
+}
+
+function awardCoins(correct) {
+  const p = getProgress(currentStudent);
+  const claimKey = todayStr() + "::" + DRILL_ID;
+  if (p.coins.claimedDrills[claimKey]) {
+    return `🪙 今天的單字測驗金幣已領過（共 ${p.coins.balance} 金幣）`;
+  }
+  const earned = correct * 5 + 30; // 每題5 + 完成30
+  p.coins.balance += earned;
+  p.coins.lifetimeEarned += earned;
+  p.coins.transactions.push({ type: "earn", source: "vocabQuiz", amount: earned,
+    balanceAfter: p.coins.balance, createdAt: new Date().toISOString(),
+    meta: { drillId: DRILL_ID, date: todayStr(), correct } });
+  p.coins.claimedDrills[claimKey] = { claimedAt: new Date().toISOString(), earned, correct };
+  saveProgress(currentStudent, p);
+  return `🪙 +${earned} 金幣！（共 ${p.coins.balance} 金幣）`;
+}
+
+// ─── Toast / info ────────────────────────────────────────────────────────────
+let toastTimer = null;
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+}
+
+function updateInfoBar() {
+  const p = getProgress(currentStudent);
+  const weak = Object.values(p.wrongCounts || {}).filter(c => c >= 2).length;
+  const bar = document.getElementById("infoBar");
+  bar.style.display = "block";
+  bar.textContent = `${currentStudent.charAt(0).toUpperCase() + currentStudent.slice(1)} · 🪙 ${p.coins.balance} · 加強中單字：${weak} 個`;
+}
+
+// ─── Student select / start ──────────────────────────────────────────────────
+function selectStudent(name) {
+  currentStudent = name;
+  localStorage.setItem("kidsCurrentStudent", name);
+  document.querySelectorAll(".stu-btn").forEach(b => b.classList.toggle("active", b.textContent.toLowerCase() === name));
+  document.getElementById("pickMsg").style.display = "none";
+  document.getElementById("result").style.display = "none";
+
+  const p = getProgress(name);
+  const claimKey = todayStr() + "::" + DRILL_ID;
+  const alreadyDone = !!p.coins.claimedDrills[claimKey];
+
+  quizWords = buildQuizSet();
+  buildQuestions();
+  qIndex = 0;
+  answers = [];
+  updateInfoBar();
+
+  if (alreadyDone) {
+    toast("今天已經測驗過囉，這次不再給金幣");
+  }
+  renderQuestion();
+}
+
+const last = localStorage.getItem("kidsCurrentStudent");
+if (last) selectStudent(last);
+</script>
+</body>
+</html>
