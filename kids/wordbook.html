@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>單字庫 Word Book</title>
+  <style>
+    :root {
+      --bg: #fff7dc; --panel: #fff; --primary: #2f80ed; --primary-soft: #dbeafe;
+      --accent: #ffb703; --text: #243042; --muted: #667085; --border: #e3e9f0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, "Noto Sans TC", sans-serif; background: var(--bg); color: var(--text); padding-bottom: 50px; }
+    header { background: var(--primary); color: #fff; text-align: center; padding: 18px 16px; }
+    header h1 { font-size: 1.4rem; }
+    header a { color: #ffe27a; font-size: .8rem; text-decoration: none; }
+
+    /* tabs */
+    #tabs { display: flex; gap: 8px; justify-content: center; padding: 12px; background: var(--accent); position: sticky; top: 0; z-index: 10; flex-wrap: wrap; }
+    .tab { padding: 7px 18px; border: 2px solid #3a2a00; border-radius: 20px; background: transparent; font-weight: 700; font-size: .88rem; cursor: pointer; color: #3a2a00; }
+    .tab.active { background: #3a2a00; color: #fff; }
+
+    /* search */
+    #searchWrap { max-width: 720px; margin: 14px auto 0; padding: 0 14px; }
+    #search { width: 100%; border: 2px solid var(--border); border-radius: 10px; padding: 10px 14px; font-size: .95rem; }
+
+    main { max-width: 720px; margin: 0 auto; padding: 14px; }
+    .theme-block { margin-bottom: 22px; }
+    .theme-title { font-size: 1rem; font-weight: 800; color: var(--primary); margin: 0 0 10px; display: flex; align-items: center; gap: 8px; }
+    .theme-title .count { font-size: .75rem; color: var(--muted); font-weight: 600; }
+
+    .word-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .word-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+    .word-emoji { font-size: 1.8rem; flex-shrink: 0; width: 30px; text-align: center; }
+    .word-main { flex: 1; min-width: 0; }
+    .word-en { font-size: 1rem; font-weight: 700; color: var(--text); }
+    .word-zh { font-size: .82rem; color: var(--muted); }
+    .word-audio { background: var(--primary-soft); border: none; border-radius: 8px; width: 34px; height: 34px; font-size: 1rem; cursor: pointer; flex-shrink: 0; }
+    .word-audio:active { background: var(--primary); }
+
+    .letter-head { font-size: 1.3rem; font-weight: 800; color: var(--accent); margin: 18px 0 8px; border-bottom: 2px solid var(--border); }
+    #emptyMsg { text-align: center; color: var(--muted); padding: 30px; display: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📖 單字庫 Word Book</h1>
+  <a href="index.html">← 回首頁</a>
+</header>
+
+<div id="tabs">
+  <button class="tab active" onclick="switchTab('basic')">國小核心（依主題）</button>
+  <button class="tab" onclick="switchTab('more')">國中 1200（依字母）</button>
+</div>
+
+<div id="searchWrap">
+  <input id="search" type="text" placeholder="🔍 搜尋單字或中文…" oninput="onSearch()" />
+</div>
+
+<main>
+  <div id="content"></div>
+  <div id="emptyMsg">找不到符合的單字</div>
+</main>
+
+<script src="wordbank.js"></script>
+<script src="word_emoji.js"></script>
+<script>
+const THEMES = [
+  ["family", "👨‍👩‍👧 家人 Family"], ["animals", "🐶 動物 Animals"], ["food", "🍎 食物 Food"],
+  ["school", "🏫 學校 School"], ["clothes", "👕 衣物 Clothes"], ["weather", "☀️ 天氣 Weather"],
+  ["body", "👀 身體 Body"], ["time", "🕐 時間 Time"], ["places", "🏪 地點 Places"],
+  ["hobbies", "⚽ 興趣 Hobbies"],
+];
+
+let currentTab = "basic";
+
+function audioKey(en) { return en.toLowerCase().replace(/[^a-z0-9]+/g, ""); }
+let curAudio = null;
+function playWord(en) {
+  const key = audioKey(en);
+  if (curAudio) { curAudio.pause(); curAudio = null; }
+  const a = new Audio("audio/words/" + key + ".mp3");
+  curAudio = a;
+  a.play().catch(() => {
+    if (!window.speechSynthesis) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(en);
+    u.lang = "en-US"; u.rate = 0.9;
+    speechSynthesis.speak(u);
+  });
+}
+
+function wordCard(w) {
+  const emoji = (typeof WORD_EMOJI !== "undefined" && WORD_EMOJI[w.en]) || "";
+  return `<div class="word-card">
+    <div class="word-emoji">${emoji}</div>
+    <div class="word-main">
+      <div class="word-en">${w.en}</div>
+      <div class="word-zh">${w.zh}</div>
+    </div>
+    <button class="word-audio" onclick="playWord('${w.en.replace(/'/g, "\\'")}')">🔊</button>
+  </div>`;
+}
+
+function renderBasic(filter) {
+  const f = (filter || "").trim().toLowerCase();
+  let html = "";
+  THEMES.forEach(([key, title]) => {
+    let words = WORDBANK.filter(w => w.level === "basic" && w.theme === key);
+    if (f) words = words.filter(w => w.en.toLowerCase().includes(f) || w.zh.includes(filter));
+    if (!words.length) return;
+    html += `<div class="theme-block"><h2 class="theme-title">${title} <span class="count">${words.length} 字</span></h2>
+      <div class="word-grid">${words.map(wordCard).join("")}</div></div>`;
+  });
+  return html;
+}
+
+function renderMore(filter) {
+  const f = (filter || "").trim().toLowerCase();
+  let words = WORDBANK.filter(w => w.level !== "basic");
+  if (f) words = words.filter(w => w.en.toLowerCase().includes(f) || w.zh.includes(filter));
+  words.sort((a, b) => a.en.toLowerCase().localeCompare(b.en.toLowerCase()));
+  let html = "", curLetter = "";
+  let group = [];
+  const flush = () => {
+    if (group.length) html += `<div class="word-grid">${group.map(wordCard).join("")}</div>`;
+    group = [];
+  };
+  words.forEach(w => {
+    const L = w.en[0].toUpperCase();
+    if (L !== curLetter) { flush(); curLetter = L; html += `<div class="letter-head">${L}</div>`; }
+    group.push(w);
+  });
+  flush();
+  return html;
+}
+
+function draw() {
+  const filter = document.getElementById("search").value;
+  const html = currentTab === "basic" ? renderBasic(filter) : renderMore(filter);
+  document.getElementById("content").innerHTML = html;
+  document.getElementById("emptyMsg").style.display = html ? "none" : "block";
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll(".tab").forEach((t, i) => t.classList.toggle("active", (tab === "basic") === (i === 0)));
+  draw();
+}
+
+let searchTimer = null;
+function onSearch() { clearTimeout(searchTimer); searchTimer = setTimeout(draw, 150); }
+
+draw();
+</script>
+</body>
+</html>
