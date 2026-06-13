@@ -100,6 +100,7 @@
 <div id="toast"></div>
 
 <script src="wordbank.js"></script>
+<script src="word_emoji.js"></script>
 <script>
 const QUIZ_SIZE = 20;
 const DRILL_ID = "vocab-quiz";
@@ -176,18 +177,33 @@ function buildQuizSet() {
 // ─── Build questions (mix EN->ZH and ZH->EN) ────────────────────────────────
 function buildQuestions() {
   questions = quizWords.map((w, i) => {
-    const dir = Math.random() < 0.5 ? "en2zh" : "zh2en"; // 看英選中 or 看中選英
+    const emoji = WORD_EMOJI[w.en];
+    // 有圖片的單字：1/3 機率出「看圖選英文」題；其餘看英選中 / 看中選英
+    let dir;
+    const r = Math.random();
+    if (emoji && r < 0.34) dir = "pic2en";
+    else dir = r < 0.67 ? "en2zh" : "zh2en";
+
     const pool = WORDBANK.filter(x => x.en !== w.en);
     shuffle(pool);
     const distractors = pool.slice(0, 3);
     const opts = shuffle([w, ...distractors]);
-    return {
-      word: w,
-      dir,
-      prompt: dir === "en2zh" ? w.en : w.zh,
-      sub: dir === "en2zh" ? "選出中文意思" : "選出正確英文",
-      choices: opts.map(o => ({ label: dir === "en2zh" ? o.zh : o.en, correct: o.en === w.en })),
-    };
+
+    let prompt, sub, choices;
+    if (dir === "pic2en") {
+      prompt = emoji;
+      sub = "看圖選出正確英文";
+      choices = opts.map(o => ({ label: o.en, correct: o.en === w.en }));
+    } else if (dir === "en2zh") {
+      prompt = w.en;
+      sub = "選出中文意思";
+      choices = opts.map(o => ({ label: o.zh, correct: o.en === w.en }));
+    } else {
+      prompt = w.zh;
+      sub = "選出正確英文";
+      choices = opts.map(o => ({ label: o.en, correct: o.en === w.en }));
+    }
+    return { word: w, dir, prompt, sub, choices, emoji };
   });
 }
 
@@ -201,9 +217,9 @@ function renderQuestion() {
   const area = document.getElementById("quizArea");
   area.innerHTML = `
     <div class="q-card active">
-      <div class="q-tag ${q.word.isWeak ? "weak" : ""}">${q.word.isWeak ? "⚠️ 加強單字" : "單字題"}</div>
+      <div class="q-tag ${q.word.isWeak ? "weak" : ""}">${q.word.isWeak ? "⚠️ 加強單字" : (q.dir === "pic2en" ? "看圖題 🖼️" : "單字題")}</div>
       <button class="q-audio-btn" onclick="playWord('${wordAudioKey(q.word.en)}', '${q.word.en}')">🔊</button>
-      <div class="q-prompt">${q.prompt}</div>
+      <div class="q-prompt" style="${q.dir === "pic2en" ? "font-size:4.5rem" : ""}">${q.prompt}</div>
       <div class="q-sub">${q.sub}</div>
       <div class="choices">
         ${q.choices.map((c, j) => `<button class="choice" id="ch_${j}" onclick="answer(${j})">${c.label}</button>`).join("")}
