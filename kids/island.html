@@ -190,6 +190,11 @@
       font-size: .9rem;
     }
     .demolish-btn:active { background: #fde0e8; }
+    .upgrade-btn {
+      width: 100%; padding: 12px; border: none; background: var(--success); color: #fff;
+      border-radius: 10px; font-weight: 800; cursor: pointer; margin-top: 12px; font-size: 1rem;
+    }
+    .upgrade-btn:active { opacity: .85; }
 
     /* toast */
     #toast {
@@ -297,8 +302,20 @@ const BUILDINGS = {
             beauty: [0,0,0], pop: [4, 8, 14], coin: [0,0,0], levelDays: [4, 10] },
   town:   { emoji: "🏘️", name: "小鎮", cost: 450, desc: "人口 + 金幣，最強建築",
             beauty: [0,0,0], pop: [12, 24, 40], coin: [20, 35, 55], levelDays: [7, 14] },
+  ranch:  { emoji: "🐄", name: "牧場", cost: 150, desc: "金幣 + 一點人口",
+            beauty: [0,0,0], pop: [2, 4, 7], coin: [18, 30, 46], levelDays: [4, 10] },
+  pond:   { emoji: "🪷", name: "池塘", cost: 70,  desc: "美化島嶼（水景）",
+            beauty: [4, 8, 13], pop: [0,0,0], coin: [0,0,0], levelDays: [3, 7] },
+  center: { emoji: "🏛️", name: "城鎮中心", cost: 0, desc: "免費設置 1 個，達標才能升級",
+            beauty: [5, 12, 25], pop: [0,0,0], coin: [10, 30, 60], levelDays: null, unique: true },
 };
-const BUILD_ORDER = ["forest", "farm", "house", "town"];
+const BUILD_ORDER = ["center", "pond", "forest", "ranch", "farm", "house", "town"];
+
+// 城鎮中心升級條件：index = 目前等級-1，達成下一級的人口與美化目標
+const CENTER_TARGETS = [
+  { pop: 20, beauty: 15 },  // Lv1 -> Lv2
+  { pop: 50, beauty: 40 },  // Lv2 -> Lv3
+];
 const GRID = 7;
 
 // ─── State ───────────────────────────────────────────────────────────────────
@@ -354,8 +371,8 @@ function runDailyTick() {
   island.buildings.forEach(b => {
     const cat = BUILDINGS[b.type];
     b.activeDays = (b.activeDays || 0) + 1;
-    // level up by activeDays thresholds
-    if (b.level < 3) {
+    // level up by activeDays thresholds (城鎮中心除外，它靠人口+美化達標升級)
+    if (cat.levelDays && b.level < 3) {
       if (b.level === 1 && b.activeDays >= cat.levelDays[0]) b.level = 2;
       else if (b.level === 2 && b.activeDays >= cat.levelDays[1]) b.level = 3;
     }
@@ -432,10 +449,13 @@ function openBuild(x, y) {
   selectedTile = { x, y };
   const p = getProgress(currentStudent);
   const bal = p.coins.balance;
+  const hasCenter = island.buildings.some(b => b.type === "center");
   let html = `<h3>蓋什麼？（你有 🪙 ${bal}）</h3>`;
   BUILD_ORDER.forEach(key => {
     const c = BUILDINGS[key];
+    if (c.unique && hasCenter) return; // 城鎮中心只能蓋一個
     const afford = bal >= c.cost;
+    const costLabel = c.cost === 0 ? "免費" : `🪙 ${c.cost}`;
     html += `
       <div class="build-opt ${afford ? "" : "locked"}" ${afford ? `onclick="build('${key}')"` : ""}>
         <div class="emoji">${c.emoji}</div>
@@ -443,7 +463,7 @@ function openBuild(x, y) {
           <div class="bname">${c.name}</div>
           <div class="bdesc">${c.desc}</div>
         </div>
-        <div class="bcost">🪙 ${c.cost}</div>
+        <div class="bcost">${costLabel}</div>
       </div>`;
   });
   document.getElementById("sheetContent").innerHTML = html;
@@ -452,6 +472,7 @@ function openBuild(x, y) {
 
 function build(key) {
   const c = BUILDINGS[key];
+  if (c.unique && island.buildings.some(b => b.type === key)) { toast("已經有一個城鎮中心了"); return; }
   const p = getProgress(currentStudent);
   if (p.coins.balance < c.cost) { toast("金幣不夠！"); return; }
   p.coins.balance -= c.cost;
@@ -476,18 +497,53 @@ function build(key) {
 
 function openDetail(b) {
   const c = BUILDINGS[b.type];
-  const nextDays = b.level < 3 ? c.levelDays[b.level - 1] : null;
   const refund = c.cost; // 試用期：全額退還
   let html = `<h3>${c.emoji} ${c.name} Lv${b.level}</h3>`;
   html += `<div class="detail-row">已經存在：<b>${b.activeDays}</b> 天</div>`;
   if (c.coin[b.level-1] > 0) html += `<div class="detail-row">每天生產：<b>🪙 ${c.coin[b.level-1]}</b></div>`;
   if (c.pop[b.level-1] > 0)  html += `<div class="detail-row">人口容量：<b>${c.pop[b.level-1]}</b></div>`;
   if (c.beauty[b.level-1] > 0) html += `<div class="detail-row">美化分數：<b>${c.beauty[b.level-1]}</b></div>`;
-  if (nextDays) html += `<div class="detail-row" style="color:var(--muted)">再過 <b>${nextDays - b.activeDays}</b> 天升到 Lv${b.level+1} ⬆️</div>`;
-  else html += `<div class="detail-row" style="color:var(--success)">已經是最高等級！⭐</div>`;
-  html += `<button class="demolish-btn" onclick="demolish('${b.id}')">🛠️ 拆除（退還 🪙 ${refund}）</button>`;
+
+  if (b.type === "center") {
+    // 城鎮中心：靠人口 + 美化達標升級
+    if (b.level < 3) {
+      const t = CENTER_TARGETS[b.level - 1];
+      const pop = island.stats.population, beauty = island.stats.beauty;
+      const popOk = pop >= t.pop, beautyOk = beauty >= t.beauty;
+      html += `<div class="detail-row" style="margin-top:6px">升到 Lv${b.level+1} 需要：</div>`;
+      html += `<div class="detail-row" style="color:${popOk ? "var(--success)" : "var(--danger)"}">　人口 ${pop} / ${t.pop} ${popOk ? "✅" : ""}</div>`;
+      html += `<div class="detail-row" style="color:${beautyOk ? "var(--success)" : "var(--danger)"}">　美化 ${beauty} / ${t.beauty} ${beautyOk ? "✅" : ""}</div>`;
+      if (popOk && beautyOk) {
+        html += `<button class="upgrade-btn" onclick="upgradeCenter('${b.id}')">⬆️ 升級城鎮中心！</button>`;
+      } else {
+        html += `<div class="detail-row" style="color:var(--muted)">多蓋房子/小鎮增加人口，多種森林/池塘增加美化 💡</div>`;
+      }
+    } else {
+      html += `<div class="detail-row" style="color:var(--success)">城鎮中心已達最高等級！🏆</div>`;
+    }
+  } else if (c.levelDays) {
+    const nextDays = b.level < 3 ? c.levelDays[b.level - 1] : null;
+    if (nextDays) html += `<div class="detail-row" style="color:var(--muted)">再過 <b>${nextDays - b.activeDays}</b> 天升到 Lv${b.level+1} ⬆️</div>`;
+    else html += `<div class="detail-row" style="color:var(--success)">已經是最高等級！⭐</div>`;
+  }
+
+  const refundLabel = refund === 0 ? "免費蓋的，拆除不退幣" : `🛠️ 拆除（退還 🪙 ${refund}）`;
+  html += `<button class="demolish-btn" onclick="demolish('${b.id}')">${refundLabel}</button>`;
   document.getElementById("sheetContent").innerHTML = html;
   document.getElementById("sheet").classList.add("open");
+}
+
+function upgradeCenter(buildingId) {
+  const b = island.buildings.find(x => x.id === buildingId);
+  if (!b || b.type !== "center" || b.level >= 3) return;
+  const t = CENTER_TARGETS[b.level - 1];
+  if (island.stats.population < t.pop || island.stats.beauty < t.beauty) { toast("還沒達標喔"); return; }
+  b.level++;
+  recalcStats();
+  saveIsland(currentStudent, island);
+  closeSheet();
+  render();
+  toast(`🏛️ 城鎮中心升到 Lv${b.level}！🎉`);
 }
 
 function demolish(buildingId) {
