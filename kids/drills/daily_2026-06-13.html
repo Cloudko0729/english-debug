@@ -280,7 +280,7 @@
     <h2>📖 3. 閱讀選擇題</h2>
     <p class="sec-hint">先讀短文，再回答問題</p>
     <div class="passage" id="passage"></div>
-    <button class="btn-listen-wide" onclick="speak(DRILL.reading.passage, 0.8)" style="margin-bottom:14px">🔊 唸給我聽</button>
+    <button class="btn-listen-wide" onclick="playAudio('passage', DRILL.reading.passage)" style="margin-bottom:14px">🔊 唸給我聽</button>
     <div id="sec3"></div>
     <button class="btn-check" onclick="checkSec3()">對答案 ✓</button>
     <div class="score-msg" id="score3"></div>
@@ -417,6 +417,17 @@ function updateStatsBar(p) {
 }
 
 // ─── Speech ──────────────────────────────────────────────────────────────────
+// 預先生成的 Kokoro 語音（af_heart）；找不到音檔時退回瀏覽器 TTS
+const AUDIO_DIR = "audio/2026-06-13/";
+let currentAudio = null;
+
+function playAudio(name, fallbackText) {
+  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  const a = new Audio(AUDIO_DIR + name + ".mp3");
+  currentAudio = a;
+  a.play().catch(() => speak(fallbackText));
+}
+
 function speak(text, rate = 0.85) {
   if (!window.speechSynthesis) return;
   window.speechSynthesis.cancel();
@@ -443,7 +454,7 @@ function renderSec1() {
     block.innerHTML = `
       <div class="q-head">
         <span class="q-num">${i + 1}.</span>
-        <button class="btn-listen" onclick="speak('${q.spoken}')">🔊</button>
+        <button class="btn-listen" onclick="playAudio('s1_${i}', '${q.spoken}')">🔊</button>
         <span style="font-size:.85rem;color:var(--muted)">聽單字，選答案</span>
       </div>
       <div class="choices">
@@ -481,7 +492,7 @@ function renderSec2() {
     block.innerHTML = `
       <div class="q-head">
         <span class="q-num">${i + 1}.</span>
-        <button class="btn-listen" onclick="speak('${q.full}')">🔊</button>
+        <button class="btn-listen" onclick="playAudio('s2_${i}', '${q.full}')">🔊</button>
         <span class="blank-sentence">${q.display.replace("___", '<b style="color:var(--primary)">___</b>')}</span>
       </div>
       <input class="blank-input" id="s2in_${i}" type="text" placeholder="type the word" autocomplete="off" autocapitalize="off" />
@@ -551,7 +562,7 @@ function renderSec4() {
     block.innerHTML = `
       <div class="q-head">
         <span class="q-num">${i + 1}.</span>
-        <button class="btn-listen" onclick="speak('${q.sentence.replace(/'/g, "\\'")}')">🔊</button>
+        <button class="btn-listen" onclick="playAudio('s4_${i}', '${q.sentence.replace(/'/g, "\\'")}')">🔊</button>
         <span style="font-size:.85rem;color:var(--muted)">聽句子，排順序</span>
       </div>
       <div class="chunk-row">

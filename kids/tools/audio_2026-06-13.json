@@ -1,0 +1,23 @@
+{
+  "outdir": "D:/english/kids/drills/audio/2026-06-13",
+  "voice": "af_heart",
+  "speed": 0.9,
+  "items": {
+    "s1_0": "turtle",
+    "s1_1": "elephant",
+    "s1_2": "horse",
+    "s1_3": "rabbit",
+    "s1_4": "lion",
+    "s1_5": "bird",
+    "s2_0": "The dog can run fast.",
+    "s2_1": "My cat is small and cute.",
+    "s2_2": "A fish can swim.",
+    "s2_3": "The monkey has a long tail.",
+    "s2_4": "I like the elephant.",
+    "passage": "Tom and Lily go to the zoo on Sunday. They see a big elephant and a tall horse. A monkey can jump and play. A tiger has orange and black lines. A turtle is slow, but it can swim. Lily likes the rabbit because it is small and cute. Tom likes the lion because it is strong.",
+    "s4_0": "The rabbit is small and cute.",
+    "s4_1": "A bird can fly in the sky.",
+    "s4_2": "My dog has a black nose.",
+    "s4_3": "The elephant is big and strong."
+  }
+}
