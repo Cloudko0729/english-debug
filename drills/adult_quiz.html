@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>每日工作英文測驗</title>
+  <style>
+    :root {
+      --bg: #0f0f1a; --panel: #1a1a2e; --panel2: #232340;
+      --text: #e8e8f0; --muted: #9a9ab0; --border: #2e2e48;
+      --primary: #4a9eff; --primary-soft: #1e3a5f;
+      --success: #2fbf71; --danger: #ef476f; --gold: #ffd166;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Segoe UI", "Microsoft JhengHei", sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    header { background: var(--panel); border-bottom: 1px solid var(--border); padding: 18px 16px; text-align: center; }
+    header h1 { font-size: 1.3rem; }
+    header a { color: var(--primary); font-size: .82rem; text-decoration: none; }
+    header p { color: var(--muted); font-size: .82rem; margin-top: 4px; }
+
+    #infoBar { background: var(--panel2); text-align: center; padding: 8px 16px; font-size: .82rem; color: var(--muted); }
+    #infoBar b { color: var(--primary); }
+
+    main { max-width: 680px; margin: 0 auto; padding: 16px; }
+
+    #progressWrap { margin-bottom: 14px; }
+    #progressBar { height: 6px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    #progressFill { height: 100%; width: 0; background: var(--primary); transition: width .3s; }
+    #progressText { font-size: .78rem; color: var(--muted); margin-top: 5px; text-align: center; }
+
+    .q-card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px 18px; }
+    .q-type { display: inline-block; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 3px 9px; border-radius: 5px; margin-bottom: 14px; }
+    .t-zh2en { background: var(--primary-soft); color: #8fc3ff; }
+    .t-bugfix { background: #4a2535; color: #ff9bb3; }
+    .t-cloze { background: #2a3f25; color: #a5e0a0; }
+    .t-weak { background: #5a3a10; color: var(--gold); }
+
+    .q-prompt { font-size: 1.15rem; line-height: 1.6; margin-bottom: 6px; }
+    .q-sub { font-size: .82rem; color: var(--muted); margin-bottom: 16px; }
+    .q-prompt code { background: #2a2a44; padding: 1px 6px; border-radius: 4px; color: #ffd9a0; font-family: inherit; }
+
+    .choices { display: flex; flex-direction: column; gap: 10px; }
+    .choice {
+      text-align: left; border: 1px solid var(--border); border-radius: 9px; background: var(--panel2);
+      padding: 13px 14px; font-size: .95rem; color: var(--text); cursor: pointer; line-height: 1.5;
+    }
+    .choice:hover:not(:disabled) { border-color: var(--primary); }
+    .choice.right { border-color: var(--success); background: #143020; }
+    .choice.wrongpick { border-color: var(--danger); background: #3a1622; }
+    .choice:disabled { cursor: default; }
+
+    .cloze-input { width: 100%; border: 1px solid var(--border); border-radius: 9px; background: var(--panel2); color: var(--text); padding: 13px 14px; font-size: 1rem; }
+    .cloze-input.right { border-color: var(--success); }
+    .cloze-input.wrongpick { border-color: var(--danger); }
+
+    .note { margin-top: 14px; font-size: .85rem; color: var(--muted); background: var(--panel2); border-left: 3px solid var(--primary); border-radius: 6px; padding: 10px 12px; display: none; line-height: 1.6; }
+    .note b { color: var(--text); }
+
+    .btn { display: inline-block; width: 100%; margin-top: 16px; padding: 13px; border: none; border-radius: 9px; font-size: 1rem; font-weight: 700; cursor: pointer; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-check { background: var(--success); color: #fff; }
+    .next-btn { display: none; background: var(--gold); color: #1a1a2e; }
+
+    #result { display: none; text-align: center; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 26px 18px; }
+    #result .big { font-size: 2.2rem; font-weight: 800; margin: 10px 0; }
+    #result .review { text-align: left; margin-top: 18px; }
+    #result .review h3 { font-size: .9rem; color: var(--danger); margin-bottom: 10px; }
+    .review-item { background: var(--panel2); border-radius: 8px; padding: 11px 13px; margin-bottom: 9px; font-size: .85rem; line-height: 1.6; }
+    .review-item .ok { color: var(--success); }
+    #result a { display: inline-block; margin-top: 16px; color: var(--primary); font-weight: 700; text-decoration: none; }
+
+    #startCard { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 26px 18px; text-align: center; }
+    #startCard p { color: var(--muted); font-size: .9rem; line-height: 1.7; margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📋 每日工作英文測驗</h1>
+  <p>維修 / RMA / 技術說明 / Email · 從你的句型庫與常犯錯出題</p>
+  <a href="../index.html">← 回首頁</a>
+</header>
+<div id="infoBar"></div>
+
+<main>
+  <div id="startCard">
+    <p>每天 15 題，混合中翻英、抓中式英文錯誤、介系詞填空。<br>
+    答錯的題目會記錄下來，隔天優先再考，直到你練熟。</p>
+    <button class="btn btn-primary" onclick="startQuiz()">開始今日測驗 →</button>
+  </div>
+
+  <div id="progressWrap" style="display:none">
+    <div id="progressBar"><div id="progressFill"></div></div>
+    <div id="progressText"></div>
+  </div>
+
+  <div id="quizArea"></div>
+  <div id="result"></div>
+</main>
+
+<script src="quiz_bank.js"></script>
+<script>
+const DAILY_SIZE = 15;
+
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+
+// ─── Progress ────────────────────────────────────────────────────────────────
+function getProgress() {
+  const raw = localStorage.getItem("adultQuizProgress");
+  return raw ? JSON.parse(raw) : { wrongIds: {}, sessions: 0, totalCorrect: 0, totalWrong: 0, lastDate: "" };
+}
+function saveProgress(p) { localStorage.setItem("adultQuizProgress", JSON.stringify(p)); }
+
+function recordResult(id, correct) {
+  const p = getProgress();
+  if (!p.wrongIds) p.wrongIds = {};
+  if (!correct) { p.wrongIds[id] = (p.wrongIds[id] || 0) + 1; p.totalWrong = (p.totalWrong||0) + 1; }
+  else { p.totalCorrect = (p.totalCorrect||0) + 1; if (p.wrongIds[id] > 0) p.wrongIds[id] = Math.max(0, p.wrongIds[id]-1); }
+  saveProgress(p);
+}
+
+// ─── Build today's set ───────────────────────────────────────────────────────
+function shuffle(a) { for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+function buildDailySet() {
+  const key = "adultQuizSet." + todayStr();
+  const saved = localStorage.getItem(key);
+  if (saved) return JSON.parse(saved);
+  const p = getProgress();
+  const wc = p.wrongIds || {};
+  const ids = QUIZ_BANK.map((q, i) => i);
+  const weak = ids.filter(i => (wc[i]||0) > 0);
+  const rest = ids.filter(i => !(wc[i] > 0));
+  shuffle(weak); shuffle(rest);
+  const picked = [...weak, ...rest].slice(0, DAILY_SIZE);
+  localStorage.setItem(key, JSON.stringify(picked));
+  return picked;
+}
+
+// ─── State ───────────────────────────────────────────────────────────────────
+let dayIds = [], qIndex = 0, answers = [];
+
+function startQuiz() {
+  dayIds = buildDailySet();
+  qIndex = 0; answers = [];
+  const p = getProgress();
+  if (p.lastDate !== todayStr()) { p.sessions = (p.sessions||0)+1; p.lastDate = todayStr(); saveProgress(p); }
+  document.getElementById("startCard").style.display = "none";
+  document.getElementById("progressWrap").style.display = "block";
+  document.getElementById("result").style.display = "none";
+  updateInfoBar();
+  renderQuestion();
+}
+
+function updateInfoBar() {
+  const p = getProgress();
+  const total = (p.totalCorrect||0) + (p.totalWrong||0);
+  const pct = total > 0 ? Math.round(p.totalCorrect/total*100) : 0;
+  const weak = Object.values(p.wrongIds||{}).filter(c => c > 0).length;
+  document.getElementById("infoBar").innerHTML = `累積正確率 <b>${pct}%</b> · 待加強題目 <b>${weak}</b> 題 · 第 ${p.sessions||0} 天`;
+}
+
+// ─── Render ──────────────────────────────────────────────────────────────────
+function renderQuestion() {
+  const id = dayIds[qIndex];
+  const q = QUIZ_BANK[id];
+  const p = getProgress();
+  const isWeak = (p.wrongIds && p.wrongIds[id] > 0);
+
+  document.getElementById("progressFill").style.width = (qIndex / dayIds.length * 100) + "%";
+  document.getElementById("progressText").textContent = `第 ${qIndex+1} / ${dayIds.length} 題`;
+
+  const typeLabel = { zh2en: "中翻英", bugfix: "抓錯改寫", cloze: "介系詞填空" }[q.type];
+  const typeClass = { zh2en: "t-zh2en", bugfix: "t-bugfix", cloze: "t-cloze" }[q.type];
+
+  let body = "";
+  if (q.type === "zh2en") {
+    body = `<div class="q-prompt">${q.zh}</div><div class="q-sub">選出最自然的工作英文寫法</div>
+      <div class="choices">${q.choices.map((c,j)=>`<button class="choice" onclick="answerMC(${j})">${escapeHtml(c)}</button>`).join("")}</div>`;
+  } else if (q.type === "bugfix") {
+    body = `<div class="q-prompt">原句：<code>${escapeHtml(q.prompt)}</code></div><div class="q-sub">選出正確、自然的版本</div>
+      <div class="choices">${q.choices.map((c,j)=>`<button class="choice" onclick="answerMC(${j})">${escapeHtml(c)}</button>`).join("")}</div>`;
+  } else {
+    body = `<div class="q-prompt">${escapeHtml(q.sentence).replace("___", '<code>____</code>')}</div><div class="q-sub">填入缺少的字（通常是介系詞）</div>
+      <input class="cloze-input" id="clozeInput" type="text" autocomplete="off" placeholder="輸入答案" onkeydown="if(event.key==='Enter')answerCloze()">
+      <button class="btn btn-check" id="clozeBtn" onclick="answerCloze()">確認</button>`;
+  }
+
+  document.getElementById("quizArea").innerHTML = `
+    <div class="q-card">
+      <span class="q-type ${isWeak ? "t-weak" : typeClass}">${isWeak ? "⚠️ 加強題" : typeLabel}</span>
+      ${body}
+      <div class="note" id="note"></div>
+      <button class="btn next-btn" id="nextBtn" onclick="nextQuestion()">${qIndex === dayIds.length-1 ? "看成績" : "下一題 →"}</button>
+    </div>`;
+  if (q.type === "cloze") setTimeout(()=>{const el=document.getElementById("clozeInput"); if(el) el.focus();}, 50);
+}
+
+function answerMC(j) {
+  const id = dayIds[qIndex];
+  const q = QUIZ_BANK[id];
+  const btns = document.querySelectorAll(".choice");
+  const ok = q.choices[j] === q.answer;
+  btns.forEach((b,k) => {
+    b.disabled = true;
+    if (q.choices[k] === q.answer) b.classList.add("right");
+    else if (k === j && !ok) b.classList.add("wrongpick");
+  });
+  finishQuestion(id, ok, q);
+}
+
+function answerCloze() {
+  const id = dayIds[qIndex];
+  const q = QUIZ_BANK[id];
+  const input = document.getElementById("clozeInput");
+  if (input.disabled) return;
+  const ok = input.value.trim().toLowerCase() === String(q.answer).toLowerCase();
+  input.disabled = true;
+  input.classList.add(ok ? "right" : "wrongpick");
+  document.getElementById("clozeBtn").style.display = "none";
+  finishQuestion(id, ok, q, !ok ? `正確答案：<b>${q.answer}</b>` : "");
+}
+
+function finishQuestion(id, ok, q, extra) {
+  answers[qIndex] = { id, ok };
+  recordResult(id, ok);
+  const note = document.getElementById("note");
+  let txt = "";
+  if (!ok && q.type !== "cloze") txt += `正確：<b>${escapeHtml(q.answer)}</b><br>`;
+  if (extra) txt += extra + "<br>";
+  if (q.note) txt += q.note;
+  if (txt) { note.innerHTML = txt; note.style.display = "block"; }
+  document.getElementById("nextBtn").style.display = "block";
+}
+
+function nextQuestion() {
+  qIndex++;
+  if (qIndex >= dayIds.length) { showResult(); return; }
+  renderQuestion();
+}
+
+function showResult() {
+  document.getElementById("quizArea").innerHTML = "";
+  document.getElementById("progressFill").style.width = "100%";
+  document.getElementById("progressText").textContent = `完成！${dayIds.length} 題`;
+  const correct = answers.filter(a => a.ok).length;
+  const wrong = answers.filter(a => !a.ok);
+  let html = `<div>今日測驗完成</div><div class="big">${correct} / ${dayIds.length}</div>`;
+  if (wrong.length) {
+    html += `<div class="review"><h3>需要再看的題目（明天會再考）</h3>`;
+    wrong.forEach(a => {
+      const q = QUIZ_BANK[a.id];
+      const prompt = q.type === "zh2en" ? q.zh : q.type === "bugfix" ? q.prompt : q.sentence;
+      html += `<div class="review-item">${escapeHtml(prompt)}<br><span class="ok">✓ ${escapeHtml(q.answer)}</span>${q.note ? "<br>"+q.note : ""}</div>`;
+    });
+    html += `</div>`;
+  } else {
+    html += `<div class="review-item" style="color:var(--success)">全部答對，工作英文很穩 👍</div>`;
+  }
+  html += `<a href="../index.html">← 回首頁</a>`;
+  document.getElementById("result").innerHTML = html;
+  document.getElementById("result").style.display = "block";
+  document.getElementById("progressWrap").style.display = "none";
+  updateInfoBar();
+}
+
+function escapeHtml(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+updateInfoBar();
+</script>
+</body>
+</html>
