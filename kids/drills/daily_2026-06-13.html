@@ -314,6 +314,7 @@
 
 </main>
 
+<script src="../cloud_sync.js"></script>
 <script>
 // ─── Drill Data (Day 2 · Animals) ────────────────────────────────────────────
 const DRILL = {
@@ -688,6 +689,7 @@ function awardCoins(correct, perfectSections) {
   });
   p.coins.claimedDrills[claimKey] = { claimedAt: new Date().toISOString(), earned, correct, perfectSections };
   saveProgress(currentStudent, p);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);  // 自動存到 Google 試算表
   return `🪙 +${earned} 金幣！（共 ${p.coins.balance} 金幣）<br><a href="../island.html" style="color:#ffe27a;font-weight:700">👉 去蓋我的島嶼</a>`;
 }
 

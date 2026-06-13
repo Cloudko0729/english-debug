@@ -278,7 +278,7 @@
     <div class="data-btns">
       <button class="data-btn" onclick="exportSave()">⬇️ 匯出備份</button>
       <button class="data-btn" onclick="document.getElementById('importFile').click()">📂 從檔案匯入</button>
-      <button class="data-btn" onclick="restoreFromCloud()">☁️ 從雲端還原</button>
+      <button class="data-btn" onclick="restoreFromGoogle()">☁️ 從 Google 還原</button>
     </div>
     <input type="file" id="importFile" accept="application/json,.json" style="display:none" onchange="importSave(event)" />
     <p class="data-hint">換手機 / 平板時用得到。匯出的檔案放進 repo 的 <code>kids/saves/</code> 再 push，其他裝置就能「從雲端還原」。</p>
@@ -293,6 +293,7 @@
 
 <div id="toast"></div>
 
+<script src="cloud_sync.js"></script>
 <script>
 // ─── Building catalog (v1) ───────────────────────────────────────────────────
 const BUILDINGS = {
@@ -494,6 +495,7 @@ function build(key) {
   saveIsland(currentStudent, island);
   closeSheet();
   render();
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
   toast(`${c.emoji} ${c.name} 蓋好了！`);
 }
 
@@ -545,6 +547,7 @@ function upgradeCenter(buildingId) {
   saveIsland(currentStudent, island);
   closeSheet();
   render();
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
   toast(`🏛️ 城鎮中心升到 Lv${b.level}！🎉`);
 }
 
@@ -565,6 +568,7 @@ function demolish(buildingId) {
   saveIsland(currentStudent, island);
   closeSheet();
   render();
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
   toast(`${c.emoji} 拆除了，退還 🪙 ${refund}`);
 }
 
@@ -596,6 +600,7 @@ function selectStudent(name) {
   if (produced > 0) {
     document.getElementById("notice").style.display = "block";
     document.getElementById("notice").innerHTML = `🌅 新的一天！你的農場和小鎮生產了 <b>🪙 ${produced}</b> 金幣！`;
+    if (typeof cloudSave === "function") cloudSave(currentStudent);  // 收成後存雲端
   } else {
     document.getElementById("notice").style.display = "none";
   }
@@ -652,16 +657,15 @@ function importSave(event) {
   event.target.value = "";
 }
 
-function restoreFromCloud() {
+// 從 Google 試算表還原（自動存檔的對應還原）
+function restoreFromGoogle() {
   if (!currentStudent) { toast("先選學生"); return; }
-  const url = "saves/" + currentStudent + ".json?t=" + Date.now();
-  fetch(url)
-    .then(r => { if (!r.ok) throw new Error("not found"); return r.json(); })
-    .then(bundle => {
-      if (!confirm(`要用雲端的存檔覆蓋目前 ${currentStudent} 的進度嗎？`)) return;
-      applyBundle(bundle);
-    })
-    .catch(() => toast(`雲端還沒有 ${currentStudent} 的存檔`));
+  if (typeof cloudLoad !== "function" || !CLOUD_URL) { toast("還沒設定 Google 同步"); return; }
+  if (!confirm(`要用 Google 雲端的存檔覆蓋目前 ${currentStudent} 的進度嗎？`)) return;
+  cloudLoad(currentStudent).then(d => {
+    if (d) { selectStudent(currentStudent); toast(`已從 Google 還原 ${currentStudent} 🎉`); }
+    else toast(`Google 上還沒有 ${currentStudent} 的存檔`);
+  });
 }
 
 // auto restore

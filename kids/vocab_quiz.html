@@ -101,6 +101,7 @@
 
 <script src="wordbank.js"></script>
 <script src="word_emoji.js"></script>
+<script src="cloud_sync.js"></script>
 <script>
 const QUIZ_SIZE = 20;
 const DRILL_ID = "vocab-quiz";
@@ -290,6 +291,7 @@ function showResult() {
   document.getElementById("result").innerHTML = html;
   document.getElementById("result").style.display = "block";
   updateInfoBar();
+  if (typeof cloudSave === "function") cloudSave(currentStudent);  // 自動存到 Google 試算表
 }
 
 function awardCoins(correct) {
