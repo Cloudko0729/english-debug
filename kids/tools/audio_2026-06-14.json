@@ -1,0 +1,23 @@
+{
+  "outdir": "D:/english/kids/drills/audio/2026-06-14",
+  "voice": "af_heart",
+  "speed": 0.9,
+  "items": {
+    "s1_0": "rice",
+    "s1_1": "chicken",
+    "s1_2": "milk",
+    "s1_3": "apple",
+    "s1_4": "noodles",
+    "s1_5": "water",
+    "s2_0": "I eat rice for lunch.",
+    "s2_1": "She drinks cold milk.",
+    "s2_2": "We have noodles for dinner.",
+    "s2_3": "The cake is sweet.",
+    "s2_4": "He is hungry in the morning.",
+    "passage": "Tom is hungry in the morning. He eats bread and an egg for breakfast. At lunch, he has rice, chicken, and soup. He drinks water. After school, he eats a sweet apple. For dinner, Tom likes noodles and fish. He says the food is yummy.",
+    "s4_0": "I eat rice for lunch.",
+    "s4_1": "She drinks milk every morning.",
+    "s4_2": "The soup is hot and yummy.",
+    "s4_3": "We have noodles for dinner."
+  }
+}
