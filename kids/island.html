@@ -210,6 +210,32 @@
     #toast.show { transform: translateX(-50%) translateY(0); }
 
     #pickStudentMsg { text-align: center; padding: 40px 20px; color: var(--muted); }
+
+    /* data backup panel */
+    #dataPanel {
+      margin-top: 18px;
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .data-title { font-size: .95rem; color: var(--primary); margin-bottom: 10px; }
+    .data-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .data-btn {
+      flex: 1 1 calc(33% - 6px);
+      min-width: 100px;
+      padding: 10px 8px;
+      border: 2px solid var(--primary);
+      background: #fff;
+      color: var(--primary);
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: .82rem;
+      cursor: pointer;
+    }
+    .data-btn:active { background: var(--primary-soft); }
+    .data-hint { font-size: .74rem; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+    .data-hint code { background: #eef3f8; padding: 1px 4px; border-radius: 4px; }
   </style>
 </head>
 <body>
@@ -239,6 +265,17 @@
   <div id="notice"></div>
   <div id="pickStudentMsg">👆 先選 Albert 或 Jonathan，開始蓋你的島！</div>
   <div id="island" style="display:none"></div>
+
+  <div id="dataPanel" style="display:none">
+    <h2 class="data-title">💾 進度備份</h2>
+    <div class="data-btns">
+      <button class="data-btn" onclick="exportSave()">⬇️ 匯出備份</button>
+      <button class="data-btn" onclick="document.getElementById('importFile').click()">📂 從檔案匯入</button>
+      <button class="data-btn" onclick="restoreFromCloud()">☁️ 從雲端還原</button>
+    </div>
+    <input type="file" id="importFile" accept="application/json,.json" style="display:none" onchange="importSave(event)" />
+    <p class="data-hint">換手機 / 平板時用得到。匯出的檔案放進 repo 的 <code>kids/saves/</code> 再 push，其他裝置就能「從雲端還原」。</p>
+  </div>
 </main>
 
 <!-- bottom sheet -->
@@ -494,6 +531,7 @@ function selectStudent(name) {
   document.getElementById("pickStudentMsg").style.display = "none";
   document.getElementById("island").style.display = "grid";
   document.getElementById("statsRow").style.display = "flex";
+  document.getElementById("dataPanel").style.display = "block";
   recalcStats();
   const produced = runDailyTick();
   render();
@@ -503,6 +541,69 @@ function selectStudent(name) {
   } else {
     document.getElementById("notice").style.display = "none";
   }
+}
+
+// ─── 匯出 / 匯入 / 雲端還原 ──────────────────────────────────────────────────
+function buildSaveBundle(student) {
+  return {
+    type: "kids-english-save",
+    version: 1,
+    student,
+    exportedAt: new Date().toISOString(),
+    progress: getProgress(student),
+    island: loadIsland(student),
+  };
+}
+
+function exportSave() {
+  if (!currentStudent) { toast("先選學生"); return; }
+  const bundle = buildSaveBundle(currentStudent);
+  const json = JSON.stringify(bundle, null, 2);
+  const blob = new Blob([json], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = currentStudent + ".json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(a.href);
+  toast(`已匯出 ${currentStudent}.json`);
+}
+
+function applyBundle(bundle) {
+  if (!bundle || bundle.type !== "kids-english-save" || !bundle.student) {
+    toast("檔案格式不對 😅"); return false;
+  }
+  const s = bundle.student;
+  if (bundle.progress) saveProgress(s, bundle.progress);
+  if (bundle.island)   localStorage.setItem("kidsIsland." + s, JSON.stringify(bundle.island));
+  selectStudent(s);
+  toast(`已還原 ${s} 的進度 🎉`);
+  return true;
+}
+
+function importSave(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try { applyBundle(JSON.parse(e.target.result)); }
+    catch (err) { toast("讀取失敗 😅"); }
+  };
+  reader.readAsText(file);
+  event.target.value = "";
+}
+
+function restoreFromCloud() {
+  if (!currentStudent) { toast("先選學生"); return; }
+  const url = "saves/" + currentStudent + ".json?t=" + Date.now();
+  fetch(url)
+    .then(r => { if (!r.ok) throw new Error("not found"); return r.json(); })
+    .then(bundle => {
+      if (!confirm(`要用雲端的存檔覆蓋目前 ${currentStudent} 的進度嗎？`)) return;
+      applyBundle(bundle);
+    })
+    .catch(() => toast(`雲端還沒有 ${currentStudent} 的存檔`));
 }
 
 // auto restore
