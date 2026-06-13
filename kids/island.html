@@ -177,6 +177,19 @@
     /* detail sheet reuse #sheet */
     .detail-row { font-size: .9rem; margin-bottom: 8px; }
     .detail-row b { color: var(--primary); }
+    .demolish-btn {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid var(--danger);
+      background: #fff;
+      color: var(--danger);
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: .9rem;
+    }
+    .demolish-btn:active { background: #fde0e8; }
 
     /* toast */
     #toast {
@@ -427,6 +440,7 @@ function build(key) {
 function openDetail(b) {
   const c = BUILDINGS[b.type];
   const nextDays = b.level < 3 ? c.levelDays[b.level - 1] : null;
+  const refund = Math.round(c.cost / 2);
   let html = `<h3>${c.emoji} ${c.name} Lv${b.level}</h3>`;
   html += `<div class="detail-row">已經存在：<b>${b.activeDays}</b> 天</div>`;
   if (c.coin[b.level-1] > 0) html += `<div class="detail-row">每天生產：<b>🪙 ${c.coin[b.level-1]}</b></div>`;
@@ -434,8 +448,29 @@ function openDetail(b) {
   if (c.beauty[b.level-1] > 0) html += `<div class="detail-row">美化分數：<b>${c.beauty[b.level-1]}</b></div>`;
   if (nextDays) html += `<div class="detail-row" style="color:var(--muted)">再過 <b>${nextDays - b.activeDays}</b> 天升到 Lv${b.level+1} ⬆️</div>`;
   else html += `<div class="detail-row" style="color:var(--success)">已經是最高等級！⭐</div>`;
+  html += `<button class="demolish-btn" onclick="demolish('${b.id}')">🛠️ 拆除（退還 🪙 ${refund}）</button>`;
   document.getElementById("sheetContent").innerHTML = html;
   document.getElementById("sheet").classList.add("open");
+}
+
+function demolish(buildingId) {
+  const idx = island.buildings.findIndex(b => b.id === buildingId);
+  if (idx < 0) return;
+  const b = island.buildings[idx];
+  const c = BUILDINGS[b.type];
+  const refund = Math.round(c.cost / 2);
+  island.buildings.splice(idx, 1);
+  const p = getProgress(currentStudent);
+  p.coins.balance += refund;
+  p.coins.transactions.push({ type: "earn", source: "islandDemolish", amount: refund,
+    balanceAfter: p.coins.balance, createdAt: new Date().toISOString(),
+    meta: { buildingType: b.type, x: b.x, y: b.y } });
+  saveProgress(currentStudent, p);
+  recalcStats();
+  saveIsland(currentStudent, island);
+  closeSheet();
+  render();
+  toast(`${c.emoji} 拆除了，退還 🪙 ${refund}`);
 }
 
 function closeSheet() { document.getElementById("sheet").classList.remove("open"); }
