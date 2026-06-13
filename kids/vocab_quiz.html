@@ -154,17 +154,19 @@ function buildQuizSet() {
   if (saved) return JSON.parse(saved);
 
   const wc = p.wrongCounts || {};
-  // tier 1: weak (wrongCounts >= 2), tier 2: shaky (==1), tier 3: rest
-  const weak  = WORDBANK.filter(w => (wc[w.en] || 0) >= 2);
-  const shaky = WORDBANK.filter(w => (wc[w.en] || 0) === 1);
-  const rest  = WORDBANK.filter(w => !(wc[w.en] > 0));
-  shuffle(weak); shuffle(shaky); shuffle(rest);
+  // 優先順序：答錯2+ → 答錯1 → 沒練過的國小基礎字 → 沒練過的國中進階字
+  const weak       = WORDBANK.filter(w => (wc[w.en] || 0) >= 2);
+  const shaky      = WORDBANK.filter(w => (wc[w.en] || 0) === 1);
+  const freshBasic = WORDBANK.filter(w => !(wc[w.en] > 0) && w.level === "basic");
+  const freshMore  = WORDBANK.filter(w => !(wc[w.en] > 0) && w.level !== "basic");
+  shuffle(weak); shuffle(shaky); shuffle(freshBasic); shuffle(freshMore);
 
   const picked = [];
   const pushUnique = (list) => { for (const w of list) { if (picked.length >= QUIZ_SIZE) break; picked.push(w); } };
   pushUnique(weak);
   pushUnique(shaky);
-  pushUnique(rest);
+  pushUnique(freshBasic);
+  pushUnique(freshMore);
 
   const set = picked.slice(0, QUIZ_SIZE).map(w => ({ ...w, isWeak: (wc[w.en] || 0) >= 2 }));
   localStorage.setItem(key, JSON.stringify(set));
