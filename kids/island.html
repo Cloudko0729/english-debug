@@ -395,6 +395,9 @@ const REQ_CENTER = {
   turtle: 4, dolphin: 4, whaleshark: 4, coral: 4, horseshoecrab: 4,
 };
 const CAT_NAME = { hills: "丘陵動物", mountain: "高山動物", ocean: "海洋動物" };
+// 各棲地可復育的動物數量上限（覆蓋各動物的 categoryMax）
+const CATEGORY_MAX = { hills: 1, mountain: 2, ocean: 2 };
+function catMax(cat) { return CATEGORY_MAX[cat] || 1; }
 function reqCenterFor(key) { return REQ_CENTER[key] || 0; }
 function centerLevel() { const c = island.buildings.find(b => b.type === "center"); return c ? c.level : 0; }
 const GRID = 15;
@@ -608,7 +611,7 @@ function canBuild(key) {
   const c = BUILDINGS[key];
   if (c.unique && countType(key) >= 1) return false;
   if (c.max && countType(key) >= c.max) return false;
-  if (c.category && countCategory(c.category) >= (c.categoryMax || 1)) return false;
+  if (c.category && countCategory(c.category) >= catMax(c.category)) return false;
   return true;
 }
 function buildableOn(t) {
@@ -653,7 +656,7 @@ function build(key) {
   if (!selectedTile || !(c.terrain || ["P"]).includes(terrainAt(selectedTile.x, selectedTile.y))) { toast(`只能蓋在${(c.terrain||["P"]).map(t=>TERR_NAME[t]).join("/")}上`); return; }
   if (c.unique && countType(key) >= 1) { toast("已經有一個了"); return; }
   if (c.max && countType(key) >= c.max) { toast(`${c.name}最多 ${c.max} 個`); return; }
-  if (c.category && countCategory(c.category) >= (c.categoryMax || 1)) { toast(`${CAT_NAME[c.category] || "這類動物"}只能復育一隻`); return; }
+  if (c.category && countCategory(c.category) >= catMax(c.category)) { toast(`${CAT_NAME[c.category] || "這類動物"}最多 ${catMax(c.category)} 隻`); return; }
   if (centerLevel() < reqCenterFor(key)) { toast(`需要城鎮中心 Lv${reqCenterFor(key)} 才能蓋`); return; }
   const p = getProgress(currentStudent);
   if (p.coins.balance < c.cost) { toast("金幣不夠！"); return; }
