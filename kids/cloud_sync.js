@@ -1,7 +1,7 @@
 // Kids English — Google 試算表自動同步
 // 部署 Apps Script 後，把 /exec 網址貼到下面 CLOUD_URL（CLOUD_SECRET 要跟 Code.gs 一致）。
 // 留空 CLOUD_URL 時所有同步自動略過，網站照常運作。
-const CLOUD_URL = "";  // 例：https://script.google.com/macros/s/AKfyc.../exec
+const CLOUD_URL = "https://script.google.com/macros/s/AKfycbyZlQ609fvyiiOYIb-UegMSd2zQRSg9DoykH-aknkzZQEIl9jo71NSa4F17dLeErW3t6g/exec";
 const CLOUD_SECRET = "kids2026";
 
 function _masteryFromProgress(progress) {
