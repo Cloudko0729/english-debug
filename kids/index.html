@@ -94,6 +94,9 @@
     .icon-vocab { background: #e6f4ea; }
     .card-title { font-size: .95rem; font-weight: 700; margin: 0 0 2px; }
     .card-sub   { font-size: .78rem; color: #888; margin: 0; }
+    /* 完成（已領獎）打勾 */
+    .card[data-done="1"] { border-color: #2fbf71 !important; background: #f3fcf7 !important; }
+    .card[data-done="1"] .card-title::before { content: "✅ "; }
     .badge {
       font-size: .68rem; font-weight: 700;
       background: #2f80ed; color: #fff;
@@ -140,7 +143,7 @@
   <h2>每日練習</h2>
   <div class="card-list">
 
-    <a class="card" href="drills/exam_final.html" style="border:2px solid #f2a900;background:linear-gradient(135deg,#fff7dc,#fff)">
+    <a class="card" href="drills/exam_final.html" data-claim="final-exam" style="border:2px solid #f2a900;background:linear-gradient(135deg,#fff7dc,#fff)">
       <div class="card-left">
         <div class="card-icon" style="background:#fff0b3;font-size:1.3rem">🏅</div>
         <div>
@@ -151,7 +154,7 @@
       <span class="badge badge-new">大獎</span>
     </a>
 
-    <a class="card" href="vocab_quiz.html" style="border:2px solid #2f80ed">
+    <a class="card" href="vocab_quiz.html" data-claim-today="vocab-quiz" style="border:2px solid #2f80ed">
       <div class="card-left">
         <div class="card-icon icon-drill">📝</div>
         <div>
@@ -162,7 +165,7 @@
       <span class="badge">每天</span>
     </a>
 
-    <a class="card" href="drills/daily_2026-06-14.html">
+    <a class="card" href="drills/daily_2026-06-14.html" data-claim="2026-06-14::2026-06-14-food">
       <div class="card-left">
         <div class="card-icon icon-drill">🍎</div>
         <div>
@@ -173,7 +176,7 @@
       <span class="badge badge-new">最新</span>
     </a>
 
-    <a class="card" href="drills/daily_2026-06-13.html">
+    <a class="card" href="drills/daily_2026-06-13.html" data-claim="2026-06-13::2026-06-13-animals">
       <div class="card-left">
         <div class="card-icon icon-drill">🦁</div>
         <div>
@@ -233,6 +236,23 @@ function pickStudent(name) {
   const coins = (p.coins && p.coins.balance) || 0;
   const peek = document.getElementById("coinPeek");
   if (peek) peek.textContent = coins;
+  markDone(p);
+}
+
+// 在已完成（已領獎）的練習卡片上打勾
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function markDone(p) {
+  const claimed = (p.coins && p.coins.claimedDrills) || {};
+  const today = todayStr();
+  document.querySelectorAll(".card[data-claim]").forEach(c => {
+    c.dataset.done = claimed[c.dataset.claim] ? "1" : "0";
+  });
+  document.querySelectorAll(".card[data-claim-today]").forEach(c => {
+    c.dataset.done = claimed[today + "::" + c.dataset.claimToday] ? "1" : "0";
+  });
 }
 
 // Auto-restore last student
