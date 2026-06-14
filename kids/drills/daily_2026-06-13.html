@@ -206,9 +206,9 @@
     .chunk-tile {
       background: var(--primary-soft); border: 2px solid var(--primary); border-radius: 9px;
       padding: 11px 14px; font-size: 1rem; font-weight: 700; color: var(--text);
-      cursor: grab; user-select: none; touch-action: none; transition: box-shadow .1s, transform .1s;
+      cursor: grab; user-select: none; touch-action: none; transition: box-shadow .12s, transform .12s;
     }
-    .chunk-tile.dragging { opacity: .9; box-shadow: 0 5px 14px rgba(0,0,0,.28); cursor: grabbing; }
+    .chunk-tile.dragging { opacity: .92; box-shadow: 0 6px 16px rgba(0,0,0,.3); cursor: grabbing; transform: scale(1.06); pointer-events: none; }
     .chunk-tile.tile-ok { border-color: var(--success); background: #e6faf0; }
     .chunk-tile.tile-bad { border-color: var(--danger); background: #fde8ee; }
 
@@ -566,36 +566,35 @@ function checkSec3() {
 }
 
 // ─── Section 4: Sentence reorder ─────────────────────────────────────────────
-// 拖曳排序（支援滑鼠與觸控）
+// 拖曳排序（支援滑鼠與觸控）— rAF 節流命中判斷，拖曳塊 pointer-events:none，避免每幀重排卡頓
 function makeSortable(container) {
   container.querySelectorAll(".chunk-tile").forEach(tile => {
-    let sx = 0, sy = 0, dragging = false;
+    let dragging = false, raf = 0, lastX = 0, lastY = 0;
     tile.addEventListener("pointerdown", e => {
       dragging = true;
       tile.setPointerCapture(e.pointerId);
       tile.classList.add("dragging");
-      sx = e.clientX; sy = e.clientY;
     });
     tile.addEventListener("pointermove", e => {
       if (!dragging) return;
-      tile.style.transform = `translate(${e.clientX - sx}px, ${e.clientY - sy}px)`;
-      tile.style.pointerEvents = "none";
-      const under = document.elementFromPoint(e.clientX, e.clientY);
-      tile.style.pointerEvents = "";
-      const over = under && under.closest(".chunk-tile");
-      if (over && over !== tile && over.parentElement === container) {
-        const r = over.getBoundingClientRect();
-        const before = e.clientX < r.left + r.width / 2;
-        container.insertBefore(tile, before ? over : over.nextSibling);
-        sx = e.clientX; sy = e.clientY;
-        tile.style.transform = "";
-      }
+      lastX = e.clientX; lastY = e.clientY;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const under = document.elementFromPoint(lastX, lastY);  // 拖曳塊已 pointer-events:none，會抓到下方的塊
+        const over = under && under.closest(".chunk-tile");
+        if (over && over !== tile && over.parentElement === container) {
+          const r = over.getBoundingClientRect();
+          const before = lastX < r.left + r.width / 2;
+          container.insertBefore(tile, before ? over : over.nextSibling);
+        }
+      });
     });
     const end = () => {
       if (!dragging) return;
       dragging = false;
       tile.classList.remove("dragging");
-      tile.style.transform = ""; tile.style.pointerEvents = "";
+      if (raf) { cancelAnimationFrame(raf); raf = 0; }
     };
     tile.addEventListener("pointerup", end);
     tile.addEventListener("pointercancel", end);
