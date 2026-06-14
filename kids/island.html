@@ -96,29 +96,29 @@
     /* island grid */
     #island {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 3px;
-      background: var(--sea);
-      padding: 8px;
-      border-radius: 14px;
-      box-shadow: inset 0 0 0 4px #3f9fd6, 0 3px 10px rgba(0,0,0,.2);
+      grid-template-columns: repeat(15, 1fr);
+      gap: 1px;
+      background: #3f9fd6;
+      padding: 5px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,.2);
     }
     .tile {
       aspect-ratio: 1;
       background: var(--land);
-      border-radius: 6px;
+      border-radius: 3px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: clamp(1.1rem, 6vw, 1.7rem);
+      font-size: clamp(.6rem, 2.6vw, 1rem);
       cursor: pointer;
       position: relative;
       user-select: none;
-      transition: transform .1s;
     }
-    .tile:active { transform: scale(.92); }
-    .tile.sea { background: var(--sea); cursor: default; }
+    .tile.t-ocean   { background: #5bb8e6; cursor: default; }
+    .tile.t-plains  { background: #aedd80; }
+    .tile.t-hills   { background: #cca877; }
+    .tile.t-mountain{ background: #b8bcca; cursor: default; }
     .tile-img { width: 100%; height: 100%; object-fit: contain; image-rendering: auto; pointer-events: none; }
     .opt-img { width: 2rem; height: 2rem; object-fit: contain; }
     .tile .lvl {
@@ -317,11 +317,37 @@ const BUILDINGS = {
 const BUILD_ORDER = ["center", "pond", "forest", "ranch", "farm", "house", "town"];
 
 // 城鎮中心升級條件：index = 目前等級-1，達成下一級的人口與美化目標
+// （地形已給 ~24 美化分，門檻相應提高）
 const CENTER_TARGETS = [
-  { pop: 20, beauty: 15 },  // Lv1 -> Lv2
-  { pop: 50, beauty: 40 },  // Lv2 -> Lv3
+  { pop: 20, beauty: 40 },  // Lv1 -> Lv2
+  { pop: 50, beauty: 75 },  // Lv2 -> Lv3
 ];
-const GRID = 7;
+const GRID = 15;
+
+// 15×15 地形圖：O 海洋、P 平地（可蓋）、H 丘陵、M 高山
+const TERRAIN_MAP = [
+  "OOOOOOOOOOOOOOO",
+  "OOOOPPPPPOOOOOO",
+  "OOPPPPPPPPPOOOO",
+  "OOPPPHHPPPPPOOO",
+  "OPPPHHHHPPPPPOO",
+  "OPPPHMMHHPPPPOO",
+  "OPPPHMMMHPPPPPO",
+  "OPPPPHHHPPPPPPO",
+  "OPPPPPPPPPPPPPO",
+  "OPPPPPPPPPPPPPO",
+  "OOPPPPPPPPPPPOO",
+  "OOPPPPPPPPPPPOO",
+  "OOOPPPPPPPPOOOO",
+  "OOOOOPPPPPOOOOO",
+  "OOOOOOOOOOOOOOO",
+];
+function terrainAt(x, y) {
+  if (y < 0 || y >= GRID || x < 0 || x >= GRID) return "O";
+  return TERRAIN_MAP[y][x];
+}
+const TERR_CLASS = { O: "t-ocean", P: "t-plains", H: "t-hills", M: "t-mountain" };
+const TERR_NAME = { O: "海洋", P: "平地", H: "丘陵", M: "高山" };
 
 // ─── State ───────────────────────────────────────────────────────────────────
 let currentStudent = null;
@@ -345,7 +371,7 @@ function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.str
 // ─── Island storage ──────────────────────────────────────────────────────────
 function newIsland(studentId) {
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     studentId,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
@@ -361,6 +387,32 @@ function newIsland(studentId) {
 function loadIsland(s) {
   const raw = localStorage.getItem("kidsIsland." + s);
   return raw ? JSON.parse(raw) : newIsland(s);
+}
+
+// 升級到 15×15 地圖：把不在平地上的舊建築拆除並退還金幣
+let lastMigration = { removed: 0, refund: 0 };
+function migrateIsland(isl, student) {
+  lastMigration = { removed: 0, refund: 0 };
+  if (isl.schemaVersion >= 2 && isl.grid && isl.grid.width === GRID) return false;
+  isl.schemaVersion = 2;
+  isl.grid = { width: GRID, height: GRID };
+  let refunded = 0, removed = 0;
+  const kept = [];
+  (isl.buildings || []).forEach(b => {
+    if (terrainAt(b.x, b.y) === "P") { kept.push(b); }
+    else { refunded += (BUILDINGS[b.type] && BUILDINGS[b.type].cost) || 0; removed++; }
+  });
+  isl.buildings = kept;
+  if (refunded > 0) {
+    const p = getProgress(student);
+    p.coins.balance += refunded;
+    p.coins.lifetimeEarned += refunded;
+    p.coins.transactions.push({ type: "earn", source: "mapMigration", amount: refunded,
+      balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { removed } });
+    saveProgress(student, p);
+  }
+  lastMigration = { removed: removed, refund: refunded };
+  return true;
 }
 function saveIsland(s, isl) {
   isl.updatedAt = new Date().toISOString();
@@ -405,8 +457,21 @@ function runDailyTick() {
 }
 
 // ─── Stats ──────────────────────────────────────────────────────────────────
+let TERRAIN_BEAUTY = null;
+function terrainBeauty() {
+  if (TERRAIN_BEAUTY === null) {
+    let b = 0;
+    for (let y = 0; y < GRID; y++) for (let x = 0; x < GRID; x++) {
+      const t = TERRAIN_MAP[y][x];
+      if (t === "H") b += 1; else if (t === "M") b += 2;
+    }
+    TERRAIN_BEAUTY = b;
+  }
+  return TERRAIN_BEAUTY;
+}
+
 function recalcStats() {
-  let pop = 0, cap = 0, beauty = 0, prod = 0;
+  let pop = 0, cap = 0, beauty = terrainBeauty(), prod = 0;  // 地形提供基礎美化分
   island.buildings.forEach(b => {
     const cat = BUILDINGS[b.type];
     cap += cat.pop[b.level - 1] || 0;
@@ -434,15 +499,20 @@ function render() {
   island.buildings.forEach(b => { map[b.x + "_" + b.y] = b; });
   for (let y = 0; y < GRID; y++) {
     for (let x = 0; x < GRID; x++) {
+      const t = terrainAt(x, y);
       const tile = document.createElement("div");
-      tile.className = "tile";
+      tile.className = "tile " + TERR_CLASS[t];
       const b = map[x + "_" + y];
       if (b) {
         const cat = BUILDINGS[b.type];
         tile.innerHTML = `<img class="tile-img" src="island_img/${b.type}.png" alt="${cat.name}" onerror="this.replaceWith(document.createTextNode('${cat.emoji}'))">` + (b.level > 1 ? `<span class="lvl">Lv${b.level}</span>` : "");
         tile.onclick = () => openDetail(b);
-      } else {
+      } else if (t === "P") {
         tile.onclick = () => openBuild(x, y);
+      } else {
+        if (t === "H") tile.textContent = "⛰️";
+        else if (t === "M") tile.textContent = "🏔️";
+        tile.onclick = () => toast(TERR_NAME[t] + "不能蓋建築");
       }
       grid.appendChild(tile);
     }
@@ -477,6 +547,7 @@ function openBuild(x, y) {
 
 function build(key) {
   const c = BUILDINGS[key];
+  if (!selectedTile || terrainAt(selectedTile.x, selectedTile.y) !== "P") { toast("只能蓋在平地上"); return; }
   if (c.unique && island.buildings.some(b => b.type === key)) { toast("已經有一個城鎮中心了"); return; }
   const p = getProgress(currentStudent);
   if (p.coins.balance < c.cost) { toast("金幣不夠！"); return; }
@@ -593,18 +664,27 @@ function selectStudent(name) {
   localStorage.setItem("kidsCurrentStudent", name);
   document.querySelectorAll(".stu-btn").forEach(b => b.classList.toggle("active", b.textContent.toLowerCase() === name));
   island = loadIsland(name);
+  const migrated = migrateIsland(island, name);
   document.getElementById("pickStudentMsg").style.display = "none";
   document.getElementById("island").style.display = "grid";
   document.getElementById("statsRow").style.display = "flex";
   document.getElementById("dataPanel").style.display = "block";
   recalcStats();
+  if (migrated) saveIsland(name, island);
   const produced = runDailyTick();
   render();
-  if (produced > 0) {
-    document.getElementById("notice").style.display = "block";
-    document.getElementById("notice").innerHTML = `🌅 新的一天！你的農場和小鎮生產了 <b>🪙 ${produced}</b> 金幣！`;
+  const notice = document.getElementById("notice");
+  if (lastMigration.removed > 0) {
+    notice.style.display = "block";
+    notice.innerHTML = `🗺️ 島嶼升級成 15×15！有 <b>${lastMigration.removed}</b> 個不在平地上的建築被拆除，退還 <b>🪙 ${lastMigration.refund}</b> 金幣。`;
+  } else if (migrated) {
+    notice.style.display = "block";
+    notice.innerHTML = `🗺️ 島嶼已升級成 15×15 新地圖！海洋 / 丘陵 / 高山只能在平地蓋建築。`;
+  } else if (produced > 0) {
+    notice.style.display = "block";
+    notice.innerHTML = `🌅 新的一天！你的農場和小鎮生產了 <b>🪙 ${produced}</b> 金幣！`;
   } else {
-    document.getElementById("notice").style.display = "none";
+    notice.style.display = "none";
   }
   // 本機空 → 從雲端拉回（新/測試平板自動載入真實進度）；本機有 → 上傳備份
   if (typeof cloudSyncOnOpen === "function") cloudSyncOnOpen(currentStudent, () => selectStudent(currentStudent));
