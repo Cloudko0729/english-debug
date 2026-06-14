@@ -120,6 +120,7 @@
     .tile.t-hills   { background: #cca877; }
     .tile.t-mountain{ background: #b8bcca; cursor: default; }
     .tile-img { width: 100%; height: 100%; object-fit: contain; image-rendering: auto; pointer-events: none; }
+    .tile-emoji { font-size: clamp(.8rem, 3.6vw, 1.4rem); line-height: 1; pointer-events: none; }
     .opt-img { width: 2rem; height: 2rem; object-fit: contain; }
     .tile .lvl {
       position: absolute;
@@ -297,30 +298,76 @@
 <script src="cloud_sync.js"></script>
 <script src="account_lock.js"></script>
 <script>
-// ─── Building catalog (v1) ───────────────────────────────────────────────────
+// ─── Building catalog ─────────────────────────────────────────────────────────
+// terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
+// category/categoryMax: 同類上限（動物復育「只能一個」）；img:true 表示有像素圖檔，否則用 emoji
 const BUILDINGS = {
-  forest: { emoji: "🌲", name: "森林", cost: 90,  desc: "美化島嶼，越久越茂密",
+  // 平地建築（3 級）
+  forest: { emoji: "🌲", name: "森林", cost: 90,  desc: "美化島嶼，越久越茂密", terrain: ["P"], maxLevel: 3, img: true,
             beauty: [3, 6, 10], pop: [0,0,0], coin: [0,0,0], levelDays: [3, 7] },
-  farm:   { emoji: "🌾", name: "農場", cost: 120, desc: "每天生產金幣",
-            beauty: [0,0,0], pop: [0,0,0], coin: [15, 25, 40], levelDays: [4, 10] },
-  house:  { emoji: "🏠", name: "房子", cost: 180, desc: "增加人口容量",
-            beauty: [0,0,0], pop: [4, 8, 14], coin: [0,0,0], levelDays: [4, 10] },
-  town:   { emoji: "🏘️", name: "小鎮", cost: 450, desc: "人口 + 金幣，最強建築",
-            beauty: [0,0,0], pop: [12, 24, 40], coin: [20, 35, 55], levelDays: [7, 14] },
-  ranch:  { emoji: "🐄", name: "牧場", cost: 150, desc: "金幣 + 一點人口",
-            beauty: [0,0,0], pop: [2, 4, 7], coin: [18, 30, 46], levelDays: [4, 10] },
-  pond:   { emoji: "🪷", name: "池塘", cost: 70,  desc: "美化島嶼（水景）",
+  pond:   { emoji: "🪷", name: "池塘", cost: 70,  desc: "美化島嶼（水景）", terrain: ["P"], maxLevel: 3, img: true,
             beauty: [4, 8, 13], pop: [0,0,0], coin: [0,0,0], levelDays: [3, 7] },
-  center: { emoji: "🏛️", name: "城鎮中心", cost: 0, desc: "免費設置 1 個，達標才能升級",
-            beauty: [5, 12, 25], pop: [0,0,0], coin: [10, 30, 60], levelDays: null, unique: true },
+  ranch:  { emoji: "🐄", name: "牧場", cost: 150, desc: "金幣 + 一點人口", terrain: ["P"], maxLevel: 3, img: true,
+            beauty: [0,0,0], pop: [2, 4, 7], coin: [18, 30, 46], levelDays: [4, 10] },
+  farm:   { emoji: "🌾", name: "農場", cost: 120, desc: "每天生產金幣", terrain: ["P"], maxLevel: 3, img: true,
+            beauty: [0,0,0], pop: [0,0,0], coin: [15, 25, 40], levelDays: [4, 10] },
+  house:  { emoji: "🏠", name: "房子", cost: 180, desc: "增加人口容量", terrain: ["P"], maxLevel: 3, img: true,
+            beauty: [0,0,0], pop: [4, 8, 14], coin: [0,0,0], levelDays: [4, 10] },
+  town:   { emoji: "🏘️", name: "小鎮", cost: 450, desc: "人口 + 金幣，最強建築", terrain: ["P"], maxLevel: 3, img: true,
+            beauty: [0,0,0], pop: [12, 24, 40], coin: [20, 35, 55], levelDays: [7, 14] },
+  center: { emoji: "🏛️", name: "城鎮中心", cost: 0, desc: "免費設置 1 個，達人口+美化才能升級", terrain: ["P"], maxLevel: 5, unique: true, img: true,
+            beauty: [8, 14, 22, 32, 45], pop: [0,0,0,0,0], coin: [8, 14, 22, 32, 45], levelDays: null },
+  // 能源（5 級）
+  solar:  { emoji: "☀️", name: "太陽能發電", cost: 260, desc: "平地發電,每天金幣", terrain: ["P"], maxLevel: 5,
+            beauty: [0,0,0,0,0], pop: [0,0,0,0,0], coin: [14, 21, 30, 40, 52], levelDays: [3, 6, 12, 20] },
+  windmill:{ emoji: "🌬️", name: "風力發電", cost: 320, desc: "丘陵/海上發電,每天金幣", terrain: ["H","O"], maxLevel: 5,
+            beauty: [0,0,0,0,0], pop: [0,0,0,0,0], coin: [18, 26, 36, 48, 62], levelDays: [3, 7, 14, 24] },
+  // 海上漁業（5 級）
+  dock:   { emoji: "⚓", name: "碼頭", cost: 420, desc: "海上,人口+金幣（最多 3）", terrain: ["O"], max: 3, maxLevel: 5,
+            beauty: [1,2,3,4,5], pop: [4,6,8,11,14], coin: [10,16,24,34,46], levelDays: [4, 9, 16, 28] },
+  fishery:{ emoji: "🎣", name: "定置漁場", cost: 360, desc: "海上漁獲,每天金幣（最多 5）", terrain: ["O"], max: 5, maxLevel: 5,
+            beauty: [0,1,1,2,3], pop: [0,0,0,0,0], coin: [20,30,42,56,72], levelDays: [4, 8, 15, 25] },
+  oceanboat:{ emoji: "🚢", name: "遠洋漁船", cost: 780, desc: "大量金幣（最多 3）", terrain: ["O"], max: 3, maxLevel: 5,
+            beauty: [-1,-1,0,0,1], pop: [0,0,0,0,0], coin: [34,50,70,94,122], levelDays: [5, 10, 18, 30] },
+  // 山區動物復育（只能養一隻,5 級）
+  bear:     { emoji: "🐻", name: "臺灣黑熊", cost: 1600, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+              beauty: [22,34,48,64,82], pop: [0,0,0,0,0], coin: [6,9,13,18,24], levelDays: [7,16,32,56] },
+  leopardcat:{ emoji: "🐆", name: "石虎", cost: 1500, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+              beauty: [20,32,46,62,80], pop: [0,0,0,0,0], coin: [7,10,15,20,26], levelDays: [7,15,30,54] },
+  salamander:{ emoji: "🦎", name: "臺灣山椒魚", cost: 1400, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+              beauty: [18,30,44,60,78], pop: [0,0,0,0,0], coin: [5,8,12,17,23], levelDays: [8,18,34,60] },
+  mikado:   { emoji: "🦚", name: "臺灣帝雉", cost: 1450, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+              beauty: [21,33,47,63,81], pop: [0,0,0,0,0], coin: [5,8,12,16,22], levelDays: [7,16,31,55] },
+  pangolin: { emoji: "🐾", name: "穿山甲", cost: 1550, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+              beauty: [19,31,46,63,84], pop: [0,0,0,0,0], coin: [8,12,17,23,30], levelDays: [8,17,33,58] },
+  serow:    { emoji: "🐐", name: "長鬃山羊", cost: 1480, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+              beauty: [20,31,45,61,79], pop: [0,0,0,0,0], coin: [6,10,14,19,25], levelDays: [7,15,30,52] },
+  salmon:   { emoji: "🐟", name: "櫻花鉤吻鮭", cost: 1520, desc: "高山溪流復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+              beauty: [19,32,48,66,86], pop: [0,0,0,0,0], coin: [5,8,11,16,22], levelDays: [9,19,36,62] },
+  butterfly:{ emoji: "🦋", name: "鳳蝶", cost: 1320, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+              beauty: [17,29,43,58,76], pop: [0,0,0,0,0], coin: [7,11,16,22,29], levelDays: [6,14,28,50] },
+  hawk:     { emoji: "🦅", name: "赫氏角鷹", cost: 1580, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+              beauty: [21,34,49,66,85], pop: [0,0,0,0,0], coin: [6,9,14,19,25], levelDays: [8,17,33,57] },
+  sambar:   { emoji: "🦌", name: "水鹿", cost: 1420, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+              beauty: [18,30,45,62,80], pop: [0,0,0,0,0], coin: [6,10,15,21,28], levelDays: [7,16,31,54] },
+  // 海洋動物復育（只能養一隻,5 級）
+  turtle:   { emoji: "🐢", name: "綠蠵龜", cost: 1350, desc: "海洋復育,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
+              beauty: [18,30,44,60,78], pop: [0,0,0,0,0], coin: [7,11,16,22,30], levelDays: [8,18,34,58] },
 };
-const BUILD_ORDER = ["center", "pond", "forest", "ranch", "farm", "house", "town"];
+const BUILD_ORDER = [
+  "center", "solar", "forest", "pond", "ranch", "farm", "house", "town",  // 平地
+  "windmill",                                                              // 丘陵/海
+  "dock", "fishery", "oceanboat",                                          // 海上
+  "bear","leopardcat","salamander","mikado","pangolin","serow","salmon","butterfly","hawk","sambar", // 高山動物
+  "turtle",                                                               // 海洋動物
+];
 
-// 城鎮中心升級條件：index = 目前等級-1，達成下一級的人口與美化目標
-// （地形已給 ~24 美化分，門檻相應提高）
+// 城鎮中心升級條件：index = 目前等級-1，達成下一級的人口與美化目標（5 級）
 const CENTER_TARGETS = [
-  { pop: 20, beauty: 40 },  // Lv1 -> Lv2
-  { pop: 50, beauty: 75 },  // Lv2 -> Lv3
+  { pop: 20,  beauty: 40  },  // Lv1 -> Lv2
+  { pop: 55,  beauty: 90  },  // Lv2 -> Lv3
+  { pop: 110, beauty: 170 },  // Lv3 -> Lv4
+  { pop: 190, beauty: 290 },  // Lv4 -> Lv5
 ];
 const GRID = 15;
 
@@ -399,8 +446,10 @@ function migrateIsland(isl, student) {
   let refunded = 0, removed = 0;
   const kept = [];
   (isl.buildings || []).forEach(b => {
-    if (terrainAt(b.x, b.y) === "P") { kept.push(b); }
-    else { refunded += (BUILDINGS[b.type] && BUILDINGS[b.type].cost) || 0; removed++; }
+    const cat = BUILDINGS[b.type];
+    const okTerrain = cat && (cat.terrain || ["P"]).includes(terrainAt(b.x, b.y));
+    if (okTerrain) { kept.push(b); }
+    else { refunded += (cat && cat.cost) || 0; removed++; }
   });
   isl.buildings = kept;
   if (refunded > 0) {
@@ -429,9 +478,10 @@ function runDailyTick() {
     const cat = BUILDINGS[b.type];
     b.activeDays = (b.activeDays || 0) + 1;
     // level up by activeDays thresholds (城鎮中心除外，它靠人口+美化達標升級)
-    if (cat.levelDays && b.level < 3) {
-      if (b.level === 1 && b.activeDays >= cat.levelDays[0]) b.level = 2;
-      else if (b.level === 2 && b.activeDays >= cat.levelDays[1]) b.level = 3;
+    const maxLv = cat.maxLevel || 3;
+    if (cat.levelDays && b.level < maxLv) {
+      const need = cat.levelDays[b.level - 1];   // 升到下一級所需天數
+      if (need != null && b.activeDays >= need) b.level++;
     }
     // production
     const produce = cat.coin[b.level - 1] || 0;
@@ -505,14 +555,18 @@ function render() {
       const b = map[x + "_" + y];
       if (b) {
         const cat = BUILDINGS[b.type];
-        tile.innerHTML = `<img class="tile-img" src="island_img/${b.type}.png" alt="${cat.name}" onerror="this.replaceWith(document.createTextNode('${cat.emoji}'))">` + (b.level > 1 ? `<span class="lvl">Lv${b.level}</span>` : "");
+        const lvl = b.level > 1 ? `<span class="lvl">Lv${b.level}</span>` : "";
+        if (cat.img) {
+          tile.innerHTML = `<img class="tile-img" src="island_img/${b.type}.png" alt="${cat.name}" onerror="this.replaceWith(document.createTextNode('${cat.emoji}'))">` + lvl;
+        } else {
+          tile.innerHTML = `<span class="tile-emoji">${cat.emoji}</span>` + lvl;
+        }
         tile.onclick = () => openDetail(b);
-      } else if (t === "P") {
-        tile.onclick = () => openBuild(x, y);
       } else {
         if (t === "H") tile.textContent = "⛰️";
         else if (t === "M") tile.textContent = "🏔️";
-        tile.onclick = () => toast(TERR_NAME[t] + "不能蓋建築");
+        if (buildableOn(t)) tile.onclick = () => openBuild(x, y);
+        else tile.onclick = () => toast(TERR_NAME[t] + "不能蓋建築");
       }
       grid.appendChild(tile);
     }
@@ -520,20 +574,37 @@ function render() {
 }
 
 // ─── Build sheet ─────────────────────────────────────────────────────────────
+function countType(key) { return island.buildings.filter(b => b.type === key).length; }
+function countCategory(cat) { return island.buildings.filter(b => BUILDINGS[b.type].category === cat).length; }
+function canBuild(key) {
+  const c = BUILDINGS[key];
+  if (c.unique && countType(key) >= 1) return false;
+  if (c.max && countType(key) >= c.max) return false;
+  if (c.category && countCategory(c.category) >= (c.categoryMax || 1)) return false;
+  return true;
+}
+function buildableOn(t) {
+  return BUILD_ORDER.some(key => (BUILDINGS[key].terrain || ["P"]).includes(t) && canBuild(key));
+}
+
 function openBuild(x, y) {
   selectedTile = { x, y };
+  const t = terrainAt(x, y);
   const p = getProgress(currentStudent);
   const bal = p.coins.balance;
-  const hasCenter = island.buildings.some(b => b.type === "center");
-  let html = `<h3>蓋什麼？（你有 🪙 ${bal}）</h3>`;
-  BUILD_ORDER.forEach(key => {
+  const list = BUILD_ORDER.filter(key => (BUILDINGS[key].terrain || ["P"]).includes(t) && canBuild(key));
+  let html = `<h3>${TERR_NAME[t]} — 蓋什麼？（你有 🪙 ${bal}）</h3>`;
+  if (!list.length) html += `<p style="color:var(--muted);font-size:.9rem">這裡目前沒有可蓋的（可能已達數量上限）。</p>`;
+  list.forEach(key => {
     const c = BUILDINGS[key];
-    if (c.unique && hasCenter) return; // 城鎮中心只能蓋一個
     const afford = bal >= c.cost;
     const costLabel = c.cost === 0 ? "免費" : `🪙 ${c.cost}`;
+    const icon = c.img
+      ? `<img class="opt-img" src="island_img/${key}.png" alt="${c.name}" onerror="this.replaceWith(document.createTextNode('${c.emoji}'))">`
+      : `<span style="font-size:1.8rem">${c.emoji}</span>`;
     html += `
       <div class="build-opt ${afford ? "" : "locked"}" ${afford ? `onclick="build('${key}')"` : ""}>
-        <div class="emoji"><img class="opt-img" src="island_img/${key}.png" alt="${c.name}" onerror="this.replaceWith(document.createTextNode('${c.emoji}'))"></div>
+        <div class="emoji">${icon}</div>
         <div class="info">
           <div class="bname">${c.name}</div>
           <div class="bdesc">${c.desc}</div>
@@ -547,8 +618,10 @@ function openBuild(x, y) {
 
 function build(key) {
   const c = BUILDINGS[key];
-  if (!selectedTile || terrainAt(selectedTile.x, selectedTile.y) !== "P") { toast("只能蓋在平地上"); return; }
-  if (c.unique && island.buildings.some(b => b.type === key)) { toast("已經有一個城鎮中心了"); return; }
+  if (!selectedTile || !(c.terrain || ["P"]).includes(terrainAt(selectedTile.x, selectedTile.y))) { toast(`只能蓋在${(c.terrain||["P"]).map(t=>TERR_NAME[t]).join("/")}上`); return; }
+  if (c.unique && countType(key) >= 1) { toast("已經有一個了"); return; }
+  if (c.max && countType(key) >= c.max) { toast(`${c.name}最多 ${c.max} 個`); return; }
+  if (c.category && countCategory(c.category) >= (c.categoryMax || 1)) { toast(c.category === "mountain" ? "山區動物只能復育一隻" : "海洋動物只能復育一隻"); return; }
   const p = getProgress(currentStudent);
   if (p.coins.balance < c.cost) { toast("金幣不夠！"); return; }
   p.coins.balance -= c.cost;
@@ -581,9 +654,10 @@ function openDetail(b) {
   if (c.pop[b.level-1] > 0)  html += `<div class="detail-row">人口容量：<b>${c.pop[b.level-1]}</b></div>`;
   if (c.beauty[b.level-1] > 0) html += `<div class="detail-row">美化分數：<b>${c.beauty[b.level-1]}</b></div>`;
 
+  const maxLv = c.maxLevel || 3;
   if (b.type === "center") {
     // 城鎮中心：靠人口 + 美化達標升級
-    if (b.level < 3) {
+    if (b.level < maxLv) {
       const t = CENTER_TARGETS[b.level - 1];
       const pop = island.stats.population, beauty = island.stats.beauty;
       const popOk = pop >= t.pop, beautyOk = beauty >= t.beauty;
@@ -593,15 +667,15 @@ function openDetail(b) {
       if (popOk && beautyOk) {
         html += `<button class="upgrade-btn" onclick="upgradeCenter('${b.id}')">⬆️ 升級城鎮中心！</button>`;
       } else {
-        html += `<div class="detail-row" style="color:var(--muted)">多蓋房子/小鎮增加人口，多種森林/池塘增加美化 💡</div>`;
+        html += `<div class="detail-row" style="color:var(--muted)">多蓋房子/小鎮/碼頭增加人口，多種森林/池塘/復育動物增加美化 💡</div>`;
       }
     } else {
-      html += `<div class="detail-row" style="color:var(--success)">城鎮中心已達最高等級！🏆</div>`;
+      html += `<div class="detail-row" style="color:var(--success)">城鎮中心已達最高等級 Lv${maxLv}！🏆</div>`;
     }
   } else if (c.levelDays) {
-    const nextDays = b.level < 3 ? c.levelDays[b.level - 1] : null;
-    if (nextDays) html += `<div class="detail-row" style="color:var(--muted)">再過 <b>${nextDays - b.activeDays}</b> 天升到 Lv${b.level+1} ⬆️</div>`;
-    else html += `<div class="detail-row" style="color:var(--success)">已經是最高等級！⭐</div>`;
+    const nextDays = b.level < maxLv ? c.levelDays[b.level - 1] : null;
+    if (nextDays != null) html += `<div class="detail-row" style="color:var(--muted)">再過 <b>${Math.max(0, nextDays - b.activeDays)}</b> 天升到 Lv${b.level+1} ⬆️</div>`;
+    else html += `<div class="detail-row" style="color:var(--success)">已經是最高等級 Lv${maxLv}！⭐</div>`;
   }
 
   const refundLabel = refund === 0 ? "免費蓋的，拆除不退幣" : `🛠️ 拆除（退還 🪙 ${refund}）`;
@@ -612,7 +686,7 @@ function openDetail(b) {
 
 function upgradeCenter(buildingId) {
   const b = island.buildings.find(x => x.id === buildingId);
-  if (!b || b.type !== "center" || b.level >= 3) return;
+  if (!b || b.type !== "center" || b.level >= (BUILDINGS.center.maxLevel || 5)) return;
   const t = CENTER_TARGETS[b.level - 1];
   if (island.stats.population < t.pop || island.stats.beauty < t.beauty) { toast("還沒達標喔"); return; }
   b.level++;
