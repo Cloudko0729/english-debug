@@ -329,23 +329,24 @@ const BUILDINGS = {
             beauty: [0,1,1,2,3], pop: [0,0,0,0,0], coin: [20,30,42,56,72], levelDays: [4, 8, 15, 25] },
   oceanboat:{ emoji: "🚢", name: "遠洋漁船", cost: 780, desc: "大量金幣（最多 3）", terrain: ["O"], max: 3, maxLevel: 5, img: true,
             beauty: [-1,-1,0,0,1], pop: [0,0,0,0,0], coin: [34,50,70,94,122], levelDays: [5, 10, 18, 30] },
-  // 山區動物復育（只能養一隻,5 級）
+  // 丘陵（淺山）動物復育（只能養一隻,5 級）
+  leopardcat:{ emoji: "🐆", name: "石虎", cost: 1500, desc: "丘陵復育（淺山）,大量美化", terrain: ["H"], category: "hills", categoryMax: 1, maxLevel: 5,
+              beauty: [20,32,46,62,80], pop: [0,0,0,0,0], coin: [7,10,15,20,26], levelDays: [7,15,30,54] },
+  pangolin: { emoji: "🐾", name: "穿山甲", cost: 1550, desc: "丘陵復育（淺山）,大量美化", terrain: ["H"], category: "hills", categoryMax: 1, maxLevel: 5,
+              beauty: [19,31,46,63,84], pop: [0,0,0,0,0], coin: [8,12,17,23,30], levelDays: [8,17,33,58] },
+  butterfly:{ emoji: "🦋", name: "鳳蝶", cost: 1320, desc: "丘陵復育（淺山）,大量美化", terrain: ["H"], category: "hills", categoryMax: 1, maxLevel: 5,
+              beauty: [17,29,43,58,76], pop: [0,0,0,0,0], coin: [7,11,16,22,29], levelDays: [6,14,28,50] },
+  // 高山動物復育（只能養一隻,5 級）
   bear:     { emoji: "🐻", name: "臺灣黑熊", cost: 1600, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [22,34,48,64,82], pop: [0,0,0,0,0], coin: [6,9,13,18,24], levelDays: [7,16,32,56] },
-  leopardcat:{ emoji: "🐆", name: "石虎", cost: 1500, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
-              beauty: [20,32,46,62,80], pop: [0,0,0,0,0], coin: [7,10,15,20,26], levelDays: [7,15,30,54] },
   salamander:{ emoji: "🦎", name: "臺灣山椒魚", cost: 1400, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [18,30,44,60,78], pop: [0,0,0,0,0], coin: [5,8,12,17,23], levelDays: [8,18,34,60] },
   mikado:   { emoji: "🦚", name: "臺灣帝雉", cost: 1450, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [21,33,47,63,81], pop: [0,0,0,0,0], coin: [5,8,12,16,22], levelDays: [7,16,31,55] },
-  pangolin: { emoji: "🐾", name: "穿山甲", cost: 1550, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
-              beauty: [19,31,46,63,84], pop: [0,0,0,0,0], coin: [8,12,17,23,30], levelDays: [8,17,33,58] },
   serow:    { emoji: "🐐", name: "長鬃山羊", cost: 1480, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [20,31,45,61,79], pop: [0,0,0,0,0], coin: [6,10,14,19,25], levelDays: [7,15,30,52] },
   salmon:   { emoji: "🐟", name: "櫻花鉤吻鮭", cost: 1520, desc: "高山溪流復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [19,32,48,66,86], pop: [0,0,0,0,0], coin: [5,8,11,16,22], levelDays: [9,19,36,62] },
-  butterfly:{ emoji: "🦋", name: "鳳蝶", cost: 1320, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
-              beauty: [17,29,43,58,76], pop: [0,0,0,0,0], coin: [7,11,16,22,29], levelDays: [6,14,28,50] },
   hawk:     { emoji: "🦅", name: "赫氏角鷹", cost: 1580, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [21,34,49,66,85], pop: [0,0,0,0,0], coin: [6,9,14,19,25], levelDays: [8,17,33,57] },
   sambar:   { emoji: "🦌", name: "水鹿", cost: 1420, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
@@ -381,10 +382,14 @@ const CENTER_TARGETS = [
 // 解鎖門檻：需要城鎮中心達到此等級才能蓋（未列 = 隨時可蓋）
 const REQ_CENTER = {
   town: 2, windmill: 2, dock: 2, fishery: 3, oceanboat: 4,
-  bear: 3, leopardcat: 3, salamander: 3, mikado: 3, pangolin: 3,
-  serow: 3, salmon: 3, butterfly: 3, hawk: 3, sambar: 3,
+  // 丘陵動物 Lv2
+  leopardcat: 2, pangolin: 2, butterfly: 2,
+  // 高山動物 Lv3
+  bear: 3, salamander: 3, mikado: 3, serow: 3, salmon: 3, hawk: 3, sambar: 3,
+  // 海洋動物 Lv4
   turtle: 4, dolphin: 4, whaleshark: 4, coral: 4, horseshoecrab: 4,
 };
+const CAT_NAME = { hills: "丘陵動物", mountain: "高山動物", ocean: "海洋動物" };
 function reqCenterFor(key) { return REQ_CENTER[key] || 0; }
 function centerLevel() { const c = island.buildings.find(b => b.type === "center"); return c ? c.level : 0; }
 const GRID = 15;
@@ -643,7 +648,7 @@ function build(key) {
   if (!selectedTile || !(c.terrain || ["P"]).includes(terrainAt(selectedTile.x, selectedTile.y))) { toast(`只能蓋在${(c.terrain||["P"]).map(t=>TERR_NAME[t]).join("/")}上`); return; }
   if (c.unique && countType(key) >= 1) { toast("已經有一個了"); return; }
   if (c.max && countType(key) >= c.max) { toast(`${c.name}最多 ${c.max} 個`); return; }
-  if (c.category && countCategory(c.category) >= (c.categoryMax || 1)) { toast(c.category === "mountain" ? "山區動物只能復育一隻" : "海洋動物只能復育一隻"); return; }
+  if (c.category && countCategory(c.category) >= (c.categoryMax || 1)) { toast(`${CAT_NAME[c.category] || "這類動物"}只能復育一隻`); return; }
   if (centerLevel() < reqCenterFor(key)) { toast(`需要城鎮中心 Lv${reqCenterFor(key)} 才能蓋`); return; }
   const p = getProgress(currentStudent);
   if (p.coins.balance < c.cost) { toast("金幣不夠！"); return; }
