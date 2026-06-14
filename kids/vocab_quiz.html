@@ -102,6 +102,7 @@
 <script src="wordbank.js"></script>
 <script src="word_emoji.js"></script>
 <script src="cloud_sync.js"></script>
+<script src="account_lock.js"></script>
 <script>
 const QUIZ_SIZE = 20;
 const DRILL_ID = "vocab-quiz";
@@ -330,6 +331,7 @@ function updateInfoBar() {
 
 // ─── Student select / start ──────────────────────────────────────────────────
 function selectStudent(name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
   currentStudent = name;
   localStorage.setItem("kidsCurrentStudent", name);
   document.querySelectorAll(".stu-btn").forEach(b => b.classList.toggle("active", b.textContent.toLowerCase() === name));

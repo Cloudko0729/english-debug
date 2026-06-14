@@ -294,6 +294,7 @@
 <div id="toast"></div>
 
 <script src="cloud_sync.js"></script>
+<script src="account_lock.js"></script>
 <script>
 // ─── Building catalog (v1) ───────────────────────────────────────────────────
 const BUILDINGS = {
@@ -586,6 +587,7 @@ function toast(msg) {
 
 // ─── Student select ──────────────────────────────────────────────────────────
 function selectStudent(name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
   currentStudent = name;
   localStorage.setItem("kidsCurrentStudent", name);
   document.querySelectorAll(".stu-btn").forEach(b => b.classList.toggle("active", b.textContent.toLowerCase() === name));

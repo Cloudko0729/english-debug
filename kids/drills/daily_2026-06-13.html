@@ -315,6 +315,7 @@
 </main>
 
 <script src="../cloud_sync.js"></script>
+<script src="../account_lock.js"></script>
 <script>
 // ─── Drill Data (Day 2 · Animals) ────────────────────────────────────────────
 const DRILL = {
@@ -399,6 +400,7 @@ function recordResult(wordEn, correct) {
 }
 
 function selectStudent(name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
   currentStudent = name;
   document.querySelectorAll(".stu-btn").forEach(b => b.classList.toggle("active", b.textContent.toLowerCase() === name));
   document.getElementById("mainContent").style.display = "flex";

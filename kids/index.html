@@ -117,6 +117,7 @@
   <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
 </div>
 <div id="statsRow"></div>
+<div style="text-align:center;margin-top:8px"><a href="#" onclick="changeSwitchPassword();return false;" style="font-size:.74rem;color:#999;text-decoration:none">🔒 家長：變更切換密碼</a></div>
 
 <section>
   <h2>我的島嶼</h2>
@@ -203,8 +204,10 @@
   </div>
 </section>
 
+<script src="account_lock.js"></script>
 <script>
 function pickStudent(name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
   localStorage.setItem("kidsCurrentStudent", name);
   document.querySelectorAll(".stu-btn").forEach(b => b.classList.toggle("active", b.textContent.toLowerCase() === name));
   const raw = localStorage.getItem("kidsProgress." + name);
