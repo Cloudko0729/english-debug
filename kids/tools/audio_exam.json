@@ -1,0 +1,13 @@
+{
+  "outdir": "D:/english/kids/drills/audio/exam",
+  "voice": "af_heart",
+  "speed": 0.85,
+  "items": {
+    "rain": "rain",
+    "skate": "skate",
+    "drill": "drill",
+    "skin": "skin",
+    "trip": "trip",
+    "sky": "sky"
+  }
+}

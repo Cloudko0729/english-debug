@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>期末英文評量</title>
+  <style>
+    :root {
+      --bg: #fff7dc; --panel: #fff; --primary: #2f80ed; --primary-soft: #dbeafe;
+      --accent: #ffb703; --gold: #f2a900; --success: #2fbf71; --danger: #ef476f;
+      --text: #243042; --muted: #667085; --border: #d9e2ec;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, "Noto Sans TC", sans-serif; background: var(--bg); color: var(--text); padding-bottom: 60px; }
+    header { background: linear-gradient(135deg, #2f80ed, #1a5fc0); color: #fff; text-align: center; padding: 20px 16px; }
+    header h1 { font-size: 1.5rem; }
+    header p { font-size: .85rem; opacity: .9; margin-top: 4px; }
+    header a { color: #ffe27a; font-size: .8rem; text-decoration: none; }
+
+    #studentBar { background: var(--accent); padding: 10px 16px; display: flex; align-items: center; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    #studentBar span { font-weight: 700; color: #3a2a00; }
+    .stu-btn { padding: 6px 18px; border: 2px solid #3a2a00; border-radius: 20px; background: transparent; font-size: .95rem; font-weight: 700; cursor: pointer; color: #3a2a00; }
+    .stu-btn.active { background: #3a2a00; color: #fff; }
+    #infoBar { background: var(--primary-soft); padding: 8px 16px; text-align: center; font-size: .82rem; color: var(--primary); font-weight: 600; display: none; }
+
+    main { max-width: 680px; margin: 0 auto; padding: 16px; }
+    #pickMsg { text-align: center; padding: 40px 20px; color: var(--muted); }
+
+    section { background: var(--panel); border: 2px solid var(--border); border-radius: 12px; padding: 18px 16px; margin-bottom: 16px; }
+    section h2 { font-size: 1.05rem; color: var(--primary); margin-bottom: 4px; }
+    .sec-hint { font-size: .82rem; color: var(--muted); margin-bottom: 14px; }
+
+    .q-block { border: 2px solid var(--border); border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+    .q-block.q-correct { border-color: var(--success); background: #f0fcf6; }
+    .q-block.q-wrong { border-color: var(--danger); background: #fef0f4; }
+    .q-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+    .q-num { font-weight: 700; color: var(--primary); }
+    .q-text { font-size: .98rem; line-height: 1.5; }
+    .pic-emoji { font-size: 3rem; text-align: center; margin: 4px 0 10px; }
+    .pic-hint { text-align: center; font-size: .82rem; color: var(--muted); margin-bottom: 8px; }
+
+    .choices { display: flex; flex-direction: column; gap: 8px; }
+    .choice { border: 2px solid var(--border); border-radius: 8px; background: #fff; padding: 11px 12px; font-size: .95rem; cursor: pointer; text-align: left; color: var(--text); line-height: 1.45; }
+    .choice.sel { border-color: var(--primary); background: var(--primary-soft); }
+    .choice.right { border-color: var(--success); background: #d9f7e8; }
+    .choice.wrongpick { border-color: var(--danger); background: #fde0e8; }
+
+    .btn-listen { background: var(--primary); color: #fff; border: none; border-radius: 50%; width: 46px; height: 46px; font-size: 1.2rem; cursor: pointer; flex-shrink: 0; }
+    .write-input { width: 100%; border: 2px solid var(--border); border-radius: 8px; padding: 11px 12px; font-size: 1rem; }
+    .write-input.right { border-color: var(--success); background: #e6faf0; }
+    .write-input.wrongpick { border-color: var(--danger); background: #fde8ee; }
+    .write-ans { font-size: .82rem; color: var(--danger); font-weight: 700; display: none; margin-top: 6px; }
+
+    .btn-submit { display: block; width: 100%; padding: 15px; border: none; border-radius: 12px; background: var(--success); color: #fff; font-size: 1.15rem; font-weight: 800; cursor: pointer; }
+
+    #result { display: none; text-align: center; background: linear-gradient(135deg,#fff,#fff7dc); border: 2px solid var(--gold); border-radius: 14px; padding: 26px 18px; }
+    #result .big { font-size: 2.4rem; font-weight: 800; margin: 8px 0; color: var(--primary); }
+    #result .coin { color: var(--gold); font-weight: 800; font-size: 1.4rem; margin: 12px 0; }
+    #result a { display: inline-block; margin-top: 14px; color: var(--primary); font-weight: 700; text-decoration: none; }
+
+    #toast { position: fixed; top: 16px; left: 50%; transform: translateX(-50%) translateY(-80px); background: #243042; color: #fff; padding: 10px 18px; border-radius: 20px; font-size: .9rem; font-weight: 600; transition: transform .3s; z-index: 100; }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🏅 期末英文評量</h1>
+  <p>進階 · 自然發音 / 價格 / 誰的 / 衣物單字</p>
+  <a href="../index.html">← 回首頁</a>
+</header>
+
+<div id="studentBar">
+  <span>我是：</span>
+  <button class="stu-btn" onclick="selectStudent('albert')">Albert</button>
+  <button class="stu-btn" onclick="selectStudent('jonathan')">Jonathan</button>
+  <button class="stu-btn" style="opacity:.7" onclick="selectStudent('test')">🧪 測試</button>
+</div>
+<div id="infoBar"></div>
+
+<main>
+  <div id="pickMsg">👆 先選名字,開始期末考！全部答對有大獎 🪙🪙</div>
+
+  <div id="examArea" style="display:none">
+    <section>
+      <h2>🎧 A. 聽音辨字</h2>
+      <p class="sec-hint">按 🔊 聽單字,圈出你聽到的那一個</p>
+      <div id="secA"></div>
+    </section>
+
+    <section>
+      <h2>💬 B. 看圖選回應</h2>
+      <p class="sec-hint">讀問題,選出正確的回應</p>
+      <div id="secB"></div>
+    </section>
+
+    <section>
+      <h2>✍️ C. 看圖寫單字</h2>
+      <p class="sec-hint">看圖和中文,把英文單字拼出來</p>
+      <div id="secC"></div>
+    </section>
+
+    <section>
+      <h2>🔢 D. 誰的 / 多少錢</h2>
+      <p class="sec-hint">選出正確的句子</p>
+      <div id="secD"></div>
+    </section>
+
+    <button class="btn-submit" onclick="submitExam()">📝 交卷看成績</button>
+  </div>
+
+  <div id="result"></div>
+</main>
+
+<div id="toast"></div>
+
+<script src="../cloud_sync.js"></script>
+<script src="../account_lock.js"></script>
+<script>
+const AUDIO_DIR = "audio/exam/";
+const EXAM_ID = "final-exam";
+
+const EXAM = {
+  phonics: [
+    { word: "rain",  choices: ["train", "drain", "rain"] },
+    { word: "skate", choices: ["skate", "state", "Kate"] },
+    { word: "drill", choices: ["till", "drill", "grill"] },
+    { word: "skin",  choices: ["spin", "skin", "pin"] },
+    { word: "trip",  choices: ["trip", "drip", "tip"] },
+    { word: "sky",   choices: ["spy", "sky", "try"] },
+  ],
+  respond: [
+    { q: "How much are the glasses?（Susan ＄250）", choices: ["They're Susan's glasses.", "They're two hundred and fifty dollars.", "She likes the glasses."], answer: "They're two hundred and fifty dollars." },
+    { q: "Whose smartphone is it?（Jack ＄800）", choices: ["It's eight hundred dollars.", "Yes, it is.", "It's Jack's smartphone."], answer: "It's Jack's smartphone." },
+    { q: "How much are the socks?（Ben ＄100）", choices: ["Yes, they are.", "They're one hundred dollars.", "They're my socks."], answer: "They're one hundred dollars." },
+    { q: "Is it Jenny's water bottle?（Jenny ＄380）", choices: ["No, it's not. It's my water bottle.", "It's Jenny's water bottle.", "It's three hundred dollars."], answer: "It's Jenny's water bottle." },
+    { q: "Whose sneakers are they?（Willy ＄500）", choices: ["They're Willy's sneakers.", "They're five hundred dollars.", "Yes, they are."], answer: "They're Willy's sneakers." },
+    { q: "Whose shorts are they?", choices: ["They're seven hundred dollars.", "They're my sister's shorts.", "They're in my sister's bedroom."], answer: "They're my sister's shorts." },
+    { q: "A: ______  B: It's five hundred and eighty dollars.", choices: ["How much is the sweater?", "Whose sweater is it?", "How much are the pants?"], answer: "How much is the sweater?" },
+    { q: "How much are the glasses?", choices: ["They're Kevin's glasses.", "They're two hundred and sixty dollars.", "It's nine hundred dollars."], answer: "They're two hundred and sixty dollars." },
+    { q: "A: ______  B: They're my sneakers.", choices: ["How much are the sneakers?", "Whose jacket is it?", "Whose sneakers are they?"], answer: "Whose sneakers are they?" },
+  ],
+  write: [
+    { emoji: "🔑", zh: "鑰匙", answers: ["key"] },
+    { emoji: "👕", zh: "T 恤", answers: ["t-shirt", "tshirt", "t shirt"] },
+    { emoji: "🧥", zh: "夾克／外套", answers: ["jacket", "coat"] },
+    { emoji: "👗", zh: "裙子", answers: ["skirt"] },
+    { emoji: "☂️", zh: "雨傘", answers: ["umbrella"] },
+    { emoji: "👗", zh: "洋裝", answers: ["dress"] },
+  ],
+  whose: [
+    { q: "Whose key is it?", choices: ["It's Sally's key.", "It's Ken's key.", "It's Lisa's key."], answer: "It's Sally's key." },
+    { q: "Whose smartphone is it?", choices: ["It's Sally's smartphone.", "It's Ken's smartphone.", "It's Lisa's smartphone."], answer: "It's Ken's smartphone." },
+    { q: "How much are the socks?", choices: ["They're one hundred and forty dollars.", "They're four hundred dollars.", "They're fourteen dollars."], answer: "They're one hundred and forty dollars." },
+    { q: "Whose watch is it?", choices: ["It's Sally's watch.", "It's Ken's watch.", "It's Lisa's watch."], answer: "It's Lisa's watch." },
+  ],
+};
+
+let currentStudent = null;
+
+// ─── progress ────────────────────────────────────────────────────────────────
+function getProgress(s) {
+  const raw = localStorage.getItem("kidsProgress." + s);
+  const p = raw ? JSON.parse(raw) : { wrongCounts: {}, sessions: 0, totalCorrect: 0, totalWrong: 0 };
+  if (!p.wrongCounts) p.wrongCounts = {};
+  if (!p.coins) p.coins = { balance: 0, lifetimeEarned: 0, lifetimeSpent: 0, transactions: [], claimedDrills: {} };
+  return p;
+}
+function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
+
+// ─── audio ───────────────────────────────────────────────────────────────────
+let curAudio = null;
+function playWord(word) {
+  if (curAudio) { curAudio.pause(); curAudio = null; }
+  const a = new Audio(AUDIO_DIR + word + ".mp3");
+  curAudio = a;
+  a.play().catch(() => {
+    if (!window.speechSynthesis) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(word); u.lang = "en-US"; u.rate = 0.85;
+    speechSynthesis.speak(u);
+  });
+}
+
+function pickChoice(btn) {
+  const block = btn.closest(".q-block");
+  block.querySelectorAll(".choice").forEach(c => c.classList.remove("sel"));
+  btn.classList.add("sel");
+}
+
+// ─── render ──────────────────────────────────────────────────────────────────
+function renderExam() {
+  // A phonics
+  document.getElementById("secA").innerHTML = EXAM.phonics.map((q, i) => `
+    <div class="q-block" id="a_${i}">
+      <div class="q-head">
+        <span class="q-num">${i + 1}.</span>
+        <button class="btn-listen" onclick="playWord('${q.word}')">🔊</button>
+      </div>
+      <div class="choices">
+        ${q.choices.map(c => `<button class="choice" data-val="${c}" onclick="pickChoice(this)">${c}</button>`).join("")}
+      </div>
+    </div>`).join("");
+
+  // B respond
+  document.getElementById("secB").innerHTML = EXAM.respond.map((q, i) => `
+    <div class="q-block" id="b_${i}">
+      <div class="q-head"><span class="q-num">${i + 1}.</span><span class="q-text">${q.q}</span></div>
+      <div class="choices">
+        ${q.choices.map(c => `<button class="choice" data-val="${escAttr(c)}" onclick="pickChoice(this)">${c}</button>`).join("")}
+      </div>
+    </div>`).join("");
+
+  // C write
+  document.getElementById("secC").innerHTML = EXAM.write.map((q, i) => `
+    <div class="q-block" id="c_${i}">
+      <div class="pic-emoji">${q.emoji}</div>
+      <div class="pic-hint">（${q.zh}）</div>
+      <input class="write-input" id="cin_${i}" type="text" placeholder="輸入英文單字" autocomplete="off" autocapitalize="off">
+      <div class="write-ans" id="cans_${i}"></div>
+    </div>`).join("");
+
+  // D whose
+  document.getElementById("secD").innerHTML = EXAM.whose.map((q, i) => `
+    <div class="q-block" id="d_${i}">
+      <div class="q-head"><span class="q-num">${i + 1}.</span><span class="q-text">${q.q}</span></div>
+      <div class="choices">
+        ${q.choices.map(c => `<button class="choice" data-val="${escAttr(c)}" onclick="pickChoice(this)">${c}</button>`).join("")}
+      </div>
+    </div>`).join("");
+}
+
+function escAttr(s) { return String(s).replace(/"/g, "&quot;"); }
+
+// ─── grade ───────────────────────────────────────────────────────────────────
+function gradeMC(prefix, list) {
+  let correct = 0;
+  list.forEach((q, i) => {
+    const block = document.getElementById(`${prefix}_${i}`);
+    const ans = q.answer !== undefined ? q.answer : q.word;
+    const sel = block.querySelector(".choice.sel");
+    const ok = sel && sel.dataset.val === ans;
+    block.className = "q-block " + (ok ? "q-correct" : "q-wrong");
+    block.querySelectorAll(".choice").forEach(c => {
+      if (c.dataset.val === ans) c.classList.add("right");
+      else if (c.classList.contains("sel") && !ok) c.classList.add("wrongpick");
+    });
+    if (ok) correct++;
+  });
+  return correct;
+}
+
+function submitExam() {
+  let correct = 0, total = 0;
+
+  correct += gradeMC("a", EXAM.phonics); total += EXAM.phonics.length;
+  correct += gradeMC("b", EXAM.respond); total += EXAM.respond.length;
+  correct += gradeMC("d", EXAM.whose); total += EXAM.whose.length;
+
+  // C write
+  EXAM.write.forEach((q, i) => {
+    total++;
+    const input = document.getElementById(`cin_${i}`);
+    const block = document.getElementById(`c_${i}`);
+    const val = input.value.trim().toLowerCase().replace(/\s+/g, " ");
+    const ok = q.answers.some(a => a.toLowerCase() === val);
+    input.className = "write-input " + (ok ? "right" : "wrongpick");
+    block.className = "q-block " + (ok ? "q-correct" : "q-wrong");
+    const ansEl = document.getElementById(`cans_${i}`);
+    if (!ok) { ansEl.textContent = "答案：" + q.answers[0]; ansEl.style.display = "block"; }
+    else ansEl.style.display = "none";
+    // 寫字題記進弱點系統
+    recordResult(q.answers[0], ok);
+    if (ok) correct++;
+  });
+
+  const pct = Math.round(correct / total * 100);
+  const coinMsg = awardCoins(correct, total);
+  let html = `<div>🏅 期末考完成！</div><div class="big">${correct} / ${total}（${pct}分）</div><div class="coin">${coinMsg}</div>`;
+  html += pct === 100 ? `<div>🌟 滿分！太厲害了，${currentStudent}！</div>`
+        : pct >= 80 ? `<div>💪 很棒，${currentStudent}！紅色的再看一次。</div>`
+        : `<div>📚 加油，${currentStudent}！錯的單字會進加強清單。</div>`;
+  html += `<br><a href="../island.html">🏝️ 用獎勵金幣去蓋島嶼</a>`;
+  document.getElementById("result").innerHTML = html;
+  document.getElementById("result").style.display = "block";
+  document.getElementById("result").scrollIntoView({ behavior: "smooth" });
+  updateInfoBar();
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+}
+
+function recordResult(wordEn, correct) {
+  const p = getProgress(currentStudent);
+  if (!correct) { p.wrongCounts[wordEn] = (p.wrongCounts[wordEn] || 0) + 1; p.totalWrong = (p.totalWrong||0)+1; }
+  else { p.totalCorrect = (p.totalCorrect||0)+1; if (p.wrongCounts[wordEn] > 0) p.wrongCounts[wordEn] = Math.max(0, p.wrongCounts[wordEn]-1); }
+  saveProgress(currentStudent, p);
+}
+
+// 期末考大獎：每題 +10，滿分再 +300，及格(>=80) +150，其餘 +60。只給第一次。
+function awardCoins(correct, total) {
+  const p = getProgress(currentStudent);
+  if (p.coins.claimedDrills[EXAM_ID]) {
+    return `🪙 期末考獎勵已領過（共 ${p.coins.balance} 金幣）`;
+  }
+  const pct = correct / total;
+  const bonus = pct === 1 ? 300 : pct >= 0.8 ? 150 : 60;
+  const earned = correct * 10 + bonus;
+  p.coins.balance += earned;
+  p.coins.lifetimeEarned += earned;
+  p.coins.transactions.push({ type: "earn", source: "finalExam", amount: earned, balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { correct, total } });
+  p.coins.claimedDrills[EXAM_ID] = { claimedAt: new Date().toISOString(), earned, correct, total };
+  saveProgress(currentStudent, p);
+  return `🪙 +${earned} 金幣大獎！（共 ${p.coins.balance} 金幣）`;
+}
+
+// ─── toast / info ────────────────────────────────────────────────────────────
+let toastTimer = null;
+function toast(msg) { const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove("show"), 2200); }
+
+function updateInfoBar() {
+  const p = getProgress(currentStudent);
+  const weak = Object.values(p.wrongCounts || {}).filter(c => c >= 2).length;
+  const done = !!p.coins.claimedDrills[EXAM_ID];
+  const bar = document.getElementById("infoBar");
+  bar.style.display = "block";
+  bar.textContent = `${currentStudent.charAt(0).toUpperCase()+currentStudent.slice(1)} · 🪙 ${p.coins.balance} · 加強中單字：${weak}${done ? " · 期末考已完成 ✅" : ""}`;
+}
+
+// ─── select ──────────────────────────────────────────────────────────────────
+function selectStudent(name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
+  currentStudent = name;
+  localStorage.setItem("kidsCurrentStudent", name);
+  document.querySelectorAll(".stu-btn").forEach(b => b.classList.toggle("active", b.textContent.toLowerCase().includes(name)));
+  document.getElementById("pickMsg").style.display = "none";
+  document.getElementById("examArea").style.display = "block";
+  document.getElementById("result").style.display = "none";
+  renderExam();
+  updateInfoBar();
+  const p = getProgress(name);
+  if (p.coins.claimedDrills[EXAM_ID]) toast("你已經考過期末考囉，這次重做不再給獎勵金幣");
+  if (typeof cloudSyncOnOpen === "function") cloudSyncOnOpen(name, () => { updateInfoBar(); });
+}
+
+const last = localStorage.getItem("kidsCurrentStudent");
+if (last) selectStudent(last);
+</script>
+</body>
+</html>
