@@ -201,6 +201,16 @@
     .chunk select.correct { border-color: var(--success); background: #e6faf0; }
     .chunk select.wrong   { border-color: var(--danger);  background: #fde8ee; }
     .reorder-answer { font-size: .85rem; color: var(--success); font-weight: 700; display: none; margin-top: 8px; }
+    /* drag-to-reorder tiles */
+    .chunk-sort { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0; }
+    .chunk-tile {
+      background: var(--primary-soft); border: 2px solid var(--primary); border-radius: 9px;
+      padding: 11px 14px; font-size: 1rem; font-weight: 700; color: var(--text);
+      cursor: grab; user-select: none; touch-action: none; transition: box-shadow .1s, transform .1s;
+    }
+    .chunk-tile.dragging { opacity: .9; box-shadow: 0 5px 14px rgba(0,0,0,.28); cursor: grabbing; }
+    .chunk-tile.tile-ok { border-color: var(--success); background: #e6faf0; }
+    .chunk-tile.tile-bad { border-color: var(--danger); background: #fde8ee; }
 
     /* ── Picture MC ── */
     .pic-emoji {
@@ -556,28 +566,60 @@ function checkSec3() {
 }
 
 // ─── Section 4: Sentence reorder ─────────────────────────────────────────────
+// 拖曳排序（支援滑鼠與觸控）
+function makeSortable(container) {
+  container.querySelectorAll(".chunk-tile").forEach(tile => {
+    let sx = 0, sy = 0, dragging = false;
+    tile.addEventListener("pointerdown", e => {
+      dragging = true;
+      tile.setPointerCapture(e.pointerId);
+      tile.classList.add("dragging");
+      sx = e.clientX; sy = e.clientY;
+    });
+    tile.addEventListener("pointermove", e => {
+      if (!dragging) return;
+      tile.style.transform = `translate(${e.clientX - sx}px, ${e.clientY - sy}px)`;
+      tile.style.pointerEvents = "none";
+      const under = document.elementFromPoint(e.clientX, e.clientY);
+      tile.style.pointerEvents = "";
+      const over = under && under.closest(".chunk-tile");
+      if (over && over !== tile && over.parentElement === container) {
+        const r = over.getBoundingClientRect();
+        const before = e.clientX < r.left + r.width / 2;
+        container.insertBefore(tile, before ? over : over.nextSibling);
+        sx = e.clientX; sy = e.clientY;
+        tile.style.transform = "";
+      }
+    });
+    const end = () => {
+      if (!dragging) return;
+      dragging = false;
+      tile.classList.remove("dragging");
+      tile.style.transform = ""; tile.style.pointerEvents = "";
+    };
+    tile.addEventListener("pointerup", end);
+    tile.addEventListener("pointercancel", end);
+  });
+}
+
 function renderSec4() {
   const div = document.getElementById("sec4");
   DRILL.reorder.forEach((q, i) => {
     const block = document.createElement("div");
     block.className = "q-block";
     block.id = `s4_${i}`;
-    const opts = '<option value="">?</option>' + [1,2,3,4,5].map(n => `<option value="${n}">${n}</option>`).join("");
     block.innerHTML = `
       <div class="q-head">
         <span class="q-num">${i + 1}.</span>
         <button class="btn-listen" onclick="playAudio('s4_${i}', '${q.sentence.replace(/'/g, "\\'")}')">🔊</button>
-        <span style="font-size:.85rem;color:var(--muted)">聽句子，排順序</span>
+        <span style="font-size:.85rem;color:var(--muted)">聽句子，拖曳方塊排順序</span>
       </div>
-      <div class="chunk-row">
-        ${q.chunks.map((c, j) => `
-          <div class="chunk">
-            <span>${c}</span>
-            <select id="s4sel_${i}_${j}">${opts}</select>
-          </div>`).join("")}
+      <div class="chunk-sort" id="s4sort_${i}">
+        ${q.chunks.map(c => `<div class="chunk-tile">${c}</div>`).join("")}
       </div>
       <div class="reorder-answer" id="s4ans_${i}">正確句子：${q.sentence}</div>`;
     div.appendChild(block);
+    makeSortable(document.getElementById(`s4sort_${i}`));
   });
 }
 
@@ -585,16 +627,14 @@ function checkSec4() {
   let correct = 0;
   DRILL.reorder.forEach((q, i) => {
     const block = document.getElementById(`s4_${i}`);
-    let allOk = true;
-    q.chunks.forEach((c, j) => {
-      const sel = document.getElementById(`s4sel_${i}_${j}`);
-      const ok = parseInt(sel.value) === q.order[j];
-      sel.className = ok ? "correct" : "wrong";
-      if (!ok) allOk = false;
-    });
-    block.className = "q-block " + (allOk ? "q-correct" : "q-wrong");
-    document.getElementById(`s4ans_${i}`).style.display = allOk ? "none" : "block";
-    if (allOk) correct++;
+    const sort = document.getElementById(`s4sort_${i}`);
+    const tiles = [...sort.querySelectorAll(".chunk-tile")];
+    const arranged = tiles.map(t => t.textContent.trim()).join(" ");
+    const ok = arranged === q.sentence.trim();
+    block.className = "q-block " + (ok ? "q-correct" : "q-wrong");
+    tiles.forEach(t => { t.classList.remove("tile-ok", "tile-bad"); t.classList.add(ok ? "tile-ok" : "tile-bad"); });
+    document.getElementById(`s4ans_${i}`).style.display = ok ? "none" : "block";
+    if (ok) correct++;
   });
   showScore("score4", correct, DRILL.reorder.length);
   sectionScores.s4 = [correct, DRILL.reorder.length];
