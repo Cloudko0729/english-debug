@@ -318,54 +318,54 @@ const BUILDINGS = {
             beauty: [0,0,0], pop: [0,0,0], coin: [15, 25, 40], levelDays: [4, 10] },
   house:  { emoji: "🏠", name: "房子", cost: 180, desc: "增加人口容量", terrain: ["P"], maxLevel: 3, img: true,
             beauty: [0,0,0], pop: [4, 8, 14], coin: [0,0,0], levelDays: [4, 10] },
-  town:   { emoji: "🏘️", name: "小鎮", cost: 450, desc: "人口 + 金幣，最強建築", terrain: ["P"], maxLevel: 3, img: true,
+  town:   { emoji: "🏘️", name: "小鎮", cost: 400, desc: "人口 + 金幣，最強建築", terrain: ["P"], maxLevel: 3, img: true,
             beauty: [0,0,0], pop: [12, 24, 40], coin: [20, 35, 55], levelDays: [7, 14] },
   center: { emoji: "🏛️", name: "城鎮中心", cost: 0, desc: "免費設置 1 個，達人口+美化才能升級", terrain: ["P"], maxLevel: 5, unique: true, img: true,
             beauty: [8, 14, 22, 32, 45], pop: [0,0,0,0,0], coin: [8, 14, 22, 32, 45], levelDays: null },
   // 能源（5 級）
-  solar:  { emoji: "☀️", name: "太陽能發電", cost: 260, desc: "平地發電,每天金幣", terrain: ["P"], maxLevel: 5, img: true,
+  solar:  { emoji: "☀️", name: "太陽能發電", cost: 220, desc: "平地發電,每天金幣", terrain: ["P"], maxLevel: 5, img: true,
             beauty: [0,0,0,0,0], pop: [0,0,0,0,0], coin: [14, 21, 30, 40, 52], levelDays: [3, 6, 12, 20] },
   windmill:{ emoji: "🌬️", name: "風力發電", cost: 320, desc: "丘陵/海上發電,每天金幣", terrain: ["H","O"], maxLevel: 5, img: true,
             beauty: [0,0,0,0,0], pop: [0,0,0,0,0], coin: [18, 26, 36, 48, 62], levelDays: [3, 7, 14, 24] },
   // 海上漁業（5 級）
-  dock:   { emoji: "⚓", name: "碼頭", cost: 420, desc: "海上,人口+金幣（最多 3）", terrain: ["O"], max: 3, maxLevel: 5, img: true,
-            beauty: [1,2,3,4,5], pop: [4,6,8,11,14], coin: [10,16,24,34,46], levelDays: [4, 9, 16, 28] },
+  dock:   { emoji: "⚓", name: "碼頭", cost: 300, desc: "海上,人口+金幣（最多 3）", terrain: ["O"], max: 3, maxLevel: 5, img: true,
+            beauty: [1,2,3,4,5], pop: [4,6,8,11,14], coin: [14,20,28,38,50], levelDays: [4, 9, 16, 28] },
   fishery:{ emoji: "🎣", name: "定置漁場", cost: 360, desc: "海上漁獲,每天金幣（最多 5）", terrain: ["O"], max: 5, maxLevel: 5, img: true,
             beauty: [0,1,1,2,3], pop: [0,0,0,0,0], coin: [20,30,42,56,72], levelDays: [4, 8, 15, 25] },
   oceanboat:{ emoji: "🚢", name: "遠洋漁船", cost: 780, desc: "大量金幣（最多 3）", terrain: ["O"], max: 3, maxLevel: 5, img: true,
             beauty: [-1,-1,0,0,1], pop: [0,0,0,0,0], coin: [34,50,70,94,122], levelDays: [5, 10, 18, 30] },
   // 丘陵（淺山）動物復育（只能養一隻,5 級）
-  leopardcat:{ emoji: "🐆", name: "石虎", cost: 1500, desc: "丘陵復育（淺山）,大量美化", terrain: ["H"], category: "hills", categoryMax: 1, maxLevel: 5,
+  leopardcat:{ emoji: "🐆", name: "石虎", cost: 800, desc: "丘陵復育（淺山）,大量美化", terrain: ["H"], category: "hills", categoryMax: 1, maxLevel: 5,
               beauty: [20,32,46,62,80], pop: [0,0,0,0,0], coin: [7,10,15,20,26], levelDays: [7,15,30,54] },
-  pangolin: { emoji: "🐾", name: "穿山甲", cost: 1550, desc: "丘陵復育（淺山）,大量美化", terrain: ["H"], category: "hills", categoryMax: 1, maxLevel: 5,
+  pangolin: { emoji: "🐾", name: "穿山甲", cost: 820, desc: "丘陵復育（淺山）,大量美化", terrain: ["H"], category: "hills", categoryMax: 1, maxLevel: 5,
               beauty: [19,31,46,63,84], pop: [0,0,0,0,0], coin: [8,12,17,23,30], levelDays: [8,17,33,58] },
-  butterfly:{ emoji: "🦋", name: "鳳蝶", cost: 1320, desc: "丘陵復育（淺山）,大量美化", terrain: ["H"], category: "hills", categoryMax: 1, maxLevel: 5,
+  butterfly:{ emoji: "🦋", name: "鳳蝶", cost: 760, desc: "丘陵復育（淺山）,大量美化", terrain: ["H"], category: "hills", categoryMax: 1, maxLevel: 5,
               beauty: [17,29,43,58,76], pop: [0,0,0,0,0], coin: [7,11,16,22,29], levelDays: [6,14,28,50] },
   // 高山動物復育（只能養一隻,5 級）
-  bear:     { emoji: "🐻", name: "臺灣黑熊", cost: 1600, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+  bear:     { emoji: "🐻", name: "臺灣黑熊", cost: 1050, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [22,34,48,64,82], pop: [0,0,0,0,0], coin: [6,9,13,18,24], levelDays: [7,16,32,56] },
-  salamander:{ emoji: "🦎", name: "臺灣山椒魚", cost: 1400, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+  salamander:{ emoji: "🦎", name: "臺灣山椒魚", cost: 900, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [18,30,44,60,78], pop: [0,0,0,0,0], coin: [5,8,12,17,23], levelDays: [8,18,34,60] },
-  mikado:   { emoji: "🦚", name: "臺灣帝雉", cost: 1450, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+  mikado:   { emoji: "🦚", name: "臺灣帝雉", cost: 950, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [21,33,47,63,81], pop: [0,0,0,0,0], coin: [5,8,12,16,22], levelDays: [7,16,31,55] },
-  serow:    { emoji: "🐐", name: "長鬃山羊", cost: 1480, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+  serow:    { emoji: "🐐", name: "長鬃山羊", cost: 950, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [20,31,45,61,79], pop: [0,0,0,0,0], coin: [6,10,14,19,25], levelDays: [7,15,30,52] },
-  salmon:   { emoji: "🐟", name: "櫻花鉤吻鮭", cost: 1520, desc: "高山溪流復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+  salmon:   { emoji: "🐟", name: "櫻花鉤吻鮭", cost: 980, desc: "高山溪流復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [19,32,48,66,86], pop: [0,0,0,0,0], coin: [5,8,11,16,22], levelDays: [9,19,36,62] },
-  hawk:     { emoji: "🦅", name: "赫氏角鷹", cost: 1580, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+  hawk:     { emoji: "🦅", name: "赫氏角鷹", cost: 1050, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [21,34,49,66,85], pop: [0,0,0,0,0], coin: [6,9,14,19,25], levelDays: [8,17,33,57] },
-  sambar:   { emoji: "🦌", name: "水鹿", cost: 1420, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+  sambar:   { emoji: "🦌", name: "水鹿", cost: 950, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [18,30,45,62,80], pop: [0,0,0,0,0], coin: [6,10,15,21,28], levelDays: [7,16,31,54] },
   // 海洋動物復育（只能養一隻,5 級）
-  turtle:   { emoji: "🐢", name: "綠蠵龜", cost: 1350, desc: "海洋復育,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
+  turtle:   { emoji: "🐢", name: "綠蠵龜", cost: 950, desc: "海洋復育,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
               beauty: [18,30,44,60,78], pop: [0,0,0,0,0], coin: [7,11,16,22,30], levelDays: [8,18,34,58] },
-  dolphin:  { emoji: "🐬", name: "中華白海豚", cost: 1700, desc: "海洋復育（媽祖魚）,最高美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
+  dolphin:  { emoji: "🐬", name: "中華白海豚", cost: 1100, desc: "海洋復育（媽祖魚）,最高美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
               beauty: [24,38,54,72,92], pop: [0,0,0,0,0], coin: [8,12,17,23,30], levelDays: [8,18,35,60] },
-  whaleshark:{ emoji: "🦈", name: "鯨鯊", cost: 1650, desc: "海洋復育（豆腐鯊）,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
+  whaleshark:{ emoji: "🦈", name: "鯨鯊", cost: 1050, desc: "海洋復育（豆腐鯊）,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
               beauty: [22,35,50,68,88], pop: [0,0,0,0,0], coin: [7,11,16,22,29], levelDays: [9,19,36,62] },
-  coral:    { emoji: "🪸", name: "珊瑚礁", cost: 1300, desc: "海洋復育,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
+  coral:    { emoji: "🪸", name: "珊瑚礁", cost: 850, desc: "海洋復育,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
               beauty: [16,27,40,55,72], pop: [0,0,0,0,0], coin: [6,9,13,18,24], levelDays: [6,14,28,50] },
-  horseshoecrab:{ emoji: "🦀", name: "鱟", cost: 1380, desc: "海洋復育（活化石）,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
+  horseshoecrab:{ emoji: "🦀", name: "鱟", cost: 880, desc: "海洋復育（活化石）,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
               beauty: [17,28,41,56,73], pop: [0,0,0,0,0], coin: [6,9,13,18,24], levelDays: [7,15,30,54] },
 };
 const BUILD_ORDER = [
@@ -406,8 +406,8 @@ function happinessOf(pop, beauty) {
   if (pop <= 0) return 100;
   return Math.max(0, Math.min(100, Math.round(100 * beauty / (pop * BEAUTY_PER_POP))));
 }
-// 每日收入倍率：快樂 0%→收入 50%，快樂 100%→收入 100%
-function incomeMult(h) { return 0.5 + 0.5 * (h / 100); }
+// 每日收入倍率：快樂 0%→收入 60%，快樂 100%→收入 120%（高快樂有加成）
+function incomeMult(h) { return 0.6 + 0.6 * (h / 100); }
 function reqCenterFor(key) { return REQ_CENTER[key] || 0; }
 function centerLevel() { const c = island.buildings.find(b => b.type === "center"); return c ? c.level : 0; }
 const GRID = 15;
@@ -796,8 +796,8 @@ function openManual() {
     人太多但美化跟不上 → 快樂下降。多種森林、池塘、復育動物可提高。</p>
 
     <p><b>💰 快樂影響收入</b><br>
-    收入倍率 = 0.5 + 0.5 × 快樂%。<br>
-    快樂 100% → 拿 100% 金幣;快樂 50% → 只拿 75%;快樂 0% → 只拿 50%。<br>
+    收入倍率 = 0.6 + 0.6 × 快樂%。<br>
+    快樂 100% → 拿 <b>120%</b> 金幣(加成!);快樂 50% → 90%;快樂 0% → 60%。<br>
     所以人口和美化要<b>一起發展</b>才賺最多。</p>
 
     <p><b>🏛️ 城鎮中心(5 級)</b><br>
