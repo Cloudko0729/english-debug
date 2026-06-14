@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kids English — Day 4 School</title>
+  <style>
+    :root {
+      --bg: #fff7dc;
+      --panel: #ffffff;
+      --primary: #2f80ed;
+      --primary-soft: #dbeafe;
+      --accent: #ffb703;
+      --success: #2fbf71;
+      --danger: #ef476f;
+      --text: #243042;
+      --muted: #667085;
+      --border: #d9e2ec;
+      --radius: 12px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, "Noto Sans TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 20px 16px 16px;
+      text-align: center;
+    }
+    header h1 { font-size: 1.5rem; margin-bottom: 6px; }
+    header p { font-size: .9rem; opacity: .85; }
+
+    #studentBar {
+      background: var(--accent);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    #studentBar span { font-weight: 700; color: #3a2a00; }
+    .stu-btn {
+      padding: 6px 18px;
+      border: 2px solid #3a2a00;
+      border-radius: 20px;
+      background: transparent;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: #3a2a00;
+    }
+    .stu-btn.active { background: #3a2a00; color: #fff; }
+
+    #statsBar {
+      background: var(--primary-soft);
+      padding: 8px 16px;
+      text-align: center;
+      font-size: .85rem;
+      color: var(--primary);
+      font-weight: 600;
+      display: none;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    section {
+      background: var(--panel);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 16px;
+    }
+    section h2 {
+      font-size: 1.05rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .sec-hint { font-size: .85rem; color: var(--muted); margin-bottom: 14px; }
+
+    /* ── Question block ── */
+    .q-block {
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+    .q-block.q-correct { border-color: var(--success); background: #f0fcf6; }
+    .q-block.q-wrong   { border-color: var(--danger);  background: #fef0f4; }
+    .q-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .q-num { font-weight: 700; color: var(--primary); }
+
+    /* ── Choice buttons ── */
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .choice {
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      padding: 10px 8px;
+      font-size: .95rem;
+      cursor: pointer;
+      text-align: center;
+      min-height: 42px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .choice.sel { border-color: var(--primary); background: var(--primary-soft); }
+    .choice.right { border-color: var(--success); background: #d9f7e8; }
+    .choice.wrongpick { border-color: var(--danger); background: #fde0e8; }
+
+    /* ── Audio button ── */
+    .btn-listen {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 44px; height: 44px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .btn-listen-wide {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      min-height: 42px;
+    }
+
+    /* ── Fill blank ── */
+    .blank-sentence { font-size: 1rem; line-height: 1.6; flex: 1 1 200px; }
+    .blank-input {
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: .95rem;
+      width: 140px;
+      min-height: 40px;
+    }
+    .blank-input.correct { border-color: var(--success); background: #e6faf0; }
+    .blank-input.wrong   { border-color: var(--danger);  background: #fde8ee; }
+    .blank-answer { font-size: .82rem; color: var(--danger); font-weight: 700; display: none; margin-top: 6px; }
+
+    /* ── Reading ── */
+    .passage {
+      background: var(--primary-soft);
+      border-radius: 8px;
+      padding: 14px;
+      font-size: .95rem;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    /* ── Reorder ── */
+    .chunk-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .chunk {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--primary-soft);
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+    .chunk span { flex: 1; font-size: .98rem; font-weight: 600; }
+    .chunk select {
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      min-height: 38px;
+      background: #fff;
+    }
+    .chunk select.correct { border-color: var(--success); background: #e6faf0; }
+    .chunk select.wrong   { border-color: var(--danger);  background: #fde8ee; }
+    .reorder-answer { font-size: .85rem; color: var(--success); font-weight: 700; display: none; margin-top: 8px; }
+    /* 上下排序清單 */
+    .chunk-list { display: flex; flex-direction: column; gap: 8px; margin: 6px 0; }
+    .chunk-row2 {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: var(--primary-soft); border: 2px solid var(--primary); border-radius: 10px;
+      padding: 8px 10px 8px 14px;
+    }
+    .chunk-word { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .chunk-btns { display: flex; gap: 6px; flex-shrink: 0; }
+    .mv { width: 42px; height: 42px; border: none; border-radius: 9px; background: var(--primary); color: #fff; font-size: 1.1rem; cursor: pointer; }
+    .mv:active { background: #1f5fb0; }
+    .mv:disabled { background: #c3d4e8; color: #fff; }
+    .chunk-row2.row-ok { border-color: var(--success); background: #e6faf0; }
+    .chunk-row2.row-bad { border-color: var(--danger); background: #fde8ee; }
+
+    /* ── Picture MC ── */
+    .pic-emoji {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    /* ── Buttons / score ── */
+    .btn-check {
+      background: var(--success);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 22px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .score-msg { margin-top: 10px; font-weight: 700; font-size: 1rem; min-height: 24px; }
+    .score-ok  { color: var(--success); }
+    .score-bad { color: var(--danger); }
+
+    /* ── Total score ── */
+    #totalSection {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      border: none;
+    }
+    #totalSection h2 { color: #fff; }
+    #totalScore { font-size: 2rem; font-weight: 800; margin: 8px 0; }
+
+    @media (max-width: 500px) {
+      header h1 { font-size: 1.25rem; }
+      .choices { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🏫 Kids English Daily Drill</h1>
+  <p>Day 4 · Theme: School 學校 · 2026-06-15</p>
+</header>
+
+<div id="studentBar">
+  <span>Who are you?</span>
+  <button class="stu-btn" onclick="selectStudent('albert')">Albert</button>
+  <button class="stu-btn" onclick="selectStudent('jonathan')">Jonathan</button>
+  <button class="stu-btn" style="opacity:.7" onclick="selectStudent('test')">🧪 測試</button>
+</div>
+<div id="statsBar"></div>
+
+<main id="mainContent" style="display:none">
+
+  <!-- 1. Listening vocab MC -->
+  <section>
+    <h2>🎧 1. 英聽單字選擇題</h2>
+    <p class="sec-hint">按 🔊 聽單字，選出正確答案</p>
+    <div id="sec1"></div>
+    <button class="btn-check" onclick="checkSec1()">對答案 ✓</button>
+    <div class="score-msg" id="score1"></div>
+  </section>
+
+  <!-- 2. Listening fill blank -->
+  <section>
+    <h2>✏️ 2. 英聽填空</h2>
+    <p class="sec-hint">按 🔊 聽整句，把空格的單字填進去</p>
+    <div id="sec2"></div>
+    <button class="btn-check" onclick="checkSec2()">對答案 ✓</button>
+    <div class="score-msg" id="score2"></div>
+  </section>
+
+  <!-- 3. Reading MC -->
+  <section>
+    <h2>📖 3. 閱讀選擇題</h2>
+    <p class="sec-hint">先讀短文，再回答問題</p>
+    <div class="passage" id="passage"></div>
+    <button class="btn-listen-wide" onclick="playAudio('passage', DRILL.reading.passage)" style="margin-bottom:14px">🔊 唸給我聽</button>
+    <div id="sec3"></div>
+    <button class="btn-check" onclick="checkSec3()">對答案 ✓</button>
+    <div class="score-msg" id="score3"></div>
+  </section>
+
+  <!-- 4. Sentence reorder -->
+  <section>
+    <h2>🔀 4. 句子重組</h2>
+    <p class="sec-hint">按 🔊 聽句子，用 1〜5 排出正確順序</p>
+    <div id="sec4"></div>
+    <button class="btn-check" onclick="checkSec4()">對答案 ✓</button>
+    <div class="score-msg" id="score4"></div>
+  </section>
+
+  <!-- 5. Picture MC -->
+  <section>
+    <h2>🖼️ 5. 圖片選擇題</h2>
+    <p class="sec-hint">看圖選出正確的英文單字</p>
+    <div id="sec5"></div>
+    <button class="btn-check" onclick="checkSec5()">對答案 ✓</button>
+    <div class="score-msg" id="score5"></div>
+  </section>
+
+  <!-- Total -->
+  <section id="totalSection">
+    <h2>🏆 今日總成績</h2>
+    <div id="totalScore">－</div>
+    <p id="totalMsg">完成全部五大題後按下面按鈕</p>
+    <button class="btn-check" style="background:#ffb703;color:#3a2a00;margin-top:10px" onclick="showTotal()">看總成績 🎉</button>
+  </section>
+
+</main>
+
+<script src="../cloud_sync.js"></script>
+<script src="../account_lock.js"></script>
+<script>
+// ─── Drill Data (Day 4 · School) ──────────────────────────────────────────────
+const DRILL = {
+  date: "2026-06-15",
+  day: 4,
+  theme: "school",
+
+  // 1. 英聽單字選擇題
+  listenVocab: [
+    { spoken: "teacher",   choices: ["teacher", "student", "pencil", "bag"],     answer: "teacher" },
+    { spoken: "classroom", choices: ["classroom", "notebook", "ruler", "chair"], answer: "classroom" },
+    { spoken: "eraser",    choices: ["book", "desk", "eraser", "school"],        answer: "eraser" },
+    { spoken: "student",   choices: ["老師", "學生", "教室", "鉛筆"],             answer: "學生" },
+    { spoken: "ruler",     choices: ["尺", "橡皮擦", "書包", "椅子"],             answer: "尺" },
+    { spoken: "notebook",  choices: ["書", "桌子", "筆記本", "學校"],             answer: "筆記本" },
+  ],
+
+  // 2. 英聽填空
+  listenBlank: [
+    { full: "My classroom is clean.",            display: "My classroom is ___.",          answer: "clean" },
+    { full: "I write with a pencil.",            display: "I write with a ___.",           answer: "pencil" },
+    { full: "The student has a new book.",       display: "The student has a ___ book.",   answer: "new" },
+    { full: "We study English at school.",       display: "We ___ English at school.",     answer: "study" },
+    { full: "Please put your bag on the chair.", display: "Please put your ___ on the chair.", answer: "bag" },
+  ],
+
+  // 3. 閱讀選擇題
+  reading: {
+    passage: "Today is Monday at school. Our classroom is big and clean. Ms. Lin is our teacher. She asks every student to take out a book, a pencil, and a notebook. We read a short story and write three sentences. After class, I put my heavy bag beside my desk. I like to learn with my friends.",
+    questions: [
+      { q: "What day is it at school?",  choices: ["Monday", "Friday", "Sunday", "Tuesday"],                          answer: "Monday" },
+      { q: "Who is the teacher?",        choices: ["Ms. Lin", "A student", "My friend", "Mr. Chen"],                  answer: "Ms. Lin" },
+      { q: "What do the students read?", choices: ["A short story", "A ruler", "A chair", "A bag"],                   answer: "A short story" },
+      { q: "Where is the heavy bag?",    choices: ["Beside the desk", "On the teacher", "Under the book", "In the pencil"], answer: "Beside the desk" },
+    ],
+  },
+
+  // 4. 句子重組（拖曳/上下排序,join 後須等於 sentence）
+  reorder: [
+    { sentence: "I read a book at school.",        chunks: ["at", "a book", "school.", "I", "read"] },
+    { sentence: "The teacher writes on the desk.", chunks: ["on", "The teacher", "desk.", "writes", "the"] },
+    { sentence: "My new pencil is in my bag.",     chunks: ["in", "is", "My new", "my bag.", "pencil"] },
+    { sentence: "We study in a clean classroom.",  chunks: ["clean", "in a", "classroom.", "We", "study"] },
+  ],
+
+  // 5. 圖片選擇題
+  pictureMC: [
+    { emoji: "🏫", choices: ["school", "chair", "book", "pencil"],       answer: "school" },
+    { emoji: "🎒", choices: ["bag", "ruler", "desk", "eraser"],          answer: "bag" },
+    { emoji: "✏️", choices: ["notebook", "pencil", "teacher", "chair"],  answer: "pencil" },
+    { emoji: "📏", choices: ["book", "bag", "ruler", "student"],         answer: "ruler" },
+    { emoji: "📖", choices: ["book", "desk", "school", "pencil"],        answer: "book" },
+    { emoji: "🪑", choices: ["eraser", "notebook", "chair", "classroom"], answer: "chair" },
+  ],
+};
+
+// word-en lookup for recording mistakes (Chinese choice → English word)
+const ZH2EN = { "學生": "student", "尺": "ruler", "筆記本": "notebook", "老師": "teacher", "教室": "classroom", "鉛筆": "pencil", "橡皮擦": "eraser", "書包": "bag", "椅子": "chair", "書": "book", "桌子": "desk", "學校": "school" };
+
+// ─── Progress storage ────────────────────────────────────────────────────────
+let currentStudent = null;
+const sectionScores = {};
+
+function getProgress(s) {
+  const raw = localStorage.getItem("kidsProgress." + s);
+  return raw ? JSON.parse(raw) : { wrongCounts: {}, sessions: 0, totalCorrect: 0, totalWrong: 0 };
+}
+function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
+
+function recordResult(wordEn, correct) {
+  if (!currentStudent || !wordEn) return;
+  const p = getProgress(currentStudent);
+  if (!p.wrongCounts) p.wrongCounts = {};
+  if (!correct) {
+    p.wrongCounts[wordEn] = (p.wrongCounts[wordEn] || 0) + 1;
+    p.totalWrong = (p.totalWrong || 0) + 1;
+  } else {
+    p.totalCorrect = (p.totalCorrect || 0) + 1;
+    if (p.wrongCounts[wordEn] > 0) p.wrongCounts[wordEn] = Math.max(0, p.wrongCounts[wordEn] - 1);
+  }
+  saveProgress(currentStudent, p);
+}
+
+function selectStudent(name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
+  currentStudent = name;
+  document.querySelectorAll(".stu-btn").forEach(b => b.classList.toggle("active", b.textContent.toLowerCase() === name));
+  document.getElementById("mainContent").style.display = "flex";
+  const p = getProgress(name);
+  p.sessions = (p.sessions || 0) + 1;
+  saveProgress(name, p);
+  updateStatsBar(p);
+}
+
+function updateStatsBar(p) {
+  const bar = document.getElementById("statsBar");
+  const total = (p.totalCorrect || 0) + (p.totalWrong || 0);
+  const pct = total > 0 ? Math.round(p.totalCorrect / total * 100) : 0;
+  const weak = Object.values(p.wrongCounts || {}).filter(c => c >= 2).length;
+  bar.style.display = "block";
+  bar.textContent = `${currentStudent.charAt(0).toUpperCase() + currentStudent.slice(1)} · Sessions: ${p.sessions} · Accuracy: ${pct}% · Weak words: ${weak}`;
+}
+
+// ─── Speech ──────────────────────────────────────────────────────────────────
+// 預先生成的 Kokoro 語音（af_heart）；找不到音檔時退回瀏覽器 TTS
+const AUDIO_DIR = "audio/2026-06-15/";
+let currentAudio = null;
+
+function playAudio(name, fallbackText) {
+  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  const a = new Audio(AUDIO_DIR + name + ".mp3");
+  currentAudio = a;
+  a.play().catch(() => speak(fallbackText));
+}
+
+function speak(text, rate = 0.85) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "en-US";
+  u.rate = rate;
+  window.speechSynthesis.speak(u);
+}
+
+// ─── Choice helper (single select within a block) ───────────────────────────
+function pickChoice(btn) {
+  const block = btn.closest(".q-block");
+  block.querySelectorAll(".choice").forEach(c => c.classList.remove("sel"));
+  btn.classList.add("sel");
+}
+
+// ─── Section 1: Listening vocab MC ───────────────────────────────────────────
+function renderSec1() {
+  const div = document.getElementById("sec1");
+  DRILL.listenVocab.forEach((q, i) => {
+    const block = document.createElement("div");
+    block.className = "q-block";
+    block.id = `s1_${i}`;
+    block.innerHTML = `
+      <div class="q-head">
+        <span class="q-num">${i + 1}.</span>
+        <button class="btn-listen" onclick="playAudio('s1_${i}', '${q.spoken}')">🔊</button>
+        <span style="font-size:.85rem;color:var(--muted)">聽單字，選答案</span>
+      </div>
+      <div class="choices">
+        ${q.choices.map(c => `<button class="choice" data-val="${c}" onclick="pickChoice(this)">${c}</button>`).join("")}
+      </div>`;
+    div.appendChild(block);
+  });
+}
+
+function checkSec1() {
+  let correct = 0;
+  DRILL.listenVocab.forEach((q, i) => {
+    const block = document.getElementById(`s1_${i}`);
+    const sel = block.querySelector(".choice.sel");
+    const ok = sel && sel.dataset.val === q.answer;
+    block.className = "q-block " + (ok ? "q-correct" : "q-wrong");
+    block.querySelectorAll(".choice").forEach(c => {
+      if (c.dataset.val === q.answer) c.classList.add("right");
+      else if (c.classList.contains("sel") && !ok) c.classList.add("wrongpick");
+    });
+    recordResult(q.spoken, ok);
+    if (ok) correct++;
+  });
+  showScore("score1", correct, DRILL.listenVocab.length);
+  sectionScores.s1 = [correct, DRILL.listenVocab.length];
+}
+
+// ─── Section 2: Listening fill blank ─────────────────────────────────────────
+function renderSec2() {
+  const div = document.getElementById("sec2");
+  DRILL.listenBlank.forEach((q, i) => {
+    const block = document.createElement("div");
+    block.className = "q-block";
+    block.id = `s2_${i}`;
+    block.innerHTML = `
+      <div class="q-head">
+        <span class="q-num">${i + 1}.</span>
+        <button class="btn-listen" onclick="playAudio('s2_${i}', '${q.full}')">🔊</button>
+        <span class="blank-sentence">${q.display.replace("___", '<b style="color:var(--primary)">___</b>')}</span>
+      </div>
+      <input class="blank-input" id="s2in_${i}" type="text" placeholder="type the word" autocomplete="off" autocapitalize="off" />
+      <div class="blank-answer" id="s2ans_${i}">答案：${q.answer}</div>`;
+    div.appendChild(block);
+  });
+}
+
+function checkSec2() {
+  let correct = 0;
+  DRILL.listenBlank.forEach((q, i) => {
+    const block = document.getElementById(`s2_${i}`);
+    const input = document.getElementById(`s2in_${i}`);
+    const ok = input.value.trim().toLowerCase() === q.answer.toLowerCase();
+    input.className = "blank-input " + (ok ? "correct" : "wrong");
+    block.className = "q-block " + (ok ? "q-correct" : "q-wrong");
+    document.getElementById(`s2ans_${i}`).style.display = ok ? "none" : "block";
+    recordResult(q.answer, ok);
+    if (ok) correct++;
+  });
+  showScore("score2", correct, DRILL.listenBlank.length);
+  sectionScores.s2 = [correct, DRILL.listenBlank.length];
+}
+
+// ─── Section 3: Reading MC ───────────────────────────────────────────────────
+function renderSec3() {
+  document.getElementById("passage").textContent = DRILL.reading.passage;
+  const div = document.getElementById("sec3");
+  DRILL.reading.questions.forEach((q, i) => {
+    const block = document.createElement("div");
+    block.className = "q-block";
+    block.id = `s3_${i}`;
+    block.innerHTML = `
+      <div class="q-head"><span class="q-num">${i + 1}.</span><span>${q.q}</span></div>
+      <div class="choices">
+        ${q.choices.map(c => `<button class="choice" data-val="${c}" onclick="pickChoice(this)">${c}</button>`).join("")}
+      </div>`;
+    div.appendChild(block);
+  });
+}
+
+function checkSec3() {
+  let correct = 0;
+  DRILL.reading.questions.forEach((q, i) => {
+    const block = document.getElementById(`s3_${i}`);
+    const sel = block.querySelector(".choice.sel");
+    const ok = sel && sel.dataset.val === q.answer;
+    block.className = "q-block " + (ok ? "q-correct" : "q-wrong");
+    block.querySelectorAll(".choice").forEach(c => {
+      if (c.dataset.val === q.answer) c.classList.add("right");
+      else if (c.classList.contains("sel") && !ok) c.classList.add("wrongpick");
+    });
+    if (ok) correct++;
+  });
+  showScore("score3", correct, DRILL.reading.questions.length);
+  sectionScores.s3 = [correct, DRILL.reading.questions.length];
+}
+
+// ─── Section 4: Sentence reorder ─────────────────────────────────────────────
+// 用 ▲▼ 把句子由上到下排好（無拖曳，零卡頓）
+function moveChunk(listId, btn, dir) {
+  const list = document.getElementById(listId);
+  const row = btn.closest(".chunk-row2");
+  if (dir < 0 && row.previousElementSibling) list.insertBefore(row, row.previousElementSibling);
+  if (dir > 0 && row.nextElementSibling) list.insertBefore(row.nextElementSibling, row);
+  updateMoveBtns(list);
+}
+
+function updateMoveBtns(list) {
+  const rows = [...list.querySelectorAll(".chunk-row2")];
+  rows.forEach((r, idx) => {
+    const ups = r.querySelector(".mv-up"), downs = r.querySelector(".mv-down");
+    if (ups) ups.disabled = idx === 0;
+    if (downs) downs.disabled = idx === rows.length - 1;
+  });
+}
+
+function renderSec4() {
+  const div = document.getElementById("sec4");
+  DRILL.reorder.forEach((q, i) => {
+    const block = document.createElement("div");
+    block.className = "q-block";
+    block.id = `s4_${i}`;
+    const listId = `s4list_${i}`;
+    block.innerHTML = `
+      <div class="q-head">
+        <span class="q-num">${i + 1}.</span>
+        <button class="btn-listen" onclick="playAudio('s4_${i}', '${q.sentence.replace(/'/g, "\\'")}')">🔊</button>
+        <span style="font-size:.85rem;color:var(--muted)">用 ▲▼ 把句子排好（由上到下）</span>
+      </div>
+      <div class="chunk-list" id="${listId}">
+        ${q.chunks.map(c => `
+          <div class="chunk-row2">
+            <span class="chunk-word">${c}</span>
+            <span class="chunk-btns">
+              <button class="mv mv-up" onclick="moveChunk('${listId}', this, -1)">▲</button>
+              <button class="mv mv-down" onclick="moveChunk('${listId}', this, 1)">▼</button>
+            </span>
+          </div>`).join("")}
+      </div>
+      <div class="reorder-answer" id="s4ans_${i}">正確句子：${q.sentence}</div>`;
+    div.appendChild(block);
+    updateMoveBtns(document.getElementById(listId));
+  });
+}
+
+function checkSec4() {
+  let correct = 0;
+  DRILL.reorder.forEach((q, i) => {
+    const block = document.getElementById(`s4_${i}`);
+    const list = document.getElementById(`s4list_${i}`);
+    const rows = [...list.querySelectorAll(".chunk-row2")];
+    const arranged = rows.map(r => r.querySelector(".chunk-word").textContent.trim()).join(" ");
+    const ok = arranged === q.sentence.trim();
+    block.className = "q-block " + (ok ? "q-correct" : "q-wrong");
+    rows.forEach(r => { r.classList.remove("row-ok", "row-bad"); r.classList.add(ok ? "row-ok" : "row-bad"); });
+    document.getElementById(`s4ans_${i}`).style.display = ok ? "none" : "block";
+    if (ok) correct++;
+  });
+  showScore("score4", correct, DRILL.reorder.length);
+  sectionScores.s4 = [correct, DRILL.reorder.length];
+}
+
+// ─── Section 5: Picture MC ───────────────────────────────────────────────────
+function renderSec5() {
+  const div = document.getElementById("sec5");
+  DRILL.pictureMC.forEach((q, i) => {
+    const block = document.createElement("div");
+    block.className = "q-block";
+    block.id = `s5_${i}`;
+    block.innerHTML = `
+      <div class="pic-emoji">${q.emoji}</div>
+      <div class="choices">
+        ${q.choices.map(c => `<button class="choice" data-val="${c}" onclick="pickChoice(this)">${c}</button>`).join("")}
+      </div>`;
+    div.appendChild(block);
+  });
+}
+
+function checkSec5() {
+  let correct = 0;
+  DRILL.pictureMC.forEach((q, i) => {
+    const block = document.getElementById(`s5_${i}`);
+    const sel = block.querySelector(".choice.sel");
+    const ok = sel && sel.dataset.val === q.answer;
+    block.className = "q-block " + (ok ? "q-correct" : "q-wrong");
+    block.querySelectorAll(".choice").forEach(c => {
+      if (c.dataset.val === q.answer) c.classList.add("right");
+      else if (c.classList.contains("sel") && !ok) c.classList.add("wrongpick");
+    });
+    recordResult(q.answer, ok);
+    if (ok) correct++;
+  });
+  showScore("score5", correct, DRILL.pictureMC.length);
+  sectionScores.s5 = [correct, DRILL.pictureMC.length];
+}
+
+// ─── Score display ───────────────────────────────────────────────────────────
+function showScore(id, correct, total) {
+  const el = document.getElementById(id);
+  if (correct === total) {
+    el.textContent = `🎉 全對！${correct}/${total}`;
+    el.className = "score-msg score-ok";
+  } else {
+    el.textContent = `${correct}/${total} 答對 — 紅色的再看一次！`;
+    el.className = "score-msg score-bad";
+  }
+  if (currentStudent) updateStatsBar(getProgress(currentStudent));
+}
+
+function showTotal() {
+  const keys = ["s1", "s2", "s3", "s4", "s5"];
+  const done = keys.filter(k => sectionScores[k]);
+  if (done.length < 5) {
+    document.getElementById("totalMsg").textContent = `還有 ${5 - done.length} 大題沒對答案喔！`;
+    return;
+  }
+  let c = 0, t = 0, perfectSections = 0;
+  keys.forEach(k => {
+    c += sectionScores[k][0];
+    t += sectionScores[k][1];
+    if (sectionScores[k][0] === sectionScores[k][1]) perfectSections++;
+  });
+  const pct = Math.round(c / t * 100);
+  document.getElementById("totalScore").textContent = `${c} / ${t}（${pct}分）`;
+
+  const coinMsg = awardCoins(c, perfectSections);
+
+  document.getElementById("totalMsg").innerHTML =
+    (pct === 100 ? `🌟 太厲害了，${currentStudent}！滿分！` :
+     pct >= 80  ? `💪 很棒，${currentStudent}！再練一下紅色的題目！` :
+                  `📚 沒關係，明天弱點單字會再出現，繼續加油！`)
+    + `<br>${coinMsg}`;
+}
+
+// ─── 發點數（每天每份只能領一次）────────────────────────────────────────────
+const DRILL_ID = "2026-06-15-school";
+function awardCoins(correct, perfectSections) {
+  if (!currentStudent) return "";
+  const p = getProgress(currentStudent);
+  if (!p.coins) p.coins = { balance: 0, lifetimeEarned: 0, lifetimeSpent: 0, transactions: [], claimedDrills: {} };
+  const claimKey = DRILL.date + "::" + DRILL_ID;
+  if (p.coins.claimedDrills[claimKey]) {
+    return `🪙 今天這份的金幣已經領過囉（目前 ${p.coins.balance} 金幣）`;
+  }
+  const earned = correct * 5 + perfectSections * 10 + 30; // 每題5 + 每大題全對10 + 完成30
+  p.coins.balance += earned;
+  p.coins.lifetimeEarned += earned;
+  p.coins.transactions.push({
+    type: "earn", source: "dailyDrill", amount: earned,
+    balanceAfter: p.coins.balance, createdAt: new Date().toISOString(),
+    meta: { drillId: DRILL_ID, date: DRILL.date, correct, perfectSections }
+  });
+  p.coins.claimedDrills[claimKey] = { claimedAt: new Date().toISOString(), earned, correct, perfectSections };
+  saveProgress(currentStudent, p);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);  // 自動存到 Google 試算表
+  return `🪙 +${earned} 金幣！（共 ${p.coins.balance} 金幣）<br><a href="../island.html" style="color:#ffe27a;font-weight:700">👉 去蓋我的島嶼</a>`;
+}
+
+// ─── Init ────────────────────────────────────────────────────────────────────
+renderSec1();
+renderSec2();
+renderSec3();
+renderSec4();
+renderSec5();
+</script>
+</body>
+</html>

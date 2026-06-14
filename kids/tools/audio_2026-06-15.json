@@ -1,0 +1,23 @@
+{
+  "outdir": "D:/english/kids/drills/audio/2026-06-15",
+  "voice": "af_heart",
+  "speed": 0.9,
+  "items": {
+    "s1_0": "teacher",
+    "s1_1": "classroom",
+    "s1_2": "eraser",
+    "s1_3": "student",
+    "s1_4": "ruler",
+    "s1_5": "notebook",
+    "s2_0": "My classroom is clean.",
+    "s2_1": "I write with a pencil.",
+    "s2_2": "The student has a new book.",
+    "s2_3": "We study English at school.",
+    "s2_4": "Please put your bag on the chair.",
+    "passage": "Today is Monday at school. Our classroom is big and clean. Ms. Lin is our teacher. She asks every student to take out a book, a pencil, and a notebook. We read a short story and write three sentences. After class, I put my heavy bag beside my desk. I like to learn with my friends.",
+    "s4_0": "I read a book at school.",
+    "s4_1": "The teacher writes on the desk.",
+    "s4_2": "My new pencil is in my bag.",
+    "s4_3": "We study in a clean classroom."
+  }
+}
