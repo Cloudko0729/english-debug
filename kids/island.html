@@ -255,7 +255,7 @@
 
 <header>
   <h1>🏝️ My Island 我的島嶼</h1>
-  <a href="index.html">← 回首頁</a>
+  <a href="index.html">← 回首頁</a>　<a href="#" onclick="openManual();return false;" style="color:#ffe27a">❓ 說明書</a>
 </header>
 
 <div id="topBar">
@@ -269,8 +269,8 @@
 
 <div id="statsRow" style="display:none">
   <div><b id="stPop">0</b>人口</div>
-  <div><b id="stCap">0</b>容量</div>
   <div><b id="stBeauty">0</b>美化</div>
+  <div><b id="stHappy">0</b>快樂</div>
   <div><b id="stProd">0</b>金幣/天</div>
   <div><b id="stBld">0</b>建築</div>
 </div>
@@ -395,9 +395,19 @@ const REQ_CENTER = {
   turtle: 4, dolphin: 4, whaleshark: 4, coral: 4, horseshoecrab: 4,
 };
 const CAT_NAME = { hills: "丘陵動物", mountain: "高山動物", ocean: "海洋動物" };
-// 各棲地可復育的動物數量上限（覆蓋各動物的 categoryMax）
-const CATEGORY_MAX = { hills: 1, mountain: 2, ocean: 2 };
-function catMax(cat) { return CATEGORY_MAX[cat] || 1; }
+// 各棲地可復育的動物數量上限。城鎮中心 Lv5 解鎖最大上限。
+const CATEGORY_MAX     = { hills: 1, mountain: 2, ocean: 2 };
+const CATEGORY_MAX_L5  = { hills: 3, mountain: 5, ocean: 5 };  // Lv5：高山 5 格全放、其餘全物種
+function catMax(cat) { return (centerLevel() >= 5 ? CATEGORY_MAX_L5 : CATEGORY_MAX)[cat] || 1; }
+
+// 快樂值：居民與美化的平衡。每位居民需要 ~1.2 美化分；不足會降低快樂。
+const BEAUTY_PER_POP = 1.2;
+function happinessOf(pop, beauty) {
+  if (pop <= 0) return 100;
+  return Math.max(0, Math.min(100, Math.round(100 * beauty / (pop * BEAUTY_PER_POP))));
+}
+// 每日收入倍率：快樂 0%→收入 50%，快樂 100%→收入 100%
+function incomeMult(h) { return 0.5 + 0.5 * (h / 100); }
 function reqCenterFor(key) { return REQ_CENTER[key] || 0; }
 function centerLevel() { const c = island.buildings.find(b => b.type === "center"); return c ? c.level : 0; }
 const GRID = 15;
@@ -514,7 +524,7 @@ function runDailyTick() {
       const need = cat.levelDays[b.level - 1];   // 升到下一級所需天數
       if (need != null && b.activeDays >= need) b.level++;
     }
-    // production
+    // production（先累計原始產量,稍後依快樂值打折）
     const produce = cat.coin[b.level - 1] || 0;
     if (produce > 0 && b.lastProductionDate !== today) {
       totalProduced += produce;
@@ -522,6 +532,8 @@ function runDailyTick() {
     }
   });
   island.lastProcessedDate = today;
+  recalcStats();  // 取得當下快樂值
+  totalProduced = Math.round(totalProduced * incomeMult(island.stats.happiness));  // 快樂值影響每日收入
   if (totalProduced > 0) {
     const p = getProgress(currentStudent);
     p.coins.balance += totalProduced;
@@ -552,16 +564,18 @@ function terrainBeauty() {
 }
 
 function recalcStats() {
-  let pop = 0, cap = 0, beauty = terrainBeauty(), prod = 0;  // 地形提供基礎美化分
+  let pop = 0, cap = 0, beauty = terrainBeauty(), baseProd = 0;  // 地形提供基礎美化分
   island.buildings.forEach(b => {
     const cat = BUILDINGS[b.type];
     cap += cat.pop[b.level - 1] || 0;
     beauty += cat.beauty[b.level - 1] || 0;
-    prod += cat.coin[b.level - 1] || 0;
+    baseProd += cat.coin[b.level - 1] || 0;
   });
-  // population grows toward capacity (simple: pop = capacity for v1)
-  pop = cap;
-  island.stats = { population: pop, populationCapacity: cap, beauty, dailyCoinProduction: prod, totalBuildings: island.buildings.length };
+  pop = cap;  // 人口成長到容量
+  const happiness = happinessOf(pop, beauty);
+  const dailyCoinProduction = Math.round(baseProd * incomeMult(happiness));  // 快樂值影響收入
+  island.stats = { population: pop, populationCapacity: cap, beauty, happiness,
+                   baseProduction: baseProd, dailyCoinProduction, totalBuildings: island.buildings.length };
 }
 
 // ─── Render ──────────────────────────────────────────────────────────────────
@@ -569,8 +583,8 @@ function render() {
   const p = getProgress(currentStudent);
   document.getElementById("coinDisplay").textContent = "🪙 " + p.coins.balance;
   document.getElementById("stPop").textContent = island.stats.population;
-  document.getElementById("stCap").textContent = island.stats.populationCapacity;
   document.getElementById("stBeauty").textContent = island.stats.beauty;
+  document.getElementById("stHappy").textContent = (island.stats.happiness != null ? island.stats.happiness : 100) + "%";
   document.getElementById("stProd").textContent = island.stats.dailyCoinProduction;
   document.getElementById("stBld").textContent = island.stats.totalBuildings;
 
@@ -756,6 +770,63 @@ function demolish(buildingId) {
 }
 
 function closeSheet() { document.getElementById("sheet").classList.remove("open"); }
+
+// ─── 說明書 ──────────────────────────────────────────────────────────────────
+function openManual() {
+  const html = `
+  <h3>📖 島嶼說明書</h3>
+  <div style="font-size:.86rem;line-height:1.7;color:var(--text)">
+    <p><b>🗺️ 地形</b><br>
+    🟦 海洋：風力發電、碼頭、定置漁場、遠洋漁船、海洋動物<br>
+    🟩 平地：城鎮中心、房子、小鎮、農場、牧場、森林、池塘、太陽能<br>
+    🟧 丘陵：風力發電、丘陵動物<br>
+    🏔️ 高山：高山動物<br>
+    每種建築只能蓋在它的地形上。</p>
+
+    <p><b>📊 五個數值</b><br>
+    <b>人口</b>：房子/小鎮/牧場/碼頭提供。<br>
+    <b>美化</b>：地形(丘陵+1、高山+2)＋森林/池塘＋復育動物。<br>
+    <b>快樂</b>：居民住得開不開心。<br>
+    <b>金幣/天</b>：每天自動賺的金幣(開島嶼頁時結算)。<br>
+    <b>建築</b>：島上設施總數。</p>
+
+    <p><b>😊 快樂值怎麼算</b><br>
+    每位居民需要約 <b>1.2 美化分</b>才會開心。<br>
+    快樂% = 美化 ÷ (人口 × 1.2)，最高 100%。<br>
+    人太多但美化跟不上 → 快樂下降。多種森林、池塘、復育動物可提高。</p>
+
+    <p><b>💰 快樂影響收入</b><br>
+    收入倍率 = 0.5 + 0.5 × 快樂%。<br>
+    快樂 100% → 拿 100% 金幣;快樂 50% → 只拿 75%;快樂 0% → 只拿 50%。<br>
+    所以人口和美化要<b>一起發展</b>才賺最多。</p>
+
+    <p><b>🏛️ 城鎮中心(5 級)</b><br>
+    免費蓋 1 個。升級要同時達到<b>人口 + 美化</b>目標：<br>
+    Lv2：人口 20、美化 40<br>
+    Lv3：人口 55、美化 90<br>
+    Lv4：人口 110、美化 170<br>
+    Lv5：人口 190、美化 290<br>
+    等級越高解鎖越多建築;<b>Lv5 把復育上限拉到最大</b>。</p>
+
+    <p><b>🔒 解鎖門檻</b><br>
+    Lv2：小鎮、風力發電、碼頭、丘陵動物<br>
+    Lv3：定置漁場、高山動物<br>
+    Lv4：遠洋漁船、海洋動物</p>
+
+    <p><b>🐾 復育動物上限</b><br>
+    丘陵 1 隻、高山 2 隻、海洋 2 隻;<br>
+    城鎮中心 Lv5 → 丘陵 3、高山 5、海洋 5。<br>
+    動物給大量美化分,是衝快樂和中心升級的關鍵。</p>
+
+    <p><b>⬆️ 建築升級</b><br>
+    一般建築放越多天,自動升級(Lv1→5)，產出變多。城鎮中心則靠達標升級。</p>
+
+    <p><b>🛠️ 拆除</b><br>
+    試用期全額退還金幣(免費蓋的城鎮中心不退)。</p>
+  </div>`;
+  document.getElementById("sheetContent").innerHTML = html;
+  document.getElementById("sheet").classList.add("open");
+}
 
 // ─── Toast ──────────────────────────────────────────────────────────────────
 let toastTimer = null;
