@@ -34,6 +34,24 @@ function cloudSave(student) {
   } catch (e) {}
 }
 
+// 開啟頁面時的智慧同步：本機沒進度就從雲端拉回（避免測試/新平板用空資料蓋掉雲端）；
+// 本機已有進度就上傳備份。onRestored 在「成功拉回」後呼叫，讓頁面用新資料重畫。
+function cloudSyncOnOpen(student, onRestored) {
+  if (!CLOUD_URL || !student) return;
+  let prog = null;
+  try { prog = JSON.parse(localStorage.getItem("kidsProgress." + student) || "null"); } catch (e) {}
+  const localEmpty = !prog ||
+    (((prog.totalCorrect || 0) + (prog.totalWrong || 0)) === 0 && !(prog.coins && prog.coins.balance > 0));
+  if (localEmpty) {
+    cloudLoad(student).then(d => {
+      if (d && d.progress) { if (typeof onRestored === "function") onRestored(); }
+      else cloudSave(student);  // 雲端也沒有 → 這是第一台裝置，上傳建立
+    });
+  } else {
+    cloudSave(student);  // 本機已有進度 → 正常備份
+  }
+}
+
 // 從雲端還原（手動觸發；會覆蓋本機進度）
 function cloudLoad(student) {
   if (!CLOUD_URL || !student) return Promise.resolve(null);

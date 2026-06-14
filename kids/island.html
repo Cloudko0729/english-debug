@@ -605,7 +605,8 @@ function selectStudent(name) {
   } else {
     document.getElementById("notice").style.display = "none";
   }
-  if (typeof cloudSave === "function") cloudSave(currentStudent);  // 一開啟就把目前進度同步到雲端
+  // 本機空 → 從雲端拉回（新/測試平板自動載入真實進度）；本機有 → 上傳備份
+  if (typeof cloudSyncOnOpen === "function") cloudSyncOnOpen(currentStudent, () => selectStudent(currentStudent));
 }
 
 // ─── 匯出 / 匯入 / 雲端還原 ──────────────────────────────────────────────────

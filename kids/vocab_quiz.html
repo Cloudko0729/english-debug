@@ -351,7 +351,8 @@ function selectStudent(name) {
   if (alreadyDone) {
     toast("今天已經測驗過囉，這次不再給金幣");
   }
-  if (typeof cloudSave === "function") cloudSave(name);  // 一選學生就把目前進度同步到雲端
+  // 本機空 → 從雲端拉回（新/測試平板自動載入真實進度）；本機有 → 上傳備份
+  if (typeof cloudSyncOnOpen === "function") cloudSyncOnOpen(name, () => selectStudent(name));
   renderQuestion();
 }
 
