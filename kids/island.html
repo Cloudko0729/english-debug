@@ -377,6 +377,16 @@ const CENTER_TARGETS = [
   { pop: 110, beauty: 170 },  // Lv3 -> Lv4
   { pop: 190, beauty: 290 },  // Lv4 -> Lv5
 ];
+
+// 解鎖門檻：需要城鎮中心達到此等級才能蓋（未列 = 隨時可蓋）
+const REQ_CENTER = {
+  town: 2, windmill: 2, dock: 2, fishery: 3, oceanboat: 4,
+  bear: 3, leopardcat: 3, salamander: 3, mikado: 3, pangolin: 3,
+  serow: 3, salmon: 3, butterfly: 3, hawk: 3, sambar: 3,
+  turtle: 4, dolphin: 4, whaleshark: 4, coral: 4, horseshoecrab: 4,
+};
+function reqCenterFor(key) { return REQ_CENTER[key] || 0; }
+function centerLevel() { const c = island.buildings.find(b => b.type === "center"); return c ? c.level : 0; }
 const GRID = 15;
 
 // 15×15 地形圖：O 海洋、P 平地（可蓋）、H 丘陵、M 高山
@@ -592,7 +602,7 @@ function canBuild(key) {
   return true;
 }
 function buildableOn(t) {
-  return BUILD_ORDER.some(key => (BUILDINGS[key].terrain || ["P"]).includes(t) && canBuild(key));
+  return BUILD_ORDER.some(key => (BUILDINGS[key].terrain || ["P"]).includes(t));
 }
 
 function openBuild(x, y) {
@@ -600,18 +610,22 @@ function openBuild(x, y) {
   const t = terrainAt(x, y);
   const p = getProgress(currentStudent);
   const bal = p.coins.balance;
+  const lvl = centerLevel();
   const list = BUILD_ORDER.filter(key => (BUILDINGS[key].terrain || ["P"]).includes(t) && canBuild(key));
   let html = `<h3>${TERR_NAME[t]} — 蓋什麼？（你有 🪙 ${bal}）</h3>`;
   if (!list.length) html += `<p style="color:var(--muted);font-size:.9rem">這裡目前沒有可蓋的（可能已達數量上限）。</p>`;
   list.forEach(key => {
     const c = BUILDINGS[key];
+    const req = reqCenterFor(key);
+    const locked = lvl < req;
     const afford = bal >= c.cost;
-    const costLabel = c.cost === 0 ? "免費" : `🪙 ${c.cost}`;
+    const clickable = !locked && afford;
+    const costLabel = locked ? `🔒 城鎮中心 Lv${req}` : (c.cost === 0 ? "免費" : `🪙 ${c.cost}`);
     const icon = c.img
       ? `<img class="opt-img" src="island_img/${key}.png" alt="${c.name}" onerror="this.replaceWith(document.createTextNode('${c.emoji}'))">`
       : `<span style="font-size:1.8rem">${c.emoji}</span>`;
     html += `
-      <div class="build-opt ${afford ? "" : "locked"}" ${afford ? `onclick="build('${key}')"` : ""}>
+      <div class="build-opt ${clickable ? "" : "locked"}" ${clickable ? `onclick="build('${key}')"` : ""}>
         <div class="emoji">${icon}</div>
         <div class="info">
           <div class="bname">${c.name}</div>
@@ -630,6 +644,7 @@ function build(key) {
   if (c.unique && countType(key) >= 1) { toast("已經有一個了"); return; }
   if (c.max && countType(key) >= c.max) { toast(`${c.name}最多 ${c.max} 個`); return; }
   if (c.category && countCategory(c.category) >= (c.categoryMax || 1)) { toast(c.category === "mountain" ? "山區動物只能復育一隻" : "海洋動物只能復育一隻"); return; }
+  if (centerLevel() < reqCenterFor(key)) { toast(`需要城鎮中心 Lv${reqCenterFor(key)} 才能蓋`); return; }
   const p = getProgress(currentStudent);
   if (p.coins.balance < c.cost) { toast("金幣不夠！"); return; }
   p.coins.balance -= c.cost;
