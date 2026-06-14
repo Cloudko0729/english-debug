@@ -121,6 +121,11 @@
     .tile.t-mountain{ background: #b8bcca; cursor: default; }
     .tile-img { width: 100%; height: 100%; object-fit: contain; image-rendering: auto; pointer-events: none; }
     .tile-emoji { font-size: clamp(.8rem, 3.6vw, 1.4rem); line-height: 1; pointer-events: none; }
+    /* 動態寵物狗 */
+    .pet-dog { display: inline-block; font-size: clamp(.9rem, 3.8vw, 1.5rem); line-height: 1; pointer-events: none; animation: dogBob .8s ease-in-out infinite; transform-origin: bottom center; }
+    @keyframes dogBob { 0%,100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-3px) rotate(5deg); } }
+    .dog-ready { position: absolute; top: -2px; right: 0; font-size: .55rem; pointer-events: none; animation: dogPulse 1s ease-in-out infinite; }
+    @keyframes dogPulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(1.25); } }
     .opt-img { width: 2rem; height: 2rem; object-fit: contain; }
     .tile .lvl {
       position: absolute;
@@ -322,6 +327,9 @@ const BUILDINGS = {
             beauty: [0,0,0], pop: [12, 24, 40], coin: [20, 35, 55], levelDays: [7, 14] },
   center: { emoji: "🏛️", name: "城鎮中心", cost: 0, desc: "免費設置 1 個，達人口+美化才能升級", terrain: ["P"], maxLevel: 5, unique: true, img: true,
             beauty: [8, 14, 22, 32, 45], pop: [0,0,0,0,0], coin: [8, 14, 22, 32, 45], levelDays: null },
+  // 寵物（免費,陸地空格,每天點一次撿金幣）
+  dog:    { emoji: "🐶", name: "寵物狗", cost: 0, desc: "放陸地空格,每天點牠一次撿隨機金幣", terrain: ["P","H","M"], unique: true, maxLevel: 1, pet: true,
+            beauty: [0], pop: [0], coin: [0], levelDays: null },
   // 能源（5 級）
   solar:  { emoji: "☀️", name: "太陽能發電", cost: 220, desc: "平地發電,每天金幣", terrain: ["P"], maxLevel: 5, img: true,
             beauty: [0,0,0,0,0], pop: [0,0,0,0,0], coin: [14, 21, 30, 40, 52], levelDays: [3, 6, 12, 20] },
@@ -369,7 +377,7 @@ const BUILDINGS = {
               beauty: [17,28,41,56,73], pop: [0,0,0,0,0], coin: [6,9,13,18,24], levelDays: [7,15,30,54] },
 };
 const BUILD_ORDER = [
-  "center", "solar", "forest", "pond", "ranch", "farm", "house", "town",  // 平地
+  "center", "dog", "solar", "forest", "pond", "ranch", "farm", "house", "town",  // 平地（dog 也可丘陵/高山）
   "windmill",                                                              // 丘陵/海
   "dock", "fishery", "oceanboat",                                          // 海上
   "bear","leopardcat","salamander","mikado","pangolin","serow","salmon","butterfly","hawk","sambar", // 高山動物
@@ -590,6 +598,7 @@ function render() {
 
   const grid = document.getElementById("island");
   grid.innerHTML = "";
+  const today = todayStr();
   const map = {};
   island.buildings.forEach(b => { map[b.x + "_" + b.y] = b; });
   for (let y = 0; y < GRID; y++) {
@@ -598,7 +607,11 @@ function render() {
       const tile = document.createElement("div");
       tile.className = "tile " + TERR_CLASS[t];
       const b = map[x + "_" + y];
-      if (b) {
+      if (b && b.type === "dog") {
+        const ready = b.lastCollectDate !== today;
+        tile.innerHTML = `<span class="pet-dog">🐶</span>` + (ready ? `<span class="dog-ready">🪙</span>` : "");
+        tile.onclick = () => tapDog(b);
+      } else if (b) {
         const cat = BUILDINGS[b.type];
         const lvl = b.level > 1 ? `<span class="lvl">Lv${b.level}</span>` : "";
         if (cat.img) {
@@ -695,9 +708,39 @@ function build(key) {
   toast(`${c.emoji} ${c.name} 蓋好了！`);
 }
 
+// 點寵物狗：每天收一次隨機金幣
+function tapDog(b) {
+  const today = todayStr();
+  if (b.lastCollectDate === today) {
+    openDetail(b);  // 今天已收 → 顯示詳情（可拆/移動）
+    return;
+  }
+  const reward = 15 + Math.floor(Math.random() * 41);  // 15–55 隨機
+  const p = getProgress(currentStudent);
+  p.coins.balance += reward;
+  p.coins.lifetimeEarned += reward;
+  p.coins.transactions.push({ type: "earn", source: "petDog", amount: reward,
+    balanceAfter: p.coins.balance, createdAt: new Date().toISOString() });
+  saveProgress(currentStudent, p);
+  b.lastCollectDate = today;
+  saveIsland(currentStudent, island);
+  render();
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  toast(`🐶 汪汪！撿到 🪙 ${reward}`);
+}
+
 function openDetail(b) {
   const c = BUILDINGS[b.type];
   const refund = c.cost; // 試用期：全額退還
+  if (b.type === "dog") {
+    const collectedToday = b.lastCollectDate === todayStr();
+    let h = `<h3>🐶 寵物狗</h3>`;
+    h += `<div class="detail-row">${collectedToday ? "今天已經撿過金幣了，明天再來！🦴" : "點牠就能撿今天的金幣！🪙"}</div>`;
+    h += `<button class="demolish-btn" onclick="demolish('${b.id}')">🛠️ 把小狗收走（移到別處）</button>`;
+    document.getElementById("sheetContent").innerHTML = h;
+    document.getElementById("sheet").classList.add("open");
+    return;
+  }
   let html = `<h3>${c.emoji} ${c.name} Lv${b.level}</h3>`;
   html += `<div class="detail-row">已經存在：<b>${b.activeDays}</b> 天</div>`;
   if (c.coin[b.level-1] > 0) html += `<div class="detail-row">每天生產：<b>🪙 ${c.coin[b.level-1]}</b></div>`;
@@ -821,8 +864,12 @@ function openManual() {
     <p><b>⬆️ 建築升級</b><br>
     一般建築放越多天,自動升級(Lv1→5)，產出變多。城鎮中心則靠達標升級。</p>
 
+    <p><b>🐶 寵物狗</b><br>
+    免費放在陸地空格(平地/丘陵/高山,只能養一隻)。<br>
+    每天點牠一次,撿 15–55 隨機金幣;有 🪙 閃爍代表今天還沒撿。</p>
+
     <p><b>🛠️ 拆除</b><br>
-    試用期全額退還金幣(免費蓋的城鎮中心不退)。</p>
+    試用期全額退還金幣(免費蓋的城鎮中心/小狗不退)。</p>
   </div>`;
   document.getElementById("sheetContent").innerHTML = html;
   document.getElementById("sheet").classList.add("open");
