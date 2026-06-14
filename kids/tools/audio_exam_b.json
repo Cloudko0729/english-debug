@@ -1,0 +1,12 @@
+{
+  "outdir": "D:/english/kids/drills/audio/exam",
+  "voice": "af_heart",
+  "speed": 0.9,
+  "items": {
+    "b1": "How much are the glasses?",
+    "b2": "Whose smartphone is it?",
+    "b3": "Are they your socks?",
+    "b4": "How much is the water bottle?",
+    "b5": "Whose sneakers are they?"
+  }
+}

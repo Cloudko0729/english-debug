@@ -36,7 +36,14 @@
     .q-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
     .q-num { font-weight: 700; color: var(--primary); }
     .q-text { font-size: .98rem; line-height: 1.5; }
-    .pic-emoji { font-size: 3rem; text-align: center; margin: 4px 0 10px; }
+
+    /* 圖卡 */
+    .pic-card { display: flex; flex-direction: column; align-items: center; gap: 5px; background: var(--primary-soft); border-radius: 12px; padding: 12px; margin-bottom: 10px; }
+    .pic-card .name { font-weight: 800; color: var(--primary); font-size: .92rem; }
+    .pic-card .emoji { font-size: 3.2rem; line-height: 1; }
+    .pic-card .price { background: var(--gold); color: #3a2a00; font-weight: 800; border-radius: 8px; padding: 2px 12px; font-size: .95rem; }
+
+    .pic-emoji { font-size: 3rem; text-align: center; margin: 4px 0 6px; }
     .pic-hint { text-align: center; font-size: .82rem; color: var(--muted); margin-bottom: 8px; }
 
     .choices { display: flex; flex-direction: column; gap: 8px; }
@@ -66,7 +73,7 @@
 
 <header>
   <h1>🏅 期末英文評量</h1>
-  <p>進階 · 自然發音 / 價格 / 誰的 / 衣物單字</p>
+  <p>進階 · 自然發音 / 聽力 / 價格 / 誰的 / 衣物單字</p>
   <a href="../index.html">← 回首頁</a>
 </header>
 
@@ -89,21 +96,27 @@
     </section>
 
     <section>
-      <h2>💬 B. 看圖選回應</h2>
-      <p class="sec-hint">讀問題,選出正確的回應</p>
+      <h2>🎧 B. 聽力 — 看圖選回應</h2>
+      <p class="sec-hint">看圖,按 🔊 聽問題,選出正確的回應</p>
       <div id="secB"></div>
     </section>
 
     <section>
-      <h2>✍️ C. 看圖寫單字</h2>
-      <p class="sec-hint">看圖和中文,把英文單字拼出來</p>
+      <h2>📖 C. 讀一讀選回應</h2>
+      <p class="sec-hint">讀對話,選出正確的句子</p>
       <div id="secC"></div>
     </section>
 
     <section>
-      <h2>🔢 D. 誰的 / 多少錢</h2>
-      <p class="sec-hint">選出正確的句子</p>
+      <h2>✍️ D. 看圖寫單字</h2>
+      <p class="sec-hint">看圖和中文,把英文單字拼出來</p>
       <div id="secD"></div>
+    </section>
+
+    <section>
+      <h2>🖼️ E. 看圖選句子</h2>
+      <p class="sec-hint">看圖,選出正確的句子</p>
+      <div id="secE"></div>
     </section>
 
     <button class="btn-submit" onclick="submitExam()">📝 交卷看成績</button>
@@ -121,6 +134,7 @@ const AUDIO_DIR = "audio/exam/";
 const EXAM_ID = "final-exam";
 
 const EXAM = {
+  // A 聽音辨字（audio=word）
   phonics: [
     { word: "rain",  choices: ["train", "drain", "rain"] },
     { word: "skate", choices: ["skate", "state", "Kate"] },
@@ -129,17 +143,32 @@ const EXAM = {
     { word: "trip",  choices: ["trip", "drip", "tip"] },
     { word: "sky",   choices: ["spy", "sky", "try"] },
   ],
-  respond: [
-    { q: "How much are the glasses?（Susan ＄250）", choices: ["They're Susan's glasses.", "They're two hundred and fifty dollars.", "She likes the glasses."], answer: "They're two hundred and fifty dollars." },
-    { q: "Whose smartphone is it?（Jack ＄800）", choices: ["It's eight hundred dollars.", "Yes, it is.", "It's Jack's smartphone."], answer: "It's Jack's smartphone." },
-    { q: "How much are the socks?（Ben ＄100）", choices: ["Yes, they are.", "They're one hundred dollars.", "They're my socks."], answer: "They're one hundred dollars." },
-    { q: "Is it Jenny's water bottle?（Jenny ＄380）", choices: ["No, it's not. It's my water bottle.", "It's Jenny's water bottle.", "It's three hundred dollars."], answer: "It's Jenny's water bottle." },
-    { q: "Whose sneakers are they?（Willy ＄500）", choices: ["They're Willy's sneakers.", "They're five hundred dollars.", "Yes, they are."], answer: "They're Willy's sneakers." },
-    { q: "Whose shorts are they?", choices: ["They're seven hundred dollars.", "They're my sister's shorts.", "They're in my sister's bedroom."], answer: "They're my sister's shorts." },
-    { q: "A: ______  B: It's five hundred and eighty dollars.", choices: ["How much is the sweater?", "Whose sweater is it?", "How much are the pants?"], answer: "How much is the sweater?" },
-    { q: "How much are the glasses?", choices: ["They're Kevin's glasses.", "They're two hundred and sixty dollars.", "It's nine hundred dollars."], answer: "They're two hundred and sixty dollars." },
-    { q: "A: ______  B: They're my sneakers.", choices: ["How much are the sneakers?", "Whose jacket is it?", "Whose sneakers are they?"], answer: "Whose sneakers are they?" },
+  // B 聽力選回應（audio=題目，看圖）
+  listen: [
+    { audio: "b1", name: "Susan", emoji: "👓", price: "$250",
+      choices: ["They're Susan's glasses.", "They're two hundred and fifty dollars.", "She likes the glasses."],
+      answer: "They're two hundred and fifty dollars." },
+    { audio: "b2", name: "Jack", emoji: "📱", price: "$800",
+      choices: ["It's eight hundred dollars.", "No, it's not. It's Jack's smartphone.", "It's Jack's smartphone."],
+      answer: "It's Jack's smartphone." },
+    { audio: "b3", name: "Ben", emoji: "🧦", price: "$100",
+      choices: ["Yes, they are.", "They're one hundred dollars.", "They're my socks."],
+      answer: "Yes, they are." },
+    { audio: "b4", name: "Jenny", emoji: "🍶", price: "$380",
+      choices: ["No, it's not. It's my water bottle.", "It's Jenny's water bottle.", "It's three hundred and eighty dollars."],
+      answer: "It's three hundred and eighty dollars." },
+    { audio: "b5", name: "Willy", emoji: "👟", price: "$500",
+      choices: ["They're Willy's sneakers.", "They're five hundred dollars.", "Yes, they are."],
+      answer: "They're Willy's sneakers." },
   ],
+  // C 讀一讀選回應（純閱讀）
+  read: [
+    { q: "A: Whose shorts are they?　B: ______", choices: ["They're seven hundred dollars.", "They're my sister's shorts.", "They're in my sister's bedroom."], answer: "They're my sister's shorts." },
+    { q: "A: ______　B: It's five hundred and eighty dollars.", choices: ["How much is the sweater?", "Whose sweater is it?", "How much are the pants?"], answer: "How much is the sweater?" },
+    { q: "A: How much are the glasses?　B: ______", choices: ["They're Kevin's glasses.", "They're two hundred and sixty dollars.", "It's nine hundred dollars."], answer: "They're two hundred and sixty dollars." },
+    { q: "A: ______　B: They're my sneakers.", choices: ["How much are the sneakers?", "Whose jacket is it?", "Whose sneakers are they?"], answer: "Whose sneakers are they?" },
+  ],
+  // D 看圖寫單字
   write: [
     { emoji: "🔑", zh: "鑰匙", answers: ["key"] },
     { emoji: "👕", zh: "T 恤", answers: ["t-shirt", "tshirt", "t shirt"] },
@@ -148,17 +177,17 @@ const EXAM = {
     { emoji: "☂️", zh: "雨傘", answers: ["umbrella"] },
     { emoji: "👗", zh: "洋裝", answers: ["dress"] },
   ],
-  whose: [
-    { q: "Whose key is it?", choices: ["It's Sally's key.", "It's Ken's key.", "It's Lisa's key."], answer: "It's Sally's key." },
-    { q: "Whose smartphone is it?", choices: ["It's Sally's smartphone.", "It's Ken's smartphone.", "It's Lisa's smartphone."], answer: "It's Ken's smartphone." },
-    { q: "How much are the socks?", choices: ["They're one hundred and forty dollars.", "They're four hundred dollars.", "They're fourteen dollars."], answer: "They're one hundred and forty dollars." },
-    { q: "Whose watch is it?", choices: ["It's Sally's watch.", "It's Ken's watch.", "It's Lisa's watch."], answer: "It's Lisa's watch." },
+  // E 看圖選句子（看圖卡）
+  match: [
+    { name: "Sally", emoji: "🔑", q: "Whose key is it?", choices: ["It's Sally's key.", "It's Ken's key.", "It's Lisa's key."], answer: "It's Sally's key." },
+    { name: "Ken", emoji: "📱", q: "Whose smartphone is it?", choices: ["It's Sally's smartphone.", "It's Ken's smartphone.", "It's Lisa's smartphone."], answer: "It's Ken's smartphone." },
+    { emoji: "🧦", price: "$140", q: "How much are the socks?", choices: ["They're one hundred and forty dollars.", "They're four hundred dollars.", "They're fourteen dollars."], answer: "They're one hundred and forty dollars." },
+    { name: "Lisa", emoji: "⌚", q: "Whose watch is it?", choices: ["It's Sally's watch.", "It's Ken's watch.", "It's Lisa's watch."], answer: "It's Lisa's watch." },
   ],
 };
 
 let currentStudent = null;
 
-// ─── progress ────────────────────────────────────────────────────────────────
 function getProgress(s) {
   const raw = localStorage.getItem("kidsProgress." + s);
   const p = raw ? JSON.parse(raw) : { wrongCounts: {}, sessions: 0, totalCorrect: 0, totalWrong: 0 };
@@ -168,16 +197,15 @@ function getProgress(s) {
 }
 function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
 
-// ─── audio ───────────────────────────────────────────────────────────────────
 let curAudio = null;
-function playWord(word) {
+function playClip(key) {
   if (curAudio) { curAudio.pause(); curAudio = null; }
-  const a = new Audio(AUDIO_DIR + word + ".mp3");
+  const a = new Audio(AUDIO_DIR + key + ".mp3");
   curAudio = a;
   a.play().catch(() => {
     if (!window.speechSynthesis) return;
     speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(word); u.lang = "en-US"; u.rate = 0.85;
+    const u = new SpeechSynthesisUtterance(key); u.lang = "en-US"; u.rate = 0.85;
     speechSynthesis.speak(u);
   });
 }
@@ -188,56 +216,57 @@ function pickChoice(btn) {
   btn.classList.add("sel");
 }
 
-// ─── render ──────────────────────────────────────────────────────────────────
+function escAttr(s) { return String(s).replace(/"/g, "&quot;"); }
+function choicesHtml(arr) { return arr.map(c => `<button class="choice" data-val="${escAttr(c)}" onclick="pickChoice(this)">${c}</button>`).join(""); }
+function picCard(o) {
+  return `<div class="pic-card">
+    ${o.name ? `<div class="name">${o.name}</div>` : ""}
+    <div class="emoji">${o.emoji}</div>
+    ${o.price ? `<div class="price">${o.price}</div>` : ""}
+  </div>`;
+}
+
 function renderExam() {
-  // A phonics
   document.getElementById("secA").innerHTML = EXAM.phonics.map((q, i) => `
     <div class="q-block" id="a_${i}">
-      <div class="q-head">
-        <span class="q-num">${i + 1}.</span>
-        <button class="btn-listen" onclick="playWord('${q.word}')">🔊</button>
-      </div>
-      <div class="choices">
-        ${q.choices.map(c => `<button class="choice" data-val="${c}" onclick="pickChoice(this)">${c}</button>`).join("")}
-      </div>
+      <div class="q-head"><span class="q-num">${i + 1}.</span><button class="btn-listen" onclick="playClip('${q.word}')">🔊</button></div>
+      <div class="choices">${q.choices.map(c => `<button class="choice" data-val="${c}" onclick="pickChoice(this)">${c}</button>`).join("")}</div>
     </div>`).join("");
 
-  // B respond
-  document.getElementById("secB").innerHTML = EXAM.respond.map((q, i) => `
+  document.getElementById("secB").innerHTML = EXAM.listen.map((q, i) => `
     <div class="q-block" id="b_${i}">
-      <div class="q-head"><span class="q-num">${i + 1}.</span><span class="q-text">${q.q}</span></div>
-      <div class="choices">
-        ${q.choices.map(c => `<button class="choice" data-val="${escAttr(c)}" onclick="pickChoice(this)">${c}</button>`).join("")}
-      </div>
+      ${picCard(q)}
+      <div class="q-head"><span class="q-num">${i + 1}.</span><button class="btn-listen" onclick="playClip('${q.audio}')">🔊</button><span style="font-size:.82rem;color:var(--muted)">聽問題,選回應</span></div>
+      <div class="choices">${choicesHtml(q.choices)}</div>
     </div>`).join("");
 
-  // C write
-  document.getElementById("secC").innerHTML = EXAM.write.map((q, i) => `
+  document.getElementById("secC").innerHTML = EXAM.read.map((q, i) => `
     <div class="q-block" id="c_${i}">
+      <div class="q-head"><span class="q-num">${i + 1}.</span><span class="q-text">${q.q}</span></div>
+      <div class="choices">${choicesHtml(q.choices)}</div>
+    </div>`).join("");
+
+  document.getElementById("secD").innerHTML = EXAM.write.map((q, i) => `
+    <div class="q-block" id="d_${i}">
       <div class="pic-emoji">${q.emoji}</div>
       <div class="pic-hint">（${q.zh}）</div>
-      <input class="write-input" id="cin_${i}" type="text" placeholder="輸入英文單字" autocomplete="off" autocapitalize="off">
-      <div class="write-ans" id="cans_${i}"></div>
+      <input class="write-input" id="din_${i}" type="text" placeholder="輸入英文單字" autocomplete="off" autocapitalize="off">
+      <div class="write-ans" id="dans_${i}"></div>
     </div>`).join("");
 
-  // D whose
-  document.getElementById("secD").innerHTML = EXAM.whose.map((q, i) => `
-    <div class="q-block" id="d_${i}">
+  document.getElementById("secE").innerHTML = EXAM.match.map((q, i) => `
+    <div class="q-block" id="e_${i}">
+      ${picCard(q)}
       <div class="q-head"><span class="q-num">${i + 1}.</span><span class="q-text">${q.q}</span></div>
-      <div class="choices">
-        ${q.choices.map(c => `<button class="choice" data-val="${escAttr(c)}" onclick="pickChoice(this)">${c}</button>`).join("")}
-      </div>
+      <div class="choices">${choicesHtml(q.choices)}</div>
     </div>`).join("");
 }
 
-function escAttr(s) { return String(s).replace(/"/g, "&quot;"); }
-
-// ─── grade ───────────────────────────────────────────────────────────────────
-function gradeMC(prefix, list) {
+function gradeMC(prefix, list, answerKey) {
   let correct = 0;
   list.forEach((q, i) => {
     const block = document.getElementById(`${prefix}_${i}`);
-    const ans = q.answer !== undefined ? q.answer : q.word;
+    const ans = answerKey ? q[answerKey] : q.answer;
     const sel = block.querySelector(".choice.sel");
     const ok = sel && sel.dataset.val === ans;
     block.className = "q-block " + (ok ? "q-correct" : "q-wrong");
@@ -252,24 +281,21 @@ function gradeMC(prefix, list) {
 
 function submitExam() {
   let correct = 0, total = 0;
+  correct += gradeMC("a", EXAM.phonics, "word"); total += EXAM.phonics.length;
+  correct += gradeMC("b", EXAM.listen); total += EXAM.listen.length;
+  correct += gradeMC("c", EXAM.read); total += EXAM.read.length;
+  correct += gradeMC("e", EXAM.match); total += EXAM.match.length;
 
-  correct += gradeMC("a", EXAM.phonics); total += EXAM.phonics.length;
-  correct += gradeMC("b", EXAM.respond); total += EXAM.respond.length;
-  correct += gradeMC("d", EXAM.whose); total += EXAM.whose.length;
-
-  // C write
   EXAM.write.forEach((q, i) => {
     total++;
-    const input = document.getElementById(`cin_${i}`);
-    const block = document.getElementById(`c_${i}`);
+    const input = document.getElementById(`din_${i}`);
+    const block = document.getElementById(`d_${i}`);
     const val = input.value.trim().toLowerCase().replace(/\s+/g, " ");
     const ok = q.answers.some(a => a.toLowerCase() === val);
     input.className = "write-input " + (ok ? "right" : "wrongpick");
     block.className = "q-block " + (ok ? "q-correct" : "q-wrong");
-    const ansEl = document.getElementById(`cans_${i}`);
-    if (!ok) { ansEl.textContent = "答案：" + q.answers[0]; ansEl.style.display = "block"; }
-    else ansEl.style.display = "none";
-    // 寫字題記進弱點系統
+    const ansEl = document.getElementById(`dans_${i}`);
+    if (!ok) { ansEl.textContent = "答案：" + q.answers[0]; ansEl.style.display = "block"; } else ansEl.style.display = "none";
     recordResult(q.answers[0], ok);
     if (ok) correct++;
   });
@@ -295,12 +321,9 @@ function recordResult(wordEn, correct) {
   saveProgress(currentStudent, p);
 }
 
-// 期末考大獎：每題 +10，滿分再 +300，及格(>=80) +150，其餘 +60。只給第一次。
 function awardCoins(correct, total) {
   const p = getProgress(currentStudent);
-  if (p.coins.claimedDrills[EXAM_ID]) {
-    return `🪙 期末考獎勵已領過（共 ${p.coins.balance} 金幣）`;
-  }
+  if (p.coins.claimedDrills[EXAM_ID]) return `🪙 期末考獎勵已領過（共 ${p.coins.balance} 金幣）`;
   const pct = correct / total;
   const bonus = pct === 1 ? 300 : pct >= 0.8 ? 150 : 60;
   const earned = correct * 10 + bonus;
@@ -312,7 +335,6 @@ function awardCoins(correct, total) {
   return `🪙 +${earned} 金幣大獎！（共 ${p.coins.balance} 金幣）`;
 }
 
-// ─── toast / info ────────────────────────────────────────────────────────────
 let toastTimer = null;
 function toast(msg) { const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove("show"), 2200); }
 
@@ -325,7 +347,6 @@ function updateInfoBar() {
   bar.textContent = `${currentStudent.charAt(0).toUpperCase()+currentStudent.slice(1)} · 🪙 ${p.coins.balance} · 加強中單字：${weak}${done ? " · 期末考已完成 ✅" : ""}`;
 }
 
-// ─── select ──────────────────────────────────────────────────────────────────
 function selectStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
   currentStudent = name;
