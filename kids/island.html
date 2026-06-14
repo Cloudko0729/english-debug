@@ -608,8 +608,11 @@ function render() {
       tile.className = "tile " + TERR_CLASS[t];
       const b = map[x + "_" + y];
       if (b && b.type === "dog") {
-        const ready = b.lastCollectDate !== today;
-        tile.innerHTML = `<span class="pet-dog">🐶</span>` + (ready ? `<span class="dog-ready">🪙</span>` : "");
+        const ready = island.dogLastCollect !== today;
+        const dogInner = BUILDINGS.dog.img
+          ? `<img class="tile-img pet-dog" src="island_img/dog.png" alt="狗" onerror="this.replaceWith(document.createTextNode('🐶'))">`
+          : `<span class="pet-dog">🐶</span>`;
+        tile.innerHTML = dogInner + (ready ? `<span class="dog-ready">🪙</span>` : "");
         tile.onclick = () => tapDog(b);
       } else if (b) {
         const cat = BUILDINGS[b.type];
@@ -708,10 +711,10 @@ function build(key) {
   toast(`${c.emoji} ${c.name} 蓋好了！`);
 }
 
-// 點寵物狗：每天收一次隨機金幣
+// 點寵物狗：每天收一次隨機金幣（記在 island.dogLastCollect，收走重放也不能重複領）
 function tapDog(b) {
   const today = todayStr();
-  if (b.lastCollectDate === today) {
+  if (island.dogLastCollect === today) {
     openDetail(b);  // 今天已收 → 顯示詳情（可拆/移動）
     return;
   }
@@ -722,7 +725,7 @@ function tapDog(b) {
   p.coins.transactions.push({ type: "earn", source: "petDog", amount: reward,
     balanceAfter: p.coins.balance, createdAt: new Date().toISOString() });
   saveProgress(currentStudent, p);
-  b.lastCollectDate = today;
+  island.dogLastCollect = today;
   saveIsland(currentStudent, island);
   render();
   if (typeof cloudSave === "function") cloudSave(currentStudent);
@@ -733,7 +736,7 @@ function openDetail(b) {
   const c = BUILDINGS[b.type];
   const refund = c.cost; // 試用期：全額退還
   if (b.type === "dog") {
-    const collectedToday = b.lastCollectDate === todayStr();
+    const collectedToday = island.dogLastCollect === todayStr();
     let h = `<h3>🐶 寵物狗</h3>`;
     h += `<div class="detail-row">${collectedToday ? "今天已經撿過金幣了，明天再來！🦴" : "點牠就能撿今天的金幣！🪙"}</div>`;
     h += `<button class="demolish-btn" onclick="demolish('${b.id}')">🛠️ 把小狗收走（移到別處）</button>`;
