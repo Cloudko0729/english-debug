@@ -349,6 +349,7 @@ function selectStudent(name) {
   if (alreadyDone) {
     toast("今天已經測驗過囉，這次不再給金幣");
   }
+  if (typeof cloudSave === "function") cloudSave(name);  // 一選學生就把目前進度同步到雲端
   renderQuestion();
 }
 

@@ -600,10 +600,10 @@ function selectStudent(name) {
   if (produced > 0) {
     document.getElementById("notice").style.display = "block";
     document.getElementById("notice").innerHTML = `🌅 新的一天！你的農場和小鎮生產了 <b>🪙 ${produced}</b> 金幣！`;
-    if (typeof cloudSave === "function") cloudSave(currentStudent);  // 收成後存雲端
   } else {
     document.getElementById("notice").style.display = "none";
   }
+  if (typeof cloudSave === "function") cloudSave(currentStudent);  // 一開啟就把目前進度同步到雲端
 }
 
 // ─── 匯出 / 匯入 / 雲端還原 ──────────────────────────────────────────────────
