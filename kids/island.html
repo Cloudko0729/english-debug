@@ -353,13 +353,21 @@ const BUILDINGS = {
   // 海洋動物復育（只能養一隻,5 級）
   turtle:   { emoji: "🐢", name: "綠蠵龜", cost: 1350, desc: "海洋復育,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
               beauty: [18,30,44,60,78], pop: [0,0,0,0,0], coin: [7,11,16,22,30], levelDays: [8,18,34,58] },
+  dolphin:  { emoji: "🐬", name: "中華白海豚", cost: 1700, desc: "海洋復育（媽祖魚）,最高美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
+              beauty: [24,38,54,72,92], pop: [0,0,0,0,0], coin: [8,12,17,23,30], levelDays: [8,18,35,60] },
+  whaleshark:{ emoji: "🦈", name: "鯨鯊", cost: 1650, desc: "海洋復育（豆腐鯊）,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
+              beauty: [22,35,50,68,88], pop: [0,0,0,0,0], coin: [7,11,16,22,29], levelDays: [9,19,36,62] },
+  coral:    { emoji: "🪸", name: "珊瑚礁", cost: 1300, desc: "海洋復育,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
+              beauty: [16,27,40,55,72], pop: [0,0,0,0,0], coin: [6,9,13,18,24], levelDays: [6,14,28,50] },
+  horseshoecrab:{ emoji: "🦀", name: "鱟", cost: 1380, desc: "海洋復育（活化石）,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
+              beauty: [17,28,41,56,73], pop: [0,0,0,0,0], coin: [6,9,13,18,24], levelDays: [7,15,30,54] },
 };
 const BUILD_ORDER = [
   "center", "solar", "forest", "pond", "ranch", "farm", "house", "town",  // 平地
   "windmill",                                                              // 丘陵/海
   "dock", "fishery", "oceanboat",                                          // 海上
   "bear","leopardcat","salamander","mikado","pangolin","serow","salmon","butterfly","hawk","sambar", // 高山動物
-  "turtle",                                                               // 海洋動物
+  "turtle","dolphin","whaleshark","coral","horseshoecrab",                // 海洋動物
 ];
 
 // 城鎮中心升級條件：index = 目前等級-1，達成下一級的人口與美化目標（5 級）
