@@ -1,0 +1,23 @@
+{
+  "outdir": "D:/english/kids/drills/audio/2026-06-16",
+  "voice": "af_heart",
+  "speed": 0.9,
+  "items": {
+    "s1_0": "shirt",
+    "s1_1": "pants",
+    "s1_2": "jacket",
+    "s1_3": "dress",
+    "s1_4": "shoes",
+    "s1_5": "coat",
+    "s2_0": "I wear a blue shirt.",
+    "s2_1": "My socks are clean.",
+    "s2_2": "She has a red dress.",
+    "s2_3": "Put on your shoes.",
+    "s2_4": "The jacket is warm.",
+    "passage": "Today is cool and sunny. Amy puts on a white T-shirt and blue pants. Her brother Leo wears a red jacket because the morning is cold. They put on clean socks and shoes. Amy takes a hat, too. At school, their friends wear uniforms. Everyone looks neat and ready for class.",
+    "s4_0": "I wear a clean shirt.",
+    "s4_1": "She has a new dress.",
+    "s4_2": "Put on your warm coat.",
+    "s4_3": "My socks are white today."
+  }
+}
