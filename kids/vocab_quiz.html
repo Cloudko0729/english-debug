@@ -178,14 +178,27 @@ function buildQuizSet() {
 }
 
 // ─── Build questions (mix EN->ZH and ZH->EN) ────────────────────────────────
+function escapeRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+// 從單字的例句裡，挑一句含該字的，把字挖空；找不到回 null
+function pickClozeSentence(w) {
+  if (!w.ex || !w.ex.length) return null;
+  const re = new RegExp("\\b" + escapeRegex(w.en) + "\\b", "i");
+  for (const s of w.ex) {
+    if (re.test(s)) return s.replace(re, '<span style="color:var(--primary);font-weight:800">＿＿＿</span>');
+  }
+  return null;
+}
+
 function buildQuestions() {
   questions = quizWords.map((w, i) => {
     const emoji = WORD_EMOJI[w.en];
-    // 有圖片的單字：1/3 機率出「看圖選英文」題；其餘看英選中 / 看中選英
+    const cloze = pickClozeSentence(w);
+    // 看圖選英文 / 例句填空 / 看英選中 / 看中選英
     let dir;
     const r = Math.random();
-    if (emoji && r < 0.34) dir = "pic2en";
-    else dir = r < 0.67 ? "en2zh" : "zh2en";
+    if (emoji && r < 0.25) dir = "pic2en";
+    else if (cloze && r < 0.55) dir = "cloze";
+    else dir = r < 0.78 ? "en2zh" : "zh2en";
 
     const pool = WORDBANK.filter(x => x.en !== w.en);
     shuffle(pool);
@@ -196,6 +209,10 @@ function buildQuestions() {
     if (dir === "pic2en") {
       prompt = emoji;
       sub = "看圖選出正確英文";
+      choices = opts.map(o => ({ label: o.en, correct: o.en === w.en }));
+    } else if (dir === "cloze") {
+      prompt = cloze;
+      sub = "選出空格要填的字";
       choices = opts.map(o => ({ label: o.en, correct: o.en === w.en }));
     } else if (dir === "en2zh") {
       prompt = w.en;
@@ -220,9 +237,9 @@ function renderQuestion() {
   const area = document.getElementById("quizArea");
   area.innerHTML = `
     <div class="q-card active">
-      <div class="q-tag ${q.word.isWeak ? "weak" : ""}">${q.word.isWeak ? "⚠️ 加強單字" : (q.dir === "pic2en" ? "看圖題 🖼️" : "單字題")}</div>
+      <div class="q-tag ${q.word.isWeak ? "weak" : ""}">${q.word.isWeak ? "⚠️ 加強單字" : (q.dir === "pic2en" ? "看圖題 🖼️" : q.dir === "cloze" ? "例句填空 📝" : "單字題")}</div>
       <button class="q-audio-btn" onclick="playWord('${wordAudioKey(q.word.en)}', '${q.word.en}')">🔊</button>
-      <div class="q-prompt" style="${q.dir === "pic2en" ? "font-size:4.5rem" : ""}">${q.prompt}</div>
+      <div class="q-prompt" style="${q.dir === "pic2en" ? "font-size:4.5rem" : q.dir === "cloze" ? "font-size:1.15rem;line-height:1.6" : ""}">${q.prompt}</div>
       <div class="q-sub">${q.sub}</div>
       <div class="choices">
         ${q.choices.map((c, j) => `<button class="choice" id="ch_${j}" onclick="answer(${j})">${c.label}</button>`).join("")}
