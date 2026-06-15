@@ -35,6 +35,7 @@
     .word-main { flex: 1; min-width: 0; }
     .word-en { font-size: 1rem; font-weight: 700; color: var(--text); }
     .word-zh { font-size: .82rem; color: var(--muted); }
+    .word-ex { font-size: .74rem; color: #8a93a0; margin-top: 4px; line-height: 1.5; }
     .word-audio { background: var(--primary-soft); border: none; border-radius: 8px; width: 34px; height: 34px; font-size: 1rem; cursor: pointer; flex-shrink: 0; }
     .word-audio:active { background: var(--primary); }
 
@@ -67,10 +68,11 @@
 <script src="word_emoji.js"></script>
 <script>
 const THEMES = [
+  ["numbers", "🔢 數字 Numbers"], ["colors", "🎨 顏色 Colors"], ["time", "🕐 時間 Time"],
   ["family", "👨‍👩‍👧 家人 Family"], ["animals", "🐶 動物 Animals"], ["food", "🍎 食物 Food"],
   ["school", "🏫 學校 School"], ["clothes", "👕 衣物 Clothes"], ["weather", "☀️ 天氣 Weather"],
-  ["body", "👀 身體 Body"], ["time", "🕐 時間 Time"], ["places", "🏪 地點 Places"],
-  ["hobbies", "⚽ 興趣 Hobbies"],
+  ["body", "👀 身體 Body"], ["places", "🏪 地點 Places"], ["hobbies", "⚽ 興趣 Hobbies"],
+  ["verbs", "🏃 動作 Verbs"], ["adjectives", "✨ 形容詞 Adjectives"], ["money", "💰 金錢 Money"],
 ];
 
 let currentTab = "basic";
@@ -93,11 +95,13 @@ function playWord(en) {
 
 function wordCard(w) {
   const emoji = (typeof WORD_EMOJI !== "undefined" && WORD_EMOJI[w.en]) || "";
+  const ex = (w.ex && w.ex.length) ? `<div class="word-ex">${w.ex.map(s => "• " + s).join("<br>")}</div>` : "";
   return `<div class="word-card">
     <div class="word-emoji">${emoji}</div>
     <div class="word-main">
       <div class="word-en">${w.en}</div>
       <div class="word-zh">${w.zh}</div>
+      ${ex}
     </div>
     <button class="word-audio" onclick="playWord('${w.en.replace(/'/g, "\\'")}')">🔊</button>
   </div>`;
