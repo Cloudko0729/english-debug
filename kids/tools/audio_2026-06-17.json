@@ -1,0 +1,18 @@
+{
+  "outdir": "D:/english/kids/drills/audio/2026-06-17",
+  "voice": "af_heart",
+  "speed": 0.9,
+  "items": {
+    "s1_0": "sunny", "s1_1": "rainy", "s1_2": "cloudy", "s1_3": "windy", "s1_4": "umbrella", "s1_5": "cold",
+    "s2_0": "It is sunny today.",
+    "s2_1": "I take an umbrella on rainy days.",
+    "s2_2": "The weather is cool in the morning.",
+    "s2_3": "We can see snow in winter.",
+    "s2_4": "It is windy after school.",
+    "passage": "Today is Wednesday. The weather is cloudy and cool. Amy wears a jacket to school. She has an umbrella in her bag because it may rain later. At lunch, the wind is strong. Amy and her friends stay inside and read books. After school, the sky is sunny again.",
+    "s4_0": "It is sunny after lunch.",
+    "s4_1": "The weather is cool today.",
+    "s4_2": "I need an umbrella now.",
+    "s4_3": "Rain falls in the park."
+  }
+}

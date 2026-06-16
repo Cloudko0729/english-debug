@@ -97,6 +97,9 @@
     /* 完成（已領獎）打勾 */
     .card[data-done="1"] { border-color: #2fbf71 !important; background: #f3fcf7 !important; }
     .card[data-done="1"] .card-title::before { content: "✅ "; }
+    /* 時間鎖：未開放的練習 */
+    .card.locked { opacity: .55; pointer-events: none; filter: grayscale(.4); }
+    .lock-badge { font-size: .7rem; font-weight: 700; background: #9aa0ad; color: #fff; border-radius: 5px; padding: 2px 7px; white-space: nowrap; }
     .badge {
       font-size: .68rem; font-weight: 700;
       background: #2f80ed; color: #fff;
@@ -163,6 +166,50 @@
         </div>
       </div>
       <span class="badge">每天</span>
+    </a>
+
+    <a class="card" href="drills/daily_2026-06-20.html" data-claim="2026-06-20::2026-06-20-places" data-unlock="2026-06-20">
+      <div class="card-left">
+        <div class="card-icon icon-drill">🏪</div>
+        <div>
+          <div class="card-title">Day 9 — 2026-06-20</div>
+          <div class="card-sub">Places 地點 · 英聽 / 填空 / 閱讀 / 重組 / 圖片</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="drills/daily_2026-06-19.html" data-claim="2026-06-19::2026-06-19-time" data-unlock="2026-06-19">
+      <div class="card-left">
+        <div class="card-icon icon-drill">🕐</div>
+        <div>
+          <div class="card-title">Day 8 — 2026-06-19</div>
+          <div class="card-sub">Time 時間 · 英聽 / 填空 / 閱讀 / 重組 / 圖片</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="drills/daily_2026-06-18.html" data-claim="2026-06-18::2026-06-18-body" data-unlock="2026-06-18">
+      <div class="card-left">
+        <div class="card-icon icon-drill">👀</div>
+        <div>
+          <div class="card-title">Day 7 — 2026-06-18</div>
+          <div class="card-sub">Body 身體 · 英聽 / 填空 / 閱讀 / 重組 / 圖片</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="drills/daily_2026-06-17.html" data-claim="2026-06-17::2026-06-17-weather" data-unlock="2026-06-17">
+      <div class="card-left">
+        <div class="card-icon icon-drill">☀️</div>
+        <div>
+          <div class="card-title">Day 6 — 2026-06-17</div>
+          <div class="card-sub">Weather 天氣 · 英聽 / 填空 / 閱讀 / 重組 / 圖片</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
     </a>
 
     <a class="card" href="drills/daily_2026-06-16.html" data-claim="2026-06-16::2026-06-16-clothes">
@@ -276,6 +323,23 @@ function markDone(p) {
     c.dataset.done = claimed[today + "::" + c.dataset.claimToday] ? "1" : "0";
   });
 }
+
+// 時間鎖：未到開放日的每日練習鎖住、不能點，顯示「🔒 月/日 開放」
+function lockFutureDrills() {
+  const today = todayStr();
+  document.querySelectorAll(".card[data-unlock]").forEach(c => {
+    const unlock = c.dataset.unlock;
+    if (today < unlock) {
+      c.classList.add("locked");
+      const last = c.querySelector(".badge, .arrow, .lock-badge");
+      const md = unlock.slice(5).replace("-", "/");
+      if (last) { last.className = "lock-badge"; last.textContent = "🔒 " + md + " 開放"; }
+    } else {
+      c.classList.remove("locked");
+    }
+  });
+}
+lockFutureDrills();
 
 // Auto-restore last student
 const last = localStorage.getItem("kidsCurrentStudent");

@@ -1,0 +1,18 @@
+{
+  "outdir": "D:/english/kids/drills/audio/2026-06-19",
+  "voice": "af_heart",
+  "speed": 0.9,
+  "items": {
+    "s1_0": "morning", "s1_1": "Saturday", "s1_2": "yesterday", "s1_3": "afternoon", "s1_4": "tomorrow", "s1_5": "week",
+    "s2_0": "I eat breakfast in the morning.",
+    "s2_1": "We will visit Grandma tomorrow.",
+    "s2_2": "Dad came home late last night.",
+    "s2_3": "Today is Friday.",
+    "s2_4": "We play soccer on Saturday.",
+    "passage": "Today is Friday. Ben checks the date and writes June 19 in his notebook. In the morning, he reads a story. In the afternoon, he plays basketball with May. In the evening, they help Mom cook. Ben is happy because tomorrow is Saturday, and the weekend will start. He plans to visit Grandpa on Sunday.",
+    "s4_0": "We have English class on Monday.",
+    "s4_1": "Tomorrow is Saturday, so we can play.",
+    "s4_2": "Dad came home late last night.",
+    "s4_3": "The weekend starts after Friday."
+  }
+}

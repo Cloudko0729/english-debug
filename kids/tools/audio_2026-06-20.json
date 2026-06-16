@@ -1,0 +1,18 @@
+{
+  "outdir": "D:/english/kids/drills/audio/2026-06-20",
+  "voice": "af_heart",
+  "speed": 0.9,
+  "items": {
+    "s1_0": "library", "s1_1": "zoo", "s1_2": "station", "s1_3": "hospital", "s1_4": "market", "s1_5": "museum",
+    "s2_0": "My family eats dinner at a restaurant.",
+    "s2_1": "The doctor works in the hospital.",
+    "s2_2": "We read books at the library.",
+    "s2_3": "I buy bananas at the market.",
+    "s2_4": "The train stops at the station.",
+    "passage": "On Saturday, Lily and her family go into town. First, they stop at the bank. Then they buy fruit at the market and eat lunch at a small restaurant. In the afternoon, Lily reads at the library. Her brother wants to see lions at the zoo, but Grandma needs to rest at home.",
+    "s4_0": "We walk to the park after school.",
+    "s4_1": "Mom buys apples at the market.",
+    "s4_2": "The library is next to the museum.",
+    "s4_3": "Please meet me at the station."
+  }
+}

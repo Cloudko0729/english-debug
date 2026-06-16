@@ -1,0 +1,18 @@
+{
+  "outdir": "D:/english/kids/drills/audio/2026-06-18",
+  "voice": "af_heart",
+  "speed": 0.9,
+  "items": {
+    "s1_0": "head", "s1_1": "eye", "s1_2": "mouth", "s1_3": "arm", "s1_4": "nose", "s1_5": "foot",
+    "s2_0": "I wash my face every morning.",
+    "s2_1": "She has long black hair.",
+    "s2_2": "My hand is clean.",
+    "s2_3": "He can kick with his foot.",
+    "s2_4": "Please touch your nose.",
+    "passage": "Ben draws a funny body in art class. The body has a big head, short hair, two eyes, and a small nose. It has long arms and strong legs. Ben gives the picture a happy mouth. His teacher smiles and says the face looks kind and friendly.",
+    "s4_0": "My arm is very strong.",
+    "s4_1": "She touches her own nose.",
+    "s4_2": "I can move my legs.",
+    "s4_3": "He washes both his hands."
+  }
+}
