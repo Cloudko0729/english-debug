@@ -19,13 +19,21 @@ function _masteryFromProgress(progress) {
     .sort((a, b) => b.wrong - a.wrong);
 }
 
+// 本機當天日期（YYYY-MM-DD），當作每日快照的 key
+function _todayStr() {
+  const n = new Date();
+  return n.getFullYear() + "-" +
+    String(n.getMonth() + 1).padStart(2, "0") + "-" +
+    String(n.getDate()).padStart(2, "0");
+}
+
 // 自動存檔（fire-and-forget，不阻塞 UI）
 function cloudSave(student) {
   if (!CLOUD_URL || !student) return;
   let progress = null, island = null;
   try { progress = JSON.parse(localStorage.getItem("kidsProgress." + student) || "null"); } catch (e) {}
   try { island = JSON.parse(localStorage.getItem("kidsIsland." + student) || "null"); } catch (e) {}
-  const payload = { secret: CLOUD_SECRET, student, ts: new Date().toISOString(), progress, island };
+  const payload = { secret: CLOUD_SECRET, student, ts: new Date().toISOString(), date: _todayStr(), progress, island };
   const m = _masteryFromProgress(progress);
   if (m) payload.mastery = m;  // 沒有 WORDBANK 的頁面就不送 mastery，Sheet 的熟練表不會被清掉
   try {
@@ -56,6 +64,31 @@ function cloudSyncOnOpen(student, onRestored) {
 function cloudLoad(student) {
   if (!CLOUD_URL || !student) return Promise.resolve(null);
   return fetch(CLOUD_URL + "?student=" + encodeURIComponent(student) + "&secret=" + encodeURIComponent(CLOUD_SECRET))
+    .then(r => r.json())
+    .then(d => {
+      if (d && d.ok) {
+        if (d.progress) localStorage.setItem("kidsProgress." + student, JSON.stringify(d.progress));
+        if (d.island) localStorage.setItem("kidsIsland." + student, JSON.stringify(d.island));
+        return d;
+      }
+      return null;
+    })
+    .catch(() => null);
+}
+
+// 近 10 天的每日快照列表（只含摘要，給「選日期還原」的清單用）
+function cloudListHistory(student) {
+  if (!CLOUD_URL || !student) return Promise.resolve([]);
+  return fetch(CLOUD_URL + "?list=1&student=" + encodeURIComponent(student) + "&secret=" + encodeURIComponent(CLOUD_SECRET))
+    .then(r => r.json())
+    .then(d => (d && d.ok && Array.isArray(d.items)) ? d.items : [])
+    .catch(() => []);
+}
+
+// 還原某一天的完整快照（progress + island 一起寫回本機）
+function cloudLoadDate(student, date) {
+  if (!CLOUD_URL || !student || !date) return Promise.resolve(null);
+  return fetch(CLOUD_URL + "?student=" + encodeURIComponent(student) + "&date=" + encodeURIComponent(date) + "&secret=" + encodeURIComponent(CLOUD_SECRET))
     .then(r => r.json())
     .then(d => {
       if (d && d.ok) {

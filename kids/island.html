@@ -293,7 +293,7 @@
       <button class="data-btn" onclick="restoreFromGoogle()">☁️ 從 Google 還原</button>
     </div>
     <input type="file" id="importFile" accept="application/json,.json" style="display:none" onchange="importSave(event)" />
-    <p class="data-hint">換手機 / 平板時用得到。匯出的檔案放進 repo 的 <code>kids/saves/</code> 再 push，其他裝置就能「從雲端還原」。</p>
+    <p class="data-hint">換手機 / 平板時用得到。「☁️ 從 Google 還原」會列出雲端近 10 天的存檔，可以選某一天還原（金幣、答題、島嶼會一起回到那天）。</p>
   </div>
 </main>
 
@@ -972,14 +972,51 @@ function importSave(event) {
   event.target.value = "";
 }
 
-// 從 Google 試算表還原（自動存檔的對應還原）
+// 從 Google 試算表還原：列出近 10 天每日快照 → 選日期 → 還原該天完整進度
 function restoreFromGoogle() {
   if (!currentStudent) { toast("先選學生"); return; }
-  if (typeof cloudLoad !== "function" || !CLOUD_URL) { toast("還沒設定 Google 同步"); return; }
-  if (!confirm(`要用 Google 雲端的存檔覆蓋目前 ${currentStudent} 的進度嗎？`)) return;
-  cloudLoad(currentStudent).then(d => {
-    if (d) { selectStudent(currentStudent); toast(`已從 Google 還原 ${currentStudent} 🎉`); }
-    else toast(`Google 上還沒有 ${currentStudent} 的存檔`);
+  if (typeof cloudListHistory !== "function" || !CLOUD_URL) { toast("還沒設定 Google 同步"); return; }
+  toast("讀取雲端紀錄中…");
+  cloudListHistory(currentStudent).then(items => {
+    if (!items || !items.length) { toast(`Google 上還沒有 ${currentStudent} 的存檔`); return; }
+    openRestoreModal(items);
+  });
+}
+
+function openRestoreModal(items) {
+  const old = document.getElementById("restoreModal");
+  if (old) old.remove();
+  const wrap = document.createElement("div");
+  wrap.id = "restoreModal";
+  wrap.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:9999;padding:16px;";
+  const card = document.createElement("div");
+  card.style.cssText = "background:#fff;border-radius:16px;max-width:420px;width:100%;max-height:80vh;overflow:auto;padding:18px;box-sizing:border-box;";
+  let html = `<h3 style="margin:0 0 4px">☁️ 選擇要還原的日期</h3>
+    <p style="margin:0 0 12px;color:#666;font-size:13px">${currentStudent}　近 ${items.length} 天的存檔</p>`;
+  items.forEach(it => {
+    const s = it.summary || {};
+    html += `<button class="restore-day" data-date="${it.date}" style="display:block;width:100%;text-align:left;border:1px solid #e2e2e2;border-radius:12px;padding:10px 12px;margin-bottom:8px;background:#fafafa;cursor:pointer">
+      <b style="font-size:15px">${it.date}</b>
+      <div style="font-size:12px;color:#555;margin-top:4px">🪙${s.coins||0}　👥${s.population||0}　🌸${s.beauty||0}　😊${s.happiness||0}%　🏠${s.buildings||0}　✅${s.correct||0}</div>
+    </button>`;
+  });
+  html += `<button id="restoreCancel" style="width:100%;border:0;border-radius:12px;padding:10px;background:#eee;cursor:pointer;margin-top:4px">取消</button>`;
+  card.innerHTML = html;
+  wrap.appendChild(card);
+  document.body.appendChild(wrap);
+  wrap.addEventListener("click", e => { if (e.target === wrap) wrap.remove(); });
+  card.querySelector("#restoreCancel").onclick = () => wrap.remove();
+  card.querySelectorAll(".restore-day").forEach(btn => {
+    btn.onclick = () => {
+      const date = btn.dataset.date;
+      if (!confirm(`要把 ${currentStudent} 的進度還原到 ${date} 那天嗎？\n金幣、答題、島嶼都會回到那天的狀態。`)) return;
+      cloudLoadDate(currentStudent, date).then(d => {
+        if (!d) { toast("還原失敗 😅"); return; }
+        wrap.remove();
+        selectStudent(currentStudent);   // 重讀 localStorage 重畫，並自動上傳成為最新
+        toast(`已還原到 ${date} 🎉`);
+      });
+    };
   });
 }
 
