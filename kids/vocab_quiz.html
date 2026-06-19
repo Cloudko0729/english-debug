@@ -183,8 +183,15 @@ function escapeRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
 function pickClozeSentence(w) {
   if (!w.ex || !w.ex.length) return null;
   const re = new RegExp("\\b" + escapeRegex(w.en) + "\\b", "i");
-  for (const s of w.ex) {
-    if (re.test(s)) return s.replace(re, '<span style="color:var(--primary);font-weight:800">＿＿＿</span>');
+  for (let i = 0; i < w.ex.length; i++) {
+    const s = w.ex[i];
+    if (re.test(s)) {
+      return {
+        display: s.replace(re, '<span style="color:var(--primary);font-weight:800">＿＿＿</span>'),
+        raw: s,
+        idx: i,
+      };
+    }
   }
   return null;
 }
@@ -211,8 +218,8 @@ function buildQuestions() {
       sub = "看圖選出正確英文";
       choices = opts.map(o => ({ label: o.en, correct: o.en === w.en }));
     } else if (dir === "cloze") {
-      prompt = cloze;
-      sub = "選出空格要填的字";
+      prompt = cloze.display;
+      sub = "選出空格要填的字（按 🔊 聽整句）";
       choices = opts.map(o => ({ label: o.en, correct: o.en === w.en }));
     } else if (dir === "en2zh") {
       prompt = w.en;
@@ -223,7 +230,8 @@ function buildQuestions() {
       sub = "選出正確英文";
       choices = opts.map(o => ({ label: o.en, correct: o.en === w.en }));
     }
-    return { word: w, dir, prompt, sub, choices, emoji };
+    return { word: w, dir, prompt, sub, choices, emoji,
+             clozeRaw: cloze ? cloze.raw : null, clozeIdx: cloze ? cloze.idx : -1 };
   });
 }
 
@@ -238,7 +246,7 @@ function renderQuestion() {
   area.innerHTML = `
     <div class="q-card active">
       <div class="q-tag ${q.word.isWeak ? "weak" : ""}">${q.word.isWeak ? "⚠️ 加強單字" : (q.dir === "pic2en" ? "看圖題 🖼️" : q.dir === "cloze" ? "例句填空 📝" : "單字題")}</div>
-      <button class="q-audio-btn" onclick="playWord('${wordAudioKey(q.word.en)}', '${q.word.en}')">🔊</button>
+      <button class="q-audio-btn" onclick="playPrompt()">🔊</button>
       <div class="q-prompt" style="${q.dir === "pic2en" ? "font-size:4.5rem" : q.dir === "cloze" ? "font-size:1.15rem;line-height:1.6" : ""}">${q.prompt}</div>
       <div class="q-sub">${q.sub}</div>
       <div class="choices">
@@ -246,8 +254,8 @@ function renderQuestion() {
       </div>
       <button class="next-btn" id="nextBtn" onclick="nextQuestion()">${qIndex === QUIZ_SIZE - 1 ? "看成績 🎉" : "下一題 →"}</button>
     </div>`;
-  // auto play audio for the word
-  playWord(wordAudioKey(q.word.en), q.word.en);
+  // 自動播放：cloze 不自動播（整句會唸出答案），其餘自動唸單字
+  if (q.dir !== "cloze") playPrompt();
 }
 
 function answer(j) {
@@ -272,17 +280,26 @@ function nextQuestion() {
 
 // ─── Audio ───────────────────────────────────────────────────────────────────
 let curAudio = null;
-function playWord(key, fallback) {
+function playClip(src, fallbackText) {
   if (curAudio) { curAudio.pause(); curAudio = null; }
-  const a = new Audio(AUDIO_DIR + key + ".mp3");
+  const a = new Audio(src);
   curAudio = a;
   a.play().catch(() => {
     if (!window.speechSynthesis) return;
     window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(fallback);
+    const u = new SpeechSynthesisUtterance(fallbackText);
     u.lang = "en-US"; u.rate = 0.85;
     window.speechSynthesis.speak(u);
   });
+}
+function playWord(key, fallback) { playClip(AUDIO_DIR + key + ".mp3", fallback); }
+function playSentence(en, idx, raw) { playClip(AUDIO_DIR + "ex/" + wordAudioKey(en) + "_" + idx + ".mp3", raw); }
+// 依目前題型播放：cloze 播整句例句，其餘播單字
+function playPrompt() {
+  const q = questions[qIndex];
+  if (!q) return;
+  if (q.dir === "cloze" && q.clozeIdx >= 0) playSentence(q.word.en, q.clozeIdx, q.clozeRaw);
+  else playWord(wordAudioKey(q.word.en), q.word.en);
 }
 
 // ─── Result + coins ──────────────────────────────────────────────────────────
