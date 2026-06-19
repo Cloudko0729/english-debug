@@ -127,16 +127,20 @@
     .dog-ready { position: absolute; top: -2px; right: 0; font-size: .55rem; pointer-events: none; animation: dogPulse 1s ease-in-out infinite; }
     @keyframes dogPulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(1.25); } }
     .opt-img { width: 2rem; height: 2rem; object-fit: contain; }
-    .tile .lvl {
-      position: absolute;
-      bottom: 1px; right: 3px;
-      font-size: .6rem;
-      font-weight: 800;
-      color: #3a2a00;
-      background: rgba(255,255,255,.7);
-      border-radius: 4px;
-      padding: 0 3px;
+    /* 等級外框：用框的顏色代表等級，不放文字、不遮住建築 */
+    .tile.lv2::after, .tile.lv3::after, .tile.lv4::after, .tile.lv5::after {
+      content: ""; position: absolute; inset: 0;
+      border-radius: inherit; box-sizing: border-box; pointer-events: none;
     }
+    .tile.lv2::after { border: 2px solid #cd7f32; }   /* 銅 */
+    .tile.lv3::after { border: 2px solid #aeb6bf; }   /* 銀 */
+    .tile.lv4::after { border: 2px solid #f4c20d; }   /* 金 */
+    .tile.lv5::after {
+      border: 2px solid #ffd24d;
+      box-shadow: 0 0 6px 1px rgba(255,196,0,.85), inset 0 0 4px rgba(255,196,0,.55);
+      animation: lv5glow 1.4s ease-in-out infinite;
+    }
+    @keyframes lv5glow { 0%,100% { opacity: .8; } 50% { opacity: 1; } }
 
     /* build sheet */
     #sheet {
@@ -616,11 +620,11 @@ function render() {
         tile.onclick = () => tapDog(b);
       } else if (b) {
         const cat = BUILDINGS[b.type];
-        const lvl = b.level > 1 ? `<span class="lvl">Lv${b.level}</span>` : "";
+        if (b.level > 1) tile.classList.add("lv" + Math.min(b.level, 5));   // 等級外框顏色
         if (cat.img) {
-          tile.innerHTML = `<img class="tile-img" src="island_img/${b.type}.png" alt="${cat.name}" onerror="this.replaceWith(document.createTextNode('${cat.emoji}'))">` + lvl;
+          tile.innerHTML = `<img class="tile-img" src="island_img/${b.type}.png" alt="${cat.name}" onerror="this.replaceWith(document.createTextNode('${cat.emoji}'))">`;
         } else {
-          tile.innerHTML = `<span class="tile-emoji">${cat.emoji}</span>` + lvl;
+          tile.innerHTML = `<span class="tile-emoji">${cat.emoji}</span>`;
         }
         tile.onclick = () => openDetail(b);
       } else {
@@ -865,7 +869,8 @@ function openManual() {
     動物給大量美化分,是衝快樂和中心升級的關鍵。</p>
 
     <p><b>⬆️ 建築升級</b><br>
-    一般建築放越多天,自動升級(Lv1→5)，產出變多。城鎮中心則靠達標升級。</p>
+    一般建築放越多天,自動升級(Lv1→5)，產出變多。城鎮中心則靠達標升級。<br>
+    等級用格子<b>外框顏色</b>看：Lv1 無框、<span style="color:#cd7f32">Lv2 銅框</span>、<span style="color:#8a93a0">Lv3 銀框</span>、<span style="color:#d4a800">Lv4 金框</span>、<span style="color:#d4a800">Lv5 發光金框</span>✨。</p>
 
     <p><b>🐶 寵物狗</b><br>
     免費放在陸地空格(平地/丘陵/高山,只能養一隻)。<br>
