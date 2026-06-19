@@ -82,6 +82,12 @@ function ss_() { return SpreadsheetApp.getActiveSpreadsheet(); }
 function sheet_(name) { const s = ss_(); return s.getSheetByName(name) || s.insertSheet(name); }
 function parseOrNull_(s) { try { return s ? JSON.parse(s) : null; } catch (e) { return null; } }
 
+// 日期欄正規化：Sheets 可能把 "2026-06-19" 自動轉成 Date 物件，統一轉回 "YYYY-MM-DD"
+function toDateStr_(v) {
+  if (v instanceof Date) return Utilities.formatDate(v, ss_().getSpreadsheetTimeZone(), "yyyy-MM-dd");
+  return String(v);
+}
+
 // ─── Saves：最新狀態（一個學生一列）────────────────────────────────────────────
 function saveRaw_(student, data) {
   const sh = sheet_("Saves");
@@ -118,6 +124,8 @@ function historySheet_() {
     sh.appendRow(["student", "date", "serverTs", "clientTs", "summary", "progress", "island"]);
     sh.setFrozenRows(1);
   }
+  // 強制日期欄(B)為純文字，避免 Sheets 把 "2026-06-19" 自動轉成日期物件
+  sh.getRange("B:B").setNumberFormat("@");
   return sh;
 }
 
@@ -129,7 +137,7 @@ function saveHistory_(student, date, data, summary, serverTs) {
   const sumStr = JSON.stringify(summary || null);
   const clientTs = data.ts || serverTs;
   for (let i = 1; i < values.length; i++) {
-    if (String(values[i][0]).toLowerCase() === student && String(values[i][1]) === date) {
+    if (String(values[i][0]).toLowerCase() === student && toDateStr_(values[i][1]) === date) {
       // 同一天重存 → 覆蓋那一列（後到的覆蓋）
       sh.getRange(i + 1, 3, 1, 5).setValues([[serverTs, clientTs, sumStr, progStr, islStr]]);
       pruneHistory_(student);
@@ -146,7 +154,7 @@ function pruneHistory_(student) {
   const values = sh.getDataRange().getValues();
   const rows = [];
   for (let i = 1; i < values.length; i++) {
-    if (String(values[i][0]).toLowerCase() === student) rows.push({ i: i, date: String(values[i][1]) });
+    if (String(values[i][0]).toLowerCase() === student) rows.push({ i: i, date: toDateStr_(values[i][1]) });
   }
   if (rows.length <= HISTORY_DAYS) return;
   rows.sort((a, b) => (a.date < b.date ? 1 : (a.date > b.date ? -1 : 0)));   // 新 → 舊
@@ -163,7 +171,7 @@ function listHistory_(student) {
   for (let i = 1; i < values.length; i++) {
     if (String(values[i][0]).toLowerCase() === student) {
       items.push({
-        date: String(values[i][1]),
+        date: toDateStr_(values[i][1]),
         serverTs: values[i][2],
         clientTs: values[i][3],
         summary: parseOrNull_(values[i][4]),
@@ -179,9 +187,9 @@ function findHistory_(student, date) {
   if (!sh) return null;
   const values = sh.getDataRange().getValues();
   for (let i = 1; i < values.length; i++) {
-    if (String(values[i][0]).toLowerCase() === student && String(values[i][1]) === date) {
+    if (String(values[i][0]).toLowerCase() === student && toDateStr_(values[i][1]) === date) {
       return {
-        date: String(values[i][1]),
+        date: toDateStr_(values[i][1]),
         serverTs: values[i][2],
         clientTs: values[i][3],
         summary: values[i][4],
