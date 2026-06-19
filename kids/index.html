@@ -168,6 +168,83 @@
       <span class="badge">每天</span>
     </a>
 
+    <a class="card" href="drills/daily_2026-06-27.html" data-claim="2026-06-27::2026-06-27-feelings" data-unlock="2026-06-27">
+      <div class="card-left">
+        <div class="card-icon icon-drill">😊</div>
+        <div>
+          <div class="card-title">Day 16 — 2026-06-27</div>
+          <div class="card-sub">Feelings 心情 · 英聽 / 填空 / 閱讀 / 重組 / 圖片</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="drills/daily_2026-06-26.html" data-claim="2026-06-26::2026-06-26-money" data-unlock="2026-06-26">
+      <div class="card-left">
+        <div class="card-icon icon-drill">💰</div>
+        <div>
+          <div class="card-title">Day 15 — 2026-06-26</div>
+          <div class="card-sub">Money 金錢 · 英聽 / 填空 / 閱讀 / 重組 / 圖片</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="drills/daily_2026-06-25.html" data-claim="2026-06-25::2026-06-25-colors" data-unlock="2026-06-25">
+      <div class="card-left">
+        <div class="card-icon icon-drill">🌈</div>
+        <div>
+          <div class="card-title">Day 14 — 2026-06-25</div>
+          <div class="card-sub">Colors 顏色 · 英聽 / 填空 / 閱讀 / 重組 / 圖片</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="drills/daily_2026-06-24.html" data-claim="2026-06-24::2026-06-24-numbers" data-unlock="2026-06-24">
+      <div class="card-left">
+        <div class="card-icon icon-drill">🔢</div>
+        <div>
+          <div class="card-title">Day 13 — 2026-06-24</div>
+          <div class="card-sub">Numbers 數字 · 英聽 / 填空 / 閱讀 / 重組 / 圖片</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="drills/daily_2026-06-23.html" data-claim="2026-06-23::2026-06-23-adjectives" data-unlock="2026-06-23">
+      <div class="card-left">
+        <div class="card-icon icon-drill">📏</div>
+        <div>
+          <div class="card-title">Day 12 — 2026-06-23</div>
+          <div class="card-sub">Adjectives 形容詞 · 英聽 / 填空 / 閱讀 / 重組 / 圖片</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="drills/daily_2026-06-22.html" data-claim="2026-06-22::2026-06-22-verbs" data-unlock="2026-06-22">
+      <div class="card-left">
+        <div class="card-icon icon-drill">🏃</div>
+        <div>
+          <div class="card-title">Day 11 — 2026-06-22</div>
+          <div class="card-sub">Verbs 動作 · 英聽 / 填空 / 閱讀 / 重組 / 圖片</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="card" href="drills/daily_2026-06-21.html" data-claim="2026-06-21::2026-06-21-hobbies" data-unlock="2026-06-21">
+      <div class="card-left">
+        <div class="card-icon icon-drill">🎨</div>
+        <div>
+          <div class="card-title">Day 10 — 2026-06-21</div>
+          <div class="card-sub">Hobbies 興趣 · 英聽 / 填空 / 閱讀 / 重組 / 圖片</div>
+        </div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
     <a class="card" href="drills/daily_2026-06-20.html" data-claim="2026-06-20::2026-06-20-places" data-unlock="2026-06-20">
       <div class="card-left">
         <div class="card-icon icon-drill">🏪</div>
@@ -306,6 +383,7 @@ function pickStudent(name) {
   const peek = document.getElementById("coinPeek");
   if (peek) peek.textContent = coins;
   markDone(p);
+  lockFutureDrills();   // 切換帳號後重新評估日期鎖（test 解鎖、其他鎖回）
 }
 
 // 在已完成（已領獎）的練習卡片上打勾
@@ -325,17 +403,22 @@ function markDone(p) {
 }
 
 // 時間鎖：未到開放日的每日練習鎖住、不能點，顯示「🔒 月/日 開放」
+// 測試帳號（test）不受日期限制，方便家長先審題。
 function lockFutureDrills() {
   const today = todayStr();
+  const isTest = localStorage.getItem("kidsCurrentStudent") === "test";
   document.querySelectorAll(".card[data-unlock]").forEach(c => {
-    const unlock = c.dataset.unlock;
-    if (today < unlock) {
-      c.classList.add("locked");
-      const last = c.querySelector(".badge, .arrow, .lock-badge");
-      const md = unlock.slice(5).replace("-", "/");
-      if (last) { last.className = "lock-badge"; last.textContent = "🔒 " + md + " 開放"; }
-    } else {
-      c.classList.remove("locked");
+    const badge = c.querySelector(".arrow, .lock-badge");
+    const locked = !isTest && today < c.dataset.unlock;
+    c.classList.toggle("locked", locked);
+    if (badge) {
+      if (locked) {
+        badge.className = "lock-badge";
+        badge.textContent = "🔒 " + c.dataset.unlock.slice(5).replace("-", "/") + " 開放";
+      } else {
+        badge.className = "arrow";
+        badge.textContent = "›";
+      }
     }
   });
 }

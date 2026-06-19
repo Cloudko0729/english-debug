@@ -1,0 +1,23 @@
+{
+ "outdir": "D:/english/kids/drills/audio/2026-06-23",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "s1_0": "big",
+  "s1_1": "happy",
+  "s1_2": "fast",
+  "s1_3": "small",
+  "s1_4": "hot",
+  "s1_5": "long",
+  "s2_0": "The dog is big.",
+  "s2_1": "My bag is small.",
+  "s2_2": "The boy is tall.",
+  "s2_3": "This soup is hot.",
+  "s2_4": "Her pencil is long.",
+  "passage": "Nina has a new school bag. It is big and blue. Her old bag is small, but she still likes it. Nina has a long pencil and a short ruler. At lunch, her soup is hot, so she waits. Nina is happy with her school things.",
+  "s4_0": "The small cat is happy.",
+  "s4_1": "My new ruler is long.",
+  "s4_2": "This old bike is slow.",
+  "s4_3": "The tall boy runs fast."
+ }
+}

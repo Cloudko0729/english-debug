@@ -1,0 +1,23 @@
+{
+ "outdir": "D:/english/kids/drills/audio/2026-06-27",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "s1_0": "happy",
+  "s1_1": "scared",
+  "s1_2": "bored",
+  "s1_3": "sad",
+  "s1_4": "hungry",
+  "s1_5": "tired",
+  "s2_0": "I am happy today.",
+  "s2_1": "She feels sad now.",
+  "s2_2": "Tom is tired after class.",
+  "s2_3": "The dog is scared.",
+  "s2_4": "We are excited for the game.",
+  "passage": "Today is school sports day. May is excited because she can run with her friends. Ben is scared before the race, but his teacher smiles at him. After the race, everyone is tired and hungry. May feels happy because her class cheers for all the runners.",
+  "s4_0": "I feel happy at school.",
+  "s4_1": "She is tired after running.",
+  "s4_2": "Ben feels scared at night.",
+  "s4_3": "We are excited for lunch."
+ }
+}

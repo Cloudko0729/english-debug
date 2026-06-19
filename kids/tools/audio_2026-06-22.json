@@ -1,0 +1,23 @@
+{
+ "outdir": "D:/english/kids/drills/audio/2026-06-22",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "s1_0": "get up",
+  "s1_1": "drink",
+  "s1_2": "study",
+  "s1_3": "write",
+  "s1_4": "wash",
+  "s1_5": "play",
+  "s2_0": "I get up at seven.",
+  "s2_1": "We eat lunch together.",
+  "s2_2": "Please drink some water.",
+  "s2_3": "Tom can write his name.",
+  "s2_4": "They walk to the park.",
+  "passage": "Leo has a busy morning. He gets up at seven and washes his face. He eats eggs and drinks milk. Then he walks to school with his sister. In class, Leo reads, writes, and studies English. After school, he plays with his friends.",
+  "s4_0": "I drink milk every morning.",
+  "s4_1": "She writes words in class.",
+  "s4_2": "They walk to school together.",
+  "s4_3": "We play after we study."
+ }
+}

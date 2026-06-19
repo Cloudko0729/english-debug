@@ -1,0 +1,23 @@
+{
+ "outdir": "D:/english/kids/drills/audio/2026-06-26",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "s1_0": "dollar",
+  "s1_1": "buy",
+  "s1_2": "cheap",
+  "s1_3": "money",
+  "s1_4": "sell",
+  "s1_5": "expensive",
+  "s2_0": "I buy a pencil.",
+  "s2_1": "This toy is cheap.",
+  "s2_2": "The bag costs ten dollars.",
+  "s2_3": "Please pay at the desk.",
+  "s2_4": "The price is high.",
+  "passage": "Jack goes to a small store with his dad. He has fifty dollars. He wants to buy a notebook and a pen. The notebook is cheap, but the pen is expensive. Jack checks the price and pays for the notebook. He saves the rest of his money.",
+  "s4_0": "I buy a cheap pen.",
+  "s4_1": "The price is ten dollars.",
+  "s4_2": "She pays for the book.",
+  "s4_3": "This toy costs five dollars."
+ }
+}

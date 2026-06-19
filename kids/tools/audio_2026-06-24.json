@@ -1,0 +1,23 @@
+{
+ "outdir": "D:/english/kids/drills/audio/2026-06-24",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "s1_0": "one",
+  "s1_1": "seven",
+  "s1_2": "third",
+  "s1_3": "five",
+  "s1_4": "eleven",
+  "s1_5": "second",
+  "s2_0": "I have one pencil.",
+  "s2_1": "There are six apples.",
+  "s2_2": "Ben is the first student.",
+  "s2_3": "We see twelve birds.",
+  "s2_4": "She has three books.",
+  "passage": "Our class has a number game today. Amy has two cards, and Ken has three cards. They count from one to twelve together. Amy says the first number is one. Ken says the second number is two. The third number is three. Everyone claps and smiles.",
+  "s4_0": "I have four red pens.",
+  "s4_1": "She is the first student.",
+  "s4_2": "We count from one to twelve.",
+  "s4_3": "There are nine books here."
+ }
+}
