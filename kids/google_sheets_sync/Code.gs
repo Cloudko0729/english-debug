@@ -138,8 +138,8 @@ function saveHistory_(student, date, data, summary, serverTs) {
   const clientTs = data.ts || serverTs;
   for (let i = 1; i < values.length; i++) {
     if (String(values[i][0]).toLowerCase() === student && toDateStr_(values[i][1]) === date) {
-      // 同一天重存 → 覆蓋那一列（後到的覆蓋）
-      sh.getRange(i + 1, 3, 1, 5).setValues([[serverTs, clientTs, sumStr, progStr, islStr]]);
+      // 同一天重存 → 覆蓋那一列（連日期欄一起寫成純文字，順便修掉舊的 Date 格）
+      sh.getRange(i + 1, 2, 1, 6).setValues([[date, serverTs, clientTs, sumStr, progStr, islStr]]);
       pruneHistory_(student);
       return;
     }
