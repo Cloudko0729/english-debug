@@ -317,10 +317,10 @@
 // category/categoryMax: 同類上限（動物復育「只能一個」）；img:true 表示有像素圖檔，否則用 emoji
 const BUILDINGS = {
   // 平地建築（3 級）
-  forest: { emoji: "🌲", name: "森林", cost: 90,  desc: "美化島嶼，越久越茂密", terrain: ["P"], maxLevel: 3, img: true,
-            beauty: [3, 6, 10], pop: [0,0,0], coin: [0,0,0], levelDays: [3, 7] },
-  pond:   { emoji: "🪷", name: "池塘", cost: 70,  desc: "美化島嶼（水景）", terrain: ["P"], maxLevel: 3, img: true,
-            beauty: [4, 8, 13], pop: [0,0,0], coin: [0,0,0], levelDays: [3, 7] },
+  forest: { emoji: "🌲", name: "森林", cost: 60,  desc: "便宜美化，CP 值高（多種幾片）", terrain: ["P"], maxLevel: 3, img: true,
+            beauty: [4, 7, 11], pop: [0,0,0], coin: [0,0,0], levelDays: [3, 7] },
+  pond:   { emoji: "🪷", name: "池塘", cost: 130, desc: "較貴，但單格美化最高（省地）", terrain: ["P"], maxLevel: 3, img: true,
+            beauty: [7, 13, 21], pop: [0,0,0], coin: [0,0,0], levelDays: [3, 7] },
   ranch:  { emoji: "🐄", name: "牧場", cost: 150, desc: "金幣 + 一點人口", terrain: ["P"], maxLevel: 3, img: true,
             beauty: [0,0,0], pop: [2, 4, 7], coin: [18, 30, 46], levelDays: [4, 10] },
   farm:   { emoji: "🌾", name: "農場", cost: 120, desc: "每天生產金幣", terrain: ["P"], maxLevel: 3, img: true,
@@ -407,10 +407,18 @@ const REQ_CENTER = {
   turtle: 4, dolphin: 4, whaleshark: 4, coral: 4, horseshoecrab: 4,
 };
 const CAT_NAME = { hills: "丘陵動物", mountain: "高山動物", ocean: "海洋動物" };
-// 各棲地可復育的動物數量上限。城鎮中心 Lv5 解鎖最大上限。
-const CATEGORY_MAX     = { hills: 1, mountain: 2, ocean: 2 };
-const CATEGORY_MAX_L5  = { hills: 3, mountain: 5, ocean: 5 };  // Lv5：高山 5 格全放、其餘全物種
-function catMax(cat) { return (centerLevel() >= 5 ? CATEGORY_MAX_L5 : CATEGORY_MAX)[cat] || 1; }
+// 各棲地可復育的動物數量上限：隨城鎮中心等級漸增，Lv5 不設上限（只受地形格數限制）。
+// 索引 = 城鎮中心等級-1（Lv1..Lv5）。動物另有解鎖門檻：丘陵 Lv2 / 高山 Lv3 / 海洋 Lv4。
+const CATEGORY_MAX_BY_LEVEL = {
+  hills:    [1, 1, 2, 3, Infinity],   // Lv2:1 → Lv3:2 → Lv4:3 → Lv5:∞
+  mountain: [2, 2, 2, 3, Infinity],   // Lv3:2 → Lv4:3 → Lv5:∞
+  ocean:    [2, 2, 2, 2, Infinity],   // Lv4:2 → Lv5:∞
+};
+function catMax(cat) {
+  const lv = Math.max(1, Math.min(5, centerLevel() || 1));
+  const arr = CATEGORY_MAX_BY_LEVEL[cat];
+  return arr ? arr[lv - 1] : 1;
+}
 
 // 快樂值：居民與美化的平衡。每位居民需要 ~1.2 美化分；不足會降低快樂。
 const BEAUTY_PER_POP = 1.2;
@@ -856,16 +864,18 @@ function openManual() {
     Lv3：人口 55、美化 90<br>
     Lv4：人口 110、美化 170<br>
     Lv5：人口 190、美化 290<br>
-    等級越高解鎖越多建築;<b>Lv5 把復育上限拉到最大</b>。</p>
+    等級越高解鎖越多建築;<b>Lv5 復育不設上限</b>（只受地形格數限制）。</p>
 
     <p><b>🔒 解鎖門檻</b><br>
     Lv2：小鎮、風力發電、碼頭、丘陵動物<br>
     Lv3：定置漁場、高山動物<br>
     Lv4：遠洋漁船、海洋動物</p>
 
-    <p><b>🐾 復育動物上限</b><br>
-    丘陵 1 隻、高山 2 隻、海洋 2 隻;<br>
-    城鎮中心 Lv5 → 丘陵 3、高山 5、海洋 5。<br>
+    <p><b>🐾 復育動物上限（隨城鎮中心等級增加）</b><br>
+    丘陵：Lv2→1、Lv3→2、Lv4→3 隻<br>
+    高山：Lv3→2、Lv4→3 隻<br>
+    海洋：Lv4→2 隻<br>
+    <b>城鎮中心 Lv5：三種棲地都不設上限</b>（只受地形格數限制）。<br>
     動物給大量美化分,是衝快樂和中心升級的關鍵。</p>
 
     <p><b>⬆️ 建築升級</b><br>
