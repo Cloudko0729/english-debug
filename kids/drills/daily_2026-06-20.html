@@ -463,6 +463,17 @@ function pickChoice(btn) {
 }
 
 // ─── Section 1: Listening vocab MC ───────────────────────────────────────────
+// 顯示時打亂選項 / 排序塊：避免「答案或正確順序固定在資料位置」（不依賴出題資料先打亂）
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+function shuffleChunks(chunks, sentence) {
+  for (let t = 0; t < 50; t++) { const a = shuffle(chunks); if (a.join(" ") !== sentence) return a; }
+  return shuffle(chunks);
+}
+
 function renderSec1() {
   const div = document.getElementById("sec1");
   DRILL.listenVocab.forEach((q, i) => {
@@ -476,7 +487,7 @@ function renderSec1() {
         <span style="font-size:.85rem;color:var(--muted)">聽單字，選答案</span>
       </div>
       <div class="choices">
-        ${q.choices.map(c => `<button class="choice" data-val="${c}" onclick="pickChoice(this)">${c}</button>`).join("")}
+        ${shuffle(q.choices).map(c => `<button class="choice" data-val="${c}" onclick="pickChoice(this)">${c}</button>`).join("")}
       </div>`;
     div.appendChild(block);
   });
@@ -546,7 +557,7 @@ function renderSec3() {
     block.innerHTML = `
       <div class="q-head"><span class="q-num">${i + 1}.</span><span>${q.q}</span></div>
       <div class="choices">
-        ${q.choices.map(c => `<button class="choice" data-val="${c}" onclick="pickChoice(this)">${c}</button>`).join("")}
+        ${shuffle(q.choices).map(c => `<button class="choice" data-val="${c}" onclick="pickChoice(this)">${c}</button>`).join("")}
       </div>`;
     div.appendChild(block);
   });
@@ -602,7 +613,7 @@ function renderSec4() {
         <span style="font-size:.85rem;color:var(--muted)">用 ▲▼ 把句子排好（由上到下）</span>
       </div>
       <div class="chunk-list" id="${listId}">
-        ${q.chunks.map(c => `
+        ${shuffleChunks(q.chunks, q.sentence).map(c => `
           <div class="chunk-row2">
             <span class="chunk-word">${c}</span>
             <span class="chunk-btns">
@@ -644,7 +655,7 @@ function renderSec5() {
     block.innerHTML = `
       <div class="pic-emoji">${q.emoji}</div>
       <div class="choices">
-        ${q.choices.map(c => `<button class="choice" data-val="${c}" onclick="pickChoice(this)">${c}</button>`).join("")}
+        ${shuffle(q.choices).map(c => `<button class="choice" data-val="${c}" onclick="pickChoice(this)">${c}</button>`).join("")}
       </div>`;
     div.appendChild(block);
   });
