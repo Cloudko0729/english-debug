@@ -112,14 +112,20 @@ async function doLogin(name, password) {
   location.reload();
 }
 
-// ── 自動守門：頁面載入就檢查登入。有登入 → 自動選取該學生（呼叫頁面的 selectStudent / pickStudent）。
-//    沒登入 → 顯示登入畫面。沒 Supabase（CDN 失敗）→ 不做事，頁面走原本的選學生流程。
-(function autoGate() {
+// ── 自動守門：等 DOM 與頁面腳本都就緒後再執行（避免 getSession 從快取秒回時，
+//    搶在頁面的 selectStudent/pickStudent 定義之前就呼叫 → 選不到學生的競態）。
+//    有登入 → 自動選取該學生；沒登入 → 顯示登入畫面；沒 Supabase → 不做事，走頁面原本流程。
+function runAutoGate() {
   if (!sbClient) return;
   authGate().then(student => {
     if (!student) return;                       // null = 已顯示登入畫面
-    const sel = (typeof selectStudent === "function") ? selectStudent
-              : (typeof pickStudent === "function") ? pickStudent : null;
-    if (sel) { try { sel(student); } catch (e) { console.warn(e); } }
+    const sel = (typeof window.selectStudent === "function") ? window.selectStudent
+              : (typeof window.pickStudent === "function") ? window.pickStudent : null;
+    if (sel) { try { sel(student); } catch (e) { console.error("auto-select 失敗：", e); } }
   });
-})();
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", runAutoGate);
+} else {
+  runAutoGate();
+}
