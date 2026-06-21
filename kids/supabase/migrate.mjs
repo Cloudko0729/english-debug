@@ -1,9 +1,10 @@
-// 一次性搬移：Google 試算表 → Supabase（每個帳號各自登入後寫入自己的資料）
-// 用法（在 D:\english 底下開終端機）：
-//   node kids/supabase/migrate.mjs test <test的密碼>
-//   node kids/supabase/migrate.mjs albert <albert的密碼>
-//   node kids/supabase/migrate.mjs jonathan <jonathan的密碼>
-// 需要 Node 18+（用內建 fetch，不用裝任何套件）。
+// 一次性搬移 → Supabase（每個帳號各自登入後寫入自己的資料）
+// 用法（在 D:\english 底下開終端機，需要 Node 18+）：
+//   A) 用「匯出的 JSON 檔」當來源（最新、最保險）：
+//      node kids/supabase/migrate.mjs test <密碼> "C:\path\test.json"
+//   B) 不給檔 → 從 Google 試算表抓：
+//      node kids/supabase/migrate.mjs test <密碼>
+// saves 用該來源的最新 progress/island；history 仍從試算表抓近 10 天（若有）。
 
 const SUPABASE_URL = "https://ozndadnpequfkrusijag.supabase.co";
 const ANON         = "sb_publishable_pk_Iw-IsjaRRJRYFpeUJhQ_8-7kSXxv";
@@ -11,9 +12,10 @@ const GAS          = "https://script.google.com/macros/s/AKfycbyZlQ609fvyiiOYIb-
 const SECRET       = "kids2026";
 const DOMAIN       = "kids.local";
 
-const [, , name, password] = process.argv;
+import { readFileSync } from "node:fs";
+const [, , name, password, jsonPath] = process.argv;
 if (!name || !password) {
-  console.error("用法: node kids/supabase/migrate.mjs <albert|jonathan|test> <密碼>");
+  console.error('用法: node kids/supabase/migrate.mjs <albert|jonathan|test> <密碼> ["匯出檔.json"]');
   process.exit(1);
 }
 const email = `${name}@${DOMAIN}`;
@@ -39,11 +41,20 @@ async function main() {
     Prefer: "resolution=merge-duplicates,return=minimal",
   };
 
-  // 2) 從試算表取最新 → 寫 saves
-  const latest = await gj(`?student=${name}&secret=${SECRET}`);
-  if (!latest.ok) console.warn(`⚠️ 試算表沒有 ${name} 的最新資料：`, latest.err || latest);
-  const progress = latest.progress || null;
-  const island   = latest.island   || null;
+  // 2) 取得最新 progress/island → 寫 saves
+  let progress = null, island = null;
+  if (jsonPath) {
+    const bundle = JSON.parse(readFileSync(jsonPath, "utf8"));
+    progress = bundle.progress || null;
+    island   = bundle.island   || null;
+    console.log(`  來源：匯出檔 ${jsonPath}`);
+  } else {
+    const latest = await gj(`?student=${name}&secret=${SECRET}`);
+    if (!latest.ok) console.warn(`⚠️ 試算表沒有 ${name} 的最新資料：`, latest.err || latest);
+    progress = latest.progress || null;
+    island   = latest.island   || null;
+    console.log("  來源：Google 試算表");
+  }
 
   const sRes = await fetch(`${SUPABASE_URL}/rest/v1/saves?on_conflict=user_id`, {
     method: "POST", headers: H,
