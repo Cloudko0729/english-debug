@@ -41,21 +41,18 @@ async function authGate() {
   return student;
 }
 
-// 把上方「我是：Albert / Jonathan / 測試」那排換成「目前：X ・ 登出」
+// 把上方「我是：Albert / Jonathan / 測試」那排，換成「目前：Name ［登出］」
 function decorateLoggedIn(student) {
-  const row = document.getElementById("studentRow") || document.querySelector("#studentRow, .stu-row");
-  document.querySelectorAll(".stu-btn").forEach(b => { b.style.display = "none"; });
-  // 加一個登出連結（避免重複加）
-  if (!document.getElementById("logoutBtn")) {
-    const host = row || document.body;
-    const span = document.createElement("span");
-    span.id = "logoutBtn";
-    span.style.cssText = "font-size:.8rem;color:#3a2a00;cursor:pointer;text-decoration:underline;margin-left:8px";
-    const name = student.charAt(0).toUpperCase() + student.slice(1);
-    span.textContent = `目前：${name}（登出）`;
-    span.onclick = doLogout;
-    if (row) row.appendChild(span);
-  }
+  // 用選學生按鈕的父容器當作那條列（各頁 id 不同：studentRow / studentBar / 無 id）
+  const btn = document.querySelector(".stu-btn");
+  const bar = (btn && btn.parentElement)
+    || document.getElementById("studentBar")
+    || document.getElementById("studentRow");
+  if (!bar) return;
+  const name = student.charAt(0).toUpperCase() + student.slice(1);
+  bar.innerHTML =
+    `<span style="font-weight:700;color:#3a2a00">目前：${name}</span>` +
+    `<button onclick="doLogout()" style="margin-left:12px;padding:4px 16px;border:2px solid #3a2a00;border-radius:18px;background:transparent;font-weight:700;color:#3a2a00;cursor:pointer">登出</button>`;
 }
 
 async function doLogout() {
