@@ -365,7 +365,9 @@
   </div>
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="account_lock.js"></script>
+<script src="supabase_auth.js"></script>
 <script>
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
@@ -424,9 +426,9 @@ function lockFutureDrills() {
 }
 lockFutureDrills();
 
-// Auto-restore last student
+// 登入後由 supabase_auth.js 的 auto-gate 自動選學生；沒 Supabase 時才走本機還原
 const last = localStorage.getItem("kidsCurrentStudent");
-if (last) pickStudent(last);
+if (!window.sbClient && last) pickStudent(last);
 </script>
 
 </body>

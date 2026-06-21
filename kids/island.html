@@ -1037,16 +1037,9 @@ function openRestoreModal(items) {
   });
 }
 
-// 登入守門：有登入 → 自動選該學生；沒登入 → 顯示登入畫面；沒 Supabase → 退回舊流程
-authGate().then(student => {
-  if (student === undefined) {              // CDN/Supabase 沒載到 → 舊流程
-    const last = localStorage.getItem("kidsCurrentStudent");
-    if (last) selectStudent(last);
-  } else if (student) {                     // 已登入
-    selectStudent(student);
-  }
-  // student === null：登入畫面已蓋上，等使用者登入
-});
+// 自動選學生由 supabase_auth.js 的 auto-gate 處理；沒 Supabase 時才走舊的本機還原
+const last = localStorage.getItem("kidsCurrentStudent");
+if (!window.sbClient && last) selectStudent(last);
 </script>
 </body>
 </html>

@@ -111,3 +111,15 @@ async function doLogin(name, password) {
   if (error) { err.textContent = "登入失敗：密碼錯誤或帳號不存在"; return; }
   location.reload();
 }
+
+// ── 自動守門：頁面載入就檢查登入。有登入 → 自動選取該學生（呼叫頁面的 selectStudent / pickStudent）。
+//    沒登入 → 顯示登入畫面。沒 Supabase（CDN 失敗）→ 不做事，頁面走原本的選學生流程。
+(function autoGate() {
+  if (!sbClient) return;
+  authGate().then(student => {
+    if (!student) return;                       // null = 已顯示登入畫面
+    const sel = (typeof selectStudent === "function") ? selectStudent
+              : (typeof pickStudent === "function") ? pickStudent : null;
+    if (sel) { try { sel(student); } catch (e) { console.warn(e); } }
+  });
+})();
