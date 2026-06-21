@@ -309,8 +309,10 @@
 
 <div id="toast"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="cloud_sync.js"></script>
 <script src="account_lock.js"></script>
+<script src="supabase_auth.js"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -1035,9 +1037,16 @@ function openRestoreModal(items) {
   });
 }
 
-// auto restore
-const last = localStorage.getItem("kidsCurrentStudent");
-if (last) selectStudent(last);
+// 登入守門：有登入 → 自動選該學生；沒登入 → 顯示登入畫面；沒 Supabase → 退回舊流程
+authGate().then(student => {
+  if (student === undefined) {              // CDN/Supabase 沒載到 → 舊流程
+    const last = localStorage.getItem("kidsCurrentStudent");
+    if (last) selectStudent(last);
+  } else if (student) {                     // 已登入
+    selectStudent(student);
+  }
+  // student === null：登入畫面已蓋上，等使用者登入
+});
 </script>
 </body>
 </html>
