@@ -1,15 +1,15 @@
 {
-  "outdir": "D:/english/kids/drills/audio/exam_flyers",
-  "voice": "af_heart",
-  "speed": 0.9,
-  "items": {
-    "lb_0": "My sister has found a new hobby at school.",
-    "lb_1": "The pilot flew above the mountains yesterday.",
-    "lb_2": "They are waiting for the MRT at the station.",
-    "lb_3": "Ben bought some noodles after basketball practice.",
-    "lc_0": "library",
-    "lc_1": "weather",
-    "lc_2": "driver",
-    "passage": "On Saturday morning, Leo went to Yangmingshan with his aunt. The sky was cloudy, so they took warm jackets. They walked beside a small river and saw many birds in the trees. At noon, Leo bought rice balls and hot soup at a shop near the bus stop. He was tired, but he felt proud because he had climbed farther than last time."
-  }
+ "outdir": "D:/english/kids/drills/audio/exam_flyers",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "lb_0": "The children are drawing flowers in art class.",
+  "lb_1": "We ate noodles for lunch.",
+  "lb_2": "Grandpa bought a green shirt.",
+  "lb_3": "Dad is washing the car.",
+  "lc_0": "Put the bag under the chair.",
+  "lc_1": "I want to buy a blue coat.",
+  "lc_2": "The farmer has five cows.",
+  "passage": "Last Saturday, Ben and his sister went to the sea with Mom. The weather was warm, and the water was blue. They saw small fish next to the boat. Ben had a red ball, so they played on the sand. Mom bought bread and milk. They ate lunch under a tree. At home, Ben made a card with a sea picture."
+ }
 }

@@ -54,7 +54,7 @@
 
 <header>
   <h1>🏆 綜合測驗</h1>
-  <p>仿劍橋兒童英檢 Movers(基礎) + Flyers(進階) · <a href="../index.html">← 回首頁</a></p>
+  <p>基礎題 + 進階題 · 國小～小六範圍 · 仿劍橋兒童英檢題型 · <a href="../index.html">← 回首頁</a></p>
 </header>
 
 <div id="studentBar">
@@ -73,49 +73,246 @@
 <script src="../supabase_auth.js"></script>
 <script>
 const EXAM = {
-  basic: {
-    listenChoice: [
-      { spoken: "apple", choices: ["apple", "banana", "egg", "rice"], answer: "apple" },
-      { spoken: "rainy", choices: ["sunny", "rainy", "windy", "cloudy"], answer: "rainy" },
-      { spoken: "tiger", choices: ["rabbit", "tiger", "duck", "fish"], answer: "tiger" }
+  "basic": {
+    "listenChoice": [
+      {
+        "spoken": "apple",
+        "choices": [
+          "apple",
+          "banana",
+          "egg",
+          "rice"
+        ],
+        "answer": "apple"
+      },
+      {
+        "spoken": "rainy",
+        "choices": [
+          "sunny",
+          "rainy",
+          "windy",
+          "cloudy"
+        ],
+        "answer": "rainy"
+      },
+      {
+        "spoken": "tiger",
+        "choices": [
+          "rabbit",
+          "tiger",
+          "duck",
+          "fish"
+        ],
+        "answer": "tiger"
+      }
     ],
-    wordDef: [
-      { def: "You wear these on your feet.", choices: ["shoes", "hat", "shirt", "dress"], answer: "shoes" },
-      { def: "This animal can swim and lives in water.", choices: ["cat", "fish", "bird", "horse"], answer: "fish" },
-      { def: "You eat this in the morning.", choices: ["breakfast", "school", "jacket", "money"], answer: "breakfast" },
-      { def: "This place has teachers, students, and books.", choices: ["park", "school", "zoo", "shop"], answer: "school" }
+    "wordDef": [
+      {
+        "def": "You wear these on your feet.",
+        "choices": [
+          "shoes",
+          "hat",
+          "shirt",
+          "dress"
+        ],
+        "answer": "shoes"
+      },
+      {
+        "def": "This animal can swim and lives in water.",
+        "choices": [
+          "cat",
+          "fish",
+          "bird",
+          "horse"
+        ],
+        "answer": "fish"
+      },
+      {
+        "def": "You eat this in the morning.",
+        "choices": [
+          "breakfast",
+          "school",
+          "jacket",
+          "money"
+        ],
+        "answer": "breakfast"
+      },
+      {
+        "def": "This place has teachers, students, and books.",
+        "choices": [
+          "park",
+          "school",
+          "zoo",
+          "shop"
+        ],
+        "answer": "school"
+      }
     ],
-    cloze: [
-      { sentence: "I ___ happy today.", choices: ["am", "is", "are"], answer: "am" },
-      { sentence: "She ___ a red dress.", choices: ["wear", "wears", "wearing"], answer: "wears" },
-      { sentence: "There are three ___ on the table.", choices: ["egg", "eggs", "an egg"], answer: "eggs" },
-      { sentence: "The ball is ___ the chair.", choices: ["under", "many", "can"], answer: "under" }
+    "cloze": [
+      {
+        "sentence": "I ___ happy today.",
+        "choices": [
+          "am",
+          "is",
+          "are"
+        ],
+        "answer": "am"
+      },
+      {
+        "sentence": "She ___ a red dress.",
+        "choices": [
+          "wear",
+          "wears",
+          "wearing"
+        ],
+        "answer": "wears"
+      },
+      {
+        "sentence": "There are three ___ on the table.",
+        "choices": [
+          "egg",
+          "eggs",
+          "an egg"
+        ],
+        "answer": "eggs"
+      },
+      {
+        "sentence": "The ball is ___ the chair.",
+        "choices": [
+          "under",
+          "many",
+          "can"
+        ],
+        "answer": "under"
+      }
     ]
   },
-  advanced: {
-    listenBlank: [
-      { full: "They went to the zoo yesterday.", display: "They ___ to the zoo yesterday.", answer: "went" },
-      { full: "Lucy is drawing a blue bird.", display: "Lucy is ___ a blue bird.", answer: "drawing" },
-      { full: "We had noodles for lunch.", display: "We ___ noodles for lunch.", answer: "had" }
+  "advanced": {
+    "listenBlank": [
+      {
+        "full": "Mom made a cake yesterday.",
+        "display": "Mom made a ___ yesterday.",
+        "answer": "cake"
+      },
+      {
+        "full": "The boys are playing soccer now.",
+        "display": "The boys are ___ soccer now.",
+        "answer": "playing"
+      },
+      {
+        "full": "We went to school by bus.",
+        "display": "We went to school by ___.",
+        "answer": "bus"
+      }
     ],
-    dialogue: [
-      { prompt: "What did you do last weekend?", choices: ["I played soccer.", "I am fine.", "Yes, please.", "It is red."], answer: "I played soccer." },
-      { prompt: "How much is this green T-shirt?", choices: ["It is 200 dollars.", "It is on the chair.", "I go by bus.", "She has a dog."], answer: "It is 200 dollars." },
-      { prompt: "Why are you sad?", choices: ["Because I lost my pencil.", "At seven o'clock.", "It is sunny.", "I like apples."], answer: "Because I lost my pencil." },
-      { prompt: "Where are you going after school?", choices: ["I am going to the library.", "I saw a rabbit.", "It is twelve.", "My shoes are black."], answer: "I am going to the library." }
+    "dialogue": [
+      {
+        "prompt": "A: What did you do after school? B: ___",
+        "choices": [
+          "I played soccer.",
+          "I am six.",
+          "It is under the table.",
+          "She wants rice."
+        ],
+        "answer": "I played soccer."
+      },
+      {
+        "prompt": "A: Where is the cat? B: ___",
+        "choices": [
+          "It is under the chair.",
+          "I like cats.",
+          "It was sunny.",
+          "I can swim."
+        ],
+        "answer": "It is under the chair."
+      },
+      {
+        "prompt": "A: What are you going to buy? B: ___",
+        "choices": [
+          "I am going to buy milk.",
+          "I went to school.",
+          "They are blue.",
+          "There are three."
+        ],
+        "answer": "I am going to buy milk."
+      },
+      {
+        "prompt": "A: Can your brother ride a bike? B: ___",
+        "choices": [
+          "Yes, he can.",
+          "It is my bike.",
+          "He has two books.",
+          "They are in the box."
+        ],
+        "answer": "Yes, he can."
+      }
     ],
-    cloze: [
-      { sentence: "We ___ a big elephant at the zoo yesterday.", choices: ["see", "saw", "seeing"], answer: "saw" },
-      { sentence: "My brother is ___ his homework now.", choices: ["do", "does", "doing"], answer: "doing" },
-      { sentence: "This box is ___ than that one.", choices: ["heavy", "heavier", "heaviest"], answer: "heavier" },
-      { sentence: "I am ___ to visit my grandma on Sunday.", choices: ["go", "going", "went"], answer: "going" }
+    "cloze": [
+      {
+        "sentence": "The children ___ a movie last night.",
+        "choices": [
+          "watched",
+          "watch",
+          "are watching"
+        ],
+        "answer": "watched"
+      },
+      {
+        "sentence": "My uncle ___ dinner now.",
+        "choices": [
+          "is eating",
+          "ate",
+          "eats"
+        ],
+        "answer": "is eating"
+      },
+      {
+        "sentence": "We ___ to the park tomorrow.",
+        "choices": [
+          "are going to go",
+          "went",
+          "goes"
+        ],
+        "answer": "are going to go"
+      },
+      {
+        "sentence": "There ___ three pencils in my bag.",
+        "choices": [
+          "are",
+          "is",
+          "am"
+        ],
+        "answer": "are"
+      }
     ],
-    readShort: {
-      passage: "Tom visited the park with his sister on Saturday morning. The weather was warm and sunny. They saw three small dogs and played basketball for one hour. After that, they bought two sandwiches and orange juice from a shop. Tom felt tired but happy because his sister won the game.",
-      questions: [
-        { q: "Where did Tom go?", answer: "the park", accept: ["the park", "park"] },
-        { q: "What did they play?", answer: "basketball", accept: ["basketball"] },
-        { q: "How did Tom feel?", answer: "tired but happy", accept: ["tired but happy", "happy and tired"] }
+    "readShort": {
+      "passage": "Tom and Lily went to the park on Sunday. The weather was sunny. They saw a dog next to a tree. They played with a ball and had sandwiches. Then they bought two apples and ate them. At home, they made a small picture for Dad.",
+      "questions": [
+        {
+          "q": "Where did Tom and Lily go?",
+          "answer": "the park",
+          "accept": [
+            "the park",
+            "park"
+          ]
+        },
+        {
+          "q": "What did they see next to a tree?",
+          "answer": "a dog",
+          "accept": [
+            "a dog",
+            "dog"
+          ]
+        },
+        {
+          "q": "What did they make at home?",
+          "answer": "a small picture",
+          "accept": [
+            "a small picture",
+            "small picture",
+            "picture"
+          ]
+        }
       ]
     }
   }
@@ -153,7 +350,7 @@ const num = n=>`<span class="q-num">${n}.</span>`;
 function renderExam(){
   let n = 0, html = "";
   // ───── 基礎題 (A1 Movers) ─────
-  html += `<div class="tier-title">📗 基礎題（A1 Movers）</div>`;
+  html += `<div class="tier-title">📗 基礎題（國小）</div>`;
   html += `<section><h2>1. 英聽單字選擇</h2><p class="sec-hint">按 🔊 聽單字，選正確的</p>`;
   EXAM.basic.listenChoice.forEach((q,i)=>{ n++; html += mc(`b1_${i}`,"listen",`${num(n)}${audioBtn("bl_"+i,q.spoken)}<span class="q-prompt">聽，選出正確單字</span>`,q.choices,q.answer); });
   html += `</section>`;
@@ -164,7 +361,7 @@ function renderExam(){
   EXAM.basic.cloze.forEach((q,i)=>{ n++; html += mc(`b3_${i}`,"read",`${num(n)}<span class="q-prompt">${q.sentence.replace("___",'<b style="color:#2f80ed">＿＿</b>')}</span>`,q.choices,q.answer,true); });
   html += `</section>`;
   // ───── 進階題 (A2 Flyers) ─────
-  html += `<div class="tier-title adv">📘 進階題（A2 Flyers）</div>`;
+  html += `<div class="tier-title adv">📘 進階題（小六）</div>`;
   html += `<section><h2>4. 英聽填空</h2><p class="sec-hint">按 🔊 聽整句，把空格的字打出來</p>`;
   EXAM.advanced.listenBlank.forEach((q,i)=>{ n++; html += input(`a4_${i}`,"listen",`${num(n)}${audioBtn("al_"+i,q.full)}<span class="q-prompt">${q.display.replace("___",'<b style="color:#2f80ed">＿＿</b>')}</span>`,q.answer); });
   html += `</section>`;

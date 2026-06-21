@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>進階測驗 Flyers — Kids English</title>
+<title>進階測驗（小六） — Kids English</title>
 <style>
   :root { --bg:#fff7dc; --panel:#fff; --primary:#2f80ed; --soft:#dbeafe; --accent:#ffb703;
           --success:#2fbf71; --danger:#ef476f; --text:#243042; --muted:#667085; --border:#d9e2ec; }
@@ -52,8 +52,8 @@
 <body>
 
 <header>
-  <h1>📘 進階測驗（Flyers A2）</h1>
-  <p>全進階 · 仿劍橋兒童英檢 Flyers · <a href="../index.html">← 回首頁</a></p>
+  <h1>📘 進階測驗（小六）</h1>
+  <p>進階混合題 · 國小～小六範圍 · 仿劍橋兒童英檢題型 · <a href="../index.html">← 回首頁</a></p>
 </header>
 
 <div id="studentBar">
@@ -72,45 +72,248 @@
 <script src="../supabase_auth.js"></script>
 <script>
 const EXAM = {
-  listenBlank: [
-    { full: "My sister has found a new hobby at school.", display: "My sister has ___ a new hobby at school.", answer: "found" },
-    { full: "The pilot flew above the mountains yesterday.", display: "The pilot ___ above the mountains yesterday.", answer: "flew" },
-    { full: "They are waiting for the MRT at the station.", display: "They are ___ for the MRT at the station.", answer: "waiting" },
-    { full: "Ben bought some noodles after basketball practice.", display: "Ben ___ some noodles after basketball practice.", answer: "bought" }
+  "listenBlank": [
+    {
+      "full": "The children are drawing flowers in art class.",
+      "display": "The children are drawing ___ in art class.",
+      "answer": "flowers"
+    },
+    {
+      "full": "We ate noodles for lunch.",
+      "display": "We ate ___ for lunch.",
+      "answer": "noodles"
+    },
+    {
+      "full": "Grandpa bought a green shirt.",
+      "display": "Grandpa bought a green ___.",
+      "answer": "shirt"
+    },
+    {
+      "full": "Dad is washing the car.",
+      "display": "Dad is ___ the car.",
+      "answer": "washing"
+    }
   ],
-  listenChoice: [
-    { spoken: "library", choices: ["library", "market", "hospital", "station"], answer: "library" },
-    { spoken: "weather", choices: ["weather", "feather", "whether", "water"], answer: "weather" },
-    { spoken: "driver", choices: ["driver", "doctor", "farmer", "waiter"], answer: "driver" }
+  "listenChoice": [
+    {
+      "spoken": "Put the bag under the chair.",
+      "choices": [
+        "under the chair",
+        "on the bed",
+        "in the box",
+        "next to the door"
+      ],
+      "answer": "under the chair"
+    },
+    {
+      "spoken": "I want to buy a blue coat.",
+      "choices": [
+        "a blue coat",
+        "a red dress",
+        "a yellow hat",
+        "a white shirt"
+      ],
+      "answer": "a blue coat"
+    },
+    {
+      "spoken": "The farmer has five cows.",
+      "choices": [
+        "five cows",
+        "two cats",
+        "three dogs",
+        "four fish"
+      ],
+      "answer": "five cows"
+    }
   ],
-  wordDef: [
-    { def: "This person helps sick people and often works in a hospital or clinic.", choices: ["doctor", "farmer", "pilot", "waiter"], answer: "doctor" },
-    { def: "You can take this long vehicle to another city, and it travels on rails.", choices: ["train", "plane", "boat", "taxi"], answer: "train" },
-    { def: "This is a high place in nature. People climb it when they go hiking.", choices: ["mountain", "market", "station", "restaurant"], answer: "mountain" },
-    { def: "This person grows vegetables, fruit, or rice and takes care of animals.", choices: ["farmer", "nurse", "driver", "pilot"], answer: "farmer" },
-    { def: "This place has many trees, birds, and insects, and people may walk there to enjoy nature.", choices: ["forest", "library", "airport", "kitchen"], answer: "forest" }
+  "wordDef": [
+    {
+      "def": "A person who teaches students.",
+      "choices": [
+        "teacher",
+        "doctor",
+        "farmer",
+        "cook"
+      ],
+      "answer": "teacher"
+    },
+    {
+      "def": "A place with trees, flowers, and places to play.",
+      "choices": [
+        "park",
+        "school",
+        "kitchen",
+        "sea"
+      ],
+      "answer": "park"
+    },
+    {
+      "def": "A big thing people ride on the road. It takes many people to school.",
+      "choices": [
+        "bus",
+        "boat",
+        "bike",
+        "plane"
+      ],
+      "answer": "bus"
+    },
+    {
+      "def": "A long line of water in nature.",
+      "choices": [
+        "river",
+        "mountain",
+        "park",
+        "tree"
+      ],
+      "answer": "river"
+    },
+    {
+      "def": "A person who helps sick people.",
+      "choices": [
+        "doctor",
+        "teacher",
+        "cook",
+        "police officer"
+      ],
+      "answer": "doctor"
+    }
   ],
-  dialogue: [
-    { prompt: "Have you ever ridden a horse?", choices: ["Yes, I rode one last year.", "It is under the chair.", "I am feeling hungry.", "She will take a plane."], answer: "Yes, I rode one last year." },
-    { prompt: "Why are you wearing a jacket?", choices: ["Because it is getting cold.", "At half past seven.", "I bought some apples.", "The bus is faster."], answer: "Because it is getting cold." },
-    { prompt: "How often do you play badminton?", choices: ["Twice a week.", "By train.", "It was delicious.", "Near the river."], answer: "Twice a week." },
-    { prompt: "What are you going to do after school?", choices: ["I am going to visit my grandma.", "I went there yesterday.", "It has four legs.", "No, there isn't any."], answer: "I am going to visit my grandma." }
+  "dialogue": [
+    {
+      "prompt": "A: Can you help me with this box? B: ___",
+      "choices": [
+        "Yes, I can.",
+        "It is red.",
+        "I went home.",
+        "There are two."
+      ],
+      "answer": "Yes, I can."
+    },
+    {
+      "prompt": "A: Where are my shoes? B: ___",
+      "choices": [
+        "They are under the bed.",
+        "They are black.",
+        "I like your shoes.",
+        "I have a hat."
+      ],
+      "answer": "They are under the bed."
+    },
+    {
+      "prompt": "A: What are you going to do tomorrow? B: ___",
+      "choices": [
+        "I am going to go to the park.",
+        "I went to the sea.",
+        "It is on Monday.",
+        "She is cooking."
+      ],
+      "answer": "I am going to go to the park."
+    },
+    {
+      "prompt": "A: How was your school trip? B: ___",
+      "choices": [
+        "It was fun.",
+        "I am twelve.",
+        "It is in my bag.",
+        "There are four books."
+      ],
+      "answer": "It was fun."
+    }
   ],
-  cloze: [
-    { sentence: "We ___ a rainbow after the heavy rain.", choices: ["saw", "see", "seen"], answer: "saw" },
-    { sentence: "Mia is ___ than her brother at swimming.", choices: ["faster", "fast", "fastest"], answer: "faster" },
-    { sentence: "Have you ever ___ sushi for breakfast?", choices: ["eaten", "ate", "eat"], answer: "eaten" },
-    { sentence: "There aren't ___ oranges in the fridge.", choices: ["any", "some", "much"], answer: "any" },
-    { sentence: "We will leave early ___ we don't miss the bus.", choices: ["so", "because", "before"], answer: "so" },
-    { sentence: "The children are ___ kites in the park now.", choices: ["flying", "flew", "fly"], answer: "flying" }
+  "cloze": [
+    {
+      "sentence": "My sister ___ a red bag now.",
+      "choices": [
+        "has",
+        "had",
+        "is having"
+      ],
+      "answer": "has"
+    },
+    {
+      "sentence": "The boys ___ soccer in the park now.",
+      "choices": [
+        "are playing",
+        "played",
+        "play"
+      ],
+      "answer": "are playing"
+    },
+    {
+      "sentence": "We ___ noodles last night.",
+      "choices": [
+        "ate",
+        "eat",
+        "are eating"
+      ],
+      "answer": "ate"
+    },
+    {
+      "sentence": "There ___ a river next to the park.",
+      "choices": [
+        "is",
+        "are",
+        "am"
+      ],
+      "answer": "is"
+    },
+    {
+      "sentence": "She ___ ride a bike.",
+      "choices": [
+        "can",
+        "is",
+        "has"
+      ],
+      "answer": "can"
+    },
+    {
+      "sentence": "Dad and I ___ buy apples tomorrow.",
+      "choices": [
+        "are going to",
+        "went to",
+        "is going to"
+      ],
+      "answer": "are going to"
+    }
   ],
-  readShort: {
-    passage: "On Saturday morning, Leo went to Yangmingshan with his aunt. The sky was cloudy, so they took warm jackets. They walked beside a small river and saw many birds in the trees. At noon, Leo bought rice balls and hot soup at a shop near the bus stop. He was tired, but he felt proud because he had climbed farther than last time.",
-    questions: [
-      { q: "Where did Leo go?", answer: "yangmingshan", accept: ["yangmingshan", "to yangmingshan"] },
-      { q: "Why did they take warm jackets?", answer: "because the sky was cloudy", accept: ["because the sky was cloudy", "the sky was cloudy", "it was cloudy", "cloudy weather"] },
-      { q: "What animals did Leo see?", answer: "birds", accept: ["birds", "many birds"] },
-      { q: "How did Leo probably feel about his hike?", answer: "proud", accept: ["proud", "happy and proud", "he felt proud", "pleased with himself"] }
+  "readShort": {
+    "passage": "Last Saturday, Ben and his sister went to the sea with Mom. The weather was warm, and the water was blue. They saw small fish next to the boat. Ben had a red ball, so they played on the sand. Mom bought bread and milk. They ate lunch under a tree. At home, Ben made a card with a sea picture.",
+    "questions": [
+      {
+        "q": "Where did Ben and his sister go?",
+        "answer": "the sea",
+        "accept": [
+          "the sea",
+          "sea"
+        ]
+      },
+      {
+        "q": "What did Ben have?",
+        "answer": "a red ball",
+        "accept": [
+          "a red ball",
+          "red ball",
+          "ball"
+        ]
+      },
+      {
+        "q": "Where did they eat lunch?",
+        "answer": "under a tree",
+        "accept": [
+          "under a tree",
+          "tree"
+        ]
+      },
+      {
+        "q": "How did Ben probably feel on the trip?",
+        "answer": "happy",
+        "accept": [
+          "happy",
+          "good",
+          "glad",
+          "he was happy"
+        ]
+      }
     ]
   }
 };
@@ -146,12 +349,12 @@ const num = n=>`<span class="q-num">${n}.</span>`;
 
 function renderExam(){
   let n = 0, html = "";
-  html += `<div class="tier-title">📘 全部進階題（A2 Flyers）</div>`;
+  html += `<div class="tier-title">📘 進階混合題（小六）</div>`;
   html += `<section><h2>1. 英聽填空</h2><p class="sec-hint">按 🔊 聽整句，把空格的字打出來</p>`;
   EXAM.listenBlank.forEach((q,i)=>{ n++; html += input(`lb_${i}`,"listen",`${num(n)}${audioBtn("lb_"+i,q.full)}<span class="q-prompt">${q.display.replace("___",'<b style="color:#2f80ed">＿＿</b>')}</span>`,q.answer); });
   html += `</section>`;
-  html += `<section><h2>2. 英聽單字選擇</h2><p class="sec-hint">按 🔊 聽單字，選正確的</p>`;
-  EXAM.listenChoice.forEach((q,i)=>{ n++; html += mc(`lc_${i}`,"listen",`${num(n)}${audioBtn("lc_"+i,q.spoken)}<span class="q-prompt">聽，選出正確單字</span>`,q.choices,q.answer); });
+  html += `<section><h2>2. 英聽選擇</h2><p class="sec-hint">按 🔊 聽句子，選出正確的</p>`;
+  EXAM.listenChoice.forEach((q,i)=>{ n++; html += mc(`lc_${i}`,"listen",`${num(n)}${audioBtn("lc_"+i,q.spoken)}<span class="q-prompt">聽，選出正確的</span>`,q.choices,q.answer,true); });
   html += `</section>`;
   html += `<section><h2>3. 字義配對</h2><p class="sec-hint">讀英文說明，選出正確單字</p>`;
   EXAM.wordDef.forEach((q,i)=>{ n++; html += mc(`wd_${i}`,"read",`${num(n)}<span class="q-prompt">${q.def}</span>`,q.choices,q.answer); });
