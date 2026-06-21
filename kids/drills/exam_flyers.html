@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>進階測驗 Flyers — Kids English</title>
+<style>
+  :root { --bg:#fff7dc; --panel:#fff; --primary:#2f80ed; --soft:#dbeafe; --accent:#ffb703;
+          --success:#2fbf71; --danger:#ef476f; --text:#243042; --muted:#667085; --border:#d9e2ec; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Arial,"Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+  header{background:#5b3aa0;color:#fff;padding:20px 16px 16px;text-align:center;}
+  header h1{font-size:1.5rem;margin-bottom:6px;}
+  header p{font-size:.85rem;opacity:.9;}
+  header a{color:#ffe27a;font-weight:700;text-decoration:none;}
+  #studentBar{background:var(--accent);padding:10px 16px;display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;}
+  #studentBar span{font-weight:700;color:#3a2a00;}
+  .stu-btn{padding:6px 18px;border:2px solid #3a2a00;border-radius:20px;background:transparent;font-size:.95rem;font-weight:700;cursor:pointer;color:#3a2a00;}
+  .stu-btn.active{background:#3a2a00;color:#fff;}
+  #statsBar{background:var(--soft);padding:8px 16px;text-align:center;font-size:.85rem;color:var(--primary);font-weight:600;display:none;}
+  main{max-width:720px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:16px;}
+  .tier-title{font-size:1.1rem;font-weight:800;background:#e6d9ff;color:#5b3aa0;border-radius:10px;padding:10px 14px;}
+  section{background:var(--panel);border:2px solid var(--border);border-radius:12px;padding:16px;}
+  section h2{font-size:1.02rem;color:var(--primary);margin-bottom:4px;}
+  .sec-hint{font-size:.82rem;color:var(--muted);margin-bottom:12px;}
+  .q-block{border:2px solid var(--border);border-radius:10px;padding:12px;margin-bottom:12px;}
+  .q-block.q-correct{border-color:var(--success);background:#f0fcf6;}
+  .q-block.q-wrong{border-color:var(--danger);background:#fef0f4;}
+  .q-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .q-num{font-weight:700;color:var(--primary);}
+  .q-prompt{font-size:1rem;line-height:1.5;flex:1 1 200px;}
+  .choices{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+  .choices.col{grid-template-columns:1fr;}
+  .choice{border:2px solid var(--border);border-radius:8px;background:#fff;padding:10px 8px;font-size:.95rem;cursor:pointer;text-align:center;min-height:42px;font-weight:600;color:var(--text);}
+  .choice.sel{border-color:var(--primary);background:var(--soft);}
+  .choice.right{border-color:var(--success);background:#d9f7e8;}
+  .choice.wrongpick{border-color:var(--danger);background:#fde0e8;}
+  .btn-listen{background:var(--primary);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:1.1rem;cursor:pointer;flex-shrink:0;}
+  .blank-input{border:2px solid var(--border);border-radius:8px;padding:8px 10px;font-size:.95rem;width:100%;min-height:42px;}
+  .blank-input.correct{border-color:var(--success);background:#e6faf0;}
+  .blank-input.wrong{border-color:var(--danger);background:#fde8ee;}
+  .ans{font-size:.82rem;color:var(--danger);font-weight:700;display:none;margin-top:6px;}
+  .passage{background:var(--soft);border-radius:8px;padding:14px;font-size:.95rem;line-height:1.7;margin-bottom:12px;}
+  .btn-check{background:var(--success);color:#fff;border:none;border-radius:10px;padding:14px 22px;font-size:1.05rem;font-weight:800;cursor:pointer;width:100%;min-height:50px;}
+  #result{background:#5b3aa0;color:#fff;border:none;text-align:center;display:none;}
+  #result h2{color:#fff;}
+  .shields{font-size:1.4rem;margin:10px 0;}
+  #resultScore{font-size:2rem;font-weight:800;margin:6px 0;}
+  @media(max-width:500px){header h1{font-size:1.25rem;}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📘 進階測驗（Flyers A2）</h1>
+  <p>全進階 · 仿劍橋兒童英檢 Flyers · <a href="../index.html">← 回首頁</a></p>
+</header>
+
+<div id="studentBar">
+  <span>我是：</span>
+  <button class="stu-btn" onclick="selectStudent('albert')">Albert</button>
+  <button class="stu-btn" onclick="selectStudent('jonathan')">Jonathan</button>
+  <button class="stu-btn" style="opacity:.7" onclick="selectStudent('test')">🧪 測試</button>
+</div>
+<div id="statsBar"></div>
+
+<main id="examMain"></main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../cloud_sync.js"></script>
+<script src="../account_lock.js"></script>
+<script src="../supabase_auth.js"></script>
+<script>
+const EXAM = {
+  listenBlank: [
+    { full: "My sister has found a new hobby at school.", display: "My sister has ___ a new hobby at school.", answer: "found" },
+    { full: "The pilot flew above the mountains yesterday.", display: "The pilot ___ above the mountains yesterday.", answer: "flew" },
+    { full: "They are waiting for the MRT at the station.", display: "They are ___ for the MRT at the station.", answer: "waiting" },
+    { full: "Ben bought some noodles after basketball practice.", display: "Ben ___ some noodles after basketball practice.", answer: "bought" }
+  ],
+  listenChoice: [
+    { spoken: "library", choices: ["library", "market", "hospital", "station"], answer: "library" },
+    { spoken: "weather", choices: ["weather", "feather", "whether", "water"], answer: "weather" },
+    { spoken: "driver", choices: ["driver", "doctor", "farmer", "waiter"], answer: "driver" }
+  ],
+  wordDef: [
+    { def: "This person helps sick people and often works in a hospital or clinic.", choices: ["doctor", "farmer", "pilot", "waiter"], answer: "doctor" },
+    { def: "You can take this long vehicle to another city, and it travels on rails.", choices: ["train", "plane", "boat", "taxi"], answer: "train" },
+    { def: "This is a high place in nature. People climb it when they go hiking.", choices: ["mountain", "market", "station", "restaurant"], answer: "mountain" },
+    { def: "This person grows vegetables, fruit, or rice and takes care of animals.", choices: ["farmer", "nurse", "driver", "pilot"], answer: "farmer" },
+    { def: "This place has many trees, birds, and insects, and people may walk there to enjoy nature.", choices: ["forest", "library", "airport", "kitchen"], answer: "forest" }
+  ],
+  dialogue: [
+    { prompt: "Have you ever ridden a horse?", choices: ["Yes, I rode one last year.", "It is under the chair.", "I am feeling hungry.", "She will take a plane."], answer: "Yes, I rode one last year." },
+    { prompt: "Why are you wearing a jacket?", choices: ["Because it is getting cold.", "At half past seven.", "I bought some apples.", "The bus is faster."], answer: "Because it is getting cold." },
+    { prompt: "How often do you play badminton?", choices: ["Twice a week.", "By train.", "It was delicious.", "Near the river."], answer: "Twice a week." },
+    { prompt: "What are you going to do after school?", choices: ["I am going to visit my grandma.", "I went there yesterday.", "It has four legs.", "No, there isn't any."], answer: "I am going to visit my grandma." }
+  ],
+  cloze: [
+    { sentence: "We ___ a rainbow after the heavy rain.", choices: ["saw", "see", "seen"], answer: "saw" },
+    { sentence: "Mia is ___ than her brother at swimming.", choices: ["faster", "fast", "fastest"], answer: "faster" },
+    { sentence: "Have you ever ___ sushi for breakfast?", choices: ["eaten", "ate", "eat"], answer: "eaten" },
+    { sentence: "There aren't ___ oranges in the fridge.", choices: ["any", "some", "much"], answer: "any" },
+    { sentence: "We will leave early ___ we don't miss the bus.", choices: ["so", "because", "before"], answer: "so" },
+    { sentence: "The children are ___ kites in the park now.", choices: ["flying", "flew", "fly"], answer: "flying" }
+  ],
+  readShort: {
+    passage: "On Saturday morning, Leo went to Yangmingshan with his aunt. The sky was cloudy, so they took warm jackets. They walked beside a small river and saw many birds in the trees. At noon, Leo bought rice balls and hot soup at a shop near the bus stop. He was tired, but he felt proud because he had climbed farther than last time.",
+    questions: [
+      { q: "Where did Leo go?", answer: "yangmingshan", accept: ["yangmingshan", "to yangmingshan"] },
+      { q: "Why did they take warm jackets?", answer: "because the sky was cloudy", accept: ["because the sky was cloudy", "the sky was cloudy", "it was cloudy", "cloudy weather"] },
+      { q: "What animals did Leo see?", answer: "birds", accept: ["birds", "many birds"] },
+      { q: "How did Leo probably feel about his hike?", answer: "proud", accept: ["proud", "happy and proud", "he felt proud", "pleased with himself"] }
+    ]
+  }
+};
+
+const AUDIO_DIR = "audio/exam_flyers/";
+let curAudio = null;
+function playAudio(name, fallback) {
+  if (curAudio) { curAudio.pause(); curAudio = null; }
+  const a = new Audio(AUDIO_DIR + name + ".mp3"); curAudio = a;
+  a.play().catch(() => {
+    if (!window.speechSynthesis) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(fallback); u.lang = "en-US"; u.rate = .85;
+    speechSynthesis.speak(u);
+  });
+}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");}
+function pick(btn){btn.parentElement.querySelectorAll(".choice").forEach(c=>c.classList.remove("sel"));btn.classList.add("sel");}
+
+const REG = [];
+function mc(id, skill, headHtml, choices, answer, col){
+  REG.push({id, skill, type:"mc", answer});
+  const opts = shuffle(choices).map(c=>`<button class="choice" data-val="${esc(c)}" onclick="pick(this)">${c}</button>`).join("");
+  return `<div class="q-block" id="${id}"><div class="q-head">${headHtml}</div><div class="choices${col?" col":""}">${opts}</div></div>`;
+}
+function input(id, skill, headHtml, answer, accept){
+  REG.push({id, skill, type:"input", answer, accept:(accept||[answer]).map(x=>x.toLowerCase())});
+  return `<div class="q-block" id="${id}"><div class="q-head">${headHtml}</div><input class="blank-input" id="${id}_in" autocomplete="off" autocapitalize="off"><div class="ans" id="${id}_ans"></div></div>`;
+}
+const audioBtn = (key, fb)=>`<button class="btn-listen" onclick="playAudio('${key}','${esc(fb).replace(/'/g,"\\'")}')">🔊</button>`;
+const num = n=>`<span class="q-num">${n}.</span>`;
+
+function renderExam(){
+  let n = 0, html = "";
+  html += `<div class="tier-title">📘 全部進階題（A2 Flyers）</div>`;
+  html += `<section><h2>1. 英聽填空</h2><p class="sec-hint">按 🔊 聽整句，把空格的字打出來</p>`;
+  EXAM.listenBlank.forEach((q,i)=>{ n++; html += input(`lb_${i}`,"listen",`${num(n)}${audioBtn("lb_"+i,q.full)}<span class="q-prompt">${q.display.replace("___",'<b style="color:#2f80ed">＿＿</b>')}</span>`,q.answer); });
+  html += `</section>`;
+  html += `<section><h2>2. 英聽單字選擇</h2><p class="sec-hint">按 🔊 聽單字，選正確的</p>`;
+  EXAM.listenChoice.forEach((q,i)=>{ n++; html += mc(`lc_${i}`,"listen",`${num(n)}${audioBtn("lc_"+i,q.spoken)}<span class="q-prompt">聽，選出正確單字</span>`,q.choices,q.answer); });
+  html += `</section>`;
+  html += `<section><h2>3. 字義配對</h2><p class="sec-hint">讀英文說明，選出正確單字</p>`;
+  EXAM.wordDef.forEach((q,i)=>{ n++; html += mc(`wd_${i}`,"read",`${num(n)}<span class="q-prompt">${q.def}</span>`,q.choices,q.answer); });
+  html += `</section>`;
+  html += `<section><h2>4. 對話選答</h2><p class="sec-hint">選出最合適的回應</p>`;
+  EXAM.dialogue.forEach((q,i)=>{ n++; html += mc(`dl_${i}`,"read",`${num(n)}<span class="q-prompt">${q.prompt}</span>`,q.choices,q.answer,true); });
+  html += `</section>`;
+  html += `<section><h2>5. 克漏字（三選一）</h2><p class="sec-hint">選出空格要填的字</p>`;
+  EXAM.cloze.forEach((q,i)=>{ n++; html += mc(`cz_${i}`,"read",`${num(n)}<span class="q-prompt">${q.sentence.replace("___",'<b style="color:#2f80ed">＿＿</b>')}</span>`,q.choices,q.answer,true); });
+  html += `</section>`;
+  html += `<section><h2>6. 閱讀短文 + 簡答</h2><p class="sec-hint">讀短文，用 1–4 個字回答</p>`;
+  html += `<div class="passage">${EXAM.readShort.passage}</div><button class="btn-listen" style="border-radius:8px;width:auto;padding:0 14px;margin-bottom:12px" onclick="playAudio('passage','${esc(EXAM.readShort.passage).replace(/'/g,"\\'")}')">🔊 唸給我聽</button>`;
+  EXAM.readShort.questions.forEach((q,i)=>{ n++; html += input(`rs_${i}`,"read",`${num(n)}<span class="q-prompt">${q.q}</span>`,q.answer,q.accept); });
+  html += `</section>`;
+  html += `<button class="btn-check" onclick="gradeAll()">交卷對答案 ✓</button>`;
+  html += `<section id="result"><h2>📜 成績單</h2><div class="shields" id="resultShields"></div><div id="resultScore"></div><div id="resultCoin" style="font-size:1.1rem;font-weight:700"></div></section>`;
+  document.getElementById("examMain").innerHTML = html;
+}
+
+function norm(s){return (s||"").trim().toLowerCase().replace(/[.?!,]+$/,"").replace(/\s+/g," ");}
+let graded = false;
+function gradeAll(){
+  if (graded) return;
+  if (!currentStudent){ alert("請先登入"); return; }
+  graded = true;
+  const L = {c:0,t:0}, R = {c:0,t:0};
+  REG.forEach(r=>{
+    const block = document.getElementById(r.id);
+    let ok = false;
+    if (r.type === "mc"){
+      const sel = block.querySelector(".choice.sel");
+      ok = !!sel && sel.dataset.val === r.answer;
+      block.querySelectorAll(".choice").forEach(c=>{
+        if (c.dataset.val === r.answer) c.classList.add("right");
+        else if (c.classList.contains("sel")) c.classList.add("wrongpick");
+      });
+    } else {
+      const inp = document.getElementById(r.id+"_in");
+      const v = norm(inp.value);
+      ok = r.accept.map(norm).includes(v);
+      inp.classList.add(ok?"correct":"wrong"); inp.disabled = true;
+      if (!ok){ const a=document.getElementById(r.id+"_ans"); a.textContent="答案："+r.answer; a.style.display="block"; }
+    }
+    block.classList.add(ok?"q-correct":"q-wrong");
+    const t = r.skill==="listen"?L:R; t.t++; if(ok)t.c++;
+  });
+  const correct = L.c + R.c, total = L.t + R.t;
+  const lsh = Math.round(L.c/L.t*5), rsh = Math.round(R.c/R.t*5);
+  const sh = s => "🛡️".repeat(s) + "▫️".repeat(5-s);
+  document.getElementById("resultShields").innerHTML =
+    `聽力 ${sh(lsh)} ${lsh}/5<br>閱讀 ${sh(rsh)} ${rsh}/5`;
+  document.getElementById("resultScore").textContent = `答對 ${correct} / ${total}`;
+  const earned = awardExam(correct, total);
+  document.getElementById("resultCoin").textContent = earned > 0
+    ? `🪙 +${earned} 金幣！`
+    : `（這份進階測驗的獎勵已經領過囉）`;
+  const res = document.getElementById("result");
+  res.style.display = "block";
+  res.scrollIntoView({behavior:"smooth"});
+}
+
+function getProgress(s){const r=localStorage.getItem("kidsProgress."+s);return r?JSON.parse(r):{wrongCounts:{},sessions:0,totalCorrect:0,totalWrong:0};}
+function saveProgress(s,p){localStorage.setItem("kidsProgress."+s,JSON.stringify(p));}
+function awardExam(correct,total){
+  const p=getProgress(currentStudent);
+  p.totalCorrect=(p.totalCorrect||0)+correct; p.totalWrong=(p.totalWrong||0)+(total-correct);
+  if(!p.coins)p.coins={balance:0,lifetimeEarned:0,lifetimeSpent:0,transactions:[],claimedDrills:{}};
+  if(!p.coins.claimedDrills)p.coins.claimedDrills={};
+  const key="flyers-exam"; let earned=0;
+  if(!p.coins.claimedDrills[key]){
+    earned=correct*15+(correct===total?150:0);
+    p.coins.balance+=earned; p.coins.lifetimeEarned+=earned;
+    p.coins.transactions.push({type:"earn",source:"flyersExam",amount:earned,balanceAfter:p.coins.balance,createdAt:new Date().toISOString(),meta:{correct,total}});
+    p.coins.claimedDrills[key]={claimedAt:new Date().toISOString(),earned,correct,total};
+  }
+  saveProgress(currentStudent,p);
+  if(typeof cloudSave==="function")cloudSave(currentStudent);
+  return earned;
+}
+
+let currentStudent=null;
+function selectStudent(name){
+  if(typeof requireUnlock==="function"&&!requireUnlock(name))return;
+  currentStudent=name;
+  document.querySelectorAll(".stu-btn").forEach(b=>b.classList.toggle("active",b.textContent.toLowerCase()===name));
+  const p=getProgress(name);
+  const total=(p.totalCorrect||0)+(p.totalWrong||0);
+  const pct=total>0?Math.round(p.totalCorrect/total*100):0;
+  const bar=document.getElementById("statsBar");
+  bar.style.display="block";
+  bar.textContent=`${name.charAt(0).toUpperCase()+name.slice(1)} · 🪙 ${(p.coins&&p.coins.balance)||0} · 正確率 ${pct}%`;
+  if(typeof cloudSyncOnOpen==="function")cloudSyncOnOpen(name,()=>selectStudent(name));
+}
+
+renderExam();
+const last=localStorage.getItem("kidsCurrentStudent");
+if(!window.sbClient && last)selectStudent(last);
+</script>
+</body>
+</html>

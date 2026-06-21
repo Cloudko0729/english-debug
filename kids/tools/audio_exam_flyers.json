@@ -1,0 +1,15 @@
+{
+  "outdir": "D:/english/kids/drills/audio/exam_flyers",
+  "voice": "af_heart",
+  "speed": 0.9,
+  "items": {
+    "lb_0": "My sister has found a new hobby at school.",
+    "lb_1": "The pilot flew above the mountains yesterday.",
+    "lb_2": "They are waiting for the MRT at the station.",
+    "lb_3": "Ben bought some noodles after basketball practice.",
+    "lc_0": "library",
+    "lc_1": "weather",
+    "lc_2": "driver",
+    "passage": "On Saturday morning, Leo went to Yangmingshan with his aunt. The sky was cloudy, so they took warm jackets. They walked beside a small river and saw many birds in the trees. At noon, Leo bought rice balls and hot soup at a shop near the bus stop. He was tired, but he felt proud because he had climbed farther than last time."
+  }
+}
