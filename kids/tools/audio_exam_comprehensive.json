@@ -1,0 +1,14 @@
+{
+  "outdir": "D:/english/kids/drills/audio/exam_comprehensive",
+  "voice": "af_heart",
+  "speed": 0.9,
+  "items": {
+    "bl_0": "apple",
+    "bl_1": "rainy",
+    "bl_2": "tiger",
+    "al_0": "They went to the zoo yesterday.",
+    "al_1": "Lucy is drawing a blue bird.",
+    "al_2": "We had noodles for lunch.",
+    "passage": "Tom visited the park with his sister on Saturday morning. The weather was warm and sunny. They saw three small dogs and played basketball for one hour. After that, they bought two sandwiches and orange juice from a shop. Tom felt tired but happy because his sister won the game."
+  }
+}
