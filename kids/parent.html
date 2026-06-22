@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>家長進度總覽 — Kids English</title>
+<style>
+  :root{--bg:#fff7dc;--panel:#fff;--primary:#2f80ed;--soft:#dbeafe;--success:#2fbf71;--warn:#f2a900;--danger:#ef476f;--text:#243042;--muted:#667085;--border:#e2e8f0;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Arial,"Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);max-width:760px;margin:0 auto;padding-bottom:40px;}
+  header{background:var(--primary);color:#fff;text-align:center;padding:22px 16px 16px;}
+  header h1{font-size:1.4rem;}
+  header p{font-size:.82rem;opacity:.9;margin-top:4px;}
+  header a{color:#ffe27a;text-decoration:none;font-weight:700;}
+  .bar{display:flex;gap:10px;justify-content:center;align-items:center;padding:12px;flex-wrap:wrap;}
+  .btn{background:var(--primary);color:#fff;border:0;border-radius:20px;padding:8px 20px;font-weight:700;cursor:pointer;font-size:.9rem;}
+  #updated{font-size:.78rem;color:var(--muted);}
+  .card{background:var(--panel);border:2px solid var(--border);border-radius:14px;margin:12px 16px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+  .card h2{font-size:1.15rem;display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .sync{font-size:.78rem;font-weight:700;padding:2px 10px;border-radius:12px;}
+  .sync.fresh{background:#d9f7e8;color:#1c7a4d;}
+  .sync.warn{background:#fdeecb;color:#8a6300;}
+  .sync.old{background:#fde0e8;color:#a31843;}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;}
+  .stat{background:var(--soft);border-radius:10px;padding:8px 6px;text-align:center;}
+  .stat b{display:block;font-size:1.15rem;color:var(--primary);}
+  .stat span{font-size:.72rem;color:var(--muted);}
+  .row{font-size:.85rem;color:#334;margin:6px 0;}
+  .row b{color:var(--primary);}
+  .weak{margin-top:8px;}
+  .weak h3{font-size:.82rem;color:var(--muted);margin-bottom:6px;}
+  .chip{display:inline-block;background:#eef2f7;border-radius:10px;padding:3px 8px;margin:0 4px 4px 0;font-size:.78rem;}
+  .chip.hard{background:#fde0e8;color:#a31843;font-weight:700;}
+  @media(max-width:480px){.stats{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<header>
+  <h1>👪 家長進度總覽</h1>
+  <p>三個帳號的最新進度（唯讀） · <a href="index.html">← 回首頁</a></p>
+</header>
+<div class="bar">
+  <button class="btn" onclick="load()">🔄 重新整理</button>
+  <span id="updated"></span>
+</div>
+<div id="cards"></div>
+
+<script src="wordbank.js"></script>
+<script>
+const GAS = "https://script.google.com/macros/s/AKfycbyZlQ609fvyiiOYIb-UegMSd2zQRSg9DoykH-aknkzZQEIl9jo71NSa4F17dLeErW3t6g/exec";
+const SECRET = "kids2026";
+const STUDENTS = [
+  { id: "albert", label: "Albert", emoji: "🧒" },
+  { id: "jonathan", label: "Jonathan", emoji: "👦" },
+  { id: "test", label: "🧪 測試", emoji: "🧪" },
+];
+
+function zhMap(){ const m={}; if(typeof WORDBANK!=="undefined")WORDBANK.forEach(w=>{m[w.en]=w.zh;}); return m; }
+
+function syncBadge(tsStr){
+  if(!tsStr) return ['old','從未同步'];
+  const t=new Date(tsStr), now=new Date();
+  const mins=Math.round((now-t)/60000);
+  const sameDay=t.toDateString()===now.toDateString();
+  let txt;
+  if(mins<1)txt="剛剛";
+  else if(mins<60)txt=mins+" 分鐘前";
+  else if(sameDay)txt="今天 "+t.toTimeString().slice(0,5);
+  else{ const days=Math.floor((now-t)/86400000); txt=(days<=1?"昨天":days+" 天前")+" "+(t.getMonth()+1)+"/"+t.getDate(); }
+  const cls = sameDay ? 'fresh' : (mins<3*1440 ? 'warn' : 'old');
+  return [cls, "最後同步："+txt];
+}
+
+function renderCard(s, d, zh){
+  const [cls, syncTxt] = d && d.ok ? syncBadge(d.ts) : ['old','還沒有資料'];
+  if(!d || !d.ok){
+    return `<div class="card"><h2>${s.emoji} ${s.label} <span class="sync old">${syncTxt}</span></h2><p style="color:#888">這個帳號還沒有任何存檔。</p></div>`;
+  }
+  const p=d.progress||{}, c=p.coins||{}, isl=d.island||{}, st=isl.stats||{};
+  const total=(p.totalCorrect||0)+(p.totalWrong||0);
+  const pct= total? Math.round(p.totalCorrect/total*100):0;
+  const weak=Object.entries(p.wrongCounts||{}).filter(([w,n])=>n>=1).sort((a,b)=>b[1]-a[1]);
+  const weakHtml = weak.length
+    ? weak.slice(0,40).map(([w,n])=>`<span class="chip ${n>=2?'hard':''}">${w}${zh[w]?" ("+zh[w]+")":""} ×${n}</span>`).join("")
+    : '<span style="color:#2fbf71;font-size:.82rem">目前沒有不熟的單字 👍</span>';
+  return `<div class="card">
+    <h2>${s.emoji} ${s.label} <span class="sync ${cls}">${syncTxt}</span></h2>
+    <div class="stats">
+      <div class="stat"><b>🪙 ${c.balance||0}</b><span>金幣</span></div>
+      <div class="stat"><b>${p.sessions||0}</b><span>練習次數</span></div>
+      <div class="stat"><b>${pct}%</b><span>正確率</span></div>
+      <div class="stat"><b>${p.totalCorrect||0}/${total}</b><span>答對/總題</span></div>
+    </div>
+    <div class="row">🏝️ 島嶼：人口 <b>${st.population||0}</b> ・ 美化 <b>${st.beauty||0}</b> ・ 建築 <b>${st.totalBuildings||0}</b> ・ 金幣/天 <b>${st.dailyCoinProduction||0}</b></div>
+    <div class="weak">
+      <h3>📌 需要加強的單字（紅色＝答錯 2 次以上，共 ${weak.length} 個）</h3>
+      ${weakHtml}
+    </div>
+  </div>`;
+}
+
+async function load(){
+  const zh=zhMap();
+  const cont=document.getElementById("cards");
+  cont.innerHTML='<p style="text-align:center;color:#888;padding:20px">載入中…</p>';
+  const out=[];
+  for(const s of STUDENTS){
+    let d=null;
+    try{ d=await (await fetch(GAS+"?student="+s.id+"&secret="+SECRET)).json(); }catch(e){}
+    out.push(renderCard(s,d,zh));
+  }
+  cont.innerHTML=out.join("");
+  document.getElementById("updated").textContent="更新於 "+new Date().toTimeString().slice(0,8);
+}
+load();
+</script>
+</body>
+</html>
