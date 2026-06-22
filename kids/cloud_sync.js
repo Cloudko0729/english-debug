@@ -78,7 +78,7 @@ function cloudSave(student) {
     const sb = window.sbClient;
     const now = new Date().toISOString();
     Promise.all([
-      sb.from("saves").upsert({ user_id: user.id, student, ts: now, progress, island }),
+      sb.from("saves").upsert({ user_id: user.id, student, ts: now, progress, island }, { onConflict: "user_id" }),
       sb.from("history").upsert(
         { user_id: user.id, student, day, client_ts: now, summary, progress, island },
         { onConflict: "user_id,day" }
