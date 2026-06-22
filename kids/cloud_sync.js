@@ -91,19 +91,12 @@ function cloudSave(student) {
   });
 }
 
-// 暫時的同步狀態列（debug 用，修好後會移除）：綠=成功、紅=失敗
+// 同步狀態：只記在背景 console + localStorage（不顯示在畫面上）
 function _sbDebug(msg) {
   try {
     localStorage.setItem("kidsSbStatus", msg + " @" + new Date().toISOString());
-    let el = document.getElementById("_sbStatus");
-    if (!el) {
-      el = document.createElement("div");
-      el.id = "_sbStatus";
-      el.style.cssText = "position:fixed;bottom:0;left:0;right:0;font:11px/1.4 monospace;padding:4px 8px;z-index:99998;text-align:center;color:#fff;";
-      if (document.body) document.body.appendChild(el);
-    }
-    el.style.background = msg.indexOf("ok") === 0 ? "#2fbf71" : "#ef476f";
-    el.textContent = "Supabase: " + msg;
+    if (msg.indexOf("ok") === 0) { if (window.console) console.log("[sync] " + msg); }
+    else if (window.console) console.warn("[sync] " + msg);
   } catch (e) {}
 }
 
