@@ -72,16 +72,39 @@ function cloudSave(student) {
   }
 
   // 2) 主存檔：Supabase（需登入）
+  if (!window.sbClient) { _sbDebug("no client (CDN?)"); }
   _sbUser().then(user => {
-    if (!user) return;
+    if (!user) { _sbDebug("no session"); return; }
     const sb = window.sbClient;
     const now = new Date().toISOString();
-    sb.from("saves").upsert({ user_id: user.id, student, ts: now, progress, island });
-    sb.from("history").upsert(
-      { user_id: user.id, student, day, client_ts: now, summary, progress, island },
-      { onConflict: "user_id,day" }
-    );
+    Promise.all([
+      sb.from("saves").upsert({ user_id: user.id, student, ts: now, progress, island }),
+      sb.from("history").upsert(
+        { user_id: user.id, student, day, client_ts: now, summary, progress, island },
+        { onConflict: "user_id,day" }
+      )
+    ]).then(([s, h]) => {
+      if (s && s.error) _sbDebug("saves ✗ " + s.error.message + " [" + (s.error.code || "") + "]");
+      else if (h && h.error) _sbDebug("history ✗ " + h.error.message + " [" + (h.error.code || "") + "]");
+      else _sbDebug("ok " + now.slice(11, 19));
+    }).catch(e => _sbDebug("throw " + (e && e.message)));
   });
+}
+
+// 暫時的同步狀態列（debug 用，修好後會移除）：綠=成功、紅=失敗
+function _sbDebug(msg) {
+  try {
+    localStorage.setItem("kidsSbStatus", msg + " @" + new Date().toISOString());
+    let el = document.getElementById("_sbStatus");
+    if (!el) {
+      el = document.createElement("div");
+      el.id = "_sbStatus";
+      el.style.cssText = "position:fixed;bottom:0;left:0;right:0;font:11px/1.4 monospace;padding:4px 8px;z-index:99998;text-align:center;color:#fff;";
+      if (document.body) document.body.appendChild(el);
+    }
+    el.style.background = msg.indexOf("ok") === 0 ? "#2fbf71" : "#ef476f";
+    el.textContent = "Supabase: " + msg;
+  } catch (e) {}
 }
 
 // ── 智慧同步：本機空就拉回，否則上傳備份 ─────────────────────────────────────
