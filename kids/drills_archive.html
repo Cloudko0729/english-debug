@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>歷史題庫（依月份） — Kids English</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Arial,"Noto Sans TC",sans-serif;max-width:640px;margin:0 auto;background:#fff7dc;color:#243042;padding-bottom:50px;}
+  header{background:#2f80ed;color:#fff;text-align:center;padding:22px 16px 16px;}
+  header h1{font-size:1.4rem;}
+  header a{color:#ffe27a;text-decoration:none;font-weight:700;font-size:.85rem;}
+  .month{margin:20px 16px 0;}
+  .month-h{font-size:1rem;font-weight:800;color:#3a2a00;background:#ffe9a8;border-radius:10px;padding:8px 14px;margin-bottom:10px;}
+  .card-list{display:flex;flex-direction:column;gap:10px;}
+  .card{background:#fff;border-radius:12px;padding:13px 15px;text-decoration:none;color:inherit;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 4px rgba(0,0,0,.08);border:2px solid transparent;}
+  .card-left{display:flex;align-items:center;gap:12px;}
+  .card-icon{width:40px;height:40px;border-radius:10px;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+  .card-title{font-size:.95rem;font-weight:700;}
+  .card-sub{font-size:.76rem;color:#888;}
+  .arrow{color:#bbb;font-size:1rem;}
+  .lock-badge{font-size:.7rem;font-weight:700;background:#9aa0ad;color:#fff;border-radius:5px;padding:2px 7px;white-space:nowrap;}
+  .card.locked{opacity:.55;pointer-events:none;filter:grayscale(.4);}
+  .card[data-done="1"]{border-color:#2fbf71;background:#f3fcf7;}
+  .card[data-done="1"] .card-title::before{content:"✅ ";}
+  #who{text-align:center;font-size:.8rem;color:#667085;padding:10px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>📚 歷史題庫</h1>
+  <p style="font-size:.82rem;opacity:.9;margin-top:4px">所有每日練習 · 依月份 · <a href="index.html">← 回首頁</a></p>
+</header>
+<div id="who"></div>
+<div id="months"></div>
+
+<script src="drills_list.js"></script>
+<script>
+function todayStr(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function currentStudent(){return localStorage.getItem("kidsCurrentStudent")||"";}
+function progress(){ const s=currentStudent(); if(!s)return null; try{return JSON.parse(localStorage.getItem("kidsProgress."+s)||"null");}catch(e){return null;} }
+
+function render(){
+  const s=currentStudent();
+  document.getElementById("who").textContent = s ? ("目前帳號："+s.charAt(0).toUpperCase()+s.slice(1)+"（✅ = 已完成）") : "（尚未登入，完成狀態請先到首頁登入）";
+  const claimed=((progress()||{}).coins||{}).claimedDrills||{};
+  const today=todayStr();
+  const isTest=s==="test";
+  // 依月份分組
+  const byMonth={};
+  DRILLS.forEach(d=>{ const m=d.date.slice(0,7); (byMonth[m]=byMonth[m]||[]).push(d); });
+  const months=Object.keys(byMonth).sort().reverse();
+  const cont=document.getElementById("months");
+  cont.innerHTML = months.map(m=>{
+    const [y,mo]=m.split("-");
+    const cards=byMonth[m].sort((a,b)=>a.date<b.date?1:-1).map(d=>{
+      const claim=d.date+"::"+d.date+"-"+d.theme;
+      const done=claimed[claim]?"1":"0";
+      const locked=!isTest && today<d.date;
+      const adv=d.day>=17?" ＋📘進階":"";
+      const right = locked
+        ? `<span class="lock-badge">🔒 ${d.date.slice(5).replace("-","/")} 開放</span>`
+        : `<span class="arrow">›</span>`;
+      return `<a class="card${locked?" locked":""}" href="drills/daily_${d.date}.html" data-done="${done}">
+        <div class="card-left"><div class="card-icon">${d.icon}</div>
+          <div><div class="card-title">Day ${d.day} — ${d.date}</div>
+          <div class="card-sub">${d.eng} ${d.zh}${adv}</div></div></div>
+        ${right}</a>`;
+    }).join("");
+    return `<div class="month"><div class="month-h">${y} 年 ${parseInt(mo,10)} 月（${byMonth[m].length} 天）</div><div class="card-list">${cards}</div></div>`;
+  }).join("");
+}
+render();
+</script>
+</body>
+</html>

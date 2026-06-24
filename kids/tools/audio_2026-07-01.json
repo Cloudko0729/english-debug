@@ -1,0 +1,24 @@
+{
+ "outdir": "D:/english/kids/drills/audio/2026-07-01",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "s1_0": "tree",
+  "s1_1": "sun",
+  "s1_2": "mountain",
+  "s1_3": "flower",
+  "s1_4": "sea",
+  "s1_5": "river",
+  "s2_0": "The sun is hot today.",
+  "s2_1": "We see many stars at night.",
+  "s2_2": "There is a big tree in the park.",
+  "s2_3": "Fish live in the river.",
+  "s2_4": "We climb the mountain.",
+  "passage": "May loves nature. On Saturday, she walks up a small mountain with her dad. They see green trees and pretty flowers. A clear river runs near the path. At the top, they can see the blue sea far away. At night, May looks at the moon and the stars. She thinks nature is beautiful.",
+  "s4_0": "The sun is very hot.",
+  "s4_1": "We see stars at night.",
+  "s4_2": "There is a big tree.",
+  "s4_3": "Fish live in the river.",
+  "advPassage": "Last Sunday, Anna and her family went to a forest near a river. They saw tall trees and heard birds singing. Anna's brother found a small flower and gave it to her. They had a picnic next to the water. The sun was warm, and everyone was happy. Anna wants to go again."
+ }
+}

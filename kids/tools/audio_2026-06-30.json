@@ -1,0 +1,24 @@
+{
+ "outdir": "D:/english/kids/drills/audio/2026-06-30",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "s1_0": "bus",
+  "s1_1": "train",
+  "s1_2": "plane",
+  "s1_3": "car",
+  "s1_4": "bike",
+  "s1_5": "boat",
+  "s2_0": "I go to school by bus.",
+  "s2_1": "We take a train to Taipei.",
+  "s2_2": "My father drives a car.",
+  "s2_3": "She rides a bike to the park.",
+  "s2_4": "They fly in a plane.",
+  "passage": "Tom lives in a small town. Every morning, he rides his bike to school. His sister takes the bus because her school is far. On the weekend, the family drives a car to the beach. Last summer, they took a plane to visit Grandma. Tom likes trains best because they are fast.",
+  "s4_0": "I go to school by bus.",
+  "s4_1": "We take a train to Taipei.",
+  "s4_2": "She rides her bike to school.",
+  "s4_3": "My father drives a car.",
+  "advPassage": "Yesterday, Ben and his mom went to the city by train. The train was fast and clean. In the city, they took a bus to the museum. After that, they walked to a park and ate ice cream. They came home by taxi because it was late. Ben had a fun day."
+ }
+}

@@ -1,0 +1,24 @@
+{
+ "outdir": "D:/english/kids/drills/audio/2026-06-29",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "s1_0": "doctor",
+  "s1_1": "teacher",
+  "s1_2": "farmer",
+  "s1_3": "cook",
+  "s1_4": "nurse",
+  "s1_5": "driver",
+  "s2_0": "My mother is a nurse.",
+  "s2_1": "The cook makes good food.",
+  "s2_2": "A doctor helps sick people.",
+  "s2_3": "The driver drives a bus.",
+  "s2_4": "My teacher works at school.",
+  "passage": "Mr. Lin is a cook. He works in a restaurant and makes noodles and soup. His wife is a nurse. She helps sick people at the hospital. Their son wants to be a police officer because he likes to help people. On Sunday, the family eats dinner together at home.",
+  "s4_0": "My father is a farmer.",
+  "s4_1": "The doctor helps sick people.",
+  "s4_2": "A cook makes good food.",
+  "s4_3": "She works at the hospital.",
+  "advPassage": "Last week, Lily visited a farm with her class. A farmer showed them the cows and chickens. They picked apples and fed the animals. At noon, they ate lunch under a big tree. Lily was happy because she saw a baby cow. She wants to be a farmer one day."
+ }
+}
