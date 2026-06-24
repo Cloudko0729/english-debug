@@ -1,0 +1,24 @@
+{
+ "outdir": "D:/english/kids/drills/audio/2026-06-28",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "s1_0": "soccer",
+  "s1_1": "swim",
+  "s1_2": "basketball",
+  "s1_3": "run",
+  "s1_4": "tennis",
+  "s1_5": "baseball",
+  "s2_0": "I play soccer after school.",
+  "s2_1": "She can swim very well.",
+  "s2_2": "We watch baseball on TV.",
+  "s2_3": "He runs in the park.",
+  "s2_4": "They play basketball every day.",
+  "passage": "Amy likes sports. On Monday, she plays tennis with her friend. On Wednesday, she swims at school. She runs in the park every morning. Her brother plays baseball, and Amy likes soccer too. On the weekend, they watch basketball games on TV together.",
+  "s4_0": "We play soccer after school.",
+  "s4_1": "She can swim very fast.",
+  "s4_2": "I run in the park.",
+  "s4_3": "He plays baseball on Sunday.",
+  "advPassage": "Last Saturday, Ken went to the sports center with his dad. First, they played tennis for an hour. Then Ken swam in the big pool. He was tired, so they ate sandwiches. In the afternoon, they watched a basketball game. Ken had a great day."
+ }
+}
