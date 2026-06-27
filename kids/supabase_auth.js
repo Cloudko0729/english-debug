@@ -127,8 +127,21 @@ async function showSourceChoice(student, proceed) {
   const lp = (function () { try { return JSON.parse(localStorage.getItem("kidsProgress." + student) || "null"); } catch (e) { return null; } })();
   const localCoins = (lp && lp.coins && lp.coins.balance) || 0;
   const cloudCoins = (cloud.progress.coins && cloud.progress.coins.balance) || 0;
-  let when = "";
-  if (cloud.ts) { const t = new Date(cloud.ts); when = `${t.getMonth() + 1}/${t.getDate()} ${t.toTimeString().slice(0, 5)}`; }
+
+  // 用「最後一筆活動時間」比新舊
+  const lastAct = prog => {
+    const tx = prog && prog.coins && prog.coins.transactions;
+    if (!tx || !tx.length) return 0;
+    let m = 0; for (const t of tx) { const c = Date.parse(t.createdAt || 0) || 0; if (c > m) m = c; }
+    return m;
+  };
+  const fmt = ms => { if (!ms) return "—"; const t = new Date(ms); return `${t.getMonth() + 1}/${t.getDate()} ${t.toTimeString().slice(0, 5)}`; };
+  const cAct = lastAct(cloud.progress), lAct = lastAct(lp);
+  let rec = "same";
+  if (cAct > lAct + 2000) rec = "cloud"; else if (lAct > cAct + 2000) rec = "local";
+  const badge = "<span style='font-size:.7rem;background:#2fbf71;color:#fff;border-radius:8px;padding:1px 7px;margin-left:6px'>✅ 建議（較新）</span>";
+  const sameNote = rec === "same"
+    ? `<p style="margin:0 0 12px;color:#2fbf71;font-size:.8rem;font-weight:700">兩邊進度看起來一樣，選哪個都可以 👍</p>` : "";
 
   const ov = document.createElement("div");
   ov.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:100000;padding:18px;font-family:Arial,'Noto Sans TC',sans-serif";
@@ -136,11 +149,12 @@ async function showSourceChoice(student, proceed) {
     <div style="background:#fff;border-radius:18px;max-width:380px;width:100%;padding:22px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.25)">
       <div style="font-size:2rem">🔄</div>
       <h2 style="margin:6px 0 4px;color:#2f80ed">要用哪個進度？</h2>
-      <p style="margin:0 0 16px;color:#888;font-size:.82rem">${student.charAt(0).toUpperCase() + student.slice(1)}　兩邊不一樣時請選一個</p>
-      <button id="srcCloud" style="display:block;width:100%;border:2px solid #2f80ed;background:#eef5ff;border-radius:12px;padding:12px;margin-bottom:10px;cursor:pointer;text-align:left">
-        <b style="color:#2f80ed">☁️ 讀取雲端紀錄</b><div style="font-size:.82rem;color:#555;margin-top:3px">🪙 ${cloudCoins}${when ? "　·　上次同步 " + when : ""}</div></button>
-      <button id="srcLocal" style="display:block;width:100%;border:2px solid #2fbf71;background:#f0fcf6;border-radius:12px;padding:12px;cursor:pointer;text-align:left">
-        <b style="color:#1c7a4d">💾 用這台的暫存</b><div style="font-size:.82rem;color:#555;margin-top:3px">🪙 ${localCoins}　·　這台瀏覽器目前的進度</div></button>
+      <p style="margin:0 0 12px;color:#888;font-size:.82rem">${student.charAt(0).toUpperCase() + student.slice(1)}</p>
+      ${sameNote}
+      <button id="srcCloud" style="display:block;width:100%;border:2px solid ${rec === "cloud" ? "#2fbf71" : "#2f80ed"};background:#eef5ff;border-radius:12px;padding:12px;margin-bottom:10px;cursor:pointer;text-align:left">
+        <b style="color:#2f80ed">☁️ 讀取雲端紀錄</b>${rec === "cloud" ? badge : ""}<div style="font-size:.82rem;color:#555;margin-top:3px">🪙 ${cloudCoins}　·　最後活動 ${fmt(cAct)}</div></button>
+      <button id="srcLocal" style="display:block;width:100%;border:2px solid ${rec === "local" ? "#2fbf71" : "#2fbf71"};background:#f0fcf6;border-radius:12px;padding:12px;cursor:pointer;text-align:left">
+        <b style="color:#1c7a4d">💾 用這台的暫存</b>${rec === "local" ? badge : ""}<div style="font-size:.82rem;color:#555;margin-top:3px">🪙 ${localCoins}　·　最後活動 ${fmt(lAct)}</div></button>
       <p style="margin:12px 0 0;color:#aaa;font-size:.72rem">雲端＝之前或別台存的；暫存＝這台剛剛玩的。</p>
     </div>`;
   document.body.appendChild(ov);
