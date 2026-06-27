@@ -25,4 +25,8 @@ const DRILLS = [
   { day: 21, date: "2026-07-02", theme: "past",       eng: "Past Tense",     zh: "過去式（國一）", icon: "⏪" },
   { day: 22, date: "2026-07-03", theme: "future",     eng: "Future",         zh: "未來式（國一）", icon: "🔮" },
   { day: 23, date: "2026-07-04", theme: "compare",    eng: "Comparatives",   zh: "比較級（國中）", icon: "⚖️" },
+  { day: 24, date: "2026-07-05", theme: "perfect",    eng: "Present Perfect", zh: "現在完成式（國二）", icon: "✅" },
+  { day: 25, date: "2026-07-06", theme: "modals",     eng: "Modals",          zh: "情態動詞（國二）", icon: "⚠️" },
+  { day: 26, date: "2026-07-07", theme: "conj",       eng: "Conjunctions",    zh: "連接詞（國二）", icon: "🔗" },
+  { day: 27, date: "2026-07-08", theme: "gerund",     eng: "Gerund & Infinitive", zh: "動名詞/不定詞（國二）", icon: "🎯" },
 ];

@@ -1,0 +1,24 @@
+{
+ "outdir": "D:/english/kids/drills/audio/2026-07-06",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "s1_0": "rule",
+  "s1_1": "sick",
+  "s1_2": "medicine",
+  "s1_3": "doctor",
+  "s1_4": "rest",
+  "s1_5": "homework",
+  "s2_0": "You should drink more water.",
+  "s2_1": "We must wear a helmet.",
+  "s2_2": "She has to study tonight.",
+  "s2_3": "You shouldn't eat too much candy.",
+  "s2_4": "Can you help me?",
+  "passage": "Ben caught a cold last week. The doctor told him that he should rest at home and drink plenty of water. He must take his medicine twice a day. The doctor also said he shouldn't eat too much ice cream. Ben has to stay home for three days, so he can't go to school. His mother says he should sleep early. Now Ben feels much better.",
+  "s4_0": "You should eat more vegetables.",
+  "s4_1": "We must follow the rules.",
+  "s4_2": "She has to wake up early.",
+  "s4_3": "You shouldn't be late today.",
+  "advPassage": "Many students feel tired because they sleep too late. If you want to feel better, you should change some habits. First, you must put away your phone before bed; the light keeps your brain awake. You should also exercise during the day, but you shouldn't exercise right before sleep. Doctors say teenagers need about nine hours of sleep. You don't have to follow every rule, but a good routine really helps."
+ }
+}

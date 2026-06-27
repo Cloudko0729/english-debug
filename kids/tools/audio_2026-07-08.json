@@ -1,0 +1,24 @@
+{
+ "outdir": "D:/english/kids/drills/audio/2026-07-08",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "s1_0": "enjoy",
+  "s1_1": "practice",
+  "s1_2": "hobby",
+  "s1_3": "dream",
+  "s1_4": "decide",
+  "s1_5": "hope",
+  "s2_0": "I enjoy reading books.",
+  "s2_1": "She wants to be a singer.",
+  "s2_2": "He is good at playing chess.",
+  "s2_3": "They decided to go camping.",
+  "s2_4": "We finished cleaning the room.",
+  "passage": "Nina has many hobbies. She enjoys painting and loves taking photos of nature. She is good at playing the violin, and she practices every day. This summer, she has decided to learn surfing because she wants to try something new. Her dream is to become an artist. She hopes to travel around the world and paint beautiful places. Nina believes that doing what you love makes life exciting.",
+  "s4_0": "I enjoy listening to music.",
+  "s4_1": "She wants to learn English.",
+  "s4_2": "He is good at drawing cartoons.",
+  "s4_3": "We decided to go hiking.",
+  "advPassage": "Ryan used to spend all his free time playing video games. Last year, however, he decided to try something different. He started learning to cook because he wanted to make meals for his family. At first, he was not good at it, and he often burned the food. But he kept practicing, and now he enjoys cooking very much. His family loves eating his dishes. Ryan says that learning a new skill is hard but worth it."
+ }
+}
