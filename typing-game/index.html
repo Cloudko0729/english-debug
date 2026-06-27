@@ -580,10 +580,13 @@
     }
 
     .finger-legend {
-      display: flex;
-      gap: 14px;
+      display: none;
+      gap: 12px;
       font-size: 0.68rem;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
     }
+    .finger-legend.open { display: flex; }
 
     .finger-legend-item {
       display: flex;
@@ -1096,6 +1099,25 @@
         <div class="stack-warning">
           <div class="stack-warning-fill" id="stackWarningFill"></div>
         </div>
+        <!-- 鍵盤指位圖（移到方塊下方；圖例預設收合）-->
+        <div class="keyboard-section" style="width:100%;margin-top:14px">
+          <div class="keyboard-header" onclick="toggleLegend()" style="cursor:pointer;justify-content:flex-start">
+            <div class="keyboard-title">⌨ 鍵盤指位圖 <span id="legendArrow" style="font-size:.85em;letter-spacing:0">▶ 看手指顏色</span></div>
+          </div>
+          <div class="finger-legend" id="fingerLegend">
+            <div class="finger-legend-item"><span class="finger-dot pinky"></span>小指</div>
+            <div class="finger-legend-item"><span class="finger-dot ring"></span>無名指</div>
+            <div class="finger-legend-item"><span class="finger-dot middle"></span>中指</div>
+            <div class="finger-legend-item"><span class="finger-dot l-index"></span>左食指</div>
+            <div class="finger-legend-item"><span class="finger-dot r-index"></span>右食指</div>
+            <div class="finger-legend-item"><span class="finger-dot thumb"></span>拇指</div>
+          </div>
+          <div class="keyboard-rows" id="keyboardRows"></div>
+          <div class="hand-labels">
+            <span class="hand-label">← 左手 Left</span>
+            <span class="hand-label">右手 Right →</span>
+          </div>
+        </div>
       </div>
 
       <!-- Stats -->
@@ -1133,26 +1155,6 @@
         </div>
       </div>
     </section>
-
-    <!-- KEYBOARD -->
-    <section class="keyboard-section">
-      <div class="keyboard-header">
-        <div class="keyboard-title">⌨ 鍵盤指位圖 Finger Position</div>
-        <div class="finger-legend">
-          <div class="finger-legend-item"><span class="finger-dot pinky"></span>小指</div>
-          <div class="finger-legend-item"><span class="finger-dot ring"></span>無名指</div>
-          <div class="finger-legend-item"><span class="finger-dot middle"></span>中指</div>
-          <div class="finger-legend-item"><span class="finger-dot l-index"></span>左食指</div>
-          <div class="finger-legend-item"><span class="finger-dot r-index"></span>右食指</div>
-          <div class="finger-legend-item"><span class="finger-dot thumb"></span>拇指</div>
-        </div>
-      </div>
-      <div class="keyboard-rows" id="keyboardRows"></div>
-      <div class="hand-labels">
-        <span class="hand-label">← 左手 Left</span>
-        <span class="hand-label">右手 Right →</span>
-      </div>
-    </section>
   </div>
 
   <!-- GAME OVER OVERLAY -->
@@ -1185,6 +1187,14 @@
     function _td() { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
     function _curStu() { return localStorage.getItem("kidsCurrentStudent") || ""; }
     function _getProg(s) { try { return JSON.parse(localStorage.getItem("kidsProgress." + s) || "null"); } catch (e) { return null; } }
+
+    function toggleLegend() {
+      const l = document.getElementById('fingerLegend');
+      const a = document.getElementById('legendArrow');
+      if (!l) return;
+      const open = l.classList.toggle('open');
+      if (a) a.textContent = open ? '▼ 收起' : '▶ 看手指顏色';
+    }
 
     function buildKidWords() {
       const basic = new Set();
