@@ -1,19 +1,15 @@
-// 月度課程：每月「文法教學（累積複習）」＋「每週 30 新單字（配合當月文法主題）」。
-// 單字會餵進每日單字測驗(vocab_quiz.html)，並由 vocab_week.html 當記憶表。
-// 單字程度＝國中(國一/國二)；經 Codex 複審。Audio: audio/words/<wordAudioKey(en)>.mp3
+// 月度課程：文法「順延每月更新」(每月解鎖該月文法，未到月份的鎖住) ＋ 每週 30 新單字。
+// 單字餵進每日單字測驗(vocab_quiz.html) + Day 21-27 每日測驗 + vocab_week.html 記憶表。
+// 7 份國中文法教學頁分配到 7~10 月；當月(含)之後才解鎖讀取。經 Codex 複審。
+// Audio: audio/words/<wordAudioKey(en)>.mp3
 const CURRICULUM = [
   {
     month: "2026-07",
     label: "7 月",
-    // 本月新文法（對應教學頁）
+    // 本月解鎖的文法（對應教學頁）
     grammar: [
-      { topic: "過去式",        eng: "Past Tense",          file: "lessons/lesson_2026-07-02.html", icon: "⏪" },
-      { topic: "未來式",        eng: "Future",              file: "lessons/lesson_2026-07-03.html", icon: "🔮" },
-      { topic: "比較級",        eng: "Comparatives",        file: "lessons/lesson_2026-07-04.html", icon: "⚖️" },
-      { topic: "現在完成式",    eng: "Present Perfect",      file: "lessons/lesson_2026-07-05.html", icon: "✅" },
-      { topic: "情態動詞",      eng: "Modals",              file: "lessons/lesson_2026-07-06.html", icon: "⚠️" },
-      { topic: "連接詞",        eng: "Conjunctions",        file: "lessons/lesson_2026-07-07.html", icon: "🔗" },
-      { topic: "動名詞 / 不定詞", eng: "Gerund & Infinitive", file: "lessons/lesson_2026-07-08.html", icon: "🎯" }
+      { topic: "過去式", eng: "Past Tense", file: "lessons/lesson_2026-07-02.html", icon: "⏪" },
+      { topic: "未來式", eng: "Future",     file: "lessons/lesson_2026-07-03.html", icon: "🔮" }
     ],
     weeks: [
       {
@@ -34,7 +30,7 @@ const CURRICULUM = [
       },
       {
         n: 2, start: "2026-07-08", end: "2026-07-14",
-        theme: "描述與經驗", grammar: ["比較級", "現在完成式"],
+        theme: "描述與經驗", grammar: ["過去式", "未來式"],
         words: [
           { en: "tall", zh: "高的", pos: "adj" }, { en: "short", zh: "矮的、短的", pos: "adj" }, { en: "heavy", zh: "重的", pos: "adj" },
           { en: "light", zh: "輕的", pos: "adj" }, { en: "expensive", zh: "昂貴的", pos: "adj" }, { en: "cheap", zh: "便宜的", pos: "adj" },
@@ -50,7 +46,7 @@ const CURRICULUM = [
       },
       {
         n: 3, start: "2026-07-15", end: "2026-07-21",
-        theme: "健康與規則", grammar: ["情態動詞", "連接詞"],
+        theme: "健康與規則", grammar: ["過去式", "未來式"],
         words: [
           { en: "health", zh: "健康", pos: "n" }, { en: "healthy", zh: "健康的", pos: "adj" }, { en: "exercise", zh: "運動", pos: "n" },
           { en: "medicine", zh: "藥", pos: "n" }, { en: "doctor", zh: "醫生", pos: "n" }, { en: "nurse", zh: "護士", pos: "n" },
@@ -66,7 +62,7 @@ const CURRICULUM = [
       },
       {
         n: 4, start: "2026-07-22", end: "2026-07-31",
-        theme: "嗜好與志向", grammar: ["動名詞 / 不定詞"],
+        theme: "嗜好與志向", grammar: ["過去式", "未來式"],
         words: [
           { en: "hobby", zh: "嗜好", pos: "n" }, { en: "interest", zh: "興趣", pos: "n" }, { en: "activity", zh: "活動", pos: "n" },
           { en: "collect", zh: "收集", pos: "v" }, { en: "painting", zh: "繪畫", pos: "n" }, { en: "hiking", zh: "健行", pos: "n" },
@@ -81,21 +77,56 @@ const CURRICULUM = [
         ]
       }
     ]
+  },
+  // ── 之後的月份：文法先排好，當月才解鎖（weeks 之後再依進度補上）──
+  {
+    month: "2026-08", label: "8 月", grammar: [
+      { topic: "比較級",     eng: "Comparatives",   file: "lessons/lesson_2026-07-04.html", icon: "⚖️" },
+      { topic: "現在完成式", eng: "Present Perfect", file: "lessons/lesson_2026-07-05.html", icon: "✅" }
+    ], weeks: []
+  },
+  {
+    month: "2026-09", label: "9 月", grammar: [
+      { topic: "情態動詞", eng: "Modals",       file: "lessons/lesson_2026-07-06.html", icon: "⚠️" },
+      { topic: "連接詞",   eng: "Conjunctions", file: "lessons/lesson_2026-07-07.html", icon: "🔗" }
+    ], weeks: []
+  },
+  {
+    month: "2026-10", label: "10 月", grammar: [
+      { topic: "動名詞 / 不定詞", eng: "Gerund & Infinitive", file: "lessons/lesson_2026-07-08.html", icon: "🎯" }
+    ], weeks: []
   }
 ];
 
-// 取得某日期所屬的月份課程（找不到就用最後一個月）
+function _ym(dateStr) { return (dateStr || "").slice(0, 7); }
+// 月份是否已開放（今天的月份 >= 該月）→ 文法教學頁的解鎖判斷
+function isMonthOpen(monthStr, todayStr) { return _ym(todayStr) >= monthStr; }
+// 取得某日期所屬月份課程（找不到→該日之前最近的月；再不行→第一個月）
 function curriculumForDate(dateStr) {
-  const m = (dateStr || "").slice(0, 7);
-  return CURRICULUM.find(c => c.month === m) || CURRICULUM[CURRICULUM.length - 1];
+  const m = _ym(dateStr);
+  return CURRICULUM.find(c => c.month === m)
+      || CURRICULUM.filter(c => c.month <= m).slice(-1)[0]
+      || CURRICULUM[0];
 }
-// 取得某日期所屬的「本週」單字組（早於該月→第1週；晚於→最後一週）
+// 把所有月份的週攤平
+function allWeeks() {
+  const out = [];
+  CURRICULUM.forEach(c => (c.weeks || []).forEach(w => out.push({ ...w, month: c })));
+  return out;
+}
+// 取得某日期所屬的「本週」單字組（沒對應→取最近、或第1週）
 function vocabWeekForDate(dateStr) {
-  const c = curriculumForDate(dateStr);
+  const weeks = allWeeks();
   const d = dateStr || "";
-  let wk = c.weeks.find(w => d >= w.start && d <= w.end);
-  if (!wk) wk = (d < c.weeks[0].start) ? c.weeks[0] : c.weeks[c.weeks.length - 1];
-  return { month: c, week: wk };
+  let wk = weeks.find(w => d >= w.start && d <= w.end);
+  if (!wk) wk = (d < weeks[0].start) ? weeks[0] : weeks[weeks.length - 1];
+  return { month: wk.month, week: wk };
+}
+// 找某教學頁檔案屬於哪個月（給解鎖判斷用）
+function monthOfLessonFile(file) {
+  for (const c of CURRICULUM) for (const g of c.grammar) if (file.indexOf(g.file) >= 0 || g.file.indexOf(file) >= 0) return c.month;
+  return null;
 }
 
-if (typeof module !== "undefined" && module.exports) module.exports = { CURRICULUM, curriculumForDate, vocabWeekForDate };
+if (typeof module !== "undefined" && module.exports)
+  module.exports = { CURRICULUM, curriculumForDate, vocabWeekForDate, isMonthOpen, monthOfLessonFile, allWeeks };

@@ -36,38 +36,56 @@
 
 <script src="curriculum.js"></script>
 <script>
-function gcard(g) {
-  return `<a class="card" href="${g.file}">
-    <div class="ic">${g.icon}</div>
-    <div><div class="t">${g.topic}</div><div class="s">${g.eng} · 單字/文法步驟/對話/短文/小測驗</div></div>
-    <span class="arrow">›</span></a>`;
+function todayStr() { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+const TODAY = todayStr();
+const isTest = localStorage.getItem("kidsCurrentStudent") === "test";
+
+function gcard(g, open, monthLabel) {
+  if (open) {
+    return `<a class="card" href="${g.file}">
+      <div class="ic">${g.icon}</div>
+      <div><div class="t">${g.topic}</div><div class="s">${g.eng} · 單字/文法步驟/對話/短文/小測驗</div></div>
+      <span class="arrow">›</span></a>`;
+  }
+  return `<div class="card" style="opacity:.6;background:#f4f6f9">
+      <div class="ic" style="background:#e7ebf0">🔒</div>
+      <div><div class="t">${g.topic}</div><div class="s">${g.eng} · ${monthLabel}開放</div></div>
+      <span class="arrow" style="color:#bbb">🔒</span></div>`;
 }
 function render() {
   const root = document.getElementById("root");
-  const months = CURRICULUM.slice().reverse();      // 最新月在最上
-  const cur = months[0], older = months.slice(1);
+  const cur = curriculumForDate(TODAY);                 // 以「今天」決定本月
+  const idx = CURRICULUM.indexOf(cur);
+  const older = CURRICULUM.slice(0, idx);               // 之前的月（複習）
+  const upcoming = CURRICULUM.slice(idx + 1);           // 之後的月（未開放）
+  const curOpen = isMonthOpen(cur.month, TODAY) || isTest;
   let html = "";
 
   // 本月新文法
   html += `<div class="sec"><div class="sec-h">🆕 本月新文法 <span class="month-tag">${cur.label}</span></div>`;
-  html += cur.grammar.map(gcard).join("");
-  // 本月每週單字主題（連到記憶表）
+  if (!curOpen) html += `<div class="note">📅 ${cur.label}（${cur.month.slice(5)}/01）正式開放；測試帳號可先預覽。</div>`;
+  html += cur.grammar.map(g => gcard(g, curOpen, cur.label)).join("");
   html += cur.weeks.map(w =>
-    `<div class="vocabbox"><div class="wk">第 ${w.n} 週 · ${w.theme}（${w.words.length} 字）<span style="color:#999;font-weight:400">　配合：${w.grammar.join("、")}</span></div>
+    `<div class="vocabbox"><div class="wk">第 ${w.n} 週 · ${w.theme}（${w.words.length} 字）</div>
      <a href="vocab_week.html?w=${w.n}">📒 看本週單字記憶表 →</a></div>`).join("");
   html += `</div>`;
 
-  // 累積複習（往月）
+  // 累積複習（往月，已開放）
   html += `<div class="sec review"><div class="sec-h review">📚 複習（往月累積）</div>`;
-  if (!older.length) {
-    html += `<div class="note">目前是第一個月，還沒有往月文法。之後每個月的文法都會累積到這裡，方便回頭複習。</div>`;
-  } else {
-    html += older.map(m =>
-      `<div class="month-tag" style="display:inline-block;margin:6px 2px">${m.label}</div>` +
-      m.grammar.map(gcard).join("")).join("");
-  }
+  if (!older.length) html += `<div class="note">目前是第一個月，還沒有往月文法。之後每月學過的文法都會累積到這裡複習。</div>`;
+  else html += older.map(m =>
+    `<div class="month-tag" style="display:inline-block;margin:6px 2px">${m.label}</div>` +
+    m.grammar.map(g => gcard(g, true, m.label)).join("")).join("");
   html += `</div>`;
 
+  // 之後月份（鎖住，預告）
+  if (upcoming.length) {
+    html += `<div class="sec"><div class="sec-h" style="color:#999">🔒 之後月份（時間到自動開放）</div>`;
+    html += upcoming.map(m =>
+      `<div class="month-tag" style="display:inline-block;margin:6px 2px;background:#e7ebf0;color:#888">${m.label}</div>` +
+      m.grammar.map(g => gcard(g, isTest, m.label)).join("")).join("");
+    html += `</div>`;
+  }
   root.innerHTML = html;
 }
 render();
