@@ -128,5 +128,33 @@ function monthOfLessonFile(file) {
   return null;
 }
 
+// 文法題庫（每日測驗用，依當月文法出題）。key = grammar topic。
+const GRAMMAR_BANK = {
+  "過去式": [
+    { q: "We ___ to the museum yesterday.", choices: ["went", "go", "going"], answer: "went" },
+    { q: "She ___ a new bag last week.", choices: ["bought", "buy", "buys"], answer: "bought" },
+    { q: "They ___ a movie last night.", choices: ["saw", "see", "seen"], answer: "saw" },
+    { q: "I ___ noodles for lunch.", choices: ["ate", "eat", "eaten"], answer: "ate" },
+    { q: "He ___ very tired yesterday.", choices: ["was", "were", "is"], answer: "was" },
+    { q: "We ___ at home last weekend.", choices: ["were", "was", "are"], answer: "were" },
+    { q: "I ___ go to school yesterday.", choices: ["didn't", "don't", "wasn't"], answer: "didn't" },
+    { q: "___ you visit your grandma last Sunday?", choices: ["Did", "Do", "Was"], answer: "Did" },
+    { q: "She ___ English last night.", choices: ["studied", "study", "studies"], answer: "studied" },
+    { q: "The bus ___ here ten minutes ago.", choices: ["stopped", "stop", "stops"], answer: "stopped" }
+  ],
+  "未來式": [
+    { q: "I ___ going to visit my uncle.", choices: ["am", "will", "is"], answer: "am" },
+    { q: "It ___ rain tomorrow.", choices: ["will", "am", "are"], answer: "will" },
+    { q: "She is going to ___ a new phone.", choices: ["buy", "buys", "buying"], answer: "buy" },
+    { q: "We ___ have a test next Monday.", choices: ["are going to", "went to", "going"], answer: "are going to" },
+    { q: "They ___ come to the party tonight.", choices: ["will", "did", "was"], answer: "will" },
+    { q: "Take an umbrella. It ___ rain.", choices: ["is going to", "was", "did"], answer: "is going to" },
+    { q: "I think it ___ be sunny tomorrow.", choices: ["will", "was", "did"], answer: "will" },
+    { q: "What ___ you going to do this weekend?", choices: ["are", "did", "was"], answer: "are" },
+    { q: "I ___ help you with your homework.", choices: ["will", "was", "did"], answer: "will" },
+    { q: "He is going to ___ to Japan next month.", choices: ["travel", "traveled", "travels"], answer: "travel" }
+  ]
+};
+
 if (typeof module !== "undefined" && module.exports)
-  module.exports = { CURRICULUM, curriculumForDate, vocabWeekForDate, isMonthOpen, monthOfLessonFile, allWeeks };
+  module.exports = { CURRICULUM, GRAMMAR_BANK, curriculumForDate, vocabWeekForDate, isMonthOpen, monthOfLessonFile, allWeeks };

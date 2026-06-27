@@ -57,14 +57,14 @@ function render(){
       const claim=d.date+"::"+d.date+"-"+d.theme;
       const done=claimed[claim]?"1":"0";
       const locked=!isTest && today<d.date;
-      const adv=d.day>=17?" ＋📘進階":"";
+      const sub = d.kind==="vocab" ? `${d.eng}：${d.zh}` : `${d.eng} ${d.zh}${d.day>=17?" ＋📘進階":""}`;
       const right = locked
         ? `<span class="lock-badge">🔒 ${d.date.slice(5).replace("-","/")} 開放</span>`
         : `<span class="arrow">›</span>`;
       return `<a class="card${locked?" locked":""}" href="drills/daily_${d.date}.html" data-done="${done}">
         <div class="card-left"><div class="card-icon">${d.icon}</div>
           <div><div class="card-title">Day ${d.day} — ${d.date}</div>
-          <div class="card-sub">${d.eng} ${d.zh}${adv}</div></div></div>
+          <div class="card-sub">${sub}</div></div></div>
         ${right}</a>`;
     }).join("");
     return `<div class="month"><div class="month-h">${y} 年 ${parseInt(mo,10)} 月（${byMonth[m].length} 天）</div><div class="card-list">${cards}</div></div>`;
