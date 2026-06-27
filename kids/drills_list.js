@@ -21,4 +21,8 @@ const DRILLS = [
   { day: 18, date: "2026-06-29", theme: "jobs",       eng: "Jobs",           zh: "職業",   icon: "💼" },
   { day: 19, date: "2026-06-30", theme: "transport",  eng: "Transportation", zh: "交通",   icon: "🚌" },
   { day: 20, date: "2026-07-01", theme: "nature",     eng: "Nature",         zh: "大自然", icon: "🏞️" },
+  // ── 國中（國一/國二）進度 ──
+  { day: 21, date: "2026-07-02", theme: "past",       eng: "Past Tense",     zh: "過去式（國一）", icon: "⏪" },
+  { day: 22, date: "2026-07-03", theme: "future",     eng: "Future",         zh: "未來式（國一）", icon: "🔮" },
+  { day: 23, date: "2026-07-04", theme: "compare",    eng: "Comparatives",   zh: "比較級（國中）", icon: "⚖️" },
 ];

@@ -1,0 +1,24 @@
+{
+ "outdir": "D:/english/kids/drills/audio/2026-07-02",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "s1_0": "yesterday",
+  "s1_1": "museum",
+  "s1_2": "ticket",
+  "s1_3": "trip",
+  "s1_4": "beach",
+  "s1_5": "photo",
+  "s2_0": "We went to the museum yesterday.",
+  "s2_1": "She bought a ticket.",
+  "s2_2": "They saw a movie last night.",
+  "s2_3": "I ate noodles for lunch.",
+  "s2_4": "He took many photos.",
+  "passage": "Last Saturday, Kevin went to the beach with his family. They left home early in the morning. At the beach, Kevin swam in the sea and built a sandcastle. His sister took many photos. At noon, they ate sandwiches and drank juice. They came home late and felt tired but happy.",
+  "s4_0": "We watched a movie last night.",
+  "s4_1": "She visited her grandma yesterday.",
+  "s4_2": "They bought new shoes at the mall.",
+  "s4_3": "I saw a big ship.",
+  "advPassage": "Last month, Amy joined a school trip to Tainan. The students visited an old temple and learned about its history. In the afternoon, they tried local food like shrimp rolls and bean cakes. Amy bought some gifts for her parents. On the way back, the bus broke down, so they waited for an hour. Amy was tired, but she said it was the best trip of the year."
+ }
+}

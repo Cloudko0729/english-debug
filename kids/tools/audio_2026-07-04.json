@@ -1,0 +1,24 @@
+{
+ "outdir": "D:/english/kids/drills/audio/2026-07-04",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "s1_0": "tall",
+  "s1_1": "fast",
+  "s1_2": "cheap",
+  "s1_3": "big",
+  "s1_4": "heavy",
+  "s1_5": "expensive",
+  "s2_0": "An elephant is bigger than a dog.",
+  "s2_1": "This bag is cheaper than that one.",
+  "s2_2": "He runs faster than me.",
+  "s2_3": "Mount Jade is the highest mountain in Taiwan.",
+  "s2_4": "She is the tallest girl in the class.",
+  "passage": "There are three students in the running race: Tom, Ben, and Sam. Tom is faster than Ben, but Sam is the fastest of all. Ben is the tallest, and Tom is the shortest. After the race, they buy drinks. The juice is more expensive than the water, but Sam thinks it is more delicious. They all agree the race was the most fun part of the day.",
+  "s4_0": "This book is more interesting.",
+  "s4_1": "He is taller than his brother.",
+  "s4_2": "Summer is hotter than winter.",
+  "s4_3": "It is the best movie ever.",
+  "advPassage": "My two cousins, Lily and Emma, are very different. Lily is older and taller than Emma, but Emma studies harder. Lily is good at sports; she is the best swimmer in her school. Emma is better at music and plays the piano beautifully. People say Emma is quieter than Lily, but both are kind. I think they are the nicest cousins in the world."
+ }
+}
