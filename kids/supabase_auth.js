@@ -106,7 +106,50 @@ async function doLogin(name, password) {
   const email = `${name}@${EMAIL_DOMAIN}`;
   const { error } = await sbClient.auth.signInWithPassword({ email, password });
   if (error) { err.textContent = "登入失敗：密碼錯誤或帳號不存在"; return; }
+  sessionStorage.setItem("kidsJustLoggedIn", name);   // 標記「剛登入」→ 重整後跳出來源選擇
   location.reload();
+}
+
+// 本機是否已有該學生的進度（用來決定登入時要不要問「雲端 vs 暫存」）
+function _localHasData(student) {
+  let p = null;
+  try { p = JSON.parse(localStorage.getItem("kidsProgress." + student) || "null"); } catch (e) {}
+  if (p && (((p.totalCorrect || 0) + (p.totalWrong || 0)) > 0 || (p.coins && p.coins.balance > 0))) return true;
+  return !!localStorage.getItem("kidsIsland." + student);
+}
+
+// 登入後跳出：☁️ 讀雲端紀錄 / 💾 用這台暫存
+async function showSourceChoice(student, proceed) {
+  let cloud = null;
+  try { cloud = (typeof cloudPeek === "function") ? await cloudPeek(student) : null; } catch (e) {}
+  if (!cloud || !cloud.progress) { proceed(); return; }   // 雲端沒資料就直接用本機
+
+  const lp = (function () { try { return JSON.parse(localStorage.getItem("kidsProgress." + student) || "null"); } catch (e) { return null; } })();
+  const localCoins = (lp && lp.coins && lp.coins.balance) || 0;
+  const cloudCoins = (cloud.progress.coins && cloud.progress.coins.balance) || 0;
+  let when = "";
+  if (cloud.ts) { const t = new Date(cloud.ts); when = `${t.getMonth() + 1}/${t.getDate()} ${t.toTimeString().slice(0, 5)}`; }
+
+  const ov = document.createElement("div");
+  ov.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:100000;padding:18px;font-family:Arial,'Noto Sans TC',sans-serif";
+  ov.innerHTML = `
+    <div style="background:#fff;border-radius:18px;max-width:380px;width:100%;padding:22px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.25)">
+      <div style="font-size:2rem">🔄</div>
+      <h2 style="margin:6px 0 4px;color:#2f80ed">要用哪個進度？</h2>
+      <p style="margin:0 0 16px;color:#888;font-size:.82rem">${student.charAt(0).toUpperCase() + student.slice(1)}　兩邊不一樣時請選一個</p>
+      <button id="srcCloud" style="display:block;width:100%;border:2px solid #2f80ed;background:#eef5ff;border-radius:12px;padding:12px;margin-bottom:10px;cursor:pointer;text-align:left">
+        <b style="color:#2f80ed">☁️ 讀取雲端紀錄</b><div style="font-size:.82rem;color:#555;margin-top:3px">🪙 ${cloudCoins}${when ? "　·　上次同步 " + when : ""}</div></button>
+      <button id="srcLocal" style="display:block;width:100%;border:2px solid #2fbf71;background:#f0fcf6;border-radius:12px;padding:12px;cursor:pointer;text-align:left">
+        <b style="color:#1c7a4d">💾 用這台的暫存</b><div style="font-size:.82rem;color:#555;margin-top:3px">🪙 ${localCoins}　·　這台瀏覽器目前的進度</div></button>
+      <p style="margin:12px 0 0;color:#aaa;font-size:.72rem">雲端＝之前或別台存的；暫存＝這台剛剛玩的。</p>
+    </div>`;
+  document.body.appendChild(ov);
+  ov.querySelector("#srcCloud").onclick = () => {
+    localStorage.setItem("kidsProgress." + student, JSON.stringify(cloud.progress));
+    if (cloud.island) localStorage.setItem("kidsIsland." + student, JSON.stringify(cloud.island));
+    ov.remove(); proceed();
+  };
+  ov.querySelector("#srcLocal").onclick = () => { ov.remove(); proceed(); };
 }
 
 // ── 自動守門：等 DOM 與頁面腳本都就緒後再執行（避免 getSession 從快取秒回時，
@@ -116,9 +159,17 @@ function runAutoGate() {
   if (!sbClient) return;
   authGate().then(student => {
     if (!student) return;                       // null = 已顯示登入畫面
-    const sel = (typeof window.selectStudent === "function") ? window.selectStudent
-              : (typeof window.pickStudent === "function") ? window.pickStudent : null;
-    if (sel) { try { sel(student); } catch (e) { console.error("auto-select 失敗：", e); } }
+    const proceed = () => {
+      const sel = (typeof window.selectStudent === "function") ? window.selectStudent
+                : (typeof window.pickStudent === "function") ? window.pickStudent : null;
+      if (sel) { try { sel(student); } catch (e) { console.error("auto-select 失敗：", e); } }
+    };
+    // 剛登入 + 這台本機已有資料 → 讓使用者選「雲端 vs 暫存」；否則照常
+    if (sessionStorage.getItem("kidsJustLoggedIn") === student) {
+      sessionStorage.removeItem("kidsJustLoggedIn");
+      if (_localHasData(student)) { showSourceChoice(student, proceed); return; }
+    }
+    proceed();
   });
 }
 if (document.readyState === "loading") {

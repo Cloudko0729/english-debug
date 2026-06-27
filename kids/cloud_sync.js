@@ -149,6 +149,23 @@ function _gasLoad(student) {
     .catch(() => null);
 }
 
+// 只「讀取」雲端最新存檔（不覆蓋本機），給登入時的「雲端 vs 暫存」選擇用
+async function cloudPeek(student) {
+  const user = await _sbUser();
+  if (user) {
+    try {
+      const { data } = await window.sbClient.from("saves")
+        .select("progress, island, ts").eq("user_id", user.id).maybeSingle();
+      return data || null;
+    } catch (e) { return null; }
+  }
+  if (!CLOUD_URL || !student) return null;
+  return fetch(CLOUD_URL + "?student=" + encodeURIComponent(student) + "&secret=" + encodeURIComponent(CLOUD_SECRET))
+    .then(r => r.json())
+    .then(d => (d && d.ok) ? { progress: d.progress, island: d.island, ts: d.ts } : null)
+    .catch(() => null);
+}
+
 // ── 近 10 天清單 ─────────────────────────────────────────────────────────────
 async function cloudListHistory(student) {
   const user = await _sbUser();
