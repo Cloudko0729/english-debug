@@ -52,7 +52,15 @@ function decorateLoggedIn(student) {
   const name = student.charAt(0).toUpperCase() + student.slice(1);
   bar.innerHTML =
     `<span style="font-weight:700;color:#3a2a00">目前：${name}</span>` +
-    `<button onclick="doLogout()" style="margin-left:12px;padding:4px 16px;border:2px solid #3a2a00;border-radius:18px;background:transparent;font-weight:700;color:#3a2a00;cursor:pointer">登出</button>`;
+    `<button onclick="chooseSource()" style="margin-left:10px;padding:4px 12px;border:2px solid #2f80ed;border-radius:18px;background:#fff;font-weight:700;color:#2f80ed;cursor:pointer;font-size:.82rem">🔄 進度來源</button>` +
+    `<button onclick="doLogout()" style="margin-left:8px;padding:4px 14px;border:2px solid #3a2a00;border-radius:18px;background:transparent;font-weight:700;color:#3a2a00;cursor:pointer">登出</button>`;
+}
+
+// 手動叫出「雲端 vs 暫存」選擇（隨時可用，不必等登入那一刻）
+function chooseSource() {
+  const s = localStorage.getItem("kidsCurrentStudent");
+  if (!s) { alert("請先登入"); return; }
+  showSourceChoice(s, () => location.reload());
 }
 
 async function doLogout() {
