@@ -1101,7 +1101,8 @@
       <!-- Stats -->
       <div class="stats-panel">
         <div class="btn-group">
-          <button class="btn-game btn-start" id="btnStart" onclick="startGame()">▶ START</button>
+          <button class="btn-game btn-pause" id="btnPractice" onclick="startGame('practice')">📝 練習</button>
+          <button class="btn-game btn-start" id="btnTest" onclick="startGame('test')">🏆 正式測驗 (0/3)</button>
           <button class="btn-game btn-pause" id="btnPause" onclick="togglePause()">⏸ PAUSE</button>
           <button class="btn-game btn-restart" id="btnRestart" onclick="restartGame()">🔄 RESTART</button>
         </div>
@@ -1384,6 +1385,7 @@
       buildKidWords();
       applyWordMode();        // 依模式設定 WORDS、更新標題、buildWordList、按鈕外觀
       refreshDailyBar();
+      updateTestBtn();
 
       buildGrid();
       buildKeyboard();
@@ -1690,9 +1692,48 @@
     }
 
     // ===== START GAME =====
-    function startGame() {
-      if (gameRunning) return; // Don't restart if already running
-
+    let currentMode = 'practice';
+    let counting = false;
+    function setStartVisible(show) {
+      const p = document.getElementById('btnPractice'), t = document.getElementById('btnTest');
+      if (p) p.style.display = show ? '' : 'none';
+      if (t) t.style.display = show ? '' : 'none';
+      if (show) updateTestBtn();
+    }
+    function updateTestBtn() {
+      const t = document.getElementById('btnTest'); if (!t) return;
+      const s = _curStu(); let n = 0;
+      if (s) { const daily = JSON.parse(localStorage.getItem("typingDaily") || "{}"); n = Math.min((((daily[s] || {})[_td()] || { attempts: [] }).attempts).length, 3); }
+      t.textContent = `🏆 正式測驗 (${n}/3)`;
+      t.disabled = n >= 3; t.style.opacity = n >= 3 ? '.5' : '';
+    }
+    function runCountdown(cb) {
+      counting = true;
+      const gm = document.getElementById('gameMessage');
+      document.getElementById('pauseOverlay').classList.remove('visible');
+      gm.style.display = ''; gm.style.fontSize = '3.2rem'; gm.style.fontWeight = '800';
+      let n = 3; gm.textContent = n;
+      const iv = setInterval(() => {
+        n--;
+        if (n > 0) gm.textContent = n;
+        else if (n === 0) gm.textContent = 'GO!';
+        else { clearInterval(iv); gm.style.fontSize = ''; gm.style.fontWeight = ''; gm.style.display = 'none'; counting = false; cb(); }
+      }, 700);
+    }
+    function startGame(mode) {
+      if (gameRunning || counting) return;
+      mode = mode || 'practice';
+      if (mode === 'test') {
+        const s = _curStu(); let n = 0;
+        if (s) { const daily = JSON.parse(localStorage.getItem("typingDaily") || "{}"); n = (((daily[s] || {})[_td()] || { attempts: [] }).attempts).length; }
+        if (n >= 3) { alert("今天 3 次正式測驗已用完囉！可以用「練習」繼續練習。"); return; }
+      }
+      currentMode = mode;
+      setStartVisible(false);
+      document.getElementById('btnPause').classList.remove('enabled');
+      runCountdown(_beginGame);
+    }
+    function _beginGame() {
       gameRunning = true;
       gamePaused = false;
       score = 0;
@@ -1716,7 +1757,7 @@
       document.getElementById('gameOverOverlay').classList.remove('visible');
       document.getElementById('gameMessage').style.display = 'none';
       document.getElementById('pauseOverlay').classList.remove('visible');
-      document.getElementById('btnStart').style.display = 'none';
+      setStartVisible(false);
       document.getElementById('btnPause').classList.add('enabled');
       document.getElementById('btnPause').innerHTML = '⏸ PAUSE';
       document.getElementById('btnRestart').classList.add('enabled');
@@ -1741,11 +1782,11 @@
       highlightKey(null);
       document.getElementById('gameOverOverlay').classList.remove('visible');
       document.getElementById('pauseOverlay').classList.remove('visible');
-      document.getElementById('btnStart').style.display = '';
+      setStartVisible(true);
       document.getElementById('btnPause').classList.remove('enabled');
       document.getElementById('btnRestart').classList.remove('enabled');
-      // Immediately start fresh
-      startGame();
+      // Immediately start fresh（沿用上一次的模式）
+      startGame(currentMode);
     }
 
     // 關閉結算視窗、回到待機（可改字庫 / 速度，再按 START）
@@ -1758,7 +1799,7 @@
       highlightKey(null);
       document.getElementById('gameOverOverlay').classList.remove('visible');
       document.getElementById('pauseOverlay').classList.remove('visible');
-      document.getElementById('btnStart').style.display = '';
+      setStartVisible(true);
       document.getElementById('btnPause').classList.remove('enabled');
       document.getElementById('btnRestart').classList.remove('enabled');
       clearGridVisual();
@@ -2107,7 +2148,7 @@
       resetInputFlow();
       highlightKey(null);
 
-      document.getElementById('btnStart').style.display = '';
+      setStartVisible(true);
       document.getElementById('btnPause').classList.remove('enabled');
       document.getElementById('btnPause').innerHTML = '⏸ PAUSE';
 
@@ -2120,19 +2161,20 @@
       document.getElementById('finalAccuracy').textContent = acc + '%';
       document.getElementById('finalWords').textContent = wordsCompletedTotal;
 
-      // 換金幣（每天前三次取最高分，20 分 = 1 金幣）
-      const tc = awardTypingCoins(score);
+      // 只有「正式測驗」才換金幣（每天前三次取最高分，20 分 = 1 金幣）；練習不計
       const coinEl = document.getElementById('finalCoin');
-      if (coinEl) {
-        if (tc.noStudent) {
-          coinEl.innerHTML = '未登入，這次沒換金幣。到 <a href="../kids/index.html" style="color:#2f80ed">主站</a>登入後再玩可賺金幣 🪙';
-        } else {
-          coinEl.innerHTML = `今天第 ${tc.attempt}/3 次 · 最佳 ${tc.best} 分 → 共 ${tc.coinsForBest} 🪙`
-            + (tc.delta > 0 ? ` <span style="color:#2fbf71">（這次 +${tc.delta} 🪙）</span>`
-               : (tc.attempt >= 3 ? '（前三次已用完）' : '（沒超過今天最佳，未加幣）'));
+      if (currentMode === 'test') {
+        const tc = awardTypingCoins(score);
+        if (coinEl) {
+          if (tc.noStudent) coinEl.innerHTML = '未登入，這次沒換金幣。到 <a href="../kids/index.html" style="color:#2f80ed">主站</a>登入後再玩可賺金幣 🪙';
+          else coinEl.innerHTML = `🏆 正式測驗 第 ${tc.attempt}/3 次 · 最佳 ${tc.best} 分 → 共 ${tc.coinsForBest} 🪙`
+            + (tc.delta > 0 ? ` <span style="color:#2fbf71">（這次 +${tc.delta} 🪙）</span>` : '（沒超過今天最佳，未加幣）');
         }
+      } else if (coinEl) {
+        coinEl.innerHTML = '📝 練習模式 · 不計金幣（想換金幣請按「正式測驗」）';
       }
       refreshDailyBar();
+      updateTestBtn();
 
       document.getElementById('gameOverOverlay').classList.add('visible');
     }
