@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>本週單字記憶表 — Kids English</title>
+<style>
+  :root{--bg:#fff7dc;--panel:#fff;--primary:#2f80ed;--soft:#dbeafe;--green:#2fbf71;--purple:#7c4dca;--text:#243042;--muted:#667085;--border:#e2e8f0;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Arial,"Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);max-width:760px;margin:0 auto;padding-bottom:60px;line-height:1.5;}
+  header{background:var(--green);color:#fff;text-align:center;padding:22px 16px 16px;}
+  header h1{font-size:1.35rem;} header p{font-size:.85rem;opacity:.95;margin-top:4px;} header a{color:#eafff2;text-decoration:none;font-weight:700;}
+  .tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:14px;}
+  .tab{padding:7px 13px;border:2px solid var(--green);border-radius:18px;background:#fff;color:#1c7a4d;font-weight:700;cursor:pointer;font-size:.85rem;text-decoration:none;}
+  .tab.on{background:var(--green);color:#fff;}
+  .meta{margin:0 16px 12px;color:var(--muted);font-size:.88rem;}
+  .meta b{color:var(--text);}
+  .bar{margin:0 16px 14px;display:flex;gap:8px;flex-wrap:wrap;}
+  .btn{padding:8px 14px;border:none;border-radius:10px;background:var(--primary);color:#fff;font-weight:700;cursor:pointer;font-size:.85rem;}
+  .btn.g{background:var(--green);}
+  .grid{margin:0 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(max-width:520px){.grid{grid-template-columns:1fr;}}
+  .w{background:var(--panel);border:2px solid var(--border);border-radius:13px;padding:11px 13px;display:flex;align-items:center;gap:10px;}
+  .w .n{color:#bbb;font-size:.8rem;font-weight:700;width:18px;flex-shrink:0;text-align:right;}
+  .w .play{width:32px;height:32px;border:none;border-radius:50%;background:var(--primary);color:#fff;font-size:.9rem;cursor:pointer;flex-shrink:0;}
+  .w .en{font-size:1.12rem;font-weight:800;}
+  .w .pos{color:#fff;background:var(--purple);border-radius:6px;font-size:.66rem;padding:1px 5px;margin-left:4px;vertical-align:middle;}
+  .w .zh{color:var(--muted);font-size:.85rem;}
+  .hideZh .zh{visibility:hidden;}
+</style>
+</head>
+<body>
+<header>
+  <h1>📒 本週單字記憶表</h1>
+  <p>每週 30 個新單字 · 點 🔊 跟著唸 · <a href="index.html">← 回首頁</a></p>
+</header>
+<div class="tabs" id="tabs"></div>
+<div class="meta" id="meta"></div>
+<div class="bar">
+  <button class="btn" onclick="playAll()">🔊 全部依序唸</button>
+  <button class="btn g" onclick="toggleZh()" id="zhBtn">🙈 遮中文（自我測驗）</button>
+  <button class="btn" style="background:#7c4dca" onclick="location.href='vocab_quiz.html'">✏️ 去做今日單字測驗</button>
+</div>
+<div class="grid" id="grid"></div>
+
+<script src="curriculum.js"></script>
+<script>
+const AUDIO_DIR = "audio/words/";
+const key = en => en.toLowerCase().replace(/[^a-z0-9]+/g, "");
+let cur = null;
+function play(en) { if (cur) cur.pause(); const a = new Audio(AUDIO_DIR + key(en) + ".mp3"); cur = a; a.play().catch(() => speak(en)); }
+function speak(t) { if (!window.speechSynthesis) return; speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = "en-US"; u.rate = .85; speechSynthesis.speak(u); }
+
+const today = new Date();
+const td = today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, "0") + "-" + String(today.getDate()).padStart(2, "0");
+const ctx = vocabWeekForDate(td);
+const month = ctx.month;
+const qs = new URLSearchParams(location.search);
+let wn = parseInt(qs.get("w") || ctx.week.n, 10);
+let week = month.weeks.find(w => w.n === wn) || ctx.week;
+
+function renderTabs() {
+  document.getElementById("tabs").innerHTML = month.weeks.map(w =>
+    `<a class="tab ${w.n === week.n ? "on" : ""}" href="?w=${w.n}">第 ${w.n} 週</a>`).join("");
+}
+function renderMeta() {
+  document.getElementById("meta").innerHTML =
+    `<b>${month.label} 第 ${week.n} 週</b>（${week.start.slice(5).replace("-", "/")}–${week.end.slice(5).replace("-", "/")}）· 主題：<b>${week.theme}</b> · 配合文法：${week.grammar.join("、")} · 共 ${week.words.length} 字`;
+}
+function renderGrid() {
+  document.getElementById("grid").innerHTML = week.words.map((w, i) =>
+    `<div class="w"><span class="n">${i + 1}</span>
+      <button class="play" onclick="play('${w.en.replace(/'/g, "\\'")}')">🔊</button>
+      <div><div class="en">${w.en}${w.pos ? `<span class="pos">${w.pos}</span>` : ""}</div><div class="zh">${w.zh}</div></div></div>`).join("");
+}
+function playAll() {
+  let i = 0;
+  (function next() {
+    if (i >= week.words.length) return;
+    if (cur) cur.pause();
+    const a = new Audio(AUDIO_DIR + key(week.words[i].en) + ".mp3"); cur = a;
+    a.onended = () => { i++; next(); };
+    a.play().catch(() => { i++; next(); });
+  })();
+}
+let zhHidden = false;
+function toggleZh() {
+  zhHidden = !zhHidden;
+  document.getElementById("grid").classList.toggle("hideZh", zhHidden);
+  document.getElementById("zhBtn").textContent = zhHidden ? "👀 顯示中文" : "🙈 遮中文（自我測驗）";
+}
+renderTabs(); renderMeta(); renderGrid();
+</script>
+</body>
+</html>

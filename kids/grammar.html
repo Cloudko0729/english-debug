@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>本月文法教學 — Kids English</title>
+<style>
+  :root{--bg:#fff7dc;--panel:#fff;--primary:#2f80ed;--soft:#dbeafe;--green:#2fbf71;--purple:#7c4dca;--text:#243042;--muted:#667085;--border:#e2e8f0;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Arial,"Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);max-width:760px;margin:0 auto;padding-bottom:60px;line-height:1.6;}
+  header{background:var(--primary);color:#fff;text-align:center;padding:22px 16px 16px;}
+  header h1{font-size:1.4rem;} header p{font-size:.85rem;opacity:.9;margin-top:4px;} header a{color:#ffe27a;text-decoration:none;font-weight:700;}
+  .sec{margin:16px;}
+  .sec-h{font-size:1.05rem;font-weight:800;color:var(--primary);margin:6px 2px 10px;display:flex;align-items:center;gap:8px;}
+  .sec-h.review{color:var(--purple);}
+  .month-tag{font-size:.75rem;background:var(--accent,#ffb703);color:#3a2a00;border-radius:8px;padding:2px 8px;}
+  .card{display:flex;align-items:center;gap:12px;background:var(--panel);border:2px solid var(--border);border-radius:14px;padding:13px 15px;margin-bottom:10px;text-decoration:none;color:inherit;}
+  .card:active{transform:scale(.99);}
+  .ic{width:42px;height:42px;border-radius:11px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+  .card .t{font-weight:800;font-size:1.02rem;}
+  .card .s{color:var(--muted);font-size:.82rem;}
+  .arrow{margin-left:auto;color:var(--primary);font-size:1.3rem;font-weight:800;}
+  .vocabbox{background:#eef9f1;border:1px solid #cdeed8;border-radius:12px;padding:12px 14px;margin-bottom:10px;}
+  .vocabbox .wk{font-weight:700;color:#1c7a4d;font-size:.9rem;margin-bottom:2px;}
+  .vocabbox a{color:var(--green);font-weight:700;text-decoration:none;font-size:.85rem;}
+  .review .card{border-style:dashed;}
+  .note{color:var(--muted);font-size:.85rem;padding:4px 2px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>📘 本月文法教學</h1>
+  <p>每月：複習舊文法 ＋ 學當月新文法 · <a href="index.html">← 回首頁</a></p>
+</header>
+<div id="root"></div>
+
+<script src="curriculum.js"></script>
+<script>
+function gcard(g) {
+  return `<a class="card" href="${g.file}">
+    <div class="ic">${g.icon}</div>
+    <div><div class="t">${g.topic}</div><div class="s">${g.eng} · 單字/文法步驟/對話/短文/小測驗</div></div>
+    <span class="arrow">›</span></a>`;
+}
+function render() {
+  const root = document.getElementById("root");
+  const months = CURRICULUM.slice().reverse();      // 最新月在最上
+  const cur = months[0], older = months.slice(1);
+  let html = "";
+
+  // 本月新文法
+  html += `<div class="sec"><div class="sec-h">🆕 本月新文法 <span class="month-tag">${cur.label}</span></div>`;
+  html += cur.grammar.map(gcard).join("");
+  // 本月每週單字主題（連到記憶表）
+  html += cur.weeks.map(w =>
+    `<div class="vocabbox"><div class="wk">第 ${w.n} 週 · ${w.theme}（${w.words.length} 字）<span style="color:#999;font-weight:400">　配合：${w.grammar.join("、")}</span></div>
+     <a href="vocab_week.html?w=${w.n}">📒 看本週單字記憶表 →</a></div>`).join("");
+  html += `</div>`;
+
+  // 累積複習（往月）
+  html += `<div class="sec review"><div class="sec-h review">📚 複習（往月累積）</div>`;
+  if (!older.length) {
+    html += `<div class="note">目前是第一個月，還沒有往月文法。之後每個月的文法都會累積到這裡，方便回頭複習。</div>`;
+  } else {
+    html += older.map(m =>
+      `<div class="month-tag" style="display:inline-block;margin:6px 2px">${m.label}</div>` +
+      m.grammar.map(gcard).join("")).join("");
+  }
+  html += `</div>`;
+
+  root.innerHTML = html;
+}
+render();
+</script>
+</body>
+</html>

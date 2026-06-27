@@ -101,6 +101,7 @@
 <div id="toast"></div>
 
 <script src="wordbank.js"></script>
+<script src="curriculum.js"></script>
 <script src="word_emoji.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="cloud_sync.js"></script>
@@ -160,21 +161,25 @@ function buildQuizSet() {
   if (saved) return JSON.parse(saved);
 
   const wc = p.wrongCounts || {};
-  // 優先順序：答錯2+ → 答錯1 → 沒練過的國小基礎字 → 沒練過的國中進階字
-  const weak       = WORDBANK.filter(w => (wc[w.en] || 0) >= 2);
-  const shaky      = WORDBANK.filter(w => (wc[w.en] || 0) === 1);
-  const freshBasic = WORDBANK.filter(w => !(wc[w.en] > 0) && w.level === "basic");
-  const freshMore  = WORDBANK.filter(w => !(wc[w.en] > 0) && w.level !== "basic");
-  shuffle(weak); shuffle(shaky); shuffle(freshBasic); shuffle(freshMore);
+  // 本週 30 字（配合當月文法主題）— 最優先納入每日測驗
+  let weekWords = [];
+  try { weekWords = (vocabWeekForDate(todayStr()).week.words || []).slice(); } catch (e) {}
+  const weekEn = new Set(weekWords.map(w => w.en));
+  const weekWeak  = weekWords.filter(w => (wc[w.en] || 0) >= 1);   // 本週答錯過 → 加強
+  const weekFresh = weekWords.filter(w => !(wc[w.en] > 0));        // 本週還沒練
+  const reviewOld = WORDBANK.filter(w => (wc[w.en] || 0) >= 2 && !weekEn.has(w.en)); // 舊字複習
+  shuffle(weekWords); shuffle(weekWeak); shuffle(weekFresh); shuffle(reviewOld);
 
   const picked = [];
-  const pushUnique = (list) => { for (const w of list) { if (picked.length >= QUIZ_SIZE) break; picked.push(w); } };
-  pushUnique(weak);
-  pushUnique(shaky);
-  pushUnique(freshBasic);
-  pushUnique(freshMore);
+  const pushUnique = (list) => { for (const w of list) { if (picked.length >= QUIZ_SIZE) break; if (!picked.some(x => x.en === w.en)) picked.push(w); } };
+  // 順序：本週要加強的 → 最多 5 個舊字複習 → 本週新字 → 本週其餘(輪替30字) → 字庫補滿
+  pushUnique(weekWeak);
+  pushUnique(reviewOld.slice(0, 5));
+  pushUnique(weekFresh);
+  pushUnique(weekWords);
+  if (picked.length < QUIZ_SIZE) { const fb = WORDBANK.filter(w => !weekEn.has(w.en)); shuffle(fb); pushUnique(fb); }
 
-  const set = picked.slice(0, QUIZ_SIZE).map(w => ({ ...w, isWeak: (wc[w.en] || 0) >= 2 }));
+  const set = shuffle(picked.slice(0, QUIZ_SIZE)).map(w => ({ ...w, isWeak: (wc[w.en] || 0) >= 2, isWeek: weekEn.has(w.en) }));
   localStorage.setItem(key, JSON.stringify(set));
   return set;
 }

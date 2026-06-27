@@ -61,13 +61,7 @@ function render(){
       const right = locked
         ? `<span class="lock-badge">🔒 ${d.date.slice(5).replace("-","/")} 開放</span>`
         : `<span class="arrow">›</span>`;
-      const lessonLink = (d.lesson && !locked)
-        ? `<a class="card" href="lessons/lesson_${d.date}.html" style="background:#eef5ff;border:1px solid #cfe0ff;margin-bottom:4px">
-            <div class="card-left"><div class="card-icon" style="background:#2f80ed;color:#fff">📘</div>
-              <div><div class="card-title" style="color:#2f80ed">先看教學：${d.eng}</div>
-              <div class="card-sub">單字/文法/對話/短文/小測驗</div></div></div><span class="arrow">›</span></a>`
-        : "";
-      return `${lessonLink}<a class="card${locked?" locked":""}" href="drills/daily_${d.date}.html" data-done="${done}">
+      return `<a class="card${locked?" locked":""}" href="drills/daily_${d.date}.html" data-done="${done}">
         <div class="card-left"><div class="card-icon">${d.icon}</div>
           <div><div class="card-title">Day ${d.day} — ${d.date}</div>
           <div class="card-sub">${d.eng} ${d.zh}${adv}</div></div></div>
