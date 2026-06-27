@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>教學：過去式 Past Tense — Kids English</title>
+<style>
+  :root{--bg:#fff7dc;--panel:#fff;--primary:#2f80ed;--soft:#dbeafe;--accent:#ffb703;--green:#2fbf71;--purple:#7c4dca;--danger:#ef476f;--text:#243042;--muted:#667085;--border:#e2e8f0;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Arial,"Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);max-width:760px;margin:0 auto;padding-bottom:60px;line-height:1.7;}
+  header{background:var(--primary);color:#fff;text-align:center;padding:22px 16px 16px;}
+  header h1{font-size:1.45rem;}
+  header p{font-size:.85rem;opacity:.9;margin-top:4px;}
+  header a{color:#ffe27a;text-decoration:none;font-weight:700;}
+  .step{background:var(--panel);border:2px solid var(--border);border-radius:14px;margin:16px;padding:18px 16px;}
+  .step-no{display:inline-block;background:var(--primary);color:#fff;border-radius:8px;font-size:.8rem;font-weight:800;padding:2px 10px;margin-bottom:8px;}
+  .step h2{font-size:1.15rem;color:var(--primary);margin-bottom:4px;}
+  .step h3{font-size:1rem;color:var(--purple);margin:14px 0 6px;}
+  .goal{background:#eef5ff;border-left:4px solid var(--primary);border-radius:8px;padding:12px 14px;margin:16px;font-size:.92rem;}
+  .play{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:none;border-radius:50%;background:var(--primary);color:#fff;font-size:.85rem;cursor:pointer;vertical-align:middle;flex-shrink:0;}
+  .play.big{width:auto;border-radius:8px;padding:4px 12px;font-size:.85rem;gap:4px}
+  /* 單字卡 */
+  .vcard{border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:#fbfdff;}
+  .vcard .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .vcard .en{font-size:1.3rem;font-weight:800;color:var(--text);}
+  .vcard .past{font-size:1rem;color:var(--purple);font-weight:700;}
+  .vcard .zh{color:var(--muted);font-size:.9rem;}
+  .vcard .ex{margin-top:6px;font-size:.92rem;display:flex;align-items:center;gap:8px;}
+  .vcard .ex .zhx{color:var(--muted);font-size:.84rem;}
+  /* 文法 */
+  .rule{background:#f7faff;border:1px solid #d8e6ff;border-radius:10px;padding:10px 12px;margin:8px 0;}
+  .rule b{color:var(--primary);}
+  .eg{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:.95rem;flex-wrap:wrap;}
+  .eg .zhx{color:var(--muted);font-size:.84rem;}
+  table.gram{width:100%;border-collapse:collapse;margin:8px 0;font-size:.92rem;}
+  table.gram td,table.gram th{border:1px solid var(--border);padding:6px 8px;text-align:left;}
+  table.gram th{background:var(--soft);color:var(--primary);}
+  .warn{background:#fff0f4;border-left:4px solid var(--danger);border-radius:8px;padding:10px 12px;margin:10px 0;font-size:.9rem;}
+  .warn .x{color:var(--danger);font-weight:700;}
+  .warn .o{color:var(--green);font-weight:700;}
+  /* 對話 */
+  .line{display:flex;gap:10px;align-items:flex-start;margin:10px 0;}
+  .who{font-weight:800;color:var(--primary);width:20px;flex-shrink:0;}
+  .who.b{color:var(--green);}
+  .line .body .en{font-size:1rem;}
+  .line .body .zhx{color:var(--muted);font-size:.86rem;}
+  .line .body .note{color:var(--purple);font-size:.8rem;margin-top:2px;}
+  /* 短文 */
+  .passage .s{margin:6px 0;}
+  .passage .en{font-size:1rem;}
+  .passage .zhx{color:var(--muted);font-size:.85rem;}
+  .nextbtn{display:block;text-align:center;background:var(--green);color:#fff;text-decoration:none;font-weight:800;border-radius:12px;padding:14px;margin:16px;font-size:1.05rem;}
+  .vocnote{font-size:.85rem;color:var(--muted);}
+</style>
+</head>
+<body>
+<header>
+  <h1>📘 過去式 Past Tense</h1>
+  <p>國一文法 · 一步一步教學 · 點 🔊 聽發音 · <a href="../index.html">← 回首頁</a></p>
+</header>
+
+<div class="goal">
+  <b>🎯 今天學會：</b>用「過去式」說出昨天、上週、剛剛<u>已經做完</u>的事。學完你能說：<i>I went to the park yesterday.</i>（我昨天去了公園。）
+  <br>下面分 ① 單字 → ② 文法 → ③ 對話 → ④ 短文，跟著一步一步念。
+</div>
+
+<!-- ① 單字 -->
+<div class="step">
+  <span class="step-no">STEP ①</span>
+  <h2>單字 Vocabulary（含發音）</h2>
+  <p class="vocnote">先學會這些「過去式動詞」和「過去時間詞」，等一下文法和對話會一直用到。每個都點 🔊 跟著念三次。</p>
+  <div id="vocab"></div>
+</div>
+
+<!-- ② 文法 -->
+<div class="step">
+  <span class="step-no">STEP ②</span>
+  <h2>文法 Grammar：怎麼把動詞變過去式</h2>
+  <p>過去式表示「<b>過去已經發生</b>」的事，常配 <i>yesterday / last night / ... ago</i>。動詞要改成「過去式」，分成<b>規則</b>和<b>不規則</b>兩種。</p>
+
+  <h3>規則動詞：字尾加 -ed（4 個拼字規則）</h3>
+  <div class="rule"><b>規則 1</b>　一般情況，直接 <b>+ ed</b>：play→play<b>ed</b>、watch→watch<b>ed</b>、walk→walk<b>ed</b>
+    <div class="eg"><button class="play" onclick="say(this,'We played soccer after school.')">🔊</button> We played soccer after school. <span class="zhx">我們放學後踢了足球。</span></div></div>
+  <div class="rule"><b>規則 2</b>　字尾是 <b>e</b>，只加 <b>d</b>：like→like<b>d</b>、live→live<b>d</b>、use→use<b>d</b>
+    <div class="eg"><button class="play" onclick="say(this,'She liked the movie.')">🔊</button> She liked the movie. <span class="zhx">她喜歡那部電影。</span></div></div>
+  <div class="rule"><b>規則 3</b>　<b>子音 + y</b>，去 y 改 <b>ied</b>：study→stud<b>ied</b>、cry→cr<b>ied</b>、try→tr<b>ied</b>
+    <div class="eg"><button class="play" onclick="say(this,'He studied English last night.')">🔊</button> He studied English last night. <span class="zhx">他昨晚讀了英文。</span></div></div>
+  <div class="rule"><b>規則 4</b>　<b>短母音 + 單子音</b>，重複字尾再加 ed：stop→sto<b>pped</b>、plan→pla<b>nned</b>
+    <div class="eg"><button class="play" onclick="say(this,'The bus stopped here.')">🔊</button> The bus stopped here. <span class="zhx">公車在這裡停了。</span></div></div>
+
+  <h3>不規則動詞：沒有規則，要背！</h3>
+  <p class="vocnote">這些最常用，一定要記起來（上面單字也有）：</p>
+  <table class="gram">
+    <tr><th>原形</th><th>過去式</th><th>中文</th></tr>
+    <tr><td>go</td><td>went</td><td>去</td></tr>
+    <tr><td>see</td><td>saw</td><td>看見</td></tr>
+    <tr><td>eat</td><td>ate</td><td>吃</td></tr>
+    <tr><td>buy</td><td>bought</td><td>買</td></tr>
+    <tr><td>have</td><td>had</td><td>有／吃</td></tr>
+    <tr><td>make</td><td>made</td><td>製作</td></tr>
+    <tr><td>take</td><td>took</td><td>拿／搭</td></tr>
+    <tr><td>come</td><td>came</td><td>來</td></tr>
+  </table>
+
+  <h3>be 動詞的過去式：was / were</h3>
+  <table class="gram">
+    <tr><th>主詞</th><th>過去式</th><th>例</th></tr>
+    <tr><td>I / He / She / It / 單數</td><td>was</td><td>I <b>was</b> happy.</td></tr>
+    <tr><td>You / We / They / 複數</td><td>were</td><td>They <b>were</b> at home.</td></tr>
+  </table>
+  <div class="eg"><button class="play" onclick="say(this,'I was very tired yesterday.')">🔊</button> I was very tired yesterday. <span class="zhx">我昨天很累。</span></div>
+
+  <h3>否定句：didn't + 原形動詞</h3>
+  <div class="eg"><button class="play" onclick="say(this,'I did not go to school.')">🔊</button> I didn't go to school. <span class="zhx">我沒有去上學。</span></div>
+  <div class="warn"><span class="x">✗ I didn't went</span>　→　<span class="o">✓ I didn't go</span>（didn't 後面要用<b>原形</b> go，不是 went）</div>
+
+  <h3>疑問句：Did + 主詞 + 原形動詞 ?</h3>
+  <div class="eg"><button class="play" onclick="say(this,'Did you eat breakfast?')">🔊</button> Did you eat breakfast? <span class="zhx">你吃早餐了嗎？</span></div>
+  <div class="eg">短答：<button class="play" onclick="say(this,'Yes, I did. No, I did not.')">🔊</button> Yes, I did. / No, I didn't.</div>
+  <div class="warn"><span class="x">✗ Did you ate?</span>　→　<span class="o">✓ Did you eat?</span></div>
+
+  <h3>⚠️ 最常犯的三個錯</h3>
+  <div class="warn"><span class="x">✗ I goed</span> → <span class="o">✓ I went</span>（go 是不規則，不能加 ed）</div>
+  <div class="warn"><span class="x">✗ She don't went</span> → <span class="o">✓ She didn't go</span></div>
+  <div class="warn"><span class="x">✗ Did you went?</span> → <span class="o">✓ Did you go?</span></div>
+</div>
+
+<!-- ③ 對話 -->
+<div class="step">
+  <span class="step-no">STEP ③</span>
+  <h2>對話 Dialogue（含發音）</h2>
+  <p class="vocnote">兩個人聊「昨天做了什麼」。每句點 🔊 跟著念，注意紫色小字的過去式重點。</p>
+  <div id="dialogue"></div>
+</div>
+
+<!-- ④ 短文 -->
+<div class="step">
+  <span class="step-no">STEP ④</span>
+  <h2>短文 Reading（含發音）</h2>
+  <button class="play big" onclick="sayPassage()" style="margin-bottom:10px">🔊 整篇唸一次</button>
+  <div class="passage" id="passage"></div>
+</div>
+
+<a class="nextbtn" href="../drills/daily_2026-07-02.html">✏️ 學完了！去做今天的練習 →</a>
+
+<script>
+const AUDIO_DIR = "audio/2026-07-02/";
+let cur = null;
+function play(key, fallback) {
+  if (cur) { cur.pause(); cur = null; }
+  const a = new Audio(AUDIO_DIR + key + ".mp3"); cur = a;
+  a.play().catch(() => speak(fallback));
+}
+function speak(t) { if (!window.speechSynthesis) return; speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = "en-US"; u.rate = .85; speechSynthesis.speak(u); }
+// 文法例句沒有預錄音檔，直接用瀏覽器語音
+function say(btn, text) { speak(text); }
+
+// 單字（原形 / 過去式 / 中文 / 例句）
+const VOCAB = [
+  { en: "go", past: "went", zh: "去", ex: "I went to school.", exzh: "我去了學校。" },
+  { en: "see", past: "saw", zh: "看見", ex: "We saw a bird.", exzh: "我們看見一隻鳥。" },
+  { en: "eat", past: "ate", zh: "吃", ex: "She ate lunch.", exzh: "她吃了午餐。" },
+  { en: "buy", past: "bought", zh: "買", ex: "He bought a book.", exzh: "他買了一本書。" },
+  { en: "have", past: "had", zh: "有／吃", ex: "They had a party.", exzh: "他們辦了一個派對。" },
+  { en: "yesterday", past: "", zh: "昨天", ex: "It rained yesterday.", exzh: "昨天下雨了。" },
+  { en: "last night", past: "", zh: "昨晚", ex: "I slept early last night.", exzh: "我昨晚很早睡。" },
+  { en: "ago", past: "", zh: "…以前", ex: "We moved here a year ago.", exzh: "我們一年前搬來這裡。" }
+];
+const DIALOGUE = [
+  { who: "A", en: "Hi, Amy! What did you do yesterday?", zh: "嗨，Amy！你昨天做了什麼？", note: "did + 原形 do" },
+  { who: "B", en: "I went to the night market with my family.", zh: "我跟家人去逛了夜市。", note: "went = go 的過去式" },
+  { who: "A", en: "That sounds fun! What did you eat?", zh: "聽起來很好玩！你吃了什麼？", note: "" },
+  { who: "B", en: "We ate stinky tofu and drank bubble tea.", zh: "我們吃了臭豆腐、喝了珍奶。", note: "ate / drank 是不規則" },
+  { who: "A", en: "Did you buy anything?", zh: "你有買東西嗎？", note: "Did + 原形 buy" },
+  { who: "B", en: "Yes, I bought a cute keychain.", zh: "有，我買了一個可愛的鑰匙圈。", note: "bought = buy 的過去式" },
+  { who: "A", en: "Were there many people?", zh: "人很多嗎？", note: "be 動詞過去式 were" },
+  { who: "B", en: "Yes, it was very crowded, but we had a great time.", zh: "對，很擠，但我們玩得很開心。", note: "was / had" }
+];
+const PASSAGE = [
+  { en: "Last Sunday, Kevin had a busy day.", zh: "上週日，Kevin 過了忙碌的一天。" },
+  { en: "In the morning, he went to the park and played basketball with his friends.", zh: "早上，他去公園跟朋友打了籃球。" },
+  { en: "At noon, they ate lunch at a small restaurant.", zh: "中午，他們在一家小餐廳吃了午餐。" },
+  { en: "In the afternoon, Kevin visited his grandparents and helped them in the garden.", zh: "下午，Kevin 拜訪了祖父母，並在花園裡幫他們忙。" },
+  { en: "He was tired at night, but he felt happy because he did many things.", zh: "晚上他很累，但因為做了很多事，他覺得很開心。" }
+];
+
+function buildVocab() {
+  document.getElementById("vocab").innerHTML = VOCAB.map((v, i) => `
+    <div class="vcard">
+      <div class="top">
+        <button class="play" onclick="play('w${i}','${v.en}')">🔊</button>
+        <span class="en">${v.en}</span>${v.past ? `<span class="past">→ ${v.past}（過去式）</span>` : ""}<span class="zh">${v.zh}</span>
+      </div>
+      <div class="ex"><button class="play" onclick="play('e${i}','${v.ex.replace(/'/g, "\\'")}')">🔊</button> ${v.ex} <span class="zhx">${v.exzh}</span></div>
+    </div>`).join("");
+}
+function buildDialogue() {
+  document.getElementById("dialogue").innerHTML = DIALOGUE.map((d, i) => `
+    <div class="line">
+      <span class="who ${d.who === 'B' ? 'b' : ''}">${d.who}</span>
+      <button class="play" onclick="play('d${i}','${d.en.replace(/'/g, "\\'")}')">🔊</button>
+      <div class="body"><div class="en">${d.en}</div><div class="zhx">${d.zh}</div>${d.note ? `<div class="note">💡 ${d.note}</div>` : ""}</div>
+    </div>`).join("");
+}
+function buildPassage() {
+  document.getElementById("passage").innerHTML = PASSAGE.map((p, i) => `
+    <div class="s"><button class="play" onclick="play('p${i}','${p.en.replace(/'/g, "\\'")}')">🔊</button> <span class="en">${p.en}</span><div class="zhx">${p.zh}</div></div>`).join("");
+}
+function sayPassage() { speak(PASSAGE.map(p => p.en).join(" ")); }
+
+buildVocab(); buildDialogue(); buildPassage();
+</script>
+</body>
+</html>
