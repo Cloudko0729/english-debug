@@ -295,11 +295,19 @@ function _weekBounds() {
 function _drillCard(d) {
   const claim = d.date + "::" + d.date + "-" + d.theme;
   const adv = d.day >= 17 ? " ＋📘進階" : "";
-  return `<a class="card" href="drills/daily_${d.date}.html" data-claim="${claim}" data-unlock="${d.date}">
+  const card = `<a class="card" href="drills/daily_${d.date}.html" data-claim="${claim}" data-unlock="${d.date}">
       <div class="card-left"><div class="card-icon icon-drill">${d.icon}</div>
         <div><div class="card-title">Day ${d.day} — ${d.date}</div>
         <div class="card-sub">${d.eng} ${d.zh} · 英聽/填空/閱讀/重組/圖片${adv}</div></div></div>
       <span class="arrow">›</span></a>`;
+  if (!d.lesson) return card;
+  const lesson = `<a class="card" href="lessons/lesson_${d.date}.html"
+      style="background:#eef5ff;border:1px solid #cfe0ff;margin-bottom:6px">
+      <div class="card-left"><div class="card-icon" style="background:#2f80ed;color:#fff">📘</div>
+        <div><div class="card-title" style="color:#2f80ed">先看教學：${d.eng} ${d.zh}</div>
+        <div class="card-sub">單字發音 · 文法步驟 · 對話 · 短文 · 小測驗</div></div></div>
+      <span class="arrow">›</span></a>`;
+  return `<div style="margin-bottom:10px">${lesson}${card}</div>`;
 }
 function renderWeekDrills() {
   const el = document.getElementById("weekDrills");
