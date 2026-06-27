@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="英文打字練習遊戲 - 透過下落字母方塊提升你的打字速度與準確度">
+  <title>英文打字方塊遊戲 | Typing Block Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+TC:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #0f0f1a;
+      --bg-secondary: #1a1a2e;
+      --bg-card: rgba(30, 30, 55, 0.7);
+      --text-primary: #e8e8f0;
+      --text-secondary: #9898b8;
+      --accent-cyan: #00d4ff;
+      --accent-purple: #a855f7;
+      --accent-pink: #f472b6;
+      --accent-green: #34d399;
+      --accent-orange: #fb923c;
+      --accent-red: #f87171;
+      --accent-yellow: #fbbf24;
+      --grid-border: rgba(100, 100, 180, 0.2);
+      --grid-bg: rgba(15, 15, 30, 0.85);
+      --finger-pinky: #f472b6;
+      --finger-ring: #86efac;
+      --finger-middle: #fcd34d;
+      --finger-l-index: #d8b4fe;
+      --finger-r-index: #93c5fd;
+      --finger-thumb: #d1d5db;
+      --finger-pinky-bg: rgba(244, 114, 182, 0.15);
+      --finger-ring-bg: rgba(134, 239, 172, 0.15);
+      --finger-middle-bg: rgba(253, 211, 77, 0.15);
+      --finger-l-index-bg: rgba(216, 180, 254, 0.15);
+      --finger-r-index-bg: rgba(147, 197, 253, 0.15);
+      --finger-thumb-bg: rgba(209, 213, 219, 0.15);
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans TC', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(ellipse at 20% 0%, rgba(168, 85, 247, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 0%, rgba(0, 212, 255, 0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 100%, rgba(244, 114, 182, 0.08) 0%, transparent 50%);
+    }
+
+    .app-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      text-align: center;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .header p {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-top: 4px;
+    }
+
+    /* ===== WORD LIST (COLLAPSIBLE) ===== */
+    .word-list-section {
+      background: var(--bg-card);
+      border: 1px solid var(--grid-border);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+
+    .word-list-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .word-list-toggle:hover {
+      background: rgba(255,255,255,0.03);
+    }
+
+    .word-list-title {
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .word-list-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 14px;
+      background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+      border-radius: 2px;
+    }
+
+    .toggle-arrow {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      transition: transform 0.3s ease;
+    }
+
+    .toggle-arrow.open {
+      transform: rotate(180deg);
+    }
+
+    .word-list-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0 18px;
+    }
+
+    .word-list-body.open {
+      max-height: 300px;
+      padding: 0 18px 14px;
+      overflow-y: auto;
+    }
+
+    .word-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+
+    .word-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 8px;
+      border-radius: 8px;
+      background: rgba(255,255,255, 0.03);
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      font-size: 0.78rem;
+      cursor: default;
+    }
+
+    .word-item.completed {
+      opacity: 0.35;
+      text-decoration: line-through;
+    }
+
+    .word-item.active {
+      border-color: var(--accent-cyan);
+      background: rgba(0, 212, 255, 0.08);
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.15);
+    }
+
+    .word-item .en {
+      font-weight: 700;
+      color: var(--text-primary);
+      text-transform: uppercase;
+    }
+
+    .word-item .zh {
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+    }
+
+    /* ===== GAME AREA ===== */
+    .game-section {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .game-board-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Current Word Display */
+    .current-word-display {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--grid-border);
+      border-radius: 12px;
+      backdrop-filter: blur(12px);
+      min-height: 52px;
+    }
+
+    .current-word-display .label {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .current-word-display .word-letters {
+      display: flex;
+      gap: 4px;
+    }
+
+    .current-word-display .letter-box {
+      width: 30px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      font-weight: 900;
+      font-size: 1rem;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--grid-border);
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+    }
+
+    .current-word-display .letter-box.typed {
+      background: rgba(52, 211, 153, 0.2);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+      box-shadow: 0 0 8px rgba(52, 211, 153, 0.3);
+    }
+
+    .current-word-display .letter-box.current {
+      background: rgba(0, 212, 255, 0.15);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      animation: pulse-border 1s ease-in-out infinite;
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+    }
+
+    @keyframes pulse-border {
+      0%, 100% { border-color: var(--accent-cyan); }
+      50% { border-color: var(--accent-purple); }
+    }
+
+    .current-word-display .meaning {
+      font-size: 0.85rem;
+      color: var(--accent-pink);
+      font-weight: 600;
+    }
+
+    /* Round indicator */
+    .round-badge {
+      font-size: 0.7rem;
+      color: var(--accent-yellow);
+      background: rgba(251, 191, 36, 0.12);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    /* Game Grid — 10 x 5 */
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      gap: 3px;
+      padding: 10px;
+      background: var(--grid-bg);
+      border: 1px solid var(--grid-border);
+      border-radius: 14px;
+      width: 100%;
+      aspect-ratio: 10 / 5.2;
+      backdrop-filter: blur(12px);
+      box-shadow:
+        0 0 40px rgba(0, 212, 255, 0.05),
+        inset 0 0 40px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game-grid::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,212,255,0.03) 0%, transparent 20%),
+        linear-gradient(0deg, rgba(248,113,113,0.05) 0%, transparent 15%);
+      pointer-events: none;
+      border-radius: 14px;
+    }
+
+    .grid-cell {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(100, 100, 180, 0.08);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+      position: relative;
+    }
+
+    .grid-cell.has-letter {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.25), rgba(168, 85, 247, 0.25));
+      border-color: rgba(0, 212, 255, 0.4);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.2), inset 0 0 8px rgba(0, 212, 255, 0.1);
+      text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+      animation: block-glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes block-glow {
+      0% { box-shadow: 0 0 12px rgba(0, 212, 255, 0.2), inset 0 0 8px rgba(0, 212, 255, 0.1); }
+      100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.3), inset 0 0 12px rgba(168, 85, 247, 0.15); }
+    }
+
+    .grid-cell.danger {
+      background: linear-gradient(135deg, rgba(248, 113, 113, 0.3), rgba(251, 146, 60, 0.3));
+      border-color: rgba(248, 113, 113, 0.5);
+      box-shadow: 0 0 16px rgba(248, 113, 113, 0.3);
+      animation: danger-pulse 0.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes danger-pulse {
+      0% { box-shadow: 0 0 16px rgba(248, 113, 113, 0.3); }
+      100% { box-shadow: 0 0 24px rgba(248, 113, 113, 0.5); }
+    }
+
+    .grid-cell.stacked {
+      background: linear-gradient(135deg, rgba(120, 80, 160, 0.35), rgba(80, 60, 130, 0.35));
+      border-color: rgba(168, 85, 247, 0.3);
+      color: rgba(255,255,255,0.5);
+      box-shadow: inset 0 0 6px rgba(168, 85, 247, 0.15);
+      animation: none;
+      text-shadow: none;
+    }
+
+    .grid-cell.correct-flash {
+      background: linear-gradient(135deg, rgba(52, 211, 153, 0.4), rgba(52, 211, 153, 0.2));
+      border-color: var(--accent-green);
+      animation: correct-burst 0.4s ease-out;
+    }
+
+    @keyframes correct-burst {
+      0% { transform: scale(1.15); box-shadow: 0 0 30px rgba(52, 211, 153, 0.6); }
+      100% { transform: scale(1); box-shadow: 0 0 0 transparent; }
+    }
+
+    .grid-cell.top-row {
+      border-top: 2px solid rgba(248, 113, 113, 0.15);
+    }
+
+    /* Pause overlay on grid */
+    .pause-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 15, 30, 0.8);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      border-radius: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .pause-overlay.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .pause-overlay .pause-text {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--accent-yellow);
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      text-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+    }
+
+    /* Stats Panel */
+    .stats-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 155px;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .btn-game {
+      padding: 11px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .btn-game:hover { transform: translateY(-2px); }
+    .btn-game:active { transform: translateY(0); }
+
+    .btn-start {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+    }
+    .btn-start:hover { box-shadow: 0 6px 28px rgba(0, 212, 255, 0.4); }
+
+    .btn-pause {
+      background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+      color: #1a1a2e;
+      box-shadow: 0 4px 16px rgba(251, 191, 36, 0.2);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .btn-pause.enabled { opacity: 1; pointer-events: all; }
+    .btn-pause:hover { box-shadow: 0 6px 24px rgba(251, 191, 36, 0.35); }
+
+    .btn-restart {
+      background: linear-gradient(135deg, rgba(248, 113, 113, 0.8), rgba(244, 114, 182, 0.8));
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(248, 113, 113, 0.2);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    .btn-restart.enabled { opacity: 1; pointer-events: all; }
+    .btn-restart:hover { box-shadow: 0 6px 24px rgba(248, 113, 113, 0.35); }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--grid-border);
+      border-radius: 12px;
+      padding: 10px 14px;
+      backdrop-filter: blur(12px);
+      text-align: center;
+    }
+
+    .stat-card .stat-label {
+      font-size: 0.63rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 3px;
+    }
+
+    .stat-card .stat-value {
+      font-size: 1.4rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-card .stat-value.score { background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan)); -webkit-background-clip: text; background-clip: text; }
+    .stat-card .stat-value.combo { background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink)); -webkit-background-clip: text; background-clip: text; }
+    .stat-card .stat-value.accuracy { background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink)); -webkit-background-clip: text; background-clip: text; }
+    .stat-card .stat-value.time { background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange)); -webkit-background-clip: text; background-clip: text; }
+
+    .timer-card {
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .timer-card.warning {
+      border-color: rgba(248, 113, 113, 0.65);
+      box-shadow: 0 0 18px rgba(248, 113, 113, 0.16);
+    }
+
+    .timer-card.warning .stat-value.time {
+      background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .speed-control {
+      background: var(--bg-card);
+      border: 1px solid var(--grid-border);
+      border-radius: 12px;
+      padding: 10px 14px;
+      backdrop-filter: blur(12px);
+    }
+
+    .speed-control .stat-label {
+      font-size: 0.63rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 4px;
+      text-align: center;
+    }
+
+    .speed-control input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent-cyan);
+    }
+
+    .speed-control .speed-val {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* ===== KEYBOARD ===== */
+    .keyboard-section {
+      background: var(--bg-card);
+      border: 1px solid var(--grid-border);
+      border-radius: 16px;
+      padding: 16px 20px 12px;
+      backdrop-filter: blur(12px);
+    }
+
+    .keyboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .keyboard-title {
+      font-size: 0.75rem;
+      color: var(--accent-purple);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .keyboard-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 14px;
+      background: linear-gradient(180deg, var(--accent-purple), var(--accent-pink));
+      border-radius: 2px;
+    }
+
+    .finger-legend {
+      display: flex;
+      gap: 14px;
+      font-size: 0.68rem;
+    }
+
+    .finger-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-secondary);
+    }
+
+    .finger-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .finger-dot.pinky { background: var(--finger-pinky); }
+    .finger-dot.ring { background: var(--finger-ring); }
+    .finger-dot.middle { background: var(--finger-middle); }
+    .finger-dot.l-index { background: var(--finger-l-index); }
+    .finger-dot.r-index { background: var(--finger-r-index); }
+    .finger-dot.thumb { background: var(--finger-thumb); }
+
+    .keyboard-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .keyboard-row {
+      display: flex;
+      gap: 4px;
+    }
+
+    .key {
+      min-width: 42px;
+      height: 42px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: all 0.15s ease;
+      cursor: default;
+      position: relative;
+    }
+
+    .key.finger-pinky { background: var(--finger-pinky-bg); border-color: rgba(244, 114, 182, 0.2); color: var(--finger-pinky); }
+    .key.finger-ring { background: var(--finger-ring-bg); border-color: rgba(134, 239, 172, 0.2); color: var(--finger-ring); }
+    .key.finger-middle { background: var(--finger-middle-bg); border-color: rgba(253, 211, 77, 0.2); color: var(--finger-middle); }
+    .key.finger-l-index { background: var(--finger-l-index-bg); border-color: rgba(216, 180, 254, 0.2); color: var(--finger-l-index); }
+    .key.finger-r-index { background: var(--finger-r-index-bg); border-color: rgba(147, 197, 253, 0.2); color: var(--finger-r-index); }
+    .key.finger-thumb { background: var(--finger-thumb-bg); border-color: rgba(209, 213, 219, 0.2); color: var(--finger-thumb); }
+
+    .key.space-key {
+      min-width: 260px;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: var(--text-secondary);
+      background: var(--finger-thumb-bg);
+      border-color: rgba(209, 213, 219, 0.2);
+    }
+
+    .key.highlight {
+      transform: scale(1.12);
+      z-index: 2;
+      box-shadow: 0 0 20px currentColor;
+      border-width: 2px;
+    }
+
+    .key.finger-pinky.highlight { background: rgba(244, 114, 182, 0.35); box-shadow: 0 0 20px var(--finger-pinky); }
+    .key.finger-ring.highlight { background: rgba(134, 239, 172, 0.35); box-shadow: 0 0 20px var(--finger-ring); }
+    .key.finger-middle.highlight { background: rgba(253, 211, 77, 0.35); box-shadow: 0 0 20px var(--finger-middle); }
+    .key.finger-l-index.highlight { background: rgba(216, 180, 254, 0.35); box-shadow: 0 0 20px var(--finger-l-index); }
+    .key.finger-r-index.highlight { background: rgba(147, 197, 253, 0.35); box-shadow: 0 0 20px var(--finger-r-index); }
+
+    .key.pressed {
+      transform: scale(0.92);
+      filter: brightness(1.5);
+    }
+
+    .hand-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+      padding: 0 30px;
+      width: 100%;
+    }
+
+    .hand-label {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    /* ===== GAME OVER OVERLAY ===== */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 15, 26, 0.92);
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .overlay.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .overlay-content {
+      text-align: center;
+      padding: 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--grid-border);
+      border-radius: 24px;
+      max-width: 420px;
+    }
+
+    .overlay-content h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .overlay-content .final-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .overlay-content .final-stat {
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+    }
+
+    .overlay-content .final-stat .fs-label {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .overlay-content .final-stat .fs-value {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--accent-cyan);
+      margin-top: 4px;
+    }
+
+    .overlay-content .btn-game {
+      width: 100%;
+    }
+
+    /* ===== GAME MESSAGE ===== */
+    .game-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+      pointer-events: none;
+      z-index: 4;
+      white-space: nowrap;
+    }
+
+    /* Stack height warning bar */
+    .stack-warning {
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.05);
+      margin-top: 6px;
+      overflow: hidden;
+    }
+
+    .stack-warning-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent-green), var(--accent-yellow), var(--accent-red));
+      transition: width 0.4s ease;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .word-grid { grid-template-columns: repeat(4, 1fr); }
+      .game-section { flex-direction: column; align-items: center; }
+      .stats-panel { flex-direction: row; flex-wrap: wrap; justify-content: center; min-width: auto; }
+      .btn-group { flex-direction: row; }
+      .key { min-width: 32px; height: 34px; font-size: 0.72rem; }
+      .key.space-key { min-width: 180px; }
+    }
+
+    /* ===== RESPONSIVE LAYOUT REFINEMENT ===== */
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      touch-action: manipulation;
+    }
+
+    .app-container {
+      width: min(100%, 1100px);
+      padding: max(16px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+    }
+
+    .game-section {
+      align-items: stretch;
+      min-width: 0;
+    }
+
+    .game-board-wrapper {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .current-word-display {
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .current-word-display .word-letters {
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .next-word-preview {
+      margin-left: 6px;
+      padding-left: 10px;
+      border-left: 1px solid var(--grid-border);
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    .next-word-preview .next-label {
+      color: var(--text-secondary);
+      font-size: 0.68rem;
+      letter-spacing: 1px;
+    }
+
+    .next-word-preview .next-word {
+      color: var(--accent-cyan);
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .next-word-preview .next-meaning {
+      color: var(--text-secondary);
+      font-size: 0.72rem;
+    }
+
+    .game-grid {
+      min-width: 0;
+    }
+
+    .grid-cell {
+      font-size: clamp(0.82rem, 2vw, 1.3rem);
+    }
+
+    .stats-panel {
+      flex: 0 0 155px;
+      min-width: 0;
+    }
+
+    .btn-game {
+      min-height: 42px;
+    }
+
+    .keyboard-section {
+      overflow: hidden;
+    }
+
+    .keyboard-header {
+      flex-wrap: wrap;
+      gap: 8px 16px;
+    }
+
+    .finger-legend {
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .keyboard-rows {
+      --key-size: clamp(25px, 4vw, 42px);
+      --key-gap: clamp(2px, 0.4vw, 4px);
+    }
+
+    .keyboard-row {
+      gap: var(--key-gap);
+      max-width: 100%;
+    }
+
+    .key {
+      width: var(--key-size);
+      min-width: var(--key-size);
+      height: var(--key-size);
+    }
+
+    .key.space-key {
+      width: clamp(150px, 32vw, 260px);
+      min-width: clamp(150px, 32vw, 260px);
+    }
+
+    .overlay {
+      padding: 16px;
+    }
+
+    .overlay-content {
+      width: min(100%, 420px);
+      max-height: calc(100dvh - 32px);
+      overflow-y: auto;
+    }
+
+    @media (max-height: 800px) and (min-width: 901px) {
+      .app-container {
+        max-width: 980px;
+        padding-top: 8px;
+        padding-bottom: 10px;
+        gap: 8px;
+      }
+
+      .header h1 { font-size: 1.5rem; }
+      .header p { margin-top: 1px; font-size: 0.75rem; }
+      .word-list-toggle { padding-top: 8px; padding-bottom: 8px; }
+      .current-word-display { min-height: 44px; margin-bottom: 6px; padding: 5px 14px; }
+      .keyboard-section { padding: 8px 14px; }
+      .keyboard-header { margin-bottom: 6px; }
+      .keyboard-rows { --key-size: 30px; --key-gap: 3px; }
+      .key { font-size: 0.72rem; }
+      .hand-labels { display: none; }
+    }
+
+    @media (max-width: 900px) {
+      .app-container {
+        padding: max(14px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+        gap: 14px;
+      }
+
+      .word-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .game-section { flex-direction: column; }
+
+      .stats-panel {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 8px;
+        flex-basis: auto;
+      }
+
+      .btn-group {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .stat-card,
+      .speed-control {
+        min-width: 0;
+        padding: 9px 8px;
+      }
+
+      .stat-card .stat-value { font-size: 1.2rem; }
+      .keyboard-section { padding-left: 14px; padding-right: 14px; }
+      .keyboard-rows { --key-size: clamp(28px, 5vw, 38px); }
+    }
+
+    @media (max-width: 640px) {
+      .app-container { padding-left: 10px; padding-right: 10px; gap: 10px; }
+      .header h1 { font-size: clamp(1.35rem, 7vw, 1.75rem); letter-spacing: 1px; }
+      .header p { font-size: 0.76rem; line-height: 1.45; }
+      .word-list-toggle { padding: 10px 12px; }
+      .word-list-body { padding-left: 12px; padding-right: 12px; }
+      .word-list-body.open { padding-left: 12px; padding-right: 12px; }
+      .word-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+      .current-word-display {
+        min-height: 48px;
+        gap: 7px;
+        padding: 7px 8px;
+      }
+
+      .current-word-display .label { width: 100%; text-align: center; }
+      .current-word-display .letter-box { width: 26px; height: 30px; font-size: 0.9rem; }
+      .next-word-preview {
+        width: auto;
+        margin-left: 4px;
+        padding: 0 0 0 8px;
+        border-left: 1px solid var(--grid-border);
+        border-top: 0;
+        justify-content: center;
+      }
+      .round-badge { padding-left: 7px; padding-right: 7px; }
+      .game-grid { gap: 2px; padding: 6px; border-radius: 10px; }
+      .grid-cell { border-radius: 3px; }
+      .game-message { max-width: 90%; white-space: normal; text-align: center; font-size: 0.9rem; line-height: 1.5; }
+
+      .stats-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .speed-control { grid-column: 1 / -1; }
+      .btn-game { padding: 9px 6px; font-size: 0.7rem; letter-spacing: 0.7px; }
+
+      .keyboard-section { padding: 10px 6px 8px; }
+      .keyboard-header { justify-content: center; }
+      .keyboard-title { width: 100%; justify-content: center; text-align: center; }
+      .finger-legend { justify-content: center; gap: 6px 10px; font-size: 0.62rem; }
+      .keyboard-rows { --key-size: clamp(25px, 7.2vw, 34px); --key-gap: 2px; }
+      .key { font-size: 0.68rem; border-radius: 5px; }
+      .key.space-key { width: clamp(140px, 50vw, 190px); min-width: clamp(140px, 50vw, 190px); }
+      .hand-labels { padding: 0 12px; }
+
+      .overlay-content { padding: 24px 18px; border-radius: 18px; }
+      .overlay-content h2 { font-size: 1.65rem; }
+    }
+
+    @media (max-width: 380px) {
+      .finger-legend { display: none; }
+      .keyboard-rows { --key-size: 25px; }
+      .hand-labels { display: none; }
+      .overlay-content .final-stats { gap: 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- HEADER -->
+    <header class="header">
+      <h1>⌨ Typing Blocks</h1>
+      <p>按下正確的字母鍵，在方塊落到底部前消除它！方塊會堆疊，堆滿即結束！</p>
+    </header>
+
+    <!-- WORD LIST (Collapsible) -->
+    <section class="word-list-section" id="wordListSection">
+      <div class="word-list-toggle" id="wordListToggle" onclick="toggleWordList()">
+        <div class="word-list-title" id="wordListTitle">📝 單字表 Word List</div>
+        <span class="toggle-arrow" id="toggleArrow">▼</span>
+      </div>
+      <div class="word-list-body" id="wordListBody">
+        <div class="word-grid" id="wordGrid"></div>
+      </div>
+    </section>
+
+    <!-- GAME + STATS -->
+    <section class="game-section">
+      <div class="game-board-wrapper">
+        <!-- Current Word -->
+        <div class="current-word-display" id="currentWordDisplay">
+          <span class="label">當前單字</span>
+          <div class="word-letters" id="wordLetters"></div>
+          <span class="meaning" id="wordMeaning"></span>
+          <span class="round-badge" id="roundBadge">第 1 輪</span>
+          <div class="next-word-preview" aria-live="polite">
+            <span class="next-label">下一個</span>
+            <span class="next-word" id="nextWordText">—</span>
+            <span class="next-meaning" id="nextWordMeaning"></span>
+          </div>
+        </div>
+        <!-- Grid -->
+        <div class="game-grid" id="gameGrid">
+          <div class="game-message" id="gameMessage">按下 START 開始遊戲</div>
+          <div class="pause-overlay" id="pauseOverlay">
+            <div class="pause-text">⏸ 暫停中</div>
+          </div>
+        </div>
+        <!-- Stack height bar -->
+        <div class="stack-warning">
+          <div class="stack-warning-fill" id="stackWarningFill"></div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-panel">
+        <div class="btn-group">
+          <button class="btn-game btn-start" id="btnStart" onclick="startGame()">▶ START</button>
+          <button class="btn-game btn-pause" id="btnPause" onclick="togglePause()">⏸ PAUSE</button>
+          <button class="btn-game btn-restart" id="btnRestart" onclick="restartGame()">🔄 RESTART</button>
+        </div>
+        <div class="speed-control">
+          <div class="stat-label">速度</div>
+          <input type="range" id="speedSlider" min="1" max="5" value="2" oninput="updateSpeed()">
+          <div class="speed-val" id="speedVal">2</div>
+        </div>
+        <div class="stat-card timer-card" id="timerCard">
+          <div class="stat-label">剩餘時間</div>
+          <div class="stat-value time" id="statTime">03:00</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">分數</div>
+          <div class="stat-value score" id="statScore">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">連擊</div>
+          <div class="stat-value combo" id="statCombo">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">準確率</div>
+          <div class="stat-value accuracy" id="statAccuracy">100%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">輪次 / 已完成</div>
+          <div class="stat-value" id="statWords">0</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEYBOARD -->
+    <section class="keyboard-section">
+      <div class="keyboard-header">
+        <div class="keyboard-title">⌨ 鍵盤指位圖 Finger Position</div>
+        <div class="finger-legend">
+          <div class="finger-legend-item"><span class="finger-dot pinky"></span>小指</div>
+          <div class="finger-legend-item"><span class="finger-dot ring"></span>無名指</div>
+          <div class="finger-legend-item"><span class="finger-dot middle"></span>中指</div>
+          <div class="finger-legend-item"><span class="finger-dot l-index"></span>左食指</div>
+          <div class="finger-legend-item"><span class="finger-dot r-index"></span>右食指</div>
+          <div class="finger-legend-item"><span class="finger-dot thumb"></span>拇指</div>
+        </div>
+      </div>
+      <div class="keyboard-rows" id="keyboardRows"></div>
+      <div class="hand-labels">
+        <span class="hand-label">← 左手 Left</span>
+        <span class="hand-label">右手 Right →</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- GAME OVER OVERLAY -->
+  <div class="overlay" id="gameOverOverlay">
+    <div class="overlay-content">
+      <h2 id="overlayTitle">💀 遊戲結束</h2>
+      <div class="final-stats">
+        <div class="final-stat"><div class="fs-label">分數</div><div class="fs-value" id="finalScore">0</div></div>
+        <div class="final-stat"><div class="fs-label">最高連擊</div><div class="fs-value" id="finalCombo">0</div></div>
+        <div class="final-stat"><div class="fs-label">準確率</div><div class="fs-value" id="finalAccuracy">0%</div></div>
+        <div class="final-stat"><div class="fs-label">完成單字</div><div class="fs-value" id="finalWords">0</div></div>
+      </div>
+      <button class="btn-game btn-start" onclick="restartGame()">🔄 再玩一次</button>
+    </div>
+  </div>
+
+  <script>
+    // ===== WORD LIST =====
+    let WORDS = [];
+
+    // ===== GRID CONFIG =====
+    const COLS = 10;
+    const ROWS = 5;
+
+    // ===== KEYBOARD FINGER MAP =====
+    const FINGER_MAP = {
+      'q': 'pinky', 'a': 'pinky', 'z': 'pinky',
+      'w': 'ring', 's': 'ring', 'x': 'ring',
+      'e': 'middle', 'd': 'middle', 'c': 'middle',
+      'r': 'l-index', 'f': 'l-index', 'v': 'l-index',
+      't': 'l-index', 'g': 'l-index', 'b': 'l-index',
+      'y': 'r-index', 'h': 'r-index', 'n': 'r-index',
+      'u': 'r-index', 'j': 'r-index', 'm': 'r-index',
+      'i': 'middle', 'k': 'middle',
+      'o': 'ring', 'l': 'ring',
+      'p': 'pinky',
+      ' ': 'thumb'
+    };
+
+    const KB_ROWS = [
+      ['q','w','e','r','t','y','u','i','o','p'],
+      ['a','s','d','f','g','h','j','k','l'],
+      ['z','x','c','v','b','n','m']
+    ];
+
+    // ===== GAME STATE =====
+    let gameRunning = false;
+    let gamePaused = false;
+    let score = 0;
+    let combo = 0;
+    let maxCombo = 0;
+    let totalKeys = 0;
+    let correctKeys = 0;
+    let wordsCompletedTotal = 0;
+    let currentRound = 1;
+    let wordsCompletedThisRound = 0;
+    let currentWordPoolIndex = -1;
+    let currentLetterIndex = 0;
+    let fallingLetter = null; // { letter, col, row }
+    let fallTimer = null;
+    let countdownTimer = null;
+    let countdownDeadline = null;
+    let remainingTime = 180;
+    let fallSpeed = 750;
+    let wordOrder = [];
+    let nextRoundWordOrder = [];
+    let advanceTimer = null;
+    let pendingAdvance = null;
+    let inputBuffer = [];
+    let gridCells = [];
+    let stackGrid = []; // stackGrid[row][col] = letter or null
+    let wordListOpen = false;
+
+    const GAME_DURATION_SECONDS = 3 * 60;
+    const LETTER_ADVANCE_DELAY = 35;
+    const WORD_ADVANCE_DELAY = 80;
+    const MISSED_LETTER_DELAY = 100;
+    const MAX_INPUT_BUFFER = 8;
+
+    const DEFAULT_WORDS = [
+      { en: 'apple', zh: '蘋果' },
+      { en: 'book', zh: '書' },
+      { en: 'cat', zh: '貓' },
+      { en: 'dog', zh: '狗' },
+      { en: 'egg', zh: '蛋' },
+      { en: 'fish', zh: '魚' },
+      { en: 'girl', zh: '女孩' },
+      { en: 'hat', zh: '帽子' },
+      { en: 'ice', zh: '冰' },
+      { en: 'jump', zh: '跳' },
+      { en: 'king', zh: '國王' },
+      { en: 'lion', zh: '獅子' },
+      { en: 'milk', zh: '牛奶' },
+      { en: 'nose', zh: '鼻子' },
+      { en: 'open', zh: '打開' },
+      { en: 'pen', zh: '筆' },
+      { en: 'rain', zh: '雨' },
+      { en: 'sun', zh: '太陽' },
+      { en: 'tree', zh: '樹' },
+      { en: 'wolf', zh: '狼' }
+    ];
+
+    function parseCsvLine(line) {
+      const cells = [];
+      let current = '';
+      let inQuotes = false;
+
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        if (char === '"') {
+          if (inQuotes && line[i + 1] === '"') {
+            current += '"';
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === ',' && !inQuotes) {
+          cells.push(current);
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+
+      cells.push(current);
+      return cells;
+    }
+
+    // ===== INIT =====
+    async function init() {
+      let loadedFromCsv = false;
+      try {
+        const res = await fetch('./words.csv', { cache: 'no-store' });
+        if (res.ok) {
+          const text = (await res.text()).replace(/^\uFEFF/, '');
+          const parsedWords = text.trim().split(/\r?\n/)
+            .map(parseCsvLine)
+            .filter(row => !(row[0]?.trim().toLowerCase() === 'en' && row[1]?.trim().toLowerCase() === 'zh'))
+            .map(([en, zh]) => ({ en: en ? en.trim().toLowerCase() : '', zh: zh ? zh.trim() : '' }))
+            .filter(word => /^[a-z]{2,}$/.test(word.en) && word.zh);
+
+          if (parsedWords.length > 0) {
+            WORDS = parsedWords;
+            loadedFromCsv = true;
+          }
+        }
+      } catch (e) {
+        console.warn('Failed to load words.csv, falling back to default wordlist:', e);
+      }
+
+      if (!loadedFromCsv) {
+        WORDS = DEFAULT_WORDS;
+      }
+
+      const note = loadedFromCsv ? '' : ' (預設值)';
+      document.getElementById('wordListTitle').innerHTML = `📝 單字表 Word List（${WORDS.length} 個）${note}`;
+
+      buildWordList();
+      buildGrid();
+      buildKeyboard();
+      initStackGrid();
+    }
+
+    function initStackGrid() {
+      stackGrid = [];
+      for (let r = 0; r < ROWS; r++) {
+        stackGrid[r] = [];
+        for (let c = 0; c < COLS; c++) {
+          stackGrid[r][c] = null;
+        }
+      }
+    }
+
+    // ===== TOGGLE WORD LIST =====
+    function toggleWordList() {
+      wordListOpen = !wordListOpen;
+      document.getElementById('wordListBody').classList.toggle('open', wordListOpen);
+      document.getElementById('toggleArrow').classList.toggle('open', wordListOpen);
+    }
+
+    // ===== WORD LIST UI =====
+    function buildWordList() {
+      const grid = document.getElementById('wordGrid');
+      grid.innerHTML = '';
+      WORDS.forEach((w, i) => {
+        const item = document.createElement('div');
+        item.className = 'word-item';
+        item.id = `word-item-${i}`;
+        item.innerHTML = `<span class="en">${w.en}</span><span class="zh">${w.zh}</span>`;
+        grid.appendChild(item);
+      });
+    }
+
+    function resetWordListHighlights() {
+      WORDS.forEach((_, i) => {
+        const el = document.getElementById(`word-item-${i}`);
+        el.classList.remove('active', 'completed');
+      });
+    }
+
+    // ===== GRID UI =====
+    function buildGrid() {
+      const grid = document.getElementById('gameGrid');
+      const msg = document.getElementById('gameMessage');
+      const pauseOv = document.getElementById('pauseOverlay');
+      grid.innerHTML = '';
+      grid.appendChild(msg);
+      grid.appendChild(pauseOv);
+      gridCells = [];
+      for (let r = 0; r < ROWS; r++) {
+        gridCells[r] = [];
+        for (let c = 0; c < COLS; c++) {
+          const cell = document.createElement('div');
+          cell.className = 'grid-cell' + (r === 0 ? ' top-row' : '');
+          cell.dataset.row = r;
+          cell.dataset.col = c;
+          grid.appendChild(cell);
+          gridCells[r][c] = cell;
+        }
+      }
+    }
+
+    // ===== KEYBOARD UI =====
+    function buildKeyboard() {
+      const container = document.getElementById('keyboardRows');
+      container.innerHTML = '';
+      KB_ROWS.forEach((row, ri) => {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'keyboard-row';
+        if (ri === 1) rowDiv.style.paddingLeft = '16px';
+        if (ri === 2) rowDiv.style.paddingLeft = '0px';
+        row.forEach(key => {
+          const keyEl = document.createElement('div');
+          keyEl.className = `key finger-${FINGER_MAP[key]}`;
+          keyEl.id = `key-${key}`;
+          keyEl.textContent = key;
+          rowDiv.appendChild(keyEl);
+        });
+        container.appendChild(rowDiv);
+      });
+      const spaceRow = document.createElement('div');
+      spaceRow.className = 'keyboard-row';
+      const spaceKey = document.createElement('div');
+      spaceKey.className = 'key space-key finger-thumb';
+      spaceKey.id = 'key-space';
+      spaceKey.textContent = 'SPACE 空白鍵';
+      spaceRow.appendChild(spaceKey);
+      container.appendChild(spaceRow);
+    }
+
+    // ===== HIGHLIGHT KEYBOARD =====
+    function highlightKey(letter) {
+      document.querySelectorAll('.key.highlight').forEach(k => k.classList.remove('highlight'));
+      if (letter) {
+        const keyEl = document.getElementById(`key-${letter.toLowerCase()}`);
+        if (keyEl) keyEl.classList.add('highlight');
+      }
+    }
+
+    function pressKeyVisual(letter) {
+      const keyEl = document.getElementById(`key-${letter.toLowerCase()}`);
+      if (keyEl) {
+        keyEl.classList.add('pressed');
+        setTimeout(() => keyEl.classList.remove('pressed'), 120);
+      }
+    }
+
+    // ===== CURRENT WORD DISPLAY =====
+    function updateCurrentWordDisplay() {
+      const word = WORDS[wordOrder[currentWordPoolIndex]];
+      const lettersDiv = document.getElementById('wordLetters');
+      const meaningDiv = document.getElementById('wordMeaning');
+      const roundBadge = document.getElementById('roundBadge');
+      lettersDiv.innerHTML = '';
+      word.en.split('').forEach((ch, i) => {
+        const box = document.createElement('div');
+        box.className = 'letter-box';
+        if (i < currentLetterIndex) box.classList.add('typed');
+        else if (i === currentLetterIndex) box.classList.add('current');
+        box.textContent = ch;
+        lettersDiv.appendChild(box);
+      });
+      meaningDiv.textContent = word.zh;
+      roundBadge.textContent = `第 ${currentRound} 輪`;
+      updateNextWordPreview();
+    }
+
+    function updateNextWordPreview() {
+      const nextWordText = document.getElementById('nextWordText');
+      const nextWordMeaning = document.getElementById('nextWordMeaning');
+      let nextWord = null;
+
+      if (wordOrder.length > 0 && currentWordPoolIndex >= 0) {
+        const nextIndex = currentWordPoolIndex + 1;
+        if (nextIndex < wordOrder.length) {
+          nextWord = WORDS[wordOrder[nextIndex]];
+        } else if (nextRoundWordOrder.length > 0) {
+          nextWord = WORDS[nextRoundWordOrder[0]];
+        }
+      }
+
+      nextWordText.textContent = nextWord ? nextWord.en : '—';
+      nextWordMeaning.textContent = nextWord ? nextWord.zh : '';
+    }
+
+    function clearCurrentWordDisplay() {
+      document.getElementById('wordLetters').innerHTML = '';
+      document.getElementById('wordMeaning').textContent = '';
+      document.getElementById('nextWordText').textContent = '—';
+      document.getElementById('nextWordMeaning').textContent = '';
+    }
+
+    // ===== UPDATE STATS =====
+    function updateStats() {
+      document.getElementById('statScore').textContent = score;
+      document.getElementById('statCombo').textContent = combo;
+      const acc = totalKeys > 0 ? Math.round((correctKeys / totalKeys) * 100) : 100;
+      document.getElementById('statAccuracy').textContent = acc + '%';
+      document.getElementById('statWords').textContent = wordsCompletedTotal;
+    }
+
+    // ===== COUNTDOWN TIMER =====
+    function formatTime(totalSeconds) {
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      return String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+    }
+
+    function updateCountdownDisplay() {
+      document.getElementById('statTime').textContent = formatTime(remainingTime);
+      document.getElementById('timerCard').classList.toggle('warning', remainingTime <= 30);
+    }
+
+    function stopCountdownTimer() {
+      if (countdownTimer) {
+        clearInterval(countdownTimer);
+        countdownTimer = null;
+      }
+      countdownDeadline = null;
+    }
+
+    function resetCountdown() {
+      stopCountdownTimer();
+      remainingTime = GAME_DURATION_SECONDS;
+      updateCountdownDisplay();
+    }
+
+    function startCountdown() {
+      stopCountdownTimer();
+      countdownDeadline = Date.now() + remainingTime * 1000;
+      updateCountdownDisplay();
+      countdownTimer = setInterval(tickCountdown, 250);
+    }
+
+    function pauseCountdown() {
+      if (countdownDeadline !== null) {
+        remainingTime = Math.max(0, Math.ceil((countdownDeadline - Date.now()) / 1000));
+      }
+      stopCountdownTimer();
+      updateCountdownDisplay();
+    }
+
+    function tickCountdown() {
+      if (!gameRunning || gamePaused || countdownDeadline === null) return;
+
+      const nextRemaining = Math.max(0, Math.ceil((countdownDeadline - Date.now()) / 1000));
+      if (nextRemaining !== remainingTime) {
+        remainingTime = nextRemaining;
+        updateCountdownDisplay();
+      }
+
+      if (remainingTime <= 0) {
+        stopCountdownTimer();
+        gameOver('time');
+      }
+    }
+
+    // ===== STACK WARNING BAR =====
+    function updateStackWarning() {
+      let maxHeight = 0;
+      for (let c = 0; c < COLS; c++) {
+        let colHeight = 0;
+        for (let r = ROWS - 1; r >= 0; r--) {
+          if (stackGrid[r][c] !== null) colHeight++;
+          else break;
+        }
+        if (colHeight > maxHeight) maxHeight = colHeight;
+      }
+      const pct = Math.round((maxHeight / ROWS) * 100);
+      document.getElementById('stackWarningFill').style.width = pct + '%';
+    }
+
+    // ===== SPEED =====
+    function updateSpeed() {
+      const val = document.getElementById('speedSlider').value;
+      document.getElementById('speedVal').textContent = val;
+      const speeds = [1000, 750, 550, 400, 280];
+      fallSpeed = speeds[val - 1];
+    }
+
+    // ===== SHUFFLE =====
+    function createShuffledWordOrder() {
+      const order = Array.from({ length: WORDS.length }, (_, i) => i);
+      for (let i = order.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+      return order;
+    }
+
+    function shuffleWordOrder() {
+      wordOrder = createShuffledWordOrder();
+    }
+
+    // ===== FAST INPUT FLOW =====
+    function stopAdvanceTimer() {
+      if (advanceTimer) {
+        clearTimeout(advanceTimer);
+        advanceTimer = null;
+      }
+    }
+
+    function resetInputFlow() {
+      stopAdvanceTimer();
+      pendingAdvance = null;
+      inputBuffer = [];
+    }
+
+    function scheduleAdvance(action, delay) {
+      stopAdvanceTimer();
+      pendingAdvance = action;
+      advanceTimer = setTimeout(() => {
+        advanceTimer = null;
+        runPendingAdvance();
+      }, delay);
+    }
+
+    function runPendingAdvance() {
+      if (!gameRunning) {
+        resetInputFlow();
+        return;
+      }
+      if (gamePaused) return;
+
+      const action = pendingAdvance;
+      pendingAdvance = null;
+      if (action === 'word') nextWord();
+      else if (action === 'letter') dropNextLetter();
+    }
+
+    function resumePendingAdvance() {
+      if (pendingAdvance && !advanceTimer) {
+        scheduleAdvance(pendingAdvance, 0);
+      }
+    }
+
+    function flushBufferedInput() {
+      if (!gameRunning || gamePaused || !fallingLetter || inputBuffer.length === 0) return;
+      const bufferedKey = inputBuffer.shift();
+      processTypedKey(bufferedKey);
+    }
+
+    // ===== START GAME =====
+    function startGame() {
+      if (gameRunning) return; // Don't restart if already running
+
+      gameRunning = true;
+      gamePaused = false;
+      score = 0;
+      combo = 0;
+      maxCombo = 0;
+      totalKeys = 0;
+      correctKeys = 0;
+      wordsCompletedTotal = 0;
+      wordsCompletedThisRound = 0;
+      currentRound = 1;
+      currentWordPoolIndex = -1;
+      currentLetterIndex = 0;
+      fallingLetter = null;
+      resetInputFlow();
+      resetCountdown();
+
+      shuffleWordOrder();
+      nextRoundWordOrder = createShuffledWordOrder();
+
+      // UI
+      document.getElementById('gameOverOverlay').classList.remove('visible');
+      document.getElementById('gameMessage').style.display = 'none';
+      document.getElementById('pauseOverlay').classList.remove('visible');
+      document.getElementById('btnStart').style.display = 'none';
+      document.getElementById('btnPause').classList.add('enabled');
+      document.getElementById('btnPause').innerHTML = '⏸ PAUSE';
+      document.getElementById('btnRestart').classList.add('enabled');
+      resetWordListHighlights();
+      clearGridVisual();
+      initStackGrid();
+      updateStats();
+      updateSpeed();
+      updateStackWarning();
+
+      nextWord();
+      startCountdown();
+    }
+
+    // ===== RESTART GAME =====
+    function restartGame() {
+      stopFalling();
+      stopCountdownTimer();
+      resetInputFlow();
+      gameRunning = false;
+      gamePaused = false;
+      highlightKey(null);
+      document.getElementById('gameOverOverlay').classList.remove('visible');
+      document.getElementById('pauseOverlay').classList.remove('visible');
+      document.getElementById('btnStart').style.display = '';
+      document.getElementById('btnPause').classList.remove('enabled');
+      document.getElementById('btnRestart').classList.remove('enabled');
+      // Immediately start fresh
+      startGame();
+    }
+
+    // ===== PAUSE / RESUME =====
+    function togglePause() {
+      if (!gameRunning) return;
+
+      if (gamePaused) {
+        // Resume
+        gamePaused = false;
+        startCountdown();
+        document.getElementById('pauseOverlay').classList.remove('visible');
+        document.getElementById('btnPause').innerHTML = '⏸ PAUSE';
+        // Resume falling or finish the pending fast transition
+        if (fallingLetter) {
+          scheduleFallTick();
+        } else {
+          resumePendingAdvance();
+        }
+      } else {
+        // Pause
+        gamePaused = true;
+        stopFalling();
+        pauseCountdown();
+        stopAdvanceTimer();
+        document.getElementById('pauseOverlay').classList.add('visible');
+        document.getElementById('btnPause').innerHTML = '▶ RESUME';
+      }
+    }
+
+    // ===== CLEAR GRID VISUAL =====
+    function clearGridVisual() {
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+          gridCells[r][c].className = 'grid-cell' + (r === 0 ? ' top-row' : '');
+          gridCells[r][c].textContent = '';
+        }
+      }
+    }
+
+    // ===== RENDER GRID =====
+    function renderGrid() {
+      for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+          const cell = gridCells[r][c];
+          // Reset classes
+          cell.className = 'grid-cell' + (r === 0 ? ' top-row' : '');
+          cell.textContent = '';
+
+          // Draw stacked blocks
+          if (stackGrid[r][c] !== null) {
+            cell.classList.add('stacked');
+            cell.textContent = stackGrid[r][c].toUpperCase();
+          }
+        }
+      }
+
+      // Draw falling letter on top
+      if (fallingLetter) {
+        const { row, col, letter } = fallingLetter;
+        const cell = gridCells[row][col];
+        cell.textContent = letter.toUpperCase();
+        cell.classList.remove('stacked');
+        cell.classList.add('has-letter');
+        // Danger when close to stack or bottom
+        const landRow = getLandingRow(col);
+        if (row >= landRow - 1) {
+          cell.classList.add('danger');
+        }
+      }
+    }
+
+    // ===== GET LANDING ROW =====
+    // Returns the row where a block would land in column c
+    function getLandingRow(col) {
+      for (let r = 0; r < ROWS; r++) {
+        if (stackGrid[r][col] !== null) return r - 1;
+      }
+      return ROWS - 1;
+    }
+
+    // ===== NEXT WORD =====
+    function nextWord() {
+      currentWordPoolIndex++;
+      if (currentWordPoolIndex >= WORDS.length) {
+        // All 20 words done — start new round
+        currentRound++;
+        wordsCompletedThisRound = 0;
+        currentWordPoolIndex = 0;
+        wordOrder = nextRoundWordOrder.length > 0 ? nextRoundWordOrder : createShuffledWordOrder();
+        nextRoundWordOrder = createShuffledWordOrder();
+        resetWordListHighlights();
+      }
+      currentLetterIndex = 0;
+
+      // Highlight in word list
+      const realIdx = wordOrder[currentWordPoolIndex];
+      resetWordListHighlights();
+      // Mark earlier words in this round as completed
+      for (let i = 0; i < currentWordPoolIndex; i++) {
+        const el = document.getElementById(`word-item-${wordOrder[i]}`);
+        el.classList.add('completed');
+      }
+      document.getElementById(`word-item-${realIdx}`).classList.add('active');
+
+      updateCurrentWordDisplay();
+      dropNextLetter();
+    }
+
+    // ===== DROP NEXT LETTER =====
+    function dropNextLetter() {
+      if (!gameRunning || gamePaused) return;
+      const word = WORDS[wordOrder[currentWordPoolIndex]];
+      if (currentLetterIndex >= word.en.length) {
+        // Word completed
+        wordsCompletedTotal++;
+        wordsCompletedThisRound++;
+        score += 50;
+        updateStats();
+
+        const realIdx = wordOrder[currentWordPoolIndex];
+        const el = document.getElementById(`word-item-${realIdx}`);
+        el.classList.remove('active');
+        el.classList.add('completed');
+
+        scheduleAdvance('word', WORD_ADVANCE_DELAY);
+        return;
+      }
+
+      const letter = word.en[currentLetterIndex];
+      // Pick a random column, prefer columns with lower stacks
+      const col = pickColumn();
+
+      // Check if landing row is valid (>= 0)
+      const landRow = getLandingRow(col);
+      if (landRow < 0) {
+        // This column is full — game over
+        gameOver();
+        return;
+      }
+
+      fallingLetter = { letter, col, row: 0 };
+
+      // If row 0 is already stacked, game over
+      if (stackGrid[0][col] !== null) {
+        gameOver();
+        return;
+      }
+
+      highlightKey(letter);
+      renderGrid();
+      scheduleFallTick();
+      queueMicrotask(flushBufferedInput);
+    }
+
+    function pickColumn() {
+      // Weight towards columns with less stack
+      const heights = [];
+      for (let c = 0; c < COLS; c++) {
+        let h = 0;
+        for (let r = ROWS - 1; r >= 0; r--) {
+          if (stackGrid[r][c] !== null) h++;
+          else break;
+        }
+        heights.push(h);
+      }
+      const minH = Math.min(...heights);
+      // Collect columns with height <= minH + 1
+      const candidates = [];
+      for (let c = 0; c < COLS; c++) {
+        if (heights[c] <= minH + 1) candidates.push(c);
+      }
+      return candidates[Math.floor(Math.random() * candidates.length)];
+    }
+
+    // ===== FALL TIMER =====
+    function scheduleFallTick() {
+      stopFalling();
+      fallTimer = setTimeout(() => fallTick(), fallSpeed);
+    }
+
+    function stopFalling() {
+      if (fallTimer) {
+        clearTimeout(fallTimer);
+        fallTimer = null;
+      }
+    }
+
+    // ===== FALL TICK =====
+    function fallTick() {
+      if (!fallingLetter || !gameRunning || gamePaused) return;
+
+      const landRow = getLandingRow(fallingLetter.col);
+
+      if (fallingLetter.row >= landRow) {
+        // Landed — stack it
+        stackBlock();
+        return;
+      }
+
+      fallingLetter.row++;
+
+      // Check again after moving
+      if (fallingLetter.row >= landRow) {
+        // Will land next tick or now at land position
+        if (fallingLetter.row === landRow) {
+          renderGrid();
+          // Give one more tick before stacking
+          scheduleFallTick();
+          return;
+        }
+        stackBlock();
+        return;
+      }
+
+      renderGrid();
+      scheduleFallTick();
+    }
+
+    // ===== STACK BLOCK =====
+    function stackBlock() {
+      if (!fallingLetter) return;
+      stopFalling();
+
+      const { col, letter } = fallingLetter;
+      const landRow = getLandingRow(col);
+
+      if (landRow < 0) {
+        // Column full — game over
+        gameOver();
+        return;
+      }
+
+      // Place in stack
+      stackGrid[landRow][col] = letter;
+      fallingLetter = null;
+      combo = 0;
+
+      renderGrid();
+      updateStats();
+      updateStackWarning();
+
+      // Check if any column is full (stacked to row 0)
+      if (isTopReached()) {
+        gameOver();
+        return;
+      }
+
+      // Move to next letter
+      currentLetterIndex++;
+      updateCurrentWordDisplay();
+      scheduleAdvance('letter', MISSED_LETTER_DELAY);
+    }
+
+    function isTopReached() {
+      // Game over if row 0 has any stacked block
+      for (let c = 0; c < COLS; c++) {
+        if (stackGrid[0][c] !== null) return true;
+      }
+      return false;
+    }
+
+    // ===== KEY INPUT =====
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (gameRunning) togglePause();
+        return;
+      }
+
+      if (!gameRunning || gamePaused || e.key.length !== 1) return;
+
+      const pressed = e.key.toLowerCase();
+      pressKeyVisual(pressed);
+
+      if (!fallingLetter) {
+        if (pendingAdvance && inputBuffer.length < MAX_INPUT_BUFFER) {
+          inputBuffer.push(pressed);
+        }
+        return;
+      }
+
+      processTypedKey(pressed);
+    });
+
+    function processTypedKey(pressed) {
+      if (!fallingLetter || !gameRunning || gamePaused) return;
+
+      const expected = fallingLetter.letter.toLowerCase();
+      totalKeys++;
+
+      if (pressed === expected) {
+        // Correct!
+        correctKeys++;
+        combo++;
+        if (combo > maxCombo) maxCombo = combo;
+        score += 10 + Math.min(combo * 2, 20);
+
+        const { row, col } = fallingLetter;
+        stopFalling();
+        fallingLetter = null;
+
+        // Flash effect
+        gridCells[row][col].classList.remove('has-letter', 'danger');
+        gridCells[row][col].classList.add('correct-flash');
+        gridCells[row][col].textContent = '✓';
+        setTimeout(() => {
+          gridCells[row][col].classList.remove('correct-flash');
+          renderGrid();
+        }, 180);
+
+        currentLetterIndex++;
+        updateCurrentWordDisplay();
+        updateStats();
+        scheduleAdvance('letter', LETTER_ADVANCE_DELAY);
+      } else {
+        // Wrong key
+        combo = 0;
+        updateStats();
+
+        const { row, col } = fallingLetter;
+        gridCells[row][col].classList.add('danger');
+        setTimeout(() => {
+          if (fallingLetter && gridCells[row]) {
+            gridCells[row][col].classList.remove('danger');
+            renderGrid();
+          }
+        }, 120);
+
+        if (inputBuffer.length > 0) {
+          queueMicrotask(flushBufferedInput);
+        }
+      }
+    }
+
+    // ===== GAME OVER =====
+    function gameOver(reason = 'stack') {
+      pauseCountdown();
+      gameRunning = false;
+      stopFalling();
+      resetInputFlow();
+      highlightKey(null);
+
+      document.getElementById('btnStart').style.display = '';
+      document.getElementById('btnPause').classList.remove('enabled');
+      document.getElementById('btnPause').innerHTML = '⏸ PAUSE';
+
+      const acc = totalKeys > 0 ? Math.round((correctKeys / totalKeys) * 100) : 0;
+      document.getElementById('overlayTitle').textContent = reason === 'time'
+        ? '⏱ 時間到 — 成績結算'
+        : '💀 遊戲結束 — 方塊堆滿了！';
+      document.getElementById('finalScore').textContent = score;
+      document.getElementById('finalCombo').textContent = maxCombo;
+      document.getElementById('finalAccuracy').textContent = acc + '%';
+      document.getElementById('finalWords').textContent = wordsCompletedTotal;
+      document.getElementById('gameOverOverlay').classList.add('visible');
+    }
+
+    // ===== INIT =====
+    init();
+  </script>
+</body>
+</html>
