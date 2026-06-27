@@ -1049,6 +1049,16 @@
       <p>按下正確的字母鍵，在方塊落到底部前消除它！方塊會堆疊，堆滿即結束！</p>
     </header>
 
+    <div id="dailyBar" style="max-width:900px;margin:0 auto 10px;padding:9px 14px;background:#fff;border-radius:12px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:.85rem;box-shadow:0 1px 4px rgba(0,0,0,.1)">
+      <span id="dailyWho" style="font-weight:700">—</span>
+      <span id="dailyStatus" style="color:#667085"></span>
+      <span style="margin-left:auto;display:flex;align-items:center;gap:6px">
+        <span style="color:#667085">字庫</span>
+        <button id="wlAll" onclick="setWordMode('all')">全部</button>
+        <button id="wlKid" onclick="setWordMode('kid')">小學程度</button>
+      </span>
+    </div>
+
     <!-- WORD LIST (Collapsible) -->
     <section class="word-list-section" id="wordListSection">
       <div class="word-list-toggle" id="wordListToggle" onclick="toggleWordList()">
@@ -1154,13 +1164,83 @@
         <div class="final-stat"><div class="fs-label">準確率</div><div class="fs-value" id="finalAccuracy">0%</div></div>
         <div class="final-stat"><div class="fs-label">完成單字</div><div class="fs-value" id="finalWords">0</div></div>
       </div>
+      <div id="finalCoin" style="margin:6px 0 12px;font-weight:700;color:#2f80ed;font-size:1rem"></div>
       <button class="btn-game btn-start" onclick="restartGame()">🔄 再玩一次</button>
     </div>
   </div>
 
+  <script src="../kids/wordbank.js"></script>
   <script>
     // ===== WORD LIST =====
     let WORDS = [];
+    let ALL_WORDS = [], KID_WORDS = [];
+    let wordMode = localStorage.getItem("typingWordMode") || "all";
+
+    // ===== 與主站整合：字庫切換 + 每日金幣 =====
+    function _td() { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
+    function _curStu() { return localStorage.getItem("kidsCurrentStudent") || ""; }
+    function _getProg(s) { try { return JSON.parse(localStorage.getItem("kidsProgress." + s) || "null"); } catch (e) { return null; } }
+
+    function buildKidWords() {
+      const basic = new Set();
+      if (typeof WORDBANK !== "undefined") WORDBANK.forEach(w => {
+        if (w.level === "basic") { const e = String(w.en).toLowerCase(); if (/^[a-z]{2,}$/.test(e)) basic.add(e); }
+      });
+      KID_WORDS = ALL_WORDS.filter(w => basic.has(w.en));
+    }
+    function applyWordMode() {
+      WORDS = (wordMode === "kid" && KID_WORDS.length) ? KID_WORDS : ALL_WORDS;
+      const label = wordMode === "kid" ? "小學程度" : "全部";
+      const t = document.getElementById('wordListTitle');
+      if (t) t.innerHTML = `📝 單字表 Word List（${label} ${WORDS.length} 個）`;
+      if (typeof buildWordList === "function") buildWordList();
+      const on = "padding:4px 12px;border:2px solid #2f80ed;border-radius:16px;background:#2f80ed;color:#fff;font-weight:700;cursor:pointer;font-size:.82rem";
+      const off = "padding:4px 12px;border:2px solid #2f80ed;border-radius:16px;background:#fff;color:#2f80ed;font-weight:700;cursor:pointer;font-size:.82rem";
+      const a = document.getElementById('wlAll'), k = document.getElementById('wlKid');
+      if (a && k) { a.style.cssText = wordMode === "all" ? on : off; k.style.cssText = wordMode === "kid" ? on : off; }
+    }
+    function setWordMode(m) {
+      if (typeof gameRunning !== "undefined" && gameRunning) { alert("請先結束這局再換字庫"); return; }
+      wordMode = m; localStorage.setItem("typingWordMode", m);
+      applyWordMode();
+      if (typeof initStackGrid === "function") initStackGrid();
+    }
+    function refreshDailyBar() {
+      const s = _curStu();
+      const who = document.getElementById("dailyWho"), st = document.getElementById("dailyStatus");
+      if (!who) return;
+      if (!s) { who.textContent = "未登入"; st.innerHTML = '到 <a href="../kids/index.html" style="color:#2f80ed">主站</a>登入後，玩這個可賺金幣（20 分 = 1 🪙，每天取前三次最高分）'; return; }
+      who.textContent = "目前：" + s.charAt(0).toUpperCase() + s.slice(1);
+      const daily = JSON.parse(localStorage.getItem("typingDaily") || "{}");
+      const rec = (daily[s] || {})[_td()] || { attempts: [], awarded: 0 };
+      const best = rec.attempts.length ? Math.max.apply(null, rec.attempts) : 0;
+      const bal = ((_getProg(s) || {}).coins || {}).balance || 0;
+      st.textContent = `今天第 ${Math.min(rec.attempts.length,3)}/3 次 · 最佳 ${best} 分 · 今天換得 ${rec.awarded} 🪙 · 餘額 ${bal} 🪙`;
+    }
+    // 結算：每天取前三次最高分，floor(最高分/20) 個金幣（已換的不重複給）
+    function awardTypingCoins(finalScore) {
+      const s = _curStu();
+      if (!s) return { delta: 0, best: 0, coinsForBest: 0, attempt: 0, noStudent: true };
+      const today = _td();
+      const daily = JSON.parse(localStorage.getItem("typingDaily") || "{}");
+      daily[s] = daily[s] || {};
+      const rec = daily[s][today] || { attempts: [], awarded: 0 };
+      if (rec.attempts.length < 3) rec.attempts.push(finalScore);   // 只算前三次
+      const best = Math.max.apply(null, rec.attempts);
+      const coinsForBest = Math.floor(best / 20);
+      const delta = coinsForBest - rec.awarded;
+      if (delta > 0) {
+        const p = _getProg(s) || { wrongCounts: {}, sessions: 0, totalCorrect: 0, totalWrong: 0 };
+        if (!p.coins) p.coins = { balance: 0, lifetimeEarned: 0, lifetimeSpent: 0, transactions: [], claimedDrills: {} };
+        p.coins.balance += delta; p.coins.lifetimeEarned += delta;
+        p.coins.transactions.push({ type: "earn", source: "typingGame", amount: delta, balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { date: today, best: best, score: finalScore } });
+        localStorage.setItem("kidsProgress." + s, JSON.stringify(p));
+        rec.awarded = coinsForBest;
+      }
+      daily[s][today] = rec;
+      localStorage.setItem("typingDaily", JSON.stringify(daily));
+      return { delta: delta, best: best, coinsForBest: coinsForBest, attempt: Math.min(rec.attempts.length, 3) };
+    }
 
     // ===== GRID CONFIG =====
     const COLS = 10;
@@ -1296,10 +1376,11 @@
         WORDS = DEFAULT_WORDS;
       }
 
-      const note = loadedFromCsv ? '' : ' (預設值)';
-      document.getElementById('wordListTitle').innerHTML = `📝 單字表 Word List（${WORDS.length} 個）${note}`;
+      ALL_WORDS = WORDS.slice();
+      buildKidWords();
+      applyWordMode();        // 依模式設定 WORDS、更新標題、buildWordList、按鈕外觀
+      refreshDailyBar();
 
-      buildWordList();
       buildGrid();
       buildKeyboard();
       initStackGrid();
@@ -2014,6 +2095,21 @@
       document.getElementById('finalCombo').textContent = maxCombo;
       document.getElementById('finalAccuracy').textContent = acc + '%';
       document.getElementById('finalWords').textContent = wordsCompletedTotal;
+
+      // 換金幣（每天前三次取最高分，20 分 = 1 金幣）
+      const tc = awardTypingCoins(score);
+      const coinEl = document.getElementById('finalCoin');
+      if (coinEl) {
+        if (tc.noStudent) {
+          coinEl.innerHTML = '未登入，這次沒換金幣。到 <a href="../kids/index.html" style="color:#2f80ed">主站</a>登入後再玩可賺金幣 🪙';
+        } else {
+          coinEl.innerHTML = `今天第 ${tc.attempt}/3 次 · 最佳 ${tc.best} 分 → 共 ${tc.coinsForBest} 🪙`
+            + (tc.delta > 0 ? ` <span style="color:#2fbf71">（這次 +${tc.delta} 🪙）</span>`
+               : (tc.attempt >= 3 ? '（前三次已用完）' : '（沒超過今天最佳，未加幣）'));
+        }
+      }
+      refreshDailyBar();
+
       document.getElementById('gameOverOverlay').classList.add('visible');
     }
 
