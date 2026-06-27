@@ -265,9 +265,9 @@
     }
 
     .current-word-display .meaning {
-      font-size: 0.85rem;
+      font-size: 1.3rem;
       color: var(--accent-pink);
-      font-weight: 600;
+      font-weight: 700;
     }
 
     /* Round indicator */
@@ -1165,7 +1165,11 @@
         <div class="final-stat"><div class="fs-label">完成單字</div><div class="fs-value" id="finalWords">0</div></div>
       </div>
       <div id="finalCoin" style="margin:6px 0 12px;font-weight:700;color:#2f80ed;font-size:1rem"></div>
-      <button class="btn-game btn-start" onclick="restartGame()">🔄 再玩一次</button>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-game btn-start" onclick="restartGame()">🔄 再玩一次</button>
+        <button class="btn-game btn-pause" onclick="closeToSettings()">⚙️ 改設定</button>
+        <a class="btn-game btn-restart" href="../kids/island.html" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">🏝️ 回我的島嶼</a>
+      </div>
     </div>
   </div>
 
@@ -1742,6 +1746,26 @@
       document.getElementById('btnRestart').classList.remove('enabled');
       // Immediately start fresh
       startGame();
+    }
+
+    // 關閉結算視窗、回到待機（可改字庫 / 速度，再按 START）
+    function closeToSettings() {
+      stopFalling();
+      stopCountdownTimer();
+      resetInputFlow();
+      gameRunning = false;
+      gamePaused = false;
+      highlightKey(null);
+      document.getElementById('gameOverOverlay').classList.remove('visible');
+      document.getElementById('pauseOverlay').classList.remove('visible');
+      document.getElementById('btnStart').style.display = '';
+      document.getElementById('btnPause').classList.remove('enabled');
+      document.getElementById('btnRestart').classList.remove('enabled');
+      clearGridVisual();
+      initStackGrid();
+      updateStackWarning();
+      const gm = document.getElementById('gameMessage');
+      if (gm) { gm.style.display = ''; gm.textContent = '改好設定後按 START 開始'; }
     }
 
     // ===== PAUSE / RESUME =====
