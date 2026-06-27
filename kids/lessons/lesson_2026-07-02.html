@@ -215,7 +215,16 @@ function buildPassage() {
   document.getElementById("passage").innerHTML = PASSAGE.map((p, i) => `
     <div class="s"><button class="play" onclick="play('p${i}','${p.en.replace(/'/g, "\\'")}')">🔊</button> <span class="en">${p.en}</span><div class="zhx">${p.zh}</div></div>`).join("");
 }
-function sayPassage() { speak(PASSAGE.map(p => p.en).join(" ")); }
+function sayPassage() {
+      let i = 0;
+      (function next() {
+        if (i >= PASSAGE.length) return;
+        if (cur) cur.pause();
+        const a = new Audio(AUDIO_DIR + "p" + i + ".mp3"); cur = a;
+        a.onended = () => { i++; next(); };
+        a.play().catch(() => speak(PASSAGE.map(p => p.en).join(" ")));
+      })();
+    }
 
 // ⑤ 小測驗
 const QUIZ = [

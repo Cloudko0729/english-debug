@@ -152,7 +152,16 @@ const QUIZ = [
 function buildVocab() { document.getElementById("vocab").innerHTML = VOCAB.map((v, i) => `<div class="vcard"><div class="top"><button class="play" onclick="play('w${i}','${v.en}')">🔊</button><span class="en">${v.en}</span>${v.past ? `<span class="past">${v.past}</span>` : ""}<span class="zh">${v.zh}</span></div><div class="ex"><button class="play" onclick="play('e${i}','${v.ex.replace(/'/g, "\\'")}')">🔊</button> ${v.ex} <span class="zhx">${v.exzh}</span></div></div>`).join(""); }
 function buildDialogue() { document.getElementById("dialogue").innerHTML = DIALOGUE.map((d, i) => `<div class="line"><span class="who ${d.who === 'B' ? 'b' : ''}">${d.who}</span><button class="play" onclick="play('d${i}','${d.en.replace(/'/g, "\\'")}')">🔊</button><div class="body"><div class="en">${d.en}</div><div class="zhx">${d.zh}</div>${d.note ? `<div class="note">💡 ${d.note}</div>` : ""}</div></div>`).join(""); }
 function buildPassage() { document.getElementById("passage").innerHTML = PASSAGE.map((p, i) => `<div class="s"><button class="play" onclick="play('p${i}','${p.en.replace(/'/g, "\\'")}')">🔊</button> <span class="en">${p.en}</span><div class="zhx">${p.zh}</div></div>`).join(""); }
-function sayPassage() { speak(PASSAGE.map(p => p.en).join(" ")); }
+function sayPassage() {
+      let i = 0;
+      (function next() {
+        if (i >= PASSAGE.length) return;
+        if (cur) cur.pause();
+        const a = new Audio(AUDIO_DIR + "p" + i + ".mp3"); cur = a;
+        a.onended = () => { i++; next(); };
+        a.play().catch(() => speak(PASSAGE.map(p => p.en).join(" ")));
+      })();
+    }
 let quizDone = 0, quizRight = 0;
 function buildQuiz() { document.getElementById("quiz").innerHTML = QUIZ.map((q, i) => `<div class="qbox" id="q${i}" style="border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:10px"><div style="font-weight:700;margin-bottom:6px">${i + 1}. ${q.q}</div><div style="display:flex;gap:6px;flex-wrap:wrap">${q.choices.map(c => `<button class="qopt" onclick="answerQuiz(${i},this,'${c.replace(/'/g, "\\'")}')" style="padding:7px 12px;border:2px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;font-weight:600">${c}</button>`).join("")}</div></div>`).join(""); }
 function answerQuiz(i, btn, val) { const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1"; const ok = val === QUIZ[i].answer; box.querySelectorAll(".qopt").forEach(b => { b.disabled = true; if (b.textContent === QUIZ[i].answer) b.style.cssText += ";border-color:var(--green);background:#d9f7e8"; else if (b === btn) b.style.cssText += ";border-color:var(--danger);background:#fde0e8"; }); quizDone++; if (ok) quizRight++; if (quizDone === QUIZ.length) { const s = document.getElementById("quizScore"); s.textContent = `🎉 答對 ${quizRight} / ${QUIZ.length}！${quizRight === QUIZ.length ? " 全對，太棒了！" : " 再看看上面的文法複習一下。"}`; s.style.cssText = "margin-top:10px;font-weight:800;font-size:1.05rem;color:" + (quizRight === QUIZ.length ? "var(--green)" : "var(--primary)"); } }
