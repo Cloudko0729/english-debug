@@ -1213,11 +1213,19 @@
     // 單字發音：Web Audio 預解碼成 buffer 播放（不卡主執行緒）；沒 mp3 的字用瀏覽器語音。
     let _actx = null;
     const _bufCache = {};   // key -> AudioBuffer | 'loading' | 'fail'
-    let _mp3Keys = null;    // 字庫裡「有 mp3」的 key 集合（避免對沒檔的字 fetch 出 404）
+    let _mp3Keys = null;    // 「有 mp3」的 key 集合（避免對沒檔的字 fetch 出 404）
     function _audioKey(en) { return (typeof wordAudioKey === "function") ? wordAudioKey(en) : String(en).toLowerCase().replace(/[^a-z0-9]+/g, ""); }
-    function _hasMp3(key) {
-      if (!_mp3Keys) { _mp3Keys = new Set(); try { if (typeof WORDBANK !== "undefined") WORDBANK.forEach(w => _mp3Keys.add(_audioKey(w.en))); } catch (e) {} }
-      return _mp3Keys.has(key);
+    function _initMp3Keys() {
+      if (_mp3Keys) return;
+      _mp3Keys = new Set();   // 先用字庫當底（manifest 載到後再補上 csv 等其餘字）
+      try { if (typeof WORDBANK !== "undefined") WORDBANK.forEach(w => _mp3Keys.add(_audioKey(w.en))); } catch (e) {}
+    }
+    function _hasMp3(key) { _initMp3Keys(); return _mp3Keys.has(key); }
+    // 載入音檔清單（所有已產生的 <key>.mp3），讓 csv 等非字庫字也算「有 mp3」
+    function loadAudioManifest() {
+      fetch("../kids/audio/words/manifest.json").then(r => r.ok ? r.json() : Promise.reject())
+        .then(arr => { _initMp3Keys(); arr.forEach(k => _mp3Keys.add(k)); })
+        .catch(() => {});
     }
     function _ensureCtx() {
       if (!_actx) { try { _actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { _actx = null; } }
@@ -1479,6 +1487,7 @@
       ALL_WORDS = WORDS.slice();
       buildKidWords();
       applyWordMode();        // 依模式設定 WORDS、更新標題、buildWordList、按鈕外觀
+      loadAudioManifest();    // 載入音檔清單（csv 等非字庫字也算有 mp3）
       refreshDailyBar();
       updateTestBtn();
 
