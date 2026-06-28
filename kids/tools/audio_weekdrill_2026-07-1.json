@@ -8,10 +8,19 @@
   "lb2": "She visited a famous museum yesterday.",
   "lb3": "They are going to stay at a hotel.",
   "lb4": "Don't forget your passport and map.",
-  "passage": "Last summer, my family took a trip to Taitung. We arrived by train and stayed at a small hotel near the beach. Every morning, I explored the mountains and took many photos. We ate local food and bought some gifts for our friends. Next year, we are going to travel abroad for the first time. I can't wait to visit a new country.",
+  "lb5": "We arrived at the airport very early.",
+  "lb6": "He took many photos on the beach.",
+  "lb7": "I am going to explore the mountains tomorrow.",
+  "passage0": "Last summer, my family took a trip to Taitung. We arrived by train and stayed at a small hotel near the beach. Every morning, I explored the mountains and took many photos. We ate local food and bought some gifts for our friends. Next year, we are going to travel abroad for the first time. I can't wait to visit a new country.",
+  "passage1": "Yesterday was a busy day. We went to the airport early in the morning to meet my grandparents. After that, we visited a famous old temple and took a lot of photos. At noon, we ate noodles at a small shop. Tomorrow, we are going to take a train to the mountains. I think it will be a wonderful weekend.",
+  "passage2": "My sister loves traveling. Last month, she visited three different cities. She bought a small gift in each place and sent me a postcard. She said the hotels were comfortable and the people were kind. Next week, she is going to fly to a new country. She is going to learn about its culture and try new food. I hope she has a safe trip.",
   "ro0": "We arrived at the airport early.",
   "ro1": "I will visit a famous museum.",
   "ro2": "They bought tickets for the trip.",
-  "ro3": "She is going to travel abroad next year."
+  "ro3": "She is going to travel abroad next year.",
+  "ro4": "We stayed at a small hotel.",
+  "ro5": "I took many photos yesterday.",
+  "ro6": "He will explore the mountains.",
+  "ro7": "They are going to the beach tomorrow."
  }
 }

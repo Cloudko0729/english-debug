@@ -72,16 +72,24 @@
     let pic = shuffleArr(words.filter(w => emo(w.en)), rnd);
     if (pic.length < 6) pic = pic.concat(shuffleArr(words.filter(w => !emo(w.en) && pic.indexOf(w) < 0), rnd));
     const s5 = pic.slice(0, 6).map(w => ({ emoji: emo(w.en) || null, zh: w.zh, en: w.en, choices: distinctChoices(w, words, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
-    // ② 英聽填空 5（從 weekdrill）
-    const s2 = (wd ? wd.listenBlank : []).map((q, i) => {
+    // ② 英聽填空：從池抽 5（依日期，不同天不一樣）
+    const lbPool = wd ? wd.listenBlank.map((q, i) => ({ ...q, _i: i })) : [];
+    const s2 = shuffleArr(lbPool, rnd).slice(0, 5).map(q => {
       const ansW = { en: q.answer, zh: "" };
-      const ch = distinctChoices(ansW, words.concat((wd.listenBlank).map(x => ({ en: x.answer, zh: "" }))), rnd).map(o => ({ label: o.en, correct: o.en === q.answer }));
-      return { key: "lb" + i, display: q.display, choices: ch };
+      const ch = distinctChoices(ansW, words.concat(lbPool.map(x => ({ en: x.answer, zh: "" }))), rnd).map(o => ({ label: o.en, correct: o.en === q.answer }));
+      return { key: "lb" + q._i, display: q.display, choices: ch };
     });
-    // ③ 閱讀 4
-    const s3 = wd ? { passage: wd.reading.passage, questions: wd.reading.questions.map(q => ({ q: q.q, choices: shuffleArr(q.choices, rnd).map(c => ({ label: c, correct: c === q.answer })) })) } : null;
-    // ④ 重組 4
-    const s4 = (wd ? wd.reorder : []).map((q, i) => ({ key: "ro" + i, sentence: q.sentence, chunks: shuffleArr(q.chunks, rnd) }));
+    // ③ 閱讀：依日期輪替挑 1 篇（連續幾天不會同一篇）
+    let s3 = null;
+    if (wd) {
+      const dnum = parseInt(DRILL_DATE.replace(/-/g, ""), 10) || 0;
+      const ri = dnum % wd.reading.length;
+      const r = wd.reading[ri];
+      s3 = { key: "passage" + ri, passage: r.passage, questions: r.questions.map(q => ({ q: q.q, choices: shuffleArr(q.choices, rnd).map(c => ({ label: c, correct: c === q.answer })) })) };
+    }
+    // ④ 句子重組：從池抽 4
+    const roPool = wd ? wd.reorder.map((q, i) => ({ ...q, _i: i })) : [];
+    const s4 = shuffleArr(roPool, rnd).slice(0, 4).map(q => ({ key: "ro" + q._i, sentence: q.sentence, chunks: shuffleArr(q.chunks, rnd) }));
     return { week, month, s1, s2, s3, s4, s5, hasWd: !!wd };
   }
 
@@ -101,7 +109,7 @@
       h += `</div>`;
       // ③
       h += `<div class="sec"><div class="sec-h">③ 閱讀選擇</div><div class="sec-d">先 🔊 聽短文，再回答問題</div>
-        <button class="play" onclick="__pwd('passage')" style="margin-bottom:8px">🔊 唸短文</button>
+        <button class="play" onclick="__pwd('${DRILL.s3.key}')" style="margin-bottom:8px">🔊 唸短文</button>
         <div class="passage">${DRILL.s3.passage}</div>`;
       DRILL.s3.questions.forEach((q, i) => { h += `<div class="q"><div class="q-no">${i + 1}. ${q.q}</div>${optsHtml('s3', i, q.choices)}</div>`; });
       h += `</div>`;
