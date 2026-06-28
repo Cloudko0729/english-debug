@@ -1210,16 +1210,16 @@
         .map(w => ({ en: String(w.en).toLowerCase(), zh: w.zh }));
       return extra.length ? base.concat(extra) : base;
     }
-    // 單字出現時念英語發音（Kokoro mp3，載不到用瀏覽器語音）
-    let _wordAudio = null;
+    // 單字出現時念英語發音（Kokoro mp3，載不到用瀏覽器語音）。重用單一元件，避免每字建立新物件卡頓。
+    let _wordAudioEl = null;
     function playWordSound(en) {
       try {
-        if (_wordAudio) { _wordAudio.pause(); _wordAudio = null; }
         const k = (typeof wordAudioKey === "function") ? wordAudioKey(en) : String(en).toLowerCase().replace(/[^a-z0-9]+/g, "");
-        const a = new Audio("../kids/audio/words/" + k + ".mp3");
-        _wordAudio = a;
-        a.play().catch(() => {
-          if (window.speechSynthesis) { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(en); u.lang = "en-US"; u.rate = .9; speechSynthesis.speak(u); }
+        if (!_wordAudioEl) _wordAudioEl = new Audio();
+        _wordAudioEl.src = "../kids/audio/words/" + k + ".mp3";
+        const p = _wordAudioEl.play();
+        if (p && p.catch) p.catch(() => {
+          if (window.speechSynthesis) { try { speechSynthesis.cancel(); } catch (e) {} const u = new SpeechSynthesisUtterance(en); u.lang = "en-US"; u.rate = .9; speechSynthesis.speak(u); }
         });
       } catch (e) {}
     }
@@ -1961,8 +1961,9 @@
       document.getElementById(`word-item-${realIdx}`).classList.add('active');
 
       updateCurrentWordDisplay();
-      playWordSound(WORDS[realIdx].en);   // 單字出現時念英語發音
-      dropNextLetter();
+      dropNextLetter();                   // 先讓字母落下、輸入就緒
+      const _w = WORDS[realIdx];          // 再延後一拍念發音，不卡到第一個字母的輸入
+      if (_w) setTimeout(() => playWordSound(_w.en), 0);
     }
 
     // ===== DROP NEXT LETTER =====
