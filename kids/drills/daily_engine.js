@@ -79,11 +79,10 @@
       const ch = distinctChoices(ansW, words.concat(lbPool.map(x => ({ en: x.answer, zh: "" }))), rnd).map(o => ({ label: o.en, correct: o.en === q.answer }));
       return { key: "lb" + q._i, display: q.display, choices: ch };
     });
-    // ③ 閱讀：依日期輪替挑 1 篇（連續幾天不會同一篇）
+    // ③ 閱讀：依「星期幾」挑 1 篇（一週 7 天各一篇，週內不重複）
     let s3 = null;
     if (wd) {
-      const dnum = parseInt(DRILL_DATE.replace(/-/g, ""), 10) || 0;
-      const ri = dnum % wd.reading.length;
+      const ri = new Date(DRILL_DATE + "T12:00:00").getDay() % wd.reading.length;
       const r = wd.reading[ri];
       s3 = { key: "passage" + ri, passage: r.passage, questions: r.questions.map(q => ({ q: q.q, choices: shuffleArr(q.choices, rnd).map(c => ({ label: c, correct: c === q.answer })) })) };
     }

@@ -50,6 +50,42 @@ const WEEK_DRILLS = {
           { q: "How were the hotels?", choices: ["Comfortable", "Expensive", "Dirty", "Noisy"], answer: "Comfortable" },
           { q: "What is she going to do next week?", choices: ["Fly to a new country", "Stay home", "Move house", "Buy a car"], answer: "Fly to a new country" }
         ]
+      },
+      {
+        passage: "Last winter, we went skiing in the mountains. The weather was cold, but the view was beautiful. We stayed at a warm hotel and drank hot cocoa every night. I fell down many times, but I had a lot of fun. Next winter, I am going to learn snowboarding. I think it will be even more exciting.",
+        questions: [
+          { q: "What did they do last winter?", choices: ["Went skiing", "Went swimming", "Went camping", "Went fishing"], answer: "Went skiing" },
+          { q: "How was the weather?", choices: ["Cold", "Hot", "Rainy", "Windy"], answer: "Cold" },
+          { q: "What did they drink at night?", choices: ["Hot cocoa", "Cold juice", "Tea", "Milk"], answer: "Hot cocoa" },
+          { q: "What is the writer going to learn next winter?", choices: ["Snowboarding", "Skiing", "Skating", "Swimming"], answer: "Snowboarding" }
+        ]
+      },
+      {
+        passage: "My uncle is a pilot, so he travels a lot. Last week, he flew to three countries. He always brings me a small gift from each place. This time, he gave me a map of the world and some foreign coins. When I grow up, I am going to travel around the world like him. I will visit every continent and take many photos.",
+        questions: [
+          { q: "What is the uncle's job?", choices: ["A pilot", "A driver", "A teacher", "A doctor"], answer: "A pilot" },
+          { q: "How many countries did he fly to last week?", choices: ["Three", "Two", "Four", "Five"], answer: "Three" },
+          { q: "What did he give the writer this time?", choices: ["A map and coins", "A book", "A hat", "A ticket"], answer: "A map and coins" },
+          { q: "What is the writer going to do when older?", choices: ["Travel around the world", "Become a pilot", "Stay home", "Buy a plane"], answer: "Travel around the world" }
+        ]
+      },
+      {
+        passage: "Yesterday, our class went on a school trip to the science museum. We took a bus and arrived at nine o'clock. Inside, we saw many cool machines and watched a space show. My favorite part was the dinosaur room. We ate lunch in the park nearby. Next month, we are going to visit a farm and learn about animals.",
+        questions: [
+          { q: "Where did the class go yesterday?", choices: ["The science museum", "The zoo", "The beach", "A farm"], answer: "The science museum" },
+          { q: "How did they get there?", choices: ["By bus", "By train", "By car", "On foot"], answer: "By bus" },
+          { q: "What was the writer's favorite part?", choices: ["The dinosaur room", "The space show", "The machines", "Lunch"], answer: "The dinosaur room" },
+          { q: "Where are they going next month?", choices: ["A farm", "A museum", "The beach", "Abroad"], answer: "A farm" }
+        ]
+      },
+      {
+        passage: "Last summer, my family camped near a big lake. We put up our tent and cooked dinner outside. At night, we saw thousands of stars. In the morning, I went fishing with my dad and caught two fish. It was quiet and peaceful. Next year, we are going to camp in a forest and ride bikes on the mountain trails.",
+        questions: [
+          { q: "Where did they camp last summer?", choices: ["Near a lake", "In a forest", "On a mountain", "By the sea"], answer: "Near a lake" },
+          { q: "What did they see at night?", choices: ["Stars", "Birds", "Fish", "Boats"], answer: "Stars" },
+          { q: "What did the writer catch?", choices: ["Two fish", "A bird", "Nothing", "A frog"], answer: "Two fish" },
+          { q: "Where are they going to camp next year?", choices: ["In a forest", "Near a lake", "On a beach", "In a city"], answer: "In a forest" }
+        ]
       }
     ]
   },
@@ -100,6 +136,42 @@ const WEEK_DRILLS = {
           { q: "How was the food?", choices: ["Cheap and delicious", "Expensive", "Bad", "Spicy"], answer: "Cheap and delicious" },
           { q: "How was the weather?", choices: ["Warm and comfortable", "Cold", "Rainy", "Windy"], answer: "Warm and comfortable" },
           { q: "Where are they going next time?", choices: ["A quiet park", "The night market", "Abroad", "A museum"], answer: "A quiet park" }
+        ]
+      },
+      {
+        passage: "Last weekend, my family tried a new restaurant downtown. The room was bright and modern, and the waiters were friendly. The food was a little expensive, but it was delicious. The place was crowded, so we waited for twenty minutes. Next time, we are going to try a small, quiet cafe near our house. I think it will be more relaxing.",
+        questions: [
+          { q: "How was the restaurant's room?", choices: ["Bright and modern", "Dark and old", "Small", "Dirty"], answer: "Bright and modern" },
+          { q: "How was the food?", choices: ["Expensive but delicious", "Cheap and bad", "Free", "Spicy"], answer: "Expensive but delicious" },
+          { q: "Why did they wait?", choices: ["It was crowded", "It was closed", "They were late", "It was far"], answer: "It was crowded" },
+          { q: "Where are they going next time?", choices: ["A quiet cafe", "A big restaurant", "Abroad", "Home"], answer: "A quiet cafe" }
+        ]
+      },
+      {
+        passage: "My grandmother's house is old but very comfortable. The rooms are small, and the garden is full of beautiful flowers. It is quiet there, and the air is fresh. Every summer, I stay with her for a week. We cook together and tell stories at night. Next summer, she is going to teach me how to grow vegetables. I can't wait.",
+        questions: [
+          { q: "How is the grandmother's house?", choices: ["Old but comfortable", "New and modern", "Big and noisy", "Cold"], answer: "Old but comfortable" },
+          { q: "What is in the garden?", choices: ["Beautiful flowers", "Tall trees", "A pool", "Toys"], answer: "Beautiful flowers" },
+          { q: "How long does the writer stay every summer?", choices: ["A week", "A day", "A month", "A year"], answer: "A week" },
+          { q: "What is the grandmother going to teach?", choices: ["Growing vegetables", "Cooking", "Painting", "Singing"], answer: "Growing vegetables" }
+        ]
+      },
+      {
+        passage: "Our city built a new library last year. It is the biggest and most modern building in town. Inside, it is quiet and clean, with thousands of books. There is also a small cafe on the first floor. Many students go there to study after school. Next month, the library is going to start a free English club. I am going to join it.",
+        questions: [
+          { q: "When was the library built?", choices: ["Last year", "This year", "Ten years ago", "Last month"], answer: "Last year" },
+          { q: "How is the library inside?", choices: ["Quiet and clean", "Noisy and dirty", "Dark", "Small"], answer: "Quiet and clean" },
+          { q: "What is on the first floor?", choices: ["A small cafe", "A garden", "A pool", "A shop"], answer: "A small cafe" },
+          { q: "What is the writer going to join?", choices: ["A free English club", "A sports team", "A band", "A trip"], answer: "A free English club" }
+        ]
+      },
+      {
+        passage: "Yesterday was a rainy and windy day, so we stayed home. The house was warm and cozy. We watched an old movie and ate popcorn. My little brother was bored, so we played board games. It was a slow but happy day. Tomorrow the weather will be sunny, and we are going to ride bikes in the park.",
+        questions: [
+          { q: "How was the weather yesterday?", choices: ["Rainy and windy", "Sunny", "Hot", "Snowy"], answer: "Rainy and windy" },
+          { q: "What did they eat?", choices: ["Popcorn", "Pizza", "Noodles", "Fruit"], answer: "Popcorn" },
+          { q: "Why did they play board games?", choices: ["The brother was bored", "It was a party", "It was homework", "They were hungry"], answer: "The brother was bored" },
+          { q: "What are they going to do tomorrow?", choices: ["Ride bikes", "Stay home", "Go to school", "Watch a movie"], answer: "Ride bikes" }
         ]
       }
     ]
