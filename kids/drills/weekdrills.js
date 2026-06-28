@@ -216,5 +216,27 @@ const WEEK_DRILLS = {
     ]
   }
 };
+// 每篇短文的「沒教過的生字」中文解釋（index 對應該週 reading[]）
+const PASSAGE_GLOSSARY = {
+  "2026-07-1": [
+    [{ en: "Taitung", zh: "台東（地名）" }],
+    [{ en: "temple", zh: "寺廟" }, { en: "grandparents", zh: "（外）祖父母" }],
+    [{ en: "postcard", zh: "明信片" }],
+    [{ en: "skiing", zh: "（雙板）滑雪" }, { en: "cocoa", zh: "熱可可" }, { en: "snowboarding", zh: "單板滑雪" }],
+    [{ en: "pilot", zh: "飛行員、機長" }, { en: "coins", zh: "硬幣" }, { en: "continent", zh: "洲、大陸" }],
+    [{ en: "science", zh: "科學" }, { en: "machines", zh: "機器" }, { en: "dinosaur", zh: "恐龍" }, { en: "farm", zh: "農場" }],
+    [{ en: "lake", zh: "湖" }, { en: "tent", zh: "帳篷" }, { en: "peaceful", zh: "寧靜的" }, { en: "trails", zh: "步道、小徑" }]
+  ],
+  "2026-07-2": [
+    [{ en: "narrow", zh: "狹窄的" }, { en: "view", zh: "風景、景色" }],
+    [{ en: "floor", zh: "樓層" }, { en: "classmates", zh: "同學" }],
+    [{ en: "instead", zh: "改為、取而代之" }],
+    [{ en: "downtown", zh: "市中心" }, { en: "waiters", zh: "服務生" }, { en: "cafe", zh: "咖啡廳" }],
+    [{ en: "garden", zh: "花園" }, { en: "fresh", zh: "新鮮的" }, { en: "vegetables", zh: "蔬菜" }],
+    [{ en: "library", zh: "圖書館" }, { en: "club", zh: "社團" }],
+    [{ en: "cozy", zh: "溫馨舒適的" }, { en: "popcorn", zh: "爆米花" }, { en: "board games", zh: "桌遊" }]
+  ]
+};
 function weekDrillFor(monthStr, weekN) { return WEEK_DRILLS[monthStr + "-" + weekN] || null; }
-if (typeof module !== "undefined" && module.exports) module.exports = { WEEK_DRILLS, weekDrillFor };
+function passageGlossary(wid, idx) { return (PASSAGE_GLOSSARY[wid] && PASSAGE_GLOSSARY[wid][idx]) || []; }
+if (typeof module !== "undefined" && module.exports) module.exports = { WEEK_DRILLS, weekDrillFor, PASSAGE_GLOSSARY, passageGlossary };

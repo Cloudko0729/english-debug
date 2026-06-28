@@ -26,6 +26,10 @@
   .opt.ok{border-color:#2fbf71;background:#d9f7e8}
   .opt.no{border-color:#ef476f;background:#fde0e8}
   .passage{background:#f7faff;border:1px solid #d8e6ff;border-radius:10px;padding:11px 13px;line-height:1.7;margin:8px 0}
+  .gloss{background:#fffbe9;border:1px solid #ffe9a8;border-radius:10px;padding:9px 12px;margin:0 0 8px;font-size:.86rem}
+  .gloss b{display:block;color:#a06a00;margin-bottom:4px;font-size:.82rem}
+  .gloss .gi{margin:2px 0;color:#555}
+  .gloss .ge{font-weight:800;color:#243042}
   .chunks,.answ{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
   .chunk{padding:8px 11px;border:2px solid #2f80ed;border-radius:9px;background:#fff;color:#2f80ed;font-weight:700;cursor:pointer}
   .chunk.used{opacity:.3;pointer-events:none}
@@ -102,7 +106,8 @@
     if (wd) {
       const ri = dayIdx % wd.reading.length;
       const r = wd.reading[ri];
-      s3 = { key: "passage" + ri, passage: r.passage, questions: r.questions.map(q => ({ q: q.q, choices: shuffleArr(q.choices, rnd).map(c => ({ label: c, correct: c === q.answer })) })) };
+      const gloss = (typeof passageGlossary === "function") ? passageGlossary(WDID, ri) : [];
+      s3 = { key: "passage" + ri, passage: r.passage, glossary: gloss, questions: r.questions.map(q => ({ q: q.q, choices: shuffleArr(q.choices, rnd).map(c => ({ label: c, correct: c === q.answer })) })) };
     }
 
     // ④ 句子重組 4（分塊輪替）
@@ -130,6 +135,7 @@
       h += `<div class="sec"><div class="sec-h">③ 閱讀選擇</div><div class="sec-d">先 🔊 聽短文，再回答問題</div>
         <button class="play" onclick="__pwd('${DRILL.s3.key}')" style="margin-bottom:8px">🔊 唸短文</button>
         <div class="passage">${DRILL.s3.passage}</div>`;
+      if (DRILL.s3.glossary && DRILL.s3.glossary.length) h += `<div class="gloss"><b>📖 生字</b>${DRILL.s3.glossary.map(g => `<div class="gi"><span class="ge">${g.en}</span> ${g.zh}</div>`).join("")}</div>`;
       DRILL.s3.questions.forEach((q, i) => { h += `<div class="q"><div class="q-no">${i + 1}. ${q.q}</div>${optsHtml('s3', i, q.choices)}</div>`; });
       h += `</div>`;
       // ④
