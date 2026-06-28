@@ -11,7 +11,11 @@ const WEEK_DRILLS = {
       { full: "Don't forget your passport and map.", display: "Don't forget your ___ and map.", answer: "passport" },
       { full: "We arrived at the airport very early.", display: "We arrived at the ___ very early.", answer: "airport" },
       { full: "He took many photos on the beach.", display: "He took many photos on the ___.", answer: "beach" },
-      { full: "I am going to explore the mountains tomorrow.", display: "I am going to ___ the mountains tomorrow.", answer: "explore" }
+      { full: "I am going to explore the mountains tomorrow.", display: "I am going to ___ the mountains tomorrow.", answer: "explore" },
+      { full: "We will leave for our vacation soon.", display: "We will leave for our ___ soon.", answer: "vacation" },
+      { full: "The tourist enjoyed the long holiday.", display: "The ___ enjoyed the long holiday.", answer: "tourist" },
+      { full: "I will pack my bag tonight.", display: "I will pack my bag ___.", answer: "tonight" },
+      { full: "They arrived a few days ago.", display: "They arrived a few days ___.", answer: "ago" }
     ],
     reorder: [
       { sentence: "We arrived at the airport early.", chunks: ["We", "arrived", "at the", "airport", "early."] },
@@ -106,7 +110,20 @@ const WEEK_DRILLS = {
       { full: "The old temple was very famous.", display: "The old temple was very ___.", answer: "famous" },
       { full: "The new building is very modern.", display: "The new building is very ___.", answer: "modern" },
       { full: "The street was too noisy at night.", display: "The street was too ___ at night.", answer: "noisy" },
-      { full: "The library was very quiet.", display: "The library was very ___.", answer: "quiet" }
+      { full: "The library was very quiet.", display: "The library was very ___.", answer: "quiet" },
+      { full: "The short trip was a great experience.", display: "The short trip was a great ___.", answer: "experience" },
+      { full: "The heavy box was hard to carry.", display: "The ___ box was hard to carry.", answer: "heavy" },
+      { full: "This bag is light and easy to carry.", display: "This bag is ___ and easy to carry.", answer: "light" },
+      { full: "The two hotels look very similar.", display: "The two hotels look very ___.", answer: "similar" },
+      { full: "The MRT is fast and convenient.", display: "The MRT is fast and ___.", answer: "convenient" },
+      { full: "That dark road is dangerous at night.", display: "That dark road is ___ at night.", answer: "dangerous" },
+      { full: "Please stay safe on your trip.", display: "Please stay ___ on your trip.", answer: "safe" },
+      { full: "The weather got worse in the afternoon.", display: "The weather got ___ in the afternoon.", answer: "worse" },
+      { full: "We had an exciting adventure last summer.", display: "We had an exciting ___ last summer.", answer: "adventure" },
+      { full: "I have recently been to Japan.", display: "I have ___ been to Japan.", answer: "recently" },
+      { full: "She has never tried this food before.", display: "She has ___ tried this food before.", answer: "never" },
+      { full: "Have you finished your homework yet?", display: "Have you finished your homework ___?", answer: "yet" },
+      { full: "He has already packed his bags.", display: "He has ___ packed his bags.", answer: "already" }
     ],
     reorder: [
       { sentence: "The hotel was very comfortable.", chunks: ["The", "hotel", "was", "very", "comfortable."] },
