@@ -1177,6 +1177,7 @@
   </div>
 
   <script src="../kids/wordbank.js"></script>
+  <script src="../kids/curriculum.js"></script>
   <script>
     // ===== WORD LIST =====
     let WORDS = [];
@@ -1187,6 +1188,41 @@
     function _td() { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0"); }
     function _curStu() { return localStorage.getItem("kidsCurrentStudent") || ""; }
     function _getProg(s) { try { return JSON.parse(localStorage.getItem("kidsProgress." + s) || "null"); } catch (e) { return null; } }
+
+    // ===== 本週單字（與課程聯動）：前 30 個方塊出本週單字，之後才其他字 =====
+    let _weekWordsCache = null, _weekSetCache = null;
+    function getWeekWords() {
+      if (_weekWordsCache) return _weekWordsCache;
+      try {
+        const d = new Date(), td = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+        _weekWordsCache = (typeof vocabWeekForDate === "function") ? (vocabWeekForDate(td).week.words || []) : [];
+      } catch (e) { _weekWordsCache = []; }
+      return _weekWordsCache;
+    }
+    function getWeekSet() {
+      if (!_weekSetCache) _weekSetCache = new Set(getWeekWords().map(w => String(w.en).toLowerCase()));
+      return _weekSetCache;
+    }
+    // 把本週單字補進字庫（缺的才補），確保都能打到
+    function mergeWeekWords(base) {
+      const have = new Set(base.map(w => String(w.en).toLowerCase()));
+      const extra = getWeekWords().filter(w => /^[a-z]+$/.test(String(w.en).toLowerCase()) && !have.has(String(w.en).toLowerCase()))
+        .map(w => ({ en: String(w.en).toLowerCase(), zh: w.zh }));
+      return extra.length ? base.concat(extra) : base;
+    }
+    // 單字出現時念英語發音（Kokoro mp3，載不到用瀏覽器語音）
+    let _wordAudio = null;
+    function playWordSound(en) {
+      try {
+        if (_wordAudio) { _wordAudio.pause(); _wordAudio = null; }
+        const k = (typeof wordAudioKey === "function") ? wordAudioKey(en) : String(en).toLowerCase().replace(/[^a-z0-9]+/g, "");
+        const a = new Audio("../kids/audio/words/" + k + ".mp3");
+        _wordAudio = a;
+        a.play().catch(() => {
+          if (window.speechSynthesis) { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(en); u.lang = "en-US"; u.rate = .9; speechSynthesis.speak(u); }
+        });
+      } catch (e) {}
+    }
 
     function toggleLegend() {
       const l = document.getElementById('fingerLegend');
@@ -1204,7 +1240,7 @@
       KID_WORDS = ALL_WORDS.filter(w => basic.has(w.en));
     }
     function applyWordMode() {
-      WORDS = (wordMode === "kid" && KID_WORDS.length) ? KID_WORDS : ALL_WORDS;
+      WORDS = mergeWeekWords((wordMode === "kid" && KID_WORDS.length) ? KID_WORDS : ALL_WORDS);
       const label = wordMode === "kid" ? "小學程度" : "全部";
       const t = document.getElementById('wordListTitle');
       if (t) t.innerHTML = `📝 單字表 Word List（${label} ${WORDS.length} 個）`;
@@ -1640,13 +1676,16 @@
     }
 
     // ===== SHUFFLE =====
+    function _shuffleInPlace(a) {
+      for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+      return a;
+    }
     function createShuffledWordOrder() {
-      const order = Array.from({ length: WORDS.length }, (_, i) => i);
-      for (let i = order.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [order[i], order[j]] = [order[j], order[i]];
-      }
-      return order;
+      // 本週單字的 index 先（隨機），其餘字在後（隨機）→ 前 30 個就是本週單字
+      const weekSet = getWeekSet();
+      const weekIdx = [], restIdx = [];
+      for (let i = 0; i < WORDS.length; i++) (weekSet.has(String(WORDS[i].en).toLowerCase()) ? weekIdx : restIdx).push(i);
+      return _shuffleInPlace(weekIdx).concat(_shuffleInPlace(restIdx));
     }
 
     function shuffleWordOrder() {
@@ -1922,6 +1961,7 @@
       document.getElementById(`word-item-${realIdx}`).classList.add('active');
 
       updateCurrentWordDisplay();
+      playWordSound(WORDS[realIdx].en);   // 單字出現時念英語發音
       dropNextLetter();
     }
 
