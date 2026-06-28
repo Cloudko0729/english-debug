@@ -3,7 +3,7 @@
 // Abstract / grammatical words are intentionally omitted.
 const WORD_EMOJI = {
   "beach": "🏖️", "mountain": "⛰️", "ticket": "🎫", "hotel": "🏨", "map": "🗺️", "airport": "🛫",
-  "gift": "🎁", "luggage": "🧳", "passport": "🛂", "trip": "✈️", "vacation": "🏝️",
+  "gift": "🎁", "luggage": "🧳", "passport": "🛂", "vacation": "🏝️",
   "aircraft": "✈️", "alarm": "🚨", "alarm clock": "⏰", "ambulance": "🚑", "angel": "👼",
   "ant": "🐜", "badminton": "🏸", "balloon": "🎈", "bat": "🦇", "beer": "🍺",
   "bicycle riding": "🚴", "blood": "🩸", "bomb": "💣", "bone": "🦴", "bowling": "🎳",
