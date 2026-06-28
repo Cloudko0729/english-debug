@@ -67,11 +67,15 @@
     WDID = month.month + "-" + week.n;
     // ① 英聽選擇 6
     const s1 = shuffleArr(words, rnd).slice(0, 6).map(w => ({ en: w.en, choices: distinctChoices(w, words, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
-    // ⑤ 圖片題 6（優先有 emoji 的）
+    // ⑤ 圖片題 6：本週可圖示的字 + 穿插「小學程度、字較長(較難)」的可圖示字，池夠大才不會每天重複
     const emo = en => (typeof WORD_EMOJI !== "undefined") ? WORD_EMOJI[en] : null;
-    let pic = shuffleArr(words.filter(w => emo(w.en)), rnd);
-    if (pic.length < 6) pic = pic.concat(shuffleArr(words.filter(w => !emo(w.en) && pic.indexOf(w) < 0), rnd));
-    const s5 = pic.slice(0, 6).map(w => ({ emoji: emo(w.en) || null, zh: w.zh, en: w.en, choices: distinctChoices(w, words, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
+    const weekPic = words.filter(w => emo(w.en)).map(w => ({ en: w.en, zh: w.zh }));
+    let basicPic = [];
+    if (typeof WORDBANK !== "undefined") basicPic = WORDBANK
+      .filter(w => w.level === "basic" && emo(w.en) && String(w.en).length >= 5 && !words.some(x => x.en === w.en))
+      .map(w => ({ en: w.en, zh: w.zh }));
+    const picPool = shuffleArr(weekPic.concat(shuffleArr(basicPic, rnd).slice(0, 24)), rnd);
+    const s5 = picPool.slice(0, 6).map(w => ({ emoji: emo(w.en), zh: w.zh, en: w.en, choices: distinctChoices(w, picPool, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
     // ② 英聽填空：從池抽 5（依日期，不同天不一樣）
     const lbPool = wd ? wd.listenBlank.map((q, i) => ({ ...q, _i: i })) : [];
     const s2 = shuffleArr(lbPool, rnd).slice(0, 5).map(q => {
