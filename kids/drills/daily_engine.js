@@ -60,39 +60,55 @@
   }
   function shuffleArr(a, rnd) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor((rnd ? rnd() : Math.random()) * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } return a; }
 
+  // 分塊輪替：同一週用固定順序(seed=週)，第 dayIdx 天取一段不重疊區塊。
+  // 池大小 >= 2×每日題數 → 隔天保證不重複；整週平均分散、出現次數最少。
+  function pickBlock(pool, k, dayIdx, seedStr) {
+    if (!pool.length) return [];
+    const order = shuffleArr(pool, seeded(seedStr));
+    const start = ((dayIdx * k) % order.length + order.length) % order.length;
+    return order.concat(order).slice(start, start + k);
+  }
+
   function buildDrill() {
     const ctx = vocabWeekForDate(DRILL_DATE), week = ctx.week, month = ctx.month, rnd = seeded(DRILL_DATE);
     const words = week.words;
     const wd = (typeof weekDrillFor === "function") ? weekDrillFor(month.month, week.n) : null;
     WDID = month.month + "-" + week.n;
-    // ① 英聽選擇 6
-    const s1 = shuffleArr(words, rnd).slice(0, 6).map(w => ({ en: w.en, choices: distinctChoices(w, words, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
-    // ⑤ 圖片題 6：本週可圖示的字 + 穿插「小學程度、字較長(較難)」的可圖示字，池夠大才不會每天重複
+    const dayIdx = Math.max(0, Math.round((Date.parse(DRILL_DATE) - Date.parse(week.start)) / 86400000));
+
+    // ① 英聽選擇 6（分塊輪替）
+    const s1 = pickBlock(words, 6, dayIdx, WDID + "-v").map(w => ({ en: w.en, choices: distinctChoices(w, words, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
+
+    // ⑤ 圖片題 6：本週可圖示字 + 小學程度較難可圖示字（池固定/週），分塊輪替
     const emo = en => (typeof WORD_EMOJI !== "undefined") ? WORD_EMOJI[en] : null;
     const weekPic = words.filter(w => emo(w.en)).map(w => ({ en: w.en, zh: w.zh }));
     let basicPic = [];
     if (typeof WORDBANK !== "undefined") basicPic = WORDBANK
       .filter(w => w.level === "basic" && emo(w.en) && String(w.en).length >= 5 && !words.some(x => x.en === w.en))
       .map(w => ({ en: w.en, zh: w.zh }));
-    const picPool = shuffleArr(weekPic.concat(shuffleArr(basicPic, rnd).slice(0, 24)), rnd);
-    const s5 = picPool.slice(0, 6).map(w => ({ emoji: emo(w.en), zh: w.zh, en: w.en, choices: distinctChoices(w, picPool, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
-    // ② 英聽填空：從池抽 5（依日期，不同天不一樣）
+    const picPool = weekPic.concat(shuffleArr(basicPic, seeded(WDID + "-pb")).slice(0, 24));
+    const s5 = pickBlock(picPool, 6, dayIdx, WDID + "-pic").map(w => ({ emoji: emo(w.en), zh: w.zh, en: w.en, choices: distinctChoices(w, picPool, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
+
+    // ② 英聽填空 5（分塊輪替）
     const lbPool = wd ? wd.listenBlank.map((q, i) => ({ ...q, _i: i })) : [];
-    const s2 = shuffleArr(lbPool, rnd).slice(0, 5).map(q => {
+    const s2 = pickBlock(lbPool, 5, dayIdx, WDID + "-lb").map(q => {
       const ansW = { en: q.answer, zh: "" };
       const ch = distinctChoices(ansW, words.concat(lbPool.map(x => ({ en: x.answer, zh: "" }))), rnd).map(o => ({ label: o.en, correct: o.en === q.answer }));
       return { key: "lb" + q._i, display: q.display, choices: ch };
     });
-    // ③ 閱讀：依「星期幾」挑 1 篇（一週 7 天各一篇，週內不重複）
+
+    // ③ 閱讀：依天數輪替挑 1 篇（一週內各天不同篇）
     let s3 = null;
     if (wd) {
-      const ri = new Date(DRILL_DATE + "T12:00:00").getDay() % wd.reading.length;
+      const ri = dayIdx % wd.reading.length;
       const r = wd.reading[ri];
       s3 = { key: "passage" + ri, passage: r.passage, questions: r.questions.map(q => ({ q: q.q, choices: shuffleArr(q.choices, rnd).map(c => ({ label: c, correct: c === q.answer })) })) };
     }
-    // ④ 句子重組：從池抽 4
+
+    // ④ 句子重組 4（分塊輪替）
     const roPool = wd ? wd.reorder.map((q, i) => ({ ...q, _i: i })) : [];
-    const s4 = shuffleArr(roPool, rnd).slice(0, 4).map(q => ({ key: "ro" + q._i, sentence: q.sentence, chunks: shuffleArr(q.chunks, rnd) }));
+    const s4 = pickBlock(roPool, 4, dayIdx, WDID + "-ro").map(q => ({ key: "ro" + q._i, sentence: q.sentence, chunks: shuffleArr(q.chunks, rnd) }));
+
     return { week, month, s1, s2, s3, s4, s5, hasWd: !!wd };
   }
 

@@ -15,7 +15,13 @@ const WEEK_DRILLS = {
       { full: "We will leave for our vacation soon.", display: "We will leave for our ___ soon.", answer: "vacation" },
       { full: "The tourist enjoyed the long holiday.", display: "The ___ enjoyed the long holiday.", answer: "tourist" },
       { full: "I will pack my bag tonight.", display: "I will pack my bag ___.", answer: "tonight" },
-      { full: "They arrived a few days ago.", display: "They arrived a few days ___.", answer: "ago" }
+      { full: "They arrived a few days ago.", display: "They arrived a few days ___.", answer: "ago" },
+      { full: "We will visit the old town soon.", display: "We will ___ the old town soon.", answer: "visit" },
+      { full: "I kept my ticket in my bag.", display: "I kept my ___ in my bag.", answer: "ticket" },
+      { full: "The bus to the museum was late.", display: "The bus to the ___ was late.", answer: "museum" },
+      { full: "We are going to plan a long trip.", display: "We are going to ___ a long trip.", answer: "plan" },
+      { full: "We will return home after the holiday.", display: "We will ___ home after the holiday.", answer: "return" },
+      { full: "The map showed the way to the station.", display: "The ___ showed the way to the station.", answer: "map" }
     ],
     reorder: [
       { sentence: "We arrived at the airport early.", chunks: ["We", "arrived", "at the", "airport", "early."] },
