@@ -1210,10 +1210,15 @@
         .map(w => ({ en: String(w.en).toLowerCase(), zh: w.zh }));
       return extra.length ? base.concat(extra) : base;
     }
-    // 單字發音：用 Web Audio API 預先「解碼」成 buffer，播放時用 BufferSource（不卡主執行緒）。
+    // 單字發音：Web Audio 預解碼成 buffer 播放（不卡主執行緒）；沒 mp3 的字用瀏覽器語音。
     let _actx = null;
     const _bufCache = {};   // key -> AudioBuffer | 'loading' | 'fail'
+    let _mp3Keys = null;    // 字庫裡「有 mp3」的 key 集合（避免對沒檔的字 fetch 出 404）
     function _audioKey(en) { return (typeof wordAudioKey === "function") ? wordAudioKey(en) : String(en).toLowerCase().replace(/[^a-z0-9]+/g, ""); }
+    function _hasMp3(key) {
+      if (!_mp3Keys) { _mp3Keys = new Set(); try { if (typeof WORDBANK !== "undefined") WORDBANK.forEach(w => _mp3Keys.add(_audioKey(w.en))); } catch (e) {} }
+      return _mp3Keys.has(key);
+    }
     function _ensureCtx() {
       if (!_actx) { try { _actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { _actx = null; } }
       if (_actx && _actx.state === "suspended") { _actx.resume().catch(() => {}); }
@@ -1221,6 +1226,7 @@
     }
     function _loadBuf(key) {
       if (_bufCache[key] !== undefined) return;       // 載入中／已載／失敗都不重載
+      if (!_hasMp3(key)) { _bufCache[key] = 'fail'; return; }   // 沒檔 → 標記失敗（之後用 TTS）
       const ctx = _ensureCtx(); if (!ctx) return;     // 還沒有 AudioContext（手勢前）→ 先不標記，之後再試
       _bufCache[key] = 'loading';
       fetch("../kids/audio/words/" + key + ".mp3")
@@ -1228,17 +1234,42 @@
         .then(ab => ctx.decodeAudioData(ab, b => { _bufCache[key] = b; }, () => { _bufCache[key] = 'fail'; }))
         .catch(() => { _bufCache[key] = 'fail'; });
     }
-    // 預先解碼本週 30 字（解碼即使在 suspended 狀態也可進行）
     function preloadWeekAudio() { try { getWeekWords().forEach(w => _loadBuf(_audioKey(w.en))); } catch (e) {} }
-    function playWordSound(en) {
+
+    // 預熱「接下來要落下的」單字：近 6 個立即載，其餘閒置時載（只載有 mp3 的，已快取的會跳過）
+    function prewarmUpcoming() {
       try {
-        const k = _audioKey(en), ctx = _ensureCtx(), buf = _bufCache[k];
-        if (ctx && buf && buf !== 'loading' && buf !== 'fail') {
-          const src = ctx.createBufferSource(); src.buffer = buf; src.connect(ctx.destination); src.start(0);
-        } else if (buf === undefined) {
-          _loadBuf(k);   // 還沒載：先觸發載入，下次出現就有聲音了
+        const keys = [];
+        for (let n = 1; n <= 24; n++) {
+          let w = null;
+          const idx = currentWordPoolIndex + n;
+          if (idx < wordOrder.length) w = WORDS[wordOrder[idx]];
+          else if (nextRoundWordOrder.length) w = WORDS[nextRoundWordOrder[(idx - wordOrder.length) % nextRoundWordOrder.length]];
+          if (w) keys.push(_audioKey(w.en));
         }
+        keys.slice(0, 6).forEach(_loadBuf);
+        const rest = keys.slice(6);
+        const idle = window.requestIdleCallback || (cb => setTimeout(() => cb(), 200));
+        idle(() => rest.forEach(_loadBuf), { timeout: 1000 });
       } catch (e) {}
+    }
+
+    function _playBuf(buf) { const ctx = _ensureCtx(); if (!ctx) return; const s = ctx.createBufferSource(); s.buffer = buf; s.connect(ctx.destination); s.start(0); }
+    function _speak(en) { if (!window.speechSynthesis) return; try { speechSynthesis.cancel(); } catch (e) {} const u = new SpeechSynthesisUtterance(en); u.lang = "en-US"; u.rate = .9; speechSynthesis.speak(u); }
+    let _playSeq = 0;
+    function playWordSound(en) {
+      const seq = ++_playSeq, k = _audioKey(en);
+      _ensureCtx();
+      const buf = _bufCache[k];
+      if (buf && buf !== 'loading' && buf !== 'fail') { _playBuf(buf); return; }   // 已解碼 → 自然發音
+      if (buf === 'fail' || !_hasMp3(k)) { _speak(en); return; }                   // 沒檔 → 瀏覽器語音
+      _loadBuf(k);                                                                 // loading/還沒載 → 載入並等一下
+      setTimeout(() => {
+        if (seq !== _playSeq) return;                                              // 已換下個字，別補播
+        const b = _bufCache[k];
+        if (b && b !== 'loading' && b !== 'fail') _playBuf(b);
+        else _speak(en);                                                           // 還沒好 → 用瀏覽器語音
+      }, 220);
     }
 
     function toggleLegend() {
@@ -1982,8 +2013,8 @@
 
       updateCurrentWordDisplay();
       dropNextLetter();                   // 先讓字母落下、輸入就緒
-      const _w = WORDS[realIdx];          // 再延後一拍念發音，不卡到第一個字母的輸入
-      if (_w) setTimeout(() => playWordSound(_w.en), 0);
+      const _w = WORDS[realIdx];          // 再延後一拍念發音 + 預熱接下來的字，不卡輸入
+      setTimeout(() => { if (_w) playWordSound(_w.en); prewarmUpcoming(); }, 0);
     }
 
     // ===== DROP NEXT LETTER =====
