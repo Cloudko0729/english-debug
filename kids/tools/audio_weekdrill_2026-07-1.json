@@ -1,0 +1,17 @@
+{
+ "outdir": "D:/english/kids/audio/weekdrill/2026-07-1",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "lb0": "I bought a ticket for the train.",
+  "lb1": "We will travel to Japan next month.",
+  "lb2": "She visited a famous museum yesterday.",
+  "lb3": "They are going to stay at a hotel.",
+  "lb4": "Don't forget your passport and map.",
+  "passage": "Last summer, my family took a trip to Taitung. We arrived by train and stayed at a small hotel near the beach. Every morning, I explored the mountains and took many photos. We ate local food and bought some gifts for our friends. Next year, we are going to travel abroad for the first time. I can't wait to visit a new country.",
+  "ro0": "We arrived at the airport early.",
+  "ro1": "I will visit a famous museum.",
+  "ro2": "They bought tickets for the trip.",
+  "ro3": "She is going to travel abroad next year."
+ }
+}

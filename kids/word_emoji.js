@@ -2,6 +2,8 @@
 // Used by the vocab quiz for picture-style questions and hints.
 // Abstract / grammatical words are intentionally omitted.
 const WORD_EMOJI = {
+  "beach": "🏖️", "mountain": "⛰️", "ticket": "🎫", "hotel": "🏨", "map": "🗺️", "airport": "🛫",
+  "gift": "🎁", "luggage": "🧳", "passport": "🛂", "trip": "✈️", "vacation": "🏝️",
   "aircraft": "✈️", "alarm": "🚨", "alarm clock": "⏰", "ambulance": "🚑", "angel": "👼",
   "ant": "🐜", "badminton": "🏸", "balloon": "🎈", "bat": "🦇", "beer": "🍺",
   "bicycle riding": "🚴", "blood": "🩸", "bomb": "💣", "bone": "🦴", "bowling": "🎳",
