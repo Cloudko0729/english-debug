@@ -1210,17 +1210,34 @@
         .map(w => ({ en: String(w.en).toLowerCase(), zh: w.zh }));
       return extra.length ? base.concat(extra) : base;
     }
-    // 單字出現時念英語發音（Kokoro mp3，載不到用瀏覽器語音）。重用單一元件，避免每字建立新物件卡頓。
-    let _wordAudioEl = null;
+    // 單字發音：用 Web Audio API 預先「解碼」成 buffer，播放時用 BufferSource（不卡主執行緒）。
+    let _actx = null;
+    const _bufCache = {};   // key -> AudioBuffer | 'loading' | 'fail'
+    function _audioKey(en) { return (typeof wordAudioKey === "function") ? wordAudioKey(en) : String(en).toLowerCase().replace(/[^a-z0-9]+/g, ""); }
+    function _ensureCtx() {
+      if (!_actx) { try { _actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { _actx = null; } }
+      if (_actx && _actx.state === "suspended") { _actx.resume().catch(() => {}); }
+      return _actx;
+    }
+    function _loadBuf(key) {
+      if (_bufCache[key] !== undefined) return;       // 載入中／已載／失敗都不重載
+      const ctx = _ensureCtx(); if (!ctx) return;     // 還沒有 AudioContext（手勢前）→ 先不標記，之後再試
+      _bufCache[key] = 'loading';
+      fetch("../kids/audio/words/" + key + ".mp3")
+        .then(r => r.ok ? r.arrayBuffer() : Promise.reject())
+        .then(ab => ctx.decodeAudioData(ab, b => { _bufCache[key] = b; }, () => { _bufCache[key] = 'fail'; }))
+        .catch(() => { _bufCache[key] = 'fail'; });
+    }
+    // 預先解碼本週 30 字（解碼即使在 suspended 狀態也可進行）
+    function preloadWeekAudio() { try { getWeekWords().forEach(w => _loadBuf(_audioKey(w.en))); } catch (e) {} }
     function playWordSound(en) {
       try {
-        const k = (typeof wordAudioKey === "function") ? wordAudioKey(en) : String(en).toLowerCase().replace(/[^a-z0-9]+/g, "");
-        if (!_wordAudioEl) _wordAudioEl = new Audio();
-        _wordAudioEl.src = "../kids/audio/words/" + k + ".mp3";
-        const p = _wordAudioEl.play();
-        if (p && p.catch) p.catch(() => {
-          if (window.speechSynthesis) { try { speechSynthesis.cancel(); } catch (e) {} const u = new SpeechSynthesisUtterance(en); u.lang = "en-US"; u.rate = .9; speechSynthesis.speak(u); }
-        });
+        const k = _audioKey(en), ctx = _ensureCtx(), buf = _bufCache[k];
+        if (ctx && buf && buf !== 'loading' && buf !== 'fail') {
+          const src = ctx.createBufferSource(); src.buffer = buf; src.connect(ctx.destination); src.start(0);
+        } else if (buf === undefined) {
+          _loadBuf(k);   // 還沒載：先觸發載入，下次出現就有聲音了
+        }
       } catch (e) {}
     }
 
@@ -1241,6 +1258,7 @@
     }
     function applyWordMode() {
       WORDS = mergeWeekWords((wordMode === "kid" && KID_WORDS.length) ? KID_WORDS : ALL_WORDS);
+      preloadWeekAudio();   // 預先解碼本週 30 字，避免遊戲中才解碼造成卡頓
       const label = wordMode === "kid" ? "小學程度" : "全部";
       const t = document.getElementById('wordListTitle');
       if (t) t.innerHTML = `📝 單字表 Word List（${label} ${WORDS.length} 個）`;
@@ -1771,6 +1789,8 @@
     }
     function startGame(mode) {
       if (gameRunning || counting) return;
+      _ensureCtx();   // 在使用者手勢內喚醒音訊 + 觸發本週字預載
+      preloadWeekAudio();
       mode = mode || 'practice';
       if (mode === 'test') {
         const s = _curStu(); let n = 0;
