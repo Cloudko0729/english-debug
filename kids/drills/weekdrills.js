@@ -21,7 +21,15 @@ const WEEK_DRILLS = {
       { sentence: "We stayed at a small hotel.", chunks: ["We", "stayed", "at a", "small", "hotel."] },
       { sentence: "I took many photos yesterday.", chunks: ["I", "took", "many", "photos", "yesterday."] },
       { sentence: "He will explore the mountains.", chunks: ["He", "will", "explore", "the", "mountains."] },
-      { sentence: "They are going to the beach tomorrow.", chunks: ["They", "are going", "to the", "beach", "tomorrow."] }
+      { sentence: "They are going to the beach tomorrow.", chunks: ["They", "are going", "to the", "beach", "tomorrow."] },
+      { sentence: "We will travel by train next week.", chunks: ["We", "will", "travel", "by train", "next week."] },
+      { sentence: "She bought a map at the station.", chunks: ["She", "bought", "a map", "at the", "station."] },
+      { sentence: "I am going to pack my luggage.", chunks: ["I", "am going to", "pack", "my", "luggage."] },
+      { sentence: "They visited the old temple yesterday.", chunks: ["They", "visited", "the old", "temple", "yesterday."] },
+      { sentence: "We will return home on Sunday.", chunks: ["We", "will", "return", "home", "on Sunday."] },
+      { sentence: "He sent a postcard from abroad.", chunks: ["He", "sent", "a postcard", "from", "abroad."] },
+      { sentence: "The trip will start next month.", chunks: ["The trip", "will", "start", "next", "month."] },
+      { sentence: "We bought gifts for our family.", chunks: ["We", "bought", "gifts", "for our", "family."] }
     ],
     reading: [
       {
@@ -108,7 +116,15 @@ const WEEK_DRILLS = {
       { sentence: "The market was very crowded.", chunks: ["The", "market", "was", "very", "crowded."] },
       { sentence: "The new park is very popular.", chunks: ["The", "new park", "is", "very", "popular."] },
       { sentence: "The street was too noisy.", chunks: ["The", "street", "was", "too", "noisy."] },
-      { sentence: "The library will be quiet today.", chunks: ["The", "library", "will be", "quiet", "today."] }
+      { sentence: "The library will be quiet today.", chunks: ["The", "library", "will be", "quiet", "today."] },
+      { sentence: "The food was cheap and tasty.", chunks: ["The", "food", "was", "cheap", "and tasty."] },
+      { sentence: "The view will be wonderful tonight.", chunks: ["The", "view", "will be", "wonderful", "tonight."] },
+      { sentence: "The new mall is very modern.", chunks: ["The", "new mall", "is", "very", "modern."] },
+      { sentence: "The old house was very quiet.", chunks: ["The", "old house", "was", "very", "quiet."] },
+      { sentence: "The beach was clean and beautiful.", chunks: ["The", "beach", "was", "clean", "and beautiful."] },
+      { sentence: "The restaurant will be crowded tonight.", chunks: ["The", "restaurant", "will be", "crowded", "tonight."] },
+      { sentence: "The mountain air was very fresh.", chunks: ["The", "mountain air", "was", "very", "fresh."] },
+      { sentence: "The festival was big and famous.", chunks: ["The", "festival", "was", "big", "and famous."] }
     ],
     reading: [
       {
