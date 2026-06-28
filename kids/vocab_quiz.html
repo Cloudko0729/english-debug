@@ -214,9 +214,11 @@ function buildQuestions() {
     else if (cloze && r < 0.55) dir = "cloze";
     else dir = r < 0.78 ? "en2zh" : "zh2en";
 
-    const pool = WORDBANK.filter(x => x.en !== w.en);
-    shuffle(pool);
-    const distractors = pool.slice(0, 3);
+    const shuffledPool = WORDBANK.filter(x => x.en !== w.en);
+    shuffle(shuffledPool);
+    const usedZh = new Set([w.zh]), distractors = [];
+    for (const x of shuffledPool) { if (distractors.length >= 3) break; if (usedZh.has(x.zh)) continue; usedZh.add(x.zh); distractors.push(x); }
+    for (const x of shuffledPool) { if (distractors.length >= 3) break; if (distractors.indexOf(x) < 0) distractors.push(x); }
     const opts = shuffle([w, ...distractors]);
 
     let prompt, sub, choices;

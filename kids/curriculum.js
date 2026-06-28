@@ -16,7 +16,7 @@ const CURRICULUM = [
         n: 1, start: "2026-07-01", end: "2026-07-07",
         theme: "旅行與時間", grammar: ["過去式", "未來式"],
         words: [
-          { en: "trip", zh: "旅行", pos: "n" }, { en: "travel", zh: "旅行", pos: "v" }, { en: "vacation", zh: "假期", pos: "n" },
+          { en: "trip", zh: "旅行、旅程", pos: "n" }, { en: "travel", zh: "旅行、旅遊", pos: "v" }, { en: "vacation", zh: "假期", pos: "n" },
           { en: "ticket", zh: "票", pos: "n" }, { en: "airport", zh: "機場", pos: "n" }, { en: "station", zh: "車站", pos: "n" },
           { en: "hotel", zh: "旅館", pos: "n" }, { en: "museum", zh: "博物館", pos: "n" }, { en: "beach", zh: "海灘", pos: "n" },
           { en: "mountain", zh: "山", pos: "n" }, { en: "map", zh: "地圖", pos: "n" }, { en: "luggage", zh: "行李", pos: "n" },

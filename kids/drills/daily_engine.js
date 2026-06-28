@@ -54,7 +54,11 @@
     const vq = shuffleWith(words, rnd).slice(0, 14).map(w => {
       const r = rnd(), em = emojiOf(w.en);
       let type = (em && r < 0.25) ? "pic" : (r < 0.5) ? "listen" : (r < 0.75) ? "en2zh" : "zh2en";
-      const pool = shuffleWith(words.filter(x => x.en !== w.en), rnd).slice(0, 3);
+      // 干擾選項：中文也要不同（避免如 trip/travel 都是「旅行」造成兩個一樣的選項）
+      const shuffled = shuffleWith(words.filter(x => x.en !== w.en), rnd);
+      const usedZh = new Set([w.zh]), pool = [];
+      for (const x of shuffled) { if (pool.length >= 3) break; if (usedZh.has(x.zh)) continue; usedZh.add(x.zh); pool.push(x); }
+      for (const x of shuffled) { if (pool.length >= 3) break; if (pool.indexOf(x) < 0) pool.push(x); }
       const opts = shuffleWith([w, ...pool], rnd);
       const base = { kind: "vocab", en: w.en, audio: null, emoji: null, prompt: null };
       if (type === "pic") return { ...base, emoji: em, sub: "看圖選英文", choices: opts.map(o => ({ label: o.en, correct: o.en === w.en })) };
