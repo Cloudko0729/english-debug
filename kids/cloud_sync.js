@@ -101,6 +101,13 @@ function _sbDebug(msg) {
 }
 
 // ── 智慧同步：本機空就拉回，否則上傳備份 ─────────────────────────────────────
+// 最後活動時間（用金幣交易的最新 createdAt 判斷新舊）
+function _lastAct(prog) {
+  const tx = prog && prog.coins && prog.coins.transactions;
+  if (!tx || !tx.length) return 0;
+  let m = 0; for (const t of tx) { const c = Date.parse(t.createdAt || 0) || 0; if (c > m) m = c; }
+  return m;
+}
 function cloudSyncOnOpen(student, onRestored) {
   if (!student) return;
   let prog = null;
@@ -112,9 +119,19 @@ function cloudSyncOnOpen(student, onRestored) {
       if (d && d.progress) { if (typeof onRestored === "function") onRestored(); }
       else cloudSave(student);
     });
-  } else {
-    cloudSave(student);
+    return;
   }
+  // 本機有資料 → 比對時間，雲端較新才拉雲端；本機較新或相同才推上去（避免舊本機蓋掉雲端最新）
+  Promise.resolve(typeof cloudPeek === "function" ? cloudPeek(student) : null).then(cloud => {
+    const cAct = _lastAct(cloud && cloud.progress), lAct = _lastAct(prog);
+    if (cloud && cloud.progress && cAct > lAct + 2000) {
+      localStorage.setItem("kidsProgress." + student, JSON.stringify(cloud.progress));
+      if (cloud.island) localStorage.setItem("kidsIsland." + student, JSON.stringify(cloud.island));
+      if (typeof onRestored === "function") onRestored();
+    } else {
+      cloudSave(student);
+    }
+  }).catch(() => cloudSave(student));
 }
 
 // ── 還原最新：Supabase 優先，沒登入退回 Google Sheet ────────────────────────
