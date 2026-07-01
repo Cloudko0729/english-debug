@@ -130,7 +130,13 @@ function _localHasData(student) {
 async function showSourceChoice(student, proceed) {
   let cloud = null;
   try { cloud = (typeof cloudPeek === "function") ? await cloudPeek(student) : null; } catch (e) {}
-  if (!cloud || !cloud.progress) { proceed(); return; }   // 雲端沒資料就直接用本機
+  if (!cloud || !cloud.progress) { proceed(); return; }   // 雲端沒資料 → 用本機
+  if (!_localHasData(student)) {                           // 只有雲端有資料 → 直接用雲端
+    localStorage.setItem("kidsProgress." + student, JSON.stringify(cloud.progress));
+    if (cloud.island) localStorage.setItem("kidsIsland." + student, JSON.stringify(cloud.island));
+    proceed(); return;
+  }
+  // 兩邊都有資料 → 跳出選擇
 
   const lp = (function () { try { return JSON.parse(localStorage.getItem("kidsProgress." + student) || "null"); } catch (e) { return null; } })();
   const localCoins = (lp && lp.coins && lp.coins.balance) || 0;
@@ -186,10 +192,10 @@ function runAutoGate() {
                 : (typeof window.pickStudent === "function") ? window.pickStudent : null;
       if (sel) { try { sel(student); } catch (e) { console.error("auto-select 失敗：", e); } }
     };
-    // 剛登入 + 這台本機已有資料 → 讓使用者選「雲端 vs 暫存」；否則照常
+    // 每次登入都走來源判斷：兩邊都有→跳選擇；只有雲端→用雲端；只有本機→用本機
     if (sessionStorage.getItem("kidsJustLoggedIn") === student) {
       sessionStorage.removeItem("kidsJustLoggedIn");
-      if (_localHasData(student)) { showSourceChoice(student, proceed); return; }
+      showSourceChoice(student, proceed); return;
     }
     proceed();
   });
