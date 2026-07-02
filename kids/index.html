@@ -247,10 +247,12 @@
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="cloud_sync.js"></script>
 <script src="account_lock.js"></script>
 <script src="supabase_auth.js"></script>
 <script src="drills_list.js"></script>
 <script>
+let _homeSynced = false;
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
   localStorage.setItem("kidsCurrentStudent", name);
@@ -268,6 +270,11 @@ function pickStudent(name) {
   if (peek) peek.textContent = coins;
   markDone(p);
   lockFutureDrills();   // 切換帳號後重新評估日期鎖（test 解鎖、其他鎖回）
+  // 開頁時做雲端同步（較新的勝出）；只做一次避免重入
+  if (!_homeSynced && typeof cloudSyncOnOpen === "function") {
+    _homeSynced = true;
+    cloudSyncOnOpen(name, () => pickStudent(name));
+  }
 }
 
 // 在已完成（已領獎）的練習卡片上打勾
