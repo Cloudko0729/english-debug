@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎴 單字圖鑑</title>
+  <style>
+    :root {
+      --bg: #fff7dc; --panel: #fff; --primary: #7c4dca; --primary-soft: #ede7f6;
+      --accent: #ffb703; --gold: #f2a900; --success: #2fbf71; --blue: #2f80ed;
+      --text: #243042; --muted: #667085; --border: #d9e2ec; --locked: #eef1f5;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, "Noto Sans TC", sans-serif;
+      background: var(--bg); color: var(--text); min-height: 100vh;
+      padding-bottom: 54px; line-height: 1.5;
+    }
+    header { background: var(--primary); color: #fff; text-align: center; padding: 20px 16px 16px; }
+    header h1 { font-size: 1.45rem; }
+    header p { font-size: .85rem; opacity: .95; margin-top: 4px; }
+    header a { color: #ffe27a; text-decoration: none; font-weight: 700; }
+
+    main { width: min(100%, 980px); margin: 0 auto; padding: 14px; }
+    #loginMsg {
+      display: none; background: var(--panel); border: 2px solid var(--border); border-radius: 14px;
+      padding: 28px 18px; text-align: center; color: var(--muted); font-weight: 700;
+    }
+    #loginMsg a { color: var(--primary); }
+
+    .summary {
+      background: var(--panel); border: 2px solid var(--border); border-radius: 14px;
+      padding: 14px; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(36,48,66,.06);
+    }
+    .summary-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .summary-title { font-size: 1.05rem; font-weight: 800; color: var(--primary); }
+    .summary-numbers { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 4px; padding: 5px 10px;
+      border-radius: 999px; background: var(--primary-soft); color: var(--primary);
+      font-weight: 800; font-size: .86rem;
+    }
+    .summary-note { margin-top: 8px; color: var(--muted); font-size: .84rem; }
+
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+    .tab {
+      border: 2px solid var(--primary); background: #fff; color: var(--primary);
+      border-radius: 18px; padding: 7px 12px; font-weight: 800; font-size: .82rem;
+      cursor: pointer; display: inline-flex; gap: 6px; align-items: center;
+    }
+    .tab.active { background: var(--primary); color: #fff; }
+    .tab .count { font-size: .76rem; opacity: .86; }
+
+    .theme-panel {
+      background: rgba(255,255,255,.72); border: 2px solid rgba(124,77,202,.18);
+      border-radius: 14px; padding: 13px; margin-bottom: 12px;
+    }
+    .theme-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+    .theme-title { font-size: 1.1rem; color: var(--primary); font-weight: 900; }
+    .theme-sub { color: var(--muted); font-size: .84rem; margin-top: 2px; }
+    .landmark { min-width: 210px; flex: 1; max-width: 420px; }
+    .landmark-title { font-weight: 900; color: var(--text); margin-bottom: 5px; }
+    .unlock {
+      display: inline-block; color: #1c7a4d; background: #e6faf0; border: 2px solid #b9efcf;
+      border-radius: 12px; padding: 7px 10px; font-weight: 900; text-decoration: none;
+    }
+    .lock-text { color: var(--muted); font-weight: 800; font-size: .9rem; margin-bottom: 6px; }
+    .progress { height: 10px; background: #e7eaf0; border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--primary), var(--success)); border-radius: inherit; }
+
+    .card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    @media (min-width: 640px) { .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (min-width: 900px) { .card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+    .word-card {
+      min-height: 168px; border-radius: 14px; padding: 12px; position: relative;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+    }
+    .word-card.collected {
+      background: linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(135deg, #7c4dca, #2f80ed, #ffb703) border-box;
+      border: 3px solid transparent; box-shadow: 0 2px 6px rgba(36,48,66,.08);
+    }
+    .word-card.max-star {
+      background: linear-gradient(#fffdf5, #fff) padding-box,
+        linear-gradient(135deg, #f2a900, #ffe27a, #7c4dca) border-box;
+      box-shadow: 0 0 0 3px rgba(242,169,0,.16), 0 8px 22px rgba(242,169,0,.24);
+    }
+    .word-card.max-star::after {
+      content: ""; position: absolute; inset: -40%; pointer-events: none;
+      background: linear-gradient(115deg, transparent 42%, rgba(255,255,255,.62) 50%, transparent 58%);
+      animation: shine 2.8s ease-in-out infinite;
+    }
+    @keyframes shine {
+      0%, 55% { transform: translateX(-60%) rotate(8deg); opacity: 0; }
+      72% { opacity: .85; }
+      100% { transform: translateX(60%) rotate(8deg); opacity: 0; }
+    }
+    .word-card.locked {
+      background: rgba(238,241,245,.76); border: 2px dashed #c9d2df; color: #a4adba;
+    }
+    .emoji { font-size: 2.65rem; line-height: 1; margin-bottom: 8px; }
+    .word-en { font-size: 1.08rem; font-weight: 900; color: var(--text); overflow-wrap: anywhere; }
+    .word-zh { color: var(--muted); font-size: .86rem; min-height: 1.25em; overflow-wrap: anywhere; }
+    .stars { color: var(--gold); font-size: 1.05rem; letter-spacing: 0; min-height: 1.45em; margin-top: 4px; }
+    .audio-btn {
+      position: absolute; right: 8px; top: 8px; width: 34px; height: 34px; border: none;
+      border-radius: 50%; background: var(--blue); color: #fff; font-size: 1rem; cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; z-index: 1;
+    }
+    .audio-btn:active { transform: scale(.96); }
+    .locked .word-en { color: #98a2b3; }
+    .locked .word-zh { color: #b2bac6; font-weight: 900; letter-spacing: 0; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>🎴 單字圖鑑</h1>
+  <p>收集單字卡，解鎖島嶼地標 · <a href="index.html">回首頁</a></p>
+</header>
+
+<main>
+  <div id="loginMsg">請先回首頁登入<br><br><a href="index.html">前往首頁</a></div>
+
+  <section id="app" style="display:none">
+    <div class="summary">
+      <div class="summary-top">
+        <div class="summary-title" id="studentTitle">單字圖鑑</div>
+        <div class="summary-numbers">
+          <span class="pill" id="collectSummary">總收集 0 / 0</span>
+          <span class="pill" id="starSummary">總星數 ⭐0</span>
+        </div>
+      </div>
+      <div class="summary-note">答對收集卡片，不同天答對升星：★收集 ★★3天 ★★★5天</div>
+    </div>
+
+    <div class="tabs" id="tabs"></div>
+    <section class="theme-panel" id="themePanel"></section>
+    <div class="card-grid" id="cardGrid"></div>
+  </section>
+</main>
+
+<script src="wordbank.js"></script>
+<script src="worddex.js"></script>
+<script src="curriculum.js"></script>
+<script src="word_emoji.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="cloud_sync.js"></script>
+<script src="account_lock.js"></script>
+<script src="supabase_auth.js"></script>
+<script>
+const JULY_THEMES = {
+  1: { name: "旅行與時間", emoji: "🗼", landmark: "燈塔" },
+  2: { name: "描述與經驗", emoji: "⛲", landmark: "噴泉" },
+  3: { name: "健康與規則", emoji: "♨️", landmark: "溫泉" },
+  4: { name: "嗜好與志向", emoji: "🎡", landmark: "摩天輪" },
+};
+
+let currentStudent = null;
+let selectedWeekIndex = 0;
+let currentAudio = null;
+
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function studentName(name) {
+  return name ? name.charAt(0).toUpperCase() + name.slice(1) : "";
+}
+
+function getProgress(student) {
+  try {
+    return JSON.parse(localStorage.getItem("kidsProgress." + student) || "{}") || {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function weeks() {
+  return (typeof allWeeks === "function") ? allWeeks() : [];
+}
+
+function monthNumber(w) {
+  const n = parseInt((w.start || "").slice(5, 7), 10);
+  return Number.isFinite(n) ? n : "";
+}
+
+function themeInfo(w) {
+  if ((w.start || "").slice(0, 7) === "2026-07" && JULY_THEMES[w.n]) return JULY_THEMES[w.n];
+  return { name: w.theme || "主題單字", emoji: "🏝️", landmark: "島嶼地標" };
+}
+
+function weekLabel(w) {
+  const info = themeInfo(w);
+  return `${monthNumber(w)}月第${w.n}週 ${info.name}`;
+}
+
+function escapeHtml(value) {
+  return String(value == null ? "" : value)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;").replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function progressStats(p) {
+  const seen = new Set();
+  let collected = 0;
+  weeks().forEach(w => (w.words || []).forEach(word => {
+    const key = String(word.en || "").toLowerCase();
+    if (!key || seen.has(key)) return;
+    seen.add(key);
+    if (dexStars(dexGet(p, word.en)) > 0) collected++;
+  }));
+  return { collected, total: seen.size, stars: typeof dexTotalStars === "function" ? dexTotalStars(p) : 0 };
+}
+
+function setSelectedWeek() {
+  const list = weeks();
+  if (!list.length) { selectedWeekIndex = 0; return; }
+  const today = todayStr();
+  const current = list.findIndex(w => today >= w.start && today <= w.end);
+  selectedWeekIndex = current >= 0 ? current : 0;
+}
+
+function showLogin() {
+  document.getElementById("app").style.display = "none";
+  document.getElementById("loginMsg").style.display = "block";
+}
+
+function showApp() {
+  document.getElementById("loginMsg").style.display = "none";
+  document.getElementById("app").style.display = "block";
+}
+
+function render() {
+  if (!currentStudent) { showLogin(); return; }
+  const list = weeks();
+  const p = getProgress(currentStudent);
+  showApp();
+
+  const total = progressStats(p);
+  document.getElementById("studentTitle").textContent = `${studentName(currentStudent)} 的單字圖鑑`;
+  document.getElementById("collectSummary").textContent = `總收集 ${total.collected} / ${total.total}`;
+  document.getElementById("starSummary").textContent = `總星數 ⭐${total.stars}`;
+
+  if (!list.length) {
+    document.getElementById("tabs").innerHTML = "";
+    document.getElementById("themePanel").innerHTML = "<div class=\"theme-title\">還沒有主題單字</div>";
+    document.getElementById("cardGrid").innerHTML = "";
+    return;
+  }
+  if (selectedWeekIndex < 0 || selectedWeekIndex >= list.length) selectedWeekIndex = 0;
+
+  renderTabs(p, list);
+  renderTheme(p, list[selectedWeekIndex]);
+  renderCards(p, list[selectedWeekIndex]);
+}
+
+function renderTabs(p, list) {
+  document.getElementById("tabs").innerHTML = list.map((w, i) => {
+    const st = dexThemeStats(p, w.words || []);
+    return `<button class="tab ${i === selectedWeekIndex ? "active" : ""}" type="button" data-index="${i}">
+      <span>${escapeHtml(weekLabel(w))}</span><span class="count">${st.collected}/${st.total}</span>
+    </button>`;
+  }).join("");
+  document.querySelectorAll(".tab").forEach(btn => {
+    btn.addEventListener("click", () => {
+      selectedWeekIndex = parseInt(btn.dataset.index, 10);
+      render();
+    });
+  });
+}
+
+function renderTheme(p, week) {
+  const st = dexThemeStats(p, week.words || []);
+  const done = dexThemeComplete(p, week.words || []);
+  const info = themeInfo(week);
+  const percent = st.total ? Math.round(st.collected / st.total * 100) : 0;
+  document.getElementById("themePanel").innerHTML = `
+    <div class="theme-head">
+      <div>
+        <div class="theme-title">${escapeHtml(weekLabel(week))}</div>
+        <div class="theme-sub">本週收集 ${st.collected} / ${st.total}</div>
+      </div>
+      <div class="landmark">
+        <div class="landmark-title">島嶼地標：${info.emoji} ${escapeHtml(info.landmark)}</div>
+        ${done
+          ? `<a class="unlock" href="island.html">✅ 已解鎖！去島嶼蓋 &rarr;</a>`
+          : `<div class="lock-text">🔒 集滿 30 字解鎖</div><div class="progress"><div class="progress-fill" style="width:${percent}%"></div></div>`}
+      </div>
+    </div>`;
+}
+
+function renderCards(p, week) {
+  const html = (week.words || []).map(word => {
+    const stars = dexStars(dexGet(p, word.en));
+    const collected = stars > 0;
+    const starText = "★".repeat(stars);
+    if (!collected) {
+      return `<article class="word-card locked">
+        <div class="word-en">${escapeHtml(word.en)}</div>
+        <div class="word-zh">？？？</div>
+      </article>`;
+    }
+    const emojiKey = String(word.en || "").toLowerCase();
+    const emoji = (typeof WORD_EMOJI !== "undefined" && (WORD_EMOJI[word.en] || WORD_EMOJI[emojiKey])) || "🎴";
+    return `<article class="word-card collected ${stars >= 3 ? "max-star" : ""}">
+      <button class="audio-btn" type="button" data-en="${escapeHtml(word.en)}" aria-label="播放 ${escapeHtml(word.en)}">🔊</button>
+      <div class="emoji">${escapeHtml(emoji)}</div>
+      <div class="word-en">${escapeHtml(word.en)}</div>
+      <div class="word-zh">${escapeHtml(word.zh)}</div>
+      <div class="stars" aria-label="${stars} 星">${starText}</div>
+    </article>`;
+  }).join("");
+  document.getElementById("cardGrid").innerHTML = html;
+  document.querySelectorAll(".audio-btn").forEach(btn => {
+    btn.addEventListener("click", () => playWord(btn.dataset.en));
+  });
+}
+
+function audioKey(en) {
+  return (typeof wordAudioKey === "function")
+    ? wordAudioKey(en)
+    : String(en).toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+function playWord(en) {
+  if (!en) return;
+  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  let usedFallback = false;
+  const fallback = () => {
+    if (usedFallback) return;
+    usedFallback = true;
+    speakWord(en);
+  };
+  const audio = new Audio("audio/words/" + audioKey(en) + ".mp3");
+  currentAudio = audio;
+  audio.onerror = fallback;
+  audio.play().catch(fallback);
+}
+
+function speakWord(en) {
+  if (!window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(en);
+  u.lang = "en-US";
+  u.rate = .85;
+  speechSynthesis.speak(u);
+}
+
+window.selectStudent = function (name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
+  currentStudent = name;
+  localStorage.setItem("kidsCurrentStudent", name);
+  render();
+  if (typeof cloudSyncOnOpen === "function") cloudSyncOnOpen(name, () => window.selectStudent(name));
+};
+
+setSelectedWeek();
+const last = localStorage.getItem("kidsCurrentStudent");
+if (!window.sbClient && last) window.selectStudent(last);
+else if (!last) showLogin();
+else if (!window.sbClient) render();
+</script>
+</body>
+</html>
