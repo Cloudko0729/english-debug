@@ -26,6 +26,13 @@
   .opt.ok{border-color:#2fbf71;background:#d9f7e8}
   .opt.no{border-color:#ef476f;background:#fde0e8}
   .passage{background:#f7faff;border:1px solid #d8e6ff;border-radius:10px;padding:11px 13px;line-height:1.7;margin:8px 0}
+  .teach{background:#f3f0ff;border:1px solid #ddd3ff;border-radius:10px;padding:10px 12px;margin:6px 0 10px}
+  .teach .tip{font-size:.9rem;color:#4b3a8f;font-weight:700;margin-bottom:8px}
+  .wordrow{display:flex;gap:8px;flex-wrap:wrap}
+  .wchip{padding:8px 14px;border:2px solid #7c4dca;border-radius:10px;background:#fff;color:#4b3a8f;font-weight:800;font-size:1rem;cursor:pointer}
+  .skel{margin:7px 0;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .rolechip{color:#fff;font-weight:800;border-radius:8px;padding:4px 10px;font-size:.95rem}
+  .skzh{color:#888;font-size:.82rem}
   .gloss{background:#fffbe9;border:1px solid #ffe9a8;border-radius:10px;padding:9px 12px;margin:0 0 8px;font-size:.86rem}
   .gloss b{display:block;color:#a06a00;margin-bottom:4px;font-size:.82rem}
   .gloss .gi{margin:2px 0;color:#555}
@@ -53,6 +60,7 @@
   function playUrl(url, fb) { if (_au) _au.pause(); const a = new Audio(url); _au = a; a.play().catch(() => { if (fb && window.speechSynthesis) { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(fb); u.lang = "en-US"; u.rate = .85; speechSynthesis.speak(u); } }); }
   window.__pw = en => playUrl(WORD_AUDIO + akey(en) + ".mp3", en);
   window.__pwd = key => playUrl("../audio/weekdrill/" + WDID + "/" + key + ".mp3");
+  window.__pst = (key, fb) => playUrl("../audio/structure/" + key + ".mp3", fb);
 
   // 干擾選項（en 不同、zh 也不同）
   function distinctChoices(answerWord, pool, rnd) {
@@ -114,7 +122,33 @@
     const roPool = wd ? wd.reorder.map((q, i) => ({ ...q, _i: i })) : [];
     const s4 = pickBlock(roPool, 4, dayIdx, WDID + "-ro").map(q => ({ key: "ro" + q._i, sentence: q.sentence, chunks: shuffleArr(q.chunks, rnd) }));
 
-    return { week, month, s1, s2, s3, s4, s5, hasWd: !!wd };
+    // ⑥ 今日發音（詞族解碼，依日期輪替單元）
+    let s6 = null;
+    if (typeof phonicsUnitFor === "function") {
+      const u = phonicsUnitFor(DRILL_DATE);
+      const qs = [];
+      // Q1/Q2：聽音選拼字（family 內辨音，兩題不同目標字）
+      const t1 = u.words[dayIdx % u.words.length], t2 = u.words[(dayIdx + 2) % u.words.length];
+      [t1, t2].forEach(t => qs.push({ kind: "listen", en: t, choices: shuffleArr(u.words.map(w => ({ label: w, correct: w === t })), rnd) }));
+      // Q3：同家族判斷（視覺規則，不用語音）
+      qs.push({ kind: "family", q: `哪一個字也是「${u.title.replace(/（.*/, "")}」家族？`, choices: shuffleArr([{ label: u.bonus, correct: true }, ...u.non.map(x => ({ label: x, correct: false }))], rnd) });
+      s6 = { unit: u, qs };
+    }
+
+    // ⑦ 句型積木（顏色標角色，依日期輪替骨架）
+    let s7 = null;
+    if (typeof skeletonUnitFor === "function") {
+      const u = skeletonUnitFor(DRILL_DATE);
+      const qs = u.quiz.map(q => {
+        if (q.type === "order") return { kind: "mc", q: q.q, choices: shuffleArr([{ label: q.answer, correct: true }, ...q.wrong.map(x => ({ label: x, correct: false }))], rnd) };
+        if (q.type === "slot") return { kind: "mc", q: q.q, choices: shuffleArr([{ label: q.answer, correct: true }, ...q.wrong.map(x => ({ label: x, correct: false }))], rnd) };
+        const correct = u.examples[q.ex].parts.join(" ");
+        return { kind: "mc", q: q.q, audio: u.id + "_e" + q.ex, choices: shuffleArr(q.options.map(o => ({ label: o, correct: o === correct })), rnd) };
+      });
+      s7 = { unit: u, qs };
+    }
+
+    return { week, month, s1, s2, s3, s4, s5, s6, s7, hasWd: !!wd };
   }
 
   function optsHtml(sec, qi, choices) { return `<div class="opts">${choices.map((c, ci) => `<button class="opt" onclick="__ans('${sec}',${qi},${ci},this)">${c.label}</button>`).join("")}</div>`; }
@@ -150,17 +184,43 @@
     h += `<div class="sec"><div class="sec-h">⑤ 圖片題</div><div class="sec-d">看圖（或中文）選出正確英文</div>`;
     DRILL.s5.forEach((q, i) => { h += `<div class="q"><div class="q-no">${i + 1}.</div>${q.emoji ? `<div class="emoji">${q.emoji}</div>` : `<div class="prompt">${q.zh}</div>`}${optsHtml('s5', i, q.choices)}</div>`; });
     h += `</div>`;
+    // ⑥ 今日發音
+    if (DRILL.s6) {
+      const u = DRILL.s6.unit;
+      h += `<div class="sec"><div class="sec-h">⑥ 今日發音 — ${u.title}</div><div class="sec-d">先聽規則、跟著念，再作答</div>
+        <div class="teach"><div class="tip">💡 ${u.tip}</div>
+        <div class="wordrow">${u.words.map(w => `<button class="wchip" onclick="__pw('${w}')">🔊 ${w}</button>`).join("")}</div></div>`;
+      DRILL.s6.qs.forEach((q, i) => {
+        if (q.kind === "listen") h += `<div class="q"><div class="q-no">${i + 1}. <span class="sub">聽發音，選出聽到的字</span></div><button class="play" onclick="__pw('${q.en}')">🔊 點我聽</button>${optsHtml('s6', i, q.choices)}</div>`;
+        else h += `<div class="q"><div class="q-no">${i + 1}. ${q.q}</div>${optsHtml('s6', i, q.choices)}</div>`;
+      });
+      h += `</div>`;
+    }
+    // ⑦ 句型積木
+    if (DRILL.s7) {
+      const u = DRILL.s7.unit;
+      h += `<div class="sec"><div class="sec-h">⑦ 句型積木 — ${u.name}</div><div class="sec-d">看顏色記住句子的「形狀」：${u.roles.map(r => `<span style="color:${r.c};font-weight:800">${r.t}</span>`).join(" ＋ ")}</div>
+        <div class="teach">${u.examples.map((e, i) => `<div class="skel"><button class="play" style="padding:4px 10px;font-size:.8rem" onclick="__pst('${u.id}_e${i}','${e.parts.join(" ").replace(/'/g, "\\'")}')">🔊</button> ${e.parts.map((p, pi) => `<span class="rolechip" style="background:${u.roles[Math.min(pi, u.roles.length - 1)].c}">${p}</span>`).join(" ")} <span class="skzh">${e.zh}</span></div>`).join("")}</div>`;
+      DRILL.s7.qs.forEach((q, i) => {
+        h += `<div class="q"><div class="q-no">${i + 1}. ${q.q}</div>${q.audio ? `<button class="play" onclick="__pst('${q.audio}','')">🔊 點我聽</button>` : ""}${optsHtml('s7', i, q.choices)}</div>`;
+      });
+      h += `</div>`;
+    }
     h += `<button class="gobtn" onclick="__showTotal()">看總成績 🎉</button><div id="totalBox"></div>`;
     const app = document.getElementById("app"); app.innerHTML = h; app.style.display = "block";
     // 計分容器
-    ['s1', 's2', 's3', 's5'].forEach(s => sectionScores[s] = [0, (DRILL[s] && (DRILL[s].questions ? DRILL[s].questions.length : DRILL[s].length)) || 0]);
+    ['s1', 's2', 's5'].forEach(s => sectionScores[s] = [0, (DRILL[s] || []).length]);
     sectionScores.s3 = [0, DRILL.s3 ? DRILL.s3.questions.length : 0];
     sectionScores.s4 = [0, DRILL.s4.length];
+    sectionScores.s6 = [0, DRILL.s6 ? DRILL.s6.qs.length : 0];
+    sectionScores.s7 = [0, DRILL.s7 ? DRILL.s7.qs.length : 0];
   }
 
   window.__ans = (sec, qi, ci, btn) => {
     const box = btn.closest('.q'); if (box.dataset.done) return; box.dataset.done = "1";
-    const list = (sec === 's3') ? DRILL.s3.questions[qi].choices : DRILL[sec][qi].choices;
+    const list = (sec === 's3') ? DRILL.s3.questions[qi].choices
+               : (sec === 's6' || sec === 's7') ? DRILL[sec].qs[qi].choices
+               : DRILL[sec][qi].choices;
     const ok = list[ci].correct;
     box.querySelectorAll('.opt').forEach((b, bi) => { b.disabled = true; if (list[bi].correct) b.classList.add('ok'); else if (bi === ci) b.classList.add('no'); });
     if (ok) sectionScores[sec][0]++;
