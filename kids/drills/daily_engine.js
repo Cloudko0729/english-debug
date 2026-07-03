@@ -58,7 +58,22 @@
   function todayStr() { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
   function getProgress(s) { const raw = localStorage.getItem("kidsProgress." + s); return raw ? JSON.parse(raw) : { wrongCounts: {}, sessions: 0, totalCorrect: 0, totalWrong: 0 }; }
   function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
-  function recordResult(en, ok) { if (!currentStudent || !en) return; const p = getProgress(currentStudent); if (!p.wrongCounts) p.wrongCounts = {}; if (!ok) { p.wrongCounts[en] = (p.wrongCounts[en] || 0) + 1; p.totalWrong = (p.totalWrong || 0) + 1; } else { p.totalCorrect = (p.totalCorrect || 0) + 1; if (p.wrongCounts[en] > 0) p.wrongCounts[en] = Math.max(0, p.wrongCounts[en] - 1); } saveProgress(currentStudent, p); }
+  function recordResult(en, ok) {
+    if (!currentStudent || !en) return; const p = getProgress(currentStudent); if (!p.wrongCounts) p.wrongCounts = {};
+    if (!ok) { p.wrongCounts[en] = (p.wrongCounts[en] || 0) + 1; p.totalWrong = (p.totalWrong || 0) + 1; }
+    else {
+      p.totalCorrect = (p.totalCorrect || 0) + 1; if (p.wrongCounts[en] > 0) p.wrongCounts[en] = Math.max(0, p.wrongCounts[en] - 1);
+      if (typeof dexRecord === "function") { const r = dexRecord(p, en); if (r && r.isNew) dexToast("🎴 收集到「" + en + "」！"); else if (r && r.starUp) dexToast("⭐ 「" + en + "」升到 " + "★".repeat(r.stars) + "！"); }
+    }
+    saveProgress(currentStudent, p);
+  }
+  let _dtTimer = null;
+  function dexToast(msg) {
+    let el = document.getElementById("dexToast");
+    if (!el) { el = document.createElement("div"); el.id = "dexToast"; el.style.cssText = "position:fixed;top:14px;left:50%;transform:translateX(-50%);background:#243042;color:#ffd24d;padding:9px 18px;border-radius:20px;font-weight:800;font-size:.9rem;z-index:9999;transition:opacity .3s;font-family:Arial,'Noto Sans TC',sans-serif"; document.body.appendChild(el); }
+    el.textContent = msg; el.style.opacity = "1";
+    clearTimeout(_dtTimer); _dtTimer = setTimeout(() => el.style.opacity = "0", 1800);
+  }
   function seeded(s0) { let s = 0; for (const c of s0) s = (s * 31 + c.charCodeAt(0)) >>> 0; return () => { s = (s * 1103515245 + 12345) >>> 0; return s / 4294967296; }; }
   function akey(en) { return (typeof wordAudioKey === "function") ? wordAudioKey(en) : String(en).toLowerCase().replace(/[^a-z0-9]+/g, ""); }
   let _au = null;

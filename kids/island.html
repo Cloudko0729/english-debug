@@ -286,6 +286,11 @@
 
 <main>
   <div id="notice"></div>
+  <div id="questRow" style="display:none;gap:8px;margin:8px 0;flex-wrap:wrap">
+    <button id="boardBtn" onclick="openBoard()" style="flex:1;min-width:130px;padding:10px;border:2px solid #b5651d;border-radius:12px;background:#fff3e0;color:#8a4a12;font-weight:800;cursor:pointer">📋 島民委託板</button>
+    <button id="visitorBtn" onclick="openVisitor()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2f80ed;border-radius:12px;background:#eaf3ff;color:#1e5fb8;font-weight:800;cursor:pointer">🛶 今日訪客</button>
+    <a href="worddex.html" style="flex:1;min-width:130px;padding:10px;border:2px solid #7c4dca;border-radius:12px;background:#f3edff;color:#5a36a8;font-weight:800;text-align:center;text-decoration:none">🎴 單字圖鑑</a>
+  </div>
   <div id="pickStudentMsg">👆 先選 Albert 或 Jonathan，開始蓋你的島！</div>
   <div id="island" style="display:none"></div>
 
@@ -309,6 +314,9 @@
 
 <div id="toast"></div>
 
+<script src="wordbank.js"></script>
+<script src="curriculum.js"></script>
+<script src="worddex.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="cloud_sync.js"></script>
 <script src="account_lock.js"></script>
@@ -381,6 +389,29 @@ const BUILDINGS = {
               beauty: [16,27,40,55,72], pop: [0,0,0,0,0], coin: [6,9,13,18,24], levelDays: [6,14,28,50] },
   horseshoecrab:{ emoji: "🦀", name: "鱟", cost: 880, desc: "海洋復育（活化石）,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
               beauty: [17,28,41,56,73], pop: [0,0,0,0,0], coin: [6,9,13,18,24], levelDays: [7,15,30,54] },
+  // ── 單字圖鑑地標（免費，集滿該主題 30 字解鎖，dex = 週次）──
+  lighthouse:{ emoji: "🗼", name: "燈塔", cost: 0, desc: "圖鑑獎勵：集滿「旅行與時間」30 字", terrain: ["O"], unique: true, maxLevel: 1, dex: 1,
+              beauty: [35], pop: [0], coin: [0], levelDays: null },
+  fountain:  { emoji: "⛲", name: "噴泉", cost: 0, desc: "圖鑑獎勵：集滿「描述與經驗」30 字", terrain: ["P"], unique: true, maxLevel: 1, dex: 2,
+              beauty: [30], pop: [0], coin: [0], levelDays: null },
+  hotspring: { emoji: "♨️", name: "溫泉", cost: 0, desc: "圖鑑獎勵：集滿「健康與規則」30 字", terrain: ["H"], unique: true, maxLevel: 1, dex: 3,
+              beauty: [32], pop: [0], coin: [0], levelDays: null },
+  ferris:    { emoji: "🎡", name: "摩天輪", cost: 0, desc: "圖鑑獎勵：集滿「嗜好與志向」30 字", terrain: ["P"], unique: true, maxLevel: 1, dex: 4,
+              beauty: [40], pop: [0], coin: [0], levelDays: null },
+  // ── 委託板禮物（免費，完成 5 次委託得 1 個禮物券）──
+  postbox:   { emoji: "📮", name: "郵筒", cost: 0, desc: "委託板禮物（每完成 5 天委託得 1 券）", terrain: ["P"], max: 3, maxLevel: 1, gift: true,
+              beauty: [8], pop: [0], coin: [0], levelDays: null },
+  picnic:    { emoji: "🧺", name: "野餐墊", cost: 0, desc: "委託板禮物（每完成 5 天委託得 1 券）", terrain: ["P","H"], max: 3, maxLevel: 1, gift: true,
+              beauty: [8], pop: [0], coin: [0], levelDays: null },
+  lantern:   { emoji: "🏮", name: "燈籠", cost: 0, desc: "委託板禮物（每完成 5 天委託得 1 券）", terrain: ["P","H","M"], max: 3, maxLevel: 1, gift: true,
+              beauty: [8], pop: [0], coin: [0], levelDays: null },
+  // ── 訪客商品（通過訪客聽力小考才上架，特價）──
+  balloon:   { emoji: "🎈", name: "熱氣球", cost: 180, desc: "訪客特價商品（原價 300）", terrain: ["P","H","M"], unique: true, maxLevel: 1, visitor: true,
+              beauty: [18], pop: [0], coin: [0], levelDays: null },
+  statue:    { emoji: "🗿", name: "石像", cost: 200, desc: "訪客特價商品（原價 340）", terrain: ["P","H"], unique: true, maxLevel: 1, visitor: true,
+              beauty: [16], pop: [0], coin: [0], levelDays: null },
+  flowerclock:{ emoji: "🌸", name: "花鐘", cost: 190, desc: "訪客特價商品（原價 320）", terrain: ["P"], unique: true, maxLevel: 1, visitor: true,
+              beauty: [17], pop: [0], coin: [0], levelDays: null },
 };
 const BUILD_ORDER = [
   "center", "dog", "solar", "forest", "pond", "ranch", "farm", "house", "town",  // 平地（dog 也可丘陵/高山）
@@ -388,6 +419,9 @@ const BUILD_ORDER = [
   "dock", "fishery", "oceanboat",                                          // 海上
   "bear","leopardcat","salamander","mikado","pangolin","serow","salmon","butterfly","hawk","sambar", // 高山動物
   "turtle","dolphin","whaleshark","coral","horseshoecrab",                // 海洋動物
+  "lighthouse","fountain","hotspring","ferris",                           // 圖鑑地標
+  "postbox","picnic","lantern",                                           // 委託板禮物
+  "balloon","statue","flowerclock",                                       // 訪客商品
 ];
 
 // 城鎮中心升級條件：index = 目前等級-1，達成下一級的人口與美化目標（5 級）
@@ -658,6 +692,27 @@ function canBuild(key) {
   if (c.category && countCategory(c.category) >= catMax(c.category)) return false;
   return true;
 }
+// ── 圖鑑地標 / 禮物券 / 訪客商品 的解鎖判斷 ──────────────────────────────────
+function dexWeekWords(n) {
+  try { const w = allWeeks().find(x => x.n === n && x.month.month === "2026-07"); return w ? w.words : null; } catch (e) { return null; }
+}
+function dexUnlocked(n) {
+  const words = dexWeekWords(n); if (!words) return false;
+  const p = getProgress(currentStudent);
+  return (typeof dexThemeComplete === "function") && dexThemeComplete(p, words);
+}
+function specialLock(key) {   // 回傳鎖定原因文字；null = 沒鎖
+  const c = BUILDINGS[key];
+  if (c.dex && !dexUnlocked(c.dex)) {
+    const w = dexWeekWords(c.dex);
+    const p = getProgress(currentStudent);
+    const st = (w && typeof dexThemeStats === "function") ? dexThemeStats(p, w) : { collected: 0, total: 30 };
+    return `🔒 圖鑑 ${st.collected}/${st.total}`;
+  }
+  if (c.gift && !((island.giftAvail || 0) > 0)) return "🔒 需要禮物券";
+  if (c.visitor && !((island.visitorStock && island.visitorStock[key]) > 0)) return "🔒 訪客未上架";
+  return null;
+}
 function buildableOn(t) {
   return BUILD_ORDER.some(key => (BUILDINGS[key].terrain || ["P"]).includes(t));
 }
@@ -674,10 +729,11 @@ function openBuild(x, y) {
   list.forEach(key => {
     const c = BUILDINGS[key];
     const req = reqCenterFor(key);
-    const locked = lvl < req;
+    const sLock = specialLock(key);
+    const locked = lvl < req || !!sLock;
     const afford = bal >= c.cost;
     const clickable = !locked && afford;
-    const costLabel = locked ? `🔒 城鎮中心 Lv${req}` : (c.cost === 0 ? "免費" : `🪙 ${c.cost}`);
+    const costLabel = sLock ? sLock : (lvl < req) ? `🔒 城鎮中心 Lv${req}` : (c.cost === 0 ? "免費" : `🪙 ${c.cost}`);
     const icon = c.img
       ? `<img class="opt-img" src="island_img/${key}.png" alt="${c.name}" onerror="this.replaceWith(document.createTextNode('${c.emoji}'))">`
       : `<span style="font-size:1.8rem">${c.emoji}</span>`;
@@ -702,8 +758,11 @@ function build(key) {
   if (c.max && countType(key) >= c.max) { toast(`${c.name}最多 ${c.max} 個`); return; }
   if (c.category && countCategory(c.category) >= catMax(c.category)) { toast(`${CAT_NAME[c.category] || "這類動物"}最多 ${catMax(c.category)} 隻`); return; }
   if (centerLevel() < reqCenterFor(key)) { toast(`需要城鎮中心 Lv${reqCenterFor(key)} 才能蓋`); return; }
+  const _sl = specialLock(key); if (_sl) { toast(_sl); return; }
   const p = getProgress(currentStudent);
   if (p.coins.balance < c.cost) { toast("金幣不夠！"); return; }
+  if (c.gift) island.giftAvail = (island.giftAvail || 0) - 1;                       // 消耗禮物券
+  if (c.visitor) island.visitorStock[key] = (island.visitorStock[key] || 0) - 1;    // 消耗上架商品
   p.coins.balance -= c.cost;
   p.coins.lifetimeSpent += c.cost;
   p.coins.transactions.push({ type: "spend", source: "islandBuild", amount: c.cost,
@@ -905,6 +964,126 @@ function toast(msg) {
   toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
 }
 
+// ─── 島民委託板 + 今日訪客 ────────────────────────────────────────────────────
+const GIFT_EVERY = 5;                       // 每完成 5 天委託送 1 張禮物券
+const TRADE_KEYS = ["balloon", "statue", "flowerclock"];
+const VISITORS = [
+  { emoji: "🧑‍✈️", name: "飛行員 Leo" }, { emoji: "👵", name: "奶奶 May" }, { emoji: "🧜‍♀️", name: "人魚 Nana" },
+  { emoji: "🦉", name: "貓頭鷹博士" }, { emoji: "🏴‍☠️", name: "海盜 Jack" }
+];
+function _learnedWords() {
+  try {
+    const t = todayStr();
+    const ws = allWeeks().filter(w => w.start <= t);
+    const pool = (ws.length ? ws : allWeeks().slice(0, 1)).flatMap(w => w.words);
+    return pool.length ? pool : null;
+  } catch (e) { return null; }
+}
+function _mcOptions(ans, pool, n) {
+  const opts = [ans]; const used = new Set([ans.en, ans.zh]);
+  const sh = pool.slice().sort(() => Math.random() - .5);
+  for (const w of sh) { if (opts.length >= n) break; if (used.has(w.en) || used.has(w.zh)) continue; used.add(w.en); used.add(w.zh); opts.push(w); }
+  return opts.sort(() => Math.random() - .5);
+}
+function updateQuestBtns() {
+  const t = todayStr();
+  const b = document.getElementById("boardBtn"), v = document.getElementById("visitorBtn");
+  if (b) { const done = island.board && island.board.last === t; b.textContent = done ? "📋 今日委託完成 ✅" : "📋 島民委託板"; b.style.opacity = done ? ".55" : "1"; }
+  if (v) { const done = island.visitor && island.visitor.last === t; v.textContent = done ? "🛶 訪客已離開 ✅" : "🛶 今日訪客"; v.style.opacity = done ? ".55" : "1"; }
+}
+let _bq = null;
+function openBoard() {
+  if (island.board && island.board.last === todayStr()) { toast("今天的委託完成了，明天再來！"); return; }
+  const pool = _learnedWords(); if (!pool) { toast("題庫還沒準備好"); return; }
+  const picks = pool.slice().sort(() => Math.random() - .5).slice(0, 3);
+  _bq = { qs: picks.map(w => ({ w, opts: _mcOptions(w, pool, 3) })), done: 0, ok: 0 };
+  let h = `<h3>📋 島民委託板</h3><p style="color:var(--muted);font-size:.85rem;margin:4px 0 10px">島民需要你幫忙！選出正確的英文（每天一次，完成 ${GIFT_EVERY} 天送 1 張禮物券 🎁）</p>`;
+  _bq.qs.forEach((q, i) => {
+    h += `<div id="bq${i}" style="border-top:1px dashed #eee;padding:10px 0">
+      <div style="font-weight:700;margin-bottom:6px">${i + 1}. 「${q.w.zh}」的英文是？</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${q.opts.map((o, oi) => `<button onclick="boardAns(${i},${oi})" style="padding:9px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer">${o.en}</button>`).join("")}</div></div>`;
+  });
+  h += `<div id="boardMsg" style="font-weight:800;margin-top:10px"></div>`;
+  document.getElementById("sheetContent").innerHTML = h;
+  document.getElementById("sheet").classList.add("open");
+}
+function boardAns(i, oi) {
+  const q = _bq.qs[i], box = document.getElementById("bq" + i);
+  if (box.dataset.done) return; box.dataset.done = "1";
+  const ok = q.opts[oi].en === q.w.en;
+  box.querySelectorAll("button").forEach((b, bi) => { b.disabled = true;
+    if (q.opts[bi].en === q.w.en) { b.style.borderColor = "#2fbf71"; b.style.background = "#d9f7e8"; }
+    else if (bi === oi) { b.style.borderColor = "#ef476f"; b.style.background = "#fde0e8"; } });
+  _bq.done++; if (ok) _bq.ok++;
+  if (_bq.done === _bq.qs.length) finishBoard();
+}
+function finishBoard() {
+  const earned = _bq.ok * 10 + (_bq.ok === 3 ? 10 : 0);
+  const p = getProgress(currentStudent);
+  p.coins.balance += earned; p.coins.lifetimeEarned += earned;
+  p.coins.transactions.push({ type: "earn", source: "islandBoard", amount: earned, balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { ok: _bq.ok } });
+  saveProgress(currentStudent, p);
+  island.board = { last: todayStr(), total: ((island.board && island.board.total) || 0) + 1 };
+  let giftMsg = "";
+  if (island.board.total % GIFT_EVERY === 0) { island.giftAvail = (island.giftAvail || 0) + 1; giftMsg = `<br>🎁 完成 ${island.board.total} 天委託，得到 1 張禮物券！去空地蓋 📮🧺🏮`; }
+  saveIsland(currentStudent, island);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  document.getElementById("boardMsg").innerHTML = `🎉 答對 ${_bq.ok}/3，島民送你 🪙 ${earned}！${giftMsg}`;
+  recalcStats(); render(); updateQuestBtns();
+}
+let _vq = null, _vAudio = null;
+function _playWordIsland(en) {
+  if (_vAudio) _vAudio.pause();
+  const k = (typeof wordAudioKey === "function") ? wordAudioKey(en) : en.toLowerCase().replace(/[^a-z0-9]+/g, "");
+  _vAudio = new Audio("audio/words/" + k + ".mp3");
+  _vAudio.play().catch(() => { if (window.speechSynthesis) { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(en); u.lang = "en-US"; speechSynthesis.speak(u); } });
+}
+function openVisitor() {
+  if (island.visitor && island.visitor.last === todayStr()) { toast("今天的訪客已經離開了，明天再來！"); return; }
+  const pool = _learnedWords(); if (!pool) { toast("題庫還沒準備好"); return; }
+  const dayN = Math.floor(Date.parse(todayStr()) / 86400000);
+  const who = VISITORS[dayN % VISITORS.length];
+  const tradeKey = TRADE_KEYS[dayN % TRADE_KEYS.length];
+  const picks = pool.slice().sort(() => Math.random() - .5).slice(0, 3);
+  _vq = { qs: picks.map(w => ({ w, opts: _mcOptions(w, pool, 3) })), done: 0, ok: 0, tradeKey };
+  const tc = BUILDINGS[tradeKey];
+  let h = `<h3>${who.emoji} ${who.name} 來訪！</h3>
+    <p style="color:var(--muted);font-size:.85rem;margin:4px 0 10px">「聽我唸的單字，選出正確的字！答對 2 題，我就把 <b>${tc.emoji} ${tc.name}</b>（特價 🪙${tc.cost}）上架給你。」</p>`;
+  _vq.qs.forEach((q, i) => {
+    h += `<div id="vq${i}" style="border-top:1px dashed #eee;padding:10px 0">
+      <div style="font-weight:700;margin-bottom:6px">${i + 1}. <button onclick="_playWordIsland('${q.w.en.replace(/'/g, "\\'")}')" style="padding:5px 12px;border:none;border-radius:9px;background:#2f80ed;color:#fff;font-weight:700;cursor:pointer">🔊 點我聽</button></div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${q.opts.map((o, oi) => `<button class="vopt" onclick="visitorAns(${i},${oi})" style="padding:9px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer">${o.en}</button>`).join("")}</div></div>`;
+  });
+  h += `<div id="visitorMsg" style="font-weight:800;margin-top:10px"></div>`;
+  document.getElementById("sheetContent").innerHTML = h;
+  document.getElementById("sheet").classList.add("open");
+}
+function visitorAns(i, oi) {
+  const q = _vq.qs[i], box = document.getElementById("vq" + i);
+  if (box.dataset.done) return; box.dataset.done = "1";
+  const ok = q.opts[oi].en === q.w.en;
+  box.querySelectorAll(".vopt").forEach((b, bi) => { b.disabled = true;
+    if (q.opts[bi].en === q.w.en) { b.style.borderColor = "#2fbf71"; b.style.background = "#d9f7e8"; }
+    else if (bi === oi) { b.style.borderColor = "#ef476f"; b.style.background = "#fde0e8"; } });
+  _vq.done++; if (ok) _vq.ok++;
+  if (_vq.done === _vq.qs.length) finishVisitor();
+}
+function finishVisitor() {
+  const msg = document.getElementById("visitorMsg");
+  if (_vq.ok >= 2) {
+    if (!island.visitorStock) island.visitorStock = {};
+    island.visitorStock[_vq.tradeKey] = (island.visitorStock[_vq.tradeKey] || 0) + 1;
+    island.visitor = { last: todayStr() };
+    saveIsland(currentStudent, island);
+    if (typeof cloudSave === "function") cloudSave(currentStudent);
+    const tc = BUILDINGS[_vq.tradeKey];
+    msg.innerHTML = `🎉 答對 ${_vq.ok}/3！${tc.emoji} ${tc.name} 已上架，去空地用特價 🪙${tc.cost} 蓋它！`;
+    updateQuestBtns();
+  } else {
+    msg.innerHTML = `答對 ${_vq.ok}/3，差一點！再試一次 👇 <button onclick="openVisitor()" style="padding:6px 14px;border:none;border-radius:9px;background:#2f80ed;color:#fff;font-weight:700;cursor:pointer">重新挑戰</button>`;
+  }
+}
+
 // ─── Student select ──────────────────────────────────────────────────────────
 function selectStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
@@ -917,6 +1096,8 @@ function selectStudent(name) {
   document.getElementById("island").style.display = "grid";
   document.getElementById("statsRow").style.display = "flex";
   document.getElementById("dataPanel").style.display = "block";
+  document.getElementById("questRow").style.display = "flex";
+  updateQuestBtns();
   recalcStats();
   if (migrated) saveIsland(name, island);
   const produced = runDailyTick();

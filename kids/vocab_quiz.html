@@ -101,6 +101,7 @@
 <div id="toast"></div>
 
 <script src="wordbank.js"></script>
+<script src="worddex.js"></script>
 <script src="curriculum.js"></script>
 <script src="word_emoji.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -141,6 +142,7 @@ function recordResult(wordEn, correct) {
   } else {
     p.totalCorrect = (p.totalCorrect || 0) + 1;
     if (p.wrongCounts[wordEn] > 0) p.wrongCounts[wordEn] = Math.max(0, p.wrongCounts[wordEn] - 1);
+    if (typeof dexRecord === "function") { const r = dexRecord(p, wordEn); if (r && r.isNew) toast("🎴 收集到「" + wordEn + "」！"); else if (r && r.starUp) toast("⭐ 「" + wordEn + "」升星！"); }
   }
   saveProgress(currentStudent, p);
 }
