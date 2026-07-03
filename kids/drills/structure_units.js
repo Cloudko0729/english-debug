@@ -1,20 +1,20 @@
 // 語言架構教材：⑥ 發音解碼(詞族) + ⑦ 句型積木(顏色標角色)。
 // 每日測驗依日期輪替一個單元(隔天不同)。單字語音用 audio/words/，句子語音 audio/structure/<unit>/eN.mp3
 const PHONICS_UNITS = [
-  { id: "ake", title: "a_e 魔法 e（-ake 家族）", tip: "字尾的 e 不發音，讓 a 變成長音 /eɪ/：c-ake、m-ake", words: ["cake", "make", "take", "lake"], bonus: "bake", non: ["boat", "ship"] },
-  { id: "ame", title: "a_e 魔法 e（-ame 家族）", tip: "一樣的魔法 e：n-ame、g-ame，a 唸 /eɪ/", words: ["name", "game", "same", "came"], bonus: "frame", non: ["farm", "goat"] },
-  { id: "ike", title: "i_e 魔法 e（-ike 家族）", tip: "字尾 e 讓 i 變長音 /aɪ/：b-ike、l-ike", words: ["bike", "like", "nine", "time"], bonus: "hike", non: ["big", "lip"] },
-  { id: "ope", title: "o_e 魔法 e（o 的長音）", tip: "字尾 e 讓 o 變長音 /oʊ/：h-ome、n-ose", words: ["home", "nose", "note", "hope"], bonus: "rope", non: ["hot", "not"] },
-  { id: "ee", title: "ee 長音 /iː/", tip: "兩個 e 在一起，拉長唸 /iː/：s-ee、tr-ee", words: ["see", "bee", "tree", "green"], bonus: "sleep", non: ["set", "ten"] },
-  { id: "ea", title: "ea 長音 /iː/", tip: "ea 也常唸 /iː/：eat、sea、tea", words: ["eat", "sea", "tea", "read"], bonus: "clean", non: ["egg", "red"] },
-  { id: "sh", title: "sh 的噓聲 /ʃ/", tip: "s+h 一起唸「噓」的聲音：sh-ip、sh-op", words: ["ship", "shop", "she", "fish"], bonus: "shoe", non: ["sit", "sun"] },
-  { id: "ch", title: "ch 的 /tʃ/", tip: "c+h 一起唸「娶」的氣音：ch-air、lun-ch", words: ["chair", "cheese", "chicken", "lunch"], bonus: "teacher", non: ["cat", "car"] },
-  { id: "st", title: "st 開頭混音", tip: "s 和 t 連在一起快唸：st-op、st-ar", words: ["stop", "star", "study", "student"], bonus: "stand", non: ["sad", "top"] },
-  { id: "tr", title: "tr 開頭混音", tip: "t 和 r 連在一起快唸：tr-ee、tr-ain", words: ["tree", "train", "trip", "try"], bonus: "truck", non: ["ten", "rain"] },
-  { id: "ay", title: "ay 長音 /eɪ/", tip: "字尾 ay 唸 /eɪ/：d-ay、pl-ay", words: ["day", "play", "say", "way"], bonus: "today", non: ["dog", "put"] },
-  { id: "oo", title: "oo 長音 /uː/", tip: "兩個 o 常唸 /uː/：f-ood、m-oon", words: ["food", "moon", "school", "zoo"], bonus: "cool", non: ["fox", "fog"] },
-  { id: "er", title: "字尾 -er（做…的人）", tip: "動作 + er = 做這件事的人：teach+er、sing+er", words: ["teacher", "farmer", "singer", "player"], bonus: "worker", non: ["water", "under"] },
-  { id: "ow", title: "ow 長音 /oʊ/", tip: "字尾 ow 常唸 /oʊ/：sn-ow、wind-ow", words: ["yellow", "window", "snow", "show"], bonus: "slow", non: ["now", "cow"] }
+  { id: "ake", title: "a_e 魔法 e（-ake 家族）", tip: "字尾的 e 不發音，讓 a 變成長音 /eɪ/：c-ake、m-ake", words: [{"en":"cake","zh":"蛋糕","ex":"I made a cake."},{"en":"make","zh":"做、製作","ex":"Let's make a card."},{"en":"take","zh":"拿、帶","ex":"Take your bag."},{"en":"lake","zh":"湖","ex":"We swam in the lake."}], bonus: "bake", non: ["boat", "ship"] },
+  { id: "ame", title: "a_e 魔法 e（-ame 家族）", tip: "一樣的魔法 e：n-ame、g-ame，a 唸 /eɪ/", words: [{"en":"name","zh":"名字","ex":"My name is Amy."},{"en":"game","zh":"遊戲","ex":"We played a game."},{"en":"same","zh":"一樣的","ex":"We wear the same shoes."},{"en":"came","zh":"來（過去式）","ex":"He came to my house."}], bonus: "frame", non: ["farm", "goat"] },
+  { id: "ike", title: "i_e 魔法 e（-ike 家族）", tip: "字尾 e 讓 i 變長音 /aɪ/：b-ike、l-ike", words: [{"en":"bike","zh":"腳踏車","ex":"I ride my bike."},{"en":"like","zh":"喜歡","ex":"I like dogs."},{"en":"nine","zh":"九","ex":"It is nine o'clock."},{"en":"time","zh":"時間","ex":"What time is it?"}], bonus: "hike", non: ["big", "lip"] },
+  { id: "ope", title: "o_e 魔法 e（o 的長音）", tip: "字尾 e 讓 o 變長音 /oʊ/：h-ome、n-ose", words: [{"en":"home","zh":"家","ex":"I went home."},{"en":"nose","zh":"鼻子","ex":"Touch your nose."},{"en":"note","zh":"筆記、便條","ex":"I wrote a note."},{"en":"hope","zh":"希望","ex":"I hope you win."}], bonus: "rope", non: ["hot", "not"] },
+  { id: "ee", title: "ee 長音 /iː/", tip: "兩個 e 在一起，拉長唸 /iː/：s-ee、tr-ee", words: [{"en":"see","zh":"看見","ex":"I see a bird."},{"en":"bee","zh":"蜜蜂","ex":"A bee is on the flower."},{"en":"tree","zh":"樹","ex":"The tree is tall."},{"en":"green","zh":"綠色","ex":"The grass is green."}], bonus: "sleep", non: ["set", "ten"] },
+  { id: "ea", title: "ea 長音 /iː/", tip: "ea 也常唸 /iː/：eat、sea、tea", words: [{"en":"eat","zh":"吃","ex":"Let's eat lunch."},{"en":"sea","zh":"海","ex":"The sea is blue."},{"en":"tea","zh":"茶","ex":"Mom drinks tea."},{"en":"read","zh":"閱讀","ex":"I read a book."}], bonus: "clean", non: ["egg", "red"] },
+  { id: "sh", title: "sh 的噓聲 /ʃ/", tip: "s+h 一起唸「噓」的聲音：sh-ip、sh-op", words: [{"en":"ship","zh":"船","ex":"The ship is big."},{"en":"shop","zh":"商店","ex":"We went to the shop."},{"en":"she","zh":"她","ex":"She is my sister."},{"en":"fish","zh":"魚","ex":"The fish can swim."}], bonus: "shoe", non: ["sit", "sun"] },
+  { id: "ch", title: "ch 的 /tʃ/", tip: "c+h 一起唸「娶」的氣音：ch-air、lun-ch", words: [{"en":"chair","zh":"椅子","ex":"Sit on the chair."},{"en":"cheese","zh":"起司","ex":"I like cheese."},{"en":"chicken","zh":"雞、雞肉","ex":"We ate chicken."},{"en":"lunch","zh":"午餐","ex":"It is time for lunch."}], bonus: "teacher", non: ["cat", "car"] },
+  { id: "st", title: "st 開頭混音", tip: "s 和 t 連在一起快唸：st-op、st-ar", words: [{"en":"stop","zh":"停止","ex":"Stop at the red light."},{"en":"star","zh":"星星","ex":"I see a star."},{"en":"study","zh":"讀書、學習","ex":"I study English."},{"en":"student","zh":"學生","ex":"He is a student."}], bonus: "stand", non: ["sad", "top"] },
+  { id: "tr", title: "tr 開頭混音", tip: "t 和 r 連在一起快唸：tr-ee、tr-ain", words: [{"en":"tree","zh":"樹","ex":"A bird is in the tree."},{"en":"train","zh":"火車","ex":"The train is fast."},{"en":"trip","zh":"旅行","ex":"We took a trip."},{"en":"try","zh":"嘗試","ex":"Try again!"}], bonus: "truck", non: ["ten", "rain"] },
+  { id: "ay", title: "ay 長音 /eɪ/", tip: "字尾 ay 唸 /eɪ/：d-ay、pl-ay", words: [{"en":"day","zh":"天、日子","ex":"Have a nice day."},{"en":"play","zh":"玩","ex":"Let's play outside."},{"en":"say","zh":"說","ex":"Say hello."},{"en":"way","zh":"路、方法","ex":"This way, please."}], bonus: "today", non: ["dog", "put"] },
+  { id: "oo", title: "oo 長音 /uː/", tip: "兩個 o 常唸 /uː/：f-ood、m-oon", words: [{"en":"food","zh":"食物","ex":"The food is good."},{"en":"moon","zh":"月亮","ex":"The moon is bright."},{"en":"school","zh":"學校","ex":"I go to school."},{"en":"zoo","zh":"動物園","ex":"We went to the zoo."}], bonus: "cool", non: ["fox", "fog"] },
+  { id: "er", title: "字尾 -er（做…的人）", tip: "動作 + er = 做這件事的人：teach+er、sing+er", words: [{"en":"teacher","zh":"老師","ex":"My teacher is kind."},{"en":"farmer","zh":"農夫","ex":"The farmer has a cow."},{"en":"singer","zh":"歌手","ex":"She is a singer."},{"en":"player","zh":"球員、選手","ex":"He is a good player."}], bonus: "worker", non: ["water", "under"] },
+  { id: "ow", title: "ow 長音 /oʊ/", tip: "字尾 ow 常唸 /oʊ/：sn-ow、wind-ow", words: [{"en":"yellow","zh":"黃色","ex":"The sun is yellow."},{"en":"window","zh":"窗戶","ex":"Open the window."},{"en":"snow","zh":"雪","ex":"I love snow."},{"en":"show","zh":"表演、節目","ex":"The show was fun."}], bonus: "slow", non: ["now", "cow"] }
 ];
 
 // 句型積木：roles 用顏色標「誰/動作/什麼/地點」，examples 依角色切塊

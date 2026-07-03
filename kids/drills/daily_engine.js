@@ -30,6 +30,11 @@
   .teach .tip{font-size:.9rem;color:#4b3a8f;font-weight:700;margin-bottom:8px}
   .wordrow{display:flex;gap:8px;flex-wrap:wrap}
   .wchip{padding:8px 14px;border:2px solid #7c4dca;border-radius:10px;background:#fff;color:#4b3a8f;font-weight:800;font-size:1rem;cursor:pointer}
+  .phword{border-top:1px dashed #d8ccf5;padding:8px 0 6px;margin-top:6px}
+  .phword:first-of-type{border-top:none;margin-top:0}
+  .phtop{display:flex;align-items:center;gap:10px}
+  .phzh{color:#555;font-size:.9rem;font-weight:700}
+  .phex{margin-top:4px;display:flex;align-items:center;gap:7px;font-size:.92rem;color:#333}
   .skel{margin:7px 0;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
   .rolechip{color:#fff;font-weight:800;border-radius:8px;padding:4px 10px;font-size:.95rem}
   .skzh{color:#888;font-size:.82rem}
@@ -128,8 +133,8 @@
       const u = phonicsUnitFor(DRILL_DATE);
       const qs = [];
       // Q1/Q2：聽音選拼字（family 內辨音，兩題不同目標字）
-      const t1 = u.words[dayIdx % u.words.length], t2 = u.words[(dayIdx + 2) % u.words.length];
-      [t1, t2].forEach(t => qs.push({ kind: "listen", en: t, choices: shuffleArr(u.words.map(w => ({ label: w, correct: w === t })), rnd) }));
+      const t1 = u.words[dayIdx % u.words.length].en, t2 = u.words[(dayIdx + 2) % u.words.length].en;
+      [t1, t2].forEach(t => qs.push({ kind: "listen", en: t, choices: shuffleArr(u.words.map(w => ({ label: w.en, correct: w.en === t })), rnd) }));
       // Q3：同家族判斷（視覺規則，不用語音）
       qs.push({ kind: "family", q: `哪一個字也是「${u.title.replace(/（.*/, "")}」家族？`, choices: shuffleArr([{ label: u.bonus, correct: true }, ...u.non.map(x => ({ label: x, correct: false }))], rnd) });
       s6 = { unit: u, qs };
@@ -189,7 +194,10 @@
       const u = DRILL.s6.unit;
       h += `<div class="sec"><div class="sec-h">⑥ 今日發音 — ${u.title}</div><div class="sec-d">先聽規則、跟著念，再作答</div>
         <div class="teach"><div class="tip">💡 ${u.tip}</div>
-        <div class="wordrow">${u.words.map(w => `<button class="wchip" onclick="__pw('${w}')">🔊 ${w}</button>`).join("")}</div></div>`;
+        ${u.words.map((w, wi) => `<div class="phword">
+          <div class="phtop"><button class="wchip" onclick="__pw('${w.en}')">🔊 ${w.en}</button><span class="phzh">${w.zh}</span></div>
+          <div class="phex"><button class="play" style="padding:3px 9px;font-size:.75rem" onclick="__pst('ph_${u.id}_${wi}','${w.ex.replace(/'/g, "\\'")}')">🔊</button> ${w.ex}</div>
+        </div>`).join("")}</div>`;
       DRILL.s6.qs.forEach((q, i) => {
         if (q.kind === "listen") h += `<div class="q"><div class="q-no">${i + 1}. <span class="sub">聽發音，選出聽到的字</span></div><button class="play" onclick="__pw('${q.en}')">🔊 點我聽</button>${optsHtml('s6', i, q.choices)}</div>`;
         else h += `<div class="q"><div class="q-no">${i + 1}. ${q.q}</div>${optsHtml('s6', i, q.choices)}</div>`;
