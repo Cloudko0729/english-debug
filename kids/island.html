@@ -125,6 +125,9 @@
     .pet-dog { display: inline-block; font-size: clamp(.9rem, 3.8vw, 1.5rem); line-height: 1; pointer-events: none; animation: dogBob .8s ease-in-out infinite; transform-origin: bottom center; }
     @keyframes dogBob { 0%,100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-3px) rotate(5deg); } }
     .dog-ready { position: absolute; top: -2px; right: 0; font-size: .55rem; pointer-events: none; animation: dogPulse 1s ease-in-out infinite; }
+    .star-badge { position: absolute; top: -3px; left: 0; font-size: .5rem; pointer-events: none; text-shadow: 0 0 3px #fff; font-weight: 800; }
+    .merge-cand { outline: 3px solid #ff5db1; outline-offset: -3px; animation: mergePulse .9s ease-in-out infinite; cursor: pointer; z-index: 2; }
+    @keyframes mergePulse { 0%,100% { outline-color: #ff5db1; } 50% { outline-color: #ffd24d; } }
     @keyframes dogPulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(1.25); } }
     .opt-img { width: 2rem; height: 2rem; object-fit: contain; }
     /* 等級外框：用框的顏色代表等級，不放文字、不遮住建築 */
@@ -580,8 +583,8 @@ function runDailyTick() {
       const need = cat.levelDays[b.level - 1];   // 升到下一級所需天數
       if (need != null && b.activeDays >= need) b.level++;
     }
-    // production（先累計原始產量,稍後依快樂值打折）
-    const produce = cat.coin[b.level - 1] || 0;
+    // production（先累計原始產量,稍後依快樂值打折；含合併星星倍率）
+    const produce = Math.round((cat.coin[b.level - 1] || 0) * starMult(b));
     if (produce > 0 && b.lastProductionDate !== today) {
       totalProduced += produce;
       b.lastProductionDate = today;
@@ -619,13 +622,16 @@ function terrainBeauty() {
   return TERRAIN_BEAUTY;
 }
 
+// 合併星星倍率：每顆 🌟 +50%（人口/美化/金幣都乘）
+function starMult(b) { return 1 + 0.5 * (b.star || 0); }
 function recalcStats() {
   let pop = 0, cap = 0, beauty = terrainBeauty(), baseProd = 0;  // 地形提供基礎美化分
   island.buildings.forEach(b => {
     const cat = BUILDINGS[b.type];
-    cap += cat.pop[b.level - 1] || 0;
-    beauty += cat.beauty[b.level - 1] || 0;
-    baseProd += cat.coin[b.level - 1] || 0;
+    const m = starMult(b);
+    cap += Math.round((cat.pop[b.level - 1] || 0) * m);
+    beauty += Math.round((cat.beauty[b.level - 1] || 0) * m);
+    baseProd += Math.round((cat.coin[b.level - 1] || 0) * m);
   });
   pop = cap;  // 人口成長到容量
   const happiness = happinessOf(pop, beauty);
@@ -670,11 +676,14 @@ function render() {
         } else {
           tile.innerHTML = `<span class="tile-emoji">${cat.emoji}</span>`;
         }
-        tile.onclick = () => openDetail(b);
+        if (b.star > 0) tile.innerHTML += `<span class="star-badge">🌟${b.star > 1 ? b.star : ""}</span>`;
+        if (mergeState && _isMergeTarget(b)) tile.classList.add("merge-cand");
+        tile.onclick = mergeState ? (() => tapDuringMerge(b)) : (() => openDetail(b));
       } else {
         if (t === "H") tile.textContent = "⛰️";
         else if (t === "M") tile.textContent = "🏔️";
-        if (buildableOn(t)) tile.onclick = () => openBuild(x, y);
+        if (mergeState) tile.onclick = () => cancelMerge();
+        else if (buildableOn(t)) tile.onclick = () => openBuild(x, y);
         else tile.onclick = () => toast(TERR_NAME[t] + "不能蓋建築");
       }
       grid.appendChild(tile);
@@ -817,11 +826,12 @@ function openDetail(b) {
     document.getElementById("sheet").classList.add("open");
     return;
   }
-  let html = `<h3>${c.emoji} ${c.name} Lv${b.level}</h3>`;
-  html += `<div class="detail-row">已經存在：<b>${b.activeDays}</b> 天</div>`;
-  if (c.coin[b.level-1] > 0) html += `<div class="detail-row">每天生產：<b>🪙 ${c.coin[b.level-1]}</b></div>`;
-  if (c.pop[b.level-1] > 0)  html += `<div class="detail-row">人口容量：<b>${c.pop[b.level-1]}</b></div>`;
-  if (c.beauty[b.level-1] > 0) html += `<div class="detail-row">美化分數：<b>${c.beauty[b.level-1]}</b></div>`;
+  const _m = starMult(b);
+  let html = `<h3>${c.emoji} ${c.name}${b.star > 0 ? "🌟".repeat(b.star) : ""} Lv${b.level}</h3>`;
+  html += `<div class="detail-row">已經存在：<b>${b.activeDays}</b> 天${b.star > 0 ? `　·　星星加成 <b>×${_m}</b>` : ""}</div>`;
+  if (c.coin[b.level-1] > 0) html += `<div class="detail-row">每天生產：<b>🪙 ${Math.round(c.coin[b.level-1] * _m)}</b></div>`;
+  if (c.pop[b.level-1] > 0)  html += `<div class="detail-row">人口容量：<b>${Math.round(c.pop[b.level-1] * _m)}</b></div>`;
+  if (c.beauty[b.level-1] > 0) html += `<div class="detail-row">美化分數：<b>${Math.round(c.beauty[b.level-1] * _m)}</b></div>`;
 
   const maxLv = c.maxLevel || 3;
   if (b.type === "center") {
@@ -847,6 +857,18 @@ function openDetail(b) {
     else html += `<div class="detail-row" style="color:var(--success)">已經是最高等級 Lv${maxLv}！⭐</div>`;
   }
 
+  // 合併升級：滿級 + 星未滿 + 有另一棟同類同星滿級的
+  if (_canMergeType(b.type) && _atMaxLevel(b) && (b.star || 0) < MERGE_MAX_STAR) {
+    const partners = _mergePartners(b);
+    const fee = mergeCost(c, (b.star || 0) + 1);
+    if (partners.length > 0) {
+      html += `<button class="upgrade-btn" onclick="startMerge('${b.id}')">✨ 合併升級 → ${c.name}${"🌟".repeat((b.star || 0) + 1)} Lv1（🪙 ${fee}）</button>`;
+      html += `<div class="detail-row" style="color:var(--muted)">會消耗另一棟滿級的 ${c.name}（點了按鈕後去地圖選它）</div>`;
+    } else {
+      html += `<div class="detail-row" style="color:var(--muted)">✨ 再蓋一棟 ${c.name} 練到滿級，就能合併升 🌟（費用 🪙 ${fee}）</div>`;
+    }
+  }
+
   const refundLabel = refund === 0 ? "免費蓋的，拆除不退幣" : `🛠️ 拆除（退還 🪙 ${refund}）`;
   html += `<button class="demolish-btn" onclick="demolish('${b.id}')">${refundLabel}</button>`;
   document.getElementById("sheetContent").innerHTML = html;
@@ -865,6 +887,54 @@ function upgradeCenter(buildingId) {
   render();
   if (typeof cloudSave === "function") cloudSave(currentStudent);
   toast(`🏛️ 城鎮中心升到 Lv${b.level}！🎉`);
+}
+
+// ─── 合併系統：兩棟同類型、同星、都滿級 → 保留第一棟 +1🌟、回到 Lv1（付費）─────
+let mergeState = null;   // { firstId, type, star }
+const MERGE_MAX_STAR = 5;
+function mergeCost(c, newStar) { return Math.max(20, Math.round(c.cost / 2)) * newStar; }
+function _atMaxLevel(b) { const c = BUILDINGS[b.type]; return b.level >= (c.maxLevel || 3); }
+function _canMergeType(key) {
+  const c = BUILDINGS[key];
+  return c.cost > 0 && !c.unique && !c.pet && key !== "center";
+}
+function _mergePartners(b) {
+  return island.buildings.filter(x => x.id !== b.id && x.type === b.type &&
+    (x.star || 0) === (b.star || 0) && _atMaxLevel(x));
+}
+function _isMergeTarget(b) {
+  return mergeState && b.id !== mergeState.firstId && b.type === mergeState.type &&
+    (b.star || 0) === mergeState.star && _atMaxLevel(b);
+}
+function startMerge(buildingId) {
+  const b = island.buildings.find(x => x.id === buildingId);
+  if (!b) return;
+  mergeState = { firstId: b.id, type: b.type, star: (b.star || 0) };
+  closeSheet(); render();
+  toast(`點另一棟滿級的 ${BUILDINGS[b.type].name} 完成合併（點空地取消）`);
+}
+function cancelMerge() { mergeState = null; render(); toast("已取消合併"); }
+function tapDuringMerge(b) {
+  if (!_isMergeTarget(b)) { cancelMerge(); return; }
+  const first = island.buildings.find(x => x.id === mergeState.firstId);
+  if (!first) { cancelMerge(); return; }
+  const c = BUILDINGS[first.type];
+  const newStar = (first.star || 0) + 1;
+  const fee = mergeCost(c, newStar);
+  const p = getProgress(currentStudent);
+  if (p.coins.balance < fee) { toast(`金幣不夠！合併需要 🪙 ${fee}`); cancelMerge(); return; }
+  p.coins.balance -= fee;
+  p.coins.lifetimeSpent += fee;
+  p.coins.transactions.push({ type: "spend", source: "islandMerge", amount: fee,
+    balanceAfter: p.coins.balance, createdAt: new Date().toISOString(),
+    meta: { buildingType: first.type, star: newStar } });
+  saveProgress(currentStudent, p);
+  island.buildings = island.buildings.filter(x => x.id !== b.id);   // 第二棟消失
+  first.star = newStar; first.level = 1; first.activeDays = 0;      // 保留棟 +1🌟 回 Lv1
+  mergeState = null;
+  recalcStats(); saveIsland(currentStudent, island); render();
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  toast(`✨ 合併成功！${c.emoji} ${c.name}${"🌟".repeat(newStar)} Lv1`);
 }
 
 function demolish(buildingId) {
@@ -942,6 +1012,12 @@ function openManual() {
     <p><b>⬆️ 建築升級</b><br>
     一般建築放越多天,自動升級(Lv1→5)，產出變多。城鎮中心則靠達標升級。<br>
     等級用格子<b>外框顏色</b>看：Lv1 無框、<span style="color:#cd7f32">Lv2 銅框</span>、<span style="color:#8a93a0">Lv3 銀框</span>、<span style="color:#d4a800">Lv4 金框</span>、<span style="color:#d4a800">Lv5 發光金框</span>✨。</p>
+
+    <p><b>✨ 合併升級（🌟 星星）</b><br>
+    兩棟<b>同類型、同星數、都滿級</b>的建築可以合併：<br>
+    點第一棟（要保留的）→ 按「合併升級」→ 到地圖點第二棟（會消失）。<br>
+    合併後保留棟 <b>+1🌟 並回到 Lv1</b> 重新練，每顆 🌟 讓產出/人口/美化 <b>+50%</b>。<br>
+    費用 = 建築半價 × 新星數，最多 <b>5🌟</b>。例：小鎮 Lv3 + 小鎮 Lv3 → 小鎮🌟 Lv1。</p>
 
     <p><b>🐶 寵物狗</b><br>
     免費放在陸地空格(平地/丘陵/高山,只能養一隻)。<br>
