@@ -181,6 +181,7 @@
     .build-opt .info { flex: 1; }
     .build-opt .bname { font-weight: 700; font-size: .95rem; }
     .build-opt .bdesc { font-size: .78rem; color: var(--muted); }
+    .build-opt .bstat { font-size: .72rem; color: #1c7a4d; margin-top: 2px; font-weight: 700; }
     .build-opt .bcost { font-weight: 800; color: var(--gold); font-size: .95rem; white-space: nowrap; }
     .sheet-close {
       width: 100%;
@@ -737,6 +738,16 @@ function buildableOn(t) {
   return BUILD_ORDER.some(key => (BUILDINGS[key].terrain || ["P"]).includes(t));
 }
 
+// 建築數值摘要（Lv1→滿級）：🍞食物 🪙金幣 👥人口 🌸美化
+function _statLine(c) {
+  const maxLv = c.maxLevel || 3, parts = [];
+  const rng = a => a[0] === a[maxLv-1] ? a[0] : a[0] + "→" + a[maxLv-1];
+  if (c.food && c.food[maxLv-1] > 0) parts.push("🍞" + rng(c.food));
+  if (c.coin[maxLv-1] > 0) parts.push("🪙" + rng(c.coin) + "/天");
+  if (c.pop[maxLv-1] > 0) parts.push("👥" + rng(c.pop));
+  if (c.beauty[maxLv-1] > 0) parts.push("🌸" + rng(c.beauty));
+  return parts.join("　");
+}
 function openBuild(x, y) {
   selectedTile = { x, y };
   const t = terrainAt(x, y);
@@ -763,6 +774,7 @@ function openBuild(x, y) {
         <div class="info">
           <div class="bname">${c.name}</div>
           <div class="bdesc">${c.desc}</div>
+          <div class="bstat">${_statLine(c)}</div>
         </div>
         <div class="bcost">${costLabel}</div>
       </div>`;
@@ -1204,7 +1216,7 @@ function selectStudent(name) {
     notice.innerHTML = `🗺️ 島嶼已升級成 15×15 新地圖！海洋 / 丘陵 / 高山只能在平地蓋建築。`;
   } else if (produced > 0) {
     notice.style.display = "block";
-    notice.innerHTML = `🌅 新的一天！你的農場和小鎮生產了 <b>🪙 ${produced}</b> 金幣！`;
+    notice.innerHTML = `🌅 新的一天！島嶼建築生產了 <b>🪙 ${produced}</b> 金幣！（含賣出多餘食物）`;
   } else {
     notice.style.display = "none";
   }
