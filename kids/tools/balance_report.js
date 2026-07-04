@@ -17,7 +17,7 @@ function extractArr(name) {
 }
 const B = extract("BUILDINGS");
 const CENTER_TARGETS = extractArr("CENTER_TARGETS");
-const mergeCost = (c, s) => Math.max(20, Math.round(c.cost / 2)) * s;
+const mergeCost = (c, s) => Math.max(20, Math.round(c.cost * 0.25)) * s;
 
 const GROUPS = [
   { name: "🏠 平地建築", keys: ["forest", "pond", "ranch", "farm", "house", "town", "center"] },
@@ -61,7 +61,7 @@ GROUPS.forEach(g => {
       <td class="num">${fmtArr(c.pop.slice(0, maxLv))}</td>
       <td class="num">${payback ? payback + "天" : "—"}</td>
     </tr>`;
-    if (merge !== "—") rows += `<tr class="mrow"><td colspan="8">└ ✨合併費(1→5🌟)：🪙 ${merge}　每🌟全數值+50%，合併後回Lv1（再花 ${lastDay || "?"} 天練回滿級）</td></tr>`;
+    if (merge !== "—") rows += `<tr class="mrow"><td colspan="8">└ ✨合併費(1→5🌟)：🪙 ${merge}　每🌟全數值+100%，合併後回Lv1（再花 ${lastDay || "?"} 天練回滿級）</td></tr>`;
   });
 });
 
@@ -89,7 +89,7 @@ const page = `<!DOCTYPE html>
 <header><h1>📊 島嶼數值平衡表</h1><p>由 tools/balance_report.js 從 island.html 自動產生（${new Date().toISOString().slice(0, 10)}） · <a href="island.html">← 回島嶼</a></p></header>
 <div class="note"><b>說明</b>：金幣/美化/人口欄位 = 各等級數值（Lv1/Lv2/…）。回本天數 = 成本 ÷ 滿級日產（未計快樂倍率 0.6~1.2）。
 城鎮中心升級門檻：${CENTER_TARGETS.map((t, i) => `Lv${i + 2}=人口${t.pop}+美化${t.beauty}`).join("、")}。
-✨合併：兩棟同類同星滿級 → 保留棟+1🌟回Lv1，費用=半價×新星數，每🌟數值+50%（上限5🌟）。</div>
+✨合併：兩棟同類同星滿級 → 保留棟+1🌟回Lv1，費用=25%價×新星數，每🌟數值+100%（上限5🌟）。</div>
 <table>
 <tr><th>建築</th><th>成本</th><th>等級</th><th>滿級時間</th><th>金幣/天</th><th>美化</th><th>人口</th><th>回本</th></tr>
 ${rows}
@@ -109,6 +109,6 @@ GROUPS.forEach(g => {
     txt += `${c.name}(${k}): cost=${c.cost} maxLv=${maxLv} levelDays=${fmtArr(c.levelDays)} coin=${fmtArr(c.coin.slice(0, maxLv))} beauty=${fmtArr(c.beauty.slice(0, maxLv))} pop=${fmtArr(c.pop.slice(0, maxLv))}\n`;
   });
 });
-txt += "\nCENTER_TARGETS: " + JSON.stringify(CENTER_TARGETS) + "\n合併費=max(20,cost/2)×新星數,每星+50%,合併回Lv1\n收入倍率=0.6+0.6×快樂%,快樂=美化/(人口×1.2)\n";
+txt += "\nCENTER_TARGETS: " + JSON.stringify(CENTER_TARGETS) + "\n合併費=max(20,cost×0.25)×新星數,每星+100%,合併回Lv1\n收入倍率=0.6+0.6×快樂%,快樂=美化/(人口×1.2)\n";
 fs.writeFileSync(path.join(__dirname, "balance_data.txt"), txt, "utf8");
 console.log("✔ tools/balance_data.txt 已產生（討論用）");
