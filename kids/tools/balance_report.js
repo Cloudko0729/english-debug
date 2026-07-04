@@ -41,7 +41,7 @@ function fmtArr(a) { return (a || []).join("/"); }
 
 let rows = "";
 GROUPS.forEach(g => {
-  rows += `<tr class="grp"><td colspan="8">${g.name}</td></tr>`;
+  rows += `<tr class="grp"><td colspan="9">${g.name}</td></tr>`;
   g.keys.forEach(k => {
     const c = B[k]; if (!c) return;
     const maxLv = c.maxLevel || 3;
@@ -56,12 +56,13 @@ GROUPS.forEach(g => {
       <td class="num">${c.cost === 0 ? "免費" : "🪙" + c.cost}</td>
       <td class="num">${maxLv}</td>
       <td class="num">${lastDay ? lastDay + "天滿級" : "—"}</td>
+      <td class="num">${c.food ? fmtArr(c.food.slice(0, maxLv)) : "—"}</td>
       <td class="num">${fmtArr(c.coin.slice(0, maxLv))}</td>
       <td class="num">${fmtArr(c.beauty.slice(0, maxLv))}</td>
       <td class="num">${fmtArr(c.pop.slice(0, maxLv))}</td>
       <td class="num">${payback ? payback + "天" : "—"}</td>
     </tr>`;
-    if (merge !== "—") rows += `<tr class="mrow"><td colspan="8">└ ✨合併費(1→5🌟)：🪙 ${merge}　每🌟全數值+100%，合併後回Lv1（再花 ${lastDay || "?"} 天練回滿級）</td></tr>`;
+    if (merge !== "—") rows += `<tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 ${merge}　每🌟全數值+100%，合併後回Lv1（再花 ${lastDay || "?"} 天練回滿級）</td></tr>`;
   });
 });
 
@@ -91,7 +92,7 @@ const page = `<!DOCTYPE html>
 城鎮中心升級門檻：${CENTER_TARGETS.map((t, i) => `Lv${i + 2}=人口${t.pop}+美化${t.beauty}`).join("、")}。
 ✨合併：兩棟同類同星滿級 → 保留棟+1🌟回Lv1，費用=25%價×新星數，每🌟數值+100%（上限5🌟）。</div>
 <table>
-<tr><th>建築</th><th>成本</th><th>等級</th><th>滿級時間</th><th>金幣/天</th><th>美化</th><th>人口</th><th>回本</th></tr>
+<tr><th>建築</th><th>成本</th><th>等級</th><th>滿級時間</th><th>🍞食物</th><th>金幣/天</th><th>美化</th><th>人口</th><th>回本</th></tr>
 ${rows}
 </table>
 </body>
@@ -106,9 +107,9 @@ GROUPS.forEach(g => {
   g.keys.forEach(k => {
     const c = B[k]; if (!c) return;
     const maxLv = c.maxLevel || 3;
-    txt += `${c.name}(${k}): cost=${c.cost} maxLv=${maxLv} levelDays=${fmtArr(c.levelDays)} coin=${fmtArr(c.coin.slice(0, maxLv))} beauty=${fmtArr(c.beauty.slice(0, maxLv))} pop=${fmtArr(c.pop.slice(0, maxLv))}\n`;
+    txt += `${c.name}(${k}): cost=${c.cost}${c.food?" food="+fmtArr(c.food.slice(0,maxLv)):""} maxLv=${maxLv} levelDays=${fmtArr(c.levelDays)} coin=${fmtArr(c.coin.slice(0, maxLv))} beauty=${fmtArr(c.beauty.slice(0, maxLv))} pop=${fmtArr(c.pop.slice(0, maxLv))}\n`;
   });
 });
-txt += "\nCENTER_TARGETS: " + JSON.stringify(CENTER_TARGETS) + "\n合併費=max(20,cost×0.25)×新星數,每星+100%,合併回Lv1\n收入倍率=0.6+0.6×快樂%,快樂=美化/(人口×1.2)\n";
+txt += "\nCENTER_TARGETS: " + JSON.stringify(CENTER_TARGETS) + "\n合併費=max(20,cost×0.25)×新星數,每星+100%,合併回Lv1\n收入倍率=0.6+0.6×快樂%,快樂=美化/(人口×1.2)×食物滿足率(食物/人口,最低0.3),每人吃1食物\n";
 fs.writeFileSync(path.join(__dirname, "balance_data.txt"), txt, "utf8");
 console.log("✔ tools/balance_data.txt 已產生（討論用）");

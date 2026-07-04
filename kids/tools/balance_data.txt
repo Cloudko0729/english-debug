@@ -1,8 +1,8 @@
 ## 🏠 平地建築
 森林(forest): cost=60 maxLv=3 levelDays=3/7 coin=0/0/0 beauty=4/7/11 pop=0/0/0
 池塘(pond): cost=130 maxLv=3 levelDays=3/7 coin=0/0/0 beauty=7/13/21 pop=0/0/0
-牧場(ranch): cost=150 maxLv=3 levelDays=4/10 coin=14/24/36 beauty=0/0/0 pop=3/6/10
-農場(farm): cost=120 maxLv=3 levelDays=4/10 coin=18/32/54 beauty=0/0/0 pop=0/0/0
+牧場(ranch): cost=150 food=8/14/22 maxLv=3 levelDays=4/10 coin=4/6/10 beauty=0/0/0 pop=3/6/10
+農場(farm): cost=120 food=12/20/32 maxLv=3 levelDays=4/10 coin=4/7/12 beauty=0/0/0 pop=0/0/0
 房子(house): cost=180 maxLv=3 levelDays=4/10 coin=0/0/0 beauty=0/0/0 pop=4/8/14
 小鎮(town): cost=520 maxLv=3 levelDays=7/14 coin=20/35/55 beauty=0/0/0 pop=12/24/40
 城鎮中心(center): cost=0 maxLv=5 levelDays= coin=8/14/22/32/45 beauty=8/14/22/32/45 pop=0/0/0/0/0
@@ -11,7 +11,7 @@
 風力發電(windmill): cost=510 maxLv=5 levelDays=3/7/14/24 coin=18/26/36/48/62 beauty=0/0/0/0/0 pop=0/0/0/0/0
 ## ⚓ 海上
 碼頭(dock): cost=450 maxLv=5 levelDays=4/9/16/28 coin=14/20/28/38/50 beauty=1/2/3/4/5 pop=4/6/8/11/14
-定置漁場(fishery): cost=560 maxLv=5 levelDays=4/8/15/25 coin=20/30/42/56/72 beauty=0/1/1/2/3 pop=0/0/0/0/0
+定置漁場(fishery): cost=450 food=14/22/32/44/58 maxLv=5 levelDays=4/8/15/25 coin=6/9/13/18/24 beauty=0/1/1/2/3 pop=0/0/0/0/0
 遠洋漁船(oceanboat): cost=1140 maxLv=5 levelDays=5/10/18/30 coin=34/50/70/94/122 beauty=-1/-1/0/0/1 pop=0/0/0/0/0
 ## 🐾 丘陵動物
 石虎(leopardcat): cost=800 maxLv=5 levelDays=7/15/30/54 coin=5/8/11/15/20 beauty=20/32/46/62/80 pop=0/0/0/0/0
@@ -47,4 +47,4 @@
 
 CENTER_TARGETS: [{"pop":20,"beauty":40},{"pop":55,"beauty":90},{"pop":110,"beauty":170},{"pop":190,"beauty":290}]
 合併費=max(20,cost×0.25)×新星數,每星+100%,合併回Lv1
-收入倍率=0.6+0.6×快樂%,快樂=美化/(人口×1.2)
+收入倍率=0.6+0.6×快樂%,快樂=美化/(人口×1.2)×食物滿足率(食物/人口,最低0.3),每人吃1食物

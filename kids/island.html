@@ -281,6 +281,7 @@
 
 <div id="statsRow" style="display:none">
   <div><b id="stPop">0</b>人口</div>
+  <div><b id="stFood">0</b>🍞食物</div>
   <div><b id="stBeauty">0</b>美化</div>
   <div><b id="stHappy">0</b>快樂</div>
   <div><b id="stProd">0</b>金幣/天</div>
@@ -334,10 +335,10 @@ const BUILDINGS = {
             beauty: [4, 7, 11], pop: [0,0,0], coin: [0,0,0], levelDays: [3, 7] },
   pond:   { emoji: "🪷", name: "池塘", cost: 130, desc: "較貴，但單格美化最高（省地）", terrain: ["P"], maxLevel: 3, img: true,
             beauty: [7, 13, 21], pop: [0,0,0], coin: [0,0,0], levelDays: [3, 7] },
-  ranch:  { emoji: "🐄", name: "牧場", cost: 150, desc: "金幣 + 一點人口", terrain: ["P"], maxLevel: 3, img: true,
-            beauty: [0,0,0], pop: [3, 6, 10], coin: [14, 24, 36], levelDays: [4, 10] },
-  farm:   { emoji: "🌾", name: "農場", cost: 120, desc: "每天生產金幣", terrain: ["P"], maxLevel: 3, img: true,
-            beauty: [0,0,0], pop: [0,0,0], coin: [18, 32, 54], levelDays: [4, 10] },
+  ranch:  { emoji: "🐄", name: "牧場", cost: 150, desc: "食物 + 人口", terrain: ["P"], maxLevel: 3, img: true, food: [8, 14, 22],
+            beauty: [0,0,0], pop: [3, 6, 10], coin: [4, 6, 10], levelDays: [4, 10] },
+  farm:   { emoji: "🌾", name: "農場", cost: 120, desc: "主產食物 + 少量金幣", terrain: ["P"], maxLevel: 3, img: true, food: [12, 20, 32],
+            beauty: [0,0,0], pop: [0,0,0], coin: [4, 7, 12], levelDays: [4, 10] },
   house:  { emoji: "🏠", name: "房子", cost: 180, desc: "增加人口容量", terrain: ["P"], maxLevel: 3, img: true,
             beauty: [0,0,0], pop: [4, 8, 14], coin: [0,0,0], levelDays: [4, 10] },
   town:   { emoji: "🏘️", name: "小鎮", cost: 520, desc: "人口 + 金幣，最強建築", terrain: ["P"], maxLevel: 3, img: true,
@@ -355,8 +356,8 @@ const BUILDINGS = {
   // 海上漁業（5 級）
   dock:   { emoji: "⚓", name: "碼頭", cost: 450, desc: "海上,人口+金幣（最多 3）", terrain: ["O"], max: 3, maxLevel: 5, img: true,
             beauty: [1,2,3,4,5], pop: [4,6,8,11,14], coin: [14,20,28,38,50], levelDays: [4, 9, 16, 28] },
-  fishery:{ emoji: "🎣", name: "定置漁場", cost: 560, desc: "海上漁獲,每天金幣（最多 5）", terrain: ["O"], max: 5, maxLevel: 5, img: true,
-            beauty: [0,1,1,2,3], pop: [0,0,0,0,0], coin: [20,30,42,56,72], levelDays: [4, 8, 15, 25] },
+  fishery:{ emoji: "🎣", name: "定置漁場", cost: 450, desc: "海上漁獲,主產食物（最多 5）", terrain: ["O"], max: 5, maxLevel: 5, img: true, food: [14, 22, 32, 44, 58],
+            beauty: [0,1,1,2,3], pop: [0,0,0,0,0], coin: [6,9,13,18,24], levelDays: [4, 8, 15, 25] },
   oceanboat:{ emoji: "🚢", name: "遠洋漁船", cost: 1140, desc: "大量金幣（最多 3）", terrain: ["O"], max: 3, maxLevel: 5, img: true,
             beauty: [-1,-1,0,0,1], pop: [0,0,0,0,0], coin: [34,50,70,94,122], levelDays: [5, 10, 18, 30] },
   // 丘陵（淺山）動物復育（只能養一隻,5 級）
@@ -625,18 +626,22 @@ function terrainBeauty() {
 // 合併星星倍率：每顆 🌟 +50%（人口/美化/金幣都乘）
 function starMult(b) { return 1 + 1.0 * (b.star || 0); }
 function recalcStats() {
-  let pop = 0, cap = 0, beauty = terrainBeauty(), baseProd = 0;  // 地形提供基礎美化分
+  let pop = 0, cap = 0, beauty = terrainBeauty(), baseProd = 0, food = 0;  // 地形提供基礎美化分
   island.buildings.forEach(b => {
     const cat = BUILDINGS[b.type];
     const m = starMult(b);
     cap += Math.round((cat.pop[b.level - 1] || 0) * m);
     beauty += Math.round((cat.beauty[b.level - 1] || 0) * m);
     baseProd += Math.round((cat.coin[b.level - 1] || 0) * m);
+    if (cat.food) food += Math.round((cat.food[b.level - 1] || 0) * m);
   });
   pop = cap;  // 人口成長到容量
-  const happiness = happinessOf(pop, beauty);
+  // 食物：每位居民吃 1 食物；不夠 → 快樂打折（最低打到 3 折，避免歸零太挫折）
+  const foodNeed = pop;
+  const foodRate = pop > 0 ? Math.max(0.3, Math.min(1, food / foodNeed)) : 1;
+  const happiness = Math.round(happinessOf(pop, beauty) * foodRate);
   const dailyCoinProduction = Math.round(baseProd * incomeMult(happiness));  // 快樂值影響收入
-  island.stats = { population: pop, populationCapacity: cap, beauty, happiness,
+  island.stats = { population: pop, populationCapacity: cap, beauty, happiness, food, foodNeed, foodRate,
                    baseProduction: baseProd, dailyCoinProduction, totalBuildings: island.buildings.length };
 }
 
@@ -645,6 +650,8 @@ function render() {
   const p = getProgress(currentStudent);
   document.getElementById("coinDisplay").textContent = "🪙 " + p.coins.balance;
   document.getElementById("stPop").textContent = island.stats.population;
+  const _fEl = document.getElementById("stFood");
+  if (_fEl) { _fEl.textContent = island.stats.food + "/" + island.stats.foodNeed; _fEl.style.color = (island.stats.foodRate != null && island.stats.foodRate < 1) ? "#ef476f" : ""; }
   document.getElementById("stBeauty").textContent = island.stats.beauty;
   document.getElementById("stHappy").textContent = (island.stats.happiness != null ? island.stats.happiness : 100) + "%";
   document.getElementById("stProd").textContent = island.stats.dailyCoinProduction;
@@ -831,6 +838,7 @@ function openDetail(b) {
   const _m = starMult(b);
   let html = `<h3>${c.emoji} ${c.name}${b.star > 0 ? "🌟".repeat(b.star) : ""} Lv${b.level}</h3>`;
   html += `<div class="detail-row">已經存在：<b>${b.activeDays}</b> 天${b.star > 0 ? `　·　星星加成 <b>×${_m}</b>` : ""}</div>`;
+  if (c.food && c.food[b.level-1] > 0) html += `<div class="detail-row">食物產量：<b>🍞 ${Math.round(c.food[b.level-1] * _m)}</b></div>`;
   if (c.coin[b.level-1] > 0) html += `<div class="detail-row">每天生產：<b>🪙 ${Math.round(c.coin[b.level-1] * _m)}</b></div>`;
   if (c.pop[b.level-1] > 0)  html += `<div class="detail-row">人口容量：<b>${Math.round(c.pop[b.level-1] * _m)}</b></div>`;
   if (c.beauty[b.level-1] > 0) html += `<div class="detail-row">美化分數：<b>${Math.round(c.beauty[b.level-1] * _m)}</b></div>`;
@@ -975,17 +983,19 @@ function openManual() {
     🏔️ 高山：高山動物<br>
     每種建築只能蓋在它的地形上。</p>
 
-    <p><b>📊 五個數值</b><br>
+    <p><b>📊 六個數值</b><br>
     <b>人口</b>：房子/小鎮/牧場/碼頭提供。<br>
+    <b>🍞 食物</b>：農場/牧場/定置漁場生產。<b>每位居民要吃 1 食物</b>！<br>
     <b>美化</b>：地形(丘陵+1、高山+2)＋森林/池塘＋復育動物。<br>
-    <b>快樂</b>：居民住得開不開心。<br>
+    <b>快樂</b>：居民住得開不開心（環境美＋吃得飽）。<br>
     <b>金幣/天</b>：每天自動賺的金幣(開島嶼頁時結算)。<br>
     <b>建築</b>：島上設施總數。</p>
 
     <p><b>😊 快樂值怎麼算</b><br>
     每位居民需要約 <b>1.2 美化分</b>才會開心。<br>
     快樂% = 美化 ÷ (人口 × 1.2)，最高 100%。<br>
-    人太多但美化跟不上 → 快樂下降。多種森林、池塘、復育動物可提高。</p>
+    <b>食物不足會再打折</b>：快樂 × (食物 ÷ 人口)。人口越多，越需要農場/牧場/漁場！<br>
+    人太多但美化或食物跟不上 → 快樂下降。</p>
 
     <p><b>💰 快樂影響收入</b><br>
     收入倍率 = 0.6 + 0.6 × 快樂%。<br>
