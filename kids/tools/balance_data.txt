@@ -1,0 +1,50 @@
+## 🏠 平地建築
+森林(forest): cost=60 maxLv=3 levelDays=3/7 coin=0/0/0 beauty=4/7/11 pop=0/0/0
+池塘(pond): cost=130 maxLv=3 levelDays=3/7 coin=0/0/0 beauty=7/13/21 pop=0/0/0
+牧場(ranch): cost=150 maxLv=3 levelDays=4/10 coin=18/30/46 beauty=0/0/0 pop=2/4/7
+農場(farm): cost=120 maxLv=3 levelDays=4/10 coin=15/25/40 beauty=0/0/0 pop=0/0/0
+房子(house): cost=180 maxLv=3 levelDays=4/10 coin=0/0/0 beauty=0/0/0 pop=4/8/14
+小鎮(town): cost=400 maxLv=3 levelDays=7/14 coin=20/35/55 beauty=0/0/0 pop=12/24/40
+城鎮中心(center): cost=0 maxLv=5 levelDays= coin=8/14/22/32/45 beauty=8/14/22/32/45 pop=0/0/0/0/0
+## ⚡ 能源
+太陽能發電(solar): cost=220 maxLv=5 levelDays=3/6/12/20 coin=14/21/30/40/52 beauty=0/0/0/0/0 pop=0/0/0/0/0
+風力發電(windmill): cost=320 maxLv=5 levelDays=3/7/14/24 coin=18/26/36/48/62 beauty=0/0/0/0/0 pop=0/0/0/0/0
+## ⚓ 海上
+碼頭(dock): cost=300 maxLv=5 levelDays=4/9/16/28 coin=14/20/28/38/50 beauty=1/2/3/4/5 pop=4/6/8/11/14
+定置漁場(fishery): cost=360 maxLv=5 levelDays=4/8/15/25 coin=20/30/42/56/72 beauty=0/1/1/2/3 pop=0/0/0/0/0
+遠洋漁船(oceanboat): cost=780 maxLv=5 levelDays=5/10/18/30 coin=34/50/70/94/122 beauty=-1/-1/0/0/1 pop=0/0/0/0/0
+## 🐾 丘陵動物
+石虎(leopardcat): cost=800 maxLv=5 levelDays=7/15/30/54 coin=7/10/15/20/26 beauty=20/32/46/62/80 pop=0/0/0/0/0
+穿山甲(pangolin): cost=820 maxLv=5 levelDays=8/17/33/58 coin=8/12/17/23/30 beauty=19/31/46/63/84 pop=0/0/0/0/0
+鳳蝶(butterfly): cost=760 maxLv=5 levelDays=6/14/28/50 coin=7/11/16/22/29 beauty=17/29/43/58/76 pop=0/0/0/0/0
+## 🏔️ 高山動物
+臺灣黑熊(bear): cost=1050 maxLv=5 levelDays=7/16/32/56 coin=6/9/13/18/24 beauty=22/34/48/64/82 pop=0/0/0/0/0
+臺灣山椒魚(salamander): cost=900 maxLv=5 levelDays=8/18/34/60 coin=5/8/12/17/23 beauty=18/30/44/60/78 pop=0/0/0/0/0
+臺灣帝雉(mikado): cost=950 maxLv=5 levelDays=7/16/31/55 coin=5/8/12/16/22 beauty=21/33/47/63/81 pop=0/0/0/0/0
+長鬃山羊(serow): cost=950 maxLv=5 levelDays=7/15/30/52 coin=6/10/14/19/25 beauty=20/31/45/61/79 pop=0/0/0/0/0
+櫻花鉤吻鮭(salmon): cost=980 maxLv=5 levelDays=9/19/36/62 coin=5/8/11/16/22 beauty=19/32/48/66/86 pop=0/0/0/0/0
+赫氏角鷹(hawk): cost=1050 maxLv=5 levelDays=8/17/33/57 coin=6/9/14/19/25 beauty=21/34/49/66/85 pop=0/0/0/0/0
+水鹿(sambar): cost=950 maxLv=5 levelDays=7/16/31/54 coin=6/10/15/21/28 beauty=18/30/45/62/80 pop=0/0/0/0/0
+## 🌊 海洋動物
+綠蠵龜(turtle): cost=950 maxLv=5 levelDays=8/18/34/58 coin=7/11/16/22/30 beauty=18/30/44/60/78 pop=0/0/0/0/0
+中華白海豚(dolphin): cost=1100 maxLv=5 levelDays=8/18/35/60 coin=8/12/17/23/30 beauty=24/38/54/72/92 pop=0/0/0/0/0
+鯨鯊(whaleshark): cost=1050 maxLv=5 levelDays=9/19/36/62 coin=7/11/16/22/29 beauty=22/35/50/68/88 pop=0/0/0/0/0
+珊瑚礁(coral): cost=850 maxLv=5 levelDays=6/14/28/50 coin=6/9/13/18/24 beauty=16/27/40/55/72 pop=0/0/0/0/0
+鱟(horseshoecrab): cost=880 maxLv=5 levelDays=7/15/30/54 coin=6/9/13/18/24 beauty=17/28/41/56/73 pop=0/0/0/0/0
+## 🎴 圖鑑地標（免費/集滿主題解鎖）
+燈塔(lighthouse): cost=0 maxLv=1 levelDays= coin=0 beauty=35 pop=0
+噴泉(fountain): cost=0 maxLv=1 levelDays= coin=0 beauty=30 pop=0
+溫泉(hotspring): cost=0 maxLv=1 levelDays= coin=0 beauty=32 pop=0
+摩天輪(ferris): cost=0 maxLv=1 levelDays= coin=0 beauty=40 pop=0
+## 🎁 委託板禮物（禮物券）
+郵筒(postbox): cost=0 maxLv=1 levelDays= coin=0 beauty=8 pop=0
+野餐墊(picnic): cost=0 maxLv=1 levelDays= coin=0 beauty=8 pop=0
+燈籠(lantern): cost=0 maxLv=1 levelDays= coin=0 beauty=8 pop=0
+## 🛶 訪客商品（特價上架）
+熱氣球(balloon): cost=180 maxLv=1 levelDays= coin=0 beauty=18 pop=0
+石像(statue): cost=200 maxLv=1 levelDays= coin=0 beauty=16 pop=0
+花鐘(flowerclock): cost=190 maxLv=1 levelDays= coin=0 beauty=17 pop=0
+
+CENTER_TARGETS: [{"pop":20,"beauty":40},{"pop":55,"beauty":90},{"pop":110,"beauty":170},{"pop":190,"beauty":290}]
+合併費=max(20,cost/2)×新星數,每星+50%,合併回Lv1
+收入倍率=0.6+0.6×快樂%,快樂=美化/(人口×1.2)
