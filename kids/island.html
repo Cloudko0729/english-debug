@@ -594,6 +594,10 @@ function runDailyTick() {
   island.lastProcessedDate = today;
   recalcStats();  // 取得當下快樂值
   totalProduced = Math.round(totalProduced * incomeMult(island.stats.happiness));  // 快樂值影響每日收入
+  // 多餘食物自動賣掉：3 🍞 = 1 🪙（市場價,不受快樂影響）
+  const _surplus = Math.max(0, (island.stats.food || 0) - (island.stats.foodNeed || 0));
+  const _foodCoins = Math.floor(_surplus / 3);
+  if (_foodCoins > 0) totalProduced += _foodCoins;
   if (totalProduced > 0) {
     const p = getProgress(currentStudent);
     p.coins.balance += totalProduced;
@@ -602,7 +606,7 @@ function runDailyTick() {
       balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { date: today } });
     saveProgress(currentStudent, p);
     island.events.push({ id: "prod-" + today, type: "production", date: today,
-      message: `農場與小鎮生產了 ${totalProduced} 金幣`, coinsDelta: totalProduced, seen: false });
+      message: `島嶼生產了 ${totalProduced} 金幣${_foodCoins > 0 ? `（含賣出多餘食物 🍞${_surplus} → 🪙${_foodCoins}）` : ""}`, coinsDelta: totalProduced, seen: false });
   }
   recalcStats();
   saveIsland(currentStudent, island);
@@ -985,7 +989,7 @@ function openManual() {
 
     <p><b>📊 六個數值</b><br>
     <b>人口</b>：房子/小鎮/牧場/碼頭提供。<br>
-    <b>🍞 食物</b>：農場/牧場/定置漁場生產。<b>每位居民要吃 1 食物</b>！<br>
+    <b>🍞 食物</b>：農場/牧場/定置漁場生產。<b>每位居民要吃 1 食物</b>！吃不完的每天自動賣掉：<b>3 🍞 = 1 🪙</b>。<br>
     <b>美化</b>：地形(丘陵+1、高山+2)＋森林/池塘＋復育動物。<br>
     <b>快樂</b>：居民住得開不開心（環境美＋吃得飽）。<br>
     <b>金幣/天</b>：每天自動賺的金幣(開島嶼頁時結算)。<br>
