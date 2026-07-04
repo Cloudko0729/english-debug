@@ -340,7 +340,7 @@ const BUILDINGS = {
             beauty: [0,0,0], pop: [0,0,0], coin: [18, 32, 54], levelDays: [4, 10] },
   house:  { emoji: "🏠", name: "房子", cost: 180, desc: "增加人口容量", terrain: ["P"], maxLevel: 3, img: true,
             beauty: [0,0,0], pop: [4, 8, 14], coin: [0,0,0], levelDays: [4, 10] },
-  town:   { emoji: "🏘️", name: "小鎮", cost: 650, desc: "人口 + 金幣，最強建築", terrain: ["P"], maxLevel: 3, img: true,
+  town:   { emoji: "🏘️", name: "小鎮", cost: 520, desc: "人口 + 金幣，最強建築", terrain: ["P"], maxLevel: 3, img: true,
             beauty: [0,0,0], pop: [12, 24, 40], coin: [20, 35, 55], levelDays: [7, 14] },
   center: { emoji: "🏛️", name: "城鎮中心", cost: 0, desc: "免費設置 1 個，達人口+美化才能升級", terrain: ["P"], maxLevel: 5, unique: true, img: true,
             beauty: [8, 14, 22, 32, 45], pop: [0,0,0,0,0], coin: [8, 14, 22, 32, 45], levelDays: null },
@@ -348,16 +348,16 @@ const BUILDINGS = {
   dog:    { emoji: "🐶", name: "寵物狗", cost: 0, desc: "放陸地空格,每天點牠一次撿隨機金幣", terrain: ["P","H","M"], unique: true, maxLevel: 1, pet: true, img: true,
             beauty: [0], pop: [0], coin: [0], levelDays: null },
   // 能源（5 級）
-  solar:  { emoji: "☀️", name: "太陽能發電", cost: 520, desc: "平地發電,每天金幣", terrain: ["P"], maxLevel: 5, img: true,
+  solar:  { emoji: "☀️", name: "太陽能發電", cost: 370, desc: "平地發電,每天金幣", terrain: ["P"], maxLevel: 5, img: true,
             beauty: [0,0,0,0,0], pop: [0,0,0,0,0], coin: [14, 21, 30, 40, 52], levelDays: [3, 6, 12, 20] },
-  windmill:{ emoji: "🌬️", name: "風力發電", cost: 700, desc: "丘陵/海上發電,每天金幣", terrain: ["H","O"], maxLevel: 5, img: true,
+  windmill:{ emoji: "🌬️", name: "風力發電", cost: 510, desc: "丘陵/海上發電,每天金幣", terrain: ["H","O"], maxLevel: 5, img: true,
             beauty: [0,0,0,0,0], pop: [0,0,0,0,0], coin: [18, 26, 36, 48, 62], levelDays: [3, 7, 14, 24] },
   // 海上漁業（5 級）
-  dock:   { emoji: "⚓", name: "碼頭", cost: 600, desc: "海上,人口+金幣（最多 3）", terrain: ["O"], max: 3, maxLevel: 5, img: true,
+  dock:   { emoji: "⚓", name: "碼頭", cost: 450, desc: "海上,人口+金幣（最多 3）", terrain: ["O"], max: 3, maxLevel: 5, img: true,
             beauty: [1,2,3,4,5], pop: [4,6,8,11,14], coin: [14,20,28,38,50], levelDays: [4, 9, 16, 28] },
-  fishery:{ emoji: "🎣", name: "定置漁場", cost: 760, desc: "海上漁獲,每天金幣（最多 5）", terrain: ["O"], max: 5, maxLevel: 5, img: true,
+  fishery:{ emoji: "🎣", name: "定置漁場", cost: 560, desc: "海上漁獲,每天金幣（最多 5）", terrain: ["O"], max: 5, maxLevel: 5, img: true,
             beauty: [0,1,1,2,3], pop: [0,0,0,0,0], coin: [20,30,42,56,72], levelDays: [4, 8, 15, 25] },
-  oceanboat:{ emoji: "🚢", name: "遠洋漁船", cost: 1500, desc: "大量金幣（最多 3）", terrain: ["O"], max: 3, maxLevel: 5, img: true,
+  oceanboat:{ emoji: "🚢", name: "遠洋漁船", cost: 1140, desc: "大量金幣（最多 3）", terrain: ["O"], max: 3, maxLevel: 5, img: true,
             beauty: [-1,-1,0,0,1], pop: [0,0,0,0,0], coin: [34,50,70,94,122], levelDays: [5, 10, 18, 30] },
   // 丘陵（淺山）動物復育（只能養一隻,5 級）
   leopardcat:{ emoji: "🐆", name: "石虎", cost: 800, desc: "丘陵復育（淺山）,大量美化", terrain: ["H"], category: "hills", categoryMax: 1, maxLevel: 5,
@@ -367,7 +367,7 @@ const BUILDINGS = {
   butterfly:{ emoji: "🦋", name: "鳳蝶", cost: 680, desc: "丘陵復育（淺山）,大量美化", terrain: ["H"], category: "hills", categoryMax: 1, maxLevel: 5,
               beauty: [17,29,43,58,76], pop: [0,0,0,0,0], coin: [7,11,16,22,29], levelDays: [6,14,28,50] },
   // 高山動物復育（只能養一隻,5 級）
-  bear:     { emoji: "🐻", name: "臺灣黑熊", cost: 1150, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
+  bear:     { emoji: "🐻", name: "臺灣黑熊", cost: 1100, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [22,34,48,64,82], pop: [0,0,0,0,0], coin: [6,9,13,18,24], levelDays: [7,16,32,56] },
   salamander:{ emoji: "🦎", name: "臺灣山椒魚", cost: 780, desc: "高山復育,大量美化", terrain: ["M"], category: "mountain", categoryMax: 1, maxLevel: 5,
               beauty: [18,30,44,60,78], pop: [0,0,0,0,0], coin: [5,8,12,17,23], levelDays: [8,18,34,60] },
@@ -384,7 +384,7 @@ const BUILDINGS = {
   // 海洋動物復育（只能養一隻,5 級）
   turtle:   { emoji: "🐢", name: "綠蠵龜", cost: 880, desc: "海洋復育,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
               beauty: [18,30,44,60,78], pop: [0,0,0,0,0], coin: [7,11,16,22,30], levelDays: [8,18,34,58] },
-  dolphin:  { emoji: "🐬", name: "中華白海豚", cost: 1250, desc: "海洋復育（媽祖魚）,最高美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
+  dolphin:  { emoji: "🐬", name: "中華白海豚", cost: 1175, desc: "海洋復育（媽祖魚）,最高美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
               beauty: [24,38,54,72,92], pop: [0,0,0,0,0], coin: [8,12,17,23,30], levelDays: [8,18,35,60] },
   whaleshark:{ emoji: "🦈", name: "鯨鯊", cost: 1050, desc: "海洋復育（豆腐鯊）,大量美化", terrain: ["O"], category: "ocean", categoryMax: 1, maxLevel: 5,
               beauty: [24,38,54,73,94], pop: [0,0,0,0,0], coin: [7,11,16,22,29], levelDays: [9,19,36,62] },
