@@ -151,12 +151,13 @@ const matCoin = new CANNON.Material("coin"), matTable = new CANNON.Material("tab
 world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matTable, { friction: 0.32, restitution: 0.12 }));
 world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matCoin, { friction: 0.12, restitution: 0.18 }));
 
-function staticBox(sx, sy, sz, x, y, z, color, visible = true) {
+function staticBox(sx, sy, sz, x, y, z, color, visible = true, rotX = 0) {
   const body = new CANNON.Body({ mass: 0, material: matTable, shape: new CANNON.Box(new CANNON.Vec3(sx / 2, sy / 2, sz / 2)), position: new CANNON.Vec3(x, y, z) });
+  if (rotX) body.quaternion.setFromEuler(rotX, 0, 0);
   world.addBody(body);
   if (visible) {
     const m = new THREE.Mesh(new THREE.BoxGeometry(sx, sy, sz), new THREE.MeshStandardMaterial({ color, roughness: .85 }));
-    m.position.set(x, y, z); scene.add(m);
+    m.position.set(x, y, z); if (rotX) m.rotation.x = rotX; scene.add(m);
   }
   return body;
 }
@@ -167,9 +168,10 @@ staticBox(0.35, 6, 10.6, -4.18, 5.0, -0.2, 0, false);           // 左隱形高�
 staticBox(0.35, 6, 10.6, 4.18, 5.0, -0.2, 0, false);            // 右隱形高牆
 staticBox(8.8, 3.6, 0.4, 0, 1.3, -5.2, 0x232a4e);               // 後牆
 staticBox(8.8, 6, 0.4, 0, 5.6, -5.2, 0, false);                 // 後隱形高牆
+staticBox(7.9, 0.3, 3.0, 0, 2.75, -4.35, 0x2a3158, true, -0.62); // 後方斜面導板（掉後面滑回前）
 
 // 推板（kinematic，前後滑動）
-const PLATE = { minZ: -4.0, maxZ: -1.7, w: 7.6, h: 1.5, d: 3.6 };
+const PLATE = { minZ: -4.0, maxZ: -1.7, w: 7.94, h: 1.5, d: 3.6 };
 const plateBody = new CANNON.Body({ mass: 0, type: CANNON.Body.KINEMATIC, material: matTable, shape: new CANNON.Box(new CANNON.Vec3(PLATE.w / 2, PLATE.h / 2, PLATE.d / 2)), position: new CANNON.Vec3(0, PLATE.h / 2, PLATE.minZ) });
 world.addBody(plateBody);
 const plateMesh = new THREE.Mesh(new THREE.BoxGeometry(PLATE.w, PLATE.h, PLATE.d),
@@ -203,9 +205,22 @@ function addCoin(type, x, y, z, randomSpin) {
   coins.push({ body, mesh, type });
 }
 function dropCoin(type) {
-  if (coins.length >= MAX_COINS) return;
+  if (coins.length >= MAX_COINS) compress(true);
   const x = (Math.random() - .5) * 6.4;
-  addCoin(type, x, 3.4 + Math.random() * 0.8, plateBody.position.z + (Math.random() - .5) * 2.0, true);
+  addCoin(type, x, 3.4 + Math.random() * 0.8, plateBody.position.z + 0.5 + Math.random() * 1.2, true);
+}
+// 自動合成：檯面太滿時，後排 3 枚金幣 → 1 枚藍鑽幣（價值 3=3 守恆，清出空間）
+function compress(force) {
+  const LIMIT = 150;
+  if (!force && coins.length <= LIMIT) return;
+  while (coins.length > (force ? MAX_COINS - 3 : LIMIT)) {
+    const golds = coins.filter(c => c.type === "gold").sort((a, b) => a.body.position.z - b.body.position.z).slice(0, 3);
+    if (golds.length < 3) break;
+    const pos = golds[0].body.position.clone();
+    golds.forEach(gc => { world.removeBody(gc.body); scene.remove(gc.mesh); coins.splice(coins.indexOf(gc), 1); });
+    addCoin("silver", pos.x, pos.y + 0.6, Math.max(pos.z, PLATE.maxZ + 0.8), false);
+    showTray("🪙×3 → 💠 自動合成！");
+  }
 }
 function seed(n) { for (let i = 0; i < n; i++) addCoin("gold", (Math.random() - .5) * 6.8, 0.35 + Math.random() * 1.2, -0.8 + Math.random() * 3.8, false); }
 
@@ -256,7 +271,7 @@ function stepWorld() {
     }
   }
   renderer.render(scene, camera);
-  if (++saveTick % 240 === 0) saveMachine();
+  if (++saveTick % 240 === 0) { compress(false); saveMachine(); }
   requestAnimationFrame(stepWorld);
 }
 let _looping = false, saveTick = 0;
