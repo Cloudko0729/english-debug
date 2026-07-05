@@ -94,22 +94,32 @@
 
   // 分塊輪替：同一週用固定順序(seed=週)，第 dayIdx 天取一段不重疊區塊。
   // 池大小 >= 2×每日題數 → 隔天保證不重複；整週平均分散、出現次數最少。
-  function pickBlock(pool, k, dayIdx, seedStr) {
+  // retake（同日重測，金幣已領過）→ 改成全隨機抽，當純練習，每次都不同。
+  function pickBlock(pool, k, dayIdx, seedStr, retake) {
     if (!pool.length) return [];
+    if (retake) return shuffleArr(pool).slice(0, k);
     const order = shuffleArr(pool, seeded(seedStr));
     const start = ((dayIdx * k) % order.length + order.length) % order.length;
     return order.concat(order).slice(start, start + k);
   }
+  function _isRetake() {
+    if (!currentStudent) return false;
+    const p = getProgress(currentStudent);
+    const claimKey = DRILL_DATE + "::" + DRILL_DATE + "-" + DRILL_THEME;
+    return !!(p.coins && p.coins.claimedDrills && p.coins.claimedDrills[claimKey]);
+  }
 
   function buildDrill() {
-    const ctx = vocabWeekForDate(DRILL_DATE), week = ctx.week, month = ctx.month, rnd = seeded(DRILL_DATE);
+    const ctx = vocabWeekForDate(DRILL_DATE), week = ctx.week, month = ctx.month;
+    const retake = _isRetake();
+    const rnd = retake ? null : seeded(DRILL_DATE);   // retake → 不用固定種子，全隨機
     const words = week.words;
     const wd = (typeof weekDrillFor === "function") ? weekDrillFor(month.month, week.n) : null;
     WDID = month.month + "-" + week.n;
     const dayIdx = Math.max(0, Math.round((Date.parse(DRILL_DATE) - Date.parse(week.start)) / 86400000));
 
-    // ① 英聽選擇 6（分塊輪替）
-    const s1 = pickBlock(words, 6, dayIdx, WDID + "-v").map(w => ({ en: w.en, choices: distinctChoices(w, words, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
+    // ① 英聽選擇 6（分塊輪替；重測→隨機）
+    const s1 = pickBlock(words, 6, dayIdx, WDID + "-v", retake).map(w => ({ en: w.en, choices: distinctChoices(w, words, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
 
     // ⑤ 圖片題 6：本週可圖示字 + 小學程度較難可圖示字（池固定/週），分塊輪替
     const emo = en => (typeof WORD_EMOJI !== "undefined") ? WORD_EMOJI[en] : null;
@@ -119,11 +129,11 @@
       .filter(w => w.level === "basic" && emo(w.en) && String(w.en).length >= 5 && !words.some(x => x.en === w.en))
       .map(w => ({ en: w.en, zh: w.zh }));
     const picPool = weekPic.concat(shuffleArr(basicPic, seeded(WDID + "-pb")).slice(0, 24));
-    const s5 = pickBlock(picPool, 6, dayIdx, WDID + "-pic").map(w => ({ emoji: emo(w.en), zh: w.zh, en: w.en, choices: distinctChoices(w, picPool, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
+    const s5 = pickBlock(picPool, 6, dayIdx, WDID + "-pic", retake).map(w => ({ emoji: emo(w.en), zh: w.zh, en: w.en, choices: distinctChoices(w, picPool, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
 
     // ② 英聽填空 5（分塊輪替）
     const lbPool = wd ? wd.listenBlank.map((q, i) => ({ ...q, _i: i })) : [];
-    const s2 = pickBlock(lbPool, 5, dayIdx, WDID + "-lb").map(q => {
+    const s2 = pickBlock(lbPool, 5, dayIdx, WDID + "-lb", retake).map(q => {
       const ansW = { en: q.answer, zh: "" };
       const ch = distinctChoices(ansW, words.concat(lbPool.map(x => ({ en: x.answer, zh: "" }))), rnd).map(o => ({ label: o.en, correct: o.en === q.answer }));
       return { key: "lb" + q._i, display: q.display, choices: ch };
@@ -132,7 +142,7 @@
     // ③ 閱讀：依天數輪替挑 1 篇（一週內各天不同篇）
     let s3 = null;
     if (wd) {
-      const ri = dayIdx % wd.reading.length;
+      const ri = retake ? Math.floor(Math.random() * wd.reading.length) : (dayIdx % wd.reading.length);
       const r = wd.reading[ri];
       const gloss = (typeof passageGlossary === "function") ? passageGlossary(WDID, ri) : [];
       s3 = { key: "passage" + ri, passage: r.passage, glossary: gloss, questions: r.questions.map(q => ({ q: q.q, choices: shuffleArr(q.choices, rnd).map(c => ({ label: c, correct: c === q.answer })) })) };
@@ -140,7 +150,7 @@
 
     // ④ 句子重組 4（分塊輪替）
     const roPool = wd ? wd.reorder.map((q, i) => ({ ...q, _i: i })) : [];
-    const s4 = pickBlock(roPool, 4, dayIdx, WDID + "-ro").map(q => ({ key: "ro" + q._i, sentence: q.sentence, chunks: shuffleArr(q.chunks, rnd) }));
+    const s4 = pickBlock(roPool, 4, dayIdx, WDID + "-ro", retake).map(q => ({ key: "ro" + q._i, sentence: q.sentence, chunks: shuffleArr(q.chunks, rnd) }));
 
     // ⑥ 今日發音（詞族解碼，依日期輪替單元）
     let s6 = null;
@@ -148,7 +158,8 @@
       const u = phonicsUnitFor(DRILL_DATE);
       const qs = [];
       // Q1/Q2：聽音選拼字（family 內辨音，兩題不同目標字）
-      const t1 = u.words[dayIdx % u.words.length].en, t2 = u.words[(dayIdx + 2) % u.words.length].en;
+      const off = retake ? Math.floor(Math.random() * u.words.length) : dayIdx;
+      const t1 = u.words[off % u.words.length].en, t2 = u.words[(off + 2) % u.words.length].en;
       [t1, t2].forEach(t => qs.push({ kind: "listen", en: t, choices: shuffleArr(u.words.map(w => ({ label: w.en, correct: w.en === t })), rnd) }));
       // Q3：同家族判斷（視覺規則，不用語音）
       qs.push({ kind: "family", q: `哪一個字也是「${u.title.replace(/（.*/, "")}」家族？`, choices: shuffleArr([{ label: u.bonus, correct: true }, ...u.non.map(x => ({ label: x, correct: false }))], rnd) });
@@ -175,7 +186,7 @@
 
   function render() {
     const w = DRILL.week, m = DRILL.month;
-    let h = `<div class="meta">📒 ${m.label} 第 ${w.n} 週 · ${w.theme} · 文法：${m.grammar.map(g => g.topic).join("、")}</div>`;
+    let h = `<div class="meta">📒 ${m.label} 第 ${w.n} 週 · ${w.theme} · 文法：${m.grammar.map(g => g.topic).join("、")}${_isRetake() ? "<br>🔁 練習模式：今天金幣已領過，題目改成隨機出" : ""}</div>`;
     // ①
     h += `<div class="sec"><div class="sec-h">① 英聽選擇</div><div class="sec-d">點 🔊 聽單字，選出正確英文</div>`;
     DRILL.s1.forEach((q, i) => { h += `<div class="q"><div class="q-no">${i + 1}.</div><button class="play" onclick="__pw('${q.en.replace(/'/g, "\\'")}')">🔊 點我聽</button>${optsHtml('s1', i, q.choices)}</div>`; });
