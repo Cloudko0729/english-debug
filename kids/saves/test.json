@@ -1,0 +1,1879 @@
+{
+  "type": "kids-english-save",
+  "version": 1,
+  "student": "test",
+  "exportedAt": "2026-06-21T08:56:16.356Z",
+  "progress": {
+    "wrongCounts": {
+      "shirt": 0,
+      "foot": 0,
+      "week": 0,
+      "five": 0,
+      "station": 1
+    },
+    "sessions": 51,
+    "totalCorrect": 501,
+    "totalWrong": 5,
+    "coins": {
+      "balance": 38,
+      "lifetimeEarned": 6188,
+      "lifetimeSpent": 7160,
+      "transactions": [
+        {
+          "type": "earn",
+          "source": "vocabQuiz",
+          "amount": 130,
+          "balanceAfter": 130,
+          "createdAt": "2026-06-14T03:58:47.178Z",
+          "meta": {
+            "drillId": "vocab-quiz",
+            "date": "2026-06-14",
+            "correct": 20
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 0,
+          "balanceAfter": 130,
+          "createdAt": "2026-06-14T03:58:52.266Z",
+          "meta": {
+            "buildingType": "center",
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 120,
+          "balanceAfter": 10,
+          "createdAt": "2026-06-14T03:58:55.620Z",
+          "meta": {
+            "buildingType": "farm",
+            "x": 4,
+            "y": 3
+          }
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 175,
+          "balanceAfter": 185,
+          "createdAt": "2026-06-14T04:03:20.260Z",
+          "meta": {
+            "drillId": "2026-06-14-food",
+            "date": "2026-06-14",
+            "correct": 23,
+            "perfectSections": 3
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 180,
+          "balanceAfter": 5,
+          "createdAt": "2026-06-14T04:03:39.399Z",
+          "meta": {
+            "buildingType": "house",
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "type": "earn",
+          "source": "finalExam",
+          "amount": 360,
+          "balanceAfter": 365,
+          "createdAt": "2026-06-14T05:05:54.584Z",
+          "meta": {
+            "correct": 21,
+            "total": 25
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 90,
+          "balanceAfter": 275,
+          "createdAt": "2026-06-14T05:06:31.219Z",
+          "meta": {
+            "buildingType": "forest",
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 70,
+          "balanceAfter": 205,
+          "createdAt": "2026-06-14T05:06:33.690Z",
+          "meta": {
+            "buildingType": "pond",
+            "x": 4,
+            "y": 4
+          }
+        },
+        {
+          "type": "earn",
+          "source": "mapMigration",
+          "amount": 70,
+          "balanceAfter": 275,
+          "createdAt": "2026-06-14T06:21:32.962Z",
+          "meta": {
+            "removed": 1
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 70,
+          "balanceAfter": 205,
+          "createdAt": "2026-06-14T06:21:52.205Z",
+          "meta": {
+            "buildingType": "pond",
+            "x": 8,
+            "y": 8
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 0,
+          "balanceAfter": 205,
+          "createdAt": "2026-06-14T06:21:55.873Z",
+          "meta": {
+            "buildingType": "center",
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 0,
+          "balanceAfter": 205,
+          "createdAt": "2026-06-14T06:22:02.761Z",
+          "meta": {
+            "buildingType": "center",
+            "x": 7,
+            "y": 10
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 180,
+          "balanceAfter": 385,
+          "createdAt": "2026-06-14T06:22:05.396Z",
+          "meta": {
+            "buildingType": "house",
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 120,
+          "balanceAfter": 505,
+          "createdAt": "2026-06-14T06:22:06.748Z",
+          "meta": {
+            "buildingType": "farm",
+            "x": 4,
+            "y": 3
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 90,
+          "balanceAfter": 595,
+          "createdAt": "2026-06-14T06:22:08.116Z",
+          "meta": {
+            "buildingType": "forest",
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 90,
+          "balanceAfter": 505,
+          "createdAt": "2026-06-14T06:22:18.104Z",
+          "meta": {
+            "buildingType": "forest",
+            "x": 5,
+            "y": 8
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 450,
+          "balanceAfter": 55,
+          "createdAt": "2026-06-14T06:22:28.026Z",
+          "meta": {
+            "buildingType": "town",
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 0,
+          "balanceAfter": 55,
+          "createdAt": "2026-06-14T06:22:32.747Z",
+          "meta": {
+            "buildingType": "center",
+            "x": 7,
+            "y": 10
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 0,
+          "balanceAfter": 55,
+          "createdAt": "2026-06-14T06:22:37.653Z",
+          "meta": {
+            "buildingType": "center",
+            "x": 6,
+            "y": 8
+          }
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 205,
+          "balanceAfter": 260,
+          "createdAt": "2026-06-14T06:57:03.334Z",
+          "meta": {
+            "drillId": "2026-06-13-animals",
+            "date": "2026-06-13",
+            "correct": 25,
+            "perfectSections": 5
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 120,
+          "balanceAfter": 140,
+          "createdAt": "2026-06-14T06:57:38.493Z",
+          "meta": {
+            "buildingType": "farm",
+            "x": 7,
+            "y": 8
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 70,
+          "balanceAfter": 210,
+          "createdAt": "2026-06-14T06:57:44.966Z",
+          "meta": {
+            "buildingType": "pond",
+            "x": 8,
+            "y": 8
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 70,
+          "balanceAfter": 140,
+          "createdAt": "2026-06-14T06:57:46.680Z",
+          "meta": {
+            "buildingType": "pond",
+            "x": 9,
+            "y": 7
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 70,
+          "balanceAfter": 210,
+          "createdAt": "2026-06-14T06:57:48.981Z",
+          "meta": {
+            "buildingType": "pond",
+            "x": 9,
+            "y": 7
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 70,
+          "balanceAfter": 140,
+          "createdAt": "2026-06-14T06:57:50.799Z",
+          "meta": {
+            "buildingType": "pond",
+            "x": 8,
+            "y": 7
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 120,
+          "balanceAfter": 20,
+          "createdAt": "2026-06-14T06:57:55.120Z",
+          "meta": {
+            "buildingType": "farm",
+            "x": 8,
+            "y": 8
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 0,
+          "balanceAfter": 20,
+          "createdAt": "2026-06-14T10:07:38.606Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 10,
+            "y": 8
+          }
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 36,
+          "balanceAfter": 56,
+          "createdAt": "2026-06-14T10:07:42.256Z"
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 0,
+          "balanceAfter": 56,
+          "createdAt": "2026-06-14T10:07:49.080Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 10,
+            "y": 8
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 0,
+          "balanceAfter": 56,
+          "createdAt": "2026-06-14T10:07:56.119Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 11,
+            "y": 5
+          }
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 25,
+          "balanceAfter": 81,
+          "createdAt": "2026-06-14T10:08:00.918Z"
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 0,
+          "balanceAfter": 81,
+          "createdAt": "2026-06-14T10:08:05.358Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 11,
+            "y": 5
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 0,
+          "balanceAfter": 81,
+          "createdAt": "2026-06-14T10:08:06.955Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 21,
+          "balanceAfter": 102,
+          "createdAt": "2026-06-14T10:08:09.425Z"
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 0,
+          "balanceAfter": 102,
+          "createdAt": "2026-06-14T10:09:57.058Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 0,
+          "balanceAfter": 102,
+          "createdAt": "2026-06-14T10:09:58.441Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 25,
+          "balanceAfter": 127,
+          "createdAt": "2026-06-14T10:09:59.376Z"
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 0,
+          "balanceAfter": 127,
+          "createdAt": "2026-06-14T10:10:01.059Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 0,
+          "balanceAfter": 127,
+          "createdAt": "2026-06-14T10:10:02.215Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 47,
+          "balanceAfter": 174,
+          "createdAt": "2026-06-14T10:10:02.862Z"
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 0,
+          "balanceAfter": 174,
+          "createdAt": "2026-06-14T10:10:04.178Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 0,
+          "balanceAfter": 174,
+          "createdAt": "2026-06-14T10:10:05.430Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 11,
+            "y": 7
+          }
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 42,
+          "balanceAfter": 216,
+          "createdAt": "2026-06-14T10:10:05.997Z"
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 0,
+          "balanceAfter": 216,
+          "createdAt": "2026-06-14T10:10:07.448Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 11,
+            "y": 7
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 0,
+          "balanceAfter": 216,
+          "createdAt": "2026-06-14T10:10:08.754Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 46,
+          "balanceAfter": 262,
+          "createdAt": "2026-06-14T10:10:10.083Z"
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 51,
+          "balanceAfter": 313,
+          "createdAt": "2026-06-14T10:17:41.398Z"
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 0,
+          "balanceAfter": 313,
+          "createdAt": "2026-06-14T10:17:44.408Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 0,
+          "balanceAfter": 313,
+          "createdAt": "2026-06-14T10:17:46.276Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 0,
+          "balanceAfter": 313,
+          "createdAt": "2026-06-14T10:17:49.030Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 0,
+          "balanceAfter": 313,
+          "createdAt": "2026-06-14T10:17:51.916Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 8,
+            "y": 9
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 180,
+          "balanceAfter": 133,
+          "createdAt": "2026-06-14T10:18:50.444Z",
+          "meta": {
+            "buildingType": "house",
+            "x": 6,
+            "y": 9
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 120,
+          "balanceAfter": 13,
+          "createdAt": "2026-06-14T10:19:07.290Z",
+          "meta": {
+            "buildingType": "farm",
+            "x": 9,
+            "y": 8
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 0,
+          "balanceAfter": 13,
+          "createdAt": "2026-06-14T11:20:26.467Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 8,
+            "y": 9
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 0,
+          "balanceAfter": 13,
+          "createdAt": "2026-06-14T11:20:29.538Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 7,
+            "y": 7
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 0,
+          "balanceAfter": 13,
+          "createdAt": "2026-06-14T11:20:32.440Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 7,
+            "y": 7
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 0,
+          "balanceAfter": 13,
+          "createdAt": "2026-06-14T11:20:42.729Z",
+          "meta": {
+            "buildingType": "dog",
+            "x": 5,
+            "y": 9
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandProduction",
+          "amount": 88,
+          "balanceAfter": 101,
+          "createdAt": "2026-06-14T22:24:37.783Z",
+          "meta": {
+            "date": "2026-06-15"
+          }
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 31,
+          "balanceAfter": 132,
+          "createdAt": "2026-06-14T22:24:41.302Z"
+        },
+        {
+          "type": "earn",
+          "source": "vocabQuiz",
+          "amount": 130,
+          "balanceAfter": 262,
+          "createdAt": "2026-06-14T22:26:16.031Z",
+          "meta": {
+            "drillId": "vocab-quiz",
+            "date": "2026-06-15",
+            "correct": 20
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 180,
+          "balanceAfter": 82,
+          "createdAt": "2026-06-14T22:26:33.827Z",
+          "meta": {
+            "buildingType": "house",
+            "x": 8,
+            "y": 9
+          }
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 205,
+          "balanceAfter": 287,
+          "createdAt": "2026-06-14T22:30:51.240Z",
+          "meta": {
+            "drillId": "2026-06-15-school",
+            "date": "2026-06-15",
+            "correct": 25,
+            "perfectSections": 5
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 180,
+          "balanceAfter": 107,
+          "createdAt": "2026-06-14T22:30:58.888Z",
+          "meta": {
+            "buildingType": "house",
+            "x": 6,
+            "y": 10
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 90,
+          "balanceAfter": 17,
+          "createdAt": "2026-06-14T22:31:11.730Z",
+          "meta": {
+            "buildingType": "forest",
+            "x": 9,
+            "y": 7
+          }
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 190,
+          "balanceAfter": 207,
+          "createdAt": "2026-06-15T14:55:49.465Z",
+          "meta": {
+            "drillId": "2026-06-16-clothes",
+            "date": "2026-06-16",
+            "correct": 24,
+            "perfectSections": 4
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandProduction",
+          "amount": 95,
+          "balanceAfter": 302,
+          "createdAt": "2026-06-15T22:21:52.088Z",
+          "meta": {
+            "date": "2026-06-16"
+          }
+        },
+        {
+          "type": "earn",
+          "source": "vocabQuiz",
+          "amount": 130,
+          "balanceAfter": 432,
+          "createdAt": "2026-06-15T22:23:15.384Z",
+          "meta": {
+            "drillId": "vocab-quiz",
+            "date": "2026-06-16",
+            "correct": 20
+          }
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 15,
+          "balanceAfter": 447,
+          "createdAt": "2026-06-15T22:23:23.712Z"
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 320,
+          "balanceAfter": 127,
+          "createdAt": "2026-06-15T22:23:46.477Z",
+          "meta": {
+            "buildingType": "windmill",
+            "x": 14,
+            "y": 4
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandProduction",
+          "amount": 116,
+          "balanceAfter": 243,
+          "createdAt": "2026-06-17T09:23:52.161Z",
+          "meta": {
+            "date": "2026-06-17"
+          }
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 205,
+          "balanceAfter": 448,
+          "createdAt": "2026-06-17T13:59:31.283Z",
+          "meta": {
+            "drillId": "2026-06-17-weather",
+            "date": "2026-06-17",
+            "correct": 25,
+            "perfectSections": 5
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 400,
+          "balanceAfter": 48,
+          "createdAt": "2026-06-17T13:59:47.798Z",
+          "meta": {
+            "buildingType": "town",
+            "x": 7,
+            "y": 10
+          }
+        },
+        {
+          "type": "earn",
+          "source": "vocabQuiz",
+          "amount": 130,
+          "balanceAfter": 178,
+          "createdAt": "2026-06-17T14:00:48.763Z",
+          "meta": {
+            "drillId": "vocab-quiz",
+            "date": "2026-06-17",
+            "correct": 20
+          }
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 33,
+          "balanceAfter": 211,
+          "createdAt": "2026-06-17T14:00:55.232Z"
+        },
+        {
+          "type": "earn",
+          "source": "islandProduction",
+          "amount": 176,
+          "balanceAfter": 387,
+          "createdAt": "2026-06-17T18:35:33.487Z",
+          "meta": {
+            "date": "2026-06-18"
+          }
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 41,
+          "balanceAfter": 428,
+          "createdAt": "2026-06-17T18:35:43.724Z"
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 300,
+          "balanceAfter": 128,
+          "createdAt": "2026-06-17T18:36:41.824Z",
+          "meta": {
+            "buildingType": "dock",
+            "x": 11,
+            "y": 12
+          }
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 205,
+          "balanceAfter": 333,
+          "createdAt": "2026-06-17T22:18:44.583Z",
+          "meta": {
+            "drillId": "2026-06-18-body",
+            "date": "2026-06-18",
+            "correct": 25,
+            "perfectSections": 5
+          }
+        },
+        {
+          "type": "earn",
+          "source": "vocabQuiz",
+          "amount": 130,
+          "balanceAfter": 463,
+          "createdAt": "2026-06-17T22:20:04.338Z",
+          "meta": {
+            "drillId": "vocab-quiz",
+            "date": "2026-06-18",
+            "correct": 20
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 400,
+          "balanceAfter": 63,
+          "createdAt": "2026-06-17T22:20:29.219Z",
+          "meta": {
+            "buildingType": "town",
+            "x": 8,
+            "y": 10
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 300,
+          "balanceAfter": 363,
+          "createdAt": "2026-06-18T00:40:13.315Z",
+          "meta": {
+            "buildingType": "dock",
+            "x": 11,
+            "y": 12
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 90,
+          "balanceAfter": 273,
+          "createdAt": "2026-06-18T00:40:30.981Z",
+          "meta": {
+            "buildingType": "forest",
+            "x": 9,
+            "y": 6
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 70,
+          "balanceAfter": 203,
+          "createdAt": "2026-06-18T00:40:35.749Z",
+          "meta": {
+            "buildingType": "pond",
+            "x": 9,
+            "y": 5
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandProduction",
+          "amount": 200,
+          "balanceAfter": 403,
+          "createdAt": "2026-06-18T23:13:41.171Z",
+          "meta": {
+            "date": "2026-06-19"
+          }
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 23,
+          "balanceAfter": 426,
+          "createdAt": "2026-06-19T07:57:26.511Z"
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 205,
+          "balanceAfter": 631,
+          "createdAt": "2026-06-19T08:04:28.113Z",
+          "meta": {
+            "drillId": "2026-06-19-time",
+            "date": "2026-06-19",
+            "correct": 25,
+            "perfectSections": 5
+          }
+        },
+        {
+          "type": "earn",
+          "source": "vocabQuiz",
+          "amount": 130,
+          "balanceAfter": 761,
+          "createdAt": "2026-06-19T08:07:36.818Z",
+          "meta": {
+            "drillId": "vocab-quiz",
+            "date": "2026-06-19",
+            "correct": 20
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 760,
+          "balanceAfter": 1,
+          "createdAt": "2026-06-19T08:07:48.559Z",
+          "meta": {
+            "buildingType": "butterfly",
+            "x": 7,
+            "y": 7
+          }
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 205,
+          "balanceAfter": 206,
+          "createdAt": "2026-06-20T00:06:26.733Z",
+          "meta": {
+            "drillId": "2026-06-20-places",
+            "date": "2026-06-20",
+            "correct": 25,
+            "perfectSections": 5
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandProduction",
+          "amount": 218,
+          "balanceAfter": 424,
+          "createdAt": "2026-06-20T00:06:29.771Z",
+          "meta": {
+            "date": "2026-06-20"
+          }
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 205,
+          "balanceAfter": 629,
+          "createdAt": "2026-06-20T00:08:39.790Z",
+          "meta": {
+            "drillId": "2026-06-21-hobbies",
+            "date": "2026-06-21",
+            "correct": 25,
+            "perfectSections": 5
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 300,
+          "balanceAfter": 329,
+          "createdAt": "2026-06-20T00:15:38.415Z",
+          "meta": {
+            "buildingType": "dock",
+            "x": 11,
+            "y": 12
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 70,
+          "balanceAfter": 259,
+          "createdAt": "2026-06-20T00:16:03.996Z",
+          "meta": {
+            "buildingType": "pond",
+            "x": 4,
+            "y": 7
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 90,
+          "balanceAfter": 169,
+          "createdAt": "2026-06-20T00:16:10.540Z",
+          "meta": {
+            "buildingType": "forest",
+            "x": 4,
+            "y": 8
+          }
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 205,
+          "balanceAfter": 374,
+          "createdAt": "2026-06-20T00:18:41.212Z",
+          "meta": {
+            "drillId": "2026-06-22-verbs",
+            "date": "2026-06-22",
+            "correct": 25,
+            "perfectSections": 5
+          }
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 205,
+          "balanceAfter": 579,
+          "createdAt": "2026-06-20T00:21:54.590Z",
+          "meta": {
+            "drillId": "2026-06-23-adjectives",
+            "date": "2026-06-23",
+            "correct": 25,
+            "perfectSections": 5
+          }
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 205,
+          "balanceAfter": 784,
+          "createdAt": "2026-06-20T00:31:53.787Z",
+          "meta": {
+            "drillId": "2026-06-24-numbers",
+            "date": "2026-06-24",
+            "correct": 25,
+            "perfectSections": 5
+          }
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 190,
+          "balanceAfter": 974,
+          "createdAt": "2026-06-20T00:34:00.416Z",
+          "meta": {
+            "drillId": "2026-06-25-colors",
+            "date": "2026-06-25",
+            "correct": 24,
+            "perfectSections": 4
+          }
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 205,
+          "balanceAfter": 1179,
+          "createdAt": "2026-06-20T00:36:27.299Z",
+          "meta": {
+            "drillId": "2026-06-26-money",
+            "date": "2026-06-26",
+            "correct": 25,
+            "perfectSections": 5
+          }
+        },
+        {
+          "type": "earn",
+          "source": "dailyDrill",
+          "amount": 205,
+          "balanceAfter": 1384,
+          "createdAt": "2026-06-20T00:39:08.159Z",
+          "meta": {
+            "drillId": "2026-06-27-feelings",
+            "date": "2026-06-27",
+            "correct": 25,
+            "perfectSections": 5
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 1050,
+          "balanceAfter": 334,
+          "createdAt": "2026-06-20T00:39:29.416Z",
+          "meta": {
+            "buildingType": "hawk",
+            "x": 6,
+            "y": 6
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 180,
+          "balanceAfter": 154,
+          "createdAt": "2026-06-20T00:39:42.620Z",
+          "meta": {
+            "buildingType": "house",
+            "x": 9,
+            "y": 9
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandDemolish",
+          "amount": 180,
+          "balanceAfter": 334,
+          "createdAt": "2026-06-20T00:39:54.536Z",
+          "meta": {
+            "buildingType": "house",
+            "x": 9,
+            "y": 9
+          }
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 34,
+          "balanceAfter": 368,
+          "createdAt": "2026-06-20T00:39:56.372Z"
+        },
+        {
+          "type": "earn",
+          "source": "vocabQuiz",
+          "amount": 130,
+          "balanceAfter": 498,
+          "createdAt": "2026-06-20T00:41:25.613Z",
+          "meta": {
+            "drillId": "vocab-quiz",
+            "date": "2026-06-20",
+            "correct": 20
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 400,
+          "balanceAfter": 98,
+          "createdAt": "2026-06-20T00:41:30.554Z",
+          "meta": {
+            "buildingType": "town",
+            "x": 9,
+            "y": 10
+          }
+        },
+        {
+          "type": "earn",
+          "source": "vocabQuiz",
+          "amount": 125,
+          "balanceAfter": 223,
+          "createdAt": "2026-06-20T23:08:54.179Z",
+          "meta": {
+            "drillId": "vocab-quiz",
+            "date": "2026-06-21",
+            "correct": 19
+          }
+        },
+        {
+          "type": "earn",
+          "source": "islandProduction",
+          "amount": 294,
+          "balanceAfter": 517,
+          "createdAt": "2026-06-20T23:08:56.453Z",
+          "meta": {
+            "date": "2026-06-21"
+          }
+        },
+        {
+          "type": "earn",
+          "source": "petDog",
+          "amount": 51,
+          "balanceAfter": 568,
+          "createdAt": "2026-06-20T23:09:01.415Z"
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 400,
+          "balanceAfter": 168,
+          "createdAt": "2026-06-20T23:09:15.449Z",
+          "meta": {
+            "buildingType": "town",
+            "x": 9,
+            "y": 9
+          }
+        },
+        {
+          "type": "spend",
+          "source": "islandBuild",
+          "amount": 130,
+          "balanceAfter": 38,
+          "createdAt": "2026-06-21T08:44:07.980Z",
+          "meta": {
+            "buildingType": "pond",
+            "x": 9,
+            "y": 4
+          }
+        }
+      ],
+      "claimedDrills": {
+        "2026-06-14::vocab-quiz": {
+          "claimedAt": "2026-06-14T03:58:47.178Z",
+          "earned": 130,
+          "correct": 20
+        },
+        "2026-06-14::2026-06-14-food": {
+          "claimedAt": "2026-06-14T04:03:20.260Z",
+          "earned": 175,
+          "correct": 23,
+          "perfectSections": 3
+        },
+        "final-exam": {
+          "claimedAt": "2026-06-14T05:05:54.584Z",
+          "earned": 360,
+          "correct": 21,
+          "total": 25
+        },
+        "2026-06-13::2026-06-13-animals": {
+          "claimedAt": "2026-06-14T06:57:03.334Z",
+          "earned": 205,
+          "correct": 25,
+          "perfectSections": 5
+        },
+        "2026-06-15::vocab-quiz": {
+          "claimedAt": "2026-06-14T22:26:16.031Z",
+          "earned": 130,
+          "correct": 20
+        },
+        "2026-06-15::2026-06-15-school": {
+          "claimedAt": "2026-06-14T22:30:51.240Z",
+          "earned": 205,
+          "correct": 25,
+          "perfectSections": 5
+        },
+        "2026-06-16::2026-06-16-clothes": {
+          "claimedAt": "2026-06-15T14:55:49.465Z",
+          "earned": 190,
+          "correct": 24,
+          "perfectSections": 4
+        },
+        "2026-06-16::vocab-quiz": {
+          "claimedAt": "2026-06-15T22:23:15.384Z",
+          "earned": 130,
+          "correct": 20
+        },
+        "2026-06-17::2026-06-17-weather": {
+          "claimedAt": "2026-06-17T13:59:31.283Z",
+          "earned": 205,
+          "correct": 25,
+          "perfectSections": 5
+        },
+        "2026-06-17::vocab-quiz": {
+          "claimedAt": "2026-06-17T14:00:48.763Z",
+          "earned": 130,
+          "correct": 20
+        },
+        "2026-06-18::2026-06-18-body": {
+          "claimedAt": "2026-06-17T22:18:44.583Z",
+          "earned": 205,
+          "correct": 25,
+          "perfectSections": 5
+        },
+        "2026-06-18::vocab-quiz": {
+          "claimedAt": "2026-06-17T22:20:04.338Z",
+          "earned": 130,
+          "correct": 20
+        },
+        "2026-06-19::2026-06-19-time": {
+          "claimedAt": "2026-06-19T08:04:28.113Z",
+          "earned": 205,
+          "correct": 25,
+          "perfectSections": 5
+        },
+        "2026-06-19::vocab-quiz": {
+          "claimedAt": "2026-06-19T08:07:36.818Z",
+          "earned": 130,
+          "correct": 20
+        },
+        "2026-06-20::2026-06-20-places": {
+          "claimedAt": "2026-06-20T00:06:26.733Z",
+          "earned": 205,
+          "correct": 25,
+          "perfectSections": 5
+        },
+        "2026-06-21::2026-06-21-hobbies": {
+          "claimedAt": "2026-06-20T00:08:39.790Z",
+          "earned": 205,
+          "correct": 25,
+          "perfectSections": 5
+        },
+        "2026-06-22::2026-06-22-verbs": {
+          "claimedAt": "2026-06-20T00:18:41.212Z",
+          "earned": 205,
+          "correct": 25,
+          "perfectSections": 5
+        },
+        "2026-06-23::2026-06-23-adjectives": {
+          "claimedAt": "2026-06-20T00:21:54.590Z",
+          "earned": 205,
+          "correct": 25,
+          "perfectSections": 5
+        },
+        "2026-06-24::2026-06-24-numbers": {
+          "claimedAt": "2026-06-20T00:31:53.787Z",
+          "earned": 205,
+          "correct": 25,
+          "perfectSections": 5
+        },
+        "2026-06-25::2026-06-25-colors": {
+          "claimedAt": "2026-06-20T00:34:00.416Z",
+          "earned": 190,
+          "correct": 24,
+          "perfectSections": 4
+        },
+        "2026-06-26::2026-06-26-money": {
+          "claimedAt": "2026-06-20T00:36:27.299Z",
+          "earned": 205,
+          "correct": 25,
+          "perfectSections": 5
+        },
+        "2026-06-27::2026-06-27-feelings": {
+          "claimedAt": "2026-06-20T00:39:08.159Z",
+          "earned": 205,
+          "correct": 25,
+          "perfectSections": 5
+        },
+        "2026-06-20::vocab-quiz": {
+          "claimedAt": "2026-06-20T00:41:25.613Z",
+          "earned": 130,
+          "correct": 20
+        },
+        "2026-06-21::vocab-quiz": {
+          "claimedAt": "2026-06-20T23:08:54.179Z",
+          "earned": 125,
+          "correct": 19
+        }
+      }
+    }
+  },
+  "island": {
+    "schemaVersion": 2,
+    "studentId": "test",
+    "createdAt": "2026-06-14T03:58:49.247Z",
+    "updatedAt": "2026-06-21T08:44:07.980Z",
+    "grid": {
+      "width": 15,
+      "height": 15
+    },
+    "season": "spring",
+    "stats": {
+      "population": 100,
+      "populationCapacity": 100,
+      "beauty": 162,
+      "happiness": 100,
+      "baseProduction": 265,
+      "dailyCoinProduction": 318,
+      "totalBuildings": 25
+    },
+    "lastProcessedDate": "2026-06-21",
+    "buildings": [
+      {
+        "id": "b-1781418138104-5-8",
+        "type": "forest",
+        "x": 5,
+        "y": 8,
+        "level": 3,
+        "createdAt": "2026-06-14T06:22:18.104Z",
+        "lastProductionDate": null,
+        "activeDays": 7,
+        "customName": "",
+        "state": {
+          "isProducing": false,
+          "isDecorative": true
+        }
+      },
+      {
+        "id": "b-1781418148027-7-9",
+        "type": "town",
+        "x": 7,
+        "y": 9,
+        "level": 2,
+        "createdAt": "2026-06-14T06:22:28.027Z",
+        "lastProductionDate": "2026-06-21",
+        "activeDays": 7,
+        "customName": "",
+        "state": {
+          "isProducing": true,
+          "isDecorative": false
+        }
+      },
+      {
+        "id": "b-1781418157653-6-8",
+        "type": "center",
+        "x": 6,
+        "y": 8,
+        "level": 3,
+        "createdAt": "2026-06-14T06:22:37.653Z",
+        "lastProductionDate": "2026-06-21",
+        "activeDays": 7,
+        "customName": "",
+        "state": {
+          "isProducing": true,
+          "isDecorative": true
+        }
+      },
+      {
+        "id": "b-1781420258493-7-8",
+        "type": "farm",
+        "x": 7,
+        "y": 8,
+        "level": 2,
+        "createdAt": "2026-06-14T06:57:38.494Z",
+        "lastProductionDate": "2026-06-21",
+        "activeDays": 7,
+        "customName": "",
+        "state": {
+          "isProducing": true,
+          "isDecorative": false
+        }
+      },
+      {
+        "id": "b-1781420270800-8-7",
+        "type": "pond",
+        "x": 8,
+        "y": 7,
+        "level": 3,
+        "createdAt": "2026-06-14T06:57:50.800Z",
+        "lastProductionDate": null,
+        "activeDays": 7,
+        "customName": "",
+        "state": {
+          "isProducing": false,
+          "isDecorative": true
+        }
+      },
+      {
+        "id": "b-1781420275120-8-8",
+        "type": "farm",
+        "x": 8,
+        "y": 8,
+        "level": 2,
+        "createdAt": "2026-06-14T06:57:55.120Z",
+        "lastProductionDate": "2026-06-21",
+        "activeDays": 7,
+        "customName": "",
+        "state": {
+          "isProducing": true,
+          "isDecorative": false
+        }
+      },
+      {
+        "id": "b-1781432330444-6-9",
+        "type": "house",
+        "x": 6,
+        "y": 9,
+        "level": 2,
+        "createdAt": "2026-06-14T10:18:50.444Z",
+        "lastProductionDate": null,
+        "activeDays": 7,
+        "customName": "",
+        "state": {
+          "isProducing": false,
+          "isDecorative": false
+        }
+      },
+      {
+        "id": "b-1781432347290-9-8",
+        "type": "farm",
+        "x": 9,
+        "y": 8,
+        "level": 2,
+        "createdAt": "2026-06-14T10:19:07.290Z",
+        "lastProductionDate": "2026-06-21",
+        "activeDays": 7,
+        "customName": "",
+        "state": {
+          "isProducing": true,
+          "isDecorative": false
+        }
+      },
+      {
+        "id": "b-1781436042730-5-9",
+        "type": "dog",
+        "x": 5,
+        "y": 9,
+        "level": 1,
+        "createdAt": "2026-06-14T11:20:42.730Z",
+        "lastProductionDate": null,
+        "activeDays": 7,
+        "customName": "",
+        "state": {
+          "isProducing": false,
+          "isDecorative": false
+        }
+      },
+      {
+        "id": "b-1781475993827-8-9",
+        "type": "house",
+        "x": 8,
+        "y": 9,
+        "level": 2,
+        "createdAt": "2026-06-14T22:26:33.827Z",
+        "lastProductionDate": null,
+        "activeDays": 6,
+        "customName": "",
+        "state": {
+          "isProducing": false,
+          "isDecorative": false
+        }
+      },
+      {
+        "id": "b-1781476258888-6-10",
+        "type": "house",
+        "x": 6,
+        "y": 10,
+        "level": 2,
+        "createdAt": "2026-06-14T22:30:58.888Z",
+        "lastProductionDate": null,
+        "activeDays": 6,
+        "customName": "",
+        "state": {
+          "isProducing": false,
+          "isDecorative": false
+        }
+      },
+      {
+        "id": "b-1781476271731-9-7",
+        "type": "forest",
+        "x": 9,
+        "y": 7,
+        "level": 2,
+        "createdAt": "2026-06-14T22:31:11.731Z",
+        "lastProductionDate": null,
+        "activeDays": 6,
+        "customName": "",
+        "state": {
+          "isProducing": false,
+          "isDecorative": true
+        }
+      },
+      {
+        "id": "b-1781562226478-14-4",
+        "type": "windmill",
+        "x": 14,
+        "y": 4,
+        "level": 2,
+        "createdAt": "2026-06-15T22:23:46.478Z",
+        "lastProductionDate": "2026-06-21",
+        "activeDays": 5,
+        "customName": "",
+        "state": {
+          "isProducing": true,
+          "isDecorative": false
+        }
+      },
+      {
+        "id": "b-1781704787799-7-10",
+        "type": "town",
+        "x": 7,
+        "y": 10,
+        "level": 1,
+        "createdAt": "2026-06-17T13:59:47.799Z",
+        "lastProductionDate": "2026-06-21",
+        "activeDays": 4,
+        "customName": "",
+        "state": {
+          "isProducing": true,
+          "isDecorative": false
+        }
+      },
+      {
+        "id": "b-1781734829220-8-10",
+        "type": "town",
+        "x": 8,
+        "y": 10,
+        "level": 1,
+        "createdAt": "2026-06-17T22:20:29.220Z",
+        "lastProductionDate": "2026-06-21",
+        "activeDays": 3,
+        "customName": "",
+        "state": {
+          "isProducing": true,
+          "isDecorative": false
+        }
+      },
+      {
+        "id": "b-1781743230981-9-6",
+        "type": "forest",
+        "x": 9,
+        "y": 6,
+        "level": 2,
+        "createdAt": "2026-06-18T00:40:30.981Z",
+        "lastProductionDate": null,
+        "activeDays": 3,
+        "customName": "",
+        "state": {
+          "isProducing": false,
+          "isDecorative": true
+        }
+      },
+      {
+        "id": "b-1781743235750-9-5",
+        "type": "pond",
+        "x": 9,
+        "y": 5,
+        "level": 2,
+        "createdAt": "2026-06-18T00:40:35.750Z",
+        "lastProductionDate": null,
+        "activeDays": 3,
+        "customName": "",
+        "state": {
+          "isProducing": false,
+          "isDecorative": true
+        }
+      },
+      {
+        "id": "b-1781856468560-7-7",
+        "type": "butterfly",
+        "x": 7,
+        "y": 7,
+        "level": 1,
+        "createdAt": "2026-06-19T08:07:48.560Z",
+        "lastProductionDate": "2026-06-21",
+        "activeDays": 2,
+        "customName": "",
+        "state": {
+          "isProducing": true,
+          "isDecorative": true
+        }
+      },
+      {
+        "id": "b-1781914538416-11-12",
+        "type": "dock",
+        "x": 11,
+        "y": 12,
+        "level": 1,
+        "createdAt": "2026-06-20T00:15:38.416Z",
+        "lastProductionDate": "2026-06-21",
+        "activeDays": 1,
+        "customName": "",
+        "state": {
+          "isProducing": true,
+          "isDecorative": true
+        }
+      },
+      {
+        "id": "b-1781914563996-4-7",
+        "type": "pond",
+        "x": 4,
+        "y": 7,
+        "level": 1,
+        "createdAt": "2026-06-20T00:16:03.996Z",
+        "lastProductionDate": null,
+        "activeDays": 1,
+        "customName": "",
+        "state": {
+          "isProducing": false,
+          "isDecorative": true
+        }
+      },
+      {
+        "id": "b-1781914570540-4-8",
+        "type": "forest",
+        "x": 4,
+        "y": 8,
+        "level": 1,
+        "createdAt": "2026-06-20T00:16:10.540Z",
+        "lastProductionDate": null,
+        "activeDays": 1,
+        "customName": "",
+        "state": {
+          "isProducing": false,
+          "isDecorative": true
+        }
+      },
+      {
+        "id": "b-1781915969417-6-6",
+        "type": "hawk",
+        "x": 6,
+        "y": 6,
+        "level": 1,
+        "createdAt": "2026-06-20T00:39:29.417Z",
+        "lastProductionDate": "2026-06-21",
+        "activeDays": 1,
+        "customName": "",
+        "state": {
+          "isProducing": true,
+          "isDecorative": true
+        }
+      },
+      {
+        "id": "b-1781916090554-9-10",
+        "type": "town",
+        "x": 9,
+        "y": 10,
+        "level": 1,
+        "createdAt": "2026-06-20T00:41:30.554Z",
+        "lastProductionDate": "2026-06-21",
+        "activeDays": 1,
+        "customName": "",
+        "state": {
+          "isProducing": true,
+          "isDecorative": false
+        }
+      },
+      {
+        "id": "b-1781996955449-9-9",
+        "type": "town",
+        "x": 9,
+        "y": 9,
+        "level": 1,
+        "createdAt": "2026-06-20T23:09:15.449Z",
+        "lastProductionDate": null,
+        "activeDays": 0,
+        "customName": "",
+        "state": {
+          "isProducing": true,
+          "isDecorative": false
+        }
+      },
+      {
+        "id": "b-1782031447980-9-4",
+        "type": "pond",
+        "x": 9,
+        "y": 4,
+        "level": 1,
+        "createdAt": "2026-06-21T08:44:07.980Z",
+        "lastProductionDate": null,
+        "activeDays": 0,
+        "customName": "",
+        "state": {
+          "isProducing": false,
+          "isDecorative": true
+        }
+      }
+    ],
+    "events": [
+      {
+        "id": "prod-2026-06-15",
+        "type": "production",
+        "date": "2026-06-15",
+        "message": "農場與小鎮生產了 88 金幣",
+        "coinsDelta": 88,
+        "seen": false
+      },
+      {
+        "id": "prod-2026-06-16",
+        "type": "production",
+        "date": "2026-06-16",
+        "message": "農場與小鎮生產了 95 金幣",
+        "coinsDelta": 95,
+        "seen": false
+      },
+      {
+        "id": "prod-2026-06-17",
+        "type": "production",
+        "date": "2026-06-17",
+        "message": "農場與小鎮生產了 116 金幣",
+        "coinsDelta": 116,
+        "seen": false
+      },
+      {
+        "id": "prod-2026-06-18",
+        "type": "production",
+        "date": "2026-06-18",
+        "message": "農場與小鎮生產了 176 金幣",
+        "coinsDelta": 176,
+        "seen": false
+      },
+      {
+        "id": "prod-2026-06-19",
+        "type": "production",
+        "date": "2026-06-19",
+        "message": "農場與小鎮生產了 200 金幣",
+        "coinsDelta": 200,
+        "seen": false
+      },
+      {
+        "id": "prod-2026-06-20",
+        "type": "production",
+        "date": "2026-06-20",
+        "message": "農場與小鎮生產了 218 金幣",
+        "coinsDelta": 218,
+        "seen": false
+      },
+      {
+        "id": "prod-2026-06-21",
+        "type": "production",
+        "date": "2026-06-21",
+        "message": "農場與小鎮生產了 294 金幣",
+        "coinsDelta": 294,
+        "seen": false
+      }
+    ],
+    "settings": {
+      "emojiStyle": true,
+      "animationsEnabled": true
+    },
+    "dogLastCollect": "2026-06-21"
+  }
+}
