@@ -100,14 +100,14 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607050041"></script>
-<script src="worddex.js?v=202607050041"></script>
-<script src="curriculum.js?v=202607050041"></script>
-<script src="word_emoji.js?v=202607050041"></script>
+<script src="wordbank.js?v=202607050046"></script>
+<script src="worddex.js?v=202607050046"></script>
+<script src="curriculum.js?v=202607050046"></script>
+<script src="word_emoji.js?v=202607050046"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607050041"></script>
-<script src="account_lock.js?v=202607050041"></script>
-<script src="supabase_auth.js?v=202607050041"></script>
+<script src="cloud_sync.js?v=202607050046"></script>
+<script src="account_lock.js?v=202607050046"></script>
+<script src="supabase_auth.js?v=202607050046"></script>
 <script>
 const QUIZ_SIZE = 20;
 const DRILL_ID = "vocab-quiz";
@@ -156,11 +156,18 @@ function shuffle(arr) {
   return arr;
 }
 
+function _quizRetake() {
+  const p = getProgress(currentStudent);
+  return !!(p.coins && p.coins.claimedDrills && p.coins.claimedDrills[todayStr() + "::" + DRILL_ID]);
+}
 function buildQuizSet() {
   const p = getProgress(currentStudent);
+  const retake = _quizRetake();   // 領過金幣 → 練習模式：每次重新隨機抽，不用凍結題組
   const key = "vocabQuizSet." + currentStudent + "." + todayStr();
-  const saved = localStorage.getItem(key);
-  if (saved) return JSON.parse(saved);
+  if (!retake) {
+    const saved = localStorage.getItem(key);
+    if (saved) return JSON.parse(saved);
+  }
 
   const wc = p.wrongCounts || {};
   // 本週 30 字（配合當月文法主題）— 最優先納入每日測驗
@@ -182,7 +189,7 @@ function buildQuizSet() {
   if (picked.length < QUIZ_SIZE) { const fb = WORDBANK.filter(w => !weekEn.has(w.en)); shuffle(fb); pushUnique(fb); }
 
   const set = shuffle(picked.slice(0, QUIZ_SIZE)).map(w => ({ ...w, isWeak: (wc[w.en] || 0) >= 2, isWeek: weekEn.has(w.en) }));
-  localStorage.setItem(key, JSON.stringify(set));
+  if (!retake) localStorage.setItem(key, JSON.stringify(set));   // 練習模式不凍結，每次都新題
   return set;
 }
 
@@ -372,7 +379,7 @@ function updateInfoBar() {
   const weak = Object.values(p.wrongCounts || {}).filter(c => c >= 2).length;
   const bar = document.getElementById("infoBar");
   bar.style.display = "block";
-  bar.textContent = `${currentStudent.charAt(0).toUpperCase() + currentStudent.slice(1)} · 🪙 ${p.coins.balance} · 加強中單字：${weak} 個`;
+  bar.textContent = `${currentStudent.charAt(0).toUpperCase() + currentStudent.slice(1)} · 🪙 ${p.coins.balance} · 加強中單字：${weak} 個${_quizRetake() ? " · 🔁 練習模式(隨機出題)" : ""}`;
 }
 
 // ─── Student select / start ──────────────────────────────────────────────────
