@@ -51,6 +51,7 @@
     <span class="st">今日已換 <b id="stDaily">0</b>/40</span>
     <span class="st">掉落 <b id="stFall">0</b> 代幣</span>
     <span class="st">⏱ <b id="stTime">3:00</b></span>
+    <button id="resetBtn" onclick="resetMachine()" style="border:none;border-radius:10px;background:#3a4370;color:#cfd6ff;font-weight:700;padding:5px 12px;cursor:pointer;font-size:.8rem">♻️ 重置</button>
     <button id="pauseBtn" onclick="togglePause()" style="border:none;border-radius:10px;background:var(--green);color:#fff;font-weight:800;padding:5px 16px;cursor:pointer;font-size:.85rem">▶ 開始</button>
   </div>
   <div id="wordArea">
@@ -148,7 +149,7 @@ const world = new CANNON.World({ gravity: new CANNON.Vec3(0, -9.8, 0) });
 world.allowSleep = true;
 world.broadphase = new CANNON.SAPBroadphase(world);
 const matCoin = new CANNON.Material("coin"), matTable = new CANNON.Material("table");
-world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matTable, { friction: 0.32, restitution: 0.12 }));
+world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matTable, { friction: 0.2, restitution: 0.1 }));
 world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matCoin, { friction: 0.05, restitution: 0.1 }));
 
 function staticBox(sx, sy, sz, x, y, z, color, visible = true, rotX = 0) {
@@ -168,11 +169,10 @@ staticBox(0.35, 6, 10.6, -4.18, 5.0, -0.2, 0, false);           // 左隱形高�
 staticBox(0.35, 6, 10.6, 4.18, 5.0, -0.2, 0, false);            // 右隱形高牆
 staticBox(8.8, 3.6, 0.4, 0, 1.3, -5.2, 0x232a4e);               // 後牆
 staticBox(8.8, 6, 0.4, 0, 5.6, -5.2, 0, false);                 // 後隱形高牆
-staticBox(7.9, 0.3, 3.0, 0, 2.75, -4.35, 0x2a3158, true, -0.62); // 後方斜面導板（掉後面滑回前）
-staticBox(8, 0.3, 3.9, 0, 1.45, 2.15, 0, false);                 // 前場隱形天花板（幣堆不過高、往前擠）
+staticBox(8, 0.3, 4.2, 0, 0.78, 2.0, 0, false);                  // 前場隱形天花板（最多疊3~4層，多的往前擠）
 
 // 推板（kinematic，前後滑動）
-const PLATE = { minZ: -4.0, maxZ: -1.7, w: 7.94, h: 1.5, d: 3.6 };
+const PLATE = { minZ: -5.7, maxZ: -3.4, w: 7.94, h: 1.5, d: 7.0 };
 const plateBody = new CANNON.Body({ mass: 0, type: CANNON.Body.KINEMATIC, material: matTable, shape: new CANNON.Box(new CANNON.Vec3(PLATE.w / 2, PLATE.h / 2, PLATE.d / 2)), position: new CANNON.Vec3(0, PLATE.h / 2, PLATE.minZ) });
 world.addBody(plateBody);
 const plateMesh = new THREE.Mesh(new THREE.BoxGeometry(PLATE.w, PLATE.h, PLATE.d),
@@ -208,7 +208,8 @@ function addCoin(type, x, y, z, randomSpin) {
 function dropCoin(type) {
   if (coins.length >= MAX_COINS) compress(true);
   const x = (Math.random() - .5) * 6.4;
-  addCoin(type, x, 3.4 + Math.random() * 0.8, plateBody.position.z + 0.5 + Math.random() * 1.2, true);
+  const ff = plateBody.position.z + PLATE.d / 2;
+  addCoin(type, x, 3.4 + Math.random() * 0.8, ff - 1.5 + Math.random() * 1.2, true);
 }
 // 自動合成：檯面太滿時，後排 3 枚金幣 → 1 枚藍鑽幣（價值 3=3 守恆，清出空間）
 function compress(force) {
@@ -219,11 +220,11 @@ function compress(force) {
     if (golds.length < 3) break;
     const pos = golds[0].body.position.clone();
     golds.forEach(gc => { world.removeBody(gc.body); scene.remove(gc.mesh); coins.splice(coins.indexOf(gc), 1); });
-    addCoin("silver", pos.x, pos.y + 0.6, Math.max(pos.z, PLATE.maxZ + 0.8), false);
+    addCoin("silver", pos.x, pos.y + 0.6, Math.max(pos.z, PLATE.maxZ + PLATE.d / 2 + 0.8), false);
     showTray("🪙×3 → 💠 自動合成！");
   }
 }
-function seed(n) { for (let i = 0; i < n; i++) addCoin("gold", (Math.random() - .5) * 6.8, 0.35 + Math.random() * 1.2, -0.8 + Math.random() * 3.8, false); }
+function seed(n) { for (let i = 0; i < n; i++) addCoin("gold", (Math.random() - .5) * 6.8, 0.35 + Math.random() * 1.2, 0.9 + Math.random() * 2.8, false); }
 
 // ─── 掉落 → 換金幣 ───────────────────────────────────────────────────────────
 let fallTokens = 0, pendingTokens = 0, trayTimer = null;
@@ -266,7 +267,7 @@ function stepWorld() {
     c.mesh.quaternion.copy(c.body.quaternion);
     if (c.type === "rainbow") c.mesh.material.color.setHSL((t * 0.01 + i * 0.13) % 1, 0.75, 0.62);
     if (c.body.position.y < -3 || c.body.position.z > 5.6) {
-      if (c.body.position.z > 3.2) onFall(c.type);   // 只有前緣掉落算得分
+      onFall(c.type);   // 掉出檯面都算得分
       world.removeBody(c.body); scene.remove(c.mesh);
       coins.splice(i, 1);
     }
@@ -285,7 +286,8 @@ function loadMachine() {
     const d = JSON.parse(localStorage.getItem("kidsPusher3d." + currentStudent) || "null");
     if (d && d.c && d.c.length) {
       const tp = { g: "gold", s: "silver", r: "rainbow" };
-      d.c.slice(0, MAX_COINS).forEach((a, i) => addCoin(tp[a[0]] || "gold", a[1], 0.3 + (i % 5) * 0.34, Math.max(a[2], PLATE.maxZ + 0.6), false));
+      const safeZ = PLATE.maxZ + PLATE.d / 2 + 0.7;
+      d.c.slice(0, MAX_COINS).forEach((a, i) => addCoin(tp[a[0]] || "gold", a[1], 0.3 + (i % 5) * 0.34, Math.max(a[2], safeZ), false));
       fallTokens = d.fall || 0; pendingTokens = d.pend || 0; return;
     }
   } catch (e) {}
@@ -330,6 +332,13 @@ window.togglePause = function () {
     clearInterval(timerIv); timerOn = false;
     btn.textContent = "▶ 繼續"; btn.style.background = "var(--green)";
   }
+};
+window.resetMachine = function () {
+  if (!confirm("要把機台清空重來嗎？（檯面代幣會消失，重新放 40 枚；已換到的金幣不受影響）")) return;
+  for (const c of coins) { world.removeBody(c.body); scene.remove(c.mesh); }
+  coins = []; pendingTokens = 0;
+  seed(SEED_COINS);
+  saveMachine(); showTray("♻️ 機台重置完成！");
 };
 window.restartSession = function () {
   timeLeft = SESSION_SEC; sessionOver = false;
