@@ -48,11 +48,14 @@
 <div id="game" style="display:none;flex-direction:column;align-items:center;width:100%">
   <div id="statBar">
     <span class="st">🪙 <b id="stCoin">—</b></span>
-    <span class="st">今日已換 <b id="stDaily">0</b>/40</span>
+    <span class="st">🏆 <b id="stTries">正式 0/3</b></span>
+    <span class="st">本局 <b id="stSession">0</b></span>
     <span class="st">掉落 <b id="stFall">0</b> 代幣</span>
     <span class="st">⏱ <b id="stTime">3:00</b></span>
     <button id="resetBtn" onclick="resetMachine()" style="border:none;border-radius:10px;background:#3a4370;color:#cfd6ff;font-weight:700;padding:5px 12px;cursor:pointer;font-size:.8rem">♻️ 重置</button>
-    <button id="pauseBtn" onclick="togglePause()" style="border:none;border-radius:10px;background:var(--green);color:#fff;font-weight:800;padding:5px 16px;cursor:pointer;font-size:.85rem">▶ 開始</button>
+    <button id="practiceBtn" onclick="startSession(&quot;practice&quot;)" style="border:none;border-radius:10px;background:#5f6cb0;color:#fff;font-weight:800;padding:5px 14px;cursor:pointer;font-size:.85rem">🎮 試玩</button>
+    <button id="officialBtn" onclick="startSession(&quot;official&quot;)" style="border:none;border-radius:10px;background:var(--green);color:#fff;font-weight:800;padding:5px 14px;cursor:pointer;font-size:.85rem">🏆 正式 (0/3)</button>
+    <button id="pauseBtn" onclick="togglePause()" style="display:none;border:none;border-radius:10px;background:var(--danger);color:#fff;font-weight:800;padding:5px 14px;cursor:pointer;font-size:.85rem">⏸ 暫停</button>
   </div>
   <div id="wordArea">
     <div id="wordZh">—</div>
@@ -62,14 +65,14 @@
   </div>
   <canvas id="cv3d" width="460" height="330"></canvas>
   <div id="tray"></div>
-  <div id="hint">打對字母掉 🪙 金幣（1 代幣）｜連擊每滿 5 掉 💠 藍鑽幣（3 代幣，比較輕）｜連擊每滿 10 掉 🌈 彩虹幣（10 代幣，超輕會亂彈！）<br>掉下前緣的代幣 <b>3 = 1 島嶼金幣</b>（每日上限 40）。平板點機台叫出鍵盤。</div>
+  <div id="hint">打對字母掉 🪙 金幣（1 代幣）｜連擊每滿 5 掉 💠 藍鑽幣（3 代幣，比較輕）｜連擊每滿 10 掉 🌈 彩虹幣（10 代幣，超輕會亂彈！）<br>每天 <b>3 次正式挑戰</b>，取掉落最多那局：<b>3 代幣 = 1 島嶼金幣</b>（試玩不限次數、不計獎勵）。平板點機台叫出鍵盤。</div>
   <input id="mobileInput" autocomplete="off" autocapitalize="none">
   <div id="overEl" style="display:none;position:fixed;inset:0;background:rgba(10,13,30,.82);z-index:50;align-items:center;justify-content:center">
     <div style="background:var(--panel);border:3px solid var(--gold);border-radius:18px;padding:26px 24px;text-align:center;max-width:320px">
       <div style="font-size:2.2rem">⏱️</div>
       <h2 style="color:var(--gold);margin:6px 0">時間到！</h2>
       <p id="overStats" style="margin:8px 0 16px;line-height:1.8"></p>
-      <button onclick="restartSession()" style="padding:11px 26px;border:none;border-radius:11px;background:var(--gold);color:#3a2a00;font-weight:800;font-size:1rem;cursor:pointer">🔄 再來一局</button>
+      <button onclick="closeOver()" style="padding:11px 26px;border:none;border-radius:11px;background:var(--gold);color:#3a2a00;font-weight:800;font-size:1rem;cursor:pointer">好！</button>
       <div style="margin-top:10px"><a href="../kids/island.html" style="color:var(--blue);font-size:.85rem">🏝️ 回我的島嶼</a></div>
     </div>
   </div>
@@ -89,7 +92,7 @@ import * as THREE from "three";
 import * as CANNON from "cannon-es";
 
 // ─── 常數 ────────────────────────────────────────────────────────────────────
-const DAILY_CAP = 40, TOKENS_PER_COIN = 3, SEED_COINS = 40, MAX_COINS = 170;
+const TOKENS_PER_COIN = 3, SEED_COINS = 40, MAX_COINS = 170;
 // 幣種：value=代幣值、mass=重量（輕的容易被撞上去）、色
 const COIN_TYPES = {
   gold:    { value: 1,  mass: 6,   r: 0.55, color: 0xffd24d, emis: 0x332200 },
@@ -102,7 +105,6 @@ let currentStudent = null;
 const todayStr = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
 const getProgress = s => { const raw = localStorage.getItem("kidsProgress." + s); const p = raw ? JSON.parse(raw) : { wrongCounts: {}, sessions: 0, totalCorrect: 0, totalWrong: 0 }; if (!p.coins) p.coins = { balance: 0, lifetimeEarned: 0, lifetimeSpent: 0, transactions: [], claimedDrills: {} }; return p; };
 const saveProgress = (s, p) => localStorage.setItem("kidsProgress." + s, JSON.stringify(p));
-const dailyEarned = p => { const t = todayStr(); return (p.coins.transactions || []).filter(x => x.source === "typingPusher" && (x.createdAt || "").slice(0, 10) === t).reduce((a, x) => a + x.amount, 0); };
 
 // ─── 單字（本週優先）＋ 發音（Web Audio 預解碼）───────────────────────────────
 let WORDS = [], order = [], oi = -1, cur = null, li = 0, combo = 0;
@@ -150,7 +152,7 @@ world.allowSleep = true;
 world.broadphase = new CANNON.SAPBroadphase(world);
 const matCoin = new CANNON.Material("coin"), matTable = new CANNON.Material("table");
 world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matTable, { friction: 0.2, restitution: 0.1 }));
-world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matCoin, { friction: 0.05, restitution: 0.1 }));
+world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matCoin, { friction: 0.4, restitution: 0.1 }));
 
 function staticBox(sx, sy, sz, x, y, z, color, visible = true, rotX = 0) {
   const body = new CANNON.Body({ mass: 0, material: matTable, shape: new CANNON.Box(new CANNON.Vec3(sx / 2, sy / 2, sz / 2)), position: new CANNON.Vec3(x, y, z) });
@@ -227,26 +229,38 @@ function compress(force) {
 function seed(n) { for (let i = 0; i < n; i++) addCoin("gold", (Math.random() - .5) * 6.8, 0.35 + Math.random() * 1.2, 0.9 + Math.random() * 2.8, false); }
 
 // ─── 掉落 → 換金幣 ───────────────────────────────────────────────────────────
-let fallTokens = 0, pendingTokens = 0, trayTimer = null;
+let fallTokens = 0, sessionTokens = 0, trayTimer = null;
 function showTray(msg) { const el = document.getElementById("tray"); el.textContent = msg; clearTimeout(trayTimer); trayTimer = setTimeout(() => el.textContent = "", 1700); }
-function updateStats() { const p = getProgress(currentStudent); document.getElementById("stCoin").textContent = p.coins.balance; document.getElementById("stDaily").textContent = dailyEarned(p); document.getElementById("stFall").textContent = fallTokens; }
-function creditCoin(n) {
+function dailyRec() {
+  const all = JSON.parse(localStorage.getItem("kidsPusherDaily." + currentStudent) || "{}");
+  const t = todayStr();
+  if (!all[t]) all[t] = { attempts: [], credited: 0 };
+  return { all, rec: all[t] };
+}
+function saveDaily(all) { localStorage.setItem("kidsPusherDaily." + currentStudent, JSON.stringify(all)); }
+function updateStats() {
   const p = getProgress(currentStudent);
-  const earned = dailyEarned(p);
-  if (earned >= DAILY_CAP) { showTray("今天換滿 40 🪙，代幣明天再換！"); return; }
-  const amt = Math.min(n, DAILY_CAP - earned);
-  p.coins.balance += amt; p.coins.lifetimeEarned += amt;
-  p.coins.transactions.push({ type: "earn", source: "typingPusher", amount: amt, balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { date: todayStr(), game: "pusher3d" } });
+  document.getElementById("stCoin").textContent = p.coins.balance;
+  document.getElementById("stFall").textContent = fallTokens;
+  document.getElementById("stSession").textContent = sessionTokens;
+  const { rec } = dailyRec();
+  document.getElementById("stTries").textContent = "正式 " + rec.attempts.length + "/3";
+}
+function creditCoin(n) {
+  if (n <= 0) return;
+  const p = getProgress(currentStudent);
+  p.coins.balance += n; p.coins.lifetimeEarned += n;
+  p.coins.transactions.push({ type: "earn", source: "typingPusher", amount: n, balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { date: todayStr(), game: "pusher3d" } });
   saveProgress(currentStudent, p);
   if (typeof cloudSave === "function") cloudSave(currentStudent);
-  updateStats(); showTray("🪙 +" + amt + "！");
+  updateStats(); showTray("🪙 +" + n + "！");
 }
 function onFall(type) {
   const v = COIN_TYPES[type].value;
-  fallTokens += v; pendingTokens += v;
+  fallTokens += v;
+  if (running && !paused) sessionTokens += v;   // 只有進行中的局才計入本局
   if (type !== "gold") showTray((type === "rainbow" ? "🌈 彩虹幣" : "💠 藍鑽幣") + " +" + v + " 代幣！");
-  const gain = Math.floor(pendingTokens / TOKENS_PER_COIN);
-  if (gain > 0) { pendingTokens -= gain * TOKENS_PER_COIN; creditCoin(gain); } else updateStats();
+  updateStats();
 }
 
 // ─── 物理迴圈 ────────────────────────────────────────────────────────────────
@@ -280,7 +294,7 @@ let _looping = false, saveTick = 0;
 function startLoop() { if (_looping) return; _looping = true; stepWorld(); }
 
 // ─── 檯面保存 ────────────────────────────────────────────────────────────────
-function saveMachine() { try { localStorage.setItem("kidsPusher3d." + currentStudent, JSON.stringify({ c: coins.map(c => [c.type[0], +c.body.position.x.toFixed(2), +c.body.position.z.toFixed(2)]), fall: fallTokens, pend: pendingTokens })); } catch (e) {} }
+function saveMachine() { try { localStorage.setItem("kidsPusher3d." + currentStudent, JSON.stringify({ c: coins.map(c => [c.type[0], +c.body.position.x.toFixed(2), +c.body.position.z.toFixed(2)]), fall: fallTokens })); } catch (e) {} }
 function loadMachine() {
   try {
     const d = JSON.parse(localStorage.getItem("kidsPusher3d." + currentStudent) || "null");
@@ -288,75 +302,93 @@ function loadMachine() {
       const tp = { g: "gold", s: "silver", r: "rainbow" };
       const safeZ = PLATE.maxZ + PLATE.d / 2 + 0.7;
       d.c.slice(0, MAX_COINS).forEach((a, i) => addCoin(tp[a[0]] || "gold", a[1], 0.3 + (i % 5) * 0.34, Math.max(a[2], safeZ), false));
-      fallTokens = d.fall || 0; pendingTokens = d.pend || 0; return;
+      fallTokens = d.fall || 0; return;
     }
   } catch (e) {}
   seed(SEED_COINS);
 }
 
-// ─── 3 分鐘計時 ──────────────────────────────────────────────────────────────
+// ─── 一局 3 分鐘：每天 3 次正式（取掉落最多的一次換幣），試玩不限 ─────────────
 const SESSION_SEC = 180;
-let timeLeft = SESSION_SEC, timerOn = false, sessionOver = false, timerIv = null;
-let sessionTokens = 0, sessionStartFall = 0;
+let mode = null, running = false, paused = false, timeLeft = SESSION_SEC, timerIv = null;
 function fmtTime(s) { return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); }
-function startTimer() {
-  if (timerOn || sessionOver) return;
-  timerOn = true; sessionStartFall = fallTokens;
-  timerIv = setInterval(() => {
-    timeLeft--;
-    const el = document.getElementById("stTime");
-    el.textContent = fmtTime(timeLeft);
-    el.style.color = timeLeft <= 30 ? "var(--danger)" : "";
-    if (timeLeft <= 0) endSession();
-  }, 1000);
+function setBtns() {
+  const pr = document.getElementById("practiceBtn"), of = document.getElementById("officialBtn"), pz = document.getElementById("pauseBtn");
+  const { rec } = dailyRec();
+  of.textContent = "🏆 正式 (" + rec.attempts.length + "/3)";
+  const noMore = rec.attempts.length >= 3;
+  of.disabled = running || noMore; of.style.opacity = (running || noMore) ? ".45" : "1";
+  pr.disabled = running; pr.style.opacity = running ? ".45" : "1";
+  pz.style.display = running ? "inline-block" : "none";
+  pz.textContent = paused ? "▶ 繼續" : "⏸ 暫停";
+  pz.style.background = paused ? "var(--green)" : "var(--danger)";
 }
-function endSession() {
-  clearInterval(timerIv); timerOn = false; sessionOver = true;
-  sessionTokens = fallTokens - sessionStartFall;
-  document.getElementById("overStats").innerHTML =
-    "本局掉落 <b style=\"color:var(--gold)\">" + sessionTokens + "</b> 代幣<br>連擊最高與換到的金幣都已入帳 🪙<br>（機台的代幣會留著，下局繼續推！）";
-  document.getElementById("overEl").style.display = "flex";
-  saveMachine();
+function tick() {
+  timeLeft--;
+  const el = document.getElementById("stTime");
+  el.textContent = fmtTime(timeLeft);
+  el.style.color = timeLeft <= 30 ? "var(--danger)" : "";
+  if (timeLeft <= 0) endSession();
 }
-let paused = true;   // 初始未開始
+window.startSession = function (m) {
+  if (running) return;
+  const { rec } = dailyRec();
+  if (m === "official" && rec.attempts.length >= 3) { showTray("今天 3 次正式用完了，玩 🎮 試玩吧！"); return; }
+  mode = m; running = true; paused = false; sessionTokens = 0; timeLeft = SESSION_SEC;
+  document.getElementById("stTime").textContent = fmtTime(timeLeft);
+  document.getElementById("stTime").style.color = "";
+  clearInterval(timerIv); timerIv = setInterval(tick, 1000);
+  setBtns(); updateStats();
+  showTray(m === "official" ? "🏆 正式挑戰開始！" : "🎮 試玩開始！");
+  document.getElementById("mobileInput").focus({ preventScroll: true });
+};
 window.togglePause = function () {
-  const btn = document.getElementById("pauseBtn");
-  if (sessionOver) return;
-  if (paused) {           // 開始 / 繼續
-    paused = false;
-    startTimer();
-    btn.textContent = "⏸ 暫停"; btn.style.background = "var(--danger)";
-    document.getElementById("mobileInput").focus({ preventScroll: true });
-  } else {                // 暫停
-    paused = true;
-    clearInterval(timerIv); timerOn = false;
-    btn.textContent = "▶ 繼續"; btn.style.background = "var(--green)";
+  if (!running) return;
+  paused = !paused;
+  if (paused) clearInterval(timerIv);
+  else { clearInterval(timerIv); timerIv = setInterval(tick, 1000); }
+  setBtns();
+};
+function endSession() {
+  clearInterval(timerIv); running = false; paused = false;
+  let msg = "本局掉落 <b style=\"color:var(--gold)\">" + sessionTokens + "</b> 代幣<br>";
+  if (mode === "official") {
+    const { all, rec } = dailyRec();
+    rec.attempts.push(sessionTokens);
+    const best = Math.max.apply(null, rec.attempts);
+    const target = Math.floor(best / 3);
+    const delta = target - (rec.credited || 0);
+    if (delta > 0) { rec.credited = target; creditCoin(delta); }
+    saveDaily(all);
+    msg += "今日最佳 " + best + " 代幣 → 換到 " + (rec.credited || 0) + " 🪙" + (delta > 0 ? "（+" + delta + "）" : "（沒破今日紀錄）") + "<br>正式次數 " + rec.attempts.length + "/3";
+  } else {
+    msg += "（試玩不計獎勵，正式挑戰才換金幣）";
   }
+  document.getElementById("overStats").innerHTML = msg;
+  document.getElementById("overEl").style.display = "flex";
+  setBtns(); updateStats(); saveMachine();
+}
+window.closeOver = function () {
+  document.getElementById("overEl").style.display = "none";
+  document.getElementById("stTime").textContent = fmtTime(SESSION_SEC);
+  setBtns();
 };
 window.resetMachine = function () {
   if (!confirm("要把機台清空重來嗎？（檯面代幣會消失，重新放 40 枚；已換到的金幣不受影響）")) return;
   for (const c of coins) { world.removeBody(c.body); scene.remove(c.mesh); }
-  coins = []; pendingTokens = 0;
+  coins = [];
   seed(SEED_COINS);
   saveMachine(); showTray("♻️ 機台重置完成！");
-};
-window.restartSession = function () {
-  timeLeft = SESSION_SEC; sessionOver = false;
-  document.getElementById("stTime").textContent = fmtTime(SESSION_SEC);
-  document.getElementById("stTime").style.color = "";
-  document.getElementById("overEl").style.display = "none";
-  paused = true;
-  const btn = document.getElementById("pauseBtn");
-  btn.textContent = "▶ 開始"; btn.style.background = "var(--green)";
 };
 
 // ─── 打字 ────────────────────────────────────────────────────────────────────
 function onKey(ch) {
-  if (!cur || sessionOver) return;
-  if (paused) { window.togglePause(); }   // 按任意字母也能開始
+  if (!cur) return;
+  if (!running) { window.startSession("practice"); }   // 沒開局就打字 → 自動開試玩
+  else if (paused) return;                              // 暫停中不吃鍵
   ch = ch.toLowerCase();
   if (!/^[a-z]$/.test(ch)) return;
-  ctx(); startTimer();
+  ctx();
   if (ch === cur.en[li]) {
     li++; combo++;
     let type = "gold", note = "";
@@ -388,6 +420,7 @@ window.selectStudent = async function (name) {
   loadMachine();
   updateStats();
   nextWord(); prewarm();
+  setBtns();
   startLoop();
   window.addEventListener("beforeunload", saveMachine);
 };
