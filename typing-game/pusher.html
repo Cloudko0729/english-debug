@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⌨️🪙 推幣機打字 Typing Coin Pusher</title>
+<style>
+  :root{--bg:#1c2340;--panel:#28305a;--gold:#ffd24d;--text:#eef1ff;--muted:#9aa3c7;--green:#2fbf71;--blue:#4da3ff;--danger:#ff5d7a;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Arial,"Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 10px 40px;}
+  header{width:100%;max-width:560px;text-align:center;padding:14px 0 6px;}
+  header h1{font-size:1.2rem;color:var(--gold);}
+  header a{color:var(--blue);font-size:.78rem;text-decoration:none;margin:0 6px;}
+  #statBar{width:100%;max-width:560px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-size:.82rem;margin:8px 0;}
+  #statBar .st{background:var(--panel);border-radius:10px;padding:6px 12px;font-weight:700;}
+  #statBar .st b{color:var(--gold);}
+  #wordArea{width:100%;max-width:560px;background:var(--panel);border-radius:14px;padding:12px;text-align:center;margin-bottom:10px;}
+  #wordZh{font-size:1.15rem;color:var(--gold);font-weight:800;min-height:1.5em;}
+  #wordLetters{display:flex;gap:5px;justify-content:center;margin:8px 0 4px;flex-wrap:wrap;}
+  .lb{width:38px;height:46px;border-radius:8px;background:#1a2038;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;border:2px solid #3a4370;}
+  .lb.done{background:#153c2b;border-color:var(--green);color:var(--green);}
+  .lb.cur{border-color:var(--gold);color:var(--gold);animation:pulse 0.9s infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+  .lb.err{border-color:var(--danger);animation:shake .18s;}
+  @keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+  #playBtn{border:none;border-radius:9px;background:var(--blue);color:#fff;font-weight:700;padding:5px 14px;cursor:pointer;font-size:.85rem;}
+  #combo{font-size:.78rem;color:var(--muted);margin-top:4px;min-height:1.2em;}
+  canvas{background:linear-gradient(#2b3462,#232a4e);border-radius:16px;border:3px solid #3a4370;touch-action:manipulation;}
+  #tray{width:100%;max-width:400px;text-align:center;font-weight:800;color:var(--gold);margin-top:8px;font-size:1rem;min-height:1.4em;}
+  #hint{color:var(--muted);font-size:.75rem;margin-top:8px;text-align:center;max-width:400px;}
+  #mobileInput{position:absolute;opacity:0;height:1px;width:1px;pointer-events:none;}
+  #pickMsg{background:var(--panel);border-radius:14px;padding:26px 18px;margin-top:20px;text-align:center;color:var(--muted);max-width:400px;}
+  .stu-btn{padding:7px 18px;border:2px solid var(--gold);border-radius:18px;background:transparent;color:var(--gold);font-weight:700;cursor:pointer;margin:4px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>⌨️🪙 推幣機打字</h1>
+  <div><a href="../kids/index.html">← 回首頁</a><a href="../kids/island.html">🏝️ 我的島嶼</a><a href="index.html">🧱 舊版打字方塊</a></div>
+</header>
+
+<div id="pickMsg">👆 選一下你是誰，開始推金幣！<br><br>
+  <button class="stu-btn" onclick="selectStudent('albert')">Albert</button>
+  <button class="stu-btn" onclick="selectStudent('jonathan')">Jonathan</button>
+  <button class="stu-btn" onclick="selectStudent('test')">🧪 測試</button>
+</div>
+
+<div id="game" style="display:none;flex-direction:column;align-items:center;width:100%">
+  <div id="statBar">
+    <span class="st">🪙 島嶼金幣 <b id="stCoin">—</b></span>
+    <span class="st">今日已換 <b id="stDaily">0</b>/40</span>
+    <span class="st">掉落代幣 <b id="stFall">0</b></span>
+  </div>
+  <div id="wordArea">
+    <div id="wordZh">—</div>
+    <div id="wordLetters"></div>
+    <div><button id="playBtn" onclick="sayCurrent()">🔊 再聽一次</button></div>
+    <div id="combo"></div>
+  </div>
+  <canvas id="cv" width="380" height="440"></canvas>
+  <div id="tray"></div>
+  <div id="hint">打對一個字母 = 掉 1 枚代幣進機台；被推下來的代幣 <b>3 枚 = 1 島嶼金幣</b>（每天最多換 40）。<br>平板請點一下機台叫出鍵盤。</div>
+  <input id="mobileInput" autocomplete="off" autocapitalize="none">
+</div>
+
+<script src="../kids/wordbank.js?v=202607050046"></script>
+<script src="../kids/curriculum.js?v=202607050046"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../kids/cloud_sync.js?v=202607050046"></script>
+<script src="../kids/account_lock.js?v=202607050046"></script>
+<script src="../kids/supabase_auth.js?v=202607050046"></script>
+<script>
+"use strict";
+// ─── 常數 ───────────────────────────────────────────────────────────────────
+const W = 380, H = 440, R = 13;          // 檯面 / 代幣半徑
+const SEED_COINS = 40;                    // 開機預放代幣數
+const TOKENS_PER_COIN = 3;                // 3 代幣 = 1 島嶼金幣
+const DAILY_CAP = 40;                     // 每日最多換 40 島嶼金幣
+let currentStudent = null;
+
+// ─── 進度存取（與全站一致）───────────────────────────────────────────────────
+function todayStr(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function getProgress(s){const raw=localStorage.getItem("kidsProgress."+s);const p=raw?JSON.parse(raw):{wrongCounts:{},sessions:0,totalCorrect:0,totalWrong:0};if(!p.coins)p.coins={balance:0,lifetimeEarned:0,lifetimeSpent:0,transactions:[],claimedDrills:{}};return p;}
+function saveProgress(s,p){localStorage.setItem("kidsProgress."+s,JSON.stringify(p));}
+function dailyEarned(p){const t=todayStr();return (p.coins.transactions||[]).filter(x=>x.source==="typingPusher"&&(x.createdAt||"").slice(0,10)===t).reduce((a,x)=>a+x.amount,0);}
+
+// ─── 單字：本週 30 字優先，之後其他字 ───────────────────────────────────────
+let WORDS=[], order=[], oi=-1, cur=null, li=0, combo=0;
+function weekWordSet(){try{return vocabWeekForDate(todayStr()).week.words.map(w=>({en:String(w.en).toLowerCase(),zh:w.zh}));}catch(e){return [];}}
+async function loadWords(){
+  let csv=[];
+  try{
+    const res=await fetch("./words.csv",{cache:"no-store"});
+    csv=(await res.text()).split(/\r?\n/).filter(l=>l.includes(",")).map(l=>{const i=l.indexOf(",");return {en:l.slice(0,i).trim().toLowerCase(),zh:l.slice(i+1).trim()};}).filter(w=>/^[a-z]{2,}$/.test(w.en));
+  }catch(e){}
+  const week=weekWordSet().filter(w=>/^[a-z]+$/.test(w.en));
+  const have=new Set(week.map(w=>w.en));
+  WORDS=week.concat(csv.filter(w=>!have.has(w.en)));
+  const wk=week.length;
+  const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+  order=shuf(WORDS.slice(0,wk).map((_,i)=>i)).concat(shuf(WORDS.slice(wk).map((_,i)=>i+wk)));
+}
+function nextWord(){
+  oi=(oi+1)%order.length; cur=WORDS[order[oi]]; li=0;
+  document.getElementById("wordZh").textContent=cur.zh;
+  renderLetters(); sayCurrent();
+}
+function renderLetters(err){
+  document.getElementById("wordLetters").innerHTML=cur.en.split("").map((ch,i)=>
+    `<div class="lb ${i<li?"done":i===li?("cur"+(err?" err":"")):""}">${ch}</div>`).join("");
+}
+
+// ─── 發音（Web Audio 預解碼，不卡輸入）──────────────────────────────────────
+let actx=null; const bufs={};
+function akey(en){return (typeof wordAudioKey==="function")?wordAudioKey(en):en.replace(/[^a-z0-9]+/g,"");}
+function ctx(){if(!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(actx&&actx.state==="suspended")actx.resume().catch(()=>{});return actx;}
+function loadBuf(k){if(bufs[k]!==undefined||!ctx())return;bufs[k]="l";
+  fetch("../kids/audio/words/"+k+".mp3").then(r=>r.ok?r.arrayBuffer():Promise.reject())
+  .then(ab=>ctx().decodeAudioData(ab,b=>{bufs[k]=b;},()=>{bufs[k]="f";})).catch(()=>{bufs[k]="f";});}
+function prewarm(){for(let n=0;n<=10;n++){const w=WORDS[order[(oi+n)%order.length]];if(w)loadBuf(akey(w.en));}}
+function sayCurrent(){
+  if(!cur)return; const k=akey(cur.en), b=bufs[k];
+  if(b&&b!=="l"&&b!=="f"){const s=ctx().createBufferSource();s.buffer=b;s.connect(ctx().destination);s.start(0);}
+  else if(b==="f"&&window.speechSynthesis){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(cur.en);u.lang="en-US";u.rate=.9;speechSynthesis.speak(u);}
+  else loadBuf(k);
+}
+
+// ─── 推幣機物理 ─────────────────────────────────────────────────────────────
+const cv=document.getElementById("cv"), g=cv.getContext("2d");
+let coins=[], t=0, fallCount=0, pendingTokens=0;
+const PLATE_MIN=54, PLATE_MAX=118;
+function plateY(){return PLATE_MIN+(PLATE_MAX-PLATE_MIN)*(0.5+0.5*Math.sin(t*0.035));}
+function plateMovingDown(){return Math.cos(t*0.035)>0;}
+function seedCoins(n){for(let i=0;i<n;i++)coins.push({x:R+8+Math.random()*(W-2*R-16),y:PLATE_MAX+20+Math.random()*(H-PLATE_MAX-140),vx:0,vy:0});}
+function dropCoin(){coins.push({x:R+10+Math.random()*(W-2*R-20),y:plateY()-16,vx:(Math.random()-.5)*0.6,vy:0.4,fresh:24});}
+function step(){
+  t++;
+  const py=plateY(), down=plateMovingDown();
+  for(const c of coins){
+    if(c.fresh){c.fresh--;}
+    // 推板：代幣頂到板緣就往前推
+    if(c.y-R<py){c.y=py+R;if(down)c.vy+=0.9;}
+    c.vy*=0.90;c.vx*=0.88;
+    c.y+=c.vy;c.x+=c.vx;
+    if(c.x<R)  {c.x=R;  c.vx=Math.abs(c.vx)*0.5;}
+    if(c.x>W-R){c.x=W-R;c.vx=-Math.abs(c.vx)*0.5;}
+  }
+  // 代幣互推（兩輪就夠穩）
+  for(let it=0;it<2;it++)for(let i=0;i<coins.length;i++)for(let j=i+1;j<coins.length;j++){
+    const a=coins[i],b=coins[j];const dx=b.x-a.x,dy=b.y-a.y;const d2=dx*dx+dy*dy;
+    if(d2>0&&d2<4*R*R){const d=Math.sqrt(d2),ov=(2*R-d)/2;const nx=dx/d,ny=dy/d;
+      a.x-=nx*ov;a.y-=ny*ov;b.x+=nx*ov;b.y+=ny*ov;
+      const tv=(a.vy-b.vy)*0.35;a.vy-=tv;b.vy+=tv;}
+  }
+  // 掉落
+  const before=coins.length;
+  coins=coins.filter(c=>{ if(c.y>H-R-2){onFall();return false;} return true; });
+}
+function draw(){
+  g.clearRect(0,0,W,H);
+  // 檯面
+  g.fillStyle="#20274a";g.fillRect(0,0,W,H);
+  // 前緣獎盤區
+  g.fillStyle="#151a33";g.fillRect(0,H-26,W,26);
+  g.fillStyle="#ffd24d";g.font="12px Arial";g.textAlign="center";g.fillText("⬇ 掉下來就是你的！⬇",W/2,H-9);
+  // 推板
+  const py=plateY();
+  const grd=g.createLinearGradient(0,0,0,py);grd.addColorStop(0,"#4a5591");grd.addColorStop(1,"#5f6cb0");
+  g.fillStyle=grd;g.fillRect(4,0,W-8,py);
+  g.fillStyle="#7c89cf";g.fillRect(4,py-6,W-8,6);
+  // 代幣
+  for(const c of coins){
+    g.beginPath();g.arc(c.x,c.y,R,0,7);
+    g.fillStyle=c.fresh?"#ffe27a":"#ffd24d";g.fill();
+    g.strokeStyle="#b8860b";g.lineWidth=2;g.stroke();
+    g.fillStyle="#b8860b";g.font="bold 13px Arial";g.textAlign="center";g.textBaseline="middle";g.fillText("￥",c.x,c.y+1);
+  }
+  g.textBaseline="alphabetic";
+}
+let _looping=false;
+function loop(){step();draw();saveMachineThrottled();requestAnimationFrame(loop);}
+function startLoop(){if(_looping)return;_looping=true;loop();}
+
+// ─── 掉落 → 換島嶼金幣（3:1，日上限）────────────────────────────────────────
+function onFall(){
+  fallCount++;pendingTokens++;
+  document.getElementById("stFall").textContent=fallCount;
+  if(pendingTokens>=TOKENS_PER_COIN){
+    pendingTokens-=TOKENS_PER_COIN;
+    creditCoin(1);
+  }
+}
+let trayTimer=null;
+function creditCoin(n){
+  const p=getProgress(currentStudent);
+  const earned=dailyEarned(p);
+  if(earned>=DAILY_CAP){showTray("今天換滿 40 🪙 了，代幣明天再換！");return;}
+  const amt=Math.min(n,DAILY_CAP-earned);
+  p.coins.balance+=amt;p.coins.lifetimeEarned+=amt;
+  p.coins.transactions.push({type:"earn",source:"typingPusher",amount:amt,balanceAfter:p.coins.balance,createdAt:new Date().toISOString(),meta:{date:todayStr()}});
+  saveProgress(currentStudent,p);
+  if(typeof cloudSave==="function")cloudSave(currentStudent);
+  updateStats();
+  showTray("🪙 +"+amt+"！");
+}
+function showTray(msg){const el=document.getElementById("tray");el.textContent=msg;clearTimeout(trayTimer);trayTimer=setTimeout(()=>el.textContent="",1600);}
+function updateStats(){
+  const p=getProgress(currentStudent);
+  document.getElementById("stCoin").textContent=p.coins.balance;
+  document.getElementById("stDaily").textContent=dailyEarned(p);
+}
+
+// ─── 檯面保存（同一台繼續玩）────────────────────────────────────────────────
+let saveTick=0;
+function saveMachineThrottled(){if(++saveTick%180!==0)return;saveMachine();}
+function saveMachine(){try{localStorage.setItem("kidsPusher."+currentStudent,JSON.stringify({coins:coins.map(c=>[Math.round(c.x),Math.round(c.y)]),fall:fallCount,pend:pendingTokens}));}catch(e){}}
+function loadMachine(){
+  try{
+    const d=JSON.parse(localStorage.getItem("kidsPusher."+currentStudent)||"null");
+    if(d&&d.coins&&d.coins.length){coins=d.coins.map(a=>({x:a[0],y:Math.max(a[1],PLATE_MAX+R),vx:0,vy:0}));fallCount=d.fall||0;pendingTokens=d.pend||0;return;}
+  }catch(e){}
+  seedCoins(SEED_COINS);
+}
+
+// ─── 打字輸入 ───────────────────────────────────────────────────────────────
+function onKey(ch){
+  if(!cur)return;
+  ch=ch.toLowerCase();
+  if(!/^[a-z]$/.test(ch))return;
+  ctx();  // 使用者手勢喚醒音訊
+  if(ch===cur.en[li]){
+    li++;combo++;dropCoin();
+    document.getElementById("combo").textContent="🔥 連續 "+combo;
+    if(li>=cur.en.length){setTimeout(nextWord,220);prewarm();}
+    else renderLetters();
+  }else{
+    combo=0;document.getElementById("combo").textContent="";
+    renderLetters(true);
+  }
+}
+document.addEventListener("keydown",e=>{if(e.key.length===1)onKey(e.key);});
+const mi=document.getElementById("mobileInput");
+cv.addEventListener("click",()=>{mi.style.pointerEvents="auto";mi.focus({preventScroll:true});});
+mi.addEventListener("input",()=>{const v=mi.value;mi.value="";if(v)onKey(v.slice(-1));});
+
+// ─── 啟動 ───────────────────────────────────────────────────────────────────
+window.selectStudent=async function(name){
+  if(typeof requireUnlock==="function"&&!requireUnlock(name))return;
+  currentStudent=name;
+  localStorage.setItem("kidsCurrentStudent",name);
+  document.getElementById("pickMsg").style.display="none";
+  document.getElementById("game").style.display="flex";
+  await loadWords();
+  loadMachine();
+  updateStats();
+  nextWord();prewarm();
+  startLoop();
+  window.addEventListener("beforeunload",saveMachine);
+};
+if(!window.sbClient){const last=localStorage.getItem("kidsCurrentStudent");if(last)window.selectStudent(last);}
+</script>
+</body>
+</html>
