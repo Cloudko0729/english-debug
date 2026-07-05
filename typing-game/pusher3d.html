@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⌨️🪙 3D 推幣機打字</title>
+<style>
+  :root{--bg:#151a33;--panel:#242b52;--gold:#ffd24d;--text:#eef1ff;--muted:#9aa3c7;--green:#2fbf71;--blue:#4da3ff;--danger:#ff5d7a;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Arial,"Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 10px 40px;}
+  header{width:100%;max-width:560px;text-align:center;padding:12px 0 4px;}
+  header h1{font-size:1.15rem;color:var(--gold);}
+  header a{color:var(--blue);font-size:.78rem;text-decoration:none;margin:0 6px;}
+  #statBar{width:100%;max-width:560px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-size:.8rem;margin:6px 0;}
+  #statBar .st{background:var(--panel);border-radius:10px;padding:5px 11px;font-weight:700;}
+  #statBar .st b{color:var(--gold);}
+  #wordArea{width:100%;max-width:560px;background:var(--panel);border-radius:14px;padding:10px;text-align:center;margin-bottom:8px;}
+  #wordZh{font-size:1.1rem;color:var(--gold);font-weight:800;min-height:1.4em;}
+  #wordLetters{display:flex;gap:5px;justify-content:center;margin:7px 0 3px;flex-wrap:wrap;}
+  .lb{width:36px;height:44px;border-radius:8px;background:#181e3c;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;border:2px solid #3a4370;}
+  .lb.done{background:#153c2b;border-color:var(--green);color:var(--green);}
+  .lb.cur{border-color:var(--gold);color:var(--gold);animation:pulse .9s infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+  .lb.err{border-color:var(--danger);animation:shake .18s;}
+  @keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+  #playBtn{border:none;border-radius:9px;background:var(--blue);color:#fff;font-weight:700;padding:4px 13px;cursor:pointer;font-size:.82rem;}
+  #combo{font-size:.8rem;color:var(--gold);margin-top:3px;min-height:1.2em;font-weight:700;}
+  #cv3d{border-radius:16px;border:3px solid #3a4370;touch-action:manipulation;max-width:100%;}
+  #tray{width:100%;max-width:420px;text-align:center;font-weight:800;color:var(--gold);margin-top:6px;font-size:1rem;min-height:1.4em;}
+  #hint{color:var(--muted);font-size:.73rem;margin-top:6px;text-align:center;max-width:440px;line-height:1.6;}
+  #mobileInput{position:absolute;opacity:0;height:1px;width:1px;pointer-events:none;}
+  #pickMsg{background:var(--panel);border-radius:14px;padding:26px 18px;margin-top:20px;text-align:center;color:var(--muted);max-width:400px;}
+  .stu-btn{padding:7px 18px;border:2px solid var(--gold);border-radius:18px;background:transparent;color:var(--gold);font-weight:700;cursor:pointer;margin:4px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>⌨️🪙 3D 推幣機打字</h1>
+  <div><a href="../kids/index.html">← 回首頁</a><a href="../kids/island.html">🏝️ 我的島嶼</a><a href="pusher.html">🕹️ 2D 版</a><a href="index.html">🧱 打字方塊</a></div>
+</header>
+
+<div id="pickMsg">👆 選一下你是誰，開始推金幣！<br><br>
+  <button class="stu-btn" onclick="selectStudent('albert')">Albert</button>
+  <button class="stu-btn" onclick="selectStudent('jonathan')">Jonathan</button>
+  <button class="stu-btn" onclick="selectStudent('test')">🧪 測試</button>
+</div>
+
+<div id="game" style="display:none;flex-direction:column;align-items:center;width:100%">
+  <div id="statBar">
+    <span class="st">🪙 <b id="stCoin">—</b></span>
+    <span class="st">今日已換 <b id="stDaily">0</b>/40</span>
+    <span class="st">掉落 <b id="stFall">0</b> 代幣</span>
+    <span class="st">⏱ <b id="stTime">3:00</b></span>
+  </div>
+  <div id="wordArea">
+    <div id="wordZh">—</div>
+    <div id="wordLetters"></div>
+    <div><button id="playBtn">🔊 再聽一次</button></div>
+    <div id="combo"></div>
+  </div>
+  <canvas id="cv3d" width="420" height="470"></canvas>
+  <div id="tray"></div>
+  <div id="hint">打對字母掉 🪙 金幣（1 代幣）｜連擊每滿 5 掉 💠 藍鑽幣（3 代幣，比較輕）｜連擊每滿 10 掉 🌈 彩虹幣（10 代幣，超輕會亂彈！）<br>掉下前緣的代幣 <b>3 = 1 島嶼金幣</b>（每日上限 40）。平板點機台叫出鍵盤。</div>
+  <input id="mobileInput" autocomplete="off" autocapitalize="none">
+  <div id="overEl" style="display:none;position:fixed;inset:0;background:rgba(10,13,30,.82);z-index:50;align-items:center;justify-content:center">
+    <div style="background:var(--panel);border:3px solid var(--gold);border-radius:18px;padding:26px 24px;text-align:center;max-width:320px">
+      <div style="font-size:2.2rem">⏱️</div>
+      <h2 style="color:var(--gold);margin:6px 0">時間到！</h2>
+      <p id="overStats" style="margin:8px 0 16px;line-height:1.8"></p>
+      <button onclick="restartSession()" style="padding:11px 26px;border:none;border-radius:11px;background:var(--gold);color:#3a2a00;font-weight:800;font-size:1rem;cursor:pointer">🔄 再來一局</button>
+      <div style="margin-top:10px"><a href="../kids/island.html" style="color:var(--blue);font-size:.85rem">🏝️ 回我的島嶼</a></div>
+    </div>
+  </div>
+</div>
+
+<script src="../kids/wordbank.js?v=202607050046"></script>
+<script src="../kids/curriculum.js?v=202607050046"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../kids/cloud_sync.js?v=202607050046"></script>
+<script src="../kids/account_lock.js?v=202607050046"></script>
+<script src="../kids/supabase_auth.js?v=202607050046"></script>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","cannon-es":"https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"}}
+</script>
+<script type="module">
+import * as THREE from "three";
+import * as CANNON from "cannon-es";
+
+// ─── 常數 ────────────────────────────────────────────────────────────────────
+const DAILY_CAP = 40, TOKENS_PER_COIN = 3, SEED_COINS = 22, MAX_COINS = 90;
+// 幣種：value=代幣值、mass=重量（輕的容易被撞上去）、色
+const COIN_TYPES = {
+  gold:    { value: 1,  mass: 6,   r: 1.1,  color: 0xffd24d, emis: 0x332200 },
+  silver:  { value: 3,  mass: 3.5, r: 1.05, color: 0x9fd8ff, emis: 0x113044 },
+  rainbow: { value: 10, mass: 2,   r: 1.0,  color: 0xff7ad9, emis: 0x331133 },
+};
+let currentStudent = null;
+
+// ─── 進度（與全站一致）───────────────────────────────────────────────────────
+const todayStr = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+const getProgress = s => { const raw = localStorage.getItem("kidsProgress." + s); const p = raw ? JSON.parse(raw) : { wrongCounts: {}, sessions: 0, totalCorrect: 0, totalWrong: 0 }; if (!p.coins) p.coins = { balance: 0, lifetimeEarned: 0, lifetimeSpent: 0, transactions: [], claimedDrills: {} }; return p; };
+const saveProgress = (s, p) => localStorage.setItem("kidsProgress." + s, JSON.stringify(p));
+const dailyEarned = p => { const t = todayStr(); return (p.coins.transactions || []).filter(x => x.source === "typingPusher" && (x.createdAt || "").slice(0, 10) === t).reduce((a, x) => a + x.amount, 0); };
+
+// ─── 單字（本週優先）＋ 發音（Web Audio 預解碼）───────────────────────────────
+let WORDS = [], order = [], oi = -1, cur = null, li = 0, combo = 0;
+async function loadWords() {
+  let csv = [];
+  try {
+    const res = await fetch("./words.csv", { cache: "no-store" });
+    csv = (await res.text()).split(/\r?\n/).filter(l => l.includes(",")).map(l => { const i = l.indexOf(","); return { en: l.slice(0, i).trim().toLowerCase(), zh: l.slice(i + 1).trim() }; }).filter(w => /^[a-z]{2,}$/.test(w.en));
+  } catch (e) {}
+  let week = [];
+  try { week = vocabWeekForDate(todayStr()).week.words.map(w => ({ en: String(w.en).toLowerCase(), zh: w.zh })).filter(w => /^[a-z]+$/.test(w.en)); } catch (e) {}
+  const have = new Set(week.map(w => w.en));
+  WORDS = week.concat(csv.filter(w => !have.has(w.en)));
+  const shuf = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  order = shuf(week.map((_, i) => i)).concat(shuf(WORDS.slice(week.length).map((_, i) => i + week.length)));
+}
+let actx = null; const bufs = {};
+const akey = en => (typeof wordAudioKey === "function") ? wordAudioKey(en) : en.replace(/[^a-z0-9]+/g, "");
+function ctx() { if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} } if (actx && actx.state === "suspended") actx.resume().catch(() => {}); return actx; }
+function loadBuf(k) { if (bufs[k] !== undefined || !ctx()) return; bufs[k] = "l"; fetch("../kids/audio/words/" + k + ".mp3").then(r => r.ok ? r.arrayBuffer() : Promise.reject()).then(ab => ctx().decodeAudioData(ab, b => { bufs[k] = b; }, () => { bufs[k] = "f"; })).catch(() => { bufs[k] = "f"; }); }
+function prewarm() { for (let n = 0; n <= 10; n++) { const w = WORDS[order[(oi + n) % order.length]]; if (w) loadBuf(akey(w.en)); } }
+function sayCurrent() {
+  if (!cur) return; const k = akey(cur.en), b = bufs[k];
+  if (b && b !== "l" && b !== "f") { const s = ctx().createBufferSource(); s.buffer = b; s.connect(ctx().destination); s.start(0); }
+  else if (b === "f" && window.speechSynthesis) { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(cur.en); u.lang = "en-US"; u.rate = .9; speechSynthesis.speak(u); }
+  else loadBuf(k);
+}
+function nextWord() { oi = (oi + 1) % order.length; cur = WORDS[order[oi]]; li = 0; document.getElementById("wordZh").textContent = cur.zh; renderLetters(); sayCurrent(); }
+function renderLetters(err) { document.getElementById("wordLetters").innerHTML = cur.en.split("").map((ch, i) => `<div class="lb ${i < li ? "done" : i === li ? ("cur" + (err ? " err" : "")) : ""}">${ch}</div>`).join(""); }
+
+// ─── 3D 場景 + 物理 ──────────────────────────────────────────────────────────
+// 檯面座標：x -4..4（寬）、z -5(後)..+4(前緣)、y 上。前緣外掉下去 = 獲得。
+const canvas = document.getElementById("cv3d");
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x10142b);
+const camera = new THREE.PerspectiveCamera(46, canvas.width / canvas.height, 0.1, 60);
+camera.position.set(0, 9.2, 10.6); camera.lookAt(0, 0.2, 0.4);
+scene.add(new THREE.HemisphereLight(0xbfd4ff, 0x2a2145, 1.1));
+const dl = new THREE.DirectionalLight(0xffffff, 1.4); dl.position.set(4, 10, 6); scene.add(dl);
+
+const world = new CANNON.World({ gravity: new CANNON.Vec3(0, -9.8, 0) });
+world.allowSleep = true;
+world.broadphase = new CANNON.SAPBroadphase(world);
+const matCoin = new CANNON.Material("coin"), matTable = new CANNON.Material("table");
+world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matTable, { friction: 0.32, restitution: 0.12 }));
+world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matCoin, { friction: 0.12, restitution: 0.18 }));
+
+function staticBox(sx, sy, sz, x, y, z, color, visible = true) {
+  const body = new CANNON.Body({ mass: 0, material: matTable, shape: new CANNON.Box(new CANNON.Vec3(sx / 2, sy / 2, sz / 2)), position: new CANNON.Vec3(x, y, z) });
+  world.addBody(body);
+  if (visible) {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(sx, sy, sz), new THREE.MeshStandardMaterial({ color, roughness: .85 }));
+    m.position.set(x, y, z); scene.add(m);
+  }
+  return body;
+}
+staticBox(8, 1, 9, 0, -0.5, -0.5, 0x2c355f);                    // 檯面（前緣到 z=4）
+staticBox(0.35, 2.6, 10.6, -4.18, 0.6, -0.2, 0x232a4e);         // 左牆
+staticBox(0.35, 2.6, 10.6, 4.18, 0.6, -0.2, 0x232a4e);          // 右牆
+staticBox(8.8, 3.2, 0.4, 0, 1.1, -5.2, 0x232a4e);               // 後牆
+
+// 推板（kinematic，前後滑動）
+const PLATE = { minZ: -4.0, maxZ: -1.7, w: 7.6, h: 1.5, d: 3.6 };
+const plateBody = new CANNON.Body({ mass: 0, type: CANNON.Body.KINEMATIC, material: matTable, shape: new CANNON.Box(new CANNON.Vec3(PLATE.w / 2, PLATE.h / 2, PLATE.d / 2)), position: new CANNON.Vec3(0, PLATE.h / 2, PLATE.minZ) });
+world.addBody(plateBody);
+const plateMesh = new THREE.Mesh(new THREE.BoxGeometry(PLATE.w, PLATE.h, PLATE.d),
+  new THREE.MeshStandardMaterial({ color: 0x5f6cb0, metalness: .5, roughness: .35 }));
+scene.add(plateMesh);
+
+// 前緣提示條
+const edge = new THREE.Mesh(new THREE.BoxGeometry(8, 0.06, 0.18), new THREE.MeshStandardMaterial({ color: 0xffd24d, emissive: 0x554400 }));
+edge.position.set(0, 0.04, 4); scene.add(edge);
+
+// ─── 硬幣 ────────────────────────────────────────────────────────────────────
+const coinGeoCache = {}, coinMatCache = {};
+function coinAssets(type) {
+  const t = COIN_TYPES[type];
+  if (!coinGeoCache[type]) coinGeoCache[type] = new THREE.CylinderGeometry(t.r, t.r, 0.3, 24);
+  if (!coinMatCache[type]) coinMatCache[type] = new THREE.MeshStandardMaterial({ color: t.color, emissive: t.emis, metalness: .75, roughness: .3 });
+  return { geo: coinGeoCache[type], mat: coinMatCache[type] };
+}
+let coins = [];   // {body, mesh, type}
+function addCoin(type, x, y, z, randomSpin) {
+  const t = COIN_TYPES[type];
+  const body = new CANNON.Body({ mass: t.mass, material: matCoin, shape: new CANNON.Cylinder(t.r, t.r, 0.3, 12), position: new CANNON.Vec3(x, y, z), allowSleep: true, sleepSpeedLimit: 0.25, sleepTimeLimit: 0.6 });
+  if (randomSpin) {
+    body.angularVelocity.set((Math.random() - .5) * 6, (Math.random() - .5) * 4, (Math.random() - .5) * 6);
+    body.velocity.set((Math.random() - .5) * 1.2, 0, (Math.random() - .2) * 0.8);
+  }
+  world.addBody(body);
+  const a = coinAssets(type);
+  const mesh = new THREE.Mesh(a.geo, type === "rainbow" ? a.mat.clone() : a.mat);
+  scene.add(mesh);
+  coins.push({ body, mesh, type });
+}
+function dropCoin(type) {
+  if (coins.length >= MAX_COINS) return;
+  const x = (Math.random() - .5) * 6.4;
+  addCoin(type, x, 3.4 + Math.random() * 0.8, plateBody.position.z + (Math.random() - .5) * 2.0, true);
+}
+function seed(n) { for (let i = 0; i < n; i++) addCoin("gold", (Math.random() - .5) * 6.8, 0.35 + Math.random() * 1.2, -0.8 + Math.random() * 3.8, false); }
+
+// ─── 掉落 → 換金幣 ───────────────────────────────────────────────────────────
+let fallTokens = 0, pendingTokens = 0, trayTimer = null;
+function showTray(msg) { const el = document.getElementById("tray"); el.textContent = msg; clearTimeout(trayTimer); trayTimer = setTimeout(() => el.textContent = "", 1700); }
+function updateStats() { const p = getProgress(currentStudent); document.getElementById("stCoin").textContent = p.coins.balance; document.getElementById("stDaily").textContent = dailyEarned(p); document.getElementById("stFall").textContent = fallTokens; }
+function creditCoin(n) {
+  const p = getProgress(currentStudent);
+  const earned = dailyEarned(p);
+  if (earned >= DAILY_CAP) { showTray("今天換滿 40 🪙，代幣明天再換！"); return; }
+  const amt = Math.min(n, DAILY_CAP - earned);
+  p.coins.balance += amt; p.coins.lifetimeEarned += amt;
+  p.coins.transactions.push({ type: "earn", source: "typingPusher", amount: amt, balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { date: todayStr(), game: "pusher3d" } });
+  saveProgress(currentStudent, p);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  updateStats(); showTray("🪙 +" + amt + "！");
+}
+function onFall(type) {
+  const v = COIN_TYPES[type].value;
+  fallTokens += v; pendingTokens += v;
+  if (type !== "gold") showTray((type === "rainbow" ? "🌈 彩虹幣" : "💠 藍鑽幣") + " +" + v + " 代幣！");
+  const gain = Math.floor(pendingTokens / TOKENS_PER_COIN);
+  if (gain > 0) { pendingTokens -= gain * TOKENS_PER_COIN; creditCoin(gain); } else updateStats();
+}
+
+// ─── 物理迴圈 ────────────────────────────────────────────────────────────────
+let t = 0;
+function stepWorld() {
+  t++;
+  // 推板：正弦運動（用速度驅動 kinematic → 有真實推力）
+  const w = 0.030;
+  const targetZ = PLATE.minZ + (PLATE.maxZ - PLATE.minZ) * (0.5 + 0.5 * Math.sin(t * w));
+  plateBody.velocity.set(0, 0, (targetZ - plateBody.position.z) * 60 * 0.9);
+  world.step(1 / 60);
+  plateMesh.position.copy(plateBody.position);
+  plateMesh.quaternion.copy(plateBody.quaternion);
+  // 掉落偵測 + 彩虹幣閃色
+  for (let i = coins.length - 1; i >= 0; i--) {
+    const c = coins[i];
+    c.mesh.position.copy(c.body.position);
+    c.mesh.quaternion.copy(c.body.quaternion);
+    if (c.type === "rainbow") c.mesh.material.color.setHSL((t * 0.01 + i * 0.13) % 1, 0.75, 0.62);
+    if (c.body.position.y < -3 || c.body.position.z > 5.6) {
+      onFall(c.type);
+      world.removeBody(c.body); scene.remove(c.mesh);
+      coins.splice(i, 1);
+    }
+  }
+  renderer.render(scene, camera);
+  if (++saveTick % 240 === 0) saveMachine();
+  requestAnimationFrame(stepWorld);
+}
+let _looping = false, saveTick = 0;
+function startLoop() { if (_looping) return; _looping = true; stepWorld(); }
+
+// ─── 檯面保存 ────────────────────────────────────────────────────────────────
+function saveMachine() { try { localStorage.setItem("kidsPusher3d." + currentStudent, JSON.stringify({ c: coins.map(c => [c.type[0], +c.body.position.x.toFixed(2), +c.body.position.z.toFixed(2)]), fall: fallTokens, pend: pendingTokens })); } catch (e) {} }
+function loadMachine() {
+  try {
+    const d = JSON.parse(localStorage.getItem("kidsPusher3d." + currentStudent) || "null");
+    if (d && d.c && d.c.length) {
+      const tp = { g: "gold", s: "silver", r: "rainbow" };
+      d.c.slice(0, MAX_COINS).forEach((a, i) => addCoin(tp[a[0]] || "gold", a[1], 0.3 + (i % 5) * 0.34, Math.max(a[2], PLATE.maxZ + 0.6), false));
+      fallTokens = d.fall || 0; pendingTokens = d.pend || 0; return;
+    }
+  } catch (e) {}
+  seed(SEED_COINS);
+}
+
+// ─── 3 分鐘計時 ──────────────────────────────────────────────────────────────
+const SESSION_SEC = 180;
+let timeLeft = SESSION_SEC, timerOn = false, sessionOver = false, timerIv = null;
+let sessionTokens = 0, sessionStartFall = 0;
+function fmtTime(s) { return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); }
+function startTimer() {
+  if (timerOn || sessionOver) return;
+  timerOn = true; sessionStartFall = fallTokens;
+  timerIv = setInterval(() => {
+    timeLeft--;
+    const el = document.getElementById("stTime");
+    el.textContent = fmtTime(timeLeft);
+    el.style.color = timeLeft <= 30 ? "var(--danger)" : "";
+    if (timeLeft <= 0) endSession();
+  }, 1000);
+}
+function endSession() {
+  clearInterval(timerIv); timerOn = false; sessionOver = true;
+  sessionTokens = fallTokens - sessionStartFall;
+  document.getElementById("overStats").innerHTML =
+    "本局掉落 <b style=\"color:var(--gold)\">" + sessionTokens + "</b> 代幣<br>連擊最高與換到的金幣都已入帳 🪙<br>（機台的代幣會留著，下局繼續推！）";
+  document.getElementById("overEl").style.display = "flex";
+  saveMachine();
+}
+window.restartSession = function () {
+  timeLeft = SESSION_SEC; sessionOver = false;
+  document.getElementById("stTime").textContent = fmtTime(SESSION_SEC);
+  document.getElementById("stTime").style.color = "";
+  document.getElementById("overEl").style.display = "none";
+};
+
+// ─── 打字 ────────────────────────────────────────────────────────────────────
+function onKey(ch) {
+  if (!cur || sessionOver) return;
+  ch = ch.toLowerCase();
+  if (!/^[a-z]$/.test(ch)) return;
+  ctx(); startTimer();
+  if (ch === cur.en[li]) {
+    li++; combo++;
+    let type = "gold", note = "";
+    if (combo % 10 === 0) { type = "rainbow"; note = "　🌈 彩虹幣！"; }
+    else if (combo % 5 === 0) { type = "silver"; note = "　💠 藍鑽幣！"; }
+    dropCoin(type);
+    document.getElementById("combo").textContent = "🔥 連擊 " + combo + note;
+    if (li >= cur.en.length) { setTimeout(nextWord, 200); prewarm(); }
+    else renderLetters();
+  } else {
+    combo = 0; document.getElementById("combo").textContent = "";
+    renderLetters(true);
+  }
+}
+document.addEventListener("keydown", e => { if (e.key.length === 1) onKey(e.key); });
+const mi = document.getElementById("mobileInput");
+canvas.addEventListener("click", () => { mi.style.pointerEvents = "auto"; mi.focus({ preventScroll: true }); });
+mi.addEventListener("input", () => { const v = mi.value; mi.value = ""; if (v) onKey(v.slice(-1)); });
+document.getElementById("playBtn").addEventListener("click", sayCurrent);
+
+// ─── 啟動 ────────────────────────────────────────────────────────────────────
+window.selectStudent = async function (name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
+  currentStudent = name;
+  localStorage.setItem("kidsCurrentStudent", name);
+  document.getElementById("pickMsg").style.display = "none";
+  document.getElementById("game").style.display = "flex";
+  await loadWords();
+  loadMachine();
+  updateStats();
+  nextWord(); prewarm();
+  startLoop();
+  window.addEventListener("beforeunload", saveMachine);
+};
+if (!window.sbClient) { const last = localStorage.getItem("kidsCurrentStudent"); if (last) window.selectStudent(last); }
+</script>
+</body>
+</html>
