@@ -150,6 +150,7 @@ const dl = new THREE.DirectionalLight(0xffffff, 1.4); dl.position.set(4, 10, 6);
 const world = new CANNON.World({ gravity: new CANNON.Vec3(0, -9.8, 0) });
 world.allowSleep = true;
 world.broadphase = new CANNON.SAPBroadphase(world);
+world.solver.iterations = 15;
 const matCoin = new CANNON.Material("coin"), matTable = new CANNON.Material("table");
 world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matTable, { friction: 0.2, restitution: 0.1 }));
 world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matCoin, { friction: 0.4, restitution: 0.1 }));
@@ -171,7 +172,7 @@ staticBox(0.35, 6, 10.6, -4.18, 5.0, -0.2, 0, false);           // 左隱形高�
 staticBox(0.35, 6, 10.6, 4.18, 5.0, -0.2, 0, false);            // 右隱形高牆
 staticBox(8.8, 3.6, 0.4, 0, 1.3, -5.2, 0x232a4e);               // 後牆
 staticBox(8.8, 6, 0.4, 0, 5.6, -5.2, 0, false);                 // 後隱形高牆
-staticBox(8, 0.3, 4.2, 0, 0.78, 2.0, 0, false);                  // 前場隱形天花板（最多疊3~4層，多的往前擠）
+staticBox(8, 2.0, 4.0, 0, 1.7, 2.5, 0, false);                    // 前場隱形天花板（厚 2.0 防穿透，z 0.5~4.5）
 
 // 推板（kinematic，前後滑動）
 const PLATE = { minZ: -5.7, maxZ: -3.4, w: 7.94, h: 1.5, d: 7.0 };
@@ -196,7 +197,7 @@ function coinAssets(type) {
 let coins = [];   // {body, mesh, type}
 function addCoin(type, x, y, z, randomSpin) {
   const t = COIN_TYPES[type];
-  const body = new CANNON.Body({ mass: t.mass, material: matCoin, shape: new CANNON.Cylinder(t.r, t.r, 0.16, 12), position: new CANNON.Vec3(x, y, z), allowSleep: true, sleepSpeedLimit: 0.25, sleepTimeLimit: 0.6 });
+  const body = new CANNON.Body({ mass: t.mass, material: matCoin, shape: new CANNON.Cylinder(t.r, t.r, 0.16, 12), position: new CANNON.Vec3(x, y, z), allowSleep: true, sleepSpeedLimit: 0.1, sleepTimeLimit: 1.5 });
   if (randomSpin) {
     body.angularVelocity.set((Math.random() - .5) * 6, (Math.random() - .5) * 4, (Math.random() - .5) * 6);
     body.velocity.set((Math.random() - .5) * 1.2, 0, (Math.random() - .2) * 0.8);
@@ -271,7 +272,8 @@ function stepWorld() {
   const w = 0.030;
   const targetZ = PLATE.minZ + (PLATE.maxZ - PLATE.minZ) * (0.5 + 0.5 * Math.sin(t * w));
   plateBody.velocity.set(0, 0, (targetZ - plateBody.position.z) * 60 * 0.9);
-  world.step(1 / 60);
+  world.step(1 / 180, 1 / 60, 5);
+  if (t % 120 === 0) { for (const c of coins) c.body.wakeUp(); }
   plateMesh.position.copy(plateBody.position);
   plateMesh.quaternion.copy(plateBody.quaternion);
   // 掉落偵測 + 彩虹幣閃色
