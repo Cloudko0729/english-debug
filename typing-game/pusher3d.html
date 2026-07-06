@@ -65,7 +65,7 @@
   </div>
   <canvas id="cv3d" width="460" height="330"></canvas>
   <div id="tray"></div>
-  <div id="hint">打對字母掉 🪙 金幣（1 代幣）｜連擊每滿 5 掉 💠 藍鑽幣（3 代幣，比較輕）｜連擊每滿 10 掉 🌈 彩虹幣（10 代幣，超輕會亂彈！）<br>每天 <b>3 次正式挑戰</b>，取掉落最多那局：<b>3 代幣 = 1 島嶼金幣</b>（試玩不限次數、不計獎勵）。平板點機台叫出鍵盤。</div>
+  <div id="hint">打對字母掉 🪙 金幣（1 代幣）｜連擊每滿 5 掉 💠 藍鑽幣（3 代幣，比較輕）｜連擊每滿 10 掉 🌈 彩虹幣（10 代幣，超輕會亂彈！）<br>每天 <b>3 次正式挑戰</b>，取掉落最多那局：<b>1 代幣 = 1 島嶼金幣</b>（試玩不限次數、不計獎勵）。平板點機台叫出鍵盤。</div>
   <input id="mobileInput" autocomplete="off" autocapitalize="none">
   <div id="overEl" style="display:none;position:fixed;inset:0;background:rgba(10,13,30,.82);z-index:50;align-items:center;justify-content:center">
     <div style="background:var(--panel);border:3px solid var(--gold);border-radius:18px;padding:26px 24px;text-align:center;max-width:320px">
@@ -92,7 +92,7 @@ import * as THREE from "three";
 import * as CANNON from "cannon-es";
 
 // ─── 常數 ────────────────────────────────────────────────────────────────────
-const TOKENS_PER_COIN = 3, SEED_COINS = 40, MAX_COINS = 120;
+const TOKENS_PER_COIN = 1, SEED_COINS = 40, MAX_COINS = 120;
 // 幣種：value=代幣值、mass=重量（輕的容易被撞上去）、色
 const COIN_TYPES = {
   gold:    { value: 1,  mass: 6,   r: 0.55, color: 0xffd24d, emis: 0x332200 },
@@ -369,7 +369,7 @@ function endSession() {
     const { all, rec } = dailyRec();
     rec.attempts.push(sessionTokens);
     const best = Math.max.apply(null, rec.attempts);
-    const target = Math.floor(best / 3);
+    const target = Math.floor(best / TOKENS_PER_COIN);
     const delta = target - (rec.credited || 0);
     if (delta > 0) { rec.credited = target; creditCoin(delta); }
     saveDaily(all);
