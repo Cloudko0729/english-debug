@@ -214,6 +214,114 @@ const WEEK_DRILLS = {
         ]
       }
     ]
+  },
+  "2026-07-3": {            // 第3週 健康與規則 · 過去式/未來式（Codex 起草、Claude 審核）
+    listenBlank: [
+      { full: "The doctor gave me medicine yesterday.", display: "The doctor gave me ___ yesterday.", answer: "medicine" },
+      { full: "A healthy habit helped Amy sleep well.", display: "A healthy ___ helped Amy sleep well.", answer: "habit" },
+      { full: "We will exercise after school tomorrow.", display: "We will ___ after school tomorrow.", answer: "exercise" },
+      { full: "The nurse checked the patient in the room.", display: "The nurse checked the ___ in the room.", answer: "patient" },
+      { full: "Dad had a fever last night.", display: "Dad had a ___ last night.", answer: "fever" },
+      { full: "My headache went away after rest.", display: "My ___ went away after rest.", answer: "headache" },
+      { full: "A cough kept Tom home today.", display: "A ___ kept Tom home today.", answer: "cough" },
+      { full: "Good health starts with enough sleep.", display: "Good ___ starts with enough sleep.", answer: "health" },
+      { full: "We followed the rule at the pool.", display: "We followed the ___ at the pool.", answer: "rule" },
+      { full: "Please be careful near the stairs.", display: "Please be ___ near the stairs.", answer: "careful" },
+      { full: "Mom's advice made me feel better.", display: "Mom's ___ made me feel better.", answer: "advice" },
+      { full: "The reason was clear to everyone today.", display: "The ___ was clear to everyone today.", answer: "reason" },
+      { full: "The result made our teacher happy.", display: "The ___ made our teacher happy.", answer: "result" },
+      { full: "Dirty hands can cause illness at school.", display: "Dirty hands can cause ___ at school.", answer: "illness" },
+      { full: "That problem worried the nurse yesterday.", display: "That ___ worried the nurse yesterday.", answer: "problem" },
+      { full: "The sign says we need masks inside.", display: "The ___ says we need masks inside.", answer: "sign" },
+      { full: "I made a mistake with my medicine.", display: "I made a ___ with my medicine.", answer: "mistake" },
+      { full: "Our safety rules protect every student here.", display: "Our ___ rules protect every student here.", answer: "safety" },
+      { full: "We will avoid running in the hall.", display: "We will ___ running in the hall.", answer: "avoid" },
+      { full: "Please follow the doctor's advice today.", display: "Please ___ the doctor's advice today.", answer: "follow" },
+      { full: "Do not worry about one mistake.", display: "Do not ___ about one mistake.", answer: "worry" }
+    ],
+    reorder: [
+      { sentence: "The doctor checked my fever yesterday.", chunks: ["The doctor", "checked", "my fever", "yesterday."] },
+      { sentence: "We are going to visit the hospital tomorrow.", chunks: ["We are going to", "visit", "the hospital", "tomorrow."] },
+      { sentence: "The nurse gave the patient water.", chunks: ["The nurse", "gave", "the patient", "water."] },
+      { sentence: "I will take medicine after lunch.", chunks: ["I will", "take medicine", "after", "lunch."] },
+      { sentence: "Kelly had a headache this morning.", chunks: ["Kelly", "had a headache", "this", "morning."] },
+      { sentence: "Dirty hands will cause a health problem.", chunks: ["Dirty hands", "will cause", "a health", "problem."] },
+      { sentence: "Good sleep will improve your health.", chunks: ["Good sleep", "will improve", "your", "health."] },
+      { sentence: "Our class followed the safety rule.", chunks: ["Our class", "followed", "the safety", "rule."] },
+      { sentence: "We will wear a mask on the bus.", chunks: ["We will", "wear a mask", "on", "the bus."] },
+      { sentence: "Dad is going to exercise tonight.", chunks: ["Dad", "is going to", "exercise", "tonight."] },
+      { sentence: "The sign warned us to be careful.", chunks: ["The sign", "warned us", "to be", "careful."] },
+      { sentence: "This healthy habit helped my brother.", chunks: ["This healthy habit", "helped", "my", "brother."] },
+      { sentence: "I made a mistake in the game.", chunks: ["I", "made a mistake", "in the", "game."] },
+      { sentence: "We will avoid sweet drinks today.", chunks: ["We will", "avoid", "sweet drinks", "today."] },
+      { sentence: "Rest helped Tina feel better yesterday.", chunks: ["Rest", "helped Tina", "feel better", "yesterday."] },
+      { sentence: "His advice will protect our team.", chunks: ["His advice", "will protect", "our", "team."] }
+    ],
+    reading: [
+      {
+        passage: "On Monday, Ben had a fever and a cough. His mother took him to the doctor. The doctor checked him and said the illness was not serious. Ben got medicine and advice: drink water and rest. He was worried about missing school, but his mother said his health came first. He will stay home today and will go back when he feels healthy.",
+        questions: [
+          { q: "What problem did Ben have?", choices: ["a fever and a cough", "a broken arm", "a toothache", "a stomachache"], answer: "a fever and a cough" },
+          { q: "Where did Ben go?", choices: ["to the doctor", "to the pool", "to the library", "to the park"], answer: "to the doctor" },
+          { q: "What advice did Ben get?", choices: ["drink water and rest", "run outside", "eat candy", "play all night"], answer: "drink water and rest" },
+          { q: "What will Ben do today?", choices: ["stay home", "take a trip", "join a race", "visit a zoo"], answer: "stay home" }
+        ]
+      },
+      {
+        passage: "At school, Mia felt a bad headache after lunch. Her teacher took her to the nurse. The nurse asked questions, checked her face, and let her rest in the health room. Mia said she slept late last night. The nurse gave simple advice about sleep. Mia's father will pick her up, and she is going to follow a better sleep habit tonight.",
+        questions: [
+          { q: "What hurt Mia?", choices: ["her head", "her hand", "her knee", "her tooth"], answer: "her head" },
+          { q: "Who helped Mia?", choices: ["the nurse", "the cook", "the driver", "the singer"], answer: "the nurse" },
+          { q: "What did Mia do last night?", choices: ["slept late", "ate breakfast", "played soccer", "cleaned shoes"], answer: "slept late" },
+          { q: "What will Mia follow tonight?", choices: ["a better sleep habit", "a new math rule", "a long bus sign", "a hard music lesson"], answer: "a better sleep habit" }
+        ]
+      },
+      {
+        passage: "Last month, Leo often skipped breakfast and slept only six hours. The result was a tired body and many small mistakes in class. His teacher talked about healthy habits. Leo made a plan: he will eat breakfast, drink water, exercise after school, and sleep earlier. He is going to check his habit chart each night. His problem will get smaller if he keeps trying.",
+        questions: [
+          { q: "What did Leo skip last month?", choices: ["breakfast", "homework", "music class", "bus time"], answer: "breakfast" },
+          { q: "What was the result?", choices: ["a tired body", "a new notebook", "a clean desk", "a full bottle"], answer: "a tired body" },
+          { q: "What will Leo do after school?", choices: ["exercise", "sleep", "cook", "draw"], answer: "exercise" },
+          { q: "What is Leo going to check each night?", choices: ["his habit chart", "his lunch box", "his phone screen", "his school bag"], answer: "his habit chart" }
+        ]
+      },
+      {
+        passage: "Yesterday, our class went to the city pool. Before we swam, the teacher read each rule. We walked on the wet floor, followed the sign, and stayed away from deep water. One boy ran and made a mistake, but no one was hurt. The coach said safety protects everyone. Next week, we will bring caps and will be careful again.",
+        questions: [
+          { q: "Where did the class go?", choices: ["the city pool", "the school gym", "the music room", "the bus stop"], answer: "the city pool" },
+          { q: "What did the teacher read?", choices: ["each rule", "a story", "a menu", "a map"], answer: "each rule" },
+          { q: "What mistake did one boy make?", choices: ["He ran.", "He jumped.", "He shouted.", "He slept."], answer: "He ran." },
+          { q: "What will the class bring next week?", choices: ["caps", "masks", "books", "coats"], answer: "caps" }
+        ]
+      },
+      {
+        passage: "Last Friday, many students at school had a cough. The principal put a sign near the gate: Wear a mask if you feel sick. Anna forgot her mask and worried about her friends. Her teacher gave her one and explained the reason. A mask can protect others and help avoid illness. Tomorrow, Anna is going to bring two masks in her bag.",
+        questions: [
+          { q: "What did the sign say to wear?", choices: ["a mask", "a hat", "a jacket", "a watch"], answer: "a mask" },
+          { q: "Who gave Anna a mask?", choices: ["her teacher", "her brother", "her doctor", "her friend"], answer: "her teacher" },
+          { q: "Why can a mask help?", choices: ["It can protect others.", "It can make lunch.", "It can open doors.", "It can clean shoes."], answer: "It can protect others." },
+          { q: "What will Anna bring tomorrow?", choices: ["two masks", "two books", "two bottles", "two pencils"], answer: "two masks" }
+        ]
+      },
+      {
+        passage: "On Sunday night, Jay worried about a math test and did not sleep well. In the morning, he had a headache and made two mistakes on easy questions. His dad said worry can cause problems for health. Jay will study earlier next time and rest before bed. He is going to turn off the tablet at nine and follow a calm sleep rule.",
+        questions: [
+          { q: "Why did Jay worry?", choices: ["a math test", "a music show", "a bus ride", "a new game"], answer: "a math test" },
+          { q: "What happened in the morning?", choices: ["He had a headache.", "He won a race.", "He cleaned a room.", "He ate a cake."], answer: "He had a headache." },
+          { q: "What can worry cause?", choices: ["problems for health", "rules for sports", "signs for rooms", "masks for class"], answer: "problems for health" },
+          { q: "What will Jay do next time?", choices: ["study earlier", "run faster", "sing louder", "draw bigger"], answer: "study earlier" }
+        ]
+      },
+      {
+        passage: "At recess yesterday, Sara and her friends played basketball. Sara wanted to win, so she ran too fast and fell. The nurse cleaned her knee and gave advice about safety. Sara learned that exercise is healthy, but players must be careful. Tomorrow, the team will warm up first, follow the game rules, and avoid pushing. They are going to protect each other.",
+        questions: [
+          { q: "What game did Sara play?", choices: ["basketball", "soccer", "baseball", "tennis"], answer: "basketball" },
+          { q: "Who cleaned Sara's knee?", choices: ["the nurse", "the doctor", "the coach", "the teacher"], answer: "the nurse" },
+          { q: "What will the team do first?", choices: ["warm up", "eat lunch", "take a test", "write names"], answer: "warm up" },
+          { q: "What will they avoid?", choices: ["pushing", "sleeping", "drawing", "singing"], answer: "pushing" }
+        ]
+      }
+    ]
   }
 };
 // 每篇短文的「沒教過的生字」中文解釋（index 對應該週 reading[]）
@@ -235,6 +343,15 @@ const PASSAGE_GLOSSARY = {
     [{ en: "garden", zh: "花園" }, { en: "fresh", zh: "新鮮的" }, { en: "vegetables", zh: "蔬菜" }],
     [{ en: "library", zh: "圖書館" }, { en: "club", zh: "社團" }],
     [{ en: "cozy", zh: "溫馨舒適的" }, { en: "popcorn", zh: "爆米花" }, { en: "board games", zh: "桌遊" }]
+  ],
+  "2026-07-3": [
+    [{ en: "serious", zh: "嚴重的" }, { en: "missing", zh: "錯過" }],
+    [{ en: "simple", zh: "簡單的" }, { en: "pick up", zh: "接走" }],
+    [{ en: "skipped", zh: "跳過、略過" }, { en: "chart", zh: "表格" }, { en: "earlier", zh: "較早地" }],
+    [{ en: "pool", zh: "游泳池" }, { en: "swam", zh: "游泳（過去式）" }, { en: "wet", zh: "濕的" }, { en: "deep", zh: "深的" }, { en: "coach", zh: "教練" }, { en: "caps", zh: "泳帽" }],
+    [{ en: "principal", zh: "校長" }, { en: "gate", zh: "大門" }, { en: "forgot", zh: "忘記（過去式）" }, { en: "explained", zh: "解釋了" }, { en: "others", zh: "其他人" }],
+    [{ en: "turn off", zh: "關掉" }, { en: "tablet", zh: "平板電腦" }, { en: "calm", zh: "平靜的" }, { en: "earlier", zh: "較早地" }],
+    [{ en: "recess", zh: "下課時間" }, { en: "basketball", zh: "籃球" }, { en: "fell", zh: "跌倒（過去式）" }, { en: "knee", zh: "膝蓋" }, { en: "warm up", zh: "熱身" }, { en: "pushing", zh: "推擠" }]
   ]
 };
 function weekDrillFor(monthStr, weekN) { return WEEK_DRILLS[monthStr + "-" + weekN] || null; }
