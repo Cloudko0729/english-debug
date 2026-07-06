@@ -47,36 +47,38 @@ const CURRICULUM = [
         ]
       },
       {
+        // 2026-07-06 重選：原「健康與規則」20 字超過第 6 級，換成 5~6 級（Codex 選字、Claude 審核）
         n: 3, start: "2026-07-12", end: "2026-07-18",
-        theme: "健康與規則", grammar: ["過去式", "未來式"],
+        theme: "校園社團與班級挑戰", grammar: ["過去式", "未來式"],
         words: [
-          { en: "health", zh: "健康", pos: "n" }, { en: "healthy", zh: "健康的", pos: "adj" }, { en: "exercise", zh: "運動", pos: "n" },
-          { en: "medicine", zh: "藥", pos: "n" }, { en: "doctor", zh: "醫生", pos: "n" }, { en: "nurse", zh: "護士", pos: "n" },
-          { en: "patient", zh: "病人", pos: "n" }, { en: "hospital", zh: "醫院", pos: "n" }, { en: "illness", zh: "疾病", pos: "n" },
-          { en: "fever", zh: "發燒", pos: "n" }, { en: "headache", zh: "頭痛", pos: "n" }, { en: "cough", zh: "咳嗽", pos: "n" },
-          { en: "rest", zh: "休息", pos: "v" }, { en: "habit", zh: "習慣", pos: "n" }, { en: "rule", zh: "規則", pos: "n" },
-          { en: "sleep", zh: "睡覺", pos: "v" }, { en: "careful", zh: "小心的", pos: "adj" }, { en: "advice", zh: "建議", pos: "n" },
-          { en: "reason", zh: "原因", pos: "n" }, { en: "result", zh: "結果", pos: "n" }, { en: "cause", zh: "造成、引起", pos: "v" },
-          { en: "problem", zh: "問題", pos: "n" }, { en: "sign", zh: "標誌", pos: "n" }, { en: "mask", zh: "口罩", pos: "n" },
-          { en: "mistake", zh: "錯誤", pos: "n" }, { en: "safety", zh: "安全", pos: "n" }, { en: "protect", zh: "保護", pos: "v" },
-          { en: "avoid", zh: "避免", pos: "v" }, { en: "follow", zh: "遵守、跟隨", pos: "v" }, { en: "worry", zh: "擔心", pos: "v" }
+          { en: "club", zh: "社團", pos: "n" }, { en: "drama", zh: "戲劇", pos: "n" }, { en: "camera", zh: "相機", pos: "n" },
+          { en: "photo", zh: "照片", pos: "n" }, { en: "report", zh: "報告", pos: "n" }, { en: "diary", zh: "日記", pos: "n" },
+          { en: "science", zh: "科學", pos: "n" }, { en: "subject", zh: "科目", pos: "n" }, { en: "lesson", zh: "課程", pos: "n" },
+          { en: "quiz", zh: "小考", pos: "n" }, { en: "exam", zh: "考試", pos: "n" }, { en: "goal", zh: "目標", pos: "n" },
+          { en: "score", zh: "分數", pos: "n" }, { en: "race", zh: "賽跑、比賽", pos: "n" }, { en: "message", zh: "訊息", pos: "n" },
+          { en: "question", zh: "問題", pos: "n" }, { en: "answer", zh: "答案、回答", pos: "n" }, { en: "practice", zh: "練習", pos: "v" },
+          { en: "decide", zh: "決定", pos: "v" }, { en: "choose", zh: "選擇", pos: "v" }, { en: "agree", zh: "同意", pos: "v" },
+          { en: "believe", zh: "相信", pos: "v" }, { en: "hope", zh: "希望", pos: "v" }, { en: "enjoy", zh: "喜愛、享受", pos: "v" },
+          { en: "follow", zh: "跟隨、遵照", pos: "v" }, { en: "repeat", zh: "重複", pos: "v" }, { en: "win", zh: "贏", pos: "v" },
+          { en: "ready", zh: "準備好的", pos: "adj" }, { en: "careful", zh: "小心的", pos: "adj" }, { en: "quickly", zh: "快速地", pos: "adv" }
         ]
       },
       {
         // 第 4 週涵蓋到 08-01(六)；8 月課程自 08-02(日) 起接手
+        // 2026-07-06 重選：原「嗜好與志向」20 字超過第 6 級，換成 5~6 級（Codex 選字、Claude 審核）
         n: 4, start: "2026-07-19", end: "2026-08-01",
-        theme: "嗜好與志向", grammar: ["過去式", "未來式"],
+        theme: "週末露營與家庭小任務", grammar: ["過去式", "未來式"],
         words: [
-          { en: "hobby", zh: "嗜好", pos: "n" }, { en: "interest", zh: "興趣", pos: "n" }, { en: "activity", zh: "活動", pos: "n" },
-          { en: "collect", zh: "收集", pos: "v" }, { en: "painting", zh: "繪畫", pos: "n" }, { en: "hiking", zh: "健行", pos: "n" },
-          { en: "camping", zh: "露營", pos: "n" }, { en: "fishing", zh: "釣魚", pos: "n" }, { en: "swimming", zh: "游泳", pos: "n" },
-          { en: "reading", zh: "閱讀", pos: "n" }, { en: "cooking", zh: "烹飪", pos: "n" }, { en: "photo", zh: "照片", pos: "n" },
-          { en: "talent", zh: "才能", pos: "n" }, { en: "skill", zh: "技能", pos: "n" }, { en: "practice", zh: "練習", pos: "v" },
-          { en: "create", zh: "創造", pos: "v" }, { en: "try", zh: "嘗試", pos: "v" }, { en: "succeed", zh: "成功", pos: "v" },
-          { en: "goal", zh: "目標", pos: "n" }, { en: "dream", zh: "夢想", pos: "n" }, { en: "future", zh: "未來", pos: "n" },
-          { en: "job", zh: "工作、職業", pos: "n" }, { en: "wish", zh: "願望", pos: "n" }, { en: "creative", zh: "有創意的", pos: "adj" },
-          { en: "imagine", zh: "想像", pos: "v" }, { en: "enjoy", zh: "喜愛、享受", pos: "v" }, { en: "relax", zh: "放鬆", pos: "v" },
-          { en: "want", zh: "想要", pos: "v" }, { en: "hope", zh: "希望", pos: "v" }, { en: "decide", zh: "決定", pos: "v" }
+          { en: "add", zh: "加入", pos: "v" }, { en: "basket", zh: "籃子", pos: "n" }, { en: "blanket", zh: "毯子", pos: "n" },
+          { en: "boil", zh: "煮沸", pos: "v" }, { en: "bottle", zh: "瓶子", pos: "n" }, { en: "brave", zh: "勇敢的", pos: "adj" },
+          { en: "camp", zh: "露營、營地", pos: "v" }, { en: "carefully", zh: "小心地", pos: "adv" }, { en: "empty", zh: "空的", pos: "adj" },
+          { en: "finally", zh: "最後、終於", pos: "adv" }, { en: "fire", zh: "火", pos: "n" }, { en: "flashlight", zh: "手電筒", pos: "n" },
+          { en: "forest", zh: "森林", pos: "n" }, { en: "fry", zh: "油煎、炒", pos: "v" }, { en: "happen", zh: "發生", pos: "v" },
+          { en: "heavy", zh: "重的", pos: "adj" }, { en: "loud", zh: "大聲的", pos: "adj" }, { en: "mix", zh: "混合", pos: "v" },
+          { en: "problem", zh: "問題", pos: "n" }, { en: "quiet", zh: "安靜的", pos: "adj" }, { en: "repair", zh: "修理", pos: "v" },
+          { en: "rope", zh: "繩子", pos: "n" }, { en: "safe", zh: "安全的", pos: "adj" }, { en: "stone", zh: "石頭", pos: "n" },
+          { en: "tent", zh: "帳篷", pos: "n" }, { en: "tool", zh: "工具", pos: "n" }, { en: "worried", zh: "擔心的", pos: "adj" },
+          { en: "fill", zh: "裝滿、填滿", pos: "v" }, { en: "wood", zh: "木頭", pos: "n" }, { en: "rest", zh: "休息", pos: "v" }
         ]
       }
     ]

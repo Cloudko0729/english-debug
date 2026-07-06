@@ -215,110 +215,218 @@ const WEEK_DRILLS = {
       }
     ]
   },
-  "2026-07-3": {            // 第3週 健康與規則 · 過去式/未來式（Codex 起草、Claude 審核）
+  "2026-07-3": {            // 第3週 校園社團與班級挑戰 · 過去式/未來式（重選，Codex 起草、Claude 審核）
     listenBlank: [
-      { full: "The doctor gave me medicine yesterday.", display: "The doctor gave me ___ yesterday.", answer: "medicine" },
-      { full: "A healthy habit helped Amy sleep well.", display: "A healthy ___ helped Amy sleep well.", answer: "habit" },
-      { full: "We will exercise after school tomorrow.", display: "We will ___ after school tomorrow.", answer: "exercise" },
-      { full: "The nurse checked the patient in the room.", display: "The nurse checked the ___ in the room.", answer: "patient" },
-      { full: "Dad had a fever last night.", display: "Dad had a ___ last night.", answer: "fever" },
-      { full: "My headache went away after rest.", display: "My ___ went away after rest.", answer: "headache" },
-      { full: "A cough kept Tom home today.", display: "A ___ kept Tom home today.", answer: "cough" },
-      { full: "Good health starts with enough sleep.", display: "Good ___ starts with enough sleep.", answer: "health" },
-      { full: "We followed the rule at the pool.", display: "We followed the ___ at the pool.", answer: "rule" },
-      { full: "Please be careful near the stairs.", display: "Please be ___ near the stairs.", answer: "careful" },
-      { full: "Mom's advice made me feel better.", display: "Mom's ___ made me feel better.", answer: "advice" },
-      { full: "The reason was clear to everyone today.", display: "The ___ was clear to everyone today.", answer: "reason" },
-      { full: "The result made our teacher happy.", display: "The ___ made our teacher happy.", answer: "result" },
-      { full: "Dirty hands can cause illness at school.", display: "Dirty hands can cause ___ at school.", answer: "illness" },
-      { full: "That problem worried the nurse yesterday.", display: "That ___ worried the nurse yesterday.", answer: "problem" },
-      { full: "The sign says we need masks inside.", display: "The ___ says we need masks inside.", answer: "sign" },
-      { full: "I made a mistake with my medicine.", display: "I made a ___ with my medicine.", answer: "mistake" },
-      { full: "Our safety rules protect every student here.", display: "Our ___ rules protect every student here.", answer: "safety" },
-      { full: "We will avoid running in the hall.", display: "We will ___ running in the hall.", answer: "avoid" },
-      { full: "Please follow the doctor's advice today.", display: "Please ___ the doctor's advice today.", answer: "follow" },
-      { full: "Do not worry about one mistake.", display: "Do not ___ about one mistake.", answer: "worry" }
+      {"full":"Our club practiced after school yesterday.","display":"Our ___ practiced after school yesterday.","answer":"club"},
+      {"full":"We will choose the drama club tomorrow.","display":"We will ___ the drama club tomorrow.","answer":"choose"},
+      {"full":"My camera was in the classroom.","display":"My ___ was in the classroom.","answer":"camera"},
+      {"full":"She will take a photo later.","display":"She will take a ___ later.","answer":"photo"},
+      {"full":"Tom wrote a report after class yesterday.","display":"Tom wrote a ___ after class yesterday.","answer":"report"},
+      {"full":"I will write in my diary tonight.","display":"I will write in my ___ tonight.","answer":"diary"},
+      {"full":"We studied science in class yesterday.","display":"We studied ___ in class yesterday.","answer":"science"},
+      {"full":"This subject was hard for me yesterday.","display":"This ___ was hard for me yesterday.","answer":"subject"},
+      {"full":"The lesson will start after lunch.","display":"The ___ will start after lunch.","answer":"lesson"},
+      {"full":"The quiz was very short yesterday.","display":"The ___ was very short yesterday.","answer":"quiz"},
+      {"full":"Our exam will start at nine.","display":"Our ___ will start at nine.","answer":"exam"},
+      {"full":"This question was easy for us.","display":"This ___ was easy for us.","answer":"question"},
+      {"full":"Leo will answer after the quiz.","display":"Leo will ___ after the quiz.","answer":"answer"},
+      {"full":"Our goal was to read ten pages.","display":"Our ___ was to read ten pages.","answer":"goal"},
+      {"full":"The score will be on the board.","display":"The ___ will be on the board.","answer":"score"},
+      {"full":"Ben will run in the race.","display":"Ben will run in the ___.","answer":"race"},
+      {"full":"I sent a message after lunch.","display":"I sent a ___ after lunch.","answer":"message"},
+      {"full":"We will practice before the show.","display":"We will ___ before the show.","answer":"practice"},
+      {"full":"They will finish quickly after class.","display":"They will finish ___ after class.","answer":"quickly"},
+      {"full":"Please be careful near the stairs.","display":"Please be ___ near the stairs.","answer":"careful"},
+      {"full":"We were ready for the race.","display":"We were ___ for the race.","answer":"ready"}
     ],
     reorder: [
-      { sentence: "The doctor checked my fever yesterday.", chunks: ["The doctor", "checked", "my fever", "yesterday."] },
-      { sentence: "We are going to visit the hospital tomorrow.", chunks: ["We are going to", "visit", "the hospital", "tomorrow."] },
-      { sentence: "The nurse gave the patient water.", chunks: ["The nurse", "gave", "the patient", "water."] },
-      { sentence: "I will take medicine after lunch.", chunks: ["I will", "take medicine", "after", "lunch."] },
-      { sentence: "Kelly had a headache this morning.", chunks: ["Kelly", "had a headache", "this", "morning."] },
-      { sentence: "Dirty hands will cause a health problem.", chunks: ["Dirty hands", "will cause", "a health", "problem."] },
-      { sentence: "Good sleep will improve your health.", chunks: ["Good sleep", "will improve", "your", "health."] },
-      { sentence: "Our class followed the safety rule.", chunks: ["Our class", "followed", "the safety", "rule."] },
-      { sentence: "We will wear a mask on the bus.", chunks: ["We will", "wear a mask", "on", "the bus."] },
-      { sentence: "Dad is going to exercise tonight.", chunks: ["Dad", "is going to", "exercise", "tonight."] },
-      { sentence: "The sign warned us to be careful.", chunks: ["The sign", "warned us", "to be", "careful."] },
-      { sentence: "This healthy habit helped my brother.", chunks: ["This healthy habit", "helped", "my", "brother."] },
-      { sentence: "I made a mistake in the game.", chunks: ["I", "made a mistake", "in the", "game."] },
-      { sentence: "We will avoid sweet drinks today.", chunks: ["We will", "avoid", "sweet drinks", "today."] },
-      { sentence: "Rest helped Tina feel better yesterday.", chunks: ["Rest", "helped Tina", "feel better", "yesterday."] },
-      { sentence: "His advice will protect our team.", chunks: ["His advice", "will protect", "our", "team."] }
+      {"sentence":"We will choose a new club tomorrow.","chunks":["We will","choose","a new","club tomorrow."]},
+      {"sentence":"Mia wrote a report about science yesterday.","chunks":["Mia wrote","a report","about science","yesterday."]},
+      {"sentence":"Our class will repeat the lesson tomorrow.","chunks":["Our class","will repeat","the lesson","tomorrow."]},
+      {"sentence":"Leo sent a message before the quiz.","chunks":["Leo sent","a message","before","the quiz."]},
+      {"sentence":"The exam was hard, but I was ready.","chunks":["The exam","was hard,","but I","was ready."]},
+      {"sentence":"I will answer the question after class.","chunks":["I will","answer","the question","after class."]},
+      {"sentence":"They were careful during the race yesterday.","chunks":["They were","careful","during the race","yesterday."]},
+      {"sentence":"We will check the score after lunch.","chunks":["We will","check","the score","after lunch."]},
+      {"sentence":"Nina took a photo with her camera.","chunks":["Nina took","a photo","with her","camera."]},
+      {"sentence":"The drama club enjoyed the play yesterday.","chunks":["The drama club","enjoyed","the play","yesterday."]},
+      {"sentence":"Sam will decide his goal tonight.","chunks":["Sam will","decide","his goal","tonight."]},
+      {"sentence":"I believe our class will win tomorrow.","chunks":["I believe","our class","will win","tomorrow."]},
+      {"sentence":"The teacher agreed with our answer yesterday.","chunks":["The teacher","agreed with","our answer","yesterday."]},
+      {"sentence":"We had to follow the teacher today.","chunks":["We had","to follow","the teacher","today."]},
+      {"sentence":"Ken will practice quickly before the exam.","chunks":["Ken will","practice quickly","before","the exam."]},
+      {"sentence":"She will write in her diary tonight.","chunks":["She will","write in","her diary","tonight."]}
     ],
     reading: [
       {
-        passage: "On Monday, Ben had a fever and a cough. His mother took him to the doctor. The doctor checked him and said the illness was not serious. Ben got medicine and advice: drink water and rest. He was worried about missing school, but his mother said his health came first. He will stay home today and will go back when he feels healthy.",
+        passage: "Yesterday, our science club met after lunch. We had one question: how can light help a plant? Amy wrote the answer, and Ben drew the plant for the report. The first try was slow, so we practiced again. Tomorrow we will choose a new question and make a short report. I hope everyone will be ready and careful. We liked the work.",
         questions: [
-          { q: "What problem did Ben have?", choices: ["a fever and a cough", "a broken arm", "a toothache", "a stomachache"], answer: "a fever and a cough" },
-          { q: "Where did Ben go?", choices: ["to the doctor", "to the pool", "to the library", "to the park"], answer: "to the doctor" },
-          { q: "What advice did Ben get?", choices: ["drink water and rest", "run outside", "eat candy", "play all night"], answer: "drink water and rest" },
-          { q: "What will Ben do today?", choices: ["stay home", "take a trip", "join a race", "visit a zoo"], answer: "stay home" }
+          {"q":"What club met after lunch?","choices":["science club","drama club","history club","camera club"],"answer":"science club"},
+          {"q":"What did Amy write?","choices":["the answer","the score","a diary","a message"],"answer":"the answer"},
+          {"q":"What will they choose tomorrow?","choices":["a new question","a new camera","a new race","a new exam"],"answer":"a new question"},
+          {"q":"How did the writer feel about the work?","choices":["The writer liked it.","The writer hated it.","The writer forgot it.","The writer lost it."],"answer":"The writer liked it."}
         ]
       },
       {
-        passage: "At school, Mia felt a bad headache after lunch. Her teacher took her to the nurse. The nurse asked questions, checked her face, and let her rest in the health room. Mia said she slept late last night. The nurse gave simple advice about sleep. Mia's father will pick her up, and she is going to follow a better sleep habit tonight.",
+        passage: "Last Friday, our drama club practiced a short play. I was not ready at first, but my friends helped me speak. Jenny used a camera, and Leo took each photo for our album. The teacher sent a message to our class. Next Friday, we will act again for our class. I believe we will enjoy the play and answer every question.",
         questions: [
-          { q: "What hurt Mia?", choices: ["her head", "her hand", "her knee", "her tooth"], answer: "her head" },
-          { q: "Who helped Mia?", choices: ["the nurse", "the cook", "the driver", "the singer"], answer: "the nurse" },
-          { q: "What did Mia do last night?", choices: ["slept late", "ate breakfast", "played soccer", "cleaned shoes"], answer: "slept late" },
-          { q: "What will Mia follow tonight?", choices: ["a better sleep habit", "a new math rule", "a long bus sign", "a hard music lesson"], answer: "a better sleep habit" }
+          {"q":"What club practiced a play?","choices":["drama club","science club","photo club","race club"],"answer":"drama club"},
+          {"q":"Who used a camera?","choices":["Jenny","Leo","the teacher","the writer"],"answer":"Jenny"},
+          {"q":"What did the teacher send?","choices":["a message","a report","a diary","a score"],"answer":"a message"},
+          {"q":"What will the club do next Friday?","choices":["act again","take an exam","run a race","write a diary"],"answer":"act again"}
         ]
       },
       {
-        passage: "Last month, Leo often skipped breakfast and slept only six hours. The result was a tired body and many small mistakes in class. His teacher talked about healthy habits. Leo made a plan: he will eat breakfast, drink water, exercise after school, and sleep earlier. He is going to check his habit chart each night. His problem will get smaller if he keeps trying.",
+        passage: "On Monday, our class had a race in the gym. I ran quickly, but Nora was faster and won. Our score was on the board, and our goal was to try again. We did not feel sad. Tomorrow we will practice before school and follow the teacher. I hope I will win one race this month, but I will be careful.",
         questions: [
-          { q: "What did Leo skip last month?", choices: ["breakfast", "homework", "music class", "bus time"], answer: "breakfast" },
-          { q: "What was the result?", choices: ["a tired body", "a new notebook", "a clean desk", "a full bottle"], answer: "a tired body" },
-          { q: "What will Leo do after school?", choices: ["exercise", "sleep", "cook", "draw"], answer: "exercise" },
-          { q: "What is Leo going to check each night?", choices: ["his habit chart", "his lunch box", "his phone screen", "his school bag"], answer: "his habit chart" }
+          {"q":"Where did the class have a race?","choices":["in the gym","in the library","in the classroom","in the park"],"answer":"in the gym"},
+          {"q":"Who won the race?","choices":["Nora","Ben","Mia","Leo"],"answer":"Nora"},
+          {"q":"What was the class goal?","choices":["to try again","to go home","to miss school","to draw a plant"],"answer":"to try again"},
+          {"q":"What will they do tomorrow?","choices":["practice before school","take photos","write diaries","choose cameras"],"answer":"practice before school"}
         ]
       },
       {
-        passage: "Yesterday, our class went to the city pool. Before we swam, the teacher read each rule. We walked on the wet floor, followed the sign, and stayed away from deep water. One boy ran and made a mistake, but no one was hurt. The coach said safety protects everyone. Next week, we will bring caps and will be careful again.",
+        passage: "Yesterday, I had a history lesson about old schools. The subject was new to me, so I wrote many words in my diary. At home, I asked Dad one question and found the answer in a book. Next week, I will write a report and read it to my class. I will choose three photos and make the report easy to read.",
         questions: [
-          { q: "Where did the class go?", choices: ["the city pool", "the school gym", "the music room", "the bus stop"], answer: "the city pool" },
-          { q: "What did the teacher read?", choices: ["each rule", "a story", "a menu", "a map"], answer: "each rule" },
-          { q: "What mistake did one boy make?", choices: ["He ran.", "He jumped.", "He shouted.", "He slept."], answer: "He ran." },
-          { q: "What will the class bring next week?", choices: ["caps", "masks", "books", "coats"], answer: "caps" }
+          {"q":"What lesson did the writer have?","choices":["a history lesson","a science quiz","a drama lesson","a race lesson"],"answer":"a history lesson"},
+          {"q":"Where did the writer write many words?","choices":["in my diary","on the board","in a message","on a photo"],"answer":"in my diary"},
+          {"q":"Who did the writer ask?","choices":["Dad","Mom","Ben","Amy"],"answer":"Dad"},
+          {"q":"What will the writer choose?","choices":["three photos","three races","three exams","three clubs"],"answer":"three photos"}
         ]
       },
       {
-        passage: "Last Friday, many students at school had a cough. The principal put a sign near the gate: Wear a mask if you feel sick. Anna forgot her mask and worried about her friends. Her teacher gave her one and explained the reason. A mask can protect others and help avoid illness. Tomorrow, Anna is going to bring two masks in her bag.",
+        passage: "Yesterday, the class wanted a new club day. We talked after lunch and did not agree at first. Some students wanted drama, and some wanted science. May sent a message with two club names. Tomorrow, everyone will choose one subject on the calendar. The teacher will read the answers. I hope we will decide before Friday and enjoy the new day.",
         questions: [
-          { q: "What did the sign say to wear?", choices: ["a mask", "a hat", "a jacket", "a watch"], answer: "a mask" },
-          { q: "Who gave Anna a mask?", choices: ["her teacher", "her brother", "her doctor", "her friend"], answer: "her teacher" },
-          { q: "Why can a mask help?", choices: ["It can protect others.", "It can make lunch.", "It can open doors.", "It can clean shoes."], answer: "It can protect others." },
-          { q: "What will Anna bring tomorrow?", choices: ["two masks", "two books", "two bottles", "two pencils"], answer: "two masks" }
+          {"q":"What did the class want?","choices":["a new club day","a new exam day","a new camera","a new diary"],"answer":"a new club day"},
+          {"q":"Which two club names were in the message?","choices":["drama and science","race and photo","quiz and exam","goal and score"],"answer":"drama and science"},
+          {"q":"What will everyone choose?","choices":["one subject","one camera","one report","one diary"],"answer":"one subject"},
+          {"q":"When does the writer hope to decide?","choices":["before Friday","after Friday","next month","last Monday"],"answer":"before Friday"}
         ]
       },
       {
-        passage: "On Sunday night, Jay worried about a math test and did not sleep well. In the morning, he had a headache and made two mistakes on easy questions. His dad said worry can cause problems for health. Jay will study earlier next time and rest before bed. He is going to turn off the tablet at nine and follow a calm sleep rule.",
+        passage: "Last night, I was not ready for the quiz. My brother gave me ten questions, and I repeated each answer. I was slow at first, but I was ready after dinner. The quiz was not an exam, but I wanted a good score. Tomorrow, I will practice again and ask the teacher one more question. I believe I will do better.",
         questions: [
-          { q: "Why did Jay worry?", choices: ["a math test", "a music show", "a bus ride", "a new game"], answer: "a math test" },
-          { q: "What happened in the morning?", choices: ["He had a headache.", "He won a race.", "He cleaned a room.", "He ate a cake."], answer: "He had a headache." },
-          { q: "What can worry cause?", choices: ["problems for health", "rules for sports", "signs for rooms", "masks for class"], answer: "problems for health" },
-          { q: "What will Jay do next time?", choices: ["study earlier", "run faster", "sing louder", "draw bigger"], answer: "study earlier" }
+          {"q":"What was the writer not ready for?","choices":["the quiz","the race","the drama","the camera"],"answer":"the quiz"},
+          {"q":"Who gave the writer ten questions?","choices":["My brother","My teacher","My friend","My classmate"],"answer":"My brother"},
+          {"q":"What was not an exam?","choices":["the quiz","the report","the lesson","the message"],"answer":"the quiz"},
+          {"q":"What will the writer ask tomorrow?","choices":["one more question","one new score","one photo","one diary"],"answer":"one more question"}
         ]
       },
       {
-        passage: "At recess yesterday, Sara and her friends played basketball. Sara wanted to win, so she ran too fast and fell. The nurse cleaned her knee and gave advice about safety. Sara learned that exercise is healthy, but players must be careful. Tomorrow, the team will warm up first, follow the game rules, and avoid pushing. They are going to protect each other.",
+        passage: "Yesterday, a new student came to our class. He did not know the lesson, so I gave him my book and answered his question. At lunch, we practiced the words together and wrote them in a diary. He read quickly after that. Tomorrow, I will send him a message about the next subject. I hope he will enjoy our class and feel ready.",
         questions: [
-          { q: "What game did Sara play?", choices: ["basketball", "soccer", "baseball", "tennis"], answer: "basketball" },
-          { q: "Who cleaned Sara's knee?", choices: ["the nurse", "the doctor", "the coach", "the teacher"], answer: "the nurse" },
-          { q: "What will the team do first?", choices: ["warm up", "eat lunch", "take a test", "write names"], answer: "warm up" },
-          { q: "What will they avoid?", choices: ["pushing", "sleeping", "drawing", "singing"], answer: "pushing" }
+          {"q":"Who came to the class?","choices":["a new student","a new teacher","a new brother","a new winner"],"answer":"a new student"},
+          {"q":"What did the writer give him?","choices":["my book","my camera","my photo","my score"],"answer":"my book"},
+          {"q":"When did they practice the words?","choices":["at lunch","at night","after dinner","before school"],"answer":"at lunch"},
+          {"q":"What will the writer send?","choices":["a message","a report","an exam","a race"],"answer":"a message"}
+        ]
+      }
+    ]
+  },
+  "2026-07-4": {            // 第4週 週末露營與家庭小任務 · 過去式/未來式（重選，Codex 起草、Claude 審核）
+    listenBlank: [
+      {"full":"We will camp by the lake tomorrow.","display":"We will ___ by the lake tomorrow.","answer":"camp"},
+      {"full":"Dad washed my bottle after breakfast.","display":"Dad washed my ___ after breakfast.","answer":"bottle"},
+      {"full":"I used a blanket on the bus.","display":"I used a ___ on the bus.","answer":"blanket"},
+      {"full":"Mia will bring a flashlight tonight.","display":"Mia will bring a ___ tonight.","answer":"flashlight"},
+      {"full":"Tom pulled the rope very hard.","display":"Tom pulled the ___ very hard.","answer":"rope"},
+      {"full":"We carried the basket to Grandma.","display":"We carried the ___ to Grandma.","answer":"basket"},
+      {"full":"Mom will add eggs to lunch.","display":"Mom will ___ eggs to lunch.","answer":"add"},
+      {"full":"We will mix fruit with milk.","display":"We will ___ fruit with milk.","answer":"mix"},
+      {"full":"Grandpa will boil water for tea.","display":"Grandpa will ___ water for tea.","answer":"boil"},
+      {"full":"Ben will fry rice for us.","display":"Ben will ___ rice for us.","answer":"fry"},
+      {"full":"I wrote the new name carefully.","display":"I wrote the new name ___.","answer":"carefully"},
+      {"full":"The brave child helped his brother.","display":"The ___ child helped his brother.","answer":"brave"},
+      {"full":"The room was quiet after nine.","display":"The room was ___ after nine.","answer":"quiet"},
+      {"full":"The music was loud last night.","display":"The music was ___ last night.","answer":"loud"},
+      {"full":"That box was too heavy yesterday.","display":"That box was too ___ yesterday.","answer":"heavy"},
+      {"full":"The cup was empty after lunch.","display":"The cup was ___ after lunch.","answer":"empty"},
+      {"full":"What will happen after the game?","display":"What will ___ after the game?","answer":"happen"},
+      {"full":"We finally found the lost key.","display":"We ___ found the lost key.","answer":"finally"},
+      {"full":"The bridge will be safe soon.","display":"The bridge will be ___ soon.","answer":"safe"},
+      {"full":"Mom was worried about the rain.","display":"Mom was ___ about the rain.","answer":"worried"},
+      {"full":"Sam solved the problem before class.","display":"Sam solved the ___ before class.","answer":"problem"}
+    ],
+    reorder: [
+      {"sentence":"We will camp by the lake tomorrow.","chunks":["We will","camp by","the lake","tomorrow."]},
+      {"sentence":"Dad will repair the old chair tomorrow.","chunks":["Dad will","repair","the old chair","tomorrow."]},
+      {"sentence":"She packed a blanket for the trip.","chunks":["She packed","a blanket","for the","trip."]},
+      {"sentence":"The basket was heavy after lunch.","chunks":["The basket","was heavy","after","lunch."]},
+      {"sentence":"We will fill the bottle with water.","chunks":["We will","fill the","bottle with","water."]},
+      {"sentence":"Ben found a tool under the table.","chunks":["Ben found","a tool","under the","table."]},
+      {"sentence":"Mom will fry rice after school.","chunks":["Mom will","fry rice","after","school."]},
+      {"sentence":"We will mix the sauce carefully.","chunks":["We will","mix the","sauce","carefully."]},
+      {"sentence":"The forest was quiet after rain.","chunks":["The forest","was quiet","after","rain."]},
+      {"sentence":"A loud sound woke us up.","chunks":["A loud","sound","woke us","up."]},
+      {"sentence":"Mia was worried about the dark sky.","chunks":["Mia was","worried about","the dark","sky."]},
+      {"sentence":"The brave boy carried the rope.","chunks":["The brave","boy carried","the","rope."]},
+      {"sentence":"We will boil eggs before breakfast.","chunks":["We will","boil eggs","before","breakfast."]},
+      {"sentence":"They finally reached home before dinner.","chunks":["They finally","reached home","before","dinner."]},
+      {"sentence":"This tent will stay dry tonight.","chunks":["This tent","will stay","dry","tonight."]},
+      {"sentence":"A small problem happened during cooking.","chunks":["A small","problem happened","during","cooking."]}
+    ],
+    reading: [
+      {
+        passage: "Last Saturday, our family went to a small camp near the forest. Dad put up the tent, and I held the flashlight. My brother tied a rope to a tree, but it fell. We fixed it before dinner. The night was quiet and safe. Tomorrow, we will bring one more blanket and rest before we walk home. Mom said the work was good.",
+        questions: [
+          {"q":"Where did the family go?","choices":["a small camp","a big store","a school club","a bus stop"],"answer":"a small camp"},
+          {"q":"What did the speaker hold?","choices":["a flashlight","a basket","a stone","a bottle"],"answer":"a flashlight"},
+          {"q":"What fell from the tree?","choices":["a rope","a tent","a blanket","a tool"],"answer":"a rope"},
+          {"q":"What will they bring tomorrow?","choices":["one more blanket","a new chair","two eggs","a loud radio"],"answer":"one more blanket"}
+        ]
+      },
+      {
+        passage: "On Sunday morning, Grandma opened her basket in our kitchen. She found rice, eggs, and one empty bottle. I helped her add water, mix eggs, and boil soup. My sister will fry rice tonight, so Grandma helped her carefully. The soup was hot, but no one was hurt. Finally, we ate lunch and washed every bowl before Dad came home from work.",
+        questions: [
+          {"q":"Who opened the basket?","choices":["Grandma","Dad","my sister","my brother"],"answer":"Grandma"},
+          {"q":"What was empty?","choices":["one bottle","one bowl","one bag","one cup"],"answer":"one bottle"},
+          {"q":"What will the sister fry?","choices":["rice","eggs","soup","bread"],"answer":"rice"},
+          {"q":"When did Dad come home?","choices":["after lunch","before breakfast","at midnight","during school"],"answer":"after lunch"}
+        ]
+      },
+      {
+        passage: "Yesterday afternoon, our old box had a problem. It hit a stone, and one part of wood broke. Dad was worried. The box was heavy. He used a tool to repair it, and I held the small part. We will fill the box with toys tomorrow. Finally, the box moved again, and we felt happy at home after dinner together.",
+        questions: [
+          {"q":"What had a problem?","choices":["an old box","a new bike","a small tent","a heavy bag"],"answer":"an old box"},
+          {"q":"What did the box hit?","choices":["a stone","a bottle","a table","a tree"],"answer":"a stone"},
+          {"q":"What did Dad use?","choices":["a tool","a rope","a blanket","a basket"],"answer":"a tool"},
+          {"q":"What will they put in the box?","choices":["toys","rice","water","wood"],"answer":"toys"}
+        ]
+      },
+      {
+        passage: "A loud wind came before our picnic. My little sister was worried, so I packed the basket fast. Dad checked the fire and made it safe. We sat on a blanket under the roof and ate apples. The rain stopped at four. Next Friday, we will try the picnic again, and I will be brave if the wind comes back.",
+        questions: [
+          {"q":"What came before the picnic?","choices":["a loud wind","a quiet cat","a heavy box","a safe fire"],"answer":"a loud wind"},
+          {"q":"Who was worried?","choices":["my little sister","Dad","Mom","Grandma"],"answer":"my little sister"},
+          {"q":"Where did they sit?","choices":["under the roof","in the forest","near the lake","by the bus"],"answer":"under the roof"},
+          {"q":"When will they try again?","choices":["Next Friday","Last Friday","This morning","At midnight"],"answer":"Next Friday"}
+        ]
+      },
+      {
+        passage: "Last month, our family cleaned the forest path. We found an empty bottle near a stone and old wood by the water. I picked them up carefully when ants were there. Nothing bad happened, and the path looked clean again. Next month, we will go back with bags. We will keep the forest safe for children and our family too.",
+        questions: [
+          {"q":"What did the family clean?","choices":["the forest path","the kitchen floor","the school bus","the bedroom wall"],"answer":"the forest path"},
+          {"q":"What did they find?","choices":["an empty bottle","a new tent","a loud radio","a warm blanket"],"answer":"an empty bottle"},
+          {"q":"How did the speaker pick things up?","choices":["carefully","loudly","quickly","angrily"],"answer":"carefully"},
+          {"q":"What will they bring next month?","choices":["bags","eggs","chairs","books"],"answer":"bags"}
+        ]
+      },
+      {
+        passage: "Yesterday, our family carried water to a small garden. The basket was heavy, but every bottle was full. I had a problem when one bottle fell, and water ran on my shoes. Mom helped me fill it again. We rested under a tree after lunch. Tomorrow, we will carry two bottles and take more rest, so we stay safe there.",
+        questions: [
+          {"q":"Where did the family carry water?","choices":["a small garden","a dark forest","a music room","a train station"],"answer":"a small garden"},
+          {"q":"What was heavy?","choices":["the basket","the blanket","the rope","the tent"],"answer":"the basket"},
+          {"q":"What fell?","choices":["one bottle","one stone","one tool","one apple"],"answer":"one bottle"},
+          {"q":"What will they carry tomorrow?","choices":["two bottles","three baskets","four boxes","five bags"],"answer":"two bottles"}
+        ]
+      },
+      {
+        passage: "Last night, Dad wanted a quiet dinner in the yard. We built a small fire and put wood by it. Mom asked me to add tomatoes to soup and mix it. A loud sound came from the street, and my baby brother cried. We will eat at the table tomorrow if that happens again. Finally, we all ate and felt safe.",
+        questions: [
+          {"q":"What kind of dinner did Dad want?","choices":["a quiet dinner","a loud dinner","a cold dinner","a quick dinner"],"answer":"a quiet dinner"},
+          {"q":"What did they build?","choices":["a small fire","a big tent","a stone wall","a wood box"],"answer":"a small fire"},
+          {"q":"What did Mom ask the speaker to add?","choices":["tomatoes","eggs","rice","water"],"answer":"tomatoes"},
+          {"q":"Where will they eat tomorrow?","choices":["at the table","in the yard","near the street","under the tree"],"answer":"at the table"}
         ]
       }
     ]
@@ -345,13 +453,22 @@ const PASSAGE_GLOSSARY = {
     [{"en":"story","zh":"故事"}, {"en":"funny","zh":"好笑的"}, {"en":"laugh","zh":"大笑"}]
   ],
   "2026-07-3": [
-    [{ en: "serious", zh: "嚴重的" }, { en: "missing", zh: "錯過" }],
-    [{ en: "simple", zh: "簡單的" }, { en: "pick up", zh: "接走" }],
-    [{ en: "skipped", zh: "跳過、略過" }, { en: "chart", zh: "表格" }, { en: "earlier", zh: "較早地" }],
-    [{ en: "pool", zh: "游泳池" }, { en: "swam", zh: "游泳（過去式）" }, { en: "wet", zh: "濕的" }, { en: "deep", zh: "深的" }, { en: "coach", zh: "教練" }, { en: "caps", zh: "泳帽" }],
-    [{ en: "principal", zh: "校長" }, { en: "gate", zh: "大門" }, { en: "forgot", zh: "忘記（過去式）" }, { en: "explained", zh: "解釋了" }, { en: "others", zh: "其他人" }],
-    [{ en: "turn off", zh: "關掉" }, { en: "tablet", zh: "平板電腦" }, { en: "calm", zh: "平靜的" }, { en: "earlier", zh: "較早地" }],
-    [{ en: "recess", zh: "下課時間" }, { en: "basketball", zh: "籃球" }, { en: "fell", zh: "跌倒（過去式）" }, { en: "knee", zh: "膝蓋" }, { en: "warm up", zh: "熱身" }, { en: "pushing", zh: "推擠" }]
+    [{"en":"plant","zh":"植物"}],
+    [{"en":"album","zh":"相簿"}, {"en":"act","zh":"表演"}],
+    [{"en":"gym","zh":"體育館"}, {"en":"board","zh":"板子；看板"}],
+    [{"en":"history","zh":"歷史"}],
+    [{"en":"calendar","zh":"日曆；行事曆"}],
+    [],
+    []
+  ],
+  "2026-07-4": [
+    [],
+    [],
+    [{"en":"part","zh":"部分；零件"}],
+    [{"en":"picnic","zh":"野餐"}, {"en":"roof","zh":"屋頂"}],
+    [{"en":"path","zh":"小路"}, {"en":"ant","zh":"螞蟻"}],
+    [{"en":"garden","zh":"花園；菜園"}],
+    [{"en":"yard","zh":"院子"}, {"en":"tomato","zh":"番茄"}, {"en":"street","zh":"街道"}]
   ]
 };
 function weekDrillFor(monthStr, weekN) { return WEEK_DRILLS[monthStr + "-" + weekN] || null; }
