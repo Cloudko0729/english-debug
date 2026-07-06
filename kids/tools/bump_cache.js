@@ -14,7 +14,7 @@ const TARGETS = ["daily_engine.js", "weekdrills.js", "structure_units.js",
 function bump(file) {
   let h = fs.readFileSync(file, "utf8"), changed = false;
   TARGETS.forEach(t => {
-    const re = new RegExp(`(src="(?:\\.\\./)?${t.replace(".", "\\.")})(\\?v=\\d+)?"`, "g");
+    const re = new RegExp(`(src="(?:\\.\\./)*(?:kids/|drills/)?${t.replace(".", "\\.")})(\\?v=\\d+)?"`, "g");
     if (re.test(h)) { h = h.replace(re, `$1?v=${STAMP}"`); changed = true; }
   });
   if (changed) { fs.writeFileSync(file, h); return true; }
@@ -26,6 +26,6 @@ const pages = [];
 fs.readdirSync(KIDS).filter(f => f.endsWith(".html")).forEach(f => pages.push(path.join(KIDS, f)));
 fs.readdirSync(path.join(KIDS, "drills")).filter(f => f.endsWith(".html")).forEach(f => pages.push(path.join(KIDS, "drills", f)));
 fs.readdirSync(path.join(KIDS, "lessons")).filter(f => f.endsWith(".html")).forEach(f => pages.push(path.join(KIDS, "lessons", f)));
-pages.push(path.join(KIDS, "..", "typing-game", "index.html"));
+["index.html", "pusher.html", "pusher3d.html"].forEach(f => pages.push(path.join(KIDS, "..", "typing-game", f)));
 pages.forEach(f => { try { if (bump(f)) n++; } catch (e) {} });
 console.log(`✔ 戳記 v=${STAMP}，更新 ${n} 個頁面`);
