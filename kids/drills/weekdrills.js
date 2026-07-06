@@ -107,110 +107,110 @@ const WEEK_DRILLS = {
       }
     ]
   },
-  "2026-07-2": {            // 第2週 描述與經驗 · 過去式/未來式
+  "2026-07-2": {            // 第2週 我的一天與社區 · 過去式/未來式（2026-07-06 重選，5~6級字）
     listenBlank: [
-      { full: "The hotel was very comfortable.", display: "The hotel was very ___.", answer: "comfortable" },
-      { full: "The night market was very crowded.", display: "The night market was very ___.", answer: "crowded" },
-      { full: "The food was cheap and delicious.", display: "The food was ___ and delicious.", answer: "cheap" },
-      { full: "I think tomorrow will be wonderful.", display: "I think tomorrow will be ___.", answer: "wonderful" },
-      { full: "The old temple was very famous.", display: "The old temple was very ___.", answer: "famous" },
-      { full: "The new building is very modern.", display: "The new building is very ___.", answer: "modern" },
-      { full: "The street was too noisy at night.", display: "The street was too ___ at night.", answer: "noisy" },
-      { full: "The library was very quiet.", display: "The library was very ___.", answer: "quiet" },
-      { full: "The short trip was a great experience.", display: "The short trip was a great ___.", answer: "experience" },
-      { full: "The heavy box was hard to carry.", display: "The ___ box was hard to carry.", answer: "heavy" },
-      { full: "This bag is light and easy to carry.", display: "This bag is ___ and easy to carry.", answer: "light" },
-      { full: "The two hotels look very similar.", display: "The two hotels look very ___.", answer: "similar" },
-      { full: "The MRT is fast and convenient.", display: "The MRT is fast and ___.", answer: "convenient" },
-      { full: "That dark road is dangerous at night.", display: "That dark road is ___ at night.", answer: "dangerous" },
-      { full: "Please stay safe on your trip.", display: "Please stay ___ on your trip.", answer: "safe" },
-      { full: "The weather got worse in the afternoon.", display: "The weather got ___ in the afternoon.", answer: "worse" },
-      { full: "We had an exciting adventure last summer.", display: "We had an exciting ___ last summer.", answer: "adventure" },
-      { full: "I have recently been to Japan.", display: "I have ___ been to Japan.", answer: "recently" },
-      { full: "She has never tried this food before.", display: "She has ___ tried this food before.", answer: "never" },
-      { full: "Have you finished your homework yet?", display: "Have you finished your homework ___?", answer: "yet" },
-      { full: "He has already packed his bags.", display: "He has ___ packed his bags.", answer: "already" }
+      {"full":"My apartment was quiet last night.","display":"My ___ was quiet last night.","answer":"apartment"},
+      {"full":"I cleaned my bedroom before dinner yesterday.","display":"I cleaned my ___ before dinner yesterday.","answer":"bedroom"},
+      {"full":"The bathroom will be clean soon.","display":"The ___ will be clean soon.","answer":"bathroom"},
+      {"full":"We visited the bakery after school yesterday.","display":"We visited the ___ after school yesterday.","answer":"bakery"},
+      {"full":"The cake was delicious at lunch today.","display":"The cake was ___ at lunch today.","answer":"delicious"},
+      {"full":"Dad watered the garden before breakfast.","display":"Dad watered the ___ before breakfast.","answer":"garden"},
+      {"full":"I will wait by the gate.","display":"I will wait by the ___.","answer":"gate"},
+      {"full":"We mailed a card at the post office.","display":"We mailed a card at the ___.","answer":"post office"},
+      {"full":"Our town was sunny this morning.","display":"Our ___ was sunny this morning.","answer":"town"},
+      {"full":"We played ball in the yard yesterday.","display":"We played ball in the ___ yesterday.","answer":"yard"},
+      {"full":"Did you borrow my book yesterday?","display":"Did you ___ my book yesterday?","answer":"borrow"},
+      {"full":"I will finish math before dinner.","display":"I will ___ math before dinner.","answer":"finish"},
+      {"full":"Dad will fix my bike tonight.","display":"Dad will ___ my bike tonight.","answer":"fix"},
+      {"full":"I did not forget my book today.","display":"I did not ___ my book today.","answer":"forget"},
+      {"full":"Please listen to Mom after lunch.","display":"Please ___ to Mom after lunch.","answer":"listen"},
+      {"full":"We will meet near school tomorrow.","display":"We will ___ near school tomorrow.","answer":"meet"},
+      {"full":"I will order lunch after class.","display":"I will ___ lunch after class.","answer":"order"},
+      {"full":"Mom will prepare breakfast before seven.","display":"Mom will ___ breakfast before seven.","answer":"prepare"},
+      {"full":"Did you remember the time yesterday?","display":"Did you ___ the time yesterday?","answer":"remember"},
+      {"full":"I will ride my bike home.","display":"I will ___ my bike home.","answer":"ride"},
+      {"full":"We will share the cake tomorrow.","display":"We will ___ the cake tomorrow.","answer":"share"}
     ],
     reorder: [
-      { sentence: "The hotel was very comfortable.", chunks: ["The", "hotel", "was", "very", "comfortable."] },
-      { sentence: "The city will be very modern.", chunks: ["The", "city", "will be", "very", "modern."] },
-      { sentence: "The old town was wonderful.", chunks: ["The", "old", "town", "was", "wonderful."] },
-      { sentence: "We saw many famous places.", chunks: ["We", "saw", "many", "famous", "places."] },
-      { sentence: "The market was very crowded.", chunks: ["The", "market", "was", "very", "crowded."] },
-      { sentence: "The new park is very popular.", chunks: ["The", "new park", "is", "very", "popular."] },
-      { sentence: "The street was too noisy.", chunks: ["The", "street", "was", "too", "noisy."] },
-      { sentence: "The library will be quiet today.", chunks: ["The", "library", "will be", "quiet", "today."] },
-      { sentence: "The food was cheap and tasty.", chunks: ["The", "food", "was", "cheap", "and tasty."] },
-      { sentence: "The view will be wonderful tonight.", chunks: ["The", "view", "will be", "wonderful", "tonight."] },
-      { sentence: "The new mall is very modern.", chunks: ["The", "new mall", "is", "very", "modern."] },
-      { sentence: "The old house was very quiet.", chunks: ["The", "old house", "was", "very", "quiet."] },
-      { sentence: "The beach was clean and beautiful.", chunks: ["The", "beach", "was", "clean", "and beautiful."] },
-      { sentence: "The restaurant will be crowded tonight.", chunks: ["The", "restaurant", "will be", "crowded", "tonight."] },
-      { sentence: "The mountain air was very fresh.", chunks: ["The", "mountain air", "was", "very", "fresh."] },
-      { sentence: "The festival was big and famous.", chunks: ["The", "festival", "was", "big", "and famous."] }
+      {"sentence":"I will prepare breakfast in the apartment.","chunks":["I will","prepare breakfast","in the","apartment."]},
+      {"sentence":"We visited the bakery after school yesterday.","chunks":["We visited","the bakery","after school","yesterday."]},
+      {"sentence":"Dad will fix the gate this weekend.","chunks":["Dad will","fix","the gate","this weekend."]},
+      {"sentence":"I did not forget my book today.","chunks":["I did not","forget","my book","today."]},
+      {"sentence":"They will meet in the living room.","chunks":["They will","meet","in the","living room."]},
+      {"sentence":"We will ride bikes around town.","chunks":["We will","ride bikes","around","town."]},
+      {"sentence":"The garden was clean after rain.","chunks":["The garden","was clean","after","rain."]},
+      {"sentence":"I will borrow a book before class.","chunks":["I will","borrow","a book","before class."]},
+      {"sentence":"Mom will bake bread in the kitchen.","chunks":["Mom will","bake bread","in the","kitchen."]},
+      {"sentence":"The post office was busy this morning.","chunks":["The post office","was busy","this","morning."]},
+      {"sentence":"My favorite place was the yard.","chunks":["My favorite","place","was the","yard."]},
+      {"sentence":"The bathroom will be clean after dinner.","chunks":["The bathroom","will be clean","after","dinner."]},
+      {"sentence":"We listened to a story before bed.","chunks":["We listened","to a story","before","bed."]},
+      {"sentence":"Please remember your important test tomorrow.","chunks":["Please remember","your important","test","tomorrow."]},
+      {"sentence":"They will share snacks in the garden.","chunks":["They will","share snacks","in the","garden."]},
+      {"sentence":"We usually finish homework before dinner.","chunks":["We usually","finish homework","before","dinner."]}
     ],
     reading: [
       {
-        passage: "Last weekend, we visited an old town in the mountains. The streets were narrow and a little crowded, but the view was wonderful. We stayed in a small, comfortable hotel. The local food was cheap and delicious, and the people were friendly. Next month, we are going to visit a modern city by the sea. It will be a very different but exciting trip.",
+        passage: "On Monday morning, Lily got up in her bedroom. She went to the bathroom and then ate breakfast in the living room. Her dad baked bread before seven, and it was delicious. Lily usually looks in her bag before school, but yesterday she forgot her book. Tomorrow she will prepare her bag after dinner and put the book by the gate.",
         questions: [
-          { q: "Where did they visit last weekend?", choices: ["An old town", "A modern city", "A beach", "A museum"], answer: "An old town" },
-          { q: "How was the hotel?", choices: ["Small and comfortable", "Big and expensive", "Old and dirty", "Far away"], answer: "Small and comfortable" },
-          { q: "How was the local food?", choices: ["Cheap and delicious", "Expensive", "Bad", "Spicy"], answer: "Cheap and delicious" },
-          { q: "Where are they going next month?", choices: ["A modern city", "The mountains", "Abroad", "Home"], answer: "A modern city" }
+          {"q":"Where did Lily eat breakfast?","choices":["in the living room","in the garden","at the bakery","at the post office"],"answer":"in the living room"},
+          {"q":"What did Dad bake?","choices":["bread","rice","noodles","fish"],"answer":"bread"},
+          {"q":"What did Lily forget yesterday?","choices":["her book","her shoes","her lunch","her hat"],"answer":"her book"},
+          {"q":"What will Lily prepare tomorrow?","choices":["her bag","the garden","a cake","the bathroom"],"answer":"her bag"}
         ]
       },
       {
-        passage: "My new school is very different from my old one. The buildings are modern and the library is big and quiet. My classroom is on the fifth floor, so the view is wonderful. At first, I thought it would be hard, but my classmates are friendly. Next week, we are going to have a sports day. I think it will be a fun and busy day.",
+        passage: "After school, Ben and his sister walked to the bakery near their apartment. Ben ordered two cakes, and his sister got a drink for Mom. The shop was small but convenient, so many people stopped there. Yesterday Ben forgot his wallet, and his sister helped him. Next Friday, he will share his own money and buy a snack for her.",
         questions: [
-          { q: "How are the school buildings?", choices: ["Modern", "Old", "Small", "Dirty"], answer: "Modern" },
-          { q: "How is the library?", choices: ["Big and quiet", "Small and noisy", "Old", "Dark"], answer: "Big and quiet" },
-          { q: "How are the classmates?", choices: ["Friendly", "Shy", "Rude", "Quiet"], answer: "Friendly" },
-          { q: "What is happening next week?", choices: ["A sports day", "A test", "A trip", "A party"], answer: "A sports day" }
+          {"q":"Where did Ben go after school?","choices":["the bakery","the post office","the garden","the bathroom"],"answer":"the bakery"},
+          {"q":"What did Ben order?","choices":["two cakes","two drinks","two books","two cards"],"answer":"two cakes"},
+          {"q":"Why did his sister help him?","choices":["He forgot his wallet","He lost his shoe","He missed the bus","He broke the gate"],"answer":"He forgot his wallet"},
+          {"q":"What will Ben share next Friday?","choices":["his own money","his favorite book","his new bike","his school bag"],"answer":"his own money"}
         ]
       },
       {
-        passage: "Yesterday, my family went to a famous night market. It was very crowded and a little noisy, but the food was cheap and delicious. We tried many things and bought a few small gifts. The weather was warm and comfortable. Next time, we are going to visit a quiet park instead. I love busy places, but my mom likes quiet ones better.",
+        passage: "On Saturday, Amy helped Grandpa in the garden. They watered flowers in the yard and cleaned the old gate. The work was not easy, but Grandpa said Amy was helpful. Last week, the gate was broken, so Dad fixed it. Tomorrow Amy will meet two friends there, and they will ride bikes around the town after lunch.",
         questions: [
-          { q: "How was the night market?", choices: ["Crowded and noisy", "Quiet and empty", "Cold", "Expensive"], answer: "Crowded and noisy" },
-          { q: "How was the food?", choices: ["Cheap and delicious", "Expensive", "Bad", "Spicy"], answer: "Cheap and delicious" },
-          { q: "How was the weather?", choices: ["Warm and comfortable", "Cold", "Rainy", "Windy"], answer: "Warm and comfortable" },
-          { q: "Where are they going next time?", choices: ["A quiet park", "The night market", "Abroad", "A museum"], answer: "A quiet park" }
+          {"q":"Who helped Grandpa?","choices":["Amy","Ben","Lily","Tom"],"answer":"Amy"},
+          {"q":"What did they clean?","choices":["the old gate","the bathroom","the living room","the post office"],"answer":"the old gate"},
+          {"q":"What happened to the gate last week?","choices":["It was broken","It was new","It was open","It was small"],"answer":"It was broken"},
+          {"q":"What will Amy and her friends do tomorrow?","choices":["ride bikes around the town","bake cakes at home","borrow books after class","order lunch at school"],"answer":"ride bikes around the town"}
         ]
       },
       {
-        passage: "Last weekend, my family tried a new restaurant downtown. The room was bright and modern, and the waiters were friendly. The food was a little expensive, but it was delicious. The place was crowded, so we waited for twenty minutes. Next time, we are going to try a small, quiet cafe near our house. I think it will be more relaxing.",
+        passage: "Tom and his mom went to the post office yesterday. Tom wanted to mail a card to Dad. The line was long, but the woman there was helpful and kind. Tom listened to her and put the card in a box. Next week, he will write a new card and send it on Monday morning.",
         questions: [
-          { q: "How was the restaurant's room?", choices: ["Bright and modern", "Dark and old", "Small", "Dirty"], answer: "Bright and modern" },
-          { q: "How was the food?", choices: ["Expensive but delicious", "Cheap and bad", "Free", "Spicy"], answer: "Expensive but delicious" },
-          { q: "Why did they wait?", choices: ["It was crowded", "It was closed", "They were late", "It was far"], answer: "It was crowded" },
-          { q: "Where are they going next time?", choices: ["A quiet cafe", "A big restaurant", "Abroad", "Home"], answer: "A quiet cafe" }
+          {"q":"Where did Tom go yesterday?","choices":["the post office","the bakery","the garden","the apartment"],"answer":"the post office"},
+          {"q":"Who was the card for?","choices":["Dad","Mom","Grandpa","Ben"],"answer":"Dad"},
+          {"q":"Who was helpful and kind?","choices":["the woman there","Tom's teacher","his sister","his friend"],"answer":"the woman there"},
+          {"q":"What will Tom do next week?","choices":["write a new card","fix the gate","ride a bike","order a cake"],"answer":"write a new card"}
         ]
       },
       {
-        passage: "My grandmother's house is old but very comfortable. The rooms are small, and the garden is full of beautiful flowers. It is quiet there, and the air is fresh. Every summer, I stay with her for a week. We cook together and tell stories at night. Next summer, she is going to teach me how to grow vegetables. I can't wait.",
+        passage: "May had an important test on Thursday. She usually studied in the living room, but last night she read in her bedroom because the TV was on. Her brother forgot his pencil, so May shared one with him. Tomorrow she will borrow a book and prepare with her friend after class. She will sleep early.",
         questions: [
-          { q: "How is the grandmother's house?", choices: ["Old but comfortable", "New and modern", "Big and noisy", "Cold"], answer: "Old but comfortable" },
-          { q: "What is in the garden?", choices: ["Beautiful flowers", "Tall trees", "A pool", "Toys"], answer: "Beautiful flowers" },
-          { q: "How long does the writer stay every summer?", choices: ["A week", "A day", "A month", "A year"], answer: "A week" },
-          { q: "What is the grandmother going to teach?", choices: ["Growing vegetables", "Cooking", "Painting", "Singing"], answer: "Growing vegetables" }
+          {"q":"What did May have on Thursday?","choices":["an important test","a birthday dinner","a new bike","a long trip"],"answer":"an important test"},
+          {"q":"Where did May study last night?","choices":["in her bedroom","in the garden","at the bakery","near the gate"],"answer":"in her bedroom"},
+          {"q":"What did May share with her brother?","choices":["a pencil","a cake","a book","a card"],"answer":"a pencil"},
+          {"q":"What will May borrow tomorrow?","choices":["a book","a bike","a wallet","a bag"],"answer":"a book"}
         ]
       },
       {
-        passage: "Our city built a new library last year. It is the biggest and most modern building in town. Inside, it is quiet and clean, with thousands of books. There is also a small cafe on the first floor. Many students go there to study after school. Next month, the library is going to start a free English club. I am going to join it.",
+        passage: "Kevin and his dad rode around town on Sunday. They left their apartment after breakfast and stopped at a small park. Kevin listened to birds and took pictures of the garden. Last month, he fell near the gate, but Dad helped him. Next Sunday, Kevin will ride to the post office and meet his friend there before lunch.",
         questions: [
-          { q: "When was the library built?", choices: ["Last year", "This year", "Ten years ago", "Last month"], answer: "Last year" },
-          { q: "How is the library inside?", choices: ["Quiet and clean", "Noisy and dirty", "Dark", "Small"], answer: "Quiet and clean" },
-          { q: "What is on the first floor?", choices: ["A small cafe", "A garden", "A pool", "A shop"], answer: "A small cafe" },
-          { q: "What is the writer going to join?", choices: ["A free English club", "A sports team", "A band", "A trip"], answer: "A free English club" }
+          {"q":"When did Kevin ride around town?","choices":["on Sunday","on Monday","on Friday","on Thursday"],"answer":"on Sunday"},
+          {"q":"Where did they stop?","choices":["at a small park","at the bakery","in the bathroom","in the bedroom"],"answer":"at a small park"},
+          {"q":"What happened last month?","choices":["he fell near the gate","he forgot his book","he baked bread","he ordered lunch"],"answer":"he fell near the gate"},
+          {"q":"Where will Kevin ride next Sunday?","choices":["to the post office","to the living room","to the yard","to the apartment"],"answer":"to the post office"}
         ]
       },
       {
-        passage: "Yesterday was a rainy and windy day, so we stayed home. The house was warm and cozy. We watched an old movie and ate popcorn. My little brother was bored, so we played board games. It was a slow but happy day. Tomorrow the weather will be sunny, and we are going to ride bikes in the park.",
+        passage: "On Saturday night, Nina's family had dinner in the living room. Grandma baked a cake, and Nina told a funny story. Everyone laughed because the story was about a lost shoe. The cake was delicious, so Nina will order one from the bakery for her birthday next month. She will remember to share it with friends after school on Friday.",
         questions: [
-          { q: "How was the weather yesterday?", choices: ["Rainy and windy", "Sunny", "Hot", "Snowy"], answer: "Rainy and windy" },
-          { q: "What did they eat?", choices: ["Popcorn", "Pizza", "Noodles", "Fruit"], answer: "Popcorn" },
-          { q: "Why did they play board games?", choices: ["The brother was bored", "It was a party", "It was homework", "They were hungry"], answer: "The brother was bored" },
-          { q: "What are they going to do tomorrow?", choices: ["Ride bikes", "Stay home", "Go to school", "Watch a movie"], answer: "Ride bikes" }
+          {"q":"Where did Nina's family have dinner?","choices":["in the living room","in the yard","at the post office","at the bakery"],"answer":"in the living room"},
+          {"q":"Who baked a cake?","choices":["Grandma","Nina","Dad","Mom"],"answer":"Grandma"},
+          {"q":"What was the story about?","choices":["a lost shoe","a new bike","a small town","a broken gate"],"answer":"a lost shoe"},
+          {"q":"What will Nina order for her birthday?","choices":["a cake from the bakery","a card from the post office","a book from school","a bike from town"],"answer":"a cake from the bakery"}
         ]
       }
     ]
@@ -336,13 +336,13 @@ const PASSAGE_GLOSSARY = {
     [{ en: "lake", zh: "湖" }, { en: "tent", zh: "帳篷" }, { en: "peaceful", zh: "寧靜的" }, { en: "trails", zh: "步道、小徑" }]
   ],
   "2026-07-2": [
-    [{ en: "narrow", zh: "狹窄的" }, { en: "view", zh: "風景、景色" }],
-    [{ en: "floor", zh: "樓層" }, { en: "classmates", zh: "同學" }],
-    [{ en: "instead", zh: "改為、取而代之" }],
-    [{ en: "downtown", zh: "市中心" }, { en: "waiters", zh: "服務生" }, { en: "cafe", zh: "咖啡廳" }],
-    [{ en: "garden", zh: "花園" }, { en: "fresh", zh: "新鮮的" }, { en: "vegetables", zh: "蔬菜" }],
-    [{ en: "library", zh: "圖書館" }, { en: "club", zh: "社團" }],
-    [{ en: "cozy", zh: "溫馨舒適的" }, { en: "popcorn", zh: "爆米花" }, { en: "board games", zh: "桌遊" }]
+    [],
+    [{"en":"wallet","zh":"皮夾"}],
+    [{"en":"broken","zh":"壞掉的"}],
+    [{"en":"line","zh":"排隊隊伍"}, {"en":"mail","zh":"寄（信）"}],
+    [],
+    [{"en":"fell","zh":"跌倒（fall 的過去式）"}, {"en":"park","zh":"公園"}],
+    [{"en":"story","zh":"故事"}, {"en":"funny","zh":"好笑的"}, {"en":"laugh","zh":"大笑"}]
   ],
   "2026-07-3": [
     [{ en: "serious", zh: "嚴重的" }, { en: "missing", zh: "錯過" }],

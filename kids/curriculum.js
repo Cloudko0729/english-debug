@@ -29,20 +29,21 @@ const CURRICULUM = [
         ]
       },
       {
-        // 自第 3 週起改為「週日開始、週六結束」；第 2 週提前於 07-11(六) 結束銜接
+        // 自第 3 週起改為「週日開始、週六結束」；第 2 週提前於 07-11(六) 結束銜接（短週：每日 2 輪補題量）
+        // 2026-07-06 重選：原「描述與經驗」多字超過 1200 字第 6 級，全部換成 5~6 級（Codex 選字、Claude 審核）
         n: 2, start: "2026-07-08", end: "2026-07-11",
-        theme: "描述與經驗", grammar: ["過去式", "未來式"],
+        theme: "我的一天與社區", grammar: ["過去式", "未來式"],
         words: [
-          { en: "tall", zh: "高的", pos: "adj" }, { en: "short", zh: "矮的、短的", pos: "adj" }, { en: "heavy", zh: "重的", pos: "adj" },
-          { en: "light", zh: "輕的", pos: "adj" }, { en: "expensive", zh: "昂貴的", pos: "adj" }, { en: "cheap", zh: "便宜的", pos: "adj" },
-          { en: "modern", zh: "現代的", pos: "adj" }, { en: "old", zh: "老的、舊的", pos: "adj" }, { en: "popular", zh: "受歡迎的", pos: "adj" },
-          { en: "famous", zh: "有名的", pos: "adj" }, { en: "similar", zh: "相似的", pos: "adj" }, { en: "different", zh: "不同的", pos: "adj" },
-          { en: "comfortable", zh: "舒適的", pos: "adj" }, { en: "convenient", zh: "方便的", pos: "adj" }, { en: "dangerous", zh: "危險的", pos: "adj" },
-          { en: "safe", zh: "安全的", pos: "adj" }, { en: "quiet", zh: "安靜的", pos: "adj" }, { en: "noisy", zh: "吵鬧的", pos: "adj" },
-          { en: "crowded", zh: "擁擠的", pos: "adj" }, { en: "better", zh: "較好的", pos: "adj" }, { en: "worse", zh: "較差的", pos: "adj" },
-          { en: "experience", zh: "經驗", pos: "n" }, { en: "adventure", zh: "冒險", pos: "n" }, { en: "local", zh: "當地的", pos: "adj" },
-          { en: "recently", zh: "最近", pos: "adv" }, { en: "ever", zh: "曾經", pos: "adv" }, { en: "never", zh: "從不", pos: "adv" },
-          { en: "already", zh: "已經", pos: "adv" }, { en: "yet", zh: "尚未、還（沒）", pos: "adv" }, { en: "wonderful", zh: "很棒的", pos: "adj" }
+          { en: "apartment", zh: "公寓", pos: "n" }, { en: "bakery", zh: "麵包店", pos: "n" }, { en: "bathroom", zh: "浴室", pos: "n" },
+          { en: "bedroom", zh: "臥室", pos: "n" }, { en: "garden", zh: "花園", pos: "n" }, { en: "gate", zh: "大門", pos: "n" },
+          { en: "living room", zh: "客廳", pos: "n" }, { en: "post office", zh: "郵局", pos: "n" }, { en: "town", zh: "城鎮", pos: "n" },
+          { en: "yard", zh: "院子", pos: "n" }, { en: "bake", zh: "烘烤", pos: "v" }, { en: "borrow", zh: "借入", pos: "v" },
+          { en: "finish", zh: "完成", pos: "v" }, { en: "fix", zh: "修理", pos: "v" }, { en: "forget", zh: "忘記", pos: "v" },
+          { en: "listen", zh: "聽", pos: "v" }, { en: "meet", zh: "見面、遇見", pos: "v" }, { en: "order", zh: "點餐、訂購", pos: "v" },
+          { en: "prepare", zh: "準備", pos: "v" }, { en: "remember", zh: "記得", pos: "v" }, { en: "ride", zh: "騎、搭乘", pos: "v" },
+          { en: "share", zh: "分享", pos: "v" }, { en: "tell", zh: "告訴", pos: "v" }, { en: "convenient", zh: "方便的", pos: "adj" },
+          { en: "delicious", zh: "美味的", pos: "adj" }, { en: "favorite", zh: "最喜愛的", pos: "adj" }, { en: "helpful", zh: "有幫助的", pos: "adj" },
+          { en: "important", zh: "重要的", pos: "adj" }, { en: "usually", zh: "通常", pos: "adv" }, { en: "test", zh: "測驗", pos: "n" }
         ]
       },
       {

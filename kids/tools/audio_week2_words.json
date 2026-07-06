@@ -1,0 +1,10 @@
+{
+ "outdir": "D:/english/kids/audio/words",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "livingroom": "living room",
+  "postoffice": "post office",
+  "listen": "listen"
+ }
+}

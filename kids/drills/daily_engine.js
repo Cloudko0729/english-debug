@@ -102,6 +102,14 @@
     const start = ((dayIdx * k) % order.length + order.length) % order.length;
     return order.concat(order).slice(start, start + k);
   }
+  // 短週（週長 ≤5 天，如換週制的過渡週）：領完金幣後再開，出「第 2 輪」全新題組補足題量
+  function _weekDays() {
+    try {
+      const w = vocabWeekForDate(DRILL_DATE).week;
+      return Math.round((Date.parse(w.end) - Date.parse(w.start)) / 86400000) + 1;
+    } catch (e) { return 7; }
+  }
+  function _isShortWeek() { return _weekDays() <= 5; }
   function _isRetake() {
     if (!currentStudent) return false;
     const p = getProgress(currentStudent);
@@ -111,12 +119,15 @@
 
   function buildDrill() {
     const ctx = vocabWeekForDate(DRILL_DATE), week = ctx.week, month = ctx.month;
-    const retake = _isRetake();
-    const rnd = retake ? null : seeded(DRILL_DATE);   // retake → 不用固定種子，全隨機
+    const retaken = _isRetake();
+    const round2 = retaken && _isShortWeek();          // 短週第 2 輪：固定出「下一組」新題（補足題量）
+    const retake = retaken && !_isShortWeek();         // 一般週重測 → 全隨機
+    const rnd = retake ? null : seeded(DRILL_DATE + (round2 ? "-r2" : ""));
     const words = week.words;
     const wd = (typeof weekDrillFor === "function") ? weekDrillFor(month.month, week.n) : null;
     WDID = month.month + "-" + week.n;
-    const dayIdx = Math.max(0, Math.round((Date.parse(DRILL_DATE) - Date.parse(week.start)) / 86400000));
+    const baseIdx = Math.max(0, Math.round((Date.parse(DRILL_DATE) - Date.parse(week.start)) / 86400000));
+    const dayIdx = baseIdx + (round2 ? _weekDays() : 0);   // 第 2 輪 → 題塊往後跳一週長，不重複
 
     // ① 英聽選擇 6（分塊輪替；重測→隨機）
     const s1 = pickBlock(words, 6, dayIdx, WDID + "-v", retake).map(w => ({ en: w.en, choices: distinctChoices(w, words, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
@@ -186,7 +197,10 @@
 
   function render() {
     const w = DRILL.week, m = DRILL.month;
-    let h = `<div class="meta">📒 ${m.label} 第 ${w.n} 週 · ${w.theme} · 文法：${m.grammar.map(g => g.topic).join("、")}${_isRetake() ? "<br>🔁 練習模式：今天金幣已領過，題目改成隨機出" : ""}</div>`;
+    const retakeNote = !_isRetake() ? ""
+      : (_isShortWeek() ? "<br>📚 短週補題 第 2 輪：全新題組（金幣今天已領過）"
+                        : "<br>🔁 練習模式：今天金幣已領過，題目改成隨機出");
+    let h = `<div class="meta">📒 ${m.label} 第 ${w.n} 週 · ${w.theme} · 文法：${m.grammar.map(g => g.topic).join("、")}${retakeNote}</div>`;
     // ①
     h += `<div class="sec"><div class="sec-h">① 英聽選擇</div><div class="sec-d">點 🔊 聽單字，選出正確英文</div>`;
     DRILL.s1.forEach((q, i) => { h += `<div class="q"><div class="q-no">${i + 1}.</div><button class="play" onclick="__pw('${q.en.replace(/'/g, "\\'")}')">🔊 點我聽</button>${optsHtml('s1', i, q.choices)}</div>`; });
@@ -309,7 +323,8 @@
     p.coins.claimedDrills[claimKey] = { claimedAt: new Date().toISOString(), earned, correct };
     saveProgress(currentStudent, p);
     if (typeof cloudSave === "function") cloudSave(currentStudent);
-    return `🪙 +${earned} 金幣！（共 ${p.coins.balance} 金幣）<br><a href="../island.html" style="color:#2f80ed;font-weight:700">👉 去蓋我的島嶼</a>`;
+    const extra = _isShortWeek() ? "<br>📚 短週補題：再開一次這份測驗，會有第 2 輪全新題目！" : "";
+    return `🪙 +${earned} 金幣！${extra}（共 ${p.coins.balance} 金幣）<br><a href="../island.html" style="color:#2f80ed;font-weight:700">👉 去蓋我的島嶼</a>`;
   }
 
   function showLock() { const a = document.getElementById("app"); a.innerHTML = `<div class="lock"><div style="font-size:3rem">🔒</div><h2>這份測驗還沒開放</h2><p>${DRILL_DATE} 才開始喔！</p><a href="../index.html">← 回首頁</a></div>`; a.style.display = "block"; }
