@@ -29,7 +29,8 @@ const CURRICULUM = [
         ]
       },
       {
-        n: 2, start: "2026-07-08", end: "2026-07-14",
+        // 自第 3 週起改為「週日開始、週六結束」；第 2 週提前於 07-11(六) 結束銜接
+        n: 2, start: "2026-07-08", end: "2026-07-11",
         theme: "描述與經驗", grammar: ["過去式", "未來式"],
         words: [
           { en: "tall", zh: "高的", pos: "adj" }, { en: "short", zh: "矮的、短的", pos: "adj" }, { en: "heavy", zh: "重的", pos: "adj" },
@@ -45,7 +46,7 @@ const CURRICULUM = [
         ]
       },
       {
-        n: 3, start: "2026-07-15", end: "2026-07-21",
+        n: 3, start: "2026-07-12", end: "2026-07-18",
         theme: "健康與規則", grammar: ["過去式", "未來式"],
         words: [
           { en: "health", zh: "健康", pos: "n" }, { en: "healthy", zh: "健康的", pos: "adj" }, { en: "exercise", zh: "運動", pos: "n" },
@@ -61,7 +62,8 @@ const CURRICULUM = [
         ]
       },
       {
-        n: 4, start: "2026-07-22", end: "2026-07-31",
+        // 第 4 週涵蓋到 08-01(六)；8 月課程自 08-02(日) 起接手
+        n: 4, start: "2026-07-19", end: "2026-08-01",
         theme: "嗜好與志向", grammar: ["過去式", "未來式"],
         words: [
           { en: "hobby", zh: "嗜好", pos: "n" }, { en: "interest", zh: "興趣", pos: "n" }, { en: "activity", zh: "活動", pos: "n" },

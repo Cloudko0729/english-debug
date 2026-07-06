@@ -29,4 +29,7 @@ const DRILLS = [
   { day: 25, date: "2026-07-06", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 旅行單字＋過去/未來式", icon: "📝" },
   { day: 26, date: "2026-07-07", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 旅行單字＋過去/未來式", icon: "📝" },
   { day: 27, date: "2026-07-08", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 描述單字＋過去/未來式", icon: "📝" },
+  { day: 28, date: "2026-07-09", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 描述單字＋過去/未來式", icon: "📝" },
+  { day: 29, date: "2026-07-10", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 描述單字＋過去/未來式", icon: "📝" },
+  { day: 30, date: "2026-07-11", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 描述單字＋過去/未來式", icon: "📝" },
 ];
