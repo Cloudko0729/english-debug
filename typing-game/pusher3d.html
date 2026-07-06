@@ -92,7 +92,7 @@ import * as THREE from "three";
 import * as CANNON from "cannon-es";
 
 // ─── 常數 ────────────────────────────────────────────────────────────────────
-const TOKENS_PER_COIN = 3, SEED_COINS = 40, MAX_COINS = 170;
+const TOKENS_PER_COIN = 3, SEED_COINS = 40, MAX_COINS = 120;
 // 幣種：value=代幣值、mass=重量（輕的容易被撞上去）、色
 const COIN_TYPES = {
   gold:    { value: 1,  mass: 6,   r: 0.55, color: 0xffd24d, emis: 0x332200 },
@@ -148,11 +148,13 @@ scene.add(new THREE.HemisphereLight(0xbfd4ff, 0x2a2145, 1.1));
 const dl = new THREE.DirectionalLight(0xffffff, 1.4); dl.position.set(4, 10, 6); scene.add(dl);
 
 const world = new CANNON.World({ gravity: new CANNON.Vec3(0, -9.8, 0) });
-world.allowSleep = true;
+world.allowSleep = false;
 world.broadphase = new CANNON.SAPBroadphase(world);
+world.solver.iterations = 20;
+world.solver.tolerance = 0.001;
 const matCoin = new CANNON.Material("coin"), matTable = new CANNON.Material("table");
-world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matTable, { friction: 0.2, restitution: 0.1 }));
-world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matCoin, { friction: 0.4, restitution: 0.1 }));
+world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matTable, { friction: 0.08, restitution: 0.02, contactEquationStiffness: 1e7, contactEquationRelaxation: 4, frictionEquationStiffness: 1e7, frictionEquationRelaxation: 4 }));
+world.addContactMaterial(new CANNON.ContactMaterial(matCoin, matCoin, { friction: 0.18, restitution: 0.02, contactEquationStiffness: 1e7, contactEquationRelaxation: 4, frictionEquationStiffness: 1e7, frictionEquationRelaxation: 4 }));
 
 function staticBox(sx, sy, sz, x, y, z, color, visible = true, rotX = 0) {
   const body = new CANNON.Body({ mass: 0, material: matTable, shape: new CANNON.Box(new CANNON.Vec3(sx / 2, sy / 2, sz / 2)), position: new CANNON.Vec3(x, y, z) });
@@ -164,17 +166,17 @@ function staticBox(sx, sy, sz, x, y, z, color, visible = true, rotX = 0) {
   }
   return body;
 }
-staticBox(8, 1, 9, 0, -0.5, -0.5, 0x2c355f);                    // 檯面（前緣到 z=4）
+staticBox(8, 1, 9, 0, -0.5, -0.5, 0x2c355f, true, -0.035);       // 檯面前傾 2°
 staticBox(0.35, 3.4, 10.6, -4.18, 1.0, -0.2, 0x232a4e);         // 左牆
 staticBox(0.35, 3.4, 10.6, 4.18, 1.0, -0.2, 0x232a4e);          // 右牆
 staticBox(0.35, 6, 10.6, -4.18, 5.0, -0.2, 0, false);           // 左隱形高牆
 staticBox(0.35, 6, 10.6, 4.18, 5.0, -0.2, 0, false);            // 右隱形高牆
 staticBox(8.8, 3.6, 0.4, 0, 1.3, -5.2, 0x232a4e);               // 後牆
 staticBox(8.8, 6, 0.4, 0, 5.6, -5.2, 0, false);                 // 後隱形高牆
-staticBox(8, 0.3, 4.2, 0, 0.78, 2.0, 0, false);                  // 前場隱形天花板（最多疊3~4層，多的往前擠）
+// 移除隱形天花板（Codex: 天花板造成壓縮/穿透/飄浮）
 
 // 推板（kinematic，前後滑動）
-const PLATE = { minZ: -5.7, maxZ: -3.4, w: 7.94, h: 1.5, d: 7.0 };
+const PLATE = { minZ: -5.7, maxZ: -2.0, w: 7.94, h: 1.5, d: 7.0 };
 const plateBody = new CANNON.Body({ mass: 0, type: CANNON.Body.KINEMATIC, material: matTable, shape: new CANNON.Box(new CANNON.Vec3(PLATE.w / 2, PLATE.h / 2, PLATE.d / 2)), position: new CANNON.Vec3(0, PLATE.h / 2, PLATE.minZ) });
 world.addBody(plateBody);
 const plateMesh = new THREE.Mesh(new THREE.BoxGeometry(PLATE.w, PLATE.h, PLATE.d),
@@ -196,7 +198,7 @@ function coinAssets(type) {
 let coins = [];   // {body, mesh, type}
 function addCoin(type, x, y, z, randomSpin) {
   const t = COIN_TYPES[type];
-  const body = new CANNON.Body({ mass: t.mass, material: matCoin, shape: new CANNON.Cylinder(t.r, t.r, 0.16, 12), position: new CANNON.Vec3(x, y, z), allowSleep: true, sleepSpeedLimit: 0.25, sleepTimeLimit: 0.6 });
+  const body = new CANNON.Body({ mass: t.mass, material: matCoin, shape: new CANNON.Cylinder(t.r, t.r, 0.16, 12), position: new CANNON.Vec3(x, y, z), allowSleep: false, linearDamping: 0.03, angularDamping: 0.35 });
   if (randomSpin) {
     body.angularVelocity.set((Math.random() - .5) * 6, (Math.random() - .5) * 4, (Math.random() - .5) * 6);
     body.velocity.set((Math.random() - .5) * 1.2, 0, (Math.random() - .2) * 0.8);
@@ -215,7 +217,7 @@ function dropCoin(type) {
 }
 // 自動合成：檯面太滿時，後排 3 枚金幣 → 1 枚藍鑽幣（價值 3=3 守恆，清出空間）
 function compress(force) {
-  const LIMIT = 150;
+  const LIMIT = 100;
   if (!force && coins.length <= LIMIT) return;
   while (coins.length > (force ? MAX_COINS - 3 : LIMIT)) {
     const golds = coins.filter(c => c.type === "gold").sort((a, b) => a.body.position.z - b.body.position.z).slice(0, 3);
@@ -264,14 +266,25 @@ function onFall(type) {
 }
 
 // ─── 物理迴圈 ────────────────────────────────────────────────────────────────
-let t = 0;
+let t = 0, lastStepTime = performance.now();
 function stepWorld() {
   t++;
-  // 推板：正弦運動（用速度驅動 kinematic → 有真實推力）
+  const now = performance.now();
+  const dt = Math.min((now - lastStepTime) / 1000, 0.1);
+  lastStepTime = now;
+  // 推板：正弦運動（速度 clamp 防暴力彈射）
   const w = 0.030;
   const targetZ = PLATE.minZ + (PLATE.maxZ - PLATE.minZ) * (0.5 + 0.5 * Math.sin(t * w));
-  plateBody.velocity.set(0, 0, (targetZ - plateBody.position.z) * 60 * 0.9);
-  world.step(1 / 60);
+  const err = targetZ - plateBody.position.z;
+  plateBody.velocity.set(0, 0, Math.max(-2.4, Math.min(2.0, err * 18)));
+  // 向前輔助力（防死堆，模擬微傾斜）
+  for (const c of coins) {
+    const p = c.body.position;
+    if (p.y < 1.2 && p.z > -1.5 && p.z < 4.5) {
+      c.body.applyForce(new CANNON.Vec3(0, 0, 0.35 * c.body.mass), p);
+    }
+  }
+  world.step(1 / 60, dt, 8);
   plateMesh.position.copy(plateBody.position);
   plateMesh.quaternion.copy(plateBody.quaternion);
   // 掉落偵測 + 彩虹幣閃色
