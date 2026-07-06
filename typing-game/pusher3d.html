@@ -14,18 +14,35 @@
   #statBar{width:100%;max-width:560px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-size:.8rem;margin:6px 0;}
   #statBar .st{background:var(--panel);border-radius:10px;padding:5px 11px;font-weight:700;}
   #statBar .st b{color:var(--gold);}
-  #wordArea{width:100%;max-width:560px;background:var(--panel);border-radius:14px;padding:10px;text-align:center;margin-bottom:8px;}
-  #wordZh{font-size:1.1rem;color:var(--gold);font-weight:800;min-height:1.4em;}
-  #wordLetters{display:flex;gap:5px;justify-content:center;margin:7px 0 3px;flex-wrap:wrap;}
-  .lb{width:36px;height:44px;border-radius:8px;background:#181e3c;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;border:2px solid #3a4370;}
+  #wordArea{width:100%;max-width:640px;background:var(--panel);border-radius:12px;padding:6px 10px;text-align:center;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+  #wordZh{font-size:1rem;color:var(--gold);font-weight:800;cursor:pointer;}
+  #wordLetters{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;}
+  .lb{width:30px;height:36px;border-radius:7px;background:#181e3c;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;border:2px solid #3a4370;}
   .lb.done{background:#153c2b;border-color:var(--green);color:var(--green);}
   .lb.cur{border-color:var(--gold);color:var(--gold);animation:pulse .9s infinite;}
   @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
   .lb.err{border-color:var(--danger);animation:shake .18s;}
   @keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-  #playBtn{border:none;border-radius:9px;background:var(--blue);color:#fff;font-weight:700;padding:4px 13px;cursor:pointer;font-size:.82rem;}
-  #combo{font-size:.8rem;color:var(--gold);margin-top:3px;min-height:1.2em;font-weight:700;}
-  #cv3d{border-radius:16px;border:3px solid #3a4370;touch-action:manipulation;max-width:100%;}
+  #combo{font-size:.78rem;color:var(--gold);font-weight:700;min-width:90px;}
+  #machineRow{display:flex;gap:10px;align-items:stretch;justify-content:center;width:100%;max-width:640px;}
+  #cv3d{border-radius:14px;border:3px solid #3a4370;touch-action:manipulation;max-width:calc(100% - 120px);}
+  #sideBtns{display:flex;flex-direction:column;gap:8px;justify-content:center;min-width:106px;}
+  #sideBtns button{border:none;border-radius:10px;font-weight:800;padding:10px 8px;cursor:pointer;font-size:.85rem;}
+  /* 指位鍵盤 */
+  #kb{margin-top:8px;display:flex;flex-direction:column;gap:4px;align-items:center;}
+  .kb-row{display:flex;gap:4px;}
+  .key{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;text-transform:uppercase;border:1.5px solid transparent;}
+  .key.f-pinky{background:rgba(244,114,182,.15);color:#f472b6;}
+  .key.f-ring{background:rgba(134,239,172,.15);color:#86efac;}
+  .key.f-middle{background:rgba(253,211,77,.15);color:#fcd34d;}
+  .key.f-l-index{background:rgba(216,180,254,.15);color:#d8b4fe;}
+  .key.f-r-index{background:rgba(147,197,253,.15);color:#93c5fd;}
+  .key.hl{border-color:currentColor;transform:scale(1.15);}
+  .key.f-pinky.hl{background:rgba(244,114,182,.4);box-shadow:0 0 14px #f472b6;}
+  .key.f-ring.hl{background:rgba(134,239,172,.4);box-shadow:0 0 14px #86efac;}
+  .key.f-middle.hl{background:rgba(253,211,77,.4);box-shadow:0 0 14px #fcd34d;}
+  .key.f-l-index.hl{background:rgba(216,180,254,.4);box-shadow:0 0 14px #d8b4fe;}
+  .key.f-r-index.hl{background:rgba(147,197,253,.4);box-shadow:0 0 14px #93c5fd;}
   #tray{width:100%;max-width:420px;text-align:center;font-weight:800;color:var(--gold);margin-top:6px;font-size:1rem;min-height:1.4em;}
   #hint{color:var(--muted);font-size:.73rem;margin-top:6px;text-align:center;max-width:440px;line-height:1.6;}
   #mobileInput{position:absolute;opacity:0;height:1px;width:1px;pointer-events:none;}
@@ -52,20 +69,24 @@
     <span class="st">本局 <b id="stSession">0</b></span>
     <span class="st">掉落 <b id="stFall">0</b> 代幣</span>
     <span class="st">⏱ <b id="stTime">3:00</b></span>
-    <button id="resetBtn" onclick="resetMachine()" style="border:none;border-radius:10px;background:#3a4370;color:#cfd6ff;font-weight:700;padding:5px 12px;cursor:pointer;font-size:.8rem">♻️ 重置</button>
-    <button id="practiceBtn" onclick="startSession(&quot;practice&quot;)" style="border:none;border-radius:10px;background:#5f6cb0;color:#fff;font-weight:800;padding:5px 14px;cursor:pointer;font-size:.85rem">🎮 試玩</button>
-    <button id="officialBtn" onclick="startSession(&quot;official&quot;)" style="border:none;border-radius:10px;background:var(--green);color:#fff;font-weight:800;padding:5px 14px;cursor:pointer;font-size:.85rem">🏆 正式 (0/3)</button>
-    <button id="pauseBtn" onclick="togglePause()" style="display:none;border:none;border-radius:10px;background:var(--danger);color:#fff;font-weight:800;padding:5px 14px;cursor:pointer;font-size:.85rem">⏸ 暫停</button>
   </div>
   <div id="wordArea">
-    <div id="wordZh">—</div>
+    <div id="wordZh" onclick="sayCurrent()" title="點我再聽一次">—</div>
     <div id="wordLetters"></div>
-    <div><button id="playBtn">🔊 再聽一次</button></div>
     <div id="combo"></div>
   </div>
-  <canvas id="cv3d" width="460" height="330"></canvas>
+  <div id="machineRow">
+    <canvas id="cv3d" width="460" height="330"></canvas>
+    <div id="sideBtns">
+      <button id="officialBtn" onclick="startSession('official')" style="background:var(--green);color:#fff">🏆 正式<br>(0/3)</button>
+      <button id="practiceBtn" onclick="startSession('practice')" style="background:#5f6cb0;color:#fff">🎮 試玩</button>
+      <button id="pauseBtn" onclick="togglePause()" style="display:none;background:var(--danger);color:#fff">⏸ 暫停</button>
+      <button id="resetBtn" onclick="resetMachine()" style="background:#3a4370;color:#cfd6ff">♻️ 重置</button>
+    </div>
+  </div>
+  <div id="kb"></div>
   <div id="tray"></div>
-  <div id="hint">打對字母掉 🪙 金幣（1 代幣）｜連擊每滿 5 掉 💠 藍鑽幣（3 代幣，比較輕）｜連擊每滿 10 掉 🌈 彩虹幣（10 代幣，超輕會亂彈！）<br>每天 <b>3 次正式挑戰</b>，取掉落最多那局：<b>1 代幣 = 1 島嶼金幣</b>（試玩不限次數、不計獎勵）。平板點機台叫出鍵盤。</div>
+  <div id="hint">打對掉 🪙（1）｜連擊 5 掉 💠（3）｜連擊 10 掉 🌈（10）｜每天 3 次正式取最佳：<b>1 代幣 = 1 島嶼金幣</b>。點中文可再聽一次；平板點機台叫出鍵盤。</div>
   <input id="mobileInput" autocomplete="off" autocapitalize="none">
   <div id="overEl" style="display:none;position:fixed;inset:0;background:rgba(10,13,30,.82);z-index:50;align-items:center;justify-content:center">
     <div style="background:var(--panel);border:3px solid var(--gold);border-radius:18px;padding:26px 24px;text-align:center;max-width:320px">
@@ -133,7 +154,28 @@ function sayCurrent() {
   else loadBuf(k);
 }
 function nextWord() { oi = (oi + 1) % order.length; cur = WORDS[order[oi]]; li = 0; document.getElementById("wordZh").textContent = cur.zh; renderLetters(); sayCurrent(); }
-function renderLetters(err) { document.getElementById("wordLetters").innerHTML = cur.en.split("").map((ch, i) => `<div class="lb ${i < li ? "done" : i === li ? ("cur" + (err ? " err" : "")) : ""}">${ch}</div>`).join(""); }
+function renderLetters(err) {
+  document.getElementById("wordLetters").innerHTML = cur.en.split("").map((ch, i) => `<div class="lb ${i < li ? "done" : i === li ? ("cur" + (err ? " err" : "")) : ""}">${ch}</div>`).join("");
+  highlightKey(li < cur.en.length ? cur.en[li] : null);
+}
+window.sayCurrent = sayCurrent;
+
+// ─── 指位鍵盤 ────────────────────────────────────────────────────────────────
+const FINGER_MAP = { q:"pinky",a:"pinky",z:"pinky", w:"ring",s:"ring",x:"ring", e:"middle",d:"middle",c:"middle",
+  r:"l-index",f:"l-index",v:"l-index", t:"l-index",g:"l-index",b:"l-index",
+  y:"r-index",h:"r-index",n:"r-index", u:"r-index",j:"r-index",m:"r-index",
+  i:"middle",k:"middle", o:"ring",l:"ring", p:"pinky" };
+(function buildKb() {
+  const rows = ["qwertyuiop", "asdfghjkl", "zxcvbnm"];
+  document.getElementById("kb").innerHTML = rows.map((r, ri) =>
+    `<div class="kb-row"${ri === 1 ? ' style="padding-left:14px"' : ""}>` +
+    r.split("").map(k => `<div class="key f-${FINGER_MAP[k]}" id="key-${k}">${k}</div>`).join("") +
+    `</div>`).join("");
+})();
+function highlightKey(ch) {
+  document.querySelectorAll(".key.hl").forEach(k => k.classList.remove("hl"));
+  if (ch) { const el = document.getElementById("key-" + ch.toLowerCase()); if (el) el.classList.add("hl"); }
+}
 
 // ─── 3D 場景 + 物理 ──────────────────────────────────────────────────────────
 // 檯面座標：x -4..4（寬）、z -5(後)..+4(前緣)、y 上。前緣外掉下去 = 獲得。
@@ -328,7 +370,7 @@ function fmtTime(s) { return Math.floor(s / 60) + ":" + String(s % 60).padStart(
 function setBtns() {
   const pr = document.getElementById("practiceBtn"), of = document.getElementById("officialBtn"), pz = document.getElementById("pauseBtn");
   const { rec } = dailyRec();
-  of.textContent = "🏆 正式 (" + rec.attempts.length + "/3)";
+  of.innerHTML = "🏆 正式<br>(" + rec.attempts.length + "/3)";
   const noMore = rec.attempts.length >= 3;
   of.disabled = running || noMore; of.style.opacity = (running || noMore) ? ".45" : "1";
   pr.disabled = running; pr.style.opacity = running ? ".45" : "1";
@@ -420,7 +462,6 @@ document.addEventListener("keydown", e => { if (e.key.length === 1) onKey(e.key)
 const mi = document.getElementById("mobileInput");
 canvas.addEventListener("click", () => { mi.style.pointerEvents = "auto"; mi.focus({ preventScroll: true }); });
 mi.addEventListener("input", () => { const v = mi.value; mi.value = ""; if (v) onKey(v.slice(-1)); });
-document.getElementById("playBtn").addEventListener("click", sayCurrent);
 
 // ─── 啟動 ────────────────────────────────────────────────────────────────────
 window.selectStudent = async function (name) {
