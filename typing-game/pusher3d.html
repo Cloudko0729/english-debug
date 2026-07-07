@@ -104,12 +104,12 @@
   </div>
 </div>
 
-<script src="../kids/wordbank.js?v=202607071328"></script>
-<script src="../kids/curriculum.js?v=202607071328"></script>
+<script src="../kids/wordbank.js?v=202607071334"></script>
+<script src="../kids/curriculum.js?v=202607071334"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../kids/cloud_sync.js?v=202607071328"></script>
-<script src="../kids/account_lock.js?v=202607071328"></script>
-<script src="../kids/supabase_auth.js?v=202607071328"></script>
+<script src="../kids/cloud_sync.js?v=202607071334"></script>
+<script src="../kids/account_lock.js?v=202607071334"></script>
+<script src="../kids/supabase_auth.js?v=202607071334"></script>
 <script type="importmap">
 {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","cannon-es":"https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"}}
 </script>
@@ -479,7 +479,9 @@ function onKey(ch) {
     renderLetters(true);
   }
 }
-document.addEventListener("keydown", e => { if (e.key.length === 1) onKey(e.key); });
+// 注意：mobileInput 聚焦時鍵盤字元會觸發 keydown「和」input 兩個事件，只能取一條路，
+// 否則同一鍵被判兩次（第二次必錯 → 連擊永遠歸零）。
+document.addEventListener("keydown", e => { if (e.target && e.target.id === "mobileInput") return; if (e.key.length === 1) onKey(e.key); });
 const mi = document.getElementById("mobileInput");
 canvas.addEventListener("click", () => { mi.style.pointerEvents = "auto"; mi.focus({ preventScroll: true }); });
 mi.addEventListener("input", () => { const v = mi.value; mi.value = ""; if (v) onKey(v.slice(-1)); });
