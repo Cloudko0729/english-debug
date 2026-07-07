@@ -14,8 +14,8 @@
   #statBar{width:100%;max-width:560px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-size:.8rem;margin:6px 0;}
   #statBar .st{background:var(--panel);border-radius:10px;padding:5px 11px;font-weight:700;}
   #statBar .st b{color:var(--gold);}
-  #wordArea{width:100%;max-width:640px;background:var(--panel);border-radius:12px;padding:6px 10px;text-align:center;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
-  #wordZh{font-size:1rem;color:var(--gold);font-weight:800;cursor:pointer;}
+  #wordArea{position:relative;width:100%;max-width:640px;background:var(--panel);border-radius:12px;padding:6px 112px 6px 12px;text-align:center;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;min-height:52px;}
+  #wordZh{font-size:1.45rem;color:var(--gold);font-weight:800;cursor:pointer;white-space:nowrap;}
   #wordLetters{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;}
   .lb{width:30px;height:36px;border-radius:7px;background:#181e3c;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;border:2px solid #3a4370;}
   .lb.done{background:#153c2b;border-color:var(--green);color:var(--green);}
@@ -23,7 +23,7 @@
   @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
   .lb.err{border-color:var(--danger);animation:shake .18s;}
   @keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-  #combo{font-size:.78rem;color:var(--gold);font-weight:700;min-width:90px;}
+  #combo{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:96px;text-align:right;font-size:.8rem;color:var(--gold);font-weight:700;line-height:1.3;}
   #machineRow{display:flex;gap:10px;align-items:stretch;justify-content:center;width:100%;max-width:640px;}
   #cv3d{border-radius:14px;border:3px solid #3a4370;touch-action:manipulation;max-width:calc(100% - 120px);}
   #sideBtns{display:flex;flex-direction:column;gap:8px;justify-content:center;min-width:106px;}
@@ -88,23 +88,24 @@
   <div id="tray"></div>
   <div id="hint">打對掉 🪙（1）｜連擊 5 掉 💠（3）｜連擊 10 掉 🌈（10）｜每天 3 次正式取最佳：<b>1 代幣 = 1 島嶼金幣</b>。點中文可再聽一次；平板點機台叫出鍵盤。</div>
   <input id="mobileInput" autocomplete="off" autocapitalize="none">
-  <div id="overEl" style="display:none;position:fixed;inset:0;background:rgba(10,13,30,.82);z-index:50;align-items:center;justify-content:center">
-    <div style="background:var(--panel);border:3px solid var(--gold);border-radius:18px;padding:26px 24px;text-align:center;max-width:320px">
+  <div id="overEl" onclick="if(event.target===this)closeOver()" style="display:none;position:fixed;inset:0;background:rgba(10,13,30,.82);z-index:50;align-items:center;justify-content:center">
+    <div style="position:relative;background:var(--panel);border:3px solid var(--gold);border-radius:18px;padding:26px 24px;text-align:center;max-width:320px">
+      <button onclick="closeOver()" title="關閉" style="position:absolute;top:8px;right:10px;border:none;background:transparent;color:var(--muted);font-size:1.3rem;font-weight:800;cursor:pointer;line-height:1">✕</button>
       <div style="font-size:2.2rem">⏱️</div>
       <h2 style="color:var(--gold);margin:6px 0">時間到！</h2>
       <p id="overStats" style="margin:8px 0 16px;line-height:1.8"></p>
-      <button onclick="closeOver()" style="padding:11px 26px;border:none;border-radius:11px;background:var(--gold);color:#3a2a00;font-weight:800;font-size:1rem;cursor:pointer">好！</button>
+      <button onclick="closeOver()" style="padding:11px 26px;border:none;border-radius:11px;background:var(--gold);color:#3a2a00;font-weight:800;font-size:1rem;cursor:pointer">✔ 關閉</button>
       <div style="margin-top:10px"><a href="../kids/island.html" style="color:var(--blue);font-size:.85rem">🏝️ 回我的島嶼</a></div>
     </div>
   </div>
 </div>
 
-<script src="../kids/wordbank.js?v=202607061513"></script>
-<script src="../kids/curriculum.js?v=202607061513"></script>
+<script src="../kids/wordbank.js?v=202607071321"></script>
+<script src="../kids/curriculum.js?v=202607071321"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../kids/cloud_sync.js?v=202607061513"></script>
-<script src="../kids/account_lock.js?v=202607061513"></script>
-<script src="../kids/supabase_auth.js?v=202607061513"></script>
+<script src="../kids/cloud_sync.js?v=202607071321"></script>
+<script src="../kids/account_lock.js?v=202607071321"></script>
+<script src="../kids/supabase_auth.js?v=202607071321"></script>
 <script type="importmap">
 {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","cannon-es":"https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"}}
 </script>
