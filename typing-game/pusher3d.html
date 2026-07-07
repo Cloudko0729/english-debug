@@ -26,6 +26,7 @@
   #combo{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:96px;text-align:right;font-size:.8rem;color:var(--gold);font-weight:700;line-height:1.3;}
   #machineRow{display:flex;gap:10px;align-items:stretch;justify-content:center;width:100%;max-width:640px;}
   #cv3d{border-radius:14px;border:3px solid #3a4370;touch-action:manipulation;max-width:calc(100% - 120px);}
+  #cd{display:none;position:absolute;inset:0;align-items:center;justify-content:center;font-size:5.5rem;font-weight:900;color:var(--gold);text-shadow:0 3px 22px rgba(0,0,0,.9);z-index:5;pointer-events:none;}
   #sideBtns{display:flex;flex-direction:column;gap:8px;justify-content:center;min-width:106px;}
   #sideBtns button{border:none;border-radius:10px;font-weight:800;padding:10px 8px;cursor:pointer;font-size:.85rem;}
   /* 指位鍵盤 */
@@ -76,7 +77,10 @@
     <div id="combo"></div>
   </div>
   <div id="machineRow">
-    <canvas id="cv3d" width="460" height="330"></canvas>
+    <div id="cvWrap" style="position:relative;display:flex">
+      <canvas id="cv3d" width="460" height="330"></canvas>
+      <div id="cd"></div>
+    </div>
     <div id="sideBtns">
       <button id="officialBtn" onclick="startSession('official')" style="background:var(--green);color:#fff">🏆 正式<br>(0/3)</button>
       <button id="practiceBtn" onclick="startSession('practice')" style="background:#5f6cb0;color:#fff">🎮 試玩</button>
@@ -100,12 +104,12 @@
   </div>
 </div>
 
-<script src="../kids/wordbank.js?v=202607071321"></script>
-<script src="../kids/curriculum.js?v=202607071321"></script>
+<script src="../kids/wordbank.js?v=202607071328"></script>
+<script src="../kids/curriculum.js?v=202607071328"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../kids/cloud_sync.js?v=202607071321"></script>
-<script src="../kids/account_lock.js?v=202607071321"></script>
-<script src="../kids/supabase_auth.js?v=202607071321"></script>
+<script src="../kids/cloud_sync.js?v=202607071328"></script>
+<script src="../kids/account_lock.js?v=202607071328"></script>
+<script src="../kids/supabase_auth.js?v=202607071328"></script>
 <script type="importmap">
 {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","cannon-es":"https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"}}
 </script>
@@ -366,15 +370,16 @@ function loadMachine() {
 
 // ─── 一局 3 分鐘：每天 3 次正式（取掉落最多的一次換幣），試玩不限 ─────────────
 const SESSION_SEC = 180;
-let mode = null, running = false, paused = false, timeLeft = SESSION_SEC, timerIv = null;
+let mode = null, running = false, paused = false, counting = false, timeLeft = SESSION_SEC, timerIv = null;
 function fmtTime(s) { return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); }
 function setBtns() {
   const pr = document.getElementById("practiceBtn"), of = document.getElementById("officialBtn"), pz = document.getElementById("pauseBtn");
   const { rec } = dailyRec();
   of.innerHTML = "🏆 正式<br>(" + rec.attempts.length + "/3)";
   const noMore = rec.attempts.length >= 3;
-  of.disabled = running || noMore; of.style.opacity = (running || noMore) ? ".45" : "1";
-  pr.disabled = running; pr.style.opacity = running ? ".45" : "1";
+  const busy = running || counting;
+  of.disabled = busy || noMore; of.style.opacity = (busy || noMore) ? ".45" : "1";
+  pr.disabled = busy; pr.style.opacity = busy ? ".45" : "1";
   pz.style.display = running ? "inline-block" : "none";
   pz.textContent = paused ? "▶ 繼續" : "⏸ 暫停";
   pz.style.background = paused ? "var(--green)" : "var(--danger)";
@@ -387,16 +392,29 @@ function tick() {
   if (timeLeft <= 0) endSession();
 }
 window.startSession = function (m) {
-  if (running) return;
+  if (running || counting) return;
   const { rec } = dailyRec();
   if (m === "official" && rec.attempts.length >= 3) { showTray("今天 3 次正式用完了，玩 🎮 試玩吧！"); return; }
-  mode = m; running = true; paused = false; sessionTokens = 0; timeLeft = SESSION_SEC;
+  mode = m; counting = true; sessionTokens = 0; timeLeft = SESSION_SEC;
   document.getElementById("stTime").textContent = fmtTime(timeLeft);
   document.getElementById("stTime").style.color = "";
-  clearInterval(timerIv); timerIv = setInterval(tick, 1000);
   setBtns(); updateStats();
-  showTray(m === "official" ? "🏆 正式挑戰開始！" : "🎮 試玩開始！");
-  document.getElementById("mobileInput").focus({ preventScroll: true });
+  showTray(m === "official" ? "🏆 正式挑戰" : "🎮 試玩");
+  // 3 秒倒數後才開始
+  const cd = document.getElementById("cd");
+  let n = 3;
+  cd.style.display = "flex"; cd.textContent = n;
+  const iv = setInterval(() => {
+    n--;
+    if (n > 0) { cd.textContent = n; return; }
+    clearInterval(iv);
+    cd.textContent = "GO!";
+    setTimeout(() => { cd.style.display = "none"; }, 500);
+    counting = false; running = true; paused = false;
+    clearInterval(timerIv); timerIv = setInterval(tick, 1000);
+    setBtns();
+    document.getElementById("mobileInput").focus({ preventScroll: true });
+  }, 1000);
 };
 window.togglePause = function () {
   if (!running) return;
@@ -438,10 +456,12 @@ window.resetMachine = function () {
 };
 
 // ─── 打字 ────────────────────────────────────────────────────────────────────
+function setCombo(note) { document.getElementById("combo").textContent = "🔥 連擊 " + combo + (note || ""); }
 function onKey(ch) {
   if (!cur) return;
-  if (!running) { window.startSession("practice"); }   // 沒開局就打字 → 自動開試玩
-  else if (paused) return;                              // 暫停中不吃鍵
+  if (counting) return;                                          // 倒數中不吃鍵
+  if (!running) { window.startSession("practice"); return; }     // 沒開局就打字 → 自動開試玩（倒數後開始）
+  if (paused) return;                                            // 暫停中不吃鍵
   ch = ch.toLowerCase();
   if (!/^[a-z]$/.test(ch)) return;
   ctx();
@@ -451,11 +471,11 @@ function onKey(ch) {
     if (combo % 10 === 0) { type = "rainbow"; note = "　🌈 彩虹幣！"; }
     else if (combo % 5 === 0) { type = "silver"; note = "　💠 藍鑽幣！"; }
     dropCoin(type);
-    document.getElementById("combo").textContent = "🔥 連擊 " + combo + note;
+    setCombo(note);
     if (li >= cur.en.length) { setTimeout(nextWord, 200); prewarm(); }
     else renderLetters();
   } else {
-    combo = 0; document.getElementById("combo").textContent = "";
+    combo = 0; setCombo();
     renderLetters(true);
   }
 }
@@ -475,6 +495,7 @@ window.selectStudent = async function (name) {
   loadMachine();
   updateStats();
   nextWord(); prewarm();
+  setCombo();
   setBtns();
   startLoop();
   window.addEventListener("beforeunload", saveMachine);
