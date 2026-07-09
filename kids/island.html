@@ -296,7 +296,7 @@
     <button id="boardBtn" onclick="openBoard()" style="flex:1;min-width:130px;padding:10px;border:2px solid #b5651d;border-radius:12px;background:#fff3e0;color:#8a4a12;font-weight:800;cursor:pointer">📋 島民委託板</button>
     <button id="visitorBtn" onclick="openVisitor()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2f80ed;border-radius:12px;background:#eaf3ff;color:#1e5fb8;font-weight:800;cursor:pointer">🛶 今日訪客</button>
     <a href="worddex.html" style="flex:1;min-width:130px;padding:10px;border:2px solid #7c4dca;border-radius:12px;background:#f3edff;color:#5a36a8;font-weight:800;text-align:center;text-decoration:none">🎴 單字圖鑑</a>
-    <button id="mailBtn" onclick="openMail()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2fbf71;border-radius:12px;background:#e9fbf1;color:#187a48;font-weight:800;cursor:pointer">✉️ 島嶼信箱</button>
+    <button id="mailBtn" onclick="openMail()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2fbf71;border-radius:12px;background:#e9fbf1;color:#187a48;font-weight:800;cursor:pointer;position:relative">✉️ 島嶼信箱<span id="mailBadge" style="display:none;position:absolute;top:-8px;right:-6px;background:#ef476f;color:#fff;border-radius:11px;min-width:22px;height:22px;line-height:22px;font-size:.75rem;font-weight:900;padding:0 4px;box-shadow:0 1px 4px rgba(0,0,0,.3)"></span></button>
   </div>
   <div id="pickStudentMsg">👆 先選你的名字，開始蓋你的島！</div>
   <div id="island" style="display:none"></div>
@@ -321,13 +321,13 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607091303"></script>
-<script src="curriculum.js?v=202607091303"></script>
-<script src="worddex.js?v=202607091303"></script>
+<script src="wordbank.js?v=202607092346"></script>
+<script src="curriculum.js?v=202607092346"></script>
+<script src="worddex.js?v=202607092346"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607091303"></script>
-<script src="account_lock.js?v=202607091303"></script>
-<script src="supabase_auth.js?v=202607091303"></script>
+<script src="cloud_sync.js?v=202607092346"></script>
+<script src="account_lock.js?v=202607092346"></script>
+<script src="supabase_auth.js?v=202607092346"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -999,8 +999,30 @@ function _mailTime(iso) {
     String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
 }
 function _esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+// 新訊息通知：查「上次已讀之後」收到的訊息數，掛紅色徽章；打開信箱即標已讀
+async function checkMailBadge() {
+  if (!currentStudent || !window.sbClient) return;
+  const user = (typeof _sbUser === "function") ? await _sbUser() : null;
+  if (!user) return;
+  const last = localStorage.getItem("kidsMailRead." + currentStudent) || "1970-01-01T00:00:00Z";
+  try {
+    const { count, error } = await window.sbClient.from("island_messages")
+      .select("id", { count: "exact", head: true })
+      .eq("recipient", currentStudent).gt("created_at", last);
+    const b = document.getElementById("mailBadge");
+    if (!b) return;
+    if (!error && count > 0) {
+      b.textContent = count > 9 ? "9+" : count;
+      b.style.display = "block";
+      if (!checkMailBadge._toasted) { checkMailBadge._toasted = true; toast("✉️ 有新留言！點「島嶼信箱」看看"); }
+    } else b.style.display = "none";
+  } catch (e) {}
+}
+setInterval(checkMailBadge, 90000);
 async function openMail(showAll) {
   _mailAll = !!showAll;
+  localStorage.setItem("kidsMailRead." + currentStudent, new Date().toISOString());
+  const b = document.getElementById("mailBadge"); if (b) b.style.display = "none";
   const sc = document.getElementById("sheetContent");
   sc.innerHTML = `<h3>✉️ 島嶼信箱</h3><p style="color:var(--muted)">讀取中…</p>`;
   document.getElementById("sheet").classList.add("open");
@@ -1287,6 +1309,7 @@ function selectStudent(name) {
   document.getElementById("dataPanel").style.display = "block";
   document.getElementById("questRow").style.display = "flex";
   updateQuestBtns();
+  checkMailBadge();
   recalcStats();
   if (migrated) saveIsland(name, island);
   const produced = runDailyTick();
