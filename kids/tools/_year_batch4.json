@@ -1,0 +1,1973 @@
+{
+  "weeks": [
+    {
+      "n": 37,
+      "start": "2027-04-11",
+      "end": "2027-04-17",
+      "theme": "溝通與表達",
+      "words": [
+        {
+          "en": "hear",
+          "zh": "聽見",
+          "pos": "v"
+        },
+        {
+          "en": "act",
+          "zh": "行動",
+          "pos": "v"
+        },
+        {
+          "en": "clap",
+          "zh": "拍手",
+          "pos": "v"
+        },
+        {
+          "en": "secret",
+          "zh": "秘密的",
+          "pos": "n"
+        },
+        {
+          "en": "speaker",
+          "zh": "說話者",
+          "pos": "n"
+        },
+        {
+          "en": "tongue",
+          "zh": "舌頭",
+          "pos": "n"
+        },
+        {
+          "en": "conversation",
+          "zh": "談話",
+          "pos": "n"
+        },
+        {
+          "en": "apologize",
+          "zh": "道歉",
+          "pos": "v"
+        },
+        {
+          "en": "excuse",
+          "zh": "原諒；藉口",
+          "pos": "v"
+        },
+        {
+          "en": "guess",
+          "zh": "猜",
+          "pos": "v"
+        },
+        {
+          "en": "matter",
+          "zh": "事情；要緊",
+          "pos": "n"
+        },
+        {
+          "en": "mean",
+          "zh": "意思是",
+          "pos": "v"
+        },
+        {
+          "en": "praise",
+          "zh": "稱讚",
+          "pos": "v"
+        },
+        {
+          "en": "remind",
+          "zh": "提醒",
+          "pos": "v"
+        },
+        {
+          "en": "trust",
+          "zh": "信任",
+          "pos": "v"
+        },
+        {
+          "en": "truth",
+          "zh": "真相",
+          "pos": "n"
+        },
+        {
+          "en": "think",
+          "zh": "思考；認為",
+          "pos": "v"
+        },
+        {
+          "en": "certainly",
+          "zh": "當然",
+          "pos": "adv"
+        },
+        {
+          "en": "anyway",
+          "zh": "無論如何",
+          "pos": "adv"
+        },
+        {
+          "en": "action",
+          "zh": "動作",
+          "pos": "n"
+        },
+        {
+          "en": "express",
+          "zh": "表示",
+          "pos": "v"
+        },
+        {
+          "en": "speech",
+          "zh": "說話",
+          "pos": "n"
+        },
+        {
+          "en": "gesture",
+          "zh": "(表達情意的)姿勢",
+          "pos": "n"
+        },
+        {
+          "en": "interrupt",
+          "zh": "打斷",
+          "pos": "v"
+        },
+        {
+          "en": "appreciate",
+          "zh": "瞭解",
+          "pos": "v"
+        },
+        {
+          "en": "command",
+          "zh": "命令",
+          "pos": "v"
+        },
+        {
+          "en": "complain",
+          "zh": "抱怨",
+          "pos": "v"
+        },
+        {
+          "en": "confirm",
+          "zh": "證實",
+          "pos": "v"
+        },
+        {
+          "en": "confuse",
+          "zh": "使混亂",
+          "pos": "v"
+        },
+        {
+          "en": "emphasize",
+          "zh": "強調",
+          "pos": "v"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 38,
+      "start": "2027-04-18",
+      "end": "2027-04-24",
+      "theme": "媒體與訊息",
+      "words": [
+        {
+          "en": "stamp",
+          "zh": "郵票",
+          "pos": "n"
+        },
+        {
+          "en": "mail carrier",
+          "zh": "郵差",
+          "pos": "n"
+        },
+        {
+          "en": "walkman",
+          "zh": "隨身聽",
+          "pos": "n"
+        },
+        {
+          "en": "mtv",
+          "zh": "音樂電視 Music",
+          "pos": "n"
+        },
+        {
+          "en": "michael jackson",
+          "zh": "麥可傑克森(人名)",
+          "pos": "n"
+        },
+        {
+          "en": "to",
+          "zh": "到；給",
+          "pos": "prep"
+        },
+        {
+          "en": "deliver",
+          "zh": "投遞",
+          "pos": "v"
+        },
+        {
+          "en": "dial",
+          "zh": "(電話的)撥號盤",
+          "pos": "v"
+        },
+        {
+          "en": "post",
+          "zh": "張貼",
+          "pos": "v"
+        },
+        {
+          "en": "link",
+          "zh": "(鏈)環",
+          "pos": "n"
+        },
+        {
+          "en": "accident",
+          "zh": "意外的事",
+          "pos": "n"
+        },
+        {
+          "en": "attack",
+          "zh": "攻擊",
+          "pos": "v"
+        },
+        {
+          "en": "crowd",
+          "zh": "群",
+          "pos": "n"
+        },
+        {
+          "en": "department",
+          "zh": "部門",
+          "pos": "n"
+        },
+        {
+          "en": "flight",
+          "zh": "飛翔",
+          "pos": "n"
+        },
+        {
+          "en": "helicopter",
+          "zh": "直升飛機",
+          "pos": "n"
+        },
+        {
+          "en": "shot",
+          "zh": "(shoot的過去式",
+          "pos": "n"
+        },
+        {
+          "en": "terrible",
+          "zh": "可怕的",
+          "pos": "adj"
+        },
+        {
+          "en": "trouble",
+          "zh": "麻煩",
+          "pos": "n"
+        },
+        {
+          "en": "sudden",
+          "zh": "突然的",
+          "pos": "adj"
+        },
+        {
+          "en": "journalist",
+          "zh": "新聞工作者",
+          "pos": "n"
+        },
+        {
+          "en": "document",
+          "zh": "公文",
+          "pos": "n"
+        },
+        {
+          "en": "press",
+          "zh": "壓",
+          "pos": "n"
+        },
+        {
+          "en": "claim",
+          "zh": "聲稱",
+          "pos": "v"
+        },
+        {
+          "en": "current",
+          "zh": "水流",
+          "pos": "adj"
+        },
+        {
+          "en": "recent",
+          "zh": "新近的",
+          "pos": "adj"
+        },
+        {
+          "en": "recently",
+          "zh": "最近",
+          "pos": "adv"
+        },
+        {
+          "en": "official",
+          "zh": "官方的",
+          "pos": "adj"
+        },
+        {
+          "en": "section",
+          "zh": "切斷",
+          "pos": "n"
+        },
+        {
+          "en": "provide",
+          "zh": "供給",
+          "pos": "v"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 39,
+      "start": "2027-04-25",
+      "end": "2027-05-01",
+      "theme": "比較與選擇",
+      "words": [
+        {
+          "en": "both",
+          "zh": "兩者都",
+          "pos": "adj"
+        },
+        {
+          "en": "pick",
+          "zh": "挑選",
+          "pos": "v"
+        },
+        {
+          "en": "between",
+          "zh": "在…之間",
+          "pos": "prep"
+        },
+        {
+          "en": "most",
+          "zh": "最多；大多數",
+          "pos": "adj"
+        },
+        {
+          "en": "worse",
+          "zh": "更糟的",
+          "pos": "adj"
+        },
+        {
+          "en": "bit",
+          "zh": "一點",
+          "pos": "n"
+        },
+        {
+          "en": "difference",
+          "zh": "差別",
+          "pos": "n"
+        },
+        {
+          "en": "prefer",
+          "zh": "更喜歡",
+          "pos": "v"
+        },
+        {
+          "en": "rather",
+          "zh": "相當",
+          "pos": "adv"
+        },
+        {
+          "en": "than",
+          "zh": "比",
+          "pos": "conj"
+        },
+        {
+          "en": "neither",
+          "zh": "也不(conj",
+          "pos": "conj"
+        },
+        {
+          "en": "none",
+          "zh": "沒有一人(或物)",
+          "pos": "phr"
+        },
+        {
+          "en": "sort",
+          "zh": "種類",
+          "pos": "n"
+        },
+        {
+          "en": "type",
+          "zh": "類型",
+          "pos": "n"
+        },
+        {
+          "en": "sample",
+          "zh": "樣品",
+          "pos": "n"
+        },
+        {
+          "en": "simple",
+          "zh": "簡單的",
+          "pos": "adj"
+        },
+        {
+          "en": "total",
+          "zh": "總計",
+          "pos": "n"
+        },
+        {
+          "en": "over-weight",
+          "zh": "超重",
+          "pos": "adj"
+        },
+        {
+          "en": "under-weight",
+          "zh": "重量不足",
+          "pos": "adj"
+        },
+        {
+          "en": "top",
+          "zh": "頂(端)  上部(n",
+          "pos": "n"
+        },
+        {
+          "en": "advantage",
+          "zh": "優勢",
+          "pos": "n"
+        },
+        {
+          "en": "available",
+          "zh": "可利用的",
+          "pos": "adj"
+        },
+        {
+          "en": "certain",
+          "zh": "確定的",
+          "pos": "adj"
+        },
+        {
+          "en": "similar",
+          "zh": "相似的",
+          "pos": "adj"
+        },
+        {
+          "en": "positive",
+          "zh": "確信的",
+          "pos": "adj"
+        },
+        {
+          "en": "negative",
+          "zh": "負的",
+          "pos": "adj"
+        },
+        {
+          "en": "major",
+          "zh": "較大的",
+          "pos": "adj"
+        },
+        {
+          "en": "minor",
+          "zh": "較小的",
+          "pos": "adj"
+        },
+        {
+          "en": "maximum",
+          "zh": "最大限度",
+          "pos": "n"
+        },
+        {
+          "en": "worth",
+          "zh": "值得的",
+          "pos": "adj"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 40,
+      "start": "2027-05-02",
+      "end": "2027-05-08",
+      "theme": "世界與國家",
+      "words": [
+        {
+          "en": "taiwan",
+          "zh": "台灣",
+          "pos": "n"
+        },
+        {
+          "en": "plane",
+          "zh": "飛機",
+          "pos": "n"
+        },
+        {
+          "en": "far",
+          "zh": "遠",
+          "pos": "adj"
+        },
+        {
+          "en": "jeep",
+          "zh": "吉普車",
+          "pos": "n"
+        },
+        {
+          "en": "our",
+          "zh": "我們的",
+          "pos": "phr"
+        },
+        {
+          "en": "us",
+          "zh": "我們",
+          "pos": "phr"
+        },
+        {
+          "en": "canadian",
+          "zh": "加拿大人",
+          "pos": "n"
+        },
+        {
+          "en": "england",
+          "zh": "英格蘭",
+          "pos": "n"
+        },
+        {
+          "en": "englishman",
+          "zh": "英格蘭人",
+          "pos": "n"
+        },
+        {
+          "en": "europe",
+          "zh": "歐洲",
+          "pos": "n"
+        },
+        {
+          "en": "european",
+          "zh": "歐洲的(adj)",
+          "pos": "adj"
+        },
+        {
+          "en": "philippines",
+          "zh": "菲律賓",
+          "pos": "n"
+        },
+        {
+          "en": "singapore",
+          "zh": "新加坡",
+          "pos": "n"
+        },
+        {
+          "en": "san francisco",
+          "zh": "舊金山",
+          "pos": "n"
+        },
+        {
+          "en": "state",
+          "zh": "狀態",
+          "pos": "n"
+        },
+        {
+          "en": "soldier",
+          "zh": "士兵",
+          "pos": "n"
+        },
+        {
+          "en": "war",
+          "zh": "戰爭",
+          "pos": "n"
+        },
+        {
+          "en": "enemy",
+          "zh": "敵人",
+          "pos": "n"
+        },
+        {
+          "en": "army",
+          "zh": "軍隊",
+          "pos": "n"
+        },
+        {
+          "en": "sailor",
+          "zh": "水手",
+          "pos": "n"
+        },
+        {
+          "en": "citizen",
+          "zh": "公民",
+          "pos": "n"
+        },
+        {
+          "en": "county",
+          "zh": "縣",
+          "pos": "n"
+        },
+        {
+          "en": "government",
+          "zh": "政府",
+          "pos": "n"
+        },
+        {
+          "en": "democracy",
+          "zh": "民主政治",
+          "pos": "n"
+        },
+        {
+          "en": "democratic",
+          "zh": "民主的",
+          "pos": "adj"
+        },
+        {
+          "en": "diplomat",
+          "zh": "外交官",
+          "pos": "n"
+        },
+        {
+          "en": "kingdom",
+          "zh": "王國",
+          "pos": "n"
+        },
+        {
+          "en": "law",
+          "zh": "法律",
+          "pos": "n"
+        },
+        {
+          "en": "president",
+          "zh": "總統",
+          "pos": "n"
+        },
+        {
+          "en": "voter",
+          "zh": "投票者",
+          "pos": "n"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 41,
+      "start": "2027-05-09",
+      "end": "2027-05-15",
+      "theme": "國中教室英語",
+      "words": [
+        {
+          "en": "enter",
+          "zh": "進入",
+          "pos": "v"
+        },
+        {
+          "en": "locker",
+          "zh": "(有鎖的)小櫥櫃",
+          "pos": "n"
+        },
+        {
+          "en": "hall",
+          "zh": "大廳",
+          "pos": "n"
+        },
+        {
+          "en": "stairs",
+          "zh": "樓梯",
+          "pos": "n"
+        },
+        {
+          "en": "put",
+          "zh": "放",
+          "pos": "v"
+        },
+        {
+          "en": "your",
+          "zh": "你的；你們的",
+          "pos": "phr"
+        },
+        {
+          "en": "absent",
+          "zh": "缺席的",
+          "pos": "adj"
+        },
+        {
+          "en": "accept",
+          "zh": "接受",
+          "pos": "v"
+        },
+        {
+          "en": "cheat",
+          "zh": "作弊",
+          "pos": "v"
+        },
+        {
+          "en": "cafeteria",
+          "zh": "自助餐廳",
+          "pos": "n"
+        },
+        {
+          "en": "junior high school",
+          "zh": "國中",
+          "pos": "n"
+        },
+        {
+          "en": "seat",
+          "zh": "座位",
+          "pos": "n"
+        },
+        {
+          "en": "project",
+          "zh": "專案",
+          "pos": "n"
+        },
+        {
+          "en": "solve",
+          "zh": "解釋",
+          "pos": "v"
+        },
+        {
+          "en": "verb",
+          "zh": "動詞",
+          "pos": "n"
+        },
+        {
+          "en": "should",
+          "zh": "應該",
+          "pos": "v"
+        },
+        {
+          "en": "could",
+          "zh": "可以；能夠",
+          "pos": "v"
+        },
+        {
+          "en": "can",
+          "zh": "能；可以",
+          "pos": "v"
+        },
+        {
+          "en": "until",
+          "zh": "直到",
+          "pos": "conj"
+        },
+        {
+          "en": "keep",
+          "zh": "保持；保留",
+          "pos": "v"
+        },
+        {
+          "en": "auxiliary",
+          "zh": "輔助的",
+          "pos": "n"
+        },
+        {
+          "en": "preposition",
+          "zh": "介系詞",
+          "pos": "n"
+        },
+        {
+          "en": "pronoun",
+          "zh": "代名詞",
+          "pos": "n"
+        },
+        {
+          "en": "connective",
+          "zh": "連結的",
+          "pos": "n"
+        },
+        {
+          "en": "determiner",
+          "zh": "(文法的)限定詞",
+          "pos": "n"
+        },
+        {
+          "en": "possessive",
+          "zh": "擁有的",
+          "pos": "adj"
+        },
+        {
+          "en": "reflexive",
+          "zh": "反身代名詞",
+          "pos": "adj"
+        },
+        {
+          "en": "require",
+          "zh": "需要",
+          "pos": "v"
+        },
+        {
+          "en": "omit",
+          "zh": "省略",
+          "pos": "v"
+        },
+        {
+          "en": "object",
+          "zh": "物體",
+          "pos": "n"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 42,
+      "start": "2027-05-16",
+      "end": "2027-05-22",
+      "theme": "考試與作業英語",
+      "words": [
+        {
+          "en": "did",
+          "zh": "做了",
+          "pos": "v"
+        },
+        {
+          "en": "get",
+          "zh": "得到",
+          "pos": "v"
+        },
+        {
+          "en": "pass",
+          "zh": "通過",
+          "pos": "v"
+        },
+        {
+          "en": "used",
+          "zh": "用過的",
+          "pos": "adj"
+        },
+        {
+          "en": "was",
+          "zh": "是（過去式）",
+          "pos": "v"
+        },
+        {
+          "en": "were",
+          "zh": "是（過去式）",
+          "pos": "v"
+        },
+        {
+          "en": "cancel",
+          "zh": "取消",
+          "pos": "v"
+        },
+        {
+          "en": "dozen",
+          "zh": "一打",
+          "pos": "n"
+        },
+        {
+          "en": "drop",
+          "zh": "落下；降低",
+          "pos": "v"
+        },
+        {
+          "en": "lose",
+          "zh": "失去；輸掉",
+          "pos": "v"
+        },
+        {
+          "en": "quit",
+          "zh": "停止",
+          "pos": "v"
+        },
+        {
+          "en": "full",
+          "zh": "滿的",
+          "pos": "adj"
+        },
+        {
+          "en": "just",
+          "zh": "剛才；只是",
+          "pos": "adv"
+        },
+        {
+          "en": "moment",
+          "zh": "片刻",
+          "pos": "n"
+        },
+        {
+          "en": "main",
+          "zh": "主要的",
+          "pos": "adj"
+        },
+        {
+          "en": "terrific",
+          "zh": "令人恐怖的",
+          "pos": "adj"
+        },
+        {
+          "en": "task",
+          "zh": "任務",
+          "pos": "n"
+        },
+        {
+          "en": "failure",
+          "zh": "失敗",
+          "pos": "n"
+        },
+        {
+          "en": "progress",
+          "zh": "前進",
+          "pos": "n"
+        },
+        {
+          "en": "prove",
+          "zh": "證明",
+          "pos": "v"
+        },
+        {
+          "en": "support",
+          "zh": "支援",
+          "pos": "v"
+        },
+        {
+          "en": "suggest",
+          "zh": "建議",
+          "pos": "v"
+        },
+        {
+          "en": "purpose",
+          "zh": "目的",
+          "pos": "n"
+        },
+        {
+          "en": "satisfy",
+          "zh": "使…滿足",
+          "pos": "v"
+        },
+        {
+          "en": "responsible",
+          "zh": "有責任的",
+          "pos": "adj"
+        },
+        {
+          "en": "revise",
+          "zh": "修訂",
+          "pos": "v"
+        },
+        {
+          "en": "final",
+          "zh": "最後的",
+          "pos": "adj"
+        },
+        {
+          "en": "mistake",
+          "zh": "錯誤",
+          "pos": "n"
+        },
+        {
+          "en": "fail",
+          "zh": "失敗",
+          "pos": "v"
+        },
+        {
+          "en": "examine",
+          "zh": "檢查",
+          "pos": "v"
+        }
+      ],
+      "review": [
+        "revise",
+        "final",
+        "mistake",
+        "fail",
+        "examine"
+      ]
+    },
+    {
+      "n": 43,
+      "start": "2027-05-23",
+      "end": "2027-05-29",
+      "theme": "意見與理由",
+      "words": [
+        {
+          "en": "hate",
+          "zh": "討厭",
+          "pos": "v"
+        },
+        {
+          "en": "wonder",
+          "zh": "感到驚訝",
+          "pos": "v"
+        },
+        {
+          "en": "seem",
+          "zh": "好像",
+          "pos": "v"
+        },
+        {
+          "en": "anything",
+          "zh": "任何事物",
+          "pos": "phr"
+        },
+        {
+          "en": "anyone",
+          "zh": "任何人",
+          "pos": "phr"
+        },
+        {
+          "en": "all",
+          "zh": "全部",
+          "pos": "phr"
+        },
+        {
+          "en": "against",
+          "zh": "違反",
+          "pos": "prep"
+        },
+        {
+          "en": "although",
+          "zh": "雖然",
+          "pos": "conj"
+        },
+        {
+          "en": "anger",
+          "zh": "憤怒(n)  使發怒",
+          "pos": "n"
+        },
+        {
+          "en": "favor",
+          "zh": "好感",
+          "pos": "n"
+        },
+        {
+          "en": "interest",
+          "zh": "興趣",
+          "pos": "n"
+        },
+        {
+          "en": "interested",
+          "zh": "感興趣的",
+          "pos": "adj"
+        },
+        {
+          "en": "interesting",
+          "zh": "有趣的",
+          "pos": "adj"
+        },
+        {
+          "en": "pleased",
+          "zh": "滿意的",
+          "pos": "adj"
+        },
+        {
+          "en": "reason",
+          "zh": "理由",
+          "pos": "n"
+        },
+        {
+          "en": "sense",
+          "zh": "感言",
+          "pos": "n"
+        },
+        {
+          "en": "strange",
+          "zh": "奇怪的",
+          "pos": "adj"
+        },
+        {
+          "en": "stupid",
+          "zh": "笨的",
+          "pos": "adj"
+        },
+        {
+          "en": "such",
+          "zh": "這樣的",
+          "pos": "adj"
+        },
+        {
+          "en": "though",
+          "zh": "雖然",
+          "pos": "conj"
+        },
+        {
+          "en": "debate",
+          "zh": "辯論",
+          "pos": "n"
+        },
+        {
+          "en": "doubt",
+          "zh": "懷疑",
+          "pos": "v"
+        },
+        {
+          "en": "concern",
+          "zh": "關心",
+          "pos": "n"
+        },
+        {
+          "en": "consider",
+          "zh": "認為",
+          "pos": "v"
+        },
+        {
+          "en": "deny",
+          "zh": "否認",
+          "pos": "v"
+        },
+        {
+          "en": "regard",
+          "zh": "看待",
+          "pos": "v"
+        },
+        {
+          "en": "reject",
+          "zh": "拒絕",
+          "pos": "v"
+        },
+        {
+          "en": "refuse",
+          "zh": "拒絕",
+          "pos": "v"
+        },
+        {
+          "en": "insist",
+          "zh": "(on",
+          "pos": "v"
+        },
+        {
+          "en": "therefore",
+          "zh": "因此",
+          "pos": "adv"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 44,
+      "start": "2027-05-30",
+      "end": "2027-06-05",
+      "theme": "畢業與轉銜複習",
+      "words": [
+        {
+          "en": "back",
+          "zh": "回來；向後",
+          "pos": "adv"
+        },
+        {
+          "en": "away",
+          "zh": "離開",
+          "pos": "adv"
+        },
+        {
+          "en": "also",
+          "zh": "也",
+          "pos": "adv"
+        },
+        {
+          "en": "little",
+          "zh": "小的；少量",
+          "pos": "adj"
+        },
+        {
+          "en": "step",
+          "zh": "步",
+          "pos": "n"
+        },
+        {
+          "en": "till",
+          "zh": "直到",
+          "pos": "prep"
+        },
+        {
+          "en": "college",
+          "zh": "大學",
+          "pos": "n"
+        },
+        {
+          "en": "leader",
+          "zh": "領導者",
+          "pos": "n"
+        },
+        {
+          "en": "partner",
+          "zh": "搭檔",
+          "pos": "n"
+        },
+        {
+          "en": "modern",
+          "zh": "現代的",
+          "pos": "adj"
+        },
+        {
+          "en": "rise",
+          "zh": "起立",
+          "pos": "v"
+        },
+        {
+          "en": "serve",
+          "zh": "為…服務/盡責",
+          "pos": "v"
+        },
+        {
+          "en": "succeed",
+          "zh": "成功",
+          "pos": "v"
+        },
+        {
+          "en": "success",
+          "zh": "成就",
+          "pos": "n"
+        },
+        {
+          "en": "university",
+          "zh": "大學",
+          "pos": "n"
+        },
+        {
+          "en": "youth",
+          "zh": "青春",
+          "pos": "n"
+        },
+        {
+          "en": "youth day",
+          "zh": "青年節",
+          "pos": "n"
+        },
+        {
+          "en": "employ",
+          "zh": "雇用",
+          "pos": "v"
+        },
+        {
+          "en": "occupation",
+          "zh": "職業",
+          "pos": "n"
+        },
+        {
+          "en": "independent",
+          "zh": "獨立的",
+          "pos": "adj"
+        },
+        {
+          "en": "campus",
+          "zh": "校園",
+          "pos": "n"
+        },
+        {
+          "en": "course",
+          "zh": "課程",
+          "pos": "n"
+        },
+        {
+          "en": "semester",
+          "zh": "學期",
+          "pos": "n"
+        },
+        {
+          "en": "future",
+          "zh": "未來",
+          "pos": "n"
+        },
+        {
+          "en": "complete",
+          "zh": "完全的",
+          "pos": "adj"
+        },
+        {
+          "en": "continue",
+          "zh": "繼續",
+          "pos": "v"
+        },
+        {
+          "en": "primary",
+          "zh": "第一的",
+          "pos": "adj"
+        },
+        {
+          "en": "principal",
+          "zh": "校長",
+          "pos": "n"
+        },
+        {
+          "en": "education",
+          "zh": "教育",
+          "pos": "n"
+        },
+        {
+          "en": "skill",
+          "zh": "技能",
+          "pos": "n"
+        }
+      ],
+      "review": [
+        "campus",
+        "course",
+        "semester",
+        "future",
+        "complete",
+        "continue",
+        "primary",
+        "principal",
+        "education",
+        "skill"
+      ]
+    },
+    {
+      "n": 45,
+      "start": "2027-06-06",
+      "end": "2027-06-12",
+      "theme": "國一先修(上)",
+      "words": [
+        {
+          "en": "hers",
+          "zh": "她的",
+          "pos": "phr"
+        },
+        {
+          "en": "ours",
+          "zh": "我們的",
+          "pos": "phr"
+        },
+        {
+          "en": "theirs",
+          "zh": "他們的",
+          "pos": "phr"
+        },
+        {
+          "en": "yours",
+          "zh": "你的；你們的",
+          "pos": "phr"
+        },
+        {
+          "en": "yourself",
+          "zh": "你自己",
+          "pos": "phr"
+        },
+        {
+          "en": "myself",
+          "zh": "我自己",
+          "pos": "phr"
+        },
+        {
+          "en": "nobody",
+          "zh": "沒有人",
+          "pos": "phr"
+        },
+        {
+          "en": "nothing",
+          "zh": "沒有東西",
+          "pos": "phr"
+        },
+        {
+          "en": "somebody",
+          "zh": "某人",
+          "pos": "phr"
+        },
+        {
+          "en": "someone",
+          "zh": "某人",
+          "pos": "phr"
+        },
+        {
+          "en": "being",
+          "zh": "存在；正在是",
+          "pos": "v"
+        },
+        {
+          "en": "oneself",
+          "zh": "自己",
+          "pos": "phr"
+        },
+        {
+          "en": "whom",
+          "zh": "誰（受格）",
+          "pos": "phr"
+        },
+        {
+          "en": "nor",
+          "zh": "也不",
+          "pos": "conj"
+        },
+        {
+          "en": "either xxx or",
+          "zh": "不是…就是…",
+          "pos": "conj"
+        },
+        {
+          "en": "neither xxx nor",
+          "zh": "既不…也不…",
+          "pos": "conj"
+        },
+        {
+          "en": "not only xxx but also",
+          "zh": "不但…而且…",
+          "pos": "conj"
+        },
+        {
+          "en": "even if",
+          "zh": "即使",
+          "pos": "conj"
+        },
+        {
+          "en": "as if",
+          "zh": "好像",
+          "pos": "conj"
+        },
+        {
+          "en": "as well as",
+          "zh": "也；以及",
+          "pos": "conj"
+        },
+        {
+          "en": "adjective",
+          "zh": "形容詞的",
+          "pos": "n"
+        },
+        {
+          "en": "adverb",
+          "zh": "副詞",
+          "pos": "n"
+        },
+        {
+          "en": "advice",
+          "zh": "勸告",
+          "pos": "n"
+        },
+        {
+          "en": "advise",
+          "zh": "勸告",
+          "pos": "v"
+        },
+        {
+          "en": "compare",
+          "zh": "比較",
+          "pos": "v"
+        },
+        {
+          "en": "discuss",
+          "zh": "討論",
+          "pos": "v"
+        },
+        {
+          "en": "explain",
+          "zh": "解釋",
+          "pos": "v"
+        },
+        {
+          "en": "introduce",
+          "zh": "介紹",
+          "pos": "v"
+        },
+        {
+          "en": "meaning",
+          "zh": "意義",
+          "pos": "n"
+        },
+        {
+          "en": "method",
+          "zh": "方法",
+          "pos": "n"
+        }
+      ],
+      "review": [
+        "adjective",
+        "adverb",
+        "advice",
+        "advise",
+        "compare",
+        "discuss",
+        "explain",
+        "introduce",
+        "meaning",
+        "method"
+      ]
+    },
+    {
+      "n": 46,
+      "start": "2027-06-13",
+      "end": "2027-06-19",
+      "theme": "國一先修(下)",
+      "words": [
+        {
+          "en": "been",
+          "zh": "be 的過去分詞",
+          "pos": "v"
+        },
+        {
+          "en": "might",
+          "zh": "可能",
+          "pos": "v"
+        },
+        {
+          "en": "since",
+          "zh": "自從；既然",
+          "pos": "conj"
+        },
+        {
+          "en": "through",
+          "zh": "穿過",
+          "pos": "prep"
+        },
+        {
+          "en": "while",
+          "zh": "當…時",
+          "pos": "conj"
+        },
+        {
+          "en": "without",
+          "zh": "沒有",
+          "pos": "prep"
+        },
+        {
+          "en": "yet",
+          "zh": "尚未；然而",
+          "pos": "adv"
+        },
+        {
+          "en": "itself",
+          "zh": "它自己",
+          "pos": "phr"
+        },
+        {
+          "en": "something",
+          "zh": "某事；某物",
+          "pos": "phr"
+        },
+        {
+          "en": "simply",
+          "zh": "簡單地",
+          "pos": "adv"
+        },
+        {
+          "en": "include",
+          "zh": "包括",
+          "pos": "v"
+        },
+        {
+          "en": "increase",
+          "zh": "(使…)增加",
+          "pos": "v"
+        },
+        {
+          "en": "influence",
+          "zh": "影響",
+          "pos": "n"
+        },
+        {
+          "en": "function",
+          "zh": "官能",
+          "pos": "n"
+        },
+        {
+          "en": "element",
+          "zh": "要素",
+          "pos": "n"
+        },
+        {
+          "en": "form",
+          "zh": "形式",
+          "pos": "n"
+        },
+        {
+          "en": "material",
+          "zh": "材料",
+          "pos": "n"
+        },
+        {
+          "en": "operation",
+          "zh": "運轉",
+          "pos": "n"
+        },
+        {
+          "en": "organize",
+          "zh": "組織",
+          "pos": "v"
+        },
+        {
+          "en": "separate",
+          "zh": "分離的",
+          "pos": "adj"
+        },
+        {
+          "en": "divide",
+          "zh": "分",
+          "pos": "v"
+        },
+        {
+          "en": "division",
+          "zh": "分開",
+          "pos": "n"
+        },
+        {
+          "en": "equal",
+          "zh": "相等的",
+          "pos": "adj"
+        },
+        {
+          "en": "ability",
+          "zh": "能力",
+          "pos": "n"
+        },
+        {
+          "en": "apply",
+          "zh": "申請(vi)  應用",
+          "pos": "v"
+        },
+        {
+          "en": "basis",
+          "zh": "基礎",
+          "pos": "n"
+        },
+        {
+          "en": "chart",
+          "zh": "海圖",
+          "pos": "n"
+        },
+        {
+          "en": "result",
+          "zh": "結果",
+          "pos": "n"
+        },
+        {
+          "en": "measure",
+          "zh": "量",
+          "pos": "v"
+        },
+        {
+          "en": "exact",
+          "zh": "精確的",
+          "pos": "adj"
+        }
+      ],
+      "review": [
+        "divide",
+        "division",
+        "equal",
+        "ability",
+        "apply",
+        "basis",
+        "chart",
+        "result",
+        "measure",
+        "exact"
+      ]
+    },
+    {
+      "n": 47,
+      "start": "2027-06-20",
+      "end": "2027-06-26",
+      "theme": "難字總複習A",
+      "words": [
+        {
+          "en": "aim",
+          "zh": "把…瞄準",
+          "pos": "v"
+        },
+        {
+          "en": "beat",
+          "zh": "打",
+          "pos": "v"
+        },
+        {
+          "en": "bow",
+          "zh": "弓(形物)  蝴蝶結",
+          "pos": "n"
+        },
+        {
+          "en": "dumb",
+          "zh": "啞的",
+          "pos": "adj"
+        },
+        {
+          "en": "flat",
+          "zh": "平的",
+          "pos": "adj"
+        },
+        {
+          "en": "frighten",
+          "zh": "使…驚恐",
+          "pos": "v"
+        },
+        {
+          "en": "huge",
+          "zh": "巨大的",
+          "pos": "adj"
+        },
+        {
+          "en": "iron",
+          "zh": "鐵",
+          "pos": "n"
+        },
+        {
+          "en": "metal",
+          "zh": "金屬的",
+          "pos": "n"
+        },
+        {
+          "en": "pump",
+          "zh": "抽水機",
+          "pos": "n"
+        },
+        {
+          "en": "affect",
+          "zh": "影響",
+          "pos": "v"
+        },
+        {
+          "en": "arrest",
+          "zh": "逮捕",
+          "pos": "v"
+        },
+        {
+          "en": "assume",
+          "zh": "假定",
+          "pos": "v"
+        },
+        {
+          "en": "blame",
+          "zh": "責備",
+          "pos": "v"
+        },
+        {
+          "en": "broad",
+          "zh": "寬的",
+          "pos": "adj"
+        },
+        {
+          "en": "burst",
+          "zh": "爆裂(v)  爆炸",
+          "pos": "v"
+        },
+        {
+          "en": "cancer",
+          "zh": "癌",
+          "pos": "n"
+        },
+        {
+          "en": "charge",
+          "zh": "索價",
+          "pos": "v"
+        },
+        {
+          "en": "chief",
+          "zh": "首領",
+          "pos": "n"
+        },
+        {
+          "en": "conflict",
+          "zh": "衝突(vi)  爭論",
+          "pos": "n"
+        },
+        {
+          "en": "environment",
+          "zh": "環境",
+          "pos": "n"
+        },
+        {
+          "en": "pollute",
+          "zh": "弄髒",
+          "pos": "v"
+        },
+        {
+          "en": "pollution",
+          "zh": "污染",
+          "pos": "n"
+        },
+        {
+          "en": "population",
+          "zh": "人口",
+          "pos": "n"
+        },
+        {
+          "en": "industry",
+          "zh": "工業",
+          "pos": "n"
+        },
+        {
+          "en": "energy",
+          "zh": "精力",
+          "pos": "n"
+        },
+        {
+          "en": "biology",
+          "zh": "生物學",
+          "pos": "n"
+        },
+        {
+          "en": "chemical",
+          "zh": "化學的",
+          "pos": "adj"
+        },
+        {
+          "en": "degree",
+          "zh": "程度",
+          "pos": "n"
+        },
+        {
+          "en": "detect",
+          "zh": "發覺",
+          "pos": "v"
+        }
+      ],
+      "review": [
+        "environment",
+        "pollute",
+        "pollution",
+        "population",
+        "industry",
+        "energy",
+        "biology",
+        "chemical",
+        "degree",
+        "detect"
+      ]
+    },
+    {
+      "n": 48,
+      "start": "2027-06-27",
+      "end": "2027-07-03",
+      "theme": "難字總複習B",
+      "words": [
+        {
+          "en": "coach",
+          "zh": "長途公共汽車",
+          "pos": "n"
+        },
+        {
+          "en": "contact lens",
+          "zh": "隱形眼鏡",
+          "pos": "n"
+        },
+        {
+          "en": "ghost",
+          "zh": "鬼",
+          "pos": "n"
+        },
+        {
+          "en": "horrible",
+          "zh": "恐怖的",
+          "pos": "adj"
+        },
+        {
+          "en": "hunter",
+          "zh": "獵人",
+          "pos": "n"
+        },
+        {
+          "en": "mechanic",
+          "zh": "機械工",
+          "pos": "n"
+        },
+        {
+          "en": "mile",
+          "zh": "英里",
+          "pos": "n"
+        },
+        {
+          "en": "painful",
+          "zh": "疼痛的",
+          "pos": "adj"
+        },
+        {
+          "en": "rent",
+          "zh": "租金(n)  租用(",
+          "pos": "n"
+        },
+        {
+          "en": "stingy",
+          "zh": "吝嗇的",
+          "pos": "adj"
+        },
+        {
+          "en": "contract",
+          "zh": "合同",
+          "pos": "n"
+        },
+        {
+          "en": "courage",
+          "zh": "勇氣",
+          "pos": "n"
+        },
+        {
+          "en": "court",
+          "zh": "庭院",
+          "pos": "n"
+        },
+        {
+          "en": "crime",
+          "zh": "犯罪",
+          "pos": "n"
+        },
+        {
+          "en": "crisis",
+          "zh": "危機",
+          "pos": "n"
+        },
+        {
+          "en": "cure",
+          "zh": "治癒",
+          "pos": "v"
+        },
+        {
+          "en": "dawn",
+          "zh": "黎明",
+          "pos": "n"
+        },
+        {
+          "en": "edge",
+          "zh": "邊",
+          "pos": "n"
+        },
+        {
+          "en": "effect",
+          "zh": "結果",
+          "pos": "n"
+        },
+        {
+          "en": "force",
+          "zh": "強迫",
+          "pos": "v"
+        },
+        {
+          "en": "control",
+          "zh": "控制",
+          "pos": "v"
+        },
+        {
+          "en": "create",
+          "zh": "創造",
+          "pos": "v"
+        },
+        {
+          "en": "design",
+          "zh": "設計(v)  設計",
+          "pos": "v"
+        },
+        {
+          "en": "discover",
+          "zh": "發現",
+          "pos": "v"
+        },
+        {
+          "en": "movement",
+          "zh": "運動",
+          "pos": "n"
+        },
+        {
+          "en": "scientist",
+          "zh": "科學家",
+          "pos": "n"
+        },
+        {
+          "en": "difficulty",
+          "zh": "困難",
+          "pos": "n"
+        },
+        {
+          "en": "effective",
+          "zh": "有效的",
+          "pos": "adj"
+        },
+        {
+          "en": "necessary",
+          "zh": "必要的",
+          "pos": "adj"
+        },
+        {
+          "en": "standard",
+          "zh": "標準",
+          "pos": "n"
+        }
+      ],
+      "review": [
+        "control",
+        "create",
+        "design",
+        "discover",
+        "movement",
+        "scientist",
+        "difficulty",
+        "effective",
+        "necessary",
+        "standard"
+      ]
+    }
+  ]
+}

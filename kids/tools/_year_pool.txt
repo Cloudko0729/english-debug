@@ -1,0 +1,1622 @@
+a few	5	
+a little	5	
+a lot	5	
+a lot of	5	許多
+ability	8	能力
+absent	7	缺席的
+accept	7	接受
+accident	7	意外的事
+achieve	8	完成
+across	7	橫過
+act	6	行動
+action	7	動作
+active	7	活躍的
+activity	7	活動
+actor	7	男演員
+actress	7	女演員
+addition	6	加
+address	6	地址
+adjective	7	形容詞的
+admire	8	欽佩
+admit	8	承認
+adopt	8	收養
+adult	7	成人
+advance	8	前進
+advantage	8	優勢
+adventure	7	
+adverb	7	副詞
+advertisement	8	廣告
+advice	7	勸告
+advise	7	勸告
+affair	8	事情
+affect	8	影響
+afraid	5	
+again	5	
+against	7	違反
+age	6	
+ahead	7	在前
+aid	8	幫助
+aids	8	愛滋病
+aim	7	把…瞄準
+air conditioner	7	空調機
+aircraft	8	飛行器
+airline	7	航線
+airmail	7	航空信
+airplane	6	
+alarm	6	警報
+alarm clock	6	鬧鐘
+album	6	相簿
+alike	7	同樣的
+alive	7	活著的
+all	5	
+alley	7	弄
+allow	7	允許
+almost	7	
+alone	6	單獨的
+aloud	6	出聲地
+already	5	
+also	6	
+although	7	
+altogether	7	總共
+always	5	
+ambulance	7	救護車
+among	7	在…之中
+amount	8	合計
+ancient	8	已往的
+angel	6	天使
+anger	7	憤怒(n)  使發怒
+angry	6	
+ankle	7	踝
+another	6	
+anybody	5	
+anyone	5	
+anything	5	
+anyway	7	無論如何
+anywhere	6	任何地方
+apologize	7	道歉
+appearance	8	出現
+apply	8	申請(vi)  應用
+appreciate	8	瞭解
+area	7	地區
+argue	7	爭論
+armchair	6	扶手椅
+army	7	軍隊
+around	7	
+arrange	7	安排
+arrest	8	逮捕
+article	7	文章
+artist	6	藝術家
+as if	8	好像
+as soon as	8	儘快
+as well as	8	也
+asia	6	亞洲
+asian	7	亞洲(人)的(adj
+asleep	6	睡覺的
+assistant	7	助手
+assume	8	假定
+attack	7	攻擊
+attend	8	出席
+attention	7	注意
+audience	8	聽眾
+australia	6	澳大利亞
+australian	7	澳大利亞(人)的(a
+aux.v	8	助動詞
+auxiliary	8	輔助的
+available	8	可利用的
+avoid	7	避免
+awake	6	喚醒
+aware	8	意識到
+away	5	
+baby sitter	6	褓母
+back	5	
+backward	7	向後地(的)  相反
+badminton	7	羽毛球
+balcony	7	陽臺
+band	7	
+banker	7	銀行家
+bar	7	條
+barbecue	7	吃烤燒肉的野餐
+barber	6	理髮師
+bark	6	(狗等)吠
+base	7	基地(n)  建立在
+baseball	6	
+basement	7	地下室
+basic	7	基本的
+basis	8	基礎
+bat	7	蝙蝠
+bath	6	
+bean	5	豆
+beard	6	鬍鬚
+beat	7	打
+beautiful	6	
+beautifully	6	美麗地
+because	6	
+become	5	
+been	7	
+beer	7	啤酒
+before	5	
+begin	5	
+beginner	6	初學者
+beginning	6	開始
+behave	7	行為
+behind	7	
+being	8	be 的現在分詞(v
+belief	8	信任
+bell	7	
+belt	7	
+bench	7	長凳
+beside	7	
+besides	7	在…旁邊
+between	6	
+beyond	8	在…那邊
+bicycle riding	5	騎腳踏車
+bill	7	帳單
+biology	8	生物學
+bit	6	一點
+bite	7	
+bitter	6	痛苦的
+blackboard	7	
+blame	8	責備
+blank	6	空的
+block	7	
+blood	7	血(液)  血統
+blouse	6	女式襯衫
+blow	6	
+board	5	(木)板
+boat	6	
+bomb	8	炸彈
+bone	6	骨
+bookcase	5	書櫥
+bored	7	
+boring	7	
+born	7	
+boss	6	
+both	5	
+both xxx and	7	兩個都…
+bother	7	打擾
+bottom	6	
+bow	7	弓(形物)  蝴蝶結
+bowl	7	
+bowling	7	保齡球
+boyfriend	7	男朋友
+brain	7	腦(袋)  智力
+branch	7	樹枝
+brick	7	磚
+brief	8	摘要
+bring	7	
+britain	7	英國
+british	7	不列顛(人)的
+broad	8	寬的
+broadcast	8	廣播
+brunch	6	早午餐
+bucket	7	水桶
+buffet	7	自助餐廳(n)  打
+bug	7	蟲
+build	7	
+building	6	建築物
+bun	6	小圓麵包
+bundle	8	包
+burger	5	(口)漢堡
+burst	8	爆裂(v)  爆炸
+business	7	
+butter	5	
+button	5	鈕扣
+cabbage	6	甘藍菜
+cabinet	7	(有抽屜或格子的)櫥
+cable	7	粗索
+cafeteria	7	自助餐廳
+cage	7	籠
+calendar	5	月曆
+calm	6	平靜的
+camping	6	露營
+campus	7	校園
+can	7	
+canada	6	加拿大
+canadian	7	加拿大人
+cancel	7	取消
+cancer	8	癌
+candle	7	蠟燭
+captain	7	上尉
+care	6	
+career	8	(原意:道路
+careless	6	不注意的
+carpet	6	地毯
+carrot	5	胡蘿蔔
+carry	7	
+cartoon	5	(報刊上的)政治性漫
+cash	7	現金
+cassette	7	(裝錄音帶的)卡式盒
+castle	7	城堡
+catch	5	
+cause	7	原因
+cd player	5	雷射唱片播放器
+ceiling	7	天花板
+cell	8	單元
+center	7	
+centimeter	6	釐米
+central	8	中央的
+century	8	世紀
+cereal	6	穀物
+certain	8	確定的
+certainly	7	的確
+chairman	8	主席
+chance	6	
+channel	7	海峽
+chapter	7	(書籍)章
+character	7	性格
+charge	8	索價
+chart	7	海圖
+chase	6	追趕
+cheat	7	
+check	7	
+cheerleader	7	啦啦隊隊長
+cheese	6	
+chemical	8	化學的
+chess	7	西洋棋
+chief	8	首領
+childhood	7	孩童時期
+childish	8	孩子氣的
+childlike	8	孩子似的
+chin	6	下巴
+china	6	
+chocolate	6	
+choice	7	選擇
+chopsticks	7	
+christmas	6	
+christmas eve	6	聖誕前夕
+chubby	6	胖嘟嘟的
+church	6	
+citizen	8	公民
+claim	8	聲稱
+clap	6	拍手
+class	5	
+class leader	6	班長
+classic	8	傑作
+classical	8	古典的
+clear	7	
+clerk	6	店員
+clever	6	聰明的
+climate	8	氣候
+climb	6	
+climbing	6	攀登
+closet	6	壁櫥
+cloth	6	布
+clothes	7	
+clothing	7	(總稱)衣服
+coach	7	長途公共汽車
+coast	7	海岸
+cockroach	7	蟑螂
+coin	5	硬幣
+collect	7	
+collection	7	收藏
+college	7	大學
+comb	6	梳子(n)  梳理
+comfortable	6	
+comfortably	7	舒適地
+comic	7	
+command	8	命令
+comment	7	註釋
+company	7	公司
+compare	7	比較
+complain	8	抱怨
+complete	7	完全的
+computer game	5	電腦遊戲
+concern	8	關心
+confident	8	自信的
+confirm	8	證實
+conflict	8	衝突(vi)  爭論
+confuse	8	使混亂
+congratulation	7	祝賀
+connective	8	連結的
+consider	8	認為
+contact lens	7	隱形眼鏡
+contain	8	包含
+continue	7	繼續
+contract	8	合同
+control	7	控制
+convenience store	6	便利商店
+conversation	7	談話
+cooking	6	烹調(n)  烹調用
+corn	5	穀物
+corner	6	角
+cost	6	
+cotton	7	棉花
+couch	6	
+cough	6	咳嗽(v)  咳嗽
+could	7	
+count	6	
+country	7	
+countryside	7	農村
+county	8	縣
+couple	7	夫妻
+courage	8	勇氣
+course	7	課程
+court	8	庭院
+crab	6	蟹
+crazy	6	
+cream	5	奶油
+create	7	創造
+creative	8	
+credit card	7	信用卡
+crime	8	犯罪
+crisis	8	危機
+crowd	7	群
+crowded	6	擁擠的
+cruel	8	殘酷的
+culture	8	文化
+culture center	8	文化中心
+cure	8	治癒
+curious	8	好奇的
+current	8	水流
+curtain	6	簾
+curve	8	曲線
+custom	8	風俗習慣
+customer	7	顧客
+cut	5	
+daily	6	每日的(adj)  
+damage	8	毀壞
+danger	7	危險
+dangerous	7	
+data	8	[計]資料
+daughter	5	
+dawn	8	黎明
+dead	6	
+deaf	6	聾的
+deal	6	給予
+death	7	死
+debate	8	辯論
+debt	8	債務
+decision	7	決定
+decorate	7	裝飾
+deep	5	深的
+deer	5	鹿
+degree	8	程度
+delay	8	推遲
+deliver	7	投遞
+democracy	8	民主政治
+democratic	8	民主的
+dentist	7	牙醫
+deny	8	否認
+department	7	部門
+department store	6	
+depend	7	依靠
+describe	7	形容
+desert	7	沙漠
+design	7	設計(v)  設計
+desire	8	願望
+dessert	6	甜點
+detect	8	發覺
+determine	8	決定
+determiner	8	(文法的)限定詞
+develop	8	發展
+dial	7	(電話的)撥號盤
+diamond	7	鑽石
+dictionary	6	
+did	5	
+diet	7	通常所吃的食物
+difference	7	差別
+different	6	
+difficulty	8	困難
+diligent	7	勤奮的
+dinosaur	5	恐龍
+diplomat	8	外交官
+direct	8	直接的(adj)  
+direction	7	方向
+director	8	指導者
+disappear	7	消失
+discover	7	發現
+discuss	7	討論
+discussion	8	討論
+dishonest	8	不誠實的
+distance	7	距離
+divide	7	分
+division	7	分開
+dizzy	6	暈眩的
+doctor	6	
+document	8	公文
+dodge ball	6	躲避球
+dodgeball	6	
+dolphin	5	海豚
+done	7	
+donkey	5	驢子
+dot	6	點
+double	6	兩倍的
+double tenth day	6	雙十節
+doubt	8	懷疑
+doughnut	5	甜甜圈
+downstairs	5	樓下(的)
+downtown	6	往市中心
+dozen	7	
+dragon	6	龍
+dragon-boat festival	6	端午節
+drawer	6	付款人
+dream	7	
+dresser	6	碗櫃
+driver	5	
+drop	7	
+drug	8	藥
+drugstore	6	藥局
+drum	6	鼓
+dryer	6	烘乾機
+dumb	7	啞的
+dumpling	5	餃子
+during	6	
+duty	8	職責
+e-mail	6	
+each	5	
+eagle	5	鷹
+earn	7	賺得
+earrings	6	耳環
+earth	6	
+east	6	
+easter	6	(基督)復活節
+eastern	7	東方的
+edge	8	邊
+education	8	教育
+effect	8	結果
+effective	8	有效的
+effort	8	努力
+eighteenth	6	第十八
+either	6	
+either xxx or	8	或者…或者…
+elder	7	年齡大的
+elect	8	選舉
+election	8	選舉
+electric	6	電的
+electricity	6	電
+element	8	要素
+elementary school	6	
+eleventh	6	第十一(num)  
+else	6	
+email	6	
+emotion	8	情感
+emphasize	8	強調
+employ	8	雇用
+encourage	8	鼓勵
+end	6	
+enemy	7	敵人
+energy	8	精力
+engine	6	引擎
+engineer	7	工程師
+england	7	英格蘭
+englishman	7	英格蘭人
+enough	5	
+enter	6	
+entire	8	全部的
+entrance	6	入口
+envelope	6	信封
+environment	8	環境
+envy	8	羡慕
+equal	7	相等的
+error	6	錯誤
+especially	7	特別
+europe	7	歐洲
+european	7	歐洲的(adj)  
+eve	6	
+even if	8	即使
+event	7	事件
+ever	7	
+everybody	5	
+everyone	5	
+everything	5	
+everywhere	7	到處
+evil	8	壞的
+exact	8	精確的
+examine	8	檢查
+example	6	
+excite	7	使…興奮
+excited	7	
+exciting	7	
+excuse	7	
+exercise	7	
+exercising	7	運動
+exist	8	存在
+exit	5	出口
+expect	8	預料
+expensive fruit	7	高級水果
+experience	8	
+explain	7	解釋
+express	8	表示
+extra	6	額外的
+extra large	6	特大號的
+eyebrow	6	眉毛
+fact	6	
+factory	6	
+fail	7	失敗
+failure	8	失敗
+fair	7	公平的
+false	6	假的
+family name	5	姓
+famous	6	
+fancy	8	奇特的
+fantastic	7	幻想的
+far	6	遠
+farm	5	
+farmer	6	
+fashionable	8	流行的
+fast food	5	速食
+fast food restaurant	6	速食餐廳
+faucet	6	(容器或水管的)龍頭
+fault	8	過失
+favor	7	好感
+fear	7	害怕
+feather	7	羽毛
+feeling	6	感覺
+fellow	8	人
+fence	7	柵欄
+fever	6	發燒
+few	6	
+field	7	田地
+fifteenth	6	第十五
+fight	6	作戰
+figure	8	數字
+film	5	電影
+final	7	最後的
+finger	6	
+fire station	5	消防站
+firm	8	商行
+first grade	5	一年級
+first name	5	名
+fisherman	6	
+fishing	5	釣魚
+fit	6	適合
+flag	5	旗(幟)
+flat	7	平的
+flat tire	6	洩了氣的輪胎
+flight	7	飛翔
+floor	6	
+flour	7	麵粉
+flow	8	流(動)  垂
+flower shop	5	花店
+flu	6	流行性感冒(等於in
+flute	7	笛
+focus	8	(使)聚焦
+fog	6	霧(n)  霧
+foggy	6	多霧的
+food restaurant	6	餐廳
+fool	7	蠢人
+foolish	7	愚蠢的
+football	5	足球
+force	8	強迫
+forgive	8	原諒
+fork	5	
+form	8	形式
+former	8	在前的
+forward	7	向前的
+fourteenth	6	第十四
+france	5	法國
+frank	8	率直的
+freedom	8	自由
+freezer	6	冷凍裝置
+freezing	6	結冰的
+french	5	法國的
+french fries	7	炸薯條
+fried chicken	5	炸雞
+fried rice	5	炒飯
+friendship	7	友誼
+fries	7	
+frighten	7	使…驚恐
+frisbee	5	飛盤
+front	6	
+full	7	
+fun	6	
+function	8	官能
+furniture	6	傢俱
+future	7	
+gain	8	獲得
+garage	6	車庫
+garbage	6	
+gas station	6	加油站
+gather	7	聚集
+general	8	一般的
+generally	8	一般地
+generation	8	代
+generous	8	慷慨的
+gentle	7	和藹的
+gentleman	7	先生
+geographical	8	地理(學)的
+geography	8	地理(學)
+german	7	德國(人)的
+germany	7	德國
+gesture	8	(表達情意的)姿勢
+get	5	
+get in	6	進入
+get off	6	下車
+get on	6	上車
+ghost	7	鬼
+girlfriend	7	女朋友
+given name	5	名字
+glad	5	
+glass	6	
+glasses	7	眼鏡
+glove	6	
+gloves	6	手套
+goat	5	
+god	7	神(God)上帝
+gold	6	金
+golden	6	金(黃)色的
+golf	6	高爾夫
+good looking	6	美貌的
+goodness	8	善良
+goose	6	鵝
+government	8	政府
+gram	7	
+grand	8	盛大的
+granddaughter	5	孫女
+grandson	5	孫子
+grape	6	葡萄
+grapefruit	6	葡萄柚(樹)
+grass	7	
+greedy	7	貪食的
+greet	7	問候
+grow	7	
+grow up	6	長大
+guard	7	看守
+guava	6	蕃石榴
+guess	7	
+guest	6	客人
+guide	7	嚮導
+guitar	6	吉他
+gun	7	槍
+guy	7	男人
+gym	5	體操房
+habit	6	
+haircut	5	理髮
+hairdresser	6	美髮師
+hall	6	大廳
+halloween	7	萬聖節前夕(月日)
+hamburger	6	
+hammer	7	槌
+handkerchief	7	手帕
+handle	7	柄
+handsome	7	
+hang	6	懸掛
+hanger	6	掛衣架
+hard-working	7	
+hardly	7	簡直不
+hate	5	
+headache	6	
+health	6	
+healthy	7	
+hear	5	
+heart	6	
+heater	6	加熱器
+height	7	高
+helicopter	7	直升飛機
+her	6	
+hero	6	英雄
+hers	7	
+hide	6	
+high	5	
+highway	7	公路
+hike	6	遠足
+hiking	6	步行
+him	5	
+hip	6	臀部
+hippopotamus	5	河馬
+hire	8	雇傭
+his	6	
+history	6	
+hobby	6	
+hold	7	
+hole	6	洞
+homesick	7	想家的
+honesty	8	正直
+honey	7	蜂蜜
+hong kong	6	香港
+hop	5	單腳跳
+horrible	7	恐怖的
+host	8	(款待客人的)主人
+housewife	5	家庭婦女
+housework	5	家務勞動
+huge	7	巨大的
+human	7	人的
+humble	8	謙遜的
+humid	7	有濕氣的
+humor	8	幽默
+humorous	8	幽默的
+hunger	7	饑餓
+hunt	7	狩獵
+hunter	7	獵人
+hurry	5	
+husband	5	
+idea	6	
+ill	6	有病的
+illness	7	
+imagine	7	料想
+impolite	6	無禮的
+importance	8	重要
+impossible	7	不可能的
+improve	8	改善
+in back of	5	在(某人)之後
+inch	7	英寸
+include	8	包括
+income	8	收入
+increase	8	(使…)增加
+indefinite	8	不確定的
+independent	8	獨立的
+industry	8	工業
+influence	8	影響
+information	8	消息
+ink	6	墨水
+insect	6	昆蟲
+inside	6	
+insist	8	(on
+inspire	8	鼓舞
+instant	8	瞬間
+instant noodle	6	速食麵
+instrument	7	器械
+intelligent	8	有智力的
+interest	7	
+interested	7	
+interesting	7	
+international	8	國際的
+interrupt	8	打斷
+interview	8	接見
+introduce	7	介紹
+invent	8	發明
+invitation	7	邀請
+iron	7	鐵
+island	7	
+italy	7	義大利
+itself	7	
+jam	5	果醬
+japan	5	日本
+japanese	6	日本(人)的
+jar	6	甕
+jazz	7	爵士樂
+jealous	8	妒忌的
+jeans	7	
+jeep	6	吉普車
+jogging	5	慢跑
+joke	6	笑話
+journalist	8	新聞工作者
+joy	7	
+judge	8	法官
+junior high school	7	
+just	7	
+kangaroo	6	袋鼠
+kaohsiung	5	高雄
+keep	7	
+ketchup	6	蕃茄醬
+key	7	
+kill	7	
+kilogram	7	
+kilometer	6	公里
+kindergarten	6	幼稚園
+kingdom	8	王國
+knee	7	
+knife	6	
+knock	7	
+know	6	
+koala	6	無尾熊
+korea	7	韓國
+korean	7	韓國(人
+ktv	6	卡拉OK電視節目
+lack	8	缺乏
+lady	5	淑女
+lake	7	
+lamb	6	小羊(肉)  羔羊(
+lamp	7	
+land	7	
+lane	7	小路
+lantern	7	燈籠
+lantern festival	6	元宵節
+large	5	
+last name	5	姓
+later	7	
+laugh	7	
+law	8	法律
+lawyer	8	律師
+lay	7	放
+lazy	6	
+ld	8	雷射光碟
+leader	7	
+leaf	5	葉子(書刊的)張
+left	5	
+lemon	6	
+lend	7	
+length	7	長度
+let	6	
+letter	7	
+lettuce	6	萵苣
+level	6	水平
+lid	7	蓋子
+life	7	
+lift	7	提
+lightning	7	閃電
+limit	8	限度
+link	7	(鏈)環
+lip	6	
+liquid	8	液體的
+list	7	
+little	6	
+live	6	
+loaf	7	一條(塊)麵包
+local	8	本地的
+location	8	場所
+lock	6	鎖(n)  鎖(被)
+locker	6	(有鎖的)小櫥櫃
+london	6	倫敦
+los angeles	6	洛杉磯
+lose	7	
+loser	7	損失者
+loss	8	遺失
+lot	5	許多
+lovely	6	可愛的
+low	6	
+lucky	5	
+lunch box	5	午餐盒
+lychee	5	荔枝
+ma'am	5	(對女主人
+machine	7	
+mad	6	發病的
+magazine	6	雜誌
+magician	7	魔法師
+mail	7	
+mail carrier	6	
+mailman	6	
+main	7	主要的
+major	8	較大的
+male	7	雄的
+mall	6	散步式商店街
+manager	7	管理者
+mandarin	6	標準中國話
+mango	5	芒果
+manner	7	禮貌
+many	5	
+marker	5	作記號的人
+marriage	8	結婚
+marry	5	結婚(vi)  娶
+mask	7	面具
+mass	8	眾多
+master	8	主人
+mat	7	席子
+match	5	火柴
+material	8	材料
+math	6	
+mathematics	6	
+matter	7	
+maximum	8	最大限度
+maybe	6	
+me	5	
+meal	7	
+mean	7	
+meaning	7	意義
+measure	8	量
+measurement	8	測量
+meat	7	
+mechanic	7	機械工
+medicine	7	
+meeting	6	
+melon	5	(各種的)瓜
+member	7	成員
+memory	7	記憶
+men's room	6	男廁
+menu	7	
+metal	7	金屬的
+meter	6	米
+method	8	方法
+michael jackson	6	麥可傑克森(人名)
+microwave	6	微波
+microwave oven	6	微波爐
+mid-autumn festival	6	中秋節
+middle	5	中間
+midnight	6	午夜
+might	7	
+mile	7	
+milk shake	5	奶昔
+million	7	
+minor	8	較小的
+minus	6	減
+mirror	5	鏡子
+missing	6	失去的
+mistake	7	
+model	6	模型
+modern	7	
+mom	5	
+moment	7	
+mommy	5	
+monster	5	怪物
+moon cake	5	月餅
+mop	6	拖把(俗稱地拖)  
+more	5	
+mosquito	6	蚊子
+most	6	
+mother's day	5	母親節
+motion	8	運動
+motorcycle	5	
+mountain-climbing	6	登山
+mouse	7	
+movement	7	運動
+movie star	5	電影明星
+movie theater	5	電影院
+mrt	6	大眾捷運系統 Mas
+mtv	6	音樂電視 Music
+much	5	
+mud	7	泥
+musician	7	音樂家
+must	6	
+my	6	
+myself	7	
+nail	6	釘子
+napkin	6	餐巾
+narrow	7	狹窄的
+nation	8	國家
+nationality	8	國民性
+natural	7	自然的
+nature	7	大自然
+naughty	7	調皮的
+near	5	
+nearly	7	幾乎
+necessary	8	必要的
+necklace	6	項圈
+necktie	6	領帶
+needle	7	針
+negative	8	負的
+neighbor	7	鄰居
+neither	7	也不(conj
+neither xxx nor	8	既不…也不…
+nephew	7	侄子
+nervous	7	神經緊張的
+nest	6	巢
+new year's day	5	新年元旦
+new york	6	紐約
+next	7	
+nice looking	6	美貌的
+niece	7	侄女
+nineteenth	6	第十九
+ninetieth	6	第九十
+nobody	7	
+nod	7	
+noise	7	
+noisy	6	喧鬧的
+none	7	沒有一人(或物)  
+noodle	6	
+nor	8	也不
+north	6	
+northern	7	北方的
+not only xxx but also	8	不僅…而且…
+note	5	便條
+nothing	7	
+num	8	數詞
+number	5	
+nurse	5	
+nut	5	堅果(如核桃
+o	8	受詞
+obey	8	順從
+object	8	物體
+oc	8	受詞補語
+occupation	8	職業
+occur	8	發生
+ocean	6	洋
+offer	8	給予
+official	8	官方的
+often	5	
+oil	6	
+omit	8	省略
+once	5	
+oneself	8	自己
+onion	5	洋蔥
+only	5	
+operate	8	運行
+operation	8	運轉
+opinion	7	意見
+ordinary	8	一般的
+organize	8	組織
+other	5	
+our	6	
+ours	7	
+out of	5	出於…
+outer space	6	外太空
+outside	5	
+oven	6	烤爐
+over	5	
+over-weight	7	超重
+overpass	7	陸橋
+overseas	8	(在)海外的;(在)
+owner	7	所有人
+ox	6	公牛
+pain	6	疼痛
+painful	7	疼痛的
+painter	6	畫家
+painting	6	
+pajamas	5	睡衣
+pale	7	蒼白的
+pan	5	平底鍋
+papaya	6	木瓜樹
+pardon	5	原諒
+parent	5	
+paris	6	巴黎
+parking lot	6	停車場
+parrot	5	鸚鵡
+particular	8	特定的
+partner	7	搭檔
+party	5	
+pass	5	
+passenger	7	乘客
+past	5	
+paste	5	糊狀物
+path	7	小路
+patient	7	忍耐的
+pattern	7	型
+pause	7	暫停
+pe	7	
+peace	7	和平
+peaceful	7	和平的
+peach	6	桃子
+pear	6	梨
+people	5	
+pepper	5	胡椒粉
+perfect	7	完美的
+period	7	(一段)時間
+person	5	
+personal	8	個人的
+philippines	7	菲律賓
+photograph	6	照片
+photographer	7	攝影師
+physical education	7	
+piano	6	
+pick	5	
+pigeon	6	鴿子
+pile	7	一堆
+pillow	5	枕頭
+pin	5	大頭針
+pineapple	5	鳳梨
+pingpong	5	乒乓球
+pipe	7	管子
+pizza	5	
+place	5	
+plain	7	平原(n)  樸素的
+plane	6	
+plant	5	植物
+plastic	6	塑膠的
+plate	6	盤子
+platform	8	月臺
+playground	7	
+pleasant	7	令人愉快的
+pleased	7	滿意的
+pleasure	8	高興
+plus	5	加
+pocket	6	衣袋
+poem	7	詩
+poison	8	毒
+police officer	5	警官
+police station	5	警察局
+policeman	5	警察
+pollute	8	弄髒
+pollution	8	污染
+pond	6	池塘
+pool	5	水池
+pop music	6	流行音樂
+popcorn	6	
+popular	7	
+population	8	人口
+port	8	港口
+position	8	位置
+positive	8	確信的
+possessive	8	擁有的
+possible	7	
+post	7	張貼
+postcard	6	
+pot	5	罐
+potato	5	馬鈴薯
+pound	7	
+power	7	權力
+praise	7	稱讚
+pray	5	請求
+precious	8	珍貴的
+prefer	7	更喜歡
+preposition	8	介系詞
+present	5	
+president	8	總統
+press	8	壓
+priest	8	僧侶
+primary	7	第一的
+primary school	6	小學
+prince	7	王子
+princess	7	公主
+principal	7	校長
+print	5	印刷
+printer	5	印表機
+prison	8	監獄
+prisoner	8	囚犯
+private	8	私人的
+prize	7	獎(賞)  獎品
+probably	8	大概
+produce	8	生產
+product	8	產品
+production	8	生產
+professor	8	教授
+progress	8	前進
+project	7	專案
+promise	7	允諾
+pronoun	8	代名詞
+pronounce	8	發音
+protect	7	保護
+prove	8	證明
+provide	8	供給
+pull	5	
+pump	7	抽水機
+pumpkin	5	南瓜
+punish	8	懲罰
+puppy	5	小狗
+purpose	8	目的
+purse	5	錢包
+push	5	
+put	6	
+puzzle	5	(使)迷惑(使)為難
+quality	8	品質
+quarter	6	四分之一
+queen	5	
+quick	5	
+quit	7	停止
+radio	5	
+railroad	7	鐵路
+railway	7	
+rainbow	7	
+raincoat	5	雨衣
+raise	7	舉起
+rapid	8	快的
+rare	7	稀有的
+rat	6	鼠
+rather	7	相當
+reach	7	到達
+reading test	5	閱讀測驗
+realize	8	實現
+reason	7	理由
+receive	6	接見
+recent	8	新近的
+recently	8	
+record	7	記錄
+recorder	7	
+recover	8	重新獲得
+rectangle	6	長方形
+recycle	7	使再迴圈
+reflexive	8	反身代名詞
+refrigerator	7	
+refuse	8	拒絕
+regard	8	看待
+regret	8	遺憾
+regular	7	有規律的
+reject	8	拒絕
+relative	8	相對的(adj)  
+relax	6	
+remind	7	提醒
+rent	7	租金(n)  租用(
+reply	6	回答
+reporter	7	
+republic of china	7	中華民國
+require	8	需要
+respect	8	尊敬
+responsible	8	有責任的
+restroom	6	
+result	7	結果
+review	6	評論
+revise	7	修訂
+right	5	
+rise	7	起立
+river	7	
+rob	7	搶劫
+robot	5	機器人
+rock	7	岩石
+role	8	角色
+roll	6	(使…)滾動
+roller skate	6	
+roller skating	6	輪式溜冰
+rome	7	羅馬
+roof	6	屋頂
+root	7	根(部)
+rose	6	
+round	6	
+row	5	(一)排
+rub	6	摩擦
+rubber	6	橡皮
+rubber band	6	橡皮筋
+rude	5	無禮的
+rule	5	
+running	5	奔跑的
+running nose	6	流鼻水
+rush	6	衝
+russia	7	俄羅斯
+russian	7	俄羅斯(人)的
+s	8	主詞
+safety	7	安全
+sail	7	帆
+sailing	7	航行
+sailor	7	水手
+sale	6	
+salesman	7	銷售員
+sample	7	樣品
+san francisco	7	舊金山
+sand	5	沙(複)沙灘
+satisfied	8	滿意的
+satisfy	8	使…滿足
+saucer	7	碟子
+sc	8	主詞補語
+scared	5	驚嚇的
+scarf	5	圍巾
+scene	8	(戲劇等的)一場
+schoolmate	6	校友
+scientist	7	科學家
+screen	7	螢幕
+seafood	6	海鮮
+search	7	搜
+seat	7	
+second grade	5	二年級
+secondary	8	第二的
+secret	6	秘密的
+secretary	7	秘書
+section	8	切斷
+seed	5	種子
+seek	8	尋找
+seem	6	好像
+seesaw	7	蹺蹺板
+seldom	5	
+select	7	挑選
+selfish	7	自私的
+sell	6	
+semester	7	學期
+senior high school	5	
+sense	7	感言
+separate	8	分離的
+servant	8	僕人
+serve	7	為…服務/盡責
+service	7	服務
+set	6	(一)套
+seventeenth	6	第十七
+several	5	
+shake	6	握手
+shape	6	
+shark	5	鯊魚
+sharp	7	鋒利的
+sheet	6	(一)張
+shelf	6	棚
+shine	6	照耀
+shock	8	震動
+shoe	5	
+shoot	7	嫩枝
+shop	7	
+shopkeeper	6	
+shopping	5	購物
+shore	7	岸
+shot	7	(shoot的過去式
+should	7	
+shoulder	7	
+shout	5	呼喊
+show	7	
+shower	5	陣雨
+shrimp	6	小蝦
+shut	6	關(閉)
+sick	6	
+side	6	
+sidewalk	7	
+sight	7	視力
+sign	6	標記
+silence	7	寂靜
+silent	7	寂靜的
+silly	6	傻的
+silver	6	銀色的(adj)  
+similar	8	相似的
+simple	7	
+simply	7	簡單地
+since	7	
+sincere	8	真誠的
+singapore	7	新加坡
+single	7	單一的
+sink	5	沉
+sixteenth	6	第十六
+skate	5	溜冰鞋
+skating	5	滑冰
+ski	6	滑雪板
+skiing	6	滑雪(運動)  滑雪
+skill	8	技能
+skillful	8	靈巧的
+skin	6	皮(膚)  外皮
+skinny	7	皮的
+sleepy	5	困乏的
+slender	7	細長的
+slide	6	滑行
+slim	7	苗條的
+slippers	5	拖鞋
+smile	5	
+snail	5	蝸牛
+sneakers	5	膠底運動鞋
+sneaky	8	鬼祟的
+snowman	5	雪人
+snowy	6	下雪的
+soap	5	肥皂
+social	8	社交的
+social science	8	社會科學
+society	8	社會
+soda	5	汽水
+soft	6	軟的
+soft drink	5	碳酸飲料
+softball	6	壘球
+soldier	7	士兵
+solve	7	解釋
+somebody	7	
+someone	7	
+something	7	
+sometimes	5	
+somewhere	7	
+sore throat	6	喉嚨痛
+sorry	5	
+sort	7	種類
+soul	8	靈魂
+sour	6	酸的
+south	6	
+southern	7	南方的
+soy-sauce	6	醬油
+space	6	
+spaghetti	6	義大利麵條
+speaker	6	說話者
+special	6	
+speech	8	說話
+speed	6	速度
+spend	7	
+spider	6	蜘蛛
+spirit	8	精神
+spoon	5	
+spread	8	推開
+stage	7	階段
+stairs	6	樓梯
+stamp	5	郵票
+stamp collecting	6	集郵
+standard	8	標準
+state	7	狀態
+stationery	6	文具
+stationery store	6	文具店
+steal	7	偷
+steam	7	(蒸)汽(n)  冒
+step	6	步
+stick	6	捧
+stingy	7	吝嗇的
+stomachache	6	肚子痛
+storm	6	暴風雨
+stormy	6	暴風雨的
+story	6	
+stove	6	爐
+straight	6	直的
+strange	7	
+straw	6	稻草
+strawberry	6	草莓
+stream	7	小河
+strike	8	打
+struggle	8	鬥爭
+stupid	7	
+style	7	作風
+submarine	8	潛艇
+subway	6	地鐵
+succeed	8	成功
+success	8	成就
+successfully	8	成功地
+such	7	這樣的
+sudden	7	突然的
+suddenly	7	突然地
+suggest	8	建議
+suit	7	合適
+suitcase	6	衣箱
+supper	5	晚餐
+support	8	支援
+surf	5	海浪
+surface	8	表面
+surfing	5	衝浪
+surprised	7	
+survive	8	活下來
+swallow	8	吞咽(v)  燕子
+swan	6	天鵝
+sweater	6	
+sweep	6	(打)掃
+swimsuit	6	游泳衣
+swing	7	搖擺
+symbol	8	象徵
+table cloth	6	桌布
+table tennis	5	乒乓球
+tableware	7	餐具
+taichung	5	台中
+tail	6	尾巴
+tainan	5	台南
+taipei	5	台北
+taiwan	5	
+taiwanese	6	台灣的
+talent	8	
+talkative	7	多嘴的
+tangerine	6	椪柑
+tank	8	槽
+tape recorder	6	錄音機
+task	8	任務
+taxi	5	
+teach	5	
+teacher's day	5	教師節
+team	7	
+teapot	6	茶壺
+tear	6	眼淚(n)  撕裂
+teenager	7	
+temperature	6	溫度
+temple	6	神殿
+tennis	5	
+term	7	學期
+terrible	7	可怕的
+terrific	7	令人恐怖的
+textbook	6	教科書
+than	7	
+thanksgiving	7	感謝
+thanksgiving day	7	感恩節
+the	5	
+their	6	
+theirs	7	
+them	5	
+therefore	8	因此
+thick	6	厚的
+thief	7	小偷
+thin	6	
+thing	6	
+think	7	
+thirteenth	6	第十三
+thirtieth	6	第三十(num)  
+though	7	
+thought	8	思想
+throat	6	咽喉
+through	7	穿過
+throughout	8	遍及
+throw	7	扔
+thumb	6	拇指
+thunder	6	雷(n)  打雷
+thus	8	如此
+tidy	6	整潔的
+tie	6	拴
+till	6	直到(…為止)(pr
+time	7	
+tiny	6	極小的
+tip	7	頂
+title	7	標題
+to	5	
+toast	6	烤麵包片
+tofu	5	豆腐
+toilet	5	浴室
+tokyo	6	東京
+tomato	6	
+tongue	6	舌頭
+tooth	6	
+toothache	5	牙痛
+toothbrush	5	牙刷
+top	7	頂(端)  上部(n
+topic	7	題目
+total	7	總計
+tour	7	旅行
+toward	7	(表示方向)朝
+towel	7	
+tower	6	塔(樓)
+trace	8	追蹤
+track	7	跑道
+trade	8	貿易
+tradition	8	傳統
+traditional	8	傳統的
+traffic	7	
+traffic jam	6	交通阻塞
+traffic light	6	交通燈號誌
+traffic lights	6	紅綠燈
+traffic sign	6	交通號誌
+train station	5	火車站
+transportation	8	運輸
+trap	8	陷阱
+trash	6	
+trash can	6	垃圾桶
+traveling	5	旅行的
+treasure	7	財寶
+treat	7	對待
+triangle	6	三角板
+trick	7	欺詐
+trouble	7	
+trousers	6	褲子
+trumpet	6	喇叭
+trust	7	信任
+truth	7	真相
+tub	6	桶
+tummy	5	(兒語)肚子
+tunnel	7	隧道
+turkey	6	火雞
+twelfth	6	第十二(num)  
+twentieth	6	第二十(num)  
+twice	7	兩倍
+type	7	類型
+typewriter	7	打字機
+typhoon	7	
+ugly	5	醜陋的
+under-weight	7	重量不足
+underlie	8	位於…的下面
+underpass	7	地道
+understand	5	
+underwear	6	內衣
+unfriendly	6	不友善地
+unhappy	5	
+unique	8	唯一的
+unit	7	個體(計量)單位(軍
+universe	8	宇宙
+university	8	大學
+until	7	
+upon	8	(同on)在…上
+upstairs	5	在樓上
+us	5	
+used	6	用過的
+useful	6	
+usual	6	通常的
+valentine's day	6	西洋情人節
+valley	7	山谷
+valuable	8	貴重的
+value	8	價值
+vcr	6	錄影機
+verb	7	動詞
+vest	6	背心
+victory	7	勝利
+video	6	
+village	6	村莊
+vinegar	7	醋
+violin	7	小提琴
+visitor	5	參觀者
+vocabulary	7	字彙
+voice	6	
+volleyball	6	排球
+vote	8	投票
+voter	8	投票者
+waist	6	腰
+waiter	5	
+waitress	5	
+wake	7	
+walkman	6	隨身聽
+wallet	6	錢包
+war	7	戰爭
+was	5	
+washing machine	6	洗衣機
+waste	7	浪費
+watch	5	
+waterfall	6	瀑布
+watermelon	5	西瓜
+wave	6	揮動
+way	7	
+weak	6	
+wedding	7	婚禮
+weekday	5	周一到周五的通稱
+weight	6	重量
+welcome	5	
+well	5	
+were	5	
+west	6	
+western	7	西的
+whale	6	鯨魚
+whatever	7	無論什麼
+wheel	6	輪
+while	7	在(當)…的時候
+whole	7	全部的
+whom	8	(who的受格)誰
+wide	5	寬闊的
+wife	5	
+wild	7	野生的
+will	6	
+willing	8	願意的
+wine	7	(葡萄)酒
+wing	6	翅膀
+winner	5	贏家
+wish	6	
+within	8	在…內
+without	7	
+wolf	6	狼
+women's room	6	女廁所
+wonder	6	感到驚訝
+wooden	6	木製的
+woods	6	樹林
+workbook	6	
+world	7	
+worse	6	
+worth	8	值得
+would	6	
+wound	8	創傷
+wrist	6	手腕
+yet	7	
+your	5	
+yours	7	
+yourself	7	
+youth	8	青春
+youth day	8	青年節
+zebra	7	斑馬

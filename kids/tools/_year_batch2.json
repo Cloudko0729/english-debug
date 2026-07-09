@@ -1,0 +1,1923 @@
+{
+  "weeks": [
+    {
+      "n": 13,
+      "start": "2026-10-25",
+      "end": "2026-10-31",
+      "theme": "動物與棲地",
+      "words": [
+        {
+          "en": "bark",
+          "zh": "(狗等)吠",
+          "pos": "v"
+        },
+        {
+          "en": "crab",
+          "zh": "蟹",
+          "pos": "n"
+        },
+        {
+          "en": "deer",
+          "zh": "鹿",
+          "pos": "n"
+        },
+        {
+          "en": "dinosaur",
+          "zh": "恐龍",
+          "pos": "n"
+        },
+        {
+          "en": "dolphin",
+          "zh": "海豚",
+          "pos": "n"
+        },
+        {
+          "en": "donkey",
+          "zh": "驢子",
+          "pos": "n"
+        },
+        {
+          "en": "eagle",
+          "zh": "鷹",
+          "pos": "n"
+        },
+        {
+          "en": "farm",
+          "zh": "農場",
+          "pos": "n"
+        },
+        {
+          "en": "goat",
+          "zh": "山羊",
+          "pos": "n"
+        },
+        {
+          "en": "goose",
+          "zh": "鵝",
+          "pos": "n"
+        },
+        {
+          "en": "hippopotamus",
+          "zh": "河馬",
+          "pos": "n"
+        },
+        {
+          "en": "insect",
+          "zh": "昆蟲",
+          "pos": "n"
+        },
+        {
+          "en": "kangaroo",
+          "zh": "袋鼠",
+          "pos": "n"
+        },
+        {
+          "en": "nest",
+          "zh": "巢",
+          "pos": "n"
+        },
+        {
+          "en": "parrot",
+          "zh": "鸚鵡",
+          "pos": "n"
+        },
+        {
+          "en": "pigeon",
+          "zh": "鴿子",
+          "pos": "n"
+        },
+        {
+          "en": "puppy",
+          "zh": "小狗",
+          "pos": "n"
+        },
+        {
+          "en": "shark",
+          "zh": "鯊魚",
+          "pos": "n"
+        },
+        {
+          "en": "spider",
+          "zh": "蜘蛛",
+          "pos": "n"
+        },
+        {
+          "en": "tail",
+          "zh": "尾巴",
+          "pos": "n"
+        },
+        {
+          "en": "whale",
+          "zh": "鯨魚",
+          "pos": "n"
+        },
+        {
+          "en": "wolf",
+          "zh": "狼",
+          "pos": "n"
+        },
+        {
+          "en": "bat",
+          "zh": "蝙蝠",
+          "pos": "n"
+        },
+        {
+          "en": "bug",
+          "zh": "蟲",
+          "pos": "n"
+        },
+        {
+          "en": "cage",
+          "zh": "籠",
+          "pos": "n"
+        },
+        {
+          "en": "cockroach",
+          "zh": "蟑螂",
+          "pos": "n"
+        },
+        {
+          "en": "feather",
+          "zh": "羽毛",
+          "pos": "n"
+        },
+        {
+          "en": "field",
+          "zh": "田地",
+          "pos": "n"
+        },
+        {
+          "en": "wild",
+          "zh": "野生的",
+          "pos": "adj"
+        },
+        {
+          "en": "zebra",
+          "zh": "斑馬",
+          "pos": "n"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 14,
+      "start": "2026-11-01",
+      "end": "2026-11-07",
+      "theme": "家事與幫忙",
+      "words": [
+        {
+          "en": "bath",
+          "zh": "洗澡",
+          "pos": "n"
+        },
+        {
+          "en": "carpet",
+          "zh": "地毯",
+          "pos": "n"
+        },
+        {
+          "en": "comb",
+          "zh": "梳子(n)  梳理",
+          "pos": "n"
+        },
+        {
+          "en": "couch",
+          "zh": "沙發",
+          "pos": "n"
+        },
+        {
+          "en": "curtain",
+          "zh": "簾",
+          "pos": "n"
+        },
+        {
+          "en": "floor",
+          "zh": "地板",
+          "pos": "n"
+        },
+        {
+          "en": "furniture",
+          "zh": "傢俱",
+          "pos": "n"
+        },
+        {
+          "en": "garbage",
+          "zh": "垃圾",
+          "pos": "n"
+        },
+        {
+          "en": "restroom",
+          "zh": "洗手間",
+          "pos": "n"
+        },
+        {
+          "en": "shelf",
+          "zh": "棚",
+          "pos": "n"
+        },
+        {
+          "en": "sink",
+          "zh": "沉",
+          "pos": "n"
+        },
+        {
+          "en": "soap",
+          "zh": "肥皂",
+          "pos": "n"
+        },
+        {
+          "en": "tidy",
+          "zh": "整潔的",
+          "pos": "adj"
+        },
+        {
+          "en": "toilet",
+          "zh": "浴室",
+          "pos": "n"
+        },
+        {
+          "en": "trash can",
+          "zh": "垃圾桶",
+          "pos": "n"
+        },
+        {
+          "en": "washing machine",
+          "zh": "洗衣機",
+          "pos": "n"
+        },
+        {
+          "en": "bucket",
+          "zh": "水桶",
+          "pos": "n"
+        },
+        {
+          "en": "cabinet",
+          "zh": "(有抽屜或格子的)櫥",
+          "pos": "n"
+        },
+        {
+          "en": "bother",
+          "zh": "打擾",
+          "pos": "n"
+        },
+        {
+          "en": "build",
+          "zh": "建造",
+          "pos": "n"
+        },
+        {
+          "en": "towel",
+          "zh": "毛巾",
+          "pos": "n"
+        },
+        {
+          "en": "carry",
+          "zh": "搬運",
+          "pos": "v"
+        },
+        {
+          "en": "clear",
+          "zh": "清理",
+          "pos": "v"
+        },
+        {
+          "en": "collect",
+          "zh": "收集",
+          "pos": "v"
+        },
+        {
+          "en": "bring",
+          "zh": "帶來",
+          "pos": "v"
+        },
+        {
+          "en": "allow",
+          "zh": "允許",
+          "pos": "v"
+        },
+        {
+          "en": "avoid",
+          "zh": "避免",
+          "pos": "v"
+        },
+        {
+          "en": "behind",
+          "zh": "在後面",
+          "pos": "prep"
+        },
+        {
+          "en": "aid",
+          "zh": "幫助",
+          "pos": "v"
+        },
+        {
+          "en": "duty",
+          "zh": "職責",
+          "pos": "n"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 15,
+      "start": "2026-11-08",
+      "end": "2026-11-14",
+      "theme": "科技與3C",
+      "words": [
+        {
+          "en": "board",
+          "zh": "(木)板",
+          "pos": "n"
+        },
+        {
+          "en": "cartoon",
+          "zh": "(報刊上的)政治性漫",
+          "pos": "n"
+        },
+        {
+          "en": "computer game",
+          "zh": "電腦遊戲",
+          "pos": "n"
+        },
+        {
+          "en": "cut",
+          "zh": "剪下",
+          "pos": "v"
+        },
+        {
+          "en": "dot",
+          "zh": "點",
+          "pos": "n"
+        },
+        {
+          "en": "electric",
+          "zh": "電的",
+          "pos": "adj"
+        },
+        {
+          "en": "electricity",
+          "zh": "電",
+          "pos": "n"
+        },
+        {
+          "en": "engine",
+          "zh": "引擎",
+          "pos": "n"
+        },
+        {
+          "en": "film",
+          "zh": "電影",
+          "pos": "n"
+        },
+        {
+          "en": "paste",
+          "zh": "糊狀物",
+          "pos": "v"
+        },
+        {
+          "en": "photograph",
+          "zh": "照片",
+          "pos": "n"
+        },
+        {
+          "en": "pin",
+          "zh": "大頭針",
+          "pos": "n"
+        },
+        {
+          "en": "pull",
+          "zh": "拉",
+          "pos": "v"
+        },
+        {
+          "en": "push",
+          "zh": "推",
+          "pos": "v"
+        },
+        {
+          "en": "puzzle",
+          "zh": "(使)迷惑(使)為難",
+          "pos": "n"
+        },
+        {
+          "en": "robot",
+          "zh": "機器人",
+          "pos": "n"
+        },
+        {
+          "en": "airmail",
+          "zh": "航空信",
+          "pos": "n"
+        },
+        {
+          "en": "cable",
+          "zh": "粗索",
+          "pos": "n"
+        },
+        {
+          "en": "cassette",
+          "zh": "(裝錄音帶的)卡式盒",
+          "pos": "n"
+        },
+        {
+          "en": "channel",
+          "zh": "海峽",
+          "pos": "n"
+        },
+        {
+          "en": "disappear",
+          "zh": "消失",
+          "pos": "v"
+        },
+        {
+          "en": "machine",
+          "zh": "機器",
+          "pos": "n"
+        },
+        {
+          "en": "mail",
+          "zh": "郵件",
+          "pos": "n"
+        },
+        {
+          "en": "mouse",
+          "zh": "滑鼠",
+          "pos": "n"
+        },
+        {
+          "en": "photographer",
+          "zh": "攝影師",
+          "pos": "n"
+        },
+        {
+          "en": "record",
+          "zh": "記錄",
+          "pos": "v"
+        },
+        {
+          "en": "recorder",
+          "zh": "錄音機",
+          "pos": "n"
+        },
+        {
+          "en": "screen",
+          "zh": "螢幕",
+          "pos": "n"
+        },
+        {
+          "en": "broadcast",
+          "zh": "廣播",
+          "pos": "v"
+        },
+        {
+          "en": "data",
+          "zh": "[計]資料",
+          "pos": "n"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 16,
+      "start": "2026-11-15",
+      "end": "2026-11-21",
+      "theme": "職業與夢想",
+      "words": [
+        {
+          "en": "baby sitter",
+          "zh": "褓母",
+          "pos": "n"
+        },
+        {
+          "en": "barber",
+          "zh": "理髮師",
+          "pos": "n"
+        },
+        {
+          "en": "boss",
+          "zh": "老闆",
+          "pos": "n"
+        },
+        {
+          "en": "factory",
+          "zh": "工廠",
+          "pos": "n"
+        },
+        {
+          "en": "farmer",
+          "zh": "農夫",
+          "pos": "n"
+        },
+        {
+          "en": "fisherman",
+          "zh": "漁夫",
+          "pos": "n"
+        },
+        {
+          "en": "hairdresser",
+          "zh": "美髮師",
+          "pos": "n"
+        },
+        {
+          "en": "mailman",
+          "zh": "郵差",
+          "pos": "n"
+        },
+        {
+          "en": "waiter",
+          "zh": "服務生",
+          "pos": "n"
+        },
+        {
+          "en": "become",
+          "zh": "成為",
+          "pos": "v"
+        },
+        {
+          "en": "clever",
+          "zh": "聰明的",
+          "pos": "adj"
+        },
+        {
+          "en": "famous",
+          "zh": "有名的",
+          "pos": "adj"
+        },
+        {
+          "en": "grow up",
+          "zh": "長大",
+          "pos": "phr"
+        },
+        {
+          "en": "movie star",
+          "zh": "電影明星",
+          "pos": "n"
+        },
+        {
+          "en": "chance",
+          "zh": "機會",
+          "pos": "n"
+        },
+        {
+          "en": "queen",
+          "zh": "女王",
+          "pos": "n"
+        },
+        {
+          "en": "actor",
+          "zh": "男演員",
+          "pos": "n"
+        },
+        {
+          "en": "actress",
+          "zh": "女演員",
+          "pos": "n"
+        },
+        {
+          "en": "assistant",
+          "zh": "助手",
+          "pos": "n"
+        },
+        {
+          "en": "business",
+          "zh": "商業",
+          "pos": "n"
+        },
+        {
+          "en": "captain",
+          "zh": "上尉",
+          "pos": "n"
+        },
+        {
+          "en": "cheerleader",
+          "zh": "啦啦隊隊長",
+          "pos": "n"
+        },
+        {
+          "en": "company",
+          "zh": "公司",
+          "pos": "n"
+        },
+        {
+          "en": "engineer",
+          "zh": "工程師",
+          "pos": "n"
+        },
+        {
+          "en": "guide",
+          "zh": "嚮導",
+          "pos": "n"
+        },
+        {
+          "en": "manager",
+          "zh": "管理者",
+          "pos": "n"
+        },
+        {
+          "en": "reporter",
+          "zh": "記者",
+          "pos": "n"
+        },
+        {
+          "en": "secretary",
+          "zh": "秘書",
+          "pos": "n"
+        },
+        {
+          "en": "career",
+          "zh": "(原意:道路",
+          "pos": "n"
+        },
+        {
+          "en": "director",
+          "zh": "指導者",
+          "pos": "n"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 17,
+      "start": "2026-11-22",
+      "end": "2026-11-28",
+      "theme": "金錢與零用錢",
+      "words": [
+        {
+          "en": "a few",
+          "zh": "一些",
+          "pos": "phr"
+        },
+        {
+          "en": "a lot",
+          "zh": "很多",
+          "pos": "phr"
+        },
+        {
+          "en": "a lot of",
+          "zh": "許多",
+          "pos": "phr"
+        },
+        {
+          "en": "enough",
+          "zh": "足夠",
+          "pos": "adj"
+        },
+        {
+          "en": "lot",
+          "zh": "許多",
+          "pos": "n"
+        },
+        {
+          "en": "many",
+          "zh": "許多",
+          "pos": "adj"
+        },
+        {
+          "en": "much",
+          "zh": "許多",
+          "pos": "adj"
+        },
+        {
+          "en": "number",
+          "zh": "數字",
+          "pos": "n"
+        },
+        {
+          "en": "plus",
+          "zh": "加",
+          "pos": "prep"
+        },
+        {
+          "en": "addition",
+          "zh": "加",
+          "pos": "n"
+        },
+        {
+          "en": "count",
+          "zh": "計算",
+          "pos": "v"
+        },
+        {
+          "en": "deal",
+          "zh": "給予",
+          "pos": "n"
+        },
+        {
+          "en": "double",
+          "zh": "兩倍的",
+          "pos": "adj"
+        },
+        {
+          "en": "extra",
+          "zh": "額外的",
+          "pos": "adj"
+        },
+        {
+          "en": "gold",
+          "zh": "金",
+          "pos": "n"
+        },
+        {
+          "en": "golden",
+          "zh": "金(黃)色的",
+          "pos": "adj"
+        },
+        {
+          "en": "banker",
+          "zh": "銀行家",
+          "pos": "n"
+        },
+        {
+          "en": "bill",
+          "zh": "帳單",
+          "pos": "n"
+        },
+        {
+          "en": "earn",
+          "zh": "賺得",
+          "pos": "v"
+        },
+        {
+          "en": "expensive fruit",
+          "zh": "高級水果",
+          "pos": "n"
+        },
+        {
+          "en": "lend",
+          "zh": "借出",
+          "pos": "v"
+        },
+        {
+          "en": "million",
+          "zh": "百萬",
+          "pos": "n"
+        },
+        {
+          "en": "shop",
+          "zh": "商店",
+          "pos": "n"
+        },
+        {
+          "en": "spend",
+          "zh": "花費",
+          "pos": "v"
+        },
+        {
+          "en": "base",
+          "zh": "基地(n)  建立在",
+          "pos": "n"
+        },
+        {
+          "en": "basic",
+          "zh": "基本的",
+          "pos": "adj"
+        },
+        {
+          "en": "cause",
+          "zh": "原因",
+          "pos": "n"
+        },
+        {
+          "en": "comment",
+          "zh": "註釋",
+          "pos": "n"
+        },
+        {
+          "en": "amount",
+          "zh": "合計",
+          "pos": "n"
+        },
+        {
+          "en": "debt",
+          "zh": "債務",
+          "pos": "n"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 18,
+      "start": "2026-11-29",
+      "end": "2026-12-05",
+      "theme": "冬天與衣物",
+      "words": [
+        {
+          "en": "button",
+          "zh": "鈕扣",
+          "pos": "n"
+        },
+        {
+          "en": "pajamas",
+          "zh": "睡衣",
+          "pos": "n"
+        },
+        {
+          "en": "shoe",
+          "zh": "鞋子",
+          "pos": "n"
+        },
+        {
+          "en": "closet",
+          "zh": "壁櫥",
+          "pos": "n"
+        },
+        {
+          "en": "cloth",
+          "zh": "布",
+          "pos": "n"
+        },
+        {
+          "en": "comfortable",
+          "zh": "舒服的",
+          "pos": "adj"
+        },
+        {
+          "en": "dresser",
+          "zh": "碗櫃",
+          "pos": "n"
+        },
+        {
+          "en": "dryer",
+          "zh": "烘乾機",
+          "pos": "n"
+        },
+        {
+          "en": "hanger",
+          "zh": "掛衣架",
+          "pos": "n"
+        },
+        {
+          "en": "heater",
+          "zh": "加熱器",
+          "pos": "n"
+        },
+        {
+          "en": "underwear",
+          "zh": "內衣",
+          "pos": "n"
+        },
+        {
+          "en": "beautiful",
+          "zh": "美麗的",
+          "pos": "adj"
+        },
+        {
+          "en": "beautifully",
+          "zh": "美麗地",
+          "pos": "adv"
+        },
+        {
+          "en": "good looking",
+          "zh": "美貌的",
+          "pos": "adj"
+        },
+        {
+          "en": "nice looking",
+          "zh": "美貌的",
+          "pos": "adj"
+        },
+        {
+          "en": "extra large",
+          "zh": "特大號的",
+          "pos": "adj"
+        },
+        {
+          "en": "belt",
+          "zh": "皮帶",
+          "pos": "n"
+        },
+        {
+          "en": "clothes",
+          "zh": "衣服",
+          "pos": "n"
+        },
+        {
+          "en": "clothing",
+          "zh": "(總稱)衣服",
+          "pos": "n"
+        },
+        {
+          "en": "cotton",
+          "zh": "棉花",
+          "pos": "n"
+        },
+        {
+          "en": "jeans",
+          "zh": "牛仔褲",
+          "pos": "n"
+        },
+        {
+          "en": "style",
+          "zh": "作風",
+          "pos": "n"
+        },
+        {
+          "en": "handsome",
+          "zh": "英俊的",
+          "pos": "adj"
+        },
+        {
+          "en": "service",
+          "zh": "服務",
+          "pos": "n"
+        },
+        {
+          "en": "twice",
+          "zh": "兩倍",
+          "pos": "adv"
+        },
+        {
+          "en": "branch",
+          "zh": "樹枝",
+          "pos": "phr"
+        },
+        {
+          "en": "beside",
+          "zh": "在旁邊",
+          "pos": "prep"
+        },
+        {
+          "en": "besides",
+          "zh": "在…旁邊",
+          "pos": "prep"
+        },
+        {
+          "en": "climate",
+          "zh": "氣候",
+          "pos": "n"
+        },
+        {
+          "en": "fashionable",
+          "zh": "流行的",
+          "pos": "adj"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 19,
+      "start": "2026-12-06",
+      "end": "2026-12-12",
+      "theme": "時間與計畫",
+      "words": [
+        {
+          "en": "alarm",
+          "zh": "警報",
+          "pos": "n"
+        },
+        {
+          "en": "alarm clock",
+          "zh": "鬧鐘",
+          "pos": "n"
+        },
+        {
+          "en": "before",
+          "zh": "在以前",
+          "pos": "prep"
+        },
+        {
+          "en": "during",
+          "zh": "在期間",
+          "pos": "prep"
+        },
+        {
+          "en": "double tenth day",
+          "zh": "雙十節",
+          "pos": "n"
+        },
+        {
+          "en": "eighteenth",
+          "zh": "第十八",
+          "pos": "adj"
+        },
+        {
+          "en": "eleventh",
+          "zh": "第十一(num)",
+          "pos": "adj"
+        },
+        {
+          "en": "fifteenth",
+          "zh": "第十五",
+          "pos": "adj"
+        },
+        {
+          "en": "fourteenth",
+          "zh": "第十四",
+          "pos": "adj"
+        },
+        {
+          "en": "nineteenth",
+          "zh": "第十九",
+          "pos": "adj"
+        },
+        {
+          "en": "seventeenth",
+          "zh": "第十七",
+          "pos": "adj"
+        },
+        {
+          "en": "sixteenth",
+          "zh": "第十六",
+          "pos": "adj"
+        },
+        {
+          "en": "thirteenth",
+          "zh": "第十三",
+          "pos": "adj"
+        },
+        {
+          "en": "twelfth",
+          "zh": "第十二(num)",
+          "pos": "adj"
+        },
+        {
+          "en": "twentieth",
+          "zh": "第二十(num)",
+          "pos": "adj"
+        },
+        {
+          "en": "valentine's day",
+          "zh": "西洋情人節",
+          "pos": "n"
+        },
+        {
+          "en": "arrange",
+          "zh": "安排",
+          "pos": "v"
+        },
+        {
+          "en": "depend",
+          "zh": "依靠",
+          "pos": "v"
+        },
+        {
+          "en": "future",
+          "zh": "未來",
+          "pos": "n"
+        },
+        {
+          "en": "later",
+          "zh": "稍後",
+          "pos": "adv"
+        },
+        {
+          "en": "nearly",
+          "zh": "幾乎",
+          "pos": "adv"
+        },
+        {
+          "en": "time",
+          "zh": "時間",
+          "pos": "n"
+        },
+        {
+          "en": "adult",
+          "zh": "成人",
+          "pos": "n"
+        },
+        {
+          "en": "ahead",
+          "zh": "在前",
+          "pos": "adv"
+        },
+        {
+          "en": "alike",
+          "zh": "同樣的",
+          "pos": "adj"
+        },
+        {
+          "en": "alive",
+          "zh": "活著的",
+          "pos": "adj"
+        },
+        {
+          "en": "almost",
+          "zh": "幾乎",
+          "pos": "adv"
+        },
+        {
+          "en": "among",
+          "zh": "在…之中",
+          "pos": "prep"
+        },
+        {
+          "en": "as soon as",
+          "zh": "儘快",
+          "pos": "phr"
+        },
+        {
+          "en": "delay",
+          "zh": "推遲",
+          "pos": "v"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 20,
+      "start": "2026-12-13",
+      "end": "2026-12-19",
+      "theme": "年度回顧複習週",
+      "words": [
+        {
+          "en": "again",
+          "zh": "再一次",
+          "pos": "adv"
+        },
+        {
+          "en": "already",
+          "zh": "已經",
+          "pos": "adv"
+        },
+        {
+          "en": "past",
+          "zh": "過去",
+          "pos": "n"
+        },
+        {
+          "en": "error",
+          "zh": "錯誤",
+          "pos": "n"
+        },
+        {
+          "en": "example",
+          "zh": "例子",
+          "pos": "n"
+        },
+        {
+          "en": "fact",
+          "zh": "事實",
+          "pos": "n"
+        },
+        {
+          "en": "another",
+          "zh": "另一個",
+          "pos": "adj"
+        },
+        {
+          "en": "anywhere",
+          "zh": "任何地方",
+          "pos": "adv"
+        },
+        {
+          "en": "blank",
+          "zh": "空的",
+          "pos": "adj"
+        },
+        {
+          "en": "bottom",
+          "zh": "底部",
+          "pos": "n"
+        },
+        {
+          "en": "different",
+          "zh": "不同的",
+          "pos": "adj"
+        },
+        {
+          "en": "false",
+          "zh": "假的",
+          "pos": "adj"
+        },
+        {
+          "en": "few",
+          "zh": "少數",
+          "pos": "adj"
+        },
+        {
+          "en": "front",
+          "zh": "前面",
+          "pos": "n"
+        },
+        {
+          "en": "middle",
+          "zh": "中間",
+          "pos": "n"
+        },
+        {
+          "en": "other",
+          "zh": "其他的",
+          "pos": "adj"
+        },
+        {
+          "en": "list",
+          "zh": "清單",
+          "pos": "n"
+        },
+        {
+          "en": "memory",
+          "zh": "記憶",
+          "pos": "n"
+        },
+        {
+          "en": "discussion",
+          "zh": "討論",
+          "pos": "n"
+        },
+        {
+          "en": "experience",
+          "zh": "經驗",
+          "pos": "n"
+        },
+        {
+          "en": "course",
+          "zh": "課程",
+          "pos": "n"
+        },
+        {
+          "en": "semester",
+          "zh": "學期",
+          "pos": "n"
+        },
+        {
+          "en": "period",
+          "zh": "(一段)時間",
+          "pos": "n"
+        },
+        {
+          "en": "article",
+          "zh": "文章",
+          "pos": "n"
+        },
+        {
+          "en": "chapter",
+          "zh": "(書籍)章",
+          "pos": "n"
+        },
+        {
+          "en": "title",
+          "zh": "標題",
+          "pos": "n"
+        },
+        {
+          "en": "vocabulary",
+          "zh": "字彙",
+          "pos": "n"
+        },
+        {
+          "en": "poem",
+          "zh": "詩",
+          "pos": "n"
+        },
+        {
+          "en": "comic",
+          "zh": "漫畫",
+          "pos": "n"
+        },
+        {
+          "en": "letter",
+          "zh": "信",
+          "pos": "n"
+        }
+      ],
+      "review": [
+        "course",
+        "semester",
+        "period",
+        "article",
+        "chapter",
+        "title",
+        "vocabulary",
+        "poem",
+        "comic",
+        "letter"
+      ]
+    },
+    {
+      "n": 21,
+      "start": "2026-12-20",
+      "end": "2026-12-26",
+      "theme": "聖誕與禮物",
+      "words": [
+        {
+          "en": "angel",
+          "zh": "天使",
+          "pos": "n"
+        },
+        {
+          "en": "chocolate",
+          "zh": "巧克力",
+          "pos": "n"
+        },
+        {
+          "en": "christmas",
+          "zh": "聖誕節",
+          "pos": "n"
+        },
+        {
+          "en": "christmas eve",
+          "zh": "聖誕前夕",
+          "pos": "n"
+        },
+        {
+          "en": "church",
+          "zh": "教堂",
+          "pos": "n"
+        },
+        {
+          "en": "pray",
+          "zh": "請求",
+          "pos": "v"
+        },
+        {
+          "en": "receive",
+          "zh": "接見",
+          "pos": "v"
+        },
+        {
+          "en": "special",
+          "zh": "特別的",
+          "pos": "adj"
+        },
+        {
+          "en": "several",
+          "zh": "幾個",
+          "pos": "adj"
+        },
+        {
+          "en": "cream",
+          "zh": "奶油",
+          "pos": "adj"
+        },
+        {
+          "en": "each",
+          "zh": "每一個",
+          "pos": "adj"
+        },
+        {
+          "en": "either",
+          "zh": "任一個",
+          "pos": "adj"
+        },
+        {
+          "en": "else",
+          "zh": "其他",
+          "pos": "adv"
+        },
+        {
+          "en": "hurry",
+          "zh": "趕快",
+          "pos": "v"
+        },
+        {
+          "en": "large",
+          "zh": "大的",
+          "pos": "adj"
+        },
+        {
+          "en": "left",
+          "zh": "左邊",
+          "pos": "adj"
+        },
+        {
+          "en": "bell",
+          "zh": "鈴鐺",
+          "pos": "n"
+        },
+        {
+          "en": "boyfriend",
+          "zh": "男朋友",
+          "pos": "n"
+        },
+        {
+          "en": "candle",
+          "zh": "蠟燭",
+          "pos": "n"
+        },
+        {
+          "en": "decorate",
+          "zh": "裝飾",
+          "pos": "v"
+        },
+        {
+          "en": "especially",
+          "zh": "特別",
+          "pos": "adv"
+        },
+        {
+          "en": "girlfriend",
+          "zh": "女朋友",
+          "pos": "n"
+        },
+        {
+          "en": "joy",
+          "zh": "喜悅",
+          "pos": "n"
+        },
+        {
+          "en": "peace",
+          "zh": "和平",
+          "pos": "n"
+        },
+        {
+          "en": "peaceful",
+          "zh": "和平的",
+          "pos": "adj"
+        },
+        {
+          "en": "thanksgiving",
+          "zh": "感謝",
+          "pos": "n"
+        },
+        {
+          "en": "whatever",
+          "zh": "無論什麼",
+          "pos": "phr"
+        },
+        {
+          "en": "bench",
+          "zh": "長凳",
+          "pos": "n"
+        },
+        {
+          "en": "forgive",
+          "zh": "原諒",
+          "pos": "v"
+        },
+        {
+          "en": "generous",
+          "zh": "慷慨的",
+          "pos": "adj"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 22,
+      "start": "2026-12-27",
+      "end": "2027-01-02",
+      "theme": "跨年與願望",
+      "words": [
+        {
+          "en": "begin",
+          "zh": "開始",
+          "pos": "v"
+        },
+        {
+          "en": "end",
+          "zh": "結束",
+          "pos": "v"
+        },
+        {
+          "en": "eve",
+          "zh": "前夕",
+          "pos": "n"
+        },
+        {
+          "en": "flag",
+          "zh": "旗(幟)",
+          "pos": "n"
+        },
+        {
+          "en": "lucky",
+          "zh": "幸運的",
+          "pos": "adj"
+        },
+        {
+          "en": "midnight",
+          "zh": "午夜",
+          "pos": "n"
+        },
+        {
+          "en": "new year's day",
+          "zh": "新年元旦",
+          "pos": "n"
+        },
+        {
+          "en": "wish",
+          "zh": "願望",
+          "pos": "n"
+        },
+        {
+          "en": "everybody",
+          "zh": "每個人",
+          "pos": "n"
+        },
+        {
+          "en": "everyone",
+          "zh": "每個人",
+          "pos": "n"
+        },
+        {
+          "en": "everything",
+          "zh": "每件事",
+          "pos": "n"
+        },
+        {
+          "en": "high",
+          "zh": "高的",
+          "pos": "adj"
+        },
+        {
+          "en": "him",
+          "zh": "他",
+          "pos": "n"
+        },
+        {
+          "en": "in back of",
+          "zh": "在(某人)之後",
+          "pos": "prep"
+        },
+        {
+          "en": "jam",
+          "zh": "果醬",
+          "pos": "n"
+        },
+        {
+          "en": "kaohsiung",
+          "zh": "高雄",
+          "pos": "n"
+        },
+        {
+          "en": "attention",
+          "zh": "注意",
+          "pos": "n"
+        },
+        {
+          "en": "congratulation",
+          "zh": "祝賀",
+          "pos": "n"
+        },
+        {
+          "en": "country",
+          "zh": "國家",
+          "pos": "n"
+        },
+        {
+          "en": "countryside",
+          "zh": "農村",
+          "pos": "n"
+        },
+        {
+          "en": "dream",
+          "zh": "夢想",
+          "pos": "n"
+        },
+        {
+          "en": "event",
+          "zh": "事件",
+          "pos": "n"
+        },
+        {
+          "en": "ever",
+          "zh": "曾經",
+          "pos": "adv"
+        },
+        {
+          "en": "everywhere",
+          "zh": "到處",
+          "pos": "adv"
+        },
+        {
+          "en": "next",
+          "zh": "下一個",
+          "pos": "adj"
+        },
+        {
+          "en": "promise",
+          "zh": "允諾",
+          "pos": "n"
+        },
+        {
+          "en": "bar",
+          "zh": "條",
+          "pos": "n"
+        },
+        {
+          "en": "brick",
+          "zh": "磚",
+          "pos": "n"
+        },
+        {
+          "en": "achieve",
+          "zh": "完成",
+          "pos": "v"
+        },
+        {
+          "en": "desire",
+          "zh": "願望",
+          "pos": "n"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 23,
+      "start": "2027-01-03",
+      "end": "2027-01-09",
+      "theme": "新年目標與習慣",
+      "words": [
+        {
+          "en": "always",
+          "zh": "總是",
+          "pos": "adv"
+        },
+        {
+          "en": "habit",
+          "zh": "習慣",
+          "pos": "n"
+        },
+        {
+          "en": "often",
+          "zh": "常常",
+          "pos": "adv"
+        },
+        {
+          "en": "once",
+          "zh": "一次",
+          "pos": "adv"
+        },
+        {
+          "en": "seldom",
+          "zh": "很少",
+          "pos": "adv"
+        },
+        {
+          "en": "sometimes",
+          "zh": "有時候",
+          "pos": "adv"
+        },
+        {
+          "en": "more",
+          "zh": "更多",
+          "pos": "adv"
+        },
+        {
+          "en": "only",
+          "zh": "只",
+          "pos": "adv"
+        },
+        {
+          "en": "quick",
+          "zh": "快的",
+          "pos": "adj"
+        },
+        {
+          "en": "right",
+          "zh": "正確的",
+          "pos": "adj"
+        },
+        {
+          "en": "active",
+          "zh": "活躍的",
+          "pos": "adj"
+        },
+        {
+          "en": "activity",
+          "zh": "活動",
+          "pos": "n"
+        },
+        {
+          "en": "choice",
+          "zh": "選擇",
+          "pos": "n"
+        },
+        {
+          "en": "complete",
+          "zh": "完全的",
+          "pos": "v"
+        },
+        {
+          "en": "continue",
+          "zh": "繼續",
+          "pos": "v"
+        },
+        {
+          "en": "decision",
+          "zh": "決定",
+          "pos": "n"
+        },
+        {
+          "en": "hard-working",
+          "zh": "努力的",
+          "pos": "adj"
+        },
+        {
+          "en": "hardly",
+          "zh": "簡直不",
+          "pos": "adv"
+        },
+        {
+          "en": "regular",
+          "zh": "有規律的",
+          "pos": "adj"
+        },
+        {
+          "en": "balcony",
+          "zh": "陽臺",
+          "pos": "n"
+        },
+        {
+          "en": "band",
+          "zh": "樂團",
+          "pos": "n"
+        },
+        {
+          "en": "blackboard",
+          "zh": "黑板",
+          "pos": "n"
+        },
+        {
+          "en": "block",
+          "zh": "街區",
+          "pos": "n"
+        },
+        {
+          "en": "born",
+          "zh": "出生",
+          "pos": "adj"
+        },
+        {
+          "en": "confident",
+          "zh": "自信的",
+          "pos": "adj"
+        },
+        {
+          "en": "determine",
+          "zh": "決定",
+          "pos": "v"
+        },
+        {
+          "en": "develop",
+          "zh": "發展",
+          "pos": "v"
+        },
+        {
+          "en": "effort",
+          "zh": "努力",
+          "pos": "n"
+        },
+        {
+          "en": "focus",
+          "zh": "(使)聚焦",
+          "pos": "v"
+        },
+        {
+          "en": "improve",
+          "zh": "改善",
+          "pos": "v"
+        }
+      ],
+      "review": []
+    },
+    {
+      "n": 24,
+      "start": "2027-01-10",
+      "end": "2027-01-16",
+      "theme": "旅行進階",
+      "words": [
+        {
+          "en": "address",
+          "zh": "地址",
+          "pos": "n"
+        },
+        {
+          "en": "asia",
+          "zh": "亞洲",
+          "pos": "n"
+        },
+        {
+          "en": "australia",
+          "zh": "澳大利亞",
+          "pos": "n"
+        },
+        {
+          "en": "canada",
+          "zh": "加拿大",
+          "pos": "n"
+        },
+        {
+          "en": "france",
+          "zh": "法國",
+          "pos": "n"
+        },
+        {
+          "en": "japan",
+          "zh": "日本",
+          "pos": "n"
+        },
+        {
+          "en": "japanese",
+          "zh": "日本(人)的",
+          "pos": "adj"
+        },
+        {
+          "en": "place",
+          "zh": "地方",
+          "pos": "n"
+        },
+        {
+          "en": "near",
+          "zh": "接近",
+          "pos": "prep"
+        },
+        {
+          "en": "out of",
+          "zh": "出於…",
+          "pos": "prep"
+        },
+        {
+          "en": "across",
+          "zh": "橫過",
+          "pos": "prep"
+        },
+        {
+          "en": "adventure",
+          "zh": "冒險",
+          "pos": "n"
+        },
+        {
+          "en": "airline",
+          "zh": "航線",
+          "pos": "n"
+        },
+        {
+          "en": "area",
+          "zh": "地區",
+          "pos": "n"
+        },
+        {
+          "en": "asian",
+          "zh": "亞洲(人)的(adj",
+          "pos": "adj"
+        },
+        {
+          "en": "australian",
+          "zh": "澳大利亞(人)的(a",
+          "pos": "adj"
+        },
+        {
+          "en": "britain",
+          "zh": "英國",
+          "pos": "n"
+        },
+        {
+          "en": "british",
+          "zh": "不列顛(人)的",
+          "pos": "adj"
+        },
+        {
+          "en": "coast",
+          "zh": "海岸",
+          "pos": "n"
+        },
+        {
+          "en": "desert",
+          "zh": "沙漠",
+          "pos": "n"
+        },
+        {
+          "en": "direction",
+          "zh": "方向",
+          "pos": "n"
+        },
+        {
+          "en": "distance",
+          "zh": "距離",
+          "pos": "n"
+        },
+        {
+          "en": "island",
+          "zh": "島嶼",
+          "pos": "n"
+        },
+        {
+          "en": "tour",
+          "zh": "旅行",
+          "pos": "n"
+        },
+        {
+          "en": "advance",
+          "zh": "前進",
+          "pos": "v"
+        },
+        {
+          "en": "aircraft",
+          "zh": "飛行器",
+          "pos": "n"
+        },
+        {
+          "en": "culture",
+          "zh": "文化",
+          "pos": "n"
+        },
+        {
+          "en": "custom",
+          "zh": "風俗習慣",
+          "pos": "n"
+        },
+        {
+          "en": "international",
+          "zh": "國際的",
+          "pos": "adj"
+        },
+        {
+          "en": "overseas",
+          "zh": "(在)海外的;(在)",
+          "pos": "adv"
+        }
+      ],
+      "review": []
+    }
+  ]
+}
