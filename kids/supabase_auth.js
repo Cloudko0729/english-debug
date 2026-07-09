@@ -82,6 +82,7 @@ function showLogin() {
       <div id="loginNames" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px">
         <button class="ln" data-name="albert"   style="${lnStyle()}">Albert</button>
         <button class="ln" data-name="jonathan" style="${lnStyle()}">Jonathan</button>
+        <button class="ln" data-name="ryder"    style="${lnStyle()}">Ryder</button>
         <button class="ln" data-name="test"     style="${lnStyle()}">🧪 測試</button>
       </div>
       <input id="loginPw" type="password" placeholder="密碼" autocomplete="current-password"
