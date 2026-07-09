@@ -59,3 +59,43 @@ drop trigger if exists trg_prune_history on public.history;
 create trigger trg_prune_history
   after insert on public.history
   for each row execute function public.prune_history();
+
+-- ── 島嶼信箱（2026-07-09 新增）：小孩互相留言 ────────────────────────────────
+-- 全家登入者都可讀；只能用自己的帳號寄；每個收件人保留最近 100 筆。
+create table if not exists public.island_messages (
+  id         bigint generated always as identity primary key,
+  sender_id  uuid not null references auth.users(id) on delete cascade,
+  sender     text not null,     -- albert / jonathan / ryder / test（信箱前綴）
+  recipient  text not null,
+  body       text not null check (char_length(body) <= 200),
+  created_at timestamptz default now()
+);
+create index if not exists island_messages_recipient_idx
+  on public.island_messages (recipient, created_at desc);
+alter table public.island_messages enable row level security;
+create policy "family can read messages"
+  on public.island_messages for select
+  to authenticated using (true);
+create policy "send as self"
+  on public.island_messages for insert
+  to authenticated with check (auth.uid() = sender_id);
+
+create or replace function public.prune_island_messages() returns trigger
+language plpgsql security definer as $$
+begin
+  delete from public.island_messages m
+  where m.recipient = new.recipient
+    and m.id not in (
+      select id from public.island_messages
+      where recipient = new.recipient
+      order by created_at desc
+      limit 100
+    );
+  return null;
+end;
+$$;
+
+drop trigger if exists trg_prune_island_messages on public.island_messages;
+create trigger trg_prune_island_messages
+  after insert on public.island_messages
+  for each row execute function public.prune_island_messages();
