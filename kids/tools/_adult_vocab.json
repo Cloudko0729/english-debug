@@ -1,302 +1,2104 @@
-{"words":[
-  {"en":"repair","zh":"維修","level":1,"src":"mail","tag":"repair"},
-  {"en":"power","zh":"電源","level":1,"src":"mail","tag":"repair"},
-  {"en":"board","zh":"板子","level":1,"src":"mail","tag":"parts"},
-  {"en":"pass","zh":"通過","level":1,"src":"mail","tag":"repair"},
-  {"en":"shipping","zh":"出貨","level":1,"src":"mail","tag":"delivery"},
-  {"en":"mail","zh":"郵件","level":1,"src":"mail","tag":"office"},
-  {"en":"main","zh":"主要的","level":1,"src":"mail","tag":"general"},
-  {"en":"priority","zh":"優先順序","level":1,"src":"mail","tag":"office"},
-  {"en":"schedule","zh":"排程","level":1,"src":"mail","tag":"delivery"},
-  {"en":"unit","zh":"單位","level":1,"src":"mail","tag":"parts"},
-  {"en":"driver","zh":"驅動器","level":1,"src":"mail","tag":"repair"},
-  {"en":"burn","zh":"燒壞","level":1,"src":"mail","tag":"repair"},
-  {"en":"touch","zh":"觸控","level":1,"src":"mail","tag":"repair"},
-  {"en":"panel","zh":"面板","level":1,"src":"mail","tag":"parts"},
-  {"en":"cpu","zh":"處理器","level":1,"src":"mail","tag":"parts"},
-  {"en":"control","zh":"控制","level":1,"src":"mail","tag":"repair"},
-  {"en":"supply","zh":"供應","level":1,"src":"mail","tag":"parts"},
-  {"en":"confidential","zh":"保密的","level":1,"src":"mail","tag":"office"},
-  {"en":"information","zh":"資訊","level":1,"src":"mail","tag":"office"},
-  {"en":"received","zh":"已收到","level":1,"src":"mail","tag":"office"},
-  {"en":"pcb","zh":"電路板","level":1,"src":"mail","tag":"parts"},
-  {"en":"tester","zh":"測試機","level":1,"src":"mail","tag":"repair"},
-  {"en":"error","zh":"錯誤","level":1,"src":"mail","tag":"repair"},
-  {"en":"immediately","zh":"立即","level":1,"src":"mail","tag":"office"},
-  {"en":"notify","zh":"通知","level":1,"src":"mail","tag":"office"},
-  {"en":"sender","zh":"寄件人","level":1,"src":"mail","tag":"office"},
-  {"en":"delete","zh":"刪除","level":1,"src":"mail","tag":"office"},
-  {"en":"cooperation","zh":"合作","level":1,"src":"mail","tag":"service"},
-  {"en":"chiller","zh":"冷卻機","level":1,"src":"mail","tag":"repair"},
-  {"en":"sensor","zh":"感測器","level":1,"src":"mail","tag":"parts"},
-  {"en":"damaged","zh":"受損的","level":1,"src":"mail","tag":"repair"},
-  {"en":"controller","zh":"控制器","level":1,"src":"mail","tag":"parts"},
-  {"en":"circuit","zh":"電路","level":1,"src":"mail","tag":"repair"},
-  {"en":"verify","zh":"確認","level":1,"src":"mail","tag":"repair"},
-  {"en":"sales","zh":"業務","level":1,"src":"mail","tag":"quotation"},
-  {"en":"heat","zh":"熱度","level":1,"src":"mail","tag":"repair"},
-  {"en":"draw","zh":"繪製","level":1,"src":"mail","tag":"repair"},
-  {"en":"burned","zh":"已燒壞","level":1,"src":"mail","tag":"repair"},
-  {"en":"fail","zh":"失敗","level":1,"src":"mail","tag":"repair"},
-  {"en":"motor","zh":"馬達","level":1,"src":"mail","tag":"parts"},
-  {"en":"parts","zh":"零件","level":1,"src":"mail","tag":"parts"},
-  {"en":"verification","zh":"驗證","level":1,"src":"mail","tag":"repair"},
-  {"en":"pcs","zh":"件數","level":1,"src":"mail","tag":"parts"},
-  {"en":"project","zh":"專案","level":1,"src":"mail","tag":"office"},
-  {"en":"card","zh":"卡片","level":1,"src":"mail","tag":"parts"},
-  {"en":"loader","zh":"載入器","level":1,"src":"mail","tag":"repair"},
-  {"en":"components","zh":"元件","level":1,"src":"mail","tag":"parts"},
-  {"en":"hesitate","zh":"猶豫","level":1,"src":"mail","tag":"service"},
-  {"en":"let","zh":"讓","level":1,"src":"mail","tag":"office"},
-  {"en":"know","zh":"知道","level":1,"src":"mail","tag":"office"},
-  {"en":"need","zh":"需要","level":1,"src":"mail","tag":"office"},
-  {"en":"case","zh":"案件","level":1,"src":"mail","tag":"service"},
-  {"en":"box","zh":"盒子","level":1,"src":"mail","tag":"logistics"},
-  {"en":"connector","zh":"連接器","level":1,"src":"mail","tag":"parts"},
-  {"en":"results","zh":"結果","level":1,"src":"mail","tag":"repair"},
-  {"en":"oven","zh":"烤箱","level":1,"src":"mail","tag":"repair"},
-  {"en":"customer","zh":"客戶","level":1,"src":"mail","tag":"service"},
-  {"en":"test","zh":"測試","level":1,"src":"mail","tag":"repair"},
-  {"en":"ask","zh":"詢問","level":1,"src":"mail","tag":"office"},
-  {"en":"solution","zh":"解法","level":1,"src":"mail","tag":"service"},
-  {"en":"further","zh":"進一步","level":1,"src":"mail","tag":"office"},
-  {"en":"assistance","zh":"協助","level":1,"src":"mail","tag":"service"},
-  {"en":"support","zh":"支援","level":1,"src":"mail","tag":"service"},
-  {"en":"require","zh":"要求","level":1,"src":"mail","tag":"order"},
-  {"en":"axis","zh":"軸","level":1,"src":"mail","tag":"repair"},
-  {"en":"image","zh":"影像","level":1,"src":"mail","tag":"repair"},
-  {"en":"business","zh":"業務","level":1,"src":"mail","tag":"office"},
-  {"en":"trace","zh":"追蹤","level":1,"src":"mail","tag":"service"},
-  {"en":"installed","zh":"已安裝","level":1,"src":"mail","tag":"repair"},
-  {"en":"option","zh":"選項","level":1,"src":"mail","tag":"quotation"},
-  {"en":"equipment","zh":"設備","level":1,"src":"mail","tag":"repair"},
-  {"en":"prober","zh":"探針台","level":1,"src":"mail","tag":"repair"},
-  {"en":"handler","zh":"分選機","level":1,"src":"mail","tag":"repair"},
-  {"en":"repaired","zh":"已修好","level":1,"src":"mail","tag":"repair"},
-  {"en":"corrosion","zh":"腐蝕","level":1,"src":"mail","tag":"repair"},
-  {"en":"temp","zh":"溫度","level":1,"src":"mail","tag":"repair"},
-  {"en":"soldering","zh":"焊接","level":1,"src":"mail","tag":"repair"},
-  {"en":"drive","zh":"驅動","level":1,"src":"mail","tag":"repair"},
-  {"en":"client","zh":"客戶","level":1,"src":"mail","tag":"service"},
-  {"en":"below","zh":"如下","level":1,"src":"mail","tag":"office"},
-  {"en":"send","zh":"寄送","level":1,"src":"mail","tag":"office"},
-  {"en":"back","zh":"返回","level":1,"src":"mail","tag":"logistics"},
-  {"en":"urgent","zh":"緊急","level":1,"src":"mail","tag":"office"},
-  {"en":"because","zh":"因為","level":1,"src":"mail","tag":"general"},
-  {"en":"center","zh":"中心","level":1,"src":"mail","tag":"office"},
-  {"en":"standard","zh":"標準","level":1,"src":"mail","tag":"general"},
-  {"en":"status","zh":"狀態","level":1,"src":"mail","tag":"service"},
-  {"en":"check","zh":"檢查","level":1,"src":"mail","tag":"repair"},
-  {"en":"file","zh":"檔案","level":1,"src":"mail","tag":"office"},
-  {"en":"team","zh":"團隊","level":1,"src":"mail","tag":"office"},
-  {"en":"confirm","zh":"確認","level":1,"src":"biz","tag":"office"},
-  {"en":"delivery","zh":"交貨","level":1,"src":"biz","tag":"delivery"},
-  {"en":"invoice","zh":"發票","level":1,"src":"biz","tag":"payment"},
-  {"en":"quote","zh":"報價","level":1,"src":"biz","tag":"quotation"},
-  {"en":"price","zh":"價格","level":1,"src":"biz","tag":"quotation"},
-  {"en":"meeting","zh":"會議","level":1,"src":"biz","tag":"meeting"},
-  {"en":"order","zh":"訂單","level":1,"src":"biz","tag":"order"},
-  {"en":"payment","zh":"付款","level":1,"src":"biz","tag":"payment"},
-  {"en":"logistics","zh":"物流","level":1,"src":"biz","tag":"logistics"},
-  {"en":"office","zh":"辦公室","level":1,"src":"biz","tag":"office"},
-  {"en":"call","zh":"通話","level":1,"src":"biz","tag":"meeting"},
-  {"en":"email","zh":"電子郵件","level":1,"src":"biz","tag":"office"},
-  {"en":"message","zh":"訊息","level":1,"src":"biz","tag":"office"},
-  {"en":"reply","zh":"回覆","level":1,"src":"biz","tag":"office"},
-  {"en":"update","zh":"更新","level":1,"src":"biz","tag":"service"},
-  {"en":"report","zh":"報告","level":1,"src":"biz","tag":"office"},
-  {"en":"plan","zh":"計畫","level":1,"src":"biz","tag":"office"},
-  {"en":"date","zh":"日期","level":1,"src":"biz","tag":"delivery"},
-  {"en":"time","zh":"時間","level":1,"src":"biz","tag":"delivery"},
-  {"en":"today","zh":"今天","level":1,"src":"biz","tag":"office"},
-  {"en":"tomorrow","zh":"明天","level":1,"src":"biz","tag":"office"},
-  {"en":"week","zh":"週","level":1,"src":"biz","tag":"delivery"},
-  {"en":"month","zh":"月份","level":1,"src":"biz","tag":"delivery"},
-  {"en":"address","zh":"地址","level":1,"src":"biz","tag":"logistics"},
-  {"en":"contact","zh":"聯絡人","level":1,"src":"biz","tag":"office"},
-  {"en":"phone","zh":"電話","level":1,"src":"biz","tag":"office"},
-  {"en":"service","zh":"服務","level":1,"src":"biz","tag":"service"},
-  {"en":"list","zh":"清單","level":1,"src":"biz","tag":"office"},
-  {"en":"note","zh":"備註","level":1,"src":"biz","tag":"office"},
-  {"en":"task","zh":"任務","level":1,"src":"biz","tag":"office"},
-  {"en":"issue","zh":"問題","level":1,"src":"biz","tag":"service"},
-  {"en":"problem","zh":"問題","level":1,"src":"biz","tag":"service"},
-  {"en":"help","zh":"幫助","level":1,"src":"biz","tag":"service"},
-  {"en":"request","zh":"請求","level":1,"src":"biz","tag":"service"},
-  {"en":"attach","zh":"附上","level":1,"src":"biz","tag":"office"},
-  {"en":"document","zh":"文件","level":1,"src":"biz","tag":"office"},
-  {"en":"copy","zh":"副本","level":1,"src":"biz","tag":"office"},
-  {"en":"approve","zh":"核准","level":1,"src":"biz","tag":"order"},
-  {"en":"ready","zh":"準備好","level":1,"src":"biz","tag":"delivery"},
-  {"en":"late","zh":"延遲","level":1,"src":"biz","tag":"delivery"},
-  {"en":"early","zh":"提早","level":1,"src":"biz","tag":"delivery"},
-  {"en":"available","zh":"可取得","level":1,"src":"biz","tag":"parts"},
-  {"en":"busy","zh":"忙碌","level":1,"src":"biz","tag":"office"},
-  {"en":"change","zh":"變更","level":1,"src":"biz","tag":"office"},
-  {"en":"cancel","zh":"取消","level":1,"src":"biz","tag":"order"},
-  {"en":"close","zh":"結案","level":1,"src":"biz","tag":"service"},
-  {"en":"open","zh":"開啟","level":1,"src":"biz","tag":"service"},
-  {"en":"start","zh":"開始","level":1,"src":"biz","tag":"office"},
-  {"en":"finish","zh":"完成","level":1,"src":"biz","tag":"office"},
-  {"en":"join","zh":"加入","level":1,"src":"biz","tag":"meeting"},
-  {"en":"meet","zh":"會面","level":1,"src":"biz","tag":"meeting"},
-  {"en":"visit","zh":"拜訪","level":1,"src":"biz","tag":"meeting"},
-  {"en":"discuss","zh":"討論","level":1,"src":"biz","tag":"meeting"},
-  {"en":"share","zh":"分享","level":1,"src":"biz","tag":"office"},
-  {"en":"prepare","zh":"準備","level":1,"src":"biz","tag":"meeting"},
-  {"en":"review","zh":"審閱","level":1,"src":"biz","tag":"office"},
-  {"en":"sign","zh":"簽署","level":1,"src":"biz","tag":"order"},
-  {"en":"pay","zh":"付款","level":1,"src":"biz","tag":"payment"},
-  {"en":"cost","zh":"成本","level":1,"src":"biz","tag":"payment"},
-  {"en":"fee","zh":"費用","level":1,"src":"biz","tag":"payment"},
-  {"en":"bank","zh":"銀行","level":1,"src":"biz","tag":"payment"},
-  {"en":"cash","zh":"現金","level":1,"src":"biz","tag":"payment"},
-  {"en":"credit","zh":"信用","level":1,"src":"biz","tag":"payment"},
-  {"en":"tax","zh":"稅","level":1,"src":"biz","tag":"payment"},
-  {"en":"total","zh":"總計","level":1,"src":"biz","tag":"payment"},
-  {"en":"amount","zh":"金額","level":1,"src":"biz","tag":"payment"},
-  {"en":"discount","zh":"折扣","level":1,"src":"biz","tag":"quotation"},
-  {"en":"quantity","zh":"數量","level":1,"src":"biz","tag":"order"},
-  {"en":"stock","zh":"庫存","level":1,"src":"biz","tag":"parts"},
-  {"en":"package","zh":"包裹","level":1,"src":"biz","tag":"logistics"},
-  {"en":"carton","zh":"紙箱","level":1,"src":"biz","tag":"logistics"},
-  {"en":"pallet","zh":"棧板","level":1,"src":"biz","tag":"logistics"},
-  {"en":"warehouse","zh":"倉庫","level":1,"src":"biz","tag":"logistics"},
-  {"en":"truck","zh":"貨車","level":1,"src":"biz","tag":"logistics"},
-  {"en":"pickup","zh":"取貨","level":1,"src":"biz","tag":"logistics"},
-  {"en":"arrival","zh":"到達","level":1,"src":"biz","tag":"delivery"},
-  {"en":"import","zh":"進口","level":1,"src":"biz","tag":"logistics"},
-  {"en":"export","zh":"出口","level":1,"src":"biz","tag":"logistics"},
-  {"en":"customs","zh":"海關","level":1,"src":"biz","tag":"logistics"},
-  {"en":"broker","zh":"報關行","level":1,"src":"biz","tag":"logistics"},
-  {"en":"carrier","zh":"承運商","level":1,"src":"biz","tag":"logistics"},
-  {"en":"tracking","zh":"追蹤號","level":1,"src":"biz","tag":"logistics"},
-  {"en":"return","zh":"退回","level":1,"src":"biz","tag":"service"},
-  {"en":"replace","zh":"更換","level":1,"src":"biz","tag":"service"},
-  {"en":"exchange","zh":"交換","level":1,"src":"biz","tag":"service"},
-  {"en":"refund","zh":"退款","level":1,"src":"biz","tag":"payment"},
-  {"en":"complain","zh":"抱怨","level":1,"src":"biz","tag":"service"},
-  {"en":"apologize","zh":"道歉","level":1,"src":"biz","tag":"service"},
-  {"en":"thanks","zh":"謝謝","level":1,"src":"biz","tag":"office"},
-  {"en":"regards","zh":"問候","level":1,"src":"biz","tag":"office"},
-  {"en":"analysis","zh":"分析","level":2,"src":"mail","tag":"repair"},
-  {"en":"study","zh":"研究","level":2,"src":"mail","tag":"repair"},
-  {"en":"acdc","zh":"交直流","level":2,"src":"mail","tag":"repair"},
-  {"en":"ate","zh":"自動測試","level":2,"src":"mail","tag":"repair"},
-  {"en":"vip","zh":"重要客戶","level":2,"src":"mail","tag":"service"},
-  {"en":"contain","zh":"包含","level":2,"src":"mail","tag":"office"},
-  {"en":"otherwise","zh":"否則","level":2,"src":"mail","tag":"office"},
-  {"en":"protected","zh":"受保護","level":2,"src":"mail","tag":"office"},
-  {"en":"modification","zh":"修改","level":2,"src":"mail","tag":"repair"},
-  {"en":"destroy","zh":"銷毀","level":2,"src":"mail","tag":"office"},
-  {"en":"rights","zh":"權利","level":2,"src":"mail","tag":"general"},
-  {"en":"reserved","zh":"保留的","level":2,"src":"mail","tag":"general"},
-  {"en":"technology","zh":"技術","level":2,"src":"mail","tag":"repair"},
-  {"en":"cap","zh":"電容","level":2,"src":"mail","tag":"parts"},
-  {"en":"loadport","zh":"載入口","level":2,"src":"mail","tag":"repair"},
-  {"en":"corporation","zh":"公司法人","level":2,"src":"mail","tag":"office"},
-  {"en":"servo","zh":"伺服","level":2,"src":"mail","tag":"parts"},
-  {"en":"temperature","zh":"溫度","level":2,"src":"mail","tag":"repair"},
-  {"en":"pwm","zh":"脈寬調變","level":2,"src":"mail","tag":"parts"},
-  {"en":"burnt","zh":"燒焦的","level":2,"src":"mail","tag":"repair"},
-  {"en":"combo","zh":"組合","level":2,"src":"mail","tag":"parts"},
-  {"en":"amplifier","zh":"放大器","level":2,"src":"mail","tag":"parts"},
-  {"en":"tech","zh":"技術人員","level":2,"src":"mail","tag":"service"},
-  {"en":"min","zh":"分鐘","level":2,"src":"mail","tag":"meeting"},
-  {"en":"ccd","zh":"影像感測","level":2,"src":"mail","tag":"parts"},
-  {"en":"product","zh":"產品","level":2,"src":"mail","tag":"quotation"},
-  {"en":"warranty","zh":"保固","level":2,"src":"mail","tag":"service"},
-  {"en":"extend","zh":"延長","level":2,"src":"mail","tag":"delivery"},
-  {"en":"record","zh":"紀錄","level":2,"src":"mail","tag":"office"},
-  {"en":"length","zh":"長度","level":2,"src":"mail","tag":"parts"},
-  {"en":"maximum","zh":"最大值","level":2,"src":"mail","tag":"repair"},
-  {"en":"question","zh":"問題","level":2,"src":"mail","tag":"service"},
-  {"en":"website","zh":"網站","level":2,"src":"mail","tag":"office"},
-  {"en":"code","zh":"代碼","level":2,"src":"mail","tag":"repair"},
-  {"en":"values","zh":"數值","level":2,"src":"mail","tag":"repair"},
-  {"en":"negotiate","zh":"談判","level":2,"src":"biz","tag":"quotation"},
-  {"en":"quotation","zh":"報價單","level":2,"src":"biz","tag":"quotation"},
-  {"en":"specification","zh":"規格","level":2,"src":"biz","tag":"parts"},
-  {"en":"compensation","zh":"補償","level":2,"src":"biz","tag":"service"},
-  {"en":"procedure","zh":"流程","level":2,"src":"biz","tag":"office"},
-  {"en":"contract","zh":"合約","level":2,"src":"biz","tag":"order"},
-  {"en":"agreement","zh":"協議","level":2,"src":"biz","tag":"order"},
-  {"en":"proposal","zh":"提案","level":2,"src":"biz","tag":"quotation"},
-  {"en":"estimate","zh":"估價","level":2,"src":"biz","tag":"quotation"},
-  {"en":"budget","zh":"預算","level":2,"src":"biz","tag":"payment"},
-  {"en":"margin","zh":"利潤","level":2,"src":"biz","tag":"quotation"},
-  {"en":"revenue","zh":"營收","level":2,"src":"biz","tag":"payment"},
-  {"en":"purchase","zh":"採購","level":2,"src":"biz","tag":"order"},
-  {"en":"procurement","zh":"採購作業","level":2,"src":"biz","tag":"order"},
-  {"en":"supplier","zh":"供應商","level":2,"src":"biz","tag":"parts"},
-  {"en":"vendor","zh":"廠商","level":2,"src":"biz","tag":"parts"},
-  {"en":"inventory","zh":"庫存","level":2,"src":"biz","tag":"parts"},
-  {"en":"shipment","zh":"貨件","level":2,"src":"biz","tag":"logistics"},
-  {"en":"turnaround","zh":"周轉期","level":2,"src":"biz","tag":"repair"},
-  {"en":"expedite","zh":"加急","level":2,"src":"biz","tag":"delivery"},
-  {"en":"delay","zh":"延誤","level":2,"src":"biz","tag":"delivery"},
-  {"en":"reschedule","zh":"改期","level":2,"src":"biz","tag":"meeting"},
-  {"en":"allocate","zh":"分配","level":2,"src":"biz","tag":"parts"},
-  {"en":"reserve","zh":"保留","level":2,"src":"biz","tag":"parts"},
-  {"en":"shortage","zh":"短缺","level":2,"src":"biz","tag":"parts"},
-  {"en":"backorder","zh":"欠交訂單","level":2,"src":"biz","tag":"order"},
-  {"en":"backlog","zh":"積壓","level":2,"src":"biz","tag":"order"},
-  {"en":"guarantee","zh":"保證","level":2,"src":"biz","tag":"service"},
-  {"en":"quality","zh":"品質","level":2,"src":"biz","tag":"repair"},
-  {"en":"inspect","zh":"檢驗","level":2,"src":"biz","tag":"repair"},
-  {"en":"inspection","zh":"檢驗","level":2,"src":"biz","tag":"repair"},
-  {"en":"defect","zh":"缺陷","level":2,"src":"biz","tag":"repair"},
-  {"en":"cause","zh":"原因","level":2,"src":"biz","tag":"repair"},
-  {"en":"diagnose","zh":"診斷","level":2,"src":"biz","tag":"repair"},
-  {"en":"maintenance","zh":"保養","level":2,"src":"biz","tag":"repair"},
-  {"en":"calibration","zh":"校正","level":2,"src":"biz","tag":"repair"},
-  {"en":"replacement","zh":"替換品","level":2,"src":"biz","tag":"parts"},
-  {"en":"approval","zh":"核准","level":2,"src":"biz","tag":"order"},
-  {"en":"authorization","zh":"授權","level":2,"src":"biz","tag":"office"},
-  {"en":"escalation","zh":"升級處理","level":2,"src":"biz","tag":"service"},
-  {"en":"deadline","zh":"期限","level":2,"src":"biz","tag":"delivery"},
-  {"en":"reminder","zh":"提醒","level":2,"src":"biz","tag":"office"},
-  {"en":"agenda","zh":"議程","level":2,"src":"biz","tag":"meeting"},
-  {"en":"minutes","zh":"會議紀錄","level":2,"src":"biz","tag":"meeting"},
-  {"en":"attendee","zh":"與會者","level":2,"src":"biz","tag":"meeting"},
-  {"en":"action","zh":"行動","level":2,"src":"biz","tag":"office"},
-  {"en":"decision","zh":"決定","level":2,"src":"biz","tag":"meeting"},
-  {"en":"follow","zh":"跟進","level":2,"src":"biz","tag":"service"},
-  {"en":"coordinate","zh":"協調","level":2,"src":"biz","tag":"office"},
-  {"en":"align","zh":"對齊","level":2,"src":"biz","tag":"office"},
-  {"en":"timeline","zh":"時程","level":2,"src":"biz","tag":"delivery"},
-  {"en":"milestone","zh":"里程碑","level":2,"src":"biz","tag":"office"},
-  {"en":"deposit","zh":"訂金","level":2,"src":"biz","tag":"payment"},
-  {"en":"balance","zh":"尾款","level":2,"src":"biz","tag":"payment"},
-  {"en":"receipt","zh":"收據","level":2,"src":"biz","tag":"payment"},
-  {"en":"disclosure","zh":"揭露","level":3,"src":"mail","tag":"office"},
-  {"en":"liable","zh":"負責的","level":3,"src":"mail","tag":"general"},
-  {"en":"unauthorized","zh":"未授權","level":3,"src":"mail","tag":"office"},
-  {"en":"misuse","zh":"誤用","level":3,"src":"mail","tag":"office"},
-  {"en":"privileged","zh":"保密特權","level":3,"src":"mail","tag":"office"},
-  {"en":"waiver","zh":"豁免","level":3,"src":"biz","tag":"order"},
-  {"en":"liability","zh":"責任","level":3,"src":"biz","tag":"order"},
-  {"en":"discrepancy","zh":"差異","level":3,"src":"biz","tag":"service"},
-  {"en":"contingency","zh":"應變方案","level":3,"src":"biz","tag":"office"},
-  {"en":"compliance","zh":"合規","level":3,"src":"biz","tag":"office"},
-  {"en":"amendment","zh":"修正條款","level":3,"src":"biz","tag":"order"},
-  {"en":"indemnity","zh":"賠償責任","level":3,"src":"biz","tag":"order"},
-  {"en":"arbitration","zh":"仲裁","level":3,"src":"biz","tag":"order"},
-  {"en":"reconciliation","zh":"對帳","level":3,"src":"biz","tag":"payment"},
-  {"en":"remediation","zh":"補救措施","level":3,"src":"biz","tag":"service"},
-  {"en":"mitigation","zh":"緩解措施","level":3,"src":"biz","tag":"service"},
-  {"en":"obsolescence","zh":"停產老化","level":3,"src":"biz","tag":"parts"},
-  {"en":"concession","zh":"讓步","level":3,"src":"biz","tag":"quotation"},
-  {"en":"surcharge","zh":"附加費","level":3,"src":"biz","tag":"payment"},
-  {"en":"embargo","zh":"禁運","level":3,"src":"biz","tag":"logistics"},
-  {"en":"clearance","zh":"清關","level":3,"src":"biz","tag":"logistics"},
-  {"en":"consignment","zh":"寄售","level":3,"src":"biz","tag":"logistics"},
-  {"en":"incoterms","zh":"國貿條件","level":3,"src":"biz","tag":"logistics"},
-  {"en":"demurrage","zh":"滯箱費","level":3,"src":"biz","tag":"logistics"},
-  {"en":"traceability","zh":"追溯性","level":3,"src":"biz","tag":"parts"},
-  {"en":"deviation","zh":"偏差","level":3,"src":"biz","tag":"repair"},
-  {"en":"validation","zh":"驗證","level":3,"src":"biz","tag":"repair"},
-  {"en":"nonconformity","zh":"不符合項","level":3,"src":"biz","tag":"repair"},
-  {"en":"interoperability","zh":"互通性","level":3,"src":"biz","tag":"parts"},
-  {"en":"redundancy","zh":"備援","level":3,"src":"biz","tag":"repair"}
-]}
+{
+ "words": [
+  {
+   "en": "repair",
+   "zh": "維修",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "power",
+   "zh": "電源",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "board",
+   "zh": "板子",
+   "level": 1,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "pass",
+   "zh": "通過",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "shipping",
+   "zh": "出貨",
+   "level": 1,
+   "src": "mail",
+   "tag": "delivery"
+  },
+  {
+   "en": "mail",
+   "zh": "郵件",
+   "level": 1,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "main",
+   "zh": "主要的",
+   "level": 1,
+   "src": "mail",
+   "tag": "general"
+  },
+  {
+   "en": "priority",
+   "zh": "優先順序",
+   "level": 1,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "schedule",
+   "zh": "排程",
+   "level": 1,
+   "src": "mail",
+   "tag": "delivery"
+  },
+  {
+   "en": "unit",
+   "zh": "單位",
+   "level": 1,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "driver",
+   "zh": "驅動器",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "burn",
+   "zh": "燒壞",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "touch",
+   "zh": "觸控",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "panel",
+   "zh": "面板",
+   "level": 1,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "cpu",
+   "zh": "處理器",
+   "level": 1,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "control",
+   "zh": "控制",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "supply",
+   "zh": "供應",
+   "level": 1,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "information",
+   "zh": "資訊",
+   "level": 1,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "received",
+   "zh": "已收到",
+   "level": 1,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "pcb",
+   "zh": "電路板",
+   "level": 1,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "tester",
+   "zh": "測試機",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "error",
+   "zh": "錯誤",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "immediately",
+   "zh": "立即",
+   "level": 1,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "notify",
+   "zh": "通知",
+   "level": 1,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "chiller",
+   "zh": "冷卻機",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "sensor",
+   "zh": "感測器",
+   "level": 1,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "damaged",
+   "zh": "受損的",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "controller",
+   "zh": "控制器",
+   "level": 1,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "circuit",
+   "zh": "電路",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "verify",
+   "zh": "確認",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "sales",
+   "zh": "業務",
+   "level": 1,
+   "src": "mail",
+   "tag": "quotation"
+  },
+  {
+   "en": "heat",
+   "zh": "熱度",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "draw",
+   "zh": "繪製",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "burned",
+   "zh": "已燒壞",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "fail",
+   "zh": "失敗",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "motor",
+   "zh": "馬達",
+   "level": 1,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "parts",
+   "zh": "零件",
+   "level": 1,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "verification",
+   "zh": "驗證",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "pcs",
+   "zh": "件數",
+   "level": 1,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "project",
+   "zh": "專案",
+   "level": 1,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "card",
+   "zh": "卡片",
+   "level": 1,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "loader",
+   "zh": "載入器",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "components",
+   "zh": "元件",
+   "level": 1,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "need",
+   "zh": "需要",
+   "level": 1,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "case",
+   "zh": "案件",
+   "level": 1,
+   "src": "mail",
+   "tag": "service"
+  },
+  {
+   "en": "box",
+   "zh": "盒子",
+   "level": 1,
+   "src": "mail",
+   "tag": "logistics"
+  },
+  {
+   "en": "connector",
+   "zh": "連接器",
+   "level": 1,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "results",
+   "zh": "結果",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "oven",
+   "zh": "烤箱",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "customer",
+   "zh": "客戶",
+   "level": 1,
+   "src": "mail",
+   "tag": "service"
+  },
+  {
+   "en": "test",
+   "zh": "測試",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "ask",
+   "zh": "詢問",
+   "level": 1,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "solution",
+   "zh": "解法",
+   "level": 1,
+   "src": "mail",
+   "tag": "service"
+  },
+  {
+   "en": "assistance",
+   "zh": "協助",
+   "level": 1,
+   "src": "mail",
+   "tag": "service"
+  },
+  {
+   "en": "support",
+   "zh": "支援",
+   "level": 1,
+   "src": "mail",
+   "tag": "service"
+  },
+  {
+   "en": "require",
+   "zh": "要求",
+   "level": 1,
+   "src": "mail",
+   "tag": "order"
+  },
+  {
+   "en": "axis",
+   "zh": "軸",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "image",
+   "zh": "影像",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "business",
+   "zh": "業務",
+   "level": 1,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "trace",
+   "zh": "追蹤",
+   "level": 1,
+   "src": "mail",
+   "tag": "service"
+  },
+  {
+   "en": "installed",
+   "zh": "已安裝",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "option",
+   "zh": "選項",
+   "level": 1,
+   "src": "mail",
+   "tag": "quotation"
+  },
+  {
+   "en": "equipment",
+   "zh": "設備",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "prober",
+   "zh": "探針台",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "handler",
+   "zh": "分選機",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "repaired",
+   "zh": "已修好",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "corrosion",
+   "zh": "腐蝕",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "temp",
+   "zh": "溫度",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "soldering",
+   "zh": "焊接",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "drive",
+   "zh": "驅動",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "client",
+   "zh": "客戶",
+   "level": 1,
+   "src": "mail",
+   "tag": "service"
+  },
+  {
+   "en": "send",
+   "zh": "寄送",
+   "level": 1,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "back",
+   "zh": "返回",
+   "level": 1,
+   "src": "mail",
+   "tag": "logistics"
+  },
+  {
+   "en": "urgent",
+   "zh": "緊急",
+   "level": 1,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "standard",
+   "zh": "標準",
+   "level": 1,
+   "src": "mail",
+   "tag": "general"
+  },
+  {
+   "en": "status",
+   "zh": "狀態",
+   "level": 1,
+   "src": "mail",
+   "tag": "service"
+  },
+  {
+   "en": "check",
+   "zh": "檢查",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "file",
+   "zh": "檔案",
+   "level": 1,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "team",
+   "zh": "團隊",
+   "level": 1,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "confirm",
+   "zh": "確認",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "delivery",
+   "zh": "交貨",
+   "level": 1,
+   "src": "biz",
+   "tag": "delivery"
+  },
+  {
+   "en": "invoice",
+   "zh": "發票",
+   "level": 1,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "quote",
+   "zh": "報價",
+   "level": 1,
+   "src": "biz",
+   "tag": "quotation"
+  },
+  {
+   "en": "price",
+   "zh": "價格",
+   "level": 1,
+   "src": "biz",
+   "tag": "quotation"
+  },
+  {
+   "en": "meeting",
+   "zh": "會議",
+   "level": 1,
+   "src": "biz",
+   "tag": "meeting"
+  },
+  {
+   "en": "order",
+   "zh": "訂單",
+   "level": 1,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "payment",
+   "zh": "付款",
+   "level": 1,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "logistics",
+   "zh": "物流",
+   "level": 1,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "office",
+   "zh": "辦公室",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "call",
+   "zh": "通話",
+   "level": 1,
+   "src": "biz",
+   "tag": "meeting"
+  },
+  {
+   "en": "email",
+   "zh": "電子郵件",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "message",
+   "zh": "訊息",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "reply",
+   "zh": "回覆",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "update",
+   "zh": "更新",
+   "level": 1,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "report",
+   "zh": "報告",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "plan",
+   "zh": "計畫",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "date",
+   "zh": "日期",
+   "level": 1,
+   "src": "biz",
+   "tag": "delivery"
+  },
+  {
+   "en": "time",
+   "zh": "時間",
+   "level": 1,
+   "src": "biz",
+   "tag": "delivery"
+  },
+  {
+   "en": "today",
+   "zh": "今天",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "tomorrow",
+   "zh": "明天",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "week",
+   "zh": "週",
+   "level": 1,
+   "src": "biz",
+   "tag": "delivery"
+  },
+  {
+   "en": "month",
+   "zh": "月份",
+   "level": 1,
+   "src": "biz",
+   "tag": "delivery"
+  },
+  {
+   "en": "address",
+   "zh": "地址",
+   "level": 1,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "contact",
+   "zh": "聯絡人",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "phone",
+   "zh": "電話",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "service",
+   "zh": "服務",
+   "level": 1,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "list",
+   "zh": "清單",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "note",
+   "zh": "備註",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "task",
+   "zh": "任務",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "issue",
+   "zh": "問題",
+   "level": 1,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "problem",
+   "zh": "問題",
+   "level": 1,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "help",
+   "zh": "幫助",
+   "level": 1,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "request",
+   "zh": "請求",
+   "level": 1,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "attach",
+   "zh": "附上",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "document",
+   "zh": "文件",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "copy",
+   "zh": "副本",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "approve",
+   "zh": "核准",
+   "level": 1,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "ready",
+   "zh": "準備好",
+   "level": 1,
+   "src": "biz",
+   "tag": "delivery"
+  },
+  {
+   "en": "late",
+   "zh": "延遲",
+   "level": 1,
+   "src": "biz",
+   "tag": "delivery"
+  },
+  {
+   "en": "early",
+   "zh": "提早",
+   "level": 1,
+   "src": "biz",
+   "tag": "delivery"
+  },
+  {
+   "en": "available",
+   "zh": "可取得",
+   "level": 1,
+   "src": "biz",
+   "tag": "parts"
+  },
+  {
+   "en": "busy",
+   "zh": "忙碌",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "change",
+   "zh": "變更",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "cancel",
+   "zh": "取消",
+   "level": 1,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "close",
+   "zh": "結案",
+   "level": 1,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "open",
+   "zh": "開啟",
+   "level": 1,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "start",
+   "zh": "開始",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "finish",
+   "zh": "完成",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "join",
+   "zh": "加入",
+   "level": 1,
+   "src": "biz",
+   "tag": "meeting"
+  },
+  {
+   "en": "meet",
+   "zh": "會面",
+   "level": 1,
+   "src": "biz",
+   "tag": "meeting"
+  },
+  {
+   "en": "visit",
+   "zh": "拜訪",
+   "level": 1,
+   "src": "biz",
+   "tag": "meeting"
+  },
+  {
+   "en": "discuss",
+   "zh": "討論",
+   "level": 1,
+   "src": "biz",
+   "tag": "meeting"
+  },
+  {
+   "en": "share",
+   "zh": "分享",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "prepare",
+   "zh": "準備",
+   "level": 1,
+   "src": "biz",
+   "tag": "meeting"
+  },
+  {
+   "en": "review",
+   "zh": "審閱",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "sign",
+   "zh": "簽署",
+   "level": 1,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "pay",
+   "zh": "付款",
+   "level": 1,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "cost",
+   "zh": "成本",
+   "level": 1,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "fee",
+   "zh": "費用",
+   "level": 1,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "bank",
+   "zh": "銀行",
+   "level": 1,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "cash",
+   "zh": "現金",
+   "level": 1,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "credit",
+   "zh": "信用",
+   "level": 1,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "tax",
+   "zh": "稅",
+   "level": 1,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "total",
+   "zh": "總計",
+   "level": 1,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "amount",
+   "zh": "金額",
+   "level": 1,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "discount",
+   "zh": "折扣",
+   "level": 1,
+   "src": "biz",
+   "tag": "quotation"
+  },
+  {
+   "en": "quantity",
+   "zh": "數量",
+   "level": 1,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "stock",
+   "zh": "庫存",
+   "level": 1,
+   "src": "biz",
+   "tag": "parts"
+  },
+  {
+   "en": "package",
+   "zh": "包裹",
+   "level": 1,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "carton",
+   "zh": "紙箱",
+   "level": 1,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "pallet",
+   "zh": "棧板",
+   "level": 1,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "warehouse",
+   "zh": "倉庫",
+   "level": 1,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "truck",
+   "zh": "貨車",
+   "level": 1,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "pickup",
+   "zh": "取貨",
+   "level": 1,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "arrival",
+   "zh": "到達",
+   "level": 1,
+   "src": "biz",
+   "tag": "delivery"
+  },
+  {
+   "en": "import",
+   "zh": "進口",
+   "level": 1,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "export",
+   "zh": "出口",
+   "level": 1,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "customs",
+   "zh": "海關",
+   "level": 1,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "broker",
+   "zh": "報關行",
+   "level": 1,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "carrier",
+   "zh": "承運商",
+   "level": 1,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "tracking",
+   "zh": "追蹤號",
+   "level": 1,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "return",
+   "zh": "退回",
+   "level": 1,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "replace",
+   "zh": "更換",
+   "level": 1,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "exchange",
+   "zh": "交換",
+   "level": 1,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "refund",
+   "zh": "退款",
+   "level": 1,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "complain",
+   "zh": "抱怨",
+   "level": 1,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "apologize",
+   "zh": "道歉",
+   "level": 1,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "thanks",
+   "zh": "謝謝",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "regards",
+   "zh": "問候",
+   "level": 1,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "analysis",
+   "zh": "分析",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "study",
+   "zh": "研究",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "acdc",
+   "zh": "交直流",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "ate",
+   "zh": "自動測試",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "vip",
+   "zh": "重要客戶",
+   "level": 2,
+   "src": "mail",
+   "tag": "service"
+  },
+  {
+   "en": "modification",
+   "zh": "修改",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "rights",
+   "zh": "權利",
+   "level": 2,
+   "src": "mail",
+   "tag": "general"
+  },
+  {
+   "en": "technology",
+   "zh": "技術",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "cap",
+   "zh": "電容",
+   "level": 2,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "loadport",
+   "zh": "載入口",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "corporation",
+   "zh": "公司法人",
+   "level": 2,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "servo",
+   "zh": "伺服",
+   "level": 2,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "temperature",
+   "zh": "溫度",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "pwm",
+   "zh": "脈寬調變",
+   "level": 2,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "burnt",
+   "zh": "燒焦的",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "combo",
+   "zh": "組合",
+   "level": 2,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "amplifier",
+   "zh": "放大器",
+   "level": 2,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "tech",
+   "zh": "技術人員",
+   "level": 2,
+   "src": "mail",
+   "tag": "service"
+  },
+  {
+   "en": "min",
+   "zh": "分鐘",
+   "level": 2,
+   "src": "mail",
+   "tag": "meeting"
+  },
+  {
+   "en": "ccd",
+   "zh": "影像感測",
+   "level": 2,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "product",
+   "zh": "產品",
+   "level": 2,
+   "src": "mail",
+   "tag": "quotation"
+  },
+  {
+   "en": "warranty",
+   "zh": "保固",
+   "level": 2,
+   "src": "mail",
+   "tag": "service"
+  },
+  {
+   "en": "extend",
+   "zh": "延長",
+   "level": 2,
+   "src": "mail",
+   "tag": "delivery"
+  },
+  {
+   "en": "record",
+   "zh": "紀錄",
+   "level": 2,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "length",
+   "zh": "長度",
+   "level": 2,
+   "src": "mail",
+   "tag": "parts"
+  },
+  {
+   "en": "maximum",
+   "zh": "最大值",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "question",
+   "zh": "問題",
+   "level": 2,
+   "src": "mail",
+   "tag": "service"
+  },
+  {
+   "en": "website",
+   "zh": "網站",
+   "level": 2,
+   "src": "mail",
+   "tag": "office"
+  },
+  {
+   "en": "code",
+   "zh": "代碼",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "values",
+   "zh": "數值",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "negotiate",
+   "zh": "談判",
+   "level": 2,
+   "src": "biz",
+   "tag": "quotation"
+  },
+  {
+   "en": "quotation",
+   "zh": "報價單",
+   "level": 2,
+   "src": "biz",
+   "tag": "quotation"
+  },
+  {
+   "en": "specification",
+   "zh": "規格",
+   "level": 2,
+   "src": "biz",
+   "tag": "parts"
+  },
+  {
+   "en": "compensation",
+   "zh": "補償",
+   "level": 2,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "procedure",
+   "zh": "流程",
+   "level": 2,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "contract",
+   "zh": "合約",
+   "level": 2,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "agreement",
+   "zh": "協議",
+   "level": 2,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "proposal",
+   "zh": "提案",
+   "level": 2,
+   "src": "biz",
+   "tag": "quotation"
+  },
+  {
+   "en": "estimate",
+   "zh": "估價",
+   "level": 2,
+   "src": "biz",
+   "tag": "quotation"
+  },
+  {
+   "en": "budget",
+   "zh": "預算",
+   "level": 2,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "margin",
+   "zh": "利潤",
+   "level": 2,
+   "src": "biz",
+   "tag": "quotation"
+  },
+  {
+   "en": "revenue",
+   "zh": "營收",
+   "level": 2,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "purchase",
+   "zh": "採購",
+   "level": 2,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "procurement",
+   "zh": "採購作業",
+   "level": 2,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "supplier",
+   "zh": "供應商",
+   "level": 2,
+   "src": "biz",
+   "tag": "parts"
+  },
+  {
+   "en": "vendor",
+   "zh": "廠商",
+   "level": 2,
+   "src": "biz",
+   "tag": "parts"
+  },
+  {
+   "en": "inventory",
+   "zh": "庫存",
+   "level": 2,
+   "src": "biz",
+   "tag": "parts"
+  },
+  {
+   "en": "shipment",
+   "zh": "貨件",
+   "level": 2,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "turnaround",
+   "zh": "周轉期",
+   "level": 2,
+   "src": "biz",
+   "tag": "repair"
+  },
+  {
+   "en": "expedite",
+   "zh": "加急",
+   "level": 2,
+   "src": "biz",
+   "tag": "delivery"
+  },
+  {
+   "en": "delay",
+   "zh": "延誤",
+   "level": 2,
+   "src": "biz",
+   "tag": "delivery"
+  },
+  {
+   "en": "reschedule",
+   "zh": "改期",
+   "level": 2,
+   "src": "biz",
+   "tag": "meeting"
+  },
+  {
+   "en": "allocate",
+   "zh": "分配",
+   "level": 2,
+   "src": "biz",
+   "tag": "parts"
+  },
+  {
+   "en": "reserve",
+   "zh": "保留",
+   "level": 2,
+   "src": "biz",
+   "tag": "parts"
+  },
+  {
+   "en": "shortage",
+   "zh": "短缺",
+   "level": 2,
+   "src": "biz",
+   "tag": "parts"
+  },
+  {
+   "en": "backorder",
+   "zh": "欠交訂單",
+   "level": 2,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "backlog",
+   "zh": "積壓",
+   "level": 2,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "guarantee",
+   "zh": "保證",
+   "level": 2,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "quality",
+   "zh": "品質",
+   "level": 2,
+   "src": "biz",
+   "tag": "repair"
+  },
+  {
+   "en": "inspect",
+   "zh": "檢驗",
+   "level": 2,
+   "src": "biz",
+   "tag": "repair"
+  },
+  {
+   "en": "inspection",
+   "zh": "檢驗",
+   "level": 2,
+   "src": "biz",
+   "tag": "repair"
+  },
+  {
+   "en": "defect",
+   "zh": "缺陷",
+   "level": 2,
+   "src": "biz",
+   "tag": "repair"
+  },
+  {
+   "en": "cause",
+   "zh": "原因",
+   "level": 2,
+   "src": "biz",
+   "tag": "repair"
+  },
+  {
+   "en": "diagnose",
+   "zh": "診斷",
+   "level": 2,
+   "src": "biz",
+   "tag": "repair"
+  },
+  {
+   "en": "maintenance",
+   "zh": "保養",
+   "level": 2,
+   "src": "biz",
+   "tag": "repair"
+  },
+  {
+   "en": "calibration",
+   "zh": "校正",
+   "level": 2,
+   "src": "biz",
+   "tag": "repair"
+  },
+  {
+   "en": "replacement",
+   "zh": "替換品",
+   "level": 2,
+   "src": "biz",
+   "tag": "parts"
+  },
+  {
+   "en": "approval",
+   "zh": "核准",
+   "level": 2,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "authorization",
+   "zh": "授權",
+   "level": 2,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "escalation",
+   "zh": "升級處理",
+   "level": 2,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "deadline",
+   "zh": "期限",
+   "level": 2,
+   "src": "biz",
+   "tag": "delivery"
+  },
+  {
+   "en": "reminder",
+   "zh": "提醒",
+   "level": 2,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "agenda",
+   "zh": "議程",
+   "level": 2,
+   "src": "biz",
+   "tag": "meeting"
+  },
+  {
+   "en": "minutes",
+   "zh": "會議紀錄",
+   "level": 2,
+   "src": "biz",
+   "tag": "meeting"
+  },
+  {
+   "en": "attendee",
+   "zh": "與會者",
+   "level": 2,
+   "src": "biz",
+   "tag": "meeting"
+  },
+  {
+   "en": "action",
+   "zh": "行動",
+   "level": 2,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "decision",
+   "zh": "決定",
+   "level": 2,
+   "src": "biz",
+   "tag": "meeting"
+  },
+  {
+   "en": "follow",
+   "zh": "跟進",
+   "level": 2,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "coordinate",
+   "zh": "協調",
+   "level": 2,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "align",
+   "zh": "對齊",
+   "level": 2,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "timeline",
+   "zh": "時程",
+   "level": 2,
+   "src": "biz",
+   "tag": "delivery"
+  },
+  {
+   "en": "milestone",
+   "zh": "里程碑",
+   "level": 2,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "deposit",
+   "zh": "訂金",
+   "level": 2,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "balance",
+   "zh": "尾款",
+   "level": 2,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "receipt",
+   "zh": "收據",
+   "level": 2,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "waiver",
+   "zh": "豁免",
+   "level": 3,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "liability",
+   "zh": "責任",
+   "level": 3,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "discrepancy",
+   "zh": "差異",
+   "level": 3,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "contingency",
+   "zh": "應變方案",
+   "level": 3,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "compliance",
+   "zh": "合規",
+   "level": 3,
+   "src": "biz",
+   "tag": "office"
+  },
+  {
+   "en": "amendment",
+   "zh": "修正條款",
+   "level": 3,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "indemnity",
+   "zh": "賠償責任",
+   "level": 3,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "arbitration",
+   "zh": "仲裁",
+   "level": 3,
+   "src": "biz",
+   "tag": "order"
+  },
+  {
+   "en": "reconciliation",
+   "zh": "對帳",
+   "level": 3,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "remediation",
+   "zh": "補救措施",
+   "level": 3,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "mitigation",
+   "zh": "緩解措施",
+   "level": 3,
+   "src": "biz",
+   "tag": "service"
+  },
+  {
+   "en": "obsolescence",
+   "zh": "停產老化",
+   "level": 3,
+   "src": "biz",
+   "tag": "parts"
+  },
+  {
+   "en": "concession",
+   "zh": "讓步",
+   "level": 3,
+   "src": "biz",
+   "tag": "quotation"
+  },
+  {
+   "en": "surcharge",
+   "zh": "附加費",
+   "level": 3,
+   "src": "biz",
+   "tag": "payment"
+  },
+  {
+   "en": "embargo",
+   "zh": "禁運",
+   "level": 3,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "clearance",
+   "zh": "清關",
+   "level": 3,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "consignment",
+   "zh": "寄售",
+   "level": 3,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "incoterms",
+   "zh": "國貿條件",
+   "level": 3,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "demurrage",
+   "zh": "滯箱費",
+   "level": 3,
+   "src": "biz",
+   "tag": "logistics"
+  },
+  {
+   "en": "traceability",
+   "zh": "追溯性",
+   "level": 3,
+   "src": "biz",
+   "tag": "parts"
+  },
+  {
+   "en": "deviation",
+   "zh": "偏差",
+   "level": 3,
+   "src": "biz",
+   "tag": "repair"
+  },
+  {
+   "en": "validation",
+   "zh": "驗證",
+   "level": 3,
+   "src": "biz",
+   "tag": "repair"
+  },
+  {
+   "en": "nonconformity",
+   "zh": "不符合項",
+   "level": 3,
+   "src": "biz",
+   "tag": "repair"
+  },
+  {
+   "en": "interoperability",
+   "zh": "互通性",
+   "level": 3,
+   "src": "biz",
+   "tag": "parts"
+  },
+  {
+   "en": "redundancy",
+   "zh": "備援",
+   "level": 3,
+   "src": "biz",
+   "tag": "repair"
+  },
+  {
+   "en": "voltage",
+   "zh": "電壓",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "current",
+   "zh": "電流",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "output",
+   "zh": "輸出",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "ground",
+   "zh": "接地",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "offset",
+   "zh": "偏移",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "thermal",
+   "zh": "熱的；溫控的",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "spare",
+   "zh": "備品",
+   "level": 1,
+   "src": "mail",
+   "tag": "general"
+  },
+  {
+   "en": "mode",
+   "zh": "模式",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "range",
+   "zh": "範圍",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "missing",
+   "zh": "缺少的",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "load",
+   "zh": "載入；負載",
+   "level": 1,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "non-ATE",
+   "zh": "非自動測試設備",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "IQC",
+   "zh": "進料品質檢驗",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "SOP",
+   "zh": "標準作業程序",
+   "level": 2,
+   "src": "mail",
+   "tag": "general"
+  },
+  {
+   "en": "DOA",
+   "zh": "到貨即故障",
+   "level": 2,
+   "src": "mail",
+   "tag": "general"
+  },
+  {
+   "en": "DCDC",
+   "zh": "直流轉直流電源",
+   "level": 2,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "DUT temperature sensor",
+   "zh": "待測物溫度感測器",
+   "level": 3,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "abnormal",
+   "zh": "異常的",
+   "level": 3,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "impedance",
+   "zh": "阻抗",
+   "level": 3,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "failure",
+   "zh": "故障",
+   "level": 3,
+   "src": "mail",
+   "tag": "repair"
+  },
+  {
+   "en": "socket",
+   "zh": "插座",
+   "level": 3,
+   "src": "mail",
+   "tag": "repair"
+  }
+ ]
+}

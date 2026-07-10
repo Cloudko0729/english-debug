@@ -1,0 +1,373 @@
+=== UNIGRAM TOP 250 ===
+fail	106498	D-3 Repair physical damage and return (50%),專案異常標記: IQC Fail 
+pass	95873	機台驗證 PASS, 更新維修狀態,專案異常標記: IQC Fail 
+module	33562	B-1 換J3 MODULE
+relay	28467	PE Relay test 169:176]
+iqc	25561	A-2 IQC XGMI PORT G2 PIN BENT
+channel	21956	詢問user , 每片96個channel
+pin	21844	A-1 1001 ERROR, XGMI PORT G2 PIN BENT (AMD LOG)
+check	20585	B-4 IV curve check all components ok when compared to MY4858 
+board	18428	建檔錯誤更正, Equipment: Tester >> PRUX IV,Board: CH Board >> Circuit Board 
+non	17321	標記為特殊板型: Non-ATE 
+swap	17063	B-2 swap U8>U13
+test	16675	A-1: 0703 PE Pogo pin contact test 
+card	15778	D-1 CLEAN PORT XGMI & HAWAII CARD
+diag	15501	A-1: Cal, Diag pass.測產品時TTR fail.
+ate	15263	標記為特殊板型: Non-ATE 
+verify	14765	C-2 VERIFY FAILED POST (LOOP)
+cal	14731	A-1: Cal, Diag pass.測產品時TTR fail.
+customer	14605	Customer revised: 聯華電子 >> 聯電, OT33071 >> TE65569,聯絡窗口 >> 聯電, 廖川毅 Alex TEL: 03-5782258 EXT:
+fuse	13512	B-1 fuse OK
+slot	11764	A-2 IQC DIMM SLOT G - L BROKEN
+div	11220	工程部門變更: Eng. Div. 3 >> Asia Fixwell,工程部門配合負責人重新指派自動變更 
+replace	10741	B-1 REPLACE NEW PORT - AMIERUL
+power	10166	A-1 Verify FAIL, temp -40 celcius, heat power 100%
+lcd	9348	A-1: 0413 LCD Pogo pin contact test    :  ch1,2
+log	9287	A-1 1001 ERROR, XGMI PORT G2 PIN BENT (AMD LOG)
+revised	8699	Customer revised: 聯華電子 >> 聯電, OT33071 >> TE65569,聯絡窗口 >> 聯電, 廖川毅 Alex TEL: 03-5782258 EXT:
+ewip	8444	設定為 Non EWIP 
+warranty	8126	案件返修, 類別: Warranty, 返修次數: 1, 已於 2026-05-28 重新開啟返修專案 , 維修完成結案 >> 返修案件處理中 
+ext	7894	Customer revised: 聯華電子 >> 聯電, OT33071 >> TE65569,聯絡窗口 >> 聯電, 廖川毅 Alex TEL: 03-5782258 EXT:
+code	7636	B-1 Code IC LC4256V (DX3021) (返修借好品)
+ohm	7563	A-3 P1/P2 thermostat normally 0.4 ohm, OL when heated
+thermal	7295	B-2 Applied 5V/0.06A, thermal ok
+error	7152	A-1 1001 ERROR, XGMI PORT G2 PIN BENT (AMD LOG)
+eng	7116	工程部門變更: Eng. Div. 3 >> Asia Fixwell,工程部門配合負責人重新指派自動變更 
+sop	6308	B-1  SOP  7800*1
+mode	6073	A-1 C-mode12 fail (P722)
+item	5944	B-2 此螢幕修被改造LED，單價低退件,返修結案類別: #2 - Different fail item / channel 
+failure	5639	C-2 全部組裝回去上電, 顯示到fan failure就會跳掉
+loop	5599	C-2 VERIFY FAILED POST (LOOP)
+revise	5428	Customer revised: ADGT_PH >> ADGT_PH, TE62383 >> MY500,聯絡窗口 >> ADGT_PH, Melissa EXT: 0926-
+output	5326	B-4 swap 9DB1233AGLFT (12-Output Differential Buffer時鐘緩衝器)  U111 <> U109 
+testing	5208	C-2  cal pass，diag (Testing DP HV leakage current  ) DP2 Fail
+diode	5157	B-2  trace XP4子板有一顆marking 1503F電晶體diode檔量測高0.2
+short	5153	量測另一顆IRF640 short 且一顆0歐姆open
+init	5034	A-1 init error
+bir	4986	更正專案資訊 Equipment: T559 >> T5593,PN: BIR-030083 >> BIR-027601 
+connector	4982	B-1 與好品比connector / TP點 IV 無異常
+hcpl	4911	TLP181. HCPL-601V
+user	4800	詢問user , 每片96個channel
+doa	4478	2026/1/13 Wei Ming親收, 返修專案代碼變更: MY623 >> MY623_#1_DOA 
+open	4472	A-2 IQC OPEN CRYSTAL CLOCK CONNECTION BETWEEN DJ13 TO R1551, LIFTED UNIT PAD A51 & C51
+different	4419	B-2 此螢幕修被改造LED，單價低退件,返修結案類別: #2 - Different fail item / channel 
+rediag	4366	A-2 rediag pass 
+description	4355	4. Description: 1.pogo pin damage
+procedure	4024	#Div. 2 Testing Procedure#
+driver	3901	A-1 NO power supply in the driver
+mft	3887	Customer revised: 京元 - MFT >> 京元 - BU5,聯絡窗口 >> 京元 - MFT, 陳怡棻 EXT: 123623,Revise Customer 
+voltage	3826	A-1 QC:%FAIL - Slot 22 channel 7 quick voltage test at 10V adjusted for DGS offset
+digital	3824	B-2 驗證TPAnalogout ch5 , ch8 fail , digital comm ch5~12 fail
+fixwell	3712	工程部門變更: Spare >> Asia Fixwell,工程部門配合負責人重新指派自動變更 
+calibration	3707	A-2 接NB測試觸碰功能正常，Manual calibration
+peic	3514	5/8 Resolder all PEIC on the board
+net	3477	上層板量測XP4 power net142K(pass 124K)
+current	3429	C-2  cal pass，diag (Testing DP HV leakage current  ) DP2 Fail
+equipment	3409	建檔錯誤更正, Equipment: Tester >> PRUX IV,Board: CH Board >> Circuit Board 
+mos	3150	模組更換MOS*2 , 5.1K*1, 240*1, 12*2,18*1, 220*1, MMSTA42*1
+load	3098	B-2 E-load pass 
+mcp	3024	MCP6001T-I/OT*1v
+pogo	2896	A-1: 0703 PE Pogo pin contact test 
+dps	2870	A-2 換DPS，5V/0.39A，LED1藍燈閃爍、LED 3、4綠燈恆亮、LED5紅燈亮 
+leak	2817	RLY 整版量測 RY124 LEAK
+ppmu	2791	Bake it in the oven & Verify again: Ch.19 Module check PPMU measure current tests fail
+exp	2736	56B IADC2 Offset Cal w/RAM                             EXP=   0.000mV          ACT= 604.45
+pad	2735	C-1 REWORK LIFTED UNIT PAD
+connection	2724	A-2 IQC OPEN CRYSTAL CLOCK CONNECTION BETWEEN DJ13 TO R1551, LIFTED UNIT PAD A51 & C51
+memory	2691	A-1 limited memory virtual err
+ram	2678	E-1 RESEAT HEATSINK & SWAP RAM SLOT D WITH RAM SLOT F
+dcdc	2605	B-2 上電48V/1.1A，燈有亮，DCDC輸出OK" 
+limit	2576	44V RELAY COUNT LIMIT   (slotA)
+component	2544	C-3 REWORK COMPONENT R662
+ting	2539	由 Ting 借出至 SCS,借出日期: 2026-07-09,Consignment 常態性借出備品,2026/07/09 FedEx出貨#8741 4669 3333,湖口廠 
+spare	2446	工程部門變更: Spare >> Asia Fixwell,工程部門配合負責人重新指派自動變更 
+opa	2434	B-1 OPA*1 虛短路量測異常，輸入電流很大，電壓沒送滿就0.6A(正常0~0.02A)，更換FCX558TA(P58)*1, FCX458TA(N58)*1, HSMS-28
+chan	2402	Customer revised: Western Digital >> SanDisk,聯絡窗口 >> SanDisk, Chan Hua Yong MOBILE: +60164
+signal	2370	K-1 FOUND SHORTED HDT SIGNAL P0_HDT_TDI & P0_HDT_TDO, SOLDER SHORTED ON TEST POINT UNDER B
+led	2323	上電+-15V/0.01A  熱影像無異常   LED綠燈兩顆
+cathy	2312	由 Cathy 借出至 聯測科技,借出日期: 2025-10-09,預計歸還日期: 2025-11-10,HQ - 1F 小庫房 >> 借出 
+range	2309	"A-1 ERR 10034 encoder min/max value out of range T1 T2校正值錯誤
+act	2288	74ACT08外觀不佳,
+photomos	2253	B-5 PhotoMOS ok
+change	2222	D-1 CLEAN SOCKET, UNIT, CHANGE HEATSINK & SOCKET
+missing	2206	B-2 REWORK MISSING RESISTORS NEAR XGMI PORT
+tlp	2131	TLP181. HCPL-601V
+kohm	2112	B-1 底板，4kOhm, 8kOhm 異常，更換
+bps	2112	SN75176BPS*1 v
+mosfet	2067	B-1 檢測MOSFET pass
+adjust	2046	B-1 ADJUST PIN NO 223 ON SLOT H
+vsim	1978	"A-1 #HVDPU  DPS   VSIM IM       INITIALIZE ALLCH
+vih	1935	Channel Drive Levels: Vih Vil ch31
+offset	1891	A-1 QC:%FAIL - Slot 22 channel 7 quick voltage test at 10V adjusted for DGS offset
+gnd	1876	B-2 5V-GND power net = 231R 
+data	1874	A-2 IQC DAMAGE 2 DIMM G DATA TRACES. LIFTED Q29
+pmu	1858	A-1：PMU FV-MU Test 多 CH fail
+clk	1807	F-1 IQC DAMAGE (DISCONNECTED) P0_PCIE_MSLOT1_CLK_H TRACES, REWORK
+diagnostics	1795	A-1：diag:001525 Output gates, diagnostics, F lines, int. test 1A fail
+cis	1793	Customer revised: 京元 - BU1 >> 京元 - BU1 - CIS,聯絡窗口 >> 京元 - BU1 - CIS, 林月娥 EXT: 122151,更新為BU
+failed	1790	C-2 VERIFY FAILED POST (LOOP)
+contact	1790	A-1: 0703 PE Pogo pin contact test 
+rly	1771	B-1 RLY FAIL
+still	1763	B-7 Replace U18(EP4CE6E22C8N, FPGA) & Thermal check: Still abnormal(5V/0.04A)
+gain	1751	B-2 上機調整可變電阻，ZERO順時針、GAIN逆時針、LIN順時針，驗證PASS" 
+sqpg	1705	A-1 0417 TEST 122015 SQPG LCD TTB START ADDRESS CHECK _ ch33
+dgt	1644	A-1 TEST 185850 LCD DGT PRECISION MODE GAIN GUARANTEE CHECK ch63 fail
+cmlien	1624	備品在庫轉 >> 領用 by cmlien.fixwell,專案負責人配合領用作業變更 spare >> cmlien.fixwell 
+alarm	1610	B-1 220V 三項測試AC、Alarm燈亮，出貨。 
+relaydiag	1603	B-2 relaydiag ch3 fail
+trace	1594	B-2  trace XP4子板有一顆marking 1503F電晶體diode檔量測高0.2
+measured	1590	A-2 IQC OPEN UNIT PAD DJ13 TO R1551, MEASURED 1.12M OHM.
+dac	1566	B-2 與OT27082比較IV DAC1~DAC4波形異常
+amd	1541	A-1 1001 ERROR, XGMI PORT G2 PIN BENT (AMD LOG)
+bpmu	1536	A-2：SW:BPMU connect impedance test, high channels fail
+off	1531	B-1 REWORK KNOCK OFF COMPONENTS
+quick	1525	A-1 QC:%FAIL - Slot 22 channel 7 quick voltage test at 10V adjusted for DGS offset
+high	1499	C-1 CHECK CONNECTION UNIT PAD FOR USB, VALUE HIGH
+adc	1482	56B ADC RAM Address Counter                            EXP= 0064               ACT= 0001  
+powernet	1480	POWERNET PASS 
+dimm	1478	A-2 IQC DIMM SLOT G - L BROKEN
+regulator	1464	B-3 子版光藕、REGULATOR OK
+measure	1450	C-3 MEASURE RESISTANCE UNIT PAD BJ73 TO DIMM A DATA LINE 80 22.05 OHM
+read	1440	B-7 U8_MT28F400B5WGB_E28F400B5B read fail, replace IC and reprogrammed
+eor	1426	Tr          Tf          Tr(EOR)     Tf(EOR)         Tr(IOCLK)  Tf(IOCLK)
+pps	1421	LOG是 PPS FAIL 客戶說 換完這片就PASS" 
+drv	1418	建檔錯誤更正, Equipment: UF3000 >> UF3000LX,Board: Servo Driver >> Loader Turtable DRV 
+lcp	1418	Customer revised: 京元 - BU6 >> 京元 - BU6 - LCP,聯絡窗口 >> 京元 - BU6 - LCP, 謝明錩 EXT: 122144,更新BU 
+asic	1399	評估，客戶不允許拆模組研究，依據網路搜尋照片，模組版本都有小差異，且看起來有ASIC類，不建議維修 
+run	1388	A-1 ICH Abnormal Fiow Rate,CH1 Flow-Reg AT無法控制Pump Inverter,run機可手動調整，再次AT Pump Inverter數值
+force	1381	A-2：diag:44E INTERNAL FORCE, F/S Hi Shorted, K101A0 CHA0 fail
+comp	1375	"A-1 comp communication err
+accuracy	1342	44T FVMV DAC center offset: ACCURACY (slotA)
+interface	1337	建檔錯誤更正, Equipment: 乾蝕刻機 >> Robot,Board: PC Gas Interface Board >> Interface Board 
+ttb	1283	A-1 0417 TEST 122015 SQPG LCD TTB START ADDRESS CHECK _ ch33
+tel	1274	Customer revised: 聯華電子 >> 聯電, OT33071 >> TE65569,聯絡窗口 >> 聯電, 廖川毅 Alex TEL: 03-5782258 EXT:
+cap	1269	A-2 IQC FAIL, CAP 被換過，但容值正常
+bpr	1238	更正專案資訊 Board: IO PE CARD >> DR PE CARD,PN: BIR-030083 >> BPR-030837 
+dig	1226	56I VM (Default) Dig-1KV,1X w/SPU-6                    EXP= -50.000 V          ACT=  -0.00
+port	1225	A-1 1001 ERROR, XGMI PORT G2 PIN BENT (AMD LOG)
+meas	1225	B-3 PhotoMOS meas. ok
+bgr	1221	建檔錯誤更正, PN: BGR-026479 >> BGR-026479X02 
+consignment	1215	由 Ting 借出至 SCS,借出日期: 2026-07-09,Consignment 常態性借出備品,2026/07/09 FedEx出貨#8741 4669 3333,湖口廠 
+rediagpass	1210	B-1：烤箱，借機rediagpass。回好修驗問題仍在，可能為主機TCIO有問題
+low	1203	A-1 CH2 abnormal low temp
+hct	1181	預防性更換 PS2505-4,CD4040BE,ULN2804A,CD74HCT251E,CD4099BE
+cmp	1180	A-2: 0206 CC10UA I2  ch2，DRV,CMP ch8
+tony	1180	0425Tony親取 
+zoho	1175	備品在庫轉 >> 領用 by zoho_user440,洪斌告知驗證Pass,V93K PS CTH機台FOR 上機,專案負責人配合領用作業變更 spare >> zoho_use
+pcs	1175	A-3 Pre-rework verify FAIL XGMI3_PCS_TO_PCS_LOOPBACK_Test (1080)
+spu	1171	56B IADC2 Offset Cal w/RAM                             EXP=   0.000mV          ACT= 604.45
+lifted	1157	C-1 REWORK LIFTED UNIT PAD
+cpu	1156	A-1 User :CPU非常的燙
+systemwide	1092	B-1 4/8 Verify in Asia-FX: Ch.12 SystemWide & Module check Frequency Count test fail
+rework	1091	C-1 REWORK LIFTED UNIT PAD
+pcb	1089	B-1 IQC 整板PCB變色....
+control	1086	A-1  LED lit, unable to control
+dccal	1081	A-1 DC CALIBRATION PPMU VSIM_IM DCCAL (ch71 fail)
+dut	1072	A-1 DUT Temperature Sensor Error
+supply	1046	A-2 CPU塗散熱膏，Power supply接主機板的連結器焦黑，換連結器(含端子)
+unit	1044	C-1 REWORK LIFTED UNIT PAD
+miss	1029	A-2 IQC COMPONENT BIOS (U90) MISS SOLDER &
+line	1020	C-2 VERIFY DIMM A DATA LINE 80 OPEN
+mobile	1013	Customer revised: TFAMD SLT-BK >> Agile Tech,聯絡窗口 >> Agile Tech, RAM MOBILE: +65-9169-8983
+linearity	1012	A-1 # 184130 LCD PL CURRENT LINEARITY  CH48
+min	982	C-1 P0_PWR_GOOD PULL UP VOLTAGE INTERMITTENT UNSTABLE, MIN +-1.789 TO MAX +-1.80024. HEART
+versa	977	建檔錯誤更正, Equipment: V1200 >> Versa1200 
+dpu	967	*** ABORTING CHECK FOR DPU4 ***
+applied	963	B-1 Applied 48V/0.93A, DCDC OK
+level	946	diag DIOPath level  all ch
+dyna	939	Customer revised: Dyna-Serv >> Dyna-Serv_SFA,聯絡窗口 >> Dyna-Serv_SFA, Art Zuniega MOBILE: +6
+serv	939	Customer revised: Dyna-Serv >> Dyna-Serv_SFA,聯絡窗口 >> Dyna-Serv_SFA, Art Zuniega MOBILE: +6
+bga	927	B-1 上次BGA重焊, 上絕緣漆 
+gen	916	B-4 上機驗證PASS，LOOP 、Gen2+ PASS" 
+impedance	907	C-1 P0_I3C_SDA<1> IMPEDANCE HIGH 12MOHM TO R1595
+input	902	B-1 清理後方接口，Input接口有污漬，自檢測試PASS
+bios	898	B-2 FLASH BIOS & FPGA
+mbps	885	AC cal：DM800MBPS TIMEOUT : PG RUN busy
+ucc	877	B-2 更換DSEI12-06A*2、IR2110S*2、UCC2818DW、28C45、UC3895DW、2N7002
+normal	871	B-9 Replace U18 & R-Checkfor D4A: 1 pin to GND is 560Ohm(Not sure it's normal)
+scan	870	A-1 Scan False Map, 即為產生假的wafer defect影像，但實際上並沒有defect.
+fpga	865	B-2 FLASH BIOS & FPGA
+upc	856	B-1 根據以往記錄更換UPC812*5
+lvc	848	5/13 Replace 1ea LVC16245A besides U175(LVC16244A) on the back-side of the board
+bms	838	B-2 Replace SN74AHCT1G125DCKR(Mark:BMS)*6
+stuck	833	A-1  Test stuck & handler hang
+leakage	832	A-1 leakage fail
+mail	830	2025/10/12 Ting mail通知:OT24334_#9_WP此筆客戶同意另外收費，請協助開立新專案 
+clean	817	D-1 CLEAN SOCKET, UNIT, CHANGE HEATSINK & SOCKET
+connect	815	B-8 R-Check for D4A: 1 pin to GND is 6Ohm, connect to U18(FPGA)
+socket	810	D-1 CLEAN SOCKET, UNIT, CHANGE HEATSINK & SOCKET
+case	781	A-2: 0309 Pass,返修結案類別: #3 - Re-diag PASS in previous case 
+bgl	780	更換9DB102BGL,DS26LV32A, MX29GL128EUT2I-11G(FLASH為大陸料,暫不更換) 
+flash	765	B-2 FLASH BIOS & FPGA
+inv	761	A-1 COMP INV COMM ERR., 低壓異常
+err	757	A-1 ERR　紅燈閃15下
+dip	756	B-1 板子為DIP USB CONNECTOR
+irf	749	B-1 上次其中一個模組的IRF9640S誤換成IRF640
+reactivation	744	Reactivation,無法維修結案 >> 尚未進行,0708 工程通知修改工程紀錄 
+voh	740	A-1 iol, voh channel 4 fail, value: 0
+bit	738	B-3 U31_AT93C66B 讀出來為空，MY241_U31_AT93C66B_16BIT__DX1001_0001BB17 
+eeprom	729	B-1 EEPROM重燒code
+ohms	728	B-2 更換1K ohms*2、THS4051ID，與OT24672交換底板 
+previous	728	A-2: 0309 Pass,返修結案類別: #3 - Re-diag PASS in previous case 
+monitor	725	MB3771 (Power Supply Monitor) v
+sdrm	724	更正專案資訊 Board: P1000 SDRM MODULE >> SDRM Module 
+replaced	718	B-6 R26/R27/R28 300Ohm burnt, replaced" 
+igbt	717	IGBT量測OK, 但還是與備品交換
+source	716	AMP connector：650091-2 _ https://www.ample-chip.com/ProductDetail/YS07679569/650091-2.html
+eic	714	B-2 更換IC31 EIC4101, IC32 EIC4091, IC33 EIC4081.
+cable	711	C-1 RESEAT HDT CABLE
+hvdpu	709	"A-1 #HVDPU  DPS   VSIM IM       INITIALIZE ALLCH
+sensor	701	A-1 DUT Temperature Sensor Error
+fct	694	B-2 更換74FCT245A , CS82C55AZ" 
+stn	691	A-1 load STN20
+path	689	A-2：diag:40I DIRECT Ext Path AutoMCU arm CH3 fail
+jessica	683	2024/11/14 Jessica入庫 
+pins	680	A-1 15 pins broken
+performance	677	20240130: Flex-01 two slot > Performance fail
+guarantee	677	A-1 TEST 185850 LCD DGT PRECISION MODE GAIN GUARANTEE CHECK ch63 fail
+write	671	D-1 VERIFY FAILED USRDP PATTERN WRITE ONLY
+onyx	667	建檔錯誤更正, Equipment: FLEX >> SLT,Board: DC90 >> Onyx Board,PN: 805-229-50 >> 102-H52301-00B 
+fan	666	B-2 FUSE 30A*1, FAN fail, replace
+dib	663	1/23,1/26換CAL DIB板交叉驗證確認主板 ch31 fail
+fiona	651	由 Fiona 借出至 超豐,借出日期: 2019-03-04,預計歸還日期: 2019-04-04,Ting告知機台當機,好修備品先借出,待維修專案修復後歸還,新竹 >> 出貨 
+possible	646	A-2：QC:PE Relay for CH9 Possible Stuck Open
+sram	645	B-1 上電5V/19A照熱影像異常，記憶體SRAM多顆不熱
+pwm	643	D-1 將5V子板及PWM子板拆下檢察 , 無異常
+pfc	640	C-1 更換FA5502M(PFC)
+slota	640	C-1 SlotA <> slotB交換上層子板
+sunday	640	備品在庫轉 >> 領用 by sunday_wu,專案負責人配合領用作業變更 spare >> sunday_wu 
+set	634	特殊板型,NO FAIL / NOT YET SET UP 
+address	630	C-1 FLASH MAC ADDRESS
+ltc	630	B-1 Replace U29/30 LTC2449CUHF, IV check ok
+tps	624	B-1 更換TPS70802*1 v(穩壓)
+xgmi	621	A-1 1001 ERROR, XGMI PORT G2 PIN BENT (AMD LOG)
+cub	621	A-2 IQC 有被修過MAX6714CUB(亂焊)
+asia	617	工程部門變更: Spare >> Asia Fixwell,工程部門配合負責人重新指派自動變更 
+heat	616	A-1 Verify FAIL, temp -40 celcius, heat power 100%
+rvs	615	A-1 0417 TEST 188100 RVS IM SIGNAL LINE CHECK _ all ch
+window	610	Customer revised: 京元 - TD3 >> 京元 - BU3,聯絡窗口 >> 京元 - BU3, 潘建君 EXT: 122834,Revise Customer &
+mohm	609	B-2 換一個參考點，量IV發現，Power Module FSAM20SH60A異常，PIN29/31 短路，剩48Ohm，正常:MOhm，更換 
+sdram	609	B-1: 換子板SDRAM*4，同步換子板驗證。
+fedex	603	由 Ting 借出至 SCS,借出日期: 2026-07-09,Consignment 常態性借出備品,2026/07/09 FedEx出貨#8741 4669 3333,湖口廠 
+
+=== BIGRAM TOP 120 ===
+non ate	15108
+channel module	11842
+iqc fail	10140
+customer revised	8699
+verify fail	8323
+diag pass	7471
+eng div	7112
+fail item	5880
+cal fail	5655
+check fail	5630
+module channel	5459
+revise customer	5422
+ext revise	5390
+failure mode	5229
+verify pass	4800
+card bir	4435
+item channel	4399
+different fail	4393
+rediag pass	4298
+div testing	4023
+testing procedure	4023
+cal pass	3514
+power net	3404
+loop pass	3145
+digital board	3130
+fail log	3088
+div eng	2943
+pass different	2882
+iqc pass	2754
+pogo pin	2674
+diag fail	2546
+relay check	2368
+pass iqc	2340
+lcd card	2269
+non ewip	2175
+connection check	2104
+bir card	2101
+pin connection	2061
+signal pin	2048
+missing component	1999
+fail fail	1900
+pass cal	1844
+revised mft	1819
+mft ext	1769
+pass loop	1749
+channel board	1747
+mft mft	1716
+revised ext	1697
+test fail	1646
+relay module	1644
+cmlien fixwell	1609
+relay fail	1593
+pin pin	1591
+exp act	1536
+fail relay	1534
+relaydiag fail	1472
+board digital	1451
+init fail	1450
+board channel	1443
+cis ext	1442
+revised cis	1441
+test lcd	1430
+mcp mcp	1420
+fuse pass	1386
+mcp ext	1367
+test signal	1358
+fuse open	1324
+relay card	1313
+card bps	1300
+pass fail	1293
+revised mcp	1247
+fail replace	1240
+still fail	1227
+swap relay	1222
+pin fail	1194
+eor eor	1187
+card card	1159
+verify failed	1155
+interface module	1138
+output fail	1124
+fail pass	1116
+ohm ohm	1103
+fail slot	1091
+sqpg lcd	1084
+relay pass	1082
+accuracy check	1072
+lcd dgt	1070
+card bpr	1050
+slot fail	1039
+power supply	1016
+pin sop	1004
+pass pass	979
+dyna serv	939
+diag cal	939
+voltage check	929
+offset gain	929
+high limit	922
+gain adjust	918
+pass diag	917
+lcd ttb	893
+relay relay	882
+pin short	870
+vih output	869
+low limit	856
+lcd comp	842
+min fail	829
+output min	828
+doa doa	805
+fuse fail	804
+current check	804
+fail swap	791
+board bgr	791
+relay test	787
+amd log	785
+adjust check	783
+net ohm	782
+lcp ext	781
+revised lcp	780
+output current	776
+leak current	776
