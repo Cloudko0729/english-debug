@@ -14,9 +14,14 @@
   .q .no{font-size:.72rem;color:#98a3bd;font-weight:700}
   .q .qt{font-weight:700;margin:4px 0 8px;font-size:.95rem}
   .q .sub{font-size:.8rem;color:#999;margin:-4px 0 8px}
-  .q button{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit}
-  .q button.ok{border-color:#2a9d5c;background:#e3f6ec}
-  .q button.no{border-color:#d64561;background:#fbe3e9}
+  .q button.opt{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit}
+  .q button.opt.ok{border-color:#2a9d5c;background:#e3f6ec}
+  .q button.opt.no{border-color:#d64561;background:#fbe3e9}
+  .chunks,.answ{display:flex;flex-wrap:wrap;gap:6px;margin:7px 0}
+  .chunk{padding:8px 12px;border:2px solid #2c5f8a;border-radius:9px;background:#fff;color:#2c5f8a;font-weight:700;cursor:pointer;font-size:.88rem;font-family:inherit}
+  .chunk.used{opacity:.3;pointer-events:none}
+  .slot{padding:8px 12px;border-radius:9px;background:#eaf3ff;color:#1f4463;font-weight:700;font-size:.88rem;cursor:pointer}
+  .rofb{font-weight:700;font-size:.88rem;min-height:1.3em;margin-top:4px}
   .fix{display:none;margin-top:7px;background:#eaf3ff;border-radius:9px;padding:8px 12px;font-size:.84rem;color:#1f4463}
   .fix .swap{margin-top:4px;font-weight:700}
   #result{font-weight:800;font-size:1.05rem;margin-top:14px;min-height:1.5em;text-align:center}
@@ -24,41 +29,85 @@
 </head>
 <body>
 <header><h1>⚡ 今日快練</h1>
-<p><a href="../index.html">← 課程目錄</a> · 每天 5 題 · 單字＋句型 · 錯的會自動回收</p></header>
+<p><a href="../index.html">← 課程目錄</a> · 每天 5 題 · 錯的隔天換句再考</p></header>
 <div class="meta" id="meta"></div>
 <div id="qs"></div>
 <div id="result"></div>
 
-<script src="../vocab.js"></script>
-<script src="../repair_terms.js"></script>
-<script src="qbank.js"></script>
-<script src="quick_engine.js"></script>
+<script src="../vocab.js?v=202607101611"></script>
+<script src="../repair_terms.js?v=202607101611"></script>
+<script src="../zh_terms.js?v=202607101611"></script>
+<script src="qbank.js?v=202607101611"></script>
+<script src="repair_qs.js?v=202607101611"></script>
+<script src="quick_engine.js?v=202607101611"></script>
 <script>
 const QS = QuickPractice.build();
 const st = QuickPractice.stats();
 document.getElementById("meta").innerHTML =
-  `📍 W${QuickPractice.week} 場景週 · 已學 ${st.learned} 字 · 待回收錯題 ${st.mistakes}` +
-  (QuickPractice.retake ? " · 🔁 今天已完成，這輪是加練（隨機題）" : "");
+  `📍 W${QuickPractice.week} · 已學 ${st.learned} 詞 · 待回收錯題 ${st.mistakes}` +
+  (QuickPractice.retake ? " · 🔁 今天已完成，這輪是加練" : "");
 let done = 0, okc = 0;
 const el = document.getElementById("qs");
-el.innerHTML = QS.map((q, i) => `<div class="q" id="q${i}">
-  <div class="no">${i + 1} / ${QS.length} ${q.kind === "word" ? "🔤 單字" : q.kind === "repair" ? "🔧 維修詞條" : "✍️ 句型"}</div>
-  <div class="qt">${q.q}</div>${q.sub ? `<div class="sub">${q.sub}</div>` : ""}` +
-  q.choices.map((c, ci) => `<button onclick="ans(${i},${ci},this)">${c.label}</button>`).join("") +
-  `<div class="fix" id="fix${i}">💡 ${q.why}${q.swap ? `<div class="swap">可套用：${q.swap}</div>` : ""}</div></div>`).join("");
-function ans(i, ci, btn) {
-  const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1";
-  const q = QS[i], ok = !!q.choices[ci].ok;
-  box.querySelectorAll("button").forEach((b, bi) => { b.disabled = true;
-    if (q.choices[bi].ok) b.classList.add("ok"); else if (bi === ci) b.classList.add("no"); });
+el.innerHTML = QS.map((q, i) => {
+  let body = "";
+  if (q.chunks) {
+    body = `<div class="answ" id="answ${i}"></div>
+      <div class="chunks">${q.chunks.map((c, ci) => `<button class="chunk" id="ch${i}_${ci}" onclick="pick(${i},${ci})">${c}</button>`).join("")}</div>
+      <div class="rofb" id="rofb${i}"></div>`;
+  } else {
+    body = q.choices.map((c, ci) => `<button class="opt" onclick="ans(${i},${ci},this)">${c.label}</button>`).join("");
+  }
+  return `<div class="q" id="q${i}">
+    <div class="no">${i + 1} / ${QS.length} ${q.label || ""}</div>
+    <div class="qt">${q.q}</div>${q.sub ? `<div class="sub">${q.sub}</div>` : ""}${body}
+    <div class="fix" id="fix${i}">💡 ${q.why}${q.swap ? `<div class="swap">可套用：${q.swap}</div>` : ""}</div></div>`;
+}).join("");
+
+function settle(i, ok) {
   document.getElementById("fix" + i).style.display = "block";
-  QuickPractice.answer(q, ok);
+  QuickPractice.answer(QS[i], ok);
   done++; if (ok) okc++;
   if (done === QS.length) {
     QuickPractice.finish(okc, QS.length);
     document.getElementById("result").textContent =
-      `🎉 完成！答對 ${okc} / ${QS.length}` + (okc < QS.length ? "，答錯的明天會再出現" : "，全對！");
+      `🎉 完成！答對 ${okc} / ${QS.length}` + (okc < QS.length ? "，答錯的明天換句再考" : "，全對！");
   }
+}
+function ans(i, ci, btn) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const q = QS[i], ok = !!q.choices[ci].ok;
+  box.querySelectorAll("button.opt").forEach((b, bi) => { b.disabled = true;
+    if (q.choices[bi].ok) b.classList.add("ok"); else if (bi === ci) b.classList.add("no"); });
+  settle(i, ok);
+}
+// 詞塊組裝
+const roState = {};
+function pick(i, ci) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return;
+  const q = QS[i]; if (!roState[i]) roState[i] = [];
+  const chip = document.getElementById("ch" + i + "_" + ci); if (chip.classList.contains("used")) return;
+  chip.classList.add("used"); roState[i].push({ ci, text: q.chunks[ci] });
+  renderAnsw(i);
+  if (roState[i].length === q.chunks.length) checkRo(i);
+}
+function renderAnsw(i) {
+  document.getElementById("answ" + i).innerHTML =
+    roState[i].map((s, k) => `<span class="slot" onclick="undo(${i},${k})">${s.text}</span>`).join("");
+}
+function undo(i, k) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return;
+  const s = roState[i].splice(k, 1)[0];
+  if (s) document.getElementById("ch" + i + "_" + s.ci).classList.remove("used");
+  renderAnsw(i);
+}
+function checkRo(i) {
+  const q = QS[i], box = document.getElementById("q" + i); box.dataset.done = "1";
+  const got = roState[i].map(s => s.text).join(" ");
+  const ok = got === q.correct.join(" ");
+  const fb = document.getElementById("rofb" + i);
+  fb.textContent = ok ? "✓ 正確！" : "✗ 正解：" + q.correct.join(" ");
+  fb.style.color = ok ? "#2a9d5c" : "#d64561";
+  settle(i, ok);
 }
 </script>
 </body>

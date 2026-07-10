@@ -1,15 +1,17 @@
-// 今日快練引擎：每日 5 題資料驅動（單字＋句型文法），依 Codex×Claude 對齊設計。
-// 需要：vocab.js(ADULT_VOCAB)、repair_terms.js(REPAIR_TERMS)、qbank.js(GRAMMAR_QS)
+// 今日快練引擎 v2（槽位制，2026-07-11 Claude×Codex 對齊設計）
+// 槽位：①複習 ②單字(商用字/中→英維修詞輪替) ③文法修復(錯句修復/填空/排序輪替)
+//       ④功能句(禮貌改寫/自然句) ⑤聽說槽(P3 前先出 中→英 或 時態題)
+// 週五/週末：②-④讓位給錯題回收。錯句修復答錯 → 隔天同 error_code 不同句。
+// 需要：vocab.js、repair_terms.js、zh_terms.js、qbank.js、repair_qs.js
 (function () {
-  const COURSE_START = "2026-07-13";   // W1 週一
-  // 26 週場景 tag（vocab.js 場景空間）＋是否維修相關週
+  const COURSE_START = "2026-07-13";
   const WEEK_TAGS = [
-    ["office", 0], ["service", 0], ["parts", 1], ["repair", 1],            // W1-4 基礎
-    ["quotation", 1], ["quotation", 1], ["repair", 1], ["delivery", 1],    // W5-8 報價RMA
-    ["repair", 1], ["parts", 1], ["repair", 1], ["repair", 1], ["service", 1], // W9-13 狀態異常
-    ["meeting", 0], ["repair", 1], ["office", 0], ["service", 0],          // W14-17 來訪
-    ["meeting", 0], ["meeting", 0], ["repair", 1], ["delivery", 1], ["meeting", 0], // W18-22 電話
-    ["quotation", 1], ["repair", 1], ["service", 1], ["general", 0],       // W23-26 整合
+    ["office", 0], ["service", 0], ["parts", 1], ["repair", 1],
+    ["quotation", 1], ["quotation", 1], ["repair", 1], ["delivery", 1],
+    ["repair", 1], ["parts", 1], ["repair", 1], ["repair", 1], ["service", 1],
+    ["meeting", 0], ["repair", 1], ["office", 0], ["service", 0],
+    ["meeting", 0], ["meeting", 0], ["repair", 1], ["delivery", 1], ["meeting", 0],
+    ["quotation", 1], ["repair", 1], ["service", 1], ["general", 0],
   ];
   const RELATED = {
     quotation: ["payment", "order", "delivery"], repair: ["parts", "service", "logistics"],
@@ -20,79 +22,101 @@
     logistics: ["delivery", "parts", "general"],
   };
   const todayStr = () => { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
+  const dayIdx = Math.floor(Date.parse(todayStr()) / 86400000);
   const weekNo = () => Math.min(26, Math.max(1, Math.floor((Date.parse(todayStr()) - Date.parse(COURSE_START)) / 604800000) + 1));
   function allowedLevels(w) { return w <= 6 ? [1] : w <= 14 ? [1, 2] : w <= 22 ? [1, 2, 3] : [2, 3]; }
   function levelWeight(w, lv) {
     const t = w <= 6 ? { 1: 1 } : w <= 14 ? { 1: .65, 2: .35 } : w <= 22 ? { 1: .35, 2: .45, 3: .2 } : { 2: .55, 3: .45 };
     return t[lv] || 0;
   }
-  // 種子隨機（同日固定；重測全隨機）
   function seeded(str) { let h = 2166136261; for (const c of str) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return () => { h = Math.imul(h ^ (h >>> 15), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); return ((h ^= h >>> 16) >>> 0) / 4294967296; }; }
   const shuf = (a, rnd) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor((rnd ? rnd() : Math.random()) * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
   // ── 狀態 ──
   function loadState() {
-    try { const s = JSON.parse(localStorage.getItem("adultPracticeState") || "null"); if (s && s.version === 1) return s; } catch (e) {}
-    return { version: 1, words: {}, repairs: {}, grammar: {}, mistakes: [], days: {} };
+    try { const s = JSON.parse(localStorage.getItem("adultPracticeState") || "null"); if (s && s.version >= 1) { s.version = 2; s.zhterms = s.zhterms || {}; s.repairfix = s.repairfix || {}; s.errorCodes = s.errorCodes || {}; return s; } } catch (e) {}
+    return { version: 2, words: {}, repairs: {}, grammar: {}, zhterms: {}, repairfix: {}, errorCodes: {}, mistakes: [], days: {} };
   }
   const state = loadState();
   const save = () => localStorage.setItem("adultPracticeState", JSON.stringify(state));
+  const mapOf = k => k === "word" ? state.words : k === "repair" ? state.repairs : k === "zhterm" ? state.zhterms : (k === "repairfix" || k === "reorder") ? state.repairfix : state.grammar;
   function rec(map, key) { return map[key] || (map[key] = { seen: 0, correct: 0, wrong: 0, streak: 0, lastSeen: "", nextReview: "" }); }
   function nextInterval(it, ok) { if (!ok) return 1; return it.streak <= 0 ? 1 : it.streak === 1 ? 3 : it.streak === 2 ? 7 : 14; }
   function addDays(dateStr, n) { const d = new Date(dateStr + "T00:00:00"); d.setDate(d.getDate() + n); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
-  function mark(kind, key, ok) {
-    const map = kind === "word" ? state.words : kind === "repair" ? state.repairs : state.grammar;
-    const it = rec(map, key);
+  function mark(q, ok) {
+    const it = rec(mapOf(q.kind), q.key);
     it.seen++; ok ? (it.correct++, it.streak++) : (it.wrong++, it.streak = 0);
-    it.lastSeen = todayStr();
-    it.nextReview = addDays(todayStr(), nextInterval(it, ok));
-    if (!ok) state.mistakes.push({ id: kind + ":" + key, type: kind, wrongAt: todayStr(), due: addDays(todayStr(), 1) });
-    if (state.mistakes.length > 60) state.mistakes = state.mistakes.slice(-60);
+    it.lastSeen = todayStr(); it.nextReview = addDays(todayStr(), nextInterval(it, ok));
+    if (q.code) {   // 錯誤代碼追蹤（同錯點隔天不同句）
+      const ec = state.errorCodes[q.code] || (state.errorCodes[q.code] = { wrong: 0, correct: 0 });
+      ok ? ec.correct++ : (ec.wrong++, ec.lastWrong = todayStr());
+    }
+    if (!ok) state.mistakes.push({ id: q.kind + ":" + q.key, kind: q.kind, code: q.code || null, wrongAt: todayStr(), due: addDays(todayStr(), 1) });
+    if (state.mistakes.length > 80) state.mistakes = state.mistakes.slice(-80);
     save();
   }
 
-  // ── 選字 ──
+  // ── 本日參數 ──
   const W = weekNo(), weekTag = WEEK_TAGS[W - 1][0], repairWeek = !!WEEK_TAGS[W - 1][1];
   const retake = !!(state.days[todayStr()] && state.days[todayStr()].done);
-  const rnd = retake ? null : seeded(todayStr() + "-quick");
+  const rnd = retake ? null : seeded(todayStr() + "-quick2");
   const R = () => (rnd ? rnd() : Math.random());
 
-  function scoreWord(v) {
-    const it = state.words[v.en] || { seen: 0, correct: 0, streak: 0 };
-    if (it.streak >= 3) return -1;   // mastered
-    let s = 0;
-    if (v.tag === weekTag) s += 100;
-    else if ((RELATED[weekTag] || []).includes(v.tag)) s += 40;
-    if (v.src === "mail") s += 20;
-    s += levelWeight(W, v.level) * 30;
-    s -= it.seen * 25 + it.correct * 8;
-    return s + R() * 15;
-  }
-  function pickNewWords(n, excl) {
-    const lv = allowedLevels(W);
-    return ADULT_VOCAB.filter(v => lv.includes(v.level) && !excl.has(v.en) && (state.words[v.en] || { seen: 0 }).seen === 0)
-      .map(v => [scoreWord(v), v]).filter(x => x[0] >= 0).sort((a, b) => b[0] - a[0]).slice(0, n).map(x => x[1]);
-  }
-  function pickReviewWords(n, excl) {
-    const t = todayStr();
-    const due = ADULT_VOCAB.filter(v => { const it = state.words[v.en]; return it && it.seen > 0 && it.streak < 3 && !excl.has(v.en) && (it.nextReview <= t || it.wrong > it.correct); });
-    const pool = due.length ? due : ADULT_VOCAB.filter(v => { const it = state.words[v.en]; return it && it.seen > 0 && it.streak < 3 && !excl.has(v.en); });
-    return shuf(pool, rnd).slice(0, n);
-  }
+  // ── 題目產生器 ──
   function wordQ(v, dir) {
     const lv = ADULT_VOCAB.filter(x => x.en !== v.en && Math.abs(x.level - v.level) <= 1);
-    const near = shuf(lv.filter(x => x.tag === v.tag), rnd).concat(shuf(lv, rnd)).filter((x, i, arr) => arr.findIndex(y => y.en === x.en) === i).slice(0, 3);
-    if (dir === "e2z") return { kind: "word", key: v.en, q: `「${v.en}」的意思是？`, choices: shuf([{ label: v.zh, ok: 1 }].concat(near.map(x => ({ label: x.zh, ok: 0 }))), rnd), why: `${v.en} = ${v.zh}（${v.src === "mail" ? "⭐你的常用字" : "商業補充字"}）` };
-    return { kind: "word", key: v.en, q: `「${v.zh}」的英文是？`, choices: shuf([{ label: v.en, ok: 1 }].concat(near.map(x => ({ label: x.en, ok: 0 }))), rnd), why: `${v.zh} = ${v.en}` };
+    const near = shuf(lv.filter(x => x.tag === v.tag), rnd).concat(shuf(lv, rnd)).filter((x, i, a) => a.findIndex(y => y.en === x.en) === i).slice(0, 3);
+    if (dir === "e2z") return { kind: "word", key: v.en, label: "🔤 單字", q: `「${v.en}」的意思是？`, choices: shuf([{ label: v.zh, ok: 1 }].concat(near.map(x => ({ label: x.zh, ok: 0 }))), rnd), why: `${v.en} = ${v.zh}` };
+    return { kind: "word", key: v.en, label: "🔤 單字", q: `「${v.zh}」的英文是？`, choices: shuf([{ label: v.en, ok: 1 }].concat(near.map(x => ({ label: x.en, ok: 0 }))), rnd), why: `${v.zh} = ${v.en}` };
   }
-  function repairQ(excl) {
-    const pool = REPAIR_TERMS.filter(t => !excl.has(t.en) && (state.repairs[t.en] || { streak: 0 }).streak < 3);
+  function scoreWord(v) {
+    const it = state.words[v.en] || { seen: 0, correct: 0, streak: 0 };
+    if (it.streak >= 3) return -1;
+    let s = 0;
+    if (v.tag === weekTag) s += 100; else if ((RELATED[weekTag] || []).includes(v.tag)) s += 40;
+    if (v.src === "mail") s += 20;
+    s += levelWeight(W, v.level) * 30 - it.seen * 25 - it.correct * 8;
+    return s + R() * 15;
+  }
+  function newWordQ(excl) {
+    const lv = allowedLevels(W);
+    const pool = ADULT_VOCAB.filter(v => lv.includes(v.level) && !excl.has(v.en) && (state.words[v.en] || { seen: 0 }).seen === 0)
+      .map(v => [scoreWord(v), v]).filter(x => x[0] >= 0).sort((a, b) => b[0] - a[0]);
+    return pool.length ? wordQ(pool[0][1], dayIdx % 2 ? "z2e" : "e2z") : null;
+  }
+  function reviewWordQ(excl) {
+    const t = todayStr();
+    let pool = ADULT_VOCAB.filter(v => { const it = state.words[v.en]; return it && it.seen > 0 && it.streak < 3 && !excl.has(v.en) && (it.nextReview <= t || it.wrong > it.correct); });
+    if (!pool.length) pool = ADULT_VOCAB.filter(v => { const it = state.words[v.en]; return it && it.seen > 0 && it.streak < 3 && !excl.has(v.en); });
+    return pool.length ? wordQ(shuf(pool, rnd)[0], dayIdx % 2 ? "e2z" : "z2e") : null;
+  }
+  function zhtermQ(excl) {
+    const pool = ZH_TERMS.filter(t => !excl.has(t.zh) && (state.zhterms[t.zh] || { streak: 0 }).streak < 3);
     if (!pool.length) return null;
-    const t = shuf(pool, rnd)[0];
-    const re = new RegExp(t.en.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i");
-    const blank = re.test(t.example) ? t.example.replace(re, "＿＿＿") : t.example + "（＿＿＿）";
-    const near = shuf(REPAIR_TERMS.filter(x => x.en !== t.en && x.cat === t.cat), rnd).slice(0, 3);
-    return { kind: "repair", key: t.en, q: `維修詞條填空：${blank}`, sub: t.example_zh, choices: shuf([{ label: t.en, ok: 1 }].concat(near.map(x => ({ label: x.en, ok: 0 }))), rnd), why: `${t.en} = ${t.zh}` };
+    pool.sort((a, b) => ((state.zhterms[a.zh] || { seen: 0 }).seen - (state.zhterms[b.zh] || { seen: 0 }).seen) || (R() - .5));
+    const t = pool[0];
+    const near = shuf(ZH_TERMS.filter(x => x.zh !== t.zh), rnd).slice(0, 3);
+    return { kind: "zhterm", key: t.zh, label: "🀄 維修詞", q: `「${t.zh}」的英文說法是？`, choices: shuf([{ label: t.en, ok: 1 }].concat(near.map(x => ({ label: x.en, ok: 0 }))), rnd), why: `${t.zh} = ${t.en}`, swap: t.example };
+  }
+  function repairfixQ(excl, preferCode) {
+    let pool = REPAIR_QS.filter(q => !excl.has(q.id) && (state.repairfix[q.id] || { streak: 0 }).streak < 2);
+    if (!pool.length) return null;
+    if (preferCode) { const p = pool.filter(q => q.code === preferCode && (state.repairfix[q.id] || { seen: 0 }).seen === 0); if (p.length) pool = p; }
+    else {
+      const tagged = pool.filter(q => q.tag === weekTag);
+      if (tagged.length) pool = tagged;
+    }
+    pool.sort((a, b) => ((state.repairfix[a.id] || { seen: 0 }).seen - (state.repairfix[b.id] || { seen: 0 }).seen) || (R() - .5));
+    const q = pool[0];
+    return { kind: "repairfix", key: q.id, code: q.code, label: "🔧 錯句修復", q: `這句有中式錯誤：「${q.wrong}」`, sub: `（${q.zh}）點詞塊組出正確的句子`, chunks: shuf(q.chunks, rnd), correct: q.chunks, why: q.why, swap: q.swap };
+  }
+  function reorderQ(excl) {
+    let pool = REPAIR_QS.filter(q => !excl.has(q.id));
+    const tagged = pool.filter(q => q.tag === weekTag);
+    if (tagged.length) pool = tagged;
+    if (!pool.length) return null;
+    const q = shuf(pool, rnd)[0];
+    return { kind: "reorder", key: q.id, label: "🧩 句子排序", q: `把詞塊排成正確句子（${q.zh}）`, chunks: shuf(q.chunks, rnd), correct: q.chunks, why: q.why, swap: q.swap };
   }
   function grammarQ(prefTypes, excl) {
     let pool = GRAMMAR_QS.filter(g => !excl.has(g.id));
@@ -100,53 +124,61 @@
     pool = (tagged.length ? tagged : pool).slice();
     if (prefTypes) { const p = pool.filter(g => prefTypes.includes(g.type)); if (p.length) pool = p; }
     pool.sort((a, b) => ((state.grammar[a.id] || { seen: 0 }).seen - (state.grammar[b.id] || { seen: 0 }).seen) || (R() - .5));
-    const g = pool[0];
-    if (!g) return null;
-    return { kind: "grammar", key: g.id, q: g.q, choices: shuf(g.c.map((label, i) => ({ label, ok: i === g.a ? 1 : 0 })), rnd), why: g.why, swap: g.swap };
+    const g = pool[0]; if (!g) return null;
+    const LBL = { A: "✍️ 自然句", B: "✍️ 搭配詞", C: "✍️ 時態", D: "✍️ 禮貌句" };
+    return { kind: "grammar", key: g.id, label: LBL[g.type] || "✍️ 句型", q: g.q, choices: shuf(g.c.map((label, i) => ({ label, ok: i === g.a ? 1 : 0 })), rnd), why: g.why, swap: g.swap };
   }
   function mistakeQs(n, excl) {
     const t = todayStr(), out = [];
-    const due = state.mistakes.filter(m => m.due <= t);
-    for (const m of shuf(due, rnd)) {
+    for (const m of shuf(state.mistakes.filter(m => m.due <= t), rnd)) {
       if (out.length >= n) break;
-      const [kind, key] = m.id.split(":");
-      if (excl.has(key)) continue;
-      if (kind === "word") { const v = ADULT_VOCAB.find(x => x.en === key); if (v) { out.push(wordQ(v, R() < .5 ? "e2z" : "z2e")); excl.add(key); } }
-      else if (kind === "repair") { const q = repairQ(new Set([...excl].filter(k => k !== key))); if (q && q.key === key) { out.push(q); excl.add(key); } }
-      else { const g = GRAMMAR_QS.find(x => x.id === key); if (g) { out.push({ kind: "grammar", key: g.id, q: g.q, choices: shuf(g.c.map((label, i) => ({ label, ok: i === g.a ? 1 : 0 })), rnd), why: g.why, swap: g.swap }); excl.add(key); } }
+      let q = null;
+      if (m.kind === "word") { const v = ADULT_VOCAB.find(x => x.en === m.id.split(":")[1]); if (v && !excl.has(v.en)) q = wordQ(v, R() < .5 ? "e2z" : "z2e"); }
+      else if (m.kind === "zhterm") { const z = m.id.split(":")[1]; if (!excl.has(z)) { const bak = new Set([...excl]); q = zhtermQ(bak); if (q && q.key !== z) q = null; else if (!q) q = null; } }
+      else if (m.kind === "repairfix" || m.kind === "reorder") q = repairfixQ(excl, m.code);   // 同錯點、不同句
+      else { const g = GRAMMAR_QS.find(x => x.id === m.id.split(":")[1]); if (g && !excl.has(g.id)) q = { kind: "grammar", key: g.id, label: "✍️ 句型", q: g.q, choices: shuf(g.c.map((label, i) => ({ label, ok: i === g.a ? 1 : 0 })), rnd), why: g.why, swap: g.swap }; }
+      if (q && !excl.has(q.key)) { out.push(q); excl.add(q.key); }
     }
     return out;
   }
 
-  // ── 每日配方 ──
+  // ── 槽位制組題 ──
   function buildToday() {
-    const dow = new Date().getDay();   // 0日..6六
+    const dow = new Date().getDay();
     const excl = new Set(); const qs = [];
-    const add = q => { if (q) { qs.push(q); excl.add(q.key); } };
-    const news = n => pickNewWords(n, excl).forEach((v, i) => add(wordQ(v, i % 2 ? "z2e" : "e2z")));
-    const revs = n => pickReviewWords(n, excl).forEach((v, i) => add(wordQ(v, i % 2 ? "e2z" : "z2e")));
-    const scene = () => { const v = pickNewWords(1, excl)[0] || pickReviewWords(1, excl)[0]; if (v) add(wordQ(v, "e2z")); };
-    if (dow === 5 || dow === 6 || dow === 0) {           // 週五＋週末：回收日
-      mistakeQs(3, excl).forEach(q => qs.push(q));
-      while (qs.length < 3) { const r = pickReviewWords(1, excl)[0]; if (!r) break; add(wordQ(r, "e2z")); }
+    const add = q => { if (q && !excl.has(q.key)) { qs.push(q); excl.add(q.key); return true; } return false; };
+    const isReviewDay = (dow === 5 || dow === 6 || dow === 0);
+    // 槽1 複習
+    if (!isReviewDay) { if (!add(mistakeQs(1, excl)[0])) add(reviewWordQ(excl) || newWordQ(excl)); }
+    if (isReviewDay) {
+      mistakeQs(3, excl).forEach(q => add(q));
+      while (qs.length < 3) { if (!add(reviewWordQ(excl))) break; }
       const core = ADULT_VOCAB.filter(v => v.tag === weekTag && !excl.has(v.en));
       if (core.length) add(wordQ(shuf(core, rnd)[0], "z2e"));
       add(grammarQ(null, excl));
-    } else if (dow === 1) { news(2); revs(1); scene(); add(grammarQ(["A"], excl)); }
-    else if (dow === 2) { news(2); revs(1); add(grammarQ(["B", "C"], excl)); add(grammarQ(["B", "C"], excl)); }
-    else if (dow === 3) { news(1); revs(2); add(repairWeek ? (repairQ(excl) || grammarQ(["D"], excl)) : grammarQ(["D"], excl)); add(grammarQ(["D", "A"], excl)); }
-    else { news(1); revs(2); add(grammarQ(["A", "C"], excl)); add(grammarQ(["D"], excl)); }
-    // 補滿 5 題
-    while (qs.length < 5) { const v = pickNewWords(1, excl)[0]; if (!v) break; add(wordQ(v, "e2z")); }
+    } else {
+      // 槽2 單字：商用字/中→英維修詞 隔日輪替
+      add(dayIdx % 2 ? (zhtermQ(excl) || newWordQ(excl)) : (newWordQ(excl) || zhtermQ(excl)));
+      // 槽3 文法修復：錯句修復/填空/排序 三日輪替（有昨日錯碼優先同碼異句）
+      const wrongCode = Object.entries(state.errorCodes).find(([c, e]) => e.lastWrong === addDays(todayStr(), -1));
+      const rot = dayIdx % 3;
+      add(rot === 0 ? (repairfixQ(excl, wrongCode && wrongCode[0]) || grammarQ(["B"], excl))
+        : rot === 1 ? (grammarQ(["B"], excl) || repairfixQ(excl))
+        : (reorderQ(excl) || repairfixQ(excl)));
+      // 槽4 功能句：禮貌/自然 輪替（P2 將換郵件組裝/對話回應）
+      add(grammarQ(dayIdx % 2 ? ["D"] : ["A"], excl));
+      // 槽5 聽說槽（P3 前：中→英 或 時態）
+      add(dayIdx % 2 ? (grammarQ(["C"], excl) || zhtermQ(excl)) : (zhtermQ(excl) || grammarQ(["C"], excl)));
+    }
+    while (qs.length < 5) { if (!add(newWordQ(excl) || reviewWordQ(excl) || grammarQ(null, excl))) break; }
     return qs.slice(0, 5);
   }
 
-  // ── 對外 ──
   window.QuickPractice = {
     week: W, weekTag, retake,
     build: buildToday,
-    answer: (q, ok) => mark(q.kind, q.key, ok),
+    answer: (q, ok) => mark(q, ok),
     finish: (okCount, total) => { state.days[todayStr()] = { done: 1, ok: okCount, total }; save(); },
-    stats: () => ({ learned: Object.keys(state.words).length, mistakes: state.mistakes.filter(m => m.due <= todayStr()).length }),
+    stats: () => ({ learned: Object.keys(state.words).length + Object.keys(state.zhterms).length, mistakes: state.mistakes.filter(m => m.due <= todayStr()).length }),
   };
 })();
