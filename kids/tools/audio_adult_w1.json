@@ -1,0 +1,11 @@
+{"outdir": "D:/english/adult/course/audio",
+ "voice": "af_heart",
+ "speed": 0.92,
+ "items": {
+  "w1_intro": "Hello, my name is Cloud. I'm from Fix-well Technology in Hsinchu, Taiwan. We repair semiconductor test equipment — testers, probers, and power supplies. I handle repair cases and customer communication. If you have any equipment problems, please contact me anytime. Nice to meet you.",
+  "w1_s1": "Thank you for your email.",
+  "w1_s2": "This is Cloud from Fix-well Technology.",
+  "w1_s3": "We are a repair service company for semiconductor test equipment.",
+  "w1_s4": "I will check the details and update you by Friday.",
+  "w1_s5": "Please let me know if you have any questions."
+ }}
