@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎤 狀態簡報練習 — 成人英語</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:700px;margin:0 auto;padding:0 14px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.7}
+  header{background:#1f4463;color:#fff;text-align:center;padding:18px;border-radius:0 0 16px 16px;margin:0 -14px 12px}
+  header h1{margin:0;font-size:1.2rem} header p{margin:6px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .frame{background:#fff;border-radius:12px;padding:12px 15px;font-size:.85rem;margin-bottom:10px}
+  .frame b{color:#1f4463}
+  #bar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+  #bar button{padding:6px 13px;border:2px solid #d9e2ec;border-radius:16px;background:#fff;font-weight:700;cursor:pointer;font-size:.8rem}
+  #bar button.on{border-color:#1f4463;background:#1f4463;color:#fff}
+  .sc{background:#fff;border-radius:14px;padding:13px 16px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .sc h3{margin:0 0 4px;font-size:.98rem;color:#1f4463}
+  .sc .zh{font-size:.78rem;color:#999;margin-bottom:8px}
+  .sc audio{width:100%;margin-bottom:8px}
+  .line{display:flex;gap:8px;align-items:baseline;border-top:1px dashed #eee;padding:6px 0;font-size:.9rem}
+  .line .fn{font-size:.68rem;font-weight:700;border-radius:5px;padding:2px 7px;white-space:nowrap}
+  .fn.opening{background:#eaf3ff;color:#1e5fb8}.fn.status{background:#e3f6ec;color:#1c7a45}
+  .fn.finding{background:#fff3e0;color:#a05c10}.fn.next{background:#f3edff;color:#5a36a8}.fn.closing{background:#fde8ec;color:#c0264b}
+  .line .en{font-weight:700;cursor:pointer}
+  .line .lzh{color:#999;font-size:.78rem}
+</style>
+</head>
+<body>
+<header><h1>🎤 狀態簡報練習</h1>
+<p><a href="index.html">← 課程目錄</a> · 30-60 秒口頭更新 · 聽整段 → 逐句跟讀 → 換自己的案子講一次</p></header>
+
+<div class="frame">📐 <b>五句框架</b>：<span class="fn opening" style="padding:2px 7px;border-radius:5px">開場</span> →
+<span class="fn status" style="padding:2px 7px;border-radius:5px">現況</span> →
+<span class="fn finding" style="padding:2px 7px;border-radius:5px">發現</span> →
+<span class="fn next" style="padding:2px 7px;border-radius:5px">下一步</span> →
+<span class="fn closing" style="padding:2px 7px;border-radius:5px">結尾</span>
+　任何進度更新都是這五句的組合。</div>
+
+<div id="bar"></div>
+<div id="list"></div>
+
+<script src="course/briefing_qs.js?v=1"></script>
+<script>
+const S = Object.fromEntries(BRIEF_S.map(s => [s.id, s]));
+const CATS = { "進度": t => t.includes("進度"), "報價": t => t.includes("報價"), "延遲": t => t.includes("延遲") || t.includes("延后") || t.includes("延後"), "驗證": t => t.includes("驗證"), "來訪": t => t.includes("來訪"), "電話": t => t.includes("電話") };
+let fc = "all";
+function draw() {
+  let b = `<button class="${fc === "all" ? "on" : ""}" onclick="fc='all';draw()">全部</button>`;
+  Object.keys(CATS).forEach(c => b += `<button class="${fc === c ? "on" : ""}" onclick="fc='${c}';draw()">${c}</button>`);
+  document.getElementById("bar").innerHTML = b;
+  const rows = BRIEF_SC.filter(sc => fc === "all" || CATS[fc](sc.title + sc.zh));
+  document.getElementById("list").innerHTML = rows.map(sc => `<div class="sc">
+    <h3>${sc.title}</h3><div class="zh">${sc.zh}</div>
+    <audio controls preload="none" src="course/audio/brief/${sc.id}.mp3"></audio>
+    ${sc.lines.map(l => { const s = S[l]; return `<div class="line">
+      <span class="fn ${s.fn}">${{ opening: "開場", status: "現況", finding: "發現", next: "下一步", closing: "結尾" }[s.fn]}</span>
+      <span><span class="en" onclick="new Audio('course/audio/brief/${s.id}.mp3').play()">${s.en}</span><div class="lzh">${s.zh}</div></span></div>`; }).join("")}
+  </div>`).join("");
+}
+draw();
+</script>
+</body>
+</html>

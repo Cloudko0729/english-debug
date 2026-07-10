@@ -1,0 +1,726 @@
+{
+  "sentences": [
+    {
+      "id": "bf_op_01",
+      "fn": "opening",
+      "en": "I'd like to give a quick update.",
+      "zh": "我想簡單更新一下。"
+    },
+    {
+      "id": "bf_op_02",
+      "fn": "opening",
+      "en": "Here is the latest repair status.",
+      "zh": "這是最新的維修狀態。"
+    },
+    {
+      "id": "bf_op_03",
+      "fn": "opening",
+      "en": "Let me explain the current progress.",
+      "zh": "我來說明目前進度。"
+    },
+    {
+      "id": "bf_op_04",
+      "fn": "opening",
+      "en": "I have an update about the quotation.",
+      "zh": "我有報價相關更新。"
+    },
+    {
+      "id": "bf_op_05",
+      "fn": "opening",
+      "en": "I want to explain the delay.",
+      "zh": "我想說明這次延遲。"
+    },
+    {
+      "id": "bf_op_06",
+      "fn": "opening",
+      "en": "We have finished the verification process.",
+      "zh": "我們已完成驗證流程。"
+    },
+    {
+      "id": "bf_op_07",
+      "fn": "opening",
+      "en": "Welcome, let me start with the repair status.",
+      "zh": "歡迎，我先說明維修狀態。"
+    },
+    {
+      "id": "bf_op_08",
+      "fn": "opening",
+      "en": "Thanks for joining this short meeting.",
+      "zh": "謝謝參加這個簡短會議。"
+    },
+    {
+      "id": "bf_op_09",
+      "fn": "opening",
+      "en": "I am calling about the repair case.",
+      "zh": "我來電是關於這個維修案。"
+    },
+    {
+      "id": "bf_op_10",
+      "fn": "opening",
+      "en": "Let me give a brief phone update.",
+      "zh": "我用電話簡單更新。"
+    },
+    {
+      "id": "bf_op_11",
+      "fn": "opening",
+      "en": "This update is about the returned unit.",
+      "zh": "這次更新是關於返修機台。"
+    },
+    {
+      "id": "bf_op_12",
+      "fn": "opening",
+      "en": "I will summarize the repair condition today.",
+      "zh": "我今天會整理維修狀況。"
+    },
+    {
+      "id": "bf_st_01",
+      "fn": "status",
+      "en": "The unit is still under repair.",
+      "zh": "這台目前仍在維修中。"
+    },
+    {
+      "id": "bf_st_02",
+      "fn": "status",
+      "en": "The repair is pending verification now.",
+      "zh": "維修目前等待驗證。"
+    },
+    {
+      "id": "bf_st_03",
+      "fn": "status",
+      "en": "We are waiting for parts today.",
+      "zh": "我們今天正在等待料件。"
+    },
+    {
+      "id": "bf_st_04",
+      "fn": "status",
+      "en": "The unit is in final testing.",
+      "zh": "這台正在做最後測試。"
+    },
+    {
+      "id": "bf_st_05",
+      "fn": "status",
+      "en": "The repair has been completed.",
+      "zh": "這台維修已經完成。"
+    },
+    {
+      "id": "bf_st_06",
+      "fn": "status",
+      "en": "We are checking the quotation items.",
+      "zh": "我們正在確認報價項目。"
+    },
+    {
+      "id": "bf_st_07",
+      "fn": "status",
+      "en": "The case is waiting for customer approval.",
+      "zh": "此案等待客戶核准。"
+    },
+    {
+      "id": "bf_st_08",
+      "fn": "status",
+      "en": "The schedule is delayed by parts shortage.",
+      "zh": "時程因缺料而延後。"
+    },
+    {
+      "id": "bf_st_09",
+      "fn": "status",
+      "en": "The unit passed the first test.",
+      "zh": "這台通過第一項測試。"
+    },
+    {
+      "id": "bf_st_10",
+      "fn": "status",
+      "en": "The issue appears during long testing.",
+      "zh": "問題在長時間測試中出現。"
+    },
+    {
+      "id": "bf_st_11",
+      "fn": "status",
+      "en": "The report is being prepared.",
+      "zh": "報告目前正在準備。"
+    },
+    {
+      "id": "bf_st_12",
+      "fn": "status",
+      "en": "The unit is ready for pickup.",
+      "zh": "這台已可安排取回。"
+    },
+    {
+      "id": "bf_fd_01",
+      "fn": "finding",
+      "en": "We found a damaged component inside.",
+      "zh": "我們在內部發現損壞零件。"
+    },
+    {
+      "id": "bf_fd_02",
+      "fn": "finding",
+      "en": "The voltage reading is abnormal.",
+      "zh": "電壓讀值有異常。"
+    },
+    {
+      "id": "bf_fd_03",
+      "fn": "finding",
+      "en": "The failure is intermittent during testing.",
+      "zh": "測試時故障是間歇性的。"
+    },
+    {
+      "id": "bf_fd_04",
+      "fn": "finding",
+      "en": "We found no problem during inspection.",
+      "zh": "檢查時沒有發現問題。"
+    },
+    {
+      "id": "bf_fd_05",
+      "fn": "finding",
+      "en": "The connector looks worn but usable.",
+      "zh": "接頭看起來磨耗但可用。"
+    },
+    {
+      "id": "bf_fd_06",
+      "fn": "finding",
+      "en": "The board shows signs of overheating.",
+      "zh": "板子有過熱跡象。"
+    },
+    {
+      "id": "bf_fd_07",
+      "fn": "finding",
+      "en": "The signal becomes unstable under load.",
+      "zh": "負載下訊號變得不穩。"
+    },
+    {
+      "id": "bf_fd_08",
+      "fn": "finding",
+      "en": "The replaced part works normally now.",
+      "zh": "更換後的零件目前正常。"
+    },
+    {
+      "id": "bf_fd_09",
+      "fn": "finding",
+      "en": "The test result matches the complaint.",
+      "zh": "測試結果符合客訴描述。"
+    },
+    {
+      "id": "bf_fd_10",
+      "fn": "finding",
+      "en": "The root cause is still under review.",
+      "zh": "根本原因仍在確認中。"
+    },
+    {
+      "id": "bf_fd_11",
+      "fn": "finding",
+      "en": "The quotation includes parts and labor.",
+      "zh": "報價包含料件與工時。"
+    },
+    {
+      "id": "bf_fd_12",
+      "fn": "finding",
+      "en": "The final verification result is stable.",
+      "zh": "最後驗證結果是穩定的。"
+    },
+    {
+      "id": "bf_nx_01",
+      "fn": "next",
+      "en": "Next, we will replace the damaged part.",
+      "zh": "下一步會更換損壞零件。"
+    },
+    {
+      "id": "bf_nx_02",
+      "fn": "next",
+      "en": "We will run another test cycle.",
+      "zh": "我們會再跑一輪測試。"
+    },
+    {
+      "id": "bf_nx_03",
+      "fn": "next",
+      "en": "We will send the quotation today.",
+      "zh": "我們今天會寄出報價。"
+    },
+    {
+      "id": "bf_nx_04",
+      "fn": "next",
+      "en": "Please review and approve the quotation.",
+      "zh": "請確認並核准報價。"
+    },
+    {
+      "id": "bf_nx_05",
+      "fn": "next",
+      "en": "We will wait for the missing parts.",
+      "zh": "我們會等待缺少的料件。"
+    },
+    {
+      "id": "bf_nx_06",
+      "fn": "next",
+      "en": "We will update you after verification.",
+      "zh": "驗證後會再更新您。"
+    },
+    {
+      "id": "bf_nx_07",
+      "fn": "next",
+      "en": "We will prepare the repair report.",
+      "zh": "我們會準備維修報告。"
+    },
+    {
+      "id": "bf_nx_08",
+      "fn": "next",
+      "en": "We can arrange shipment after approval.",
+      "zh": "核准後可安排出貨。"
+    },
+    {
+      "id": "bf_nx_09",
+      "fn": "next",
+      "en": "We will keep monitoring the unit.",
+      "zh": "我們會持續監控這台。"
+    },
+    {
+      "id": "bf_nx_10",
+      "fn": "next",
+      "en": "We will confirm the schedule tomorrow.",
+      "zh": "我們明天會確認時程。"
+    },
+    {
+      "id": "bf_nx_11",
+      "fn": "next",
+      "en": "We can show the result onsite.",
+      "zh": "我們可現場展示結果。"
+    },
+    {
+      "id": "bf_nx_12",
+      "fn": "next",
+      "en": "Please contact us if anything changes.",
+      "zh": "若有變更請聯絡我們。"
+    },
+    {
+      "id": "bf_cl_01",
+      "fn": "closing",
+      "en": "That is the update for now.",
+      "zh": "以上是目前的更新。"
+    },
+    {
+      "id": "bf_cl_02",
+      "fn": "closing",
+      "en": "We will keep you informed.",
+      "zh": "我們會持續通知您。"
+    },
+    {
+      "id": "bf_cl_03",
+      "fn": "closing",
+      "en": "Thank you for your patience.",
+      "zh": "謝謝您的耐心等待。"
+    },
+    {
+      "id": "bf_cl_04",
+      "fn": "closing",
+      "en": "Please let us know your decision.",
+      "zh": "請讓我們知道您的決定。"
+    },
+    {
+      "id": "bf_cl_05",
+      "fn": "closing",
+      "en": "We will follow up again soon.",
+      "zh": "我們會很快再追蹤。"
+    },
+    {
+      "id": "bf_cl_06",
+      "fn": "closing",
+      "en": "The unit is safe to return.",
+      "zh": "這台可以安全退回。"
+    },
+    {
+      "id": "bf_cl_07",
+      "fn": "closing",
+      "en": "Thanks for visiting our repair area.",
+      "zh": "謝謝來訪我們維修區。"
+    },
+    {
+      "id": "bf_cl_08",
+      "fn": "closing",
+      "en": "I will send the details by email.",
+      "zh": "我會用信件寄出細節。"
+    },
+    {
+      "id": "bf_cl_09",
+      "fn": "closing",
+      "en": "Please call me with any questions.",
+      "zh": "若有問題請來電。"
+    },
+    {
+      "id": "bf_cl_10",
+      "fn": "closing",
+      "en": "This completes our short phone update.",
+      "zh": "這次電話簡報到這裡。"
+    },
+    {
+      "id": "bf_cl_11",
+      "fn": "closing",
+      "en": "We appreciate your quick confirmation.",
+      "zh": "感謝您快速確認。"
+    },
+    {
+      "id": "bf_cl_12",
+      "fn": "closing",
+      "en": "I will close with that point.",
+      "zh": "我就以這點作結。"
+    }
+  ],
+  "scripts": [
+    {
+      "id": "sc_01",
+      "title": "標準進度更新",
+      "zh": "跟客戶電話更新維修進度",
+      "lines": [
+        "bf_op_01",
+        "bf_st_01",
+        "bf_fd_02",
+        "bf_nx_02",
+        "bf_cl_01"
+      ]
+    },
+    {
+      "id": "sc_02",
+      "title": "等待料件進度",
+      "zh": "說明目前維修卡在料件等待",
+      "lines": [
+        "bf_op_02",
+        "bf_st_03",
+        "bf_fd_01",
+        "bf_nx_05",
+        "bf_cl_02"
+      ]
+    },
+    {
+      "id": "sc_03",
+      "title": "測試中進度",
+      "zh": "回報機台正在進行測試",
+      "lines": [
+        "bf_op_03",
+        "bf_st_04",
+        "bf_fd_03",
+        "bf_nx_09",
+        "bf_cl_05"
+      ]
+    },
+    {
+      "id": "sc_04",
+      "title": "初步檢查進度",
+      "zh": "說明檢查結果與後續確認",
+      "lines": [
+        "bf_op_11",
+        "bf_st_01",
+        "bf_fd_10",
+        "bf_nx_02",
+        "bf_cl_02"
+      ]
+    },
+    {
+      "id": "sc_05",
+      "title": "負載測試進度",
+      "zh": "更新負載測試時看到的狀況",
+      "lines": [
+        "bf_op_01",
+        "bf_st_10",
+        "bf_fd_07",
+        "bf_nx_09",
+        "bf_cl_01"
+      ]
+    },
+    {
+      "id": "sc_06",
+      "title": "無異常進度",
+      "zh": "說明目前未重現客戶問題",
+      "lines": [
+        "bf_op_02",
+        "bf_st_02",
+        "bf_fd_04",
+        "bf_nx_02",
+        "bf_cl_03"
+      ]
+    },
+    {
+      "id": "sc_07",
+      "title": "報告準備進度",
+      "zh": "更新報告正在整理中的狀態",
+      "lines": [
+        "bf_op_12",
+        "bf_st_11",
+        "bf_fd_09",
+        "bf_nx_07",
+        "bf_cl_08"
+      ]
+    },
+    {
+      "id": "sc_08",
+      "title": "可取回進度",
+      "zh": "通知客戶機台已可取回",
+      "lines": [
+        "bf_op_02",
+        "bf_st_12",
+        "bf_fd_12",
+        "bf_nx_08",
+        "bf_cl_06"
+      ]
+    },
+    {
+      "id": "sc_09",
+      "title": "報價項目說明",
+      "zh": "說明報價包含的主要項目",
+      "lines": [
+        "bf_op_04",
+        "bf_st_06",
+        "bf_fd_11",
+        "bf_nx_03",
+        "bf_cl_04"
+      ]
+    },
+    {
+      "id": "sc_10",
+      "title": "報價待核准",
+      "zh": "提醒客戶目前等待報價核准",
+      "lines": [
+        "bf_op_04",
+        "bf_st_07",
+        "bf_fd_01",
+        "bf_nx_04",
+        "bf_cl_11"
+      ]
+    },
+    {
+      "id": "sc_11",
+      "title": "損壞零件報價",
+      "zh": "用損壞零件原因說明報價",
+      "lines": [
+        "bf_op_04",
+        "bf_st_06",
+        "bf_fd_01",
+        "bf_nx_03",
+        "bf_cl_08"
+      ]
+    },
+    {
+      "id": "sc_12",
+      "title": "工時報價說明",
+      "zh": "說明報價含檢修工時",
+      "lines": [
+        "bf_op_03",
+        "bf_st_06",
+        "bf_fd_11",
+        "bf_nx_04",
+        "bf_cl_04"
+      ]
+    },
+    {
+      "id": "sc_13",
+      "title": "核准後出貨",
+      "zh": "說明報價核准後即可安排出貨",
+      "lines": [
+        "bf_op_04",
+        "bf_st_07",
+        "bf_fd_08",
+        "bf_nx_08",
+        "bf_cl_11"
+      ]
+    },
+    {
+      "id": "sc_14",
+      "title": "缺料延遲通知",
+      "zh": "通知客戶因缺料造成延遲",
+      "lines": [
+        "bf_op_05",
+        "bf_st_08",
+        "bf_fd_01",
+        "bf_nx_05",
+        "bf_cl_03"
+      ]
+    },
+    {
+      "id": "sc_15",
+      "title": "驗證延遲通知",
+      "zh": "說明驗證中問題間歇出現",
+      "lines": [
+        "bf_op_05",
+        "bf_st_02",
+        "bf_fd_03",
+        "bf_nx_06",
+        "bf_cl_02"
+      ]
+    },
+    {
+      "id": "sc_16",
+      "title": "排程延遲通知",
+      "zh": "通知客戶明天確認新時程",
+      "lines": [
+        "bf_op_05",
+        "bf_st_08",
+        "bf_fd_10",
+        "bf_nx_10",
+        "bf_cl_05"
+      ]
+    },
+    {
+      "id": "sc_17",
+      "title": "長測延遲通知",
+      "zh": "說明長時間測試造成等待",
+      "lines": [
+        "bf_op_05",
+        "bf_st_10",
+        "bf_fd_07",
+        "bf_nx_09",
+        "bf_cl_03"
+      ]
+    },
+    {
+      "id": "sc_18",
+      "title": "等核准延遲",
+      "zh": "說明等待核准造成維修延後",
+      "lines": [
+        "bf_op_05",
+        "bf_st_07",
+        "bf_fd_11",
+        "bf_nx_04",
+        "bf_cl_04"
+      ]
+    },
+    {
+      "id": "sc_19",
+      "title": "驗證完成通知",
+      "zh": "通知客戶驗證流程已完成",
+      "lines": [
+        "bf_op_06",
+        "bf_st_05",
+        "bf_fd_12",
+        "bf_nx_07",
+        "bf_cl_06"
+      ]
+    },
+    {
+      "id": "sc_20",
+      "title": "首測通過通知",
+      "zh": "說明第一項測試已通過",
+      "lines": [
+        "bf_op_06",
+        "bf_st_09",
+        "bf_fd_08",
+        "bf_nx_02",
+        "bf_cl_02"
+      ]
+    },
+    {
+      "id": "sc_21",
+      "title": "無問題驗證",
+      "zh": "說明驗證中未發現問題",
+      "lines": [
+        "bf_op_06",
+        "bf_st_05",
+        "bf_fd_04",
+        "bf_nx_07",
+        "bf_cl_08"
+      ]
+    },
+    {
+      "id": "sc_22",
+      "title": "穩定結果通知",
+      "zh": "告知客戶最後結果穩定",
+      "lines": [
+        "bf_op_06",
+        "bf_st_12",
+        "bf_fd_12",
+        "bf_nx_08",
+        "bf_cl_06"
+      ]
+    },
+    {
+      "id": "sc_23",
+      "title": "來訪維修開場",
+      "zh": "客戶來訪時先說明維修狀態",
+      "lines": [
+        "bf_op_07",
+        "bf_st_01",
+        "bf_fd_02",
+        "bf_nx_11",
+        "bf_cl_07"
+      ]
+    },
+    {
+      "id": "sc_24",
+      "title": "來訪測試展示",
+      "zh": "現場展示測試與發現",
+      "lines": [
+        "bf_op_08",
+        "bf_st_04",
+        "bf_fd_07",
+        "bf_nx_11",
+        "bf_cl_12"
+      ]
+    },
+    {
+      "id": "sc_25",
+      "title": "來訪報價說明",
+      "zh": "客戶來訪時說明報價內容",
+      "lines": [
+        "bf_op_07",
+        "bf_st_06",
+        "bf_fd_11",
+        "bf_nx_04",
+        "bf_cl_07"
+      ]
+    },
+    {
+      "id": "sc_26",
+      "title": "來訪完成展示",
+      "zh": "客戶來訪時展示完成結果",
+      "lines": [
+        "bf_op_08",
+        "bf_st_05",
+        "bf_fd_12",
+        "bf_nx_11",
+        "bf_cl_07"
+      ]
+    },
+    {
+      "id": "sc_27",
+      "title": "電話更新收尾",
+      "zh": "電話中快速更新並收尾",
+      "lines": [
+        "bf_op_09",
+        "bf_st_02",
+        "bf_fd_10",
+        "bf_nx_06",
+        "bf_cl_10"
+      ]
+    },
+    {
+      "id": "sc_28",
+      "title": "電話報價收尾",
+      "zh": "電話說明報價後請客戶決定",
+      "lines": [
+        "bf_op_10",
+        "bf_st_07",
+        "bf_fd_11",
+        "bf_nx_04",
+        "bf_cl_09"
+      ]
+    },
+    {
+      "id": "sc_29",
+      "title": "電話延遲收尾",
+      "zh": "電話通知延遲並保留聯絡窗口",
+      "lines": [
+        "bf_op_10",
+        "bf_st_08",
+        "bf_fd_03",
+        "bf_nx_10",
+        "bf_cl_09"
+      ]
+    },
+    {
+      "id": "sc_30",
+      "title": "電話完成收尾",
+      "zh": "電話通知完成並安排後續",
+      "lines": [
+        "bf_op_09",
+        "bf_st_05",
+        "bf_fd_12",
+        "bf_nx_08",
+        "bf_cl_10"
+      ]
+    }
+  ]
+}

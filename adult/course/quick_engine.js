@@ -139,6 +139,32 @@
     const q = pool[0];
     return { kind: "dialog", key: q.id, label: "💬 對話回應", q: `客戶說：“${q.cue}”（${q.cueZh}）你回：`, choices: shuf(q.choices.map((label, i) => ({ label, ok: i === q.a ? 1 : 0 })), rnd), why: q.why, swap: q.swap };
   }
+  // 聽力：播對話 cue（不顯示英文）→ 選中文意思 或 選得體回應
+  function listenQ(excl) {
+    if (typeof DIALOG_QS === "undefined") return null;
+    let pool = DIALOG_QS.filter(q => !excl.has("L" + q.id) && (state.dialog["L" + q.id] || { streak: 0 }).streak < 2);
+    const tagged = pool.filter(q => q.tag === weekTag); if (tagged.length) pool = tagged;
+    if (!pool.length) return null;
+    pool.sort((a, b) => ((state.dialog["L" + a.id] || { seen: 0 }).seen - (state.dialog["L" + b.id] || { seen: 0 }).seen) || (R() - .5));
+    const q = pool[0];
+    if (dayIdx % 2) {   // 聽意思
+      const near = shuf(DIALOG_QS.filter(x => x.id !== q.id), rnd).slice(0, 3);
+      return { kind: "dialog", key: "L" + q.id, label: "🎧 聽力", audio: "audio/dialog/" + q.id + ".mp3", q: "🔊 聽客戶說什麼，選出意思：", choices: shuf([{ label: q.cueZh, ok: 1 }].concat(near.map(x => ({ label: x.cueZh, ok: 0 }))), rnd), why: `他說的是：“${q.cue}”（${q.cueZh}）`, swap: q.choices[q.a] };
+    }
+    // 聽了選回應
+    return { kind: "dialog", key: "L" + q.id, label: "🎧 聽力回應", audio: "audio/dialog/" + q.id + ".mp3", q: "🔊 聽客戶說什麼，選出得體的回應：", choices: shuf(q.choices.map((label, i) => ({ label, ok: i === q.a ? 1 : 0 })), rnd), why: `他說的是：“${q.cue}”（${q.cueZh}）。` + q.why, swap: q.swap };
+  }
+  // 簡報功能題：播一句簡報句 → 判斷它的功能（開場/現況/發現/下一步/結尾）
+  function briefQ(excl) {
+    if (typeof BRIEF_S === "undefined") return null;
+    const FN = { opening: "開場", status: "現況", finding: "發現", next: "下一步", closing: "結尾" };
+    let pool = BRIEF_S.filter(s => !excl.has(s.id) && (state.grammar[s.id] || { streak: 0 }).streak < 2);
+    if (!pool.length) return null;
+    pool.sort((a, b) => ((state.grammar[a.id] || { seen: 0 }).seen - (state.grammar[b.id] || { seen: 0 }).seen) || (R() - .5));
+    const s = pool[0];
+    const others = shuf(Object.keys(FN).filter(f => f !== s.fn), rnd).slice(0, 3);
+    return { kind: "grammar", key: s.id, label: "🎤 簡報功能", audio: "audio/brief/" + s.id + ".mp3", q: "🔊 聽這句簡報用語，它是在做什麼？", choices: shuf([{ label: FN[s.fn], ok: 1 }].concat(others.map(f => ({ label: FN[f], ok: 0 }))), rnd), why: `“${s.en}”（${s.zh}）是${FN[s.fn]}句。`, swap: s.en };
+  }
   function grammarQ(prefTypes, excl) {
     let pool = GRAMMAR_QS.filter(g => !excl.has(g.id));
     const tagged = pool.filter(g => g.tag === weekTag);
@@ -191,8 +217,10 @@
       // 槽4 功能句：郵件組裝 / 對話回應 隔日輪替（fallback 禮貌/自然句）
       add(dayIdx % 2 ? (emailQ(excl) || dialogQ(excl) || grammarQ(["D"], excl))
                      : (dialogQ(excl) || emailQ(excl) || grammarQ(["A"], excl)));
-      // 槽5 聽說槽（P3 前：中→英 或 時態）
-      add(dayIdx % 2 ? (grammarQ(["C"], excl) || zhtermQ(excl)) : (zhtermQ(excl) || grammarQ(["C"], excl)));
+      // 槽5 聽說槽：聽力/簡報功能 三日輪替（會議/來訪週簡報加密），fallback 維修詞
+      const meetWeek = weekTag === "meeting" || weekTag === "office";
+      const l5 = (dayIdx % 3 === 2 || meetWeek) ? (briefQ(excl) || listenQ(excl)) : (listenQ(excl) || briefQ(excl));
+      add(l5 || zhtermQ(excl) || grammarQ(["C"], excl));
     }
     while (qs.length < 5) { if (!add(newWordQ(excl) || reviewWordQ(excl) || grammarQ(null, excl))) break; }
     return qs.slice(0, 5);

@@ -34,14 +34,15 @@
 <div id="qs"></div>
 <div id="result"></div>
 
-<script src="../vocab.js?v=202607102127"></script>
-<script src="../repair_terms.js?v=202607102127"></script>
-<script src="../zh_terms.js?v=202607102127"></script>
-<script src="email_qs.js?v=202607102127"></script>
-<script src="dialog_qs.js?v=202607102127"></script>
-<script src="qbank.js?v=202607102127"></script>
-<script src="repair_qs.js?v=202607102127"></script>
-<script src="quick_engine.js?v=202607102127"></script>
+<script src="../vocab.js?v=202607102203"></script>
+<script src="../repair_terms.js?v=202607102203"></script>
+<script src="../zh_terms.js?v=202607102203"></script>
+<script src="email_qs.js?v=202607102203"></script>
+<script src="dialog_qs.js?v=202607102203"></script>
+<script src="briefing_qs.js?v=202607102203"></script>
+<script src="qbank.js?v=202607102203"></script>
+<script src="repair_qs.js?v=202607102203"></script>
+<script src="quick_engine.js?v=202607102203"></script>
 <script>
 const QS = QuickPractice.build();
 const st = QuickPractice.stats();
@@ -59,9 +60,10 @@ el.innerHTML = QS.map((q, i) => {
   } else {
     body = q.choices.map((c, ci) => `<button class="opt" onclick="ans(${i},${ci},this)">${c.label}</button>`).join("");
   }
+  const audioBtn = q.audio ? `<button class="chunk" style="margin-bottom:6px" onclick="new Audio('${q.audio}').play()">🔊 播放</button>` : "";
   return `<div class="q" id="q${i}">
     <div class="no">${i + 1} / ${QS.length} ${q.label || ""}</div>
-    <div class="qt">${q.q}</div>${q.sub ? `<div class="sub">${q.sub}</div>` : ""}${body}
+    <div class="qt">${q.q}</div>${q.sub ? `<div class="sub">${q.sub}</div>` : ""}${audioBtn}${body}
     <div class="fix" id="fix${i}">💡 ${q.why}${q.swap ? `<div class="swap">可套用：${q.swap}</div>` : ""}</div></div>`;
 }).join("");
 

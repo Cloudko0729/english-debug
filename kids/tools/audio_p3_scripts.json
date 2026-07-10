@@ -1,0 +1,1415 @@
+{
+ "outdir": "D:/english/adult/course/audio/brief",
+ "episodes": {
+  "sc_01": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I'd like to give a quick update.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The unit is still under repair.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The voltage reading is abnormal.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will run another test cycle.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "That is the update for now.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_02": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Here is the latest repair status.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We are waiting for parts today.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We found a damaged component inside.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will wait for the missing parts.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will keep you informed.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_03": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Let me explain the current progress.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The unit is in final testing.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The failure is intermittent during testing.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will keep monitoring the unit.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will follow up again soon.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_04": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "This update is about the returned unit.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The unit is still under repair.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The root cause is still under review.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will run another test cycle.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will keep you informed.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_05": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I'd like to give a quick update.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The issue appears during long testing.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The signal becomes unstable under load.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will keep monitoring the unit.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "That is the update for now.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_06": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Here is the latest repair status.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The repair is pending verification now.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We found no problem during inspection.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will run another test cycle.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Thank you for your patience.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_07": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I will summarize the repair condition today.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The report is being prepared.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The test result matches the complaint.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will prepare the repair report.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I will send the details by email.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_08": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Here is the latest repair status.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The unit is ready for pickup.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The final verification result is stable.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We can arrange shipment after approval.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The unit is safe to return.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_09": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I have an update about the quotation.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We are checking the quotation items.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The quotation includes parts and labor.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will send the quotation today.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Please let us know your decision.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_10": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I have an update about the quotation.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The case is waiting for customer approval.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We found a damaged component inside.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Please review and approve the quotation.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We appreciate your quick confirmation.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_11": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I have an update about the quotation.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We are checking the quotation items.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We found a damaged component inside.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will send the quotation today.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I will send the details by email.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_12": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Let me explain the current progress.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We are checking the quotation items.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The quotation includes parts and labor.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Please review and approve the quotation.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Please let us know your decision.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_13": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I have an update about the quotation.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The case is waiting for customer approval.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The replaced part works normally now.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We can arrange shipment after approval.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We appreciate your quick confirmation.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_14": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I want to explain the delay.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The schedule is delayed by parts shortage.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We found a damaged component inside.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will wait for the missing parts.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Thank you for your patience.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_15": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I want to explain the delay.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The repair is pending verification now.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The failure is intermittent during testing.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will update you after verification.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will keep you informed.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_16": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I want to explain the delay.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The schedule is delayed by parts shortage.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The root cause is still under review.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will confirm the schedule tomorrow.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will follow up again soon.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_17": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I want to explain the delay.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The issue appears during long testing.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The signal becomes unstable under load.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will keep monitoring the unit.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Thank you for your patience.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_18": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I want to explain the delay.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The case is waiting for customer approval.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The quotation includes parts and labor.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Please review and approve the quotation.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Please let us know your decision.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_19": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We have finished the verification process.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The repair has been completed.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The final verification result is stable.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will prepare the repair report.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The unit is safe to return.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_20": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We have finished the verification process.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The unit passed the first test.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The replaced part works normally now.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will run another test cycle.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will keep you informed.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_21": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We have finished the verification process.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The repair has been completed.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We found no problem during inspection.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will prepare the repair report.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I will send the details by email.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_22": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We have finished the verification process.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The unit is ready for pickup.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The final verification result is stable.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We can arrange shipment after approval.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The unit is safe to return.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_23": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Welcome, let me start with the repair status.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The unit is still under repair.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The voltage reading is abnormal.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We can show the result onsite.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Thanks for visiting our repair area.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_24": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Thanks for joining this short meeting.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The unit is in final testing.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The signal becomes unstable under load.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We can show the result onsite.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I will close with that point.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_25": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Welcome, let me start with the repair status.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We are checking the quotation items.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The quotation includes parts and labor.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Please review and approve the quotation.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Thanks for visiting our repair area.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_26": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Thanks for joining this short meeting.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The repair has been completed.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The final verification result is stable.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We can show the result onsite.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Thanks for visiting our repair area.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_27": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I am calling about the repair case.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The repair is pending verification now.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The root cause is still under review.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will update you after verification.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "This completes our short phone update.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_28": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Let me give a brief phone update.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The case is waiting for customer approval.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The quotation includes parts and labor.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Please review and approve the quotation.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Please call me with any questions.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_29": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Let me give a brief phone update.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The schedule is delayed by parts shortage.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The failure is intermittent during testing.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We will confirm the schedule tomorrow.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "Please call me with any questions.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ],
+  "sc_30": [
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "I am calling about the repair case.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The repair has been completed.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "The final verification result is stable.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "We can arrange shipment after approval.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   },
+   {
+    "v": "af_heart",
+    "lang": "en-us",
+    "t": "This completes our short phone update.",
+    "speed": 0.88
+   },
+   {
+    "pause": 0.5
+   }
+  ]
+ }
+}
