@@ -42,6 +42,8 @@
   .gloss b{display:block;color:#a06a00;margin-bottom:4px;font-size:.82rem}
   .gloss .gi{margin:2px 0;color:#555}
   .gloss .ge{font-weight:800;color:#243042}
+  .gcfix{margin-top:8px;background:#eef5ff;border:1.5px solid #bcd6ff;border-radius:9px;padding:7px 11px;font-size:.88rem;font-weight:700}
+  .gcfix a{color:#1e5fb8;text-decoration:none}
   .chunks,.answ{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
   .chunk{padding:8px 11px;border:2px solid #2f80ed;border-radius:9px;background:#fff;color:#2f80ed;font-weight:700;cursor:pointer}
   .chunk.used{opacity:.3;pointer-events:none}
@@ -190,7 +192,26 @@
       s7 = { unit: u, qs };
     }
 
-    return { week, month, s1, s2, s3, s4, s5, s6, s7, hasWd: !!wd };
+    // ⑧ 文法（根基課程進度）：主要出「目前單元」，已開放多單元時混 1 題舊單元複習
+    let s8 = null;
+    if (typeof gcProgress === "function" && typeof GC_QUIZ !== "undefined") {
+      const gp = gcProgress(DRILL_DATE);
+      if (gp) {
+        const cur = gp.current;
+        const mk = (raw, unit) => ({ q: raw.q, unit, choices: shuffleArr(raw.choices.map(c => ({ label: c, correct: c === raw.answer })), rnd) });
+        const pool = GC_QUIZ[cur.id].map((q, i) => ({ ...q, _i: i }));
+        let qs = pickBlock(pool, 3, dayIdx, WDID + "-gc-" + cur.id, retake).map(q => mk(q, cur));
+        if (gp.opened.length > 1) {
+          const prevList = gp.opened.slice(0, -1);
+          const prevU = prevList[retake ? Math.floor(Math.random() * prevList.length) : dayIdx % prevList.length];
+          const ppool = GC_QUIZ[prevU.id].map((q, i) => ({ ...q, _i: i }));
+          qs = qs.slice(0, 2).concat(pickBlock(ppool, 1, dayIdx, WDID + "-gcr", retake).map(q => mk(q, prevU)));
+        }
+        s8 = { current: cur, qs };
+      }
+    }
+
+    return { week, month, s1, s2, s3, s4, s5, s6, s7, s8, hasWd: !!wd };
   }
 
   function optsHtml(sec, qi, choices) { return `<div class="opts">${choices.map((c, ci) => `<button class="opt" onclick="__ans('${sec}',${qi},${ci},this)">${c.label}</button>`).join("")}</div>`; }
@@ -200,7 +221,8 @@
     const retakeNote = !_isRetake() ? ""
       : (_isShortWeek() ? "<br>📚 短週補題 第 2 輪：全新題組（金幣今天已領過）"
                         : "<br>🔁 練習模式：今天金幣已領過，題目改成隨機出");
-    let h = `<div class="meta">📒 ${m.label} 第 ${w.n} 週 · ${w.theme} · 文法：${m.grammar.map(g => g.topic).join("、")}${retakeNote}</div>`;
+    const gramNote = DRILL.s8 ? `文法課程：${DRILL.s8.current.icon} ${DRILL.s8.current.name}` : `文法：${m.grammar.map(g => g.topic).join("、")}`;
+    let h = `<div class="meta">📒 ${m.label} 第 ${w.n} 週 · ${w.theme} · ${gramNote}${retakeNote}</div>`;
     // ①
     h += `<div class="sec"><div class="sec-h">① 英聽選擇</div><div class="sec-d">點 🔊 聽單字，選出正確英文</div>`;
     DRILL.s1.forEach((q, i) => { h += `<div class="q"><div class="q-no">${i + 1}.</div><button class="play" onclick="__pw('${q.en.replace(/'/g, "\\'")}')">🔊 點我聽</button>${optsHtml('s1', i, q.choices)}</div>`; });
@@ -254,6 +276,12 @@
       });
       h += `</div>`;
     }
+    // ⑧ 文法（根基課程）
+    if (DRILL.s8) {
+      h += `<div class="sec"><div class="sec-h">⑧ 文法 — ${DRILL.s8.current.icon} ${DRILL.s8.current.name}</div><div class="sec-d">文法根基課程進度題；答錯會出現複習連結，點過去看單元</div>`;
+      DRILL.s8.qs.forEach((q, i) => { h += `<div class="q"><div class="q-no">${i + 1}. ${q.q}</div>${optsHtml('s8', i, q.choices)}</div>`; });
+      h += `</div>`;
+    }
     h += `<button class="gobtn" onclick="__showTotal()">看總成績 🎉</button><div id="totalBox"></div>`;
     const app = document.getElementById("app"); app.innerHTML = h; app.style.display = "block";
     // 計分容器
@@ -262,17 +290,26 @@
     sectionScores.s4 = [0, DRILL.s4.length];
     sectionScores.s6 = [0, DRILL.s6 ? DRILL.s6.qs.length : 0];
     sectionScores.s7 = [0, DRILL.s7 ? DRILL.s7.qs.length : 0];
+    sectionScores.s8 = [0, DRILL.s8 ? DRILL.s8.qs.length : 0];
   }
 
   window.__ans = (sec, qi, ci, btn) => {
     const box = btn.closest('.q'); if (box.dataset.done) return; box.dataset.done = "1";
     const list = (sec === 's3') ? DRILL.s3.questions[qi].choices
-               : (sec === 's6' || sec === 's7') ? DRILL[sec].qs[qi].choices
+               : (sec === 's6' || sec === 's7' || sec === 's8') ? DRILL[sec].qs[qi].choices
                : DRILL[sec][qi].choices;
     const ok = list[ci].correct;
     box.querySelectorAll('.opt').forEach((b, bi) => { b.disabled = true; if (list[bi].correct) b.classList.add('ok'); else if (bi === ci) b.classList.add('no'); });
     if (ok) sectionScores[sec][0]++;
     if (sec === 's1' || sec === 's5') recordResult(DRILL[sec][qi].en, ok);
+    // 文法題答錯 → 給課程複習連結（開新分頁）
+    if (!ok && sec === 's8') {
+      const u = DRILL.s8.qs[qi].unit;
+      const d = document.createElement('div');
+      d.className = 'gcfix';
+      d.innerHTML = `📘 這題的觀念在 <a href="../grammar_core/${u.id}.html" target="_blank" rel="noopener">${u.icon}「${u.name}」單元</a>，點過去複習一下！`;
+      box.appendChild(d);
+    }
   };
 
   // 句子重組

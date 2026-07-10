@@ -32,4 +32,11 @@ const DRILLS = [
   { day: 28, date: "2026-07-09", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 描述單字＋過去/未來式", icon: "📝" },
   { day: 29, date: "2026-07-10", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 描述單字＋過去/未來式", icon: "📝" },
   { day: 30, date: "2026-07-11", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 描述單字＋過去/未來式", icon: "📝" },
+  { day: 31, date: "2026-07-12", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 校園社團單字＋文法根基", icon: "📝" },
+  { day: 32, date: "2026-07-13", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 校園社團單字＋文法根基", icon: "📝" },
+  { day: 33, date: "2026-07-14", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 校園社團單字＋文法根基", icon: "📝" },
+  { day: 34, date: "2026-07-15", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 校園社團單字＋文法根基", icon: "📝" },
+  { day: 35, date: "2026-07-16", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 校園社團單字＋文法根基", icon: "📝" },
+  { day: 36, date: "2026-07-17", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 校園社團單字＋文法根基", icon: "📝" },
+  { day: 37, date: "2026-07-18", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 校園社團單字＋文法根基", icon: "📝" },
 ];
