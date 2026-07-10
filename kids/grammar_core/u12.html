@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧰 好用的小幫手 — 文法根基</title><style>
+body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
+header{background:#2f80ed;color:#fff;text-align:center;padding:16px;border-radius:0 0 14px 14px;margin:0 -14px 12px}
+header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.78rem;opacity:.92}
+header a{color:#ffe27a;text-decoration:none;font-weight:700}
+.card{background:#fff;border-radius:14px;padding:14px 16px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:1rem;color:#1e5fb8;margin:0 0 8px}
+.concept{font-size:.92rem;background:#eef5ff;border-radius:10px;padding:10px 14px;font-weight:700;color:#1e5fb8}
+svg{width:100%;height:auto}
+audio{width:100%;margin-top:6px}
+.pod-missing{color:#999;font-size:.85rem;text-align:center;padding:10px}
+details{font-size:.88rem} summary{cursor:pointer;font-weight:700;color:#187a48;padding:4px 0}
+.script p{margin:7px 0;font-size:.9rem}
+.script .en{background:#eaf3ff;border-left:4px solid #2f80ed;padding:5px 11px;border-radius:0 8px 8px 0;font-weight:700;color:#1e5fb8}
+.ex{border-top:1px dashed #eee;padding:8px 0;font-size:.92rem}
+.ex button{border:none;border-radius:8px;background:#2f80ed;color:#fff;font-weight:700;padding:5px 11px;cursor:pointer;margin-right:8px}
+.ex small{color:#888;display:block;margin-top:2px}
+.q{border-top:1px dashed #eee;padding:10px 0}
+.q .qt{font-weight:700;margin-bottom:6px;font-size:.92rem}
+.q button{padding:8px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;margin:3px 4px 3px 0;font-size:.88rem}
+#result{font-weight:800;font-size:1rem;margin-top:10px;min-height:1.4em}
+.nav2{display:flex;justify-content:space-between;margin-top:16px;font-size:.85rem}
+.nav2 a{color:#1e5fb8;text-decoration:none;font-weight:700;background:#fff;border-radius:10px;padding:9px 14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+#studentBar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:700;font-size:.85rem;margin-top:10px}
+.stu-btn{padding:6px 14px;border:2px solid #2f80ed;border-radius:16px;background:#fff;color:#2f80ed;font-weight:700;cursor:pointer}
+.stu-btn.active{background:#2f80ed;color:#fff}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#243042;color:#fff;border-radius:12px;padding:10px 18px;font-weight:700;display:none;z-index:60}
+</style></head><body>
+<header><h1>🧰 好用的小幫手 <span style="font-size:.75rem;opacity:.85">Helpers: can / there is / will</span></h1>
+<p><a href="index.html">← 課程目錄</a> · 建議 2-3 週 · 學穩再前進</p></header>
+<div id="studentBar">我是：
+ <button class="stu-btn" onclick="pick('albert')">Albert</button>
+ <button class="stu-btn" onclick="pick('jonathan')">Jonathan</button>
+ <button class="stu-btn" onclick="pick('ryder')">Ryder</button>
+ <button class="stu-btn" style="opacity:.7" onclick="pick('test')">🧪 測試</button>
+</div>
+<div class="card"><div class="concept">💡 can（能力）＋There is/are（存在）＋will / be going to 入門；should/must 為補充</div></div>
+<div class="card"><h2>🗺️ 概念圖</h2><svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a93b8"/></marker></defs><rect x="130" y="35" width="400" height="34" rx="10" fill="#b5651d"/><text x="330" y="58" font-size="16" fill="#fff" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🧰 好用小幫手工具箱</text><rect x="45" y="90" width="180" height="130" rx="14" fill="#eaf3ff" stroke="#2f80ed" stroke-width="2.5"/><text x="135" y="120" font-size="17" fill="#1e5fb8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🔧 can</text><text x="135" y="150" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">會、能力</text><text x="135" y="180" font-size="14" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I can swim.</text><text x="135" y="205" font-size="14" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">She can cook.</text><rect x="240" y="90" width="180" height="130" rx="14" fill="#e6f6ec" stroke="#2fbf71" stroke-width="2.5"/><text x="330" y="120" font-size="15.5" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">📦 There is/are</text><text x="330" y="150" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">有（存在）</text><text x="330" y="180" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">There is a park.</text><text x="330" y="205" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">There are two dogs.</text><rect x="435" y="90" width="180" height="130" rx="14" fill="#f3edff" stroke="#7c4dca" stroke-width="2.5"/><text x="525" y="120" font-size="14.5" fill="#5a36a8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🕐 will / going to</text><text x="525" y="150" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">之後要做</text><text x="525" y="180" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I will help you.</text><text x="525" y="205" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I'm going to read.</text><rect x="45" y="240" width="570" height="62" rx="14" fill="#fde8ec" stroke="#ef476f" stroke-width="2.5"/><text x="330" y="265" font-size="15.5" fill="#c0264b" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">⚠️ 小幫手後面，動詞回原形！</text><text x="330" y="291" font-size="13" fill="#c0264b" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">✅ She can swim.　❌ She can swims.　（should/must 也一樣，之後再學）</text></svg></div>
+<div class="card"><h2>🎧 聽講解（小幫手後面動詞回原形）</h2>
+<audio controls preload="none" src="audio/u12.mp3" onerror="this.outerHTML='<div class=pod-missing>🎙️ 語音準備中，先看下面的講稿吧</div>'"></audio>
+<details><summary>📄 看講稿</summary><div class="script"><p>今天我們打開英文工具箱。裡面有幾個超好用的小幫手。</p><p>它們是 can, there is, there are, will, be going to，還有 should, must。</p><p>先抓住最重要的一句：小幫手後面，動詞回原形。</p><p>什麼叫回原形？就是不要加 s，不要變過去式，也不要變 ing。</p><p>can 是能力工具。你會不會做某件事，就可以請 can 出來。</p><p>聽聽看，can 後面是原形動詞 swim。</p><p class="en">I can swim.</p><p>不是 I can swims，也不是 I can swimming。小幫手後面回原形。</p><p>如果主詞換成 he 或 she，也一樣不用加 s。</p><p>聽這句，she 後面有 can，所以 draw 不加 s。</p><p class="en">She can draw a rabbit.</p><p>平常可能是 She draws，但有 can 時，變成 She can draw。</p><p>there is 和 there are 是存在工具，像在說：那裡有什麼。</p><p>聽這句，只有一隻貓，所以用 there is。</p><p class="en">There is a cat under the chair.</p><p>一個東西用 is，兩個以上用 are。這裡不是看中文，是看後面的東西幾個。</p><p>再聽一句，後面是 three pencils，所以要用 are。</p><p class="en">There are three pencils on the desk.</p><p>will 和 be going to 是未來工具。要講等一下、明天、下週，就很常用。</p><p>聽聽看，will 後面也是原形動詞 call。</p><p class="en">I will call you tonight.</p><p>不要說 I will called。will 已經幫你講未來，動詞不用再變身。</p><p>should 是應該，must 是必須，也都會讓後面動詞回原形。</p><p>聽這句，must 後面是 be，不是 are，也不是 is。</p><p class="en">We must be quiet in the library.</p><p>台灣小孩常見錯誤，是看到 he 或 she 就想加 s：He can plays。</p><p>可是 can 已經站在前面了，後面要 play。寫 He can play。</p><p>另一個錯誤是 there is 後面接很多東西：There is two dogs。</p><p>看到 two dogs，要換 there are。要讓 is 和 are 跟後面的數量配合。</p><p>最後整理：can 講能力，there is/are 講存在，will/going to 講未來。</p><p>看到小幫手，就提醒自己：後面的動詞回原形。這個習慣救你很多題。</p><p>英文不是每個字都一直變。先找小幫手，再決定後面要不要變。</p></div></details></div>
+<div class="card"><h2>📚 例句集</h2><div class="ex"><button onclick="playEx(0)">🔊</button><b>I can swim.</b><small>我會游泳。</small></div><div class="ex"><button onclick="playEx(1)">🔊</button><b>She can draw.</b><small>她會畫畫。</small></div><div class="ex"><button onclick="playEx(2)">🔊</button><b>There is a ball in the box.</b><small>盒子裡有一顆球。</small></div><div class="ex"><button onclick="playEx(3)">🔊</button><b>There are two dogs in the park.</b><small>公園裡有兩隻狗。</small></div><div class="ex"><button onclick="playEx(4)">🔊</button><b>I will call you tonight.</b><small>我今晚會打電話給你。</small></div><div class="ex"><button onclick="playEx(5)">🔊</button><b>We are going to play soccer after school.</b><small>我們放學後要踢足球。</small></div><div class="ex"><button onclick="playEx(6)">🔊</button><b>You should drink water.</b><small>你應該喝水。</small></div><div class="ex"><button onclick="playEx(7)">🔊</button><b>We must be quiet in the library.</b><small>我們在圖書館必須安靜。</small></div><div class="ex"><button onclick="playEx(8)">🔊</button><b>Can you help me with my homework?</b><small>你可以幫我寫功課嗎？</small></div><div class="ex"><button onclick="playEx(9)">🔊</button><b>There will be a test tomorrow.</b><small>明天會有一個考試。</small></div></div>
+<div class="card"><h2>📝 小測驗（完成領金幣，每人一次）</h2><div id="quiz"></div><div id="result"></div></div>
+<div class="nav2">
+  <span><a href="u11.html">← 🌉 連接詞</a></span>
+  <span><a href="r4.html">🧪 總複習：句子合體 →</a></span>
+</div>
+<div id="toast"></div>
+<script>
+const UID="u12", QUIZ=[{"q":"小幫手 can 後面的動詞通常要怎麼樣？","choices":["用原形","加 s","加 ing","變過去式"],"answer":"用原形"},{"q":"He can ___ basketball. 哪個正確？","choices":["play","plays","playing","played"],"answer":"play"},{"q":"___ a book on the desk. 後面是一個 book，選哪個？","choices":["There is","There are","There have","There can"],"answer":"There is"},{"q":"___ three apples in the bag. 後面是三個 apples，選哪個？","choices":["There are","There is","There has","There be"],"answer":"There are"},{"q":"I will ___ my room later. will 後面選哪個？","choices":["clean","cleans","cleaned","cleaning"],"answer":"clean"},{"q":"She is going to ___ her grandma tomorrow. 哪個正確？","choices":["visit","visits","visited","visiting"],"answer":"visit"},{"q":"You should ___ your hands before lunch. should 後面選哪個？","choices":["wash","washes","washing","washed"],"answer":"wash"},{"q":"哪一句正確使用小幫手？","choices":["She can ride a bike.","She can rides a bike.","She will rode a bike.","There is two bikes."],"answer":"She can ride a bike."}];
+let stu=localStorage.getItem("kidsCurrentStudent")||null;
+function pick(n){stu=n;localStorage.setItem("kidsCurrentStudent",n);
+  document.querySelectorAll(".stu-btn").forEach(b=>b.classList.toggle("active",b.textContent.toLowerCase().includes(n==="test"?"測試":n)));}
+if(stu)pick(stu);
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",2200);}
+function playEx(i){new Audio("audio/ex/"+UID+"_"+i+".mp3").play().catch(()=>toast("語音載入中，再點一次"));}
+// 測驗
+let done=0, ok=0;
+const qEl=document.getElementById("quiz");
+qEl.innerHTML=QUIZ.map((q,i)=>'<div class="q" id="q'+i+'"><div class="qt">'+(i+1)+". "+q.q.replace(/</g,"&lt;")+'</div>'+
+  q.choices.map(ch=>'<button onclick="ans('+i+',this)">'+ch.replace(/</g,"&lt;")+"</button>").join("")+"</div>").join("");
+function ans(i,btn){
+  const box=document.getElementById("q"+i); if(box.dataset.done)return; box.dataset.done="1";
+  const good=btn.textContent===QUIZ[i].answer;
+  box.querySelectorAll("button").forEach(b=>{b.disabled=true;
+    if(b.textContent===QUIZ[i].answer){b.style.borderColor="#2fbf71";b.style.background="#d9f7e8";}
+    else if(b===btn){b.style.borderColor="#ef476f";b.style.background="#fde0e8";}});
+  done++; if(good)ok++;
+  if(done===QUIZ.length)finish();
+}
+function finish(){
+  const r=document.getElementById("result");
+  let msg="🎉 答對 "+ok+" / "+QUIZ.length+"！";
+  if(!stu){r.textContent=msg+"（先選名字才能領金幣）";return;}
+  const key="gc::"+UID;
+  const raw=localStorage.getItem("kidsProgress."+stu);
+  const p=raw?JSON.parse(raw):{wrongCounts:{},sessions:0,totalCorrect:0,totalWrong:0};
+  if(!p.coins)p.coins={balance:0,lifetimeEarned:0,lifetimeSpent:0,transactions:[],claimedDrills:{}};
+  if(p.coins.claimedDrills[key]){r.textContent=msg+"（這單元的金幣領過囉）";return;}
+  const earned=ok*5+(ok===QUIZ.length?10:0)+20;
+  p.coins.balance+=earned;p.coins.lifetimeEarned+=earned;
+  p.coins.transactions.push({type:"earn",source:"grammarCore",amount:earned,balanceAfter:p.coins.balance,createdAt:new Date().toISOString(),meta:{unit:UID,correct:ok}});
+  p.coins.claimedDrills[key]={claimedAt:new Date().toISOString(),earned,correct:ok};
+  localStorage.setItem("kidsProgress."+stu,JSON.stringify(p));
+  if(typeof cloudSave==="function")cloudSave(stu);
+  r.innerHTML=msg+" 🪙 +"+earned+"（共 "+p.coins.balance+"）";
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../cloud_sync.js?v=202607100042"></script>
+<script src="../account_lock.js?v=202607100042"></script>
+<script src="../supabase_auth.js?v=202607100042"></script>
+</body></html>

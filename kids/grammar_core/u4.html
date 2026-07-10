@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚙️ 兩種動詞引擎 — 文法根基</title><style>
+body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
+header{background:#2f80ed;color:#fff;text-align:center;padding:16px;border-radius:0 0 14px 14px;margin:0 -14px 12px}
+header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.78rem;opacity:.92}
+header a{color:#ffe27a;text-decoration:none;font-weight:700}
+.card{background:#fff;border-radius:14px;padding:14px 16px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:1rem;color:#1e5fb8;margin:0 0 8px}
+.concept{font-size:.92rem;background:#eef5ff;border-radius:10px;padding:10px 14px;font-weight:700;color:#1e5fb8}
+svg{width:100%;height:auto}
+audio{width:100%;margin-top:6px}
+.pod-missing{color:#999;font-size:.85rem;text-align:center;padding:10px}
+details{font-size:.88rem} summary{cursor:pointer;font-weight:700;color:#187a48;padding:4px 0}
+.script p{margin:7px 0;font-size:.9rem}
+.script .en{background:#eaf3ff;border-left:4px solid #2f80ed;padding:5px 11px;border-radius:0 8px 8px 0;font-weight:700;color:#1e5fb8}
+.ex{border-top:1px dashed #eee;padding:8px 0;font-size:.92rem}
+.ex button{border:none;border-radius:8px;background:#2f80ed;color:#fff;font-weight:700;padding:5px 11px;cursor:pointer;margin-right:8px}
+.ex small{color:#888;display:block;margin-top:2px}
+.q{border-top:1px dashed #eee;padding:10px 0}
+.q .qt{font-weight:700;margin-bottom:6px;font-size:.92rem}
+.q button{padding:8px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;margin:3px 4px 3px 0;font-size:.88rem}
+#result{font-weight:800;font-size:1rem;margin-top:10px;min-height:1.4em}
+.nav2{display:flex;justify-content:space-between;margin-top:16px;font-size:.85rem}
+.nav2 a{color:#1e5fb8;text-decoration:none;font-weight:700;background:#fff;border-radius:10px;padding:9px 14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+#studentBar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:700;font-size:.85rem;margin-top:10px}
+.stu-btn{padding:6px 14px;border:2px solid #2f80ed;border-radius:16px;background:#fff;color:#2f80ed;font-weight:700;cursor:pointer}
+.stu-btn.active{background:#2f80ed;color:#fff}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#243042;color:#fff;border-radius:12px;padding:10px 18px;font-weight:700;display:none;z-index:60}
+</style></head><body>
+<header><h1>⚙️ 兩種動詞引擎 <span style="font-size:.75rem;opacity:.85">Be vs. Action Verbs</span></h1>
+<p><a href="index.html">← 課程目錄</a> · 建議 3 週 · 學穩再前進</p></header>
+<div id="studentBar">我是：
+ <button class="stu-btn" onclick="pick('albert')">Albert</button>
+ <button class="stu-btn" onclick="pick('jonathan')">Jonathan</button>
+ <button class="stu-btn" onclick="pick('ryder')">Ryder</button>
+ <button class="stu-btn" style="opacity:.7" onclick="pick('test')">🧪 測試</button>
+</div>
+<div class="card"><div class="concept">💡 be 動詞（是/在/狀態）vs 一般動詞（動作）——最重要的分水嶺</div></div>
+<div class="card"><h2>🗺️ 概念圖</h2><svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a93b8"/></marker></defs><text x="170" y="34" font-size="17" fill="#1e5fb8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">⚙️ be 引擎（是/在/狀態）</text><rect x="30" y="50" width="280" height="120" rx="12" fill="#eaf3ff" stroke="#2f80ed" stroke-width="2.5"/><text x="170" y="88" font-size="18" fill="#1e5fb8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">am · is · are</text><text x="170" y="120" font-size="14" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I am tall. / She is a nurse.</text><text x="170" y="148" font-size="14" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">They are at home.</text><text x="170" y="205" font-size="17" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">⚙️ 動作引擎（做動作）</text><rect x="30" y="220" width="280" height="90" rx="12" fill="#e6f6ec" stroke="#2fbf71" stroke-width="2.5"/><text x="170" y="258" font-size="16" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">run · eat · play · like…</text><text x="170" y="288" font-size="14" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I play basketball.</text><rect x="360" y="50" width="280" height="260" rx="16" fill="#fde8ec" stroke="#ef476f" stroke-width="2.5"/><text x="500" y="90" font-size="17" fill="#c0264b" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🚗 一台車一顆引擎！</text><text x="500" y="140" font-size="16" fill="#c0264b" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">❌ I am play basketball.</text><text x="500" y="175" font-size="13" fill="#888" font-weight="400" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">（兩顆引擎打架了）</text><text x="500" y="225" font-size="16" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">✅ I play basketball.</text><text x="500" y="260" font-size="16" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">✅ I am tall.</text></svg></div>
+<div class="card"><h2>🎧 聽講解（be 動詞和一般動詞不要混在同一台車）</h2>
+<audio controls preload="none" src="audio/u4.mp3" onerror="this.outerHTML='<div class=pod-missing>🎙️ 語音準備中，先看下面的講稿吧</div>'"></audio>
+<details><summary>📄 看講稿</summary><div class="script"><p>今天是超重要分水嶺：英文有兩種動詞引擎，be 動詞和一般動詞。不要把兩台裝進同一台車。</p><p>be 動詞就是 am、is、are。它常常講「是什麼、在哪裡、狀態怎樣」。</p><p>一般動詞就是真正的動作，像 play、eat、read、watch、run。它們自己就是引擎。</p><p>很多錯句都是因為看到中文「是」或「有在」，就硬塞 is。英文要先選引擎。</p><p>先聽 be 引擎，它不是在做動作，是在說狀態。</p><p class="en">I am tired.</p><p>am 把 I 和 tired 接起來。這台車裝的是 be 引擎，不需要再加 do 或 play。</p><p>再聽一般動詞引擎，動作自己會跑。</p><p class="en">I play soccer.</p><p>play 是動作引擎，所以不要說 I am play soccer。am 和 play 不能這樣混裝。</p><p>第三句是位置，be 動詞很常用來說在哪裡。</p><p class="en">My bag is under the desk.</p><p>is 告訴我們書包在哪裡。under the desk 是位置，不是動作，所以用 be 很合理。</p><p>再看一般動詞，家裡常見的一句。</p><p class="en">My brother watches TV after dinner.</p><p>watches 是看電視的動作。這句已經有一般動詞，就不要再放 is 在前面。</p><p>問句也要分引擎。be 句把 be 放前面；一般動詞句以後會用 do 幫忙。現在先別混。</p><p class="en">Are you hungry?</p><p>hungry 是狀態，所以用 Are you hungry? 不說 Do you hungry? 因為 hungry 不是動詞。</p><p>台灣小孩最常寫 I am like it。因為中文想說「我是喜歡它的」，但英文 like 已經是動詞。</p><p>正確是 I like it。除非你要說狀態，像 I am happy，才用 am。</p><p>另一個陷阱：You are eat lunch。eat 是動作引擎，現在先說 You eat lunch。</p><p>最後總結：看到句子先問，是狀態或位置，還是真的動作？狀態位置多用 be，動作用一般動詞。</p><p>一台車先裝一台引擎。be 和一般動詞分清楚，你後面學時態、問句才不會全部打結。</p></div></details></div>
+<div class="card"><h2>📚 例句集</h2><div class="ex"><button onclick="playEx(0)">🔊</button><b>I am happy.</b><small>我很開心。</small></div><div class="ex"><button onclick="playEx(1)">🔊</button><b>She is at school.</b><small>她在學校。</small></div><div class="ex"><button onclick="playEx(2)">🔊</button><b>They are friends.</b><small>他們是朋友。</small></div><div class="ex"><button onclick="playEx(3)">🔊</button><b>We play cards.</b><small>我們玩卡牌。</small></div><div class="ex"><button onclick="playEx(4)">🔊</button><b>Tom eats lunch.</b><small>Tom 吃午餐。</small></div><div class="ex"><button onclick="playEx(5)">🔊</button><b>My cat sleeps on the sofa.</b><small>我的貓睡在沙發上。</small></div><div class="ex"><button onclick="playEx(6)">🔊</button><b>The classroom is quiet.</b><small>教室很安靜。</small></div><div class="ex"><button onclick="playEx(7)">🔊</button><b>Are you late?</b><small>你遲到了嗎？</small></div><div class="ex"><button onclick="playEx(8)">🔊</button><b>Do you like this game?</b><small>你喜歡這個遊戲嗎？</small></div><div class="ex"><button onclick="playEx(9)">🔊</button><b>My dad is in the kitchen, and he cooks dinner.</b><small>我爸爸在廚房，而且他煮晚餐。</small></div></div>
+<div class="card"><h2>📝 小測驗（完成領金幣，每人一次）</h2><div id="quiz"></div><div id="result"></div></div>
+<div class="nav2">
+  <span><a href="u3.html">← 🎭 代名詞家族</a></span>
+  <span><a href="r1.html">🏭 綜合複習：造句工廠 →</a></span>
+</div>
+<div id="toast"></div>
+<script>
+const UID="u4", QUIZ=[{"q":"哪一句正確使用 be 動詞表示狀態？","choices":["I am tired.","I tired.","I am like tired.","I do tired."],"answer":"I am tired."},{"q":"哪一句正確使用一般動詞？","choices":["We play basketball.","We are play basketball.","We playing basketball.","We is play basketball."],"answer":"We play basketball."},{"q":"My pencil ___ on the desk. 空格最適合？","choices":["is","plays","do","eat"],"answer":"is"},{"q":"I ___ this song. 空格是動作「喜歡」，最適合？","choices":["like","am like","is like","am"],"answer":"like"},{"q":"哪一句修正了 He is plays games.？","choices":["He plays games.","He is play games.","He are plays games.","He playing games."],"answer":"He plays games."},{"q":"hungry 是狀態，不是動作。問「你餓嗎？」哪句較好？","choices":["Are you hungry?","Do you hungry?","You hungry?","Are you eat hungry?"],"answer":"Are you hungry?"},{"q":"哪一句同時有 be 引擎和一般動詞引擎，但不是亂混？","choices":["I am at home, and I read.","I am read at home.","I am like books.","I do am home."],"answer":"I am at home, and I read."},{"q":"選引擎時，第一個問題應該是什麼？","choices":["這是在說狀態位置，還是在說動作？","中文有沒有「是」這個字？","句子是不是很長？","單字看起來難不難？"],"answer":"這是在說狀態位置，還是在說動作？"}];
+let stu=localStorage.getItem("kidsCurrentStudent")||null;
+function pick(n){stu=n;localStorage.setItem("kidsCurrentStudent",n);
+  document.querySelectorAll(".stu-btn").forEach(b=>b.classList.toggle("active",b.textContent.toLowerCase().includes(n==="test"?"測試":n)));}
+if(stu)pick(stu);
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",2200);}
+function playEx(i){new Audio("audio/ex/"+UID+"_"+i+".mp3").play().catch(()=>toast("語音載入中，再點一次"));}
+// 測驗
+let done=0, ok=0;
+const qEl=document.getElementById("quiz");
+qEl.innerHTML=QUIZ.map((q,i)=>'<div class="q" id="q'+i+'"><div class="qt">'+(i+1)+". "+q.q.replace(/</g,"&lt;")+'</div>'+
+  q.choices.map(ch=>'<button onclick="ans('+i+',this)">'+ch.replace(/</g,"&lt;")+"</button>").join("")+"</div>").join("");
+function ans(i,btn){
+  const box=document.getElementById("q"+i); if(box.dataset.done)return; box.dataset.done="1";
+  const good=btn.textContent===QUIZ[i].answer;
+  box.querySelectorAll("button").forEach(b=>{b.disabled=true;
+    if(b.textContent===QUIZ[i].answer){b.style.borderColor="#2fbf71";b.style.background="#d9f7e8";}
+    else if(b===btn){b.style.borderColor="#ef476f";b.style.background="#fde0e8";}});
+  done++; if(good)ok++;
+  if(done===QUIZ.length)finish();
+}
+function finish(){
+  const r=document.getElementById("result");
+  let msg="🎉 答對 "+ok+" / "+QUIZ.length+"！";
+  if(!stu){r.textContent=msg+"（先選名字才能領金幣）";return;}
+  const key="gc::"+UID;
+  const raw=localStorage.getItem("kidsProgress."+stu);
+  const p=raw?JSON.parse(raw):{wrongCounts:{},sessions:0,totalCorrect:0,totalWrong:0};
+  if(!p.coins)p.coins={balance:0,lifetimeEarned:0,lifetimeSpent:0,transactions:[],claimedDrills:{}};
+  if(p.coins.claimedDrills[key]){r.textContent=msg+"（這單元的金幣領過囉）";return;}
+  const earned=ok*5+(ok===QUIZ.length?10:0)+20;
+  p.coins.balance+=earned;p.coins.lifetimeEarned+=earned;
+  p.coins.transactions.push({type:"earn",source:"grammarCore",amount:earned,balanceAfter:p.coins.balance,createdAt:new Date().toISOString(),meta:{unit:UID,correct:ok}});
+  p.coins.claimedDrills[key]={claimedAt:new Date().toISOString(),earned,correct:ok};
+  localStorage.setItem("kidsProgress."+stu,JSON.stringify(p));
+  if(typeof cloudSave==="function")cloudSave(stu);
+  r.innerHTML=msg+" 🪙 +"+earned+"（共 "+p.coins.balance+"）";
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../cloud_sync.js?v=202607100042"></script>
+<script src="../account_lock.js?v=202607100042"></script>
+<script src="../supabase_auth.js?v=202607100042"></script>
+</body></html>

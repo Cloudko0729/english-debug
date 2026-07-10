@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏷️ 描述員 — 文法根基</title><style>
+body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
+header{background:#2f80ed;color:#fff;text-align:center;padding:16px;border-radius:0 0 14px 14px;margin:0 -14px 12px}
+header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.78rem;opacity:.92}
+header a{color:#ffe27a;text-decoration:none;font-weight:700}
+.card{background:#fff;border-radius:14px;padding:14px 16px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:1rem;color:#1e5fb8;margin:0 0 8px}
+.concept{font-size:.92rem;background:#eef5ff;border-radius:10px;padding:10px 14px;font-weight:700;color:#1e5fb8}
+svg{width:100%;height:auto}
+audio{width:100%;margin-top:6px}
+.pod-missing{color:#999;font-size:.85rem;text-align:center;padding:10px}
+details{font-size:.88rem} summary{cursor:pointer;font-weight:700;color:#187a48;padding:4px 0}
+.script p{margin:7px 0;font-size:.9rem}
+.script .en{background:#eaf3ff;border-left:4px solid #2f80ed;padding:5px 11px;border-radius:0 8px 8px 0;font-weight:700;color:#1e5fb8}
+.ex{border-top:1px dashed #eee;padding:8px 0;font-size:.92rem}
+.ex button{border:none;border-radius:8px;background:#2f80ed;color:#fff;font-weight:700;padding:5px 11px;cursor:pointer;margin-right:8px}
+.ex small{color:#888;display:block;margin-top:2px}
+.q{border-top:1px dashed #eee;padding:10px 0}
+.q .qt{font-weight:700;margin-bottom:6px;font-size:.92rem}
+.q button{padding:8px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;margin:3px 4px 3px 0;font-size:.88rem}
+#result{font-weight:800;font-size:1rem;margin-top:10px;min-height:1.4em}
+.nav2{display:flex;justify-content:space-between;margin-top:16px;font-size:.85rem}
+.nav2 a{color:#1e5fb8;text-decoration:none;font-weight:700;background:#fff;border-radius:10px;padding:9px 14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+#studentBar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:700;font-size:.85rem;margin-top:10px}
+.stu-btn{padding:6px 14px;border:2px solid #2f80ed;border-radius:16px;background:#fff;color:#2f80ed;font-weight:700;cursor:pointer}
+.stu-btn.active{background:#2f80ed;color:#fff}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#243042;color:#fff;border-radius:12px;padding:10px 18px;font-weight:700;display:none;z-index:60}
+</style></head><body>
+<header><h1>🏷️ 描述員 <span style="font-size:.75rem;opacity:.85">Describing Words</span></h1>
+<p><a href="index.html">← 課程目錄</a> · 建議 2-3 週 · 學穩再前進</p></header>
+<div id="studentBar">我是：
+ <button class="stu-btn" onclick="pick('albert')">Albert</button>
+ <button class="stu-btn" onclick="pick('jonathan')">Jonathan</button>
+ <button class="stu-btn" onclick="pick('ryder')">Ryder</button>
+ <button class="stu-btn" style="opacity:.7" onclick="pick('test')">🧪 測試</button>
+</div>
+<div class="card"><div class="concept">💡 形容詞貼名詞、副詞貼動作、頻率副詞貼習慣</div></div>
+<div class="card"><h2>🗺️ 概念圖</h2><svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a93b8"/></marker></defs><rect x="30" y="45" width="190" height="110" rx="14" fill="#eaf3ff" stroke="#2f80ed" stroke-width="2.5"/><text x="125" y="75" font-size="14.5" fill="#1e5fb8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🏷️ 形容詞 → 名詞</text><text x="125" y="108" font-size="16" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">a big dog</text><text x="125" y="138" font-size="12.5" fill="#666" font-weight="400" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">東西「怎樣」</text><rect x="235" y="45" width="190" height="110" rx="14" fill="#e6f6ec" stroke="#2fbf71" stroke-width="2.5"/><text x="330" y="75" font-size="14.5" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🏷️ 副詞 → 動作</text><text x="330" y="108" font-size="16" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">runs quickly</text><text x="330" y="138" font-size="12.5" fill="#666" font-weight="400" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">動作「怎樣」（常 -ly）</text><rect x="440" y="45" width="200" height="110" rx="14" fill="#fff3e0" stroke="#f2a900" stroke-width="2.5"/><text x="540" y="75" font-size="14.5" fill="#a05c10" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🏷️ 頻率 → 習慣</text><text x="540" y="108" font-size="16" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I always run.</text><text x="540" y="138" font-size="12.5" fill="#666" font-weight="400" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">放一般動詞前面</text><text x="330" y="195" font-size="15" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">頻率量表</text><line x1="80" y1="235" x2="580" y2="235" stroke="#8a93b8" stroke-width="4"/><circle cx="80" cy="235" r="8" fill="#2fbf71"/><circle cx="205" cy="235" r="8" fill="#7cc576"/><circle cx="330" cy="235" r="8" fill="#f2a900"/><circle cx="455" cy="235" r="8" fill="#f28444"/><circle cx="580" cy="235" r="8" fill="#ef476f"/><text x="80" y="265" font-size="13" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">always</text><text x="205" y="265" font-size="13" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">usually</text><text x="330" y="265" font-size="13" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">sometimes</text><text x="455" y="265" font-size="13" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">seldom</text><text x="580" y="265" font-size="13" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">never</text><text x="80" y="285" font-size="12" fill="#888" font-weight="400" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">100%</text><text x="580" y="285" font-size="12" fill="#888" font-weight="400" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">0%</text></svg></div>
+<div class="card"><h2>🎧 聽講解（形容詞說東西怎樣，副詞說動作怎樣）</h2>
+<audio controls preload="none" src="audio/u9.mp3" onerror="this.outerHTML='<div class=pod-missing>🎙️ 語音準備中，先看下面的講稿吧</div>'"></audio>
+<details><summary>📄 看講稿</summary><div class="script"><p>今天我們來認識英文裡的描述員。它們像貼紙，幫句子加上更清楚的畫面。</p><p>第一種貼紙叫形容詞，專門貼在名詞旁邊，說人、東西、地方怎樣。</p><p>第二種貼紙叫副詞，常常貼在動作旁邊，說這個動作做得怎樣。</p><p>今天的核心句是：形容詞說東西怎樣，副詞說動作怎樣。</p><p>先看形容詞。名詞像一個便當盒，形容詞像貼在盒子上的標籤。</p><p>聽聽看。</p><p class="en">I have a small bag.</p><p>small 貼在 bag 旁邊，告訴你這個書包是小的，不是大的。</p><p>形容詞也可以放在 be 動詞後面，說主詞現在的狀態。</p><p>聽這句。</p><p class="en">The soup is hot.</p><p>hot 說 soup 怎樣。這時候 be 動詞像等號，左邊的湯等於熱的。</p><p>再來看副詞。動作像一段影片，副詞告訴你影片裡的動作怎麼做。</p><p>聽聽看。</p><p class="en">She reads slowly.</p><p>slowly 不是說 she 這個人慢，而是說 reads 這個動作慢慢地做。</p><p>很多副詞長得像形容詞加 ly，例如 slow 變 slowly，careful 變 carefully。</p><p>但不是每個副詞都加 ly。fast 就很特別，形容詞和副詞都可以是 fast。</p><p>接著是頻率副詞，像 always、usually、sometimes、never。</p><p>它們不是說動作快慢，而是說事情發生幾次，常常還是很少。</p><p>聽這句。</p><p class="en">I usually eat lunch at school.</p><p>usually 告訴你：我通常在學校吃午餐。它在 eat 前面，貼著習慣動作。</p><p>如果句子有 be 動詞，頻率副詞常放在 be 後面。</p><p>聽最後一個。</p><p class="en">My dad is always busy.</p><p>always 放在 is 後面，說爸爸總是很忙。位置跟一般動詞句不太一樣。</p><p>台灣小孩常見錯誤是把形容詞拿去修飾動作，例如 She writes careful。</p><p>如果要說她寫得很仔細，要說 She writes carefully。動作要配副詞。</p><p>另一個陷阱是直接照中文排：I eat usually lunch。英文會覺得卡卡的。</p><p>一般動詞的習慣句，先主詞，再頻率副詞，再動作：I usually eat lunch。</p><p>最後整理：形容詞貼名詞，像 cute dog、big desk。副詞貼動作，像 read slowly。</p><p>頻率副詞像次數量表：always 最常，usually 常常，sometimes 有時，never 從不。</p><p>下次看到描述字，先問自己：它在說東西怎樣，還是動作怎樣？答案就很清楚。</p></div></details></div>
+<div class="card"><h2>📚 例句集</h2><div class="ex"><button onclick="playEx(0)">🔊</button><b>It is a big bag.</b><small>它是一個大書包。</small></div><div class="ex"><button onclick="playEx(1)">🔊</button><b>I have a cute dog.</b><small>我有一隻可愛的狗。</small></div><div class="ex"><button onclick="playEx(2)">🔊</button><b>The soup is hot.</b><small>湯是熱的。</small></div><div class="ex"><button onclick="playEx(3)">🔊</button><b>She runs fast.</b><small>她跑得快。</small></div><div class="ex"><button onclick="playEx(4)">🔊</button><b>He reads slowly.</b><small>他讀得慢。</small></div><div class="ex"><button onclick="playEx(5)">🔊</button><b>We usually eat lunch at school.</b><small>我們通常在學校吃午餐。</small></div><div class="ex"><button onclick="playEx(6)">🔊</button><b>My dad is always busy.</b><small>我爸爸總是很忙。</small></div><div class="ex"><button onclick="playEx(7)">🔊</button><b>I never play games before homework.</b><small>我寫功課前從不玩遊戲。</small></div><div class="ex"><button onclick="playEx(8)">🔊</button><b>The teacher speaks clearly in class.</b><small>老師在課堂上說得很清楚。</small></div><div class="ex"><button onclick="playEx(9)">🔊</button><b>Lisa is a careful student, and she writes carefully.</b><small>Lisa 是一個細心的學生，而且她寫字很仔細。</small></div></div>
+<div class="card"><h2>📝 小測驗（完成領金幣，每人一次）</h2><div id="quiz"></div><div id="result"></div></div>
+<div class="nav2">
+  <span><a href="u8.html">← 🤖 問句與否定</a></span>
+  <span><a href="u10.html">🗺️ 位置與時間 →</a></span>
+</div>
+<div id="toast"></div>
+<script>
+const UID="u9", QUIZ=[{"q":"形容詞主要貼在哪一種字旁邊？","choices":["名詞","動詞","問句小幫手","句號"],"answer":"名詞"},{"q":"It is a ___ cat.","choices":["cute","cutely","slowly","usually"],"answer":"cute"},{"q":"Tom runs ___.","choices":["fast","fastly","quick","happy"],"answer":"fast"},{"q":"Amy writes ___.","choices":["carefully","careful","good","nice"],"answer":"carefully"},{"q":"頻率副詞 always、usually、sometimes、never 主要在說什麼？","choices":["事情發生的次數","東西的顏色","動作的地點","句子的主詞"],"answer":"事情發生的次數"},{"q":"哪一句的頻率副詞位置最自然？","choices":["We usually play soccer after school.","We play usually soccer after school.","Usually we soccer play after school.","We play soccer usually after school always."],"answer":"We usually play soccer after school."},{"q":"be 動詞句：My brother is ___ late.","choices":["often","late often","usually is","neverly"],"answer":"often"},{"q":"哪一句同時用對形容詞和副詞？","choices":["He is a careful boy, and he reads carefully.","He is a carefully boy, and he reads careful.","He is careful boy, and he reads careful.","He is a careful boy, and he reads careful."],"answer":"He is a careful boy, and he reads carefully."}];
+let stu=localStorage.getItem("kidsCurrentStudent")||null;
+function pick(n){stu=n;localStorage.setItem("kidsCurrentStudent",n);
+  document.querySelectorAll(".stu-btn").forEach(b=>b.classList.toggle("active",b.textContent.toLowerCase().includes(n==="test"?"測試":n)));}
+if(stu)pick(stu);
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",2200);}
+function playEx(i){new Audio("audio/ex/"+UID+"_"+i+".mp3").play().catch(()=>toast("語音載入中，再點一次"));}
+// 測驗
+let done=0, ok=0;
+const qEl=document.getElementById("quiz");
+qEl.innerHTML=QUIZ.map((q,i)=>'<div class="q" id="q'+i+'"><div class="qt">'+(i+1)+". "+q.q.replace(/</g,"&lt;")+'</div>'+
+  q.choices.map(ch=>'<button onclick="ans('+i+',this)">'+ch.replace(/</g,"&lt;")+"</button>").join("")+"</div>").join("");
+function ans(i,btn){
+  const box=document.getElementById("q"+i); if(box.dataset.done)return; box.dataset.done="1";
+  const good=btn.textContent===QUIZ[i].answer;
+  box.querySelectorAll("button").forEach(b=>{b.disabled=true;
+    if(b.textContent===QUIZ[i].answer){b.style.borderColor="#2fbf71";b.style.background="#d9f7e8";}
+    else if(b===btn){b.style.borderColor="#ef476f";b.style.background="#fde0e8";}});
+  done++; if(good)ok++;
+  if(done===QUIZ.length)finish();
+}
+function finish(){
+  const r=document.getElementById("result");
+  let msg="🎉 答對 "+ok+" / "+QUIZ.length+"！";
+  if(!stu){r.textContent=msg+"（先選名字才能領金幣）";return;}
+  const key="gc::"+UID;
+  const raw=localStorage.getItem("kidsProgress."+stu);
+  const p=raw?JSON.parse(raw):{wrongCounts:{},sessions:0,totalCorrect:0,totalWrong:0};
+  if(!p.coins)p.coins={balance:0,lifetimeEarned:0,lifetimeSpent:0,transactions:[],claimedDrills:{}};
+  if(p.coins.claimedDrills[key]){r.textContent=msg+"（這單元的金幣領過囉）";return;}
+  const earned=ok*5+(ok===QUIZ.length?10:0)+20;
+  p.coins.balance+=earned;p.coins.lifetimeEarned+=earned;
+  p.coins.transactions.push({type:"earn",source:"grammarCore",amount:earned,balanceAfter:p.coins.balance,createdAt:new Date().toISOString(),meta:{unit:UID,correct:ok}});
+  p.coins.claimedDrills[key]={claimedAt:new Date().toISOString(),earned,correct:ok};
+  localStorage.setItem("kidsProgress."+stu,JSON.stringify(p));
+  if(typeof cloudSave==="function")cloudSave(stu);
+  r.innerHTML=msg+" 🪙 +"+earned+"（共 "+p.coins.balance+"）";
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../cloud_sync.js?v=202607100042"></script>
+<script src="../account_lock.js?v=202607100042"></script>
+<script src="../supabase_auth.js?v=202607100042"></script>
+</body></html>

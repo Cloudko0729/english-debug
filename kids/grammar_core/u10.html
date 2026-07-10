@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🗺️ 位置與時間 — 文法根基</title><style>
+body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
+header{background:#2f80ed;color:#fff;text-align:center;padding:16px;border-radius:0 0 14px 14px;margin:0 -14px 12px}
+header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.78rem;opacity:.92}
+header a{color:#ffe27a;text-decoration:none;font-weight:700}
+.card{background:#fff;border-radius:14px;padding:14px 16px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:1rem;color:#1e5fb8;margin:0 0 8px}
+.concept{font-size:.92rem;background:#eef5ff;border-radius:10px;padding:10px 14px;font-weight:700;color:#1e5fb8}
+svg{width:100%;height:auto}
+audio{width:100%;margin-top:6px}
+.pod-missing{color:#999;font-size:.85rem;text-align:center;padding:10px}
+details{font-size:.88rem} summary{cursor:pointer;font-weight:700;color:#187a48;padding:4px 0}
+.script p{margin:7px 0;font-size:.9rem}
+.script .en{background:#eaf3ff;border-left:4px solid #2f80ed;padding:5px 11px;border-radius:0 8px 8px 0;font-weight:700;color:#1e5fb8}
+.ex{border-top:1px dashed #eee;padding:8px 0;font-size:.92rem}
+.ex button{border:none;border-radius:8px;background:#2f80ed;color:#fff;font-weight:700;padding:5px 11px;cursor:pointer;margin-right:8px}
+.ex small{color:#888;display:block;margin-top:2px}
+.q{border-top:1px dashed #eee;padding:10px 0}
+.q .qt{font-weight:700;margin-bottom:6px;font-size:.92rem}
+.q button{padding:8px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;margin:3px 4px 3px 0;font-size:.88rem}
+#result{font-weight:800;font-size:1rem;margin-top:10px;min-height:1.4em}
+.nav2{display:flex;justify-content:space-between;margin-top:16px;font-size:.85rem}
+.nav2 a{color:#1e5fb8;text-decoration:none;font-weight:700;background:#fff;border-radius:10px;padding:9px 14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+#studentBar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:700;font-size:.85rem;margin-top:10px}
+.stu-btn{padding:6px 14px;border:2px solid #2f80ed;border-radius:16px;background:#fff;color:#2f80ed;font-weight:700;cursor:pointer}
+.stu-btn.active{background:#2f80ed;color:#fff}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#243042;color:#fff;border-radius:12px;padding:10px 18px;font-weight:700;display:none;z-index:60}
+</style></head><body>
+<header><h1>🗺️ 位置與時間 <span style="font-size:.75rem;opacity:.85">Prepositions</span></h1>
+<p><a href="index.html">← 課程目錄</a> · 建議 2 週 · 學穩再前進</p></header>
+<div id="studentBar">我是：
+ <button class="stu-btn" onclick="pick('albert')">Albert</button>
+ <button class="stu-btn" onclick="pick('jonathan')">Jonathan</button>
+ <button class="stu-btn" onclick="pick('ryder')">Ryder</button>
+ <button class="stu-btn" style="opacity:.7" onclick="pick('test')">🧪 測試</button>
+</div>
+<div class="card"><div class="concept">💡 空間介係詞（圖感）＋ at/on/in 時間金字塔</div></div>
+<div class="card"><h2>🗺️ 概念圖</h2><svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a93b8"/></marker></defs><rect x="40" y="55" width="250" height="190" rx="10" fill="#fffdf3" stroke="#8a93b8" stroke-width="2.5"/><text x="165" y="45" font-size="15" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🗺️ 空間：用「看」的</text><text x="100" y="95" font-size="14" fill="#1e5fb8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">on 🐱</text><rect x="70" y="105" width="60" height="42" fill="#d9e2ec" rx="6"/><text x="100" y="130" font-size="12" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">盒子</text><text x="100" y="172" font-size="14" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">in 🐱</text><rect x="70" y="182" width="60" height="42" fill="#d9e2ec" rx="6"/><text x="100" y="207" font-size="12" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">盒子</text><text x="225" y="95" font-size="14" fill="#a05c10" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">under 🐱</text><rect x="195" y="105" width="60" height="10" fill="#d9e2ec" rx="4"/><text x="225" y="135" font-size="16" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🐱</text><text x="225" y="185" font-size="14" fill="#7c4dca" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">next to</text><rect x="188" y="196" width="34" height="34" fill="#d9e2ec" rx="6"/><text x="243" y="218" font-size="16" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🐱</text><path d="M 470 60 L 570 155 L 370 155 Z" fill="#fff3e0" stroke="#f2a900" stroke-width="2.5"/><path d="M 470 60 L 537 124 L 403 124 Z" fill="#fde8ec" stroke="#ef476f" stroke-width="2.5"/><path d="M 470 60 L 505 93 L 435 93 Z" fill="#eaf3ff" stroke="#2f80ed" stroke-width="2.5"/><text x="470" y="84" font-size="13" fill="#1e5fb8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">at</text><text x="470" y="114" font-size="14" fill="#c0264b" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">on</text><text x="470" y="146" font-size="15" fill="#a05c10" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">in</text><text x="470" y="45" font-size="14" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">⏰ 時間金字塔（越下越大段）</text><text x="470" y="185" font-size="13" fill="#1e5fb8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">at 7:00（時刻）</text><text x="470" y="210" font-size="13" fill="#c0264b" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">on Monday（某一天）</text><text x="470" y="235" font-size="13" fill="#a05c10" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">in July / in 2026（月、年）</text><text x="330" y="290" font-size="14" fill="#555" font-weight="400" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">❌ 不要背中文翻譯，看圖記位置關係</text></svg></div>
+<div class="card"><h2>🎧 聽講解（介係詞不是翻中文，是看空間關係）</h2>
+<audio controls preload="none" src="audio/u10.mp3" onerror="this.outerHTML='<div class=pod-missing>🎙️ 語音準備中，先看下面的講稿吧</div>'"></audio>
+<details><summary>📄 看講稿</summary><div class="script"><p>今天來講介係詞。先不要怕這個名字，它其實就是位置和時間的導航標誌。</p><p>很多人學介係詞會一直問：這個中文是不是翻成在？但這樣很容易亂。</p><p>今天要抓住核心：介係詞不是翻中文，是看空間關係。</p><p>你要像在看地圖：東西在裡面、在上面、在下面、在旁邊，畫面先出來。</p><p>先看 on。on 不是只有中文的在，它有碰到表面的感覺。</p><p>聽聽看。</p><p class="en">The book is on the desk.</p><p>書碰著桌面，所以用 on。牆上的圖也常用 on，因為它貼著表面。</p><p>再看 in。in 有在裡面的感覺，像盒子、書包、房間、班級。</p><p>聽這句。</p><p class="en">My pencil is in my bag.</p><p>鉛筆在書包裡面，所以用 in。腦中畫出袋子包住鉛筆。</p><p>under 是在下面，next to 是在旁邊，behind 是在後面，between 是在兩個中間。</p><p>這些都不是死背中文，而是看兩個東西的關係。</p><p>聽一個教室句。</p><p class="en">I sit next to Ben.</p><p>next to 就是座位靠在 Ben 旁邊。英文用一個小標誌把位置說清楚。</p><p>時間也有介係詞，最常見的是 at、on、in。你可以想成時間金字塔。</p><p>at 最小，常接精準時間：at seven、at noon、at night。</p><p>on 中等，常接星期和日期：on Monday、on July 10。</p><p>in 最大，常接月份、年份、早上下午晚上：in May、in 2026、in the morning。</p><p>聽聽看時間句。</p><p class="en">We have English class at nine.</p><p>nine 是精準時間點，所以用 at。像拿針插在時間線上的一點。</p><p>再聽一個。</p><p class="en">My birthday is in May.</p><p>May 是一整個月份，範圍比較大，所以用 in。不是每個中文「在」都用 at。</p><p>台灣小孩常犯的錯是每個「在」都寫 at，例如 at Monday、at May。</p><p>英文要看大小：時間點用 at，星期日期用 on，月份年份大範圍用 in。</p><p>另一個錯是只背翻譯，不看圖。on the bus、in the car，就是英文習慣的畫面。</p><p>最後整理：空間介係詞先看圖，不要先翻中文。東西在裡面用 in，在表面用 on。</p><p>時間 at、on、in 想金字塔：小時間點 at，中間星期日期 on，大範圍 in。</p><p>每次寫介係詞，先問：它們的關係長什麼樣？圖對了，字就比較容易對。</p></div></details></div>
+<div class="card"><h2>📚 例句集</h2><div class="ex"><button onclick="playEx(0)">🔊</button><b>The book is on the desk.</b><small>書在桌上。</small></div><div class="ex"><button onclick="playEx(1)">🔊</button><b>The ball is under the chair.</b><small>球在椅子下面。</small></div><div class="ex"><button onclick="playEx(2)">🔊</button><b>My cat is in the box.</b><small>我的貓在盒子裡。</small></div><div class="ex"><button onclick="playEx(3)">🔊</button><b>I sit next to Ben.</b><small>我坐在 Ben 旁邊。</small></div><div class="ex"><button onclick="playEx(4)">🔊</button><b>The park is behind my school.</b><small>公園在我學校後面。</small></div><div class="ex"><button onclick="playEx(5)">🔊</button><b>We eat lunch at noon.</b><small>我們中午吃午餐。</small></div><div class="ex"><button onclick="playEx(6)">🔊</button><b>I have art on Monday.</b><small>我星期一有美術課。</small></div><div class="ex"><button onclick="playEx(7)">🔊</button><b>My birthday is in May.</b><small>我的生日在五月。</small></div><div class="ex"><button onclick="playEx(8)">🔊</button><b>We play basketball in the afternoon.</b><small>我們下午打籃球。</small></div><div class="ex"><button onclick="playEx(9)">🔊</button><b>The bus stop is between the school and the park.</b><small>公車站在學校和公園中間。</small></div></div>
+<div class="card"><h2>📝 小測驗（完成領金幣，每人一次）</h2><div id="quiz"></div><div id="result"></div></div>
+<div class="nav2">
+  <span><a href="u9.html">← 🏷️ 描述員</a></span>
+  <span><a href="r3.html">🌅 綜合複習：描述我的一天 →</a></span>
+</div>
+<div id="toast"></div>
+<script>
+const UID="u10", QUIZ=[{"q":"空間介係詞最該先看什麼？","choices":["兩個東西的關係圖","中文有沒有「在」","句子有幾個字","動詞是不是過去式"],"answer":"兩個東西的關係圖"},{"q":"The pencil is ___ my bag.","choices":["in","on","at","between"],"answer":"in"},{"q":"The picture is ___ the wall.","choices":["on","in","under","at"],"answer":"on"},{"q":"We meet ___ seven.","choices":["at","on","in","under"],"answer":"at"},{"q":"I have PE ___ Friday.","choices":["on","in","at","next to"],"answer":"on"},{"q":"My birthday is ___ July.","choices":["in","on","at","behind"],"answer":"in"},{"q":"哪一組 at/on/in 的時間用法都正確？","choices":["at six / on Sunday / in 2026","on six / in Sunday / at 2026","in six / at Sunday / on 2026","at Monday / on May / in night"],"answer":"at six / on Sunday / in 2026"},{"q":"The cat is ___ the table. 牠在桌子下面。","choices":["under","on","in","between"],"answer":"under"}];
+let stu=localStorage.getItem("kidsCurrentStudent")||null;
+function pick(n){stu=n;localStorage.setItem("kidsCurrentStudent",n);
+  document.querySelectorAll(".stu-btn").forEach(b=>b.classList.toggle("active",b.textContent.toLowerCase().includes(n==="test"?"測試":n)));}
+if(stu)pick(stu);
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",2200);}
+function playEx(i){new Audio("audio/ex/"+UID+"_"+i+".mp3").play().catch(()=>toast("語音載入中，再點一次"));}
+// 測驗
+let done=0, ok=0;
+const qEl=document.getElementById("quiz");
+qEl.innerHTML=QUIZ.map((q,i)=>'<div class="q" id="q'+i+'"><div class="qt">'+(i+1)+". "+q.q.replace(/</g,"&lt;")+'</div>'+
+  q.choices.map(ch=>'<button onclick="ans('+i+',this)">'+ch.replace(/</g,"&lt;")+"</button>").join("")+"</div>").join("");
+function ans(i,btn){
+  const box=document.getElementById("q"+i); if(box.dataset.done)return; box.dataset.done="1";
+  const good=btn.textContent===QUIZ[i].answer;
+  box.querySelectorAll("button").forEach(b=>{b.disabled=true;
+    if(b.textContent===QUIZ[i].answer){b.style.borderColor="#2fbf71";b.style.background="#d9f7e8";}
+    else if(b===btn){b.style.borderColor="#ef476f";b.style.background="#fde0e8";}});
+  done++; if(good)ok++;
+  if(done===QUIZ.length)finish();
+}
+function finish(){
+  const r=document.getElementById("result");
+  let msg="🎉 答對 "+ok+" / "+QUIZ.length+"！";
+  if(!stu){r.textContent=msg+"（先選名字才能領金幣）";return;}
+  const key="gc::"+UID;
+  const raw=localStorage.getItem("kidsProgress."+stu);
+  const p=raw?JSON.parse(raw):{wrongCounts:{},sessions:0,totalCorrect:0,totalWrong:0};
+  if(!p.coins)p.coins={balance:0,lifetimeEarned:0,lifetimeSpent:0,transactions:[],claimedDrills:{}};
+  if(p.coins.claimedDrills[key]){r.textContent=msg+"（這單元的金幣領過囉）";return;}
+  const earned=ok*5+(ok===QUIZ.length?10:0)+20;
+  p.coins.balance+=earned;p.coins.lifetimeEarned+=earned;
+  p.coins.transactions.push({type:"earn",source:"grammarCore",amount:earned,balanceAfter:p.coins.balance,createdAt:new Date().toISOString(),meta:{unit:UID,correct:ok}});
+  p.coins.claimedDrills[key]={claimedAt:new Date().toISOString(),earned,correct:ok};
+  localStorage.setItem("kidsProgress."+stu,JSON.stringify(p));
+  if(typeof cloudSave==="function")cloudSave(stu);
+  r.innerHTML=msg+" 🪙 +"+earned+"（共 "+p.coins.balance+"）";
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../cloud_sync.js?v=202607100042"></script>
+<script src="../account_lock.js?v=202607100042"></script>
+<script src="../supabase_auth.js?v=202607100042"></script>
+</body></html>

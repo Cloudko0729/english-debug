@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧪 總複習：句子合體 — 文法根基</title><style>
+body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
+header{background:#2f80ed;color:#fff;text-align:center;padding:16px;border-radius:0 0 14px 14px;margin:0 -14px 12px}
+header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.78rem;opacity:.92}
+header a{color:#ffe27a;text-decoration:none;font-weight:700}
+.card{background:#fff;border-radius:14px;padding:14px 16px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:1rem;color:#1e5fb8;margin:0 0 8px}
+.concept{font-size:.92rem;background:#eef5ff;border-radius:10px;padding:10px 14px;font-weight:700;color:#1e5fb8}
+svg{width:100%;height:auto}
+audio{width:100%;margin-top:6px}
+.pod-missing{color:#999;font-size:.85rem;text-align:center;padding:10px}
+details{font-size:.88rem} summary{cursor:pointer;font-weight:700;color:#187a48;padding:4px 0}
+.script p{margin:7px 0;font-size:.9rem}
+.script .en{background:#eaf3ff;border-left:4px solid #2f80ed;padding:5px 11px;border-radius:0 8px 8px 0;font-weight:700;color:#1e5fb8}
+.ex{border-top:1px dashed #eee;padding:8px 0;font-size:.92rem}
+.ex button{border:none;border-radius:8px;background:#2f80ed;color:#fff;font-weight:700;padding:5px 11px;cursor:pointer;margin-right:8px}
+.ex small{color:#888;display:block;margin-top:2px}
+.q{border-top:1px dashed #eee;padding:10px 0}
+.q .qt{font-weight:700;margin-bottom:6px;font-size:.92rem}
+.q button{padding:8px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;margin:3px 4px 3px 0;font-size:.88rem}
+#result{font-weight:800;font-size:1rem;margin-top:10px;min-height:1.4em}
+.nav2{display:flex;justify-content:space-between;margin-top:16px;font-size:.85rem}
+.nav2 a{color:#1e5fb8;text-decoration:none;font-weight:700;background:#fff;border-radius:10px;padding:9px 14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+#studentBar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:700;font-size:.85rem;margin-top:10px}
+.stu-btn{padding:6px 14px;border:2px solid #2f80ed;border-radius:16px;background:#fff;color:#2f80ed;font-weight:700;cursor:pointer}
+.stu-btn.active{background:#2f80ed;color:#fff}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#243042;color:#fff;border-radius:12px;padding:10px 18px;font-weight:700;display:none;z-index:60}
+</style></head><body>
+<header><h1>🧪 總複習：句子合體 <span style="font-size:.75rem;opacity:.85">Review: Build Paragraphs</span></h1>
+<p><a href="index.html">← 課程目錄</a> · 建議 2+ 週 · 學穩再前進</p></header>
+<div id="studentBar">我是：
+ <button class="stu-btn" onclick="pick('albert')">Albert</button>
+ <button class="stu-btn" onclick="pick('jonathan')">Jonathan</button>
+ <button class="stu-btn" onclick="pick('ryder')">Ryder</button>
+ <button class="stu-btn" style="opacity:.7" onclick="pick('test')">🧪 測試</button>
+</div>
+<div class="card"><div class="concept">💡 把全部觀念合體，寫短段落（自我介紹/日記）</div></div>
+<div class="card"><h2>🗺️ 概念圖</h2><svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a93b8"/></marker></defs><text x="330" y="30" font-size="16" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🧪 句子合體實驗室：短句 ➜ 一段話</text><rect x="30" y="55" width="180" height="55" rx="10" fill="#eaf3ff" stroke="#2f80ed" stroke-width="2.5"/><text x="120" y="88" font-size="14" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I am eleven.</text><rect x="30" y="120" width="180" height="55" rx="10" fill="#e6f6ec" stroke="#2fbf71" stroke-width="2.5"/><text x="120" y="153" font-size="14" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I like dogs.</text><rect x="30" y="185" width="180" height="55" rx="10" fill="#fff3e0" stroke="#f2a900" stroke-width="2.5"/><text x="120" y="218" font-size="14" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I can swim.</text><line x1="215" y1="100" x2="265" y2="135" stroke="#8a93b8" stroke-width="3" marker-end="url(#ar)"/><line x1="215" y1="148" x2="265" y2="148" stroke="#8a93b8" stroke-width="3" marker-end="url(#ar)"/><line x1="215" y1="200" x2="265" y2="165" stroke="#8a93b8" stroke-width="3" marker-end="url(#ar)"/><path d="M 300 105 L 340 105 L 340 130 L 375 195 L 265 195 L 300 130 Z" fill="#f3edff" stroke="#7c4dca" stroke-width="3"/><text x="320" y="165" font-size="14" fill="#5a36a8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">⚗️ 合體</text><line x1="380" y1="165" x2="420" y2="165" stroke="#8a93b8" stroke-width="3" marker-end="url(#ar)"/><rect x="425" y="80" width="215" height="170" rx="14" fill="#fff" stroke="#2fbf71" stroke-width="2.5"/><text x="532" y="112" font-size="15" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">📔 一段自我介紹</text><text x="532" y="145" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">Hi! I am eleven and</text><text x="532" y="170" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I like dogs, but my</text><text x="532" y="195" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">brother likes cats.</text><text x="532" y="220" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I can swim, too!</text><text x="330" y="290" font-size="14" fill="#555" font-weight="400" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">文法是為了「說出你想說的」——不是背規則 💬</text></svg></div>
+<div class="card"><h2>🎧 聽講解（文法最後要服務表達，不是背規則）</h2>
+<audio controls preload="none" src="audio/r4.mp3" onerror="this.outerHTML='<div class=pod-missing>🎙️ 語音準備中，先看下面的講稿吧</div>'"></audio>
+<details><summary>📄 看講稿</summary><div class="script"><p>前面我們學了很多零件：名詞、動詞、時態、連接詞、小幫手。</p><p>但學文法不是為了把規則背到像機器人。最後要拿來表達。</p><p>今天的重點是：文法最後要服務表達，不是背規則。</p><p>你可以把句子想成樂高。一塊一塊很重要，但最後要拼成作品。</p><p>一小段英文通常有三件事：主題句、細節句、收尾句。</p><p>主題句像標題，先告訴別人你要講什麼。</p><p>聽聽看，這句可以放在自我介紹開頭。</p><p class="en">I am a sixth-grade student, and I like soccer.</p><p>它告訴我們：我是小六生，而且我喜歡足球。and 把兩個資訊接起來。</p><p>細節句要補畫面。你可以加時間、地點、原因，讓句子不是空空的。</p><p>聽這句，有頻率，也有地點。</p><p class="en">I usually play soccer in the park after school.</p><p>usually 告訴你常常，in the park 告訴你地點，after school 告訴你時間。</p><p>如果要講昨天，就要把時間線拉到過去。不要前面 yesterday，後面還亂用現在。</p><p>聽這句，yesterday 搭 played。</p><p class="en">Yesterday, I played a game with my brother.</p><p>看到 yesterday，就想過去式。play 變 played，句子才站得穩。</p><p>如果要講未來，就可以請 will 或 be going to 出來。</p><p>聽這句，will 後面用原形 help。</p><p class="en">Tomorrow, I will help my mom at home.</p><p>Tomorrow 是未來時間，will 幫你標出未來，help 不要加 s 或 ed。</p><p>段落還需要連接詞，因為讀的人要知道每句之間的路怎麼走。</p><p>聽這句，because 把喜歡的原因說清楚。</p><p class="en">I like my school because my friends are kind.</p><p>這不是多背一個 because，而是讓讀的人知道：為什麼我喜歡學校。</p><p>台灣小孩常見錯誤，是每句都 I, I, I，像點名一樣。</p><p>可以加時間、地點、原因、連接詞，句子就會有變化。</p><p>第二個錯誤是時態跳來跳去。昨天用過去，平常習慣用現在，明天用未來。</p><p>第三個錯誤是中文順序直翻：I very like。英文要說 I like it very much。</p><p>最後 30 秒整理：先想你要講什麼，再選文法工具。</p><p>主題句開門，細節句補畫面，連接詞鋪路，時態放到正確時間線。</p><p>文法不是考卷上的陷阱。它是讓別人聽懂你、看見你想法的工具。</p></div></details></div>
+<div class="card"><h2>📚 例句集</h2><div class="ex"><button onclick="playEx(0)">🔊</button><b>I am a sixth-grade student.</b><small>我是小六學生。</small></div><div class="ex"><button onclick="playEx(1)">🔊</button><b>I have a pet dog at home.</b><small>我家裡有一隻寵物狗。</small></div><div class="ex"><button onclick="playEx(2)">🔊</button><b>I usually read books after dinner.</b><small>我通常晚餐後看書。</small></div><div class="ex"><button onclick="playEx(3)">🔊</button><b>My brother is funny, but he is noisy.</b><small>我哥哥很有趣，但是他很吵。</small></div><div class="ex"><button onclick="playEx(4)">🔊</button><b>Yesterday, I cleaned my room.</b><small>昨天我打掃了我的房間。</small></div><div class="ex"><button onclick="playEx(5)">🔊</button><b>I was tired, so I went to bed early.</b><small>我很累，所以我早點睡。</small></div><div class="ex"><button onclick="playEx(6)">🔊</button><b>There are many books in our classroom.</b><small>我們教室裡有很多書。</small></div><div class="ex"><button onclick="playEx(7)">🔊</button><b>Tomorrow, I will study with my friends.</b><small>明天我會和朋友一起讀書。</small></div><div class="ex"><button onclick="playEx(8)">🔊</button><b>I can play the piano, and I want to join the show.</b><small>我會彈鋼琴，而且我想參加表演。</small></div><div class="ex"><button onclick="playEx(9)">🔊</button><b>I like my school because my teachers are kind.</b><small>我喜歡我的學校，因為我的老師很親切。</small></div></div>
+<div class="card"><h2>📝 小測驗（完成領金幣，每人一次）</h2><div id="quiz"></div><div id="result"></div></div>
+<div class="nav2">
+  <span><a href="u12.html">← 🧰 好用的小幫手</a></span>
+  <span></span>
+</div>
+<div id="toast"></div>
+<script>
+const UID="r4", QUIZ=[{"q":"寫短段落時，文法最重要的作用是什麼？","choices":["幫助表達清楚","讓句子看起來很長","把規則背完就好","每句都用難字"],"answer":"幫助表達清楚"},{"q":"一段自我介紹的第一句，最適合先做什麼？","choices":["先說主題或身分","直接列五個單字","先寫一個沒有主詞的片語","先把所有時態混在一起"],"answer":"先說主題或身分"},{"q":"Yesterday, I ___ basketball with my friends. 看到 yesterday，選哪個？","choices":["played","play","plays","will play"],"answer":"played"},{"q":"Tomorrow, I will ___ my grandma. will 後面選哪個？","choices":["visit","visits","visited","visiting"],"answer":"visit"},{"q":"I was hungry, ___ I ate a sandwich. 後面是結果，選哪個？","choices":["so","because","but","or"],"answer":"so"},{"q":"哪一句最適合放進「My School Day」這段文章？","choices":["I have math class on Monday.","The moon is under my desk.","My pencil can eat lunch.","Because so I school happy."],"answer":"I have math class on Monday."},{"q":"選出最清楚、最自然的英文句子。","choices":["I like my dog very much.","I very like my dog.","I like very my dog.","I my dog very like."],"answer":"I like my dog very much."},{"q":"把句子合成段落時，哪個做法最好？","choices":["用時間、地點、原因讓句子有關係","每句都只寫 I like","不管時間，全都用同一個動詞形","把中文順序直接照搬"],"answer":"用時間、地點、原因讓句子有關係"}];
+let stu=localStorage.getItem("kidsCurrentStudent")||null;
+function pick(n){stu=n;localStorage.setItem("kidsCurrentStudent",n);
+  document.querySelectorAll(".stu-btn").forEach(b=>b.classList.toggle("active",b.textContent.toLowerCase().includes(n==="test"?"測試":n)));}
+if(stu)pick(stu);
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",2200);}
+function playEx(i){new Audio("audio/ex/"+UID+"_"+i+".mp3").play().catch(()=>toast("語音載入中，再點一次"));}
+// 測驗
+let done=0, ok=0;
+const qEl=document.getElementById("quiz");
+qEl.innerHTML=QUIZ.map((q,i)=>'<div class="q" id="q'+i+'"><div class="qt">'+(i+1)+". "+q.q.replace(/</g,"&lt;")+'</div>'+
+  q.choices.map(ch=>'<button onclick="ans('+i+',this)">'+ch.replace(/</g,"&lt;")+"</button>").join("")+"</div>").join("");
+function ans(i,btn){
+  const box=document.getElementById("q"+i); if(box.dataset.done)return; box.dataset.done="1";
+  const good=btn.textContent===QUIZ[i].answer;
+  box.querySelectorAll("button").forEach(b=>{b.disabled=true;
+    if(b.textContent===QUIZ[i].answer){b.style.borderColor="#2fbf71";b.style.background="#d9f7e8";}
+    else if(b===btn){b.style.borderColor="#ef476f";b.style.background="#fde0e8";}});
+  done++; if(good)ok++;
+  if(done===QUIZ.length)finish();
+}
+function finish(){
+  const r=document.getElementById("result");
+  let msg="🎉 答對 "+ok+" / "+QUIZ.length+"！";
+  if(!stu){r.textContent=msg+"（先選名字才能領金幣）";return;}
+  const key="gc::"+UID;
+  const raw=localStorage.getItem("kidsProgress."+stu);
+  const p=raw?JSON.parse(raw):{wrongCounts:{},sessions:0,totalCorrect:0,totalWrong:0};
+  if(!p.coins)p.coins={balance:0,lifetimeEarned:0,lifetimeSpent:0,transactions:[],claimedDrills:{}};
+  if(p.coins.claimedDrills[key]){r.textContent=msg+"（這單元的金幣領過囉）";return;}
+  const earned=ok*5+(ok===QUIZ.length?10:0)+20;
+  p.coins.balance+=earned;p.coins.lifetimeEarned+=earned;
+  p.coins.transactions.push({type:"earn",source:"grammarCore",amount:earned,balanceAfter:p.coins.balance,createdAt:new Date().toISOString(),meta:{unit:UID,correct:ok}});
+  p.coins.claimedDrills[key]={claimedAt:new Date().toISOString(),earned,correct:ok};
+  localStorage.setItem("kidsProgress."+stu,JSON.stringify(p));
+  if(typeof cloudSave==="function")cloudSave(stu);
+  r.innerHTML=msg+" 🪙 +"+earned+"（共 "+p.coins.balance+"）";
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../cloud_sync.js?v=202607100042"></script>
+<script src="../account_lock.js?v=202607100042"></script>
+<script src="../supabase_auth.js?v=202607100042"></script>
+</body></html>

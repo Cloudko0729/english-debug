@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🛤️ 綜合複習：時間軸 — 文法根基</title><style>
+body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
+header{background:#2f80ed;color:#fff;text-align:center;padding:16px;border-radius:0 0 14px 14px;margin:0 -14px 12px}
+header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.78rem;opacity:.92}
+header a{color:#ffe27a;text-decoration:none;font-weight:700}
+.card{background:#fff;border-radius:14px;padding:14px 16px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:1rem;color:#1e5fb8;margin:0 0 8px}
+.concept{font-size:.92rem;background:#eef5ff;border-radius:10px;padding:10px 14px;font-weight:700;color:#1e5fb8}
+svg{width:100%;height:auto}
+audio{width:100%;margin-top:6px}
+.pod-missing{color:#999;font-size:.85rem;text-align:center;padding:10px}
+details{font-size:.88rem} summary{cursor:pointer;font-weight:700;color:#187a48;padding:4px 0}
+.script p{margin:7px 0;font-size:.9rem}
+.script .en{background:#eaf3ff;border-left:4px solid #2f80ed;padding:5px 11px;border-radius:0 8px 8px 0;font-weight:700;color:#1e5fb8}
+.ex{border-top:1px dashed #eee;padding:8px 0;font-size:.92rem}
+.ex button{border:none;border-radius:8px;background:#2f80ed;color:#fff;font-weight:700;padding:5px 11px;cursor:pointer;margin-right:8px}
+.ex small{color:#888;display:block;margin-top:2px}
+.q{border-top:1px dashed #eee;padding:10px 0}
+.q .qt{font-weight:700;margin-bottom:6px;font-size:.92rem}
+.q button{padding:8px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;margin:3px 4px 3px 0;font-size:.88rem}
+#result{font-weight:800;font-size:1rem;margin-top:10px;min-height:1.4em}
+.nav2{display:flex;justify-content:space-between;margin-top:16px;font-size:.85rem}
+.nav2 a{color:#1e5fb8;text-decoration:none;font-weight:700;background:#fff;border-radius:10px;padding:9px 14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+#studentBar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:700;font-size:.85rem;margin-top:10px}
+.stu-btn{padding:6px 14px;border:2px solid #2f80ed;border-radius:16px;background:#fff;color:#2f80ed;font-weight:700;cursor:pointer}
+.stu-btn.active{background:#2f80ed;color:#fff}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#243042;color:#fff;border-radius:12px;padding:10px 18px;font-weight:700;display:none;z-index:60}
+</style></head><body>
+<header><h1>🛤️ 綜合複習：時間軸 <span style="font-size:.75rem;opacity:.85">Review: Timeline</span></h1>
+<p><a href="index.html">← 課程目錄</a> · 建議 2-3 週 · 學穩再前進</p></header>
+<div id="studentBar">我是：
+ <button class="stu-btn" onclick="pick('albert')">Albert</button>
+ <button class="stu-btn" onclick="pick('jonathan')">Jonathan</button>
+ <button class="stu-btn" onclick="pick('ryder')">Ryder</button>
+ <button class="stu-btn" style="opacity:.7" onclick="pick('test')">🧪 測試</button>
+</div>
+<div class="card"><div class="concept">💡 yesterday / every day / right now / later 四個站牌</div></div>
+<div class="card"><h2>🗺️ 概念圖</h2><svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a93b8"/></marker></defs><line x1="40" y1="180" x2="620" y2="180" stroke="#8a93b8" stroke-width="4" marker-end="url(#ar)"/><line x1="150" y1="165" x2="150" y2="195" stroke="#8a93b8" stroke-width="3"/><line x1="330" y1="165" x2="330" y2="195" stroke="#8a93b8" stroke-width="3"/><line x1="500" y1="165" x2="500" y2="195" stroke="#8a93b8" stroke-width="3"/><rect x="75" y="50" width="150" height="95" rx="12" fill="#fff3e0" stroke="#f2a900" stroke-width="2.5"/><text x="150" y="80" font-size="15" fill="#a05c10" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🕰️ yesterday</text><text x="150" y="108" font-size="14" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">過去式</text><text x="150" y="132" font-size="14" fill="#a05c10" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I played.</text><rect x="255" y="50" width="150" height="95" rx="12" fill="#eaf3ff" stroke="#2f80ed" stroke-width="2.5"/><text x="330" y="80" font-size="15" fill="#1e5fb8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🔁 every day</text><text x="330" y="108" font-size="14" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">現在簡單</text><text x="330" y="132" font-size="14" fill="#1e5fb8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I play.</text><rect x="425" y="50" width="150" height="95" rx="12" fill="#e6f6ec" stroke="#2fbf71" stroke-width="2.5"/><text x="500" y="80" font-size="15" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🔍 right now</text><text x="500" y="108" font-size="14" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">現在進行</text><text x="500" y="132" font-size="14" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I am playing.</text><rect x="340" y="210" width="280" height="90" rx="12" fill="#f3edff" stroke="#7c4dca" stroke-width="2.5"/><text x="480" y="242" font-size="14.5" fill="#5a36a8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🔮 later / tomorrow（預告）</text><text x="480" y="272" font-size="14" fill="#5a36a8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I will play. / I am going to play.</text><text x="200" y="250" font-size="15" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🚏 看到時間詞</text><text x="200" y="278" font-size="13.5" fill="#555" font-weight="400" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">就知道動詞穿哪件衣服</text></svg></div>
+<div class="card"><h2>🎧 聽講解（看時間詞決定動詞形狀）</h2>
+<audio controls preload="none" src="audio/r2.mp3" onerror="this.outerHTML='<div class=pod-missing>🎙️ 語音準備中，先看下面的講稿吧</div>'"></audio>
+<details><summary>📄 看講稿</summary><div class="script"><p>英文時態先不要想成一堆規則，先想成一條時間軸。</p><p>左邊是昨天，現在中間，右邊是等一下或明天。動詞要看時間穿衣服。</p><p>這集我們把三件事放在一起：習慣、正在、過去。最後再偷看未來。</p><p>第一站是 every day。它不是鏡頭，是生活循環。</p><p class="en">I play basketball every day.</p><p>我每天打籃球。因為是習慣，所以用現在簡單式 play。</p><p>如果主詞變成 he，別忘了現在簡單式的三單 s。</p><p class="en">He plays basketball every day.</p><p>同樣是每天，he 後面 play 變 plays。這是現在簡單式的重點提醒。</p><p>第二站是 right now。這是鏡頭正在拍，公式要換。</p><p class="en">He is playing basketball right now.</p><p>他現在正在打籃球。is 加 playing，要兩個一起出現。</p><p>注意，every day 和 right now 都是現在附近，但感覺完全不同。</p><p>every day 是一圈一圈重複；right now 是相機喀嚓一張照片。</p><p>第三站是 yesterday。事情已經結束，動詞要進過去盒子。</p><p class="en">He played basketball yesterday.</p><p>他昨天打了籃球。play 變 played，因為昨天已經過去了。</p><p>如果是 go 這種不規則動詞，就不是加 ed。聽這句。</p><p class="en">We went to the library yesterday.</p><p>我們昨天去了圖書館。go 變 went，看到 yesterday 就要換成過去衣服。</p><p>最後偷看未來站：later 或 tomorrow。這批先認得，不急著深入。</p><p class="en">I will clean my room tomorrow.</p><p>我明天會打掃房間。will 是在右邊未來站的預告，之後會再細學。</p><p>台灣小孩常見錯誤，是只看中文，不看時間字。</p><p>例如「我每天正在打球」聽起來像中文能通，可是英文 every day 不配 right now。</p><p>要說每天，就 I play every day。要說現在正在，就 I am playing now。</p><p>另一個錯，是昨天還用 play，或現在正在少掉 am。時間一換，動詞也要換。</p><p>總結：先找時間字，再選動詞衣服。every day 用現在簡單式。</p><p>right now 用 be 加 V-ing；yesterday 用過去式；tomorrow 可以先記 will。</p><p>不要急著背一堆名字。先問：這件事在時間軸哪一站？答案通常就出來了。</p></div></details></div>
+<div class="card"><h2>📚 例句集</h2><div class="ex"><button onclick="playEx(0)">🔊</button><b>I clean my desk every night.</b><small>我每天晚上整理我的書桌。</small></div><div class="ex"><button onclick="playEx(1)">🔊</button><b>She cleans her desk every night.</b><small>她每天晚上整理她的書桌。</small></div><div class="ex"><button onclick="playEx(2)">🔊</button><b>She is cleaning her desk now.</b><small>她現在正在整理她的書桌。</small></div><div class="ex"><button onclick="playEx(3)">🔊</button><b>She cleaned her desk yesterday.</b><small>她昨天整理了她的書桌。</small></div><div class="ex"><button onclick="playEx(4)">🔊</button><b>We play games on Fridays.</b><small>我們星期五玩遊戲。</small></div><div class="ex"><button onclick="playEx(5)">🔊</button><b>We are playing games right now.</b><small>我們現在正在玩遊戲。</small></div><div class="ex"><button onclick="playEx(6)">🔊</button><b>We played games last Friday.</b><small>我們上星期五玩了遊戲。</small></div><div class="ex"><button onclick="playEx(7)">🔊</button><b>My dog sleeps under the table every day.</b><small>我的狗每天睡在桌子下面。</small></div><div class="ex"><button onclick="playEx(8)">🔊</button><b>My dog is sleeping under the table now.</b><small>我的狗現在正在桌子下面睡覺。</small></div><div class="ex"><button onclick="playEx(9)">🔊</button><b>My dog slept under the table last night.</b><small>我的狗昨晚睡在桌子下面。</small></div></div>
+<div class="card"><h2>📝 小測驗（完成領金幣，每人一次）</h2><div id="quiz"></div><div id="result"></div></div>
+<div class="nav2">
+  <span><a href="u7.html">← 📖 過去簡單式</a></span>
+  <span><a href="u8.html">🤖 問句與否定 →</a></span>
+</div>
+<div id="toast"></div>
+<script>
+const UID="r2", QUIZ=[{"q":"看到 every day，最適合先想到哪一種？","choices":["現在簡單式","現在進行式","過去簡單式","一定用 will"],"answer":"現在簡單式"},{"q":"看到 right now，最適合先想到哪一種？","choices":["be + V-ing","動詞加 ed","動詞加 s 就好","will + V"],"answer":"be + V-ing"},{"q":"看到 yesterday，最適合先想到哪一種？","choices":["過去簡單式","現在進行式","現在簡單式","三單 s"],"answer":"過去簡單式"},{"q":"She ___ TV every night.","choices":["watches","watch","is watching","watched"],"answer":"watches"},{"q":"She ___ TV right now.","choices":["is watching","watches","watched","watch"],"answer":"is watching"},{"q":"She ___ TV last night.","choices":["watched","watches","is watching","watch"],"answer":"watched"},{"q":"哪一句的時間字和動詞最搭？","choices":["They are eating lunch now.","They eating lunch now.","They eat lunch yesterday.","They are eat lunch every day."],"answer":"They are eating lunch now."},{"q":"哪個配對是錯的？","choices":["yesterday → plays","every day → plays","right now → is playing","tomorrow → will play"],"answer":"yesterday → plays"}];
+let stu=localStorage.getItem("kidsCurrentStudent")||null;
+function pick(n){stu=n;localStorage.setItem("kidsCurrentStudent",n);
+  document.querySelectorAll(".stu-btn").forEach(b=>b.classList.toggle("active",b.textContent.toLowerCase().includes(n==="test"?"測試":n)));}
+if(stu)pick(stu);
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",2200);}
+function playEx(i){new Audio("audio/ex/"+UID+"_"+i+".mp3").play().catch(()=>toast("語音載入中，再點一次"));}
+// 測驗
+let done=0, ok=0;
+const qEl=document.getElementById("quiz");
+qEl.innerHTML=QUIZ.map((q,i)=>'<div class="q" id="q'+i+'"><div class="qt">'+(i+1)+". "+q.q.replace(/</g,"&lt;")+'</div>'+
+  q.choices.map(ch=>'<button onclick="ans('+i+',this)">'+ch.replace(/</g,"&lt;")+"</button>").join("")+"</div>").join("");
+function ans(i,btn){
+  const box=document.getElementById("q"+i); if(box.dataset.done)return; box.dataset.done="1";
+  const good=btn.textContent===QUIZ[i].answer;
+  box.querySelectorAll("button").forEach(b=>{b.disabled=true;
+    if(b.textContent===QUIZ[i].answer){b.style.borderColor="#2fbf71";b.style.background="#d9f7e8";}
+    else if(b===btn){b.style.borderColor="#ef476f";b.style.background="#fde0e8";}});
+  done++; if(good)ok++;
+  if(done===QUIZ.length)finish();
+}
+function finish(){
+  const r=document.getElementById("result");
+  let msg="🎉 答對 "+ok+" / "+QUIZ.length+"！";
+  if(!stu){r.textContent=msg+"（先選名字才能領金幣）";return;}
+  const key="gc::"+UID;
+  const raw=localStorage.getItem("kidsProgress."+stu);
+  const p=raw?JSON.parse(raw):{wrongCounts:{},sessions:0,totalCorrect:0,totalWrong:0};
+  if(!p.coins)p.coins={balance:0,lifetimeEarned:0,lifetimeSpent:0,transactions:[],claimedDrills:{}};
+  if(p.coins.claimedDrills[key]){r.textContent=msg+"（這單元的金幣領過囉）";return;}
+  const earned=ok*5+(ok===QUIZ.length?10:0)+20;
+  p.coins.balance+=earned;p.coins.lifetimeEarned+=earned;
+  p.coins.transactions.push({type:"earn",source:"grammarCore",amount:earned,balanceAfter:p.coins.balance,createdAt:new Date().toISOString(),meta:{unit:UID,correct:ok}});
+  p.coins.claimedDrills[key]={claimedAt:new Date().toISOString(),earned,correct:ok};
+  localStorage.setItem("kidsProgress."+stu,JSON.stringify(p));
+  if(typeof cloudSave==="function")cloudSave(stu);
+  r.innerHTML=msg+" 🪙 +"+earned+"（共 "+p.coins.balance+"）";
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../cloud_sync.js?v=202607100042"></script>
+<script src="../account_lock.js?v=202607100042"></script>
+<script src="../supabase_auth.js?v=202607100042"></script>
+</body></html>

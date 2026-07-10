@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏗️ 句子是什麼 — 文法根基</title><style>
+body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
+header{background:#2f80ed;color:#fff;text-align:center;padding:16px;border-radius:0 0 14px 14px;margin:0 -14px 12px}
+header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.78rem;opacity:.92}
+header a{color:#ffe27a;text-decoration:none;font-weight:700}
+.card{background:#fff;border-radius:14px;padding:14px 16px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:1rem;color:#1e5fb8;margin:0 0 8px}
+.concept{font-size:.92rem;background:#eef5ff;border-radius:10px;padding:10px 14px;font-weight:700;color:#1e5fb8}
+svg{width:100%;height:auto}
+audio{width:100%;margin-top:6px}
+.pod-missing{color:#999;font-size:.85rem;text-align:center;padding:10px}
+details{font-size:.88rem} summary{cursor:pointer;font-weight:700;color:#187a48;padding:4px 0}
+.script p{margin:7px 0;font-size:.9rem}
+.script .en{background:#eaf3ff;border-left:4px solid #2f80ed;padding:5px 11px;border-radius:0 8px 8px 0;font-weight:700;color:#1e5fb8}
+.ex{border-top:1px dashed #eee;padding:8px 0;font-size:.92rem}
+.ex button{border:none;border-radius:8px;background:#2f80ed;color:#fff;font-weight:700;padding:5px 11px;cursor:pointer;margin-right:8px}
+.ex small{color:#888;display:block;margin-top:2px}
+.q{border-top:1px dashed #eee;padding:10px 0}
+.q .qt{font-weight:700;margin-bottom:6px;font-size:.92rem}
+.q button{padding:8px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;margin:3px 4px 3px 0;font-size:.88rem}
+#result{font-weight:800;font-size:1rem;margin-top:10px;min-height:1.4em}
+.nav2{display:flex;justify-content:space-between;margin-top:16px;font-size:.85rem}
+.nav2 a{color:#1e5fb8;text-decoration:none;font-weight:700;background:#fff;border-radius:10px;padding:9px 14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+#studentBar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:700;font-size:.85rem;margin-top:10px}
+.stu-btn{padding:6px 14px;border:2px solid #2f80ed;border-radius:16px;background:#fff;color:#2f80ed;font-weight:700;cursor:pointer}
+.stu-btn.active{background:#2f80ed;color:#fff}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#243042;color:#fff;border-radius:12px;padding:10px 18px;font-weight:700;display:none;z-index:60}
+</style></head><body>
+<header><h1>🏗️ 句子是什麼 <span style="font-size:.75rem;opacity:.85">What Is a Sentence?</span></h1>
+<p><a href="index.html">← 課程目錄</a> · 建議 2-3 週 · 學穩再前進</p></header>
+<div id="studentBar">我是：
+ <button class="stu-btn" onclick="pick('albert')">Albert</button>
+ <button class="stu-btn" onclick="pick('jonathan')">Jonathan</button>
+ <button class="stu-btn" onclick="pick('ryder')">Ryder</button>
+ <button class="stu-btn" style="opacity:.7" onclick="pick('test')">🧪 測試</button>
+</div>
+<div class="card"><div class="concept">💡 誰＋做什麼（主詞＋動詞）；直述/疑問/命令/驚嘆四種句型</div></div>
+<div class="card"><h2>🗺️ 概念圖</h2><svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a93b8"/></marker></defs><rect x="20" y="40" width="170" height="90" rx="12" fill="#e6f6ec" stroke="#2fbf71" stroke-width="2.5"/><text x="105" y="70" font-size="18" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">誰？</text><text x="105" y="100" font-size="16" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">The dog 🐶</text><rect x="20" y="190" width="170" height="90" rx="12" fill="#eaf3ff" stroke="#2f80ed" stroke-width="2.5"/><text x="105" y="220" font-size="18" fill="#1e5fb8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">做什麼？</text><text x="105" y="250" font-size="16" fill="#1e5fb8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">runs 🏃</text><line x1="195" y1="85" x2="250" y2="130" stroke="#8a93b8" stroke-width="3" marker-end="url(#ar)"/><line x1="195" y1="235" x2="250" y2="190" stroke="#8a93b8" stroke-width="3" marker-end="url(#ar)"/><rect x="255" y="110" width="150" height="100" rx="16" fill="#fff3e0" stroke="#f2a900" stroke-width="2.5"/><text x="330" y="145" font-size="17" fill="#8a5a00" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🏗️ 句子工廠</text><text x="330" y="175" font-size="15" fill="#8a5a00" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">主詞＋動詞</text><line x1="410" y1="160" x2="460" y2="160" stroke="#8a93b8" stroke-width="3" marker-end="url(#ar)"/><rect x="470" y="20" width="175" height="62" rx="12" fill="#fff" stroke="#2fbf71" stroke-width="2.5"/><text x="557" y="44" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">直述 The dog runs.</text><text x="557" y="66" font-size="12" fill="#888" font-weight="400" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">說一件事</text><rect x="470" y="96" width="175" height="62" rx="12" fill="#fff" stroke="#2f80ed" stroke-width="2.5"/><text x="557" y="120" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">疑問 Does it run?</text><text x="557" y="142" font-size="12" fill="#888" font-weight="400" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">問問題</text><rect x="470" y="172" width="175" height="62" rx="12" fill="#fff" stroke="#b5651d" stroke-width="2.5"/><text x="557" y="196" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">命令 Run!</text><text x="557" y="218" font-size="11" fill="#888" font-weight="400" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">叫人做事（誰＝you 藏起來）</text><rect x="470" y="248" width="175" height="62" rx="12" fill="#fff" stroke="#7c4dca" stroke-width="2.5"/><text x="557" y="272" font-size="13.5" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">驚嘆 How fast!</text><text x="557" y="294" font-size="12" fill="#888" font-weight="400" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">哇的感覺</text></svg></div>
+<div class="card"><h2>🎧 聽講解（英文句子一定要有主詞和動詞）</h2>
+<audio controls preload="none" src="audio/u1.mp3" onerror="this.outerHTML='<div class=pod-missing>🎙️ 語音準備中，先看下面的講稿吧</div>'"></audio>
+<details><summary>📄 看講稿</summary><div class="script"><p>你有沒有寫過英文，單字都認得，可是老師說：這不是句子？今天先把句子的骨架抓起來。</p><p>把句子想成一台小工廠。左邊放「誰」，右邊放「做什麼」或「怎麼了」，才會輸出完整句子。</p><p>英文句子最基本一定要有兩個零件：主詞和動詞。主詞是誰，動詞是動作或狀態。</p><p>中文可以說「很累」「下雨了」，可是英文通常不能只丟一個狀態在那邊，要講清楚誰怎麼了。</p><p>先聽最小的完整句，像積木只有兩塊，但已經站得住。</p><p class="en">I run.</p><p>I 是誰，run 是做什麼。兩個都有，所以它短短的，還是句子。</p><p>再聽一句，這次不是動作，是狀態。</p><p class="en">The dog is happy.</p><p>The dog 是主詞，is 是動詞，happy 是狀態。英文用 is 把主詞和狀態接起來。</p><p>第三句放進學校生活，主詞長一點也沒關係。</p><p class="en">My teacher reads a story.</p><p>My teacher 是誰，reads 是動詞，a story 是讀的東西。主詞可以變長，但骨架一樣。</p><p>英文句子還可以有四種口味：說事情、問問題、叫人做事、表示驚訝。骨架還是在。</p><p>聽聽看問句，主詞和動詞只是位置變一下，零件沒有消失。</p><p class="en">Are you ready?</p><p>you 是主詞，are 是動詞。問句把 are 放前面，讓別人知道你在問。</p><p>命令句比較特別，像老師說「Open your book.」主詞 you 藏起來，但意思是叫你做。</p><p class="en">Open your book.</p><p>這句表面沒有 you，可是動詞 open 在，聽的人也知道是「你」要打開。</p><p>台灣小孩常見陷阱是中文直翻：想說「我很喜歡」就寫 I very like。</p><p>英文不能讓 very 直接站在 like 前面當動詞。要說 I like it very much，或 I really like it。</p><p>另一個陷阱是忘記主詞，寫 Is fun。英文要問：誰 fun？要說 It is fun。</p><p>最後三十秒記這句：先找誰，再找動詞。句子像腳踏車，少一個輪子就騎不起來。</p><p>以後看到英文，先圈主詞，再圈動詞。你圈得到，句子就有骨架；圈不到，就要回工廠補零件。</p></div></details></div>
+<div class="card"><h2>📚 例句集</h2><div class="ex"><button onclick="playEx(0)">🔊</button><b>I read.</b><small>我閱讀。</small></div><div class="ex"><button onclick="playEx(1)">🔊</button><b>Dad cooks.</b><small>爸爸煮飯。</small></div><div class="ex"><button onclick="playEx(2)">🔊</button><b>The cat sleeps.</b><small>那隻貓睡覺。</small></div><div class="ex"><button onclick="playEx(3)">🔊</button><b>My sister is hungry.</b><small>我妹妹餓了。</small></div><div class="ex"><button onclick="playEx(4)">🔊</button><b>We play basketball.</b><small>我們打籃球。</small></div><div class="ex"><button onclick="playEx(5)">🔊</button><b>Ben cleans his desk.</b><small>Ben 清他的書桌。</small></div><div class="ex"><button onclick="playEx(6)">🔊</button><b>Do you like math?</b><small>你喜歡數學嗎？</small></div><div class="ex"><button onclick="playEx(7)">🔊</button><b>Close the door.</b><small>把門關上。</small></div><div class="ex"><button onclick="playEx(8)">🔊</button><b>What a big dog!</b><small>好大的一隻狗！</small></div><div class="ex"><button onclick="playEx(9)">🔊</button><b>My friends and I watch a game after school.</b><small>我和朋友放學後看一場比賽。</small></div></div>
+<div class="card"><h2>📝 小測驗（完成領金幣，每人一次）</h2><div id="quiz"></div><div id="result"></div></div>
+<div class="nav2">
+  <span></span>
+  <span><a href="u2.html">🧸 名詞與 a/an/the →</a></span>
+</div>
+<div id="toast"></div>
+<script>
+const UID="u1", QUIZ=[{"q":"哪一句是完整英文句子？","choices":["My dog runs.","My dog very cute.","In the park","Play games"],"answer":"My dog runs."},{"q":"句子 The boy eats lunch. 的動詞是哪一個？","choices":["eats","The boy","lunch","boy"],"answer":"eats"},{"q":"句子 My mom is busy. 的主詞是哪一個？","choices":["My mom","is","busy","mom is"],"answer":"My mom"},{"q":"想說「很好玩」，英文句子最需要補哪個零件？","choices":["主詞 It","逗號","more","big"],"answer":"主詞 It"},{"q":"哪一句是問句？","choices":["Are you OK?","You are OK.","Be you OK.","You OK?"],"answer":"Are you OK?"},{"q":"哪一句像命令句，主詞 you 藏起來？","choices":["Sit down.","I sit down.","You are sit.","Sitting down."],"answer":"Sit down."},{"q":"哪一句修正了 Is cold. 的問題？","choices":["It is cold.","Is it cold.","Very cold.","Cold is."],"answer":"It is cold."},{"q":"看到英文句子時，最先檢查哪兩個零件？","choices":["主詞和動詞","顏色和大小","逗號和句點","中文意思和注音"],"answer":"主詞和動詞"}];
+let stu=localStorage.getItem("kidsCurrentStudent")||null;
+function pick(n){stu=n;localStorage.setItem("kidsCurrentStudent",n);
+  document.querySelectorAll(".stu-btn").forEach(b=>b.classList.toggle("active",b.textContent.toLowerCase().includes(n==="test"?"測試":n)));}
+if(stu)pick(stu);
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",2200);}
+function playEx(i){new Audio("audio/ex/"+UID+"_"+i+".mp3").play().catch(()=>toast("語音載入中，再點一次"));}
+// 測驗
+let done=0, ok=0;
+const qEl=document.getElementById("quiz");
+qEl.innerHTML=QUIZ.map((q,i)=>'<div class="q" id="q'+i+'"><div class="qt">'+(i+1)+". "+q.q.replace(/</g,"&lt;")+'</div>'+
+  q.choices.map(ch=>'<button onclick="ans('+i+',this)">'+ch.replace(/</g,"&lt;")+"</button>").join("")+"</div>").join("");
+function ans(i,btn){
+  const box=document.getElementById("q"+i); if(box.dataset.done)return; box.dataset.done="1";
+  const good=btn.textContent===QUIZ[i].answer;
+  box.querySelectorAll("button").forEach(b=>{b.disabled=true;
+    if(b.textContent===QUIZ[i].answer){b.style.borderColor="#2fbf71";b.style.background="#d9f7e8";}
+    else if(b===btn){b.style.borderColor="#ef476f";b.style.background="#fde0e8";}});
+  done++; if(good)ok++;
+  if(done===QUIZ.length)finish();
+}
+function finish(){
+  const r=document.getElementById("result");
+  let msg="🎉 答對 "+ok+" / "+QUIZ.length+"！";
+  if(!stu){r.textContent=msg+"（先選名字才能領金幣）";return;}
+  const key="gc::"+UID;
+  const raw=localStorage.getItem("kidsProgress."+stu);
+  const p=raw?JSON.parse(raw):{wrongCounts:{},sessions:0,totalCorrect:0,totalWrong:0};
+  if(!p.coins)p.coins={balance:0,lifetimeEarned:0,lifetimeSpent:0,transactions:[],claimedDrills:{}};
+  if(p.coins.claimedDrills[key]){r.textContent=msg+"（這單元的金幣領過囉）";return;}
+  const earned=ok*5+(ok===QUIZ.length?10:0)+20;
+  p.coins.balance+=earned;p.coins.lifetimeEarned+=earned;
+  p.coins.transactions.push({type:"earn",source:"grammarCore",amount:earned,balanceAfter:p.coins.balance,createdAt:new Date().toISOString(),meta:{unit:UID,correct:ok}});
+  p.coins.claimedDrills[key]={claimedAt:new Date().toISOString(),earned,correct:ok};
+  localStorage.setItem("kidsProgress."+stu,JSON.stringify(p));
+  if(typeof cloudSave==="function")cloudSave(stu);
+  r.innerHTML=msg+" 🪙 +"+earned+"（共 "+p.coins.balance+"）";
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../cloud_sync.js?v=202607100042"></script>
+<script src="../account_lock.js?v=202607100042"></script>
+<script src="../supabase_auth.js?v=202607100042"></script>
+</body></html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🤖 問句與否定 — 文法根基</title><style>
+body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
+header{background:#2f80ed;color:#fff;text-align:center;padding:16px;border-radius:0 0 14px 14px;margin:0 -14px 12px}
+header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.78rem;opacity:.92}
+header a{color:#ffe27a;text-decoration:none;font-weight:700}
+.card{background:#fff;border-radius:14px;padding:14px 16px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:1rem;color:#1e5fb8;margin:0 0 8px}
+.concept{font-size:.92rem;background:#eef5ff;border-radius:10px;padding:10px 14px;font-weight:700;color:#1e5fb8}
+svg{width:100%;height:auto}
+audio{width:100%;margin-top:6px}
+.pod-missing{color:#999;font-size:.85rem;text-align:center;padding:10px}
+details{font-size:.88rem} summary{cursor:pointer;font-weight:700;color:#187a48;padding:4px 0}
+.script p{margin:7px 0;font-size:.9rem}
+.script .en{background:#eaf3ff;border-left:4px solid #2f80ed;padding:5px 11px;border-radius:0 8px 8px 0;font-weight:700;color:#1e5fb8}
+.ex{border-top:1px dashed #eee;padding:8px 0;font-size:.92rem}
+.ex button{border:none;border-radius:8px;background:#2f80ed;color:#fff;font-weight:700;padding:5px 11px;cursor:pointer;margin-right:8px}
+.ex small{color:#888;display:block;margin-top:2px}
+.q{border-top:1px dashed #eee;padding:10px 0}
+.q .qt{font-weight:700;margin-bottom:6px;font-size:.92rem}
+.q button{padding:8px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;margin:3px 4px 3px 0;font-size:.88rem}
+#result{font-weight:800;font-size:1rem;margin-top:10px;min-height:1.4em}
+.nav2{display:flex;justify-content:space-between;margin-top:16px;font-size:.85rem}
+.nav2 a{color:#1e5fb8;text-decoration:none;font-weight:700;background:#fff;border-radius:10px;padding:9px 14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+#studentBar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:700;font-size:.85rem;margin-top:10px}
+.stu-btn{padding:6px 14px;border:2px solid #2f80ed;border-radius:16px;background:#fff;color:#2f80ed;font-weight:700;cursor:pointer}
+.stu-btn.active{background:#2f80ed;color:#fff}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#243042;color:#fff;border-radius:12px;padding:10px 18px;font-weight:700;display:none;z-index:60}
+</style></head><body>
+<header><h1>🤖 問句與否定 <span style="font-size:.75rem;opacity:.85">Questions &amp; Negatives</span></h1>
+<p><a href="index.html">← 課程目錄</a> · 建議 3 週 · 學穩再前進</p></header>
+<div id="studentBar">我是：
+ <button class="stu-btn" onclick="pick('albert')">Albert</button>
+ <button class="stu-btn" onclick="pick('jonathan')">Jonathan</button>
+ <button class="stu-btn" onclick="pick('ryder')">Ryder</button>
+ <button class="stu-btn" style="opacity:.7" onclick="pick('test')">🧪 測試</button>
+</div>
+<div class="card"><div class="concept">💡 do/does/did 小幫手；not 的位置</div></div>
+<div class="card"><h2>🗺️ 概念圖</h2><svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a93b8"/></marker></defs><rect x="30" y="50" width="190" height="90" rx="12" fill="#fff" stroke="#8a93b8" stroke-width="2.5"/><text x="125" y="85" font-size="15" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">普通句</text><text x="125" y="115" font-size="15" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">You like dogs.</text><line x1="225" y1="95" x2="275" y2="95" stroke="#8a93b8" stroke-width="3" marker-end="url(#ar)"/><rect x="280" y="40" width="120" height="120" rx="18" fill="#eaf3ff" stroke="#2f80ed" stroke-width="3"/><circle cx="322" cy="80" r="9" fill="#2f80ed"/><circle cx="358" cy="80" r="9" fill="#2f80ed"/><rect x="315" y="105" width="50" height="10" rx="5" fill="#2f80ed"/><text x="340" y="145" font-size="13.5" fill="#1e5fb8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🤖 do/does/did</text><line x1="405" y1="70" x2="450" y2="55" stroke="#8a93b8" stroke-width="3" marker-end="url(#ar)"/><line x1="405" y1="125" x2="450" y2="145" stroke="#8a93b8" stroke-width="3" marker-end="url(#ar)"/><rect x="455" y="30" width="190" height="65" rx="12" fill="#e6f6ec" stroke="#2fbf71" stroke-width="2.5"/><text x="550" y="55" font-size="13.5" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">問句：小幫手到句首</text><text x="550" y="80" font-size="14" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">Do you like dogs?</text><rect x="455" y="115" width="190" height="65" rx="12" fill="#fff3e0" stroke="#f2a900" stroke-width="2.5"/><text x="550" y="140" font-size="13.5" fill="#a05c10" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">否定：小幫手＋not</text><text x="550" y="165" font-size="14" fill="#a05c10" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">I don't like dogs.</text><rect x="30" y="210" width="610" height="95" rx="14" fill="#fde8ec" stroke="#ef476f" stroke-width="2.5"/><text x="335" y="242" font-size="16" fill="#c0264b" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🤖 小幫手出場後，動詞回原形！</text><text x="335" y="272" font-size="14" fill="#c0264b" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">She likes cats. ➜ Does she like cats?（likes 的 s 交給 does）</text><text x="335" y="296" font-size="13" fill="#555" font-weight="400" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">be 動詞不用小幫手：Is she tall? / She isn't tall.</text></svg></div>
+<div class="card"><h2>🎧 聽講解（一般動詞問句否定要請小幫手）</h2>
+<audio controls preload="none" src="audio/u8.mp3" onerror="this.outerHTML='<div class=pod-missing>🎙️ 語音準備中，先看下面的講稿吧</div>'"></audio>
+<details><summary>📄 看講稿</summary><div class="script"><p>今天先想一個畫面：英文問問題時，常常要請一個小幫手機器人出來。</p><p>這個小幫手就是 do、does、did。它專門幫一般動詞變問句和否定句。</p><p>記住一句話：一般動詞問句否定要請小幫手。沒有小幫手，句子會很像中文直翻。</p><p>一般動詞就是 play、like、eat、go、read 這種真的在做的動作。</p><p>肯定句很直：I play games. 但要問問題，就不是 You play games?</p><p>聽聽看正確問法。</p><p class="en">Do you play games after school?</p><p>意思是：你放學後玩遊戲嗎？Do 站到最前面，幫 play 開門。</p><p>如果主詞是 he、she、it，現在簡單式要用 does，因為小幫手要配合主詞。</p><p>聽這句。</p><p class="en">Does your brother like cats?</p><p>注意，已經有 does 了，後面的 like 要回原形，不可以說 likes。</p><p>這很重要：小幫手拿走了現在式的記號，主要動詞就穿回原本的衣服。</p><p>過去式也一樣。問昨天、上週、剛剛的事，用 did。</p><p>聽聽看。</p><p class="en">Did you finish your homework yesterday?</p><p>意思是：你昨天寫完功課了嗎？有 did，finish 不用變 finished。</p><p>否定句也要小幫手。現在是 do not 或 does not，口語常說 don't、doesn't。</p><p>來聽一個生活句。</p><p class="en">I do not eat candy before dinner.</p><p>意思是：我晚餐前不吃糖。not 放在小幫手後面，不是亂放在動詞前面。</p><p>主詞是 she、he、it，否定用 does not，後面動詞也回原形。</p><p>聽這句。</p><p class="en">She does not watch TV on school nights.</p><p>不是 She does not watches。does 已經把工作做完了，watch 不要再加 s。</p><p>台灣小孩常見陷阱是把中文「不」直接丟進英文，說 He not like milk。</p><p>英文不能這樣。一般動詞要說 He does not like milk。小幫手要出場。</p><p>第二個陷阱是雙重變化：Did he went? Does she likes? 這兩句都太用力了。</p><p>正確是 Did he go? Does she like? 小幫手拿時態，主要動詞回原形。</p><p>最後三十秒整理：一般動詞問句，把 do、does、did 放前面。</p><p>否定句，把 not 放在 do、does、did 後面。後面的主要動詞用原形。</p><p>你只要記得小幫手機器人：現在我你我們用 do，he she it 用 does，過去用 did。</p></div></details></div>
+<div class="card"><h2>📚 例句集</h2><div class="ex"><button onclick="playEx(0)">🔊</button><b>I do not like tea.</b><small>我不喜歡茶。</small></div><div class="ex"><button onclick="playEx(1)">🔊</button><b>Do you play soccer?</b><small>你踢足球嗎？</small></div><div class="ex"><button onclick="playEx(2)">🔊</button><b>She does not eat fish.</b><small>她不吃魚。</small></div><div class="ex"><button onclick="playEx(3)">🔊</button><b>Does Tom have a dog?</b><small>Tom 有一隻狗嗎？</small></div><div class="ex"><button onclick="playEx(4)">🔊</button><b>We did not watch TV last night.</b><small>我們昨晚沒有看電視。</small></div><div class="ex"><button onclick="playEx(5)">🔊</button><b>Did you finish your homework?</b><small>你寫完功課了嗎？</small></div><div class="ex"><button onclick="playEx(6)">🔊</button><b>My brother doesn't get up early.</b><small>我哥哥不早起。</small></div><div class="ex"><button onclick="playEx(7)">🔊</button><b>Did they go to the park yesterday?</b><small>他們昨天去公園了嗎？</small></div><div class="ex"><button onclick="playEx(8)">🔊</button><b>Why do you like this game?</b><small>你為什麼喜歡這個遊戲？</small></div><div class="ex"><button onclick="playEx(9)">🔊</button><b>What did Mom buy at the store?</b><small>媽媽在商店買了什麼？</small></div></div>
+<div class="card"><h2>📝 小測驗（完成領金幣，每人一次）</h2><div id="quiz"></div><div id="result"></div></div>
+<div class="nav2">
+  <span><a href="r2.html">← 🛤️ 綜合複習：時間軸</a></span>
+  <span><a href="u9.html">🏷️ 描述員 →</a></span>
+</div>
+<div id="toast"></div>
+<script>
+const UID="u8", QUIZ=[{"q":"一般動詞問句：___ you like apples?","choices":["Do","Are","Does","Did not"],"answer":"Do"},{"q":"否定句：She ___ like fish.","choices":["doesn't","don't","isn't","not"],"answer":"doesn't"},{"q":"Does Ken ___ basketball after school?","choices":["play","plays","played","playing"],"answer":"play"},{"q":"Did Amy ___ her homework last night?","choices":["finish","finished","finishes","finishing"],"answer":"finish"},{"q":"把 Leo went to school. 變否定，哪一句觀念正確？","choices":["Leo did not go to school.","Leo did not went to school.","Leo not went to school.","Leo does not went to school."],"answer":"Leo did not go to school."},{"q":"哪一句問句是正確的？","choices":["Does your sister like cats?","Does your sister likes cats?","Your sister does like cats?","Is your sister like cats?"],"answer":"Does your sister like cats?"},{"q":"問昨天的事：Where ___ you go yesterday?","choices":["did","do","does","are"],"answer":"did"},{"q":"否定句：We ___ have PE today.","choices":["don't","doesn't","aren't","not"],"answer":"don't"}];
+let stu=localStorage.getItem("kidsCurrentStudent")||null;
+function pick(n){stu=n;localStorage.setItem("kidsCurrentStudent",n);
+  document.querySelectorAll(".stu-btn").forEach(b=>b.classList.toggle("active",b.textContent.toLowerCase().includes(n==="test"?"測試":n)));}
+if(stu)pick(stu);
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",2200);}
+function playEx(i){new Audio("audio/ex/"+UID+"_"+i+".mp3").play().catch(()=>toast("語音載入中，再點一次"));}
+// 測驗
+let done=0, ok=0;
+const qEl=document.getElementById("quiz");
+qEl.innerHTML=QUIZ.map((q,i)=>'<div class="q" id="q'+i+'"><div class="qt">'+(i+1)+". "+q.q.replace(/</g,"&lt;")+'</div>'+
+  q.choices.map(ch=>'<button onclick="ans('+i+',this)">'+ch.replace(/</g,"&lt;")+"</button>").join("")+"</div>").join("");
+function ans(i,btn){
+  const box=document.getElementById("q"+i); if(box.dataset.done)return; box.dataset.done="1";
+  const good=btn.textContent===QUIZ[i].answer;
+  box.querySelectorAll("button").forEach(b=>{b.disabled=true;
+    if(b.textContent===QUIZ[i].answer){b.style.borderColor="#2fbf71";b.style.background="#d9f7e8";}
+    else if(b===btn){b.style.borderColor="#ef476f";b.style.background="#fde0e8";}});
+  done++; if(good)ok++;
+  if(done===QUIZ.length)finish();
+}
+function finish(){
+  const r=document.getElementById("result");
+  let msg="🎉 答對 "+ok+" / "+QUIZ.length+"！";
+  if(!stu){r.textContent=msg+"（先選名字才能領金幣）";return;}
+  const key="gc::"+UID;
+  const raw=localStorage.getItem("kidsProgress."+stu);
+  const p=raw?JSON.parse(raw):{wrongCounts:{},sessions:0,totalCorrect:0,totalWrong:0};
+  if(!p.coins)p.coins={balance:0,lifetimeEarned:0,lifetimeSpent:0,transactions:[],claimedDrills:{}};
+  if(p.coins.claimedDrills[key]){r.textContent=msg+"（這單元的金幣領過囉）";return;}
+  const earned=ok*5+(ok===QUIZ.length?10:0)+20;
+  p.coins.balance+=earned;p.coins.lifetimeEarned+=earned;
+  p.coins.transactions.push({type:"earn",source:"grammarCore",amount:earned,balanceAfter:p.coins.balance,createdAt:new Date().toISOString(),meta:{unit:UID,correct:ok}});
+  p.coins.claimedDrills[key]={claimedAt:new Date().toISOString(),earned,correct:ok};
+  localStorage.setItem("kidsProgress."+stu,JSON.stringify(p));
+  if(typeof cloudSave==="function")cloudSave(stu);
+  r.innerHTML=msg+" 🪙 +"+earned+"（共 "+p.coins.balance+"）";
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../cloud_sync.js?v=202607100042"></script>
+<script src="../account_lock.js?v=202607100042"></script>
+<script src="../supabase_auth.js?v=202607100042"></script>
+</body></html>

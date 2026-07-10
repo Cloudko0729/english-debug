@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏭 綜合複習：造句工廠 — 文法根基</title><style>
+body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
+header{background:#2f80ed;color:#fff;text-align:center;padding:16px;border-radius:0 0 14px 14px;margin:0 -14px 12px}
+header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.78rem;opacity:.92}
+header a{color:#ffe27a;text-decoration:none;font-weight:700}
+.card{background:#fff;border-radius:14px;padding:14px 16px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:1rem;color:#1e5fb8;margin:0 0 8px}
+.concept{font-size:.92rem;background:#eef5ff;border-radius:10px;padding:10px 14px;font-weight:700;color:#1e5fb8}
+svg{width:100%;height:auto}
+audio{width:100%;margin-top:6px}
+.pod-missing{color:#999;font-size:.85rem;text-align:center;padding:10px}
+details{font-size:.88rem} summary{cursor:pointer;font-weight:700;color:#187a48;padding:4px 0}
+.script p{margin:7px 0;font-size:.9rem}
+.script .en{background:#eaf3ff;border-left:4px solid #2f80ed;padding:5px 11px;border-radius:0 8px 8px 0;font-weight:700;color:#1e5fb8}
+.ex{border-top:1px dashed #eee;padding:8px 0;font-size:.92rem}
+.ex button{border:none;border-radius:8px;background:#2f80ed;color:#fff;font-weight:700;padding:5px 11px;cursor:pointer;margin-right:8px}
+.ex small{color:#888;display:block;margin-top:2px}
+.q{border-top:1px dashed #eee;padding:10px 0}
+.q .qt{font-weight:700;margin-bottom:6px;font-size:.92rem}
+.q button{padding:8px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;margin:3px 4px 3px 0;font-size:.88rem}
+#result{font-weight:800;font-size:1rem;margin-top:10px;min-height:1.4em}
+.nav2{display:flex;justify-content:space-between;margin-top:16px;font-size:.85rem}
+.nav2 a{color:#1e5fb8;text-decoration:none;font-weight:700;background:#fff;border-radius:10px;padding:9px 14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+#studentBar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:700;font-size:.85rem;margin-top:10px}
+.stu-btn{padding:6px 14px;border:2px solid #2f80ed;border-radius:16px;background:#fff;color:#2f80ed;font-weight:700;cursor:pointer}
+.stu-btn.active{background:#2f80ed;color:#fff}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#243042;color:#fff;border-radius:12px;padding:10px 18px;font-weight:700;display:none;z-index:60}
+</style></head><body>
+<header><h1>🏭 綜合複習：造句工廠 <span style="font-size:.75rem;opacity:.85">Review: Sentence Factory</span></h1>
+<p><a href="index.html">← 課程目錄</a> · 建議 2 週 · 學穩再前進</p></header>
+<div id="studentBar">我是：
+ <button class="stu-btn" onclick="pick('albert')">Albert</button>
+ <button class="stu-btn" onclick="pick('jonathan')">Jonathan</button>
+ <button class="stu-btn" onclick="pick('ryder')">Ryder</button>
+ <button class="stu-btn" style="opacity:.7" onclick="pick('test')">🧪 測試</button>
+</div>
+<div class="card"><div class="concept">💡 把名詞、代名詞、be/一般動詞組成正確句子</div></div>
+<div class="card"><h2>🗺️ 概念圖</h2><svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" role="img"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8a93b8"/></marker></defs><text x="330" y="32" font-size="16" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">🏭 造句輸送帶：零件對了，句子就對了</text><rect x="30" y="60" width="130" height="70" rx="12" fill="#eaf3ff" stroke="#2f80ed" stroke-width="2.5"/><text x="95" y="90" font-size="14" fill="#1e5fb8" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">名詞/代名詞</text><text x="95" y="115" font-size="13" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">The cat · She</text><rect x="180" y="60" width="130" height="70" rx="12" fill="#e6f6ec" stroke="#2fbf71" stroke-width="2.5"/><text x="245" y="90" font-size="14" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">動詞（選引擎）</text><text x="245" y="115" font-size="13" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">is / drinks</text><rect x="330" y="60" width="130" height="70" rx="12" fill="#fff3e0" stroke="#f2a900" stroke-width="2.5"/><text x="395" y="90" font-size="14" fill="#a05c10" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">其他零件</text><text x="395" y="115" font-size="13" fill="#243042" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">milk · cute</text><line x1="95" y1="135" x2="95" y2="175" stroke="#8a93b8" stroke-width="3" marker-end="url(#ar)"/><line x1="245" y1="135" x2="245" y2="175" stroke="#8a93b8" stroke-width="3" marker-end="url(#ar)"/><line x1="395" y1="135" x2="395" y2="175" stroke="#8a93b8" stroke-width="3" marker-end="url(#ar)"/><rect x="30" y="180" width="600" height="34" rx="8" fill="#d9e2ec"/><circle cx="80" cy="214" r="10" fill="#8a93b8"/><circle cx="230" cy="214" r="10" fill="#8a93b8"/><circle cx="380" cy="214" r="10" fill="#8a93b8"/><circle cx="530" cy="214" r="10" fill="#8a93b8"/><line x1="330" y1="220" x2="330" y2="250" stroke="#8a93b8" stroke-width="3" marker-end="url(#ar)"/><rect x="120" y="255" width="420" height="55" rx="14" fill="#fff" stroke="#2fbf71" stroke-width="2.5"/><text x="330" y="288" font-size="16" fill="#187a48" font-weight="700" text-anchor="middle" font-family="Arial,'Noto Sans TC',sans-serif">✅ The cat drinks milk. ／ She is cute.</text></svg></div>
+<div class="card"><h2>🎧 聽講解（先造對，再造長）</h2>
+<audio controls preload="none" src="audio/r1.mp3" onerror="this.outerHTML='<div class=pod-missing>🎙️ 語音準備中，先看下面的講稿吧</div>'"></audio>
+<details><summary>📄 看講稿</summary><div class="script"><p>今天不是學新招，是開造句工廠，把前面四個零件真的組起來：名詞、代名詞、be、一般動詞。</p><p>複習的口訣是：先造對，再造長。不要急著寫很華麗，先讓句子站得穩。</p><p>第一關，句子要有主詞和動詞。主詞可以是名詞，也可以是代名詞。</p><p>第二關，名詞要想一個或很多個，第一次或大家都知道，a、an、the 不要亂貼。</p><p>第三關，代名詞要看位置。做事的人用主詞衣，動詞後面被影響的人用受詞衣。</p><p>第四關，選動詞引擎。狀態位置多用 be，真正動作用一般動詞。</p><p>先聽一個很乾淨的 be 句，像工廠第一台成品。</p><p class="en">The puppy is under the chair.</p><p>The puppy 是大家知道的小狗，is 是 be 引擎，under the chair 說位置。</p><p>再聽一般動詞句，這次動作自己跑起來。</p><p class="en">My sister reads a book.</p><p>My sister 是主詞，reads 是動詞，a book 是第一次提到的一本書。句子很穩。</p><p>第三句加入代名詞，注意 me 的位置。</p><p class="en">My friend helps me after class.</p><p>My friend 做幫忙的動作，me 被幫，所以不用 I。after class 只是加長，不影響骨架。</p><p>第四句把兩個短句接起來，但每一邊都要先造對。</p><p class="en">I am tired, but I finish my homework.</p><p>前半 I am tired 是 be 句，後半 I finish my homework 是一般動詞句。兩邊各有自己的引擎。</p><p>造長句的方法不是一直加字，而是先造出短短正確句，再加時間、地方、東西。</p><p>像 I play games 可以加 at home，也可以加 after dinner，但 play 這個引擎不要被 is 亂插隊。</p><p>台灣小孩常見陷阱是想一次翻整句中文，結果零件亂掉：My mom is cook dinner。</p><p>先停一下問：cook 是動作嗎？是。那就 My mom cooks dinner。不要急著塞 is。</p><p>另一個陷阱是名詞沒貼紙：I see dog。若是第一次看到一隻狗，要說 I see a dog。</p><p>最後三十秒總結：先找主詞，再選引擎，再檢查名詞貼紙和代名詞衣服。</p><p>每次寫英文都像出貨前檢查。句子先造對，再慢慢造長，你的英文會比只背翻譯穩很多。</p></div></details></div>
+<div class="card"><h2>📚 例句集</h2><div class="ex"><button onclick="playEx(0)">🔊</button><b>I am at home.</b><small>我在家。</small></div><div class="ex"><button onclick="playEx(1)">🔊</button><b>The dog runs.</b><small>那隻狗跑步。</small></div><div class="ex"><button onclick="playEx(2)">🔊</button><b>She has an eraser.</b><small>她有一個橡皮擦。</small></div><div class="ex"><button onclick="playEx(3)">🔊</button><b>My brother helps me.</b><small>我哥哥幫我。</small></div><div class="ex"><button onclick="playEx(4)">🔊</button><b>This lunch box is mine.</b><small>這個便當盒是我的。</small></div><div class="ex"><button onclick="playEx(5)">🔊</button><b>We clean the classroom.</b><small>我們打掃那間教室。</small></div><div class="ex"><button onclick="playEx(6)">🔊</button><b>The cat is on my bed.</b><small>那隻貓在我的床上。</small></div><div class="ex"><button onclick="playEx(7)">🔊</button><b>A girl draws a picture after school.</b><small>一個女孩放學後畫一張圖。</small></div><div class="ex"><button onclick="playEx(8)">🔊</button><b>Tom is hungry, and he eats an egg.</b><small>Tom 餓了，所以他吃一顆蛋。</small></div><div class="ex"><button onclick="playEx(9)">🔊</button><b>My friends and I play a game in the living room.</b><small>我和朋友在客廳玩一個遊戲。</small></div></div>
+<div class="card"><h2>📝 小測驗（完成領金幣，每人一次）</h2><div id="quiz"></div><div id="result"></div></div>
+<div class="nav2">
+  <span><a href="u4.html">← ⚙️ 兩種動詞引擎</a></span>
+  <span><a href="u5.html">🔁 現在簡單式 →</a></span>
+</div>
+<div id="toast"></div>
+<script>
+const UID="r1", QUIZ=[{"q":"哪一句先造對了基本骨架？","choices":["My sister reads.","My sister very happy.","In my room.","Reads a book."],"answer":"My sister reads."},{"q":"第一次提到一顆蛋，應該選？","choices":["an egg","a egg","the egg","eggs"],"answer":"an egg"},{"q":"Dad helps ___. 空格在動詞後，最適合？","choices":["me","I","my","mine"],"answer":"me"},{"q":"This is ___ bag. 空格後面有名詞，最適合？","choices":["my","mine","me","I"],"answer":"my"},{"q":"哪一句沒有把 be 和一般動詞亂混？","choices":["She likes music.","She is likes music.","She are like music.","She is like music."],"answer":"She likes music."},{"q":"The book ___ on the desk. 這是在說位置，最適合？","choices":["is","reads","do","play"],"answer":"is"},{"q":"想把 I play games 造長，哪個加法最穩？","choices":["I play games after dinner.","I am play games after dinner.","I play after dinner games am.","I games play is after dinner."],"answer":"I play games after dinner."},{"q":"造句工廠的複習口訣是什麼？","choices":["先造對，再造長","先造長，再猜文法","先翻中文，再補單字","先背難字，再看句子"],"answer":"先造對，再造長"}];
+let stu=localStorage.getItem("kidsCurrentStudent")||null;
+function pick(n){stu=n;localStorage.setItem("kidsCurrentStudent",n);
+  document.querySelectorAll(".stu-btn").forEach(b=>b.classList.toggle("active",b.textContent.toLowerCase().includes(n==="test"?"測試":n)));}
+if(stu)pick(stu);
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.style.display="block";setTimeout(()=>t.style.display="none",2200);}
+function playEx(i){new Audio("audio/ex/"+UID+"_"+i+".mp3").play().catch(()=>toast("語音載入中，再點一次"));}
+// 測驗
+let done=0, ok=0;
+const qEl=document.getElementById("quiz");
+qEl.innerHTML=QUIZ.map((q,i)=>'<div class="q" id="q'+i+'"><div class="qt">'+(i+1)+". "+q.q.replace(/</g,"&lt;")+'</div>'+
+  q.choices.map(ch=>'<button onclick="ans('+i+',this)">'+ch.replace(/</g,"&lt;")+"</button>").join("")+"</div>").join("");
+function ans(i,btn){
+  const box=document.getElementById("q"+i); if(box.dataset.done)return; box.dataset.done="1";
+  const good=btn.textContent===QUIZ[i].answer;
+  box.querySelectorAll("button").forEach(b=>{b.disabled=true;
+    if(b.textContent===QUIZ[i].answer){b.style.borderColor="#2fbf71";b.style.background="#d9f7e8";}
+    else if(b===btn){b.style.borderColor="#ef476f";b.style.background="#fde0e8";}});
+  done++; if(good)ok++;
+  if(done===QUIZ.length)finish();
+}
+function finish(){
+  const r=document.getElementById("result");
+  let msg="🎉 答對 "+ok+" / "+QUIZ.length+"！";
+  if(!stu){r.textContent=msg+"（先選名字才能領金幣）";return;}
+  const key="gc::"+UID;
+  const raw=localStorage.getItem("kidsProgress."+stu);
+  const p=raw?JSON.parse(raw):{wrongCounts:{},sessions:0,totalCorrect:0,totalWrong:0};
+  if(!p.coins)p.coins={balance:0,lifetimeEarned:0,lifetimeSpent:0,transactions:[],claimedDrills:{}};
+  if(p.coins.claimedDrills[key]){r.textContent=msg+"（這單元的金幣領過囉）";return;}
+  const earned=ok*5+(ok===QUIZ.length?10:0)+20;
+  p.coins.balance+=earned;p.coins.lifetimeEarned+=earned;
+  p.coins.transactions.push({type:"earn",source:"grammarCore",amount:earned,balanceAfter:p.coins.balance,createdAt:new Date().toISOString(),meta:{unit:UID,correct:ok}});
+  p.coins.claimedDrills[key]={claimedAt:new Date().toISOString(),earned,correct:ok};
+  localStorage.setItem("kidsProgress."+stu,JSON.stringify(p));
+  if(typeof cloudSave==="function")cloudSave(stu);
+  r.innerHTML=msg+" 🪙 +"+earned+"（共 "+p.coins.balance+"）";
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../cloud_sync.js?v=202607100042"></script>
+<script src="../account_lock.js?v=202607100042"></script>
+<script src="../supabase_auth.js?v=202607100042"></script>
+</body></html>
