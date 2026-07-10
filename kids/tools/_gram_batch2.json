@@ -1,0 +1,968 @@
+{
+  "units": {
+    "u5": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "你有沒有每天早上刷牙？這種天天會發生的事，英文有一件固定制服。"
+        },
+        {
+          "v": "zh",
+          "t": "它叫現在簡單式。名字有現在，可是重點不是現在這一秒，是習慣和事實。"
+        },
+        {
+          "v": "zh",
+          "t": "想像你在拍班級生活表：每天、常常、通常、星期幾會做什麼，就用它。"
+        },
+        {
+          "v": "zh",
+          "t": "第一句先聽，這是最基本的習慣。"
+        },
+        {
+          "v": "en",
+          "t": "I walk to school every day."
+        },
+        {
+          "v": "zh",
+          "t": "意思是我每天走路上學。不是說我現在正在走，是在說我的平常習慣。"
+        },
+        {
+          "v": "zh",
+          "t": "再聽一個事實，像自然課會講的那種。"
+        },
+        {
+          "v": "en",
+          "t": "The sun rises in the morning."
+        },
+        {
+          "v": "zh",
+          "t": "太陽早上升起。這不是今天限定，是一直都成立的事實，所以用現在簡單式。"
+        },
+        {
+          "v": "zh",
+          "t": "現在簡單式大部分很直覺：I, you, we, they 後面，動詞用原形。"
+        },
+        {
+          "v": "zh",
+          "t": "像 I play, you play, we play, they play。動詞不用加奇怪東西。"
+        },
+        {
+          "v": "zh",
+          "t": "可是英文有一個小魔王：主詞是 he, she, it，動詞通常要加 s。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句，注意 plays。"
+        },
+        {
+          "v": "en",
+          "t": "My brother plays basketball after school."
+        },
+        {
+          "v": "zh",
+          "t": "哥哥是 he 的一種，所以 play 變 plays。中文不會變，英文會提醒你主詞是誰。"
+        },
+        {
+          "v": "zh",
+          "t": "再來一個，主詞是寵物，英文把一隻動物當 it 看。"
+        },
+        {
+          "v": "en",
+          "t": "My dog likes my toy."
+        },
+        {
+          "v": "zh",
+          "t": "狗是 it，所以 like 加 s。這個 s 很小，但少了就像制服少扣一顆扣子。"
+        },
+        {
+          "v": "zh",
+          "t": "常見時間字也很重要：every day, usually, often, on Sundays。"
+        },
+        {
+          "v": "zh",
+          "t": "聽到這些字，先想：這是不是平常會重複的事？如果是，就用現在簡單式。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩常犯的錯，是看到中文「現在」就加 be 動詞。"
+        },
+        {
+          "v": "zh",
+          "t": "例如「我每天打球」不是 I am play basketball every day。"
+        },
+        {
+          "v": "zh",
+          "t": "因為 play 已經是動作引擎了，不要再塞 am。正確是這句。"
+        },
+        {
+          "v": "en",
+          "t": "I play basketball every day."
+        },
+        {
+          "v": "zh",
+          "t": "另一個錯，是忘記三單 s：She like cats。中文沒差，英文要寫 She likes cats。"
+        },
+        {
+          "v": "zh",
+          "t": "總結一下：現在簡單式是習慣和事實，不是正在發生。"
+        },
+        {
+          "v": "zh",
+          "t": "I, you, we, they 用動詞原形；he, she, it 後面，動詞通常加 s。"
+        },
+        {
+          "v": "zh",
+          "t": "看到 every day, usually, often，就想生活循環。這套觀念穩，英文句子會清很多。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "I like cats.",
+          "zh": "我喜歡貓。"
+        },
+        {
+          "en": "You play games after school.",
+          "zh": "你放學後玩遊戲。"
+        },
+        {
+          "en": "We eat lunch at school.",
+          "zh": "我們在學校吃午餐。"
+        },
+        {
+          "en": "They walk to the park every day.",
+          "zh": "他們每天走路去公園。"
+        },
+        {
+          "en": "My sister reads books at night.",
+          "zh": "我妹妹晚上看書。"
+        },
+        {
+          "en": "He watches TV on Sundays.",
+          "zh": "他星期日看電視。"
+        },
+        {
+          "en": "My dog runs fast.",
+          "zh": "我的狗跑得很快。"
+        },
+        {
+          "en": "She usually drinks milk in the morning.",
+          "zh": "她通常早上喝牛奶。"
+        },
+        {
+          "en": "The bus stops near my school.",
+          "zh": "公車停在我的學校附近。"
+        },
+        {
+          "en": "My dad often helps me with homework.",
+          "zh": "我爸爸常常幫我寫作業。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "看到 every day，通常是在說哪一種事？",
+          "choices": [
+            "習慣或重複的事",
+            "現在這一秒正在做",
+            "已經結束的昨天故事",
+            "一定要用 be 動詞"
+          ],
+          "answer": "習慣或重複的事"
+        },
+        {
+          "q": "I ___ milk every morning.",
+          "choices": [
+            "drink",
+            "drinks",
+            "am drink",
+            "drinking"
+          ],
+          "answer": "drink"
+        },
+        {
+          "q": "My brother ___ soccer after school.",
+          "choices": [
+            "plays",
+            "play",
+            "is play",
+            "playing"
+          ],
+          "answer": "plays"
+        },
+        {
+          "q": "哪一句是正確的現在簡單式？",
+          "choices": [
+            "She likes cats.",
+            "She like cats.",
+            "She is like cats.",
+            "She liking cats."
+          ],
+          "answer": "She likes cats."
+        },
+        {
+          "q": "主詞是 he / she / it，現在簡單式的動作動詞通常要怎樣？",
+          "choices": [
+            "加 s 或 es",
+            "前面加 am",
+            "變成 V-ing",
+            "永遠不變"
+          ],
+          "answer": "加 s 或 es"
+        },
+        {
+          "q": "They ___ games on Fridays.",
+          "choices": [
+            "play",
+            "plays",
+            "is play",
+            "playing"
+          ],
+          "answer": "play"
+        },
+        {
+          "q": "哪一句在說「事實」，適合用現在簡單式？",
+          "choices": [
+            "The sun rises in the morning.",
+            "The sun is rise in the morning.",
+            "The sun rising in the morning.",
+            "The sun rise yesterday."
+          ],
+          "answer": "The sun rises in the morning."
+        },
+        {
+          "q": "My dog ___ under my desk every night.",
+          "choices": [
+            "sleeps",
+            "sleep",
+            "is sleep",
+            "sleeping"
+          ],
+          "answer": "sleeps"
+        }
+      ]
+    },
+    "u6": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "如果你打開房門，看到弟弟正在偷玩你的遊戲機，英文要怎麼抓現行犯？"
+        },
+        {
+          "v": "zh",
+          "t": "這時候用現在進行式。它的重點是 right now，現在這一刻正在發生。"
+        },
+        {
+          "v": "zh",
+          "t": "它的公式很像兩片積木，不能分開：be 加上 V-ing。"
+        },
+        {
+          "v": "zh",
+          "t": "be 會變成 am, is, are；後面的動詞要穿 ing 外套。"
+        },
+        {
+          "v": "zh",
+          "t": "先聽最簡單的一句，想像你正在寫作業。"
+        },
+        {
+          "v": "en",
+          "t": "I am doing my homework."
+        },
+        {
+          "v": "zh",
+          "t": "意思是我正在做作業。am 和 doing 要一起出現，少一個都不完整。"
+        },
+        {
+          "v": "zh",
+          "t": "主詞換成 she，be 就換成 is。聽聽看。"
+        },
+        {
+          "v": "en",
+          "t": "She is reading a comic book."
+        },
+        {
+          "v": "zh",
+          "t": "她正在看漫畫。不是她平常都看，是鏡頭現在拍到她正在看。"
+        },
+        {
+          "v": "zh",
+          "t": "主詞如果是 they 或 we，be 要用 are。"
+        },
+        {
+          "v": "en",
+          "t": "They are playing basketball now."
+        },
+        {
+          "v": "zh",
+          "t": "他們現在正在打籃球。now 是很強的提醒：鏡頭正在拍。"
+        },
+        {
+          "v": "zh",
+          "t": "現在進行式像放大鏡，只看眼前這一格，不管平常是不是每天做。"
+        },
+        {
+          "v": "zh",
+          "t": "再聽一個家裡場景。"
+        },
+        {
+          "v": "en",
+          "t": "Mom is cooking dinner in the kitchen."
+        },
+        {
+          "v": "zh",
+          "t": "媽媽正在廚房煮晚餐。這句有 is，也有 cooking，兩個扣在一起。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩最常犯兩種錯。第一種：只寫 She reading。"
+        },
+        {
+          "v": "zh",
+          "t": "少了 be，就像車沒有電池。reading 看得到動作，句子卻沒有完整引擎。"
+        },
+        {
+          "v": "zh",
+          "t": "第二種：寫 She is read。這次有 be，可是動詞忘了穿 ing 外套。"
+        },
+        {
+          "v": "zh",
+          "t": "正確要兩個都到：She is reading。be 加 V-ing 是一組。"
+        },
+        {
+          "v": "zh",
+          "t": "另一個陷阱，是把每天習慣也寫成進行式。"
+        },
+        {
+          "v": "zh",
+          "t": "如果是「我每天走路上學」，不要說 I am walking to school every day。"
+        },
+        {
+          "v": "zh",
+          "t": "每天是習慣，用現在簡單式：I walk to school every day。"
+        },
+        {
+          "v": "zh",
+          "t": "最後總結：現在進行式是鏡頭拍到的 right now。"
+        },
+        {
+          "v": "zh",
+          "t": "公式是 am, is, are 加 V-ing。I am, he/she/it is, we/you/they are。"
+        },
+        {
+          "v": "zh",
+          "t": "看到 now, right now, look，就先想：是不是正在發生？是的話，就用這一套。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "I am eating breakfast.",
+          "zh": "我正在吃早餐。"
+        },
+        {
+          "en": "You are watching TV now.",
+          "zh": "你現在正在看電視。"
+        },
+        {
+          "en": "He is playing a game.",
+          "zh": "他正在玩遊戲。"
+        },
+        {
+          "en": "She is drawing a cat.",
+          "zh": "她正在畫一隻貓。"
+        },
+        {
+          "en": "We are cleaning the classroom.",
+          "zh": "我們正在打掃教室。"
+        },
+        {
+          "en": "They are running in the park.",
+          "zh": "他們正在公園跑步。"
+        },
+        {
+          "en": "My dog is sleeping under the table.",
+          "zh": "我的狗正在桌子下面睡覺。"
+        },
+        {
+          "en": "Dad is washing the car right now.",
+          "zh": "爸爸現在正在洗車。"
+        },
+        {
+          "en": "The students are listening to the teacher.",
+          "zh": "學生們正在聽老師說話。"
+        },
+        {
+          "en": "Look! The baby is smiling at me.",
+          "zh": "你看！那個寶寶正在對我笑。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "現在進行式主要在說什麼？",
+          "choices": [
+            "現在這一刻正在發生",
+            "每天重複的習慣",
+            "昨天結束的事",
+            "永遠不變的事實"
+          ],
+          "answer": "現在這一刻正在發生"
+        },
+        {
+          "q": "現在進行式的基本組合是哪一個？",
+          "choices": [
+            "be + V-ing",
+            "V + s",
+            "V + ed",
+            "do + V-ing"
+          ],
+          "answer": "be + V-ing"
+        },
+        {
+          "q": "I ___ reading now.",
+          "choices": [
+            "am",
+            "is",
+            "are",
+            "do"
+          ],
+          "answer": "am"
+        },
+        {
+          "q": "She ___ a picture right now.",
+          "choices": [
+            "is drawing",
+            "drawing",
+            "is draw",
+            "draws"
+          ],
+          "answer": "is drawing"
+        },
+        {
+          "q": "They ___ lunch now.",
+          "choices": [
+            "are eating",
+            "is eating",
+            "are eat",
+            "eat"
+          ],
+          "answer": "are eating"
+        },
+        {
+          "q": "哪一句是正確的現在進行式？",
+          "choices": [
+            "We are playing soccer.",
+            "We playing soccer.",
+            "We are play soccer.",
+            "We plays soccer."
+          ],
+          "answer": "We are playing soccer."
+        },
+        {
+          "q": "看到 Look! The cat ___ on the chair. 哪個最合理？",
+          "choices": [
+            "is sleeping",
+            "sleeps",
+            "sleep",
+            "slept"
+          ],
+          "answer": "is sleeping"
+        },
+        {
+          "q": "哪一句比較像「習慣」，不該用現在進行式？",
+          "choices": [
+            "I brush my teeth every day.",
+            "I am brushing my teeth now.",
+            "She is cooking right now.",
+            "They are running now."
+          ],
+          "answer": "I brush my teeth every day."
+        }
+      ]
+    },
+    "u7": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "你昨天在學校發生一件好笑的事，要用英文講，就不能穿今天的衣服。"
+        },
+        {
+          "v": "zh",
+          "t": "過去簡單式就是昨天盒子。事情已經結束，就把動詞放進過去盒子。"
+        },
+        {
+          "v": "zh",
+          "t": "看到 yesterday, last night, last week, two days ago，腦中要亮燈。"
+        },
+        {
+          "v": "zh",
+          "t": "規則動詞很乖，通常加 ed。先聽一句。"
+        },
+        {
+          "v": "en",
+          "t": "I played soccer yesterday."
+        },
+        {
+          "v": "zh",
+          "t": "我昨天踢足球。play 進昨天盒子，變 played。"
+        },
+        {
+          "v": "zh",
+          "t": "再聽一個，跟家事有關。"
+        },
+        {
+          "v": "en",
+          "t": "We cleaned the classroom after lunch."
+        },
+        {
+          "v": "zh",
+          "t": "我們午餐後打掃教室。clean 變 cleaned，表示那件事已經做完。"
+        },
+        {
+          "v": "zh",
+          "t": "可是英文也有一批常用動詞不照規矩，它們不加 ed，而是整個變身。"
+        },
+        {
+          "v": "zh",
+          "t": "像 go 變 went，eat 變 ate，see 變 saw，have 變 had。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句，注意 went。"
+        },
+        {
+          "v": "en",
+          "t": "My family went to the zoo last Sunday."
+        },
+        {
+          "v": "zh",
+          "t": "我們家上星期日去了動物園。go 的過去式不是 goed，是 went。"
+        },
+        {
+          "v": "zh",
+          "t": "再聽一個吃東西的例子。"
+        },
+        {
+          "v": "en",
+          "t": "He ate noodles for dinner last night."
+        },
+        {
+          "v": "zh",
+          "t": "他昨晚晚餐吃麵。eat 變 ate，這種常用字要一個一個認得。"
+        },
+        {
+          "v": "zh",
+          "t": "過去簡單式的好消息是：主詞是 I, he, she, they，動詞過去式都一樣。"
+        },
+        {
+          "v": "zh",
+          "t": "現在簡單式有三單 s，過去簡單式的普通肯定句不用管三單 s。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩常犯的錯，是昨天還用現在式：Yesterday I play soccer。"
+        },
+        {
+          "v": "zh",
+          "t": "看到 Yesterday，play 要進盒子，變 played。"
+        },
+        {
+          "v": "zh",
+          "t": "另一個錯，是把所有動詞都加 ed，寫成 goed 或 eated。"
+        },
+        {
+          "v": "zh",
+          "t": "這種不規則動詞像遊戲裡的特殊角色，常看到，就把它們記起來。"
+        },
+        {
+          "v": "zh",
+          "t": "還有一個小提醒：一句話有一個主要過去動詞就夠了。"
+        },
+        {
+          "v": "zh",
+          "t": "例如 I went to school，不要寫 I was went to school。was 和 went 會打架。"
+        },
+        {
+          "v": "zh",
+          "t": "總結：過去簡單式在講已經結束的事，時間常在昨天、上次、以前。"
+        },
+        {
+          "v": "zh",
+          "t": "規則動詞通常加 ed；常用不規則動詞要認得 went, ate, saw, had。"
+        },
+        {
+          "v": "zh",
+          "t": "先抓時間，再幫動詞換衣服。這樣你講昨天的故事就不會像還在今天。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "I played games yesterday.",
+          "zh": "我昨天玩遊戲。"
+        },
+        {
+          "en": "She watched TV last night.",
+          "zh": "她昨晚看電視。"
+        },
+        {
+          "en": "We cleaned our classroom.",
+          "zh": "我們打掃了教室。"
+        },
+        {
+          "en": "He visited his grandma last Sunday.",
+          "zh": "他上星期日去看奶奶。"
+        },
+        {
+          "en": "They walked to school this morning.",
+          "zh": "他們今天早上走路去學校。"
+        },
+        {
+          "en": "My dog jumped on my bed.",
+          "zh": "我的狗跳到我的床上。"
+        },
+        {
+          "en": "I went to the park after school.",
+          "zh": "我放學後去了公園。"
+        },
+        {
+          "en": "Dad bought a new ball for me.",
+          "zh": "爸爸買了一顆新球給我。"
+        },
+        {
+          "en": "We saw a big bird near the river.",
+          "zh": "我們在河邊看到一隻大鳥。"
+        },
+        {
+          "en": "My sister had a test yesterday.",
+          "zh": "我妹妹昨天有一場考試。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "看到 yesterday，通常要注意什麼？",
+          "choices": [
+            "動詞要用過去式",
+            "動詞一定加 s",
+            "一定要用 be + V-ing",
+            "主詞要變複數"
+          ],
+          "answer": "動詞要用過去式"
+        },
+        {
+          "q": "I ___ basketball yesterday.",
+          "choices": [
+            "played",
+            "play",
+            "plays",
+            "am playing"
+          ],
+          "answer": "played"
+        },
+        {
+          "q": "go 的過去式是哪一個？",
+          "choices": [
+            "went",
+            "goed",
+            "goes",
+            "going"
+          ],
+          "answer": "went"
+        },
+        {
+          "q": "She ___ TV last night.",
+          "choices": [
+            "watched",
+            "watches",
+            "watch",
+            "is watching"
+          ],
+          "answer": "watched"
+        },
+        {
+          "q": "哪一句是正確的過去簡單式？",
+          "choices": [
+            "We saw a dog yesterday.",
+            "We see a dog yesterday.",
+            "We seed a dog yesterday.",
+            "We are seeing a dog yesterday."
+          ],
+          "answer": "We saw a dog yesterday."
+        },
+        {
+          "q": "eat 的過去式是哪一個？",
+          "choices": [
+            "ate",
+            "eated",
+            "eats",
+            "eating"
+          ],
+          "answer": "ate"
+        },
+        {
+          "q": "My brother ___ a new pen last week.",
+          "choices": [
+            "bought",
+            "buys",
+            "buyed",
+            "is buying"
+          ],
+          "answer": "bought"
+        },
+        {
+          "q": "哪一句有「兩個引擎打架」的問題？",
+          "choices": [
+            "I was went to school.",
+            "I went to school.",
+            "She watched TV.",
+            "They played games."
+          ],
+          "answer": "I was went to school."
+        }
+      ]
+    },
+    "r2": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "英文時態先不要想成一堆規則，先想成一條時間軸。"
+        },
+        {
+          "v": "zh",
+          "t": "左邊是昨天，現在中間，右邊是等一下或明天。動詞要看時間穿衣服。"
+        },
+        {
+          "v": "zh",
+          "t": "這集我們把三件事放在一起：習慣、正在、過去。最後再偷看未來。"
+        },
+        {
+          "v": "zh",
+          "t": "第一站是 every day。它不是鏡頭，是生活循環。"
+        },
+        {
+          "v": "en",
+          "t": "I play basketball every day."
+        },
+        {
+          "v": "zh",
+          "t": "我每天打籃球。因為是習慣，所以用現在簡單式 play。"
+        },
+        {
+          "v": "zh",
+          "t": "如果主詞變成 he，別忘了現在簡單式的三單 s。"
+        },
+        {
+          "v": "en",
+          "t": "He plays basketball every day."
+        },
+        {
+          "v": "zh",
+          "t": "同樣是每天，he 後面 play 變 plays。這是現在簡單式的重點提醒。"
+        },
+        {
+          "v": "zh",
+          "t": "第二站是 right now。這是鏡頭正在拍，公式要換。"
+        },
+        {
+          "v": "en",
+          "t": "He is playing basketball right now."
+        },
+        {
+          "v": "zh",
+          "t": "他現在正在打籃球。is 加 playing，要兩個一起出現。"
+        },
+        {
+          "v": "zh",
+          "t": "注意，every day 和 right now 都是現在附近，但感覺完全不同。"
+        },
+        {
+          "v": "zh",
+          "t": "every day 是一圈一圈重複；right now 是相機喀嚓一張照片。"
+        },
+        {
+          "v": "zh",
+          "t": "第三站是 yesterday。事情已經結束，動詞要進過去盒子。"
+        },
+        {
+          "v": "en",
+          "t": "He played basketball yesterday."
+        },
+        {
+          "v": "zh",
+          "t": "他昨天打了籃球。play 變 played，因為昨天已經過去了。"
+        },
+        {
+          "v": "zh",
+          "t": "如果是 go 這種不規則動詞，就不是加 ed。聽這句。"
+        },
+        {
+          "v": "en",
+          "t": "We went to the library yesterday."
+        },
+        {
+          "v": "zh",
+          "t": "我們昨天去了圖書館。go 變 went，看到 yesterday 就要換成過去衣服。"
+        },
+        {
+          "v": "zh",
+          "t": "最後偷看未來站：later 或 tomorrow。這批先認得，不急著深入。"
+        },
+        {
+          "v": "en",
+          "t": "I will clean my room tomorrow."
+        },
+        {
+          "v": "zh",
+          "t": "我明天會打掃房間。will 是在右邊未來站的預告，之後會再細學。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩常見錯誤，是只看中文，不看時間字。"
+        },
+        {
+          "v": "zh",
+          "t": "例如「我每天正在打球」聽起來像中文能通，可是英文 every day 不配 right now。"
+        },
+        {
+          "v": "zh",
+          "t": "要說每天，就 I play every day。要說現在正在，就 I am playing now。"
+        },
+        {
+          "v": "zh",
+          "t": "另一個錯，是昨天還用 play，或現在正在少掉 am。時間一換，動詞也要換。"
+        },
+        {
+          "v": "zh",
+          "t": "總結：先找時間字，再選動詞衣服。every day 用現在簡單式。"
+        },
+        {
+          "v": "zh",
+          "t": "right now 用 be 加 V-ing；yesterday 用過去式；tomorrow 可以先記 will。"
+        },
+        {
+          "v": "zh",
+          "t": "不要急著背一堆名字。先問：這件事在時間軸哪一站？答案通常就出來了。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "I clean my desk every night.",
+          "zh": "我每天晚上整理我的書桌。"
+        },
+        {
+          "en": "She cleans her desk every night.",
+          "zh": "她每天晚上整理她的書桌。"
+        },
+        {
+          "en": "She is cleaning her desk now.",
+          "zh": "她現在正在整理她的書桌。"
+        },
+        {
+          "en": "She cleaned her desk yesterday.",
+          "zh": "她昨天整理了她的書桌。"
+        },
+        {
+          "en": "We play games on Fridays.",
+          "zh": "我們星期五玩遊戲。"
+        },
+        {
+          "en": "We are playing games right now.",
+          "zh": "我們現在正在玩遊戲。"
+        },
+        {
+          "en": "We played games last Friday.",
+          "zh": "我們上星期五玩了遊戲。"
+        },
+        {
+          "en": "My dog sleeps under the table every day.",
+          "zh": "我的狗每天睡在桌子下面。"
+        },
+        {
+          "en": "My dog is sleeping under the table now.",
+          "zh": "我的狗現在正在桌子下面睡覺。"
+        },
+        {
+          "en": "My dog slept under the table last night.",
+          "zh": "我的狗昨晚睡在桌子下面。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "看到 every day，最適合先想到哪一種？",
+          "choices": [
+            "現在簡單式",
+            "現在進行式",
+            "過去簡單式",
+            "一定用 will"
+          ],
+          "answer": "現在簡單式"
+        },
+        {
+          "q": "看到 right now，最適合先想到哪一種？",
+          "choices": [
+            "be + V-ing",
+            "動詞加 ed",
+            "動詞加 s 就好",
+            "will + V"
+          ],
+          "answer": "be + V-ing"
+        },
+        {
+          "q": "看到 yesterday，最適合先想到哪一種？",
+          "choices": [
+            "過去簡單式",
+            "現在進行式",
+            "現在簡單式",
+            "三單 s"
+          ],
+          "answer": "過去簡單式"
+        },
+        {
+          "q": "She ___ TV every night.",
+          "choices": [
+            "watches",
+            "watch",
+            "is watching",
+            "watched"
+          ],
+          "answer": "watches"
+        },
+        {
+          "q": "She ___ TV right now.",
+          "choices": [
+            "is watching",
+            "watches",
+            "watched",
+            "watch"
+          ],
+          "answer": "is watching"
+        },
+        {
+          "q": "She ___ TV last night.",
+          "choices": [
+            "watched",
+            "watches",
+            "is watching",
+            "watch"
+          ],
+          "answer": "watched"
+        },
+        {
+          "q": "哪一句的時間字和動詞最搭？",
+          "choices": [
+            "They are eating lunch now.",
+            "They eating lunch now.",
+            "They eat lunch yesterday.",
+            "They are eat lunch every day."
+          ],
+          "answer": "They are eating lunch now."
+        },
+        {
+          "q": "哪個配對是錯的？",
+          "choices": [
+            "yesterday → plays",
+            "every day → plays",
+            "right now → is playing",
+            "tomorrow → will play"
+          ],
+          "answer": "yesterday → plays"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,768 @@
+{
+  "units": {
+    "u11": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "你有沒有玩過積木橋？兩塊積木中間少一塊，車子就過不去。"
+        },
+        {
+          "v": "zh",
+          "t": "英文句子也一樣。兩個想法要接在一起，中間要有一座橋。"
+        },
+        {
+          "v": "zh",
+          "t": "今天的橋叫連接詞：and, but, or, so, because。"
+        },
+        {
+          "v": "zh",
+          "t": "先記住一句話：連接詞不是裝飾，是說明兩句的關係。"
+        },
+        {
+          "v": "zh",
+          "t": "也就是說，不是看到空格就亂塞 and。你要先問：這兩句是什麼關係？"
+        },
+        {
+          "v": "zh",
+          "t": "and 像加號，前後是同方向、一起發生、都是真的事情。"
+        },
+        {
+          "v": "zh",
+          "t": "聽聽看這句，兩件事是一起加上去。"
+        },
+        {
+          "v": "en",
+          "t": "I do my homework and clean my desk."
+        },
+        {
+          "v": "zh",
+          "t": "意思是我寫功課，也整理桌子。and 把兩個動作排在一起。"
+        },
+        {
+          "v": "zh",
+          "t": "but 像轉彎牌。前面一個想法，後面突然反過來或不一樣。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句，前後感覺有轉折。"
+        },
+        {
+          "v": "en",
+          "t": "The game is fun, but I am tired."
+        },
+        {
+          "v": "zh",
+          "t": "遊戲好玩，可是我累了。好玩跟想休息有衝突，所以用 but。"
+        },
+        {
+          "v": "zh",
+          "t": "or 像選單。你要選 A 還是 B，不能兩個都當同一件事。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句，像媽媽問你要哪一個。"
+        },
+        {
+          "v": "en",
+          "t": "Do you want tea or milk?"
+        },
+        {
+          "v": "zh",
+          "t": "茶或牛奶，這是在選擇，所以用 or。"
+        },
+        {
+          "v": "zh",
+          "t": "so 像結果箭頭。前面發生一件事，後面出現結果。"
+        },
+        {
+          "v": "zh",
+          "t": "聽聽看，原因在前，結果在後。"
+        },
+        {
+          "v": "en",
+          "t": "It is raining, so I take my umbrella."
+        },
+        {
+          "v": "zh",
+          "t": "因為下雨，結果我帶傘。so 後面通常放結果。"
+        },
+        {
+          "v": "zh",
+          "t": "because 像原因牌。它會告訴你：為什麼會這樣？"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句，後面是在解釋原因。"
+        },
+        {
+          "v": "en",
+          "t": "I stay home because my dog is sick."
+        },
+        {
+          "v": "zh",
+          "t": "我待在家，原因是狗狗生病了。because 後面接原因。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩最常犯的錯，是把「因為所以」直接翻成 because...so..."
+        },
+        {
+          "v": "zh",
+          "t": "英文通常選一個就好：because 講原因，或 so 講結果，不要兩個硬塞。"
+        },
+        {
+          "v": "zh",
+          "t": "另一個錯誤是什麼都用 and。結果句子像一直加菜，卻不知道味道。"
+        },
+        {
+          "v": "zh",
+          "t": "最後 30 秒整理：and 是加，but 是轉，or 是選，so 是結果，because 是原因。"
+        },
+        {
+          "v": "zh",
+          "t": "每次要接兩句，先別急著寫。先問：它們是一起、相反、選擇、結果，還是原因？"
+        },
+        {
+          "v": "zh",
+          "t": "你選對橋，句子就會很順，讀的人也知道你的腦袋怎麼走。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "I have a dog and a cat.",
+          "zh": "我有一隻狗和一隻貓。"
+        },
+        {
+          "en": "I like math, but it is hard.",
+          "zh": "我喜歡數學，但是它很難。"
+        },
+        {
+          "en": "Do you want rice or noodles?",
+          "zh": "你想要飯還是麵？"
+        },
+        {
+          "en": "It is hot, so I drink water.",
+          "zh": "天氣很熱，所以我喝水。"
+        },
+        {
+          "en": "I am happy because I win the game.",
+          "zh": "我很開心，因為我贏了遊戲。"
+        },
+        {
+          "en": "My sister can sing and dance.",
+          "zh": "我妹妹會唱歌也會跳舞。"
+        },
+        {
+          "en": "I want to play, but I have homework.",
+          "zh": "我想玩，但是我有功課。"
+        },
+        {
+          "en": "We can go by bus or walk to school.",
+          "zh": "我們可以搭公車或走路去學校。"
+        },
+        {
+          "en": "The bus is late, so we run to class.",
+          "zh": "公車晚了，所以我們跑去上課。"
+        },
+        {
+          "en": "I go to bed early because I have a test tomorrow.",
+          "zh": "我早點睡，因為我明天有考試。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "兩個想法是「一起加上去」時，最適合用哪個連接詞？",
+          "choices": [
+            "and",
+            "but",
+            "because",
+            "so"
+          ],
+          "answer": "and"
+        },
+        {
+          "q": "I like the book, ___ it is too long. 空格表示轉折，選哪個？",
+          "choices": [
+            "but",
+            "and",
+            "so",
+            "or"
+          ],
+          "answer": "but"
+        },
+        {
+          "q": "Do you want water ___ juice? 這句是在做選擇，選哪個？",
+          "choices": [
+            "or",
+            "and",
+            "so",
+            "because"
+          ],
+          "answer": "or"
+        },
+        {
+          "q": "It is cold, ___ I wear a jacket. 後面是結果，選哪個？",
+          "choices": [
+            "so",
+            "because",
+            "but",
+            "or"
+          ],
+          "answer": "so"
+        },
+        {
+          "q": "I am late ___ I miss the bus. 後面是原因，選哪個？",
+          "choices": [
+            "because",
+            "so",
+            "and",
+            "but"
+          ],
+          "answer": "because"
+        },
+        {
+          "q": "哪一句比較自然，不把中文「因為所以」硬翻？",
+          "choices": [
+            "I stay home because I am sick.",
+            "Because I am sick, so I stay home.",
+            "I stay home so I am sick.",
+            "I am sick but I stay home."
+          ],
+          "answer": "I stay home because I am sick."
+        },
+        {
+          "q": "My pencil is old, ___ it still works. 兩句有反差，選哪個？",
+          "choices": [
+            "but",
+            "and",
+            "because",
+            "or"
+          ],
+          "answer": "but"
+        },
+        {
+          "q": "選出關係最清楚的句子。",
+          "choices": [
+            "I study hard, so I get a good grade.",
+            "I study hard, but I get a good grade.",
+            "I study hard, or I get a good grade.",
+            "I study hard, because I get a good grade."
+          ],
+          "answer": "I study hard, so I get a good grade."
+        }
+      ]
+    },
+    "u12": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "今天我們打開英文工具箱。裡面有幾個超好用的小幫手。"
+        },
+        {
+          "v": "zh",
+          "t": "它們是 can, there is, there are, will, be going to，還有 should, must。"
+        },
+        {
+          "v": "zh",
+          "t": "先抓住最重要的一句：小幫手後面，動詞回原形。"
+        },
+        {
+          "v": "zh",
+          "t": "什麼叫回原形？就是不要加 s，不要變過去式，也不要變 ing。"
+        },
+        {
+          "v": "zh",
+          "t": "can 是能力工具。你會不會做某件事，就可以請 can 出來。"
+        },
+        {
+          "v": "zh",
+          "t": "聽聽看，can 後面是原形動詞 swim。"
+        },
+        {
+          "v": "en",
+          "t": "I can swim."
+        },
+        {
+          "v": "zh",
+          "t": "不是 I can swims，也不是 I can swimming。小幫手後面回原形。"
+        },
+        {
+          "v": "zh",
+          "t": "如果主詞換成 he 或 she，也一樣不用加 s。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句，she 後面有 can，所以 draw 不加 s。"
+        },
+        {
+          "v": "en",
+          "t": "She can draw a rabbit."
+        },
+        {
+          "v": "zh",
+          "t": "平常可能是 She draws，但有 can 時，變成 She can draw。"
+        },
+        {
+          "v": "zh",
+          "t": "there is 和 there are 是存在工具，像在說：那裡有什麼。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句，只有一隻貓，所以用 there is。"
+        },
+        {
+          "v": "en",
+          "t": "There is a cat under the chair."
+        },
+        {
+          "v": "zh",
+          "t": "一個東西用 is，兩個以上用 are。這裡不是看中文，是看後面的東西幾個。"
+        },
+        {
+          "v": "zh",
+          "t": "再聽一句，後面是 three pencils，所以要用 are。"
+        },
+        {
+          "v": "en",
+          "t": "There are three pencils on the desk."
+        },
+        {
+          "v": "zh",
+          "t": "will 和 be going to 是未來工具。要講等一下、明天、下週，就很常用。"
+        },
+        {
+          "v": "zh",
+          "t": "聽聽看，will 後面也是原形動詞 call。"
+        },
+        {
+          "v": "en",
+          "t": "I will call you tonight."
+        },
+        {
+          "v": "zh",
+          "t": "不要說 I will called。will 已經幫你講未來，動詞不用再變身。"
+        },
+        {
+          "v": "zh",
+          "t": "should 是應該，must 是必須，也都會讓後面動詞回原形。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句，must 後面是 be，不是 are，也不是 is。"
+        },
+        {
+          "v": "en",
+          "t": "We must be quiet in the library."
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩常見錯誤，是看到 he 或 she 就想加 s：He can plays。"
+        },
+        {
+          "v": "zh",
+          "t": "可是 can 已經站在前面了，後面要 play。寫 He can play。"
+        },
+        {
+          "v": "zh",
+          "t": "另一個錯誤是 there is 後面接很多東西：There is two dogs。"
+        },
+        {
+          "v": "zh",
+          "t": "看到 two dogs，要換 there are。要讓 is 和 are 跟後面的數量配合。"
+        },
+        {
+          "v": "zh",
+          "t": "最後整理：can 講能力，there is/are 講存在，will/going to 講未來。"
+        },
+        {
+          "v": "zh",
+          "t": "看到小幫手，就提醒自己：後面的動詞回原形。這個習慣救你很多題。"
+        },
+        {
+          "v": "zh",
+          "t": "英文不是每個字都一直變。先找小幫手，再決定後面要不要變。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "I can swim.",
+          "zh": "我會游泳。"
+        },
+        {
+          "en": "She can draw.",
+          "zh": "她會畫畫。"
+        },
+        {
+          "en": "There is a ball in the box.",
+          "zh": "盒子裡有一顆球。"
+        },
+        {
+          "en": "There are two dogs in the park.",
+          "zh": "公園裡有兩隻狗。"
+        },
+        {
+          "en": "I will call you tonight.",
+          "zh": "我今晚會打電話給你。"
+        },
+        {
+          "en": "We are going to play soccer after school.",
+          "zh": "我們放學後要踢足球。"
+        },
+        {
+          "en": "You should drink water.",
+          "zh": "你應該喝水。"
+        },
+        {
+          "en": "We must be quiet in the library.",
+          "zh": "我們在圖書館必須安靜。"
+        },
+        {
+          "en": "Can you help me with my homework?",
+          "zh": "你可以幫我寫功課嗎？"
+        },
+        {
+          "en": "There will be a test tomorrow.",
+          "zh": "明天會有一個考試。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "小幫手 can 後面的動詞通常要怎麼樣？",
+          "choices": [
+            "用原形",
+            "加 s",
+            "加 ing",
+            "變過去式"
+          ],
+          "answer": "用原形"
+        },
+        {
+          "q": "He can ___ basketball. 哪個正確？",
+          "choices": [
+            "play",
+            "plays",
+            "playing",
+            "played"
+          ],
+          "answer": "play"
+        },
+        {
+          "q": "___ a book on the desk. 後面是一個 book，選哪個？",
+          "choices": [
+            "There is",
+            "There are",
+            "There have",
+            "There can"
+          ],
+          "answer": "There is"
+        },
+        {
+          "q": "___ three apples in the bag. 後面是三個 apples，選哪個？",
+          "choices": [
+            "There are",
+            "There is",
+            "There has",
+            "There be"
+          ],
+          "answer": "There are"
+        },
+        {
+          "q": "I will ___ my room later. will 後面選哪個？",
+          "choices": [
+            "clean",
+            "cleans",
+            "cleaned",
+            "cleaning"
+          ],
+          "answer": "clean"
+        },
+        {
+          "q": "She is going to ___ her grandma tomorrow. 哪個正確？",
+          "choices": [
+            "visit",
+            "visits",
+            "visited",
+            "visiting"
+          ],
+          "answer": "visit"
+        },
+        {
+          "q": "You should ___ your hands before lunch. should 後面選哪個？",
+          "choices": [
+            "wash",
+            "washes",
+            "washing",
+            "washed"
+          ],
+          "answer": "wash"
+        },
+        {
+          "q": "哪一句正確使用小幫手？",
+          "choices": [
+            "She can ride a bike.",
+            "She can rides a bike.",
+            "She will rode a bike.",
+            "There is two bikes."
+          ],
+          "answer": "She can ride a bike."
+        }
+      ]
+    },
+    "r4": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "前面我們學了很多零件：名詞、動詞、時態、連接詞、小幫手。"
+        },
+        {
+          "v": "zh",
+          "t": "但學文法不是為了把規則背到像機器人。最後要拿來表達。"
+        },
+        {
+          "v": "zh",
+          "t": "今天的重點是：文法最後要服務表達，不是背規則。"
+        },
+        {
+          "v": "zh",
+          "t": "你可以把句子想成樂高。一塊一塊很重要，但最後要拼成作品。"
+        },
+        {
+          "v": "zh",
+          "t": "一小段英文通常有三件事：主題句、細節句、收尾句。"
+        },
+        {
+          "v": "zh",
+          "t": "主題句像標題，先告訴別人你要講什麼。"
+        },
+        {
+          "v": "zh",
+          "t": "聽聽看，這句可以放在自我介紹開頭。"
+        },
+        {
+          "v": "en",
+          "t": "I am a sixth-grade student, and I like soccer."
+        },
+        {
+          "v": "zh",
+          "t": "它告訴我們：我是小六生，而且我喜歡足球。and 把兩個資訊接起來。"
+        },
+        {
+          "v": "zh",
+          "t": "細節句要補畫面。你可以加時間、地點、原因，讓句子不是空空的。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句，有頻率，也有地點。"
+        },
+        {
+          "v": "en",
+          "t": "I usually play soccer in the park after school."
+        },
+        {
+          "v": "zh",
+          "t": "usually 告訴你常常，in the park 告訴你地點，after school 告訴你時間。"
+        },
+        {
+          "v": "zh",
+          "t": "如果要講昨天，就要把時間線拉到過去。不要前面 yesterday，後面還亂用現在。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句，yesterday 搭 played。"
+        },
+        {
+          "v": "en",
+          "t": "Yesterday, I played a game with my brother."
+        },
+        {
+          "v": "zh",
+          "t": "看到 yesterday，就想過去式。play 變 played，句子才站得穩。"
+        },
+        {
+          "v": "zh",
+          "t": "如果要講未來，就可以請 will 或 be going to 出來。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句，will 後面用原形 help。"
+        },
+        {
+          "v": "en",
+          "t": "Tomorrow, I will help my mom at home."
+        },
+        {
+          "v": "zh",
+          "t": "Tomorrow 是未來時間，will 幫你標出未來，help 不要加 s 或 ed。"
+        },
+        {
+          "v": "zh",
+          "t": "段落還需要連接詞，因為讀的人要知道每句之間的路怎麼走。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句，because 把喜歡的原因說清楚。"
+        },
+        {
+          "v": "en",
+          "t": "I like my school because my friends are kind."
+        },
+        {
+          "v": "zh",
+          "t": "這不是多背一個 because，而是讓讀的人知道：為什麼我喜歡學校。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩常見錯誤，是每句都 I, I, I，像點名一樣。"
+        },
+        {
+          "v": "zh",
+          "t": "可以加時間、地點、原因、連接詞，句子就會有變化。"
+        },
+        {
+          "v": "zh",
+          "t": "第二個錯誤是時態跳來跳去。昨天用過去，平常習慣用現在，明天用未來。"
+        },
+        {
+          "v": "zh",
+          "t": "第三個錯誤是中文順序直翻：I very like。英文要說 I like it very much。"
+        },
+        {
+          "v": "zh",
+          "t": "最後 30 秒整理：先想你要講什麼，再選文法工具。"
+        },
+        {
+          "v": "zh",
+          "t": "主題句開門，細節句補畫面，連接詞鋪路，時態放到正確時間線。"
+        },
+        {
+          "v": "zh",
+          "t": "文法不是考卷上的陷阱。它是讓別人聽懂你、看見你想法的工具。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "I am a sixth-grade student.",
+          "zh": "我是小六學生。"
+        },
+        {
+          "en": "I have a pet dog at home.",
+          "zh": "我家裡有一隻寵物狗。"
+        },
+        {
+          "en": "I usually read books after dinner.",
+          "zh": "我通常晚餐後看書。"
+        },
+        {
+          "en": "My brother is funny, but he is noisy.",
+          "zh": "我哥哥很有趣，但是他很吵。"
+        },
+        {
+          "en": "Yesterday, I cleaned my room.",
+          "zh": "昨天我打掃了我的房間。"
+        },
+        {
+          "en": "I was tired, so I went to bed early.",
+          "zh": "我很累，所以我早點睡。"
+        },
+        {
+          "en": "There are many books in our classroom.",
+          "zh": "我們教室裡有很多書。"
+        },
+        {
+          "en": "Tomorrow, I will study with my friends.",
+          "zh": "明天我會和朋友一起讀書。"
+        },
+        {
+          "en": "I can play the piano, and I want to join the show.",
+          "zh": "我會彈鋼琴，而且我想參加表演。"
+        },
+        {
+          "en": "I like my school because my teachers are kind.",
+          "zh": "我喜歡我的學校，因為我的老師很親切。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "寫短段落時，文法最重要的作用是什麼？",
+          "choices": [
+            "幫助表達清楚",
+            "讓句子看起來很長",
+            "把規則背完就好",
+            "每句都用難字"
+          ],
+          "answer": "幫助表達清楚"
+        },
+        {
+          "q": "一段自我介紹的第一句，最適合先做什麼？",
+          "choices": [
+            "先說主題或身分",
+            "直接列五個單字",
+            "先寫一個沒有主詞的片語",
+            "先把所有時態混在一起"
+          ],
+          "answer": "先說主題或身分"
+        },
+        {
+          "q": "Yesterday, I ___ basketball with my friends. 看到 yesterday，選哪個？",
+          "choices": [
+            "played",
+            "play",
+            "plays",
+            "will play"
+          ],
+          "answer": "played"
+        },
+        {
+          "q": "Tomorrow, I will ___ my grandma. will 後面選哪個？",
+          "choices": [
+            "visit",
+            "visits",
+            "visited",
+            "visiting"
+          ],
+          "answer": "visit"
+        },
+        {
+          "q": "I was hungry, ___ I ate a sandwich. 後面是結果，選哪個？",
+          "choices": [
+            "so",
+            "because",
+            "but",
+            "or"
+          ],
+          "answer": "so"
+        },
+        {
+          "q": "哪一句最適合放進「My School Day」這段文章？",
+          "choices": [
+            "I have math class on Monday.",
+            "The moon is under my desk.",
+            "My pencil can eat lunch.",
+            "Because so I school happy."
+          ],
+          "answer": "I have math class on Monday."
+        },
+        {
+          "q": "選出最清楚、最自然的英文句子。",
+          "choices": [
+            "I like my dog very much.",
+            "I very like my dog.",
+            "I like very my dog.",
+            "I my dog very like."
+          ],
+          "answer": "I like my dog very much."
+        },
+        {
+          "q": "把句子合成段落時，哪個做法最好？",
+          "choices": [
+            "用時間、地點、原因讓句子有關係",
+            "每句都只寫 I like",
+            "不管時間，全都用同一個動詞形",
+            "把中文順序直接照搬"
+          ],
+          "answer": "用時間、地點、原因讓句子有關係"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1048 @@
+{
+  "units": {
+    "u8": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "今天先想一個畫面：英文問問題時，常常要請一個小幫手機器人出來。"
+        },
+        {
+          "v": "zh",
+          "t": "這個小幫手就是 do、does、did。它專門幫一般動詞變問句和否定句。"
+        },
+        {
+          "v": "zh",
+          "t": "記住一句話：一般動詞問句否定要請小幫手。沒有小幫手，句子會很像中文直翻。"
+        },
+        {
+          "v": "zh",
+          "t": "一般動詞就是 play、like、eat、go、read 這種真的在做的動作。"
+        },
+        {
+          "v": "zh",
+          "t": "肯定句很直：I play games. 但要問問題，就不是 You play games?"
+        },
+        {
+          "v": "zh",
+          "t": "聽聽看正確問法。"
+        },
+        {
+          "v": "en",
+          "t": "Do you play games after school?"
+        },
+        {
+          "v": "zh",
+          "t": "意思是：你放學後玩遊戲嗎？Do 站到最前面，幫 play 開門。"
+        },
+        {
+          "v": "zh",
+          "t": "如果主詞是 he、she、it，現在簡單式要用 does，因為小幫手要配合主詞。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句。"
+        },
+        {
+          "v": "en",
+          "t": "Does your brother like cats?"
+        },
+        {
+          "v": "zh",
+          "t": "注意，已經有 does 了，後面的 like 要回原形，不可以說 likes。"
+        },
+        {
+          "v": "zh",
+          "t": "這很重要：小幫手拿走了現在式的記號，主要動詞就穿回原本的衣服。"
+        },
+        {
+          "v": "zh",
+          "t": "過去式也一樣。問昨天、上週、剛剛的事，用 did。"
+        },
+        {
+          "v": "zh",
+          "t": "聽聽看。"
+        },
+        {
+          "v": "en",
+          "t": "Did you finish your homework yesterday?"
+        },
+        {
+          "v": "zh",
+          "t": "意思是：你昨天寫完功課了嗎？有 did，finish 不用變 finished。"
+        },
+        {
+          "v": "zh",
+          "t": "否定句也要小幫手。現在是 do not 或 does not，口語常說 don't、doesn't。"
+        },
+        {
+          "v": "zh",
+          "t": "來聽一個生活句。"
+        },
+        {
+          "v": "en",
+          "t": "I do not eat candy before dinner."
+        },
+        {
+          "v": "zh",
+          "t": "意思是：我晚餐前不吃糖。not 放在小幫手後面，不是亂放在動詞前面。"
+        },
+        {
+          "v": "zh",
+          "t": "主詞是 she、he、it，否定用 does not，後面動詞也回原形。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句。"
+        },
+        {
+          "v": "en",
+          "t": "She does not watch TV on school nights."
+        },
+        {
+          "v": "zh",
+          "t": "不是 She does not watches。does 已經把工作做完了，watch 不要再加 s。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩常見陷阱是把中文「不」直接丟進英文，說 He not like milk。"
+        },
+        {
+          "v": "zh",
+          "t": "英文不能這樣。一般動詞要說 He does not like milk。小幫手要出場。"
+        },
+        {
+          "v": "zh",
+          "t": "第二個陷阱是雙重變化：Did he went? Does she likes? 這兩句都太用力了。"
+        },
+        {
+          "v": "zh",
+          "t": "正確是 Did he go? Does she like? 小幫手拿時態，主要動詞回原形。"
+        },
+        {
+          "v": "zh",
+          "t": "最後三十秒整理：一般動詞問句，把 do、does、did 放前面。"
+        },
+        {
+          "v": "zh",
+          "t": "否定句，把 not 放在 do、does、did 後面。後面的主要動詞用原形。"
+        },
+        {
+          "v": "zh",
+          "t": "你只要記得小幫手機器人：現在我你我們用 do，he she it 用 does，過去用 did。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "I do not like tea.",
+          "zh": "我不喜歡茶。"
+        },
+        {
+          "en": "Do you play soccer?",
+          "zh": "你踢足球嗎？"
+        },
+        {
+          "en": "She does not eat fish.",
+          "zh": "她不吃魚。"
+        },
+        {
+          "en": "Does Tom have a dog?",
+          "zh": "Tom 有一隻狗嗎？"
+        },
+        {
+          "en": "We did not watch TV last night.",
+          "zh": "我們昨晚沒有看電視。"
+        },
+        {
+          "en": "Did you finish your homework?",
+          "zh": "你寫完功課了嗎？"
+        },
+        {
+          "en": "My brother doesn't get up early.",
+          "zh": "我哥哥不早起。"
+        },
+        {
+          "en": "Did they go to the park yesterday?",
+          "zh": "他們昨天去公園了嗎？"
+        },
+        {
+          "en": "Why do you like this game?",
+          "zh": "你為什麼喜歡這個遊戲？"
+        },
+        {
+          "en": "What did Mom buy at the store?",
+          "zh": "媽媽在商店買了什麼？"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "一般動詞問句：___ you like apples?",
+          "choices": [
+            "Do",
+            "Are",
+            "Does",
+            "Did not"
+          ],
+          "answer": "Do"
+        },
+        {
+          "q": "否定句：She ___ like fish.",
+          "choices": [
+            "doesn't",
+            "don't",
+            "isn't",
+            "not"
+          ],
+          "answer": "doesn't"
+        },
+        {
+          "q": "Does Ken ___ basketball after school?",
+          "choices": [
+            "play",
+            "plays",
+            "played",
+            "playing"
+          ],
+          "answer": "play"
+        },
+        {
+          "q": "Did Amy ___ her homework last night?",
+          "choices": [
+            "finish",
+            "finished",
+            "finishes",
+            "finishing"
+          ],
+          "answer": "finish"
+        },
+        {
+          "q": "把 Leo went to school. 變否定，哪一句觀念正確？",
+          "choices": [
+            "Leo did not go to school.",
+            "Leo did not went to school.",
+            "Leo not went to school.",
+            "Leo does not went to school."
+          ],
+          "answer": "Leo did not go to school."
+        },
+        {
+          "q": "哪一句問句是正確的？",
+          "choices": [
+            "Does your sister like cats?",
+            "Does your sister likes cats?",
+            "Your sister does like cats?",
+            "Is your sister like cats?"
+          ],
+          "answer": "Does your sister like cats?"
+        },
+        {
+          "q": "問昨天的事：Where ___ you go yesterday?",
+          "choices": [
+            "did",
+            "do",
+            "does",
+            "are"
+          ],
+          "answer": "did"
+        },
+        {
+          "q": "否定句：We ___ have PE today.",
+          "choices": [
+            "don't",
+            "doesn't",
+            "aren't",
+            "not"
+          ],
+          "answer": "don't"
+        }
+      ]
+    },
+    "u9": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "今天我們來認識英文裡的描述員。它們像貼紙，幫句子加上更清楚的畫面。"
+        },
+        {
+          "v": "zh",
+          "t": "第一種貼紙叫形容詞，專門貼在名詞旁邊，說人、東西、地方怎樣。"
+        },
+        {
+          "v": "zh",
+          "t": "第二種貼紙叫副詞，常常貼在動作旁邊，說這個動作做得怎樣。"
+        },
+        {
+          "v": "zh",
+          "t": "今天的核心句是：形容詞說東西怎樣，副詞說動作怎樣。"
+        },
+        {
+          "v": "zh",
+          "t": "先看形容詞。名詞像一個便當盒，形容詞像貼在盒子上的標籤。"
+        },
+        {
+          "v": "zh",
+          "t": "聽聽看。"
+        },
+        {
+          "v": "en",
+          "t": "I have a small bag."
+        },
+        {
+          "v": "zh",
+          "t": "small 貼在 bag 旁邊，告訴你這個書包是小的，不是大的。"
+        },
+        {
+          "v": "zh",
+          "t": "形容詞也可以放在 be 動詞後面，說主詞現在的狀態。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句。"
+        },
+        {
+          "v": "en",
+          "t": "The soup is hot."
+        },
+        {
+          "v": "zh",
+          "t": "hot 說 soup 怎樣。這時候 be 動詞像等號，左邊的湯等於熱的。"
+        },
+        {
+          "v": "zh",
+          "t": "再來看副詞。動作像一段影片，副詞告訴你影片裡的動作怎麼做。"
+        },
+        {
+          "v": "zh",
+          "t": "聽聽看。"
+        },
+        {
+          "v": "en",
+          "t": "She reads slowly."
+        },
+        {
+          "v": "zh",
+          "t": "slowly 不是說 she 這個人慢，而是說 reads 這個動作慢慢地做。"
+        },
+        {
+          "v": "zh",
+          "t": "很多副詞長得像形容詞加 ly，例如 slow 變 slowly，careful 變 carefully。"
+        },
+        {
+          "v": "zh",
+          "t": "但不是每個副詞都加 ly。fast 就很特別，形容詞和副詞都可以是 fast。"
+        },
+        {
+          "v": "zh",
+          "t": "接著是頻率副詞，像 always、usually、sometimes、never。"
+        },
+        {
+          "v": "zh",
+          "t": "它們不是說動作快慢，而是說事情發生幾次，常常還是很少。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句。"
+        },
+        {
+          "v": "en",
+          "t": "I usually eat lunch at school."
+        },
+        {
+          "v": "zh",
+          "t": "usually 告訴你：我通常在學校吃午餐。它在 eat 前面，貼著習慣動作。"
+        },
+        {
+          "v": "zh",
+          "t": "如果句子有 be 動詞，頻率副詞常放在 be 後面。"
+        },
+        {
+          "v": "zh",
+          "t": "聽最後一個。"
+        },
+        {
+          "v": "en",
+          "t": "My dad is always busy."
+        },
+        {
+          "v": "zh",
+          "t": "always 放在 is 後面，說爸爸總是很忙。位置跟一般動詞句不太一樣。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩常見錯誤是把形容詞拿去修飾動作，例如 She writes careful。"
+        },
+        {
+          "v": "zh",
+          "t": "如果要說她寫得很仔細，要說 She writes carefully。動作要配副詞。"
+        },
+        {
+          "v": "zh",
+          "t": "另一個陷阱是直接照中文排：I eat usually lunch。英文會覺得卡卡的。"
+        },
+        {
+          "v": "zh",
+          "t": "一般動詞的習慣句，先主詞，再頻率副詞，再動作：I usually eat lunch。"
+        },
+        {
+          "v": "zh",
+          "t": "最後整理：形容詞貼名詞，像 cute dog、big desk。副詞貼動作，像 read slowly。"
+        },
+        {
+          "v": "zh",
+          "t": "頻率副詞像次數量表：always 最常，usually 常常，sometimes 有時，never 從不。"
+        },
+        {
+          "v": "zh",
+          "t": "下次看到描述字，先問自己：它在說東西怎樣，還是動作怎樣？答案就很清楚。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "It is a big bag.",
+          "zh": "它是一個大書包。"
+        },
+        {
+          "en": "I have a cute dog.",
+          "zh": "我有一隻可愛的狗。"
+        },
+        {
+          "en": "The soup is hot.",
+          "zh": "湯是熱的。"
+        },
+        {
+          "en": "She runs fast.",
+          "zh": "她跑得快。"
+        },
+        {
+          "en": "He reads slowly.",
+          "zh": "他讀得慢。"
+        },
+        {
+          "en": "We usually eat lunch at school.",
+          "zh": "我們通常在學校吃午餐。"
+        },
+        {
+          "en": "My dad is always busy.",
+          "zh": "我爸爸總是很忙。"
+        },
+        {
+          "en": "I never play games before homework.",
+          "zh": "我寫功課前從不玩遊戲。"
+        },
+        {
+          "en": "The teacher speaks clearly in class.",
+          "zh": "老師在課堂上說得很清楚。"
+        },
+        {
+          "en": "Lisa is a careful student, and she writes carefully.",
+          "zh": "Lisa 是一個細心的學生，而且她寫字很仔細。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "形容詞主要貼在哪一種字旁邊？",
+          "choices": [
+            "名詞",
+            "動詞",
+            "問句小幫手",
+            "句號"
+          ],
+          "answer": "名詞"
+        },
+        {
+          "q": "It is a ___ cat.",
+          "choices": [
+            "cute",
+            "cutely",
+            "slowly",
+            "usually"
+          ],
+          "answer": "cute"
+        },
+        {
+          "q": "Tom runs ___.",
+          "choices": [
+            "fast",
+            "fastly",
+            "quick",
+            "happy"
+          ],
+          "answer": "fast"
+        },
+        {
+          "q": "Amy writes ___.",
+          "choices": [
+            "carefully",
+            "careful",
+            "good",
+            "nice"
+          ],
+          "answer": "carefully"
+        },
+        {
+          "q": "頻率副詞 always、usually、sometimes、never 主要在說什麼？",
+          "choices": [
+            "事情發生的次數",
+            "東西的顏色",
+            "動作的地點",
+            "句子的主詞"
+          ],
+          "answer": "事情發生的次數"
+        },
+        {
+          "q": "哪一句的頻率副詞位置最自然？",
+          "choices": [
+            "We usually play soccer after school.",
+            "We play usually soccer after school.",
+            "Usually we soccer play after school.",
+            "We play soccer usually after school always."
+          ],
+          "answer": "We usually play soccer after school."
+        },
+        {
+          "q": "be 動詞句：My brother is ___ late.",
+          "choices": [
+            "often",
+            "late often",
+            "usually is",
+            "neverly"
+          ],
+          "answer": "often"
+        },
+        {
+          "q": "哪一句同時用對形容詞和副詞？",
+          "choices": [
+            "He is a careful boy, and he reads carefully.",
+            "He is a carefully boy, and he reads careful.",
+            "He is careful boy, and he reads careful.",
+            "He is a careful boy, and he reads careful."
+          ],
+          "answer": "He is a careful boy, and he reads carefully."
+        }
+      ]
+    },
+    "u10": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "今天來講介係詞。先不要怕這個名字，它其實就是位置和時間的導航標誌。"
+        },
+        {
+          "v": "zh",
+          "t": "很多人學介係詞會一直問：這個中文是不是翻成在？但這樣很容易亂。"
+        },
+        {
+          "v": "zh",
+          "t": "今天要抓住核心：介係詞不是翻中文，是看空間關係。"
+        },
+        {
+          "v": "zh",
+          "t": "你要像在看地圖：東西在裡面、在上面、在下面、在旁邊，畫面先出來。"
+        },
+        {
+          "v": "zh",
+          "t": "先看 on。on 不是只有中文的在，它有碰到表面的感覺。"
+        },
+        {
+          "v": "zh",
+          "t": "聽聽看。"
+        },
+        {
+          "v": "en",
+          "t": "The book is on the desk."
+        },
+        {
+          "v": "zh",
+          "t": "書碰著桌面，所以用 on。牆上的圖也常用 on，因為它貼著表面。"
+        },
+        {
+          "v": "zh",
+          "t": "再看 in。in 有在裡面的感覺，像盒子、書包、房間、班級。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句。"
+        },
+        {
+          "v": "en",
+          "t": "My pencil is in my bag."
+        },
+        {
+          "v": "zh",
+          "t": "鉛筆在書包裡面，所以用 in。腦中畫出袋子包住鉛筆。"
+        },
+        {
+          "v": "zh",
+          "t": "under 是在下面，next to 是在旁邊，behind 是在後面，between 是在兩個中間。"
+        },
+        {
+          "v": "zh",
+          "t": "這些都不是死背中文，而是看兩個東西的關係。"
+        },
+        {
+          "v": "zh",
+          "t": "聽一個教室句。"
+        },
+        {
+          "v": "en",
+          "t": "I sit next to Ben."
+        },
+        {
+          "v": "zh",
+          "t": "next to 就是座位靠在 Ben 旁邊。英文用一個小標誌把位置說清楚。"
+        },
+        {
+          "v": "zh",
+          "t": "時間也有介係詞，最常見的是 at、on、in。你可以想成時間金字塔。"
+        },
+        {
+          "v": "zh",
+          "t": "at 最小，常接精準時間：at seven、at noon、at night。"
+        },
+        {
+          "v": "zh",
+          "t": "on 中等，常接星期和日期：on Monday、on July 10。"
+        },
+        {
+          "v": "zh",
+          "t": "in 最大，常接月份、年份、早上下午晚上：in May、in 2026、in the morning。"
+        },
+        {
+          "v": "zh",
+          "t": "聽聽看時間句。"
+        },
+        {
+          "v": "en",
+          "t": "We have English class at nine."
+        },
+        {
+          "v": "zh",
+          "t": "nine 是精準時間點，所以用 at。像拿針插在時間線上的一點。"
+        },
+        {
+          "v": "zh",
+          "t": "再聽一個。"
+        },
+        {
+          "v": "en",
+          "t": "My birthday is in May."
+        },
+        {
+          "v": "zh",
+          "t": "May 是一整個月份，範圍比較大，所以用 in。不是每個中文「在」都用 at。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩常犯的錯是每個「在」都寫 at，例如 at Monday、at May。"
+        },
+        {
+          "v": "zh",
+          "t": "英文要看大小：時間點用 at，星期日期用 on，月份年份大範圍用 in。"
+        },
+        {
+          "v": "zh",
+          "t": "另一個錯是只背翻譯，不看圖。on the bus、in the car，就是英文習慣的畫面。"
+        },
+        {
+          "v": "zh",
+          "t": "最後整理：空間介係詞先看圖，不要先翻中文。東西在裡面用 in，在表面用 on。"
+        },
+        {
+          "v": "zh",
+          "t": "時間 at、on、in 想金字塔：小時間點 at，中間星期日期 on，大範圍 in。"
+        },
+        {
+          "v": "zh",
+          "t": "每次寫介係詞，先問：它們的關係長什麼樣？圖對了，字就比較容易對。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "The book is on the desk.",
+          "zh": "書在桌上。"
+        },
+        {
+          "en": "The ball is under the chair.",
+          "zh": "球在椅子下面。"
+        },
+        {
+          "en": "My cat is in the box.",
+          "zh": "我的貓在盒子裡。"
+        },
+        {
+          "en": "I sit next to Ben.",
+          "zh": "我坐在 Ben 旁邊。"
+        },
+        {
+          "en": "The park is behind my school.",
+          "zh": "公園在我學校後面。"
+        },
+        {
+          "en": "We eat lunch at noon.",
+          "zh": "我們中午吃午餐。"
+        },
+        {
+          "en": "I have art on Monday.",
+          "zh": "我星期一有美術課。"
+        },
+        {
+          "en": "My birthday is in May.",
+          "zh": "我的生日在五月。"
+        },
+        {
+          "en": "We play basketball in the afternoon.",
+          "zh": "我們下午打籃球。"
+        },
+        {
+          "en": "The bus stop is between the school and the park.",
+          "zh": "公車站在學校和公園中間。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "空間介係詞最該先看什麼？",
+          "choices": [
+            "兩個東西的關係圖",
+            "中文有沒有「在」",
+            "句子有幾個字",
+            "動詞是不是過去式"
+          ],
+          "answer": "兩個東西的關係圖"
+        },
+        {
+          "q": "The pencil is ___ my bag.",
+          "choices": [
+            "in",
+            "on",
+            "at",
+            "between"
+          ],
+          "answer": "in"
+        },
+        {
+          "q": "The picture is ___ the wall.",
+          "choices": [
+            "on",
+            "in",
+            "under",
+            "at"
+          ],
+          "answer": "on"
+        },
+        {
+          "q": "We meet ___ seven.",
+          "choices": [
+            "at",
+            "on",
+            "in",
+            "under"
+          ],
+          "answer": "at"
+        },
+        {
+          "q": "I have PE ___ Friday.",
+          "choices": [
+            "on",
+            "in",
+            "at",
+            "next to"
+          ],
+          "answer": "on"
+        },
+        {
+          "q": "My birthday is ___ July.",
+          "choices": [
+            "in",
+            "on",
+            "at",
+            "behind"
+          ],
+          "answer": "in"
+        },
+        {
+          "q": "哪一組 at/on/in 的時間用法都正確？",
+          "choices": [
+            "at six / on Sunday / in 2026",
+            "on six / in Sunday / at 2026",
+            "in six / at Sunday / on 2026",
+            "at Monday / on May / in night"
+          ],
+          "answer": "at six / on Sunday / in 2026"
+        },
+        {
+          "q": "The cat is ___ the table. 牠在桌子下面。",
+          "choices": [
+            "under",
+            "on",
+            "in",
+            "between"
+          ],
+          "answer": "under"
+        }
+      ]
+    },
+    "r3": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "這集是綜合複習，我們要用英文說完整的一天，不是只丟幾個單字。"
+        },
+        {
+          "v": "zh",
+          "t": "你可以把一天想成四格漫畫：早上、學校、放學、晚上。每一格都要有清楚句子。"
+        },
+        {
+          "v": "zh",
+          "t": "核心方法是：用時間加動作加描述，說完整一天。"
+        },
+        {
+          "v": "zh",
+          "t": "第一步先放時間。時間像路標，告訴讀的人現在走到一天的哪裡。"
+        },
+        {
+          "v": "zh",
+          "t": "第二步放動作。動作要看時間換衣服：every day 用現在簡單，right now 用正在。"
+        },
+        {
+          "v": "zh",
+          "t": "yesterday 是昨天盒子，要用過去式。問句和否定，記得請 do、does、did 小幫手。"
+        },
+        {
+          "v": "zh",
+          "t": "第三步加描述。形容詞說東西怎樣，副詞說動作怎樣，介係詞說位置或時間。"
+        },
+        {
+          "v": "zh",
+          "t": "先從早上開始，聽一個很普通但很穩的句子。"
+        },
+        {
+          "v": "en",
+          "t": "I get up at six thirty."
+        },
+        {
+          "v": "zh",
+          "t": "時間是 at six thirty，精準時間點用 at。動作 get up 是每天習慣。"
+        },
+        {
+          "v": "zh",
+          "t": "再加一點地點，句子就更像真的生活。"
+        },
+        {
+          "v": "en",
+          "t": "I eat breakfast in the kitchen."
+        },
+        {
+          "v": "zh",
+          "t": "in the kitchen 讓畫面出現了。不是只說吃早餐，而是在哪裡吃。"
+        },
+        {
+          "v": "zh",
+          "t": "到學校，可以用頻率副詞說習慣。聽聽看。"
+        },
+        {
+          "v": "en",
+          "t": "I usually walk to school."
+        },
+        {
+          "v": "zh",
+          "t": "usually 說這件事常常發生，放在一般動詞 walk 前面。"
+        },
+        {
+          "v": "zh",
+          "t": "如果是現在正在發生的事，就要換成 be 加 V-ing。"
+        },
+        {
+          "v": "en",
+          "t": "I am reading a book now."
+        },
+        {
+          "v": "zh",
+          "t": "now 是現在這一刻，am reading 是一組，不可以只說 I reading。"
+        },
+        {
+          "v": "zh",
+          "t": "放學後講昨天的事，動詞就要進昨天盒子。"
+        },
+        {
+          "v": "en",
+          "t": "We played basketball after school yesterday."
+        },
+        {
+          "v": "zh",
+          "t": "yesterday 提醒你用 played。after school 說時間位置，讓句子更完整。"
+        },
+        {
+          "v": "zh",
+          "t": "也可以加否定，說你不做什麼。"
+        },
+        {
+          "v": "en",
+          "t": "I do not play games before homework."
+        },
+        {
+          "v": "zh",
+          "t": "一般動詞 play 的否定要用 do not。before homework 告訴你是在功課前。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩寫一段英文常見問題是每句都像單字清單：morning eat breakfast school。"
+        },
+        {
+          "v": "zh",
+          "t": "英文需要句子工廠：主詞、動詞、時間、描述，一個一個裝好。"
+        },
+        {
+          "v": "zh",
+          "t": "第二個陷阱是時間詞有了，動詞沒換：Yesterday I play basketball。"
+        },
+        {
+          "v": "zh",
+          "t": "看到 yesterday，要改成 Yesterday I played basketball。時間和動詞要同隊。"
+        },
+        {
+          "v": "zh",
+          "t": "第三個陷阱是描述詞亂貼：I am quickly。quickly 是副詞，不能直接說人是 quickly。"
+        },
+        {
+          "v": "zh",
+          "t": "可以說 I am quick，或 I run quickly。先問它在描述人，還是描述動作。"
+        },
+        {
+          "v": "zh",
+          "t": "最後三十秒整理：要說我的一天，先排時間路標：in the morning、at school、after school、at night。"
+        },
+        {
+          "v": "zh",
+          "t": "再放動作：get up、study、play、read。接著加描述：a heavy bag、read quietly、in my room。"
+        },
+        {
+          "v": "zh",
+          "t": "每句先求清楚，再求漂亮。時間對、動詞對、描述對，你的一天就能說成一段英文。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "I get up at six thirty.",
+          "zh": "我六點半起床。"
+        },
+        {
+          "en": "I eat breakfast in the kitchen.",
+          "zh": "我在廚房吃早餐。"
+        },
+        {
+          "en": "My bag is heavy.",
+          "zh": "我的書包很重。"
+        },
+        {
+          "en": "I usually walk to school.",
+          "zh": "我通常走路上學。"
+        },
+        {
+          "en": "I am reading a book now.",
+          "zh": "我現在正在讀一本書。"
+        },
+        {
+          "en": "We played basketball after school yesterday.",
+          "zh": "我們昨天放學後打了籃球。"
+        },
+        {
+          "en": "I do not play games before homework.",
+          "zh": "我寫功課前不玩遊戲。"
+        },
+        {
+          "en": "Does your sister study at night?",
+          "zh": "你妹妹晚上讀書嗎？"
+        },
+        {
+          "en": "I write carefully in English class.",
+          "zh": "我在英文課仔細地寫字。"
+        },
+        {
+          "en": "On Saturday, I visited my grandma and ate dinner with her.",
+          "zh": "星期六，我拜訪奶奶並和她一起吃晚餐。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "Every morning, I ___ breakfast.",
+          "choices": [
+            "eat",
+            "am eating",
+            "ate",
+            "eats"
+          ],
+          "answer": "eat"
+        },
+        {
+          "q": "Right now, I ___ my homework.",
+          "choices": [
+            "am doing",
+            "do",
+            "did",
+            "does"
+          ],
+          "answer": "am doing"
+        },
+        {
+          "q": "Yesterday, we ___ soccer after school.",
+          "choices": [
+            "played",
+            "play",
+            "are playing",
+            "plays"
+          ],
+          "answer": "played"
+        },
+        {
+          "q": "My cat sleeps ___ the sofa.",
+          "choices": [
+            "on",
+            "at",
+            "in Monday",
+            "does"
+          ],
+          "answer": "on"
+        },
+        {
+          "q": "This is a ___ lunch.",
+          "choices": [
+            "good",
+            "well",
+            "slowly",
+            "usually"
+          ],
+          "answer": "good"
+        },
+        {
+          "q": "He reads ___.",
+          "choices": [
+            "quietly",
+            "quiet",
+            "good",
+            "alwaysly"
+          ],
+          "answer": "quietly"
+        },
+        {
+          "q": "哪一句問句最正確？",
+          "choices": [
+            "Do you walk to school every day?",
+            "Are you walk to school every day?",
+            "Do you walks to school every day?",
+            "You walk to school every day?"
+          ],
+          "answer": "Do you walk to school every day?"
+        },
+        {
+          "q": "哪一句最像完整的一天描述：有時間、動作、描述或位置？",
+          "choices": [
+            "At night, I read a funny book in my room.",
+            "Night read book room.",
+            "I funny read at room night.",
+            "At night, I reading a funny book in my room."
+          ],
+          "answer": "At night, I read a funny book in my room."
+        }
+      ]
+    }
+  }
+}

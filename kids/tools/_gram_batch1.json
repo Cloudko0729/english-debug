@@ -1,0 +1,1128 @@
+{
+  "units": {
+    "u1": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "你有沒有寫過英文，單字都認得，可是老師說：這不是句子？今天先把句子的骨架抓起來。"
+        },
+        {
+          "v": "zh",
+          "t": "把句子想成一台小工廠。左邊放「誰」，右邊放「做什麼」或「怎麼了」，才會輸出完整句子。"
+        },
+        {
+          "v": "zh",
+          "t": "英文句子最基本一定要有兩個零件：主詞和動詞。主詞是誰，動詞是動作或狀態。"
+        },
+        {
+          "v": "zh",
+          "t": "中文可以說「很累」「下雨了」，可是英文通常不能只丟一個狀態在那邊，要講清楚誰怎麼了。"
+        },
+        {
+          "v": "zh",
+          "t": "先聽最小的完整句，像積木只有兩塊，但已經站得住。"
+        },
+        {
+          "v": "en",
+          "t": "I run."
+        },
+        {
+          "v": "zh",
+          "t": "I 是誰，run 是做什麼。兩個都有，所以它短短的，還是句子。"
+        },
+        {
+          "v": "zh",
+          "t": "再聽一句，這次不是動作，是狀態。"
+        },
+        {
+          "v": "en",
+          "t": "The dog is happy."
+        },
+        {
+          "v": "zh",
+          "t": "The dog 是主詞，is 是動詞，happy 是狀態。英文用 is 把主詞和狀態接起來。"
+        },
+        {
+          "v": "zh",
+          "t": "第三句放進學校生活，主詞長一點也沒關係。"
+        },
+        {
+          "v": "en",
+          "t": "My teacher reads a story."
+        },
+        {
+          "v": "zh",
+          "t": "My teacher 是誰，reads 是動詞，a story 是讀的東西。主詞可以變長，但骨架一樣。"
+        },
+        {
+          "v": "zh",
+          "t": "英文句子還可以有四種口味：說事情、問問題、叫人做事、表示驚訝。骨架還是在。"
+        },
+        {
+          "v": "zh",
+          "t": "聽聽看問句，主詞和動詞只是位置變一下，零件沒有消失。"
+        },
+        {
+          "v": "en",
+          "t": "Are you ready?"
+        },
+        {
+          "v": "zh",
+          "t": "you 是主詞，are 是動詞。問句把 are 放前面，讓別人知道你在問。"
+        },
+        {
+          "v": "zh",
+          "t": "命令句比較特別，像老師說「Open your book.」主詞 you 藏起來，但意思是叫你做。"
+        },
+        {
+          "v": "en",
+          "t": "Open your book."
+        },
+        {
+          "v": "zh",
+          "t": "這句表面沒有 you，可是動詞 open 在，聽的人也知道是「你」要打開。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩常見陷阱是中文直翻：想說「我很喜歡」就寫 I very like。"
+        },
+        {
+          "v": "zh",
+          "t": "英文不能讓 very 直接站在 like 前面當動詞。要說 I like it very much，或 I really like it。"
+        },
+        {
+          "v": "zh",
+          "t": "另一個陷阱是忘記主詞，寫 Is fun。英文要問：誰 fun？要說 It is fun。"
+        },
+        {
+          "v": "zh",
+          "t": "最後三十秒記這句：先找誰，再找動詞。句子像腳踏車，少一個輪子就騎不起來。"
+        },
+        {
+          "v": "zh",
+          "t": "以後看到英文，先圈主詞，再圈動詞。你圈得到，句子就有骨架；圈不到，就要回工廠補零件。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "I read.",
+          "zh": "我閱讀。"
+        },
+        {
+          "en": "Dad cooks.",
+          "zh": "爸爸煮飯。"
+        },
+        {
+          "en": "The cat sleeps.",
+          "zh": "那隻貓睡覺。"
+        },
+        {
+          "en": "My sister is hungry.",
+          "zh": "我妹妹餓了。"
+        },
+        {
+          "en": "We play basketball.",
+          "zh": "我們打籃球。"
+        },
+        {
+          "en": "Ben cleans his desk.",
+          "zh": "Ben 清他的書桌。"
+        },
+        {
+          "en": "Do you like math?",
+          "zh": "你喜歡數學嗎？"
+        },
+        {
+          "en": "Close the door.",
+          "zh": "把門關上。"
+        },
+        {
+          "en": "What a big dog!",
+          "zh": "好大的一隻狗！"
+        },
+        {
+          "en": "My friends and I watch a game after school.",
+          "zh": "我和朋友放學後看一場比賽。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "哪一句是完整英文句子？",
+          "choices": [
+            "My dog runs.",
+            "My dog very cute.",
+            "In the park",
+            "Play games"
+          ],
+          "answer": "My dog runs."
+        },
+        {
+          "q": "句子 The boy eats lunch. 的動詞是哪一個？",
+          "choices": [
+            "eats",
+            "The boy",
+            "lunch",
+            "boy"
+          ],
+          "answer": "eats"
+        },
+        {
+          "q": "句子 My mom is busy. 的主詞是哪一個？",
+          "choices": [
+            "My mom",
+            "is",
+            "busy",
+            "mom is"
+          ],
+          "answer": "My mom"
+        },
+        {
+          "q": "想說「很好玩」，英文句子最需要補哪個零件？",
+          "choices": [
+            "主詞 It",
+            "逗號",
+            "more",
+            "big"
+          ],
+          "answer": "主詞 It"
+        },
+        {
+          "q": "哪一句是問句？",
+          "choices": [
+            "Are you OK?",
+            "You are OK.",
+            "Be you OK.",
+            "You OK?"
+          ],
+          "answer": "Are you OK?"
+        },
+        {
+          "q": "哪一句像命令句，主詞 you 藏起來？",
+          "choices": [
+            "Sit down.",
+            "I sit down.",
+            "You are sit.",
+            "Sitting down."
+          ],
+          "answer": "Sit down."
+        },
+        {
+          "q": "哪一句修正了 Is cold. 的問題？",
+          "choices": [
+            "It is cold.",
+            "Is it cold.",
+            "Very cold.",
+            "Cold is."
+          ],
+          "answer": "It is cold."
+        },
+        {
+          "q": "看到英文句子時，最先檢查哪兩個零件？",
+          "choices": [
+            "主詞和動詞",
+            "顏色和大小",
+            "逗號和句點",
+            "中文意思和注音"
+          ],
+          "answer": "主詞和動詞"
+        }
+      ]
+    },
+    "u2": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "今天來處理英文裡很小、可是很會扣分的東西：a、an、the。它們像名詞前面的貼紙。"
+        },
+        {
+          "v": "zh",
+          "t": "名詞就是人、地方、東西、動物、想法。像 student、school、pencil、dog 都是名詞。"
+        },
+        {
+          "v": "zh",
+          "t": "先把名詞分兩堆：一個，或很多個。一個 pencil，很多個 pencils，後面常常加 s。"
+        },
+        {
+          "v": "zh",
+          "t": "接著看貼紙。a 和 an 表示「一個」，通常是第一次提到，對方還不知道是哪一個。"
+        },
+        {
+          "v": "zh",
+          "t": "a 跟 an 的差別不是看字母，是看開頭聲音。母音聲音用 an，其他多半用 a。"
+        },
+        {
+          "v": "zh",
+          "t": "聽第一句，很像從書包拿出一樣新東西給朋友看。"
+        },
+        {
+          "v": "en",
+          "t": "I have a pencil."
+        },
+        {
+          "v": "zh",
+          "t": "a pencil 是一枝筆，而且是第一次講，朋友還不知道是哪一枝。"
+        },
+        {
+          "v": "zh",
+          "t": "再聽 an，注意它接的是開頭像母音的聲音。"
+        },
+        {
+          "v": "en",
+          "t": "She eats an apple."
+        },
+        {
+          "v": "zh",
+          "t": "apple 開頭是母音聲音，所以用 an apple。不是因為比較高級，只是念起來順。"
+        },
+        {
+          "v": "zh",
+          "t": "the 是另一張貼紙，意思像「那個你我都知道的」。不是第一次，不是隨便一個。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這組，先出現一隻狗，再變成大家都知道的那隻狗。"
+        },
+        {
+          "v": "en",
+          "t": "I see a dog. The dog is small."
+        },
+        {
+          "v": "zh",
+          "t": "第一句 a dog 是第一次看到一隻狗。第二句 the dog，就是剛剛那隻狗。"
+        },
+        {
+          "v": "zh",
+          "t": "很多個的時候，通常不加 a 或 an，因為 a/an 只管一個。"
+        },
+        {
+          "v": "en",
+          "t": "There are three books on the desk."
+        },
+        {
+          "v": "zh",
+          "t": "three books 已經是三本，所以不說 a three books。the desk 是你我知道的那張桌子。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩常見陷阱：中文沒有 a，所以英文也忘記寫，變成 I have pencil。"
+        },
+        {
+          "v": "zh",
+          "t": "如果是一枝鉛筆，要說 I have a pencil。英文單數可數名詞前面常常需要一張貼紙。"
+        },
+        {
+          "v": "zh",
+          "t": "第二個陷阱是看到 a、e、i、o、u 就一定用 an。其實要聽聲音，像 a uniform 是 yu 的聲音。"
+        },
+        {
+          "v": "zh",
+          "t": "最後總結：名詞先問一個還是很多個，再問第一次還是你我都知道。"
+        },
+        {
+          "v": "zh",
+          "t": "一個又第一次，多半 a 或 an；已經知道，用 the；很多個，就讓複數 s 上場。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "I have a bag.",
+          "zh": "我有一個書包。"
+        },
+        {
+          "en": "Tom has an egg.",
+          "zh": "Tom 有一顆蛋。"
+        },
+        {
+          "en": "This is a desk.",
+          "zh": "這是一張書桌。"
+        },
+        {
+          "en": "The desk is clean.",
+          "zh": "那張書桌很乾淨。"
+        },
+        {
+          "en": "She sees a cat.",
+          "zh": "她看到一隻貓。"
+        },
+        {
+          "en": "The cat is under the chair.",
+          "zh": "那隻貓在椅子下面。"
+        },
+        {
+          "en": "We need two chairs.",
+          "zh": "我們需要兩張椅子。"
+        },
+        {
+          "en": "There is an orange in my lunch box.",
+          "zh": "我的便當盒裡有一顆柳橙。"
+        },
+        {
+          "en": "A boy is playing a game.",
+          "zh": "一個男孩正在玩一個遊戲。"
+        },
+        {
+          "en": "The game on my tablet is fun.",
+          "zh": "我平板上的那個遊戲很好玩。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "第一次提到「一隻狗」，最自然是哪一個？",
+          "choices": [
+            "a dog",
+            "an dog",
+            "the dog",
+            "dogs"
+          ],
+          "answer": "a dog"
+        },
+        {
+          "q": "___ apple is on the table. 空格最適合？",
+          "choices": [
+            "An",
+            "A",
+            "The first",
+            "Many"
+          ],
+          "answer": "An"
+        },
+        {
+          "q": "I see a cat. ___ cat is black. 空格最適合？",
+          "choices": [
+            "The",
+            "A",
+            "An",
+            "Cats"
+          ],
+          "answer": "The"
+        },
+        {
+          "q": "哪一句最適合表示「三本書」？",
+          "choices": [
+            "three books",
+            "a three books",
+            "three book",
+            "an books"
+          ],
+          "answer": "three books"
+        },
+        {
+          "q": "I have ___ pencil. 空格最適合？",
+          "choices": [
+            "a",
+            "an",
+            "the",
+            "many"
+          ],
+          "answer": "a"
+        },
+        {
+          "q": "哪個說法表示「你我都知道的那位老師」？",
+          "choices": [
+            "the teacher",
+            "a teacher",
+            "an teacher",
+            "teachers"
+          ],
+          "answer": "the teacher"
+        },
+        {
+          "q": "a/an 主要看什麼？",
+          "choices": [
+            "開頭聲音",
+            "中文意思",
+            "字有幾個字母",
+            "是不是人名"
+          ],
+          "answer": "開頭聲音"
+        },
+        {
+          "q": "哪一句避免了中文直翻少冠詞的問題？",
+          "choices": [
+            "I need a ruler.",
+            "I need ruler.",
+            "I need an ruler.",
+            "I need the ruler first time."
+          ],
+          "answer": "I need a ruler."
+        }
+      ]
+    },
+    "u3": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "今天講代名詞。代名詞像角色換衣服：同一個人，站的位置不同，穿的衣服就不同。"
+        },
+        {
+          "v": "zh",
+          "t": "以 I 這一家來說，有 I、me、my、mine。不要覺得它們很像就亂用，位置會決定衣服。"
+        },
+        {
+          "v": "zh",
+          "t": "I 是主詞衣，站在動詞前面，負責做事情。像我吃、我跑、我讀。"
+        },
+        {
+          "v": "zh",
+          "t": "先聽一句最基本的。"
+        },
+        {
+          "v": "en",
+          "t": "I like music."
+        },
+        {
+          "v": "zh",
+          "t": "I 在動詞 like 前面，表示「我」做喜歡這個動作，所以穿 I 這件衣服。"
+        },
+        {
+          "v": "zh",
+          "t": "me 是受詞衣，常常站在動詞後面，表示動作打到我身上。"
+        },
+        {
+          "v": "zh",
+          "t": "聽聽看，老師幫的是誰。"
+        },
+        {
+          "v": "en",
+          "t": "My teacher helps me."
+        },
+        {
+          "v": "zh",
+          "t": "helps 後面用 me，不用 I。因為這裡不是我做事，是老師幫我。"
+        },
+        {
+          "v": "zh",
+          "t": "my 是名詞前面的衣服，意思是「我的某個東西」。my 後面要接名詞。"
+        },
+        {
+          "v": "zh",
+          "t": "聽這句，my 後面馬上接 bag。"
+        },
+        {
+          "v": "en",
+          "t": "This is my bag."
+        },
+        {
+          "v": "zh",
+          "t": "my bag 是我的書包。my 不能自己收尾，後面需要一個東西。"
+        },
+        {
+          "v": "zh",
+          "t": "mine 則是「我的那個」，已經把名詞包進去了，後面通常不用再接名詞。"
+        },
+        {
+          "v": "zh",
+          "t": "聽聽看兩個書包怎麼分。"
+        },
+        {
+          "v": "en",
+          "t": "This bag is mine."
+        },
+        {
+          "v": "zh",
+          "t": "mine 已經等於 my bag，所以不要說 mine bag。那就像穿兩件一樣的制服，很怪。"
+        },
+        {
+          "v": "zh",
+          "t": "其他人也有同樣規則：he、him、his；she、her、her；we、us、our、ours。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩常見陷阱是中文都說「我」，所以英文也一路 I 到底：Teacher helps I。"
+        },
+        {
+          "v": "zh",
+          "t": "英文要看位置。動詞後面被幫的人，用 me。正確是 The teacher helps me。"
+        },
+        {
+          "v": "zh",
+          "t": "另一個陷阱是 my 和 mine 混用。my pencil 可以，mine pencil 不行；This pencil is mine 可以。"
+        },
+        {
+          "v": "zh",
+          "t": "最後總結：動詞前做事用 I，動詞後被影響用 me，名詞前用 my，自己收尾用 mine。"
+        },
+        {
+          "v": "zh",
+          "t": "遇到代名詞不要先背中文，先看它站哪裡。位置看對，衣服就不會穿錯。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "I am ready.",
+          "zh": "我準備好了。"
+        },
+        {
+          "en": "You can help me.",
+          "zh": "你可以幫我。"
+        },
+        {
+          "en": "This is my pencil.",
+          "zh": "這是我的鉛筆。"
+        },
+        {
+          "en": "The pencil is mine.",
+          "zh": "這枝鉛筆是我的。"
+        },
+        {
+          "en": "He likes baseball.",
+          "zh": "他喜歡棒球。"
+        },
+        {
+          "en": "We play with him.",
+          "zh": "我們和他一起玩。"
+        },
+        {
+          "en": "Her dog is cute.",
+          "zh": "她的狗很可愛。"
+        },
+        {
+          "en": "The red bike is hers.",
+          "zh": "那台紅色腳踏車是她的。"
+        },
+        {
+          "en": "Our class wins the game.",
+          "zh": "我們班贏了比賽。"
+        },
+        {
+          "en": "This classroom is ours, not theirs.",
+          "zh": "這間教室是我們的，不是他們的。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "___ like English. 空格在動詞前，最適合？",
+          "choices": [
+            "I",
+            "Me",
+            "My",
+            "Mine"
+          ],
+          "answer": "I"
+        },
+        {
+          "q": "Mom calls ___. 空格在動詞後，最適合？",
+          "choices": [
+            "me",
+            "I",
+            "my",
+            "mine"
+          ],
+          "answer": "me"
+        },
+        {
+          "q": "This is ___ book. 空格後面有名詞 book，最適合？",
+          "choices": [
+            "my",
+            "mine",
+            "me",
+            "I"
+          ],
+          "answer": "my"
+        },
+        {
+          "q": "This book is ___. 空格後面沒有名詞，最適合？",
+          "choices": [
+            "mine",
+            "my",
+            "me",
+            "I"
+          ],
+          "answer": "mine"
+        },
+        {
+          "q": "哪一句沒有把 my 和 mine 混用？",
+          "choices": [
+            "This is my eraser.",
+            "This is mine eraser.",
+            "My is an eraser.",
+            "This eraser is my."
+          ],
+          "answer": "This is my eraser."
+        },
+        {
+          "q": "Tom is my friend. I play with ___.",
+          "choices": [
+            "him",
+            "he",
+            "his",
+            "her"
+          ],
+          "answer": "him"
+        },
+        {
+          "q": "Lisa has a dog. ___ dog is small.",
+          "choices": [
+            "Her",
+            "She",
+            "Hers",
+            "Him"
+          ],
+          "answer": "Her"
+        },
+        {
+          "q": "代名詞要先看什麼，才知道用 I/me/my/mine？",
+          "choices": [
+            "它在句子裡的位置",
+            "中文是不是我",
+            "句子有幾個單字",
+            "單字長不長"
+          ],
+          "answer": "它在句子裡的位置"
+        }
+      ]
+    },
+    "u4": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "今天是超重要分水嶺：英文有兩種動詞引擎，be 動詞和一般動詞。不要把兩台裝進同一台車。"
+        },
+        {
+          "v": "zh",
+          "t": "be 動詞就是 am、is、are。它常常講「是什麼、在哪裡、狀態怎樣」。"
+        },
+        {
+          "v": "zh",
+          "t": "一般動詞就是真正的動作，像 play、eat、read、watch、run。它們自己就是引擎。"
+        },
+        {
+          "v": "zh",
+          "t": "很多錯句都是因為看到中文「是」或「有在」，就硬塞 is。英文要先選引擎。"
+        },
+        {
+          "v": "zh",
+          "t": "先聽 be 引擎，它不是在做動作，是在說狀態。"
+        },
+        {
+          "v": "en",
+          "t": "I am tired."
+        },
+        {
+          "v": "zh",
+          "t": "am 把 I 和 tired 接起來。這台車裝的是 be 引擎，不需要再加 do 或 play。"
+        },
+        {
+          "v": "zh",
+          "t": "再聽一般動詞引擎，動作自己會跑。"
+        },
+        {
+          "v": "en",
+          "t": "I play soccer."
+        },
+        {
+          "v": "zh",
+          "t": "play 是動作引擎，所以不要說 I am play soccer。am 和 play 不能這樣混裝。"
+        },
+        {
+          "v": "zh",
+          "t": "第三句是位置，be 動詞很常用來說在哪裡。"
+        },
+        {
+          "v": "en",
+          "t": "My bag is under the desk."
+        },
+        {
+          "v": "zh",
+          "t": "is 告訴我們書包在哪裡。under the desk 是位置，不是動作，所以用 be 很合理。"
+        },
+        {
+          "v": "zh",
+          "t": "再看一般動詞，家裡常見的一句。"
+        },
+        {
+          "v": "en",
+          "t": "My brother watches TV after dinner."
+        },
+        {
+          "v": "zh",
+          "t": "watches 是看電視的動作。這句已經有一般動詞，就不要再放 is 在前面。"
+        },
+        {
+          "v": "zh",
+          "t": "問句也要分引擎。be 句把 be 放前面；一般動詞句以後會用 do 幫忙。現在先別混。"
+        },
+        {
+          "v": "en",
+          "t": "Are you hungry?"
+        },
+        {
+          "v": "zh",
+          "t": "hungry 是狀態，所以用 Are you hungry? 不說 Do you hungry? 因為 hungry 不是動詞。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩最常寫 I am like it。因為中文想說「我是喜歡它的」，但英文 like 已經是動詞。"
+        },
+        {
+          "v": "zh",
+          "t": "正確是 I like it。除非你要說狀態，像 I am happy，才用 am。"
+        },
+        {
+          "v": "zh",
+          "t": "另一個陷阱：You are eat lunch。eat 是動作引擎，現在先說 You eat lunch。"
+        },
+        {
+          "v": "zh",
+          "t": "最後總結：看到句子先問，是狀態或位置，還是真的動作？狀態位置多用 be，動作用一般動詞。"
+        },
+        {
+          "v": "zh",
+          "t": "一台車先裝一台引擎。be 和一般動詞分清楚，你後面學時態、問句才不會全部打結。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "I am happy.",
+          "zh": "我很開心。"
+        },
+        {
+          "en": "She is at school.",
+          "zh": "她在學校。"
+        },
+        {
+          "en": "They are friends.",
+          "zh": "他們是朋友。"
+        },
+        {
+          "en": "We play cards.",
+          "zh": "我們玩卡牌。"
+        },
+        {
+          "en": "Tom eats lunch.",
+          "zh": "Tom 吃午餐。"
+        },
+        {
+          "en": "My cat sleeps on the sofa.",
+          "zh": "我的貓睡在沙發上。"
+        },
+        {
+          "en": "The classroom is quiet.",
+          "zh": "教室很安靜。"
+        },
+        {
+          "en": "Are you late?",
+          "zh": "你遲到了嗎？"
+        },
+        {
+          "en": "Do you like this game?",
+          "zh": "你喜歡這個遊戲嗎？"
+        },
+        {
+          "en": "My dad is in the kitchen, and he cooks dinner.",
+          "zh": "我爸爸在廚房，而且他煮晚餐。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "哪一句正確使用 be 動詞表示狀態？",
+          "choices": [
+            "I am tired.",
+            "I tired.",
+            "I am like tired.",
+            "I do tired."
+          ],
+          "answer": "I am tired."
+        },
+        {
+          "q": "哪一句正確使用一般動詞？",
+          "choices": [
+            "We play basketball.",
+            "We are play basketball.",
+            "We playing basketball.",
+            "We is play basketball."
+          ],
+          "answer": "We play basketball."
+        },
+        {
+          "q": "My pencil ___ on the desk. 空格最適合？",
+          "choices": [
+            "is",
+            "plays",
+            "do",
+            "eat"
+          ],
+          "answer": "is"
+        },
+        {
+          "q": "I ___ this song. 空格是動作「喜歡」，最適合？",
+          "choices": [
+            "like",
+            "am like",
+            "is like",
+            "am"
+          ],
+          "answer": "like"
+        },
+        {
+          "q": "哪一句修正了 He is plays games.？",
+          "choices": [
+            "He plays games.",
+            "He is play games.",
+            "He are plays games.",
+            "He playing games."
+          ],
+          "answer": "He plays games."
+        },
+        {
+          "q": "hungry 是狀態，不是動作。問「你餓嗎？」哪句較好？",
+          "choices": [
+            "Are you hungry?",
+            "Do you hungry?",
+            "You hungry?",
+            "Are you eat hungry?"
+          ],
+          "answer": "Are you hungry?"
+        },
+        {
+          "q": "哪一句同時有 be 引擎和一般動詞引擎，但不是亂混？",
+          "choices": [
+            "I am at home, and I read.",
+            "I am read at home.",
+            "I am like books.",
+            "I do am home."
+          ],
+          "answer": "I am at home, and I read."
+        },
+        {
+          "q": "選引擎時，第一個問題應該是什麼？",
+          "choices": [
+            "這是在說狀態位置，還是在說動作？",
+            "中文有沒有「是」這個字？",
+            "句子是不是很長？",
+            "單字看起來難不難？"
+          ],
+          "answer": "這是在說狀態位置，還是在說動作？"
+        }
+      ]
+    },
+    "r1": {
+      "podcast": [
+        {
+          "v": "zh",
+          "t": "今天不是學新招，是開造句工廠，把前面四個零件真的組起來：名詞、代名詞、be、一般動詞。"
+        },
+        {
+          "v": "zh",
+          "t": "複習的口訣是：先造對，再造長。不要急著寫很華麗，先讓句子站得穩。"
+        },
+        {
+          "v": "zh",
+          "t": "第一關，句子要有主詞和動詞。主詞可以是名詞，也可以是代名詞。"
+        },
+        {
+          "v": "zh",
+          "t": "第二關，名詞要想一個或很多個，第一次或大家都知道，a、an、the 不要亂貼。"
+        },
+        {
+          "v": "zh",
+          "t": "第三關，代名詞要看位置。做事的人用主詞衣，動詞後面被影響的人用受詞衣。"
+        },
+        {
+          "v": "zh",
+          "t": "第四關，選動詞引擎。狀態位置多用 be，真正動作用一般動詞。"
+        },
+        {
+          "v": "zh",
+          "t": "先聽一個很乾淨的 be 句，像工廠第一台成品。"
+        },
+        {
+          "v": "en",
+          "t": "The puppy is under the chair."
+        },
+        {
+          "v": "zh",
+          "t": "The puppy 是大家知道的小狗，is 是 be 引擎，under the chair 說位置。"
+        },
+        {
+          "v": "zh",
+          "t": "再聽一般動詞句，這次動作自己跑起來。"
+        },
+        {
+          "v": "en",
+          "t": "My sister reads a book."
+        },
+        {
+          "v": "zh",
+          "t": "My sister 是主詞，reads 是動詞，a book 是第一次提到的一本書。句子很穩。"
+        },
+        {
+          "v": "zh",
+          "t": "第三句加入代名詞，注意 me 的位置。"
+        },
+        {
+          "v": "en",
+          "t": "My friend helps me after class."
+        },
+        {
+          "v": "zh",
+          "t": "My friend 做幫忙的動作，me 被幫，所以不用 I。after class 只是加長，不影響骨架。"
+        },
+        {
+          "v": "zh",
+          "t": "第四句把兩個短句接起來，但每一邊都要先造對。"
+        },
+        {
+          "v": "en",
+          "t": "I am tired, but I finish my homework."
+        },
+        {
+          "v": "zh",
+          "t": "前半 I am tired 是 be 句，後半 I finish my homework 是一般動詞句。兩邊各有自己的引擎。"
+        },
+        {
+          "v": "zh",
+          "t": "造長句的方法不是一直加字，而是先造出短短正確句，再加時間、地方、東西。"
+        },
+        {
+          "v": "zh",
+          "t": "像 I play games 可以加 at home，也可以加 after dinner，但 play 這個引擎不要被 is 亂插隊。"
+        },
+        {
+          "v": "zh",
+          "t": "台灣小孩常見陷阱是想一次翻整句中文，結果零件亂掉：My mom is cook dinner。"
+        },
+        {
+          "v": "zh",
+          "t": "先停一下問：cook 是動作嗎？是。那就 My mom cooks dinner。不要急著塞 is。"
+        },
+        {
+          "v": "zh",
+          "t": "另一個陷阱是名詞沒貼紙：I see dog。若是第一次看到一隻狗，要說 I see a dog。"
+        },
+        {
+          "v": "zh",
+          "t": "最後三十秒總結：先找主詞，再選引擎，再檢查名詞貼紙和代名詞衣服。"
+        },
+        {
+          "v": "zh",
+          "t": "每次寫英文都像出貨前檢查。句子先造對，再慢慢造長，你的英文會比只背翻譯穩很多。"
+        }
+      ],
+      "examples": [
+        {
+          "en": "I am at home.",
+          "zh": "我在家。"
+        },
+        {
+          "en": "The dog runs.",
+          "zh": "那隻狗跑步。"
+        },
+        {
+          "en": "She has an eraser.",
+          "zh": "她有一個橡皮擦。"
+        },
+        {
+          "en": "My brother helps me.",
+          "zh": "我哥哥幫我。"
+        },
+        {
+          "en": "This lunch box is mine.",
+          "zh": "這個便當盒是我的。"
+        },
+        {
+          "en": "We clean the classroom.",
+          "zh": "我們打掃那間教室。"
+        },
+        {
+          "en": "The cat is on my bed.",
+          "zh": "那隻貓在我的床上。"
+        },
+        {
+          "en": "A girl draws a picture after school.",
+          "zh": "一個女孩放學後畫一張圖。"
+        },
+        {
+          "en": "Tom is hungry, and he eats an egg.",
+          "zh": "Tom 餓了，所以他吃一顆蛋。"
+        },
+        {
+          "en": "My friends and I play a game in the living room.",
+          "zh": "我和朋友在客廳玩一個遊戲。"
+        }
+      ],
+      "quiz": [
+        {
+          "q": "哪一句先造對了基本骨架？",
+          "choices": [
+            "My sister reads.",
+            "My sister very happy.",
+            "In my room.",
+            "Reads a book."
+          ],
+          "answer": "My sister reads."
+        },
+        {
+          "q": "第一次提到一顆蛋，應該選？",
+          "choices": [
+            "an egg",
+            "a egg",
+            "the egg",
+            "eggs"
+          ],
+          "answer": "an egg"
+        },
+        {
+          "q": "Dad helps ___. 空格在動詞後，最適合？",
+          "choices": [
+            "me",
+            "I",
+            "my",
+            "mine"
+          ],
+          "answer": "me"
+        },
+        {
+          "q": "This is ___ bag. 空格後面有名詞，最適合？",
+          "choices": [
+            "my",
+            "mine",
+            "me",
+            "I"
+          ],
+          "answer": "my"
+        },
+        {
+          "q": "哪一句沒有把 be 和一般動詞亂混？",
+          "choices": [
+            "She likes music.",
+            "She is likes music.",
+            "She are like music.",
+            "She is like music."
+          ],
+          "answer": "She likes music."
+        },
+        {
+          "q": "The book ___ on the desk. 這是在說位置，最適合？",
+          "choices": [
+            "is",
+            "reads",
+            "do",
+            "play"
+          ],
+          "answer": "is"
+        },
+        {
+          "q": "想把 I play games 造長，哪個加法最穩？",
+          "choices": [
+            "I play games after dinner.",
+            "I am play games after dinner.",
+            "I play after dinner games am.",
+            "I games play is after dinner."
+          ],
+          "answer": "I play games after dinner."
+        },
+        {
+          "q": "造句工廠的複習口訣是什麼？",
+          "choices": [
+            "先造對，再造長",
+            "先造長，再猜文法",
+            "先翻中文，再補單字",
+            "先背難字，再看句子"
+          ],
+          "answer": "先造對，再造長"
+        }
+      ]
+    }
+  }
+}
