@@ -1,0 +1,77 @@
+// 驗證 _adult_vocab.json → 產 adult/vocab.js + adult/vocab.html（可篩選）
+const fs = require("fs"), path = require("path");
+const j = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "kids", "tools", "_adult_vocab.json"), "utf8"));
+const W = j.words;
+
+// ── 驗證 ──
+const errs = [];
+if (W.length !== 300) errs.push("總數 " + W.length + " != 300");
+const seen = new Set();
+const lv = { 1: 0, 2: 0, 3: 0 }, src = { mail: 0, biz: 0 };
+const TAGS = new Set("repair quotation delivery parts meeting order payment logistics service office general".split(" "));
+W.forEach(w => {
+  const k = w.en.toLowerCase();
+  if (seen.has(k)) errs.push("重複 " + k); seen.add(k);
+  if (![1, 2, 3].includes(w.level)) errs.push(w.en + " level?");
+  else lv[w.level]++;
+  if (!["mail", "biz"].includes(w.src)) errs.push(w.en + " src?"); else src[w.src]++;
+  if (!TAGS.has(w.tag)) errs.push(w.en + " tag '" + w.tag + "'?");
+  if (!w.zh) errs.push(w.en + " 無中文");
+});
+if (Math.abs(lv[1] - 180) > 10 || Math.abs(lv[2] - 90) > 8 || Math.abs(lv[3] - 30) > 5) errs.push(`級別比例偏差 ${lv[1]}/${lv[2]}/${lv[3]}`);
+if (src.mail < 120) errs.push("mail 來源僅 " + src.mail);
+if (errs.length) { console.error("❌\n" + errs.slice(0, 20).join("\n")); process.exit(1); }
+console.log(`✔ 300 字驗證通過：初${lv[1]}/中${lv[2]}/高${lv[3]}；常用${src.mail}/補充${src.biz}`);
+
+// ── 資料檔 ──
+fs.writeFileSync(path.join(__dirname, "..", "adult", "vocab.js"),
+  "// 商用英文單字表（常用字來自 223 封真實信＋一般商業補充；Codex 起草、Claude 驗證）\n" +
+  "const ADULT_VOCAB = " + JSON.stringify(W) + ";\n" +
+  'if (typeof module !== "undefined" && module.exports) module.exports = { ADULT_VOCAB };\n');
+
+// ── HTML ──
+const TAG_ZH = { repair: "維修", quotation: "報價", delivery: "交期", parts: "料件", meeting: "會議",
+  order: "訂單", payment: "付款", logistics: "物流", service: "客服", office: "辦公", general: "通用" };
+const html = `<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>商用英文單字表</title><style>
+body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:760px;margin:0 auto;padding:0 14px 60px;background:#f4f6fb;color:#1a1a2e}
+header{background:#1f4463;color:#fff;text-align:center;padding:18px;border-radius:0 0 16px 16px;margin:0 -14px 12px}
+header h1{margin:0;font-size:1.2rem} header p{margin:6px 0 0;font-size:.8rem;opacity:.85}
+header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+#bar{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+#bar button{padding:6px 13px;border:2px solid #d9e2ec;border-radius:16px;background:#fff;font-weight:700;cursor:pointer;font-size:.8rem}
+#bar button.on{border-color:#1f4463;background:#1f4463;color:#fff}
+#list{display:flex;flex-wrap:wrap;gap:6px}
+.w{background:#fff;border-radius:9px;padding:6px 11px;font-size:.85rem;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.07);cursor:pointer}
+.w i{font-style:normal;font-weight:400;color:#777;margin-left:5px;font-size:.76rem}
+.w.l1{border-left:4px solid #2a9d5c}.w.l2{border-left:4px solid #f2a900}.w.l3{border-left:4px solid #d64561}
+.w .m{font-size:.66rem;color:#98a3bd;margin-left:4px}
+#stat{font-size:.78rem;color:#666;margin:6px 0}
+</style></head><body>
+<header><h1>📚 商用英文單字表</h1>
+<p><a href="index.html">← 課程目錄</a> · 你的常用字 ＋ 商業必備 · 🟢初 🟡中 🔴高（60/30/10）· 點單字發音</p></header>
+<div id="bar"></div><div id="stat"></div><div id="list"></div>
+<script src="vocab.js"></script>
+<script>
+let fl=0, ft="all";
+const TAG_ZH=${JSON.stringify(TAG_ZH)};
+function bar(){
+  let h='<button class="'+(fl===0?'on':'')+'" onclick="fl=0;draw()">全部</button>';
+  [1,2,3].forEach(l=>h+='<button class="'+(fl===l?'on':'')+'" onclick="fl='+l+';draw()">'+['','🟢 初階','🟡 中階','🔴 高階'][l]+'</button>');
+  h+='<span style="width:10px"></span>';
+  h+='<button class="'+(ft==='all'?'on':'')+'" onclick="ft=\\'all\\';draw()">全場景</button>';
+  Object.entries(TAG_ZH).forEach(([t,z])=>h+='<button class="'+(ft===t?'on':'')+'" onclick="ft=\\''+t+'\\';draw()">'+z+'</button>');
+  document.getElementById('bar').innerHTML=h;
+}
+function draw(){
+  bar();
+  const rows=ADULT_VOCAB.filter(w=>(fl===0||w.level===fl)&&(ft==='all'||w.tag===ft));
+  document.getElementById('stat').textContent='顯示 '+rows.length+' / '+ADULT_VOCAB.length+' 字（⭐ = 你信裡的常用字）';
+  document.getElementById('list').innerHTML=rows.map(w=>
+    '<span class="w l'+w.level+'" onclick="say(\\''+w.en.replace(/'/g,"\\\\'")+'\\')">'+(w.src==='mail'?'⭐':'')+w.en+'<i>'+w.zh+'</i></span>').join('');
+}
+function say(en){const u=new SpeechSynthesisUtterance(en);u.lang='en-US';u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u);}
+draw();
+</script></body></html>`;
+fs.writeFileSync(path.join(__dirname, "..", "adult", "vocab.html"), html);
+console.log("✔ adult/vocab.js + vocab.html");
