@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W1 週二 — 核心句練習</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:660px;margin:0 auto;padding:0 16px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.7}
+  header{background:#1f4463;color:#fff;text-align:center;padding:16px;border-radius:0 0 16px 16px;margin:0 -16px 14px}
+  header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .q{background:#fff;border-radius:14px;padding:14px 16px;margin-top:12px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .q .qt{font-weight:700;margin-bottom:8px;font-size:.93rem}
+  .q button{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit}
+  .q button.ok{border-color:#2a9d5c;background:#e3f6ec}
+  .q button.no{border-color:#d64561;background:#fbe3e9}
+  .why{display:none;margin-top:6px;background:#eaf3ff;border-radius:9px;padding:8px 12px;font-size:.84rem;color:#1f4463}
+  #result{font-weight:800;font-size:1.05rem;margin-top:12px;text-align:center;min-height:1.5em}
+</style>
+</head>
+<body>
+<header><h1>✏️ W1 週二 — 核心句練習</h1>
+<p><a href="w1.html">← 本週重點</a> · 5 個核心句的變化題（中翻英＋填空）</p></header>
+<div id="qs"></div><div id="result"></div>
+<script>
+const QUIZ = [
+ { q: "「謝謝你的來信」怎麼寫？", c: ["Thank you for your email.", "Thanks your email.", "Thank your email."], a: 0, why: "Thank you for＋名詞，for 不能省。" },
+ { q: "填空：Thank you ___ your quick reply.", c: ["for", "of", "to"], a: 0, why: "同一句型換個名詞照樣用：reply / inquiry / support。" },
+ { q: "電話中自報身分：", c: ["This is Cloud from Fix-well Technology.", "I am Cloud from Fix-well Technology.", "Here is Cloud."], a: 0, why: "電話慣例用 This is＋名字＋from＋公司。" },
+ { q: "填空：We are a repair service company ___ semiconductor test equipment.", c: ["for", "of", "with"], a: 0, why: "服務對象用 for。這句是公司一句話，背熟。" },
+ { q: "「我會確認細節，最晚週五回覆你」：", c: ["I will check the details and update you by Friday.", "I will check detail and answer you until Friday.", "I check the details and update you Friday."], a: 0, why: "will＋原形；期限用 by；details 複數。" },
+ { q: "填空：I will confirm the schedule and update you ___ Wednesday.", c: ["by", "until", "at"], a: 0, why: "by＝最晚在…之前。承諾回覆一定用它。" },
+ { q: "「有任何問題請告訴我」：", c: ["Please let me know if you have any questions.", "If you have any question please tell me.", "Any questions please let me know."], a: 0, why: "標準結尾句直接背；questions 複數。" },
+ { q: "填空：Please let me know if you ___ any questions.", c: ["have", "has", "had"], a: 0, why: "you＋have；別被 if 影響。" },
+ { q: "自我介紹說「我負責維修案件與客戶聯繫」：", c: ["I handle repair cases and customer communication.", "I am charge of repair case and customer contact.", "My job is repair and talk to customer."], a: 0, why: "handle＝負責處理；in charge of 也可但別漏 in。" },
+ { q: "組合題：回信第一句＋最後一句的正確組合是？", c: ["Thank you for your email. ⋯ Please let me know if you have any questions.", "Please let me know. ⋯ Thank you for your email.", "This is Cloud. ⋯ Thanks your email."], a: 0, why: "開場謝→正事→結尾邀請提問，是最穩的信件骨架。" },
+];
+let done = 0, ok = 0;
+document.getElementById("qs").innerHTML = QUIZ.map((q, i) => `<div class="q" id="q${i}"><div class="qt">${i + 1}. ${q.q}</div>` +
+  q.c.map((c, ci) => `<button onclick="ans(${i},${ci},this)">${c}</button>`).join("") +
+  `<div class="why" id="w${i}">💡 ${q.why}</div></div>`).join("");
+function ans(i, ci, btn) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const good = ci === QUIZ[i].a;
+  box.querySelectorAll("button").forEach((b, bi) => { b.disabled = true;
+    if (bi === QUIZ[i].a) b.classList.add("ok"); else if (bi === ci) b.classList.add("no"); });
+  document.getElementById("w" + i).style.display = "block";
+  done++; if (good) ok++;
+  if (done === QUIZ.length) {
+    document.getElementById("result").textContent = `🎉 答對 ${ok} / ${QUIZ.length}`;
+    try { const p = JSON.parse(localStorage.getItem("adultProgress") || "{}"); p["w1d2"] = { done: new Date().toISOString(), ok, total: QUIZ.length }; localStorage.setItem("adultProgress", JSON.stringify(p)); } catch (e) {}
+  }
+}
+</script>
+</body>
+</html>

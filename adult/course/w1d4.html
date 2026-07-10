@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W1 週四 — Shadowing 自介</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:660px;margin:0 auto;padding:0 16px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.75}
+  header{background:#1f4463;color:#fff;text-align:center;padding:16px;border-radius:0 0 16px 16px;margin:0 -16px 14px}
+  header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .card{background:#fff;border-radius:14px;padding:15px 17px;margin-top:13px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .card h2{font-size:1rem;color:#1f4463;margin:0 0 9px}
+  .speech{background:#f0fff5;border:1.5px solid #bfe8cd;border-radius:12px;padding:12px 14px;font-size:.96rem;font-style:italic}
+  audio{width:100%;margin-top:8px}
+  .task{display:flex;gap:10px;align-items:flex-start;border-top:1px dashed #eee;padding:10px 0}
+  .task input{width:20px;height:20px;margin-top:3px}
+  .task b{font-size:.92rem}
+  .task small{display:block;color:#888;font-size:.8rem}
+  #doneBtn{width:100%;padding:13px;border:none;border-radius:12px;background:#1f4463;color:#fff;font-weight:800;font-size:1rem;cursor:pointer;margin-top:14px;opacity:.5;pointer-events:none}
+  #doneBtn.ready{opacity:1;pointer-events:auto}
+  #result{font-weight:800;text-align:center;margin-top:10px;min-height:1.4em}
+  .tip{background:#fff8e1;border-radius:10px;padding:9px 13px;font-size:.83rem;color:#8a6d1a;margin-top:8px}
+</style>
+</head>
+<body>
+<header><h1>🎙️ W1 週四 — Shadowing 自介</h1>
+<p><a href="w1.html">← 本週重點</a> · 目標：不看稿講出 30 秒自介</p></header>
+
+<div class="card"><h2>📜 講稿</h2>
+<div class="speech">Hello, my name is Cloud. I'm from Fix-well Technology in Hsinchu, Taiwan.
+We repair semiconductor test equipment — testers, probers, and power supplies.
+I handle repair cases and customer communication.
+If you have any equipment problems, please contact me anytime. Nice to meet you.</div>
+<audio controls preload="none" src="audio/w1_intro.mp3"></audio>
+<div class="tip">💡 Shadowing 要領：影子跟在聲音後面 0.5 秒，模仿語調和斷句，不是聽完再唸。</div>
+</div>
+
+<div class="card"><h2>✅ 今日任務（做完打勾）</h2>
+<div class="task"><input type="checkbox" onchange="chk()"><span><b>1. 全文聽 2 次</b><small>先不出聲，注意哪裡連音、哪裡停頓</small></span></div>
+<div class="task"><input type="checkbox" onchange="chk()"><span><b>2. 跟讀 3 次</b><small>跟著音檔影子式朗讀，卡住的句子單獨重來</small></span></div>
+<div class="task"><input type="checkbox" onchange="chk()"><span><b>3. 不看稿講一次＋手機錄音</b><small>換成你自己的資訊也可以（名字/部門）</small></span></div>
+<div class="task"><input type="checkbox" onchange="chk()"><span><b>4. 聽自己的錄音</b><small>對照音檔找出 1 個最不像的地方，明天加強</small></span></div>
+<button id="doneBtn" onclick="fin()">完成今日 Shadowing ✔</button>
+<div id="result"></div>
+</div>
+
+<script>
+function chk() {
+  const all = [...document.querySelectorAll("input")].every(c => c.checked);
+  document.getElementById("doneBtn").classList.toggle("ready", all);
+}
+function fin() {
+  document.getElementById("result").textContent = "🎉 完成！明天週五做情境應答＋錯誤回收";
+  try { const p = JSON.parse(localStorage.getItem("adultProgress") || "{}"); p["w1d4"] = { done: new Date().toISOString() }; localStorage.setItem("adultProgress", JSON.stringify(p)); } catch (e) {}
+}
+</script>
+</body>
+</html>
