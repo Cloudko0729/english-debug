@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W1 週一 — 讀信＋圈句型</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:680px;margin:0 auto;padding:0 16px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.7}
+  header{background:#1f4463;color:#fff;text-align:center;padding:16px;border-radius:0 0 16px 16px;margin:0 -16px 16px}
+  header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .card{background:#fff;border-radius:14px;padding:16px 18px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .card h2{font-size:1rem;color:#1f4463;margin:0 0 10px}
+  .mail{background:#fdfdf8;border:1.5px solid #e3ddc8;border-radius:12px;padding:14px 16px;font-size:.93rem}
+  .mail .subj{font-weight:800;border-bottom:1px solid #e3ddc8;padding-bottom:6px;margin-bottom:8px}
+  .q{border-top:1px dashed #e5e5e5;padding:12px 0}
+  .q .qt{font-weight:700;margin-bottom:7px;font-size:.92rem}
+  .q button{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit}
+  .q button.ok{border-color:#2a9d5c;background:#e3f6ec}
+  .q button.no{border-color:#d64561;background:#fbe3e9}
+  .q .why{display:none;margin-top:6px;background:#eaf3ff;border-radius:9px;padding:8px 12px;font-size:.84rem;color:#1f4463}
+  #result{font-weight:800;font-size:1.05rem;margin-top:12px;min-height:1.5em}
+  .gobtn{width:100%;padding:13px;border:none;border-radius:12px;background:#1f4463;color:#fff;font-weight:800;font-size:1rem;cursor:pointer;margin-top:14px}
+</style>
+</head>
+<body>
+<header><h1>📖 W1 週一 — 讀信＋圈句型</h1>
+<p><a href="w1.html">← 本週重點</a> · 讀一封修正版真實信，找出可重複使用的句型</p></header>
+
+<div class="card"><h2>先讀這封信（改編自真實維修回覆信，已去識別化）</h2>
+<div class="mail">
+  <div class="subj">Subject: RE: Repair Inquiry — DC Power Supply</div>
+  Dear Mr. Lee,<br><br>
+  <b>Thank you for your email.</b> <b>This is Cloud from Fix-well Technology.</b><br>
+  <b>We are a repair service company for semiconductor test equipment.</b><br><br>
+  We have received your inquiry about the DC power supply repair.
+  <b>I will check the details with our engineer and update you by Friday.</b><br><br>
+  <b>Please let me know if you have any questions.</b><br><br>
+  Best regards,<br>Cloud
+</div>
+<p style="font-size:.84rem;color:#777">粗體就是本週 5 個核心句——它們在幾乎每封信都能重複使用。讀兩次再作答。</p>
+</div>
+
+<div class="card"><h2>✏️ 練習（8 題）</h2><div id="quiz"></div>
+<div id="result"></div>
+</div>
+
+<script>
+const QUIZ = [
+ { q: "1. 信裡哪一句的功能是「自報身分」？",
+   c: ["This is Cloud from Fix-well Technology.", "Thank you for your email.", "Please let me know if you have any questions."],
+   a: 0, why: "第一次聯絡（信/電話）自報身分用 This is ＋名字＋from＋公司。" },
+ { q: "2. 哪一句是「承諾下一步＋期限」？",
+   c: ["We have received your inquiry.", "I will check the details with our engineer and update you by Friday.", "Best regards."],
+   a: 1, why: "will＋動作＋update you by＋時間。給期限是讓客戶安心的關鍵。" },
+ { q: "3. 「update you by Friday」的 by 意思是？",
+   c: ["最晚在週五（之前）", "在週五那天整天", "從週五開始"],
+   a: 0, why: "by＋時間＝最晚在那之前完成。訂交期、承諾回覆都用 by。" },
+ { q: "4. 收到客戶詢問信，最自然的第一句是？",
+   c: ["Thank you for your email.", "Thanks your email.", "I have seen your email."],
+   a: 0, why: "Thank you for＋名詞。Thanks your email 少了 for，是常見中式寫法。" },
+ { q: "5. 填空：We are a repair service company ___ semiconductor test equipment.",
+   c: ["for", "of", "to"],
+   a: 0, why: "「服務對象」用 for：a repair company for ○○ 設備。" },
+ { q: "6. 「有任何問題請告訴我」最自然的寫法是？",
+   c: ["Please let me know if you have any questions.", "If you have any question please tell me.", "Any question please let me know."],
+   a: 0, why: "固定結尾句直接背。另外 questions 用複數。" },
+ { q: "7. 一封回信的正確順序是？",
+   c: ["稱呼 → 謝謝來信 → 自報身分 → 正事 → 結尾", "自報身分 → 正事 → 稱呼 → 結尾", "正事 → 謝謝來信 → 稱呼 → 結尾"],
+   a: 0, why: "Dear○○ → Thank you for... → This is...（首次聯絡才需要）→ 正事 → Please let me know..." },
+ { q: "8. 電話中自報身分，下面哪個對？",
+   c: ["This is Cloud from Fix-well.", "I am Cloud from Fix-well.", "Here is Cloud from Fix-well."],
+   a: 0, why: "電話慣用 This is＋名字。I am 文法沒錯但電話中不道地；Here is 是給東西。" },
+];
+let done = 0, ok = 0;
+const el = document.getElementById("quiz");
+el.innerHTML = QUIZ.map((q, i) => `<div class="q" id="q${i}"><div class="qt">${q.q}</div>` +
+  q.c.map((c, ci) => `<button onclick="ans(${i},${ci},this)">${c}</button>`).join("") +
+  `<div class="why" id="why${i}">💡 ${q.why}</div></div>`).join("");
+function ans(i, ci, btn) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const good = ci === QUIZ[i].a;
+  box.querySelectorAll("button").forEach((b, bi) => { b.disabled = true;
+    if (bi === QUIZ[i].a) b.classList.add("ok"); else if (bi === ci) b.classList.add("no"); });
+  document.getElementById("why" + i).style.display = "block";
+  done++; if (good) ok++;
+  if (done === QUIZ.length) {
+    const r = document.getElementById("result");
+    r.textContent = `🎉 答對 ${ok} / ${QUIZ.length}` + (ok === QUIZ.length ? "，全對！" : "，答錯的句子明天會再出現");
+    try {
+      const p = JSON.parse(localStorage.getItem("adultProgress") || "{}");
+      p["w1d1"] = { done: new Date().toISOString(), ok, total: QUIZ.length };
+      localStorage.setItem("adultProgress", JSON.stringify(p));
+    } catch (e) {}
+  }
+}
+</script>
+</body>
+</html>
