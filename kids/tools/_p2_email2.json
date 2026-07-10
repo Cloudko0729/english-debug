@@ -1,0 +1,724 @@
+{
+  "items": [
+    {
+      "id": "em_2_001",
+      "tag": "quotation",
+      "zh": "請提供正式報價",
+      "chunks": ["Could you please", "send us", "the official quotation?"],
+      "why": "Could you please 禮貌請求",
+      "swap": "Could you please send us the updated invoice?"
+    },
+    {
+      "id": "em_2_002",
+      "tag": "quotation",
+      "zh": "請確認報價有效期限",
+      "chunks": ["Please confirm", "the validity period", "of this quotation."],
+      "why": "confirm 接確認事項",
+      "swap": "Please confirm the delivery date of this order."
+    },
+    {
+      "id": "em_2_003",
+      "tag": "quotation",
+      "zh": "我們需要含稅價格",
+      "chunks": ["We need", "the price", "including tax."],
+      "why": "including 補充包含項目",
+      "swap": "We need the price including shipping."
+    },
+    {
+      "id": "em_2_004",
+      "tag": "quotation",
+      "zh": "請列出維修費用",
+      "chunks": ["Please list", "the repair cost", "separately."],
+      "why": "list 表示列出明細",
+      "swap": "Please list the freight charge separately."
+    },
+    {
+      "id": "em_2_005",
+      "tag": "quotation",
+      "zh": "請加入運費",
+      "chunks": ["Please include", "the freight charge", "in the quotation."],
+      "why": "include 表示納入費用",
+      "swap": "Please include the inspection fee in the quote."
+    },
+    {
+      "id": "em_2_006",
+      "tag": "quotation",
+      "zh": "這個價格是否包含檢測費",
+      "chunks": ["Does this price", "include", "the inspection fee?"],
+      "why": "Does 開頭問是否包含",
+      "swap": "Does this price include the shipping cost?"
+    },
+    {
+      "id": "em_2_007",
+      "tag": "quotation",
+      "zh": "請確認是否有折扣",
+      "chunks": ["Please confirm", "if any discount", "is available."],
+      "why": "if 引導確認內容",
+      "swap": "Please confirm if early delivery is available."
+    },
+    {
+      "id": "em_2_008",
+      "tag": "quotation",
+      "zh": "我們接受此報價",
+      "chunks": ["We accept", "this quotation", "and will proceed."],
+      "why": "accept 表示正式接受",
+      "swap": "We accept this schedule and will proceed."
+    },
+    {
+      "id": "em_2_009",
+      "tag": "quotation",
+      "zh": "請修正報價上的公司名稱",
+      "chunks": ["Please correct", "our company name", "on the quotation."],
+      "why": "correct 指修正錯誤",
+      "swap": "Please correct our address on the invoice."
+    },
+    {
+      "id": "em_2_010",
+      "tag": "quotation",
+      "zh": "請分開列材料與工資",
+      "chunks": ["Please separate", "the parts", "and labor costs."],
+      "why": "separate 表示分開列",
+      "swap": "Please separate the service and freight costs."
+    },
+    {
+      "id": "em_2_011",
+      "tag": "quotation",
+      "zh": "報價金額超出預算",
+      "chunks": ["The quotation amount", "is over", "our budget."],
+      "why": "is over 表示超出",
+      "swap": "The repair cost is over our budget."
+    },
+    {
+      "id": "em_2_012",
+      "tag": "quotation",
+      "zh": "請提供更詳細費用明細",
+      "chunks": ["Could you provide", "a more detailed", "cost breakdown?"],
+      "why": "breakdown 指費用明細",
+      "swap": "Could you provide a more detailed repair report?"
+    },
+    {
+      "id": "em_2_013",
+      "tag": "quotation",
+      "zh": "請使用美元報價",
+      "chunks": ["Please issue", "the quotation", "in US dollars."],
+      "why": "issue 表示開立文件",
+      "swap": "Please issue the invoice in US dollars."
+    },
+    {
+      "id": "em_2_014",
+      "tag": "quotation",
+      "zh": "請確認是否另收手續費",
+      "chunks": ["Please confirm", "if there is", "any handling fee."],
+      "why": "there is 表示是否有",
+      "swap": "Please confirm if there is any storage fee."
+    },
+    {
+      "id": "em_2_015",
+      "tag": "quotation",
+      "zh": "我們需要主管核准報價",
+      "chunks": ["We need", "management approval", "for this quotation."],
+      "why": "approval 表示核准",
+      "swap": "We need customer approval for this repair."
+    },
+    {
+      "id": "em_2_016",
+      "tag": "quotation",
+      "zh": "費用核准後會下單",
+      "chunks": ["We will place", "the order", "after cost approval."],
+      "why": "after 表示之後動作",
+      "swap": "We will release the shipment after payment confirmation."
+    },
+    {
+      "id": "em_2_017",
+      "tag": "delivery",
+      "zh": "請提供預計交期",
+      "chunks": ["Please provide", "the estimated", "delivery date."],
+      "why": "estimated 表示預計",
+      "swap": "Please provide the estimated repair date."
+    },
+    {
+      "id": "em_2_018",
+      "tag": "delivery",
+      "zh": "交期是否仍是下週",
+      "chunks": ["Is the delivery date", "still", "next week?"],
+      "why": "still 確認是否仍然",
+      "swap": "Is the pickup date still tomorrow?"
+    },
+    {
+      "id": "em_2_019",
+      "tag": "delivery",
+      "zh": "請確認最新ETA",
+      "chunks": ["Please confirm", "the latest ETA", "for delivery."],
+      "why": "latest 表示最新版",
+      "swap": "Please confirm the latest ETA for pickup."
+    },
+    {
+      "id": "em_2_020",
+      "tag": "delivery",
+      "zh": "我們需要月底前收到",
+      "chunks": ["We need to receive", "the unit", "before month-end."],
+      "why": "before 表示期限前",
+      "swap": "We need to receive the parts before Friday."
+    },
+    {
+      "id": "em_2_021",
+      "tag": "delivery",
+      "zh": "請盡快安排交貨",
+      "chunks": ["Please arrange", "delivery", "as soon as possible."],
+      "why": "arrange 表示安排",
+      "swap": "Please arrange pickup as soon as possible."
+    },
+    {
+      "id": "em_2_022",
+      "tag": "delivery",
+      "zh": "預計何時可以出貨",
+      "chunks": ["When can you", "ship", "the repaired unit?"],
+      "why": "When can you 詢問時間",
+      "swap": "When can you finish the inspection report?"
+    },
+    {
+      "id": "em_2_023",
+      "tag": "delivery",
+      "zh": "請告知可行交貨日",
+      "chunks": ["Please advise", "the available", "delivery date."],
+      "why": "advise 用於商務告知",
+      "swap": "Please advise the available meeting time."
+    },
+    {
+      "id": "em_2_024",
+      "tag": "delivery",
+      "zh": "這批貨可以提前嗎",
+      "chunks": ["Can this shipment", "be delivered", "earlier?"],
+      "why": "被動式問交貨可能",
+      "swap": "Can this order be processed earlier?"
+    },
+    {
+      "id": "em_2_025",
+      "tag": "delivery",
+      "zh": "請把交期改到週五",
+      "chunks": ["Please move", "the delivery date", "to Friday."],
+      "why": "move 表示改期",
+      "swap": "Please move the meeting time to Monday."
+    },
+    {
+      "id": "em_2_026",
+      "tag": "delivery",
+      "zh": "可以接受部分交貨",
+      "chunks": ["We can accept", "partial delivery", "this time."],
+      "why": "partial 表示部分",
+      "swap": "We can accept partial payment this month."
+    },
+    {
+      "id": "em_2_027",
+      "tag": "delivery",
+      "zh": "請確認維修完成日",
+      "chunks": ["Please confirm", "the repair", "completion date."],
+      "why": "completion date 完成日",
+      "swap": "Please confirm the shipment pickup date."
+    },
+    {
+      "id": "em_2_028",
+      "tag": "delivery",
+      "zh": "請提供新的交期安排",
+      "chunks": ["Please provide", "the revised", "delivery schedule."],
+      "why": "revised 表示已修訂",
+      "swap": "Please provide the revised payment schedule."
+    },
+    {
+      "id": "em_2_029",
+      "tag": "delivery",
+      "zh": "交期比預期更急",
+      "chunks": ["The delivery schedule", "is more urgent", "than expected."],
+      "why": "than expected 比預期",
+      "swap": "The repair request is more urgent than expected."
+    },
+    {
+      "id": "em_2_030",
+      "tag": "delivery",
+      "zh": "請優先處理此訂單",
+      "chunks": ["Please prioritize", "this order", "for earlier delivery."],
+      "why": "prioritize 表示優先",
+      "swap": "Please prioritize this case for faster review."
+    },
+    {
+      "id": "em_2_031",
+      "tag": "delivery",
+      "zh": "若有變更請立即通知",
+      "chunks": ["Please inform us", "immediately", "if anything changes."],
+      "why": "if anything changes 條件",
+      "swap": "Please update us immediately if the date changes."
+    },
+    {
+      "id": "em_2_032",
+      "tag": "logistics",
+      "zh": "請提供追蹤號碼",
+      "chunks": ["Please provide", "the shipment", "tracking number."],
+      "why": "tracking number 追蹤碼",
+      "swap": "Please provide the courier tracking number."
+    },
+    {
+      "id": "em_2_033",
+      "tag": "logistics",
+      "zh": "貨物今天已寄出了嗎",
+      "chunks": ["Has the shipment", "been sent out", "today?"],
+      "why": "Has 開頭問完成狀態",
+      "swap": "Has the invoice been sent out today?"
+    },
+    {
+      "id": "em_2_034",
+      "tag": "logistics",
+      "zh": "請寄到以下地址",
+      "chunks": ["Please ship it", "to the address", "below."],
+      "why": "below 指下方資訊",
+      "swap": "Please send it to the email below."
+    },
+    {
+      "id": "em_2_035",
+      "tag": "logistics",
+      "zh": "請確認收件人電話",
+      "chunks": ["Please confirm", "the receiver's", "phone number."],
+      "why": "receiver 表示收件人",
+      "swap": "Please confirm the customer's contact number."
+    },
+    {
+      "id": "em_2_036",
+      "tag": "logistics",
+      "zh": "請用我們快遞帳號",
+      "chunks": ["Please use", "our courier account", "for shipping."],
+      "why": "use account 使用帳號",
+      "swap": "Please use our billing address for shipping."
+    },
+    {
+      "id": "em_2_037",
+      "tag": "logistics",
+      "zh": "請附上裝箱單",
+      "chunks": ["Please include", "the packing list", "with the shipment."],
+      "why": "with 表示隨貨附上",
+      "swap": "Please include the test report with the unit."
+    },
+    {
+      "id": "em_2_038",
+      "tag": "logistics",
+      "zh": "請提供商業發票",
+      "chunks": ["Please provide", "the commercial invoice", "for customs."],
+      "why": "for customs 表示用途",
+      "swap": "Please provide the packing list for customs."
+    },
+    {
+      "id": "em_2_039",
+      "tag": "logistics",
+      "zh": "追蹤資訊尚未更新",
+      "chunks": ["The tracking information", "has not been", "updated yet."],
+      "why": "has not been 被動完成",
+      "swap": "The payment status has not been updated yet."
+    },
+    {
+      "id": "em_2_040",
+      "tag": "logistics",
+      "zh": "請確認包裹位置",
+      "chunks": ["Please confirm", "the current location", "of the package."],
+      "why": "current location 目前位置",
+      "swap": "Please confirm the current status of the order."
+    },
+    {
+      "id": "em_2_041",
+      "tag": "logistics",
+      "zh": "我們今天收到包裹",
+      "chunks": ["We received", "the package", "this morning."],
+      "why": "received 表示已收到",
+      "swap": "We received the invoice this morning."
+    },
+    {
+      "id": "em_2_042",
+      "tag": "logistics",
+      "zh": "外箱在運送中受損",
+      "chunks": ["The outer box", "was damaged", "during transit."],
+      "why": "during transit 運送中",
+      "swap": "The unit cover was damaged during transit."
+    },
+    {
+      "id": "em_2_043",
+      "tag": "logistics",
+      "zh": "請協助向快遞查詢",
+      "chunks": ["Please help check", "with the courier", "today."],
+      "why": "check with 向某方查詢",
+      "swap": "Please help check with the warehouse today."
+    },
+    {
+      "id": "em_2_044",
+      "tag": "logistics",
+      "zh": "請安排上門取件",
+      "chunks": ["Please arrange", "pickup", "at our office."],
+      "why": "pickup 表示取件",
+      "swap": "Please arrange delivery at our office."
+    },
+    {
+      "id": "em_2_045",
+      "tag": "logistics",
+      "zh": "海關需要更多資料",
+      "chunks": ["Customs requires", "more information", "for clearance."],
+      "why": "requires 表示需要",
+      "swap": "Accounting requires more information for payment."
+    },
+    {
+      "id": "em_2_046",
+      "tag": "delivery",
+      "zh": "很抱歉延遲回覆",
+      "chunks": ["We are sorry", "for the", "late reply."],
+      "why": "sorry for 表示歉意",
+      "swap": "We are sorry for the delayed update."
+    },
+    {
+      "id": "em_2_047",
+      "tag": "delivery",
+      "zh": "很抱歉出貨延誤",
+      "chunks": ["We apologize", "for the", "shipment delay."],
+      "why": "apologize for 道歉",
+      "swap": "We apologize for the payment delay."
+    },
+    {
+      "id": "em_2_048",
+      "tag": "repair",
+      "zh": "維修進度比預期慢",
+      "chunks": ["The repair", "is taking longer", "than expected."],
+      "why": "taking longer 表示延長",
+      "swap": "The inspection is taking longer than expected."
+    },
+    {
+      "id": "em_2_049",
+      "tag": "service",
+      "zh": "我們正在加快處理",
+      "chunks": ["We are working", "to speed up", "the process."],
+      "why": "speed up 表示加速",
+      "swap": "We are trying to speed up the review."
+    },
+    {
+      "id": "em_2_050",
+      "tag": "service",
+      "zh": "請再給我們兩天",
+      "chunks": ["Please give us", "two more days", "to finish."],
+      "why": "give us 表示請求時間",
+      "swap": "Please give us one more day to confirm."
+    },
+    {
+      "id": "em_2_051",
+      "tag": "parts",
+      "zh": "延遲原因是零件短缺",
+      "chunks": ["The delay", "is due to", "parts shortage."],
+      "why": "due to 表示原因",
+      "swap": "The delay is due to system maintenance."
+    },
+    {
+      "id": "em_2_052",
+      "tag": "delivery",
+      "zh": "我們會提供更新時程",
+      "chunks": ["We will provide", "an updated schedule", "shortly."],
+      "why": "will 表示後續承諾",
+      "swap": "We will provide an updated quotation shortly."
+    },
+    {
+      "id": "em_2_053",
+      "tag": "general",
+      "zh": "很抱歉造成不便",
+      "chunks": ["We apologize", "for any inconvenience", "caused."],
+      "why": "商務常用道歉句",
+      "swap": "We apologize for any confusion caused."
+    },
+    {
+      "id": "em_2_054",
+      "tag": "service",
+      "zh": "會優先處理此案件",
+      "chunks": ["We will handle", "this case", "as a priority."],
+      "why": "as priority 表示優先",
+      "swap": "We will handle this order as a priority."
+    },
+    {
+      "id": "em_2_055",
+      "tag": "delivery",
+      "zh": "請確認是否可接受延後",
+      "chunks": ["Please confirm", "if the delay", "is acceptable."],
+      "why": "acceptable 表示可接受",
+      "swap": "Please confirm if the change is acceptable."
+    },
+    {
+      "id": "em_2_056",
+      "tag": "general",
+      "zh": "想跟進這封郵件",
+      "chunks": ["I would like to", "follow up on", "this email."],
+      "why": "follow up on 跟進",
+      "swap": "I would like to follow up on this case."
+    },
+    {
+      "id": "em_2_057",
+      "tag": "quotation",
+      "zh": "請問報價進度如何",
+      "chunks": ["May I check", "the status of", "the quotation?"],
+      "why": "May I check 禮貌詢問",
+      "swap": "May I check the status of the shipment?"
+    },
+    {
+      "id": "em_2_058",
+      "tag": "payment",
+      "zh": "請回覆付款確認",
+      "chunks": ["Please reply with", "the payment", "confirmation."],
+      "why": "reply with 附上回覆",
+      "swap": "Please reply with the delivery confirmation."
+    },
+    {
+      "id": "em_2_059",
+      "tag": "delivery",
+      "zh": "請盡快確認交期",
+      "chunks": ["Please confirm", "the delivery date", "as soon as possible."],
+      "why": "ASAP 表示盡快",
+      "swap": "Please confirm the payment date as soon as possible."
+    },
+    {
+      "id": "em_2_060",
+      "tag": "general",
+      "zh": "我們仍在等您回覆",
+      "chunks": ["We are still", "waiting for", "your reply."],
+      "why": "still waiting 表示仍等待",
+      "swap": "We are still waiting for your approval."
+    },
+    {
+      "id": "em_2_061",
+      "tag": "office",
+      "zh": "請協助加速審核",
+      "chunks": ["Please help", "speed up", "the review process."],
+      "why": "help 加動詞原形",
+      "swap": "Please help speed up the approval process."
+    },
+    {
+      "id": "em_2_062",
+      "tag": "general",
+      "zh": "請今天回覆結果",
+      "chunks": ["Please reply with", "the result", "today."],
+      "why": "today 放句尾表時間",
+      "swap": "Please reply with the schedule today."
+    },
+    {
+      "id": "em_2_063",
+      "tag": "logistics",
+      "zh": "若已寄出請提供追蹤碼",
+      "chunks": ["If it has shipped,", "please send", "the tracking number."],
+      "why": "If 條件句放句首",
+      "swap": "If it is ready, please send the invoice."
+    },
+    {
+      "id": "em_2_064",
+      "tag": "service",
+      "zh": "我們需要關閉此案件",
+      "chunks": ["We need to", "close this case", "soon."],
+      "why": "need to 接動詞",
+      "swap": "We need to close this order soon."
+    },
+    {
+      "id": "em_2_065",
+      "tag": "payment",
+      "zh": "請提供付款條件",
+      "chunks": ["Please provide", "the agreed", "payment terms."],
+      "why": "payment terms 付款條件",
+      "swap": "Please provide the updated delivery terms."
+    },
+    {
+      "id": "em_2_066",
+      "tag": "payment",
+      "zh": "我們今天已安排付款",
+      "chunks": ["We have arranged", "the payment", "today."],
+      "why": "have arranged 已安排",
+      "swap": "We have arranged the pickup today."
+    },
+    {
+      "id": "em_2_067",
+      "tag": "payment",
+      "zh": "請確認是否收到款項",
+      "chunks": ["Please confirm", "if the payment", "was received."],
+      "why": "was received 被動語態",
+      "swap": "Please confirm if the package was received."
+    },
+    {
+      "id": "em_2_068",
+      "tag": "payment",
+      "zh": "發票金額似乎有誤",
+      "chunks": ["The invoice amount", "seems incorrect", "to us."],
+      "why": "seems 表示看起來",
+      "swap": "The shipment address seems incorrect to us."
+    },
+    {
+      "id": "em_2_069",
+      "tag": "payment",
+      "zh": "請重新開立發票",
+      "chunks": ["Please reissue", "the invoice", "with correct details."],
+      "why": "reissue 表示重開",
+      "swap": "Please resend the quotation with correct details."
+    },
+    {
+      "id": "em_2_070",
+      "tag": "payment",
+      "zh": "請提供銀行帳戶資訊",
+      "chunks": ["Please provide", "your bank account", "details."],
+      "why": "account details 帳戶資訊",
+      "swap": "Please provide your billing contact details."
+    },
+    {
+      "id": "em_2_071",
+      "tag": "payment",
+      "zh": "付款會在本週完成",
+      "chunks": ["The payment", "will be completed", "this week."],
+      "why": "will be completed 被動",
+      "swap": "The repair will be completed this week."
+    },
+    {
+      "id": "em_2_072",
+      "tag": "payment",
+      "zh": "請延長付款期限",
+      "chunks": ["Please extend", "the payment deadline", "to Friday."],
+      "why": "extend 表示延長",
+      "swap": "Please move the delivery deadline to Friday."
+    },
+    {
+      "id": "em_2_073",
+      "tag": "payment",
+      "zh": "我們需要月結帳單",
+      "chunks": ["We need", "the monthly statement", "for accounting."],
+      "why": "for 表示用途",
+      "swap": "We need the service report for accounting."
+    },
+    {
+      "id": "em_2_074",
+      "tag": "payment",
+      "zh": "請確認付款幣別",
+      "chunks": ["Please confirm", "the payment currency", "for this invoice."],
+      "why": "currency 表示幣別",
+      "swap": "Please confirm the shipping method for this order."
+    },
+    {
+      "id": "em_2_075",
+      "tag": "payment",
+      "zh": "我們已收到發票",
+      "chunks": ["We have received", "the invoice", "from your team."],
+      "why": "have received 已收到",
+      "swap": "We have received the quotation from your team."
+    },
+    {
+      "id": "em_2_076",
+      "tag": "logistics",
+      "zh": "請提供RMA號碼",
+      "chunks": ["Please provide", "the RMA number", "for this return."],
+      "why": "RMA number 退修編號",
+      "swap": "Please provide the case number for this repair."
+    },
+    {
+      "id": "em_2_077",
+      "tag": "logistics",
+      "zh": "請把故障品寄回",
+      "chunks": ["Please send back", "the defective unit", "for repair."],
+      "why": "send back 表示寄回",
+      "swap": "Please send back the wrong part for inspection."
+    },
+    {
+      "id": "em_2_078",
+      "tag": "logistics",
+      "zh": "我們會附上RMA表單",
+      "chunks": ["We will include", "the RMA form", "in the package."],
+      "why": "include 表示附上",
+      "swap": "We will include the invoice in the package."
+    },
+    {
+      "id": "em_2_079",
+      "tag": "logistics",
+      "zh": "請在外箱標示RMA",
+      "chunks": ["Please mark", "the RMA number", "on the box."],
+      "why": "mark on 標示在上面",
+      "swap": "Please mark the case number on the label."
+    },
+    {
+      "id": "em_2_080",
+      "tag": "logistics",
+      "zh": "請確認退貨收件地址",
+      "chunks": ["Please confirm", "the return address", "before shipment."],
+      "why": "before shipment 出貨前",
+      "swap": "Please confirm the billing address before payment."
+    },
+    {
+      "id": "em_2_081",
+      "tag": "repair",
+      "zh": "故障品已寄出檢修",
+      "chunks": ["The defective unit", "has been shipped", "for inspection."],
+      "why": "has been shipped 已寄出",
+      "swap": "The repaired unit has been shipped for testing."
+    },
+    {
+      "id": "em_2_082",
+      "tag": "logistics",
+      "zh": "請提供寄送包裝要求",
+      "chunks": ["Please provide", "the packing requirements", "for return shipping."],
+      "why": "requirements 表示要求",
+      "swap": "Please provide the labeling requirements for export shipping."
+    },
+    {
+      "id": "em_2_083",
+      "tag": "logistics",
+      "zh": "收到RMA後請通知",
+      "chunks": ["Please notify us", "after receiving", "the RMA package."],
+      "why": "after receiving 收到後",
+      "swap": "Please notify us after receiving the payment notice."
+    },
+    {
+      "id": "em_2_084",
+      "tag": "meeting",
+      "zh": "請安排一場會議",
+      "chunks": ["Please arrange", "a meeting", "for this topic."],
+      "why": "arrange a meeting 安排會議",
+      "swap": "Please arrange a call for this issue."
+    },
+    {
+      "id": "em_2_085",
+      "tag": "meeting",
+      "zh": "您週三有空嗎",
+      "chunks": ["Are you available", "for a meeting", "on Wednesday?"],
+      "why": "available 表示有空",
+      "swap": "Are you available for a call on Friday?"
+    },
+    {
+      "id": "em_2_086",
+      "tag": "meeting",
+      "zh": "請提供可開會時段",
+      "chunks": ["Please share", "your available", "meeting time."],
+      "why": "share 表示提供資訊",
+      "swap": "Please share your available pickup time."
+    },
+    {
+      "id": "em_2_087",
+      "tag": "meeting",
+      "zh": "我們想改到明天",
+      "chunks": ["We would like to", "move it", "to tomorrow."],
+      "why": "would like to 較客氣",
+      "swap": "We would like to move it to Friday."
+    },
+    {
+      "id": "em_2_088",
+      "tag": "meeting",
+      "zh": "請加入維修工程師",
+      "chunks": ["Please include", "our repair engineer", "in the meeting."],
+      "why": "include someone 加入人",
+      "swap": "Please include our purchasing manager in the email."
+    },
+    {
+      "id": "em_2_089",
+      "tag": "meeting",
+      "zh": "會議連結已建立",
+      "chunks": ["The meeting link", "has been created", "for everyone."],
+      "why": "has been created 被動完成",
+      "swap": "The payment record has been created for accounting."
+    },
+    {
+      "id": "em_2_090",
+      "tag": "meeting",
+      "zh": "會後請寄會議記錄",
+      "chunks": ["Please send", "the meeting notes", "after the call."],
+      "why": "after the call 會後",
+      "swap": "Please send the repair report after the inspection."
+    }
+  ]
+}

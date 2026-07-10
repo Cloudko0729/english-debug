@@ -38,8 +38,11 @@
     return { version: 2, words: {}, repairs: {}, grammar: {}, zhterms: {}, repairfix: {}, errorCodes: {}, mistakes: [], days: {} };
   }
   const state = loadState();
+  state.emailasm = state.emailasm || {}; state.dialog = state.dialog || {};
   const save = () => localStorage.setItem("adultPracticeState", JSON.stringify(state));
-  const mapOf = k => k === "word" ? state.words : k === "repair" ? state.repairs : k === "zhterm" ? state.zhterms : (k === "repairfix" || k === "reorder") ? state.repairfix : state.grammar;
+  const mapOf = k => k === "word" ? state.words : k === "repair" ? state.repairs : k === "zhterm" ? state.zhterms
+    : (k === "repairfix" || k === "reorder") ? state.repairfix
+    : k === "emailasm" ? state.emailasm : k === "dialog" ? state.dialog : state.grammar;
   function rec(map, key) { return map[key] || (map[key] = { seen: 0, correct: 0, wrong: 0, streak: 0, lastSeen: "", nextReview: "" }); }
   function nextInterval(it, ok) { if (!ok) return 1; return it.streak <= 0 ? 1 : it.streak === 1 ? 3 : it.streak === 2 ? 7 : 14; }
   function addDays(dateStr, n) { const d = new Date(dateStr + "T00:00:00"); d.setDate(d.getDate() + n); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
@@ -118,6 +121,24 @@
     const q = shuf(pool, rnd)[0];
     return { kind: "reorder", key: q.id, label: "🧩 句子排序", q: `把詞塊排成正確句子（${q.zh}）`, chunks: shuf(q.chunks, rnd), correct: q.chunks, why: q.why, swap: q.swap };
   }
+  function emailQ(excl) {
+    if (typeof EMAIL_QS === "undefined") return null;
+    let pool = EMAIL_QS.filter(q => !excl.has(q.id) && (state.emailasm[q.id] || { streak: 0 }).streak < 2);
+    const tagged = pool.filter(q => q.tag === weekTag); if (tagged.length) pool = tagged;
+    if (!pool.length) return null;
+    pool.sort((a, b) => ((state.emailasm[a.id] || { seen: 0 }).seen - (state.emailasm[b.id] || { seen: 0 }).seen) || (R() - .5));
+    const q = pool[0];
+    return { kind: "emailasm", key: q.id, label: "📧 郵件組裝", q: `把這句寫成英文：「${q.zh}」`, chunks: shuf(q.chunks, rnd), correct: q.chunks, why: q.why, swap: q.swap };
+  }
+  function dialogQ(excl) {
+    if (typeof DIALOG_QS === "undefined") return null;
+    let pool = DIALOG_QS.filter(q => !excl.has(q.id) && (state.dialog[q.id] || { streak: 0 }).streak < 2);
+    const tagged = pool.filter(q => q.tag === weekTag); if (tagged.length) pool = tagged;
+    if (!pool.length) return null;
+    pool.sort((a, b) => ((state.dialog[a.id] || { seen: 0 }).seen - (state.dialog[b.id] || { seen: 0 }).seen) || (R() - .5));
+    const q = pool[0];
+    return { kind: "dialog", key: q.id, label: "💬 對話回應", q: `客戶說：“${q.cue}”（${q.cueZh}）你回：`, choices: shuf(q.choices.map((label, i) => ({ label, ok: i === q.a ? 1 : 0 })), rnd), why: q.why, swap: q.swap };
+  }
   function grammarQ(prefTypes, excl) {
     let pool = GRAMMAR_QS.filter(g => !excl.has(g.id));
     const tagged = pool.filter(g => g.tag === weekTag);
@@ -136,6 +157,8 @@
       if (m.kind === "word") { const v = ADULT_VOCAB.find(x => x.en === m.id.split(":")[1]); if (v && !excl.has(v.en)) q = wordQ(v, R() < .5 ? "e2z" : "z2e"); }
       else if (m.kind === "zhterm") { const z = m.id.split(":")[1]; if (!excl.has(z)) { const bak = new Set([...excl]); q = zhtermQ(bak); if (q && q.key !== z) q = null; else if (!q) q = null; } }
       else if (m.kind === "repairfix" || m.kind === "reorder") q = repairfixQ(excl, m.code);   // 同錯點、不同句
+      else if (m.kind === "emailasm") { const e = (typeof EMAIL_QS !== "undefined") && EMAIL_QS.find(x => x.id === m.id.split(":")[1]); if (e && !excl.has(e.id)) q = { kind: "emailasm", key: e.id, label: "📧 郵件組裝", q: `把這句寫成英文：「${e.zh}」`, chunks: shuf(e.chunks, rnd), correct: e.chunks, why: e.why, swap: e.swap }; }
+      else if (m.kind === "dialog") { const d = (typeof DIALOG_QS !== "undefined") && DIALOG_QS.find(x => x.id === m.id.split(":")[1]); if (d && !excl.has(d.id)) q = { kind: "dialog", key: d.id, label: "💬 對話回應", q: `客戶說：“${d.cue}”（${d.cueZh}）你回：`, choices: shuf(d.choices.map((label, i) => ({ label, ok: i === d.a ? 1 : 0 })), rnd), why: d.why, swap: d.swap }; }
       else { const g = GRAMMAR_QS.find(x => x.id === m.id.split(":")[1]); if (g && !excl.has(g.id)) q = { kind: "grammar", key: g.id, label: "✍️ 句型", q: g.q, choices: shuf(g.c.map((label, i) => ({ label, ok: i === g.a ? 1 : 0 })), rnd), why: g.why, swap: g.swap }; }
       if (q && !excl.has(q.key)) { out.push(q); excl.add(q.key); }
     }
@@ -165,8 +188,9 @@
       add(rot === 0 ? (repairfixQ(excl, wrongCode && wrongCode[0]) || grammarQ(["B"], excl))
         : rot === 1 ? (grammarQ(["B"], excl) || repairfixQ(excl))
         : (reorderQ(excl) || repairfixQ(excl)));
-      // 槽4 功能句：禮貌/自然 輪替（P2 將換郵件組裝/對話回應）
-      add(grammarQ(dayIdx % 2 ? ["D"] : ["A"], excl));
+      // 槽4 功能句：郵件組裝 / 對話回應 隔日輪替（fallback 禮貌/自然句）
+      add(dayIdx % 2 ? (emailQ(excl) || dialogQ(excl) || grammarQ(["D"], excl))
+                     : (dialogQ(excl) || emailQ(excl) || grammarQ(["A"], excl)));
       // 槽5 聽說槽（P3 前：中→英 或 時態）
       add(dayIdx % 2 ? (grammarQ(["C"], excl) || zhtermQ(excl)) : (zhtermQ(excl) || grammarQ(["C"], excl)));
     }

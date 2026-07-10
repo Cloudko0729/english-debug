@@ -1,0 +1,1404 @@
+{
+ "items": [
+  {
+   "id": "dg_001",
+   "tag": "repair",
+   "cue": "Any update on the repair?",
+   "cueZh": "維修有進度嗎？",
+   "choices": [
+    "We are checking the root cause and will update you by Friday.",
+    "I don't know, the engineer not tell me.",
+    "You ask too fast, please wait."
+   ],
+   "a": 0,
+   "why": "說明現況並給期限",
+   "swap": "Do you have any repair status now?"
+  },
+  {
+   "id": "dg_002",
+   "tag": "repair",
+   "cue": "Where are we with my unit?",
+   "cueZh": "我的設備現在到哪一步了？",
+   "choices": [
+    "Engineer still finding, I will tell you if have.",
+    "No result now. You just wait for our call.",
+    "It is under electrical testing now. I will update you tomorrow."
+   ],
+   "a": 2,
+   "why": "現況清楚且有下一步",
+   "swap": "What stage is the repair at?"
+  },
+  {
+   "id": "dg_003",
+   "tag": "repair",
+   "cue": "Has the engineer checked it yet?",
+   "cueZh": "工程師檢查過了嗎？",
+   "choices": [
+    "Maybe checked, but I am not sure this time.",
+    "Yes, testing started today. I will share results by Wednesday.",
+    "You ask engineer, not ask me."
+   ],
+   "a": 1,
+   "why": "回答問題再承諾回覆",
+   "swap": "Did your team start the inspection?"
+  },
+  {
+   "id": "dg_004",
+   "tag": "repair",
+   "cue": "Is my repair moving forward?",
+   "cueZh": "我的維修有在往前嗎？",
+   "choices": [
+    "Yes, we found one failed board and are testing the next part.",
+    "Of course moving, why you worry so much?",
+    "It should be moving, but many cases are waiting."
+   ],
+   "a": 0,
+   "why": "具體說明已完成步驟",
+   "swap": "Is there progress on the repair?"
+  },
+  {
+   "id": "dg_005",
+   "tag": "repair",
+   "cue": "Can you tell me the latest status?",
+   "cueZh": "可以告訴我最新狀態嗎？",
+   "choices": [
+    "Latest is not ready, I cannot say anything.",
+    "I need ask inside first, maybe later tell you.",
+    "The unit is in final test. I will confirm before 5 p.m."
+   ],
+   "a": 2,
+   "why": "給現況與明確時間",
+   "swap": "What is the latest update?"
+  },
+  {
+   "id": "dg_006",
+   "tag": "repair",
+   "cue": "Why is there no update this week?",
+   "cueZh": "為什麼這週都沒有更新？",
+   "choices": [
+    "Because no update, so we didn't call you.",
+    "Sorry for the delay. Testing took longer, and I will update you today.",
+    "Our engineer is very busy, please understand."
+   ],
+   "a": 1,
+   "why": "先致歉再給動作",
+   "swap": "I have not heard anything this week."
+  },
+  {
+   "id": "dg_007",
+   "tag": "repair",
+   "cue": "Can I get a status before lunch?",
+   "cueZh": "午餐前可以給我狀態嗎？",
+   "choices": [
+    "Yes, I will check now and call you before noon.",
+    "Before lunch is too hurry for us.",
+    "If engineer answer me, maybe I can tell you."
+   ],
+   "a": 0,
+   "why": "接受需求並給時點",
+   "swap": "Please update me by noon."
+  },
+  {
+   "id": "dg_008",
+   "tag": "repair",
+   "cue": "Is the repair almost finished?",
+   "cueZh": "維修快完成了嗎？",
+   "choices": [
+    "Almost maybe, but don't push our engineer.",
+    "You wait shipment notice, okay?",
+    "It passed repair and is in burn-in test today."
+   ],
+   "a": 2,
+   "why": "用測試階段回答進度",
+   "swap": "Are you close to finishing it?"
+  },
+  {
+   "id": "dg_009",
+   "tag": "delivery",
+   "cue": "We need this back urgently.",
+   "cueZh": "我們急著要拿回來。",
+   "choices": [
+    "Urgent is not only your company.",
+    "I understand. We will prioritize it and confirm the best date today.",
+    "You should send earlier, then no problem."
+   ],
+   "a": 1,
+   "why": "同理急件並承諾確認",
+   "swap": "This is urgent for our production."
+  },
+  {
+   "id": "dg_010",
+   "tag": "delivery",
+   "cue": "Can you finish it this week?",
+   "cueZh": "這週可以修好嗎？",
+   "choices": [
+    "We are checking parts now. I will confirm the schedule tomorrow.",
+    "This week impossible, don't think too much.",
+    "Maybe can, maybe cannot, I cannot promise."
+   ],
+   "a": 0,
+   "why": "不亂保證且給期限",
+   "swap": "Is this week possible?"
+  },
+  {
+   "id": "dg_011",
+   "tag": "delivery",
+   "cue": "Our line is waiting for this tool.",
+   "cueZh": "我們產線在等這台設備。",
+   "choices": [
+    "Your line waiting is not our control.",
+    "Then you need prepare backup by yourself.",
+    "I understand the impact. We will review options and reply today."
+   ],
+   "a": 2,
+   "why": "同理影響並給行動",
+   "swap": "This delay is affecting our line."
+  },
+  {
+   "id": "dg_012",
+   "tag": "delivery",
+   "cue": "Can you speed up the repair?",
+   "cueZh": "可以加快維修嗎？",
+   "choices": [
+    "Speed up need engineer mood, not my decision.",
+    "I will check the critical steps and update the fastest date.",
+    "Fast repair maybe make bad quality."
+   ],
+   "a": 1,
+   "why": "確認可加速處理點",
+   "swap": "Can this case be expedited?"
+  },
+  {
+   "id": "dg_013",
+   "tag": "delivery",
+   "cue": "The promised date has passed.",
+   "cueZh": "原本承諾的日期已經過了。",
+   "choices": [
+    "You are right. I will check the delay and give a new date today.",
+    "That date was only for reference, not promise.",
+    "Many things can delay, you should know."
+   ],
+   "a": 0,
+   "why": "承認問題並補新日期",
+   "swap": "You missed the delivery date."
+  },
+  {
+   "id": "dg_014",
+   "tag": "delivery",
+   "cue": "Can you ship before our shutdown?",
+   "cueZh": "可以在我們停機前出貨嗎？",
+   "choices": [
+    "Shutdown is your schedule, not ours.",
+    "Don't give us pressure with your shutdown.",
+    "Please share the shutdown date. I will check if shipping is possible."
+   ],
+   "a": 2,
+   "why": "先確認限制再評估",
+   "swap": "We need it before maintenance shutdown."
+  },
+  {
+   "id": "dg_015",
+   "tag": "delivery",
+   "cue": "Why is it taking so long?",
+   "cueZh": "為什麼花這麼久？",
+   "choices": [
+    "Repair always needs time, no need ask why.",
+    "We found an intermittent fault, so testing needs extra time.",
+    "Long time means the machine has big problem."
+   ],
+   "a": 1,
+   "why": "用原因解釋時程",
+   "swap": "What is causing the delay?"
+  },
+  {
+   "id": "dg_016",
+   "tag": "delivery",
+   "cue": "Can you commit to a delivery date?",
+   "cueZh": "你們可以承諾交期嗎？",
+   "choices": [
+    "Commit is hard, because engineer may change mind.",
+    "We don't like to promise date to customer.",
+    "Yes, after parts check today, I will send a confirmed date."
+   ],
+   "a": 2,
+   "why": "說明承諾前置條件",
+   "swap": "Please give me a firm delivery date."
+  },
+  {
+   "id": "dg_017",
+   "tag": "quotation",
+   "cue": "When will you send the quotation?",
+   "cueZh": "你們什麼時候會寄報價？",
+   "choices": [
+    "Quotation is preparing. I will send it by tomorrow afternoon.",
+    "Price not come out, so no quotation.",
+    "You wait, finance side is very slow."
+   ],
+   "a": 0,
+   "why": "明確告知報價時間",
+   "swap": "Can I get the quote soon?"
+  },
+  {
+   "id": "dg_018",
+   "tag": "quotation",
+   "cue": "How much will the repair cost?",
+   "cueZh": "這次維修會多少錢？",
+   "choices": [
+    "Cost depends, maybe expensive.",
+    "I cannot tell price before boss approves.",
+    "We are checking parts cost and will quote by Friday."
+   ],
+   "a": 2,
+   "why": "說明估價中並給期限",
+   "swap": "What is the estimated repair cost?"
+  },
+  {
+   "id": "dg_019",
+   "tag": "quotation",
+   "cue": "Why is the quotation not ready?",
+   "cueZh": "為什麼報價還沒好？",
+   "choices": [
+    "Because purchasing doesn't reply, not our problem.",
+    "We are confirming one part price and will update you today.",
+    "Quotation needs many people sign, so just wait."
+   ],
+   "a": 1,
+   "why": "解釋卡點與回覆時間",
+   "swap": "What is holding up the quote?"
+  },
+  {
+   "id": "dg_020",
+   "tag": "quotation",
+   "cue": "Can you give a rough price first?",
+   "cueZh": "可以先給大概價格嗎？",
+   "choices": [
+    "The rough estimate is USD 800 to 1,000, pending final check.",
+    "Rough price is not accurate, don't ask first.",
+    "Maybe very cheap, maybe very expensive."
+   ],
+   "a": 0,
+   "why": "可給範圍並註明待確認",
+   "swap": "Can I have a ballpark estimate?"
+  },
+  {
+   "id": "dg_021",
+   "tag": "quotation",
+   "cue": "Does the quote include shipping?",
+   "cueZh": "報價包含運費嗎？",
+   "choices": [
+    "You see quote by yourself, it is written there.",
+    "Yes, it includes return shipping, but not import duty.",
+    "Shipping always extra, you should know."
+   ],
+   "a": 1,
+   "why": "清楚說明包含項目",
+   "swap": "Is freight included in the quotation?"
+  },
+  {
+   "id": "dg_022",
+   "tag": "quotation",
+   "cue": "Can you resend the quotation?",
+   "cueZh": "可以重寄報價嗎？",
+   "choices": [
+    "Sure, I will resend it to you now.",
+    "You lost it? Please check your mail better.",
+    "I sent already, why need again?"
+   ],
+   "a": 0,
+   "why": "簡短接受並立即處理",
+   "swap": "Please send the quote again."
+  },
+  {
+   "id": "dg_023",
+   "tag": "quotation",
+   "cue": "Can you explain this line item?",
+   "cueZh": "可以說明這個報價項目嗎？",
+   "choices": [
+    "That item is normal, no need explain too much.",
+    "If you don't understand, ask your purchasing.",
+    "Yes, that line is for the replacement driver board."
+   ],
+   "a": 2,
+   "why": "直接解釋客戶疑問",
+   "swap": "What does this charge mean?"
+  },
+  {
+   "id": "dg_024",
+   "tag": "quotation",
+   "cue": "Is this the final price?",
+   "cueZh": "這是最終價格嗎？",
+   "choices": [
+    "Final or not depends on our manager.",
+    "Yes, this is the final repair price for this scope.",
+    "If you don't like it, we can discuss later."
+   ],
+   "a": 1,
+   "why": "確認範圍內最終價",
+   "swap": "Are there any extra costs?"
+  },
+  {
+   "id": "dg_025",
+   "tag": "quotation",
+   "cue": "Can you give us a discount?",
+   "cueZh": "可以給我們折扣嗎？",
+   "choices": [
+    "I will review the cost and check what discount is possible.",
+    "No discount. Our price is already very cheap.",
+    "You always ask discount, very difficult."
+   ],
+   "a": 0,
+   "why": "不直接拒絕並承諾確認",
+   "swap": "Is there any room for discount?"
+  },
+  {
+   "id": "dg_026",
+   "tag": "quotation",
+   "cue": "The price is too high.",
+   "cueZh": "價格太高了。",
+   "choices": [
+    "High is because your machine is broken badly.",
+    "You compare outside price first then tell me.",
+    "I understand. Let me review the cost breakdown with you."
+   ],
+   "a": 2,
+   "why": "先同理再說明成本",
+   "swap": "This quote is higher than expected."
+  },
+  {
+   "id": "dg_027",
+   "tag": "quotation",
+   "cue": "Can you match another vendor's price?",
+   "cueZh": "可以跟其他廠商同價嗎？",
+   "choices": [
+    "Other vendor price is not our business.",
+    "Please send their scope. We will compare it and reply tomorrow.",
+    "If they are cheaper, you can go there."
+   ],
+   "a": 1,
+   "why": "要求範圍再評估",
+   "swap": "Another vendor quoted lower."
+  },
+  {
+   "id": "dg_028",
+   "tag": "quotation",
+   "cue": "Can you remove the inspection fee?",
+   "cueZh": "可以免檢測費嗎？",
+   "choices": [
+    "The fee cannot remove, company rule.",
+    "We can waive it if you approve the full repair.",
+    "Inspection already done, why remove fee?"
+   ],
+   "a": 1,
+   "why": "給條件式方案",
+   "swap": "Can you waive the diagnosis charge?"
+  },
+  {
+   "id": "dg_029",
+   "tag": "quotation",
+   "cue": "We are a long-term customer.",
+   "cueZh": "我們是長期客戶。",
+   "choices": [
+    "Long-term customer also need pay correct price.",
+    "I know, but company doesn't care this point.",
+    "Thank you. I will ask for the best support we can offer."
+   ],
+   "a": 2,
+   "why": "肯定關係並爭取支援",
+   "swap": "Can you support us as a key customer?"
+  },
+  {
+   "id": "dg_030",
+   "tag": "quotation",
+   "cue": "Can you lower the labor charge?",
+   "cueZh": "工資可以降一點嗎？",
+   "choices": [
+    "Labor is labor, cannot less.",
+    "I will check if any labor adjustment is available.",
+    "Our engineer also need salary, okay?"
+   ],
+   "a": 1,
+   "why": "保留彈性並確認",
+   "swap": "Is the labor fee negotiable?"
+  },
+  {
+   "id": "dg_031",
+   "tag": "quotation",
+   "cue": "Can you give us your best price?",
+   "cueZh": "可以給我們最優惠價格嗎？",
+   "choices": [
+    "I will check the best price and reply by tomorrow.",
+    "Best price is already there, don't ask again.",
+    "If you want cheap, repair quality will be cheap."
+   ],
+   "a": 0,
+   "why": "承諾確認並給期限",
+   "swap": "Please offer your best price."
+  },
+  {
+   "id": "dg_032",
+   "tag": "quotation",
+   "cue": "Can you split the payment?",
+   "cueZh": "可以分期付款嗎？",
+   "choices": [
+    "Payment rule is fixed, ask accounting yourself.",
+    "No one pays like that in repair business.",
+    "I will check our payment options and get back to you."
+   ],
+   "a": 2,
+   "why": "不擅自答應付款條件",
+   "swap": "Do you allow partial payment?"
+  },
+  {
+   "id": "dg_033",
+   "tag": "repair",
+   "cue": "What caused the failure?",
+   "cueZh": "故障原因是什麼？",
+   "choices": [
+    "We found a shorted power module caused the failure.",
+    "Cause is machine old, so it broke.",
+    "Hard to say, maybe user side problem."
+   ],
+   "a": 0,
+   "why": "具體說明失效部位",
+   "swap": "Do you know the root cause?"
+  },
+  {
+   "id": "dg_034",
+   "tag": "repair",
+   "cue": "Is this a user issue?",
+   "cueZh": "這是使用者造成的問題嗎？",
+   "choices": [
+    "Maybe your operator used it wrong.",
+    "Of course not our repair problem.",
+    "We do not see user damage yet. Testing is still ongoing."
+   ],
+   "a": 2,
+   "why": "避免指責並說明狀態",
+   "swap": "Was it caused by our operation?"
+  },
+  {
+   "id": "dg_035",
+   "tag": "repair",
+   "cue": "Can you provide a failure report?",
+   "cueZh": "可以提供故障報告嗎？",
+   "choices": [
+    "Report takes time, so wait more.",
+    "Yes, we will send the report after final test.",
+    "Why need report? Quotation is enough."
+   ],
+   "a": 1,
+   "why": "答應文件並給條件",
+   "swap": "Can we get a root cause report?"
+  },
+  {
+   "id": "dg_036",
+   "tag": "repair",
+   "cue": "Why did it fail again?",
+   "cueZh": "為什麼又故障了？",
+   "choices": [
+    "Maybe your site condition is not good.",
+    "We will compare both cases and check for repeated failure.",
+    "Again fail means the tool is bad."
+   ],
+   "a": 1,
+   "why": "比對前後案件找原因",
+   "swap": "This is the second failure."
+  },
+  {
+   "id": "dg_037",
+   "tag": "repair",
+   "cue": "Is the board damaged?",
+   "cueZh": "板子壞了嗎？",
+   "choices": [
+    "Yes, the driver board failed and needs replacement.",
+    "Board maybe bad, maybe not bad.",
+    "You see? The board is already no good."
+   ],
+   "a": 0,
+   "why": "直接回答並說下一步",
+   "swap": "Did the driver board fail?"
+  },
+  {
+   "id": "dg_038",
+   "tag": "repair",
+   "cue": "Did shipping damage the unit?",
+   "cueZh": "是運送造成損壞嗎？",
+   "choices": [
+    "Shipping company always not careful.",
+    "If damaged, you need claim by yourself.",
+    "We found no shipping damage during incoming inspection."
+   ],
+   "a": 2,
+   "why": "根據入廠檢查回覆",
+   "swap": "Was there any transport damage?"
+  },
+  {
+   "id": "dg_039",
+   "tag": "repair",
+   "cue": "Can you explain the test result?",
+   "cueZh": "可以說明測試結果嗎？",
+   "choices": [
+    "Test result is technical, maybe hard for you.",
+    "Sure. The output voltage is unstable during load test.",
+    "It failed test, that is the result."
+   ],
+   "a": 1,
+   "why": "用簡單技術語說明",
+   "swap": "What did the test show?"
+  },
+  {
+   "id": "dg_040",
+   "tag": "repair",
+   "cue": "Is the root cause confirmed?",
+   "cueZh": "根因確認了嗎？",
+   "choices": [
+    "Yes, a failed capacitor caused unstable power output.",
+    "Confirmed or not is internal information.",
+    "Root cause is too difficult to explain."
+   ],
+   "a": 0,
+   "why": "確認根因並簡述",
+   "swap": "Have you confirmed the cause?"
+  },
+  {
+   "id": "dg_041",
+   "tag": "service",
+   "cue": "Do you have a loaner unit?",
+   "cueZh": "你們有借機嗎？",
+   "choices": [
+    "Loaner is not always for every customer.",
+    "You should buy spare unit for emergency.",
+    "I will check loaner stock and confirm today."
+   ],
+   "a": 2,
+   "why": "先查庫存並給時點",
+   "swap": "Can we borrow a replacement unit?"
+  },
+  {
+   "id": "dg_042",
+   "tag": "service",
+   "cue": "Can you lend us a unit during repair?",
+   "cueZh": "維修期間可以借我們一台嗎？",
+   "choices": [
+    "Borrow unit is troublesome for us.",
+    "I can check availability and the loaner terms for you.",
+    "No, because customer often damage loaner."
+   ],
+   "a": 1,
+   "why": "確認可用性與條件",
+   "swap": "Do you offer loaners while repairing?"
+  },
+  {
+   "id": "dg_043",
+   "tag": "service",
+   "cue": "We need a backup by tomorrow.",
+   "cueZh": "我們明天前需要備機。",
+   "choices": [
+    "I understand. I will check stock and reply before 3 p.m.",
+    "Tomorrow is too hurry, not possible.",
+    "Backup is your own responsibility."
+   ],
+   "a": 0,
+   "why": "同理急迫並給回覆",
+   "swap": "Can you arrange a backup tomorrow?"
+  },
+  {
+   "id": "dg_044",
+   "tag": "service",
+   "cue": "Is the loaner free of charge?",
+   "cueZh": "借機是免費的嗎？",
+   "choices": [
+    "Free or not depends, I don't know.",
+    "Why always ask free service?",
+    "It is free for warranty cases, excluding shipping."
+   ],
+   "a": 2,
+   "why": "清楚說明費用條件",
+   "swap": "Will there be a loaner fee?"
+  },
+  {
+   "id": "dg_045",
+   "tag": "service",
+   "cue": "How soon can the loaner arrive?",
+   "cueZh": "借機最快何時會到？",
+   "choices": [
+    "It arrives when logistics deliver it.",
+    "If approved today, it can arrive on Thursday.",
+    "You should ask forwarder, not us."
+   ],
+   "a": 1,
+   "why": "提供條件與到貨日",
+   "swap": "When can we receive the loaner?"
+  },
+  {
+   "id": "dg_046",
+   "tag": "service",
+   "cue": "Can we keep the loaner longer?",
+   "cueZh": "借機可以多留幾天嗎？",
+   "choices": [
+    "I will check the next booking and reply today.",
+    "No, other customer also wants it.",
+    "If you keep longer, we will be unhappy."
+   ],
+   "a": 0,
+   "why": "確認排程後再回覆",
+   "swap": "Can we extend the loaner period?"
+  },
+  {
+   "id": "dg_047",
+   "tag": "service",
+   "cue": "What documents do you need for a loaner?",
+   "cueZh": "借機需要哪些文件？",
+   "choices": [
+    "Documents are many, we will tell later.",
+    "You should know our loaner process already.",
+    "We need the signed loaner form and shipping address."
+   ],
+   "a": 2,
+   "why": "列出必要文件",
+   "swap": "What is required to borrow a unit?"
+  },
+  {
+   "id": "dg_048",
+   "tag": "service",
+   "cue": "Can the loaner match our model?",
+   "cueZh": "借機型號能跟我們一樣嗎？",
+   "choices": [
+    "Same model is hard, don't expect too much.",
+    "I will check the same model first, then offer alternatives.",
+    "Similar is okay enough, no need same."
+   ],
+   "a": 1,
+   "why": "優先同型號再備案",
+   "swap": "Do you have the same model loaner?"
+  },
+  {
+   "id": "dg_049",
+   "tag": "meeting",
+   "cue": "Can we schedule a call?",
+   "cueZh": "可以安排通話嗎？",
+   "choices": [
+    "Yes, I am available at 10 a.m. or 3 p.m. tomorrow.",
+    "Call anytime if I have free time.",
+    "Why need call? Email is enough."
+   ],
+   "a": 0,
+   "why": "提供明確時段選項",
+   "swap": "Can we set up a meeting?"
+  },
+  {
+   "id": "dg_050",
+   "tag": "meeting",
+   "cue": "Are you available this afternoon?",
+   "cueZh": "你今天下午有空嗎？",
+   "choices": [
+    "Afternoon maybe, but I cannot promise.",
+    "Today very full, you choose other day.",
+    "Yes, I am available from 2 to 4 p.m."
+   ],
+   "a": 2,
+   "why": "直接回覆可用時段",
+   "swap": "Can we talk later today?"
+  },
+  {
+   "id": "dg_051",
+   "tag": "meeting",
+   "cue": "Can your engineer join the video meeting?",
+   "cueZh": "工程師可以參加視訊嗎？",
+   "choices": [
+    "Engineer is shy to talk with customer.",
+    "Yes, I will invite our engineer and send a meeting link.",
+    "Engineer is too busy, don't need join."
+   ],
+   "a": 1,
+   "why": "答應並說明安排",
+   "swap": "Can the engineer join our call?"
+  },
+  {
+   "id": "dg_052",
+   "tag": "meeting",
+   "cue": "Can we visit your site next week?",
+   "cueZh": "我們下週可以去你們那邊嗎？",
+   "choices": [
+    "Please share your preferred date, and I will arrange a visit.",
+    "Visit is not easy, you need many approvals.",
+    "Why you want to come? We can email."
+   ],
+   "a": 0,
+   "why": "請客戶給時段並安排",
+   "swap": "Can we come to your office next week?"
+  },
+  {
+   "id": "dg_053",
+   "tag": "meeting",
+   "cue": "Can we move the meeting earlier?",
+   "cueZh": "會議可以提前嗎？",
+   "choices": [
+    "Earlier is inconvenient for everyone.",
+    "You changed time again, very hard.",
+    "Yes, I can do 9 a.m. tomorrow if that works."
+   ],
+   "a": 2,
+   "why": "提供可行替代時段",
+   "swap": "Can we have the meeting sooner?"
+  },
+  {
+   "id": "dg_054",
+   "tag": "meeting",
+   "cue": "Can we postpone the call?",
+   "cueZh": "通話可以延後嗎？",
+   "choices": [
+    "Postpone again? This is not good.",
+    "Sure, would 4 p.m. tomorrow work for you?",
+    "Then you tell me when you are free."
+   ],
+   "a": 1,
+   "why": "接受並提出新時段",
+   "swap": "Can we reschedule the call?"
+  },
+  {
+   "id": "dg_055",
+   "tag": "meeting",
+   "cue": "Who will attend the meeting?",
+   "cueZh": "誰會參加會議？",
+   "choices": [
+    "I and our repair engineer will attend the meeting.",
+    "Our side will send people, don't worry.",
+    "Maybe me, maybe engineer, depends."
+   ],
+   "a": 0,
+   "why": "明確告知出席者",
+   "swap": "Who will join from your team?"
+  },
+  {
+   "id": "dg_056",
+   "tag": "meeting",
+   "cue": "Please send a calendar invite.",
+   "cueZh": "請寄行事曆邀請。",
+   "choices": [
+    "You can make invite by yourself.",
+    "Invite is not necessary, just remember time.",
+    "Sure, I will send the calendar invite now."
+   ],
+   "a": 2,
+   "why": "接受請求並立即處理",
+   "swap": "Can you send the meeting invite?"
+  },
+  {
+   "id": "dg_057",
+   "tag": "general",
+   "cue": "The symptom appears only under load.",
+   "cueZh": "症狀只在負載下出現。",
+   "choices": [
+    "Sorry, could you repeat that more slowly?",
+    "Your English is too fast for me.",
+    "I cannot understand your technical words."
+   ],
+   "a": 0,
+   "why": "禮貌請對方放慢",
+   "swap": "It happens only during high current."
+  },
+  {
+   "id": "dg_058",
+   "tag": "general",
+   "cue": "Please verify the intermittent alarm.",
+   "cueZh": "請確認間歇性警報。",
+   "choices": [
+    "What? Please say easy English.",
+    "Your sentence is not clear to me.",
+    "Sorry, could you explain the alarm condition again?"
+   ],
+   "a": 2,
+   "why": "聚焦請重述條件",
+   "swap": "Please check the alarm that comes and goes."
+  },
+  {
+   "id": "dg_059",
+   "tag": "general",
+   "cue": "The waveform drops at startup.",
+   "cueZh": "波形在啟動時下降。",
+   "choices": [
+    "Startup and waveform, I don't know these.",
+    "Let me confirm: the waveform drops when the unit starts, correct?",
+    "Please don't use hard technical words."
+   ],
+   "a": 1,
+   "why": "用確認句核對理解",
+   "swap": "The signal falls when it powers on."
+  },
+  {
+   "id": "dg_060",
+   "tag": "general",
+   "cue": "Could you check the grounding path?",
+   "cueZh": "可以檢查接地路徑嗎？",
+   "choices": [
+    "I cannot catch the last part. Did you say grounding path?",
+    "Grounding path is too professional.",
+    "Your voice is bad, I cannot hear."
+   ],
+   "a": 0,
+   "why": "指出沒聽清並確認",
+   "swap": "Please inspect the ground connection."
+  },
+  {
+   "id": "dg_061",
+   "tag": "general",
+   "cue": "The issue happens once every few hours.",
+   "cueZh": "問題每幾小時發生一次。",
+   "choices": [
+    "You say many times but I still confused.",
+    "I don't know what you mean by few hours.",
+    "Sorry, do you mean it happens every few hours?"
+   ],
+   "a": 2,
+   "why": "用重述確認意思",
+   "swap": "It occurs every two or three hours."
+  },
+  {
+   "id": "dg_062",
+   "tag": "general",
+   "cue": "We saw arcing near the connector.",
+   "cueZh": "我們在接頭附近看到電弧。",
+   "choices": [
+    "Sorry, could you spell the word near the connector?",
+    "Arcing? This word I never hear.",
+    "Maybe you say wrong word."
+   ],
+   "a": 0,
+   "why": "禮貌請拼關鍵字",
+   "swap": "There was a spark near the connector."
+  },
+  {
+   "id": "dg_063",
+   "tag": "general",
+   "cue": "The pressure fluctuates during idle mode.",
+   "cueZh": "壓力在閒置模式時波動。",
+   "choices": [
+    "Your accent makes this hard to understand.",
+    "Sorry, could you say the pressure issue one more time?",
+    "Please type it, talking is too hard."
+   ],
+   "a": 1,
+   "why": "禮貌請對方重說",
+   "swap": "The pressure changes while idle."
+  },
+  {
+   "id": "dg_064",
+   "tag": "general",
+   "cue": "Please confirm the serial number suffix.",
+   "cueZh": "請確認序號後綴。",
+   "choices": [
+    "Suffix is what? I don't use this word.",
+    "Serial number is too long, just send photo.",
+    "Could you repeat the last two letters of the serial number?"
+   ],
+   "a": 2,
+   "why": "請重述關鍵資訊",
+   "swap": "Please check the last letters of the serial number."
+  },
+  {
+   "id": "dg_065",
+   "tag": "service",
+   "cue": "We are very unhappy with this delay.",
+   "cueZh": "我們對這次延誤非常不滿。",
+   "choices": [
+    "I am sorry for the delay. I will review it and update you today.",
+    "Delay happens, please don't be angry.",
+    "We also unhappy because parts are late."
+   ],
+   "a": 0,
+   "why": "致歉並給處理動作",
+   "swap": "This delay is unacceptable."
+  },
+  {
+   "id": "dg_066",
+   "tag": "service",
+   "cue": "Your communication has been poor.",
+   "cueZh": "你們溝通做得很差。",
+   "choices": [
+    "We are very busy, so sometimes no time reply.",
+    "You also did not give full information.",
+    "I am sorry. I will send clear updates every two days."
+   ],
+   "a": 2,
+   "why": "承認感受並改善頻率",
+   "swap": "We need better communication from you."
+  },
+  {
+   "id": "dg_067",
+   "tag": "service",
+   "cue": "This is not acceptable.",
+   "cueZh": "這樣我們不能接受。",
+   "choices": [
+    "I understand. Let me review the issue and propose a solution.",
+    "Not acceptable also no other way.",
+    "You need accept because repair is difficult."
+   ],
+   "a": 0,
+   "why": "同理後提出解法",
+   "swap": "We cannot accept this result."
+  },
+  {
+   "id": "dg_068",
+   "tag": "service",
+   "cue": "You promised to call me yesterday.",
+   "cueZh": "你們昨天說會打給我。",
+   "choices": [
+    "Maybe you remember wrong time.",
+    "Yesterday was too busy, so I forgot.",
+    "You are right. I am sorry, and I will call you now."
+   ],
+   "a": 2,
+   "why": "承認失誤並立即補救",
+   "swap": "I was waiting for your call yesterday."
+  },
+  {
+   "id": "dg_069",
+   "tag": "service",
+   "cue": "This problem keeps coming back.",
+   "cueZh": "這個問題一直重複發生。",
+   "choices": [
+    "Maybe your machine has many hidden problems.",
+    "I understand. We will review the history and test deeper.",
+    "If it comes back, you send again."
+   ],
+   "a": 1,
+   "why": "承接抱怨並查歷史",
+   "swap": "The same issue happened again."
+  },
+  {
+   "id": "dg_070",
+   "tag": "service",
+   "cue": "Your team made a mistake.",
+   "cueZh": "你們團隊犯錯了。",
+   "choices": [
+    "Our team usually doesn't make mistakes.",
+    "I will check what happened and come back with facts.",
+    "Mistake is hard to avoid, okay?"
+   ],
+   "a": 1,
+   "why": "先查事實不爭辯",
+   "swap": "I think your team caused this issue."
+  },
+  {
+   "id": "dg_071",
+   "tag": "service",
+   "cue": "I want to speak to your manager.",
+   "cueZh": "我要跟你們主管說話。",
+   "choices": [
+    "Manager is busy, talk to me first.",
+    "Talking to manager will not change anything.",
+    "I understand. I will ask my manager to contact you today."
+   ],
+   "a": 2,
+   "why": "接受升級並給期限",
+   "swap": "Please escalate this to your manager."
+  },
+  {
+   "id": "dg_072",
+   "tag": "service",
+   "cue": "We may stop working with you.",
+   "cueZh": "我們可能不再跟你們合作。",
+   "choices": [
+    "I am sorry to hear that. Let us review how to fix this.",
+    "That is your decision, no problem.",
+    "Other vendors also have problems."
+   ],
+   "a": 0,
+   "why": "重視關係並求補救",
+   "swap": "We are considering another supplier."
+  },
+  {
+   "id": "dg_073",
+   "tag": "logistics",
+   "cue": "Has the repaired unit shipped?",
+   "cueZh": "修好的設備出貨了嗎？",
+   "choices": [
+    "Maybe shipped, warehouse didn't tell me.",
+    "Yes, it shipped today. I will send the tracking number.",
+    "You can check with courier by yourself."
+   ],
+   "a": 1,
+   "why": "確認已出貨並給追蹤",
+   "swap": "Did you ship the repaired unit?"
+  },
+  {
+   "id": "dg_074",
+   "tag": "logistics",
+   "cue": "What is the tracking number?",
+   "cueZh": "追蹤號碼是多少？",
+   "choices": [
+    "Tracking number is in system, I need find.",
+    "Why you need tracking so fast?",
+    "The tracking number is 1Z45A8. I will email it now."
+   ],
+   "a": 2,
+   "why": "直接提供並補寄信",
+   "swap": "Can you send the tracking number?"
+  },
+  {
+   "id": "dg_075",
+   "tag": "logistics",
+   "cue": "When will it arrive at our site?",
+   "cueZh": "什麼時候會到我們廠區？",
+   "choices": [
+    "It should arrive on Thursday, based on the carrier schedule.",
+    "Carrier decides, not us.",
+    "Maybe this week if no accident."
+   ],
+   "a": 0,
+   "why": "提供預估到貨日依據",
+   "swap": "What is the estimated arrival date?"
+  },
+  {
+   "id": "dg_076",
+   "tag": "logistics",
+   "cue": "Can you ship it to our other plant?",
+   "cueZh": "可以寄到我們另一個廠嗎？",
+   "choices": [
+    "Changing address is troublesome now.",
+    "Yes, please send the new address before 2 p.m.",
+    "You should decide address earlier."
+   ],
+   "a": 1,
+   "why": "可配合並給截止",
+   "swap": "Can you change the shipping address?"
+  },
+  {
+   "id": "dg_077",
+   "tag": "logistics",
+   "cue": "Please confirm the package contents.",
+   "cueZh": "請確認包裹內容物。",
+   "choices": [
+    "Warehouse packs it, I don't know details.",
+    "You can open and check after receive.",
+    "The package includes the repaired unit and test report."
+   ],
+   "a": 2,
+   "why": "明確列出包裹內容",
+   "swap": "What is included in the shipment?"
+  },
+  {
+   "id": "dg_078",
+   "tag": "logistics",
+   "cue": "Was it packed safely?",
+   "cueZh": "包裝安全嗎？",
+   "choices": [
+    "Our package is always okay, don't worry.",
+    "Yes, we used foam protection and a shock label.",
+    "If courier damage it, not our problem."
+   ],
+   "a": 1,
+   "why": "具體說明保護方式",
+   "swap": "Did you use protective packing?"
+  },
+  {
+   "id": "dg_079",
+   "tag": "logistics",
+   "cue": "Can you hold the shipment until Monday?",
+   "cueZh": "可以延到週一再出貨嗎？",
+   "choices": [
+    "Yes, we will hold it and ship on Monday.",
+    "Why hold? We already prepared.",
+    "Holding shipment may make warehouse angry."
+   ],
+   "a": 0,
+   "why": "確認保留並給出貨日",
+   "swap": "Please do not ship before Monday."
+  },
+  {
+   "id": "dg_080",
+   "tag": "logistics",
+   "cue": "Did you include the invoice?",
+   "cueZh": "你們有放發票嗎？",
+   "choices": [
+    "Invoice should be there, maybe.",
+    "If missing, you ask accounting later.",
+    "Yes, the invoice is attached outside the box."
+   ],
+   "a": 2,
+   "why": "確認文件位置",
+   "swap": "Is the invoice with the shipment?"
+  },
+  {
+   "id": "dg_081",
+   "tag": "service",
+   "cue": "This should be covered by warranty.",
+   "cueZh": "這應該要算保固內。",
+   "choices": [
+    "Warranty or not is not decided by you.",
+    "I understand. I will check the warranty terms and case record.",
+    "Your warranty is maybe expired already."
+   ],
+   "a": 1,
+   "why": "不爭辯並查條款",
+   "swap": "We believe this is under warranty."
+  },
+  {
+   "id": "dg_082",
+   "tag": "service",
+   "cue": "Why are you charging us?",
+   "cueZh": "為什麼要跟我們收費？",
+   "choices": [
+    "Because your warranty already no use.",
+    "Charge is charge, company rule.",
+    "The damage is outside warranty. I can explain the reason."
+   ],
+   "a": 2,
+   "why": "說明原因並願意解釋",
+   "swap": "Why is this not free?"
+  },
+  {
+   "id": "dg_083",
+   "tag": "service",
+   "cue": "The unit failed right after repair.",
+   "cueZh": "設備剛修完就故障了。",
+   "choices": [
+    "Maybe you used it wrong after receiving.",
+    "I am sorry. We will review it as a possible warranty case.",
+    "After repair is not always our problem."
+   ],
+   "a": 1,
+   "why": "同理並納入保固審查",
+   "swap": "It broke again after your repair."
+  },
+  {
+   "id": "dg_084",
+   "tag": "service",
+   "cue": "Can you extend the warranty?",
+   "cueZh": "可以延長保固嗎？",
+   "choices": [
+    "Extend warranty is not possible for anyone.",
+    "Why need extend? Repair is already done.",
+    "I will check if an extension is possible for this case."
+   ],
+   "a": 2,
+   "why": "不立即拒絕並確認",
+   "swap": "Can we get more warranty time?"
+  },
+  {
+   "id": "dg_085",
+   "tag": "service",
+   "cue": "Your repair warranty should apply.",
+   "cueZh": "你們的維修保固應該適用。",
+   "choices": [
+    "I will check the repair date and warranty coverage today.",
+    "Warranty applies only if we say yes.",
+    "You cannot decide our warranty."
+   ],
+   "a": 0,
+   "why": "查日期與保固範圍",
+   "swap": "This should be under repair warranty."
+  },
+  {
+   "id": "dg_086",
+   "tag": "service",
+   "cue": "This damage was not caused by us.",
+   "cueZh": "這個損壞不是我們造成的。",
+   "choices": [
+    "Maybe, but many customers say same thing.",
+    "I understand. We will review photos and inspection records.",
+    "Damage must have a reason from your side."
+   ],
+   "a": 1,
+   "why": "用資料確認不指責",
+   "swap": "We did not cause this damage."
+  },
+  {
+   "id": "dg_087",
+   "tag": "service",
+   "cue": "Can you waive the charge under goodwill?",
+   "cueZh": "可以基於善意免收費嗎？",
+   "choices": [
+    "Goodwill is not easy, don't expect.",
+    "Free service will make us lose money.",
+    "I will request goodwill review and update you tomorrow."
+   ],
+   "a": 2,
+   "why": "轉善意審查並給時限",
+   "swap": "Can you cover this as goodwill?"
+  },
+  {
+   "id": "dg_088",
+   "tag": "service",
+   "cue": "Your warranty terms are unclear.",
+   "cueZh": "你們保固條款不清楚。",
+   "choices": [
+    "I am sorry. I will send the terms and explain the key points.",
+    "The terms are clear if you read carefully.",
+    "Legal words are always unclear, no way."
+   ],
+   "a": 0,
+   "why": "致歉並提供條款說明",
+   "swap": "I do not understand your warranty policy."
+  },
+  {
+   "id": "dg_089",
+   "tag": "meeting",
+   "cue": "We are here for the repair meeting.",
+   "cueZh": "我們是來開維修會議的。",
+   "choices": [
+    "Why come so early? Meeting is later.",
+    "Welcome. I will check you in and notify our team.",
+    "Please wait there, I am doing something."
+   ],
+   "a": 1,
+   "why": "歡迎並說明接待動作",
+   "swap": "We have a meeting with your repair team."
+  },
+  {
+   "id": "dg_090",
+   "tag": "meeting",
+   "cue": "Where should we wait?",
+   "cueZh": "我們應該在哪裡等？",
+   "choices": [
+    "You can stand here until engineer comes.",
+    "Just find a seat by yourself.",
+    "Please wait in this room. I will bring water."
+   ],
+   "a": 2,
+   "why": "安排地點並照顧需求",
+   "swap": "Is there a waiting room?"
+  },
+  {
+   "id": "dg_091",
+   "tag": "meeting",
+   "cue": "Can we see the repaired unit?",
+   "cueZh": "我們可以看修好的設備嗎？",
+   "choices": [
+    "Yes, I will bring it here after safety check.",
+    "You cannot touch it, only look far away.",
+    "Unit is inside, maybe later if engineer free."
+   ],
+   "a": 0,
+   "why": "答應並顧及安全",
+   "swap": "Can we inspect the unit today?"
+  },
+  {
+   "id": "dg_092",
+   "tag": "meeting",
+   "cue": "Do we need visitor badges?",
+   "cueZh": "我們需要訪客證嗎？",
+   "choices": [
+    "Badge rule is security side, not me.",
+    "If no badge, security may be angry.",
+    "Yes, please wear these badges during your visit."
+   ],
+   "a": 2,
+   "why": "清楚說明訪客規定",
+   "swap": "Should we wear visitor passes?"
+  },
+  {
+   "id": "dg_093",
+   "tag": "meeting",
+   "cue": "Can we take photos here?",
+   "cueZh": "我們可以在這裡拍照嗎？",
+   "choices": [
+    "Take photo if no one sees you.",
+    "Photos are allowed only in this area, not in the lab.",
+    "You should know photos are sensitive."
+   ],
+   "a": 1,
+   "why": "說明可拍與禁拍範圍",
+   "swap": "Is photography allowed here?"
+  },
+  {
+   "id": "dg_094",
+   "tag": "meeting",
+   "cue": "Who will guide us today?",
+   "cueZh": "今天誰會帶我們？",
+   "choices": [
+    "I will guide you and introduce our repair engineer.",
+    "Someone will come, please wait.",
+    "Guide is not needed, just follow us."
+   ],
+   "a": 0,
+   "why": "告知接待窗口",
+   "swap": "Who is our host today?"
+  },
+  {
+   "id": "dg_095",
+   "tag": "meeting",
+   "cue": "Can we enter the repair area?",
+   "cueZh": "我們可以進維修區嗎？",
+   "choices": [
+    "Repair area is messy, better not go.",
+    "Customers usually cannot go inside.",
+    "Yes, after safety briefing, we can escort you inside."
+   ],
+   "a": 2,
+   "why": "可入內但需安全流程",
+   "swap": "May we visit the repair lab?"
+  },
+  {
+   "id": "dg_096",
+   "tag": "meeting",
+   "cue": "Can you help us call a taxi?",
+   "cueZh": "可以幫我們叫計程車嗎？",
+   "choices": [
+    "Taxi is easy, you can call yourself.",
+    "Sure, I will call one and confirm the pickup time.",
+    "We don't provide this service normally."
+   ],
+   "a": 1,
+   "why": "協助並確認接送時間",
+   "swap": "Could you arrange a taxi for us?"
+  },
+  {
+   "id": "dg_097",
+   "tag": "repair",
+   "cue": "Did the final test pass?",
+   "cueZh": "最終測試通過了嗎？",
+   "choices": [
+    "Yes, it passed final test, and we are preparing shipment.",
+    "Final test maybe pass, I need check.",
+    "If fail, we will tell you."
+   ],
+   "a": 0,
+   "why": "回答結果並說下一步",
+   "swap": "Has the unit passed testing?"
+  },
+  {
+   "id": "dg_098",
+   "tag": "logistics",
+   "cue": "Can you ship it today?",
+   "cueZh": "今天可以出貨嗎？",
+   "choices": [
+    "Today is hard because warehouse very busy.",
+    "You should have told us earlier.",
+    "Yes, if payment is confirmed before 3 p.m."
+   ],
+   "a": 2,
+   "why": "提供出貨條件",
+   "swap": "Is same-day shipment possible?"
+  },
+  {
+   "id": "dg_099",
+   "tag": "quotation",
+   "cue": "Can you revise the quotation address?",
+   "cueZh": "可以修改報價單地址嗎？",
+   "choices": [
+    "Address wrong is your company problem.",
+    "Yes, please send the correct address and I will revise it.",
+    "Changing quotation is very troublesome."
+   ],
+   "a": 1,
+   "why": "請提供資料並處理",
+   "swap": "Please update the billing address."
+  },
+  {
+   "id": "dg_100",
+   "tag": "service",
+   "cue": "We need a clear recovery plan.",
+   "cueZh": "我們需要明確的補救計畫。",
+   "choices": [
+    "I will send a recovery plan with owners and dates today.",
+    "Recovery plan is too formal for this case.",
+    "We will try our best, please trust us."
+   ],
+   "a": 0,
+   "why": "承諾計畫含責任與日期",
+   "swap": "Please provide a corrective action plan."
+  }
+ ]
+}

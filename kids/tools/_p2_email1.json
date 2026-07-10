@@ -1,0 +1,724 @@
+{
+  "items": [
+    {
+      "id": "em_1_001",
+      "tag": "general",
+      "zh": "我們已收到您的詢問",
+      "chunks": ["We have received", "your inquiry", "and will review it."],
+      "why": "現在完成表示已收到",
+      "swap": "We have received your request and will check it."
+    },
+    {
+      "id": "em_1_002",
+      "tag": "general",
+      "zh": "感謝您聯絡我們",
+      "chunks": ["Thank you", "for contacting us", "about this issue."],
+      "why": "Thank you for 接名詞動名詞",
+      "swap": "Thank you for sending us the details."
+    },
+    {
+      "id": "em_1_003",
+      "tag": "general",
+      "zh": "我們會盡快回覆",
+      "chunks": ["We will", "reply", "as soon as possible."],
+      "why": "will 表示後續動作",
+      "swap": "We will update you as soon as possible."
+    },
+    {
+      "id": "em_1_004",
+      "tag": "repair",
+      "zh": "我們已收到您的維修詢問",
+      "chunks": ["We have received", "your repair inquiry", "today."],
+      "why": "完成式搭配 today 可用",
+      "swap": "We have received your service inquiry today."
+    },
+    {
+      "id": "em_1_005",
+      "tag": "service",
+      "zh": "我們正在確認您的需求",
+      "chunks": ["We are checking", "your request", "with our team."],
+      "why": "進行式表示正在處理",
+      "swap": "We are checking your case with our engineer."
+    },
+    {
+      "id": "em_1_006",
+      "tag": "general",
+      "zh": "我們需要一些更多資訊",
+      "chunks": ["We need", "a little more information", "from you."],
+      "why": "need 後接需要的資料",
+      "swap": "We need a little more time from you."
+    },
+    {
+      "id": "em_1_007",
+      "tag": "service",
+      "zh": "我們會先開立服務案件",
+      "chunks": ["We will open", "a service case", "first."],
+      "why": "open a case 表示立案",
+      "swap": "We will create a service ticket first."
+    },
+    {
+      "id": "em_1_008",
+      "tag": "general",
+      "zh": "請稍候我們的確認信",
+      "chunks": ["Please wait for", "our confirmation email", "later today."],
+      "why": "wait for 後接等待對象",
+      "swap": "Please wait for our update email later today."
+    },
+    {
+      "id": "em_1_009",
+      "tag": "repair",
+      "zh": "我們會安排工程師確認",
+      "chunks": ["We will ask", "an engineer", "to check it."],
+      "why": "ask 人 to 做某事",
+      "swap": "We will ask our technician to review it."
+    },
+    {
+      "id": "em_1_010",
+      "tag": "general",
+      "zh": "若有更新我們會通知您",
+      "chunks": ["We will inform you", "if there is", "any update."],
+      "why": "if 引導條件句",
+      "swap": "We will contact you if there is any change."
+    },
+    {
+      "id": "em_1_011",
+      "tag": "repair",
+      "zh": "請提供機台序號",
+      "chunks": ["Could you please", "provide", "the serial number", "of the unit?"],
+      "why": "Could you please 禮貌請求",
+      "swap": "Could you please provide the order number for us?"
+    },
+    {
+      "id": "em_1_012",
+      "tag": "repair",
+      "zh": "請提供機台型號",
+      "chunks": ["Could you please", "provide", "the model number", "of the unit?"],
+      "why": "provide 後接所需資訊",
+      "swap": "Could you please provide the product name for us?"
+    },
+    {
+      "id": "em_1_013",
+      "tag": "repair",
+      "zh": "請提供錯誤代碼",
+      "chunks": ["Please send us", "the error code", "on the screen."],
+      "why": "send us 後接資料",
+      "swap": "Please send us the warning message on the screen."
+    },
+    {
+      "id": "em_1_014",
+      "tag": "repair",
+      "zh": "請提供異常照片",
+      "chunks": ["Could you please send", "a clear photo", "of the issue?"],
+      "why": "photo of 表示某物照片",
+      "swap": "Could you please send a clear photo of the label?"
+    },
+    {
+      "id": "em_1_015",
+      "tag": "repair",
+      "zh": "請提供機台日誌",
+      "chunks": ["Please share", "the machine log", "for our review."],
+      "why": "for 表示用途",
+      "swap": "Please share the error log for our review."
+    },
+    {
+      "id": "em_1_016",
+      "tag": "service",
+      "zh": "請提供軟體版本",
+      "chunks": ["Could you please confirm", "the software version", "installed?"],
+      "why": "confirm 可用於確認資訊",
+      "swap": "Could you please confirm the firmware version installed?"
+    },
+    {
+      "id": "em_1_017",
+      "tag": "repair",
+      "zh": "請提供故障發生時間",
+      "chunks": ["Please tell us", "when the failure", "first occurred."],
+      "why": "when 引導時間資訊",
+      "swap": "Please tell us when the alarm first appeared."
+    },
+    {
+      "id": "em_1_018",
+      "tag": "repair",
+      "zh": "請說明目前機台狀態",
+      "chunks": ["Please describe", "the current status", "of the unit."],
+      "why": "describe 後接描述內容",
+      "swap": "Please describe the current condition of the tool."
+    },
+    {
+      "id": "em_1_019",
+      "tag": "repair",
+      "zh": "請確認是否仍可開機",
+      "chunks": ["Could you please confirm", "if the unit", "can power on?"],
+      "why": "if 表示是否",
+      "swap": "Could you please confirm if the screen can turn on?"
+    },
+    {
+      "id": "em_1_020",
+      "tag": "service",
+      "zh": "請提供客戶現場地址",
+      "chunks": ["Please provide", "the site address", "for service planning."],
+      "why": "address 可接 for 用途",
+      "swap": "Please provide the office address for shipment planning."
+    },
+    {
+      "id": "em_1_021",
+      "tag": "service",
+      "zh": "請告知聯絡窗口",
+      "chunks": ["Please share", "the contact person", "for this case."],
+      "why": "contact person 指窗口",
+      "swap": "Please share the phone number for this case."
+    },
+    {
+      "id": "em_1_022",
+      "tag": "service",
+      "zh": "請提供購買日期",
+      "chunks": ["Could you please provide", "the purchase date", "for reference?"],
+      "why": "for reference 表示供參考",
+      "swap": "Could you please provide the invoice date for reference?"
+    },
+    {
+      "id": "em_1_023",
+      "tag": "repair",
+      "zh": "請提供前次維修紀錄",
+      "chunks": ["Please send", "the previous repair record", "if available."],
+      "why": "if available 表示若有",
+      "swap": "Please send the previous test report if available."
+    },
+    {
+      "id": "em_1_024",
+      "tag": "service",
+      "zh": "請確認保固狀態",
+      "chunks": ["Could you please confirm", "the warranty status", "with us?"],
+      "why": "confirm 狀態很常用",
+      "swap": "Could you please confirm the service status with us?"
+    },
+    {
+      "id": "em_1_025",
+      "tag": "parts",
+      "zh": "請提供零件料號",
+      "chunks": ["Please provide", "the part number", "for checking stock."],
+      "why": "part number 指料號",
+      "swap": "Please provide the serial number for checking records."
+    },
+    {
+      "id": "em_1_026",
+      "tag": "parts",
+      "zh": "請確認需要的數量",
+      "chunks": ["Please confirm", "the quantity you need", "for this part."],
+      "why": "quantity 表示數量",
+      "swap": "Please confirm the date you need for this service."
+    },
+    {
+      "id": "em_1_027",
+      "tag": "logistics",
+      "zh": "請提供收貨人資訊",
+      "chunks": ["Please provide", "the receiver information", "for the return shipment."],
+      "why": "receiver information 收貨資訊",
+      "swap": "Please provide the billing information for the quotation."
+    },
+    {
+      "id": "em_1_028",
+      "tag": "logistics",
+      "zh": "請提供包裝照片",
+      "chunks": ["Could you please send", "photos of", "the package condition?"],
+      "why": "photos of 表示多張照片",
+      "swap": "Could you please send photos of the damaged label?"
+    },
+    {
+      "id": "em_1_029",
+      "tag": "repair",
+      "zh": "請確認電源與氣源",
+      "chunks": ["Please check", "the power and air supply", "first."],
+      "why": "check 後接檢查項目",
+      "swap": "Please check the cable and connector first."
+    },
+    {
+      "id": "em_1_030",
+      "tag": "repair",
+      "zh": "請描述錯誤發生步驟",
+      "chunks": ["Please describe", "the steps before", "the error appeared."],
+      "why": "before 表示先前步驟",
+      "swap": "Please describe the steps before the unit stopped."
+    },
+    {
+      "id": "em_1_031",
+      "tag": "repair",
+      "zh": "我們已收到機台",
+      "chunks": ["We have received", "the unit", "at our repair center."],
+      "why": "at 表示收件地點",
+      "swap": "We have received the tool at our service center."
+    },
+    {
+      "id": "em_1_032",
+      "tag": "parts",
+      "zh": "我們已收到零件",
+      "chunks": ["We have received", "the parts", "from your company."],
+      "why": "from 表示來源",
+      "swap": "We have received the samples from your company."
+    },
+    {
+      "id": "em_1_033",
+      "tag": "repair",
+      "zh": "我們已收到照片",
+      "chunks": ["We have received", "the photos", "and will review them."],
+      "why": "and 連接後續動作",
+      "swap": "We have received the files and will check them."
+    },
+    {
+      "id": "em_1_034",
+      "tag": "repair",
+      "zh": "我們已收到日誌檔",
+      "chunks": ["We have received", "the log file", "for analysis."],
+      "why": "analysis 表示分析用途",
+      "swap": "We have received the report file for review."
+    },
+    {
+      "id": "em_1_035",
+      "tag": "general",
+      "zh": "我們已收到您的文件",
+      "chunks": ["We have received", "your documents", "for this case."],
+      "why": "case 表示案件",
+      "swap": "We have received your photos for this case."
+    },
+    {
+      "id": "em_1_036",
+      "tag": "repair",
+      "zh": "機台已進入檢測流程",
+      "chunks": ["The unit has entered", "our inspection process", "today."],
+      "why": "has entered 表示已進入",
+      "swap": "The unit has entered our repair process today."
+    },
+    {
+      "id": "em_1_037",
+      "tag": "repair",
+      "zh": "我們會先檢查外觀",
+      "chunks": ["We will check", "the appearance", "before testing."],
+      "why": "before 接名詞動名詞",
+      "swap": "We will check the label before shipment."
+    },
+    {
+      "id": "em_1_038",
+      "tag": "logistics",
+      "zh": "我們正在核對附件",
+      "chunks": ["We are checking", "the accessories", "in the box."],
+      "why": "in the box 表示位置",
+      "swap": "We are checking the documents in the box."
+    },
+    {
+      "id": "em_1_039",
+      "tag": "logistics",
+      "zh": "包裹目前安全存放",
+      "chunks": ["The package is", "safely stored", "in our warehouse."],
+      "why": "被動語態描述狀態",
+      "swap": "The unit is safely stored in our warehouse."
+    },
+    {
+      "id": "em_1_040",
+      "tag": "repair",
+      "zh": "收件後會安排檢測",
+      "chunks": ["We will arrange", "inspection", "after receiving the unit."],
+      "why": "after 接動名詞",
+      "swap": "We will arrange testing after receiving the parts."
+    },
+    {
+      "id": "em_1_041",
+      "tag": "repair",
+      "zh": "工程師正在檢查機台",
+      "chunks": ["Our engineer", "is checking", "the unit now."],
+      "why": "進行式表示正在檢查",
+      "swap": "Our technician is checking the board now."
+    },
+    {
+      "id": "em_1_042",
+      "tag": "repair",
+      "zh": "檢測仍在進行中",
+      "chunks": ["The inspection", "is still", "in progress."],
+      "why": "in progress 表示進行中",
+      "swap": "The repair is still in progress."
+    },
+    {
+      "id": "em_1_043",
+      "tag": "repair",
+      "zh": "我們正在分析故障原因",
+      "chunks": ["We are analyzing", "the cause", "of the failure."],
+      "why": "cause of 表示原因",
+      "swap": "We are analyzing the cause of the alarm."
+    },
+    {
+      "id": "em_1_044",
+      "tag": "repair",
+      "zh": "我們已找到主要問題",
+      "chunks": ["We have found", "the main issue", "in the unit."],
+      "why": "have found 表示已找到",
+      "swap": "We have found the main problem in the board."
+    },
+    {
+      "id": "em_1_045",
+      "tag": "parts",
+      "zh": "需要更換一個零件",
+      "chunks": ["One part", "needs to be", "replaced."],
+      "why": "被動語態表示需更換",
+      "swap": "One cable needs to be replaced."
+    },
+    {
+      "id": "em_1_046",
+      "tag": "parts",
+      "zh": "零件目前缺貨",
+      "chunks": ["The required part", "is currently", "out of stock."],
+      "why": "out of stock 表示缺貨",
+      "swap": "The required sensor is currently out of stock."
+    },
+    {
+      "id": "em_1_047",
+      "tag": "parts",
+      "zh": "我們正在等候零件到貨",
+      "chunks": ["We are waiting for", "the replacement part", "to arrive."],
+      "why": "wait for 等待某物",
+      "swap": "We are waiting for the new sensor to arrive."
+    },
+    {
+      "id": "em_1_048",
+      "tag": "repair",
+      "zh": "維修預計明天完成",
+      "chunks": ["The repair", "is expected", "to finish tomorrow."],
+      "why": "is expected 表示預計",
+      "swap": "The inspection is expected to finish tomorrow."
+    },
+    {
+      "id": "em_1_049",
+      "tag": "repair",
+      "zh": "維修需要更多時間",
+      "chunks": ["The repair", "will need", "a little more time."],
+      "why": "a little 修飾程度",
+      "swap": "The inspection will need a little more time."
+    },
+    {
+      "id": "em_1_050",
+      "tag": "service",
+      "zh": "我們會更新新的完成日",
+      "chunks": ["We will update", "the new completion date", "soon."],
+      "why": "update 後接更新內容",
+      "swap": "We will update the new shipping date soon."
+    },
+    {
+      "id": "em_1_051",
+      "tag": "repair",
+      "zh": "機台已完成維修",
+      "chunks": ["The unit", "has been repaired", "successfully."],
+      "why": "完成被動表示已修好",
+      "swap": "The board has been repaired successfully."
+    },
+    {
+      "id": "em_1_052",
+      "tag": "repair",
+      "zh": "機台正在做最終測試",
+      "chunks": ["The unit", "is under", "final testing now."],
+      "why": "under testing 表示測試中",
+      "swap": "The board is under final testing now."
+    },
+    {
+      "id": "em_1_053",
+      "tag": "repair",
+      "zh": "我們正在做老化測試",
+      "chunks": ["We are running", "a burn-in test", "today."],
+      "why": "run a test 表示執行測試",
+      "swap": "We are running a function test today."
+    },
+    {
+      "id": "em_1_054",
+      "tag": "repair",
+      "zh": "測試結果目前正常",
+      "chunks": ["The test result", "is normal", "so far."],
+      "why": "so far 表示目前為止",
+      "swap": "The machine status is normal so far."
+    },
+    {
+      "id": "em_1_055",
+      "tag": "repair",
+      "zh": "測試中仍發現異常",
+      "chunks": ["We still found", "an abnormal issue", "during testing."],
+      "why": "during 表示期間",
+      "swap": "We still found a warning message during testing."
+    },
+    {
+      "id": "em_1_056",
+      "tag": "repair",
+      "zh": "需要重新檢查電路板",
+      "chunks": ["We need to", "recheck", "the control board."],
+      "why": "need to 後接原形動詞",
+      "swap": "We need to recheck the power module."
+    },
+    {
+      "id": "em_1_057",
+      "tag": "parts",
+      "zh": "工程師建議更換感測器",
+      "chunks": ["Our engineer recommends", "replacing", "the sensor."],
+      "why": "recommend 後接動名詞",
+      "swap": "Our engineer recommends replacing the cable."
+    },
+    {
+      "id": "em_1_058",
+      "tag": "repair",
+      "zh": "維修報告正在準備中",
+      "chunks": ["The repair report", "is being prepared", "now."],
+      "why": "is being 表示正在被",
+      "swap": "The test report is being prepared now."
+    },
+    {
+      "id": "em_1_059",
+      "tag": "repair",
+      "zh": "我們會附上檢測照片",
+      "chunks": ["We will attach", "the inspection photos", "later."],
+      "why": "attach 表示附上",
+      "swap": "We will attach the test report later."
+    },
+    {
+      "id": "em_1_060",
+      "tag": "service",
+      "zh": "請確認是否同意維修",
+      "chunks": ["Please confirm", "if you agree", "with the repair."],
+      "why": "agree with 表示同意",
+      "swap": "Please confirm if you agree with the quotation."
+    },
+    {
+      "id": "em_1_061",
+      "tag": "repair",
+      "zh": "機台無法開機",
+      "chunks": ["The unit", "cannot power on", "at this time."],
+      "why": "cannot 表示不能",
+      "swap": "The screen cannot turn on at this time."
+    },
+    {
+      "id": "em_1_062",
+      "tag": "repair",
+      "zh": "畫面顯示錯誤代碼",
+      "chunks": ["The screen shows", "an error code", "during startup."],
+      "why": "show 表示顯示",
+      "swap": "The screen shows a warning message during startup."
+    },
+    {
+      "id": "em_1_063",
+      "tag": "repair",
+      "zh": "我們發現連接線鬆動",
+      "chunks": ["We found", "a loose cable", "inside the unit."],
+      "why": "loose 表示鬆動",
+      "swap": "We found a damaged connector inside the unit."
+    },
+    {
+      "id": "em_1_064",
+      "tag": "parts",
+      "zh": "電源模組可能故障",
+      "chunks": ["The power module", "may be", "faulty."],
+      "why": "may be 表示可能是",
+      "swap": "The control board may be faulty."
+    },
+    {
+      "id": "em_1_065",
+      "tag": "repair",
+      "zh": "感測器讀值不穩定",
+      "chunks": ["The sensor reading", "is not stable", "during operation."],
+      "why": "during operation 表示運轉時",
+      "swap": "The pressure reading is not stable during operation."
+    },
+    {
+      "id": "em_1_066",
+      "tag": "repair",
+      "zh": "氣壓低於需求",
+      "chunks": ["The air pressure", "is lower than", "required."],
+      "why": "lower than 表示低於",
+      "swap": "The voltage is lower than required."
+    },
+    {
+      "id": "em_1_067",
+      "tag": "repair",
+      "zh": "溫度異常偏高",
+      "chunks": ["The temperature", "is higher than", "the normal range."],
+      "why": "higher than 表示高於",
+      "swap": "The pressure is higher than the normal range."
+    },
+    {
+      "id": "em_1_068",
+      "tag": "service",
+      "zh": "軟體版本不相容",
+      "chunks": ["The software version", "is not compatible", "with this unit."],
+      "why": "compatible with 表示相容",
+      "swap": "The firmware version is not compatible with this board."
+    },
+    {
+      "id": "em_1_069",
+      "tag": "parts",
+      "zh": "零件磨耗嚴重",
+      "chunks": ["The part shows", "heavy wear", "from long use."],
+      "why": "wear 表示磨耗",
+      "swap": "The belt shows heavy wear from long use."
+    },
+    {
+      "id": "em_1_070",
+      "tag": "logistics",
+      "zh": "外殼運送中受損",
+      "chunks": ["The cover", "was damaged", "during transportation."],
+      "why": "被動語態描述受損",
+      "swap": "The package was damaged during transportation."
+    },
+    {
+      "id": "em_1_071",
+      "tag": "parts",
+      "zh": "接頭有輕微氧化",
+      "chunks": ["The connector has", "slight oxidation", "on the surface."],
+      "why": "on the surface 表示表面",
+      "swap": "The board has slight damage on the surface."
+    },
+    {
+      "id": "em_1_072",
+      "tag": "repair",
+      "zh": "我們沒有發現漏液",
+      "chunks": ["We did not find", "any liquid leakage", "inside."],
+      "why": "did not find 表示未發現",
+      "swap": "We did not find any visible damage inside."
+    },
+    {
+      "id": "em_1_073",
+      "tag": "repair",
+      "zh": "故障可能由粉塵造成",
+      "chunks": ["The issue", "may be caused by", "dust buildup."],
+      "why": "caused by 表示由造成",
+      "swap": "The alarm may be caused by low pressure."
+    },
+    {
+      "id": "em_1_074",
+      "tag": "parts",
+      "zh": "保險絲已燒毀",
+      "chunks": ["The fuse", "has blown", "and needs replacement."],
+      "why": "has blown 表示燒毀",
+      "swap": "The relay has failed and needs replacement."
+    },
+    {
+      "id": "em_1_075",
+      "tag": "repair",
+      "zh": "馬達運轉聲音異常",
+      "chunks": ["The motor makes", "abnormal noise", "during operation."],
+      "why": "make noise 表示發出聲音",
+      "swap": "The fan makes abnormal noise during operation."
+    },
+    {
+      "id": "em_1_076",
+      "tag": "repair",
+      "zh": "初步測試已通過",
+      "chunks": ["The unit passed", "the initial test", "today."],
+      "why": "passed 表示通過測試",
+      "swap": "The board passed the initial test today."
+    },
+    {
+      "id": "em_1_077",
+      "tag": "repair",
+      "zh": "功能測試已完成",
+      "chunks": ["The function test", "has been", "completed."],
+      "why": "完成被動表示已完成",
+      "swap": "The pressure test has been completed."
+    },
+    {
+      "id": "em_1_078",
+      "tag": "repair",
+      "zh": "壓力測試結果正常",
+      "chunks": ["The pressure test result", "is", "normal."],
+      "why": "result is normal 常用回報",
+      "swap": "The voltage test result is normal."
+    },
+    {
+      "id": "em_1_079",
+      "tag": "repair",
+      "zh": "連續運轉測試通過",
+      "chunks": ["The continuous running test", "passed", "without issue."],
+      "why": "without issue 表示無異常",
+      "swap": "The final function test passed without issue."
+    },
+    {
+      "id": "em_1_080",
+      "tag": "repair",
+      "zh": "我們未能重現問題",
+      "chunks": ["We could not", "reproduce", "the reported issue."],
+      "why": "could not 表示未能",
+      "swap": "We could not reproduce the same alarm."
+    },
+    {
+      "id": "em_1_081",
+      "tag": "repair",
+      "zh": "問題在測試中再次出現",
+      "chunks": ["The issue appeared", "again", "during our test."],
+      "why": "again 表示再次",
+      "swap": "The alarm appeared again during our test."
+    },
+    {
+      "id": "em_1_082",
+      "tag": "parts",
+      "zh": "更換零件後測試通過",
+      "chunks": ["The unit passed", "testing", "after part replacement."],
+      "why": "after 表示之後",
+      "swap": "The board passed testing after cable replacement."
+    },
+    {
+      "id": "em_1_083",
+      "tag": "repair",
+      "zh": "清潔後機台恢復正常",
+      "chunks": ["The unit returned", "to normal", "after cleaning."],
+      "why": "return to normal 恢復正常",
+      "swap": "The reading returned to normal after calibration."
+    },
+    {
+      "id": "em_1_084",
+      "tag": "repair",
+      "zh": "校正後讀值穩定",
+      "chunks": ["The reading became", "stable", "after calibration."],
+      "why": "became 表示變成",
+      "swap": "The pressure became stable after adjustment."
+    },
+    {
+      "id": "em_1_085",
+      "tag": "repair",
+      "zh": "最終測試結果良好",
+      "chunks": ["The final test result", "is", "good."],
+      "why": "final 表示最終",
+      "swap": "The final inspection result is good."
+    },
+    {
+      "id": "em_1_086",
+      "tag": "service",
+      "zh": "我們會寄送測試報告",
+      "chunks": ["We will send", "the test report", "tomorrow."],
+      "why": "send 後接寄送內容",
+      "swap": "We will send the repair report tomorrow."
+    },
+    {
+      "id": "em_1_087",
+      "tag": "repair",
+      "zh": "報告會包含照片",
+      "chunks": ["The report will include", "photos", "from inspection."],
+      "why": "include 表示包含",
+      "swap": "The report will include results from testing."
+    },
+    {
+      "id": "em_1_088",
+      "tag": "logistics",
+      "zh": "請確認是否可以出貨",
+      "chunks": ["Please confirm", "if we can", "ship the unit."],
+      "why": "if we can 表示是否可",
+      "swap": "Please confirm if we can return the parts."
+    },
+    {
+      "id": "em_1_089",
+      "tag": "logistics",
+      "zh": "我們會安排退回機台",
+      "chunks": ["We will arrange", "return shipment", "for the unit."],
+      "why": "arrange shipment 安排出貨",
+      "swap": "We will arrange return shipment for the parts."
+    },
+    {
+      "id": "em_1_090",
+      "tag": "general",
+      "zh": "感謝您的耐心等待",
+      "chunks": ["Thank you", "for your patience", "during this repair."],
+      "why": "Thank you for 後接名詞",
+      "swap": "Thank you for your support during this case."
+    }
+  ]
+}
