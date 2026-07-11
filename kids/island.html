@@ -330,14 +330,14 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607110335"></script>
-<script src="curriculum.js?v=202607110335"></script>
-<script src="worddex.js?v=202607110335"></script>
-<script src="city_data.js?v=202607110335"></script>
+<script src="wordbank.js?v=202607110347"></script>
+<script src="curriculum.js?v=202607110347"></script>
+<script src="worddex.js?v=202607110347"></script>
+<script src="city_data.js?v=202607110347"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607110335"></script>
-<script src="account_lock.js?v=202607110335"></script>
-<script src="supabase_auth.js?v=202607110335"></script>
+<script src="cloud_sync.js?v=202607110347"></script>
+<script src="account_lock.js?v=202607110347"></script>
+<script src="supabase_auth.js?v=202607110347"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -644,6 +644,7 @@ function terrainBeauty() {
 function starMult(b) { return 1 + 1.0 * (b.star || 0); }
 function recalcStats() {
   let pop = 0, cap = 0, beauty = terrainBeauty(), baseProd = 0, food = 0;  // 地形提供基礎美化分
+  beauty += giftShelfBeauty();   // 兄弟送的禮物擺在禮物架上加美化（等級越高加越多）
   island.buildings.forEach(b => {
     const cat = BUILDINGS[b.type];
     const m = starMult(b);
@@ -999,6 +1000,48 @@ function demolish(buildingId) {
 
 function closeSheet() { document.getElementById("sheet").classList.remove("open"); }
 
+// ─── 兄弟送禮（禮物等級 ↔ 美化值；收禮進禮物架，不占島格）──────────────────────
+const SIB_GIFTS = [
+  { id: "card",   emoji: "💌", name: "心意卡片", cost: 50,  beauty: 2 },
+  { id: "flower", emoji: "💐", name: "花束",     cost: 150, beauty: 6 },
+  { id: "deluxe", emoji: "🎁", name: "豪華禮盒", cost: 300, beauty: 15 },
+];
+function giftShelfBeauty() {
+  return (island && island.giftShelf || []).reduce((a, g) => a + ((SIB_GIFTS.find(s => s.id === g.t) || { beauty: 0 }).beauty), 0);
+}
+window.sendSibGift = async function (tier) {
+  const g = SIB_GIFTS.find(x => x.id === tier);
+  const user = (typeof _sbUser === "function") ? await _sbUser() : null;
+  if (!user) { toast("要先登入才能送禮"); return; }
+  if (!_spendCoins(g.cost, "sibGift:" + tier + ":" + _mailTo)) return;
+  try {
+    const { error } = await window.sbClient.from("island_messages")
+      .insert({ sender_id: user.id, sender: currentStudent, recipient: _mailTo, body: "🎁GIFT|" + tier });
+    if (error) throw error;
+    toast(`${g.emoji} ${g.name}寄出去了！`);
+    openMail(_mailAll);
+  } catch (e) { toast("寄送失敗：" + (e.message || e)); }
+};
+window.claimGift = async function (msgId, tier, from) {
+  if (!island.giftsClaimed) island.giftsClaimed = [];
+  if (island.giftsClaimed.includes(msgId)) return;
+  const g = SIB_GIFTS.find(x => x.id === tier) || SIB_GIFTS[0];
+  island.giftsClaimed.push(msgId);
+  if (!island.giftShelf) island.giftShelf = [];
+  island.giftShelf.push({ t: tier, from, at: todayStr() });
+  recalcStats(); render();
+  saveIsland(currentStudent, island);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  toast(`${g.emoji} 拆開了 ${MAIL_LABEL[from] || from} 送的${g.name}！美化 +${g.beauty} ✨`);
+  // 自動回謝卡
+  try {
+    const user = await _sbUser();
+    if (user) await window.sbClient.from("island_messages")
+      .insert({ sender_id: user.id, sender: currentStudent, recipient: from, body: `謝謝你的${g.name}！我把它擺在禮物架上了 💛（自動回覆）` });
+  } catch (e) {}
+  openMail(_mailAll);
+};
+
 // ─── 島嶼信箱（跨帳號留言，存 Supabase island_messages）───────────────────────
 const MAIL_STUDENTS = ["albert", "jonathan", "ryder", "test"];
 const MAIL_LABEL = { albert: "Albert", jonathan: "Jonathan", ryder: "Ryder", test: "🧪 測試" };
@@ -1045,7 +1088,7 @@ async function openMail(showAll) {
   let rows = [];
   try {
     const { data, error } = await window.sbClient.from("island_messages")
-      .select("sender, recipient, body, created_at")
+      .select("id, sender, recipient, body, created_at")
       .or(`recipient.eq.${currentStudent},sender.eq.${currentStudent}`)
       .order("created_at", { ascending: false }).limit(limit);
     if (error) throw error;
@@ -1064,17 +1107,34 @@ async function openMail(showAll) {
     <textarea id="mailBody" maxlength="100" rows="2" placeholder="想跟他說什麼？（最多 100 字）"
       style="width:100%;box-sizing:border-box;border:2px solid #d9e2ec;border-radius:10px;padding:8px;font-size:.95rem;font-family:inherit"></textarea>
     <button onclick="sendMail()" style="margin-top:8px;width:100%;padding:10px;border:none;border-radius:10px;background:#2fbf71;color:#fff;font-weight:800;font-size:.95rem;cursor:pointer">📨 送出</button>
+    <div style="border-top:1px dashed #cde5d5;margin-top:10px;padding-top:8px">
+      <div style="font-weight:800;font-size:.85rem;margin-bottom:6px">或送一份禮物（會加對方島嶼的美化值 ✨）：</div>
+      <div style="display:flex;gap:6px">${SIB_GIFTS.map(g =>
+        `<button onclick="sendSibGift('${g.id}')" style="flex:1;padding:9px 4px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;font-size:.8rem">${g.emoji} ${g.name}<br><small>🪙${g.cost} · 美化+${g.beauty}</small></button>`).join("")}</div>
+    </div>
   </div>
+  ${(island.giftShelf && island.giftShelf.length) ? `<div style="background:#fff8e1;border:1.5px solid #f2d98a;border-radius:11px;padding:8px 12px;margin:8px 0;font-size:.84rem">🏆 <b>我的禮物架</b>（美化 +${giftShelfBeauty()} ✨）：${island.giftShelf.map(g => (SIB_GIFTS.find(s => s.id === g.t) || {}).emoji || "🎁").join(" ")}</div>` : ""}
   <div style="font-weight:800;font-size:.9rem;margin:12px 0 4px">最新訊息${_mailAll ? "（最多 100 筆）" : "（最新 10 筆）"}</div>`;
   if (!rows.length) h += `<p style="color:var(--muted);font-size:.88rem">還沒有訊息，寫第一封吧！</p>`;
   rows.forEach(m => {
     const out = m.sender === currentStudent;
-    h += `<div style="border-top:1px dashed #eee;padding:8px 2px;font-size:.9rem">
-      <div style="display:flex;justify-content:space-between;gap:8px">
+    const head = `<div style="display:flex;justify-content:space-between;gap:8px">
         <b style="color:${out ? "#1e5fb8" : "#187a48"}">${out ? "📤 我 → " + (MAIL_LABEL[m.recipient] || m.recipient) : "📥 " + (MAIL_LABEL[m.sender] || m.sender) + " → 我"}</b>
         <span style="color:var(--muted);font-size:.78rem;white-space:nowrap">${_mailTime(m.created_at)}</span>
-      </div>
+      </div>`;
+    if (m.body.startsWith("🎁GIFT|")) {
+      const tier = m.body.split("|")[1];
+      const g = SIB_GIFTS.find(x => x.id === tier) || SIB_GIFTS[0];
+      const claimed = (island.giftsClaimed || []).includes(m.id);
+      h += `<div style="border-top:1px dashed #eee;padding:8px 2px;font-size:.9rem">${head}
+        <div style="margin-top:4px;background:#fdeef4;border:1.5px solid #f3b8cd;border-radius:10px;padding:8px 12px">
+          ${g.emoji} <b>${g.name}</b>${out ? "（已寄出）" : claimed ? "（已拆開，美化 +" + g.beauty + " ✨）"
+            : ` <button onclick="claimGift(${m.id},'${tier}','${m.sender}')" style="margin-left:6px;padding:5px 14px;border:none;border-radius:9px;background:#ef476f;color:#fff;font-weight:800;cursor:pointer">🎀 拆禮物！</button>`}
+        </div></div>`;
+    } else {
+      h += `<div style="border-top:1px dashed #eee;padding:8px 2px;font-size:.9rem">${head}
       <div style="margin-top:2px;word-break:break-word">${_esc(m.body)}</div></div>`;
+    }
   });
   if (!_mailAll && rows.length >= 10)
     h += `<button onclick="openMail(true)" style="margin-top:10px;width:100%;padding:9px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer">📜 看更早的訊息（最多 100 筆）</button>`;
