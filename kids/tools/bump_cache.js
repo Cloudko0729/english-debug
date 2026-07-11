@@ -9,7 +9,7 @@ const KIDS = path.join(__dirname, "..");
 // 要蓋戳記的本站 script（CDN 不動）
 const TARGETS = ["daily_engine.js", "weekdrills.js", "structure_units.js",
   "curriculum.js", "worddex.js", "word_emoji.js", "wordbank.js",
-  "cloud_sync.js", "account_lock.js", "supabase_auth.js", "drills_list.js", "quizbank.js"];
+  "cloud_sync.js", "account_lock.js", "supabase_auth.js", "drills_list.js", "quizbank.js", "city_data.js"];
 
 function bump(file) {
   let h = fs.readFileSync(file, "utf8"), changed = false;

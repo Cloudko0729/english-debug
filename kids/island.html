@@ -294,7 +294,8 @@
   <div id="notice"></div>
   <div id="questRow" style="display:none;gap:8px;margin:8px 0;flex-wrap:wrap">
     <button id="boardBtn" onclick="openBoard()" style="flex:1;min-width:130px;padding:10px;border:2px solid #b5651d;border-radius:12px;background:#fff3e0;color:#8a4a12;font-weight:800;cursor:pointer">📋 島民委託板</button>
-    <button id="visitorBtn" onclick="openVisitor()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2f80ed;border-radius:12px;background:#eaf3ff;color:#1e5fb8;font-weight:800;cursor:pointer">🛶 今日訪客</button>
+    <button id="visitorBtn" onclick="openTravel()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2f80ed;border-radius:12px;background:#eaf3ff;color:#1e5fb8;font-weight:800;cursor:pointer">✈️ 今日旅客</button>
+    <button id="albumBtn" onclick="openAlbum()" style="flex:1;min-width:130px;padding:10px;border:2px solid #d4a017;border-radius:12px;background:#fff8e1;color:#8a6d1a;font-weight:800;cursor:pointer">📕 城市卡冊</button>
     <a href="worddex.html" style="flex:1;min-width:130px;padding:10px;border:2px solid #7c4dca;border-radius:12px;background:#f3edff;color:#5a36a8;font-weight:800;text-align:center;text-decoration:none">🎴 單字圖鑑</a>
     <button id="mailBtn" onclick="openMail()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2fbf71;border-radius:12px;background:#e9fbf1;color:#187a48;font-weight:800;cursor:pointer;position:relative">✉️ 島嶼信箱<span id="mailBadge" style="display:none;position:absolute;top:-8px;right:-6px;background:#ef476f;color:#fff;border-radius:11px;min-width:22px;height:22px;line-height:22px;font-size:.75rem;font-weight:900;padding:0 4px;box-shadow:0 1px 4px rgba(0,0,0,.3)"></span></button>
   </div>
@@ -321,13 +322,14 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607100354"></script>
-<script src="curriculum.js?v=202607100354"></script>
-<script src="worddex.js?v=202607100354"></script>
+<script src="wordbank.js?v=202607110306"></script>
+<script src="curriculum.js?v=202607110306"></script>
+<script src="worddex.js?v=202607110306"></script>
+<script src="city_data.js?v=202607110306"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607100354"></script>
-<script src="account_lock.js?v=202607100354"></script>
-<script src="supabase_auth.js?v=202607100354"></script>
+<script src="cloud_sync.js?v=202607110306"></script>
+<script src="account_lock.js?v=202607110306"></script>
+<script src="supabase_auth.js?v=202607110306"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -1200,7 +1202,255 @@ function updateQuestBtns() {
   const t = todayStr();
   const b = document.getElementById("boardBtn"), v = document.getElementById("visitorBtn");
   if (b) { const done = island.board && island.board.last === t; b.textContent = done ? "📋 今日委託完成 ✅" : "📋 島民委託板"; b.style.opacity = done ? ".55" : "1"; }
-  if (v) { const done = island.visitor && island.visitor.last === t; v.textContent = done ? "🛶 訪客已離開 ✅" : "🛶 今日訪客"; v.style.opacity = done ? ".55" : "1"; }
+  if (v) {
+    const ca = CA();
+    const done = ca.lastStampDate === t;
+    const allDone = Object.keys(ca.cards).length >= WORLD_CITIES.length;
+    v.textContent = allDone ? "✈️ 環遊世界完成 🏆" : done ? "✈️ 今日護照章 ✅" : "✈️ 今日旅客";
+    v.style.opacity = (done || allDone) ? ".55" : "1";
+  }
+}
+
+// ─── 世界城市卡：護照集章＋卡冊＋城市交流（設計：tools/_city_v2_final.md）──────
+function CA() {
+  if (!island.cityAlbum) island.cityAlbum = { version: 1, routeIndex: 0, currentStamps: 0, lastStampDate: "", cards: {}, friendship: {}, daily: { date: "", total: 0, per: {} } };
+  const ca = island.cityAlbum;
+  if (ca.daily.date !== todayStr()) ca.daily = { date: todayStr(), total: 0, per: {} };
+  return ca;
+}
+function curCity() { const ca = CA(); return WORLD_CITIES[Math.min(ca.routeIndex, WORLD_CITIES.length - 1)]; }
+function _cityAudio(id, kind) { const a = new Audio("audio/city/" + id + "_" + kind + ".mp3"); a.play().catch(() => {}); }
+function _spendCoins(n, why) {
+  const p = getProgress(currentStudent);
+  if ((p.coins.balance || 0) < n) { toast("金幣不夠（需要 " + n + "）"); return false; }
+  p.coins.balance -= n; p.coins.lifetimeSpent = (p.coins.lifetimeSpent || 0) + n;
+  p.coins.transactions.push({ type: "spend", source: "cityExchange", amount: n, balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { why } });
+  saveProgress(currentStudent, p); recalcStats();
+  return true;
+}
+// ── 今日旅客：集章任務 ──
+let _tq = null;
+function openTravel() {
+  const ca = CA();
+  if (Object.keys(ca.cards).length >= WORLD_CITIES.length) { toast("12 座城市全部收集完成！等第二批城市 🏆"); return; }
+  if (ca.lastStampDate === todayStr()) { toast("今天的護照章拿到了，明天再來！"); return; }
+  const c = curCity();
+  const others = WORLD_CITIES.filter(x => x.id !== c.id);
+  const pick3 = arr => arr.slice().sort(() => Math.random() - .5).slice(0, 3);
+  _tq = { done: 0, ok: 0, city: c, qs: [
+    { q: `${c.flag} ${c.city} is in ___ ?`, opts: [c.country].concat(pick3(others).map(x => x.country)).sort(() => Math.random() - .5), a: c.country },
+    { q: `${c.lmEmoji} The ${c.landmark} is in ___ ?`, opts: [c.city].concat(pick3(others).map(x => x.city)).sort(() => Math.random() - .5), a: c.city },
+  ], ro: { chunks: ["I want", "to visit", c.city + "."].sort(() => Math.random() - .5), correct: ["I want", "to visit", c.city + "."], picked: [] } };
+  let h = `<h3>✈️ ${c.flag} ${c.city} 之旅</h3>
+  <p style="color:var(--muted);font-size:.85rem;margin:4px 0 6px">護照章：${"●".repeat(ca.currentStamps)}${"○".repeat(3 - ca.currentStamps)}　再集 ${3 - ca.currentStamps} 枚換城市卡（答對 2 題以上蓋章）</p>`;
+  _tq.qs.forEach((q, i) => {
+    h += `<div id="tq${i}" style="border-top:1px dashed #eee;padding:10px 0"><div style="font-weight:700;margin-bottom:6px">${i + 1}. ${q.q}</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${q.opts.map(o => `<button onclick="travelAns(${i},'${o.replace(/'/g, "\\'")}',this)" style="padding:9px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer">${o}</button>`).join("")}</div></div>`;
+  });
+  h += `<div id="tq2" style="border-top:1px dashed #eee;padding:10px 0"><div style="font-weight:700;margin-bottom:6px">3. 排出正確句子（我想去${c.city}玩）</div>
+    <div id="troAnsw" style="display:flex;gap:6px;flex-wrap:wrap;min-height:34px;margin-bottom:6px"></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">${_tq.ro.chunks.map((ch, ci) => `<button id="tch${ci}" onclick="travelPick(${ci})" style="padding:9px 14px;border:2px solid #2f80ed;border-radius:10px;background:#fff;color:#1e5fb8;font-weight:700;cursor:pointer">${ch}</button>`).join("")}</div>
+    <div id="trofb" style="font-weight:700;margin-top:5px;min-height:1.3em"></div></div>
+  <div id="travelMsg" style="font-weight:800;margin-top:8px"></div>`;
+  document.getElementById("sheetContent").innerHTML = h;
+  document.getElementById("sheet").classList.add("open");
+}
+window.travelAns = function (i, val, btn) {
+  const box = document.getElementById("tq" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const ok = val === _tq.qs[i].a;
+  box.querySelectorAll("button").forEach(b => { b.disabled = true;
+    if (b.textContent === _tq.qs[i].a) { b.style.borderColor = "#2fbf71"; b.style.background = "#d9f7e8"; }
+    else if (b === btn) { b.style.borderColor = "#ef476f"; b.style.background = "#fde0e8"; } });
+  _tq.done++; if (ok) _tq.ok++;
+  if (_tq.done === 3) travelFinish();
+};
+window.travelPick = function (ci) {
+  if (document.getElementById("tq2").dataset.done) return;
+  const b = document.getElementById("tch" + ci); if (b.classList.contains("used")) return;
+  b.classList.add("used"); b.style.opacity = ".3"; b.style.pointerEvents = "none";
+  _tq.ro.picked.push(_tq.ro.chunks[ci]);
+  document.getElementById("troAnsw").innerHTML = _tq.ro.picked.map(t => `<span style="padding:8px 12px;border-radius:9px;background:#eaf3ff;color:#1e5fb8;font-weight:700">${t}</span>`).join("");
+  if (_tq.ro.picked.length === 3) {
+    document.getElementById("tq2").dataset.done = "1";
+    const ok = _tq.ro.picked.join(" ") === _tq.ro.correct.join(" ");
+    const fb = document.getElementById("trofb");
+    fb.textContent = ok ? "✓ 正確！" : "✗ 正解：" + _tq.ro.correct.join(" ");
+    fb.style.color = ok ? "#2fbf71" : "#ef476f";
+    _tq.done++; if (ok) _tq.ok++;
+    if (_tq.done === 3) travelFinish();
+  }
+};
+function travelFinish() {
+  const msg = document.getElementById("travelMsg"), ca = CA(), c = _tq.city;
+  if (_tq.ok < 2) {
+    msg.innerHTML = `答對 ${_tq.ok}/3，差一點！<button onclick="openTravel()" style="padding:6px 14px;border:none;border-radius:9px;background:#2f80ed;color:#fff;font-weight:700;cursor:pointer;margin-left:6px">再挑戰</button>`;
+    return;
+  }
+  ca.currentStamps++; ca.lastStampDate = todayStr();
+  if (ca.currentStamps >= 3) {
+    ca.cards[c.id] = { collectedAt: todayStr() };
+    ca.currentStamps = 0; ca.routeIndex = Math.min(ca.routeIndex + 1, WORLD_CITIES.length - 1);
+    msg.innerHTML = `🎉 集滿 3 枚章！獲得 <b>${c.flag} ${c.city} 城市卡</b>！<br><button onclick="openAlbum()" style="padding:8px 16px;border:none;border-radius:10px;background:#d4a017;color:#fff;font-weight:800;cursor:pointer;margin-top:6px">📕 打開卡冊看看</button>`;
+    _cityAudio(c.id, "visit");
+  } else {
+    msg.innerHTML = `✅ 蓋章成功（${ca.currentStamps}/3）！明天再來 ${c.flag} ${c.city} 繼續。`;
+    _cityAudio(c.id, "in");
+  }
+  saveIsland(currentStudent, island); updateQuestBtns();
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+}
+// ── 好感度 ──
+function frOf(id) { const ca = CA(); return ca.friendship[id] || (ca.friendship[id] = { pts: 0, prefsFound: [], lastGreet: "", lastAct: "" }); }
+function frLv(pts) { let lv = 0; FRIEND_LV.forEach((th, i) => { if (pts >= th) lv = i; }); return lv; }
+function addFr(id, pts, label) {
+  const ca = CA(), per = ca.daily.per[id] || (ca.daily.per[id] = { pts: 0, gift: 0 });
+  const room = Math.min(FRIEND_CAP_CITY - per.pts, FRIEND_CAP_DAY - ca.daily.total);
+  const real = Math.max(0, Math.min(pts, room));
+  if (real <= 0) { toast("今天這座城市的好感度滿了，明天再來！"); return 0; }
+  const f = frOf(id), lvBefore = frLv(f.pts);
+  f.pts += real; per.pts += real; ca.daily.total += real;
+  const lvAfter = frLv(f.pts);
+  toast(`${label} 好感度 +${real} 💛`);
+  if (lvAfter > lvBefore) {
+    const ex = CITY_EXCHANGE[id];
+    const unlocked = ex ? ex.cards.filter(cd => cd.lv === lvAfter) : [];
+    setTimeout(() => toast(`🎊 好感度升到 Lv${lvAfter}！` + (unlocked.length ? `解鎖「${unlocked[0].zh}」卡！` : "")), 1400);
+  }
+  saveIsland(currentStudent, island);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  return real;
+}
+window.doGreet = function (id) {
+  const f = frOf(id);
+  if (f.lastGreet === todayStr()) { toast("今天打過招呼囉！"); return; }
+  f.lastGreet = todayStr(); addFr(id, GREET_PTS, "👋 Hello!");
+  openAlbum(id);
+};
+window.doGift = function (id) {
+  const ca = CA(), per = ca.daily.per[id] || { gift: 0 };
+  if ((per.gift || 0) >= GIFT_PTS_CAP) { toast("今天送過禮物了，明天再送！"); return; }
+  const ex = CITY_EXCHANGE[id];
+  const pool = CITY_GIFTS.filter(g => g.id !== ex.pref).sort(() => Math.random() - .5).slice(0, 2);
+  const opts = [CITY_GIFTS.find(g => g.id === ex.pref)].concat(pool).sort(() => Math.random() - .5);
+  const c = WORLD_CITIES.find(x => x.id === id);
+  document.getElementById("sheetContent").innerHTML = `<h3>🎁 送禮物給 ${c.flag} ${c.city}</h3>
+    <p style="font-size:.88rem;background:#eaf3ff;border-radius:10px;padding:9px 13px">💡 線索：<i>${ex.clue}</i><br><span style="color:#888;font-size:.8rem">${ex.clueZh}——選對它最愛的，好感度加更多！（花費 ${GIFT_COST} 🪙）</span></p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">${opts.map(g =>
+      `<button onclick="giftPick('${id}','${g.id}')" style="flex:1;min-width:100px;padding:14px;border:2px solid #d9e2ec;border-radius:12px;background:#fff;cursor:pointer;font-weight:700"><div style="font-size:2rem">${g.emoji}</div>${g.en}<br><small style="color:#888">${g.zh}</small></button>`).join("")}</div>
+    <div id="giftMsg" style="font-weight:800;margin-top:10px"></div>`;
+  document.getElementById("sheet").classList.add("open");
+};
+window.giftPick = function (id, gid) {
+  if (!_spendCoins(GIFT_COST, "gift:" + id + ":" + gid)) return;
+  const ca = CA(), per = ca.daily.per[id] || (ca.daily.per[id] = { pts: 0, gift: 0 });
+  const ex = CITY_EXCHANGE[id], f = frOf(id), isPref = gid === ex.pref;
+  let pts = isPref ? GIFT_PREF_PTS : GIFT_PTS;
+  let bonus = "";
+  if (isPref && !f.prefsFound.includes(gid)) { f.prefsFound.push(gid); pts += 5; bonus = "（首次發現最愛 +5！記進喜好圖鑑 📖）"; }
+  per.gift = (per.gift || 0) + pts;
+  const g = CITY_GIFTS.find(x => x.id === gid);
+  document.getElementById("giftMsg").innerHTML = isPref
+    ? `💖 太棒了！${g.emoji} 正是它的最愛！${bonus}`
+    : `🙂 它收下了 ${g.emoji}，普通開心。`;
+  addFr(id, pts, "🎁");
+  setTimeout(() => openAlbum(id), 1800);
+};
+// ── 交流活動（3 題）──
+let _xa = null;
+window.doActivity = function (id) {
+  const f = frOf(id);
+  if (f.lastAct === todayStr()) { toast("今天辦過交流活動了！（重玩可以練習，不加好感）"); }
+  if (!_spendCoins(ACT_COST, "activity:" + id)) return;
+  const c = WORLD_CITIES.find(x => x.id === id);
+  const others = WORLD_CITIES.filter(x => x.id !== id).sort(() => Math.random() - .5);
+  const wpool = _learnedWords() || [];
+  const w = wpool.length ? wpool[Math.floor(Math.random() * wpool.length)] : { en: "apple", zh: "蘋果" };
+  const wopts = wpool.length >= 4 ? _mcOptions(w, wpool, 3) : [{ en: w.en }, { en: "book" }, { en: "cat" }, { en: "run" }];
+  const g = CITY_GIFTS[Math.floor(Math.random() * CITY_GIFTS.length)];
+  const gopts = [g].concat(CITY_GIFTS.filter(x => x.id !== g.id).sort(() => Math.random() - .5).slice(0, 2)).sort(() => Math.random() - .5);
+  _xa = { id, done: 0, ok: 0, first: f.lastAct !== todayStr(), qs: [
+    { q: `${c.lmEmoji} The ${c.landmark} is in ___ ?`, opts: [c.city].concat(others.slice(0, 3).map(x => x.city)).sort(() => Math.random() - .5), a: c.city },
+    { q: `「${w.zh}」的英文是？`, opts: wopts.map(o => o.en), a: w.en },
+    { q: `${g.emoji} 這個禮物的英文是？`, opts: gopts.map(o => o.en), a: g.en },
+  ] };
+  let h = `<h3>🎪 ${c.flag} ${c.city} 交流活動</h3><p style="color:var(--muted);font-size:.83rem">答對越多好感越多（+8/+14/+20）</p>`;
+  _xa.qs.forEach((q, i) => {
+    h += `<div id="xa${i}" style="border-top:1px dashed #eee;padding:10px 0"><div style="font-weight:700;margin-bottom:6px">${i + 1}. ${q.q}</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${q.opts.map(o => `<button onclick="actAns(${i},'${String(o).replace(/'/g, "\\'")}',this)" style="padding:9px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer">${o}</button>`).join("")}</div></div>`;
+  });
+  h += `<div id="xaMsg" style="font-weight:800;margin-top:8px"></div>`;
+  document.getElementById("sheetContent").innerHTML = h;
+  document.getElementById("sheet").classList.add("open");
+};
+window.actAns = function (i, val, btn) {
+  const box = document.getElementById("xa" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const ok = val === String(_xa.qs[i].a);
+  box.querySelectorAll("button").forEach(b => { b.disabled = true;
+    if (b.textContent === String(_xa.qs[i].a)) { b.style.borderColor = "#2fbf71"; b.style.background = "#d9f7e8"; }
+    else if (b === btn) { b.style.borderColor = "#ef476f"; b.style.background = "#fde0e8"; } });
+  _xa.done++; if (ok) _xa.ok++;
+  if (_xa.done === 3) {
+    const f = frOf(_xa.id), msg = document.getElementById("xaMsg");
+    if (_xa.first) {
+      f.lastAct = todayStr();
+      msg.textContent = `🎉 答對 ${_xa.ok}/3！`;
+      addFr(_xa.id, ACT_PTS[_xa.ok], "🎪");
+    } else msg.textContent = `練習完成（答對 ${_xa.ok}/3），好感今天已結算`;
+    setTimeout(() => openAlbum(_xa.id), 1600);
+  }
+};
+// ── 卡冊 ──
+function openAlbum(focusId) {
+  const ca = CA();
+  const got = Object.keys(ca.cards).length;
+  let h = `<h3>📕 世界城市卡冊 ${got}/${WORLD_CITIES.length}</h3>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0">`;
+  WORLD_CITIES.forEach(c => {
+    const has = !!ca.cards[c.id];
+    h += has
+      ? `<div onclick="openAlbum('${c.id}')" style="border:2px solid ${EXCHANGE_OPEN.includes(c.id) ? "#d4a017" : "#2fbf71"};border-radius:11px;padding:8px;text-align:center;background:#fff;cursor:pointer">
+          <div style="font-size:1.6rem">${c.flag}</div><b style="font-size:.82rem">${c.city}</b>
+          ${EXCHANGE_OPEN.includes(c.id) ? `<div style="font-size:.68rem;color:#8a6d1a">💛 Lv${frLv(frOf(c.id).pts)}</div>` : `<div style="font-size:.68rem;color:#888">${c.region}</div>`}</div>`
+      : `<div style="border:2px dashed #ccc;border-radius:11px;padding:8px;text-align:center;background:#f4f4f4;color:#aaa">
+          <div style="font-size:1.6rem">🌫️</div><b style="font-size:.82rem">???</b><div style="font-size:.68rem">${c.region}</div></div>`;
+  });
+  h += `</div>`;
+  if (focusId && ca.cards[focusId]) {
+    const c = WORLD_CITIES.find(x => x.id === focusId);
+    h += `<div style="border:2px solid #2f80ed;border-radius:14px;padding:12px;background:#f7faff;margin-top:6px">
+      <div style="display:flex;align-items:center;gap:8px"><span style="font-size:2rem">${c.flag}</span><div><b>${c.city}</b> · ${c.country}<br><small style="color:#888">收集日 ${ca.cards[focusId].collectedAt}</small></div></div>
+      <div style="margin-top:6px;font-size:.9rem">${c.lmEmoji} <b onclick="_cityAudio('${c.id}','lm')" style="cursor:pointer;color:#1e5fb8">🔊 The ${c.landmark} is in ${c.city}.</b></div>
+      <div style="font-size:.9rem"><b onclick="_cityAudio('${c.id}','visit')" style="cursor:pointer;color:#1e5fb8">🔊 I want to visit ${c.city}.</b></div>`;
+    if (EXCHANGE_OPEN.includes(focusId)) {
+      const f = frOf(focusId), lv = frLv(f.pts), ex = CITY_EXCHANGE[focusId];
+      const nextTh = FRIEND_LV[Math.min(lv + 1, FRIEND_LV.length - 1)];
+      const pct = lv >= 3 ? 100 : Math.min(100, Math.round(f.pts / nextTh * 100));
+      h += `<div style="margin-top:10px;border-top:1px dashed #cdd;padding-top:8px">
+        <b>💛 好感度 Lv${lv}</b> <small style="color:#888">${f.pts}${lv < 3 ? " / " + nextTh : "（一階滿級）"}</small>
+        <div style="background:#e5e9f0;border-radius:8px;height:10px;margin:4px 0"><div style="width:${pct}%;height:10px;border-radius:8px;background:#f2a900"></div></div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">
+          <button onclick="doGreet('${focusId}')" style="flex:1;padding:9px;border:2px solid #2fbf71;border-radius:10px;background:#e9fbf1;font-weight:800;cursor:pointer">👋 打招呼<br><small>免費 +${GREET_PTS}</small></button>
+          <button onclick="doGift('${focusId}')" style="flex:1;padding:9px;border:2px solid #ef8fb0;border-radius:10px;background:#fdeef4;font-weight:800;cursor:pointer">🎁 送禮物<br><small>${GIFT_COST}🪙</small></button>
+          <button onclick="doActivity('${focusId}')" style="flex:1;padding:9px;border:2px solid #7c4dca;border-radius:10px;background:#f3edff;font-weight:800;cursor:pointer">🎪 交流活動<br><small>${ACT_COST}🪙 3題</small></button>
+        </div>`;
+      ex.cards.forEach(cd => {
+        const un = lv >= cd.lv;
+        h += un
+          ? `<div style="border:2px solid #d4a017;border-radius:11px;padding:9px 11px;margin-top:8px;background:#fffbe9">
+              <b>${cd.emoji} ${cd.en}</b> <small>${cd.zh}</small><span style="float:right;font-size:.7rem;background:#d4a017;color:#fff;border-radius:5px;padding:1px 6px">${cd.type === "culture" ? "文化卡" : "景點卡"}</span>
+              <div style="font-size:.88rem;margin-top:3px"><b onclick="new Audio('audio/city/${cd.id}.mp3').play()" style="cursor:pointer;color:#1e5fb8">🔊 ${cd.sent}</b> <small style="color:#888">${cd.sentZh}</small></div>
+              <div style="font-size:.8rem;color:#666;margin-top:3px">📖 ${cd.fact}</div>
+              <div style="font-size:.76rem;color:#8a6d1a;margin-top:2px">單字：${cd.words.join(" / ")}</div></div>`
+          : `<div style="border:2px dashed #ccc;border-radius:11px;padding:9px 11px;margin-top:8px;background:#f6f6f6;color:#999;font-size:.85rem">🔒 ${cd.type === "culture" ? "文化卡" : "景點卡"}｜好感度 Lv${cd.lv} 解鎖</div>`;
+      });
+      h += `</div>`;
+    }
+    h += `</div>`;
+  } else if (!focusId) {
+    h += `<p style="color:var(--muted);font-size:.82rem">點已收集的城市看卡片；金框城市（台北/東京/倫敦）可以交流培養好感度，解鎖文化卡和景點卡！</p>`;
+  }
+  document.getElementById("sheetContent").innerHTML = h;
+  document.getElementById("sheet").classList.add("open");
 }
 let _bq = null;
 function openBoard() {
