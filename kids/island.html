@@ -330,14 +330,14 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607110843"></script>
-<script src="curriculum.js?v=202607110843"></script>
-<script src="worddex.js?v=202607110843"></script>
-<script src="city_data.js?v=202607110843"></script>
+<script src="wordbank.js?v=202607111346"></script>
+<script src="curriculum.js?v=202607111346"></script>
+<script src="worddex.js?v=202607111346"></script>
+<script src="city_data.js?v=202607111346"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607110843"></script>
-<script src="account_lock.js?v=202607110843"></script>
-<script src="supabase_auth.js?v=202607110843"></script>
+<script src="cloud_sync.js?v=202607111346"></script>
+<script src="account_lock.js?v=202607111346"></script>
+<script src="supabase_auth.js?v=202607111346"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -1713,6 +1713,11 @@ function finishVisitor() {
 
 // ─── Student select ──────────────────────────────────────────────────────────
 function selectStudent(name) {
+  if (name === "guest") {   // 訪客不能玩小島
+    document.getElementById("pickStudentMsg").innerHTML =
+      "🎫 訪客帳號不能玩小島喔！<br><br>小島需要用自己的帳號（進度才存得住）。<br>可以回首頁玩每日測驗、文法課程、打字遊戲。<br><br><a href='index.html' style='color:#2f80ed;font-weight:700'>← 回首頁</a>";
+    return;
+  }
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
   currentStudent = name;
   localStorage.setItem("kidsCurrentStudent", name);

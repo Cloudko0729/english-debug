@@ -16,6 +16,7 @@ function _setUnlocked(s) { localStorage.setItem("kidsUnlockedStudent", s); }
 
 // 切換到 student 前呼叫；回傳 true 才允許切換
 function requireUnlock(student) {
+  if (student === "guest") return true;         // 訪客免密碼（試玩帳號，資料只留本機）
   if (_getUnlocked() === student) return true;  // 這台平板已解鎖同一帳號
 
   const hash = _getPwHash();

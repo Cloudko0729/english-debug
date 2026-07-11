@@ -122,6 +122,7 @@
   <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
   <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
   <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
+  <button class="stu-btn" onclick="pickStudent('guest')">🎫 訪客</button>
   <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
 </div>
 <div id="statsRow"></div>
@@ -270,10 +271,10 @@
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607110843"></script>
-<script src="account_lock.js?v=202607110843"></script>
-<script src="supabase_auth.js?v=202607110843"></script>
-<script src="drills_list.js?v=202607110843"></script>
+<script src="cloud_sync.js?v=202607111346"></script>
+<script src="account_lock.js?v=202607111346"></script>
+<script src="supabase_auth.js?v=202607111346"></script>
+<script src="drills_list.js?v=202607111346"></script>
 <script>
 let _homeSynced = false;
 function pickStudent(name) {
@@ -293,6 +294,14 @@ function pickStudent(name) {
   if (peek) peek.textContent = coins;
   markDone(p);
   lockFutureDrills();   // 切換帳號後重新評估日期鎖（test 解鎖、其他鎖回）
+  // 訪客不能玩小島：把島嶼卡灰掉
+  const isGuest = name === "guest";
+  document.querySelectorAll('a.card[href="island.html"]').forEach(c => {
+    c.style.opacity = isGuest ? ".45" : "1";
+    c.style.pointerEvents = isGuest ? "none" : "auto";
+    if (isGuest) { const sub = c.querySelector(".card-sub"); if (sub) sub.textContent = "🎫 訪客不能玩小島（登入自己的帳號才行）"; }
+  });
+  if (isGuest) return;   // 訪客不接雲端同步
   // 開頁時做雲端同步（較新的勝出）；只做一次避免重入
   if (!_homeSynced && typeof cloudSyncOnOpen === "function") {
     _homeSynced = true;
