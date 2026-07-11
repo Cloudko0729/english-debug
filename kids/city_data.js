@@ -58,20 +58,20 @@ const CITY_EXCHANGE = {
     "id": "taipei_person",
     "type": "person",
     "lv": 4,
-    "emoji": "🎤",
-    "en": "Teresa Teng",
-    "zh": "鄧麗君",
-    "sent": "Teresa Teng sang gentle songs across Asia.",
-    "sentZh": "鄧麗君在亞洲各地演唱溫柔歌曲。",
-    "fact": "鄧麗君出生於台灣，以清澈溫柔的歌聲聞名，華語與多種語言歌曲影響亞洲流行音樂。",
+    "emoji": "✍️",
+    "en": "Lin Yutang",
+    "zh": "林語堂",
+    "sent": "Lin Yutang wrote famous books in English.",
+    "sentZh": "林語堂用英文寫出著名的書。",
+    "fact": "林語堂是聞名世界的作家與發明家，用英文向世界介紹中華文化，晚年住在台北陽明山，故居現在是紀念館。",
     "words": [
-     "gentle",
-     "song",
-     "Asia"
+        "write",
+        "book",
+        "English"
     ],
-    "era": "1953–1995",
-    "field": "歌唱"
-   }
+    "era": "1895–1976",
+    "field": "文學"
+}
   ]
  },
  "tokyo": {
