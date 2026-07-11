@@ -35,6 +35,10 @@ async function authStudent() {
 async function authGate() {
   if (!sbClient) return undefined;            // 降級：沒 Supabase 就不擋
   const student = await authStudent();
+  if (!student && localStorage.getItem("kidsCurrentStudent") === "guest") {
+    decorateGuest();                           // 訪客模式：不跳登入，掛「訪客中」列
+    return "guest";
+  }
   if (!student) { showLogin(); return null; }
   localStorage.setItem("kidsCurrentStudent", student);
   decorateLoggedIn(student);
@@ -54,6 +58,18 @@ function decorateLoggedIn(student) {
     `<span style="font-weight:700;color:#3a2a00">目前：${name}</span>` +
     `<button onclick="chooseSource()" style="margin-left:10px;padding:4px 12px;border:2px solid #2f80ed;border-radius:18px;background:#fff;font-weight:700;color:#2f80ed;cursor:pointer;font-size:.82rem">🔄 進度來源</button>` +
     `<button onclick="doLogout()" style="margin-left:8px;padding:4px 14px;border:2px solid #3a2a00;border-radius:18px;background:transparent;font-weight:700;color:#3a2a00;cursor:pointer">登出</button>`;
+}
+
+// 訪客模式列：不跳登入視窗，顯示「訪客中」＋可切回登入
+function decorateGuest() {
+  const btn = document.querySelector(".stu-btn");
+  const bar = (btn && btn.parentElement)
+    || document.getElementById("studentBar")
+    || document.getElementById("studentRow");
+  if (!bar) return;
+  bar.innerHTML =
+    `<span style="font-weight:700;color:#3a2a00">🎫 訪客試玩中（進度只留本機、不能玩小島）</span>` +
+    `<button onclick="localStorage.removeItem('kidsCurrentStudent');location.reload()" style="margin-left:10px;padding:4px 14px;border:2px solid #3a2a00;border-radius:18px;background:transparent;font-weight:700;color:#3a2a00;cursor:pointer">登入帳號</button>`;
 }
 
 // 手動叫出「雲端 vs 暫存」選擇（隨時可用，不必等登入那一刻）
@@ -89,6 +105,7 @@ function showLogin() {
         style="width:100%;box-sizing:border-box;padding:11px 12px;border:2px solid #e2e2e2;border-radius:10px;font-size:1rem;margin-bottom:12px" />
       <button id="loginGo" style="width:100%;padding:12px;border:0;border-radius:10px;background:#2f80ed;color:#fff;font-size:1rem;font-weight:700;cursor:pointer">登入</button>
       <div id="loginErr" style="color:#e23;font-size:.82rem;margin-top:10px;min-height:1em"></div>
+      <button id="loginGuest" style="width:100%;padding:10px;border:2px dashed #bbb;border-radius:10px;background:#fafafa;color:#777;font-size:.88rem;font-weight:700;cursor:pointer;margin-top:6px">🎫 訪客試玩（免登入，不能玩小島）</button>
     </div>`;
   document.body.appendChild(ov);
 
@@ -102,6 +119,12 @@ function showLogin() {
   const go = () => doLogin(picked, document.getElementById("loginPw").value);
   document.getElementById("loginGo").onclick = go;
   document.getElementById("loginPw").addEventListener("keydown", e => { if (e.key === "Enter") go(); });
+  document.getElementById("loginGuest").onclick = () => {
+    localStorage.setItem("kidsCurrentStudent", "guest");
+    ov.remove();
+    if (typeof pickStudent === "function") pickStudent("guest");
+    else if (typeof selectStudent === "function") selectStudent("guest");
+  };
 }
 function lnStyle() {
   return "padding:8px 14px;border:2px solid #2f80ed;border-radius:18px;background:#fff;color:#2f80ed;font-weight:700;cursor:pointer;font-size:.9rem";
