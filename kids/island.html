@@ -102,7 +102,14 @@
       padding: 5px;
       border-radius: 12px;
       box-shadow: 0 3px 10px rgba(0,0,0,.2);
+      position: relative;   /* 寵物精靈圖層 */
     }
+    #petSprite {
+      position: absolute; z-index: 6; cursor: pointer; user-select: none;
+      transition: left 3.5s linear, top 3.5s linear;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,.35));
+    }
+    #petSprite .mood { position: absolute; top: -14px; right: -10px; font-size: .8em; }
     .tile {
       aspect-ratio: 1;
       background: var(--land);
@@ -296,6 +303,7 @@
     <button id="boardBtn" onclick="openBoard()" style="flex:1;min-width:130px;padding:10px;border:2px solid #b5651d;border-radius:12px;background:#fff3e0;color:#8a4a12;font-weight:800;cursor:pointer">📋 島民委託板</button>
     <button id="visitorBtn" onclick="openTravel()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2f80ed;border-radius:12px;background:#eaf3ff;color:#1e5fb8;font-weight:800;cursor:pointer">✈️ 今日旅客</button>
     <button id="albumBtn" onclick="openAlbum()" style="flex:1;min-width:130px;padding:10px;border:2px solid #d4a017;border-radius:12px;background:#fff8e1;color:#8a6d1a;font-weight:800;cursor:pointer">📕 城市卡冊</button>
+    <button id="petBtn" onclick="openPet()" style="flex:1;min-width:130px;padding:10px;border:2px solid #b5651d;border-radius:12px;background:#fdf1e3;color:#8a4a12;font-weight:800;cursor:pointer">🐾 我的寵物</button>
     <a href="worddex.html" style="flex:1;min-width:130px;padding:10px;border:2px solid #7c4dca;border-radius:12px;background:#f3edff;color:#5a36a8;font-weight:800;text-align:center;text-decoration:none">🎴 單字圖鑑</a>
     <button id="mailBtn" onclick="openMail()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2fbf71;border-radius:12px;background:#e9fbf1;color:#187a48;font-weight:800;cursor:pointer;position:relative">✉️ 島嶼信箱<span id="mailBadge" style="display:none;position:absolute;top:-8px;right:-6px;background:#ef476f;color:#fff;border-radius:11px;min-width:22px;height:22px;line-height:22px;font-size:.75rem;font-weight:900;padding:0 4px;box-shadow:0 1px 4px rgba(0,0,0,.3)"></span></button>
   </div>
@@ -322,14 +330,14 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607110306"></script>
-<script src="curriculum.js?v=202607110306"></script>
-<script src="worddex.js?v=202607110306"></script>
-<script src="city_data.js?v=202607110306"></script>
+<script src="wordbank.js?v=202607110335"></script>
+<script src="curriculum.js?v=202607110335"></script>
+<script src="worddex.js?v=202607110335"></script>
+<script src="city_data.js?v=202607110335"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607110306"></script>
-<script src="account_lock.js?v=202607110306"></script>
-<script src="supabase_auth.js?v=202607110306"></script>
+<script src="cloud_sync.js?v=202607110335"></script>
+<script src="account_lock.js?v=202607110335"></script>
+<script src="supabase_auth.js?v=202607110335"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -1423,10 +1431,11 @@ function openAlbum(focusId) {
       <div style="font-size:.9rem"><b onclick="_cityAudio('${c.id}','visit')" style="cursor:pointer;color:#1e5fb8">🔊 I want to visit ${c.city}.</b></div>`;
     if (EXCHANGE_OPEN.includes(focusId)) {
       const f = frOf(focusId), lv = frLv(f.pts), ex = CITY_EXCHANGE[focusId];
-      const nextTh = FRIEND_LV[Math.min(lv + 1, FRIEND_LV.length - 1)];
-      const pct = lv >= 3 ? 100 : Math.min(100, Math.round(f.pts / nextTh * 100));
+      const MAXLV = FRIEND_LV.length - 1;
+      const nextTh = FRIEND_LV[Math.min(lv + 1, MAXLV)];
+      const pct = lv >= MAXLV ? 100 : Math.min(100, Math.round(f.pts / nextTh * 100));
       h += `<div style="margin-top:10px;border-top:1px dashed #cdd;padding-top:8px">
-        <b>💛 好感度 Lv${lv}</b> <small style="color:#888">${f.pts}${lv < 3 ? " / " + nextTh : "（一階滿級）"}</small>
+        <b>💛 好感度 Lv${lv}</b> <small style="color:#888">${lv < MAXLV ? f.pts + " / " + nextTh : "滿級"}</small>${lv >= MAXLV ? ` <span style="background:linear-gradient(135deg,#f7d774,#d4a017);color:#5a4300;border-radius:6px;padding:1px 8px;font-size:.72rem;font-weight:800">🏅 金卡 · ${c.city} 之友</span>` : ""}
         <div style="background:#e5e9f0;border-radius:8px;height:10px;margin:4px 0"><div style="width:${pct}%;height:10px;border-radius:8px;background:#f2a900"></div></div>
         <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">
           <button onclick="doGreet('${focusId}')" style="flex:1;padding:9px;border:2px solid #2fbf71;border-radius:10px;background:#e9fbf1;font-weight:800;cursor:pointer">👋 打招呼<br><small>免費 +${GREET_PTS}</small></button>
@@ -1437,11 +1446,11 @@ function openAlbum(focusId) {
         const un = lv >= cd.lv;
         h += un
           ? `<div style="border:2px solid #d4a017;border-radius:11px;padding:9px 11px;margin-top:8px;background:#fffbe9">
-              <b>${cd.emoji} ${cd.en}</b> <small>${cd.zh}</small><span style="float:right;font-size:.7rem;background:#d4a017;color:#fff;border-radius:5px;padding:1px 6px">${cd.type === "culture" ? "文化卡" : "景點卡"}</span>
+              <b>${cd.emoji} ${cd.en}</b> <small>${cd.zh}</small><span style="float:right;font-size:.7rem;background:${cd.type === "person" ? "#7c4dca" : "#d4a017"};color:#fff;border-radius:5px;padding:1px 6px">${cd.type === "culture" ? "文化卡" : cd.type === "person" ? "人物卡" : "景點卡"}</span>${cd.era ? `<div style="font-size:.72rem;color:#999">${cd.era} · ${cd.field}</div>` : ""}
               <div style="font-size:.88rem;margin-top:3px"><b onclick="new Audio('audio/city/${cd.id}.mp3').play()" style="cursor:pointer;color:#1e5fb8">🔊 ${cd.sent}</b> <small style="color:#888">${cd.sentZh}</small></div>
               <div style="font-size:.8rem;color:#666;margin-top:3px">📖 ${cd.fact}</div>
               <div style="font-size:.76rem;color:#8a6d1a;margin-top:2px">單字：${cd.words.join(" / ")}</div></div>`
-          : `<div style="border:2px dashed #ccc;border-radius:11px;padding:9px 11px;margin-top:8px;background:#f6f6f6;color:#999;font-size:.85rem">🔒 ${cd.type === "culture" ? "文化卡" : "景點卡"}｜好感度 Lv${cd.lv} 解鎖</div>`;
+          : `<div style="border:2px dashed #ccc;border-radius:11px;padding:9px 11px;margin-top:8px;background:#f6f6f6;color:#999;font-size:.85rem">🔒 ${cd.type === "culture" ? "文化卡" : cd.type === "person" ? "人物卡" : "景點卡"}｜好感度 Lv${cd.lv} 解鎖</div>`;
       });
       h += `</div>`;
     }
@@ -1452,6 +1461,103 @@ function openAlbum(focusId) {
   document.getElementById("sheetContent").innerHTML = h;
   document.getElementById("sheet").classList.add("open");
 }
+// ─── 寵物養成（第一隻免費；不占建築格，精靈圖層漫遊）──────────────────────────
+const PET_SPECIES = {
+  dog:     { stages: ["🐶", "🐕", "🐕‍🦺"], name: "小狗" },
+  cat:     { stages: ["🐱", "🐈", "🐈‍⬛"], name: "小貓" },
+  penguin: { stages: ["🐣", "🐧", "🐧"], name: "企鵝" },
+};
+const PET_FEED_COST = 20, PET_STAGE_DAYS = [0, 5, 14];
+function petMood() {
+  const p = island.pet; if (!p || !p.lastFed) return "hungry";
+  const h = (Date.now() - Date.parse(p.lastFed)) / 3600000;
+  if (h > 72) return "sad";
+  if (h > 48) return "hungry";
+  if (h > 24) return "normal";
+  return p.lastPlay === todayStr() ? "happy" : "normal";
+}
+const MOOD_UI = { happy: ["😊", "超開心"], normal: ["🙂", "普通"], hungry: ["😋", "肚子餓了"], sad: ["😢", "好難過（超過三天沒餵）"] };
+function petStage() { const p = island.pet; if (!p) return 0; let s = 0; PET_STAGE_DAYS.forEach((d, i) => { if ((p.careDays || 0) >= d) s = i; }); return s; }
+function openPet() {
+  if (!island.pet) {
+    let h = `<h3>🐾 領養寵物</h3><p style="color:var(--muted);font-size:.86rem">第一隻免費！每天餵牠（${PET_FEED_COST} 🪙）就會長大。忘記餵不會死掉，只是會難過。</p>
+    <div style="display:flex;gap:8px;margin-top:8px">`;
+    Object.entries(PET_SPECIES).forEach(([id, s]) => {
+      h += `<button onclick="adoptPet('${id}')" style="flex:1;padding:16px;border:2px solid #d9e2ec;border-radius:14px;background:#fff;cursor:pointer;font-weight:800"><div style="font-size:2.4rem">${s.stages[0]}</div>${s.name}</button>`;
+    });
+    h += `</div>`;
+    document.getElementById("sheetContent").innerHTML = h;
+    document.getElementById("sheet").classList.add("open");
+    return;
+  }
+  const p = island.pet, sp = PET_SPECIES[p.sp], st = petStage(), mood = petMood(), m = MOOD_UI[mood];
+  const next = PET_STAGE_DAYS[st + 1];
+  const stageName = ["幼年", "成長期", "成年"][st];
+  const fedToday = p.lastCareDay === todayStr();
+  let h = `<h3>${sp.stages[st]} 我的${sp.name}（${stageName}）</h3>
+  <div style="font-size:.9rem;margin:6px 0">${m[0]} 心情：<b>${m[1]}</b>　·　照顧日：<b>${p.careDays || 0}</b>${next ? `（再 ${next - (p.careDays || 0)} 天${st === 0 ? "進入成長期" : "長大成年"}）` : "（滿級 🎉）"}</div>
+  <div style="display:flex;gap:8px;margin-top:8px">
+    <button onclick="feedPet()" style="flex:1;padding:12px;border:2px solid #2fbf71;border-radius:12px;background:#e9fbf1;font-weight:800;cursor:pointer">🍖 餵食 ${PET_FEED_COST}🪙${fedToday ? "<br><small>今天餵過（心情用）</small>" : "<br><small>+1 照顧日</small>"}</button>
+    <button onclick="playPet()" style="flex:1;padding:12px;border:2px solid #2f80ed;border-radius:12px;background:#eaf3ff;font-weight:800;cursor:pointer">🎾 摸摸玩耍<br><small>免費 每天 1 次</small></button>
+  </div>
+  <p style="color:var(--muted);font-size:.78rem;margin-top:8px">照顧日一天只算一次；連續照顧牠就會長大。牠會在島上散步，點牠也能打開這裡。</p>`;
+  document.getElementById("sheetContent").innerHTML = h;
+  document.getElementById("sheet").classList.add("open");
+}
+window.adoptPet = function (id) {
+  island.pet = { sp: id, adoptedAt: todayStr(), lastFed: new Date().toISOString(), lastCareDay: todayStr(), careDays: 1, lastPlay: "" };
+  saveIsland(currentStudent, island);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  closeSheet(); renderPet(); updatePetBtn();
+  toast(`${PET_SPECIES[id].stages[0]} 領養成功！記得每天餵牠`);
+};
+window.feedPet = function () {
+  const p = island.pet; if (!p) return;
+  if (!_spendCoins(PET_FEED_COST, "petFeed")) return;
+  p.lastFed = new Date().toISOString();
+  const stBefore = petStage();
+  if (p.lastCareDay !== todayStr()) { p.lastCareDay = todayStr(); p.careDays = (p.careDays || 0) + 1; }
+  const stAfter = petStage();
+  saveIsland(currentStudent, island);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  toast(stAfter > stBefore ? `🎉 ${PET_SPECIES[p.sp].name}長大了！變成${["", "成長期", "成年"][stAfter]}！` : "🍖 好吃！");
+  renderPet(); openPet();
+};
+window.playPet = function () {
+  const p = island.pet; if (!p) return;
+  if (p.lastPlay === todayStr()) { toast("今天玩過了，牠想睡覺 💤"); return; }
+  p.lastPlay = todayStr();
+  saveIsland(currentStudent, island);
+  toast("🎾 " + PET_SPECIES[p.sp].name + "玩得好開心！");
+  renderPet(); openPet();
+};
+let _petTimer = null;
+function renderPet() {
+  const host = document.getElementById("island");
+  let el = document.getElementById("petSprite");
+  if (!island || !island.pet) { if (el) el.remove(); if (_petTimer) clearInterval(_petTimer); return; }
+  const p = island.pet, st = petStage(), mood = petMood();
+  if (!el) {
+    el = document.createElement("div"); el.id = "petSprite";
+    el.onclick = openPet;
+    el.style.left = "45%"; el.style.top = "45%";
+    host.appendChild(el);
+  }
+  el.style.fontSize = (1.1 + st * 0.35) + "rem";
+  el.innerHTML = PET_SPECIES[p.sp].stages[st] + `<span class="mood">${MOOD_UI[mood][0]}</span>`;
+  if (_petTimer) clearInterval(_petTimer);
+  const speed = mood === "sad" ? 0 : mood === "hungry" ? 9000 : 4500;
+  if (speed) _petTimer = setInterval(() => {
+    el.style.left = (8 + Math.random() * 80) + "%";
+    el.style.top = (8 + Math.random() * 80) + "%";
+  }, speed);
+}
+function updatePetBtn() {
+  const b = document.getElementById("petBtn"); if (!b) return;
+  if (!island.pet) { b.textContent = "🐾 領養寵物（免費）"; return; }
+  b.textContent = `${PET_SPECIES[island.pet.sp].stages[petStage()]} 我的寵物 ${MOOD_UI[petMood()][0]}`;
+}
+
 let _bq = null;
 function openBoard() {
   if (island.board && island.board.last === todayStr()) { toast("今天的委託完成了，明天再來！"); return; }
@@ -1560,6 +1666,7 @@ function selectStudent(name) {
   document.getElementById("questRow").style.display = "flex";
   updateQuestBtns();
   checkMailBadge();
+  renderPet(); updatePetBtn();
   recalcStats();
   if (migrated) saveIsland(name, island);
   const produced = runDailyTick();
