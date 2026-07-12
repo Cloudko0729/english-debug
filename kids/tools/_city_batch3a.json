@@ -1,0 +1,71 @@
+{
+  "cities": [
+    {
+      "id": "hongkong", "city": "Hong Kong", "country": "Hong Kong SAR, China", "flag": "🇭🇰", "region": "亞洲",
+      "landmark": "Victoria Peak", "lmEmoji": "⛰️",
+      "clue": "Harbor ferries glide beneath a dazzling mountain skyline.", "clueZh": "港灣渡輪在璀璨的山城天際線下穿梭。",
+      "pref": "bubbletea",
+      "cards": [
+        {"id":"hongkong_culture","type":"culture","lv":2,"emoji":"🥟","en":"Dim Sum","zh":"點心","sent":"Families share small dim sum dishes at tea.","sentZh":"家人喝茶時一起分享小份點心。","fact":"香港茶樓的點心種類豐富，人們常與親友圍桌喝茶，分享蒸籠中的蝦餃、燒賣和叉燒包。","words":["family","share","dish"]},
+        {"id":"hongkong_landmark","type":"landmark","lv":2,"emoji":"⛴️","en":"Star Ferry","zh":"天星小輪","sent":"The green ferry crosses the busy harbor.","sentZh":"綠色渡輪穿越繁忙的港灣。","fact":"天星小輪自十九世紀起往返維多利亞港兩岸，至今仍是市民通勤和遊客賞景的經典交通工具。","words":["ferry","cross","harbor"]},
+        {"id":"hongkong_person","type":"person","lv":4,"emoji":"🥋","en":"Bruce Lee","zh":"李小龍","sent":"Bruce Lee shared martial arts through exciting films.","sentZh":"李小龍透過精彩電影推廣武術。","fact":"李小龍在香港成長並投身電影，以敏捷身手和武術理念享譽世界，也促進不同文化對中國功夫的認識。","words":["martial","film","share"],"era":"1940–1973","field":"武術與電影"}
+      ]
+    },
+    {
+      "id": "mumbai", "city": "Mumbai", "country": "India", "flag": "🇮🇳", "region": "亞洲",
+      "landmark": "Gateway of India", "lmEmoji": "🚪",
+      "clue": "Colorful films and crowded trains energize this seaside metropolis.", "clueZh": "繽紛電影與擁擠列車為這座海濱大城注入活力。",
+      "pref": "tea",
+      "cards": [
+        {"id":"mumbai_culture","type":"culture","lv":2,"emoji":"🎬","en":"Bollywood","zh":"寶萊塢","sent":"Dancers fill musical films with color and joy.","sentZh":"舞者讓歌舞電影充滿色彩與歡樂。","fact":"孟買是印度印地語電影產業的重要中心，許多寶萊塢作品融合歌曲、舞蹈、戲劇與鮮明服裝。","words":["dancer","musical","joy"]},
+        {"id":"mumbai_landmark","type":"landmark","lv":3,"emoji":"🚉","en":"Chhatrapati Shivaji Terminus","zh":"賈特拉帕蒂·希瓦吉終點站","sent":"Busy trains arrive beneath grand stone arches.","sentZh":"繁忙列車駛入宏偉的石拱門下。","fact":"這座歷史車站融合維多利亞哥德式與印度建築元素，華麗外觀下每天仍有大量通勤列車進出。","words":["train","stone","arch"]},
+        {"id":"mumbai_person","type":"person","lv":4,"emoji":"🎤","en":"Lata Mangeshkar","zh":"拉塔·曼吉茜卡","sent":"Lata sang thousands of songs for Indian films.","sentZh":"拉塔為印度電影演唱了數千首歌曲。","fact":"拉塔·曼吉茜卡長年在孟買錄製電影歌曲，以清亮歌聲跨越多種印度語言，成為極具影響力的歌手。","words":["sing","song","thousand"],"era":"1929–2022","field":"歌唱與電影音樂"}
+      ]
+    },
+    {
+      "id": "berlin", "city": "Berlin", "country": "Germany", "flag": "🇩🇪", "region": "歐洲",
+      "landmark": "Brandenburg Gate", "lmEmoji": "🏛️",
+      "clue": "History, art, and music thrive beside a once-divided wall.", "clueZh": "歷史、藝術與音樂在昔日分隔城市的圍牆旁蓬勃發展。",
+      "pref": "bookmark",
+      "cards": [
+        {"id":"berlin_culture","type":"culture","lv":2,"emoji":"🎨","en":"Street Art","zh":"街頭藝術","sent":"Artists paint bold stories across city walls.","sentZh":"藝術家在城市牆面畫下鮮明故事。","fact":"柏林擁有活躍的街頭藝術文化，牆面上的大型彩繪常以創意圖像表達歷史、自由與社會觀察。","words":["artist","paint","wall"]},
+        {"id":"berlin_landmark","type":"landmark","lv":3,"emoji":"🏺","en":"Museum Island","zh":"博物館島","sent":"Five museums protect treasures beside the river.","sentZh":"五座博物館在河畔守護珍貴文物。","fact":"博物館島位於施普雷河上，聚集五座重要博物館，收藏跨越古代文明、藝術與歐洲歷史的珍品。","words":["museum","protect","treasure"]},
+        {"id":"berlin_person","type":"person","lv":4,"emoji":"🧠","en":"Albert Einstein","zh":"阿爾伯特·愛因斯坦","sent":"Einstein explored light, space, time, and energy.","sentZh":"愛因斯坦探索光、空間、時間與能量。","fact":"愛因斯坦曾在柏林研究與任教，提出影響深遠的物理理論，幫助人類重新理解時間、空間和重力。","words":["explore","space","energy"],"era":"1879–1955","field":"物理學"}
+      ]
+    },
+    {
+      "id": "athens", "city": "Athens", "country": "Greece", "flag": "🇬🇷", "region": "歐洲",
+      "landmark": "The Parthenon", "lmEmoji": "🏛️",
+      "clue": "Ancient columns overlook lively streets near the blue Aegean.", "clueZh": "古老石柱俯瞰鄰近蔚藍愛琴海的熱鬧街道。",
+      "pref": "bookmark",
+      "cards": [
+        {"id":"athens_culture","type":"culture","lv":2,"emoji":"🎭","en":"Ancient Theater","zh":"古希臘戲劇","sent":"Actors told powerful stories behind painted masks.","sentZh":"演員戴著彩繪面具講述動人的故事。","fact":"古代雅典人會在露天劇場欣賞悲劇與喜劇，演員運用面具、歌唱和對話，把故事傳給廣大觀眾。","words":["actor","story","mask"]},
+        {"id":"athens_landmark","type":"landmark","lv":2,"emoji":"🏟️","en":"Panathenaic Stadium","zh":"帕那辛納克體育場","sent":"White marble seats surround the long running track.","sentZh":"白色大理石座位環繞著長跑道。","fact":"帕那辛納克體育場以白色大理石建成，曾舉辦古代競賽，也見證一八九六年首屆現代奧運會。","words":["marble","seat","track"]},
+        {"id":"athens_person","type":"person","lv":4,"emoji":"📚","en":"Aristotle","zh":"亞里斯多德","sent":"Aristotle studied nature, ideas, language, and living things.","sentZh":"亞里斯多德研究自然、思想、語言與生物。","fact":"亞里斯多德曾在雅典求學並創辦學園，他廣泛研究邏輯、自然和倫理，深深影響後世教育與科學思考。","words":["study","nature","idea"],"era":"384–322 BCE","field":"哲學與科學"}
+      ]
+    },
+    {
+      "id": "toronto", "city": "Toronto", "country": "Canada", "flag": "🇨🇦", "region": "北美洲",
+      "landmark": "CN Tower", "lmEmoji": "🗼",
+      "clue": "Many languages mingle beside a vast freshwater lake.", "clueZh": "多種語言在遼闊的淡水湖畔交會。",
+      "pref": "bagel",
+      "cards": [
+        {"id":"toronto_culture","type":"culture","lv":2,"emoji":"🌍","en":"Multicultural Festivals","zh":"多元文化節慶","sent":"Neighbors share music, food, and dances from everywhere.","sentZh":"鄰居分享來自世界各地的音樂、美食與舞蹈。","fact":"多倫多居民來自世界各地，城市常以節慶、遊行和市集分享不同社群的音樂、飲食與傳統。","words":["neighbor","music","everywhere"]},
+        {"id":"toronto_landmark","type":"landmark","lv":2,"emoji":"🏰","en":"Casa Loma","zh":"卡薩羅馬城堡","sent":"Secret passages wind through this hilltop castle.","sentZh":"祕密通道蜿蜒穿過這座山丘城堡。","fact":"卡薩羅馬建於二十世紀初，擁有塔樓、祕密通道和華麗房間，如今是介紹多倫多歷史的博物館。","words":["secret","passage","castle"]},
+        {"id":"toronto_person","type":"person","lv":4,"emoji":"🏃","en":"Terry Fox","zh":"泰瑞·福克斯","sent":"Terry ran across Canada to support cancer research.","sentZh":"泰瑞跑步橫越加拿大以支持癌症研究。","fact":"泰瑞·福克斯在多倫多附近結束希望馬拉松，他以義肢長跑為癌症研究募款，勇氣至今鼓舞無數人。","words":["run","support","research"],"era":"1958–1981","field":"運動與公益"}
+      ]
+    },
+    {
+      "id": "auckland", "city": "Auckland", "country": "New Zealand", "flag": "🇳🇿", "region": "大洋洲",
+      "landmark": "Sky Tower", "lmEmoji": "🗼",
+      "clue": "Sailboats cross volcanic harbors in this breezy island city.", "clueZh": "帆船穿越火山環抱的港灣，駛過這座微風島城。",
+      "pref": "surfboard",
+      "cards": [
+        {"id":"auckland_culture","type":"culture","lv":2,"emoji":"🛶","en":"Waka Ama","zh":"毛利支架獨木舟","sent":"Teams paddle long canoes together across the harbor.","sentZh":"隊伍齊心划著長舟穿越港灣。","fact":"支架獨木舟運動源自太平洋航海傳統，奧克蘭許多隊伍共同訓練，學習合作、節奏與海洋文化。","words":["team","paddle","canoe"]},
+        {"id":"auckland_landmark","type":"landmark","lv":2,"emoji":"🌉","en":"Auckland Harbour Bridge","zh":"奧克蘭海港大橋","sent":"The great bridge stretches across sparkling blue water.","sentZh":"宏偉大橋橫跨閃耀的藍色海面。","fact":"奧克蘭海港大橋跨越懷特瑪塔港，連接市中心與北岸，是城市交通要道和醒目的海港景觀。","words":["bridge","stretch","water"]},
+        {"id":"auckland_person","type":"person","lv":4,"emoji":"🏔️","en":"Sir Edmund Hillary","zh":"艾德蒙·希拉里爵士","sent":"Hillary climbed Everest and explored icy Antarctica.","sentZh":"希拉里攀登聖母峰並探索冰封南極。","fact":"希拉里出生於奧克蘭，成為首批登上聖母峰頂的人之一，之後持續探險並協助尼泊爾山區興建學校。","words":["climb","explore","icy"],"era":"1919–2008","field":"登山與探險"}
+      ]
+    }
+  ],
+  "newGifts": []
+}

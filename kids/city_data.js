@@ -13,6 +13,18 @@ const WORLD_CITIES = [
   { id: "sydney",    city: "Sydney",    country: "Australia",      flag: "🇦🇺", region: "大洋洲", landmark: "Sydney Opera House",    lmEmoji: "🎭" },
   { id: "cairo",     city: "Cairo",     country: "Egypt",          flag: "🇪🇬", region: "非洲",   landmark: "Pyramids of Giza",      lmEmoji: "🔺" },
   { id: "rio",       city: "Rio",       country: "Brazil",         flag: "🇧🇷", region: "南美洲", landmark: "Christ the Redeemer",   lmEmoji: "⛰️" },
+  { id: "hongkong", city: "Hong Kong", country: "Hong Kong SAR, China", flag: "🇭🇰", region: "亞洲", landmark: "Victoria Peak", lmEmoji: "⛰️" },
+  { id: "mumbai", city: "Mumbai", country: "India", flag: "🇮🇳", region: "亞洲", landmark: "Gateway of India", lmEmoji: "🚪" },
+  { id: "berlin", city: "Berlin", country: "Germany", flag: "🇩🇪", region: "歐洲", landmark: "Brandenburg Gate", lmEmoji: "🏛️" },
+  { id: "athens", city: "Athens", country: "Greece", flag: "🇬🇷", region: "歐洲", landmark: "The Parthenon", lmEmoji: "🏛️" },
+  { id: "toronto", city: "Toronto", country: "Canada", flag: "🇨🇦", region: "北美洲", landmark: "CN Tower", lmEmoji: "🗼" },
+  { id: "auckland", city: "Auckland", country: "New Zealand", flag: "🇳🇿", region: "大洋洲", landmark: "Sky Tower", lmEmoji: "🗼" },
+  { id: "madrid", city: "Madrid", country: "Spain", flag: "🇪🇸", region: "歐洲", landmark: "Royal Palace of Madrid", lmEmoji: "🏰" },
+  { id: "amsterdam", city: "Amsterdam", country: "Netherlands", flag: "🇳🇱", region: "歐洲", landmark: "Amsterdam Canals", lmEmoji: "🚤" },
+  { id: "mexico_city", city: "Mexico City", country: "Mexico", flag: "🇲🇽", region: "北美洲", landmark: "Angel of Independence", lmEmoji: "🗽" },
+  { id: "cape_town", city: "Cape Town", country: "South Africa", flag: "🇿🇦", region: "非洲", landmark: "Table Mountain", lmEmoji: "⛰️" },
+  { id: "buenos_aires", city: "Buenos Aires", country: "Argentina", flag: "🇦🇷", region: "南美洲", landmark: "Obelisco", lmEmoji: "🗼" },
+  { id: "beijing", city: "Beijing", country: "China", flag: "🇨🇳", region: "亞洲", landmark: "The Great Wall", lmEmoji: "🧱" },
 ];
 
 // 交流系統（一階只開放前 3 城）
@@ -700,7 +712,691 @@ const CITY_EXCHANGE = {
     "field": "巴西音樂"
    }
   ]
- }
+ },
+ "hongkong": {
+  "clue": "Harbor ferries glide beneath a dazzling mountain skyline.",
+  "clueZh": "港灣渡輪在璀璨的山城天際線下穿梭。",
+  "pref": "bubbletea",
+  "cards": [
+   {
+    "id": "hongkong_culture",
+    "type": "culture",
+    "lv": 2,
+    "emoji": "🥟",
+    "en": "Dim Sum",
+    "zh": "點心",
+    "sent": "Families share small dim sum dishes at tea.",
+    "sentZh": "家人喝茶時一起分享小份點心。",
+    "fact": "香港茶樓的點心種類豐富，人們常與親友圍桌喝茶，分享蒸籠中的蝦餃、燒賣和叉燒包。",
+    "words": [
+     "family",
+     "share",
+     "dish"
+    ]
+   },
+   {
+    "id": "hongkong_landmark",
+    "type": "landmark",
+    "lv": 2,
+    "emoji": "⛴️",
+    "en": "Star Ferry",
+    "zh": "天星小輪",
+    "sent": "The green ferry crosses the busy harbor.",
+    "sentZh": "綠色渡輪穿越繁忙的港灣。",
+    "fact": "天星小輪自十九世紀起往返維多利亞港兩岸，至今仍是市民通勤和遊客賞景的經典交通工具。",
+    "words": [
+     "ferry",
+     "cross",
+     "harbor"
+    ]
+   },
+   {
+    "id": "hongkong_person",
+    "type": "person",
+    "lv": 4,
+    "emoji": "🥋",
+    "en": "Bruce Lee",
+    "zh": "李小龍",
+    "sent": "Bruce Lee shared martial arts through exciting films.",
+    "sentZh": "李小龍透過精彩電影推廣武術。",
+    "fact": "李小龍在香港成長並投身電影，以敏捷身手和武術理念享譽世界，也促進不同文化對中國功夫的認識。",
+    "words": [
+     "martial",
+     "film",
+     "share"
+    ],
+    "era": "1940–1973",
+    "field": "武術與電影"
+   }
+  ]
+ },
+ "mumbai": {
+  "clue": "Colorful films and crowded trains energize this seaside metropolis.",
+  "clueZh": "繽紛電影與擁擠列車為這座海濱大城注入活力。",
+  "pref": "tea",
+  "cards": [
+   {
+    "id": "mumbai_culture",
+    "type": "culture",
+    "lv": 2,
+    "emoji": "🎬",
+    "en": "Bollywood",
+    "zh": "寶萊塢",
+    "sent": "Dancers fill musical films with color and joy.",
+    "sentZh": "舞者讓歌舞電影充滿色彩與歡樂。",
+    "fact": "孟買是印度印地語電影產業的重要中心，許多寶萊塢作品融合歌曲、舞蹈、戲劇與鮮明服裝。",
+    "words": [
+     "dancer",
+     "musical",
+     "joy"
+    ]
+   },
+   {
+    "id": "mumbai_landmark",
+    "type": "landmark",
+    "lv": 3,
+    "emoji": "🚉",
+    "en": "Chhatrapati Shivaji Terminus",
+    "zh": "賈特拉帕蒂·希瓦吉終點站",
+    "sent": "Busy trains arrive beneath grand stone arches.",
+    "sentZh": "繁忙列車駛入宏偉的石拱門下。",
+    "fact": "這座歷史車站融合維多利亞哥德式與印度建築元素，華麗外觀下每天仍有大量通勤列車進出。",
+    "words": [
+     "train",
+     "stone",
+     "arch"
+    ]
+   },
+   {
+    "id": "mumbai_person",
+    "type": "person",
+    "lv": 4,
+    "emoji": "🎤",
+    "en": "Lata Mangeshkar",
+    "zh": "拉塔·曼吉茜卡",
+    "sent": "Lata sang thousands of songs for Indian films.",
+    "sentZh": "拉塔為印度電影演唱了數千首歌曲。",
+    "fact": "拉塔·曼吉茜卡長年在孟買錄製電影歌曲，以清亮歌聲跨越多種印度語言，成為極具影響力的歌手。",
+    "words": [
+     "sing",
+     "song",
+     "thousand"
+    ],
+    "era": "1929–2022",
+    "field": "歌唱與電影音樂"
+   }
+  ]
+ },
+ "berlin": {
+  "clue": "History, art, and music thrive beside a once-divided wall.",
+  "clueZh": "歷史、藝術與音樂在昔日分隔城市的圍牆旁蓬勃發展。",
+  "pref": "bookmark",
+  "cards": [
+   {
+    "id": "berlin_culture",
+    "type": "culture",
+    "lv": 2,
+    "emoji": "🎨",
+    "en": "Street Art",
+    "zh": "街頭藝術",
+    "sent": "Artists paint bold stories across city walls.",
+    "sentZh": "藝術家在城市牆面畫下鮮明故事。",
+    "fact": "柏林擁有活躍的街頭藝術文化，牆面上的大型彩繪常以創意圖像表達歷史、自由與社會觀察。",
+    "words": [
+     "artist",
+     "paint",
+     "wall"
+    ]
+   },
+   {
+    "id": "berlin_landmark",
+    "type": "landmark",
+    "lv": 3,
+    "emoji": "🏺",
+    "en": "Museum Island",
+    "zh": "博物館島",
+    "sent": "Five museums protect treasures beside the river.",
+    "sentZh": "五座博物館在河畔守護珍貴文物。",
+    "fact": "博物館島位於施普雷河上，聚集五座重要博物館，收藏跨越古代文明、藝術與歐洲歷史的珍品。",
+    "words": [
+     "museum",
+     "protect",
+     "treasure"
+    ]
+   },
+   {
+    "id": "berlin_person",
+    "type": "person",
+    "lv": 4,
+    "emoji": "🧠",
+    "en": "Albert Einstein",
+    "zh": "阿爾伯特·愛因斯坦",
+    "sent": "Einstein explored light, space, time, and energy.",
+    "sentZh": "愛因斯坦探索光、空間、時間與能量。",
+    "fact": "愛因斯坦曾在柏林研究與任教，提出影響深遠的物理理論，幫助人類重新理解時間、空間和重力。",
+    "words": [
+     "explore",
+     "space",
+     "energy"
+    ],
+    "era": "1879–1955",
+    "field": "物理學"
+   }
+  ]
+ },
+ "athens": {
+  "clue": "Ancient columns overlook lively streets near the blue Aegean.",
+  "clueZh": "古老石柱俯瞰鄰近蔚藍愛琴海的熱鬧街道。",
+  "pref": "bookmark",
+  "cards": [
+   {
+    "id": "athens_culture",
+    "type": "culture",
+    "lv": 2,
+    "emoji": "🎭",
+    "en": "Ancient Theater",
+    "zh": "古希臘戲劇",
+    "sent": "Actors told powerful stories behind painted masks.",
+    "sentZh": "演員戴著彩繪面具講述動人的故事。",
+    "fact": "古代雅典人會在露天劇場欣賞悲劇與喜劇，演員運用面具、歌唱和對話，把故事傳給廣大觀眾。",
+    "words": [
+     "actor",
+     "story",
+     "mask"
+    ]
+   },
+   {
+    "id": "athens_landmark",
+    "type": "landmark",
+    "lv": 2,
+    "emoji": "🏟️",
+    "en": "Panathenaic Stadium",
+    "zh": "帕那辛納克體育場",
+    "sent": "White marble seats surround the long running track.",
+    "sentZh": "白色大理石座位環繞著長跑道。",
+    "fact": "帕那辛納克體育場以白色大理石建成，曾舉辦古代競賽，也見證一八九六年首屆現代奧運會。",
+    "words": [
+     "marble",
+     "seat",
+     "track"
+    ]
+   },
+   {
+    "id": "athens_person",
+    "type": "person",
+    "lv": 4,
+    "emoji": "📚",
+    "en": "Aristotle",
+    "zh": "亞里斯多德",
+    "sent": "Aristotle studied nature, ideas, language, and living things.",
+    "sentZh": "亞里斯多德研究自然、思想、語言與生物。",
+    "fact": "亞里斯多德曾在雅典求學並創辦學園，他廣泛研究邏輯、自然和倫理，深深影響後世教育與科學思考。",
+    "words": [
+     "study",
+     "nature",
+     "idea"
+    ],
+    "era": "384–322 BCE",
+    "field": "哲學與科學"
+   }
+  ]
+ },
+ "toronto": {
+  "clue": "Many languages mingle beside a vast freshwater lake.",
+  "clueZh": "多種語言在遼闊的淡水湖畔交會。",
+  "pref": "bagel",
+  "cards": [
+   {
+    "id": "toronto_culture",
+    "type": "culture",
+    "lv": 2,
+    "emoji": "🌍",
+    "en": "Multicultural Festivals",
+    "zh": "多元文化節慶",
+    "sent": "Neighbors share music, food, and dances from everywhere.",
+    "sentZh": "鄰居分享來自世界各地的音樂、美食與舞蹈。",
+    "fact": "多倫多居民來自世界各地，城市常以節慶、遊行和市集分享不同社群的音樂、飲食與傳統。",
+    "words": [
+     "neighbor",
+     "music",
+     "everywhere"
+    ]
+   },
+   {
+    "id": "toronto_landmark",
+    "type": "landmark",
+    "lv": 2,
+    "emoji": "🏰",
+    "en": "Casa Loma",
+    "zh": "卡薩羅馬城堡",
+    "sent": "Secret passages wind through this hilltop castle.",
+    "sentZh": "祕密通道蜿蜒穿過這座山丘城堡。",
+    "fact": "卡薩羅馬建於二十世紀初，擁有塔樓、祕密通道和華麗房間，如今是介紹多倫多歷史的博物館。",
+    "words": [
+     "secret",
+     "passage",
+     "castle"
+    ]
+   },
+   {
+    "id": "toronto_person",
+    "type": "person",
+    "lv": 4,
+    "emoji": "🏃",
+    "en": "Terry Fox",
+    "zh": "泰瑞·福克斯",
+    "sent": "Terry ran across Canada to support cancer research.",
+    "sentZh": "泰瑞跑步橫越加拿大以支持癌症研究。",
+    "fact": "泰瑞·福克斯在多倫多附近結束希望馬拉松，他以義肢長跑為癌症研究募款，勇氣至今鼓舞無數人。",
+    "words": [
+     "run",
+     "support",
+     "research"
+    ],
+    "era": "1958–1981",
+    "field": "運動與公益"
+   }
+  ]
+ },
+ "auckland": {
+  "clue": "Sailboats cross volcanic harbors in this breezy island city.",
+  "clueZh": "帆船穿越火山環抱的港灣，駛過這座微風島城。",
+  "pref": "surfboard",
+  "cards": [
+   {
+    "id": "auckland_culture",
+    "type": "culture",
+    "lv": 2,
+    "emoji": "🛶",
+    "en": "Waka Ama",
+    "zh": "毛利支架獨木舟",
+    "sent": "Teams paddle long canoes together across the harbor.",
+    "sentZh": "隊伍齊心划著長舟穿越港灣。",
+    "fact": "支架獨木舟運動源自太平洋航海傳統，奧克蘭許多隊伍共同訓練，學習合作、節奏與海洋文化。",
+    "words": [
+     "team",
+     "paddle",
+     "canoe"
+    ]
+   },
+   {
+    "id": "auckland_landmark",
+    "type": "landmark",
+    "lv": 2,
+    "emoji": "🌉",
+    "en": "Auckland Harbour Bridge",
+    "zh": "奧克蘭海港大橋",
+    "sent": "The great bridge stretches across sparkling blue water.",
+    "sentZh": "宏偉大橋橫跨閃耀的藍色海面。",
+    "fact": "奧克蘭海港大橋跨越懷特瑪塔港，連接市中心與北岸，是城市交通要道和醒目的海港景觀。",
+    "words": [
+     "bridge",
+     "stretch",
+     "water"
+    ]
+   },
+   {
+    "id": "auckland_person",
+    "type": "person",
+    "lv": 4,
+    "emoji": "🏔️",
+    "en": "Sir Edmund Hillary",
+    "zh": "艾德蒙·希拉里爵士",
+    "sent": "Hillary climbed Everest and explored icy Antarctica.",
+    "sentZh": "希拉里攀登聖母峰並探索冰封南極。",
+    "fact": "希拉里出生於奧克蘭，成為首批登上聖母峰頂的人之一，之後持續探險並協助尼泊爾山區興建學校。",
+    "words": [
+     "climb",
+     "explore",
+     "icy"
+    ],
+    "era": "1919–2008",
+    "field": "登山與探險"
+   }
+  ]
+ },
+ "madrid": {
+  "clue": "Grand plazas glow while flamenco rhythms fill lively streets.",
+  "clueZh": "宏偉廣場閃耀，佛朗明哥節奏洋溢在熱鬧街頭。",
+  "pref": "carnivalmask",
+  "cards": [
+   {
+    "id": "madrid_culture",
+    "type": "culture",
+    "lv": 2,
+    "emoji": "💃",
+    "en": "Flamenco",
+    "zh": "佛朗明哥",
+    "sent": "Dancers clap and move to lively guitar music.",
+    "sentZh": "舞者隨著活潑的吉他音樂拍手起舞。",
+    "fact": "佛朗明哥融合歌唱、吉他與舞蹈，源自西班牙南部，在馬德里的劇場與小酒館也十分盛行。",
+    "words": [
+     "dancer",
+     "clap",
+     "guitar"
+    ]
+   },
+   {
+    "id": "madrid_landmark",
+    "type": "landmark",
+    "lv": 2,
+    "emoji": "🖼️",
+    "en": "Prado Museum",
+    "zh": "普拉多博物館",
+    "sent": "Famous paintings fill this grand art museum.",
+    "sentZh": "著名畫作陳列在這座宏偉的藝術博物館中。",
+    "fact": "普拉多博物館收藏大量歐洲藝術珍品，尤其以西班牙繪畫著稱，是馬德里重要的文化地標。",
+    "words": [
+     "famous",
+     "painting",
+     "museum"
+    ]
+   },
+   {
+    "id": "madrid_person",
+    "type": "person",
+    "lv": 4,
+    "emoji": "🎨",
+    "en": "Diego Velázquez",
+    "zh": "迪亞哥・委拉斯開茲",
+    "sent": "Velázquez painted people with remarkable detail and depth.",
+    "sentZh": "委拉斯開茲以非凡的細節與深度描繪人物。",
+    "fact": "委拉斯開茲長年在馬德里創作，以細膩肖像與光影技巧聞名，代表作《宮女》現藏於普拉多博物館。",
+    "words": [
+     "paint",
+     "detail",
+     "depth"
+    ],
+    "era": "1599–1660",
+    "field": "繪畫藝術"
+   }
+  ]
+ },
+ "amsterdam": {
+  "clue": "Bicycles cross bridges beside narrow houses and sparkling waterways.",
+  "clueZh": "自行車穿越橋梁，沿途是窄屋與閃亮水道。",
+  "pref": "orchid",
+  "cards": [
+   {
+    "id": "amsterdam_culture",
+    "type": "culture",
+    "lv": 2,
+    "emoji": "🚲",
+    "en": "Cycling Culture",
+    "zh": "自行車文化",
+    "sent": "Families ride bicycles along safe city paths.",
+    "sentZh": "家庭沿著安全的城市道路騎自行車。",
+    "fact": "阿姆斯特丹擁有密集的自行車道與停車設施，許多居民每天騎車上學、工作或前往市場。",
+    "words": [
+     "bicycle",
+     "ride",
+     "path"
+    ]
+   },
+   {
+    "id": "amsterdam_landmark",
+    "type": "landmark",
+    "lv": 2,
+    "emoji": "🏛️",
+    "en": "Rijksmuseum",
+    "zh": "國家博物館",
+    "sent": "Dutch masterpieces welcome visitors inside this great museum.",
+    "sentZh": "荷蘭傑作在這座宏偉博物館裡迎接訪客。",
+    "fact": "荷蘭國家博物館收藏林布蘭與維梅爾等大師作品，帶領訪客認識數百年的荷蘭藝術與歷史。",
+    "words": [
+     "Dutch",
+     "masterpiece",
+     "visitor"
+    ]
+   },
+   {
+    "id": "amsterdam_person",
+    "type": "person",
+    "lv": 4,
+    "emoji": "🖌️",
+    "en": "Rembrandt",
+    "zh": "林布蘭",
+    "sent": "Rembrandt used light to create powerful painted stories.",
+    "sentZh": "林布蘭運用光線創造動人的繪畫故事。",
+    "fact": "林布蘭在阿姆斯特丹生活與創作多年，善用明暗對比描繪人物情感，成為荷蘭藝術的重要大師。",
+    "words": [
+     "light",
+     "powerful",
+     "story"
+    ],
+    "era": "1606–1669",
+    "field": "繪畫與版畫"
+   }
+  ]
+ },
+ "mexico_city": {
+  "clue": "Ancient ruins and colorful murals brighten this mountain capital.",
+  "clueZh": "古老遺跡與繽紛壁畫照亮這座山間首都。",
+  "pref": "carnivalmask",
+  "cards": [
+   {
+    "id": "mexico_city_culture",
+    "type": "culture",
+    "lv": 2,
+    "emoji": "🌼",
+    "en": "Day of the Dead",
+    "zh": "亡靈節",
+    "sent": "Families remember loved ones with flowers and food.",
+    "sentZh": "家人用鮮花與食物懷念摯愛親友。",
+    "fact": "亡靈節期間，人們布置花朵、照片與食物，溫馨紀念離世親友，展現墨西哥獨特的生命觀。",
+    "words": [
+     "remember",
+     "flower",
+     "family"
+    ]
+   },
+   {
+    "id": "mexico_city_landmark",
+    "type": "landmark",
+    "lv": 3,
+    "emoji": "🏰",
+    "en": "Chapultepec Castle",
+    "zh": "查普爾特佩克城堡",
+    "sent": "The hilltop castle overlooks trees and busy avenues.",
+    "sentZh": "山頂城堡俯瞰樹林與繁忙大道。",
+    "fact": "查普爾特佩克城堡坐落於公園山丘上，如今是國家歷史博物館，可俯瞰墨西哥城廣闊景色。",
+    "words": [
+     "hilltop",
+     "castle",
+     "overlook"
+    ]
+   },
+   {
+    "id": "mexico_city_person",
+    "type": "person",
+    "lv": 4,
+    "emoji": "🌺",
+    "en": "Frida Kahlo",
+    "zh": "芙烈達・卡蘿",
+    "sent": "Frida painted bold portraits inspired by her life.",
+    "sentZh": "芙烈達以自身生命為靈感描繪鮮明肖像。",
+    "fact": "芙烈達・卡蘿出生並生活於墨西哥城，以強烈色彩和自畫像表達身體經驗、情感與文化認同。",
+    "words": [
+     "bold",
+     "portrait",
+     "inspire"
+    ],
+    "era": "1907–1954",
+    "field": "繪畫藝術"
+   }
+  ]
+ },
+ "cape_town": {
+  "clue": "Oceans meet beneath a famous flat-topped mountain near penguins.",
+  "clueZh": "海洋在著名的平頂山下交會，附近還有企鵝。",
+  "pref": "surfboard",
+  "cards": [
+   {
+    "id": "cape_town_culture",
+    "type": "culture",
+    "lv": 2,
+    "emoji": "🎶",
+    "en": "Cape Jazz",
+    "zh": "開普爵士樂",
+    "sent": "Musicians blend joyful rhythms into lively jazz songs.",
+    "sentZh": "音樂家把歡快節奏融入活潑的爵士歌曲。",
+    "fact": "開普爵士樂融合非洲、歐洲與亞洲音樂元素，以活潑節奏呈現開普敦多元社群的文化交流。",
+    "words": [
+     "musician",
+     "rhythm",
+     "blend"
+    ]
+   },
+   {
+    "id": "cape_town_landmark",
+    "type": "landmark",
+    "lv": 3,
+    "emoji": "🏝️",
+    "en": "Robben Island",
+    "zh": "羅本島",
+    "sent": "Boats carry visitors to this historic island museum.",
+    "sentZh": "船隻載著訪客前往這座歷史島嶼博物館。",
+    "fact": "羅本島位於開普敦外海，曾作為監獄與隔離地，如今透過博物館保存南非追求自由的歷史記憶。",
+    "words": [
+     "boat",
+     "historic",
+     "island"
+    ]
+   },
+   {
+    "id": "cape_town_person",
+    "type": "person",
+    "lv": 4,
+    "emoji": "❤️",
+    "en": "Christiaan Barnard",
+    "zh": "克里斯蒂安・巴納德",
+    "sent": "Barnard led the first successful human heart transplant.",
+    "sentZh": "巴納德主持了首次成功的人類心臟移植手術。",
+    "fact": "巴納德醫師在開普敦的醫院完成世界首例成功的人類心臟移植，推動心臟外科與移植醫學發展。",
+    "words": [
+     "heart",
+     "transplant",
+     "successful"
+    ],
+    "era": "1922–2001",
+    "field": "心臟外科醫學"
+   }
+  ]
+ },
+ "buenos_aires": {
+  "clue": "Tango dancers sweep across plazas in this elegant port city.",
+  "clueZh": "探戈舞者在這座優雅港都的廣場上翩然起舞。",
+  "pref": "bookmark",
+  "cards": [
+   {
+    "id": "buenos_aires_culture",
+    "type": "culture",
+    "lv": 2,
+    "emoji": "🕺",
+    "en": "Tango",
+    "zh": "探戈",
+    "sent": "Partners dance closely to dramatic tango music.",
+    "sentZh": "舞伴隨著戲劇性的探戈音樂貼近共舞。",
+    "fact": "探戈誕生於拉普拉塔河沿岸社區，結合舞蹈、音樂與詩歌，後來成為布宜諾斯艾利斯的文化象徵。",
+    "words": [
+     "partner",
+     "closely",
+     "dramatic"
+    ]
+   },
+   {
+    "id": "buenos_aires_landmark",
+    "type": "landmark",
+    "lv": 2,
+    "emoji": "🎭",
+    "en": "Teatro Colón",
+    "zh": "哥倫布劇院",
+    "sent": "Opera and ballet shine inside this splendid theater.",
+    "sentZh": "歌劇與芭蕾在這座華麗劇院中綻放光彩。",
+    "fact": "哥倫布劇院以華麗建築和優良音響聞名，自二十世紀初起便是歌劇、芭蕾與古典音樂的重要舞台。",
+    "words": [
+     "opera",
+     "ballet",
+     "theater"
+    ]
+   },
+   {
+    "id": "buenos_aires_person",
+    "type": "person",
+    "lv": 4,
+    "emoji": "📚",
+    "en": "Jorge Luis Borges",
+    "zh": "豪爾赫・路易斯・波赫士",
+    "sent": "Borges wrote imaginative stories about mazes and libraries.",
+    "sentZh": "波赫士創作關於迷宮與圖書館的想像故事。",
+    "fact": "波赫士出生於布宜諾斯艾利斯，以迷宮、鏡子與無限等主題創作短篇故事，深刻影響世界文學。",
+    "words": [
+     "imaginative",
+     "maze",
+     "library"
+    ],
+    "era": "1899–1986",
+    "field": "文學創作"
+   }
+  ]
+ },
+ "beijing": {
+  "clue": "Ancient courtyards stand beside modern towers in this northern capital.",
+  "clueZh": "古老院落與現代高樓並立於這座北方首都。",
+  "pref": "kite",
+  "cards": [
+   {
+    "id": "beijing_culture",
+    "type": "culture",
+    "lv": 2,
+    "emoji": "🎭",
+    "en": "Peking Opera",
+    "zh": "京劇",
+    "sent": "Performers sing and act in colorful painted faces.",
+    "sentZh": "表演者畫著彩色臉譜唱歌演戲。",
+    "fact": "京劇結合唱腔、念白、武術與舞蹈，鮮明臉譜能提示角色性格，是北京極具代表性的表演藝術。",
+    "words": [
+     "performer",
+     "painted",
+     "act"
+    ]
+   },
+   {
+    "id": "beijing_landmark",
+    "type": "landmark",
+    "lv": 3,
+    "emoji": "🏯",
+    "en": "Forbidden City",
+    "zh": "故宮",
+    "sent": "Red walls surround hundreds of historic palace buildings.",
+    "sentZh": "紅牆環繞著數百座歷史宮殿建築。",
+    "fact": "北京故宮是規模宏大的古代宮殿建築群，擁有數百年歷史，如今以博物院形式保存珍貴文物。",
+    "words": [
+     "surround",
+     "historic",
+     "palace"
+    ]
+   },
+   {
+    "id": "beijing_person",
+    "type": "person",
+    "lv": 4,
+    "emoji": "🎭",
+    "en": "Mei Lanfang",
+    "zh": "梅蘭芳",
+    "sent": "Mei Lanfang brought Peking Opera to world audiences.",
+    "sentZh": "梅蘭芳把京劇帶給世界各地的觀眾。",
+    "fact": "梅蘭芳生於北京，以精湛唱腔與表演革新京劇旦角藝術，並透過海外演出促進東西方戲劇交流。",
+    "words": [
+     "audience",
+     "opera",
+     "perform"
+    ],
+    "era": "1894–1961",
+    "field": "京劇表演藝術"
+   }
+  ]
+ },
 };
 
 // 禮物池（送禮時出 3 選 1：含該城偏好 1 個＋隨機 2 個）

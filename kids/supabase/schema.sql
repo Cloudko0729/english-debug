@@ -99,3 +99,22 @@ drop trigger if exists trg_prune_island_messages on public.island_messages;
 create trigger trg_prune_island_messages
   after insert on public.island_messages
   for each row execute function public.prune_island_messages();
+
+-- ── 共同奇觀（2026-07-12 新增）：三兄弟合捐金幣蓋跨島奇觀 ─────────────────────
+-- 全家登入者都可讀（算總進度、排行榜）；只能用自己的帳號捐款。永久保留（不修剪）。
+create table if not exists public.island_wonders (
+  id         bigint generated always as identity primary key,
+  sender_id  uuid not null references auth.users(id) on delete cascade,
+  student    text not null,
+  wonder_id  text not null,
+  amount     integer not null check (amount > 0),
+  created_at timestamptz default now()
+);
+create index if not exists island_wonders_wonder_idx on public.island_wonders (wonder_id, created_at);
+alter table public.island_wonders enable row level security;
+create policy "family can read wonder contributions"
+  on public.island_wonders for select
+  to authenticated using (true);
+create policy "donate as self"
+  on public.island_wonders for insert
+  to authenticated with check (auth.uid() = sender_id);

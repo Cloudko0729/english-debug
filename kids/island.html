@@ -304,6 +304,7 @@
     <button id="visitorBtn" onclick="openTravel()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2f80ed;border-radius:12px;background:#eaf3ff;color:#1e5fb8;font-weight:800;cursor:pointer">✈️ 今日旅客</button>
     <button id="albumBtn" onclick="openAlbum()" style="flex:1;min-width:130px;padding:10px;border:2px solid #d4a017;border-radius:12px;background:#fff8e1;color:#8a6d1a;font-weight:800;cursor:pointer">📕 城市卡冊</button>
     <button id="petBtn" onclick="openPet()" style="flex:1;min-width:130px;padding:10px;border:2px solid #b5651d;border-radius:12px;background:#fdf1e3;color:#8a4a12;font-weight:800;cursor:pointer">🐾 我的寵物</button>
+    <button id="wonderBtn" onclick="openWonder()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2c5f8a;border-radius:12px;background:#eaf1fb;color:#1f4463;font-weight:800;cursor:pointer">🏛️ 共同奇觀</button>
     <a href="worddex.html" style="flex:1;min-width:130px;padding:10px;border:2px solid #7c4dca;border-radius:12px;background:#f3edff;color:#5a36a8;font-weight:800;text-align:center;text-decoration:none">🎴 單字圖鑑</a>
     <button id="mailBtn" onclick="openMail()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2fbf71;border-radius:12px;background:#e9fbf1;color:#187a48;font-weight:800;cursor:pointer;position:relative">✉️ 島嶼信箱<span id="mailBadge" style="display:none;position:absolute;top:-8px;right:-6px;background:#ef476f;color:#fff;border-radius:11px;min-width:22px;height:22px;line-height:22px;font-size:.75rem;font-weight:900;padding:0 4px;box-shadow:0 1px 4px rgba(0,0,0,.3)"></span></button>
   </div>
@@ -330,14 +331,14 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607120514"></script>
-<script src="curriculum.js?v=202607120514"></script>
-<script src="worddex.js?v=202607120514"></script>
-<script src="city_data.js?v=202607120514"></script>
+<script src="wordbank.js?v=202607120600"></script>
+<script src="curriculum.js?v=202607120600"></script>
+<script src="worddex.js?v=202607120600"></script>
+<script src="city_data.js?v=202607120600"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607120514"></script>
-<script src="account_lock.js?v=202607120514"></script>
-<script src="supabase_auth.js?v=202607120514"></script>
+<script src="cloud_sync.js?v=202607120600"></script>
+<script src="account_lock.js?v=202607120600"></script>
+<script src="supabase_auth.js?v=202607120600"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -1302,7 +1303,7 @@ function _spendCoins(n, why) {
 let _tq = null;
 function openTravel() {
   const ca = CA();
-  if (Object.keys(ca.cards).length >= WORLD_CITIES.length) { toast("12 座城市全部收集完成！等第二批城市 🏆"); return; }
+  if (Object.keys(ca.cards).length >= WORLD_CITIES.length) { toast(`${WORLD_CITIES.length} 座城市全部收集完成！你環遊世界了 🏆`); return; }
   if (ca.lastStampDate === todayStr()) { toast("今天的護照章拿到了，明天再來！"); return; }
   const c = curCity();
   const others = WORLD_CITIES.filter(x => x.id !== c.id);
@@ -1619,6 +1620,91 @@ function updatePetBtn() {
   if (!island.pet) { b.textContent = "🐾 領養寵物（免費）"; return; }
   b.textContent = `${PET_SPECIES[island.pet.sp].stages[petStage()]} 我的寵物 ${MOOD_UI[petMood()][0]}`;
 }
+
+// ─── 共同奇觀（三兄弟合捐金幣，跨帳號 Supabase 共享進度；零格子占用）──────────
+const WONDER_FAMILY = ["albert", "jonathan", "ryder"];
+const WONDERS = [
+  { id: "lighthouse",  name: "海上燈塔", emoji: "🗼", target: 15000, desc: "三個人一起蓋一座燈塔，晚上為船隻指路！" },
+  { id: "rainbowbridge", name: "彩虹跨海大橋", emoji: "🌈", target: 30000, desc: "把三座島連起來的夢幻大橋。" },
+  { id: "clocktower", name: "時光鐘樓", emoji: "🕰️", target: 45000, desc: "全家都看得到報時的高塔。" },
+  { id: "library", name: "世界圖書館", emoji: "📚", target: 60000, desc: "收藏三兄弟一起讀過的所有故事。" },
+];
+const WONDER_DONATE = [300, 800, 2000];
+async function fetchWonderRows() {
+  if (!window.sbClient) return [];
+  try {
+    const { data, error } = await window.sbClient.from("island_wonders").select("student, wonder_id, amount");
+    if (error) throw error;
+    return data || [];
+  } catch (e) { return []; }
+}
+function wonderState(rows) {
+  const sums = {};   // wonder_id -> total
+  const per = {};    // wonder_id -> {student: total}
+  rows.forEach(r => {
+    sums[r.wonder_id] = (sums[r.wonder_id] || 0) + r.amount;
+    (per[r.wonder_id] || (per[r.wonder_id] = {}))[r.student] = (per[r.wonder_id][r.student] || 0) + r.amount;
+  });
+  const completed = [];
+  let current = WONDERS[WONDERS.length - 1], idx = WONDERS.length - 1;
+  for (let i = 0; i < WONDERS.length; i++) {
+    const w = WONDERS[i], total = sums[w.id] || 0;
+    if (total >= w.target) {
+      const donors = per[w.id] || {};
+      const top = Object.entries(donors).sort((a, b) => b[1] - a[1])[0];
+      completed.push({ w, total, architect: top ? top[0] : null });
+    } else { current = w; idx = i; break; }
+    if (i === WONDERS.length - 1) { current = null; idx = i; }   // 全部完成
+  }
+  return { sums, per, completed, current, idx };
+}
+async function openWonder() {
+  const user = (typeof _sbUser === "function") ? await _sbUser() : null;
+  if (!user) {
+    document.getElementById("sheetContent").innerHTML = `<h3>🏛️ 共同奇觀</h3><p style="color:var(--muted);font-size:.86rem">要先登入才能跟兄弟一起蓋奇觀喔！回首頁登入後再來。</p>`;
+    document.getElementById("sheet").classList.add("open");
+    return;
+  }
+  document.getElementById("sheetContent").innerHTML = `<h3>🏛️ 共同奇觀</h3><p style="color:var(--muted)">讀取進度中…</p>`;
+  document.getElementById("sheet").classList.add("open");
+  const rows = await fetchWonderRows();
+  renderWonder(wonderState(rows));
+}
+function renderWonder(st) {
+  let h = `<h3>🏛️ 共同奇觀</h3><p style="color:var(--muted);font-size:.83rem">三兄弟一起捐金幣，蓋跨島的大建設！不占你自己的島格子。</p>`;
+  if (st.completed.length) {
+    h += `<div style="display:flex;flex-wrap:wrap;gap:6px;margin:6px 0">${st.completed.map(c =>
+      `<span style="background:#fff8e1;border:1.5px solid #f2d98a;border-radius:9px;padding:5px 10px;font-size:.8rem">${c.w.emoji} ${c.w.name} ✅${c.architect ? `<br><small>🏅 首席建築師：${MAIL_LABEL[c.architect] || c.architect}</small>` : ""}</span>`).join("")}</div>`;
+  }
+  if (!st.current) {
+    h += `<p style="font-weight:800;color:#5a36a8">🎉 目前所有奇觀都蓋完了！等下一批建設開放。</p>`;
+  } else {
+    const w = st.current, total = st.sums[w.id] || 0, pct = Math.min(100, Math.round(total / w.target * 100));
+    const per = st.per[w.id] || {};
+    h += `<div style="border:2px solid #2c5f8a;border-radius:14px;padding:14px;background:#f7faff;margin-top:6px">
+      <div style="font-size:2.2rem;text-align:center">${w.emoji}</div>
+      <div style="text-align:center;font-weight:800;font-size:1.05rem">${w.name}</div>
+      <div style="text-align:center;color:#888;font-size:.82rem;margin-bottom:8px">${w.desc}</div>
+      <div style="background:#e5e9f0;border-radius:9px;height:14px"><div style="width:${pct}%;height:14px;border-radius:9px;background:linear-gradient(90deg,#2c5f8a,#5a9fd4)"></div></div>
+      <div style="text-align:center;font-size:.85rem;margin:5px 0 10px">🪙 ${total.toLocaleString()} / ${w.target.toLocaleString()}（${pct}%）</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">${WONDER_FAMILY.map(s =>
+        `<span style="flex:1;min-width:90px;text-align:center;background:#fff;border-radius:9px;padding:6px;font-size:.8rem">${MAIL_LABEL[s] || s}<br><b>🪙${(per[s] || 0).toLocaleString()}</b></span>`).join("")}</div>
+      <div style="display:flex;gap:6px">${WONDER_DONATE.map(n =>
+        `<button onclick="donateWonder('${w.id}',${n})" style="flex:1;padding:10px 4px;border:none;border-radius:10px;background:#2c5f8a;color:#fff;font-weight:800;cursor:pointer;font-size:.85rem">捐 🪙${n}</button>`).join("")}</div>
+    </div>`;
+  }
+  document.getElementById("sheetContent").innerHTML = h;
+}
+window.donateWonder = async function (wonderId, amount) {
+  const user = await _sbUser(); if (!user) { toast("要先登入"); return; }
+  if (!_spendCoins(amount, "wonder:" + wonderId)) return;
+  try {
+    const { error } = await window.sbClient.from("island_wonders").insert({ sender_id: user.id, student: currentStudent, wonder_id: wonderId, amount });
+    if (error) throw error;
+    toast(`🏛️ 捐了 🪙${amount}！`);
+    openWonder();
+  } catch (e) { toast("捐款失敗：" + (e.message || e)); }
+};
 
 let _bq = null;
 function openBoard() {

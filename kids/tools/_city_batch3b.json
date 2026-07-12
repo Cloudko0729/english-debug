@@ -1,0 +1,317 @@
+{
+  "cities": [
+    {
+      "id": "madrid",
+      "city": "Madrid",
+      "country": "Spain",
+      "flag": "🇪🇸",
+      "region": "歐洲",
+      "landmark": "Royal Palace of Madrid",
+      "lmEmoji": "🏰",
+      "clue": "Grand plazas glow while flamenco rhythms fill lively streets.",
+      "clueZh": "宏偉廣場閃耀，佛朗明哥節奏洋溢在熱鬧街頭。",
+      "pref": "carnivalmask",
+      "cards": [
+        {
+          "id": "madrid_culture",
+          "type": "culture",
+          "lv": 2,
+          "emoji": "💃",
+          "en": "Flamenco",
+          "zh": "佛朗明哥",
+          "sent": "Dancers clap and move to lively guitar music.",
+          "sentZh": "舞者隨著活潑的吉他音樂拍手起舞。",
+          "fact": "佛朗明哥融合歌唱、吉他與舞蹈，源自西班牙南部，在馬德里的劇場與小酒館也十分盛行。",
+          "words": ["dancer", "clap", "guitar"]
+        },
+        {
+          "id": "madrid_landmark",
+          "type": "landmark",
+          "lv": 2,
+          "emoji": "🖼️",
+          "en": "Prado Museum",
+          "zh": "普拉多博物館",
+          "sent": "Famous paintings fill this grand art museum.",
+          "sentZh": "著名畫作陳列在這座宏偉的藝術博物館中。",
+          "fact": "普拉多博物館收藏大量歐洲藝術珍品，尤其以西班牙繪畫著稱，是馬德里重要的文化地標。",
+          "words": ["famous", "painting", "museum"]
+        },
+        {
+          "id": "madrid_person",
+          "type": "person",
+          "lv": 4,
+          "emoji": "🎨",
+          "en": "Diego Velázquez",
+          "zh": "迪亞哥・委拉斯開茲",
+          "sent": "Velázquez painted people with remarkable detail and depth.",
+          "sentZh": "委拉斯開茲以非凡的細節與深度描繪人物。",
+          "fact": "委拉斯開茲長年在馬德里創作，以細膩肖像與光影技巧聞名，代表作《宮女》現藏於普拉多博物館。",
+          "words": ["paint", "detail", "depth"],
+          "era": "1599–1660",
+          "field": "繪畫藝術"
+        }
+      ]
+    },
+    {
+      "id": "amsterdam",
+      "city": "Amsterdam",
+      "country": "Netherlands",
+      "flag": "🇳🇱",
+      "region": "歐洲",
+      "landmark": "Amsterdam Canals",
+      "lmEmoji": "🚤",
+      "clue": "Bicycles cross bridges beside narrow houses and sparkling waterways.",
+      "clueZh": "自行車穿越橋梁，沿途是窄屋與閃亮水道。",
+      "pref": "orchid",
+      "cards": [
+        {
+          "id": "amsterdam_culture",
+          "type": "culture",
+          "lv": 2,
+          "emoji": "🚲",
+          "en": "Cycling Culture",
+          "zh": "自行車文化",
+          "sent": "Families ride bicycles along safe city paths.",
+          "sentZh": "家庭沿著安全的城市道路騎自行車。",
+          "fact": "阿姆斯特丹擁有密集的自行車道與停車設施，許多居民每天騎車上學、工作或前往市場。",
+          "words": ["bicycle", "ride", "path"]
+        },
+        {
+          "id": "amsterdam_landmark",
+          "type": "landmark",
+          "lv": 2,
+          "emoji": "🏛️",
+          "en": "Rijksmuseum",
+          "zh": "國家博物館",
+          "sent": "Dutch masterpieces welcome visitors inside this great museum.",
+          "sentZh": "荷蘭傑作在這座宏偉博物館裡迎接訪客。",
+          "fact": "荷蘭國家博物館收藏林布蘭與維梅爾等大師作品，帶領訪客認識數百年的荷蘭藝術與歷史。",
+          "words": ["Dutch", "masterpiece", "visitor"]
+        },
+        {
+          "id": "amsterdam_person",
+          "type": "person",
+          "lv": 4,
+          "emoji": "🖌️",
+          "en": "Rembrandt",
+          "zh": "林布蘭",
+          "sent": "Rembrandt used light to create powerful painted stories.",
+          "sentZh": "林布蘭運用光線創造動人的繪畫故事。",
+          "fact": "林布蘭在阿姆斯特丹生活與創作多年，善用明暗對比描繪人物情感，成為荷蘭藝術的重要大師。",
+          "words": ["light", "powerful", "story"],
+          "era": "1606–1669",
+          "field": "繪畫與版畫"
+        }
+      ]
+    },
+    {
+      "id": "mexico_city",
+      "city": "Mexico City",
+      "country": "Mexico",
+      "flag": "🇲🇽",
+      "region": "北美洲",
+      "landmark": "Angel of Independence",
+      "lmEmoji": "🗽",
+      "clue": "Ancient ruins and colorful murals brighten this mountain capital.",
+      "clueZh": "古老遺跡與繽紛壁畫照亮這座山間首都。",
+      "pref": "carnivalmask",
+      "cards": [
+        {
+          "id": "mexico_city_culture",
+          "type": "culture",
+          "lv": 2,
+          "emoji": "🌼",
+          "en": "Day of the Dead",
+          "zh": "亡靈節",
+          "sent": "Families remember loved ones with flowers and food.",
+          "sentZh": "家人用鮮花與食物懷念摯愛親友。",
+          "fact": "亡靈節期間，人們布置花朵、照片與食物，溫馨紀念離世親友，展現墨西哥獨特的生命觀。",
+          "words": ["remember", "flower", "family"]
+        },
+        {
+          "id": "mexico_city_landmark",
+          "type": "landmark",
+          "lv": 3,
+          "emoji": "🏰",
+          "en": "Chapultepec Castle",
+          "zh": "查普爾特佩克城堡",
+          "sent": "The hilltop castle overlooks trees and busy avenues.",
+          "sentZh": "山頂城堡俯瞰樹林與繁忙大道。",
+          "fact": "查普爾特佩克城堡坐落於公園山丘上，如今是國家歷史博物館，可俯瞰墨西哥城廣闊景色。",
+          "words": ["hilltop", "castle", "overlook"]
+        },
+        {
+          "id": "mexico_city_person",
+          "type": "person",
+          "lv": 4,
+          "emoji": "🌺",
+          "en": "Frida Kahlo",
+          "zh": "芙烈達・卡蘿",
+          "sent": "Frida painted bold portraits inspired by her life.",
+          "sentZh": "芙烈達以自身生命為靈感描繪鮮明肖像。",
+          "fact": "芙烈達・卡蘿出生並生活於墨西哥城，以強烈色彩和自畫像表達身體經驗、情感與文化認同。",
+          "words": ["bold", "portrait", "inspire"],
+          "era": "1907–1954",
+          "field": "繪畫藝術"
+        }
+      ]
+    },
+    {
+      "id": "cape_town",
+      "city": "Cape Town",
+      "country": "South Africa",
+      "flag": "🇿🇦",
+      "region": "非洲",
+      "landmark": "Table Mountain",
+      "lmEmoji": "⛰️",
+      "clue": "Oceans meet beneath a famous flat-topped mountain near penguins.",
+      "clueZh": "海洋在著名的平頂山下交會，附近還有企鵝。",
+      "pref": "surfboard",
+      "cards": [
+        {
+          "id": "cape_town_culture",
+          "type": "culture",
+          "lv": 2,
+          "emoji": "🎶",
+          "en": "Cape Jazz",
+          "zh": "開普爵士樂",
+          "sent": "Musicians blend joyful rhythms into lively jazz songs.",
+          "sentZh": "音樂家把歡快節奏融入活潑的爵士歌曲。",
+          "fact": "開普爵士樂融合非洲、歐洲與亞洲音樂元素，以活潑節奏呈現開普敦多元社群的文化交流。",
+          "words": ["musician", "rhythm", "blend"]
+        },
+        {
+          "id": "cape_town_landmark",
+          "type": "landmark",
+          "lv": 3,
+          "emoji": "🏝️",
+          "en": "Robben Island",
+          "zh": "羅本島",
+          "sent": "Boats carry visitors to this historic island museum.",
+          "sentZh": "船隻載著訪客前往這座歷史島嶼博物館。",
+          "fact": "羅本島位於開普敦外海，曾作為監獄與隔離地，如今透過博物館保存南非追求自由的歷史記憶。",
+          "words": ["boat", "historic", "island"]
+        },
+        {
+          "id": "cape_town_person",
+          "type": "person",
+          "lv": 4,
+          "emoji": "❤️",
+          "en": "Christiaan Barnard",
+          "zh": "克里斯蒂安・巴納德",
+          "sent": "Barnard led the first successful human heart transplant.",
+          "sentZh": "巴納德主持了首次成功的人類心臟移植手術。",
+          "fact": "巴納德醫師在開普敦的醫院完成世界首例成功的人類心臟移植，推動心臟外科與移植醫學發展。",
+          "words": ["heart", "transplant", "successful"],
+          "era": "1922–2001",
+          "field": "心臟外科醫學"
+        }
+      ]
+    },
+    {
+      "id": "buenos_aires",
+      "city": "Buenos Aires",
+      "country": "Argentina",
+      "flag": "🇦🇷",
+      "region": "南美洲",
+      "landmark": "Obelisco",
+      "lmEmoji": "🗼",
+      "clue": "Tango dancers sweep across plazas in this elegant port city.",
+      "clueZh": "探戈舞者在這座優雅港都的廣場上翩然起舞。",
+      "pref": "bookmark",
+      "cards": [
+        {
+          "id": "buenos_aires_culture",
+          "type": "culture",
+          "lv": 2,
+          "emoji": "🕺",
+          "en": "Tango",
+          "zh": "探戈",
+          "sent": "Partners dance closely to dramatic tango music.",
+          "sentZh": "舞伴隨著戲劇性的探戈音樂貼近共舞。",
+          "fact": "探戈誕生於拉普拉塔河沿岸社區，結合舞蹈、音樂與詩歌，後來成為布宜諾斯艾利斯的文化象徵。",
+          "words": ["partner", "closely", "dramatic"]
+        },
+        {
+          "id": "buenos_aires_landmark",
+          "type": "landmark",
+          "lv": 2,
+          "emoji": "🎭",
+          "en": "Teatro Colón",
+          "zh": "哥倫布劇院",
+          "sent": "Opera and ballet shine inside this splendid theater.",
+          "sentZh": "歌劇與芭蕾在這座華麗劇院中綻放光彩。",
+          "fact": "哥倫布劇院以華麗建築和優良音響聞名，自二十世紀初起便是歌劇、芭蕾與古典音樂的重要舞台。",
+          "words": ["opera", "ballet", "theater"]
+        },
+        {
+          "id": "buenos_aires_person",
+          "type": "person",
+          "lv": 4,
+          "emoji": "📚",
+          "en": "Jorge Luis Borges",
+          "zh": "豪爾赫・路易斯・波赫士",
+          "sent": "Borges wrote imaginative stories about mazes and libraries.",
+          "sentZh": "波赫士創作關於迷宮與圖書館的想像故事。",
+          "fact": "波赫士出生於布宜諾斯艾利斯，以迷宮、鏡子與無限等主題創作短篇故事，深刻影響世界文學。",
+          "words": ["imaginative", "maze", "library"],
+          "era": "1899–1986",
+          "field": "文學創作"
+        }
+      ]
+    },
+    {
+      "id": "beijing",
+      "city": "Beijing",
+      "country": "China",
+      "flag": "🇨🇳",
+      "region": "亞洲",
+      "landmark": "The Great Wall",
+      "lmEmoji": "🧱",
+      "clue": "Ancient courtyards stand beside modern towers in this northern capital.",
+      "clueZh": "古老院落與現代高樓並立於這座北方首都。",
+      "pref": "kite",
+      "cards": [
+        {
+          "id": "beijing_culture",
+          "type": "culture",
+          "lv": 2,
+          "emoji": "🎭",
+          "en": "Peking Opera",
+          "zh": "京劇",
+          "sent": "Performers sing and act in colorful painted faces.",
+          "sentZh": "表演者畫著彩色臉譜唱歌演戲。",
+          "fact": "京劇結合唱腔、念白、武術與舞蹈，鮮明臉譜能提示角色性格，是北京極具代表性的表演藝術。",
+          "words": ["performer", "painted", "act"]
+        },
+        {
+          "id": "beijing_landmark",
+          "type": "landmark",
+          "lv": 3,
+          "emoji": "🏯",
+          "en": "Forbidden City",
+          "zh": "故宮",
+          "sent": "Red walls surround hundreds of historic palace buildings.",
+          "sentZh": "紅牆環繞著數百座歷史宮殿建築。",
+          "fact": "北京故宮是規模宏大的古代宮殿建築群，擁有數百年歷史，如今以博物院形式保存珍貴文物。",
+          "words": ["surround", "historic", "palace"]
+        },
+        {
+          "id": "beijing_person",
+          "type": "person",
+          "lv": 4,
+          "emoji": "🎭",
+          "en": "Mei Lanfang",
+          "zh": "梅蘭芳",
+          "sent": "Mei Lanfang brought Peking Opera to world audiences.",
+          "sentZh": "梅蘭芳把京劇帶給世界各地的觀眾。",
+          "fact": "梅蘭芳生於北京，以精湛唱腔與表演革新京劇旦角藝術，並透過海外演出促進東西方戲劇交流。",
+          "words": ["audience", "opera", "perform"],
+          "era": "1894–1961",
+          "field": "京劇表演藝術"
+        }
+      ]
+    }
+  ],
+  "newGifts": []
+}
