@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>兒童英語圖片題單字盤點與生成圖片報告</title>
+  <style>
+    :root{--ink:#243042;--blue:#2f80ed;--green:#17875d;--gold:#f2a900;--muted:#667085;--line:#dfe6ee;--soft:#f6f9fc;--warn:#fff7dc}
+    *{box-sizing:border-box}body{margin:0;background:#eef3f7;color:var(--ink);font-family:Arial,"Noto Sans TC","Microsoft JhengHei",sans-serif;line-height:1.65}
+    main{max-width:1120px;margin:0 auto;background:#fff;min-height:100vh;padding:30px 34px 70px}h1{font-size:2rem;line-height:1.25;margin:0 0 8px}h2{margin:38px 0 14px;border-left:6px solid var(--blue);padding-left:12px}h3{margin:24px 0 10px}.meta{color:var(--muted);font-size:.92rem}.lead{font-size:1.08rem;background:#edf6ff;border:1px solid #cfe4ff;border-radius:14px;padding:16px 18px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}.stat{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:15px;text-align:center}.stat b{display:block;font-size:1.55rem;color:var(--blue)}.note{background:var(--warn);border:1px solid #f5d977;border-radius:12px;padding:12px 16px}.ok{background:#ecfbf5;border:1px solid #bdebd8;border-radius:12px;padding:12px 16px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 3px 12px rgba(20,40,60,.07)}.card img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#fff8df}.card .body{padding:11px 12px}.word{font-size:1.15rem;font-weight:800;color:#173a66}.zh{color:var(--green);font-weight:700}.small{font-size:.83rem;color:var(--muted)}table{width:100%;border-collapse:collapse;margin:12px 0 22px;font-size:.94rem}th,td{border:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}th{background:#eef5ff}code{background:#f0f3f6;border-radius:5px;padding:2px 5px}.sheet{width:100%;border:1px solid var(--line);border-radius:14px;display:block}.pill{display:inline-block;border-radius:999px;padding:3px 9px;font-size:.78rem;font-weight:700;background:#e9f3ff;color:#225a9d}.priority{background:#fff1ce;color:#8a5b00}.columns{columns:2;column-gap:30px}.columns li{break-inside:avoid;margin-bottom:5px}.footer{margin-top:42px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem}
+    @media(max-width:760px){main{padding:20px 14px 50px}h1{font-size:1.55rem}.stats{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:repeat(2,1fr)}.columns{columns:1}table{font-size:.84rem}th,td{padding:7px}}
+  </style>
+</head>
+<body><main>
+  <h1>兒童英語圖片題單字盤點與生成圖片報告</h1>
+  <div class="meta">盤點日期：2026-07-12｜專案：English Debug Kids｜範圍：目前課程＋52 週年度單字計畫</div>
+
+  <p class="lead"><strong>結論：</strong>目前圖片題只接受 <code>word_emoji.js</code> 已有 emoji 的單字，因此不少具體、可用圖片清楚表示的單字不會進入圖片題。目前已完成 76 個單字的簡潔線稿／關鍵色圖片並切成獨立 PNG。</p>
+
+  <div class="stats">
+    <div class="stat"><b>52</b>年度週次</div>
+    <div class="stat"><b>1,560</b>計畫單字</div>
+    <div class="stat"><b>317</b>現有 emoji 映射</div>
+    <div class="stat"><b>76</b>目前生成圖片</div>
+  </div>
+
+  <div class="note"><strong>注意：</strong>共有 1,363 個課程字沒有 emoji 映射，但不能把它們全部視為圖片缺口。當中大量是抽象名詞、動詞、形容詞、副詞與片語；若單張圖不能唯一指向答案，就不應加入圖片題。</div>
+
+  <h2>一、現有圖片題檢視</h2>
+  <ul>
+    <li><code>kids/drills/daily_engine.js</code> 先用 <code>WORD_EMOJI[en]</code> 篩選圖片題候選字。</li>
+    <li>沒有 emoji 的單字不會進入 <code>weekPic</code> 或 <code>basicPic</code>。</li>
+    <li>畫面目前只會顯示 emoji；沒有圖時才退回顯示中文。</li>
+    <li>這種做法穩定，但像 <em>bathroom</em>、<em>living room</em>、<em>post office</em>、<em>waterfall</em> 等詞，生成圖片會比 emoji 更明確。</li>
+  </ul>
+
+  <h2>二、第一批已生成的 16 個新增單字</h2>
+  <p>選字原則：近期課程優先、單張圖可辨識、與常見干擾選項能區分、不依賴文字標籤。</p>
+
+  <div class="cards">
+    <div class="card"><img src="../picture_vocab_img/v2/apartment.png" alt="apartment"><div class="body"><div class="word">apartment</div><div class="zh">公寓</div><div class="small">7/8｜多層住宅與陽台，避開辦公大樓外觀</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/bakery.png" alt="bakery"><div class="body"><div class="word">bakery</div><div class="zh">麵包店</div><div class="small">7/8｜店面＋櫥窗麵包，不使用文字招牌</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/bathroom.png" alt="bathroom"><div class="body"><div class="word">bathroom</div><div class="zh">浴室</div><div class="small">7/8｜浴缸、馬桶、洗手台形成房間概念</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/bedroom.png" alt="bedroom"><div class="body"><div class="word">bedroom</div><div class="zh">臥室</div><div class="small">7/8｜床、枕頭、衣櫃與床頭燈</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/living_room.png" alt="living room"><div class="body"><div class="word">living room</div><div class="zh">客廳</div><div class="small">7/8｜沙發、茶几、地毯與電視</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/post_office.png" alt="post office"><div class="body"><div class="word">post office</div><div class="zh">郵局</div><div class="small">7/8｜建築為主，搭配郵筒、信件與郵務車</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/garden.png" alt="garden"><div class="body"><div class="word">garden</div><div class="zh">花園／菜園</div><div class="small">7/8｜花圃、植物、小徑與園藝工具</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/gate.png" alt="gate"><div class="body"><div class="word">gate</div><div class="zh">大門／柵門</div><div class="small">7/8｜設於短圍籬中的開啟式柵門</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/camera.png" alt="camera"><div class="body"><div class="word">camera</div><div class="zh">相機</div><div class="small">7/12｜本週單字，單一數位相機</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/basket.png" alt="basket"><div class="body"><div class="word">basket</div><div class="zh">籃子</div><div class="small">7/19｜空的藤編提籃，輪廓明確</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/blanket.png" alt="blanket"><div class="body"><div class="word">blanket</div><div class="zh">毯子</div><div class="small">7/19｜摺疊柔軟毯子，與 towel 區分</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/rope.png" alt="rope"><div class="body"><div class="word">rope</div><div class="zh">繩子</div><div class="small">7/19｜粗繩盤成一圈，材質與形狀清楚</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/forest.png" alt="forest"><div class="body"><div class="word">forest</div><div class="zh">森林</div><div class="small">7/19｜大量高樹與自然小徑，避免畫成 park</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/waterfall.png" alt="waterfall"><div class="body"><div class="word">waterfall</div><div class="zh">瀑布</div><div class="small">8/2｜水流由岩壁落下，辨識度高</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/pond.png" alt="pond"><div class="body"><div class="word">pond</div><div class="zh">池塘</div><div class="small">8/2｜小型自然水域、睡蓮與蘆葦</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/fire_station.png" alt="fire station"><div class="body"><div class="word">fire station</div><div class="zh">消防站</div><div class="small">8/2｜消防站建築為主，消防車只作輔助線索</div></div></div>
+  </div>
+
+  <h2>三、生成圖片總表</h2>
+  <h3>第一張：12 個單字</h3>
+  <img class="sheet" src="../picture_vocab_img/v2/picture_vocab_contact_sheet.png" alt="12 個圖片題單字總表">
+  <h3>第二張：4 個補充單字</h3>
+  <img class="sheet" src="../picture_vocab_img/v2/picture_vocab_contact_sheet_2.png" alt="4 個圖片題單字總表">
+
+  <h2>四、第二批：廚房用品 10 個單字</h2>
+  <div class="cards">
+    <div class="card"><img src="../picture_vocab_img/v2/fork.png" alt="fork"><div class="body"><div class="word">fork</div><div class="zh">叉子</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/knife.png" alt="knife"><div class="body"><div class="word">knife</div><div class="zh">刀子</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/spoon.png" alt="spoon"><div class="body"><div class="word">spoon</div><div class="zh">湯匙</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/bowl.png" alt="bowl"><div class="body"><div class="word">bowl</div><div class="zh">碗</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/pot.png" alt="pot"><div class="body"><div class="word">pot</div><div class="zh">鍋子</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/oven.png" alt="oven"><div class="body"><div class="word">oven</div><div class="zh">烤箱</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/microwave_oven.png" alt="microwave oven"><div class="body"><div class="word">microwave oven</div><div class="zh">微波爐</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/stove.png" alt="stove"><div class="body"><div class="word">stove</div><div class="zh">爐台</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/refrigerator.png" alt="refrigerator"><div class="body"><div class="word">refrigerator</div><div class="zh">冰箱</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/napkin.png" alt="napkin"><div class="body"><div class="word">napkin</div><div class="zh">餐巾</div></div></div>
+  </div>
+  <h3>廚房用品總表</h3>
+  <img class="sheet" src="../picture_vocab_img/v2/kitchen_contact_sheet.png" alt="10 個廚房用品圖片題單字總表">
+  <h2>五、第三批：戶外與交通 10 個單字</h2>
+  <div class="cards">
+    <div class="card"><img src="../picture_vocab_img/v2/pool.png" alt="pool"><div class="body"><div class="word">pool</div><div class="zh">游泳池</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/boat.png" alt="boat"><div class="body"><div class="word">boat</div><div class="zh">船</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/police_station.png" alt="police station"><div class="body"><div class="word">police station</div><div class="zh">警察局</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/airplane.png" alt="airplane"><div class="body"><div class="word">airplane</div><div class="zh">飛機</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/taxi.png" alt="taxi"><div class="body"><div class="word">taxi</div><div class="zh">計程車</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/motorcycle.png" alt="motorcycle"><div class="body"><div class="word">motorcycle</div><div class="zh">機車</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/traffic_jam.png" alt="traffic jam"><div class="body"><div class="word">traffic jam</div><div class="zh">交通阻塞</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/sidewalk.png" alt="sidewalk"><div class="body"><div class="word">sidewalk</div><div class="zh">人行道</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/garage.png" alt="garage"><div class="body"><div class="word">garage</div><div class="zh">車庫</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/flat_tire.png" alt="flat tire"><div class="body"><div class="word">flat tire</div><div class="zh">洩氣的輪胎</div></div></div>
+  </div>
+  <h3>戶外與交通總表</h3>
+  <img class="sheet" src="../picture_vocab_img/v2/transport_contact_sheet.png" alt="10 個戶外與交通圖片題單字總表">
+
+  <h2>六、第四批：食物與動物 10 個單字</h2>
+  <div class="cards">
+    <div class="card"><img src="../picture_vocab_img/v2/cabbage.png" alt="cabbage"><div class="body"><div class="word">cabbage</div><div class="zh">甘藍菜</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/cheese.png" alt="cheese"><div class="body"><div class="word">cheese</div><div class="zh">起司</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/fried_rice.png" alt="fried rice"><div class="body"><div class="word">fried rice</div><div class="zh">炒飯</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/tofu.png" alt="tofu"><div class="body"><div class="word">tofu</div><div class="zh">豆腐</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/tomato.png" alt="tomato"><div class="body"><div class="word">tomato</div><div class="zh">番茄</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/donkey.png" alt="donkey"><div class="body"><div class="word">donkey</div><div class="zh">驢子</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/goat.png" alt="goat"><div class="body"><div class="word">goat</div><div class="zh">山羊</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/goose.png" alt="goose"><div class="body"><div class="word">goose</div><div class="zh">鵝</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/nest.png" alt="nest"><div class="body"><div class="word">nest</div><div class="zh">鳥巢</div></div></div>
+    <div class="card"><img src="../picture_vocab_img/v2/pigeon.png" alt="pigeon"><div class="body"><div class="word">pigeon</div><div class="zh">鴿子</div></div></div>
+  </div>
+  <h3>食物與動物總表</h3>
+  <img class="sheet" src="../picture_vocab_img/v2/food_animals_contact_sheet.png" alt="10 個食物與動物圖片題單字總表">
+  <h2>七、第五批：剩餘廚房與購物 10 個單字</h2>
+  <p><strong>由左至右、由上到下：</strong>freezer、ketchup、butter、glass、mop／saucer、wallet、postcard、blouse、cash。</p>
+  <img class="sheet" src="../picture_vocab_img/v2/remaining_kitchen_shopping_contact_sheet.png" alt="10 個剩餘廚房與購物圖片題單字總表">
+
+  <h2>八、第六批：商店、學校與天氣 10 個單字</h2>
+  <p><strong>由左至右、由上到下：</strong>department store、flower shop、stationery store、piano、raincoat／rainbow、bookcase、dictionary、magazine、album。</p>
+  <img class="sheet" src="../picture_vocab_img/v2/shops_school_weather_contact_sheet.png" alt="10 個商店學校與天氣圖片題單字總表">
+
+  <h2>九、第七批：學校、運動與健康 10 個單字</h2>
+  <p><strong>由左至右、由上到下：</strong>typewriter、baseball、tennis、beard、eyebrow／heart、nurse、medicine、cage、sand。</p>
+  <img class="sheet" src="../picture_vocab_img/v2/school_sports_health_contact_sheet.png" alt="10 個學校運動與健康圖片題單字總表">
+  <h2>十、已完成單字覆蓋狀態</h2>
+  <p>原先列為下一批、可由單張圖清楚辨識的單字已全數完成。剩餘詞多為抽象概念、動作或需要句子脈絡，因此維持不放入單張圖片題。</p>
+  <table>
+    <thead><tr><th>主題</th><th>建議單字</th><th>注意事項</th></tr></thead>
+    <tbody>
+      <tr><td>夏日戶外與安全</td><td>本批已完成</td><td>pool 要畫成游泳池，避免與 pond 混淆；police station 應以建築為主。</td></tr>
+      <tr><td>廚房與料理</td><td>本批已完成</td><td>器具適合單物件圖；oven、stove、microwave oven 必須刻意拉開外形差異。</td></tr>
+      <tr><td>商店與購物</td><td>本批已完成</td><td>商店類避免在圖中使用可讀文字招牌。</td></tr>
+      <tr><td>城市與交通</td><td>本批已完成</td><td>traffic jam 需要多車壅塞場景；sidewalk 需強調行人與路緣。</td></tr>
+      <tr><td>學校、天氣與閱讀</td><td>本批已完成</td><td>dictionary 與 book 應以厚重參考書外觀區分；album 可用翻開的照片冊。</td></tr>
+      <tr><td>運動、健康、食物、動物</td><td>本批已完成</td><td>疾病症狀與身體感受不一定能由單張圖唯一表示，需個別審核。</td></tr>
+    </tbody>
+  </table>
+
+  <h2>十一、不建議直接放進單張圖片題的詞</h2>
+  <div class="columns">
+    <ul>
+      <li><strong>時間與頻率：</strong>usually, yesterday, tomorrow, soon, ago</li>
+      <li><strong>抽象概念：</strong>goal, problem, science, subject, safety, danger</li>
+      <li><strong>認知與情緒動詞：</strong>believe, decide, remember, hope, agree</li>
+      <li><strong>泛用動作：</strong>prepare, finish, follow, share, tell</li>
+      <li><strong>程度／方式：</strong>quickly, carefully, important, convenient</li>
+      <li><strong>需要前後文：</strong>arrive, leave, return, abroad, weekend</li>
+    </ul>
+  </div>
+  <p class="note">這些詞若要視覺化，通常需要兩格對照、漫畫情境或動畫；用單張圖會產生多個合理答案，不適合目前的四選一圖片題。</p>
+
+  <h2>十二、建議的程式整合方式</h2>
+  <p>不要把生成圖片硬塞進 <code>WORD_EMOJI</code>。建議新增獨立圖片映射，例如：</p>
+  <pre><code>const WORD_IMAGE = {
+  "camera": "picture_vocab_img/v2/camera.png",
+  "basket": "picture_vocab_img/v2/basket.png",
+  "waterfall": "picture_vocab_img/v2/waterfall.png"
+};</code></pre>
+  <p>圖片題顯示優先順序：</p>
+  <ol>
+    <li>有 <code>WORD_IMAGE</code>：顯示生成圖片。</li>
+    <li>沒有圖片但有 <code>WORD_EMOJI</code>：顯示 emoji。</li>
+    <li>兩者都沒有：不要放入圖片題；必要時才退回中文題。</li>
+  </ol>
+  <div class="ok"><strong>建議：</strong>先把目前 76 個單字加入圖片映射，觀察手機載入速度與孩子答題辨識度，再決定是否製作下一批。</div>
+
+  <h2>十三、素材與生成資訊</h2>
+  <ul>
+    <li>目前建議素材：<code>kids/picture_vocab_img/v2/</code>（簡潔黑白線稿）；原彩色版保留於 <code>kids/picture_vocab_img/v1/</code></li>
+    <li>獨立圖片：76 張 PNG。</li>
+    <li>第一張總表：1536 × 1024，切成 12 張約 384 × 341。</li>
+    <li>第二張總表：1254 × 1254，切成 4 張 627 × 627。</li><li>廚房用品總表：1718 × 916，切成 10 張約 344 × 458。</li><li>戶外與交通總表：1774 × 887，切成 10 張約 355 × 444。</li><li>食物與動物總表：1774 × 887，切成 10 張約 355 × 444。</li><li>剩餘廚房與購物總表：1693 × 929，切成 10 張約 339 × 465。</li><li>商店、學校與天氣總表：1774 × 887，切成 10 張約 355 × 444。</li><li>學校、運動與健康總表：1693 × 929，切成 10 張約 339 × 465。</li>
+    <li>生成方式：OpenAI 內建 image generation。</li>
+    <li>共同風格：白底、粗輪廓、無文字、只保留辨識所需元素。預設以黑白／灰階呈現；當顏色能明顯降低誤判時，允許使用一至兩個關鍵色。</li>
+  </ul>
+
+  <details><summary><strong>生成提示重點</strong></summary>
+    <p>用途指定為兒童英語圖片題；要求固定網格、每格一個概念、無文字／標籤／浮水印；房間與場所使用必要情境，單一物件置中；預設黑白／灰階，僅在顏色可降低誤判時使用少量關鍵色；避免寫實、雜亂、重複主體與可造成多重答案的物件。</p>
+  </details>
+
+  <div class="footer">本報告只完成盤點與圖片素材生成，尚未修改 <code>daily_engine.js</code>、<code>vocab_quiz.html</code> 或正式題庫邏輯。</div>
+</main></body></html>

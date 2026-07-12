@@ -19,6 +19,8 @@
   .q-no .sub{font-weight:400;color:#999;font-size:.8rem;margin-left:4px}
   .play{display:inline-flex;align-items:center;justify-content:center;border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;cursor:pointer;padding:7px 14px;font-size:.9rem}
   .emoji{font-size:2.6rem;text-align:center;margin:4px 0}
+  .pic-wrap{display:flex;justify-content:center;margin:4px 0}
+  .pic-img{width:120px;height:auto;max-height:110px;object-fit:contain;border-radius:10px;background:#fff;border:1px solid #e2e8f0}
   .prompt{font-size:1.2rem;font-weight:800;text-align:center;color:#243042;margin:4px 0}
   .blank{font-size:1.05rem;text-align:center;margin:8px 0;color:#243042}
   .opts{display:flex;flex-direction:column;gap:7px;margin-top:8px}
@@ -135,14 +137,23 @@
     const s1 = pickBlock(words, 6, dayIdx, WDID + "-v", retake).map(w => ({ en: w.en, choices: distinctChoices(w, words, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
 
     // ⑤ 圖片題 6：本週可圖示字 + 小學程度較難可圖示字（池固定/週），分塊輪替
+    // 顯示優先序：WORD_IMAGE（生成圖）→ WORD_EMOJI → 不進圖片題
+    const img = en => (typeof WORD_IMAGE !== "undefined") ? WORD_IMAGE[en] : null;
     const emo = en => (typeof WORD_EMOJI !== "undefined") ? WORD_EMOJI[en] : null;
-    const weekPic = words.filter(w => emo(w.en)).map(w => ({ en: w.en, zh: w.zh }));
+    const hasVisual = en => !!(img(en) || emo(en));
+    const weekPic = words.filter(w => hasVisual(w.en)).map(w => ({ en: w.en, zh: w.zh }));
     let basicPic = [];
     if (typeof WORDBANK !== "undefined") basicPic = WORDBANK
-      .filter(w => w.level === "basic" && emo(w.en) && String(w.en).length >= 5 && !words.some(x => x.en === w.en))
+      .filter(w => w.level === "basic" && hasVisual(w.en) && String(w.en).length >= 5 && !words.some(x => x.en === w.en))
       .map(w => ({ en: w.en, zh: w.zh }));
     const picPool = weekPic.concat(shuffleArr(basicPic, seeded(WDID + "-pb")).slice(0, 24));
-    const s5 = pickBlock(picPool, 6, dayIdx, WDID + "-pic", retake).map(w => ({ emoji: emo(w.en), zh: w.zh, en: w.en, choices: distinctChoices(w, picPool, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
+    // 圖片題干擾選項避開易混詞（cabinet/closet/dresser、lake/river/stream 這類）
+    function picChoices(answerWord, pool, rnd) {
+      const confuse = (typeof imageConfusesWith === "function") ? imageConfusesWith(answerWord.en) : null;
+      const safePool = confuse ? pool.filter(x => !confuse.has(x.en)) : pool;
+      return distinctChoices(answerWord, safePool.length >= 4 ? safePool : pool, rnd);
+    }
+    const s5 = pickBlock(picPool, 6, dayIdx, WDID + "-pic", retake).map(w => ({ img: img(w.en), emoji: emo(w.en), zh: w.zh, en: w.en, choices: picChoices(w, picPool, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
 
     // ② 英聽填空 5（分塊輪替）
     const lbPool = wd ? wd.listenBlank.map((q, i) => ({ ...q, _i: i })) : [];
@@ -249,7 +260,12 @@
     }
     // ⑤
     h += `<div class="sec"><div class="sec-h">⑤ 圖片題</div><div class="sec-d">看圖（或中文）選出正確英文</div>`;
-    DRILL.s5.forEach((q, i) => { h += `<div class="q"><div class="q-no">${i + 1}.</div>${q.emoji ? `<div class="emoji">${q.emoji}</div>` : `<div class="prompt">${q.zh}</div>`}${optsHtml('s5', i, q.choices)}</div>`; });
+    DRILL.s5.forEach((q, i) => {
+      const visual = q.img
+        ? `<div class="pic-wrap"><img class="pic-img" src="../${q.img}" alt="${q.en}" loading="lazy" onerror="this.outerHTML=${JSON.stringify(q.emoji ? `<div class="emoji">${q.emoji}</div>` : `<div class="prompt">${q.zh}</div>`)}"></div>`
+        : (q.emoji ? `<div class="emoji">${q.emoji}</div>` : `<div class="prompt">${q.zh}</div>`);
+      h += `<div class="q"><div class="q-no">${i + 1}.</div>${visual}${optsHtml('s5', i, q.choices)}</div>`;
+    });
     h += `</div>`;
     // ⑥ 今日發音
     if (DRILL.s6) {

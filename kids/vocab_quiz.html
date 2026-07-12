@@ -102,14 +102,15 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607120600"></script>
-<script src="worddex.js?v=202607120600"></script>
-<script src="curriculum.js?v=202607120600"></script>
-<script src="word_emoji.js?v=202607120600"></script>
+<script src="wordbank.js?v=202607121218"></script>
+<script src="worddex.js?v=202607121218"></script>
+<script src="curriculum.js?v=202607121218"></script>
+<script src="word_emoji.js?v=202607121218"></script>
+<script src="word_image.js?v=1"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607120600"></script>
-<script src="account_lock.js?v=202607120600"></script>
-<script src="supabase_auth.js?v=202607120600"></script>
+<script src="cloud_sync.js?v=202607121218"></script>
+<script src="account_lock.js?v=202607121218"></script>
+<script src="supabase_auth.js?v=202607121218"></script>
 <script>
 const QUIZ_SIZE = 20;
 const DRILL_ID = "vocab-quiz";
@@ -217,11 +218,12 @@ function pickClozeSentence(w) {
 function buildQuestions() {
   questions = quizWords.map((w, i) => {
     const emoji = WORD_EMOJI[w.en];
+    const img = (typeof WORD_IMAGE !== "undefined") ? WORD_IMAGE[w.en] : null;
     const cloze = pickClozeSentence(w);
     // 看圖選英文 / 例句填空 / 看英選中 / 看中選英
     let dir;
     const r = Math.random();
-    if (emoji && r < 0.25) dir = "pic2en";
+    if ((emoji || img) && r < 0.25) dir = "pic2en";
     else if (cloze && r < 0.55) dir = "cloze";
     else dir = r < 0.78 ? "en2zh" : "zh2en";
 
@@ -234,7 +236,7 @@ function buildQuestions() {
 
     let prompt, sub, choices;
     if (dir === "pic2en") {
-      prompt = emoji;
+      prompt = img ? "" : emoji;
       sub = "看圖選出正確英文";
       choices = opts.map(o => ({ label: o.en, correct: o.en === w.en }));
     } else if (dir === "cloze") {
@@ -250,7 +252,7 @@ function buildQuestions() {
       sub = "選出正確英文";
       choices = opts.map(o => ({ label: o.en, correct: o.en === w.en }));
     }
-    return { word: w, dir, prompt, sub, choices, emoji,
+    return { word: w, dir, prompt, sub, choices, emoji, img,
              clozeRaw: cloze ? cloze.raw : null, clozeIdx: cloze ? cloze.idx : -1 };
   });
 }
@@ -267,7 +269,7 @@ function renderQuestion() {
     <div class="q-card active">
       <div class="q-tag ${q.word.isWeak ? "weak" : ""}">${q.word.isWeak ? "⚠️ 加強單字" : (q.dir === "pic2en" ? "看圖題 🖼️" : q.dir === "cloze" ? "例句填空 📝" : "單字題")}</div>
       <button class="q-audio-btn" onclick="playPrompt()">🔊</button>
-      <div class="q-prompt" style="${q.dir === "pic2en" ? "font-size:4.5rem" : q.dir === "cloze" ? "font-size:1.15rem;line-height:1.6" : ""}">${q.prompt}</div>
+      <div class="q-prompt" style="${q.dir === "pic2en" ? "font-size:4.5rem" : q.dir === "cloze" ? "font-size:1.15rem;line-height:1.6" : ""}">${q.dir === "pic2en" && q.img ? `<img src="${q.img}" alt="${q.word.en}" style="width:140px;max-height:130px;object-fit:contain;border-radius:12px;background:#fff;border:1px solid #e2e8f0" onerror="this.outerHTML='${(q.emoji || "❓").replace(/'/g, "\\'")}'">` : q.prompt}</div>
       <div class="q-sub">${q.sub}</div>
       <div class="choices">
         ${q.choices.map((c, j) => `<button class="choice" id="ch_${j}" onclick="answer(${j})">${c.label}</button>`).join("")}

@@ -175,7 +175,7 @@ function buildQuiz() { document.getElementById("quiz").innerHTML = QUIZ.map((q, 
 function answerQuiz(i, btn, val) { const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1"; const ok = val === QUIZ[i].answer; box.querySelectorAll(".qopt").forEach(b => { b.disabled = true; if (b.textContent === QUIZ[i].answer) b.style.cssText += ";border-color:var(--green);background:#d9f7e8"; else if (b === btn) b.style.cssText += ";border-color:var(--danger);background:#fde0e8"; }); quizDone++; if (ok) quizRight++; if (quizDone === QUIZ.length) { const s = document.getElementById("quizScore"); s.textContent = `🎉 答對 ${quizRight} / ${QUIZ.length}！${quizRight === QUIZ.length ? " 全對，太棒了！" : " 再看看上面的文法複習一下。"}`; s.style.cssText = "margin-top:10px;font-weight:800;font-size:1.05rem;color:" + (quizRight === QUIZ.length ? "var(--green)" : "var(--primary)"); } }
 buildVocab(); buildDialogue(); buildPassage(); buildQuiz();
 </script>
-<script src="../curriculum.js?v=202607120600"></script>
+<script src="../curriculum.js?v=202607121218"></script>
 <script src="month_lock.js"></script>
 </body>
 </html>
