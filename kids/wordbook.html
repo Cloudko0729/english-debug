@@ -96,10 +96,14 @@ function playWord(en) {
 }
 
 function wordCard(w) {
+  const img = (typeof WORD_IMAGE !== "undefined" && WORD_IMAGE[w.en]) || "";
   const emoji = (typeof WORD_EMOJI !== "undefined" && WORD_EMOJI[w.en]) || "";
+  const visual = img
+    ? `<img class="word-emoji" src="${img}" alt="${w.en}" style="width:30px;height:30px;object-fit:contain;border-radius:6px" onerror="this.outerHTML='<div class=word-emoji>${(emoji || "").replace(/'/g, "\\'")}</div>'">`
+    : `<div class="word-emoji">${emoji}</div>`;
   const ex = (w.ex && w.ex.length) ? `<div class="word-ex">${w.ex.map(s => "• " + s).join("<br>")}</div>` : "";
   return `<div class="word-card">
-    <div class="word-emoji">${emoji}</div>
+    ${visual}
     <div class="word-main">
       <div class="word-en">${w.en}</div>
       <div class="word-zh">${w.zh}</div>
