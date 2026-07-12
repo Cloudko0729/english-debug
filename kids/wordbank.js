@@ -1574,6 +1574,51 @@ const WORDBANK = [
   { en: "thirsty", zh: "渴的", theme: "adjectives", level: "basic", ex: ["I am thirsty.", "She is thirsty after running."] },
   { en: "funny", zh: "有趣的", theme: "adjectives", level: "basic", ex: ["The story is funny.", "He makes a funny face."] },
   { en: "nice", zh: "好的", theme: "adjectives", level: "basic", ex: ["She is nice.", "This is a nice day."] },
+
+  // 2026-07-12 新增：picture_vocab_img/v2 已生成圖片的 34 個字，補進 basic 詞庫
+  // 讓它們能進 daily_engine.js 的 basicPic 圖片題池與 wordbook.html 主題瀏覽。
+  // 新增三個主題：objects（居家物品）、transport（交通）、health（健康）。
+  { en: "apartment", zh: "公寓", pos: "n", theme: "places", level: "basic", ex: ["We live in an apartment.", "The apartment has three rooms."] },
+  { en: "bakery", zh: "麵包店", pos: "n", theme: "places", level: "basic", ex: ["The bakery smells like fresh bread.", "We bought a cake at the bakery."] },
+  { en: "bathroom", zh: "浴室", pos: "n", theme: "places", level: "basic", ex: ["I wash my hands in the bathroom.", "The bathroom is next to my bedroom."] },
+  { en: "bedroom", zh: "臥室", pos: "n", theme: "places", level: "basic", ex: ["My bedroom has a big window.", "I sleep in my bedroom."] },
+  { en: "living room", zh: "客廳", pos: "n", theme: "places", level: "basic", ex: ["We watch TV in the living room.", "The living room has a soft sofa."] },
+  { en: "post office", zh: "郵局", pos: "n", theme: "places", level: "basic", ex: ["I mailed a letter at the post office.", "The post office is near my school."] },
+  { en: "garden", zh: "花園", pos: "n", theme: "places", level: "basic", ex: ["Flowers grow in the garden.", "Dad works in the garden every weekend."] },
+  { en: "department store", zh: "百貨公司", pos: "n", theme: "places", level: "basic", ex: ["We bought shoes at the department store.", "The department store is very big."] },
+
+  { en: "camera", zh: "相機", pos: "n", theme: "objects", level: "basic", ex: ["I took a photo with my camera.", "My camera is small and light."] },
+  { en: "basket", zh: "籃子", pos: "n", theme: "objects", level: "basic", ex: ["She put apples in the basket.", "The basket is made of straw."] },
+  { en: "fork", zh: "叉子", pos: "n", theme: "objects", level: "basic", ex: ["I eat pasta with a fork.", "Please pass me a fork."] },
+  { en: "knife", zh: "刀子", pos: "n", theme: "objects", level: "basic", ex: ["Be careful with the knife.", "Mom cuts the bread with a knife."] },
+  { en: "spoon", zh: "湯匙", pos: "n", theme: "objects", level: "basic", ex: ["I eat soup with a spoon.", "The spoon is on the table."] },
+  { en: "bowl", zh: "碗", pos: "n", theme: "objects", level: "basic", ex: ["There is rice in the bowl.", "She filled the bowl with soup."] },
+  { en: "refrigerator", zh: "冰箱", pos: "n", theme: "objects", level: "basic", ex: ["Put the milk in the refrigerator.", "The refrigerator keeps food cold."] },
+  { en: "glass", zh: "玻璃杯", pos: "n", theme: "objects", level: "basic", ex: ["I drink water from a glass.", "The glass is empty."] },
+  { en: "postcard", zh: "明信片", pos: "n", theme: "objects", level: "basic", ex: ["I sent a postcard from Japan.", "The postcard has a nice picture."] },
+  { en: "piano", zh: "鋼琴", pos: "n", theme: "objects", level: "basic", ex: ["She plays the piano every day.", "The piano is in the living room."] },
+  { en: "dictionary", zh: "字典", pos: "n", theme: "objects", level: "basic", ex: ["I look up new words in the dictionary.", "The dictionary is very thick."] },
+
+  { en: "boat", zh: "船", pos: "n", theme: "transport", level: "basic", ex: ["We rode a boat on the lake.", "The boat is red and white."] },
+  { en: "airplane", zh: "飛機", pos: "n", theme: "transport", level: "basic", ex: ["We flew to Japan by airplane.", "The airplane is very fast."] },
+  { en: "taxi", zh: "計程車", pos: "n", theme: "transport", level: "basic", ex: ["We took a taxi to the airport.", "The taxi driver was friendly."] },
+  { en: "motorcycle", zh: "機車", pos: "n", theme: "transport", level: "basic", ex: ["He rides a motorcycle to work.", "The motorcycle is loud."] },
+  { en: "sidewalk", zh: "人行道", pos: "n", theme: "transport", level: "basic", ex: ["We walk on the sidewalk.", "Bikes should not ride on the sidewalk."] },
+
+  { en: "cheese", zh: "起司", pos: "n", theme: "food", level: "basic", ex: ["I like cheese on my pizza.", "The cheese is yellow."] },
+  { en: "tomato", zh: "番茄", pos: "n", theme: "food", level: "basic", ex: ["The tomato is red and juicy.", "We put tomato in the salad."] },
+  { en: "butter", zh: "奶油", pos: "n", theme: "food", level: "basic", ex: ["She spreads butter on the bread.", "The butter is soft."] },
+
+  { en: "goat", zh: "山羊", pos: "n", theme: "animals", level: "basic", ex: ["The goat eats grass.", "We saw a goat on the farm."] },
+
+  { en: "baseball", zh: "棒球", pos: "n", theme: "hobbies", level: "basic", ex: ["He plays baseball on Saturdays.", "The baseball is white."] },
+  { en: "tennis", zh: "網球", pos: "n", theme: "hobbies", level: "basic", ex: ["She plays tennis with her friend.", "Tennis is a fun sport."] },
+
+  { en: "rainbow", zh: "彩虹", pos: "n", theme: "weather", level: "basic", ex: ["We saw a rainbow after the rain.", "The rainbow has many colors."] },
+
+  { en: "heart", zh: "心臟", pos: "n", theme: "health", level: "basic", ex: ["My heart beats fast when I run.", "The doctor listened to my heart."] },
+  { en: "nurse", zh: "護士", pos: "n", theme: "health", level: "basic", ex: ["The nurse helped the sick boy.", "My aunt is a nurse."] },
+  { en: "medicine", zh: "藥", pos: "n", theme: "health", level: "basic", ex: ["I take medicine when I am sick.", "The medicine tastes bad."] },
 ];
 
 function wordAudioKey(en) {
