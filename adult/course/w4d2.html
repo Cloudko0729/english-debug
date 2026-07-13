@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W4 週二 — 核心句練習</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:660px;margin:0 auto;padding:0 16px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.7}
+  header{background:#1f4463;color:#fff;text-align:center;padding:16px;border-radius:0 0 16px 16px;margin:0 -16px 14px}
+  header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .q{background:#fff;border-radius:14px;padding:14px 16px;margin-top:12px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .q .qt{font-weight:700;margin-bottom:8px;font-size:.93rem}
+  .q button{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit}
+  .q button.ok{border-color:#2a9d5c;background:#e3f6ec}
+  .q button.no{border-color:#d64561;background:#fbe3e9}
+  .why{display:none;margin-top:6px;background:#eaf3ff;border-radius:9px;padding:8px 12px;font-size:.84rem;color:#1f4463}
+  #result{font-weight:800;font-size:1.05rem;margin-top:12px;text-align:center;min-height:1.5em}
+</style>
+</head>
+<body>
+<header><h1>✏️ W4 週二 — 核心句練習</h1>
+<p><a href="w4.html">← 本週重點</a> · 5 個核心句的變化題（中翻英＋填空）</p></header>
+<div id="qs"></div><div id="result"></div>
+<script>
+const QUIZ = [
+ { q: "「謝謝你寄送設備，我們已收到會盡快安排檢查」：", c: ["Thank you for sending the unit — we have received it and will arrange the inspection shortly.", "Thanks send unit, we receive and will check.", "Thank you send the unit, we got it will check."], a: 0, why: "have received 是現在完成式；received it 用 it 避免重複 unit。" },
+ { q: "填空：We have ___ the unit and will arrange the inspection shortly.", c: ["received", "receive", "receiving"], a: 0, why: "have＋過去分詞＝現在完成式，表示動作已完成。" },
+ { q: "「進廠檢查預計需要一到兩個工作天」：", c: ["The incoming inspection is expected to take one to two business days.", "Inspection need one two day.", "Check will take one or two day maybe."], a: 0, why: "is expected to take＋時間，是給估計工期的標準句型；days 要複數。" },
+ { q: "填空：The incoming inspection is expected ___ take one to two business days.", c: ["to", "for", "at"], a: 0, why: "be expected to＋原形動詞，固定搭配。" },
+ { q: "「檢查完成後我們會盡快跟你分享結果」：", c: ["We will share the findings with you as soon as the inspection is complete.", "We tell you result when inspection finish.", "We will let you know when check is done maybe."], a: 0, why: "as soon as＋明確完成點；findings 比籠統的 result 更專業。" },
+ { q: "填空：We will share the findings with you ___ the inspection is complete.", c: ["as soon as", "until", "since"], a: 0, why: "as soon as表示「一…就…」，是承諾下一步最常用的連接詞。" },
+ { q: "「如果我們發現額外問題，會在繼續維修前先告知你」：", c: ["If we find any additional issues, we will inform you before proceeding with the repair.", "If we found more problem, we tell you before continue.", "We continue even if find new problem, don't worry."], a: 0, why: "if 子句現在式 find；before proceeding with，proceeding 是動名詞。" },
+ { q: "填空：If we find any additional issues, we will inform you before ___ with the repair.", c: ["proceeding", "proceed", "to proceed"], a: 0, why: "介係詞 before 後面接動名詞。" },
+ { q: "「謝謝你在這段過程中的耐心等候」：", c: ["Thank you for your patience while we complete this process.", "Thanks you patient for this process.", "Thank you for wait during this process."], a: 0, why: "patience 是名詞（耐心），patient 是形容詞，別搞混。" },
+ { q: "組合題：已收件通知信第一句＋最後一句的正確組合是？", c: ["Thank you for sending the unit — we have received it and will arrange the inspection shortly. ⋯ Thank you for your patience while we complete this process.", "Thank you for your patience. ⋯ We have received the unit.", "The inspection is expected to take two days. ⋯ Thanks send unit."], a: 0, why: "先確認收件＋下一步，最後感謝耐心等候，是已收件通知信最穩的骨架。" },
+];
+let done = 0, ok = 0;
+document.getElementById("qs").innerHTML = QUIZ.map((q, i) => `<div class="q" id="q${i}"><div class="qt">${i + 1}. ${q.q}</div>` +
+  q.c.map((c, ci) => `<button onclick="ans(${i},${ci},this)">${c}</button>`).join("") +
+  `<div class="why" id="w${i}">💡 ${q.why}</div></div>`).join("");
+function ans(i, ci, btn) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const good = ci === QUIZ[i].a;
+  box.querySelectorAll("button").forEach((b, bi) => { b.disabled = true;
+    if (bi === QUIZ[i].a) b.classList.add("ok"); else if (bi === ci) b.classList.add("no"); });
+  document.getElementById("w" + i).style.display = "block";
+  done++; if (good) ok++;
+  if (done === QUIZ.length) {
+    document.getElementById("result").textContent = `🎉 答對 ${ok} / ${QUIZ.length}`;
+    try { const p = JSON.parse(localStorage.getItem("adultProgress") || "{}"); p["w4d2"] = { done: new Date().toISOString(), ok, total: QUIZ.length }; localStorage.setItem("adultProgress", JSON.stringify(p)); } catch (e) {}
+  }
+}
+</script>
+</body>
+</html>

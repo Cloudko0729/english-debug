@@ -1,0 +1,26 @@
+{
+ "outdir": "D:/english/adult/course/audio",
+ "voice": "af_heart",
+ "speed": 0.88,
+ "items": {
+  "w4_s1": "Thank you for sending the unit — we have received it and will arrange the inspection shortly.",
+  "w4_s2": "The incoming inspection is expected to take one to two business days.",
+  "w4_s3": "We will share the findings with you as soon as the inspection is complete.",
+  "w4_s4": "If we find any additional issues, we will inform you before proceeding with the repair.",
+  "w4_s5": "Thank you for your patience while we complete this process.",
+  "w4_speech": "Hi, this is Cloud from Fix-well Technology. Thank you for sending the unit — we've received it and will arrange the inspection shortly. The incoming inspection usually takes one to two business days. We'll share the findings with you as soon as it's complete, and if we find any additional issues, we'll let you know before proceeding. Thanks so much for your patience.",
+  "w4_gram1": "We have received the unit and will arrange the inspection shortly.",
+  "w4_gram2": "The incoming inspection is expected to take one to two business days.",
+  "w4_gram3": "We will share the findings with you as soon as the inspection is complete.",
+  "w4_gram4": "If we find any additional issues, we will inform you before proceeding with the repair.",
+  "w4_gram5": "Thank you for your patience while we complete this process.",
+  "w4_rec1": "Symptom: The socket showed poor contact during the incoming inspection. Action: Cleaned the socket and repeated the contact test. Result: The unit passed the incoming inspection with no further issue.",
+  "w4_rec2": "Symptom: A missing component was found during IQC. Action: Replaced the missing component before proceeding with the repair. Result: The board passed the follow-up inspection.",
+  "w4_rec3": "Symptom: The cable showed intermittent contact during the initial check. Action: Reseated the cable and repeated the check. Result: The intermittent issue no longer appeared.",
+  "w4dg1": "Did you receive the unit yet?",
+  "w4dg2": "How long will the inspection take?",
+  "w4dg3": "Was there any damage during shipping?",
+  "w4dg4": "If you find another problem, will you fix it automatically?",
+  "w4dg5": "Please hurry, we really need this back soon."
+ }
+}
