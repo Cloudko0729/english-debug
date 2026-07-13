@@ -26,6 +26,17 @@
   .days a.ready{border-color:#2c5f8a}
   .days .soon{opacity:.45;pointer-events:none}
   .days small{font-weight:400;color:#888}
+  .bug{border-top:1px dashed #e5e5e5;padding:10px 0}
+  .bug:first-of-type{border-top:none}
+  .bug .bad{color:#a33;font-size:.88rem}
+  .bug .bad::before{content:"❌ "}
+  .bug .why{font-size:.8rem;color:#8a6d1a;background:#fff8e1;border-radius:8px;padding:5px 10px;margin:5px 0;display:block}
+  .bug .good{font-size:.95rem;color:#1a5c33;font-weight:700}
+  .bug .good::before{content:"✅ "}
+  .rec{border-top:1px dashed #e5e5e5;padding:10px 0}
+  .rec:first-of-type{border-top:none}
+  .rec .line{font-size:.9rem;margin:2px 0}
+  .rec .line b{color:#1f4463}
 </style>
 </head>
 <body>
@@ -59,6 +70,40 @@
   If you have any equipment problems, please contact me anytime. Nice to meet you.</div>
   <audio controls preload="none" src="audio/w1_intro.mp3" style="width:100%;margin-top:8px"></audio>
   <p style="font-size:.82rem;color:#777">練法：先聽一次 → 跟讀 3 次 → 不看稿自己講一次並錄音。</p>
+</div>
+
+<div class="card"><h2>📧 Email 常見錯誤語法</h2>
+  <div class="bug"><div class="bad">The repair item will send to customer verify.</div>
+    <span class="why">will send 漏了被動（該用 be sent）；customer verify 是中文直翻，英文要用 for verification</span>
+    <div class="good"><button class="play" onclick="new Audio('audio/w1_gram1.mp3').play()">🔊</button>The repaired unit will be sent to the customer for verification.</div></div>
+  <div class="bug"><div class="bad">This problem maybe related with copy board.</div>
+    <span class="why">maybe（副詞：也許）跟 may be（動詞片語：可能是）搞混；related with 應該是 related to</span>
+    <div class="good"><button class="play" onclick="new Audio('audio/w1_gram2.mp3').play()">🔊</button>This issue may be related to the copied board.</div></div>
+  <div class="bug"><div class="bad">Please help check this issue, thanks.</div>
+    <span class="why">help check 是「幫我看一下」的直翻，正式信件裡太籠統，講清楚你要對方做什麼動作</span>
+    <div class="good"><button class="play" onclick="new Audio('audio/w1_gram3.mp3').play()">🔊</button>Could you please check this issue and let us know the result?</div></div>
+  <div class="bug"><div class="bad">We will arrange the shipment if test pass.</div>
+    <span class="why">if 子句裡動詞要跟主詞一致，還漏了冠詞：the test passes</span>
+    <div class="good"><button class="play" onclick="new Audio('audio/w1_gram4.mp3').play()">🔊</button>We will arrange the shipment once the test passes.</div></div>
+  <div class="bug"><div class="bad">We are still checking, not confirm yet.</div>
+    <span class="why">checking／confirm 詞性不一致；否定用法生硬，直接用「還沒被確認」的被動句更自然</span>
+    <div class="good"><button class="play" onclick="new Audio('audio/w1_gram5.mp3').play()">🔊</button>We are still checking the root cause; it has not been confirmed yet.</div></div>
+</div>
+
+<div class="card"><h2>🛠️ 維修紀錄撰寫範例</h2>
+  <p style="font-size:.82rem;color:#777;margin-top:-4px">英文維修紀錄固定寫三層：Symptom（現象）→ Action（處置）→ Result（結果），每層一句就好，不用寫得複雜。</p>
+  <div class="rec"><div class="line"><b>Symptom：</b>The relay contact was unstable during the load test.</div>
+    <div class="line"><b>Action：</b>Replaced the relay and re-ran the load test.</div>
+    <div class="line"><b>Result：</b>The unit passed with stable output across all channels.</div>
+    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w1_rec1.mp3').play()">🔊 播放整則</button></div>
+  <div class="rec"><div class="line"><b>Symptom：</b>DCCAL failed before the PPMU module was replaced.</div>
+    <div class="line"><b>Action：</b>Replaced the PPMU module and repeated DCCAL.</div>
+    <div class="line"><b>Result：</b>DCCAL passed; the unit was released for final verification.</div>
+    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w1_rec2.mp3').play()">🔊 播放整則</button></div>
+  <div class="rec"><div class="line"><b>Symptom：</b>No power was present at the driver input.</div>
+    <div class="line"><b>Action：</b>Traced the power net, found an open connection near the connector, and resoldered the joint.</div>
+    <div class="line"><b>Result：</b>Power was restored and the unit passed the functional test.</div>
+    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w1_rec3.mp3').play()">🔊 播放整則</button></div>
 </div>
 
 <div class="card"><h2>🗓️ 本週練習</h2>

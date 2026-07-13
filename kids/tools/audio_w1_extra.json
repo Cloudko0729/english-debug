@@ -1,0 +1,15 @@
+{
+ "outdir": "D:/english/adult/course/audio",
+ "voice": "af_heart",
+ "speed": 0.88,
+ "items": {
+  "w1_gram1": "The repaired unit will be sent to the customer for verification.",
+  "w1_gram2": "This issue may be related to the copied board.",
+  "w1_gram3": "Could you please check this issue and let us know the result?",
+  "w1_gram4": "We will arrange the shipment once the test passes.",
+  "w1_gram5": "We are still checking the root cause; it has not been confirmed yet.",
+  "w1_rec1": "Symptom: The relay contact was unstable during the load test. Action: Replaced the relay and re-ran the load test. Result: The unit passed with stable output across all channels.",
+  "w1_rec2": "Symptom: DCCAL failed before the PPMU module was replaced. Action: Replaced the PPMU module and repeated DCCAL. Result: DCCAL passed; the unit was released for final verification.",
+  "w1_rec3": "Symptom: No power was present at the driver input. Action: Traced the power net, found an open connection near the connector, and resoldered the joint. Result: Power was restored and the unit passed the functional test."
+ }
+}
