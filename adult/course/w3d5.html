@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W3 週五 — 情境應答＋回收</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:660px;margin:0 auto;padding:0 16px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.7}
+  header{background:#1f4463;color:#fff;text-align:center;padding:16px;border-radius:0 0 16px 16px;margin:0 -16px 14px}
+  header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .q{background:#fff;border-radius:14px;padding:14px 16px;margin-top:12px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .q .no{font-size:.72rem;color:#98a3bd;font-weight:700}
+  .q .qt{font-weight:700;margin:4px 0 8px;font-size:.93rem}
+  .q button{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit}
+  .q button.play{display:inline-block;width:auto;background:#2c5f8a;color:#fff;border:none;font-weight:700}
+  .q button.ok{border-color:#2a9d5c;background:#e3f6ec}
+  .q button.no2{border-color:#d64561;background:#fbe3e9}
+  .why{display:none;margin-top:6px;background:#eaf3ff;border-radius:9px;padding:8px 12px;font-size:.84rem;color:#1f4463}
+  #result{font-weight:800;font-size:1.02rem;margin-top:12px;text-align:center;min-height:1.5em}
+  .next{display:block;text-align:center;background:#1f4463;color:#fff;border-radius:12px;padding:12px;margin-top:12px;text-decoration:none;font-weight:800}
+</style>
+</head>
+<body>
+<header><h1>💬 W3 週五 — 情境應答</h1>
+<p><a href="w3.html">← 本週重點</a> · 聽客戶說話（別看字！）選出得體的應答</p></header>
+<div id="qs"></div><div id="result"></div>
+<a class="next" href="quick.html">➡️ 接著做「今日快練」回收本週錯題</a>
+
+<script>
+const QS = [
+ { id: "w3dg1", cue: "I don't know the serial number, is that okay?", cueZh: "我不知道序號，這樣可以嗎？",
+   choices: ["No problem, could you send us a photo of the nameplate instead?", "You must find it, we cannot help without it.", "Serial number is not important, don't worry."],
+   a: 0, why: "不直接拒絕，提供替代方案（拍名牌照片）讓客戶容易配合。", swap: "That's fine, a photo of the label works too." },
+ { id: "w3dg2", cue: "Here is a screenshot of the error.", cueZh: "這是錯誤的截圖。",
+   choices: ["Thank you, this is very helpful. Let me check it with our engineer.", "This picture is not clear enough, useless.", "OK I look later, maybe tomorrow."],
+   a: 0, why: "先感謝再說明下一步，讓客戶知道資訊已經被重視、正在處理。", swap: "Thanks, this helps a lot — I'll review it now." },
+ { id: "w3dg3", cue: "It happens randomly, I can't say exactly when.", cueZh: "它是隨機發生的，我沒辦法說出確切時間。",
+   choices: ["That's okay — could you tell us roughly how often it happens?", "You must know exactly, please check again.", "Randomly is not useful information for us."],
+   a: 0, why: "接受模糊回答，改問範圍更小的問題（大概多久一次），比要求「精確」更務實。", swap: "No worries — even a rough estimate would help." },
+ { id: "w3dg4", cue: "Why do you need the model number again? I already told your colleague.", cueZh: "為什麼又要問型號？我已經跟你同事說過了。",
+   choices: ["I'm sorry for the trouble — let me check our record first.", "Your colleague didn't tell me anything.", "You need to tell me again, no choice."],
+   a: 0, why: "先道歉、自己查記錄，不要把責任推給客戶或同事。", swap: "Sorry about that, let me look into our notes." },
+ { id: "w3dg5", cue: "I'll send the details later today.", cueZh: "我今天稍晚會把細節傳給你。",
+   choices: ["Great, thank you — we'll start the diagnosis as soon as we receive them.", "Later is too slow, please send now.", "OK, whenever you want."],
+   a: 0, why: "感謝並說明「收到後」會做的下一步，呼應本週核心句 once we receive...", swap: "Sounds good, we'll begin once it arrives." },
+];
+let done = 0, ok = 0;
+document.getElementById("qs").innerHTML = QS.map((q, i) => `<div class="q" id="q${i}">
+  <div class="no">${i + 1} / ${QS.length} 🎧</div>
+  <div class="qt">客戶說：</div>
+  <button class="play" onclick="new Audio('audio/${q.id}.mp3').play()">🔊 播放（聽不懂再按一次）</button>
+  <div class="qt" style="margin-top:8px">你回：</div>` +
+  q.choices.map((c, ci) => `<button onclick="ans(${i},${ci},this)">${c}</button>`).join("") +
+  `<div class="why" id="w${i}">💡 他說的是：“${q.cue}”（${q.cueZh}）。${q.why}<br><b>可套用：${q.swap || ""}</b></div></div>`).join("");
+function ans(i, ci, btn) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const good = ci === QS[i].a;
+  box.querySelectorAll("button:not(.play)").forEach((b, bi) => { b.disabled = true;
+    if (bi === QS[i].a) b.classList.add("ok"); else if (bi === ci) b.classList.add("no2"); });
+  document.getElementById("w" + i).style.display = "block";
+  done++; if (good) ok++;
+  if (done === QS.length) {
+    document.getElementById("result").textContent = `🎉 答對 ${ok} / ${QS.length}，接著去快練回收錯題！`;
+    try { const p = JSON.parse(localStorage.getItem("adultProgress") || "{}"); p["w3d5"] = { done: new Date().toISOString(), ok, total: QS.length }; localStorage.setItem("adultProgress", JSON.stringify(p)); } catch (e) {}
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+ "outdir": "D:/english/adult/course/audio",
+ "voice": "af_heart",
+ "speed": 0.88,
+ "items": {
+  "w3_s1": "Thank you for your inquiry — to help us get started, could you provide a few more details?",
+  "w3_s2": "Could you please provide the model number and serial number of the unit?",
+  "w3_s3": "Could you also send us a screenshot of the error message you are seeing?",
+  "w3_s4": "It would help if you could tell us when the issue occurs, and once we have this information, we can start the diagnosis right away.",
+  "w3_s5": "Please let us know if you need any help finding this information.",
+  "w3_speech": "Hi, this is Cloud from Fix-well Technology. Thank you for your inquiry — to help us get started, could you provide a few more details? Could you tell me the model number and serial number of the unit, and send us a screenshot of the error message? It would also help to know when the issue occurs — during power-up or under load. Once we have this information, we can start the diagnosis right away.",
+  "w3_gram1": "Could you please send us a picture of the error message?",
+  "w3_gram2": "Could you please provide the model number and serial number?",
+  "w3_gram3": "Could you tell us when this problem happens?",
+  "w3_gram4": "Once we receive this information, we can start the diagnosis right away.",
+  "w3_gram5": "Please let us know if you need any help finding this information.",
+  "w3_rec1": "Symptom: The fuse was blown when the unit was powered up. Action: Replaced the fuse and checked the power net for a short before retesting. Result: The unit powered up normally with no further abnormality.",
+  "w3_rec2": "Symptom: The ADC output drifted during the offset check. Action: Recalibrated the ADC and repeated the offset check. Result: The offset check passed within the allowed tolerance.",
+  "w3_rec3": "Symptom: The sensor reported an incorrect value during startup. Action: Replaced the sensor and reran the startup sequence. Result: The sensor reading was correct and the unit passed verification.",
+  "w3dg1": "I don't know the serial number, is that okay?",
+  "w3dg2": "Here is a screenshot of the error.",
+  "w3dg3": "It happens randomly, I can't say exactly when.",
+  "w3dg4": "Why do you need the model number again? I already told your colleague.",
+  "w3dg5": "I'll send the details later today."
+ }
+}

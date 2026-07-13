@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W3 週二 — 核心句練習</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:660px;margin:0 auto;padding:0 16px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.7}
+  header{background:#1f4463;color:#fff;text-align:center;padding:16px;border-radius:0 0 16px 16px;margin:0 -16px 14px}
+  header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .q{background:#fff;border-radius:14px;padding:14px 16px;margin-top:12px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .q .qt{font-weight:700;margin-bottom:8px;font-size:.93rem}
+  .q button{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit}
+  .q button.ok{border-color:#2a9d5c;background:#e3f6ec}
+  .q button.no{border-color:#d64561;background:#fbe3e9}
+  .why{display:none;margin-top:6px;background:#eaf3ff;border-radius:9px;padding:8px 12px;font-size:.84rem;color:#1f4463}
+  #result{font-weight:800;font-size:1.05rem;margin-top:12px;text-align:center;min-height:1.5em}
+</style>
+</head>
+<body>
+<header><h1>✏️ W3 週二 — 核心句練習</h1>
+<p><a href="w3.html">← 本週重點</a> · 5 個核心句的變化題（中翻英＋填空）</p></header>
+<div id="qs"></div><div id="result"></div>
+<script>
+const QUIZ = [
+ { q: "「謝謝你的詢問，為了開始處理可以請你提供多一點細節嗎」：", c: ["Thank you for your inquiry — to help us get started, could you provide a few more details?", "Thank you your inquiry, please give me more detail.", "Thanks inquiry, we need more information now."], a: 0, why: "先謝再用 to help us get started 過渡，比直接列問題禮貌。" },
+ { q: "填空：To help us get started, could you provide a few more ___ ?", c: ["details", "detail", "detailed"], a: 0, why: "details 是可數名詞複數，不能用單數 detail。" },
+ { q: "「可以請你提供型號與序號嗎」：", c: ["Could you please provide the model number and serial number of the unit?", "What is model number and serial number?", "Please give model number serial number."], a: 0, why: "Could you please provide 比直接問句委婉，記得加冠詞 the unit。" },
+ { q: "填空：Could you please provide the serial number ___ the unit?", c: ["of", "for", "about"], a: 0, why: "A of B＝B的A，serial number of the unit。" },
+ { q: "「可以請你也傳一張錯誤訊息的截圖給我們嗎」：", c: ["Could you also send us a screenshot of the error message you are seeing?", "Could you send me picture about error?", "Please send screenshot error message."], a: 0, why: "screenshot 接 of，別用 about；記得補主詞跟助動詞。" },
+ { q: "填空：Could you send us a screenshot ___ the error message?", c: ["of", "about", "with"], a: 0, why: "screenshot／picture 固定接 of。" },
+ { q: "「如果你能告訴我們何時發生會很有幫助」：", c: ["It would help if you could tell us when the issue occurs.", "It will help if you tell us when happen the issue.", "It help you tell us when the issue occur."], a: 0, why: "It would help if you could＋原形動詞，when the issue occurs 語序別顛倒。" },
+ { q: "填空：Once we ___ this information, we can start the diagnosis right away.", c: ["receive", "will receive", "received"], a: 0, why: "once／if 子句用現在式表示未來動作，不能用 will。" },
+ { q: "「如果你需要協助找這些資訊，請告訴我們」：", c: ["Please let us know if you need any help finding this information.", "Please let us know if you need help find this information.", "Tell us if you need help to found information."], a: 0, why: "need help 後面接動詞要用 -ing：need help finding。" },
+ { q: "組合題：索取資訊信第一句＋最後一句的正確組合是？", c: ["Thank you for your inquiry — to help us get started, could you provide a few more details? ⋯ Please let us know if you need any help finding this information.", "Please let us know. ⋯ Thank you for your inquiry.", "What is your model number? ⋯ Thanks your email."], a: 0, why: "先感謝＋過渡→一次問齊資訊→提供協助，是索取資訊信最穩的骨架。" },
+];
+let done = 0, ok = 0;
+document.getElementById("qs").innerHTML = QUIZ.map((q, i) => `<div class="q" id="q${i}"><div class="qt">${i + 1}. ${q.q}</div>` +
+  q.c.map((c, ci) => `<button onclick="ans(${i},${ci},this)">${c}</button>`).join("") +
+  `<div class="why" id="w${i}">💡 ${q.why}</div></div>`).join("");
+function ans(i, ci, btn) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const good = ci === QUIZ[i].a;
+  box.querySelectorAll("button").forEach((b, bi) => { b.disabled = true;
+    if (bi === QUIZ[i].a) b.classList.add("ok"); else if (bi === ci) b.classList.add("no"); });
+  document.getElementById("w" + i).style.display = "block";
+  done++; if (good) ok++;
+  if (done === QUIZ.length) {
+    document.getElementById("result").textContent = `🎉 答對 ${ok} / ${QUIZ.length}`;
+    try { const p = JSON.parse(localStorage.getItem("adultProgress") || "{}"); p["w3d2"] = { done: new Date().toISOString(), ok, total: QUIZ.length }; localStorage.setItem("adultProgress", JSON.stringify(p)); } catch (e) {}
+  }
+}
+</script>
+</body>
+</html>
