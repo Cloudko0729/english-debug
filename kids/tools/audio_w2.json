@@ -1,0 +1,21 @@
+{
+ "outdir": "D:/english/adult/course/audio",
+ "voice": "af_heart",
+ "speed": 0.88,
+ "items": {
+  "w2_s1": "Thank you for reaching out regarding the power supply issue.",
+  "w2_s2": "We have received your inquiry and will look into it right away.",
+  "w2_s3": "To confirm, you would like us to check the power supply for an intermittent output issue — is that correct?",
+  "w2_s4": "We will get back to you with more details by tomorrow.",
+  "w2_s5": "Please let us know if there is any additional information we should know.",
+  "w2_speech": "Hi, this is Cloud from Fix-well Technology. Thank you for reaching out about the power supply issue. I just want to confirm — you're seeing an intermittent output problem on the DC power supply, is that right? Great, we'll look into it and get back to you with more details by tomorrow. Please let us know if there's anything else we should know.",
+  "w2_gram1": "We have already received your inquiry.",
+  "w2_gram2": "To confirm, you would like us to check the power supply — is that correct?",
+  "w2_gram3": "We will get back to you tomorrow.",
+  "w2_gram4": "Please let us know if there is any additional information.",
+  "w2_gram5": "Thank you for your inquiry. We will look into it.",
+  "w2_rec1": "Symptom: The connector pins showed poor contact during the retest. Action: Cleaned the connector and reseated the cable. Result: The contact test passed with no further abnormality.",
+  "w2_rec2": "Symptom: The thermal image showed an unusually hot spot near the regulator. Action: Replaced the regulator and repeated the thermal check. Result: The thermal image was normal after the replacement.",
+  "w2_rec3": "Symptom: The EEPROM data was inconsistent with the reference board. Action: Rewrote the EEPROM after confirming the correct configuration. Result: The board passed verification with the corrected data."
+ }
+}

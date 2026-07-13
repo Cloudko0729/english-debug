@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W2 週三 — 組一封完整回信</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:660px;margin:0 auto;padding:0 16px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.7}
+  header{background:#1f4463;color:#fff;text-align:center;padding:16px;border-radius:0 0 16px 16px;margin:0 -16px 14px}
+  header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .brief{background:#fdfdf8;border:1.5px solid #e3ddc8;border-radius:12px;padding:12px 15px;font-size:.88rem}
+  .step{background:#fff;border-radius:14px;padding:13px 16px;margin-top:12px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .step .no{font-size:.72rem;color:#98a3bd;font-weight:700}
+  .step .zh{font-weight:700;margin:4px 0 8px;font-size:.92rem}
+  .answ,.chunks{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+  .chunk{padding:8px 12px;border:2px solid #2c5f8a;border-radius:9px;background:#fff;color:#2c5f8a;font-weight:700;cursor:pointer;font-size:.88rem;font-family:inherit}
+  .chunk.used{opacity:.3;pointer-events:none}
+  .slot{padding:8px 12px;border-radius:9px;background:#eaf3ff;color:#1f4463;font-weight:700;font-size:.88rem;cursor:pointer}
+  .fb{font-weight:700;font-size:.86rem;min-height:1.3em;margin-top:4px}
+  #final{display:none;background:#f0fff5;border:2px solid #2a9d5c;border-radius:14px;padding:16px;margin-top:14px}
+  #final h3{margin:0 0 8px;color:#1c7a45;font-size:1rem}
+  #final .mail{font-size:.93rem;background:#fff;border-radius:10px;padding:12px 14px}
+</style>
+</head>
+<body>
+<header><h1>📧 W2 週三 — 組一封完整回信</h1>
+<p><a href="w2.html">← 本週重點</a> · 五層骨架逐句組裝，完成一封確認回覆信</p></header>
+
+<div class="brief">📩 <b>情境</b>：Mr. Tan 來信詢問一台 handler 的異常現象。你要回一封信：
+點題感謝來信 → 確認收到並會處理 → 重述確認理解內容 → 承諾何時回覆 → 邀請補充資訊。逐句把詞塊點回正確順序。</div>
+
+<div id="steps"></div>
+<div id="final"><h3>✉️ 你組出來的信（唸一遍！）</h3><div class="mail" id="mailOut"></div></div>
+
+<script>
+const LINES = [
+  { zh: "① 開場點題：謝謝來信詢問 handler 的問題", chunks: ["Thank you", "for reaching out", "regarding the handler issue."] },
+  { zh: "② 確認收到並會處理", chunks: ["We have received", "your inquiry", "and will look into it right away."] },
+  { zh: "③ 重述確認：你是要我們檢查 handler 的間歇性異常，對嗎？", chunks: ["To confirm,", "you would like us to check the handler", "for an intermittent issue —", "is that correct?"] },
+  { zh: "④ 承諾下一步：我們最晚明天回覆更詳細內容", chunks: ["We will get back to you", "with more details", "by tomorrow."] },
+  { zh: "⑤ 結尾：有其他該知道的資訊請告訴我們", chunks: ["Please let us know", "if there is", "any additional information we should know."] },
+];
+const st = {};
+document.getElementById("steps").innerHTML = LINES.map((L, i) => `<div class="step" id="s${i}">
+  <div class="no">${i + 1} / ${LINES.length}</div><div class="zh">${L.zh}</div>
+  <div class="answ" id="answ${i}"></div>
+  <div class="chunks">${shuffle(L.chunks.map((c, ci) => ({ c, ci }))).map(o => `<button class="chunk" id="ch${i}_${o.ci}" onclick="pick(${i},${o.ci})">${o.c}</button>`).join("")}</div>
+  <div class="fb" id="fb${i}"></div></div>`).join("");
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function pick(i, ci) {
+  const box = document.getElementById("s" + i); if (box.dataset.done) return;
+  if (!st[i]) st[i] = [];
+  const chip = document.getElementById("ch" + i + "_" + ci); if (chip.classList.contains("used")) return;
+  chip.classList.add("used"); st[i].push({ ci, text: LINES[i].chunks[ci] });
+  document.getElementById("answ" + i).innerHTML = st[i].map((s, k) => `<span class="slot" onclick="undo(${i},${k})">${s.text}</span>`).join("");
+  if (st[i].length === LINES[i].chunks.length) check(i);
+}
+function undo(i, k) {
+  const box = document.getElementById("s" + i); if (box.dataset.done) return;
+  const s = st[i].splice(k, 1)[0]; if (s) document.getElementById("ch" + i + "_" + s.ci).classList.remove("used");
+  document.getElementById("answ" + i).innerHTML = st[i].map((x, kk) => `<span class="slot" onclick="undo(${i},${kk})">${x.text}</span>`).join("");
+}
+let doneCount = 0, okCount = 0;
+function check(i) {
+  const box = document.getElementById("s" + i); box.dataset.done = "1";
+  const got = st[i].map(s => s.text).join(" ");
+  const ok = got === LINES[i].chunks.join(" ");
+  const fb = document.getElementById("fb" + i);
+  fb.textContent = ok ? "✓ 正確！" : "✗ 正解：" + LINES[i].chunks.join(" ");
+  fb.style.color = ok ? "#2a9d5c" : "#d64561";
+  doneCount++; if (ok) okCount++;
+  if (doneCount === LINES.length) finish();
+}
+function finish() {
+  const mail = ["Dear Mr. Tan,", ""].concat(LINES.map(L => L.chunks.join(" "))).concat(["", "Best regards,", "Cloud"]);
+  document.getElementById("mailOut").innerHTML = mail.join("<br>");
+  document.getElementById("final").style.display = "block";
+  try { const p = JSON.parse(localStorage.getItem("adultProgress") || "{}"); p["w2d3"] = { done: new Date().toISOString(), ok: okCount, total: LINES.length }; localStorage.setItem("adultProgress", JSON.stringify(p)); } catch (e) {}
+}
+</script>
+</body>
+</html>
