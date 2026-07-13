@@ -25,10 +25,13 @@ def main():
 
     with tempfile.TemporaryDirectory() as tmp:
         for name, text in spec["items"].items():
+            mp3 = outdir / f"{name}.mp3"
+            if mp3.exists():
+                print(f"{name}.mp3 (skip, exists)")
+                continue
             samples, sr = kokoro.create(text, voice=voice, speed=speed, lang="en-us")
             wav = Path(tmp) / f"{name}.wav"
             sf.write(wav, samples, sr)
-            mp3 = outdir / f"{name}.mp3"
             subprocess.run(
                 ["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav), "-b:a", "96k", str(mp3)],
                 check=True,

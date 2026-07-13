@@ -44,9 +44,14 @@ function draw(){
     (w.ex?'<div class="ex">🔊 '+esc(w.ex)+'</div><div class="exzh">'+esc(w.exZh||"")+'</div>':'')+
     '</div>').join('');
 }
+function audioKey(en){return en.toLowerCase().replace(/[^a-z0-9]+/g,"");}
+let curAudio=null;
 function say(el){
-  const text=el.dataset.ex || el.dataset.en;
-  const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.88;speechSynthesis.cancel();speechSynthesis.speak(u);
+  const key=audioKey(el.dataset.en);
+  if(curAudio){curAudio.pause();curAudio=null;}
+  const a=new Audio('audio/vocab/'+key+'.mp3');
+  curAudio=a;
+  a.play().catch(()=>{});
 }
 draw();
 </script></body></html>
