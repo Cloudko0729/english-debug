@@ -7,20 +7,25 @@ header a{color:#9fd0ff;text-decoration:none;font-weight:700}
 #bar{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
 #bar button{padding:6px 13px;border:2px solid #d9e2ec;border-radius:16px;background:#fff;font-weight:700;cursor:pointer;font-size:.8rem}
 #bar button.on{border-color:#1f4463;background:#1f4463;color:#fff}
-#list{display:flex;flex-wrap:wrap;gap:6px}
-.w{background:#fff;border-radius:9px;padding:6px 11px;font-size:.85rem;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.07);cursor:pointer}
-.w i{font-style:normal;font-weight:400;color:#777;margin-left:5px;font-size:.76rem}
+#stat{font-size:.78rem;color:#666;margin:6px 0 10px}
+#list{display:flex;flex-direction:column;gap:8px}
+.w{background:#fff;border-radius:11px;padding:9px 13px;box-shadow:0 1px 3px rgba(0,0,0,.07);cursor:pointer}
 .w.l1{border-left:4px solid #2a9d5c}.w.l2{border-left:4px solid #f2a900}.w.l3{border-left:4px solid #d64561}
-.w .m{font-size:.66rem;color:#98a3bd;margin-left:4px}
-#stat{font-size:.78rem;color:#666;margin:6px 0}
+.w .hd{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.w .en{font-weight:800;font-size:.98rem}
+.w .zh{color:#777;font-size:.82rem}
+.w .m{font-size:.66rem;color:#98a3bd;margin-left:auto}
+.w .ex{margin-top:4px;font-size:.85rem;color:#2c4a68;background:#f6f9fd;border-left:3px solid #9fc3e8;border-radius:0 8px 8px 0;padding:4px 10px}
+.w .exzh{font-size:.76rem;color:#999;margin-top:2px;padding-left:12px}
 </style></head><body>
 <header><h1>📚 商用英文單字表</h1>
-<p><a href="index.html">← 課程目錄</a> · 你的常用字 ＋ 商業必備 · 🟢初 🟡中 🔴高（60/30/10）· 點單字發音</p></header>
+<p><a href="index.html">← 課程目錄</a> · 你的常用字 ＋ 商業必備 · 🟢初 🟡中 🔴高（60/30/10）· 點卡片發音</p></header>
 <div id="bar"></div><div id="stat"></div><div id="list"></div>
 <script src="vocab.js"></script>
 <script>
 let fl=0, ft="all";
 const TAG_ZH={"repair":"維修","quotation":"報價","delivery":"交期","parts":"料件","meeting":"會議","order":"訂單","payment":"付款","logistics":"物流","service":"客服","office":"辦公","general":"通用"};
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 function bar(){
   let h='<button class="'+(fl===0?'on':'')+'" onclick="fl=0;draw()">全部</button>';
   [1,2,3].forEach(l=>h+='<button class="'+(fl===l?'on':'')+'" onclick="fl='+l+';draw()">'+['','🟢 初階','🟡 中階','🔴 高階'][l]+'</button>');
@@ -34,8 +39,14 @@ function draw(){
   const rows=ADULT_VOCAB.filter(w=>(fl===0||w.level===fl)&&(ft==='all'||w.tag===ft));
   document.getElementById('stat').textContent='顯示 '+rows.length+' / '+ADULT_VOCAB.length+' 字（⭐ = 你信裡的常用字）';
   document.getElementById('list').innerHTML=rows.map(w=>
-    '<span class="w l'+w.level+'" onclick="say(\''+w.en.replace(/'/g,"\\'")+'\')">'+(w.src==='mail'?'⭐':'')+w.en+'<i>'+w.zh+'</i></span>').join('');
+    '<div class="w l'+w.level+'" onclick="say(this)" data-en="'+esc(w.en)+'" data-ex="'+esc(w.ex||"")+'">'+
+    '<div class="hd"><span class="en">'+(w.src==="mail"?"⭐":"")+esc(w.en)+'</span><span class="zh">'+esc(w.zh)+'</span><span class="m">'+(TAG_ZH[w.tag]||w.tag)+'</span></div>'+
+    (w.ex?'<div class="ex">🔊 '+esc(w.ex)+'</div><div class="exzh">'+esc(w.exZh||"")+'</div>':'')+
+    '</div>').join('');
 }
-function say(en){const u=new SpeechSynthesisUtterance(en);u.lang='en-US';u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u);}
+function say(el){
+  const text=el.dataset.ex || el.dataset.en;
+  const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.88;speechSynthesis.cancel();speechSynthesis.speak(u);
+}
 draw();
 </script></body></html>
