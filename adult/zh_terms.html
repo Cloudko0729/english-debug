@@ -23,9 +23,15 @@ function draw(kw){
   const rows=ZH_TERMS.filter(t=>!kw||t.zh.includes(kw)||t.en.toLowerCase().includes(kw)||t.example.toLowerCase().includes(kw));
   document.getElementById('stat').textContent='顯示 '+rows.length+' / '+ZH_TERMS.length+' 條';
   document.getElementById('list').innerHTML=rows.map(t=>
-    '<div class="t"><div class="hd"><span class="zh">'+t.zh+'</span><span class="en" onclick="say(this.textContent)">'+t.en+'</span></div>'+
-    '<div class="ex" onclick="say(this.textContent)">'+t.example+'</div></div>').join('');
+    '<div class="t"><div class="hd"><span class="zh">'+t.zh+'</span><span class="en" onclick="say('+t.id+',\'term\')">'+t.en+'</span></div>'+
+    '<div class="ex" onclick="say('+t.id+',\'ex\')">'+t.example+'</div></div>').join('');
 }
-function say(s){const u=new SpeechSynthesisUtterance(s.split('/')[0]);u.lang='en-US';u.rate=.85;speechSynthesis.cancel();speechSynthesis.speak(u);}
+let curAudio=null;
+function say(id,type){
+  if(curAudio){curAudio.pause();curAudio=null;}
+  const a=new Audio('audio/zh_terms/t'+id+'_'+type+'.mp3');
+  curAudio=a;
+  a.play().catch(()=>{});
+}
 draw('');
 </script></body></html>
