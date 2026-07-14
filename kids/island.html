@@ -59,6 +59,18 @@
       color: #3a2a00;
     }
     .stu-btn.active { background: #3a2a00; color: #fff; }
+    .isl-group { display: flex; gap: 6px; }
+    .isl-btn {
+      padding: 5px 12px;
+      border: 2px solid #3a2a00;
+      border-radius: 18px;
+      background: transparent;
+      font-weight: 700;
+      font-size: .8rem;
+      cursor: pointer;
+      color: #3a2a00;
+    }
+    .isl-btn.active { background: #3a2a00; color: #fff; }
     .coin-display {
       background: #fff;
       border-radius: 18px;
@@ -285,6 +297,10 @@
  <button class="stu-btn" onclick="selectStudent('ryder')">Ryder</button>
     <button class="stu-btn" style="opacity:.7" onclick="selectStudent('test')">🧪 測試</button>
   </div>
+  <div class="isl-group" id="islandGroup" style="display:none">
+    <button class="isl-btn active" id="islBtn1" onclick="switchIsland(1)">🏝️ 一號島</button>
+    <button class="isl-btn" id="islBtn2" onclick="switchIsland(2)">🪨 二號島</button>
+  </div>
   <div class="coin-display" id="coinDisplay">🪙 —</div>
 </div>
 
@@ -331,14 +347,14 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607131335"></script>
-<script src="curriculum.js?v=202607131335"></script>
-<script src="worddex.js?v=202607131335"></script>
-<script src="city_data.js?v=202607131335"></script>
+<script src="wordbank.js?v=202607141312"></script>
+<script src="curriculum.js?v=202607141312"></script>
+<script src="worddex.js?v=202607141312"></script>
+<script src="city_data.js?v=202607141312"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607131335"></script>
-<script src="account_lock.js?v=202607131335"></script>
-<script src="supabase_auth.js?v=202607131335"></script>
+<script src="cloud_sync.js?v=202607141312"></script>
+<script src="account_lock.js?v=202607141312"></script>
+<script src="supabase_auth.js?v=202607141312"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -487,7 +503,7 @@ function centerLevel() { const c = island.buildings.find(b => b.type === "center
 const GRID = 15;
 
 // 15×15 地形圖：O 海洋、P 平地（可蓋）、H 丘陵、M 高山
-const TERRAIN_MAP = [
+const TERRAIN_MAP_1 = [
   "OOOOOOOOOOOOOOO",
   "OOOOPPPPPOOOOOO",
   "OOPPPPPPPPPOOOO",
@@ -504,6 +520,26 @@ const TERRAIN_MAP = [
   "OOOOOPPPPPOOOOO",
   "OOOOOOOOOOOOOOO",
 ];
+// 二號島：格數一樣，山丘位置略有不同（偏東北），另有碎石覆蓋
+const TERRAIN_MAP_2 = [
+  "OOOOOOOOOOOOOOO",
+  "OOOOOOPPPPPOOOO",
+  "OOOPPPPPPPPPPOO",
+  "OOPPPPPPPPHHPOO",
+  "OPPPPPPPPHHHPOO",
+  "OPPPPPPPHMMHPOO",
+  "OPPPPPPHMMMHPPO",
+  "OPPPPPPPHHHPPPO",
+  "OPPPPPPPPPPPPPO",
+  "OPPHPPPPPPPPPPO",
+  "OOPHHPPPPPPPPOO",
+  "OOPPHPPPPPPPOOO",
+  "OOOPPPPPPPPOOOO",
+  "OOOOOPPPPPOOOOO",
+  "OOOOOOOOOOOOOOO",
+];
+let TERRAIN_MAP = TERRAIN_MAP_1;
+function terrainMapFor(id) { return id === 2 ? TERRAIN_MAP_2 : TERRAIN_MAP_1; }
 function terrainAt(x, y) {
   if (y < 0 || y >= GRID || x < 0 || x >= GRID) return "O";
   return TERRAIN_MAP[y][x];
@@ -515,6 +551,7 @@ const TERR_NAME = { O: "海洋", P: "平地", H: "丘陵", M: "高山" };
 let currentStudent = null;
 let island = null;
 let selectedTile = null;
+let currentIslandId = 1;
 
 function todayStr() {
   const d = new Date();
@@ -531,9 +568,24 @@ function getProgress(s) {
 function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
 
 // ─── Island storage ──────────────────────────────────────────────────────────
-function newIsland(studentId) {
+const RUBBLE_RATIO = 0.7;      // 二號島碎石覆蓋比例
+const RUBBLE_CLEAR_COST = 500; // 開墾一格的費用
+function genRubble(mapId) {
+  const map = terrainMapFor(mapId);
+  const rubble = {};
+  for (let y = 0; y < GRID; y++) {
+    for (let x = 0; x < GRID; x++) {
+      if (map[y][x] !== "O" && Math.random() < RUBBLE_RATIO) rubble[x + "_" + y] = true;
+    }
+  }
+  return rubble;
+}
+function islandStorageKey(s, id) { return "kidsIsland" + (id === 2 ? "2" : "") + "." + s; }
+function newIsland(studentId, id) {
+  id = id === 2 ? 2 : 1;
   return {
     schemaVersion: 2,
+    islandId: id,
     studentId,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
@@ -544,11 +596,16 @@ function newIsland(studentId) {
     buildings: [],
     events: [],
     settings: { emojiStyle: true, animationsEnabled: true },
+    rubble: id === 2 ? genRubble(2) : {},
   };
 }
-function loadIsland(s) {
-  const raw = localStorage.getItem("kidsIsland." + s);
-  return raw ? JSON.parse(raw) : newIsland(s);
+function loadIsland(s, id) {
+  id = id === 2 ? 2 : 1;
+  const raw = localStorage.getItem(islandStorageKey(s, id));
+  const isl = raw ? JSON.parse(raw) : newIsland(s, id);
+  if (isl.islandId == null) isl.islandId = id;   // 舊存檔補欄位
+  if (!isl.rubble) isl.rubble = {};
+  return isl;
 }
 
 // 升級到 15×15 地圖：把不在平地上的舊建築拆除並退還金幣
@@ -580,7 +637,7 @@ function migrateIsland(isl, student) {
 }
 function saveIsland(s, isl) {
   isl.updatedAt = new Date().toISOString();
-  localStorage.setItem("kidsIsland." + s, JSON.stringify(isl));
+  localStorage.setItem(islandStorageKey(s, isl.islandId || 1), JSON.stringify(isl));
 }
 
 // ─── Daily tick: grow buildings + collect production ────────────────────────
@@ -629,14 +686,16 @@ function runDailyTick() {
 
 // ─── Stats ──────────────────────────────────────────────────────────────────
 let TERRAIN_BEAUTY = null;
+let TERRAIN_BEAUTY_MAP = null;   // 記住是為哪張地圖算的，切換小島時要重算
 function terrainBeauty() {
-  if (TERRAIN_BEAUTY === null) {
+  if (TERRAIN_BEAUTY === null || TERRAIN_BEAUTY_MAP !== TERRAIN_MAP) {
     let b = 0;
     for (let y = 0; y < GRID; y++) for (let x = 0; x < GRID; x++) {
       const t = TERRAIN_MAP[y][x];
       if (t === "H") b += 1; else if (t === "M") b += 2;
     }
     TERRAIN_BEAUTY = b;
+    TERRAIN_BEAUTY_MAP = TERRAIN_MAP;
   }
   return TERRAIN_BEAUTY;
 }
@@ -705,6 +764,11 @@ function render() {
         if (b.star > 0) tile.innerHTML += `<span class="star-badge">🌟${b.star > 1 ? b.star : ""}</span>`;
         if (mergeState && _isMergeTarget(b)) tile.classList.add("merge-cand");
         tile.onclick = mergeState ? (() => tapDuringMerge(b)) : (() => openDetail(b));
+      } else if (island.rubble && island.rubble[x + "_" + y]) {
+        tile.textContent = "🪨";
+        tile.title = "碎石地，開墾後才能蓋建築";
+        if (mergeState) tile.onclick = () => cancelMerge();
+        else tile.onclick = () => openReclaim(x, y);
       } else {
         if (t === "H") tile.textContent = "⛰️";
         else if (t === "M") tile.textContent = "🏔️";
@@ -801,6 +865,7 @@ function openBuild(x, y) {
 function build(key) {
   const c = BUILDINGS[key];
   if (!selectedTile || !(c.terrain || ["P"]).includes(terrainAt(selectedTile.x, selectedTile.y))) { toast(`只能蓋在${(c.terrain||["P"]).map(t=>TERR_NAME[t]).join("/")}上`); return; }
+  if (island.rubble && island.rubble[selectedTile.x + "_" + selectedTile.y]) { toast("要先開墾這格的碎石"); return; }
   if (c.unique && countType(key) >= 1) { toast("已經有一個了"); return; }
   if (c.max && countType(key) >= c.max) { toast(`${c.name}最多 ${c.max} 個`); return; }
   if (c.category && countType(key) >= 1) { toast(`${c.name}已經復育過了，同種生物只能一隻——換別種吧！`); return; }
@@ -832,6 +897,38 @@ function build(key) {
   render();
   if (typeof cloudSave === "function") cloudSave(currentStudent);
   toast(`${c.emoji} ${c.name} 蓋好了！`);
+}
+
+// ─── 碎石開墾（二號島）───────────────────────────────────────────────────────
+function openReclaim(x, y) {
+  selectedTile = { x, y };
+  const t = terrainAt(x, y);
+  const p = getProgress(currentStudent);
+  const afford = p.coins.balance >= RUBBLE_CLEAR_COST;
+  let html = `<h3>🪨 碎石地（${TERR_NAME[t]}）</h3>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:10px">要先開墾清掉碎石，才能在這格蓋建築。</p>
+    <button class="upgrade-btn" style="background:${afford ? "var(--success)" : "var(--muted)"}" ${afford ? `onclick="reclaimTile(${x},${y})"` : ""}>
+      🪨 開墾這格（🪙 ${RUBBLE_CLEAR_COST}）${afford ? "" : " — 金幣不夠"}
+    </button>`;
+  document.getElementById("sheetContent").innerHTML = html;
+  document.getElementById("sheet").classList.add("open");
+}
+function reclaimTile(x, y) {
+  const key = x + "_" + y;
+  if (!island.rubble || !island.rubble[key]) { closeSheet(); return; }
+  const p = getProgress(currentStudent);
+  if (p.coins.balance < RUBBLE_CLEAR_COST) { toast("金幣不夠！"); return; }
+  p.coins.balance -= RUBBLE_CLEAR_COST;
+  p.coins.lifetimeSpent += RUBBLE_CLEAR_COST;
+  p.coins.transactions.push({ type: "spend", source: "islandReclaim", amount: RUBBLE_CLEAR_COST,
+    balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { x, y, islandId: island.islandId } });
+  saveProgress(currentStudent, p);
+  delete island.rubble[key];
+  saveIsland(currentStudent, island);
+  closeSheet();
+  render();
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  toast("🪨 開墾完成！這格可以蓋建築了");
 }
 
 // 點寵物狗：每天收一次隨機金幣（記在 island.dogLastCollect，收走重放也不能重複領）
@@ -1233,6 +1330,12 @@ function openManual() {
 
     <p><b>🛠️ 拆除</b><br>
     試用期全額退還金幣(免費蓋的城鎮中心/小狗不退)。</p>
+
+    <p><b>🏝️ 二號島（碎石島）</b><br>
+    頂端「🏝️ 一號島 / 🪨 二號島」按鈕可以切換。二號島格數一樣，地形略有不同，<br>
+    但陸地上有大量 🪨 <b>碎石</b>（約 7 成的地）：點碎石格 → 付 <b>🪙 500</b> 開墾 → 才能在那格蓋建築。<br>
+    兩座島的人口/美化/快樂/金幣產量<b>各自獨立計算</b>，寵物、島民委託、訪客商品也是每座島各自一份。<br>
+    金幣是共用的（跟每日測驗共用同一個 🪙 錢包）。</p>
   </div>`;
   document.getElementById("sheetContent").innerHTML = html;
   document.getElementById("sheet").classList.add("open");
@@ -1799,6 +1902,32 @@ function finishVisitor() {
   }
 }
 
+// ─── Island switch (一號島／二號島) ───────────────────────────────────────────
+function switchIsland(id) {
+  if (!currentStudent || id === currentIslandId) return;
+  mergeState = null;   // 換島時取消尚未完成的合併操作
+  currentIslandId = id === 2 ? 2 : 1;
+  TERRAIN_MAP = terrainMapFor(currentIslandId);
+  document.getElementById("islBtn1").classList.toggle("active", currentIslandId === 1);
+  document.getElementById("islBtn2").classList.toggle("active", currentIslandId === 2);
+  island = loadIsland(currentStudent, currentIslandId);
+  const migrated = migrateIsland(island, currentStudent);
+  recalcStats();
+  if (migrated) saveIsland(currentStudent, island);
+  const produced = runDailyTick();
+  render();
+  updateQuestBtns();
+  renderPet(); updatePetBtn();
+  const notice = document.getElementById("notice");
+  if (produced > 0) {
+    notice.style.display = "block";
+    notice.innerHTML = `🌅 ${currentIslandId === 2 ? "二號島" : "一號島"}建築生產了 <b>🪙 ${produced}</b> 金幣！`;
+  } else {
+    notice.style.display = "none";
+  }
+  toast(currentIslandId === 2 ? "🪨 切換到二號島（碎石島）" : "🏝️ 切換到一號島");
+}
+
 // ─── Student select ──────────────────────────────────────────────────────────
 function selectStudent(name) {
   if (name === "guest") {   // 訪客不能玩小島
@@ -1810,7 +1939,12 @@ function selectStudent(name) {
   currentStudent = name;
   localStorage.setItem("kidsCurrentStudent", name);
   document.querySelectorAll(".stu-btn").forEach(b => b.classList.toggle("active", b.textContent.toLowerCase() === name));
-  island = loadIsland(name);
+  currentIslandId = 1;
+  TERRAIN_MAP = TERRAIN_MAP_1;
+  document.getElementById("islBtn1").classList.add("active");
+  document.getElementById("islBtn2").classList.remove("active");
+  document.getElementById("islandGroup").style.display = "flex";
+  island = loadIsland(name, 1);
   const migrated = migrateIsland(island, name);
   document.getElementById("pickStudentMsg").style.display = "none";
   document.getElementById("island").style.display = "grid";
@@ -1849,7 +1983,8 @@ function buildSaveBundle(student) {
     student,
     exportedAt: new Date().toISOString(),
     progress: getProgress(student),
-    island: loadIsland(student),
+    island: loadIsland(student, 1),
+    island2: loadIsland(student, 2),
   };
 }
 
@@ -1874,7 +2009,8 @@ function applyBundle(bundle) {
   }
   const s = bundle.student;
   if (bundle.progress) saveProgress(s, bundle.progress);
-  if (bundle.island)   localStorage.setItem("kidsIsland." + s, JSON.stringify(bundle.island));
+  if (bundle.island)   localStorage.setItem(islandStorageKey(s, 1), JSON.stringify(bundle.island));
+  if (bundle.island2)  localStorage.setItem(islandStorageKey(s, 2), JSON.stringify(bundle.island2));
   selectStudent(s);
   toast(`已還原 ${s} 的進度 🎉`);
   return true;
