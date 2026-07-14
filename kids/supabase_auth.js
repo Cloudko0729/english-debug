@@ -142,6 +142,12 @@ async function doLogin(name, password) {
   location.reload();
 }
 
+// 雲端 island blob 可能夾帶二號島（island._island2，見 cloud_sync.js）——拆開存兩把 key
+function _storeCloudIsland(student, islandData) {
+  if (typeof _storeIslands === "function") { _storeIslands(student, islandData); return; }
+  localStorage.setItem("kidsIsland." + student, JSON.stringify(islandData));
+}
+
 // 本機是否已有該學生的進度（用來決定登入時要不要問「雲端 vs 暫存」）
 function _localHasData(student) {
   let p = null;
@@ -157,7 +163,7 @@ async function showSourceChoice(student, proceed) {
   if (!cloud || !cloud.progress) { proceed(); return; }   // 雲端沒資料 → 用本機
   if (!_localHasData(student)) {                           // 只有雲端有資料 → 直接用雲端
     localStorage.setItem("kidsProgress." + student, JSON.stringify(cloud.progress));
-    if (cloud.island) localStorage.setItem("kidsIsland." + student, JSON.stringify(cloud.island));
+    if (cloud.island) _storeCloudIsland(student, cloud.island);
     proceed(); return;
   }
   // 兩邊都有資料 → 跳出選擇
@@ -198,7 +204,7 @@ async function showSourceChoice(student, proceed) {
   document.body.appendChild(ov);
   ov.querySelector("#srcCloud").onclick = () => {
     localStorage.setItem("kidsProgress." + student, JSON.stringify(cloud.progress));
-    if (cloud.island) localStorage.setItem("kidsIsland." + student, JSON.stringify(cloud.island));
+    if (cloud.island) _storeCloudIsland(student, cloud.island);
     ov.remove(); proceed();
   };
   ov.querySelector("#srcLocal").onclick = () => { ov.remove(); proceed(); };

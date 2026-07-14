@@ -347,14 +347,14 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607141312"></script>
-<script src="curriculum.js?v=202607141312"></script>
-<script src="worddex.js?v=202607141312"></script>
-<script src="city_data.js?v=202607141312"></script>
+<script src="wordbank.js?v=202607141320"></script>
+<script src="curriculum.js?v=202607141320"></script>
+<script src="worddex.js?v=202607141320"></script>
+<script src="city_data.js?v=202607141320"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607141312"></script>
-<script src="account_lock.js?v=202607141312"></script>
-<script src="supabase_auth.js?v=202607141312"></script>
+<script src="cloud_sync.js?v=202607141320"></script>
+<script src="account_lock.js?v=202607141320"></script>
+<script src="supabase_auth.js?v=202607141320"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -1286,7 +1286,7 @@ function openManual() {
     <p><b>😊 快樂值怎麼算</b><br>
     每位居民需要約 <b>1.2 美化分</b>才會開心。<br>
     快樂% = 美化 ÷ (人口 × 1.2)，最高 100%。<br>
-    <b>食物不足會再打折</b>：快樂 × (食物 ÷ 人口)。人口越多，越需要農場/牧場/漁場！<br>
+    <b>食物不足會再打折</b>：快樂 × (食物 ÷ 人口)，最低打到 3 折。人口越多，越需要農場/牧場/漁場！<br>
     人太多但美化或食物跟不上 → 快樂下降。</p>
 
     <p><b>💰 快樂影響收入</b><br>
@@ -1335,7 +1335,8 @@ function openManual() {
     頂端「🏝️ 一號島 / 🪨 二號島」按鈕可以切換。二號島格數一樣，地形略有不同，<br>
     但陸地上有大量 🪨 <b>碎石</b>（約 7 成的地）：點碎石格 → 付 <b>🪙 500</b> 開墾 → 才能在那格蓋建築。<br>
     兩座島的人口/美化/快樂/金幣產量<b>各自獨立計算</b>，寵物、島民委託、訪客商品也是每座島各自一份。<br>
-    金幣是共用的（跟每日測驗共用同一個 🪙 錢包）。</p>
+    金幣是共用的（跟每日測驗共用同一個 🪙 錢包）。<br>
+    雲端存檔、每日快照還原、匯出/匯入備份都<b>包含兩座島</b>，換裝置不會弄丟二號島。</p>
   </div>`;
   document.getElementById("sheetContent").innerHTML = html;
   document.getElementById("sheet").classList.add("open");

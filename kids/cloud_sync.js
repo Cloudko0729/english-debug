@@ -42,10 +42,27 @@ function _summarize(progress, island) {
 }
 
 function _localData(student) {
-  let progress = null, island = null;
+  let progress = null, island = null, island2 = null;
   try { progress = JSON.parse(localStorage.getItem("kidsProgress." + student) || "null"); } catch (e) {}
   try { island = JSON.parse(localStorage.getItem("kidsIsland." + student) || "null"); } catch (e) {}
-  return { progress, island };
+  try { island2 = JSON.parse(localStorage.getItem("kidsIsland2." + student) || "null"); } catch (e) {}
+  return { progress, island, island2 };
+}
+
+// ── 二號島打包／拆包：island2 塞進 island._island2 一起同步 ──────────────────
+// island 欄位是 JSON blob（Supabase jsonb / Sheets 存字串），塞巢狀欄位不用改後端 schema；
+// 舊存檔沒有 _island2 也完全相容。
+function _packIslands(island, island2) {
+  if (!island || !island2) return island;
+  return Object.assign({}, island, { _island2: island2 });
+}
+function _storeIslands(student, islandData) {
+  if (!islandData) return;
+  const isl2 = islandData._island2 || null;
+  const isl1 = Object.assign({}, islandData);
+  delete isl1._island2;
+  localStorage.setItem("kidsIsland." + student, JSON.stringify(isl1));
+  if (isl2) localStorage.setItem("kidsIsland2." + student, JSON.stringify(isl2));
 }
 
 // 取目前登入的 Supabase 使用者（沒有就 null）
@@ -59,13 +76,14 @@ async function _sbUser() {
 // ── 存檔：Supabase（若已登入）+ Google Sheet（雙寫）─────────────────────────
 function cloudSave(student) {
   if (!student) return;
-  const { progress, island } = _localData(student);
+  const { progress, island, island2 } = _localData(student);
+  const islandPacked = _packIslands(island, island2);
   const day = _todayStr();
   const summary = _summarize(progress, island);
 
   // 1) 雙寫 Google Sheet（維持家長可讀的試算表 + 熟練表）
   if (CLOUD_URL) {
-    const payload = { secret: CLOUD_SECRET, student, ts: new Date().toISOString(), date: day, progress, island };
+    const payload = { secret: CLOUD_SECRET, student, ts: new Date().toISOString(), date: day, progress, island: islandPacked };
     const m = _masteryFromProgress(progress);
     if (m) payload.mastery = m;
     try { fetch(CLOUD_URL, { method: "POST", body: JSON.stringify(payload) }); } catch (e) {}
@@ -78,9 +96,9 @@ function cloudSave(student) {
     const sb = window.sbClient;
     const now = new Date().toISOString();
     Promise.all([
-      sb.from("saves").upsert({ user_id: user.id, student, ts: now, progress, island }, { onConflict: "user_id" }),
+      sb.from("saves").upsert({ user_id: user.id, student, ts: now, progress, island: islandPacked }, { onConflict: "user_id" }),
       sb.from("history").upsert(
-        { user_id: user.id, student, day, client_ts: now, summary, progress, island },
+        { user_id: user.id, student, day, client_ts: now, summary, progress, island: islandPacked },
         { onConflict: "user_id,day" }
       )
     ]).then(([s, h]) => {
@@ -126,7 +144,7 @@ function cloudSyncOnOpen(student, onRestored) {
     const cAct = _lastAct(cloud && cloud.progress), lAct = _lastAct(prog);
     if (cloud && cloud.progress && cAct > lAct + 2000) {
       localStorage.setItem("kidsProgress." + student, JSON.stringify(cloud.progress));
-      if (cloud.island) localStorage.setItem("kidsIsland." + student, JSON.stringify(cloud.island));
+      if (cloud.island) _storeIslands(student, cloud.island);
       if (typeof onRestored === "function") onRestored();
     } else {
       cloudSave(student);
@@ -143,7 +161,7 @@ async function cloudLoad(student) {
         .select("progress, island").eq("user_id", user.id).maybeSingle();
       if (data) {
         if (data.progress) localStorage.setItem("kidsProgress." + student, JSON.stringify(data.progress));
-        if (data.island) localStorage.setItem("kidsIsland." + student, JSON.stringify(data.island));
+        if (data.island) _storeIslands(student, data.island);
         return data;
       }
       return null;
@@ -158,7 +176,7 @@ function _gasLoad(student) {
     .then(d => {
       if (d && d.ok) {
         if (d.progress) localStorage.setItem("kidsProgress." + student, JSON.stringify(d.progress));
-        if (d.island) localStorage.setItem("kidsIsland." + student, JSON.stringify(d.island));
+        if (d.island) _storeIslands(student, d.island);
         return d;
       }
       return null;
@@ -209,7 +227,7 @@ async function cloudLoadDate(student, date) {
         .select("progress, island, day").eq("user_id", user.id).eq("day", date).maybeSingle();
       if (data) {
         if (data.progress) localStorage.setItem("kidsProgress." + student, JSON.stringify(data.progress));
-        if (data.island) localStorage.setItem("kidsIsland." + student, JSON.stringify(data.island));
+        if (data.island) _storeIslands(student, data.island);
         return data;
       }
       return null;
@@ -221,7 +239,7 @@ async function cloudLoadDate(student, date) {
     .then(r => r.json()).then(d => {
       if (d && d.ok) {
         if (d.progress) localStorage.setItem("kidsProgress." + student, JSON.stringify(d.progress));
-        if (d.island) localStorage.setItem("kidsIsland." + student, JSON.stringify(d.island));
+        if (d.island) _storeIslands(student, d.island);
         return d;
       }
       return null;
