@@ -319,6 +319,7 @@
     <button id="boardBtn" onclick="openBoard()" style="flex:1;min-width:130px;padding:10px;border:2px solid #b5651d;border-radius:12px;background:#fff3e0;color:#8a4a12;font-weight:800;cursor:pointer">📋 島民委託板</button>
     <button id="visitorBtn" onclick="openTravel()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2f80ed;border-radius:12px;background:#eaf3ff;color:#1e5fb8;font-weight:800;cursor:pointer">✈️ 今日旅客</button>
     <button id="albumBtn" onclick="openAlbum()" style="flex:1;min-width:130px;padding:10px;border:2px solid #d4a017;border-radius:12px;background:#fff8e1;color:#8a6d1a;font-weight:800;cursor:pointer">📕 城市卡冊</button>
+    <button id="rootsBtn" onclick="openRoots()" style="flex:1;min-width:130px;padding:10px;border:2px solid #4a8f3c;border-radius:12px;background:#f3fbe9;color:#2e6b23;font-weight:800;cursor:pointer">🌱 字根字源</button>
     <button id="petBtn" onclick="openPet()" style="flex:1;min-width:130px;padding:10px;border:2px solid #b5651d;border-radius:12px;background:#fdf1e3;color:#8a4a12;font-weight:800;cursor:pointer">🐾 我的寵物</button>
     <button id="wonderBtn" onclick="openWonder()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2c5f8a;border-radius:12px;background:#eaf1fb;color:#1f4463;font-weight:800;cursor:pointer">🏛️ 共同奇觀</button>
     <a href="worddex.html" style="flex:1;min-width:130px;padding:10px;border:2px solid #7c4dca;border-radius:12px;background:#f3edff;color:#5a36a8;font-weight:800;text-align:center;text-decoration:none">🎴 單字圖鑑</a>
@@ -347,14 +348,15 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607161417"></script>
-<script src="curriculum.js?v=202607161417"></script>
-<script src="worddex.js?v=202607161417"></script>
-<script src="city_data.js?v=202607161417"></script>
+<script src="wordbank.js?v=202607162218"></script>
+<script src="curriculum.js?v=202607162218"></script>
+<script src="word_roots.js?v=202607162218"></script>
+<script src="worddex.js?v=202607162218"></script>
+<script src="city_data.js?v=202607162218"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607161417"></script>
-<script src="account_lock.js?v=202607161417"></script>
-<script src="supabase_auth.js?v=202607161417"></script>
+<script src="cloud_sync.js?v=202607162218"></script>
+<script src="account_lock.js?v=202607162218"></script>
+<script src="supabase_auth.js?v=202607162218"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -1394,6 +1396,8 @@ function updateQuestBtns() {
     v.textContent = allDone ? "✈️ 環遊世界完成 🏆" : done ? "✈️ 今日護照章 ✅" : "✈️ 今日旅客";
     v.style.opacity = (done || allDone) ? ".55" : "1";
   }
+  const rb = document.getElementById("rootsBtn");
+  if (rb) { const done = island.rootsLast === t; rb.textContent = done ? "🌱 今日字根完成 ✅" : "🌱 字根字源"; rb.style.opacity = done ? ".55" : "1"; }
 }
 
 // ─── 世界城市卡：護照集章＋卡冊＋城市交流（設計：tools/_city_v2_final.md）──────
@@ -1519,6 +1523,77 @@ function travelFinish() {
   saveIsland(currentStudent, island); updateQuestBtns();
   if (typeof cloudSave === "function") cloudSave(currentStudent);
 }
+
+// ── 🌱 字根字源：以當週單字為基礎教一個字首/字尾，教完出 3 題 ──
+let _rq = null;
+function _rootDistractors(correctWord, count) {
+  const pool = [];
+  WORD_ROOTS.forEach(r => r.ex.forEach(e => { if (e.word !== correctWord && !pool.includes(e.word)) pool.push(e.word); }));
+  return pool.sort(() => Math.random() - .5).slice(0, count);
+}
+function _rootZhDistractors(correctZh, count) {
+  const pool = WORD_ROOTS.map(r => r.zh).filter(z => z !== correctZh);
+  return pool.sort(() => Math.random() - .5).slice(0, count);
+}
+function openRoots() {
+  if (island.rootsLast === todayStr()) { toast("今天的字根字源學過了，明天再來！"); return; }
+  if (typeof WORD_ROOTS === "undefined" || typeof WEEK_ROOT_PICKS === "undefined") { toast("字根題庫還沒準備好"); return; }
+  const wk = (typeof vocabWeekForDate === "function") ? vocabWeekForDate(todayStr()).week : null;
+  const picks = (wk && WEEK_ROOT_PICKS[wk.n]) || WEEK_ROOT_PICKS[1];
+  const dayN = Math.floor(Date.parse(todayStr()) / 86400000);
+  const today = picks[dayN % picks.length];
+  const rootInfo = WORD_ROOTS.find(r => r.id === today.id);
+  if (!rootInfo) { toast("字根題庫還沒準備好"); return; }
+  const affixBare = rootInfo.affix.replace(/-/g, "");
+
+  const q1opts = [rootInfo.zh].concat(_rootZhDistractors(rootInfo.zh, 2)).sort(() => Math.random() - .5);
+  const q2opts = [today.word].concat(_rootDistractors(today.word, 2)).sort(() => Math.random() - .5);
+  const q3opts = [today.word].concat(_rootDistractors(today.word, 2)).sort(() => Math.random() - .5);
+  _rq = { done: 0, ok: 0, qs: [
+    { q: `${rootInfo.affix} 這個字根通常代表什麼意思？`, opts: q1opts, a: rootInfo.zh },
+    { q: `${today.base} + ${affixBare} = ?（提示：${today.zh}）`, opts: q2opts, a: today.word },
+    { q: `「${today.zh.replace(/（.*）/, "")}」的英文怎麼說？`, opts: q3opts, a: today.word },
+  ] };
+
+  let h = `<h3>🌱 字根字源：${rootInfo.affix}</h3>
+    <p style="color:var(--muted);font-size:.85rem;margin:4px 0 10px">${rootInfo.affix}＝${rootInfo.zh}</p>
+    <div style="background:#f3fbe9;border:1.5px solid #c8e6a0;border-radius:11px;padding:10px 14px;font-size:.9rem;margin-bottom:10px">
+      📌 本週單字：<b>${today.base}</b> → <b>${today.word}</b>（${today.zh}）<br>
+      💡 其他例子：${rootInfo.ex.map(e => `<b>${e.base}</b>→<b>${e.word}</b>（${e.zh}）`).join("　")}
+    </div>`;
+  _rq.qs.forEach((q, i) => {
+    h += `<div id="rq${i}" style="border-top:1px dashed #eee;padding:10px 0">
+      <div style="font-weight:700;margin-bottom:6px">${i + 1}. ${q.q}</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${q.opts.map(o => `<button onclick="rootAns(${i},'${String(o).replace(/'/g, "\\'")}',this)" style="padding:9px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer">${o}</button>`).join("")}</div>
+    </div>`;
+  });
+  h += `<div id="rootsMsg" style="font-weight:800;margin-top:10px"></div>`;
+  document.getElementById("sheetContent").innerHTML = h;
+  document.getElementById("sheet").classList.add("open");
+}
+window.rootAns = function (i, val, btn) {
+  const q = _rq.qs[i], box = document.getElementById("rq" + i);
+  if (box.dataset.done) return; box.dataset.done = "1";
+  const ok = val === q.a;
+  box.querySelectorAll("button").forEach(b => { b.disabled = true;
+    if (b.textContent === q.a) { b.style.borderColor = "#2fbf71"; b.style.background = "#d9f6e8"; }
+    else if (b === btn) { b.style.borderColor = "#ef476f"; b.style.background = "#fde0e8"; } });
+  _rq.done++; if (ok) _rq.ok++;
+  if (_rq.done === _rq.qs.length) finishRoots();
+};
+function finishRoots() {
+  const earned = _rq.ok * 10 + (_rq.ok === 3 ? 10 : 0);
+  const p = getProgress(currentStudent);
+  p.coins.balance += earned; p.coins.lifetimeEarned += earned;
+  p.coins.transactions.push({ type: "earn", source: "islandRoots", amount: earned, balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { ok: _rq.ok } });
+  saveProgress(currentStudent, p);
+  island.rootsLast = todayStr();
+  saveIsland(currentStudent, island);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  document.getElementById("rootsMsg").innerHTML = `🎉 答對 ${_rq.ok}/3，得到 🪙 ${earned}！明天再學新的字根`;
+  recalcStats(); render(); updateQuestBtns();
+}
+
 // ── 好感度 ──
 function frOf(id) { const ca = CA(); return ca.friendship[id] || (ca.friendship[id] = { pts: 0, prefsFound: [], lastGreet: "", lastAct: "" }); }
 function frLv(pts) { let lv = 0; FRIEND_LV.forEach((th, i) => { if (pts >= th) lv = i; }); return lv; }
