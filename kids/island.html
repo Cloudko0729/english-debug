@@ -348,15 +348,15 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607162218"></script>
-<script src="curriculum.js?v=202607162218"></script>
-<script src="word_roots.js?v=202607162218"></script>
-<script src="worddex.js?v=202607162218"></script>
-<script src="city_data.js?v=202607162218"></script>
+<script src="wordbank.js?v=202607162226"></script>
+<script src="curriculum.js?v=202607162226"></script>
+<script src="word_roots.js?v=202607162226"></script>
+<script src="worddex.js?v=202607162226"></script>
+<script src="city_data.js?v=202607162226"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607162218"></script>
-<script src="account_lock.js?v=202607162218"></script>
-<script src="supabase_auth.js?v=202607162218"></script>
+<script src="cloud_sync.js?v=202607162226"></script>
+<script src="account_lock.js?v=202607162226"></script>
+<script src="supabase_auth.js?v=202607162226"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -1421,20 +1421,36 @@ function _spendCoins(n, why) {
 let _tq = null;
 function _pickN(arr, n) { return arr.slice().sort(() => Math.random() - .5).slice(0, n); }
 function _uniq(arr) { return [...new Set(arr)]; }
-// 6 種選擇題產生器：國家 / 地標在哪 / 哪個地標 / 哪一洲 / 國旗 / 聽力
+// 7 種選擇題產生器：國家 / 地標在哪 / 哪個地標 / 哪一洲 / 國旗 / 聽城市名 / 聽地標名
 function _travelMcGens(c) {
   const others = WORLD_CITIES.filter(x => x.id !== c.id);
   const otherCountries = _uniq(others.map(x => x.country)).filter(v => v !== c.country);
   const otherCities = others.map(x => x.city);
   const otherLandmarks = others.map(x => x.landmark);
   const otherRegions = _uniq(WORLD_CITIES.map(x => x.region)).filter(r => r !== c.region);
+  const playBtn = kind => `<button class="tplay" onclick="_cityAudio('${c.id}','${kind}')" style="padding:5px 12px;border:none;border-radius:8px;background:#2f80ed;color:#fff;font-weight:700;cursor:pointer">🔊 播放</button>`;
   return [
     () => ({ q: `${c.flag} ${c.city} is in ___ ?`, opts: [c.country].concat(_pickN(otherCountries, 3)), a: c.country }),
     () => ({ q: `${c.lmEmoji} The ${c.landmark} is in ___ ?`, opts: [c.city].concat(_pickN(otherCities, 3)), a: c.city }),
     () => ({ q: `${c.flag} Which landmark is in ${c.city}?（哪個地標在${c.city}？）`, opts: [c.landmark].concat(_pickN(otherLandmarks, 3)), a: c.landmark }),
     () => ({ q: `${c.flag} ${c.city} 在哪一洲？`, opts: [c.region].concat(_pickN(otherRegions, 3)), a: c.region }),
     () => ({ q: `${c.flag} 這面國旗是哪個國家的？`, opts: [c.country].concat(_pickN(otherCountries, 3)), a: c.country }),
-    () => ({ q: `<button class="tplay" onclick="_cityAudio('${c.id}','name')" style="padding:5px 12px;border:none;border-radius:8px;background:#2f80ed;color:#fff;font-weight:700;cursor:pointer">🔊 播放</button> 聽聽看，這是哪座城市？`, opts: [c.city].concat(_pickN(otherCities, 3)), a: c.city }),
+    () => ({ q: `${playBtn("name")} 聽聽看，這是哪座城市？`, opts: [c.city].concat(_pickN(otherCities, 3)), a: c.city }),
+    () => ({ q: `${playBtn("lm")} 聽聽看，這是哪個地標？猜猜在哪座城市`, opts: [c.city].concat(_pickN(otherCities, 3)), a: c.city }),
+  ];
+}
+// 3 種是非題產生器：城市在哪國 / 地標在哪城市 / 城市在哪一洲（各 50% 出對句、50% 出錯句）
+function _travelTFGens(c) {
+  return [
+    () => { const ok = Math.random() < 0.5;
+      const country = ok ? c.country : _pickN(WORLD_CITIES.filter(x => x.country !== c.country).map(x => x.country), 1)[0];
+      return { q: `${c.flag} ${c.city} is in ${country}.`, isTrue: ok }; },
+    () => { const ok = Math.random() < 0.5;
+      const landmark = ok ? c.landmark : _pickN(WORLD_CITIES.filter(x => x.id !== c.id).map(x => x.landmark), 1)[0];
+      return { q: `${c.lmEmoji} The ${landmark} is in ${c.city}.`, isTrue: ok }; },
+    () => { const ok = Math.random() < 0.5;
+      const region = ok ? c.region : _pickN(_uniq(WORLD_CITIES.map(x => x.region)).filter(r => r !== c.region), 1)[0];
+      return { q: `${c.flag} ${c.city} is in ${region}. （${c.city} 在${region}）`, isTrue: ok }; },
   ];
 }
 // 4 種句子重組模板
@@ -1446,62 +1462,92 @@ function _travelReorders(c) {
     { zh: `我要飛去${c.city}`, chunks: ["I will", "fly to", c.city + "."] },
   ];
 }
+// 每天隨機抽一種 3 題排列（不再固定「MC、MC、重組」），讓每天的題型組合不一樣
+const TRAVEL_LAYOUTS = [
+  ["mc", "mc", "reorder"], ["mc", "tf", "reorder"], ["tf", "mc", "reorder"],
+  ["mc", "mc", "mc"], ["mc", "tf", "mc"], ["tf", "tf", "reorder"],
+];
 function openTravel() {
   const ca = CA();
   if (Object.keys(ca.cards).length >= WORLD_CITIES.length) { toast(`${WORLD_CITIES.length} 座城市全部收集完成！你環遊世界了 🏆`); return; }
   if (ca.lastStampDate === todayStr()) { toast("今天的護照章拿到了，明天再來！"); return; }
   const c = curCity();
-  // 第 1 題：本城隨機題型；第 2 題：一半機率複習已收集的城市，否則本城另一種題型
-  const gens = _pickN(_travelMcGens(c), 2);
-  const q1 = gens[0]();
-  let q2, review = null;
+  const layout = _pickN(TRAVEL_LAYOUTS, 1)[0];
   const collectedIds = Object.keys(ca.cards);
-  if (collectedIds.length > 0 && Math.random() < 0.5) {
-    review = WORLD_CITIES.find(x => x.id === _pickN(collectedIds, 1)[0]);
-    if (review) q2 = _pickN(_travelMcGens(review), 1)[0]();
-  }
-  if (!q2) q2 = gens[1]();
-  const roT = _pickN(_travelReorders(c), 1)[0];
-  _tq = { done: 0, ok: 0, city: c, qs: [q1, q2].map(q => ({ ...q, opts: q.opts.sort(() => Math.random() - .5) })),
-    ro: { chunks: roT.chunks.slice().sort(() => Math.random() - .5), correct: roT.chunks, picked: [] } };
+  const mcGens = _pickN(_travelMcGens(c), layout.filter(t => t === "mc").length);
+  const tfGens = _pickN(_travelTFGens(c), layout.filter(t => t === "tf").length);
+  let mcI = 0, tfI = 0, review = null, reviewSlot = -1;
+  const slots = layout.map((type, i) => {
+    if (type === "mc") {
+      // 第一個 MC 有機會複習已收集的城市，其餘用本城不同題型
+      if (reviewSlot < 0 && collectedIds.length > 0 && Math.random() < 0.5) {
+        review = WORLD_CITIES.find(x => x.id === _pickN(collectedIds, 1)[0]);
+        reviewSlot = i;
+        if (review) { const q = _pickN(_travelMcGens(review), 1)[0](); return { type, ...q, opts: _pickN(q.opts, q.opts.length) }; }
+      }
+      const q = mcGens[mcI++](); return { type, ...q, opts: _pickN(q.opts, q.opts.length) };
+    }
+    if (type === "tf") { const q = tfGens[tfI++](); return { type, ...q }; }
+    const roT = _pickN(_travelReorders(c), 1)[0];
+    return { type, zh: roT.zh, correct: roT.chunks, chunks: _pickN(roT.chunks, roT.chunks.length), picked: [] };
+  });
+  _tq = { done: 0, ok: 0, city: c, slots };
   let h = `<h3>✈️ ${c.flag} ${c.city} 之旅</h3>
   <p style="color:var(--muted);font-size:.85rem;margin:4px 0 6px">護照章：${"●".repeat(ca.currentStamps)}${"○".repeat(3 - ca.currentStamps)}　再集 ${3 - ca.currentStamps} 枚換城市卡（答對 2 題以上蓋章）</p>`;
-  _tq.qs.forEach((q, i) => {
-    const revTag = (i === 1 && review) ? `<span style="font-size:.7rem;background:#f3edff;color:#5a36a8;border-radius:6px;padding:1px 7px;margin-left:6px">複習 ${review.flag}</span>` : "";
-    h += `<div id="tq${i}" style="border-top:1px dashed #eee;padding:10px 0"><div style="font-weight:700;margin-bottom:6px">${i + 1}. ${q.q}${revTag}</div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap">${q.opts.map(o => `<button onclick="travelAns(${i},'${o.replace(/'/g, "\\'")}',this)" style="padding:9px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer">${o}</button>`).join("")}</div></div>`;
+  slots.forEach((s, i) => {
+    const revTag = (i === reviewSlot && review) ? `<span style="font-size:.7rem;background:#f3edff;color:#5a36a8;border-radius:6px;padding:1px 7px;margin-left:6px">複習 ${review.flag}</span>` : "";
+    if (s.type === "mc") {
+      h += `<div id="tq${i}" style="border-top:1px dashed #eee;padding:10px 0"><div style="font-weight:700;margin-bottom:6px">${i + 1}. ${s.q}${revTag}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">${s.opts.map(o => `<button onclick="travelAns(${i},'${o.replace(/'/g, "\\'")}',this)" style="padding:9px 14px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer">${o}</button>`).join("")}</div></div>`;
+    } else if (s.type === "tf") {
+      h += `<div id="tq${i}" style="border-top:1px dashed #eee;padding:10px 0"><div style="font-weight:700;margin-bottom:6px">${i + 1}. 對還是錯？${revTag}</div>
+        <div style="font-size:.95rem;margin-bottom:8px">${s.q}</div>
+        <div style="display:flex;gap:8px"><button onclick="travelTF(${i},true,this)" style="flex:1;padding:9px 14px;border:2px solid #2fbf71;border-radius:10px;background:#fff;color:#1c7a4d;font-weight:800;cursor:pointer">⭕ 對 True</button>
+        <button onclick="travelTF(${i},false,this)" style="flex:1;padding:9px 14px;border:2px solid #ef476f;border-radius:10px;background:#fff;color:#c22;font-weight:800;cursor:pointer">❌ 錯 False</button></div></div>`;
+    } else {
+      h += `<div id="tq${i}" style="border-top:1px dashed #eee;padding:10px 0"><div style="font-weight:700;margin-bottom:6px">${i + 1}. 排出正確句子（${s.zh}）</div>
+        <div id="troAnsw${i}" style="display:flex;gap:6px;flex-wrap:wrap;min-height:34px;margin-bottom:6px"></div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">${s.chunks.map((ch, ci) => `<button id="tch${i}_${ci}" onclick="travelPick(${i},${ci})" style="padding:9px 14px;border:2px solid #2f80ed;border-radius:10px;background:#fff;color:#1e5fb8;font-weight:700;cursor:pointer">${ch}</button>`).join("")}</div>
+        <div id="trofb${i}" style="font-weight:700;margin-top:5px;min-height:1.3em"></div></div>`;
+    }
   });
-  h += `<div id="tq2" style="border-top:1px dashed #eee;padding:10px 0"><div style="font-weight:700;margin-bottom:6px">3. 排出正確句子（${roT.zh}）</div>
-    <div id="troAnsw" style="display:flex;gap:6px;flex-wrap:wrap;min-height:34px;margin-bottom:6px"></div>
-    <div style="display:flex;gap:6px;flex-wrap:wrap">${_tq.ro.chunks.map((ch, ci) => `<button id="tch${ci}" onclick="travelPick(${ci})" style="padding:9px 14px;border:2px solid #2f80ed;border-radius:10px;background:#fff;color:#1e5fb8;font-weight:700;cursor:pointer">${ch}</button>`).join("")}</div>
-    <div id="trofb" style="font-weight:700;margin-top:5px;min-height:1.3em"></div></div>
-  <div id="travelMsg" style="font-weight:800;margin-top:8px"></div>`;
+  h += `<div id="travelMsg" style="font-weight:800;margin-top:8px"></div>`;
   document.getElementById("sheetContent").innerHTML = h;
   document.getElementById("sheet").classList.add("open");
 }
 window.travelAns = function (i, val, btn) {
   const box = document.getElementById("tq" + i); if (box.dataset.done) return; box.dataset.done = "1";
-  const ok = val === _tq.qs[i].a;
+  const ok = val === _tq.slots[i].a;
   box.querySelectorAll("button:not(.tplay)").forEach(b => { b.disabled = true;
-    if (b.textContent === _tq.qs[i].a) { b.style.borderColor = "#2fbf71"; b.style.background = "#d9f7e8"; }
+    if (b.textContent === _tq.slots[i].a) { b.style.borderColor = "#2fbf71"; b.style.background = "#d9f7e8"; }
     else if (b === btn) { b.style.borderColor = "#ef476f"; b.style.background = "#fde0e8"; } });
   _tq.done++; if (ok) _tq.ok++;
-  if (_tq.done === 3) travelFinish();
+  if (_tq.done === _tq.slots.length) travelFinish();
 };
-window.travelPick = function (ci) {
-  if (document.getElementById("tq2").dataset.done) return;
-  const b = document.getElementById("tch" + ci); if (b.classList.contains("used")) return;
+window.travelTF = function (i, val, btn) {
+  const box = document.getElementById("tq" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const ok = val === _tq.slots[i].isTrue;
+  box.querySelectorAll("button").forEach(b => { b.disabled = true; });
+  btn.style.background = ok ? "#d9f7e8" : "#fde0e8";
+  btn.style.borderColor = ok ? "#2fbf71" : "#ef476f";
+  _tq.done++; if (ok) _tq.ok++;
+  if (_tq.done === _tq.slots.length) travelFinish();
+};
+window.travelPick = function (i, ci) {
+  const box = document.getElementById("tq" + i); if (box.dataset.done) return;
+  const s = _tq.slots[i];
+  const b = document.getElementById("tch" + i + "_" + ci); if (b.classList.contains("used")) return;
   b.classList.add("used"); b.style.opacity = ".3"; b.style.pointerEvents = "none";
-  _tq.ro.picked.push(_tq.ro.chunks[ci]);
-  document.getElementById("troAnsw").innerHTML = _tq.ro.picked.map(t => `<span style="padding:8px 12px;border-radius:9px;background:#eaf3ff;color:#1e5fb8;font-weight:700">${t}</span>`).join("");
-  if (_tq.ro.picked.length === 3) {
-    document.getElementById("tq2").dataset.done = "1";
-    const ok = _tq.ro.picked.join(" ") === _tq.ro.correct.join(" ");
-    const fb = document.getElementById("trofb");
-    fb.textContent = ok ? "✓ 正確！" : "✗ 正解：" + _tq.ro.correct.join(" ");
+  s.picked.push(s.chunks[ci]);
+  document.getElementById("troAnsw" + i).innerHTML = s.picked.map(t => `<span style="padding:8px 12px;border-radius:9px;background:#eaf3ff;color:#1e5fb8;font-weight:700">${t}</span>`).join("");
+  if (s.picked.length === s.correct.length) {
+    box.dataset.done = "1";
+    const ok = s.picked.join(" ") === s.correct.join(" ");
+    const fb = document.getElementById("trofb" + i);
+    fb.textContent = ok ? "✓ 正確！" : "✗ 正解：" + s.correct.join(" ");
     fb.style.color = ok ? "#2fbf71" : "#ef476f";
     _tq.done++; if (ok) _tq.ok++;
-    if (_tq.done === 3) travelFinish();
+    if (_tq.done === _tq.slots.length) travelFinish();
   }
 };
 function travelFinish() {
