@@ -1,0 +1,13 @@
+{
+ "outdir": "D:/english/adult/audio/repair_terms",
+ "voice": "af_heart",
+ "speed": 0.88,
+ "items": {
+  "t121_term": "refurbish",
+  "t121_ex": "We will refurbish all components on the board before quoting the cost.",
+  "t122_term": "reset the error",
+  "t122_ex": "The driver failed to reset the error even after several attempts.",
+  "t123_term": "prompt an error",
+  "t123_ex": "The tool prompted an error code during the verification test."
+ }
+}

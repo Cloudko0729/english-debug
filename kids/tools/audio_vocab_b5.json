@@ -1,0 +1,12 @@
+{
+ "outdir": "D:/english/adult/audio/vocab",
+ "voice": "af_heart",
+ "speed": 0.88,
+ "items": {
+  "advise": "Please advise if we have experience repairing this type of board.",
+  "kindly": "Kindly help to ship the boards to our Asia office.",
+  "refertoattached": "Please refer to attached for the full parts list.",
+  "furtherassistance": "Please let me know if I can be of further assistance.",
+  "experiencein": "Do you have experience in repairing this type of controller?"
+ }
+}
