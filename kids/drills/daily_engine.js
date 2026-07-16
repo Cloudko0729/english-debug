@@ -261,8 +261,9 @@
     // ⑤
     h += `<div class="sec"><div class="sec-h">⑤ 圖片題</div><div class="sec-d">看圖（或中文）選出正確英文</div>`;
     DRILL.s5.forEach((q, i) => {
+      const fallbackVisual = (q.emoji ? `<div class="emoji">${q.emoji}</div>` : `<div class="prompt">${q.zh}</div>`).replace(/'/g, "\\'");
       const visual = q.img
-        ? `<div class="pic-wrap"><img class="pic-img" src="../${q.img}" alt="${q.en}" loading="lazy" onerror="this.outerHTML=${JSON.stringify(q.emoji ? `<div class="emoji">${q.emoji}</div>` : `<div class="prompt">${q.zh}</div>`)}"></div>`
+        ? `<div class="pic-wrap"><img class="pic-img" src="../${q.img}" alt="${q.en}" loading="lazy" onerror="this.outerHTML='${fallbackVisual}'"></div>`
         : (q.emoji ? `<div class="emoji">${q.emoji}</div>` : `<div class="prompt">${q.zh}</div>`);
       h += `<div class="q"><div class="q-no">${i + 1}.</div>${visual}${optsHtml('s5', i, q.choices)}</div>`;
     });
