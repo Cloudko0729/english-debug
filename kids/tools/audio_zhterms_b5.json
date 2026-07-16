@@ -1,0 +1,17 @@
+{
+ "outdir": "D:/english/adult/audio/zh_terms",
+ "voice": "af_heart",
+ "speed": 0.88,
+ "items": {
+  "t121_term": "could you please prepare",
+  "t121_ex": "Could you please prepare three sets of DC-DC modules for the sales team?",
+  "t122_term": "once received, please ship to",
+  "t122_ex": "Once received, please ship the units to our Asia office.",
+  "t123_term": "three sets",
+  "t123_ex": "We need three sets of DC-DC converters for this order.",
+  "t124_term": "add someone to the loop",
+  "t124_ex": "I'm adding Ting to the loop for this case.",
+  "t125_term": "sorry for the follow-up email",
+  "t125_ex": "Sorry for the follow-up email — one more thing to confirm."
+ }
+}
