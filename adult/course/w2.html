@@ -37,6 +37,8 @@
   .rec:first-of-type{border-top:none}
   .rec .line{font-size:.9rem;margin:2px 0}
   .rec .line b{color:#1f4463}
+  .rec .short{margin-top:6px;padding:6px 10px;background:#fff8e1;border-radius:8px;font-size:.85rem;color:#6b5010}
+  .rec .short b{color:#8a6d1a}
 </style>
 </head>
 <body>
@@ -92,19 +94,19 @@
 </div>
 
 <div class="card"><h2>🛠️ 維修紀錄撰寫範例</h2>
-  <p style="font-size:.82rem;color:#777;margin-top:-4px">英文維修紀錄固定寫三層：Symptom（現象）→ Action（處置）→ Result（結果），每層一句就好。</p>
+  <p style="font-size:.82rem;color:#777;margin-top:-4px">英文維修紀錄固定寫三層：Symptom（現象）→ Action（處置）→ Result（結果），每層一句就好。標準版之後附「精簡版」——真實工程師交班常用的電報式簡寫，不用完整文法，但夠清楚。</p>
   <div class="rec"><div class="line"><b>Symptom：</b>The connector pins showed poor contact during the retest.</div>
     <div class="line"><b>Action：</b>Cleaned the connector and reseated the cable.</div>
     <div class="line"><b>Result：</b>The contact test passed with no further abnormality.</div>
-    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w2_rec1.mp3').play()">🔊 播放整則</button></div>
+    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w2_rec1.mp3').play()">🔊 播放整則</button><div class="short"><b>精簡版：</b>Connector pins poor contact @ retest → cleaned + reseated cable → contact test pass, no further issue.</div><button class="play" style="margin-top:6px" onclick="new Audio('audio/w2_recshort1.mp3').play()">🔊 播放精簡版</button></div>
   <div class="rec"><div class="line"><b>Symptom：</b>The thermal image showed an unusually hot spot near the regulator.</div>
     <div class="line"><b>Action：</b>Replaced the regulator and repeated the thermal check.</div>
     <div class="line"><b>Result：</b>The thermal image was normal after the replacement.</div>
-    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w2_rec2.mp3').play()">🔊 播放整則</button></div>
+    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w2_rec2.mp3').play()">🔊 播放整則</button><div class="short"><b>精簡版：</b>Hot spot near regulator (thermal img) → replaced regulator, re-checked → thermal normal now.</div><button class="play" style="margin-top:6px" onclick="new Audio('audio/w2_recshort2.mp3').play()">🔊 播放精簡版</button></div>
   <div class="rec"><div class="line"><b>Symptom：</b>The EEPROM data was inconsistent with the reference board.</div>
     <div class="line"><b>Action：</b>Rewrote the EEPROM after confirming the correct configuration.</div>
     <div class="line"><b>Result：</b>The board passed verification with the corrected data.</div>
-    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w2_rec3.mp3').play()">🔊 播放整則</button></div>
+    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w2_rec3.mp3').play()">🔊 播放整則</button><div class="short"><b>精簡版：</b>EEPROM data mismatch vs ref board → confirmed config, rewrote EEPROM → passed verification.</div><button class="play" style="margin-top:6px" onclick="new Audio('audio/w2_recshort3.mp3').play()">🔊 播放精簡版</button></div>
 </div>
 
 <div class="card"><h2>🗓️ 本週練習</h2>

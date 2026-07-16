@@ -1,0 +1,19 @@
+{
+ "outdir": "D:/english/adult/course/audio",
+ "voice": "af_heart",
+ "speed": 0.88,
+ "items": {
+  "w1_recshort1": "Relay contact unstable at load test. Replaced relay, re-ran. Passed, stable output all channels.",
+  "w1_recshort2": "DCCAL fail before PPMU swap. Replaced PPMU, re-ran DCCAL. Pass, released for final verification.",
+  "w1_recshort3": "No power at driver input. Traced net, found open near connector, resoldered. Power back, passed functional test.",
+  "w2_recshort1": "Connector pins poor contact at retest. Cleaned and reseated cable. Contact test pass, no further issue.",
+  "w2_recshort2": "Hot spot near regulator, thermal image. Replaced regulator, re-checked. Thermal normal now.",
+  "w2_recshort3": "EEPROM data mismatch versus reference board. Confirmed config, rewrote EEPROM. Passed verification.",
+  "w3_recshort1": "Fuse blown at power-up. Replaced fuse, checked net for short. Powers up fine now.",
+  "w3_recshort2": "ADC drift at offset check. Recalibrated ADC, re-checked. Pass, within tolerance.",
+  "w3_recshort3": "Sensor value wrong at startup. Replaced sensor, reran sequence. Reading OK, passed verification.",
+  "w4_recshort1": "Socket poor contact at incoming inspection. Cleaned socket, retested. Passed, no further issue.",
+  "w4_recshort2": "Missing component found at IQC. Replaced before proceeding. Passed follow-up inspection.",
+  "w4_recshort3": "Cable intermittent at initial check. Reseated cable, rechecked. Issue gone."
+ }
+}

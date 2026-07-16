@@ -37,6 +37,8 @@
   .rec:first-of-type{border-top:none}
   .rec .line{font-size:.9rem;margin:2px 0}
   .rec .line b{color:#1f4463}
+  .rec .short{margin-top:6px;padding:6px 10px;background:#fff8e1;border-radius:8px;font-size:.85rem;color:#6b5010}
+  .rec .short b{color:#8a6d1a}
 </style>
 </head>
 <body>
@@ -92,19 +94,19 @@
 </div>
 
 <div class="card"><h2>🛠️ 維修紀錄撰寫範例</h2>
-  <p style="font-size:.82rem;color:#777;margin-top:-4px">英文維修紀錄固定寫三層：Symptom（現象）→ Action（處置）→ Result（結果），每層一句就好。</p>
+  <p style="font-size:.82rem;color:#777;margin-top:-4px">英文維修紀錄固定寫三層：Symptom（現象）→ Action（處置）→ Result（結果），每層一句就好。標準版之後附「精簡版」——真實工程師交班常用的電報式簡寫，不用完整文法，但夠清楚。</p>
   <div class="rec"><div class="line"><b>Symptom：</b>The fuse was blown when the unit was powered up.</div>
     <div class="line"><b>Action：</b>Replaced the fuse and checked the power net for a short before retesting.</div>
     <div class="line"><b>Result：</b>The unit powered up normally with no further abnormality.</div>
-    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w3_rec1.mp3').play()">🔊 播放整則</button></div>
+    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w3_rec1.mp3').play()">🔊 播放整則</button><div class="short"><b>精簡版：</b>Fuse blown @ power-up → replaced fuse, checked net for short → powers up fine now.</div><button class="play" style="margin-top:6px" onclick="new Audio('audio/w3_recshort1.mp3').play()">🔊 播放精簡版</button></div>
   <div class="rec"><div class="line"><b>Symptom：</b>The ADC output drifted during the offset check.</div>
     <div class="line"><b>Action：</b>Recalibrated the ADC and repeated the offset check.</div>
     <div class="line"><b>Result：</b>The offset check passed within the allowed tolerance.</div>
-    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w3_rec2.mp3').play()">🔊 播放整則</button></div>
+    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w3_rec2.mp3').play()">🔊 播放整則</button><div class="short"><b>精簡版：</b>ADC drift @ offset check → recal'd ADC, re-checked → pass, within tolerance.</div><button class="play" style="margin-top:6px" onclick="new Audio('audio/w3_recshort2.mp3').play()">🔊 播放精簡版</button></div>
   <div class="rec"><div class="line"><b>Symptom：</b>The sensor reported an incorrect value during startup.</div>
     <div class="line"><b>Action：</b>Replaced the sensor and reran the startup sequence.</div>
     <div class="line"><b>Result：</b>The sensor reading was correct and the unit passed verification.</div>
-    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w3_rec3.mp3').play()">🔊 播放整則</button></div>
+    <button class="play" style="margin-top:6px" onclick="new Audio('audio/w3_rec3.mp3').play()">🔊 播放整則</button><div class="short"><b>精簡版：</b>Sensor value wrong @ startup → replaced sensor, reran seq → reading OK, passed verification.</div><button class="play" style="margin-top:6px" onclick="new Audio('audio/w3_recshort3.mp3').play()">🔊 播放精簡版</button></div>
 </div>
 
 <div class="card"><h2>🗓️ 本週練習</h2>
