@@ -347,14 +347,14 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607161403"></script>
-<script src="curriculum.js?v=202607161403"></script>
-<script src="worddex.js?v=202607161403"></script>
-<script src="city_data.js?v=202607161403"></script>
+<script src="wordbank.js?v=202607161417"></script>
+<script src="curriculum.js?v=202607161417"></script>
+<script src="worddex.js?v=202607161417"></script>
+<script src="city_data.js?v=202607161417"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607161403"></script>
-<script src="account_lock.js?v=202607161403"></script>
-<script src="supabase_auth.js?v=202607161403"></script>
+<script src="cloud_sync.js?v=202607161417"></script>
+<script src="account_lock.js?v=202607161417"></script>
+<script src="supabase_auth.js?v=202607161417"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -1122,17 +1122,24 @@ window.sendSibGift = async function (tier) {
     openMail(_mailAll);
   } catch (e) { toast("寄送失敗：" + (e.message || e)); }
 };
-window.claimGift = async function (msgId, tier, from) {
-  if (!island.giftsClaimed) island.giftsClaimed = [];
-  if (island.giftsClaimed.includes(msgId)) return;
+// 拆禮物：跨島共用一份「已拆清單」存在 kidsProgress（不分島），避免一號二號島各自都能拆一次同一份禮物；
+// 拆開後由玩家指定要放進哪座島的禮物架（islandId 1 或 2）。
+window.claimGift = async function (msgId, tier, from, islandId) {
+  islandId = islandId === 2 ? 2 : 1;
+  const p = getProgress(currentStudent);
+  if (!p.giftsClaimed) p.giftsClaimed = (island && island.giftsClaimed) ? island.giftsClaimed.slice() : [];   // 舊資料一次性搬過來
+  if (p.giftsClaimed.includes(msgId)) return;
+  p.giftsClaimed.push(msgId);
+  saveProgress(currentStudent, p);
   const g = SIB_GIFTS.find(x => x.id === tier) || SIB_GIFTS[0];
-  island.giftsClaimed.push(msgId);
-  if (!island.giftShelf) island.giftShelf = [];
-  island.giftShelf.push({ t: tier, from, at: todayStr() });
-  recalcStats(); render();
-  saveIsland(currentStudent, island);
+  const isCurrent = islandId === currentIslandId;
+  const targetIsland = isCurrent ? island : loadIsland(currentStudent, islandId);
+  if (!targetIsland.giftShelf) targetIsland.giftShelf = [];
+  targetIsland.giftShelf.push({ t: tier, from, at: todayStr() });
+  if (isCurrent) { recalcStats(); render(); }
+  saveIsland(currentStudent, targetIsland);
   if (typeof cloudSave === "function") cloudSave(currentStudent);
-  toast(`${g.emoji} 拆開了 ${MAIL_LABEL[from] || from} 送的${g.name}！美化 +${g.beauty} ✨`);
+  toast(`${g.emoji} 拆開了 ${MAIL_LABEL[from] || from} 送的${g.name}！放進${islandId === 2 ? "二號島" : "一號島"}的禮物架，美化 +${g.beauty} ✨`);
   // 自動回謝卡
   try {
     const user = await _sbUser();
@@ -1197,6 +1204,8 @@ async function openMail(showAll) {
     sc.innerHTML = `<h3>✉️ 島嶼信箱</h3><p style="color:#ef476f;font-size:.9rem">讀取失敗：${_esc(e.message || e)}<br>（信箱資料表可能還沒建立）</p>`;
     return;
   }
+  const p = getProgress(currentStudent);
+  if (!p.giftsClaimed) { p.giftsClaimed = (island && island.giftsClaimed) ? island.giftsClaimed.slice() : []; saveProgress(currentStudent, p); }
   const others = MAIL_STUDENTS.filter(s => s !== currentStudent);
   if (!_mailTo || !others.includes(_mailTo)) _mailTo = others[0];
   let h = `<h3>✉️ 島嶼信箱</h3>
@@ -1213,7 +1222,7 @@ async function openMail(showAll) {
         `<button onclick="sendSibGift('${g.id}')" style="flex:1;padding:9px 4px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;font-size:.8rem">${g.emoji} ${g.name}<br><small>🪙${g.cost} · 美化+${g.beauty}</small></button>`).join("")}</div>
     </div>
   </div>
-  ${(island.giftShelf && island.giftShelf.length) ? `<div style="background:#fff8e1;border:1.5px solid #f2d98a;border-radius:11px;padding:8px 12px;margin:8px 0;font-size:.84rem">🏆 <b>我的禮物架</b>（美化 +${giftShelfBeauty()} ✨）：${island.giftShelf.map(g => (SIB_GIFTS.find(s => s.id === g.t) || {}).emoji || "🎁").join(" ")}</div>` : ""}
+  ${(island.giftShelf && island.giftShelf.length) ? `<div style="background:#fff8e1;border:1.5px solid #f2d98a;border-radius:11px;padding:8px 12px;margin:8px 0;font-size:.84rem">🏆 <b>${currentIslandId === 2 ? "二號島" : "一號島"}的禮物架</b>（美化 +${giftShelfBeauty()} ✨）：${island.giftShelf.map(g => (SIB_GIFTS.find(s => s.id === g.t) || {}).emoji || "🎁").join(" ")}</div>` : ""}
   <div style="font-weight:800;font-size:.9rem;margin:12px 0 4px">最新訊息${_mailAll ? "（最多 100 筆）" : "（最新 10 筆）"}</div>`;
   if (!rows.length) h += `<p style="color:var(--muted);font-size:.88rem">還沒有訊息，寫第一封吧！</p>`;
   rows.forEach(m => {
@@ -1225,11 +1234,12 @@ async function openMail(showAll) {
     if (m.body.startsWith("🎁GIFT|")) {
       const tier = m.body.split("|")[1];
       const g = SIB_GIFTS.find(x => x.id === tier) || SIB_GIFTS[0];
-      const claimed = (island.giftsClaimed || []).includes(m.id);
+      const claimed = (p.giftsClaimed || []).includes(m.id);
       h += `<div style="border-top:1px dashed #eee;padding:8px 2px;font-size:.9rem">${head}
         <div style="margin-top:4px;background:#fdeef4;border:1.5px solid #f3b8cd;border-radius:10px;padding:8px 12px">
           ${g.emoji} <b>${g.name}</b>${out ? "（已寄出）" : claimed ? "（已拆開，美化 +" + g.beauty + " ✨）"
-            : ` <button onclick="claimGift(${m.id},'${tier}','${m.sender}')" style="margin-left:6px;padding:5px 14px;border:none;border-radius:9px;background:#ef476f;color:#fff;font-weight:800;cursor:pointer">🎀 拆禮物！</button>`}
+            : ` <button onclick="claimGift(${m.id},'${tier}','${m.sender}',1)" style="margin-left:6px;padding:5px 10px;border:none;border-radius:9px;background:#ef476f;color:#fff;font-weight:800;cursor:pointer;font-size:.82rem">🎀 拆開放🏝️一號島</button>
+          <button onclick="claimGift(${m.id},'${tier}','${m.sender}',2)" style="margin-left:4px;padding:5px 10px;border:none;border-radius:9px;background:#8a5a2b;color:#fff;font-weight:800;cursor:pointer;font-size:.82rem">🎀 拆開放🪨二號島</button>`}
         </div></div>`;
     } else {
       h += `<div style="border-top:1px dashed #eee;padding:8px 2px;font-size:.9rem">${head}
