@@ -1,0 +1,9 @@
+{
+ "outdir": "D:/english/adult/audio/vocab",
+ "voice": "af_heart",
+ "speed": 0.88,
+ "items": {
+  "pendingconfirmation": "The quantity of newly purchased spare boards is still pending confirmation.",
+  "asdiscussed": "As discussed over the phone, only two boards can be consigned to the client's site."
+ }
+}
