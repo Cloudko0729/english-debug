@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎒 Week 3：School Things — Lv.1</title><style>
+body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
+header{background:#2fbf71;color:#fff;text-align:center;padding:16px;border-radius:0 0 14px 14px;margin:0 -14px 12px}
+header h1{margin:0;font-size:1.2rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.92}
+header a{color:#eaffef;text-decoration:none;font-weight:700}
+.card{background:#fff;border-radius:14px;padding:14px 16px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:1rem;color:#187a48;margin:0 0 8px}
+.goal{font-size:.92rem;background:#eafff2;border-radius:10px;padding:10px 14px;font-weight:700;color:#187a48}
+.pattern{font-size:1rem;background:#eef5ff;border-radius:10px;padding:10px 14px;font-weight:700;color:#1e5fb8;margin-top:8px}
+.dlg{border-top:1px dashed #eee;padding:9px 0;font-size:.95rem;display:flex;align-items:center;gap:8px}
+.dlg b{min-width:64px}
+.dlg button{border:none;border-radius:8px;background:#2fbf71;color:#fff;font-weight:700;padding:6px 12px;cursor:pointer}
+.dlg small{display:block;color:#888;margin-top:2px}
+.dlg .txt{flex:1}
+.vocabgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:6px}
+.vcard{background:#fdf6e3;border:2px solid #f2d68a;border-radius:12px;text-align:center;padding:10px 6px;cursor:pointer}
+.vcard .em{font-size:1.8rem}
+.vcard b{display:block;margin-top:4px;font-size:.92rem}
+.vcard small{color:#888}
+.vcard.from{opacity:.85}
+.vcard .tag{font-size:.65rem;color:#b5651d;font-weight:700}
+#gameArea{margin-top:8px}
+#gameArea button.gcard{padding:12px 10px;border:2px solid #d9e2ec;border-radius:12px;background:#fff;font-weight:700;cursor:pointer;margin:4px;font-size:1rem}
+#gameArea button.gcard.correct{border-color:#2fbf71;background:#d9f7e8}
+#gameArea button.gcard.wrong{border-color:#ef476f;background:#fde0e8}
+#gplay{border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:9px 16px;cursor:pointer;margin-bottom:8px}
+#gstatus{font-weight:700;margin-top:8px;min-height:1.4em}
+.extra{border-top:1px dashed #eee;padding-top:10px;margin-top:10px}
+.foodbtn{border:2px solid #d9e2ec;border-radius:12px;padding:8px 12px;background:#fff;font-weight:700;cursor:pointer;margin:4px}
+.recbox{border:2px dashed #2fbf71;border-radius:12px;padding:14px;text-align:center;margin-top:6px}
+.recbox button{border:none;border-radius:20px;padding:10px 18px;font-weight:700;cursor:pointer;margin:5px;font-size:.95rem}
+#recBtn{background:#ef476f;color:#fff}
+#stopBtn{background:#888;color:#fff}
+#playBtn{background:#2f80ed;color:#fff}
+#recStatus{font-size:.85rem;color:#888;margin-top:6px}
+.donebox{text-align:center;margin-top:10px}
+.donebox label{font-weight:700;font-size:.9rem}
+.nav2{display:flex;justify-content:space-between;margin-top:16px;font-size:.85rem}
+.nav2 a{color:#187a48;text-decoration:none;font-weight:700;background:#fff;border-radius:10px;padding:9px 14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.book-page{border-top:1px dashed #eee;padding:10px 0;font-size:.98rem}
+.book-page b{font-size:1.05rem}
+</style></head><body>
+<header><h1>🎒 Week 3：School Things <span style="font-size:.8rem;opacity:.85">學校用品</span></h1>
+<p><a href="index.html">← Lv.1 目錄</a> · <a href="../index.html">課程首頁</a></p></header>
+<div class="card"><div class="goal">🎯 聽指令找物並貼標籤，會用 It is a... / Show me...</div><div class="pattern">It is a ___.</div><div class="pattern">Show me your ___.</div></div><div class="card"><h2>🎧 情境對話</h2><button id="playAll" onclick="playAllDlg()">▶️ 全部播放</button><div class="dlg"><b>Teacher 🧑‍🏫</b><button onclick="playAudio('w3_dlg0')">🔊</button><span class="txt">Show me your book, please.<small>請給我看你的書。</small></span></div><div class="dlg"><b>Tom 👦</b><button onclick="playAudio('w3_dlg1')">🔊</button><span class="txt">Here it is. It is a book.<small>在這裡。它是一本書。</small></span></div><div class="dlg"><b>Teacher 🧑‍🏫</b><button onclick="playAudio('w3_dlg2')">🔊</button><span class="txt">Good! Show me your pencil.<small>很好！給我看你的鉛筆。</small></span></div><div class="dlg"><b>Tom 👦</b><button onclick="playAudio('w3_dlg3')">🔊</button><span class="txt">It is a pencil.<small>它是一支鉛筆。</small></span></div></div><div class="card"><h2>🔤 單字卡（點卡片聽發音）</h2><div class="vocabgrid"><div class="vcard" onclick="playAudio('w3_book')"><div class="em">📖</div><b>book</b><small>書</small></div><div class="vcard" onclick="playAudio('w3_bag')"><div class="em">🎒</div><b>bag</b><small>書包</small></div><div class="vcard" onclick="playAudio('w3_pen')"><div class="em">🖊️</div><b>pen</b><small>筆</small></div><div class="vcard" onclick="playAudio('w3_pencil')"><div class="em">✏️</div><b>pencil</b><small>鉛筆</small></div><div class="vcard" onclick="playAudio('w3_desk')"><div class="em">🪑</div><b>desk</b><small>書桌</small></div><div class="vcard" onclick="playAudio('w3_chair')"><div class="em">💺</div><b>chair</b><small>椅子</small></div><div class="vcard" onclick="playAudio('w3_ruler')"><div class="em">📏</div><b>ruler</b><small>尺</small></div><div class="vcard" onclick="playAudio('w3_eraser')"><div class="em">🧽</div><b>eraser</b><small>橡皮擦</small></div><div class="vcard" onclick="playAudio('w3_teacher')"><div class="em">🧑‍🏫</div><b>teacher</b><small>老師</small></div><div class="vcard" onclick="playAudio('w3_classroom')"><div class="em">🏫</div><b>classroom</b><small>教室</small></div><div class="vcard" onclick="playAudio('w3_it')"><div class="em">🔵</div><b>it</b><small>它</small></div><div class="vcard" onclick="playAudio('w3_a')"><div class="em">1️⃣</div><b>a</b><small>一個</small></div><div class="vcard" onclick="playAudio('w3_show')"><div class="em">👀</div><b>show</b><small>給...看</small></div><div class="vcard" onclick="playAudio('w3_me')"><div class="em">🙋</div><b>me</b><small>我</small></div><div class="vcard" onclick="playAudio('w3_please')"><div class="em">🙏</div><b>please</b><small>請</small></div></div></div><div class="card"><h2>🎮 聽力遊戲</h2><p>🔊 聽學校用品，點對的卡片</p>
+  <button id="gplay" onclick="startGame()">▶️ 開始</button>
+  <div id="gameArea"></div><div id="gstatus"></div></div><div class="card"><h2>🎙️ 錄音角</h2><p>拿一樣文具，跟著念然後錄下來：</p>
+  <div class="pattern">Show me your book. It is a book.</div>
+  <button onclick="playAudio('w3_product')" style="margin-top:8px;border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:8px 14px;cursor:pointer">🔊 先聽示範</button>
+  <div class="recbox">
+    <button id="recBtn" onclick="startRec()">🎙️ 開始錄音</button>
+    <button id="stopBtn" onclick="stopRec()" style="display:none">⏹️ 停止</button>
+    <button id="playBtn" onclick="playRec()" style="display:none">▶️ 播放我的錄音</button>
+    <div id="recStatus">按「開始錄音」，說完再按「停止」。錄音只存在你的瀏覽器裡，不會上傳。</div>
+  </div></div><div class="card donebox"><label><input type="checkbox" id="doneCb" onchange="toggleDone(this)"> ✅ 這週完成了（記在這台裝置，不用帳號）</label></div>
+<div class="nav2">
+  <span><a href="week2.html">← Week 2</a></span>
+  <span><a href="week4.html">Week 4 →</a></span>
+</div>
+<script>
+const WEEK_ID=3;
+const DLG=["w3_dlg0","w3_dlg1","w3_dlg2","w3_dlg3"];
+const GAME_WORDS=["book","bag","pen","pencil","desk","chair","ruler","eraser"];
+const VOCAB_AUDIO={"book":"w3_book","bag":"w3_bag","pen":"w3_pen","pencil":"w3_pencil","desk":"w3_desk","chair":"w3_chair","ruler":"w3_ruler","eraser":"w3_eraser","teacher":"w3_teacher","classroom":"w3_classroom","it":"w3_it","a":"w3_a","show":"w3_show","me":"w3_me","please":"w3_please"};
+const VOCAB_MAP={"book":{"en":"book","emoji":"📖"},"bag":{"en":"bag","emoji":"🎒"},"pen":{"en":"pen","emoji":"🖊️"},"pencil":{"en":"pencil","emoji":"✏️"},"desk":{"en":"desk","emoji":"🪑"},"chair":{"en":"chair","emoji":"💺"},"ruler":{"en":"ruler","emoji":"📏"},"eraser":{"en":"eraser","emoji":"🧽"},"teacher":{"en":"teacher","emoji":"🧑‍🏫"},"classroom":{"en":"classroom","emoji":"🏫"},"it":{"en":"it","emoji":"🔵"},"a":{"en":"a","emoji":"1️⃣"},"show":{"en":"show","emoji":"👀"},"me":{"en":"me","emoji":"🙋"},"please":{"en":"please","emoji":"🙏"}};
+
+function playAudio(name){new Audio("audio/"+name+".mp3").play().catch(()=>{});}
+let dlgIdx=0;
+function playAllDlg(){
+  dlgIdx=0; playNextDlg();
+}
+function playNextDlg(){
+  if(dlgIdx>=DLG.length)return;
+  const a=new Audio("audio/"+DLG[dlgIdx]+".mp3");
+  a.onended=()=>{dlgIdx++;playNextDlg();};
+  a.play().catch(()=>{dlgIdx++;playNextDlg();});
+}
+let gWords=[], gIdx=0, gScore=0;
+function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startGame(){
+  gWords=shuffle(GAME_WORDS); gIdx=0; gScore=0;
+  document.getElementById("gstatus").textContent="";
+  renderGameRound();
+}
+function renderGameRound(){
+  const area=document.getElementById("gameArea");
+  if(gIdx>=gWords.length){area.innerHTML="";document.getElementById("gstatus").textContent="🎉 完成！答對 "+gScore+" / "+gWords.length;return;}
+  const target=gWords[gIdx];
+  const choices=shuffle(GAME_WORDS.filter(w=>w!==target).slice(0,3).concat([target]));
+  area.innerHTML=choices.map(w=>{const v=VOCAB_MAP[w];return '<button class="gcard" data-w="'+w+'" onclick="gameAnswer(this,\''+w+'\')">'+v.emoji+' '+v.en+'</button>';}).join("");
+  new Audio("audio/"+VOCAB_AUDIO[target]+".mp3").play().catch(()=>{});
+  document.getElementById("gstatus").textContent="第 "+(gIdx+1)+" / "+gWords.length+" 題";
+}
+function gameAnswer(btn,w){
+  const target=gWords[gIdx];
+  document.querySelectorAll("#gameArea button").forEach(b=>b.disabled=true);
+  if(w===target){btn.classList.add("correct");gScore++;}
+  else{btn.classList.add("wrong");document.querySelector('#gameArea [data-w="'+target+'"]').classList.add("correct");}
+  setTimeout(()=>{gIdx++;renderGameRound();},900);
+}
+let mediaRecorder=null, recChunks=[], recBlobUrl=null;
+async function startRec(){
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    recChunks=[];
+    mediaRecorder=new MediaRecorder(stream);
+    mediaRecorder.ondataavailable=e=>recChunks.push(e.data);
+    mediaRecorder.onstop=()=>{
+      const blob=new Blob(recChunks,{type:"audio/webm"});
+      recBlobUrl=URL.createObjectURL(blob);
+      document.getElementById("playBtn").style.display="inline-block";
+      document.getElementById("recStatus").textContent="錄好了！按「播放我的錄音」聽聽看，可以重錄。";
+      stream.getTracks().forEach(t=>t.stop());
+    };
+    mediaRecorder.start();
+    document.getElementById("recBtn").style.display="none";
+    document.getElementById("stopBtn").style.display="inline-block";
+    document.getElementById("recStatus").textContent="🔴 錄音中...";
+  }catch(e){
+    document.getElementById("recStatus").textContent="無法使用麥克風（可能沒開權限），可以直接用手機錄音代替。";
+  }
+}
+function stopRec(){
+  if(mediaRecorder)mediaRecorder.stop();
+  document.getElementById("stopBtn").style.display="none";
+  document.getElementById("recBtn").style.display="inline-block";
+  document.getElementById("recBtn").textContent="🔁 重新錄音";
+}
+function playRec(){ if(recBlobUrl) new Audio(recBlobUrl).play(); }
+const FOOD_FORM={apple:"apples",egg:"eggs",banana:"bananas",milk:"milk",bread:"bread",rice:"rice",juice:"juice",water:"water"};
+function foodChoice(kind){
+  const sel=document.querySelector("#foodArea .foodbtn.sel");
+  const word=sel?sel.dataset.en:null;
+  const r=document.getElementById("foodResult");
+  if(!word){r.textContent="先點一樣食物，再選 👍 或 👎";return;}
+  const form=FOOD_FORM[word]||word;
+  const sent = kind==="like" ? "I like "+form+"." : "I don't like "+form+".";
+  r.textContent=sent;
+}
+document.addEventListener("click",e=>{
+  if(e.target.classList && e.target.classList.contains("foodbtn") && e.target.dataset.en){
+    document.querySelectorAll("#foodArea .foodbtn").forEach(b=>b.classList.remove("sel"));
+    e.target.classList.add("sel");
+    playAudio(VOCAB_AUDIO[e.target.dataset.en]);
+  }
+});
+const doneKey="k9progress";
+function loadDone(){try{return JSON.parse(localStorage.getItem(doneKey)||"{}");}catch(e){return {};}}
+function saveDone(d){localStorage.setItem(doneKey,JSON.stringify(d));}
+function toggleDone(cb){
+  const d=loadDone(); if(!d.lv1)d.lv1={};
+  d.lv1["week"+WEEK_ID]=cb.checked; saveDone(d);
+}
+(function initDone(){
+  const d=loadDone();
+  const cb=document.getElementById("doneCb");
+  if(cb && d.lv1 && d.lv1["week"+WEEK_ID]) cb.checked=true;
+})();
+
+</script>
+</body></html>

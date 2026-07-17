@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌱 Lv.1 國小一年級 — 8 週英語入門</title><style>
+body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
+header{background:#2fbf71;color:#fff;text-align:center;padding:18px;border-radius:0 0 14px 14px;margin:0 -14px 12px}
+header h1{margin:0;font-size:1.25rem} header p{margin:6px 0 0;font-size:.82rem;opacity:.92}
+header a{color:#eaffef;text-decoration:none;font-weight:700}
+.card{background:#fff;border-radius:14px;padding:14px 16px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:1rem;color:#187a48;margin:0 0 8px}
+.wcard{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:12px 14px;margin-top:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-decoration:none;color:inherit}
+.wcard .em{font-size:1.8rem}
+.wcard b{display:block;font-size:.95rem}
+.wcard small{color:#888}
+.wcard .chk{margin-left:auto;font-size:1.2rem}
+</style></head><body>
+<header><h1>🌱 Lv.1 國小一年級</h1><p><a href="../index.html">← 課程首頁</a> · Pre-A1 起步 · 不考試，聽說為主</p></header>
+<div class="card"><h2>這一級要做到</h2><p>看得懂、聽得懂日常招呼、家人、學校用品、顏色形狀、身體、動物、食物的基本單字和短句；能完成 8 週的小任務並做出一本「我的小書」。</p></div>
+<a class="wcard" href="week1.html"><div class="em">👋</div><div><b>Week 1：Hello, Me</b><small>哈囉，我</small></div><div class="chk" id="chk1"></div></a><a class="wcard" href="week2.html"><div class="em">👨‍👩‍👧‍👦</div><div><b>Week 2：My Family</b><small>我的家人</small></div><div class="chk" id="chk2"></div></a><a class="wcard" href="week3.html"><div class="em">🎒</div><div><b>Week 3：School Things</b><small>學校用品</small></div><div class="chk" id="chk3"></div></a><a class="wcard" href="week4.html"><div class="em">🌈</div><div><b>Week 4：Colors and Shapes</b><small>顏色與形狀</small></div><div class="chk" id="chk4"></div></a><a class="wcard" href="week5.html"><div class="em">🙆</div><div><b>Week 5：My Body</b><small>我的身體</small></div><div class="chk" id="chk5"></div></a><a class="wcard" href="week6.html"><div class="em">🐾</div><div><b>Week 6：Animals</b><small>動物</small></div><div class="chk" id="chk6"></div></a><a class="wcard" href="week7.html"><div class="em">🍎</div><div><b>Week 7：Food I Like</b><small>我喜歡的食物</small></div><div class="chk" id="chk7"></div></a><a class="wcard" href="week8.html"><div class="em">📕</div><div><b>Week 8：My Little Book</b><small>我的小書</small></div><div class="chk" id="chk8"></div></a>
+<script>
+try{
+  const d=JSON.parse(localStorage.getItem("k9progress")||"{}");
+  if(d.lv1){for(const k in d.lv1){if(d.lv1[k]){const m=k.match(/week(\d+)/);if(m)document.getElementById("chk"+m[1]).textContent="✅";}}}
+}catch(e){}
+</script>
+</body></html>
