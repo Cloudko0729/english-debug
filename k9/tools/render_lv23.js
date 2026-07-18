@@ -4,6 +4,7 @@
 const fs = require("fs");
 const path = require("path");
 const { WORD_LEVELS } = require(path.join(__dirname, "..", "..", "kids", "wordlevels.js"));
+const { WORDBANK } = require(path.join(__dirname, "..", "..", "kids", "wordbank.js"));
 
 const ROOT = path.join(__dirname, "..");
 
@@ -44,6 +45,16 @@ const LEVELS = [
   }
 ];
 
+// wL2/wL3 的 canonical 字彙有些不會出現在每週單字卡，這裡補上字彙池所需的基礎中文義。
+const EXTRA_ZH = {
+  air: "空氣", and: "和", bee: "蜜蜂", birthday: "生日", box: "盒子", but: "但是", candy: "糖果", cap: "帽子", classmate: "同學", clock: "時鐘", coffee: "咖啡", cola: "可樂", coke: "可樂", cow: "牛", dear: "親愛的", doll: "娃娃", english: "英語", flower: "花", friendly: "友善的", fruit: "水果", ham: "火腿", hello: "哈囉", hi: "嗨", its: "它的", on: "在……上", picnic: "野餐", please: "請", real: "真的；真實的", roc: "巨鳥（神話）", sandwich: "三明治", sea: "海", sheep: "綿羊", ship: "船", shy: "害羞的", singer: "歌手", sofa: "沙發", son: "兒子", song: "歌曲", study: "讀書；學習", table: "桌子", thank: "感謝", these: "這些", those: "那些", under: "在……下面", usa: "美國", very: "非常", woman: "女人",
+  "a.m.": "上午", about: "關於；大約", after: "在……之後", ago: "以前", america: "美國", animal: "動物", any: "任何的", beef: "牛肉", bicycle: "腳踏車", bike: "腳踏車", breakfast: "早餐", chalk: "粉筆", child: "小孩", computer: "電腦", cookie: "餅乾", cooky: "古怪的；瘋狂的", cry: "哭", dad: "爸爸", daddy: "爸爸", die: "死亡", "dining room": "餐廳", dinner: "晚餐", down: "向下；下方", drive: "開車", dry: "乾的", every: "每一個", feel: "感覺", fly: "飛", friend: "朋友", "good-bye": "再見", goodbye: "再見", "hot dog": "熱狗", house: "房子", ice: "冰", "ice cream": "冰淇淋", into: "進入……裡面", join: "加入", kick: "踢", kiss: "親吻", kitchen: "廚房", kite: "風箏", learn: "學習", need: "需要", "o'clock": "……點鐘", "p.m.": "下午", really: "真的；非常", salt: "鹽", spell: "拼字", star: "星星", start: "開始", telephone: "電話", phone: "電話", there: "那裡", together: "一起", train: "火車", trip: "旅行", truck: "卡車", try: "嘗試", up: "向上；上方", wait: "等待", wear: "穿戴", when: "何時；當……時", where: "哪裡", why: "為什麼", with: "和；與", word: "單字", worker: "工作者；工人", true: "真的；正確的"
+};
+
+const WORD_BANK_ZH = Object.fromEntries(WORDBANK.map(item => [item.en, item.zh]).filter(([, zh]) => zh));
+const WEEK_ZH = Object.fromEntries(LEVELS.flatMap(level => level.weeks.flatMap(week => week.vocab.map(v => [v[0], v[1]]))));
+function wordZh(word) { return EXTRA_ZH[word] || WEEK_ZH[word] || WORD_BANK_ZH[word] || "中文意思整理中"; }
+
 const CSS = `
 body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
 header{color:#fff;text-align:center;padding:18px;border-radius:0 0 14px 14px;margin:0 -14px 12px} header.l2{background:#5b7cfa} header.l3{background:#9b59b6}
@@ -81,8 +92,8 @@ const doneKey="k9progress"; function toggleDone(cb){let d={};try{d=JSON.parse(lo
 function renderIndex(level) {
   const rows = level.weeks.map((w, i) => `<a class="week" href="week${i + 1}.html"><span class="num">${i + 1}</span><span><b>Week ${i + 1}：${esc(w.title)}</b><small>${esc(w.zh)}</small></span></a>`).join("");
   const canonical = Object.keys(WORD_LEVELS).filter(word => WORD_LEVELS[word] === level.id).sort();
-  const pool = canonical.map(word => `<span class="word">${esc(word)}</span>`).join(" ");
-  return `<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Lv.${level.id} ${esc(level.title)}</title><style>${CSS}.home{background:${level.id === 2 ? "#5b7cfa" : "#9b59b6"};color:#fff;text-align:center;padding:22px 16px;border-radius:0 0 14px 14px;margin:0 -14px 14px}.home h1{margin:0;font-size:1.35rem}.home a{color:#fff}.week{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:12px 14px;margin-top:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-decoration:none;color:inherit}.week .num{background:#eef1ff;color:#4055a8;border-radius:50%;width:32px;height:32px;text-align:center;line-height:32px;font-weight:700}.week b{display:block}.week small{color:#888}.pool{margin-top:12px}.pool summary{cursor:pointer;font-weight:700;color:#4055a8}.word{display:inline-block;background:#f7f7fb;border-radius:5px;padding:1px 5px;margin:2px;font-size:.82rem}</style></head><body><header class="home"><h1>${level.icon} Lv.${level.id}：${esc(level.title)}</h1><p><a href="../index.html">← 國小～國中英語 9 級課程</a> · ${esc(level.zh)}</p></header><div class="card"><h2>這一級要做到</h2><p>${esc(level.intro)}</p><p>每週都有獨立短文：先聽、手寫、朗讀，再背說。</p><details class="pool"><summary>查看本級 canonical 字彙池（wL${level.id}，${canonical.length} 字）</summary><p>${pool}</p></details></div>${rows}</body></html>`;
+  const pool = canonical.map(word => `<details class="pool-word"><summary>${esc(word)}</summary><span>${esc(wordZh(word))}</span></details>`).join("");
+  return `<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Lv.${level.id} ${esc(level.title)}</title><style>${CSS}.home{background:${level.id === 2 ? "#5b7cfa" : "#9b59b6"};color:#fff;text-align:center;padding:22px 16px;border-radius:0 0 14px 14px;margin:0 -14px 14px}.home h1{margin:0;font-size:1.35rem}.home a{color:#fff}.week{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:12px 14px;margin-top:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-decoration:none;color:inherit}.week .num{background:#eef1ff;color:#4055a8;border-radius:50%;width:32px;height:32px;text-align:center;line-height:32px;font-weight:700}.week b{display:block}.week small{color:#888}.pool-intro{color:#666;font-size:.88rem;margin:4px 0 10px}.poolgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}.pool-word{background:#fdf6e3;border:1px solid #f2d68a;border-radius:9px;min-height:38px}.pool-word summary{cursor:pointer;padding:6px 8px;font-weight:700;color:#243042;list-style-position:inside}.pool-word span{display:block;padding:0 8px 7px;color:#4055a8;font-size:.85rem;font-weight:700}</style></head><body><header class="home"><h1>${level.icon} Lv.${level.id}：${esc(level.title)}</h1><p><a href="../index.html">← 國小～國中英語 9 級課程</a> · ${esc(level.zh)}</p></header><div class="card"><h2>📚 Lv.${level.id} 字彙池（wL${level.id}，${canonical.length} 字）</h2><p class="pool-intro">點一下單字，就會展開中文意思；再點一次可以收合。這是理解字彙池，每週主動練習仍以各週單字卡為主。</p><div class="poolgrid">${pool}</div></div><div class="card"><h2>這一級要做到</h2><p>${esc(level.intro)}</p><p>每週都有獨立短文：先聽、手寫、朗讀，再背說。</p></div>${rows}</body></html>`;
 }
 
 for (const level of LEVELS) {
