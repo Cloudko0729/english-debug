@@ -40,7 +40,7 @@ header h1{margin:0;font-size:1.2rem} header p{margin:6px 0 0;font-size:.82rem;op
 .qcount{font-size:.82rem;color:#888;margin-top:6px}
 .sent{font-size:1.05rem;background:#eef5ff;border-radius:10px;padding:12px 14px;margin-bottom:10px}
 .sent b{color:#1e5fb8}
-.playbtn{border:none;border-radius:8px;color:#fff;font-weight:700;padding:7px 14px;cursor:pointer;margin-bottom:10px}
+.playbtn{border:none;border-radius:8px;color:#fff;font-weight:700;padding:7px 14px;cursor:pointer;margin:0 8px 10px 0}
 .choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .choices button{padding:12px 10px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;font-size:.92rem}
 .choices button.correct{border-color:#2fbf71;background:#d9f7e8}
@@ -59,6 +59,7 @@ function renderQuizPage(level) {
     en: word,
     zh: zhFor(level, word),
     audio: "pool_" + slug(word),
+    sentAudio: "pool_sent_" + slug(word),
     sentHtml: boldWord(SENTENCES[word], word),
   }));
   return `<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
@@ -99,7 +100,8 @@ function renderQ(){
   const distractors=shuffle(POOL.filter(p=>p.en!==q.en)).slice(0,3).map(p=>p.zh);
   const choices=shuffle(distractors.concat([q.zh]));
   area.innerHTML='<div class="sent">'+q.sentHtml+'</div>'+
-    '<button class="playbtn" style="background:${color}" onclick="playAudio(\\''+q.audio+'\\')">🔊 聽這個字的發音</button>'+
+    '<button class="playbtn" style="background:${color}" onclick="playAudio(\\''+q.sentAudio+'\\')">🔊 聽整句例句</button>'+
+    '<button class="playbtn" style="background:#8a93b8" onclick="playAudio(\\''+q.audio+'\\')">🔊 只聽這個字</button>'+
     '<div class="choices">'+choices.map(c=>'<button onclick="answer(this,\\''+c.replace(/'/g,"\\\\'")+'\\')">'+esc(c)+'</button>').join("")+'</div>';
   document.getElementById("qstatus").textContent="第 "+(qi+1)+" / "+session.length+" 題";
   document.getElementById("qcount").textContent="本級字彙池共 "+POOL.length+" 字，慢慢都會抽到。";
@@ -125,7 +127,10 @@ if (require.main === module) {
     fs.writeFileSync(path.join(out, "vocab_quiz.html"), renderQuizPage(level), "utf8");
     const canonical = Object.keys(WORD_LEVELS).filter(w => WORD_LEVELS[w] === level).sort();
     const items = {};
-    canonical.forEach(word => { items["pool_" + slug(word)] = word; });
+    canonical.forEach(word => {
+      items["pool_" + slug(word)] = word;
+      items["pool_sent_" + slug(word)] = SENTENCES[word];
+    });
     fs.writeFileSync(path.join(__dirname, `audio_pool_lv${level}.json`), JSON.stringify({ outdir: path.join(out, "audio").replace(/\\/g, "/"), voice: "af_heart", speed: 0.85, items }, null, 2), "utf8");
     console.log(`Lv.${level} 單字練習題：${canonical.length} 字`);
   }

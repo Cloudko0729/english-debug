@@ -295,6 +295,7 @@ Lv.1（G1）8 週已實際做完上線：`k9/lv1/index.html` + `week1.html`~`wee
 - 三支既有產生器（render_lv1/23/46.js）改為 `require.main===module` 才寫檔＋`module.exports`，讓 render_pool_quiz.js 可以重用它們既有的中文翻譯查詢邏輯，不用重複維護。
 - 音檔：853 個新字音檔（`pool_<slug>.mp3`，各級自己的 audio/ 資料夾），背景跑約 25 分鐘（Kokoro CPU-bound），過程中用 Monitor 心跳追蹤進度。
 - 測試中抓到一個真的 bug：quiz 頁面 client-side JS 呼叫了只在 Node 產生器裡定義的 `esc()`，導致選項按鈕全部噴錯——已在頁面內加對應的瀏覽器端 `esc()` 修好，Playwright 重測全 6 級 index+quiz 頁面（含實際作答互動）確認 console 全乾淨。
+- **補發音（2026-07-18，使用者發現）**：使用者截圖回報單字練習題只有單字發音、例句沒有發音。加了第二顆「🔊 聽整句例句」鍵（原本的改叫「🔊 只聽這個字」），例句音檔用 `pool_sent_<slug>.mp3` 命名跟單字音檔區分，853句新音檔背景生成。Playwright 驗證兩顆鍵各自打對音檔（用 request URL 比對，不是只看有沒有噴錯）。
 
 ## 8. 製作前最低規格
 
