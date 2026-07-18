@@ -63,6 +63,7 @@ header h1{margin:0;font-size:1.2rem} header p{margin:6px 0 0;font-size:.82rem;op
 .l3card h2{color:#7b3f91}.goal{font-size:.92rem;background:#eef1ff;border-radius:10px;padding:10px 14px;font-weight:700;color:#4055a8}.l3goal{background:#f6edfa;color:#7b3f91}
 .pattern{font-size:1rem;background:#eef5ff;border-radius:10px;padding:10px 14px;font-weight:700;color:#1e5fb8;margin-top:8px}.dlg{border-top:1px dashed #eee;padding:9px 0;font-size:.95rem;display:flex;align-items:center;gap:8px}.dlg b{min-width:60px}.dlg button,.playall{border:none;border-radius:8px;background:#5b7cfa;color:#fff;font-weight:700;padding:6px 12px;cursor:pointer}.dlg small{display:block;color:#888;margin-top:2px}.dlg .txt{flex:1}
 .vocabgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:6px}.vcard{background:#fdf6e3;border:2px solid #f2d68a;border-radius:12px;text-align:center;padding:10px 6px;cursor:pointer}.vcard .em{font-size:1.8rem}.vcard b{display:block;margin-top:4px;font-size:.92rem}.vcard small{color:#888}
+#gameArea{margin-top:8px}#gameArea button.gcard{padding:12px 10px;border:2px solid #d9e2ec;border-radius:12px;background:#fff;font-weight:700;cursor:pointer;margin:4px;font-size:1rem}#gameArea button.gcard.correct{border-color:#2fbf71;background:#d9f7e8}#gameArea button.gcard.wrong{border-color:#ef476f;background:#fde0e8}#gplay{border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:9px 16px;cursor:pointer;margin-bottom:8px}#gstatus{font-weight:700;margin-top:8px;min-height:1.4em}
 .copywork{border:2px solid #f2d68a;background:#fffdf4}.copywork h2{color:#b5651d}.copywork .steps{margin:8px 0 10px;padding-left:22px}.copy-line{border-top:1px dashed #ddd;padding:8px 0;font-size:1rem}.copy-line b{display:block}.copy-line small{color:#777}.speak-check{background:#eafff2;border-radius:10px;padding:9px 12px;color:#187a48;font-weight:700;margin-top:10px}.donebox{text-align:center}.donebox label{font-weight:700;font-size:.9rem}.nav2{display:flex;justify-content:space-between;margin-top:16px;font-size:.85rem}.nav2 a{color:#4055a8;text-decoration:none;font-weight:700;background:#fff;border-radius:10px;padding:9px 14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
 `;
 
@@ -75,6 +76,7 @@ function renderWeek(level, week, index) {
   const body = `<div class="card"><div class="goal ${level.id === 3 ? "l3goal" : ""}">🎯 ${esc(week.goal)}</div>${week.pattern.map(p => `<div class="pattern">${esc(p)}</div>`).join("")}</div>
 <div class="card ${level.id === 3 ? "l3card" : ""}"><h2>🎧 情境對話</h2><button class="playall" onclick="playDialogue()">▶️ 全部播放</button>${week.dialogue.map((d, i) => `<div class="dlg"><b>${esc(d[0])}</b><button onclick="playAudio('${dlgAudio[i]}')">🔊</button><span class="txt">${esc(d[1])}<small>${esc(d[2])}</small></span></div>`).join("")}</div>
 <div class="card ${level.id === 3 ? "l3card" : ""}"><h2>🔤 單字卡</h2><div class="vocabgrid">${week.vocab.map(v => `<div class="vcard" onclick="playAudio('${vocabAudio[v[0]]}')"><div class="em">${v[2]}</div><b>${esc(v[0])}</b><small>${esc(v[1])}</small></div>`).join("")}</div></div>
+<div class="card ${level.id === 3 ? "l3card" : ""}"><h2>🎮 聽力遊戲</h2><p>🔊 聽單字，點對的卡片</p><button id="gplay" onclick="startGame()">▶️ 開始</button><div id="gameArea"></div><div id="gstatus"></div></div>
 <div class="card copywork"><h2>✍️ 本週獨立短文：手寫＋口說</h2><p>這篇短文不在上方對話中。請抄在實體筆記本上，邊寫邊小聲念，再朗讀和背說。</p><button class="playall" onclick="playAudio('${copyAudio}')">🔊 聽整篇示範</button><ol class="steps"><li>先聽整篇 2 次。</li><li>每句手寫 1 次，邊寫邊念。</li><li>看著筆記本朗讀 3 次。</li><li>闔上頁面，試著完整背說 1 次。</li></ol>${week.copywork.map(p => `<div class="copy-line"><b>${esc(p[0])}</b><small>${esc(p[1])}</small></div>`).join("")}<div class="speak-check">完成標準：能不看網頁，順順念完自己的手寫短文。</div></div>
 <div class="card donebox"><label><input type="checkbox" id="doneCb" onchange="toggleDone(this)"> ✅ 這週完成了</label></div>`;
   const previous = index ? `<a href="week${index}.html">← Week ${index}</a>` : `<a href="index.html">← ${level.title}</a>`;
@@ -82,9 +84,29 @@ function renderWeek(level, week, index) {
   return `<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${level.icon} Lv.${level.id} Week ${index + 1}：${esc(week.title)}</title><style>${CSS}</style></head><body><header class="l${level.id}"><h1>${level.icon} Lv.${level.id} Week ${index + 1}：${esc(week.title)}</h1><p><a href="index.html">← ${esc(level.title)}</a> · ${esc(week.zh)}</p></header>${body}<div class="nav2"><span>${previous}</span><span>${next}</span></div><script>
 const DIALOGUE_AUDIO=${JSON.stringify(dlgAudio)};
 const VOCAB_AUDIO=${JSON.stringify(vocabAudio)};
-const COPY_AUDIO="${copyAudio}";
+const VOCAB_MAP=${JSON.stringify(vocabMap)};
+const GAME_WORDS=${JSON.stringify(week.vocab.map(v => v[0]))};
 function playAudio(name){new Audio("audio/"+name+".mp3").play().catch(()=>{});}
 let dialogueIndex=0; function playDialogue(){dialogueIndex=0;playNext();} function playNext(){if(dialogueIndex>=DIALOGUE_AUDIO.length)return;const a=new Audio("audio/"+DIALOGUE_AUDIO[dialogueIndex]+".mp3");a.onended=()=>{dialogueIndex++;playNext();};a.play().catch(()=>{dialogueIndex++;playNext();});}
+let gWords=[],gIdx=0,gScore=0;
+function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startGame(){gWords=shuffle(GAME_WORDS);gIdx=0;gScore=0;document.getElementById("gstatus").textContent="";renderGameRound();}
+function renderGameRound(){
+  const area=document.getElementById("gameArea");
+  if(gIdx>=gWords.length){area.innerHTML="";document.getElementById("gstatus").textContent="🎉 完成！答對 "+gScore+" / "+gWords.length;return;}
+  const target=gWords[gIdx];
+  const choices=shuffle(GAME_WORDS.filter(w=>w!==target).slice(0,3).concat([target]));
+  area.innerHTML=choices.map(w=>{const v=VOCAB_MAP[w];return '<button class="gcard" data-w="'+w+'" onclick="gameAnswer(this,\\''+w+'\\')">'+v.emoji+' '+v.en+'</button>';}).join("");
+  new Audio("audio/"+VOCAB_AUDIO[target]+".mp3").play().catch(()=>{});
+  document.getElementById("gstatus").textContent="第 "+(gIdx+1)+" / "+gWords.length+" 題";
+}
+function gameAnswer(btn,w){
+  const target=gWords[gIdx];
+  document.querySelectorAll("#gameArea button").forEach(b=>b.disabled=true);
+  if(w===target){btn.classList.add("correct");gScore++;}
+  else{btn.classList.add("wrong");document.querySelector('#gameArea [data-w="'+target+'"]').classList.add("correct");}
+  setTimeout(()=>{gIdx++;renderGameRound();},900);
+}
 const doneKey="k9progress"; function toggleDone(cb){let d={};try{d=JSON.parse(localStorage.getItem(doneKey)||"{}")}catch(e){} if(!d.lv${level.id})d.lv${level.id}={};d.lv${level.id}["week${index + 1}"]=cb.checked;localStorage.setItem(doneKey,JSON.stringify(d));} (function(){try{const d=JSON.parse(localStorage.getItem(doneKey)||"{}");const cb=document.getElementById("doneCb");if(cb&&d.lv${level.id}&&d.lv${level.id}["week${index + 1}"])cb.checked=true;}catch(e){}})();
 </script></body></html>`;
 }
