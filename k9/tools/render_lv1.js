@@ -4,6 +4,7 @@
 //   2. 同時輸出 k9/tools/audio_lv1.json 給 kids/tools/generate_audio.py 生音檔
 const fs = require("fs");
 const path = require("path");
+const { WORD_LEVELS } = require(path.join(__dirname, "..", "..", "kids", "wordlevels.js"));
 
 const OUTDIR = path.join(__dirname, "..", "lv1");
 const AUDIO_SPEC_OUT = path.join(__dirname, "audio_lv1.json");
@@ -306,6 +307,11 @@ const WEEKS = [
 
 function esc(s) { return String(s).replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 
+const LV1_ZH = {
+  a: "一個", an: "一個", am: "是", are: "是", arm: "手臂", at: "在",
+  baby: "嬰兒", bad: "壞的", ball: "球", bed: "床", big: "大的", bird: "鳥", boy: "男孩", bus: "公車", car: "汽車", card: "卡片", cat: "貓", come: "來", cup: "杯子", desk: "書桌", do: "做", dog: "狗", door: "門", ear: "耳朵", egg: "蛋", eight: "八", eye: "眼睛", fat: "胖的", fine: "好的；沒事", five: "五", food: "食物", four: "四", girl: "女孩", go: "去", good: "好的", great: "很棒的", he: "他", here: "這裡", home: "家", hot: "熱的", how: "如何；怎麼樣", i: "我", in: "在……裡", is: "是", it: "它；這件事", job: "工作", jog: "慢跑", kid: "小孩", king: "國王", leg: "腿", lion: "獅子", love: "愛；喜歡", lunch: "午餐", man: "男人", milk: "牛奶", miss: "想念；錯過", moon: "月亮", mr: "先生", mrs: "太太", ms: "女士", name: "名字", neck: "脖子", new: "新的", nice: "好的；親切的", nine: "九", no: "不；沒有", nose: "鼻子", not: "不", now: "現在", ok: "好的", one: "一", or: "或者", pen: "筆", pet: "寵物", picture: "圖片", pie: "派；餡餅", pig: "豬", red: "紅色的", room: "房間", run: "跑", sad: "難過的", say: "說", seven: "七", she: "她", sit: "坐", six: "六", sky: "天空", sun: "太陽", tall: "高的", tea: "茶", ten: "十", that: "那個；那件事", they: "他們；她們；它們", three: "三", today: "今天", too: "也；太", toy: "玩具", tree: "樹", two: "二", walk: "走路", water: "水", we: "我們", what: "什麼", who: "誰", yes: "是；好的", you: "你；你們"
+};
+
 function vocabAudioName(weekId, en) { return `w${weekId}_${slug(en)}`; }
 function dlgAudioName(weekId, i) { return `w${weekId}_dlg${i}`; }
 function bookAudioName(i) { return `w8_book${i}`; }
@@ -512,6 +518,8 @@ ${GAME_JS}
 
 function renderIndexPage(weekList) {
   const rows = weekList.map(w => `<a class="wcard" href="week${w.id}.html"><div class="em">${w.icon}</div><div><b>Week ${w.id}：${esc(w.title)}</b><small>${esc(w.zh)}</small></div><div class="chk" id="chk${w.id}"></div></a>`).join("");
+  const canonical = Object.keys(WORD_LEVELS).filter(word => WORD_LEVELS[word] === 1).sort();
+  const pool = canonical.map(word => `<details class="pool-word"><summary>${esc(word)}</summary><span>${esc(LV1_ZH[word] || "中文意思整理中")}</span></details>`).join("");
   return `<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🌱 Lv.1 國小一年級 — 8 週英語入門</title><style>
@@ -522,13 +530,19 @@ header a{color:#eaffef;text-decoration:none;font-weight:700}
 .card{background:#fff;border-radius:14px;padding:14px 16px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
 .card h2{font-size:1rem;color:#187a48;margin:0 0 8px}
 .wcard{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:12px 14px;margin-top:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-decoration:none;color:inherit}
-.wcard .em{font-size:1.8rem}
-.wcard b{display:block;font-size:.95rem}
-.wcard small{color:#888}
-.wcard .chk{margin-left:auto;font-size:1.2rem}
+  .wcard .em{font-size:1.8rem}
+  .wcard b{display:block;font-size:.95rem}
+  .wcard small{color:#888}
+  .wcard .chk{margin-left:auto;font-size:1.2rem}
+  .pool-intro{color:#666;font-size:.88rem;margin:4px 0 10px}
+  .poolgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
+  .pool-word{background:#fdf6e3;border:1px solid #f2d68a;border-radius:9px;min-height:38px}
+  .pool-word summary{cursor:pointer;padding:6px 8px;font-weight:700;color:#243042;list-style-position:inside}
+  .pool-word span{display:block;padding:0 8px 7px;color:#187a48;font-size:.85rem;font-weight:700}
 </style></head><body>
 <header><h1>🌱 Lv.1 國小一年級</h1><p><a href="../index.html">← 課程首頁</a> · Pre-A1 起步 · 不考試，聽說為主</p></header>
 <div class="card"><h2>這一級要做到</h2><p>看得懂、聽得懂日常招呼、家人、學校用品、顏色形狀、身體、動物、食物的基本單字和短句；能完成 8 週的小任務並做出一本「我的小書」。</p></div>
+<div class="card"><h2>📚 Lv.1 字彙池（wL1，${canonical.length} 字）</h2><p class="pool-intro">點一下單字，就會展開中文意思；再點一次可以收合。這是理解字彙池，每週主動練習仍以各週單字卡為主。</p><div class="poolgrid">${pool}</div></div>
 ${rows}
 <script>
 try{
