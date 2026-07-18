@@ -29,12 +29,12 @@ header a{color:#eaffef;text-decoration:none;font-weight:700}
 #gstatus{font-weight:700;margin-top:8px;min-height:1.4em}
 .extra{border-top:1px dashed #eee;padding-top:10px;margin-top:10px}
 .foodbtn{border:2px solid #d9e2ec;border-radius:12px;padding:8px 12px;background:#fff;font-weight:700;cursor:pointer;margin:4px}
-.recbox{border:2px dashed #2fbf71;border-radius:12px;padding:14px;text-align:center;margin-top:6px}
-.recbox button{border:none;border-radius:20px;padding:10px 18px;font-weight:700;cursor:pointer;margin:5px;font-size:.95rem}
-#recBtn{background:#ef476f;color:#fff}
-#stopBtn{background:#888;color:#fff}
-#playBtn{background:#2f80ed;color:#fff}
-#recStatus{font-size:.85rem;color:#888;margin-top:6px}
+.copywork{border:2px solid #f2d68a;background:#fffdf4}
+.copywork .steps{margin:8px 0 10px;padding-left:22px}
+.copywork .copy-line{border-top:1px dashed #ddd;padding:8px 0;font-size:1rem}
+.copywork .copy-line b{display:block;color:#243042}
+.copywork .copy-line small{color:#777}
+.copywork .speak-check{background:#eafff2;border-radius:10px;padding:9px 12px;color:#187a48;font-weight:700;margin-top:10px}
 .donebox{text-align:center;margin-top:10px}
 .donebox label{font-weight:700;font-size:.9rem}
 .nav2{display:flex;justify-content:space-between;margin-top:16px;font-size:.85rem}
@@ -49,15 +49,10 @@ header a{color:#eaffef;text-decoration:none;font-weight:700}
   <div id="gameArea"></div><div id="gstatus"></div></div><div class="card extra"><h2>👍👎 我喜歡 / 我不喜歡</h2><p>看到食物卡，選 👍 我喜歡 或 👎 我不喜歡，聽聽看整句怎麼說。</p>
   <div id="foodArea"><span class="foodbtn" data-en="rice">🍚 rice</span><span class="foodbtn" data-en="milk">🥛 milk</span><span class="foodbtn" data-en="apple">🍎 apple</span><span class="foodbtn" data-en="egg">🥚 egg</span><span class="foodbtn" data-en="water">💧 water</span><span class="foodbtn" data-en="bread">🍞 bread</span><span class="foodbtn" data-en="juice">🧃 juice</span><span class="foodbtn" data-en="banana">🍌 banana</span></div>
   <div style="margin-top:8px"><button class="foodbtn" onclick="foodChoice('like')">👍 I like it.</button><button class="foodbtn" onclick="foodChoice('dislike')">👎 I don't like it.</button></div>
-  <div id="foodResult" style="margin-top:8px;font-weight:700"></div></div><div class="card"><h2>🎙️ 錄音角</h2><p>說出三樣你喜歡和不喜歡的食物，然後錄下來：</p>
-  <div class="pattern">I like apples. I don't like eggs.</div>
-  <button onclick="playAudio('w7_product')" style="margin-top:8px;border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:8px 14px;cursor:pointer">🔊 先聽示範</button>
-  <div class="recbox">
-    <button id="recBtn" onclick="startRec()">🎙️ 開始錄音</button>
-    <button id="stopBtn" onclick="stopRec()" style="display:none">⏹️ 停止</button>
-    <button id="playBtn" onclick="playRec()" style="display:none">▶️ 播放我的錄音</button>
-    <div id="recStatus">按「開始錄音」，說完再按「停止」。錄音只存在你的瀏覽器裡，不會上傳。</div>
-  </div></div><div class="card donebox"><label><input type="checkbox" id="doneCb" onchange="toggleDone(this)"> ✅ 這週完成了（記在這台裝置，不用帳號）</label></div>
+  <div id="foodResult" style="margin-top:8px;font-weight:700"></div></div><div class="card copywork"><h2>✍️ 本週手寫記憶＋口說作業</h2>
+  <p>請把下面的對話抄在實體筆記本上。抄寫時小聲念，完成後再練習朗讀與背說。</p>
+  <button onclick="playCopywork()" style="border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:8px 14px;cursor:pointer">🔊 聽整段示範</button>
+  <ol class="steps"><li>先聽整段 2 次。</li><li>每句手寫 1 次，邊寫邊念。</li><li>看著筆記本朗讀 3 次。</li><li>闔上頁面，試著完整背說 1 次。</li></ol><div class="copy-line"><b>Amy 👧: I like apples. They are yummy.</b><small>我喜歡蘋果。它們很好吃。</small></div><div class="copy-line"><b>Tom 👦: I like milk, but I don't like eggs.</b><small>我喜歡牛奶，但我不喜歡蛋。</small></div><div class="copy-line"><b>Amy 👧: Do you like juice?</b><small>你喜歡果汁嗎？</small></div><div class="copy-line"><b>Tom 👦: Yes! I like juice very much.</b><small>喜歡！我很喜歡果汁。</small></div><div class="speak-check">完成標準：能不看網頁，指著自己的手寫內容順順念完。</div></div><div class="card donebox"><label><input type="checkbox" id="doneCb" onchange="toggleDone(this)"> ✅ 這週完成了（記在這台裝置，不用帳號）</label></div>
 <div class="nav2">
   <span><a href="week6.html">← Week 6</a></span>
   <span><a href="week8.html">Week 8 →</a></span>
@@ -68,6 +63,7 @@ const DLG=["w7_dlg0","w7_dlg1","w7_dlg2","w7_dlg3"];
 const GAME_WORDS=["rice","milk","apple","egg","water","bread","juice","banana"];
 const VOCAB_AUDIO={"rice":"w7_rice","milk":"w7_milk","apple":"w7_apple","egg":"w7_egg","water":"w7_water","bread":"w7_bread","juice":"w7_juice","banana":"w7_banana","like":"w7_like","don't":"w7_don_t","eat":"w7_eat","drink":"w7_drink","yummy":"w7_yummy","I":"w7_i","no":"w7_no"};
 const VOCAB_MAP={"rice":{"en":"rice","emoji":"🍚"},"milk":{"en":"milk","emoji":"🥛"},"apple":{"en":"apple","emoji":"🍎"},"egg":{"en":"egg","emoji":"🥚"},"water":{"en":"water","emoji":"💧"},"bread":{"en":"bread","emoji":"🍞"},"juice":{"en":"juice","emoji":"🧃"},"banana":{"en":"banana","emoji":"🍌"},"like":{"en":"like","emoji":"😋"},"don't":{"en":"don't","emoji":"🚫"},"eat":{"en":"eat","emoji":"🍽️"},"drink":{"en":"drink","emoji":"🥤"},"yummy":{"en":"yummy","emoji":"😋"},"I":{"en":"I","emoji":"🙋"},"no":{"en":"no","emoji":"🙅"}};
+const COPYWORK_AUDIO=["w7_dlg0","w7_dlg1","w7_dlg2","w7_dlg3"];
 
 function playAudio(name){new Audio("audio/"+name+".mp3").play().catch(()=>{});}
 let dlgIdx=0;
@@ -103,35 +99,16 @@ function gameAnswer(btn,w){
   else{btn.classList.add("wrong");document.querySelector('#gameArea [data-w="'+target+'"]').classList.add("correct");}
   setTimeout(()=>{gIdx++;renderGameRound();},900);
 }
-let mediaRecorder=null, recChunks=[], recBlobUrl=null;
-async function startRec(){
-  try{
-    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-    recChunks=[];
-    mediaRecorder=new MediaRecorder(stream);
-    mediaRecorder.ondataavailable=e=>recChunks.push(e.data);
-    mediaRecorder.onstop=()=>{
-      const blob=new Blob(recChunks,{type:"audio/webm"});
-      recBlobUrl=URL.createObjectURL(blob);
-      document.getElementById("playBtn").style.display="inline-block";
-      document.getElementById("recStatus").textContent="錄好了！按「播放我的錄音」聽聽看，可以重錄。";
-      stream.getTracks().forEach(t=>t.stop());
-    };
-    mediaRecorder.start();
-    document.getElementById("recBtn").style.display="none";
-    document.getElementById("stopBtn").style.display="inline-block";
-    document.getElementById("recStatus").textContent="🔴 錄音中...";
-  }catch(e){
-    document.getElementById("recStatus").textContent="無法使用麥克風（可能沒開權限），可以直接用手機錄音代替。";
+function playCopywork(){
+  let i=0;
+  function next(){
+    if(i>=COPYWORK_AUDIO.length)return;
+    const a=new Audio("audio/"+COPYWORK_AUDIO[i]+".mp3");
+    a.onended=()=>{i++;next();};
+    a.play().catch(()=>{i++;next();});
   }
+  next();
 }
-function stopRec(){
-  if(mediaRecorder)mediaRecorder.stop();
-  document.getElementById("stopBtn").style.display="none";
-  document.getElementById("recBtn").style.display="inline-block";
-  document.getElementById("recBtn").textContent="🔁 重新錄音";
-}
-function playRec(){ if(recBlobUrl) new Audio(recBlobUrl).play(); }
 const FOOD_FORM={apple:"apples",egg:"eggs",banana:"bananas",milk:"milk",bread:"bread",rice:"rice",juice:"juice",water:"water"};
 function foodChoice(kind){
   const sel=document.querySelector("#foodArea .foodbtn.sel");

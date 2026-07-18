@@ -42,7 +42,6 @@ const WEEKS = [
       { who: "Tom 👦", en: "I am a boy. Nice to meet you!", zh: "我是男生。很高興認識你！" },
     ],
     game: { instruction: "🔊 聽數字，點對的卡片", words: ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"] },
-    product: { instruction: "跟著念，然後錄下你自己的版本：", en: "Hi! My name is ___. I am a boy / a girl." },
   },
   {
     id: 2, title: "My Family", zh: "我的家人", icon: "👨‍👩‍👧‍👦",
@@ -72,7 +71,6 @@ const WEEKS = [
       { who: "Amy 👧", en: "I love my family!", zh: "我愛我的家人！" },
     ],
     game: { instruction: "🔊 聽家人稱呼，點對的卡片", words: ["mom", "dad", "brother", "sister", "baby", "grandma", "grandpa"] },
-    product: { instruction: "指著家人照片說一句，然後錄下來：", en: "This is my ___. I love my family." },
   },
   {
     id: 3, title: "School Things", zh: "學校用品", icon: "🎒",
@@ -102,7 +100,6 @@ const WEEKS = [
       { who: "Tom 👦", en: "It is a pencil.", zh: "它是一支鉛筆。" },
     ],
     game: { instruction: "🔊 聽學校用品，點對的卡片", words: ["book", "bag", "pen", "pencil", "desk", "chair", "ruler", "eraser"] },
-    product: { instruction: "拿一樣文具，跟著念然後錄下來：", en: "Show me your book. It is a book." },
   },
   {
     id: 4, title: "Colors and Shapes", zh: "顏色與形狀", icon: "🌈",
@@ -132,7 +129,6 @@ const WEEKS = [
       { who: "Tom 👦", en: "It is big and yellow.", zh: "它又大又黃。" },
     ],
     game: { instruction: "🔊 聽顏色或形狀，點對的卡片", words: ["red", "blue", "yellow", "green", "circle", "square", "triangle", "star"] },
-    product: { instruction: "找一樣家裡的東西，跟著念然後錄下來：", en: "I see a red circle. It is red." },
   },
   {
     id: 5, title: "My Body", zh: "我的身體", icon: "🙆",
@@ -162,7 +158,6 @@ const WEEKS = [
       { who: "Kids 🧒", en: "Sit down, please.", zh: "請坐下。" },
     ],
     game: { instruction: "🔊 聽身體部位，點對的卡片", words: ["head", "hand", "eye", "nose", "mouth", "ear", "foot", "arm"] },
-    product: { instruction: "跟著動作歌做動作，然後錄下你自己說的：", en: "Touch your head. I have two hands." },
   },
   {
     id: 6, title: "Animals", zh: "動物", icon: "🐾",
@@ -192,7 +187,6 @@ const WEEKS = [
       { who: "Amy 👧", en: "It is cute.", zh: "牠好可愛。" },
     ],
     game: { instruction: "🔊 聽動物名稱，點對的卡片", words: ["cat", "dog", "bird", "fish", "rabbit", "duck", "cow", "pig"] },
-    product: { instruction: "選一隻你喜歡的動物，跟著念然後錄下來：", en: "I see a dog. It is big and cute." },
   },
   {
     id: 7, title: "Food I Like", zh: "我喜歡的食物", icon: "🍎",
@@ -226,7 +220,6 @@ const WEEKS = [
       title: "👍👎 我喜歡 / 我不喜歡",
       instruction: "看到食物卡，選 👍 我喜歡 或 👎 我不喜歡，聽聽看整句怎麼說。",
     },
-    product: { instruction: "說出三樣你喜歡和不喜歡的食物，然後錄下來：", en: "I like apples. I don't like eggs." },
   },
   {
     id: 8, title: "My Little Book", zh: "我的小書", icon: "📕",
@@ -259,7 +252,6 @@ const WEEKS = [
       { en: "I like apples. Yummy!", zh: "我喜歡蘋果。好吃！" },
     ],
     game: { instruction: "🔊 複習：聽單字，點對的卡片（每週各挑一個字）", words: ["hello", "family", "book", "red", "head", "dog", "apple"] },
-    product: { instruction: "把七句連起來，做成一本小書，朗讀給家人聽並錄下來：", en: "Hello! This is my family. I like apples." },
   },
 ];
 
@@ -268,7 +260,6 @@ function esc(s) { return String(s).replace(/</g, "&lt;").replace(/>/g, "&gt;"); 
 function vocabAudioName(weekId, en) { return `w${weekId}_${slug(en)}`; }
 function dlgAudioName(weekId, i) { return `w${weekId}_dlg${i}`; }
 function bookAudioName(i) { return `w8_book${i}`; }
-function productAudioName(weekId) { return `w${weekId}_product`; }
 
 const CSS = `
 body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
@@ -299,12 +290,12 @@ header a{color:#eaffef;text-decoration:none;font-weight:700}
 #gstatus{font-weight:700;margin-top:8px;min-height:1.4em}
 .extra{border-top:1px dashed #eee;padding-top:10px;margin-top:10px}
 .foodbtn{border:2px solid #d9e2ec;border-radius:12px;padding:8px 12px;background:#fff;font-weight:700;cursor:pointer;margin:4px}
-.recbox{border:2px dashed #2fbf71;border-radius:12px;padding:14px;text-align:center;margin-top:6px}
-.recbox button{border:none;border-radius:20px;padding:10px 18px;font-weight:700;cursor:pointer;margin:5px;font-size:.95rem}
-#recBtn{background:#ef476f;color:#fff}
-#stopBtn{background:#888;color:#fff}
-#playBtn{background:#2f80ed;color:#fff}
-#recStatus{font-size:.85rem;color:#888;margin-top:6px}
+.copywork{border:2px solid #f2d68a;background:#fffdf4}
+.copywork .steps{margin:8px 0 10px;padding-left:22px}
+.copywork .copy-line{border-top:1px dashed #ddd;padding:8px 0;font-size:1rem}
+.copywork .copy-line b{display:block;color:#243042}
+.copywork .copy-line small{color:#777}
+.copywork .speak-check{background:#eafff2;border-radius:10px;padding:9px 12px;color:#187a48;font-weight:700;margin-top:10px}
 .donebox{text-align:center;margin-top:10px}
 .donebox label{font-weight:700;font-size:.9rem}
 .nav2{display:flex;justify-content:space-between;margin-top:16px;font-size:.85rem}
@@ -339,16 +330,15 @@ function renderExtraHTML(weekId, extra, vocab) {
   <div id="foodResult" style="margin-top:8px;font-weight:700"></div></div>`;
 }
 
-function renderProductHTML(weekId, product) {
-  return `<div class="card"><h2>🎙️ 錄音角</h2><p>${esc(product.instruction)}</p>
-  <div class="pattern">${esc(product.en)}</div>
-  <button onclick="playAudio('${productAudioName(weekId)}')" style="margin-top:8px;border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:8px 14px;cursor:pointer">🔊 先聽示範</button>
-  <div class="recbox">
-    <button id="recBtn" onclick="startRec()">🎙️ 開始錄音</button>
-    <button id="stopBtn" onclick="stopRec()" style="display:none">⏹️ 停止</button>
-    <button id="playBtn" onclick="playRec()" style="display:none">▶️ 播放我的錄音</button>
-    <div id="recStatus">按「開始錄音」，說完再按「停止」。錄音只存在你的瀏覽器裡，不會上傳。</div>
-  </div></div>`;
+function renderCopyworkHTML(week) {
+  const lines = week.review ? week.book : week.dialogue;
+  const title = week.review ? "文章" : "對話";
+  return `<div class="card copywork"><h2>✍️ 本週手寫記憶＋口說作業</h2>
+  <p>請把下面的${title}抄在實體筆記本上。抄寫時小聲念，完成後再練習朗讀與背說。</p>
+  <button onclick="playCopywork()" style="border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:8px 14px;cursor:pointer">🔊 聽整段示範</button>
+  <ol class="steps"><li>先聽整段 2 次。</li><li>每句手寫 1 次，邊寫邊念。</li><li>看著筆記本朗讀 3 次。</li><li>闔上頁面，試著完整背說 1 次。</li></ol>` +
+    lines.map(p => `<div class="copy-line"><b>${esc(p.who ? `${p.who}: ${p.en}` : p.en)}</b><small>${esc(p.zh)}</small></div>`).join("") +
+    `<div class="speak-check">完成標準：能不看網頁，指著自己的手寫內容順順念完。</div></div>`;
 }
 
 function renderBookHTML(book) {
@@ -392,35 +382,16 @@ function gameAnswer(btn,w){
   else{btn.classList.add("wrong");document.querySelector('#gameArea [data-w="'+target+'"]').classList.add("correct");}
   setTimeout(()=>{gIdx++;renderGameRound();},900);
 }
-let mediaRecorder=null, recChunks=[], recBlobUrl=null;
-async function startRec(){
-  try{
-    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-    recChunks=[];
-    mediaRecorder=new MediaRecorder(stream);
-    mediaRecorder.ondataavailable=e=>recChunks.push(e.data);
-    mediaRecorder.onstop=()=>{
-      const blob=new Blob(recChunks,{type:"audio/webm"});
-      recBlobUrl=URL.createObjectURL(blob);
-      document.getElementById("playBtn").style.display="inline-block";
-      document.getElementById("recStatus").textContent="錄好了！按「播放我的錄音」聽聽看，可以重錄。";
-      stream.getTracks().forEach(t=>t.stop());
-    };
-    mediaRecorder.start();
-    document.getElementById("recBtn").style.display="none";
-    document.getElementById("stopBtn").style.display="inline-block";
-    document.getElementById("recStatus").textContent="🔴 錄音中...";
-  }catch(e){
-    document.getElementById("recStatus").textContent="無法使用麥克風（可能沒開權限），可以直接用手機錄音代替。";
+function playCopywork(){
+  let i=0;
+  function next(){
+    if(i>=COPYWORK_AUDIO.length)return;
+    const a=new Audio("audio/"+COPYWORK_AUDIO[i]+".mp3");
+    a.onended=()=>{i++;next();};
+    a.play().catch(()=>{i++;next();});
   }
+  next();
 }
-function stopRec(){
-  if(mediaRecorder)mediaRecorder.stop();
-  document.getElementById("stopBtn").style.display="none";
-  document.getElementById("recBtn").style.display="inline-block";
-  document.getElementById("recBtn").textContent="🔁 重新錄音";
-}
-function playRec(){ if(recBlobUrl) new Audio(recBlobUrl).play(); }
 const FOOD_FORM={apple:"apples",egg:"eggs",banana:"bananas",milk:"milk",bread:"bread",rice:"rice",juice:"juice",water:"water"};
 function foodChoice(kind){
   const sel=document.querySelector("#foodArea .foodbtn.sel");
@@ -470,7 +441,7 @@ function renderWeekPage(week, weekList) {
   body += renderVocabHTML(week.id, week.vocab);
   body += renderGameHTML(week.id, week.game);
   if (week.extra) body += renderExtraHTML(week.id, week.extra, week.vocab);
-  body += renderProductHTML(week.id, week.product);
+  body += renderCopyworkHTML(week);
   body += `<div class="card donebox"><label><input type="checkbox" id="doneCb" onchange="toggleDone(this)"> ✅ 這週完成了（記在這台裝置，不用帳號）</label></div>`;
 
   const gameWords = JSON.stringify(week.game.words);
@@ -496,6 +467,7 @@ const DLG=${JSON.stringify(dlgNames)};
 const GAME_WORDS=${gameWords};
 const VOCAB_AUDIO=${JSON.stringify(Object.assign({}, vocabAudioMap, gameAudioMap))};
 const VOCAB_MAP=${JSON.stringify(gVocabMap)};
+const COPYWORK_AUDIO=${JSON.stringify(week.review ? bookNames : dlgNames)};
 ${GAME_JS}
 </script>
 </body></html>`;
@@ -546,7 +518,6 @@ WEEKS.forEach(w => {
   } else {
     w.book.forEach((p, i) => { items[bookAudioName(i)] = p.en; });
   }
-  items[productAudioName(w.id)] = w.product.en;
 });
 fs.writeFileSync(AUDIO_SPEC_OUT, JSON.stringify({ outdir: AUDIO_OUTDIR, voice: "af_heart", speed: 0.85, items }, null, 2), "utf-8");
 

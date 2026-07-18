@@ -1,5 +1,5 @@
 {
-  "outdir": "D:/english/k9/lv1/audio",
+  "outdir": "D:/English/k9/lv1/audio",
   "voice": "af_heart",
   "speed": 0.85,
   "items": {
@@ -22,7 +22,6 @@
     "w1_dlg1": "Hi Amy! My name is Tom.",
     "w1_dlg2": "I am a girl.",
     "w1_dlg3": "I am a boy. Nice to meet you!",
-    "w1_product": "Hi! My name is ___. I am a boy / a girl.",
     "w2_family": "family",
     "w2_mom": "mom",
     "w2_dad": "dad",
@@ -42,7 +41,6 @@
     "w2_dlg1": "This is my dad.",
     "w2_dlg2": "This is my baby brother.",
     "w2_dlg3": "I love my family!",
-    "w2_product": "This is my ___. I love my family.",
     "w3_book": "book",
     "w3_bag": "bag",
     "w3_pen": "pen",
@@ -62,7 +60,6 @@
     "w3_dlg1": "Here it is. It is a book.",
     "w3_dlg2": "Good! Show me your pencil.",
     "w3_dlg3": "It is a pencil.",
-    "w3_product": "Show me your book. It is a book.",
     "w4_red": "red",
     "w4_blue": "blue",
     "w4_yellow": "yellow",
@@ -82,7 +79,6 @@
     "w4_dlg1": "I see a blue square.",
     "w4_dlg2": "Look! A yellow star!",
     "w4_dlg3": "It is big and yellow.",
-    "w4_product": "I see a red circle. It is red.",
     "w5_head": "head",
     "w5_hand": "hand",
     "w5_eye": "eye",
@@ -102,7 +98,6 @@
     "w5_dlg1": "Touch your nose. Touch your ears.",
     "w5_dlg2": "I have two hands and two feet.",
     "w5_dlg3": "Sit down, please.",
-    "w5_product": "Touch your head. I have two hands.",
     "w6_cat": "cat",
     "w6_dog": "dog",
     "w6_bird": "bird",
@@ -122,7 +117,6 @@
     "w6_dlg1": "I see a cat. It is small and cute.",
     "w6_dlg2": "Look at the duck!",
     "w6_dlg3": "It is cute.",
-    "w6_product": "I see a dog. It is big and cute.",
     "w7_rice": "rice",
     "w7_milk": "milk",
     "w7_apple": "apple",
@@ -142,7 +136,6 @@
     "w7_dlg1": "I like milk, but I don't like eggs.",
     "w7_dlg2": "Do you like juice?",
     "w7_dlg3": "Yes! I like juice very much.",
-    "w7_product": "I like apples. I don't like eggs.",
     "w8_hello": "hello",
     "w8_name": "name",
     "w8_family": "family",
@@ -163,7 +156,6 @@
     "w8_book3": "I see a red circle and a blue square.",
     "w8_book4": "I have two hands. Touch your head!",
     "w8_book5": "I see a dog. It is cute.",
-    "w8_book6": "I like apples. Yummy!",
-    "w8_product": "Hello! This is my family. I like apples."
+    "w8_book6": "I like apples. Yummy!"
   }
 }
