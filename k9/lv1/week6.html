@@ -47,9 +47,9 @@ header a{color:#eaffef;text-decoration:none;font-weight:700}
 <div class="card"><div class="goal">🎯 選一隻動物說 3 句，會用 I see a... / It is...</div><div class="pattern">I see a ___.</div><div class="pattern">It is big. / It is small.</div></div><div class="card"><h2>🎧 情境對話</h2><button id="playAll" onclick="playAllDlg()">▶️ 全部播放</button><div class="dlg"><b>Tom 👦</b><button onclick="playAudio('w6_dlg0')">🔊</button><span class="txt">I see a dog. It is big.<small>我看到一隻狗。牠很大。</small></span></div><div class="dlg"><b>Amy 👧</b><button onclick="playAudio('w6_dlg1')">🔊</button><span class="txt">I see a cat. It is small and cute.<small>我看到一隻貓。牠又小又可愛。</small></span></div><div class="dlg"><b>Tom 👦</b><button onclick="playAudio('w6_dlg2')">🔊</button><span class="txt">Look at the duck!<small>你看那隻鴨子！</small></span></div><div class="dlg"><b>Amy 👧</b><button onclick="playAudio('w6_dlg3')">🔊</button><span class="txt">It is cute.<small>牠好可愛。</small></span></div></div><div class="card"><h2>🔤 單字卡（點卡片聽發音）</h2><div class="vocabgrid"><div class="vcard" onclick="playAudio('w6_cat')"><div class="em">🐱</div><b>cat</b><small>貓</small></div><div class="vcard" onclick="playAudio('w6_dog')"><div class="em">🐶</div><b>dog</b><small>狗</small></div><div class="vcard" onclick="playAudio('w6_bird')"><div class="em">🐦</div><b>bird</b><small>鳥</small></div><div class="vcard" onclick="playAudio('w6_fish')"><div class="em">🐟</div><b>fish</b><small>魚</small></div><div class="vcard" onclick="playAudio('w6_rabbit')"><div class="em">🐰</div><b>rabbit</b><small>兔子</small></div><div class="vcard" onclick="playAudio('w6_duck')"><div class="em">🦆</div><b>duck</b><small>鴨子</small></div><div class="vcard" onclick="playAudio('w6_cow')"><div class="em">🐮</div><b>cow</b><small>牛</small></div><div class="vcard" onclick="playAudio('w6_pig')"><div class="em">🐷</div><b>pig</b><small>豬</small></div><div class="vcard" onclick="playAudio('w6_big')"><div class="em">🐘</div><b>big</b><small>大的</small></div><div class="vcard" onclick="playAudio('w6_small')"><div class="em">🐭</div><b>small</b><small>小的</small></div><div class="vcard" onclick="playAudio('w6_cute')"><div class="em">🥰</div><b>cute</b><small>可愛的</small></div><div class="vcard" onclick="playAudio('w6_see')"><div class="em">👀</div><b>see</b><small>看見</small></div><div class="vcard" onclick="playAudio('w6_it')"><div class="em">🔵</div><b>it</b><small>它</small></div><div class="vcard" onclick="playAudio('w6_is')"><div class="em">🟰</div><b>is</b><small>是</small></div><div class="vcard" onclick="playAudio('w6_a')"><div class="em">1️⃣</div><b>a</b><small>一個</small></div></div></div><div class="card"><h2>🎮 聽力遊戲</h2><p>🔊 聽動物名稱，點對的卡片</p>
   <button id="gplay" onclick="startGame()">▶️ 開始</button>
   <div id="gameArea"></div><div id="gstatus"></div></div><div class="card copywork"><h2>✍️ 本週手寫記憶＋口說作業</h2>
-  <p>請把下面的對話抄在實體筆記本上。抄寫時小聲念，完成後再練習朗讀與背說。</p>
-  <button onclick="playCopywork()" style="border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:8px 14px;cursor:pointer">🔊 聽整段示範</button>
-  <ol class="steps"><li>先聽整段 2 次。</li><li>每句手寫 1 次，邊寫邊念。</li><li>看著筆記本朗讀 3 次。</li><li>闔上頁面，試著完整背說 1 次。</li></ol><div class="copy-line"><b>Tom 👦: I see a dog. It is big.</b><small>我看到一隻狗。牠很大。</small></div><div class="copy-line"><b>Amy 👧: I see a cat. It is small and cute.</b><small>我看到一隻貓。牠又小又可愛。</small></div><div class="copy-line"><b>Tom 👦: Look at the duck!</b><small>你看那隻鴨子！</small></div><div class="copy-line"><b>Amy 👧: It is cute.</b><small>牠好可愛。</small></div><div class="speak-check">完成標準：能不看網頁，指著自己的手寫內容順順念完。</div></div><div class="card donebox"><label><input type="checkbox" id="doneCb" onchange="toggleDone(this)"> ✅ 這週完成了（記在這台裝置，不用帳號）</label></div>
+  <p>這是另外準備的本週短文。請抄在實體筆記本上，抄寫時小聲念，完成後再練習朗讀與背說。</p>
+  <button onclick="playAudio('w6_copywork')" style="border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:8px 14px;cursor:pointer">🔊 聽整篇示範</button>
+  <ol class="steps"><li>先聽整段 2 次。</li><li>每句手寫 1 次，邊寫邊念。</li><li>看著筆記本朗讀 3 次。</li><li>闔上頁面，試著完整背說 1 次。</li></ol><div class="copy-line"><b>A small rabbit is in the grass.</b><small>一隻小兔子在草地上。</small></div><div class="copy-line"><b>It has long ears.</b><small>牠有長長的耳朵。</small></div><div class="copy-line"><b>It can jump.</b><small>牠會跳。</small></div><div class="copy-line"><b>I like this cute rabbit.</b><small>我喜歡這隻可愛的兔子。</small></div><div class="speak-check">完成標準：能不看網頁，指著自己的手寫內容順順念完。</div></div><div class="card donebox"><label><input type="checkbox" id="doneCb" onchange="toggleDone(this)"> ✅ 這週完成了（記在這台裝置，不用帳號）</label></div>
 <div class="nav2">
   <span><a href="week5.html">← Week 5</a></span>
   <span><a href="week7.html">Week 7 →</a></span>
@@ -60,7 +60,6 @@ const DLG=["w6_dlg0","w6_dlg1","w6_dlg2","w6_dlg3"];
 const GAME_WORDS=["cat","dog","bird","fish","rabbit","duck","cow","pig"];
 const VOCAB_AUDIO={"cat":"w6_cat","dog":"w6_dog","bird":"w6_bird","fish":"w6_fish","rabbit":"w6_rabbit","duck":"w6_duck","cow":"w6_cow","pig":"w6_pig","big":"w6_big","small":"w6_small","cute":"w6_cute","see":"w6_see","it":"w6_it","is":"w6_is","a":"w6_a"};
 const VOCAB_MAP={"cat":{"en":"cat","emoji":"🐱"},"dog":{"en":"dog","emoji":"🐶"},"bird":{"en":"bird","emoji":"🐦"},"fish":{"en":"fish","emoji":"🐟"},"rabbit":{"en":"rabbit","emoji":"🐰"},"duck":{"en":"duck","emoji":"🦆"},"cow":{"en":"cow","emoji":"🐮"},"pig":{"en":"pig","emoji":"🐷"},"big":{"en":"big","emoji":"🐘"},"small":{"en":"small","emoji":"🐭"},"cute":{"en":"cute","emoji":"🥰"},"see":{"en":"see","emoji":"👀"},"it":{"en":"it","emoji":"🔵"},"is":{"en":"is","emoji":"🟰"},"a":{"en":"a","emoji":"1️⃣"}};
-const COPYWORK_AUDIO=["w6_dlg0","w6_dlg1","w6_dlg2","w6_dlg3"];
 
 function playAudio(name){new Audio("audio/"+name+".mp3").play().catch(()=>{});}
 let dlgIdx=0;
@@ -95,16 +94,6 @@ function gameAnswer(btn,w){
   if(w===target){btn.classList.add("correct");gScore++;}
   else{btn.classList.add("wrong");document.querySelector('#gameArea [data-w="'+target+'"]').classList.add("correct");}
   setTimeout(()=>{gIdx++;renderGameRound();},900);
-}
-function playCopywork(){
-  let i=0;
-  function next(){
-    if(i>=COPYWORK_AUDIO.length)return;
-    const a=new Audio("audio/"+COPYWORK_AUDIO[i]+".mp3");
-    a.onended=()=>{i++;next();};
-    a.play().catch(()=>{i++;next();});
-  }
-  next();
 }
 const FOOD_FORM={apple:"apples",egg:"eggs",banana:"bananas",milk:"milk",bread:"bread",rice:"rice",juice:"juice",water:"water"};
 function foodChoice(kind){

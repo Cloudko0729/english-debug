@@ -47,9 +47,9 @@ header a{color:#eaffef;text-decoration:none;font-weight:700}
 <div class="card"><div class="goal">🎯 用 This is my... 介紹家人，完成家庭圖卡口頭導覽</div><div class="pattern">This is my ___.</div><div class="pattern">I love my family.</div></div><div class="card"><h2>🎧 情境對話</h2><button id="playAll" onclick="playAllDlg()">▶️ 全部播放</button><div class="dlg"><b>Amy 👧</b><button onclick="playAudio('w2_dlg0')">🔊</button><span class="txt">This is my mom.<small>這是我媽媽。</small></span></div><div class="dlg"><b>Amy 👧</b><button onclick="playAudio('w2_dlg1')">🔊</button><span class="txt">This is my dad.<small>這是我爸爸。</small></span></div><div class="dlg"><b>Amy 👧</b><button onclick="playAudio('w2_dlg2')">🔊</button><span class="txt">This is my baby brother.<small>這是我的小弟弟。</small></span></div><div class="dlg"><b>Amy 👧</b><button onclick="playAudio('w2_dlg3')">🔊</button><span class="txt">I love my family!<small>我愛我的家人！</small></span></div></div><div class="card"><h2>🔤 單字卡（點卡片聽發音）</h2><div class="vocabgrid"><div class="vcard" onclick="playAudio('w2_family')"><div class="em">👨‍👩‍👧‍👦</div><b>family</b><small>家人</small></div><div class="vcard" onclick="playAudio('w2_mom')"><div class="em">👩</div><b>mom</b><small>媽媽</small></div><div class="vcard" onclick="playAudio('w2_dad')"><div class="em">👨</div><b>dad</b><small>爸爸</small></div><div class="vcard" onclick="playAudio('w2_brother')"><div class="em">👦</div><b>brother</b><small>哥哥／弟弟</small></div><div class="vcard" onclick="playAudio('w2_sister')"><div class="em">👧</div><b>sister</b><small>姐姐／妹妹</small></div><div class="vcard" onclick="playAudio('w2_baby')"><div class="em">👶</div><b>baby</b><small>小寶寶</small></div><div class="vcard" onclick="playAudio('w2_grandma')"><div class="em">👵</div><b>grandma</b><small>奶奶／阿嬤</small></div><div class="vcard" onclick="playAudio('w2_grandpa')"><div class="em">👴</div><b>grandpa</b><small>爺爺／阿公</small></div><div class="vcard" onclick="playAudio('w2_this')"><div class="em">👉</div><b>this</b><small>這（是）</small></div><div class="vcard" onclick="playAudio('w2_my')"><div class="em">🙋</div><b>my</b><small>我的</small></div><div class="vcard" onclick="playAudio('w2_big')"><div class="em">🐘</div><b>big</b><small>大的</small></div><div class="vcard" onclick="playAudio('w2_small')"><div class="em">🐭</div><b>small</b><small>小的</small></div><div class="vcard" onclick="playAudio('w2_love')"><div class="em">❤️</div><b>love</b><small>愛</small></div><div class="vcard" onclick="playAudio('w2_happy')"><div class="em">😊</div><b>happy</b><small>開心</small></div><div class="vcard" onclick="playAudio('w2_is')"><div class="em">🟰</div><b>is</b><small>是</small></div></div></div><div class="card"><h2>🎮 聽力遊戲</h2><p>🔊 聽家人稱呼，點對的卡片</p>
   <button id="gplay" onclick="startGame()">▶️ 開始</button>
   <div id="gameArea"></div><div id="gstatus"></div></div><div class="card copywork"><h2>✍️ 本週手寫記憶＋口說作業</h2>
-  <p>請把下面的對話抄在實體筆記本上。抄寫時小聲念，完成後再練習朗讀與背說。</p>
-  <button onclick="playCopywork()" style="border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:8px 14px;cursor:pointer">🔊 聽整段示範</button>
-  <ol class="steps"><li>先聽整段 2 次。</li><li>每句手寫 1 次，邊寫邊念。</li><li>看著筆記本朗讀 3 次。</li><li>闔上頁面，試著完整背說 1 次。</li></ol><div class="copy-line"><b>Amy 👧: This is my mom.</b><small>這是我媽媽。</small></div><div class="copy-line"><b>Amy 👧: This is my dad.</b><small>這是我爸爸。</small></div><div class="copy-line"><b>Amy 👧: This is my baby brother.</b><small>這是我的小弟弟。</small></div><div class="copy-line"><b>Amy 👧: I love my family!</b><small>我愛我的家人！</small></div><div class="speak-check">完成標準：能不看網頁，指著自己的手寫內容順順念完。</div></div><div class="card donebox"><label><input type="checkbox" id="doneCb" onchange="toggleDone(this)"> ✅ 這週完成了（記在這台裝置，不用帳號）</label></div>
+  <p>這是另外準備的本週短文。請抄在實體筆記本上，抄寫時小聲念，完成後再練習朗讀與背說。</p>
+  <button onclick="playAudio('w2_copywork')" style="border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:8px 14px;cursor:pointer">🔊 聽整篇示範</button>
+  <ol class="steps"><li>先聽整段 2 次。</li><li>每句手寫 1 次，邊寫邊念。</li><li>看著筆記本朗讀 3 次。</li><li>闔上頁面，試著完整背說 1 次。</li></ol><div class="copy-line"><b>My family is big.</b><small>我的家庭很大。</small></div><div class="copy-line"><b>I have a mom, a dad, and a baby brother.</b><small>我有媽媽、爸爸和一個小弟弟。</small></div><div class="copy-line"><b>We are happy.</b><small>我們很快樂。</small></div><div class="copy-line"><b>I love them all.</b><small>我愛他們每一個人。</small></div><div class="speak-check">完成標準：能不看網頁，指著自己的手寫內容順順念完。</div></div><div class="card donebox"><label><input type="checkbox" id="doneCb" onchange="toggleDone(this)"> ✅ 這週完成了（記在這台裝置，不用帳號）</label></div>
 <div class="nav2">
   <span><a href="week1.html">← Week 1</a></span>
   <span><a href="week3.html">Week 3 →</a></span>
@@ -60,7 +60,6 @@ const DLG=["w2_dlg0","w2_dlg1","w2_dlg2","w2_dlg3"];
 const GAME_WORDS=["mom","dad","brother","sister","baby","grandma","grandpa"];
 const VOCAB_AUDIO={"family":"w2_family","mom":"w2_mom","dad":"w2_dad","brother":"w2_brother","sister":"w2_sister","baby":"w2_baby","grandma":"w2_grandma","grandpa":"w2_grandpa","this":"w2_this","my":"w2_my","big":"w2_big","small":"w2_small","love":"w2_love","happy":"w2_happy","is":"w2_is"};
 const VOCAB_MAP={"family":{"en":"family","emoji":"👨‍👩‍👧‍👦"},"mom":{"en":"mom","emoji":"👩"},"dad":{"en":"dad","emoji":"👨"},"brother":{"en":"brother","emoji":"👦"},"sister":{"en":"sister","emoji":"👧"},"baby":{"en":"baby","emoji":"👶"},"grandma":{"en":"grandma","emoji":"👵"},"grandpa":{"en":"grandpa","emoji":"👴"},"this":{"en":"this","emoji":"👉"},"my":{"en":"my","emoji":"🙋"},"big":{"en":"big","emoji":"🐘"},"small":{"en":"small","emoji":"🐭"},"love":{"en":"love","emoji":"❤️"},"happy":{"en":"happy","emoji":"😊"},"is":{"en":"is","emoji":"🟰"}};
-const COPYWORK_AUDIO=["w2_dlg0","w2_dlg1","w2_dlg2","w2_dlg3"];
 
 function playAudio(name){new Audio("audio/"+name+".mp3").play().catch(()=>{});}
 let dlgIdx=0;
@@ -95,16 +94,6 @@ function gameAnswer(btn,w){
   if(w===target){btn.classList.add("correct");gScore++;}
   else{btn.classList.add("wrong");document.querySelector('#gameArea [data-w="'+target+'"]').classList.add("correct");}
   setTimeout(()=>{gIdx++;renderGameRound();},900);
-}
-function playCopywork(){
-  let i=0;
-  function next(){
-    if(i>=COPYWORK_AUDIO.length)return;
-    const a=new Audio("audio/"+COPYWORK_AUDIO[i]+".mp3");
-    a.onended=()=>{i++;next();};
-    a.play().catch(()=>{i++;next();});
-  }
-  next();
 }
 const FOOD_FORM={apple:"apples",egg:"eggs",banana:"bananas",milk:"milk",bread:"bread",rice:"rice",juice:"juice",water:"water"};
 function foodChoice(kind){

@@ -3,6 +3,7 @@
 # items.json: {"outdir": "...", "voice": "af_heart", "speed": 0.9,
 #              "items": {"filename": "text to speak", ...}}
 import json
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -14,12 +15,25 @@ from kokoro_onnx import Kokoro
 MODEL_DIR = Path(r"C:\Users\CloudKo_Home\py\kokoro_models")
 
 
+def find_ffmpeg():
+    executable = shutil.which("ffmpeg")
+    if executable:
+        return executable
+    try:
+        import imageio_ffmpeg
+
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except ImportError as exc:
+        raise RuntimeError("ffmpeg or imageio-ffmpeg is required to create MP3 files") from exc
+
+
 def main():
     spec = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
     outdir = Path(spec["outdir"])
     outdir.mkdir(parents=True, exist_ok=True)
     voice = spec.get("voice", "af_heart")
     speed = spec.get("speed", 0.9)
+    ffmpeg = find_ffmpeg()
 
     kokoro = Kokoro(str(MODEL_DIR / "kokoro-v1.0.onnx"), str(MODEL_DIR / "voices-v1.0.bin"))
 
@@ -33,7 +47,7 @@ def main():
             wav = Path(tmp) / f"{name}.wav"
             sf.write(wav, samples, sr)
             subprocess.run(
-                ["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav), "-b:a", "96k", str(mp3)],
+                [ffmpeg, "-y", "-loglevel", "error", "-i", str(wav), "-b:a", "96k", str(mp3)],
                 check=True,
             )
             print(f"{name}.mp3 ({mp3.stat().st_size // 1024} KB)")

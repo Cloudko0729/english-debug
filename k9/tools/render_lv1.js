@@ -42,6 +42,12 @@ const WEEKS = [
       { who: "Tom 👦", en: "I am a boy. Nice to meet you!", zh: "我是男生。很高興認識你！" },
     ],
     game: { instruction: "🔊 聽數字，點對的卡片", words: ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"] },
+    copywork: [
+      { en: "Hello! I am Mia.", zh: "哈囉！我是 Mia。" },
+      { en: "I am seven years old.", zh: "我七歲。" },
+      { en: "I have a big smile.", zh: "我有一個大大的笑容。" },
+      { en: "I say hello to my friends.", zh: "我向朋友們說哈囉。" },
+    ],
   },
   {
     id: 2, title: "My Family", zh: "我的家人", icon: "👨‍👩‍👧‍👦",
@@ -71,6 +77,12 @@ const WEEKS = [
       { who: "Amy 👧", en: "I love my family!", zh: "我愛我的家人！" },
     ],
     game: { instruction: "🔊 聽家人稱呼，點對的卡片", words: ["mom", "dad", "brother", "sister", "baby", "grandma", "grandpa"] },
+    copywork: [
+      { en: "My family is big.", zh: "我的家庭很大。" },
+      { en: "I have a mom, a dad, and a baby brother.", zh: "我有媽媽、爸爸和一個小弟弟。" },
+      { en: "We are happy.", zh: "我們很快樂。" },
+      { en: "I love them all.", zh: "我愛他們每一個人。" },
+    ],
   },
   {
     id: 3, title: "School Things", zh: "學校用品", icon: "🎒",
@@ -100,6 +112,12 @@ const WEEKS = [
       { who: "Tom 👦", en: "It is a pencil.", zh: "它是一支鉛筆。" },
     ],
     game: { instruction: "🔊 聽學校用品，點對的卡片", words: ["book", "bag", "pen", "pencil", "desk", "chair", "ruler", "eraser"] },
+    copywork: [
+      { en: "My school bag is blue.", zh: "我的書包是藍色的。" },
+      { en: "I have a book, a pencil, and an eraser.", zh: "我有一本書、一支鉛筆和一個橡皮擦。" },
+      { en: "They are in my bag.", zh: "它們都在我的書包裡。" },
+      { en: "I am ready for school.", zh: "我準備好上學了。" },
+    ],
   },
   {
     id: 4, title: "Colors and Shapes", zh: "顏色與形狀", icon: "🌈",
@@ -129,6 +147,12 @@ const WEEKS = [
       { who: "Tom 👦", en: "It is big and yellow.", zh: "它又大又黃。" },
     ],
     game: { instruction: "🔊 聽顏色或形狀，點對的卡片", words: ["red", "blue", "yellow", "green", "circle", "square", "triangle", "star"] },
+    copywork: [
+      { en: "I see a small red circle.", zh: "我看到一個紅色的小圓形。" },
+      { en: "I see a big blue square.", zh: "我看到一個藍色的大正方形。" },
+      { en: "The star is yellow.", zh: "星星是黃色的。" },
+      { en: "Colors and shapes are fun!", zh: "顏色和形狀真有趣！" },
+    ],
   },
   {
     id: 5, title: "My Body", zh: "我的身體", icon: "🙆",
@@ -158,6 +182,12 @@ const WEEKS = [
       { who: "Kids 🧒", en: "Sit down, please.", zh: "請坐下。" },
     ],
     game: { instruction: "🔊 聽身體部位，點對的卡片", words: ["head", "hand", "eye", "nose", "mouth", "ear", "foot", "arm"] },
+    copywork: [
+      { en: "I have two eyes and two ears.", zh: "我有兩隻眼睛和兩隻耳朵。" },
+      { en: "I have one nose and one mouth.", zh: "我有一個鼻子和一張嘴巴。" },
+      { en: "I clap my hands.", zh: "我拍拍手。" },
+      { en: "I stamp my feet.", zh: "我跺跺腳。" },
+    ],
   },
   {
     id: 6, title: "Animals", zh: "動物", icon: "🐾",
@@ -187,6 +217,12 @@ const WEEKS = [
       { who: "Amy 👧", en: "It is cute.", zh: "牠好可愛。" },
     ],
     game: { instruction: "🔊 聽動物名稱，點對的卡片", words: ["cat", "dog", "bird", "fish", "rabbit", "duck", "cow", "pig"] },
+    copywork: [
+      { en: "A small rabbit is in the grass.", zh: "一隻小兔子在草地上。" },
+      { en: "It has long ears.", zh: "牠有長長的耳朵。" },
+      { en: "It can jump.", zh: "牠會跳。" },
+      { en: "I like this cute rabbit.", zh: "我喜歡這隻可愛的兔子。" },
+    ],
   },
   {
     id: 7, title: "Food I Like", zh: "我喜歡的食物", icon: "🍎",
@@ -220,6 +256,12 @@ const WEEKS = [
       title: "👍👎 我喜歡 / 我不喜歡",
       instruction: "看到食物卡，選 👍 我喜歡 或 👎 我不喜歡，聽聽看整句怎麼說。",
     },
+    copywork: [
+      { en: "I eat bread and an egg for breakfast.", zh: "我早餐吃麵包和一顆蛋。" },
+      { en: "I drink milk.", zh: "我喝牛奶。" },
+      { en: "I like apples, too.", zh: "我也喜歡蘋果。" },
+      { en: "My breakfast is yummy!", zh: "我的早餐真好吃！" },
+    ],
   },
   {
     id: 8, title: "My Little Book", zh: "我的小書", icon: "📕",
@@ -252,6 +294,13 @@ const WEEKS = [
       { en: "I like apples. Yummy!", zh: "我喜歡蘋果。好吃！" },
     ],
     game: { instruction: "🔊 複習：聽單字，點對的卡片（每週各挑一個字）", words: ["hello", "family", "book", "red", "head", "dog", "apple"] },
+    copywork: [
+      { en: "Hello! I am Leo.", zh: "哈囉！我是 Leo。" },
+      { en: "I have a happy family.", zh: "我有一個快樂的家庭。" },
+      { en: "My school bag is blue.", zh: "我的書包是藍色的。" },
+      { en: "I like dogs and apples.", zh: "我喜歡狗和蘋果。" },
+      { en: "This is my little book.", zh: "這是我的小書。" },
+    ],
   },
 ];
 
@@ -260,6 +309,7 @@ function esc(s) { return String(s).replace(/</g, "&lt;").replace(/>/g, "&gt;"); 
 function vocabAudioName(weekId, en) { return `w${weekId}_${slug(en)}`; }
 function dlgAudioName(weekId, i) { return `w${weekId}_dlg${i}`; }
 function bookAudioName(i) { return `w8_book${i}`; }
+function copyworkAudioName(weekId) { return `w${weekId}_copywork`; }
 
 const CSS = `
 body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
@@ -331,13 +381,11 @@ function renderExtraHTML(weekId, extra, vocab) {
 }
 
 function renderCopyworkHTML(week) {
-  const lines = week.review ? week.book : week.dialogue;
-  const title = week.review ? "文章" : "對話";
   return `<div class="card copywork"><h2>✍️ 本週手寫記憶＋口說作業</h2>
-  <p>請把下面的${title}抄在實體筆記本上。抄寫時小聲念，完成後再練習朗讀與背說。</p>
-  <button onclick="playCopywork()" style="border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:8px 14px;cursor:pointer">🔊 聽整段示範</button>
+  <p>這是另外準備的本週短文。請抄在實體筆記本上，抄寫時小聲念，完成後再練習朗讀與背說。</p>
+  <button onclick="playAudio('${copyworkAudioName(week.id)}')" style="border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:8px 14px;cursor:pointer">🔊 聽整篇示範</button>
   <ol class="steps"><li>先聽整段 2 次。</li><li>每句手寫 1 次，邊寫邊念。</li><li>看著筆記本朗讀 3 次。</li><li>闔上頁面，試著完整背說 1 次。</li></ol>` +
-    lines.map(p => `<div class="copy-line"><b>${esc(p.who ? `${p.who}: ${p.en}` : p.en)}</b><small>${esc(p.zh)}</small></div>`).join("") +
+    week.copywork.map(p => `<div class="copy-line"><b>${esc(p.en)}</b><small>${esc(p.zh)}</small></div>`).join("") +
     `<div class="speak-check">完成標準：能不看網頁，指著自己的手寫內容順順念完。</div></div>`;
 }
 
@@ -381,16 +429,6 @@ function gameAnswer(btn,w){
   if(w===target){btn.classList.add("correct");gScore++;}
   else{btn.classList.add("wrong");document.querySelector('#gameArea [data-w="'+target+'"]').classList.add("correct");}
   setTimeout(()=>{gIdx++;renderGameRound();},900);
-}
-function playCopywork(){
-  let i=0;
-  function next(){
-    if(i>=COPYWORK_AUDIO.length)return;
-    const a=new Audio("audio/"+COPYWORK_AUDIO[i]+".mp3");
-    a.onended=()=>{i++;next();};
-    a.play().catch(()=>{i++;next();});
-  }
-  next();
 }
 const FOOD_FORM={apple:"apples",egg:"eggs",banana:"bananas",milk:"milk",bread:"bread",rice:"rice",juice:"juice",water:"water"};
 function foodChoice(kind){
@@ -467,7 +505,6 @@ const DLG=${JSON.stringify(dlgNames)};
 const GAME_WORDS=${gameWords};
 const VOCAB_AUDIO=${JSON.stringify(Object.assign({}, vocabAudioMap, gameAudioMap))};
 const VOCAB_MAP=${JSON.stringify(gVocabMap)};
-const COPYWORK_AUDIO=${JSON.stringify(week.review ? bookNames : dlgNames)};
 ${GAME_JS}
 </script>
 </body></html>`;
@@ -518,6 +555,7 @@ WEEKS.forEach(w => {
   } else {
     w.book.forEach((p, i) => { items[bookAudioName(i)] = p.en; });
   }
+  items[copyworkAudioName(w.id)] = w.copywork.map(p => p.en).join(" ");
 });
 fs.writeFileSync(AUDIO_SPEC_OUT, JSON.stringify({ outdir: AUDIO_OUTDIR, voice: "af_heart", speed: 0.85, items }, null, 2), "utf-8");
 

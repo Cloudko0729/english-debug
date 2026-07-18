@@ -47,9 +47,9 @@ header a{color:#eaffef;text-decoration:none;font-weight:700}
 <div class="card"><div class="goal">🎯 完成動作歌指令挑戰，會用 Touch your... / I have...</div><div class="pattern">Touch your ___.</div><div class="pattern">I have two ___.</div></div><div class="card"><h2>🎧 情境對話</h2><button id="playAll" onclick="playAllDlg()">▶️ 全部播放</button><div class="dlg"><b>Teacher 🧑‍🏫</b><button onclick="playAudio('w5_dlg0')">🔊</button><span class="txt">Stand up! Touch your head.<small>站起來！摸摸你的頭。</small></span></div><div class="dlg"><b>Kids 🧒</b><button onclick="playAudio('w5_dlg1')">🔊</button><span class="txt">Touch your nose. Touch your ears.<small>摸摸鼻子。摸摸耳朵。</small></span></div><div class="dlg"><b>Teacher 🧑‍🏫</b><button onclick="playAudio('w5_dlg2')">🔊</button><span class="txt">I have two hands and two feet.<small>我有兩隻手和兩隻腳。</small></span></div><div class="dlg"><b>Kids 🧒</b><button onclick="playAudio('w5_dlg3')">🔊</button><span class="txt">Sit down, please.<small>請坐下。</small></span></div></div><div class="card"><h2>🔤 單字卡（點卡片聽發音）</h2><div class="vocabgrid"><div class="vcard" onclick="playAudio('w5_head')"><div class="em">🗣️</div><b>head</b><small>頭</small></div><div class="vcard" onclick="playAudio('w5_hand')"><div class="em">✋</div><b>hand</b><small>手</small></div><div class="vcard" onclick="playAudio('w5_eye')"><div class="em">👁️</div><b>eye</b><small>眼睛</small></div><div class="vcard" onclick="playAudio('w5_nose')"><div class="em">👃</div><b>nose</b><small>鼻子</small></div><div class="vcard" onclick="playAudio('w5_mouth')"><div class="em">👄</div><b>mouth</b><small>嘴巴</small></div><div class="vcard" onclick="playAudio('w5_ear')"><div class="em">👂</div><b>ear</b><small>耳朵</small></div><div class="vcard" onclick="playAudio('w5_foot')"><div class="em">🦶</div><b>foot</b><small>腳</small></div><div class="vcard" onclick="playAudio('w5_hair')"><div class="em">💇</div><b>hair</b><small>頭髮</small></div><div class="vcard" onclick="playAudio('w5_arm')"><div class="em">💪</div><b>arm</b><small>手臂</small></div><div class="vcard" onclick="playAudio('w5_touch')"><div class="em">👉</div><b>touch</b><small>摸</small></div><div class="vcard" onclick="playAudio('w5_have')"><div class="em">🤲</div><b>have</b><small>有</small></div><div class="vcard" onclick="playAudio('w5_two')"><div class="em">2️⃣</div><b>two</b><small>二</small></div><div class="vcard" onclick="playAudio('w5_your')"><div class="em">🫵</div><b>your</b><small>你的</small></div><div class="vcard" onclick="playAudio('w5_stand_up')"><div class="em">🧍</div><b>stand up</b><small>站起來</small></div><div class="vcard" onclick="playAudio('w5_sit_down')"><div class="em">🪑</div><b>sit down</b><small>坐下</small></div></div></div><div class="card"><h2>🎮 聽力遊戲</h2><p>🔊 聽身體部位，點對的卡片</p>
   <button id="gplay" onclick="startGame()">▶️ 開始</button>
   <div id="gameArea"></div><div id="gstatus"></div></div><div class="card copywork"><h2>✍️ 本週手寫記憶＋口說作業</h2>
-  <p>請把下面的對話抄在實體筆記本上。抄寫時小聲念，完成後再練習朗讀與背說。</p>
-  <button onclick="playCopywork()" style="border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:8px 14px;cursor:pointer">🔊 聽整段示範</button>
-  <ol class="steps"><li>先聽整段 2 次。</li><li>每句手寫 1 次，邊寫邊念。</li><li>看著筆記本朗讀 3 次。</li><li>闔上頁面，試著完整背說 1 次。</li></ol><div class="copy-line"><b>Teacher 🧑‍🏫: Stand up! Touch your head.</b><small>站起來！摸摸你的頭。</small></div><div class="copy-line"><b>Kids 🧒: Touch your nose. Touch your ears.</b><small>摸摸鼻子。摸摸耳朵。</small></div><div class="copy-line"><b>Teacher 🧑‍🏫: I have two hands and two feet.</b><small>我有兩隻手和兩隻腳。</small></div><div class="copy-line"><b>Kids 🧒: Sit down, please.</b><small>請坐下。</small></div><div class="speak-check">完成標準：能不看網頁，指著自己的手寫內容順順念完。</div></div><div class="card donebox"><label><input type="checkbox" id="doneCb" onchange="toggleDone(this)"> ✅ 這週完成了（記在這台裝置，不用帳號）</label></div>
+  <p>這是另外準備的本週短文。請抄在實體筆記本上，抄寫時小聲念，完成後再練習朗讀與背說。</p>
+  <button onclick="playAudio('w5_copywork')" style="border:none;border-radius:10px;background:#2f80ed;color:#fff;font-weight:700;padding:8px 14px;cursor:pointer">🔊 聽整篇示範</button>
+  <ol class="steps"><li>先聽整段 2 次。</li><li>每句手寫 1 次，邊寫邊念。</li><li>看著筆記本朗讀 3 次。</li><li>闔上頁面，試著完整背說 1 次。</li></ol><div class="copy-line"><b>I have two eyes and two ears.</b><small>我有兩隻眼睛和兩隻耳朵。</small></div><div class="copy-line"><b>I have one nose and one mouth.</b><small>我有一個鼻子和一張嘴巴。</small></div><div class="copy-line"><b>I clap my hands.</b><small>我拍拍手。</small></div><div class="copy-line"><b>I stamp my feet.</b><small>我跺跺腳。</small></div><div class="speak-check">完成標準：能不看網頁，指著自己的手寫內容順順念完。</div></div><div class="card donebox"><label><input type="checkbox" id="doneCb" onchange="toggleDone(this)"> ✅ 這週完成了（記在這台裝置，不用帳號）</label></div>
 <div class="nav2">
   <span><a href="week4.html">← Week 4</a></span>
   <span><a href="week6.html">Week 6 →</a></span>
@@ -60,7 +60,6 @@ const DLG=["w5_dlg0","w5_dlg1","w5_dlg2","w5_dlg3"];
 const GAME_WORDS=["head","hand","eye","nose","mouth","ear","foot","arm"];
 const VOCAB_AUDIO={"head":"w5_head","hand":"w5_hand","eye":"w5_eye","nose":"w5_nose","mouth":"w5_mouth","ear":"w5_ear","foot":"w5_foot","hair":"w5_hair","arm":"w5_arm","touch":"w5_touch","have":"w5_have","two":"w5_two","your":"w5_your","stand up":"w5_stand_up","sit down":"w5_sit_down"};
 const VOCAB_MAP={"head":{"en":"head","emoji":"🗣️"},"hand":{"en":"hand","emoji":"✋"},"eye":{"en":"eye","emoji":"👁️"},"nose":{"en":"nose","emoji":"👃"},"mouth":{"en":"mouth","emoji":"👄"},"ear":{"en":"ear","emoji":"👂"},"foot":{"en":"foot","emoji":"🦶"},"hair":{"en":"hair","emoji":"💇"},"arm":{"en":"arm","emoji":"💪"},"touch":{"en":"touch","emoji":"👉"},"have":{"en":"have","emoji":"🤲"},"two":{"en":"two","emoji":"2️⃣"},"your":{"en":"your","emoji":"🫵"},"stand up":{"en":"stand up","emoji":"🧍"},"sit down":{"en":"sit down","emoji":"🪑"}};
-const COPYWORK_AUDIO=["w5_dlg0","w5_dlg1","w5_dlg2","w5_dlg3"];
 
 function playAudio(name){new Audio("audio/"+name+".mp3").play().catch(()=>{});}
 let dlgIdx=0;
@@ -95,16 +94,6 @@ function gameAnswer(btn,w){
   if(w===target){btn.classList.add("correct");gScore++;}
   else{btn.classList.add("wrong");document.querySelector('#gameArea [data-w="'+target+'"]').classList.add("correct");}
   setTimeout(()=>{gIdx++;renderGameRound();},900);
-}
-function playCopywork(){
-  let i=0;
-  function next(){
-    if(i>=COPYWORK_AUDIO.length)return;
-    const a=new Audio("audio/"+COPYWORK_AUDIO[i]+".mp3");
-    a.onended=()=>{i++;next();};
-    a.play().catch(()=>{i++;next();});
-  }
-  next();
 }
 const FOOD_FORM={apple:"apples",egg:"eggs",banana:"bananas",milk:"milk",bread:"bread",rice:"rice",juice:"juice",water:"water"};
 function foodChoice(kind){
