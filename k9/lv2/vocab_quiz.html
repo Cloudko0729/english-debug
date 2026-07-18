@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎯 Lv.2 單字練習題</title><style>
+body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;max-width:720px;margin:0 auto;padding:0 14px 60px;line-height:1.7}
+header{color:#fff;text-align:center;padding:18px;border-radius:0 0 14px 14px;margin:0 -14px 12px}
+header h1{margin:0;font-size:1.2rem} header p{margin:6px 0 0;font-size:.82rem;opacity:.92} header a{color:#fff;text-decoration:none;font-weight:700}
+.card{background:#fff;border-radius:14px;padding:14px 16px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h2{font-size:1rem;margin:0 0 8px}
+.intro{font-size:.9rem;color:#555}
+#start{border:none;border-radius:10px;color:#fff;font-weight:700;padding:11px 20px;cursor:pointer;font-size:.95rem}
+.qcount{font-size:.82rem;color:#888;margin-top:6px}
+.sent{font-size:1.05rem;background:#eef5ff;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.sent b{color:#1e5fb8}
+.playbtn{border:none;border-radius:8px;color:#fff;font-weight:700;padding:7px 14px;cursor:pointer;margin-bottom:10px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.choices button{padding:12px 10px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:700;cursor:pointer;font-size:.92rem}
+.choices button.correct{border-color:#2fbf71;background:#d9f7e8}
+.choices button.wrong{border-color:#ef476f;background:#fde0e8}
+#qstatus{font-weight:700;margin-top:10px;text-align:center}
+#result{text-align:center;font-size:1.1rem;font-weight:700;margin-top:10px}
+.again{display:block;text-align:center;border:none;border-radius:10px;color:#fff;font-weight:700;padding:10px;margin-top:12px;cursor:pointer;width:100%;font-size:.95rem}
+.nav2{display:flex;justify-content:space-between;margin-top:16px;font-size:.85rem}
+.nav2 a{text-decoration:none;font-weight:700;background:#fff;border-radius:10px;padding:9px 14px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+</style></head><body>
+<header style="background:#5b7cfa"><h1>🎯 Lv.2 單字練習題</h1><p><a href="index.html">← Lv.2：國小二年級</a></p></header>
+<div class="card"><h2 style="color:#5b7cfa">字彙池練習</h2><p class="intro">從 Lv.2 字彙池（101 字，不限本級 8 週課程教過的字）隨機出題：看例句、聽發音，選出正確的中文意思。每次練習抽 12 題，可以一直重來抽到不同的字。</p>
+<button id="start" style="background:#5b7cfa" onclick="startQuiz()">▶️ 開始練習</button>
+<p class="qcount" id="qcount"></p>
+<div id="quizArea"></div>
+<div id="qstatus"></div>
+<div id="result"></div>
+<button class="again" id="again" style="background:#5b7cfa;display:none" onclick="startQuiz()">🔁 再來一組</button>
+</div>
+<div class="nav2"><span><a href="index.html" style="color:#5b7cfa">← Lv.2 目錄</a></span><span></span></div>
+<script>
+const POOL=[{"en":"air","zh":"空氣","audio":"pool_air","sentHtml":"We breathe fresh <b>air</b> outside."},{"en":"and","zh":"和","audio":"pool_and","sentHtml":"I like apples <b>and</b> bananas."},{"en":"ant","zh":"螞蟻","audio":"pool_ant","sentHtml":"A tiny <b>ant</b> is on the table."},{"en":"apple","zh":"蘋果","audio":"pool_apple","sentHtml":"I eat an <b>apple</b> every day."},{"en":"bee","zh":"蜜蜂","audio":"pool_bee","sentHtml":"A <b>bee</b> flies to the flower."},{"en":"birthday","zh":"生日","audio":"pool_birthday","sentHtml":"Today is my <b>birthday</b>."},{"en":"black","zh":"黑色","audio":"pool_black","sentHtml":"My shoes are <b>black</b>."},{"en":"box","zh":"盒子","audio":"pool_box","sentHtml":"I put my toys in a <b>box</b>."},{"en":"brother","zh":"兄弟","audio":"pool_brother","sentHtml":"My <b>brother</b> is ten years old."},{"en":"brown","zh":"棕色","audio":"pool_brown","sentHtml":"The dog has <b>brown</b> fur."},{"en":"busy","zh":"忙碌的","audio":"pool_busy","sentHtml":"My mom is very <b>busy</b> today."},{"en":"but","zh":"但是","audio":"pool_but","sentHtml":"I like tea, <b>but</b> not coffee."},{"en":"cake","zh":"蛋糕","audio":"pool_cake","sentHtml":"We made a chocolate <b>cake</b>."},{"en":"candy","zh":"糖果","audio":"pool_candy","sentHtml":"The <b>candy</b> is very sweet."},{"en":"cap","zh":"帽子","audio":"pool_cap","sentHtml":"He wears a red <b>cap</b>."},{"en":"chair","zh":"椅子","audio":"pool_chair","sentHtml":"Please sit on the <b>chair</b>."},{"en":"classmate","zh":"同學","audio":"pool_classmate","sentHtml":"She is my <b>classmate</b>."},{"en":"classroom","zh":"教室","audio":"pool_classroom","sentHtml":"Our <b>classroom</b> is very clean."},{"en":"clock","zh":"時鐘","audio":"pool_clock","sentHtml":"The <b>clock</b> says three o'clock."},{"en":"close","zh":"關上","audio":"pool_close","sentHtml":"Please <b>close</b> the window."},{"en":"coffee","zh":"咖啡","audio":"pool_coffee","sentHtml":"My dad drinks <b>coffee</b> every morning."},{"en":"coke","zh":"可樂","audio":"pool_coke","sentHtml":"I like <b>coke</b> better than juice."},{"en":"cola","zh":"可樂","audio":"pool_cola","sentHtml":"We drank <b>cola</b> at the party."},{"en":"color","zh":"顏色","audio":"pool_color","sentHtml":"What is your favorite <b>color</b>?"},{"en":"cow","zh":"牛","audio":"pool_cow","sentHtml":"The <b>cow</b> eats grass."},{"en":"cute","zh":"可愛的","audio":"pool_cute","sentHtml":"The puppy is very <b>cute</b>."},{"en":"day","zh":"天","audio":"pool_day","sentHtml":"It is a sunny <b>day</b>."},{"en":"dear","zh":"親愛的","audio":"pool_dear","sentHtml":"<b>Dear</b> friend, how are you?"},{"en":"dirty","zh":"髒的","audio":"pool_dirty","sentHtml":"My shoes are <b>dirty</b>."},{"en":"doll","zh":"娃娃","audio":"pool_doll","sentHtml":"She plays with her <b>doll</b>."},{"en":"draw","zh":"畫畫","audio":"pool_draw","sentHtml":"I like to <b>draw</b> animals."},{"en":"eat","zh":"吃","audio":"pool_eat","sentHtml":"Let's <b>eat</b> dinner together."},{"en":"english","zh":"英語","audio":"pool_english","sentHtml":"We study <b>English</b> at school."},{"en":"father","zh":"爸爸","audio":"pool_father","sentHtml":"My <b>father</b> works in the city."},{"en":"flower","zh":"花","audio":"pool_flower","sentHtml":"This <b>flower</b> smells nice."},{"en":"fox","zh":"狐狸、狡猾的人","audio":"pool_fox","sentHtml":"A <b>fox</b> ran across the field."},{"en":"friendly","zh":"友善的","audio":"pool_friendly","sentHtml":"Our new neighbor is very <b>friendly</b>."},{"en":"frog","zh":"青蛙","audio":"pool_frog","sentHtml":"The <b>frog</b> jumped into the pond."},{"en":"fruit","zh":"水果","audio":"pool_fruit","sentHtml":"I eat <b>fruit</b> every day."},{"en":"give","zh":"給","audio":"pool_give","sentHtml":"Can you <b>give</b> me the ball?"},{"en":"glue","zh":"膠水","audio":"pool_glue","sentHtml":"Use <b>glue</b> to stick the paper."},{"en":"gray","zh":"灰色","audio":"pool_gray","sentHtml":"The sky is <b>gray</b> today."},{"en":"green","zh":"綠色","audio":"pool_green","sentHtml":"The grass is <b>green</b>."},{"en":"ham","zh":"火腿","audio":"pool_ham","sentHtml":"We had <b>ham</b> sandwiches for lunch."},{"en":"hello","zh":"哈囉","audio":"pool_hello","sentHtml":"<b>Hello</b>, how are you?"},{"en":"hen","zh":"母雞","audio":"pool_hen","sentHtml":"The <b>hen</b> laid an egg."},{"en":"hey","zh":"嘿、喂","audio":"pool_hey","sentHtml":"<b>Hey</b>, look at this!"},{"en":"hi","zh":"嗨","audio":"pool_hi","sentHtml":"<b>Hi</b>, my name is Tom."},{"en":"hippo","zh":"河馬","audio":"pool_hippo","sentHtml":"The <b>hippo</b> swims in the river."},{"en":"its","zh":"它的","audio":"pool_its","sentHtml":"The dog wagged <b>its</b> tail."},{"en":"old","zh":"舊的","audio":"pool_old","sentHtml":"My grandpa is very <b>old</b>."},{"en":"on","zh":"在……上","audio":"pool_on","sentHtml":"The book is <b>on</b> the table."},{"en":"pencil","zh":"鉛筆","audio":"pool_pencil","sentHtml":"May I borrow your <b>pencil</b>?"},{"en":"picnic","zh":"野餐","audio":"pool_picnic","sentHtml":"We had a <b>picnic</b> in the park."},{"en":"pink","zh":"粉紅色","audio":"pool_pink","sentHtml":"She wears a <b>pink</b> dress."},{"en":"please","zh":"請","audio":"pool_please","sentHtml":"<b>Please</b> help me."},{"en":"read","zh":"閱讀","audio":"pool_read","sentHtml":"I like to <b>read</b> books."},{"en":"real","zh":"真的；真實的","audio":"pool_real","sentHtml":"That flower looks <b>real</b>."},{"en":"rice","zh":"飯","audio":"pool_rice","sentHtml":"We eat <b>rice</b> every day."},{"en":"roc","zh":"巨鳥（神話）","audio":"pool_roc","sentHtml":"The <b>roc</b> is a giant bird in stories."},{"en":"ruler","zh":"尺","audio":"pool_ruler","sentHtml":"Use a <b>ruler</b> to draw a line."},{"en":"sandwich","zh":"三明治","audio":"pool_sandwich","sentHtml":"I made a cheese <b>sandwich</b>."},{"en":"school","zh":"學校","audio":"pool_school","sentHtml":"I go to <b>school</b> by bus."},{"en":"sea","zh":"海","audio":"pool_sea","sentHtml":"We swam in the <b>sea</b>."},{"en":"see","zh":"看見","audio":"pool_see","sentHtml":"I can <b>see</b> a rainbow."},{"en":"sheep","zh":"綿羊","audio":"pool_sheep","sentHtml":"The <b>sheep</b> are in the field."},{"en":"ship","zh":"船","audio":"pool_ship","sentHtml":"The <b>ship</b> sailed across the ocean."},{"en":"shirt","zh":"襯衫","audio":"pool_shirt","sentHtml":"He wears a blue <b>shirt</b>."},{"en":"short","zh":"短的","audio":"pool_short","sentHtml":"My hair is <b>short</b>."},{"en":"shy","zh":"害羞的","audio":"pool_shy","sentHtml":"The little boy is <b>shy</b>."},{"en":"sing","zh":"唱歌","audio":"pool_sing","sentHtml":"She loves to <b>sing</b> songs."},{"en":"singer","zh":"歌手","audio":"pool_singer","sentHtml":"My sister wants to be a <b>singer</b>."},{"en":"sister","zh":"姊妹","audio":"pool_sister","sentHtml":"My <b>sister</b> is eight years old."},{"en":"slow","zh":"慢的","audio":"pool_slow","sentHtml":"The turtle is very <b>slow</b>."},{"en":"small","zh":"小的","audio":"pool_small","sentHtml":"The mouse is very <b>small</b>."},{"en":"sofa","zh":"沙發","audio":"pool_sofa","sentHtml":"We sat on the <b>sofa</b>."},{"en":"son","zh":"兒子","audio":"pool_son","sentHtml":"He is their only <b>son</b>."},{"en":"song","zh":"歌曲","audio":"pool_song","sentHtml":"This is my favorite <b>song</b>."},{"en":"soup","zh":"湯","audio":"pool_soup","sentHtml":"The <b>soup</b> is warm and tasty."},{"en":"stand","zh":"站","audio":"pool_stand","sentHtml":"Please <b>stand</b> up."},{"en":"store","zh":"商店","audio":"pool_store","sentHtml":"We bought bread at the <b>store</b>."},{"en":"student","zh":"學生","audio":"pool_student","sentHtml":"I am a <b>student</b> at this school."},{"en":"study","zh":"讀書；學習","audio":"pool_study","sentHtml":"I <b>study</b> English every night."},{"en":"table","zh":"桌子","audio":"pool_table","sentHtml":"Put the plate on the <b>table</b>."},{"en":"talk","zh":"說話","audio":"pool_talk","sentHtml":"Let's <b>talk</b> about the trip."},{"en":"teacher","zh":"老師","audio":"pool_teacher","sentHtml":"My <b>teacher</b> is very kind."},{"en":"thank","zh":"感謝","audio":"pool_thank","sentHtml":"<b>Thank</b> you for your help."},{"en":"these","zh":"這些","audio":"pool_these","sentHtml":"<b>These</b> are my new shoes."},{"en":"those","zh":"那些","audio":"pool_those","sentHtml":"<b>Those</b> are my friends."},{"en":"toe","zh":"腳趾、腳尖","audio":"pool_toe","sentHtml":"I stubbed my <b>toe</b>."},{"en":"under","zh":"在……下面","audio":"pool_under","sentHtml":"The cat is <b>under</b> the table."},{"en":"usa","zh":"美國","audio":"pool_usa","sentHtml":"My uncle lives in the <b>USA</b>."},{"en":"very","zh":"非常","audio":"pool_very","sentHtml":"This cake is <b>very</b> sweet."},{"en":"want","zh":"想要","audio":"pool_want","sentHtml":"I <b>want</b> a glass of water."},{"en":"wash","zh":"洗","audio":"pool_wash","sentHtml":"Please <b>wash</b> your hands."},{"en":"week","zh":"星期；一週","audio":"pool_week","sentHtml":"I have music class every <b>week</b>."},{"en":"white","zh":"白色","audio":"pool_white","sentHtml":"The snow is <b>white</b>."},{"en":"woman","zh":"女人","audio":"pool_woman","sentHtml":"That <b>woman</b> is my teacher."},{"en":"year","zh":"年","audio":"pool_year","sentHtml":"I am nine years old this <b>year</b>."},{"en":"yellow","zh":"黃色","audio":"pool_yellow","sentHtml":"The sun is <b>yellow</b>."},{"en":"zoo","zh":"動物園","audio":"pool_zoo","sentHtml":"We saw a lion at the <b>zoo</b>."}];
+const N=Math.min(12,POOL.length);
+let session=[],qi=0,score=0;
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startQuiz(){
+  session=shuffle(POOL).slice(0,N); qi=0; score=0;
+  document.getElementById("result").textContent="";
+  document.getElementById("again").style.display="none";
+  document.getElementById("qcount").textContent="";
+  renderQ();
+}
+function renderQ(){
+  const area=document.getElementById("quizArea");
+  if(qi>=session.length){
+    area.innerHTML=""; document.getElementById("qstatus").textContent="";
+    document.getElementById("result").textContent="🎉 完成！答對 "+score+" / "+session.length;
+    document.getElementById("again").style.display="block";
+    return;
+  }
+  const q=session[qi];
+  const distractors=shuffle(POOL.filter(p=>p.en!==q.en)).slice(0,3).map(p=>p.zh);
+  const choices=shuffle(distractors.concat([q.zh]));
+  area.innerHTML='<div class="sent">'+q.sentHtml+'</div>'+
+    '<button class="playbtn" style="background:#5b7cfa" onclick="playAudio(\''+q.audio+'\')">🔊 聽這個字的發音</button>'+
+    '<div class="choices">'+choices.map(c=>'<button onclick="answer(this,\''+c.replace(/'/g,"\\'")+'\')">'+esc(c)+'</button>').join("")+'</div>';
+  document.getElementById("qstatus").textContent="第 "+(qi+1)+" / "+session.length+" 題";
+  document.getElementById("qcount").textContent="本級字彙池共 "+POOL.length+" 字，慢慢都會抽到。";
+}
+function answer(btn,c){
+  const q=session[qi];
+  document.querySelectorAll(".choices button").forEach(b=>b.disabled=true);
+  if(c===q.zh){btn.classList.add("correct");score++;}
+  else{btn.classList.add("wrong");
+    document.querySelectorAll(".choices button").forEach(b=>{if(b.textContent===q.zh)b.classList.add("correct");});
+  }
+  setTimeout(()=>{qi++;renderQ();},1100);
+}
+function playAudio(name){new Audio("audio/"+name+".mp3").play().catch(()=>{});}
+</script>
+</body></html>

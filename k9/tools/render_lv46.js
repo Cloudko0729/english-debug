@@ -258,24 +258,29 @@ const doneKey="k9progress"; function toggleDone(cb){let d={};try{d=JSON.parse(lo
 function renderIndex(level) {
   const rows = level.weeks.map((w, i) => `<a class="week" href="week${i + 1}.html"><span class="num">${i + 1}</span><span><b>Week ${i + 1}：${esc(w.title)}</b><small>${esc(w.zh)}</small></span></a>`).join("");
   const canonical = Object.keys(WORD_LEVELS).filter(word => WORD_LEVELS[word] === level.id).sort();
-  const pool = canonical.map(word => `<details class="pool-word"><summary>${esc(word)}</summary><span>${esc(wordZh(word))}</span></details>`).join("");
+  const usedWords = new Set(level.weeks.flatMap(w => w.vocab.map(v => v[0])));
+  const pool = canonical.map(word => `<details class="pool-word${usedWords.has(word) ? " used" : ""}"><summary>${esc(word)}</summary><span>${esc(wordZh(word))}</span></details>`).join("");
   const color = HEADER_COLOR[level.id];
-  return `<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Lv.${level.id} ${esc(level.title)}</title><style>${CSS}.home{background:${color};color:#fff;text-align:center;padding:22px 16px;border-radius:0 0 14px 14px;margin:0 -14px 14px}.home h1{margin:0;font-size:1.35rem}.home a{color:#fff}.week{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:12px 14px;margin-top:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-decoration:none;color:inherit}.week .num{background:#eef1ff;color:${color};border-radius:50%;width:32px;height:32px;text-align:center;line-height:32px;font-weight:700}.week b{display:block}.week small{color:#888}.pool-intro{color:#666;font-size:.88rem;margin:4px 0 10px}.poolgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}.pool-word{background:#fdf6e3;border:1px solid #f2d68a;border-radius:9px;min-height:38px}.pool-word summary{cursor:pointer;padding:6px 8px;font-weight:700;color:#243042;list-style-position:inside}.pool-word span{display:block;padding:0 8px 7px;color:${color};font-size:.85rem;font-weight:700}</style></head><body><header class="home"><h1>${level.icon} Lv.${level.id}：${esc(level.title)}</h1><p><a href="../index.html">← 國小～國中英語 9 級課程</a> · ${esc(level.zh)}</p></header><div class="card"><h2 style="color:${color}">📚 Lv.${level.id} 字彙池（wL${level.id}，${canonical.length} 字）</h2><p class="pool-intro">點一下單字，就會展開中文意思；再點一次可以收合。這是理解字彙池，每週主動練習仍以各週單字卡為主。</p><div class="poolgrid">${pool}</div></div><div class="card"><h2 style="color:${color}">這一級要做到</h2><p>${esc(level.intro)}</p><p>每週都有文法小提示、聽力遊戲、獨立短文：先聽、手寫、朗讀，再背說。</p></div>${rows}</body></html>`;
+  return `<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Lv.${level.id} ${esc(level.title)}</title><style>${CSS}.home{background:${color};color:#fff;text-align:center;padding:22px 16px;border-radius:0 0 14px 14px;margin:0 -14px 14px}.home h1{margin:0;font-size:1.35rem}.home a{color:#fff}.week{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:12px 14px;margin-top:10px;box-shadow:0 1px 4px rgba(0,0,0,.08);text-decoration:none;color:inherit}.week .num{background:#eef1ff;color:${color};border-radius:50%;width:32px;height:32px;text-align:center;line-height:32px;font-weight:700}.week b{display:block}.week small{color:#888}.pool-intro{color:#666;font-size:.88rem;margin:4px 0 10px}.poolgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}.pool-word{background:#fdf6e3;border:1px solid #f2d68a;border-radius:9px;min-height:38px}.pool-word.used{background:#eef4f4;border:1px solid #9ad8d6}.pool-word summary{cursor:pointer;padding:6px 8px;font-weight:700;color:#243042;list-style-position:inside}.pool-word span{display:block;padding:0 8px 7px;color:${color};font-size:.85rem;font-weight:700}.legend{font-size:.8rem;color:#666;margin:8px 0}.legend .sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:4px;vertical-align:-1px}.quizlink{display:block;text-align:center;background:${color};color:#fff;font-weight:700;text-decoration:none;border-radius:10px;padding:10px;margin-top:10px}</style></head><body><header class="home"><h1>${level.icon} Lv.${level.id}：${esc(level.title)}</h1><p><a href="../index.html">← 國小～國中英語 9 級課程</a> · ${esc(level.zh)}</p></header><div class="card"><h2 style="color:${color}">📚 Lv.${level.id} 字彙池（wL${level.id}，${canonical.length} 字）</h2><p class="pool-intro">點一下單字，就會展開中文意思；再點一次可以收合。這是理解字彙池，每週主動練習仍以各週單字卡為主。</p><p class="legend"><span class="sw" style="background:#eef4f4;border:1px solid #9ad8d6"></span>本級 8 週課程教過　<span class="sw" style="background:#fdf6e3;border:1px solid #f2d68a"></span>只在字彙池，還沒排進課程</p><div class="poolgrid">${pool}</div><a class="quizlink" href="vocab_quiz.html">🎯 開始這一級的單字練習題</a></div><div class="card"><h2 style="color:${color}">這一級要做到</h2><p>${esc(level.intro)}</p><p>每週都有文法小提示、聽力遊戲、獨立短文：先聽、手寫、朗讀，再背說。</p></div>${rows}</body></html>`;
 }
 
-for (const level of LEVELS) {
-  const out = path.join(ROOT, `lv${level.id}`); fs.mkdirSync(path.join(out, "audio"), { recursive: true });
-  level.weeks.forEach((week, i) => fs.writeFileSync(path.join(out, `week${i + 1}.html`), renderWeek(level, week, i), "utf8"));
-  fs.writeFileSync(path.join(out, "index.html"), renderIndex(level), "utf8");
-  const items = {};
-  level.weeks.forEach((week, i) => {
-    week.vocab.forEach(v => { items[audioName(level.id, i + 1, "v", slug(v[0]))] = v[0]; });
-    week.dialogue.forEach((d, j) => { items[audioName(level.id, i + 1, "d", j)] = d[1]; });
-    week.grammar.examples.forEach((ex, j) => { items[audioName(level.id, i + 1, "g", j)] = ex[0]; });
-    items[audioName(level.id, i + 1, "copy")] = week.copywork.map(p => p[0]).join(" ");
-  });
-  fs.writeFileSync(path.join(__dirname, `audio_lv${level.id}.json`), JSON.stringify({ outdir: path.join(out, "audio").replace(/\\/g, "/"), voice: "af_heart", speed: 0.85, items }, null, 2), "utf8");
-  const canonicalCount = Object.values(WORD_LEVELS).filter(sourceLevel => sourceLevel === level.id).length;
-  console.log(`Lv.${level.id} canonical wL${level.id}: ${canonicalCount} 字, audio items: ${Object.keys(items).length}`);
+if (require.main === module) {
+  for (const level of LEVELS) {
+    const out = path.join(ROOT, `lv${level.id}`); fs.mkdirSync(path.join(out, "audio"), { recursive: true });
+    level.weeks.forEach((week, i) => fs.writeFileSync(path.join(out, `week${i + 1}.html`), renderWeek(level, week, i), "utf8"));
+    fs.writeFileSync(path.join(out, "index.html"), renderIndex(level), "utf8");
+    const items = {};
+    level.weeks.forEach((week, i) => {
+      week.vocab.forEach(v => { items[audioName(level.id, i + 1, "v", slug(v[0]))] = v[0]; });
+      week.dialogue.forEach((d, j) => { items[audioName(level.id, i + 1, "d", j)] = d[1]; });
+      week.grammar.examples.forEach((ex, j) => { items[audioName(level.id, i + 1, "g", j)] = ex[0]; });
+      items[audioName(level.id, i + 1, "copy")] = week.copywork.map(p => p[0]).join(" ");
+    });
+    fs.writeFileSync(path.join(__dirname, `audio_lv${level.id}.json`), JSON.stringify({ outdir: path.join(out, "audio").replace(/\\/g, "/"), voice: "af_heart", speed: 0.85, items }, null, 2), "utf8");
+    const canonicalCount = Object.values(WORD_LEVELS).filter(sourceLevel => sourceLevel === level.id).length;
+    console.log(`Lv.${level.id} canonical wL${level.id}: ${canonicalCount} 字, audio items: ${Object.keys(items).length}`);
+  }
+  console.log("已產生 Lv.4 / Lv.5 / Lv.6 各 8 週頁面與音訊清單");
 }
-console.log("已產生 Lv.4 / Lv.5 / Lv.6 各 8 週頁面與音訊清單");
+
+module.exports = { LEVELS, wordZh };

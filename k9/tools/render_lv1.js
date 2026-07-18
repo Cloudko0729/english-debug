@@ -519,7 +519,8 @@ ${GAME_JS}
 function renderIndexPage(weekList) {
   const rows = weekList.map(w => `<a class="wcard" href="week${w.id}.html"><div class="em">${w.icon}</div><div><b>Week ${w.id}：${esc(w.title)}</b><small>${esc(w.zh)}</small></div><div class="chk" id="chk${w.id}"></div></a>`).join("");
   const canonical = Object.keys(WORD_LEVELS).filter(word => WORD_LEVELS[word] === 1).sort();
-  const pool = canonical.map(word => `<details class="pool-word"><summary>${esc(word)}</summary><span>${esc(LV1_ZH[word] || "中文意思整理中")}</span></details>`).join("");
+  const usedWords = new Set(weekList.flatMap(w => w.vocab.map(v => v.en)));
+  const pool = canonical.map(word => `<details class="pool-word${usedWords.has(word) ? " used" : ""}"><summary>${esc(word)}</summary><span>${esc(LV1_ZH[word] || "中文意思整理中")}</span></details>`).join("");
   return `<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🌱 Lv.1 國小一年級 — 8 週英語入門</title><style>
@@ -537,12 +538,19 @@ header a{color:#eaffef;text-decoration:none;font-weight:700}
   .pool-intro{color:#666;font-size:.88rem;margin:4px 0 10px}
   .poolgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
   .pool-word{background:#fdf6e3;border:1px solid #f2d68a;border-radius:9px;min-height:38px}
+  .pool-word.used{background:#eafff2;border:1px solid #7fd9a8}
   .pool-word summary{cursor:pointer;padding:6px 8px;font-weight:700;color:#243042;list-style-position:inside}
   .pool-word span{display:block;padding:0 8px 7px;color:#187a48;font-size:.85rem;font-weight:700}
+  .legend{font-size:.8rem;color:#666;margin:8px 0}
+  .legend .sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+  .quizlink{display:block;text-align:center;background:#2fbf71;color:#fff;font-weight:700;text-decoration:none;border-radius:10px;padding:10px;margin-top:10px}
 </style></head><body>
 <header><h1>🌱 Lv.1 國小一年級</h1><p><a href="../index.html">← 課程首頁</a> · Pre-A1 起步 · 不考試，聽說為主</p></header>
 <div class="card"><h2>這一級要做到</h2><p>看得懂、聽得懂日常招呼、家人、學校用品、顏色形狀、身體、動物、食物的基本單字和短句；能完成 8 週的小任務並做出一本「我的小書」。</p></div>
-<div class="card"><h2>📚 Lv.1 字彙池（wL1，${canonical.length} 字）</h2><p class="pool-intro">點一下單字，就會展開中文意思；再點一次可以收合。這是理解字彙池，每週主動練習仍以各週單字卡為主。</p><div class="poolgrid">${pool}</div></div>
+<div class="card"><h2>📚 Lv.1 字彙池（wL1，${canonical.length} 字）</h2><p class="pool-intro">點一下單字，就會展開中文意思；再點一次可以收合。這是理解字彙池，每週主動練習仍以各週單字卡為主。</p>
+<p class="legend"><span class="sw" style="background:#eafff2;border:1px solid #7fd9a8"></span>本級 8 週課程教過　<span class="sw" style="background:#fdf6e3;border:1px solid #f2d68a"></span>只在字彙池，還沒排進課程</p>
+<div class="poolgrid">${pool}</div>
+<a class="quizlink" href="vocab_quiz.html">🎯 開始這一級的單字練習題</a></div>
 ${rows}
 <script>
 try{
@@ -554,24 +562,28 @@ try{
 }
 
 // ---- 產生檔案 ----
-fs.mkdirSync(OUTDIR, { recursive: true });
-WEEKS.forEach(w => {
-  fs.writeFileSync(path.join(OUTDIR, `week${w.id}.html`), renderWeekPage(w, WEEKS), "utf-8");
-});
-fs.writeFileSync(path.join(OUTDIR, "index.html"), renderIndexPage(WEEKS), "utf-8");
+if (require.main === module) {
+  fs.mkdirSync(OUTDIR, { recursive: true });
+  WEEKS.forEach(w => {
+    fs.writeFileSync(path.join(OUTDIR, `week${w.id}.html`), renderWeekPage(w, WEEKS), "utf-8");
+  });
+  fs.writeFileSync(path.join(OUTDIR, "index.html"), renderIndexPage(WEEKS), "utf-8");
 
-// ---- 產生語音清單 ----
-const items = {};
-WEEKS.forEach(w => {
-  w.vocab.forEach(v => { items[vocabAudioName(w.id, v.en)] = v.en; });
-  if (!w.review) {
-    w.dialogue.forEach((d, i) => { items[dlgAudioName(w.id, i)] = d.en; });
-  } else {
-    w.book.forEach((p, i) => { items[bookAudioName(i)] = p.en; });
-  }
-  items[copyworkAudioName(w.id)] = w.copywork.map(p => p.en).join(" ");
-});
-fs.writeFileSync(AUDIO_SPEC_OUT, JSON.stringify({ outdir: AUDIO_OUTDIR, voice: "af_heart", speed: 0.85, items }, null, 2), "utf-8");
+  // ---- 產生語音清單 ----
+  const items = {};
+  WEEKS.forEach(w => {
+    w.vocab.forEach(v => { items[vocabAudioName(w.id, v.en)] = v.en; });
+    if (!w.review) {
+      w.dialogue.forEach((d, i) => { items[dlgAudioName(w.id, i)] = d.en; });
+    } else {
+      w.book.forEach((p, i) => { items[bookAudioName(i)] = p.en; });
+    }
+    items[copyworkAudioName(w.id)] = w.copywork.map(p => p.en).join(" ");
+  });
+  fs.writeFileSync(AUDIO_SPEC_OUT, JSON.stringify({ outdir: AUDIO_OUTDIR, voice: "af_heart", speed: 0.85, items }, null, 2), "utf-8");
 
-console.log(`已產生 ${WEEKS.length} 週頁面 + index.html`);
-console.log(`語音清單：${Object.keys(items).length} 條 -> ${AUDIO_SPEC_OUT}`);
+  console.log(`已產生 ${WEEKS.length} 週頁面 + index.html`);
+  console.log(`語音清單：${Object.keys(items).length} 條 -> ${AUDIO_SPEC_OUT}`);
+}
+
+module.exports = { WEEKS, LV1_ZH };
