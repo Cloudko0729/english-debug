@@ -3,15 +3,16 @@
 // 依賴 pool_sentences.js（例句庫）＋各級既有的中文翻譯來源（render_lv1/render_lv23/render_lv46 的 zh 對照）。
 const fs = require("fs");
 const path = require("path");
-const { WORD_LEVELS } = require(path.join(__dirname, "..", "..", "kids", "wordlevels.js"));
+const { WORD_LEVELS, EXTRA_LEVELS, wordLevel } = require(path.join(__dirname, "..", "..", "kids", "wordlevels.js"));
 const { SENTENCES } = require("./pool_sentences.js");
 const { LV1_ZH } = require("./render_lv1.js");
 const { wordZh: wordZh23 } = require("./render_lv23.js");
 const { wordZh: wordZh46 } = require("./render_lv46.js");
+const { wordZh: wordZh79 } = require("./render_lv79.js");
 
 const ROOT = path.join(__dirname, "..");
-const HEADER_COLOR = { 1: "#2fbf71", 2: "#5b7cfa", 3: "#9b59b6", 4: "#0e9594", 5: "#e08e2b", 6: "#d1495b" };
-const TITLES = { 1: "國小一年級", 2: "國小二年級", 3: "國小三年級", 4: "國小四年級", 5: "國小五年級", 6: "國小六年級" };
+const HEADER_COLOR = { 1: "#2fbf71", 2: "#5b7cfa", 3: "#9b59b6", 4: "#0e9594", 5: "#e08e2b", 6: "#d1495b", 7: "#6a4c93" };
+const TITLES = { 1: "國小一年級", 2: "國小二年級", 3: "國小三年級", 4: "國小四年級", 5: "國小五年級", 6: "國小六年級", 7: "國中一年級" };
 
 function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
 function slug(s) { return s.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, ""); }
@@ -26,7 +27,17 @@ function boldWord(sentence, word) {
 function zhFor(level, word) {
   if (level === 1) return LV1_ZH[word] || "中文意思整理中";
   if (level === 2 || level === 3) return wordZh23(word);
+  if (level === 7) return wordZh79(word);
   return wordZh46(word);
+}
+// Lv.1-6 沿用既有 WORD_LEVELS-only 範圍（PDF 1200 字表，不含 Codex 額外分級字，維持已上線內容不變）；
+// Lv.7 用 wordLevel() 合併 WORD_LEVELS+EXTRA_LEVELS，跟 render_lv79.js 的字彙池範圍一致（575 字）。
+function canonicalWordsFor(level) {
+  if (level === 7) {
+    const all = new Set([...Object.keys(WORD_LEVELS), ...Object.keys(EXTRA_LEVELS)]);
+    return [...all].filter(w => wordLevel(w) === 7).sort();
+  }
+  return Object.keys(WORD_LEVELS).filter(w => WORD_LEVELS[w] === level).sort();
 }
 
 const CSS = `
@@ -54,7 +65,7 @@ header h1{margin:0;font-size:1.2rem} header p{margin:6px 0 0;font-size:.82rem;op
 
 function renderQuizPage(level) {
   const color = HEADER_COLOR[level];
-  const canonical = Object.keys(WORD_LEVELS).filter(w => WORD_LEVELS[w] === level).sort();
+  const canonical = canonicalWordsFor(level);
   const pool = canonical.map(word => ({
     en: word,
     zh: zhFor(level, word),
@@ -121,11 +132,11 @@ function playAudio(name){new Audio("audio/"+name+".mp3").play().catch(()=>{});}
 }
 
 if (require.main === module) {
-  for (const level of [1, 2, 3, 4, 5, 6]) {
+  for (const level of [1, 2, 3, 4, 5, 6, 7]) {
     const out = path.join(ROOT, `lv${level}`);
     fs.mkdirSync(path.join(out, "audio"), { recursive: true });
     fs.writeFileSync(path.join(out, "vocab_quiz.html"), renderQuizPage(level), "utf8");
-    const canonical = Object.keys(WORD_LEVELS).filter(w => WORD_LEVELS[w] === level).sort();
+    const canonical = canonicalWordsFor(level);
     const items = {};
     canonical.forEach(word => {
       items["pool_" + slug(word)] = word;
