@@ -322,7 +322,7 @@
     <button id="rootsBtn" onclick="openRoots()" style="flex:1;min-width:130px;padding:10px;border:2px solid #4a8f3c;border-radius:12px;background:#f3fbe9;color:#2e6b23;font-weight:800;cursor:pointer">🌱 字根字源</button>
     <button id="petBtn" onclick="openPet()" style="flex:1;min-width:130px;padding:10px;border:2px solid #b5651d;border-radius:12px;background:#fdf1e3;color:#8a4a12;font-weight:800;cursor:pointer">🐾 我的寵物</button>
     <button id="wonderBtn" onclick="openWonder()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2c5f8a;border-radius:12px;background:#eaf1fb;color:#1f4463;font-weight:800;cursor:pointer">🏛️ 共同奇觀</button>
-    <a href="worddex.html" style="flex:1;min-width:130px;padding:10px;border:2px solid #7c4dca;border-radius:12px;background:#f3edff;color:#5a36a8;font-weight:800;text-align:center;text-decoration:none">🎴 單字圖鑑</a>
+    <a id="worddexLink" href="worddex.html" style="flex:1;min-width:130px;padding:10px;border:2px solid #7c4dca;border-radius:12px;background:#f3edff;color:#5a36a8;font-weight:800;text-align:center;text-decoration:none">🎴 單字圖鑑</a>
     <button id="mailBtn" onclick="openMail()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2fbf71;border-radius:12px;background:#e9fbf1;color:#187a48;font-weight:800;cursor:pointer;position:relative">✉️ 島嶼信箱<span id="mailBadge" style="display:none;position:absolute;top:-8px;right:-6px;background:#ef476f;color:#fff;border-radius:11px;min-width:22px;height:22px;line-height:22px;font-size:.75rem;font-weight:900;padding:0 4px;box-shadow:0 1px 4px rgba(0,0,0,.3)"></span></button>
   </div>
   <div id="pickStudentMsg">👆 先選你的名字，開始蓋你的島！</div>
@@ -348,15 +348,15 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607181435"></script>
-<script src="curriculum.js?v=202607181435"></script>
-<script src="word_roots.js?v=202607181435"></script>
-<script src="worddex.js?v=202607181435"></script>
-<script src="city_data.js?v=202607181435"></script>
+<script src="wordbank.js?v=202607201512"></script>
+<script src="curriculum.js?v=202607201512"></script>
+<script src="word_roots.js?v=202607201512"></script>
+<script src="worddex.js?v=202607201512"></script>
+<script src="city_data.js?v=202607201512"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607181435"></script>
-<script src="account_lock.js?v=202607181435"></script>
-<script src="supabase_auth.js?v=202607181435"></script>
+<script src="cloud_sync.js?v=202607201512"></script>
+<script src="account_lock.js?v=202607201512"></script>
+<script src="supabase_auth.js?v=202607201512"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -2070,6 +2070,16 @@ function finishVisitor() {
 }
 
 // ─── Island switch (一號島／二號島) ───────────────────────────────────────────
+// 二號島跟一號島共用同一份委託/護照/卡冊/字根/奇觀/圖鑑，不用重複顯示；
+// 二號島只留 🐾寵物 和 ✉️信箱（領禮物）+ 下面的建築地圖。
+const ISLAND2_HIDDEN_BTNS = ["boardBtn", "visitorBtn", "albumBtn", "rootsBtn", "wonderBtn", "worddexLink"];
+function updateQuestRowVisibility() {
+  const hide = currentIslandId === 2;
+  ISLAND2_HIDDEN_BTNS.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = hide ? "none" : "";
+  });
+}
 function switchIsland(id) {
   if (!currentStudent || id === currentIslandId) return;
   mergeState = null;   // 換島時取消尚未完成的合併操作
@@ -2084,6 +2094,7 @@ function switchIsland(id) {
   const produced = runDailyTick();
   render();
   updateQuestBtns();
+  updateQuestRowVisibility();
   renderPet(); updatePetBtn();
   const notice = document.getElementById("notice");
   if (produced > 0) {
@@ -2119,6 +2130,7 @@ function selectStudent(name) {
   document.getElementById("dataPanel").style.display = "block";
   document.getElementById("questRow").style.display = "flex";
   updateQuestBtns();
+  updateQuestRowVisibility();
   checkMailBadge();
   renderPet(); updatePetBtn();
   recalcStats();
