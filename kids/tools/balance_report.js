@@ -18,6 +18,7 @@ function extractArr(name) {
 const B = extract("BUILDINGS");
 const CENTER_TARGETS = extractArr("CENTER_TARGETS");
 const mergeCost = (c, s) => Math.max(20, Math.round(c.cost * 0.25)) * s;
+const directUpgradeCost = (c, s) => Math.round(c.cost + mergeCost(c, s) * Math.pow(1.5, s - 1));
 
 const GROUPS = [
   { name: "🏠 平地建築", keys: ["forest", "pond", "ranch", "farm", "house", "town", "center"] },
@@ -63,6 +64,10 @@ GROUPS.forEach(g => {
       <td class="num">${payback ? payback + "天" : "—"}</td>
     </tr>`;
     if (merge !== "—") rows += `<tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 ${merge}　每🌟全數值+100%，合併後回Lv1（再花 ${lastDay || "?"} 天練回滿級）</td></tr>`;
+    if (merge !== "—" && (c.max || c.category)) {
+      const direct = [1, 2, 3, 4, 5].map(s => directUpgradeCost(c, s)).join("/");
+      rows += `<tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 ${direct}　= 成本 + 合併費×1.5^(星-1)</td></tr>`;
+    }
   });
 });
 
@@ -90,7 +95,8 @@ const page = `<!DOCTYPE html>
 <header><h1>📊 島嶼數值平衡表</h1><p>由 tools/balance_report.js 從 island.html 自動產生（${new Date().toISOString().slice(0, 10)}） · <a href="island.html">← 回島嶼</a></p></header>
 <div class="note"><b>說明</b>：金幣/美化/人口欄位 = 各等級數值（Lv1/Lv2/…）。回本天數 = 成本 ÷ 滿級日產（未計快樂倍率 0.6~1.2）。
 🍞每人吃1，吃不完每天自動賣：3🍞=1🪙。城鎮中心升級門檻：${CENTER_TARGETS.map((t, i) => `Lv${i + 2}=人口${t.pop}+美化${t.beauty}`).join("、")}。
-✨合併：兩棟同類同星滿級 → 保留棟+1🌟回Lv1，費用=25%價×新星數，每🌟數值+100%（上限5🌟）。</div>
+✨合併：兩棟同類同星滿級 → 保留棟+1🌟回Lv1，費用=25%價×新星數，每🌟數值+100%（上限5🌟）。
+💰直接升星（碼頭/定置漁場/遠洋漁船/復育動物專用）：這些建築有數量上限（動物同種限1隻），合併不到5星，改用花幣直接升星，費用=成本+合併費×1.5^(新星數-1)，比合併貴但不用等。</div>
 <table>
 <tr><th>建築</th><th>成本</th><th>等級</th><th>滿級時間</th><th>🍞食物</th><th>金幣/天</th><th>美化</th><th>人口</th><th>回本</th></tr>
 ${rows}

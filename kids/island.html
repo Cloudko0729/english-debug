@@ -348,15 +348,15 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607201512"></script>
-<script src="curriculum.js?v=202607201512"></script>
-<script src="word_roots.js?v=202607201512"></script>
-<script src="worddex.js?v=202607201512"></script>
-<script src="city_data.js?v=202607201512"></script>
+<script src="wordbank.js?v=202607201555"></script>
+<script src="curriculum.js?v=202607201555"></script>
+<script src="word_roots.js?v=202607201555"></script>
+<script src="worddex.js?v=202607201555"></script>
+<script src="city_data.js?v=202607201555"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607201512"></script>
-<script src="account_lock.js?v=202607201512"></script>
-<script src="supabase_auth.js?v=202607201512"></script>
+<script src="cloud_sync.js?v=202607201555"></script>
+<script src="account_lock.js?v=202607201555"></script>
+<script src="supabase_auth.js?v=202607201555"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -1002,9 +1002,14 @@ function openDetail(b) {
   if (_canMergeType(b.type) && _atMaxLevel(b) && (b.star || 0) < MERGE_MAX_STAR) {
     const partners = _mergePartners(b);
     const fee = mergeCost(c, (b.star || 0) + 1);
+    const isCapped = !!(c.max || c.category);
     if (partners.length > 0) {
       html += `<button class="upgrade-btn" onclick="startMerge('${b.id}')">✨ 合併升級 → ${c.name}${"🌟".repeat((b.star || 0) + 1)} Lv1（🪙 ${fee}）</button>`;
       html += `<div class="detail-row" style="color:var(--muted)">會消耗另一棟滿級的 ${c.name}（點了按鈕後去地圖選它）</div>`;
+    } else if (isCapped) {
+      const dfee = directUpgradeCost(c, (b.star || 0) + 1);
+      html += `<button class="upgrade-btn" onclick="directUpgrade('${b.id}')">💰 直接升星 → ${c.name}${"🌟".repeat((b.star || 0) + 1)} Lv1（🪙 ${dfee}）</button>`;
+      html += `<div class="detail-row" style="color:var(--muted)">${c.category ? "同種只能養一隻，沒辦法合併" : "有數量上限，合併太慢"}，可以直接花幣升星（比合併貴一點）</div>`;
     } else {
       html += `<div class="detail-row" style="color:var(--muted)">✨ 再蓋一棟 ${c.name} 練到滿級，就能合併升 🌟（費用 🪙 ${fee}）</div>`;
     }
@@ -1035,6 +1040,27 @@ const LEGACY_COSTS = { town: 400, solar: 220, windmill: 320, dock: 300, fishery:
 let mergeState = null;   // { firstId, type, star }
 const MERGE_MAX_STAR = 5;
 function mergeCost(c, newStar) { return Math.max(20, Math.round(c.cost * 0.25)) * newStar; }
+// 定置漁場/碼頭/遠洋漁船（數量上限）、復育動物（同種只能一隻）合併不到 5 星，開放直接花幣升星（比合併貴，換算成合併要花的時間成本）
+function directUpgradeCost(c, newStar) { return Math.round(c.cost + mergeCost(c, newStar) * Math.pow(1.5, newStar - 1)); }
+function directUpgrade(buildingId) {
+  const b = island.buildings.find(x => x.id === buildingId);
+  if (!b) return;
+  const c = BUILDINGS[b.type];
+  const newStar = (b.star || 0) + 1;
+  const fee = directUpgradeCost(c, newStar);
+  const p = getProgress(currentStudent);
+  if (p.coins.balance < fee) { toast(`金幣不夠！直接升星需要 🪙 ${fee}`); return; }
+  p.coins.balance -= fee;
+  p.coins.lifetimeSpent += fee;
+  p.coins.transactions.push({ type: "spend", source: "islandDirectUpgrade", amount: fee,
+    balanceAfter: p.coins.balance, createdAt: new Date().toISOString(),
+    meta: { buildingType: b.type, star: newStar } });
+  saveProgress(currentStudent, p);
+  b.star = newStar; b.level = 1; b.activeDays = 0;
+  recalcStats(); saveIsland(currentStudent, island); closeSheet(); render();
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  toast(`💰 直接升星成功！${c.emoji} ${c.name}${"🌟".repeat(newStar)} Lv1`);
+}
 function _atMaxLevel(b) { const c = BUILDINGS[b.type]; return b.level >= (c.maxLevel || 3); }
 function _canMergeType(key) {
   const c = BUILDINGS[key];

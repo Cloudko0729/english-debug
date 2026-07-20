@@ -19,10 +19,11 @@
 </style>
 </head>
 <body>
-<header><h1>📊 島嶼數值平衡表</h1><p>由 tools/balance_report.js 從 island.html 自動產生（2026-07-04） · <a href="island.html">← 回島嶼</a></p></header>
+<header><h1>📊 島嶼數值平衡表</h1><p>由 tools/balance_report.js 從 island.html 自動產生（2026-07-20） · <a href="island.html">← 回島嶼</a></p></header>
 <div class="note"><b>說明</b>：金幣/美化/人口欄位 = 各等級數值（Lv1/Lv2/…）。回本天數 = 成本 ÷ 滿級日產（未計快樂倍率 0.6~1.2）。
 🍞每人吃1，吃不完每天自動賣：3🍞=1🪙。城鎮中心升級門檻：Lv2=人口20+美化40、Lv3=人口55+美化90、Lv4=人口110+美化170、Lv5=人口190+美化290。
-✨合併：兩棟同類同星滿級 → 保留棟+1🌟回Lv1，費用=25%價×新星數，每🌟數值+100%（上限5🌟）。</div>
+✨合併：兩棟同類同星滿級 → 保留棟+1🌟回Lv1，費用=25%價×新星數，每🌟數值+100%（上限5🌟）。
+💰直接升星（碼頭/定置漁場/遠洋漁船/復育動物專用）：這些建築有數量上限（動物同種限1隻），合併不到5星，改用花幣直接升星，費用=成本+合併費×1.5^(新星數-1)，比合併貴但不用等。</div>
 <table>
 <tr><th>建築</th><th>成本</th><th>等級</th><th>滿級時間</th><th>🍞食物</th><th>金幣/天</th><th>美化</th><th>人口</th><th>回本</th></tr>
 <tr class="grp"><td colspan="9">🏠 平地建築</td></tr><tr>
@@ -125,7 +126,7 @@
       <td class="num">1/2/3/4/5</td>
       <td class="num">4/6/8/11/14</td>
       <td class="num">9天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 113/226/339/452/565　每🌟全數值+100%，合併後回Lv1（再花 28 天練回滿級）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 113/226/339/452/565　每🌟全數值+100%，合併後回Lv1（再花 28 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 563/789/1213/1976/3310　= 成本 + 合併費×1.5^(星-1)</td></tr><tr>
       <td>🎣 定置漁場<span class="lim">限5</span></td>
       <td class="num">🪙450</td>
       <td class="num">5</td>
@@ -135,7 +136,7 @@
       <td class="num">0/1/1/2/3</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">19天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 113/226/339/452/565　每🌟全數值+100%，合併後回Lv1（再花 25 天練回滿級）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 113/226/339/452/565　每🌟全數值+100%，合併後回Lv1（再花 25 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 563/789/1213/1976/3310　= 成本 + 合併費×1.5^(星-1)</td></tr><tr>
       <td>🚢 遠洋漁船<span class="lim">限3</span></td>
       <td class="num">🪙1140</td>
       <td class="num">5</td>
@@ -145,7 +146,7 @@
       <td class="num">-1/-1/0/0/1</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">10天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 285/570/855/1140/1425　每🌟全數值+100%，合併後回Lv1（再花 30 天練回滿級）</td></tr><tr class="grp"><td colspan="9">🐾 丘陵動物</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 285/570/855/1140/1425　每🌟全數值+100%，合併後回Lv1（再花 30 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 1425/1995/3064/4988/8354　= 成本 + 合併費×1.5^(星-1)</td></tr><tr class="grp"><td colspan="9">🐾 丘陵動物</td></tr><tr>
       <td>🐆 石虎<span class="lim">同類上限</span></td>
       <td class="num">🪙800</td>
       <td class="num">5</td>
@@ -155,7 +156,7 @@
       <td class="num">20/32/46/62/80</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">40天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 200/400/600/800/1000　每🌟全數值+100%，合併後回Lv1（再花 54 天練回滿級）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 200/400/600/800/1000　每🌟全數值+100%，合併後回Lv1（再花 54 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 1000/1400/2150/3500/5863　= 成本 + 合併費×1.5^(星-1)</td></tr><tr>
       <td>🐾 穿山甲<span class="lim">同類上限</span></td>
       <td class="num">🪙820</td>
       <td class="num">5</td>
@@ -165,7 +166,7 @@
       <td class="num">19/31/46/63/84</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">38天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 205/410/615/820/1025　每🌟全數值+100%，合併後回Lv1（再花 58 天練回滿級）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 205/410/615/820/1025　每🌟全數值+100%，合併後回Lv1（再花 58 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 1025/1435/2204/3588/6009　= 成本 + 合併費×1.5^(星-1)</td></tr><tr>
       <td>🦋 鳳蝶<span class="lim">同類上限</span></td>
       <td class="num">🪙680</td>
       <td class="num">5</td>
@@ -175,7 +176,7 @@
       <td class="num">17/29/43/58/76</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">24天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 170/340/510/680/850　每🌟全數值+100%，合併後回Lv1（再花 50 天練回滿級）</td></tr><tr class="grp"><td colspan="9">🏔️ 高山動物</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 170/340/510/680/850　每🌟全數值+100%，合併後回Lv1（再花 50 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 850/1190/1828/2975/4983　= 成本 + 合併費×1.5^(星-1)</td></tr><tr class="grp"><td colspan="9">🏔️ 高山動物</td></tr><tr>
       <td>🐻 臺灣黑熊<span class="lim">同類上限</span></td>
       <td class="num">🪙1100</td>
       <td class="num">5</td>
@@ -185,7 +186,7 @@
       <td class="num">22/34/48/64/82</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">46天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 275/550/825/1100/1375　每🌟全數值+100%，合併後回Lv1（再花 56 天練回滿級）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 275/550/825/1100/1375　每🌟全數值+100%，合併後回Lv1（再花 56 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 1375/1925/2956/4813/8061　= 成本 + 合併費×1.5^(星-1)</td></tr><tr>
       <td>🦎 臺灣山椒魚<span class="lim">同類上限</span></td>
       <td class="num">🪙780</td>
       <td class="num">5</td>
@@ -195,7 +196,7 @@
       <td class="num">18/30/44/60/78</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">34天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 195/390/585/780/975　每🌟全數值+100%，合併後回Lv1（再花 60 天練回滿級）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 195/390/585/780/975　每🌟全數值+100%，合併後回Lv1（再花 60 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 975/1365/2096/3413/5716　= 成本 + 合併費×1.5^(星-1)</td></tr><tr>
       <td>🦚 臺灣帝雉<span class="lim">同類上限</span></td>
       <td class="num">🪙950</td>
       <td class="num">5</td>
@@ -205,7 +206,7 @@
       <td class="num">21/33/47/63/81</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">48天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 238/476/714/952/1190　每🌟全數值+100%，合併後回Lv1（再花 55 天練回滿級）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 238/476/714/952/1190　每🌟全數值+100%，合併後回Lv1（再花 55 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 1188/1664/2557/4163/6974　= 成本 + 合併費×1.5^(星-1)</td></tr><tr>
       <td>🐐 長鬃山羊<span class="lim">同類上限</span></td>
       <td class="num">🪙950</td>
       <td class="num">5</td>
@@ -215,7 +216,7 @@
       <td class="num">20/31/45/61/79</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">46天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 238/476/714/952/1190　每🌟全數值+100%，合併後回Lv1（再花 52 天練回滿級）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 238/476/714/952/1190　每🌟全數值+100%，合併後回Lv1（再花 52 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 1188/1664/2557/4163/6974　= 成本 + 合併費×1.5^(星-1)</td></tr><tr>
       <td>🐟 櫻花鉤吻鮭<span class="lim">同類上限</span></td>
       <td class="num">🪙980</td>
       <td class="num">5</td>
@@ -225,7 +226,7 @@
       <td class="num">20/34/51/70/92</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">45天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 245/490/735/980/1225　每🌟全數值+100%，合併後回Lv1（再花 62 天練回滿級）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 245/490/735/980/1225　每🌟全數值+100%，合併後回Lv1（再花 62 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 1225/1715/2634/4288/7182　= 成本 + 合併費×1.5^(星-1)</td></tr><tr>
       <td>🦅 赫氏角鷹<span class="lim">同類上限</span></td>
       <td class="num">🪙1050</td>
       <td class="num">5</td>
@@ -235,7 +236,7 @@
       <td class="num">22/36/52/70/90</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">42天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 263/526/789/1052/1315　每🌟全數值+100%，合併後回Lv1（再花 57 天練回滿級）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 263/526/789/1052/1315　每🌟全數值+100%，合併後回Lv1（再花 57 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 1313/1839/2825/4601/7707　= 成本 + 合併費×1.5^(星-1)</td></tr><tr>
       <td>🦌 水鹿<span class="lim">同類上限</span></td>
       <td class="num">🪙950</td>
       <td class="num">5</td>
@@ -245,7 +246,7 @@
       <td class="num">18/30/45/62/80</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">44天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 238/476/714/952/1190　每🌟全數值+100%，合併後回Lv1（再花 54 天練回滿級）</td></tr><tr class="grp"><td colspan="9">🌊 海洋動物</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 238/476/714/952/1190　每🌟全數值+100%，合併後回Lv1（再花 54 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 1188/1664/2557/4163/6974　= 成本 + 合併費×1.5^(星-1)</td></tr><tr class="grp"><td colspan="9">🌊 海洋動物</td></tr><tr>
       <td>🐢 綠蠵龜<span class="lim">同類上限</span></td>
       <td class="num">🪙880</td>
       <td class="num">5</td>
@@ -255,7 +256,7 @@
       <td class="num">18/30/44/60/78</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">30天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 220/440/660/880/1100　每🌟全數值+100%，合併後回Lv1（再花 58 天練回滿級）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 220/440/660/880/1100　每🌟全數值+100%，合併後回Lv1（再花 58 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 1100/1540/2365/3850/6449　= 成本 + 合併費×1.5^(星-1)</td></tr><tr>
       <td>🐬 中華白海豚<span class="lim">同類上限</span></td>
       <td class="num">🪙1175</td>
       <td class="num">5</td>
@@ -265,7 +266,7 @@
       <td class="num">24/38/54/72/92</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">40天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 294/588/882/1176/1470　每🌟全數值+100%，合併後回Lv1（再花 60 天練回滿級）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 294/588/882/1176/1470　每🌟全數值+100%，合併後回Lv1（再花 60 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 1469/2057/3160/5144/8617　= 成本 + 合併費×1.5^(星-1)</td></tr><tr>
       <td>🦈 鯨鯊<span class="lim">同類上限</span></td>
       <td class="num">🪙1050</td>
       <td class="num">5</td>
@@ -275,7 +276,7 @@
       <td class="num">24/38/54/73/94</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">37天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 263/526/789/1052/1315　每🌟全數值+100%，合併後回Lv1（再花 62 天練回滿級）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 263/526/789/1052/1315　每🌟全數值+100%，合併後回Lv1（再花 62 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 1313/1839/2825/4601/7707　= 成本 + 合併費×1.5^(星-1)</td></tr><tr>
       <td>🪸 珊瑚礁<span class="lim">同類上限</span></td>
       <td class="num">🪙720</td>
       <td class="num">5</td>
@@ -285,7 +286,7 @@
       <td class="num">16/27/40/55/72</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">30天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 180/360/540/720/900　每🌟全數值+100%，合併後回Lv1（再花 50 天練回滿級）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 180/360/540/720/900　每🌟全數值+100%，合併後回Lv1（再花 50 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 900/1260/1935/3150/5276　= 成本 + 合併費×1.5^(星-1)</td></tr><tr>
       <td>🦀 鱟<span class="lim">同類上限</span></td>
       <td class="num">🪙760</td>
       <td class="num">5</td>
@@ -295,7 +296,7 @@
       <td class="num">17/28/41/56/73</td>
       <td class="num">0/0/0/0/0</td>
       <td class="num">32天</td>
-    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 190/380/570/760/950　每🌟全數值+100%，合併後回Lv1（再花 54 天練回滿級）</td></tr><tr class="grp"><td colspan="9">🎴 圖鑑地標（免費/集滿主題解鎖）</td></tr><tr>
+    </tr><tr class="mrow"><td colspan="9">└ ✨合併費(1→5🌟)：🪙 190/380/570/760/950　每🌟全數值+100%，合併後回Lv1（再花 54 天練回滿級）</td></tr><tr class="mrow"><td colspan="9">└ 💰直接升星費(1→5🌟，數量上限合併不到)：🪙 950/1330/2043/3325/5569　= 成本 + 合併費×1.5^(星-1)</td></tr><tr class="grp"><td colspan="9">🎴 圖鑑地標（免費/集滿主題解鎖）</td></tr><tr>
       <td>🗼 燈塔<span class="lim">限1</span></td>
       <td class="num">免費</td>
       <td class="num">1</td>
