@@ -348,15 +348,15 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607201555"></script>
-<script src="curriculum.js?v=202607201555"></script>
-<script src="word_roots.js?v=202607201555"></script>
-<script src="worddex.js?v=202607201555"></script>
-<script src="city_data.js?v=202607201555"></script>
+<script src="wordbank.js?v=202607201616"></script>
+<script src="curriculum.js?v=202607201616"></script>
+<script src="word_roots.js?v=202607201616"></script>
+<script src="worddex.js?v=202607201616"></script>
+<script src="city_data.js?v=202607201616"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607201555"></script>
-<script src="account_lock.js?v=202607201555"></script>
-<script src="supabase_auth.js?v=202607201555"></script>
+<script src="cloud_sync.js?v=202607201616"></script>
+<script src="account_lock.js?v=202607201616"></script>
+<script src="supabase_auth.js?v=202607201616"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -1111,6 +1111,10 @@ function demolish(buildingId) {
   const b = island.buildings[idx];
   const c = BUILDINGS[b.type];
   const refund = (b.paid != null) ? b.paid : (LEGACY_COSTS[b.type] != null ? LEGACY_COSTS[b.type] : c.cost); // 退「當時買價」，防漲價套利
+  const confirmMsg = b.type === "dog"
+    ? `要把 ${c.emoji} 寵物狗收走嗎？要再放回去得重新點空地蓋一次（免費）。`
+    : `要拆除 ${c.emoji} ${c.name}${b.star ? "🌟".repeat(b.star) : ""} Lv${b.level} 嗎？${refund > 0 ? `會退還 🪙 ${refund}` : "免費蓋的，拆除不會退幣"}，這個動作沒辦法復原。`;
+  if (!confirm(confirmMsg)) return;
   island.buildings.splice(idx, 1);
   const p = getProgress(currentStudent);
   p.coins.balance += refund;
