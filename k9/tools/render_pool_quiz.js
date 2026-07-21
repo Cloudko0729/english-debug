@@ -30,12 +30,12 @@ function zhFor(level, word) {
   if (level === 7) return wordZh79(word);
   return wordZh46(word);
 }
-// Lv.1-6 沿用既有 WORD_LEVELS-only 範圍（PDF 1200 字表，不含 Codex 額外分級字，維持已上線內容不變）；
-// Lv.7 用 wordLevel() 合併 WORD_LEVELS+EXTRA_LEVELS，跟 render_lv79.js 的字彙池範圍一致（575 字）。
+// Lv.1-3 沿用既有 WORD_LEVELS-only 範圍（PDF 1200 字表，額外字很少且維持已上線內容不變）；
+// Lv.4-7 用 wordLevel() 合併 WORD_LEVELS+EXTRA_LEVELS，修正原本漏收 Codex 額外分級字的落差。
 function canonicalWordsFor(level) {
-  if (level === 7) {
+  if (level >= 4) {
     const all = new Set([...Object.keys(WORD_LEVELS), ...Object.keys(EXTRA_LEVELS)]);
-    return [...all].filter(w => wordLevel(w) === 7).sort();
+    return [...all].filter(w => wordLevel(w) === level).sort();
   }
   return Object.keys(WORD_LEVELS).filter(w => WORD_LEVELS[w] === level).sort();
 }

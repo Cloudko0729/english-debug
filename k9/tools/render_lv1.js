@@ -544,14 +544,15 @@ header a{color:#eaffef;text-decoration:none;font-weight:700}
   .legend{font-size:.8rem;color:#666;margin:8px 0}
   .legend .sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:4px;vertical-align:-1px}
   .quizlink{display:block;text-align:center;background:#2fbf71;color:#fff;font-weight:700;text-decoration:none;border-radius:10px;padding:10px;margin-top:10px}
+  details.poolcard summary{cursor:pointer;font-size:1rem;color:#187a48;font-weight:700;list-style-position:inside}
 </style></head><body>
 <header><h1>🌱 Lv.1 國小一年級</h1><p><a href="../index.html">← 課程首頁</a> · Pre-A1 起步 · 不考試，聽說為主</p></header>
 <div class="card"><h2>這一級要做到</h2><p>看得懂、聽得懂日常招呼、家人、學校用品、顏色形狀、身體、動物、食物的基本單字和短句；能完成 8 週的小任務並做出一本「我的小書」。</p></div>
-<div class="card"><h2>📚 Lv.1 字彙池（wL1，${canonical.length} 字）</h2><p class="pool-intro">點一下單字，就會展開中文意思；再點一次可以收合。這是理解字彙池，每週主動練習仍以各週單字卡為主。</p>
+${rows}
+<details class="card poolcard"><summary>📚 Lv.1 字彙池（wL1，${canonical.length} 字）</summary><p class="pool-intro">點一下單字，就會展開中文意思；再點一次可以收合。這是理解字彙池，每週主動練習仍以各週單字卡為主。</p>
 <p class="legend"><span class="sw" style="background:#eafff2;border:1px solid #7fd9a8"></span>本級 8 週課程教過　<span class="sw" style="background:#fdf6e3;border:1px solid #f2d68a"></span>只在字彙池，還沒排進課程</p>
 <div class="poolgrid">${pool}</div>
-<a class="quizlink" href="vocab_quiz.html">🎯 開始這一級的單字練習題</a></div>
-${rows}
+<a class="quizlink" href="vocab_quiz.html">🎯 開始這一級的單字練習題</a></details>
 <script>
 try{
   const d=JSON.parse(localStorage.getItem("k9progress")||"{}");
