@@ -73,6 +73,20 @@ async function _sbUser() {
   catch (e) { return null; }
 }
 
+// Google Sheets 每個儲存格上限約 50,000 字元；coins.transactions 只會一直長大，
+// 累積夠久一定會把整包 progress JSON 撐爆那個上限，害 setValues() 在 GAS 那邊丟例外。
+// cloud_sync.js 這邊的 fetch 又是 fire-and-forget、從不讀回應——所以會整個沒聲音地失敗，
+// GAS/Sheet 這份「家長可讀」鏡像就此卡住不再更新，但完全看不出任何錯誤（本機/Supabase 不受影響）。
+// 只精簡「送去 GAS 的那份」，本機存檔跟 Supabase 主存檔都保留完整歷史，不動。
+const GAS_TX_CAP = 150;
+function _capForSheet(progress) {
+  const tx = progress && progress.coins && progress.coins.transactions;
+  if (!Array.isArray(tx) || tx.length <= GAS_TX_CAP) return progress;
+  return Object.assign({}, progress, {
+    coins: Object.assign({}, progress.coins, { transactions: tx.slice(-GAS_TX_CAP) }),
+  });
+}
+
 // ── 存檔：Supabase（若已登入）+ Google Sheet（雙寫）─────────────────────────
 function cloudSave(student) {
   if (!student) return;
@@ -83,10 +97,14 @@ function cloudSave(student) {
 
   // 1) 雙寫 Google Sheet（維持家長可讀的試算表 + 熟練表）
   if (CLOUD_URL) {
-    const payload = { secret: CLOUD_SECRET, student, ts: new Date().toISOString(), date: day, progress, island: islandPacked };
+    const payload = { secret: CLOUD_SECRET, student, ts: new Date().toISOString(), date: day, progress: _capForSheet(progress), island: islandPacked };
     const m = _masteryFromProgress(progress);
     if (m) payload.mastery = m;
-    try { fetch(CLOUD_URL, { method: "POST", body: JSON.stringify(payload) }); } catch (e) {}
+    try {
+      fetch(CLOUD_URL, { method: "POST", body: JSON.stringify(payload) })
+        .then(r => r.json()).then(d => { if (!d || !d.ok) console.warn("[gas-sync] failed: " + (d && d.err)); })
+        .catch(e => console.warn("[gas-sync] network error: " + (e && e.message)));
+    } catch (e) {}
   }
 
   // 2) 主存檔：Supabase（需登入）
