@@ -45,7 +45,7 @@
 </div>
 <div id="cards"></div>
 
-<script src="wordbank.js?v=202607201616"></script>
+<script src="wordbank.js?v=202607210118"></script>
 <script>
 const GAS = "https://script.google.com/macros/s/AKfycbyZlQ609fvyiiOYIb-UegMSd2zQRSg9DoykH-aknkzZQEIl9jo71NSa4F17dLeErW3t6g/exec";
 const SECRET = "kids2026";
@@ -72,27 +72,49 @@ function syncBadge(tsStr){
   return [cls, "最後同步："+txt];
 }
 
+// 最後「真的有活動」的時間（用金幣交易最新 createdAt），跟「最後同步」時間分開看：
+// 同步徽章只代表「有打開過頁面觸發同步」，不代表有新進度——資料沒動過也會重新上傳同一份舊資料。
+function lastActivityNote(progress){
+  const tx = progress && progress.coins && progress.coins.transactions;
+  if(!tx || !tx.length) return null;
+  let latest = 0;
+  for(const t of tx){ const c = Date.parse(t.createdAt||0)||0; if(c>latest) latest=c; }
+  if(!latest) return null;
+  const t=new Date(latest), now=new Date();
+  const days=Math.floor((now-t)/86400000);
+  if(days < 1) return null;   // 今天有活動就不用特別提醒
+  const txt = days===1 ? "昨天" : days+" 天前"+"（"+(t.getMonth()+1)+"/"+t.getDate()+"）";
+  return `⚠️ 最後一次真的有答題賺金幣是 ${txt}——同步時間只代表打開過頁面，不代表有新進度`;
+}
+
 function renderCard(s, d, zh){
   const [cls, syncTxt] = d && d.ok ? syncBadge(d.ts) : ['old','還沒有資料'];
   if(!d || !d.ok){
     return `<div class="card"><h2>${s.emoji} ${s.label} <span class="sync old">${syncTxt}</span></h2><p style="color:#888">這個帳號還沒有任何存檔。</p></div>`;
   }
   const p=d.progress||{}, c=p.coins||{}, isl=d.island||{}, st=isl.stats||{};
+  const isl2=isl._island2||null, st2=isl2&&isl2.stats||{};
   const total=(p.totalCorrect||0)+(p.totalWrong||0);
   const pct= total? Math.round(p.totalCorrect/total*100):0;
   const weak=Object.entries(p.wrongCounts||{}).filter(([w,n])=>n>=1).sort((a,b)=>b[1]-a[1]);
   const weakHtml = weak.length
     ? weak.slice(0,40).map(([w,n])=>`<span class="chip ${n>=2?'hard':''}">${w}${zh[w]?" ("+zh[w]+")":""} ×${n}</span>`).join("")
     : '<span style="color:#2fbf71;font-size:.82rem">目前沒有不熟的單字 👍</span>';
+  const actNote = lastActivityNote(p);
+  const island2Row = isl2
+    ? `<div class="row">🪨 二號島：人口 <b>${st2.population||0}</b> ・ 美化 <b>${st2.beauty||0}</b> ・ 建築 <b>${st2.totalBuildings||0}</b> ・ 金幣/天 <b>${st2.dailyCoinProduction||0}</b></div>`
+    : '';
   return `<div class="card">
     <h2>${s.emoji} ${s.label} <span class="sync ${cls}">${syncTxt}</span></h2>
+    ${actNote ? `<div class="row" style="color:var(--danger)">${actNote}</div>` : ''}
     <div class="stats">
       <div class="stat"><b>🪙 ${c.balance||0}</b><span>金幣</span></div>
       <div class="stat"><b>${p.sessions||0}</b><span>練習次數</span></div>
       <div class="stat"><b>${pct}%</b><span>正確率</span></div>
       <div class="stat"><b>${p.totalCorrect||0}/${total}</b><span>答對/總題</span></div>
     </div>
-    <div class="row">🏝️ 島嶼：人口 <b>${st.population||0}</b> ・ 美化 <b>${st.beauty||0}</b> ・ 建築 <b>${st.totalBuildings||0}</b> ・ 金幣/天 <b>${st.dailyCoinProduction||0}</b></div>
+    <div class="row">🏝️ 一號島：人口 <b>${st.population||0}</b> ・ 美化 <b>${st.beauty||0}</b> ・ 建築 <b>${st.totalBuildings||0}</b> ・ 金幣/天 <b>${st.dailyCoinProduction||0}</b></div>
+    ${island2Row}
     <div class="weak">
       <h3>📌 需要加強的單字（紅色＝答錯 2 次以上，共 ${weak.length} 個）</h3>
       ${weakHtml}
