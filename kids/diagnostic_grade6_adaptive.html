@@ -450,9 +450,11 @@
       const flow = activeFlow();
       return '<div class="nav"><button type="button" class="btn btn-ghost' + (flowIndex === 0 ? " hidden" : "") +
         '" onclick="goTo(' + (flowIndex - 1) + ')">上一部分</button>' +
-        (flowIndex === flow.length - 1
+        (currentSectionId() === "performance"
           ? '<button type="button" class="btn btn-primary" onclick="submitDiagnostic()">完成並查看結果</button>'
-          : '<button type="button" class="btn btn-primary" onclick="nextSection()">下一部分</button>') + "</div>";
+          : '<button type="button" class="btn btn-primary" onclick="nextSection()">' +
+            (!draft.route && flowIndex === GATE_FLOW.length - 1 ? "完成基礎題並繼續" : "下一部分") +
+            "</button>") + "</div>";
     }
 
     function nextSection() {
@@ -650,6 +652,15 @@
     }
 
     function submitDiagnostic() {
+      if (!draft.route) {
+        draft.route = chooseRoute();
+        flowIndex = GATE_FLOW.length;
+        saveDraft();
+        renderSteps();
+        renderSection();
+        window.scrollTo({top:document.getElementById("examShell").offsetTop - 5,behavior:"smooth"});
+        return;
+      }
       const selected = DATA.questions.filter(function (q) { return q.stage === "gate" || q.stage === draft.route; });
       const missing = selected.filter(function (q) { return !Object.prototype.hasOwnProperty.call(draft.answers,q.id); });
       if (missing.length) {

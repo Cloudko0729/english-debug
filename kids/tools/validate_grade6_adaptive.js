@@ -184,6 +184,25 @@ if (inlineScripts.length) {
     `, sandbox);
     assert(lowRoute === "low", "基礎閘門全錯時應進入 low 分流");
 
+    const gateNavigation = vm.runInContext(`
+      draft = newDraft();
+      flowIndex = GATE_FLOW.length - 1;
+      renderNav();
+    `, sandbox);
+    assert(gateNavigation.includes("nextSection()"),
+      "基礎閘門最後一頁必須繼續分流，不可直接送出結果");
+    assert(!gateNavigation.includes("submitDiagnostic()"),
+      "基礎閘門最後一頁不可顯示完成整份測驗按鈕");
+
+    const performanceNavigation = vm.runInContext(`
+      draft = newDraft();
+      draft.route = "low";
+      flowIndex = activeFlow().length - 1;
+      renderNav();
+    `, sandbox);
+    assert(performanceNavigation.includes("submitDiagnostic()"),
+      "寫作與口說頁必須顯示完成並查看結果按鈕");
+
     const perfectHigh = vm.runInContext(`
       draft = newDraft();
       draft.route = "high";
@@ -260,7 +279,7 @@ const summary = {
   levels: data.bands.map(band => band.id),
   prerecordedAudioFiles: listeningQuestions.length,
   browserSpeechFallback: false,
-  scoringSmokeTests: 5,
+  scoringSmokeTests: 7,
   errors,
 };
 
