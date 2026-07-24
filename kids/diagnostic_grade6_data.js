@@ -65,6 +65,7 @@
       section: "listening",
       tier: "Core",
       type: "mc",
+      audio: "l1",
       spoken:
         "Nina usually walks to school, but today her father is driving her.",
       prompt: "How is Nina going to school today?",
@@ -77,6 +78,7 @@
       section: "listening",
       tier: "Core",
       type: "mc",
+      audio: "l2",
       spoken: "Put the blue notebook between the dictionary and the lamp.",
       prompt: "Where should the blue notebook go?",
       choices: [
@@ -93,6 +95,7 @@
       section: "listening",
       tier: "Bridge",
       type: "mc",
+      audio: "l3",
       spoken: "Leo was reading when the lights went out.",
       prompt: "What was Leo doing?",
       choices: [
@@ -109,6 +112,7 @@
       section: "listening",
       tier: "Bridge",
       type: "mc",
+      audio: "l4",
       spoken:
         "Maya has already finished her science report, so she can help her partner.",
       prompt: "What has Maya finished?",
@@ -126,6 +130,7 @@
       section: "listening",
       tier: "Bridge",
       type: "mc",
+      audio: "l5",
       spoken:
         "If the weather improves, the team will test the machine outside.",
       prompt: "What must happen before the team tests outside?",
@@ -143,6 +148,7 @@
       section: "listening",
       tier: "Extension",
       type: "mc",
+      audio: "l6",
       spoken:
         "The device was designed by a student who wanted to reduce food waste.",
       prompt: "Why was the device designed?",
@@ -691,7 +697,7 @@
 
   return {
     id: "grade6-entry-diagnostic",
-    version: "2026.07.24",
+    version: "2026.07.24.2",
     title: "六年級英語起點診斷",
     sections,
     passages,

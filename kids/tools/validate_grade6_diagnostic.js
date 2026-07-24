@@ -9,6 +9,8 @@ const ROOT = path.resolve(__dirname, "..");
 const HTML_PATH = path.join(ROOT, "diagnostic_grade6.html");
 const INDEX_PATH = path.join(ROOT, "index.html");
 const PARENT_PATH = path.join(ROOT, "parent.html");
+const AUDIO_SPEC_PATH = path.join(ROOT, "tools", "audio_grade6_diagnostic.json");
+const AUDIO_DIR = path.join(ROOT, "audio", "diagnostic_grade6");
 
 const errors = [];
 const expectedCounts = {
@@ -58,6 +60,7 @@ for (const question of data.questions) {
 
   if (question.section === "listening") {
     assert(Boolean(question.spoken), `${question.id} 缺少聽力原句`);
+    assert(Boolean(question.audio), `${question.id} 缺少預錄音檔代號`);
   }
 
   if (question.section === "reading") {
@@ -79,6 +82,31 @@ assert(data.bands.every((band, index) => index === 0 || band.minPercent > data.b
   "程度級距門檻必須遞增");
 
 const html = fs.readFileSync(HTML_PATH, "utf8");
+assert(!html.includes("speechSynthesis"), "診斷頁不得使用瀏覽器內建 speechSynthesis");
+assert(!html.includes("SpeechSynthesisUtterance"),
+  "診斷頁不得使用瀏覽器內建 SpeechSynthesisUtterance");
+assert(html.includes("audio/diagnostic_grade6/"),
+  "診斷頁尚未連接預先產生的音檔目錄");
+
+const audioSpec = JSON.parse(fs.readFileSync(AUDIO_SPEC_PATH, "utf8"));
+const listeningQuestions = data.questions.filter(question => question.section === "listening");
+assert(Object.keys(audioSpec.items).length === listeningQuestions.length,
+  "音檔規格數量必須與聽力題數一致");
+for (const question of listeningQuestions) {
+  assert(audioSpec.items[question.audio] === question.spoken,
+    `${question.id} 的音檔文字與題庫不一致`);
+  const audioPath = path.join(AUDIO_DIR, `${question.audio}.mp3`);
+  assert(fs.existsSync(audioPath), `${question.id} 缺少 MP3：${question.audio}.mp3`);
+  if (fs.existsSync(audioPath)) {
+    const stat = fs.statSync(audioPath);
+    assert(stat.size > 10000, `${question.audio}.mp3 太小，可能產生失敗`);
+    const header = fs.readFileSync(audioPath).subarray(0, 3);
+    const looksLikeMp3 =
+      header.toString("ascii") === "ID3" ||
+      (header[0] === 0xff && (header[1] & 0xe0) === 0xe0);
+    assert(looksLikeMp3, `${question.audio}.mp3 檔頭不是有效 MP3`);
+  }
+}
 const inlineScripts = [
   ...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi),
 ].map(match => match[1]).filter(script => script.trim());
@@ -181,6 +209,8 @@ const summary = {
   ),
   uniqueQuestionIds: new Set(ids).size,
   passageCount: data.passages.length,
+  prerecordedAudioFiles: listeningQuestions.length,
+  browserSpeechFallback: false,
   inlineScriptsChecked: inlineScripts.length,
   scoringSmokeTests: 3,
   errors,

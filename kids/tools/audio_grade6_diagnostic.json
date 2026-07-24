@@ -1,0 +1,13 @@
+{
+  "outdir": "D:/English/kids/audio/diagnostic_grade6",
+  "voice": "af_heart",
+  "speed": 0.88,
+  "items": {
+    "l1": "Nina usually walks to school, but today her father is driving her.",
+    "l2": "Put the blue notebook between the dictionary and the lamp.",
+    "l3": "Leo was reading when the lights went out.",
+    "l4": "Maya has already finished her science report, so she can help her partner.",
+    "l5": "If the weather improves, the team will test the machine outside.",
+    "l6": "The device was designed by a student who wanted to reduce food waste."
+  }
+}

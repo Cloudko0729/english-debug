@@ -458,7 +458,7 @@
 
   <div id="toast" role="status"></div>
 
-  <script src="diagnostic_grade6_data.js?v=20260724"></script>
+  <script src="diagnostic_grade6_data.js?v=2026072402"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="cloud_sync.js?v=202607210235"></script>
   <script src="account_lock.js?v=202607210235"></script>
@@ -474,6 +474,7 @@
     let lastDetailedResult = null;
     let timerId = null;
     let timerRemaining = 60;
+    let currentAudio = null;
 
     function emptyDraft() {
       return {
@@ -626,6 +627,10 @@
 
     function goSection(index) {
       if (!draft) return;
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio = null;
+      }
       if (timerId) {
         clearInterval(timerId);
         timerId = null;
@@ -791,19 +796,19 @@
 
     function playListening(id) {
       const q = DATA.questions.find(function (item) { return item.id === id; });
-      if (!q || !q.spoken) return;
-      if (!window.speechSynthesis) {
-        alert("這個瀏覽器不支援語音播放，請改用 Chrome、Edge 或 Safari。");
-        return;
-      }
+      if (!q || !q.audio) return;
       if ((draft.listenCounts[id] || 0) >= 2) return toast("這題已播放兩次");
+      if (currentAudio) currentAudio.pause();
+      currentAudio = new Audio("audio/diagnostic_grade6/" + q.audio + ".mp3?v=2026072402");
       draft.listenCounts[id] = (draft.listenCounts[id] || 0) + 1;
       saveDraft();
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(q.spoken);
-      utterance.lang = "en-US";
-      utterance.rate = .83;
-      window.speechSynthesis.speak(utterance);
+      currentAudio.play().catch(function (error) {
+        draft.listenCounts[id] = Math.max(0, (draft.listenCounts[id] || 1) - 1);
+        saveDraft();
+        console.warn("diagnostic audio failed", q.audio, error);
+        toast("音檔載入失敗，請檢查網路後重試");
+        renderSection();
+      });
       renderSection();
     }
 
