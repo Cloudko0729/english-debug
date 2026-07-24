@@ -4,8 +4,8 @@
 > 對象：2026 年 9 月升六年級的學習者
 > 搭配課程：`kids/grade6_annual_outline_2026-2027.md`
 > 單字來源：10 堂課 300 個候選種子＋舊版 48 週分類詞庫
-> 起點測驗：`kids/diagnostic_grade6.html`
-> 起點測驗：`kids/diagnostic_grade6.html`
+> 建議起點測驗：`kids/diagnostic_grade6_adaptive.html`（先測基礎，再依表現分流 F0–F7）
+> 固定題組備用：`kids/diagnostic_grade6.html`
 
 ## 1. 舊版資料診斷
 

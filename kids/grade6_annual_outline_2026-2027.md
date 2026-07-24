@@ -268,6 +268,7 @@ Common Core 要求的是：
 - `kids/legacy_vocab_1440_classified.md`：舊版 48 週、1,440 個詞彙項目的完整逐項分類與資料品質標記。
 - `kids/legacy_vocab_1440_classified.json`：舊版分類的機器可讀資料，保留週次、難度、目標、重複及建議用途。
 - `kids/children_vocab_learning_plan.md`：把每週 30 個位置改造成新字、字族／搭配與間隔複習的新版規劃。
+- `kids/diagnostic_grade6_adaptive.html`：建議優先使用的適性起點診斷；先以 24 題基礎閘門判斷，再分流細分 F0–F7。
 - `kids/diagnostic_grade6.html`：六年級入學起點診斷，涵蓋聽力、單字辨識與回想、文法、閱讀、寫作及口說。
 - 下一階段才會：
   1. 對舊 1,440 字做來源標記、重複字與已知字清理；

@@ -1,0 +1,19 @@
+{
+  "outdir": "D:/English/kids/audio/diagnostic_grade6_adaptive",
+  "voice": "af_heart",
+  "speed": 0.88,
+  "items": {
+    "gl1": "Touch the red book, then put it on the chair.",
+    "gl2": "Amy has a small dog. It sleeps under her desk.",
+    "gl3": "Ben usually gets up at seven, but today he got up at eight.",
+    "gl4": "Sara wanted juice, but the bottle was empty, so she drank water.",
+    "ll1": "The pencils are in the box beside the window.",
+    "ll2": "Kevin is wearing a coat because it is cold.",
+    "ll3": "Mia went to the market and bought three oranges.",
+    "ll4": "After dinner, wash the dishes before you watch television.",
+    "hl1": "Eva has already finished the map, but she has not written the directions yet.",
+    "hl2": "While Daniel was taking photos, his partner interviewed the shop owner.",
+    "hl3": "If the team collects enough evidence, they will present their conclusion on Friday.",
+    "hl4": "The new bridge was designed to make the route safer for people who walk or cycle."
+  }
+}

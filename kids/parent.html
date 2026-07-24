@@ -89,14 +89,28 @@ function lastActivityNote(progress){
 
 function diagnosticHtml(progress){
   const latest=progress&&progress.diagnostics&&progress.diagnostics.grade6Entry&&progress.diagnostics.grade6Entry.latest;
-  if(!latest)return '<div class="row">🧭 六年級起點診斷：<b>尚未完成</b></div>';
+  if(!latest)return '<div class="row">🧭 固定題組診斷：<b>尚未完成</b></div>';
   const band=latest.band||{}, sections=latest.sectionScores||{};
   const order=[['listening','聽力'],['recognition','辨識'],['recall','回想'],['grammar','文法'],['reading','閱讀']];
   const detail=order.map(([key,label])=>sections[key]?`${label} ${sections[key].percent}%`:null).filter(Boolean).join(' ・ ');
   const day=latest.completedAt?latest.completedAt.slice(0,10):'';
   return `<div class="row" style="background:#eef9f1;border-radius:10px;padding:9px 10px">
-    🧭 六年級起點診斷：<b>${band.label||'已完成'}</b> ・ ${band.courseLabel||''} ・ 綜合 ${latest.overallPercent||0}% ${day?'・ '+day:''}
+    🧭 固定題組診斷：<b>${band.label||'已完成'}</b> ・ ${band.courseLabel||''} ・ 綜合 ${latest.overallPercent||0}% ${day?'・ '+day:''}
     ${detail?`<div style="font-size:.75rem;color:var(--muted);margin-top:3px">${detail}</div>`:''}
+  </div>`;
+}
+
+function adaptiveDiagnosticHtml(progress){
+  const latest=progress&&progress.diagnostics&&progress.diagnostics.grade6Adaptive&&progress.diagnostics.grade6Adaptive.latest;
+  if(!latest)return '<div class="row">🧭 適性起點診斷：<b>尚未完成</b></div>';
+  const band=latest.band||{}, domains=latest.domainScores||{};
+  const order=[['listening','聽力'],['recognition','辨識'],['recall','回想'],['grammar','文法'],['reading','閱讀']];
+  const detail=order.map(([key,label])=>domains[key]&&domains[key].total?`${label} ${domains[key].percent}%`:null).filter(Boolean).join(' ・ ');
+  const gate=latest.gate||{};
+  const day=latest.completedAt?latest.completedAt.slice(0,10):'';
+  return `<div class="row" style="background:#fff7df;border:1px solid #edd39b;border-radius:10px;padding:9px 10px">
+    🧭 適性起點診斷：<b>${band.label||'已完成'}</b> ・ ${band.courseLabel||''} ・ 綜合 ${latest.overallPercent||0}% ${day?'・ '+day:''}
+    <div style="font-size:.75rem;color:var(--muted);margin-top:3px">基礎閘門 ${gate.correct||0}/${gate.total||24}${detail?' ・ '+detail:''}</div>
   </div>`;
 }
 
@@ -128,6 +142,7 @@ function renderCard(s, d, zh){
     </div>
     <div class="row">🏝️ 一號島：人口 <b>${st.population||0}</b> ・ 美化 <b>${st.beauty||0}</b> ・ 建築 <b>${st.totalBuildings||0}</b> ・ 金幣/天 <b>${st.dailyCoinProduction||0}</b></div>
     ${island2Row}
+    ${adaptiveDiagnosticHtml(p)}
     ${diagnosticHtml(p)}
     <div class="weak">
       <h3>📌 需要加強的單字（紅色＝答錯 2 次以上，共 ${weak.length} 個）</h3>
