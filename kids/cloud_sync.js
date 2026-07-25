@@ -73,18 +73,41 @@ async function _sbUser() {
   catch (e) { return null; }
 }
 
-// Google Sheets 每個儲存格上限約 50,000 字元；coins.transactions 只會一直長大，
+// Google Sheets 每個儲存格上限約 50,000 字元。progress 裡有兩塊會隨著使用一直長大，
 // 累積夠久一定會把整包 progress JSON 撐爆那個上限，害 setValues() 在 GAS 那邊丟例外。
 // cloud_sync.js 這邊的 fetch 又是 fire-and-forget、從不讀回應——所以會整個沒聲音地失敗，
 // GAS/Sheet 這份「家長可讀」鏡像就此卡住不再更新，但完全看不出任何錯誤（本機/Supabase 不受影響）。
-// 只精簡「送去 GAS 的那份」，本機存檔跟 Supabase 主存檔都保留完整歷史，不動。
+// 只精簡「送去 GAS 的那份」，本機存檔跟 Supabase 主存檔都保留完整歷史，不動：
+//   1) coins.transactions —— 只留最近 GAS_TX_CAP 筆
+//   2) diagnostics.*      —— 只留 latest，丟掉 attempts 歷次快照與 latest.wordEvidence 逐字明細
+//      （parent.html 只讀 band / overallPercent / gate / sectionScores / domainScores / completedAt，
+//        這些都保留，所以家長頁顯示不受影響）
 const GAS_TX_CAP = 150;
 function _capForSheet(progress) {
-  const tx = progress && progress.coins && progress.coins.transactions;
-  if (!Array.isArray(tx) || tx.length <= GAS_TX_CAP) return progress;
-  return Object.assign({}, progress, {
-    coins: Object.assign({}, progress.coins, { transactions: tx.slice(-GAS_TX_CAP) }),
-  });
+  if (!progress) return progress;
+  let out = progress;
+
+  const tx = progress.coins && progress.coins.transactions;
+  if (Array.isArray(tx) && tx.length > GAS_TX_CAP) {
+    out = Object.assign({}, out, {
+      coins: Object.assign({}, out.coins, { transactions: tx.slice(-GAS_TX_CAP) }),
+    });
+  }
+
+  const diag = progress.diagnostics;
+  if (diag && typeof diag === "object") {
+    const slim = {};
+    Object.keys(diag).forEach(function (key) {
+      const latest = diag[key] && diag[key].latest;
+      if (!latest) return;
+      const copy = Object.assign({}, latest);
+      delete copy.wordEvidence;
+      slim[key] = { latest: copy };
+    });
+    out = Object.assign({}, out, { diagnostics: slim });
+  }
+
+  return out;
 }
 
 // ── 存檔：Supabase（若已登入）+ Google Sheet（雙寫）─────────────────────────

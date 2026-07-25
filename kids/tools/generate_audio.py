@@ -33,14 +33,21 @@ def main():
     outdir.mkdir(parents=True, exist_ok=True)
     voice = spec.get("voice", "af_heart")
     speed = spec.get("speed", 0.9)
+    items = list(spec["items"].items())
+    if "--prefix" in sys.argv:
+        prefix = sys.argv[sys.argv.index("--prefix") + 1]
+        items = [(name, text) for name, text in items if name.startswith(prefix)]
+    if "--reverse" in sys.argv:
+        items.reverse()
+    force = "--force" in sys.argv
     ffmpeg = find_ffmpeg()
 
     kokoro = Kokoro(str(MODEL_DIR / "kokoro-v1.0.onnx"), str(MODEL_DIR / "voices-v1.0.bin"))
 
     with tempfile.TemporaryDirectory() as tmp:
-        for name, text in spec["items"].items():
+        for name, text in items:
             mp3 = outdir / f"{name}.mp3"
-            if mp3.exists():
+            if mp3.exists() and not force:
                 print(f"{name}.mp3 (skip, exists)")
                 continue
             samples, sr = kokoro.create(text, voice=voice, speed=speed, lang="en-us")
@@ -52,7 +59,7 @@ def main():
             )
             print(f"{name}.mp3 ({mp3.stat().st_size // 1024} KB)")
 
-    print(f"done: {len(spec['items'])} files -> {outdir}")
+    print(f"done: {len(items)} files -> {outdir}")
 
 
 if __name__ == "__main__":
