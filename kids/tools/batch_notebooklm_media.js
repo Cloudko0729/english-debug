@@ -1,0 +1,165 @@
+// 批次產生 grammar_db 節點的 NotebookLM podcast + 影片，並壓縮後放進 lessons/podcast/。
+//
+// 用法：
+//   node kids/tools/batch_notebooklm_media.js --bands F0,F1,F2,F3,F4
+//   node kids/tools/batch_notebooklm_media.js --nodes F0.1-complete-sentence,F0.2-be-agreement
+//   node kids/tools/batch_notebooklm_media.js --bands F0 --limit 3     # 先試跑 3 個
+//   node kids/tools/batch_notebooklm_media.js --bands F0,F1 --audio-only
+//
+// 特性：
+//   * 可中斷續跑：輸出檔已存在的節點自動跳過（不會重複燒 NotebookLM 額度）
+//   * 每個節點獨立 try/catch，單一節點失敗不會中斷整批，最後列出失敗清單
+//   * 進度寫入 kids/tools/_notebooklm_batch_log.json，隨時可查
+//
+// 前置條件：notebooklm CLI 已登入（notebooklm login），且 ffmpeg 可用。
+const fs = require("fs");
+const path = require("path");
+const { execFileSync } = require("child_process");
+
+const ROOT = path.join(__dirname, "..");
+const DB = path.join(ROOT, "grammar_db");
+const SRC_DIR = path.join(DB, "notebooklm_sources");
+const OUT_DIR = path.join(DB, "lessons", "podcast");
+const TMP_DIR = path.join(__dirname, "_nbtmp");
+const LOG = path.join(__dirname, "_notebooklm_batch_log.json");
+const BANDS = ["f0", "f1", "f2", "f3", "f4", "f5", "f6", "f7"];
+
+function arg(name, def) {
+  const i = process.argv.indexOf("--" + name);
+  if (i < 0) return def;
+  const v = process.argv[i + 1];
+  return v && !v.startsWith("--") ? v : true;
+}
+const AUDIO_ONLY = !!arg("audio-only", false);
+const LIMIT = parseInt(arg("limit", "0"), 10) || 0;
+
+function loadNodes() {
+  const out = [];
+  BANDS.forEach(b => {
+    const d = JSON.parse(fs.readFileSync(path.join(DB, "bands", b + ".json"), "utf8"));
+    (Array.isArray(d) ? d : d.nodes).forEach(n => out.push(n));
+  });
+  return out;
+}
+
+function nb(...args) {
+  return execFileSync("notebooklm", args, { encoding: "utf8", maxBuffer: 32 * 1024 * 1024 }).trim();
+}
+function ff(...args) {
+  execFileSync("ffmpeg", ["-y", "-v", "error", ...args], { stdio: ["ignore", "pipe", "pipe"], maxBuffer: 32 * 1024 * 1024 });
+}
+function jparse(s) {
+  const i = s.indexOf("{");
+  if (i < 0) throw new Error("no JSON in CLI output: " + s.slice(0, 200));
+  return JSON.parse(s.slice(i));
+}
+function log(msg) {
+  const line = `[${new Date().toISOString().slice(11, 19)}] ${msg}`;
+  process.stdout.write(line + "\n");
+}
+
+// 壓縮設定（LESSON_PAGE_SPEC 第 6 節：實測 32MB → 4.8MB）
+function compressAudio(inFile, outFile) {
+  ff("-i", inFile, "-c:a", "aac", "-b:a", "48k", "-ac", "1", "-movflags", "+faststart", outFile);
+}
+function compressVideo(inFile, outFile) {
+  ff("-i", inFile, "-c:v", "libx264", "-crf", "30", "-preset", "slow",
+     "-vf", "scale=854:480", "-c:a", "aac", "-b:a", "48k", "-ac", "1",
+     "-movflags", "+faststart", outFile);
+}
+
+function doNode(n) {
+  const srcMd = path.join(SRC_DIR, n.id + ".md");
+  if (!fs.existsSync(srcMd)) throw new Error("來源文件不存在，請先跑 build_notebooklm_sources.js：" + srcMd);
+
+  const outA = path.join(OUT_DIR, n.id + ".m4a");
+  const outV = path.join(OUT_DIR, n.id + ".mp4");
+  const needA = !fs.existsSync(outA);
+  const needV = !AUDIO_ONLY && !fs.existsSync(outV);
+  if (!needA && !needV) { log(`  ↷ ${n.id} 已存在，跳過`); return "skipped"; }
+
+  // 1) 建 notebook
+  log(`  · 建立 notebook…`);
+  const nbId = jparse(nb("create", `文法 ${n.id} ${n.titleZh}`, "--json")).notebook.id;
+
+  // 2) 加來源並等處理完成
+  log(`  · 上傳來源文件…`);
+  const srcId = jparse(nb("source", "add", srcMd, "--type", "file",
+    "--title", `${n.id} 教學文件`, "--notebook", nbId, "--json")).source.id;
+  nb("source", "wait", srcId, "--notebook", nbId, "--json");
+
+  const desc = `用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「${n.titleZh}」。` +
+    `用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。`;
+
+  fs.mkdirSync(TMP_DIR, { recursive: true });
+
+  // 3) 音檔
+  if (needA) {
+    log(`  · 生成 podcast…`);
+    nb("generate", "audio", desc, "--notebook", nbId, "--format", "deep-dive",
+       "--length", "short", "--language", "zh_Hant", "--wait", "--timeout", "900", "--json");
+    const tmpA = path.join(TMP_DIR, n.id + ".raw.m4a");
+    nb("download", "audio", "--notebook", nbId, "--force", tmpA, "--json");
+    log(`  · 壓縮音檔…`);
+    compressAudio(tmpA, outA);
+    fs.unlinkSync(tmpA);
+  }
+
+  // 4) 影片
+  if (needV) {
+    log(`  · 生成影片…`);
+    nb("generate", "video", desc, "--notebook", nbId, "--style", "kawaii",
+       "--language", "zh_Hant", "--wait", "--timeout", "1800", "--json");
+    const tmpV = path.join(TMP_DIR, n.id + ".raw.mp4");
+    nb("download", "video", "--notebook", nbId, "--force", tmpV, "--json");
+    log(`  · 壓縮影片…`);
+    compressVideo(tmpV, outV);
+    fs.unlinkSync(tmpV);
+  }
+
+  const mb = f => fs.existsSync(f) ? (fs.statSync(f).size / 1048576).toFixed(2) + "MB" : "-";
+  log(`  ✔ ${n.id} 完成（音 ${mb(outA)} / 影 ${mb(outV)}）`);
+  return "done";
+}
+
+function main() {
+  const bandsArg = String(arg("bands", "") || "").toUpperCase();
+  const nodesArg = String(arg("nodes", "") || "");
+  let nodes = loadNodes();
+  if (nodesArg) {
+    const want = nodesArg.split(",").map(s => s.trim()).filter(Boolean);
+    nodes = nodes.filter(n => want.includes(n.id));
+  } else if (bandsArg) {
+    const want = bandsArg.split(",").map(s => s.trim()).filter(Boolean);
+    nodes = nodes.filter(n => want.includes(n.band));
+  }
+  if (LIMIT) nodes = nodes.slice(0, LIMIT);
+  if (!nodes.length) { console.error("沒有符合條件的節點"); process.exit(1); }
+
+  fs.mkdirSync(OUT_DIR, { recursive: true });
+  log(`本批共 ${nodes.length} 個節點${AUDIO_ONLY ? "（只做音檔）" : ""}`);
+
+  const result = { startedAt: new Date().toISOString(), done: [], skipped: [], failed: [] };
+  nodes.forEach((n, i) => {
+    log(`[${i + 1}/${nodes.length}] ${n.id} ${n.titleZh}`);
+    try {
+      const r = doNode(n);
+      result[r === "skipped" ? "skipped" : "done"].push(n.id);
+    } catch (e) {
+      const msg = (e && e.message ? e.message : String(e)).split("\n")[0].slice(0, 300);
+      log(`  ✘ ${n.id} 失敗：${msg}`);
+      result.failed.push({ id: n.id, error: msg });
+    }
+    result.finishedAt = new Date().toISOString();
+    fs.writeFileSync(LOG, JSON.stringify(result, null, 2), "utf8");
+  });
+
+  log(`完成：成功 ${result.done.length}／跳過 ${result.skipped.length}／失敗 ${result.failed.length}`);
+  if (result.failed.length) {
+    log(`失敗清單（可重跑同一指令，已完成的會自動跳過）：`);
+    result.failed.forEach(f => log(`   ${f.id}: ${f.error}`));
+  }
+  console.log(JSON.stringify(result, null, 2));
+}
+
+main();
