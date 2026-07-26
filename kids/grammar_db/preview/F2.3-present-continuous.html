@@ -23,7 +23,13 @@
   .podcast{background:#f3edff;border:2px solid #d7c6ff;border-radius:16px;margin:14px;padding:14px 16px;display:none;}
   .podcast.show{display:block;}
   .podcast .hd{font-weight:800;color:#5a36a8;font-size:.9rem;margin-bottom:8px;}
-  .podcast audio,.podcast video{width:100%;border-radius:10px;margin-top:6px;}
+  .podcast audio,.podcast video{width:100%;border-radius:10px;margin-top:4px;display:block;}
+  .podcast .mlabel{font-size:.82rem;font-weight:700;color:#5a36a8;margin-top:8px;}
+  .qbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;background:#fff;border-radius:10px;padding:8px 10px;margin-bottom:4px;}
+  .qlabel{font-size:.78rem;color:var(--muted);font-weight:700;}
+  .qbtn{padding:5px 12px;border:2px solid #d7c6ff;border-radius:16px;background:#fff;color:#5a36a8;font-weight:700;font-size:.78rem;cursor:pointer;font-family:inherit;}
+  .qbtn.active{background:#5a36a8;color:#fff;border-color:#5a36a8;}
+  .qnote{font-size:.72rem;color:var(--muted);width:100%;}
   .podcast-fallback{background:#f7f3ff;border:1.5px dashed #c9b6f0;border-radius:12px;margin:14px;padding:10px 14px;font-size:.8rem;color:#7355b0;}
 
   .play{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:none;border-radius:50%;background:var(--primary);color:#fff;font-size:.85rem;cursor:pointer;vertical-align:middle;flex-shrink:0;}
@@ -103,8 +109,19 @@
 
 <div class="podcast" id="podcastBox">
   <div class="hd">🎧 教學 Podcast（NotebookLM 生成）</div>
+
+  <div class="qbar">
+    <span class="qlabel">畫質／音質比較：</span>
+    <button class="qbtn active" id="qMin" onclick="setQuality('min')">壓縮版（4.8MB）</button>
+    <button class="qbtn" id="qOrig" onclick="setQuality('orig')">原始版（32MB）</button>
+    <span class="qnote" id="qNote">目前：壓縮版 · 480p / 48kbps 單聲道</span>
+  </div>
+
+  <div class="mlabel">🎬 影片：秘密偵探特訓 — 大家現在正在做什麼？</div>
+  <video id="podcastVideo" controls preload="none" playsinline></video>
+
+  <div class="mlabel" style="margin-top:12px">🎧 Podcast：秒懂現在進行式（4分40秒）</div>
   <audio id="podcastAudio" controls preload="none"></audio>
-  <video id="podcastVideo" controls preload="none" style="margin-top:8px"></video>
 </div>
 <div class="podcast-fallback" id="podcastFallback">
   🎧 這個節點還沒有 NotebookLM Podcast／影片，先用下面的句子逐句真人語音講解。
@@ -285,14 +302,35 @@ document.getElementById("speakPrompt").textContent = "🗣️ " + NODE.speaking;
 document.getElementById("writePrompt").textContent = "✍️ " + NODE.writing;
 
 // NotebookLM podcast/video slot：檔案不存在就自動隱藏，退回逐句真人語音
+const PODCAST_SRC = {
+  min:  { a: "podcast/F2.3-present-continuous-min.m4a", v: "podcast/F2.3-present-continuous-min.mp4",
+          note: "目前：壓縮版 · 480p / 48kbps 單聲道 · 影片 3.1MB＋音檔 1.7MB" },
+  orig: { a: "podcast/F2.3-present-continuous.m4a",     v: "podcast/F2.3-present-continuous.mp4",
+          note: "目前：原始版 · 720p / 256kbps 立體聲 · 影片 23.4MB＋音檔 8.6MB" },
+};
+// 切換畫質：記住播放位置，換檔後回到同一秒，方便直接比對同一個畫面
+function setQuality(kind) {
+  const src = PODCAST_SRC[kind];
+  const a = document.getElementById("podcastAudio");
+  const v = document.getElementById("podcastVideo");
+  const at = a.currentTime, vt = v.currentTime;
+  const aPlaying = !a.paused, vPlaying = !v.paused;
+  a.src = src.a; v.src = src.v;
+  a.addEventListener("loadedmetadata", function h() { a.currentTime = at; if (aPlaying) a.play().catch(() => {}); a.removeEventListener("loadedmetadata", h); });
+  v.addEventListener("loadedmetadata", function h() { v.currentTime = vt; if (vPlaying) v.play().catch(() => {}); v.removeEventListener("loadedmetadata", h); });
+  document.getElementById("qMin").classList.toggle("active", kind === "min");
+  document.getElementById("qOrig").classList.toggle("active", kind === "orig");
+  document.getElementById("qNote").textContent = src.note;
+}
 (function tryPodcast() {
   const a = document.getElementById("podcastAudio");
   const v = document.getElementById("podcastVideo");
   const box = document.getElementById("podcastBox");
   const fallback = document.getElementById("podcastFallback");
   let found = false;
-  a.src = "podcast/F2.3-present-continuous.m4a";
-  v.src = "podcast/F2.3-present-continuous.mp4";
+  a.src = PODCAST_SRC.min.a;
+  v.src = PODCAST_SRC.min.v;
+  document.getElementById("qNote").textContent = PODCAST_SRC.min.note;
   a.addEventListener("loadedmetadata", () => { found = true; box.classList.add("show"); fallback.style.display = "none"; });
   a.addEventListener("error", checkDone);
   v.addEventListener("loadedmetadata", () => { found = true; box.classList.add("show"); fallback.style.display = "none"; });
