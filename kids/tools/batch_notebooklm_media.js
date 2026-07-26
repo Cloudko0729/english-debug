@@ -42,8 +42,31 @@ function loadNodes() {
   return out;
 }
 
+// NotebookLM 的 Google 登入實測只有約 2 小時效期，長批次跑到一半一定會過期。
+// 過期後每個節點都會在第一步秒失敗，繼續跑只是把 log 洗版，所以偵測到就整批中止。
+class AuthExpired extends Error {}
+function isAuthError(s) { return /Authentication expired|Run 'notebooklm login'/i.test(String(s)); }
+
 function nb(...args) {
-  return execFileSync("notebooklm", args, { encoding: "utf8", maxBuffer: 32 * 1024 * 1024 }).trim();
+  try {
+    const out = execFileSync("notebooklm", args, { encoding: "utf8", maxBuffer: 32 * 1024 * 1024 }).trim();
+    if (isAuthError(out)) throw new AuthExpired(out);
+    return out;
+  } catch (e) {
+    if (e instanceof AuthExpired) throw e;
+    const blob = [e.message, e.stdout, e.stderr].map(x => x ? x.toString() : "").join("\n");
+    if (isAuthError(blob)) throw new AuthExpired("NotebookLM 登入已過期");
+    throw e;
+  }
+}
+
+// 開跑前先確認登入還有效，避免整批空轉
+function preflightAuth() {
+  try { nb("list", "--json"); return true; }
+  catch (e) {
+    if (e instanceof AuthExpired) return false;
+    throw e;
+  }
 }
 function ff(...args) {
   execFileSync("ffmpeg", ["-y", "-v", "error", ...args], { stdio: ["ignore", "pipe", "pipe"], maxBuffer: 32 * 1024 * 1024 });
@@ -137,22 +160,44 @@ function main() {
   if (!nodes.length) { console.error("沒有符合條件的節點"); process.exit(1); }
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
-  log(`本批共 ${nodes.length} 個節點${AUDIO_ONLY ? "（只做音檔）" : ""}`);
 
-  const result = { startedAt: new Date().toISOString(), done: [], skipped: [], failed: [] };
-  nodes.forEach((n, i) => {
+  const todo = nodes.filter(n =>
+    !fs.existsSync(path.join(OUT_DIR, n.id + ".m4a")) ||
+    (!AUDIO_ONLY && !fs.existsSync(path.join(OUT_DIR, n.id + ".mp4"))));
+  const perNode = AUDIO_ONLY ? 7 : 21;   // 實測分鐘數
+  log(`本批共 ${nodes.length} 個節點，其中 ${todo.length} 個待處理${AUDIO_ONLY ? "（只做音檔）" : ""}`);
+  log(`預估 ${todo.length * perNode} 分鐘（約 ${(todo.length * perNode / 60).toFixed(1)} 小時）；` +
+      `登入效期約 2 小時，超過的部分會中止，重新登入後重跑同一指令即可續做。`);
+
+  if (!preflightAuth()) {
+    log(`✘ NotebookLM 登入已過期，未開始任何工作。請先執行：notebooklm login`);
+    process.exit(2);
+  }
+
+  const result = { startedAt: new Date().toISOString(), done: [], skipped: [], failed: [], abortedAuth: false };
+  for (let i = 0; i < nodes.length; i++) {
+    const n = nodes[i];
     log(`[${i + 1}/${nodes.length}] ${n.id} ${n.titleZh}`);
     try {
       const r = doNode(n);
       result[r === "skipped" ? "skipped" : "done"].push(n.id);
     } catch (e) {
+      if (e instanceof AuthExpired) {
+        result.abortedAuth = true;
+        result.finishedAt = new Date().toISOString();
+        fs.writeFileSync(LOG, JSON.stringify(result, null, 2), "utf8");
+        log(`✘ 登入過期，於第 ${i + 1}/${nodes.length} 個節點中止（已完成 ${result.done.length} 個）`);
+        log(`  重新登入後重跑同一指令即可接著做：notebooklm login`);
+        console.log(JSON.stringify(result, null, 2));
+        process.exit(2);
+      }
       const msg = (e && e.message ? e.message : String(e)).split("\n")[0].slice(0, 300);
       log(`  ✘ ${n.id} 失敗：${msg}`);
       result.failed.push({ id: n.id, error: msg });
     }
     result.finishedAt = new Date().toISOString();
     fs.writeFileSync(LOG, JSON.stringify(result, null, 2), "utf8");
-  });
+  }
 
   log(`完成：成功 ${result.done.length}／跳過 ${result.skipped.length}／失敗 ${result.failed.length}`);
   if (result.failed.length) {
