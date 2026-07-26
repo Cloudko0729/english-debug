@@ -9,6 +9,7 @@
 - `diagrams.json` 與 `diagrams/*.svg`：19 張可直接嵌入網頁的示意圖。
 - `diagram_embed.css`：手機以橫向捲動保留可讀字級，避免把 760px 圖硬縮成小字。
 - `REBUILD_OUTLINE.md`：重建原則、分級、月份映射與整合方式。
+- **`LESSON_PAGE_SPEC.md`：孩子端教學頁建置規範（漸進式呈現、E0–E3 對外文案、情境圖、手機版 SVG、語音與媒體壓縮）。建任何節點頁前必讀。**
 - `ten_lesson_cycle.json`：每月 10 堂的適性教學、產出與複習循環。
 - `monthly_course_map.json`：2026-09 至 2027-06 的故事目標、候選節點與補救節點。
 
@@ -57,3 +58,12 @@ python kids/tools/verify_grammar_audio.py
   <img src="grammar_db/diagrams/question-routes.svg" alt="問句雙路線">
 </div>
 ```
+
+> 注意：以上是完整圖的桌機／「看整張規則圖」用法。手機版預設不應直接呈現整張 760px 圖，
+> 需改為「目前相關分支」的直式卡片——詳見 `LESSON_PAGE_SPEC.md` 第 4 節。
+
+## 孩子端呈現規範
+
+資料庫欄位完整是為了教學引擎，**不代表可以整包攤在孩子面前**。
+節點頁一律採五步驟漸進式呈現（生活情境 → 一句話任務 → 2 個核心例句 → 1 組最小對照 → 3 題診斷＋1 個輸出任務），
+其餘收進摺疊區；E0–E3 不對孩子顯示代碼。完整規則見 **`LESSON_PAGE_SPEC.md`**。
