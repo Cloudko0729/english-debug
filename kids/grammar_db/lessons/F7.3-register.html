@@ -48,6 +48,10 @@
   .prod-box{background:#f0fff5;border:1.5px solid #bfe8cd;border-radius:12px;padding:14px;margin:10px 0;}
   .prod-box .prompt{font-weight:700;font-size:.98rem;margin-bottom:8px;}
   .prod-box .done-check{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.88rem;color:#1a7a4d;font-weight:700;}
+  /* 英文範例答案（不是題目指令） */
+  .prod-box .eg{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fff;border:1.5px solid #bfe8cd;border-radius:10px;padding:8px 10px;margin-top:8px;}
+  .prod-box .eg-tag{font-size:.7rem;font-weight:800;background:#2fbf71;color:#fff;border-radius:10px;padding:2px 9px;flex-shrink:0;}
+  .prod-box .eg-en{font-size:.98rem;font-weight:700;color:#14324a;}
   .why-drawer{margin:14px;}
   .why-btn{width:100%;padding:12px;border:2px solid var(--purple);border-radius:12px;background:#f3edff;color:var(--purple);font-weight:800;cursor:pointer;font-size:.92rem;font-family:inherit;}
   .why-content{display:none;background:var(--panel);border:2px solid var(--border);border-top:none;border-radius:0 0 12px 12px;padding:14px;}
@@ -167,8 +171,11 @@
   <span class="step-no">STEP ④</span>
   <h2>🎤 口說作業</h2>
   <div class="prod-box">
-    <div class="prompt">🗣️ Make the same request to a friend and to a teacher.</div>
-    <button class="play big" onclick="pa('../../audio/grammar_db/content/f7_3_register_prompt_speaking.mp3')">🔊 聽一次示範</button>
+    <div class="prompt">🗣️ 同一件事，分別用對朋友和對老師的說法各講一次</div>
+    <div class="eg"><span class="eg-tag">範例</span>
+      <button class="play" onclick="pa('../../audio/grammar_db/task_examples/f7_3_register_speak.mp3')">🔊</button>
+      <span class="eg-en">Can you send me the file? Could you please send me the file?</span>
+    </div>
     <label class="done-check"><input type="checkbox"> 我說完了</label>
   </div>
 </div>
@@ -177,8 +184,11 @@
   <span class="step-no">STEP ⑤</span>
   <h2>✍️ 手寫作業（紙本為主）</h2>
   <div class="prod-box">
-    <div class="prompt">✍️ Rewrite an informal sentence for a school report.</div>
-    <button class="play big" onclick="pa('../../audio/grammar_db/content/f7_3_register_prompt_writing.mp3')">🔊 聽一次示範</button>
+    <div class="prompt">✍️ 把一句口語的話改寫成報告用的說法</div>
+    <div class="eg"><span class="eg-tag">範例</span>
+      <button class="play" onclick="pa('../../audio/grammar_db/task_examples/f7_3_register_write.mp3')">🔊</button>
+      <span class="eg-en">The results indicate a clear improvement.</span>
+    </div>
     <p style="font-size:.85rem;color:var(--muted);margin-top:8px">紙上寫：① 照抄一次 → ② 遮住憑記憶寫一次 → ③ 自己換個內容寫一句。</p>
     <label class="done-check"><input type="checkbox"> 我寫完了</label>
   </div>

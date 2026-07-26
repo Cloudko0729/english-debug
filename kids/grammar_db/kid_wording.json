@@ -1,59 +1,579 @@
 {
   "_note": "孩子端用語：goal = 一句話講完今天要學會什麼（取代 communicativeGoalZh 的教學術語）；formZh = 用中文講的句型規則（取代 form 的英文文法術語，如 subject + predicate）。依 LESSON_PAGE_SPEC.md 第 1 節，資料庫欄位是給教學引擎用的，不可直接呈現給孩子。",
-
-  "F0.1-complete-sentence":   { "goal": "看出一句話有沒有說完整", "formZh": "「誰」＋「做什麼／是什麼」，兩個都要有才算一句話" },
-  "F0.2-be-agreement":        { "goal": "說「是」的時候，用對 am / is / are", "formZh": "I 配 am；他、她、它 配 is；你、我們、他們 配 are" },
-  "F0.3-be-meaning":          { "goal": "用「是」說出某人是誰、心情怎樣、在哪裡", "formZh": "誰 ＋ am/is/are ＋ 身分／心情／地點" },
-  "F0.4-singular-plural":     { "goal": "說清楚是「一個」還是「很多個」", "formZh": "一個用原形；兩個以上字尾多半加 -s" },
-  "F0.5-a-an-sound":          { "goal": "決定要用 a 還是 an", "formZh": "聽下一個字的開頭「聲音」：子音用 a，母音用 an（不是看字母）" },
-
-  "F1.1-subject-pronouns":    { "goal": "用「他、她、它、他們」代替一直重複的名字", "formZh": "把主角換成 I / you / he / she / it / we / they" },
-  "F1.2-action-affirmative":  { "goal": "說出「誰做了什麼事」", "formZh": "誰 ＋ 做什麼 ＋ 對象／地點／時間" },
-  "F1.3-predicate-choice":    { "goal": "決定這句該用 be 還是一般動詞", "formZh": "講身分／心情／地點用 be；講動作用一般動詞" },
-  "F1.4-be-questions-negatives": { "goal": "用 be 問問題、說「不是」", "formZh": "問句把 be 搬到最前面；否定在 be 後面加 not" },
-  "F1.5-do-does":             { "goal": "用 Do / Does 問問題、說「不」", "formZh": "Do／Does 放句首，後面的動詞回到原形" },
-  "F1.6-wh-questions":        { "goal": "問「誰、什麼、哪裡、什麼時候、為什麼、怎麼樣」", "formZh": "疑問詞放最前面，後面接 be 或 do／does" },
-
-  "F2.1-present-simple":      { "goal": "說平常、每天都會做的事", "formZh": "一般用原形；主角是他／她／它時，動詞要加 -s" },
-  "F2.2-frequency-adverbs":   { "goal": "把「總是、常常、有時候、從不」放在對的位置", "formZh": "放在一般動詞前面；但要放在 be 動詞後面" },
-  "F2.3-present-continuous":  { "goal": "告訴別人現在正在做什麼", "formZh": "誰 ＋ am/is/are ＋ 動詞加 ing（兩個都要，不能只有一個）" },
-  "F2.4-present-contrast":    { "goal": "分清楚「平常都這樣」和「現在正在做」", "formZh": "平常的事用原形；此刻正在做的用 be ＋ 動詞加 ing" },
-  "F2.5-stative-verbs":       { "goal": "知道有些字（喜歡、想要、知道）不能加 ing", "formZh": "like／want／know／need 這類表示狀態的字，直接用原形" },
-  "F2.6-pronoun-case":        { "goal": "分清楚 I / me / my / mine 什麼時候用哪一個", "formZh": "當主角用 I；被做的對象用 me；表示「誰的」用 my／mine" },
-  "F2.7-there-count-quantity":{ "goal": "說「有一個⋯⋯」「有很多⋯⋯」", "formZh": "一個用 There is；兩個以上用 There are" },
-
-  "F3.1-past-be":             { "goal": "說「以前是⋯⋯」「昨天在⋯⋯」", "formZh": "I／他／她／它 用 was；你／我們／他們 用 were" },
-  "F3.2-past-simple":         { "goal": "說出昨天、剛才已經做過的事", "formZh": "多數動詞加 -ed；有些要整個換掉（go → went）" },
-  "F3.3-did-questions":       { "goal": "問「你有沒有⋯⋯？」、說「我沒有⋯⋯」", "formZh": "Did 放句首，後面的動詞回到原形（不是過去式）" },
-  "F3.4-prepositions":        { "goal": "說清楚東西在哪裡、事情在什麼時候", "formZh": "in／on／at 各自對應不同大小的地點和時間範圍" },
-  "F3.5-connectors":          { "goal": "把兩句話連起來：而且／但是／因為／所以", "formZh": "前一句 ＋ 連接詞 ＋ 後一句（同一組因果只用一個連接詞）" },
-  "F3.6-basic-helpers":       { "goal": "說「我會⋯⋯」「我要⋯⋯」「我打算⋯⋯」", "formZh": "can／will／be going to 後面的動詞一律用原形" },
-
-  "F4.1-past-continuous":     { "goal": "說「那時候我正在⋯⋯，結果⋯⋯」", "formZh": "was／were ＋ 動詞加 ing；被打斷的那件事用 when 帶出來" },
-  "F4.2-adjectives-adverbs":  { "goal": "分清楚「形容東西」和「形容做事的樣子」", "formZh": "形容東西用形容詞；形容動作怎麼做，多半在字尾加 -ly" },
-  "F4.3-comparatives":        { "goal": "比較誰比較高、誰最高", "formZh": "兩個比：-er／more ⋯ than；最高級：the -est／the most" },
-  "F4.4-quantifiers":         { "goal": "說「很多」「一點點」的時候用對字", "formZh": "數得出來用 many／few；數不出來用 much／little" },
-  "F4.5-modal-functions":     { "goal": "說「應該、必須、可能」", "formZh": "should／must／have to／may／might 後面動詞一律用原形" },
-  "F4.6-infinitive-gerund":   { "goal": "在常用動詞後面，選對要接哪一種動詞形式", "formZh": "want／need／plan 後面接 to ＋ 原形；enjoy／finish 後面接 -ing" },
-
-  "F5.1-present-perfect-experience": { "goal": "說出你「曾經做過」的事，或現在還看得到的結果", "formZh": "have／has ＋ 動詞的過去分詞（第三種變化）" },
-  "F5.2-perfect-markers":     { "goal": "說清楚「已經、還沒、從什麼時候開始、持續多久」", "formZh": "already 用在肯定句；yet 用在問句和否定句；since 接時間點；for 接一段時間" },
-  "F5.3-perfect-vs-past":     { "goal": "分清楚「事情已經過去了」和「到現在還有影響」", "formZh": "有明確過去時間用過去式；講經驗或現在還看得到的結果用現在完成式" },
-  "F5.4-first-conditional":   { "goal": "說出「如果⋯⋯就會⋯⋯」這種有可能發生的事", "formZh": "If ＋ 現在式，後面主句用 will／can ＋ 原形（if 裡面不能用 will）" },
-  "F5.5-relative-basic":      { "goal": "用一句話補充說明「哪一個人、哪個東西、哪個地方」", "formZh": "名詞 ＋ who／which／that／where ＋ 補充說明（人用 who，物用 which）" },
-  "F5.6-reflexive-reference": { "goal": "說「他自己」時用對字，也別讓「他」指不清楚是誰", "formZh": "主詞和受詞是同一個人時用 -self；強調時也可放在名詞後面" },
-
-  "F6.1-tense-choice":        { "goal": "寫一整段的時候，時態前後要一致", "formZh": "看整件事發生的時間軸來決定時態，不要只看某一個關鍵字" },
-  "F6.2-passive-process":     { "goal": "當「誰做的」不重要時，把重點放在事情本身", "formZh": "be ＋ 動詞的過去分詞；真的要說做事者才加 by" },
-  "F6.3-future-forms":        { "goal": "分清楚四種講未來的說法", "formZh": "時刻表用現在式；已約好用現在進行式；有計畫用 going to；當下決定用 will" },
-  "F6.4-expanded-noun-phrases": { "goal": "把一個東西描述得更精確", "formZh": "冠詞 ＋ 依順序排的形容詞 ＋ 名詞 ＋ 後面補充說明" },
-  "F6.5-reporting-sources":   { "goal": "說明這個資訊是從哪裡來的", "formZh": "According to ＋ 來源, 句子；或 某人 ＋ says／explains that ＋ 句子" },
-  "F6.6-cohesion-basic":      { "goal": "讓一整段話讀起來順、前後接得上", "formZh": "順序詞 ＋ 清楚的指涉 ＋ 適度重複關鍵字" },
-
-  "F7.1-relative-advanced":   { "goal": "用補充子句時，讓補充說明連到正確的對象", "formZh": "限定用法不加逗號；補充用法要加逗號，且要緊接在被說明的詞後面" },
-  "F7.2-modal-deduction":     { "goal": "用 must／may／might／can't 表達「有多確定」", "formZh": "情態動詞 ＋ 原形；推測過去用 情態動詞 ＋ have ＋ 過去分詞" },
-  "F7.3-register":            { "goal": "看對象調整說話的正式程度", "formZh": "依對象決定用字、要不要縮寫、語氣強弱" },
-  "F7.4-reference-across-sentences": { "goal": "讓 it、they、this 清楚指到前面講過的東西", "formZh": "代名詞要能明確對應到前面某個名詞；會混淆時就把名詞重講一次" },
-  "F7.5-punctuation":         { "goal": "用標點把資訊分層，不要一路用逗號串到底", "formZh": "冒號引出說明；分號連接兩個完整句；破折號和括號放補充資訊" },
-  "F7.6-edit-naturalness":    { "goal": "檢查句子除了文法對，是不是也講得自然", "formZh": "先看意思對不對，再看結構、用字搭配、語氣是否合適" }
+  "F0.1-complete-sentence": {
+    "goal": "看出一句話有沒有說完整",
+    "formZh": "「誰」＋「做什麼／是什麼」，兩個都要有才算一句話",
+    "speak": {
+      "zh": "用完整的一句話，說一件關於家人的事",
+      "eg": "My sister is a student."
+    },
+    "write": {
+      "zh": "用完整的一句話，寫你的教室",
+      "eg": "My classroom is very big."
+    }
+  },
+  "F0.2-be-agreement": {
+    "goal": "說「是」的時候，用對 am / is / are",
+    "formZh": "I 配 am；他、她、它 配 is；你、我們、他們 配 are",
+    "speak": {
+      "zh": "說一句用 I am 開頭的話",
+      "eg": "I am ready for school."
+    },
+    "write": {
+      "zh": "寫一句主詞是好幾個人、要用 are 的話",
+      "eg": "My friends are in the park."
+    }
+  },
+  "F0.3-be-meaning": {
+    "goal": "用「是」說出某人是誰、心情怎樣、在哪裡",
+    "formZh": "誰 ＋ am/is/are ＋ 身分／心情／地點",
+    "speak": {
+      "zh": "說出你的書包在哪裡",
+      "eg": "My school bag is under the desk."
+    },
+    "write": {
+      "zh": "寫一句今天心情怎麼樣",
+      "eg": "I am happy today."
+    }
+  },
+  "F0.4-singular-plural": {
+    "goal": "說清楚是「一個」還是「很多個」",
+    "formZh": "一個用原形；兩個以上字尾多半加 -s",
+    "speak": {
+      "zh": "說一句有數字、也有兩個以上東西的話",
+      "eg": "I have three books."
+    },
+    "write": {
+      "zh": "用 box 和 child 的複數各寫一句",
+      "eg": "There are two boxes. The children are playing."
+    }
+  },
+  "F0.5-a-an-sound": {
+    "goal": "決定要用 a 還是 an",
+    "formZh": "聽下一個字的開頭「聲音」：子音用 a，母音用 an（不是看字母）",
+    "speak": {
+      "zh": "說一個用 a 的詞，再說一個用 an 的詞",
+      "eg": "a cat and an apple"
+    },
+    "write": {
+      "zh": "寫一句用到 an hour 的話",
+      "eg": "We waited for an hour."
+    }
+  },
+  "F1.1-subject-pronouns": {
+    "goal": "用「他、她、它、他們」代替一直重複的名字",
+    "formZh": "把主角換成 I / you / he / she / it / we / they",
+    "speak": {
+      "zh": "用 he 或 she 介紹一個人",
+      "eg": "She is my teacher."
+    },
+    "write": {
+      "zh": "寫一句用 they 講兩個人的話",
+      "eg": "They are my classmates."
+    }
+  },
+  "F1.2-action-affirmative": {
+    "goal": "說出「誰做了什麼事」",
+    "formZh": "誰 ＋ 做什麼 ＋ 對象／地點／時間",
+    "speak": {
+      "zh": "說一件你每天都會做的事",
+      "eg": "I brush my teeth every morning."
+    },
+    "write": {
+      "zh": "寫一句有「誰＋做什麼＋對象」的話",
+      "eg": "My brother plays the piano."
+    }
+  },
+  "F1.3-predicate-choice": {
+    "goal": "決定這句該用 be 還是一般動詞",
+    "formZh": "講身分／心情／地點用 be；講動作用一般動詞",
+    "speak": {
+      "zh": "先說一句用 be 的話，再說一句講動作的話",
+      "eg": "I am hungry. I eat lunch at noon."
+    },
+    "write": {
+      "zh": "寫一句講狀態、一句講動作",
+      "eg": "She is tired. She sleeps early."
+    }
+  },
+  "F1.4-be-questions-negatives": {
+    "goal": "用 be 問問題、說「不是」",
+    "formZh": "問句把 be 搬到最前面；否定在 be 後面加 not",
+    "speak": {
+      "zh": "用 be 問句問別人心情怎麼樣",
+      "eg": "Are you happy today?"
+    },
+    "write": {
+      "zh": "寫一句用 is not 或 are not 的否定句",
+      "eg": "The door is not open."
+    }
+  },
+  "F1.5-do-does": {
+    "goal": "用 Do / Does 問問題、說「不」",
+    "formZh": "Do／Does 放句首，後面的動詞回到原形",
+    "speak": {
+      "zh": "用 Do you...? 問朋友的日常習慣",
+      "eg": "Do you play basketball after school?"
+    },
+    "write": {
+      "zh": "寫一句用 doesn't 的否定句",
+      "eg": "He doesn't like carrots."
+    }
+  },
+  "F1.6-wh-questions": {
+    "goal": "問「誰、什麼、哪裡、什麼時候、為什麼、怎麼樣」",
+    "formZh": "疑問詞放最前面，後面接 be 或 do／does",
+    "speak": {
+      "zh": "用 where 問一個問題",
+      "eg": "Where is my pencil?"
+    },
+    "write": {
+      "zh": "用 why 加 be 動詞寫一個問句",
+      "eg": "Why are you late?"
+    }
+  },
+  "F2.1-present-simple": {
+    "goal": "說平常、每天都會做的事",
+    "formZh": "一般用原形；主角是他／她／它時，動詞要加 -s",
+    "speak": {
+      "zh": "說一件你每天都做的事",
+      "eg": "I walk to school every day."
+    },
+    "write": {
+      "zh": "寫一個關於動物的事實",
+      "eg": "Cats sleep a lot."
+    }
+  },
+  "F2.2-frequency-adverbs": {
+    "goal": "把「總是、常常、有時候、從不」放在對的位置",
+    "formZh": "放在一般動詞前面；但要放在 be 動詞後面",
+    "speak": {
+      "zh": "用 usually 說一句真的事",
+      "eg": "I usually get up at seven."
+    },
+    "write": {
+      "zh": "寫一句把 never 放對位置的話",
+      "eg": "She never drinks coffee."
+    }
+  },
+  "F2.3-present-continuous": {
+    "goal": "告訴別人現在正在做什麼",
+    "formZh": "誰 ＋ am/is/are ＋ 動詞加 ing（兩個都要，不能只有一個）",
+    "speak": {
+      "zh": "說你現在正在做什麼",
+      "eg": "I am doing my homework."
+    },
+    "write": {
+      "zh": "寫一句別人正在做什麼",
+      "eg": "My mom is cooking dinner."
+    }
+  },
+  "F2.4-present-contrast": {
+    "goal": "分清楚「平常都這樣」和「現在正在做」",
+    "formZh": "平常的事用原形；此刻正在做的用 be ＋ 動詞加 ing",
+    "speak": {
+      "zh": "比較你平常做的事，和今天正在做的事",
+      "eg": "I usually walk to school, but today I am taking the bus."
+    },
+    "write": {
+      "zh": "寫兩句：一句平常的、一句現在正在做的",
+      "eg": "She reads every night. She is reading now."
+    }
+  },
+  "F2.5-stative-verbs": {
+    "goal": "知道有些字（喜歡、想要、知道）不能加 ing",
+    "formZh": "like／want／know／need 這類表示狀態的字，直接用原形",
+    "speak": {
+      "zh": "說一句用 know 或 need 的話",
+      "eg": "I know his name."
+    },
+    "write": {
+      "zh": "寫一句用「喜歡、想要」這類字的話",
+      "eg": "She wants a new bike."
+    }
+  },
+  "F2.6-pronoun-case": {
+    "goal": "分清楚 I / me / my / mine 什麼時候用哪一個",
+    "formZh": "當主角用 I；被做的對象用 me；表示「誰的」用 my／mine",
+    "speak": {
+      "zh": "說誰幫助你（用 me、him、her 這類字）",
+      "eg": "My father helps me."
+    },
+    "write": {
+      "zh": "寫一句用 my，一句用 mine",
+      "eg": "This is my book. That one is mine."
+    }
+  },
+  "F2.7-there-count-quantity": {
+    "goal": "說「有一個⋯⋯」「有很多⋯⋯」",
+    "formZh": "一個用 There is；兩個以上用 There are",
+    "speak": {
+      "zh": "說一樣你房間裡有的東西",
+      "eg": "There is a lamp on my desk."
+    },
+    "write": {
+      "zh": "用 There are 加數字寫一句",
+      "eg": "There are four chairs in the room."
+    }
+  },
+  "F3.1-past-be": {
+    "goal": "說「以前是⋯⋯」「昨天在⋯⋯」",
+    "formZh": "I／他／她／它 用 was；你／我們／他們 用 were",
+    "speak": {
+      "zh": "說你昨天在哪裡",
+      "eg": "I was at my grandma's house yesterday."
+    },
+    "write": {
+      "zh": "用 was 或 were 寫一個問過去的問句",
+      "eg": "Were you at home last night?"
+    }
+  },
+  "F3.2-past-simple": {
+    "goal": "說出昨天、剛才已經做過的事",
+    "formZh": "多數動詞加 -ed；有些要整個換掉（go → went）",
+    "speak": {
+      "zh": "說一件你昨天做的事",
+      "eg": "I watched a movie yesterday."
+    },
+    "write": {
+      "zh": "寫兩句上週末做過的事",
+      "eg": "We went to the beach. I ate ice cream."
+    }
+  },
+  "F3.3-did-questions": {
+    "goal": "問「你有沒有⋯⋯？」、說「我沒有⋯⋯」",
+    "formZh": "Did 放句首，後面的動詞回到原形（不是過去式）",
+    "speak": {
+      "zh": "用 Did 問一個關於昨天的問題",
+      "eg": "Did you finish your homework?"
+    },
+    "write": {
+      "zh": "寫一句用 didn't 的過去否定句",
+      "eg": "I didn't go to school yesterday."
+    }
+  },
+  "F3.4-prepositions": {
+    "goal": "說清楚東西在哪裡、事情在什麼時候",
+    "formZh": "in／on／at 各自對應不同大小的地點和時間範圍",
+    "speak": {
+      "zh": "說一樣東西在哪裡（用地點介系詞）",
+      "eg": "The cat is under the chair."
+    },
+    "write": {
+      "zh": "寫一句同時有時間和星期的話",
+      "eg": "We have class at nine on Monday."
+    }
+  },
+  "F3.5-connectors": {
+    "goal": "把兩句話連起來：而且／但是／因為／所以",
+    "formZh": "前一句 ＋ 連接詞 ＋ 後一句（同一組因果只用一個連接詞）",
+    "speak": {
+      "zh": "用 because 把兩件事連起來",
+      "eg": "I am tired because I slept late."
+    },
+    "write": {
+      "zh": "用 but 寫一句有轉折的話",
+      "eg": "The bag is small but heavy."
+    }
+  },
+  "F3.6-basic-helpers": {
+    "goal": "說「我會⋯⋯」「我要⋯⋯」「我打算⋯⋯」",
+    "formZh": "can／will／be going to 後面的動詞一律用原形",
+    "speak": {
+      "zh": "說一件你會做的事",
+      "eg": "I can swim very well."
+    },
+    "write": {
+      "zh": "用 be going to 寫一個計畫",
+      "eg": "I am going to visit my uncle."
+    }
+  },
+  "F4.1-past-continuous": {
+    "goal": "說「那時候我正在⋯⋯，結果⋯⋯」",
+    "formZh": "was／were ＋ 動詞加 ing；被打斷的那件事用 when 帶出來",
+    "speak": {
+      "zh": "說昨天晚上八點你正在做什麼",
+      "eg": "I was reading a book at eight last night."
+    },
+    "write": {
+      "zh": "用 when 加過去進行式寫一句",
+      "eg": "I was cooking when the phone rang."
+    }
+  },
+  "F4.2-adjectives-adverbs": {
+    "goal": "分清楚「形容東西」和「形容做事的樣子」",
+    "formZh": "形容東西用形容詞；形容動作怎麼做，多半在字尾加 -ly",
+    "speak": {
+      "zh": "描述某個人做事情的樣子",
+      "eg": "He runs very quickly."
+    },
+    "write": {
+      "zh": "寫一句用形容詞、一句用副詞",
+      "eg": "It was a quiet room. She spoke quietly."
+    }
+  },
+  "F4.3-comparatives": {
+    "goal": "比較誰比較高、誰最高",
+    "formZh": "兩個比：-er／more ⋯ than；最高級：the -est／the most",
+    "speak": {
+      "zh": "比較你身邊的兩樣東西",
+      "eg": "This pencil is longer than that one."
+    },
+    "write": {
+      "zh": "寫一句最高級的話",
+      "eg": "This is the tallest building in our city."
+    }
+  },
+  "F4.4-quantifiers": {
+    "goal": "說「很多」「一點點」的時候用對字",
+    "formZh": "數得出來用 many／few；數不出來用 much／little",
+    "speak": {
+      "zh": "用 how many 或 how much 問一個問題",
+      "eg": "How many books do you have?"
+    },
+    "write": {
+      "zh": "用 a few 加可數名詞寫一句",
+      "eg": "I have a few questions."
+    }
+  },
+  "F4.5-modal-functions": {
+    "goal": "說「應該、必須、可能」",
+    "formZh": "should／must／have to／may／might 後面動詞一律用原形",
+    "speak": {
+      "zh": "用 should 給一個建議",
+      "eg": "You should drink more water."
+    },
+    "write": {
+      "zh": "用 might 寫一件可能發生的事",
+      "eg": "It might rain this afternoon."
+    }
+  },
+  "F4.6-infinitive-gerund": {
+    "goal": "在常用動詞後面，選對要接哪一種動詞形式",
+    "formZh": "want／need／plan 後面接 to ＋ 原形；enjoy／finish 後面接 -ing",
+    "speak": {
+      "zh": "說一件你喜歡做的事",
+      "eg": "I enjoy playing badminton."
+    },
+    "write": {
+      "zh": "寫一件你打算做的事",
+      "eg": "I plan to study Japanese."
+    }
+  },
+  "F5.1-present-perfect-experience": {
+    "goal": "說出你「曾經做過」的事，或現在還看得到的結果",
+    "formZh": "have／has ＋ 動詞的過去分詞（第三種變化）",
+    "speak": {
+      "zh": "用 Have you ever...? 問別人的經驗",
+      "eg": "Have you ever been to Japan?"
+    },
+    "write": {
+      "zh": "寫一件你曾經做過的事",
+      "eg": "I have visited Taipei 101 twice."
+    }
+  },
+  "F5.2-perfect-markers": {
+    "goal": "說清楚「已經、還沒、從什麼時候開始、持續多久」",
+    "formZh": "already 用在肯定句；yet 用在問句和否定句；since 接時間點；for 接一段時間",
+    "speak": {
+      "zh": "說你學英文學多久了",
+      "eg": "I have studied English for three years."
+    },
+    "write": {
+      "zh": "寫一句用 already 或 yet 的話",
+      "eg": "I have already finished my homework."
+    }
+  },
+  "F5.3-perfect-vs-past": {
+    "goal": "分清楚「事情已經過去了」和「到現在還有影響」",
+    "formZh": "有明確過去時間用過去式；講經驗或現在還看得到的結果用現在完成式",
+    "speak": {
+      "zh": "比較一件已經結束的往事，和一個人生經驗",
+      "eg": "I went to Kenting last summer. I have never been to Hualien."
+    },
+    "write": {
+      "zh": "寫兩句，一句過去式、一句現在完成式",
+      "eg": "She lost her key yesterday. She has lost her key, so she can't get in."
+    }
+  },
+  "F5.4-first-conditional": {
+    "goal": "說出「如果⋯⋯就會⋯⋯」這種有可能發生的事",
+    "formZh": "If ＋ 現在式，後面主句用 will／can ＋ 原形（if 裡面不能用 will）",
+    "speak": {
+      "zh": "說如果明天下雨你會怎麼做",
+      "eg": "If it rains tomorrow, I will stay home."
+    },
+    "write": {
+      "zh": "寫一句真的有可能發生的「如果⋯⋯就⋯⋯」",
+      "eg": "If we leave now, we will catch the bus."
+    }
+  },
+  "F5.5-relative-basic": {
+    "goal": "用一句話補充說明「哪一個人、哪個東西、哪個地方」",
+    "formZh": "名詞 ＋ who／which／that／where ＋ 補充說明（人用 who，物用 which）",
+    "speak": {
+      "zh": "用 who 的子句描述一個人",
+      "eg": "He is the boy who won the race."
+    },
+    "write": {
+      "zh": "寫一句用 that 或 which 的話",
+      "eg": "This is the book that I like best."
+    }
+  },
+  "F5.6-reflexive-reference": {
+    "goal": "說「他自己」時用對字，也別讓「他」指不清楚是誰",
+    "formZh": "主詞和受詞是同一個人時用 -self；強調時也可放在名詞後面",
+    "speak": {
+      "zh": "說一件你自己一個人完成的事",
+      "eg": "I made this cake by myself."
+    },
+    "write": {
+      "zh": "把一句「他」指不清楚的話改清楚",
+      "eg": "Tom told Ben that Tom was late."
+    }
+  },
+  "F6.1-tense-choice": {
+    "goal": "寫一整段的時候，時態前後要一致",
+    "formZh": "看整件事發生的時間軸來決定時態，不要只看某一個關鍵字",
+    "speak": {
+      "zh": "說一個小故事，要有背景和主要事件",
+      "eg": "I was walking home when I saw my old teacher."
+    },
+    "write": {
+      "zh": "用過去式和現在完成式寫三句連貫的話",
+      "eg": "We planted a tree last spring. It has grown a lot. Now it gives us shade."
+    }
+  },
+  "F6.2-passive-process": {
+    "goal": "當「誰做的」不重要時，把重點放在事情本身",
+    "formZh": "be ＋ 動詞的過去分詞；真的要說做事者才加 by",
+    "speak": {
+      "zh": "用被動語態說明一個步驟",
+      "eg": "The water is heated for ten minutes."
+    },
+    "write": {
+      "zh": "把主動句改寫成強調成品的被動句",
+      "eg": "The bridge was built in 1998."
+    }
+  },
+  "F6.3-future-forms": {
+    "goal": "分清楚四種講未來的說法",
+    "formZh": "時刻表用現在式；已約好用現在進行式；有計畫用 going to；當下決定用 will",
+    "speak": {
+      "zh": "說一個已經約好的安排，和一個計畫",
+      "eg": "I am meeting my friend at six. I am going to buy a gift."
+    },
+    "write": {
+      "zh": "寫一句時刻表的話，和一句預測",
+      "eg": "The train leaves at seven. It will be cold tomorrow."
+    }
+  },
+  "F6.4-expanded-noun-phrases": {
+    "goal": "把一個東西描述得更精確",
+    "formZh": "冠詞 ＋ 依順序排的形容詞 ＋ 名詞 ＋ 後面補充說明",
+    "speak": {
+      "zh": "用兩個修飾語描述一樣東西",
+      "eg": "It is a small blue notebook."
+    },
+    "write": {
+      "zh": "寫一個名詞後面帶補充說明的詞組",
+      "eg": "the girl in the red jacket"
+    }
+  },
+  "F6.5-reporting-sources": {
+    "goal": "說明這個資訊是從哪裡來的",
+    "formZh": "According to ＋ 來源, 句子；或 某人 ＋ says／explains that ＋ 句子",
+    "speak": {
+      "zh": "用 According to... 說一個資訊",
+      "eg": "According to the report, the school will open a new library."
+    },
+    "write": {
+      "zh": "寫一句清楚說明資料來源的話",
+      "eg": "The teacher explained that the test will be next Friday."
+    }
+  },
+  "F6.6-cohesion-basic": {
+    "goal": "讓一整段話讀起來順、前後接得上",
+    "formZh": "順序詞 ＋ 清楚的指涉 ＋ 適度重複關鍵字",
+    "speak": {
+      "zh": "用轉折語連接兩個相反的想法",
+      "eg": "The plan is cheap; however, it is not safe."
+    },
+    "write": {
+      "zh": "用順序詞寫三句話描述一個流程",
+      "eg": "First, we wash the rice. Then, we add water. Finally, we cook it."
+    }
+  },
+  "F7.1-relative-advanced": {
+    "goal": "用補充子句時，讓補充說明連到正確的對象",
+    "formZh": "限定用法不加逗號；補充用法要加逗號，且要緊接在被說明的詞後面",
+    "speak": {
+      "zh": "用 whose 描述一個人",
+      "eg": "She is the student whose drawing won first prize."
+    },
+    "write": {
+      "zh": "寫一句有逗號的補充說明子句",
+      "eg": "My uncle, who lives in Tainan, is a doctor."
+    }
+  },
+  "F7.2-modal-deduction": {
+    "goal": "用 must／may／might／can't 表達「有多確定」",
+    "formZh": "情態動詞 ＋ 原形；推測過去用 情態動詞 ＋ have ＋ 過去分詞",
+    "speak": {
+      "zh": "用 might 做一個保留一點的猜測",
+      "eg": "She might be at the library."
+    },
+    "write": {
+      "zh": "寫一個有證據支持的強推論",
+      "eg": "The lights are on, so someone must be home."
+    }
+  },
+  "F7.3-register": {
+    "goal": "看對象調整說話的正式程度",
+    "formZh": "依對象決定用字、要不要縮寫、語氣強弱",
+    "speak": {
+      "zh": "同一件事，分別用對朋友和對老師的說法各講一次",
+      "eg": "Can you send me the file? Could you please send me the file?"
+    },
+    "write": {
+      "zh": "把一句口語的話改寫成報告用的說法",
+      "eg": "The results indicate a clear improvement."
+    }
+  },
+  "F7.4-reference-across-sentences": {
+    "goal": "讓 it、they、this 清楚指到前面講過的東西",
+    "formZh": "代名詞要能明確對應到前面某個名詞；會混淆時就把名詞重講一次",
+    "speak": {
+      "zh": "說明一段話裡的代名詞指的是什麼",
+      "eg": "In that sentence, it refers to the broken printer."
+    },
+    "write": {
+      "zh": "把指涉不清楚的句子改成清楚的說法",
+      "eg": "The device broke. This failure caused a delay."
+    }
+  },
+  "F7.5-punctuation": {
+    "goal": "用標點把資訊分層，不要一路用逗號串到底",
+    "formZh": "冒號引出說明；分號連接兩個完整句；破折號和括號放補充資訊",
+    "speak": {
+      "zh": "唸一句有冒號的話，並說明冒號帶出什麼",
+      "eg": "We need three things: paper, glue, and scissors."
+    },
+    "write": {
+      "zh": "用分號連接兩個關係密切的完整句",
+      "eg": "It works; we agree."
+    }
+  },
+  "F7.6-edit-naturalness": {
+    "goal": "檢查句子除了文法對，是不是也講得自然",
+    "formZh": "先看意思對不對，再看結構、用字搭配、語氣是否合適",
+    "speak": {
+      "zh": "說明一句聽得懂但不自然的話，問題在哪裡",
+      "eg": "I very like it should be I really like it."
+    },
+    "write": {
+      "zh": "從意思、自然度和語氣三方面改寫一句話",
+      "eg": "I would like to request more information."
+    }
+  }
 }

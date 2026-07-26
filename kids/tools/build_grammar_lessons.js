@@ -66,6 +66,15 @@ function formZhOf(n) {
   if (!k || !k.formZh) throw new Error(`kid_wording.json 缺少 ${n.id} 的 formZh`);
   return k.formZh;
 }
+// 作業說明一律中文（英文題幹孩子讀不懂），另外附英文範例答案＋範例語音。
+// 注意：資料裡的 promptAudio 唸的是英文「指令」，不是示範答案，不能當示範用。
+function taskOf(n, kind) {
+  const k = KID[n.id];
+  if (!k || !k[kind] || !k[kind].zh || !k[kind].eg) throw new Error(`kid_wording.json 缺少 ${n.id} 的 ${kind}.zh / ${kind}.eg`);
+  return k[kind];
+}
+// 範例語音檔名（由 build_task_example_audio.js 產生）
+function egAudio(n, kind) { return `../../audio/grammar_db/task_examples/${n.id.replace(/[.\-]/g, "_").toLowerCase()}_${kind}.mp3`; }
 
 const STYLE = `
   :root{--bg:#fff7dc;--panel:#fff;--primary:#2f80ed;--soft:#dbeafe;--accent:#ffb703;--green:#2fbf71;--purple:#7c4dca;--danger:#ef476f;--text:#243042;--muted:#667085;--border:#e2e8f0;}
@@ -111,6 +120,10 @@ const STYLE = `
   .prod-box{background:#f0fff5;border:1.5px solid #bfe8cd;border-radius:12px;padding:14px;margin:10px 0;}
   .prod-box .prompt{font-weight:700;font-size:.98rem;margin-bottom:8px;}
   .prod-box .done-check{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.88rem;color:#1a7a4d;font-weight:700;}
+  /* 英文範例答案（不是題目指令） */
+  .prod-box .eg{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fff;border:1.5px solid #bfe8cd;border-radius:10px;padding:8px 10px;margin-top:8px;}
+  .prod-box .eg-tag{font-size:.7rem;font-weight:800;background:#2fbf71;color:#fff;border-radius:10px;padding:2px 9px;flex-shrink:0;}
+  .prod-box .eg-en{font-size:.98rem;font-weight:700;color:#14324a;}
   .why-drawer{margin:14px;}
   .why-btn{width:100%;padding:12px;border:2px solid var(--purple);border-radius:12px;background:#f3edff;color:var(--purple);font-weight:800;cursor:pointer;font-size:.92rem;font-family:inherit;}
   .why-content{display:none;background:var(--panel);border:2px solid var(--border);border-top:none;border-radius:0 0 12px 12px;padding:14px;}
@@ -230,8 +243,11 @@ function renderNode(n, prev, next) {
   <span class="step-no">STEP ④</span>
   <h2>🎤 口說作業</h2>
   <div class="prod-box">
-    <div class="prompt">🗣️ ${esc(speak ? speak.prompt : "")}</div>
-    ${speak && speak.promptAudio ? `<button class="play big" onclick="pa('${jsq(au(speak.promptAudio))}')">🔊 聽一次示範</button>` : ""}
+    <div class="prompt">🗣️ ${esc(taskOf(n, "speak").zh)}</div>
+    <div class="eg"><span class="eg-tag">範例</span>
+      <button class="play" onclick="pa('${jsq(egAudio(n, "speak"))}')">🔊</button>
+      <span class="eg-en">${esc(taskOf(n, "speak").eg)}</span>
+    </div>
     <label class="done-check"><input type="checkbox"> 我說完了</label>
   </div>
 </div>
@@ -240,8 +256,11 @@ function renderNode(n, prev, next) {
   <span class="step-no">STEP ⑤</span>
   <h2>✍️ 手寫作業（紙本為主）</h2>
   <div class="prod-box">
-    <div class="prompt">✍️ ${esc(write ? write.prompt : "")}</div>
-    ${write && write.promptAudio ? `<button class="play big" onclick="pa('${jsq(au(write.promptAudio))}')">🔊 聽一次示範</button>` : ""}
+    <div class="prompt">✍️ ${esc(taskOf(n, "write").zh)}</div>
+    <div class="eg"><span class="eg-tag">範例</span>
+      <button class="play" onclick="pa('${jsq(egAudio(n, "write"))}')">🔊</button>
+      <span class="eg-en">${esc(taskOf(n, "write").eg)}</span>
+    </div>
     <p style="font-size:.85rem;color:var(--muted);margin-top:8px">紙上寫：① 照抄一次 → ② 遮住憑記憶寫一次 → ③ 自己換個內容寫一句。</p>
     <label class="done-check"><input type="checkbox"> 我寫完了</label>
   </div>
