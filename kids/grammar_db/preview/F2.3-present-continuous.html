@@ -118,10 +118,10 @@
   </div>
 
   <div class="mlabel">🎬 影片：秘密偵探特訓 — 大家現在正在做什麼？</div>
-  <video id="podcastVideo" controls preload="none" playsinline></video>
+  <video id="podcastVideo" controls preload="metadata" playsinline></video>
 
   <div class="mlabel" style="margin-top:12px">🎧 Podcast：秒懂現在進行式（4分40秒）</div>
-  <audio id="podcastAudio" controls preload="none"></audio>
+  <audio id="podcastAudio" controls preload="metadata"></audio>
 </div>
 <div class="podcast-fallback" id="podcastFallback">
   🎧 這個節點還沒有 NotebookLM Podcast／影片，先用下面的句子逐句真人語音講解。
@@ -322,21 +322,26 @@ function setQuality(kind) {
   document.getElementById("qOrig").classList.toggle("active", kind === "orig");
   document.getElementById("qNote").textContent = src.note;
 }
+// fail-safe：預設就顯示播放器（檔案本來就跟頁面一起發佈），
+// 只有「音檔和影片都真的載入失敗」才隱藏並退回逐句真人語音。
+// （先前掛在 loadedmetadata 上判斷，遇到 preload="none" 事件永不觸發，會誤判成沒有檔案。）
 (function tryPodcast() {
   const a = document.getElementById("podcastAudio");
   const v = document.getElementById("podcastVideo");
   const box = document.getElementById("podcastBox");
   const fallback = document.getElementById("podcastFallback");
-  let found = false;
   a.src = PODCAST_SRC.min.a;
   v.src = PODCAST_SRC.min.v;
   document.getElementById("qNote").textContent = PODCAST_SRC.min.note;
-  a.addEventListener("loadedmetadata", () => { found = true; box.classList.add("show"); fallback.style.display = "none"; });
-  a.addEventListener("error", checkDone);
-  v.addEventListener("loadedmetadata", () => { found = true; box.classList.add("show"); fallback.style.display = "none"; });
-  v.addEventListener("error", checkDone);
-  let checked = 0;
-  function checkDone() { checked++; if (checked >= 2 && !found) { box.classList.remove("show"); fallback.style.display = "block"; } }
+  box.classList.add("show");
+  fallback.style.display = "none";
+  let errs = 0;
+  function onErr() {
+    errs++;
+    if (errs >= 2) { box.classList.remove("show"); fallback.style.display = "block"; }
+  }
+  a.addEventListener("error", onErr);
+  v.addEventListener("error", onErr);
 })();
 </script>
 </body>
