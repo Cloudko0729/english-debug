@@ -5,3 +5,8 @@ extracted/
 # OS
 .DS_Store
 Thumbs.db
+
+# NotebookLM 批次執行的暫存記錄（每次跑都會變，不進版控）
+kids/tools/_batch_*.log
+kids/tools/_notebooklm_batch_log.json
+kids/tools/_nbtmp/
