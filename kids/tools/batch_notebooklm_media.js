@@ -45,17 +45,23 @@ function loadNodes() {
 // NotebookLM 的 Google 登入實測只有約 2 小時效期，長批次跑到一半一定會過期。
 // 過期後每個節點都會在第一步秒失敗，繼續跑只是把 log 洗版，所以偵測到就整批中止。
 class AuthExpired extends Error {}
+// Google 對 audio/video 生成有配額；額度用完後每次呼叫都會即時失敗，
+// 繼續跑只會把剩下的節點全部標成失敗，所以跟登入過期一樣整批中止、等額度回復再續跑。
+class RateLimited extends Error {}
 function isAuthError(s) { return /Authentication expired|Run 'notebooklm login'/i.test(String(s)); }
+function isRateLimit(s) { return /RATE_LIMITED|RateLimitError|rate limited by Google/i.test(String(s)); }
 
 function nb(...args) {
   try {
     const out = execFileSync("notebooklm", args, { encoding: "utf8", maxBuffer: 32 * 1024 * 1024 }).trim();
     if (isAuthError(out)) throw new AuthExpired(out);
+    if (isRateLimit(out)) throw new RateLimited(out);
     return out;
   } catch (e) {
-    if (e instanceof AuthExpired) throw e;
+    if (e instanceof AuthExpired || e instanceof RateLimited) throw e;
     const blob = [e.message, e.stdout, e.stderr].map(x => x ? x.toString() : "").join("\n");
     if (isAuthError(blob)) throw new AuthExpired("NotebookLM 登入已過期");
+    if (isRateLimit(blob)) throw new RateLimited("Google 生成配額已用盡");
     throw e;
   }
 }
@@ -182,12 +188,14 @@ function main() {
       const r = doNode(n);
       result[r === "skipped" ? "skipped" : "done"].push(n.id);
     } catch (e) {
-      if (e instanceof AuthExpired) {
-        result.abortedAuth = true;
+      if (e instanceof AuthExpired || e instanceof RateLimited) {
+        const rl = e instanceof RateLimited;
+        result[rl ? "abortedRateLimit" : "abortedAuth"] = true;
         result.finishedAt = new Date().toISOString();
         fs.writeFileSync(LOG, JSON.stringify(result, null, 2), "utf8");
-        log(`✘ 登入過期，於第 ${i + 1}/${nodes.length} 個節點中止（已完成 ${result.done.length} 個）`);
-        log(`  重新登入後重跑同一指令即可接著做：notebooklm login`);
+        log(`✘ ${rl ? "Google 生成配額已用盡" : "登入過期"}，於第 ${i + 1}/${nodes.length} 個節點中止（本輪完成 ${result.done.length} 個）`);
+        log(rl ? `  等配額回復（通常隔日）後重跑同一指令即可接著做。`
+               : `  重新登入後重跑同一指令即可接著做：notebooklm login`);
         console.log(JSON.stringify(result, null, 2));
         process.exit(2);
       }
