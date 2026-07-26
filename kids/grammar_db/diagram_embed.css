@@ -1,0 +1,24 @@
+/* Keep grammar SVG text readable on narrow screens.
+   Wrap each <img> or inline <svg> in .grammar-diagram-scroll. */
+.grammar-diagram-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.grammar-diagram-scroll > img,
+.grammar-diagram-scroll > svg {
+  display: block;
+  width: 760px;
+  min-width: 680px;
+  height: auto;
+  margin-inline: auto;
+}
+
+@media (max-width: 760px) {
+  .grammar-diagram-scroll > img,
+  .grammar-diagram-scroll > svg {
+    margin-inline: 0;
+  }
+}

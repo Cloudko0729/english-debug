@@ -1,0 +1,1634 @@
+{
+  "schemaVersion": "1.0.0",
+  "band": "F4",
+  "nodes": [
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F4.1-past-continuous",
+      "band": "F4",
+      "microLevel": 1,
+      "titleZh": "過去進行式與 when / while",
+      "titleEn": "Past Continuous with When and While",
+      "communicativeGoalZh": "描述過去某時正在進行的背景動作，以及被另一事件打斷的關係。",
+      "form": "was/were + V-ing; when + event; while + ongoing action",
+      "prerequisites": [
+        "F3.1-past-be",
+        "F3.2-past-simple"
+      ],
+      "diagramRef": "tense-timeline",
+      "naturalExamples": [
+        {
+          "id": "F4.1-past-continuous-example-1",
+          "text": "I was reading when the phone rang.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f4_1_past_continuous_example_1.mp3"
+        },
+        {
+          "id": "F4.1-past-continuous-example-2",
+          "text": "They were playing soccer at four.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f4_1_past_continuous_example_2.mp3"
+        },
+        {
+          "id": "F4.1-past-continuous-example-3",
+          "text": "While Mom was cooking, I set the table.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f4_1_past_continuous_example_3.mp3"
+        },
+        {
+          "id": "F4.1-past-continuous-example-4",
+          "text": "It was raining when we left school.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f4_1_past_continuous_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F4.1-past-continuous-contrast-1",
+          "wrong": {
+            "text": "I was read when the phone rang.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_1_past_continuous_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I was reading when the phone rang.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_1_past_continuous_contrast_1_better.mp3"
+          },
+          "reasonZh": "過去進行式使用 was/were + V-ing。"
+        },
+        {
+          "id": "F4.1-past-continuous-contrast-2",
+          "wrong": {
+            "text": "While the bell rang, we were studying.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f4_1_past_continuous_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "When the bell rang, we were studying.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_1_past_continuous_contrast_2_better.mp3"
+          },
+          "reasonZh": "短暫發生的 bell rang 通常以 when 引入。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F4.1-past-continuous-bug-1",
+          "zh": "我回家時，他正在睡覺。",
+          "wrong": {
+            "text": "He slept when I came home.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_1_past_continuous_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "He was sleeping when I came home.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_1_past_continuous_bug_1_better.mp3"
+          },
+          "reasonZh": "要強調我到家那一刻正在持續的背景動作，使用 was sleeping。",
+          "severity": "E0"
+        },
+        {
+          "id": "F4.1-past-continuous-bug-2",
+          "zh": "他們當時正在等公車。",
+          "wrong": {
+            "text": "They was waiting for the bus.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_1_past_continuous_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "They were waiting for the bus.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_1_past_continuous_bug_2_better.mp3"
+          },
+          "reasonZh": "複數主詞 they 搭配 were。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F4.1-past-continuous-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I was reading when the phone rang.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f4_1_past_continuous_example_1.mp3"
+            },
+            {
+              "text": "I was read when the phone rang.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_1_past_continuous_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "While the bell rang, we were studying.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f4_1_past_continuous_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F4.1-past-continuous-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「I was read when the phone rang.」？",
+          "choices": [
+            {
+              "text": "I was reading when the phone rang.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f4_1_past_continuous_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "I was read when the phone rang.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_1_past_continuous_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "While the bell rang, we were studying.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f4_1_past_continuous_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F4.1-past-continuous-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "They were playing soccer at four.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f4_1_past_continuous_example_2.mp3"
+            },
+            {
+              "text": "He slept when I came home.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_1_past_continuous_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "They was waiting for the bus.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_1_past_continuous_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F4.1-past-continuous-speaking",
+          "type": "speaking",
+          "prompt": "Say what you were doing at eight last night.",
+          "promptAudio": "audio/grammar_db/content/f4_1_past_continuous_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "was/were + V-ing; when + event; while + ongoing action"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F4.1-past-continuous-writing",
+          "type": "writing",
+          "prompt": "Write a sentence with \"when\" and the past continuous.",
+          "promptAudio": "audio/grammar_db/content/f4_1_past_continuous_prompt_writing.mp3",
+          "expectedFeatures": [
+            "was/were + V-ing; when + event; while + ongoing action"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F4.1-past-continuous-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "I was read when the phone rang. While the bell rang, we were studying.",
+        "audio": "audio/grammar_db/content/f4_1_past_continuous_revision.mp3",
+        "expectedCorrections": [
+          "I was reading when the phone rang.",
+          "When the bell rang, we were studying."
+        ],
+        "severityTargets": [
+          "E0",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F4.1-past-continuous-dialogue-1",
+            "speaker": "A",
+            "text": "What were you doing when I called?",
+            "audio": "audio/grammar_db/dialogue_lines/f4_1_past_continuous_dialogue_1.mp3"
+          },
+          {
+            "id": "F4.1-past-continuous-dialogue-2",
+            "speaker": "B",
+            "text": "I was taking a shower.",
+            "audio": "audio/grammar_db/dialogue_lines/f4_1_past_continuous_dialogue_2.mp3"
+          },
+          {
+            "id": "F4.1-past-continuous-dialogue-3",
+            "speaker": "A",
+            "text": "Was your brother home?",
+            "audio": "audio/grammar_db/dialogue_lines/f4_1_past_continuous_dialogue_3.mp3"
+          },
+          {
+            "id": "F4.1-past-continuous-dialogue-4",
+            "speaker": "B",
+            "text": "Yes, he was doing his homework.",
+            "audio": "audio/grammar_db/dialogue_lines/f4_1_past_continuous_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f4_1_past_continuous.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F4.2-adjectives-adverbs",
+      "band": "F4",
+      "microLevel": 2,
+      "titleZh": "形容詞與副詞",
+      "titleEn": "Adjectives and Adverbs",
+      "communicativeGoalZh": "用形容詞描述名詞或主詞，用副詞描述動作方式。",
+      "form": "adjective + noun / be + adjective; verb + adverb",
+      "prerequisites": [
+        "F0.3-be-meaning",
+        "F1.2-action-affirmative"
+      ],
+      "diagramRef": "sentence-slots",
+      "naturalExamples": [
+        {
+          "id": "F4.2-adjectives-adverbs-example-1",
+          "text": "She is a careful student.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_example_1.mp3"
+        },
+        {
+          "id": "F4.2-adjectives-adverbs-example-2",
+          "text": "She checks her work carefully.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_example_2.mp3"
+        },
+        {
+          "id": "F4.2-adjectives-adverbs-example-3",
+          "text": "The soup smells good.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_example_3.mp3"
+        },
+        {
+          "id": "F4.2-adjectives-adverbs-example-4",
+          "text": "Ben runs fast.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F4.2-adjectives-adverbs-contrast-1",
+          "wrong": {
+            "text": "He is a carefully boy.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "He is a careful boy.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_1_better.mp3"
+          },
+          "reasonZh": "名詞 boy 前使用形容詞 careful。"
+        },
+        {
+          "id": "F4.2-adjectives-adverbs-contrast-2",
+          "wrong": {
+            "text": "She speaks English good.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "She speaks English well.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_2_better.mp3"
+          },
+          "reasonZh": "描述 speaks 的方式通常用副詞 well。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F4.2-adjectives-adverbs-bug-1",
+          "zh": "他慢慢地走。",
+          "wrong": {
+            "text": "He walks slow.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "He walks slowly.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_bug_1_better.mp3"
+          },
+          "reasonZh": "正式基礎用法以副詞 slowly 描述 walks。",
+          "severity": "E2"
+        },
+        {
+          "id": "F4.2-adjectives-adverbs-bug-2",
+          "zh": "這朵花聞起來很香。",
+          "wrong": {
+            "text": "This flower smells sweetly.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "This flower smells sweet.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_bug_2_better.mp3"
+          },
+          "reasonZh": "smell 在這裡是連綴動詞，後接形容詞。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "He runs fast.",
+            "He works hard."
+          ],
+          "noteZh": "fast 和 hard 本身可作副詞；不要造出 fastly，hardly 的意思則是「幾乎不」。",
+          "dialect": "general"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F4.2-adjectives-adverbs-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She is a careful student.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_example_1.mp3"
+            },
+            {
+              "text": "He is a carefully boy.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She speaks English good.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F4.2-adjectives-adverbs-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「He is a carefully boy.」？",
+          "choices": [
+            {
+              "text": "He is a careful boy.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "He is a carefully boy.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She speaks English good.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F4.2-adjectives-adverbs-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She checks her work carefully.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_example_2.mp3"
+            },
+            {
+              "text": "He walks slow.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "This flower smells sweetly.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F4.2-adjectives-adverbs-speaking",
+          "type": "speaking",
+          "prompt": "Describe how someone does an action.",
+          "promptAudio": "audio/grammar_db/content/f4_2_adjectives_adverbs_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "adjective + noun / be + adjective; verb + adverb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F4.2-adjectives-adverbs-writing",
+          "type": "writing",
+          "prompt": "Write one sentence with an adjective and one with an adverb.",
+          "promptAudio": "audio/grammar_db/content/f4_2_adjectives_adverbs_prompt_writing.mp3",
+          "expectedFeatures": [
+            "adjective + noun / be + adjective; verb + adverb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F4.2-adjectives-adverbs-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "He is a carefully boy. She speaks English good.",
+        "audio": "audio/grammar_db/content/f4_2_adjectives_adverbs_revision.mp3",
+        "expectedCorrections": [
+          "He is a careful boy.",
+          "She speaks English well."
+        ],
+        "severityTargets": [
+          "E2",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F4.2-adjectives-adverbs-dialogue-1",
+            "speaker": "A",
+            "text": "How does Amy write?",
+            "audio": "audio/grammar_db/dialogue_lines/f4_2_adjectives_adverbs_dialogue_1.mp3"
+          },
+          {
+            "id": "F4.2-adjectives-adverbs-dialogue-2",
+            "speaker": "B",
+            "text": "She writes very carefully.",
+            "audio": "audio/grammar_db/dialogue_lines/f4_2_adjectives_adverbs_dialogue_2.mp3"
+          },
+          {
+            "id": "F4.2-adjectives-adverbs-dialogue-3",
+            "speaker": "A",
+            "text": "Is she a careful student?",
+            "audio": "audio/grammar_db/dialogue_lines/f4_2_adjectives_adverbs_dialogue_3.mp3"
+          },
+          {
+            "id": "F4.2-adjectives-adverbs-dialogue-4",
+            "speaker": "B",
+            "text": "Yes, she always checks her work.",
+            "audio": "audio/grammar_db/dialogue_lines/f4_2_adjectives_adverbs_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f4_2_adjectives_adverbs.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F4.3-comparatives",
+      "band": "F4",
+      "microLevel": 3,
+      "titleZh": "比較級與最高級",
+      "titleEn": "Comparatives and Superlatives",
+      "communicativeGoalZh": "比較兩者或三者以上，並清楚指出比較對象。",
+      "form": "-er/more ... than; the -est/most; as ... as",
+      "prerequisites": [
+        "F4.2-adjectives-adverbs"
+      ],
+      "diagramRef": "comparison-scale",
+      "naturalExamples": [
+        {
+          "id": "F4.3-comparatives-example-1",
+          "text": "Mia is taller than Ben.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f4_3_comparatives_example_1.mp3"
+        },
+        {
+          "id": "F4.3-comparatives-example-2",
+          "text": "This book is more interesting than that one.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f4_3_comparatives_example_2.mp3"
+        },
+        {
+          "id": "F4.3-comparatives-example-3",
+          "text": "Leo is the fastest runner in the class.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f4_3_comparatives_example_3.mp3"
+        },
+        {
+          "id": "F4.3-comparatives-example-4",
+          "text": "My bag is as heavy as yours.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f4_3_comparatives_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F4.3-comparatives-contrast-1",
+          "wrong": {
+            "text": "This box is more bigger.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_3_comparatives_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "This box is bigger.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_3_comparatives_contrast_1_better.mp3"
+          },
+          "reasonZh": "比較級只標示一次，不同時使用 more 和 -er。"
+        },
+        {
+          "id": "F4.3-comparatives-contrast-2",
+          "wrong": {
+            "text": "Amy is the goodest singer.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_3_comparatives_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "Amy is the best singer.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_3_comparatives_contrast_2_better.mp3"
+          },
+          "reasonZh": "good 的最高級是不規則形式 best。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F4.3-comparatives-bug-1",
+          "zh": "這條路比那條路短。",
+          "wrong": {
+            "text": "This road is short than that road.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_3_comparatives_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "This road is shorter than that road.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_3_comparatives_bug_1_better.mp3"
+          },
+          "reasonZh": "兩者比較使用 shorter than。",
+          "severity": "E1"
+        },
+        {
+          "id": "F4.3-comparatives-bug-2",
+          "zh": "這是三個方案中最方便的。",
+          "wrong": {
+            "text": "This is the more convenient of the three plans.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_3_comparatives_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "This is the most convenient of the three plans.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_3_comparatives_bug_2_better.mp3"
+          },
+          "reasonZh": "三者以上選最高程度，使用 most。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "friendlier",
+            "more friendly"
+          ],
+          "noteZh": "兩種形式都可見；friendlier 較常見。",
+          "dialect": "general"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F4.3-comparatives-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Mia is taller than Ben.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f4_3_comparatives_example_1.mp3"
+            },
+            {
+              "text": "This box is more bigger.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_3_comparatives_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Amy is the goodest singer.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_3_comparatives_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F4.3-comparatives-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「This box is more bigger.」？",
+          "choices": [
+            {
+              "text": "This box is bigger.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f4_3_comparatives_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "This box is more bigger.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_3_comparatives_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Amy is the goodest singer.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_3_comparatives_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F4.3-comparatives-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "This book is more interesting than that one.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f4_3_comparatives_example_2.mp3"
+            },
+            {
+              "text": "This road is short than that road.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_3_comparatives_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "This is the more convenient of the three plans.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_3_comparatives_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F4.3-comparatives-speaking",
+          "type": "speaking",
+          "prompt": "Compare two objects near you.",
+          "promptAudio": "audio/grammar_db/content/f4_3_comparatives_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "-er/more ... than; the -est/most; as ... as"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F4.3-comparatives-writing",
+          "type": "writing",
+          "prompt": "Write a sentence with a superlative.",
+          "promptAudio": "audio/grammar_db/content/f4_3_comparatives_prompt_writing.mp3",
+          "expectedFeatures": [
+            "-er/more ... than; the -est/most; as ... as"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F4.3-comparatives-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "This box is more bigger. Amy is the goodest singer.",
+        "audio": "audio/grammar_db/content/f4_3_comparatives_revision.mp3",
+        "expectedCorrections": [
+          "This box is bigger.",
+          "Amy is the best singer."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F4.3-comparatives-dialogue-1",
+            "speaker": "A",
+            "text": "Which bag is lighter?",
+            "audio": "audio/grammar_db/dialogue_lines/f4_3_comparatives_dialogue_1.mp3"
+          },
+          {
+            "id": "F4.3-comparatives-dialogue-2",
+            "speaker": "B",
+            "text": "The blue bag is lighter than the red one.",
+            "audio": "audio/grammar_db/dialogue_lines/f4_3_comparatives_dialogue_2.mp3"
+          },
+          {
+            "id": "F4.3-comparatives-dialogue-3",
+            "speaker": "A",
+            "text": "Which bag is the cheapest?",
+            "audio": "audio/grammar_db/dialogue_lines/f4_3_comparatives_dialogue_3.mp3"
+          },
+          {
+            "id": "F4.3-comparatives-dialogue-4",
+            "speaker": "B",
+            "text": "The green bag is the cheapest of the three.",
+            "audio": "audio/grammar_db/dialogue_lines/f4_3_comparatives_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f4_3_comparatives.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F4.4-quantifiers",
+      "band": "F4",
+      "microLevel": 4,
+      "titleZh": "數量詞",
+      "titleEn": "Quantifiers",
+      "communicativeGoalZh": "依可數與不可數名詞選擇 many、much、few、little、fewer、less。",
+      "form": "count: many/few/fewer; noncount: much/little/less",
+      "prerequisites": [
+        "F2.7-there-count-quantity"
+      ],
+      "diagramRef": "quantifier-matrix",
+      "naturalExamples": [
+        {
+          "id": "F4.4-quantifiers-example-1",
+          "text": "How many books do you have?",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f4_4_quantifiers_example_1.mp3"
+        },
+        {
+          "id": "F4.4-quantifiers-example-2",
+          "text": "We don't have much time.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f4_4_quantifiers_example_2.mp3"
+        },
+        {
+          "id": "F4.4-quantifiers-example-3",
+          "text": "There are a few apples left.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f4_4_quantifiers_example_3.mp3"
+        },
+        {
+          "id": "F4.4-quantifiers-example-4",
+          "text": "This bottle has less water.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f4_4_quantifiers_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F4.4-quantifiers-contrast-1",
+          "wrong": {
+            "text": "How much books do you need?",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_4_quantifiers_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "How many books do you need?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_4_quantifiers_contrast_1_better.mp3"
+          },
+          "reasonZh": "books 是複數可數名詞，使用 many。"
+        },
+        {
+          "id": "F4.4-quantifiers-contrast-2",
+          "wrong": {
+            "text": "We need less plastic bottles.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f4_4_quantifiers_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We need fewer plastic bottles.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_4_quantifiers_contrast_2_better.mp3"
+          },
+          "reasonZh": "正式用法中，複數可數名詞 bottles 使用 fewer。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F4.4-quantifiers-bug-1",
+          "zh": "我有一點時間。",
+          "wrong": {
+            "text": "I have a few time.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_4_quantifiers_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I have a little time.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_4_quantifiers_bug_1_better.mp3"
+          },
+          "reasonZh": "time 在這個意思中不可數，使用 a little。",
+          "severity": "E1"
+        },
+        {
+          "id": "F4.4-quantifiers-bug-2",
+          "zh": "班上只有少數學生。",
+          "wrong": {
+            "text": "There are little students in the class.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_4_quantifiers_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "There are few students in the class.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_4_quantifiers_bug_2_better.mp3"
+          },
+          "reasonZh": "students 可數，使用 few。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "fewer people",
+            "less people"
+          ],
+          "noteZh": "less + 複數在口語中常見；正式寫作優先使用 fewer people。",
+          "dialect": "general"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F4.4-quantifiers-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "How many books do you have?",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f4_4_quantifiers_example_1.mp3"
+            },
+            {
+              "text": "How much books do you need?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_4_quantifiers_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We need less plastic bottles.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f4_4_quantifiers_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F4.4-quantifiers-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「How much books do you need?」？",
+          "choices": [
+            {
+              "text": "How many books do you need?",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f4_4_quantifiers_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "How much books do you need?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_4_quantifiers_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We need less plastic bottles.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f4_4_quantifiers_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F4.4-quantifiers-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "We don't have much time.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f4_4_quantifiers_example_2.mp3"
+            },
+            {
+              "text": "I have a few time.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_4_quantifiers_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "There are little students in the class.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_4_quantifiers_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F4.4-quantifiers-speaking",
+          "type": "speaking",
+          "prompt": "Ask one question with \"how many\" or \"how much\".",
+          "promptAudio": "audio/grammar_db/content/f4_4_quantifiers_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "count: many/few/fewer; noncount: much/little/less"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F4.4-quantifiers-writing",
+          "type": "writing",
+          "prompt": "Write a sentence with \"a few\" and a count noun.",
+          "promptAudio": "audio/grammar_db/content/f4_4_quantifiers_prompt_writing.mp3",
+          "expectedFeatures": [
+            "count: many/few/fewer; noncount: much/little/less"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F4.4-quantifiers-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "How much books do you need? We need less plastic bottles.",
+        "audio": "audio/grammar_db/content/f4_4_quantifiers_revision.mp3",
+        "expectedCorrections": [
+          "How many books do you need?",
+          "We need fewer plastic bottles."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F4.4-quantifiers-dialogue-1",
+            "speaker": "A",
+            "text": "How much water do we need?",
+            "audio": "audio/grammar_db/dialogue_lines/f4_4_quantifiers_dialogue_1.mp3"
+          },
+          {
+            "id": "F4.4-quantifiers-dialogue-2",
+            "speaker": "B",
+            "text": "We need a little more water.",
+            "audio": "audio/grammar_db/dialogue_lines/f4_4_quantifiers_dialogue_2.mp3"
+          },
+          {
+            "id": "F4.4-quantifiers-dialogue-3",
+            "speaker": "A",
+            "text": "How many bottles should we bring?",
+            "audio": "audio/grammar_db/dialogue_lines/f4_4_quantifiers_dialogue_3.mp3"
+          },
+          {
+            "id": "F4.4-quantifiers-dialogue-4",
+            "speaker": "B",
+            "text": "A few bottles will be enough.",
+            "audio": "audio/grammar_db/dialogue_lines/f4_4_quantifiers_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f4_4_quantifiers.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F4.5-modal-functions",
+      "band": "F4",
+      "microLevel": 5,
+      "titleZh": "建議、義務與可能性",
+      "titleEn": "Modal Functions: Advice, Obligation, and Possibility",
+      "communicativeGoalZh": "依溝通目的選擇 should、must、have to、may、might、could。",
+      "form": "modal + base verb; have to + base verb",
+      "prerequisites": [
+        "F3.6-basic-helpers"
+      ],
+      "diagramRef": "modal-strength",
+      "naturalExamples": [
+        {
+          "id": "F4.5-modal-functions-example-1",
+          "text": "You should get more sleep.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f4_5_modal_functions_example_1.mp3"
+        },
+        {
+          "id": "F4.5-modal-functions-example-2",
+          "text": "Students must wear a helmet here.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f4_5_modal_functions_example_2.mp3"
+        },
+        {
+          "id": "F4.5-modal-functions-example-3",
+          "text": "I have to finish my homework.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f4_5_modal_functions_example_3.mp3"
+        },
+        {
+          "id": "F4.5-modal-functions-example-4",
+          "text": "It might rain this afternoon.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f4_5_modal_functions_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F4.5-modal-functions-contrast-1",
+          "wrong": {
+            "text": "You must to wear a helmet.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_5_modal_functions_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "You must wear a helmet.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_5_modal_functions_contrast_1_better.mp3"
+          },
+          "reasonZh": "must 後直接接原形。"
+        },
+        {
+          "id": "F4.5-modal-functions-contrast-2",
+          "wrong": {
+            "text": "She shoulds see a doctor.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_5_modal_functions_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "She should see a doctor.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_5_modal_functions_contrast_2_better.mp3"
+          },
+          "reasonZh": "情態動詞不因第三人稱加 -s。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F4.5-modal-functions-bug-1",
+          "zh": "你應該休息一下。",
+          "wrong": {
+            "text": "You should to take a break.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_5_modal_functions_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "You should take a break.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_5_modal_functions_bug_1_better.mp3"
+          },
+          "reasonZh": "should 後接原形。",
+          "severity": "E1"
+        },
+        {
+          "id": "F4.5-modal-functions-bug-2",
+          "zh": "明天可能會下雪。",
+          "wrong": {
+            "text": "It must snow tomorrow.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_5_modal_functions_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "It might snow tomorrow.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_5_modal_functions_bug_2_better.mp3"
+          },
+          "reasonZh": "只有可能性時用 might；must 會表達更強的確定或義務。",
+          "severity": "E0"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F4.5-modal-functions-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "You should get more sleep.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f4_5_modal_functions_example_1.mp3"
+            },
+            {
+              "text": "You must to wear a helmet.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_5_modal_functions_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She shoulds see a doctor.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_5_modal_functions_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F4.5-modal-functions-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「You must to wear a helmet.」？",
+          "choices": [
+            {
+              "text": "You must wear a helmet.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f4_5_modal_functions_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "You must to wear a helmet.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_5_modal_functions_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She shoulds see a doctor.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_5_modal_functions_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F4.5-modal-functions-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Students must wear a helmet here.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f4_5_modal_functions_example_2.mp3"
+            },
+            {
+              "text": "You should to take a break.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_5_modal_functions_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "It must snow tomorrow.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_5_modal_functions_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F4.5-modal-functions-speaking",
+          "type": "speaking",
+          "prompt": "Give one piece of advice with \"should\".",
+          "promptAudio": "audio/grammar_db/content/f4_5_modal_functions_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "modal + base verb; have to + base verb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F4.5-modal-functions-writing",
+          "type": "writing",
+          "prompt": "Write a sentence about a possibility with \"might\".",
+          "promptAudio": "audio/grammar_db/content/f4_5_modal_functions_prompt_writing.mp3",
+          "expectedFeatures": [
+            "modal + base verb; have to + base verb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F4.5-modal-functions-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "You must to wear a helmet. She shoulds see a doctor.",
+        "audio": "audio/grammar_db/content/f4_5_modal_functions_revision.mp3",
+        "expectedCorrections": [
+          "You must wear a helmet.",
+          "She should see a doctor."
+        ],
+        "severityTargets": [
+          "E1",
+          "E0"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F4.5-modal-functions-dialogue-1",
+            "speaker": "A",
+            "text": "I have a bad headache.",
+            "audio": "audio/grammar_db/dialogue_lines/f4_5_modal_functions_dialogue_1.mp3"
+          },
+          {
+            "id": "F4.5-modal-functions-dialogue-2",
+            "speaker": "B",
+            "text": "You should rest and drink some water.",
+            "audio": "audio/grammar_db/dialogue_lines/f4_5_modal_functions_dialogue_2.mp3"
+          },
+          {
+            "id": "F4.5-modal-functions-dialogue-3",
+            "speaker": "A",
+            "text": "Do I have to see a doctor?",
+            "audio": "audio/grammar_db/dialogue_lines/f4_5_modal_functions_dialogue_3.mp3"
+          },
+          {
+            "id": "F4.5-modal-functions-dialogue-4",
+            "speaker": "B",
+            "text": "You might need one if the pain gets worse.",
+            "audio": "audio/grammar_db/dialogue_lines/f4_5_modal_functions_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f4_5_modal_functions.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F4.6-infinitive-gerund",
+      "band": "F4",
+      "microLevel": 6,
+      "titleZh": "to + V 與 V-ing 搭配",
+      "titleEn": "Common Infinitive and Gerund Patterns",
+      "communicativeGoalZh": "在高頻動詞與介系詞後選擇常見的 to + V 或 V-ing 形式。",
+      "form": "want/need/plan + to V; enjoy/finish + V-ing; preposition + V-ing",
+      "prerequisites": [
+        "F1.2-action-affirmative"
+      ],
+      "diagramRef": "predicate-routes",
+      "naturalExamples": [
+        {
+          "id": "F4.6-infinitive-gerund-example-1",
+          "text": "I want to read this book.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_example_1.mp3"
+        },
+        {
+          "id": "F4.6-infinitive-gerund-example-2",
+          "text": "We plan to leave early.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_example_2.mp3"
+        },
+        {
+          "id": "F4.6-infinitive-gerund-example-3",
+          "text": "She enjoys drawing.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_example_3.mp3"
+        },
+        {
+          "id": "F4.6-infinitive-gerund-example-4",
+          "text": "Ben is good at swimming.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F4.6-infinitive-gerund-contrast-1",
+          "wrong": {
+            "text": "She enjoys to draw.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "She enjoys drawing.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_contrast_1_better.mp3"
+          },
+          "reasonZh": "enjoy 後面接 V-ing。"
+        },
+        {
+          "id": "F4.6-infinitive-gerund-contrast-2",
+          "wrong": {
+            "text": "I want reading this book.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I want to read this book.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_contrast_2_better.mp3"
+          },
+          "reasonZh": "want 後面通常接 to + 原形。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F4.6-infinitive-gerund-bug-1",
+          "zh": "他完成了打掃房間。",
+          "wrong": {
+            "text": "He finished to clean his room.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "He finished cleaning his room.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_bug_1_better.mp3"
+          },
+          "reasonZh": "finish 後接 V-ing。",
+          "severity": "E1"
+        },
+        {
+          "id": "F4.6-infinitive-gerund-bug-2",
+          "zh": "我們決定搭公車。",
+          "wrong": {
+            "text": "We decided taking the bus.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We decided to take the bus.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_bug_2_better.mp3"
+          },
+          "reasonZh": "decide 後通常接 to + V。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "I like reading.",
+            "I like to read."
+          ],
+          "noteZh": "兩種形式通常都自然，語意重點可能因情境略有不同。",
+          "dialect": "general"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F4.6-infinitive-gerund-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I want to read this book.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_example_1.mp3"
+            },
+            {
+              "text": "She enjoys to draw.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I want reading this book.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F4.6-infinitive-gerund-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「She enjoys to draw.」？",
+          "choices": [
+            {
+              "text": "She enjoys drawing.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "She enjoys to draw.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I want reading this book.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F4.6-infinitive-gerund-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "We plan to leave early.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_example_2.mp3"
+            },
+            {
+              "text": "He finished to clean his room.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We decided taking the bus.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F4.6-infinitive-gerund-speaking",
+          "type": "speaking",
+          "prompt": "Say something you enjoy doing.",
+          "promptAudio": "audio/grammar_db/content/f4_6_infinitive_gerund_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "want/need/plan + to V; enjoy/finish + V-ing; preposition + V-ing"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F4.6-infinitive-gerund-writing",
+          "type": "writing",
+          "prompt": "Write one sentence about what you plan to do.",
+          "promptAudio": "audio/grammar_db/content/f4_6_infinitive_gerund_prompt_writing.mp3",
+          "expectedFeatures": [
+            "want/need/plan + to V; enjoy/finish + V-ing; preposition + V-ing"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F4.6-infinitive-gerund-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "She enjoys to draw. I want reading this book.",
+        "audio": "audio/grammar_db/content/f4_6_infinitive_gerund_revision.mp3",
+        "expectedCorrections": [
+          "She enjoys drawing.",
+          "I want to read this book."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F4.6-infinitive-gerund-dialogue-1",
+            "speaker": "A",
+            "text": "What do you want to do this weekend?",
+            "audio": "audio/grammar_db/dialogue_lines/f4_6_infinitive_gerund_dialogue_1.mp3"
+          },
+          {
+            "id": "F4.6-infinitive-gerund-dialogue-2",
+            "speaker": "B",
+            "text": "I want to visit the science museum.",
+            "audio": "audio/grammar_db/dialogue_lines/f4_6_infinitive_gerund_dialogue_2.mp3"
+          },
+          {
+            "id": "F4.6-infinitive-gerund-dialogue-3",
+            "speaker": "A",
+            "text": "What do you enjoy doing there?",
+            "audio": "audio/grammar_db/dialogue_lines/f4_6_infinitive_gerund_dialogue_3.mp3"
+          },
+          {
+            "id": "F4.6-infinitive-gerund-dialogue-4",
+            "speaker": "B",
+            "text": "I enjoy trying the hands-on activities.",
+            "audio": "audio/grammar_db/dialogue_lines/f4_6_infinitive_gerund_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f4_6_infinitive_gerund.mp3"
+      }
+    }
+  ]
+}

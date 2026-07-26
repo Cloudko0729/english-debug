@@ -1,0 +1,1620 @@
+{
+  "schemaVersion": "1.0.0",
+  "band": "F1",
+  "nodes": [
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F1.1-subject-pronouns",
+      "band": "F1",
+      "microLevel": 1,
+      "titleZh": "主詞代名詞",
+      "titleEn": "Subject Pronouns",
+      "communicativeGoalZh": "用 I、you、he、she、it、we、they 代替清楚的主詞。",
+      "form": "subject pronoun + predicate",
+      "prerequisites": [
+        "F0.2-be-agreement"
+      ],
+      "diagramRef": "pronoun-positions",
+      "naturalExamples": [
+        {
+          "id": "F1.1-subject-pronouns-example-1",
+          "text": "I like music.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f1_1_subject_pronouns_example_1.mp3"
+        },
+        {
+          "id": "F1.1-subject-pronouns-example-2",
+          "text": "She is my teacher.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f1_1_subject_pronouns_example_2.mp3"
+        },
+        {
+          "id": "F1.1-subject-pronouns-example-3",
+          "text": "It is on the desk.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f1_1_subject_pronouns_example_3.mp3"
+        },
+        {
+          "id": "F1.1-subject-pronouns-example-4",
+          "text": "They walk to school.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f1_1_subject_pronouns_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F1.1-subject-pronouns-contrast-1",
+          "wrong": {
+            "text": "Me am ready.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_1_subject_pronouns_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I am ready.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_1_subject_pronouns_contrast_1_better.mp3"
+          },
+          "reasonZh": "主詞位置使用 I，不使用受格 me。"
+        },
+        {
+          "id": "F1.1-subject-pronouns-contrast-2",
+          "wrong": {
+            "text": "Tom and Amy is here.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_1_subject_pronouns_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "They are here.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_1_subject_pronouns_contrast_2_better.mp3"
+          },
+          "reasonZh": "Tom and Amy 是複數，可用 they 代替並搭配 are。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F1.1-subject-pronouns-bug-1",
+          "zh": "她是我的妹妹。",
+          "wrong": {
+            "text": "Her is my sister.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_1_subject_pronouns_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "She is my sister.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_1_subject_pronouns_bug_1_better.mp3"
+          },
+          "reasonZh": "主詞位置要用 she。",
+          "severity": "E1"
+        },
+        {
+          "id": "F1.1-subject-pronouns-bug-2",
+          "zh": "它很重。",
+          "wrong": {
+            "text": "Is heavy.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_1_subject_pronouns_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "It is heavy.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_1_subject_pronouns_bug_2_better.mp3"
+          },
+          "reasonZh": "物品可用 it 作主詞，不能省略。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F1.1-subject-pronouns-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I like music.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f1_1_subject_pronouns_example_1.mp3"
+            },
+            {
+              "text": "Me am ready.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_1_subject_pronouns_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Tom and Amy is here.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_1_subject_pronouns_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F1.1-subject-pronouns-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「Me am ready.」？",
+          "choices": [
+            {
+              "text": "I am ready.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f1_1_subject_pronouns_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "Me am ready.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_1_subject_pronouns_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Tom and Amy is here.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_1_subject_pronouns_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F1.1-subject-pronouns-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She is my teacher.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f1_1_subject_pronouns_example_2.mp3"
+            },
+            {
+              "text": "Her is my sister.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_1_subject_pronouns_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Is heavy.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_1_subject_pronouns_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F1.1-subject-pronouns-speaking",
+          "type": "speaking",
+          "prompt": "Use \"she\" or \"he\" to introduce someone.",
+          "promptAudio": "audio/grammar_db/content/f1_1_subject_pronouns_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "subject pronoun + predicate"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F1.1-subject-pronouns-writing",
+          "type": "writing",
+          "prompt": "Write a sentence that uses \"they\" for two people.",
+          "promptAudio": "audio/grammar_db/content/f1_1_subject_pronouns_prompt_writing.mp3",
+          "expectedFeatures": [
+            "subject pronoun + predicate"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F1.1-subject-pronouns-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "Me am ready. Tom and Amy is here.",
+        "audio": "audio/grammar_db/content/f1_1_subject_pronouns_revision.mp3",
+        "expectedCorrections": [
+          "I am ready.",
+          "They are here."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F1.1-subject-pronouns-dialogue-1",
+            "speaker": "A",
+            "text": "Who is that girl?",
+            "audio": "audio/grammar_db/dialogue_lines/f1_1_subject_pronouns_dialogue_1.mp3"
+          },
+          {
+            "id": "F1.1-subject-pronouns-dialogue-2",
+            "speaker": "B",
+            "text": "She is my classmate.",
+            "audio": "audio/grammar_db/dialogue_lines/f1_1_subject_pronouns_dialogue_2.mp3"
+          },
+          {
+            "id": "F1.1-subject-pronouns-dialogue-3",
+            "speaker": "A",
+            "text": "Where are Ben and Leo?",
+            "audio": "audio/grammar_db/dialogue_lines/f1_1_subject_pronouns_dialogue_3.mp3"
+          },
+          {
+            "id": "F1.1-subject-pronouns-dialogue-4",
+            "speaker": "B",
+            "text": "They are in the library.",
+            "audio": "audio/grammar_db/dialogue_lines/f1_1_subject_pronouns_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f1_1_subject_pronouns.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F1.2-action-affirmative",
+      "band": "F1",
+      "microLevel": 2,
+      "titleZh": "一般動詞肯定句",
+      "titleEn": "Affirmative Action-Verb Sentences",
+      "communicativeGoalZh": "用主詞、一般動詞與必要受詞表達動作。",
+      "form": "subject + action verb + object/place/time",
+      "prerequisites": [
+        "F0.1-complete-sentence"
+      ],
+      "diagramRef": "sentence-slots",
+      "naturalExamples": [
+        {
+          "id": "F1.2-action-affirmative-example-1",
+          "text": "I like apples.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f1_2_action_affirmative_example_1.mp3"
+        },
+        {
+          "id": "F1.2-action-affirmative-example-2",
+          "text": "We play basketball after school.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f1_2_action_affirmative_example_2.mp3"
+        },
+        {
+          "id": "F1.2-action-affirmative-example-3",
+          "text": "My father drives to work.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f1_2_action_affirmative_example_3.mp3"
+        },
+        {
+          "id": "F1.2-action-affirmative-example-4",
+          "text": "She reads a book every night.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f1_2_action_affirmative_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F1.2-action-affirmative-contrast-1",
+          "wrong": {
+            "text": "I am like music.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_2_action_affirmative_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I like music.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_2_action_affirmative_contrast_1_better.mp3"
+          },
+          "reasonZh": "like 本身是一般動詞，這個意思不需要 am。"
+        },
+        {
+          "id": "F1.2-action-affirmative-contrast-2",
+          "wrong": {
+            "text": "We are play basketball.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_2_action_affirmative_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We play basketball.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_2_action_affirmative_contrast_2_better.mp3"
+          },
+          "reasonZh": "一般現在的動作句不使用 are + 原形。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F1.2-action-affirmative-bug-1",
+          "zh": "我每天走路上學。",
+          "wrong": {
+            "text": "I am walk to school every day.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_2_action_affirmative_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I walk to school every day.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_2_action_affirmative_bug_1_better.mp3"
+          },
+          "reasonZh": "walk 已是動詞，不要在前面加 am。",
+          "severity": "E1"
+        },
+        {
+          "id": "F1.2-action-affirmative-bug-2",
+          "zh": "她看電視。",
+          "wrong": {
+            "text": "She TV.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_2_action_affirmative_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "She watches TV.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_2_action_affirmative_bug_2_better.mp3"
+          },
+          "reasonZh": "需要加入表示動作的動詞 watches。",
+          "severity": "E0"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F1.2-action-affirmative-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I like apples.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f1_2_action_affirmative_example_1.mp3"
+            },
+            {
+              "text": "I am like music.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_2_action_affirmative_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We are play basketball.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_2_action_affirmative_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F1.2-action-affirmative-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「I am like music.」？",
+          "choices": [
+            {
+              "text": "I like music.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f1_2_action_affirmative_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "I am like music.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_2_action_affirmative_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We are play basketball.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_2_action_affirmative_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F1.2-action-affirmative-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "We play basketball after school.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f1_2_action_affirmative_example_2.mp3"
+            },
+            {
+              "text": "I am walk to school every day.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_2_action_affirmative_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She TV.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_2_action_affirmative_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F1.2-action-affirmative-speaking",
+          "type": "speaking",
+          "prompt": "Say one sentence about something you do every day.",
+          "promptAudio": "audio/grammar_db/content/f1_2_action_affirmative_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "subject + action verb + object/place/time"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F1.2-action-affirmative-writing",
+          "type": "writing",
+          "prompt": "Write a sentence with a subject, an action verb, and an object.",
+          "promptAudio": "audio/grammar_db/content/f1_2_action_affirmative_prompt_writing.mp3",
+          "expectedFeatures": [
+            "subject + action verb + object/place/time"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F1.2-action-affirmative-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "I am like music. We are play basketball.",
+        "audio": "audio/grammar_db/content/f1_2_action_affirmative_revision.mp3",
+        "expectedCorrections": [
+          "I like music.",
+          "We play basketball."
+        ],
+        "severityTargets": [
+          "E1",
+          "E0"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F1.2-action-affirmative-dialogue-1",
+            "speaker": "A",
+            "text": "What do you do after school?",
+            "audio": "audio/grammar_db/dialogue_lines/f1_2_action_affirmative_dialogue_1.mp3"
+          },
+          {
+            "id": "F1.2-action-affirmative-dialogue-2",
+            "speaker": "B",
+            "text": "I play basketball with my friends.",
+            "audio": "audio/grammar_db/dialogue_lines/f1_2_action_affirmative_dialogue_2.mp3"
+          },
+          {
+            "id": "F1.2-action-affirmative-dialogue-3",
+            "speaker": "A",
+            "text": "What does your sister do?",
+            "audio": "audio/grammar_db/dialogue_lines/f1_2_action_affirmative_dialogue_3.mp3"
+          },
+          {
+            "id": "F1.2-action-affirmative-dialogue-4",
+            "speaker": "B",
+            "text": "She reads in the library.",
+            "audio": "audio/grammar_db/dialogue_lines/f1_2_action_affirmative_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f1_2_action_affirmative.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F1.3-predicate-choice",
+      "band": "F1",
+      "microLevel": 3,
+      "titleZh": "be 述語與一般動詞述語",
+      "titleEn": "Choosing a Be or Action Predicate",
+      "communicativeGoalZh": "依要表達的身分、狀態、位置或動作選擇正確述語。",
+      "form": "be + noun/adjective/place OR action verb",
+      "prerequisites": [
+        "F0.3-be-meaning",
+        "F1.2-action-affirmative"
+      ],
+      "diagramRef": "predicate-routes",
+      "naturalExamples": [
+        {
+          "id": "F1.3-predicate-choice-example-1",
+          "text": "I am tired.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f1_3_predicate_choice_example_1.mp3"
+        },
+        {
+          "id": "F1.3-predicate-choice-example-2",
+          "text": "He is a teacher.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f1_3_predicate_choice_example_2.mp3"
+        },
+        {
+          "id": "F1.3-predicate-choice-example-3",
+          "text": "The book is on the desk.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f1_3_predicate_choice_example_3.mp3"
+        },
+        {
+          "id": "F1.3-predicate-choice-example-4",
+          "text": "She plays soccer.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f1_3_predicate_choice_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F1.3-predicate-choice-contrast-1",
+          "wrong": {
+            "text": "She is plays soccer.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_3_predicate_choice_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "She plays soccer.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_3_predicate_choice_contrast_1_better.mp3"
+          },
+          "reasonZh": "一般現在式的 plays 已構成述語，不再加 is。"
+        },
+        {
+          "id": "F1.3-predicate-choice-contrast-2",
+          "wrong": {
+            "text": "I happy today.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_3_predicate_choice_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I am happy today.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_3_predicate_choice_contrast_2_better.mp3"
+          },
+          "reasonZh": "happy 是形容詞，需要 be 形成述語。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F1.3-predicate-choice-bug-1",
+          "zh": "我喜歡這首歌。",
+          "wrong": {
+            "text": "I am like this song.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_3_predicate_choice_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I like this song.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_3_predicate_choice_bug_1_better.mp3"
+          },
+          "reasonZh": "like 在這裡是動詞，不是形容詞。",
+          "severity": "E1"
+        },
+        {
+          "id": "F1.3-predicate-choice-bug-2",
+          "zh": "他在教室裡。",
+          "wrong": {
+            "text": "He in the classroom.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_3_predicate_choice_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "He is in the classroom.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_3_predicate_choice_bug_2_better.mp3"
+          },
+          "reasonZh": "位置片語前需要 is。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [
+        "「一個述語選一條基本路線」只用於初學肯定句；後續的 is playing、can swim、has finished 都是完整動詞片語。"
+      ],
+      "diagnostics": [
+        {
+          "id": "F1.3-predicate-choice-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I am tired.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f1_3_predicate_choice_example_1.mp3"
+            },
+            {
+              "text": "She is plays soccer.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_3_predicate_choice_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I happy today.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_3_predicate_choice_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F1.3-predicate-choice-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「She is plays soccer.」？",
+          "choices": [
+            {
+              "text": "She plays soccer.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f1_3_predicate_choice_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "She is plays soccer.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_3_predicate_choice_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I happy today.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_3_predicate_choice_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F1.3-predicate-choice-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "He is a teacher.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f1_3_predicate_choice_example_2.mp3"
+            },
+            {
+              "text": "I am like this song.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_3_predicate_choice_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "He in the classroom.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_3_predicate_choice_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F1.3-predicate-choice-speaking",
+          "type": "speaking",
+          "prompt": "Say one be sentence and one action-verb sentence.",
+          "promptAudio": "audio/grammar_db/content/f1_3_predicate_choice_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "be + noun/adjective/place OR action verb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F1.3-predicate-choice-writing",
+          "type": "writing",
+          "prompt": "Write a sentence about a state and a sentence about an action.",
+          "promptAudio": "audio/grammar_db/content/f1_3_predicate_choice_prompt_writing.mp3",
+          "expectedFeatures": [
+            "be + noun/adjective/place OR action verb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F1.3-predicate-choice-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "She is plays soccer. I happy today.",
+        "audio": "audio/grammar_db/content/f1_3_predicate_choice_revision.mp3",
+        "expectedCorrections": [
+          "She plays soccer.",
+          "I am happy today."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F1.3-predicate-choice-dialogue-1",
+            "speaker": "A",
+            "text": "Is \"hungry\" an action?",
+            "audio": "audio/grammar_db/dialogue_lines/f1_3_predicate_choice_dialogue_1.mp3"
+          },
+          {
+            "id": "F1.3-predicate-choice-dialogue-2",
+            "speaker": "B",
+            "text": "No. We say, \"I am hungry.\"",
+            "audio": "audio/grammar_db/dialogue_lines/f1_3_predicate_choice_dialogue_2.mp3"
+          },
+          {
+            "id": "F1.3-predicate-choice-dialogue-3",
+            "speaker": "A",
+            "text": "What about \"eat\"?",
+            "audio": "audio/grammar_db/dialogue_lines/f1_3_predicate_choice_dialogue_3.mp3"
+          },
+          {
+            "id": "F1.3-predicate-choice-dialogue-4",
+            "speaker": "B",
+            "text": "That is an action. We say, \"I eat lunch.\"",
+            "audio": "audio/grammar_db/dialogue_lines/f1_3_predicate_choice_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f1_3_predicate_choice.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F1.4-be-questions-negatives",
+      "band": "F1",
+      "microLevel": 4,
+      "titleZh": "be 問句、否定與短答",
+      "titleEn": "Questions, Negatives, and Short Answers with Be",
+      "communicativeGoalZh": "移動 be 形成問句，並把 not 放在 be 後。",
+      "form": "Be + subject ...?; subject + be + not ...",
+      "prerequisites": [
+        "F0.2-be-agreement",
+        "F1.3-predicate-choice"
+      ],
+      "diagramRef": "question-routes",
+      "naturalExamples": [
+        {
+          "id": "F1.4-be-questions-negatives-example-1",
+          "text": "Are you tired?",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_example_1.mp3"
+        },
+        {
+          "id": "F1.4-be-questions-negatives-example-2",
+          "text": "Is she at home?",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_example_2.mp3"
+        },
+        {
+          "id": "F1.4-be-questions-negatives-example-3",
+          "text": "I am not busy.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_example_3.mp3"
+        },
+        {
+          "id": "F1.4-be-questions-negatives-example-4",
+          "text": "They aren't ready.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F1.4-be-questions-negatives-contrast-1",
+          "wrong": {
+            "text": "Do you tired?",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Are you tired?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_contrast_1_better.mp3"
+          },
+          "reasonZh": "tired 是形容詞，問句使用 be 路線。"
+        },
+        {
+          "id": "F1.4-be-questions-negatives-contrast-2",
+          "wrong": {
+            "text": "She not is here.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "She is not here.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_contrast_2_better.mp3"
+          },
+          "reasonZh": "not 放在 is 後面。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F1.4-be-questions-negatives-bug-1",
+          "zh": "他是老師嗎？",
+          "wrong": {
+            "text": "Does he a teacher?",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Is he a teacher?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_bug_1_better.mp3"
+          },
+          "reasonZh": "身分句使用 is 形成問句。",
+          "severity": "E1"
+        },
+        {
+          "id": "F1.4-be-questions-negatives-bug-2",
+          "zh": "我們不冷。",
+          "wrong": {
+            "text": "We not cold.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We are not cold.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_bug_2_better.mp3"
+          },
+          "reasonZh": "否定狀態句仍需要 are。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "is not",
+            "isn't"
+          ],
+          "noteZh": "完整形式與縮寫都自然；正式程度與語氣可能不同。",
+          "dialect": "general"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F1.4-be-questions-negatives-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Are you tired?",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_example_1.mp3"
+            },
+            {
+              "text": "Do you tired?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She not is here.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F1.4-be-questions-negatives-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「Do you tired?」？",
+          "choices": [
+            {
+              "text": "Are you tired?",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "Do you tired?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She not is here.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F1.4-be-questions-negatives-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Is she at home?",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_example_2.mp3"
+            },
+            {
+              "text": "Does he a teacher?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We not cold.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F1.4-be-questions-negatives-speaking",
+          "type": "speaking",
+          "prompt": "Ask someone how they feel using a be question.",
+          "promptAudio": "audio/grammar_db/content/f1_4_be_questions_negatives_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "Be + subject ...?; subject + be + not ..."
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F1.4-be-questions-negatives-writing",
+          "type": "writing",
+          "prompt": "Write one negative sentence with \"is not\" or \"are not\".",
+          "promptAudio": "audio/grammar_db/content/f1_4_be_questions_negatives_prompt_writing.mp3",
+          "expectedFeatures": [
+            "Be + subject ...?; subject + be + not ..."
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F1.4-be-questions-negatives-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "Do you tired? She not is here.",
+        "audio": "audio/grammar_db/content/f1_4_be_questions_negatives_revision.mp3",
+        "expectedCorrections": [
+          "Are you tired?",
+          "She is not here."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F1.4-be-questions-negatives-dialogue-1",
+            "speaker": "A",
+            "text": "Are you ready?",
+            "audio": "audio/grammar_db/dialogue_lines/f1_4_be_questions_negatives_dialogue_1.mp3"
+          },
+          {
+            "id": "F1.4-be-questions-negatives-dialogue-2",
+            "speaker": "B",
+            "text": "Yes, I am.",
+            "audio": "audio/grammar_db/dialogue_lines/f1_4_be_questions_negatives_dialogue_2.mp3"
+          },
+          {
+            "id": "F1.4-be-questions-negatives-dialogue-3",
+            "speaker": "A",
+            "text": "Is Amy in the classroom?",
+            "audio": "audio/grammar_db/dialogue_lines/f1_4_be_questions_negatives_dialogue_3.mp3"
+          },
+          {
+            "id": "F1.4-be-questions-negatives-dialogue-4",
+            "speaker": "B",
+            "text": "No, she isn't.",
+            "audio": "audio/grammar_db/dialogue_lines/f1_4_be_questions_negatives_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f1_4_be_questions_negatives.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F1.5-do-does",
+      "band": "F1",
+      "microLevel": 5,
+      "titleZh": "do / does 問句與否定",
+      "titleEn": "Questions and Negatives with Do and Does",
+      "communicativeGoalZh": "使用 do/does 詢問或否定現在的動作與喜好，主要動詞回原形。",
+      "form": "Do/Does + subject + base verb?; subject + do/does not + base verb",
+      "prerequisites": [
+        "F1.2-action-affirmative",
+        "F1.3-predicate-choice"
+      ],
+      "diagramRef": "question-routes",
+      "naturalExamples": [
+        {
+          "id": "F1.5-do-does-example-1",
+          "text": "Do you like apples?",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f1_5_do_does_example_1.mp3"
+        },
+        {
+          "id": "F1.5-do-does-example-2",
+          "text": "Does she walk to school?",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f1_5_do_does_example_2.mp3"
+        },
+        {
+          "id": "F1.5-do-does-example-3",
+          "text": "I don't drink coffee.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f1_5_do_does_example_3.mp3"
+        },
+        {
+          "id": "F1.5-do-does-example-4",
+          "text": "He doesn't play soccer.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f1_5_do_does_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F1.5-do-does-contrast-1",
+          "wrong": {
+            "text": "Does he likes cats?",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_5_do_does_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Does he like cats?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_5_do_does_contrast_1_better.mp3"
+          },
+          "reasonZh": "does 已標示第三人稱，後面的動詞回原形。"
+        },
+        {
+          "id": "F1.5-do-does-contrast-2",
+          "wrong": {
+            "text": "She don't eat meat.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_5_do_does_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "She doesn't eat meat.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_5_do_does_contrast_2_better.mp3"
+          },
+          "reasonZh": "第三人稱單數 she 使用 doesn't。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F1.5-do-does-bug-1",
+          "zh": "你每天看書嗎？",
+          "wrong": {
+            "text": "Are you read every day?",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_5_do_does_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Do you read every day?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_5_do_does_bug_1_better.mp3"
+          },
+          "reasonZh": "read 是一般動詞，問句使用 do。",
+          "severity": "E1"
+        },
+        {
+          "id": "F1.5-do-does-bug-2",
+          "zh": "他不喜歡牛奶。",
+          "wrong": {
+            "text": "He doesn't likes milk.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_5_do_does_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "He doesn't like milk.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_5_do_does_bug_2_better.mp3"
+          },
+          "reasonZh": "doesn't 後接原形 like。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F1.5-do-does-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Do you like apples?",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f1_5_do_does_example_1.mp3"
+            },
+            {
+              "text": "Does he likes cats?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_5_do_does_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She don't eat meat.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_5_do_does_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F1.5-do-does-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「Does he likes cats?」？",
+          "choices": [
+            {
+              "text": "Does he like cats?",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f1_5_do_does_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "Does he likes cats?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_5_do_does_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She don't eat meat.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_5_do_does_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F1.5-do-does-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Does she walk to school?",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f1_5_do_does_example_2.mp3"
+            },
+            {
+              "text": "Are you read every day?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_5_do_does_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "He doesn't likes milk.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_5_do_does_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F1.5-do-does-speaking",
+          "type": "speaking",
+          "prompt": "Ask a friend about a daily habit with \"Do you...?\"",
+          "promptAudio": "audio/grammar_db/content/f1_5_do_does_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "Do/Does + subject + base verb?; subject + do/does not + base verb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F1.5-do-does-writing",
+          "type": "writing",
+          "prompt": "Write one negative sentence with \"doesn't\".",
+          "promptAudio": "audio/grammar_db/content/f1_5_do_does_prompt_writing.mp3",
+          "expectedFeatures": [
+            "Do/Does + subject + base verb?; subject + do/does not + base verb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F1.5-do-does-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "Does he likes cats? She don't eat meat.",
+        "audio": "audio/grammar_db/content/f1_5_do_does_revision.mp3",
+        "expectedCorrections": [
+          "Does he like cats?",
+          "She doesn't eat meat."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F1.5-do-does-dialogue-1",
+            "speaker": "A",
+            "text": "Do you play soccer?",
+            "audio": "audio/grammar_db/dialogue_lines/f1_5_do_does_dialogue_1.mp3"
+          },
+          {
+            "id": "F1.5-do-does-dialogue-2",
+            "speaker": "B",
+            "text": "Yes, I do.",
+            "audio": "audio/grammar_db/dialogue_lines/f1_5_do_does_dialogue_2.mp3"
+          },
+          {
+            "id": "F1.5-do-does-dialogue-3",
+            "speaker": "A",
+            "text": "Does your sister play, too?",
+            "audio": "audio/grammar_db/dialogue_lines/f1_5_do_does_dialogue_3.mp3"
+          },
+          {
+            "id": "F1.5-do-does-dialogue-4",
+            "speaker": "B",
+            "text": "No, she doesn't.",
+            "audio": "audio/grammar_db/dialogue_lines/f1_5_do_does_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f1_5_do_does.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F1.6-wh-questions",
+      "band": "F1",
+      "microLevel": 6,
+      "titleZh": "Wh- 資訊問句",
+      "titleEn": "Wh- Information Questions",
+      "communicativeGoalZh": "用 who、what、where、when、why、how 詢問缺少的資訊。",
+      "form": "Wh-word + be/do/does + subject ...?",
+      "prerequisites": [
+        "F1.4-be-questions-negatives",
+        "F1.5-do-does"
+      ],
+      "diagramRef": "question-routes",
+      "naturalExamples": [
+        {
+          "id": "F1.6-wh-questions-example-1",
+          "text": "What do you need?",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f1_6_wh_questions_example_1.mp3"
+        },
+        {
+          "id": "F1.6-wh-questions-example-2",
+          "text": "Where is my book?",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f1_6_wh_questions_example_2.mp3"
+        },
+        {
+          "id": "F1.6-wh-questions-example-3",
+          "text": "When does class start?",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f1_6_wh_questions_example_3.mp3"
+        },
+        {
+          "id": "F1.6-wh-questions-example-4",
+          "text": "Why are you sad?",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f1_6_wh_questions_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F1.6-wh-questions-contrast-1",
+          "wrong": {
+            "text": "Where you live?",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_6_wh_questions_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Where do you live?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_6_wh_questions_contrast_1_better.mp3"
+          },
+          "reasonZh": "一般動詞 live 的問句需要 do。"
+        },
+        {
+          "id": "F1.6-wh-questions-contrast-2",
+          "wrong": {
+            "text": "What she wants?",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_6_wh_questions_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "What does she want?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_6_wh_questions_contrast_2_better.mp3"
+          },
+          "reasonZh": "第三人稱問句使用 does，want 回原形。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F1.6-wh-questions-bug-1",
+          "zh": "你為什麼累？",
+          "wrong": {
+            "text": "Why you are tired?",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_6_wh_questions_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Why are you tired?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_6_wh_questions_bug_1_better.mp3"
+          },
+          "reasonZh": "be 問句要把 are 放到主詞前。",
+          "severity": "E1"
+        },
+        {
+          "id": "F1.6-wh-questions-bug-2",
+          "zh": "他幾點起床？",
+          "wrong": {
+            "text": "When he gets up?",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f1_6_wh_questions_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "When does he get up?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f1_6_wh_questions_bug_2_better.mp3"
+          },
+          "reasonZh": "一般動詞問句需要 does，主要動詞回原形。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "Who called you?",
+            "Who did you call?"
+          ],
+          "noteZh": "who 當主詞時通常不加 do；who 當受詞時使用 did/do/does。",
+          "dialect": "general"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F1.6-wh-questions-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "What do you need?",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f1_6_wh_questions_example_1.mp3"
+            },
+            {
+              "text": "Where you live?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_6_wh_questions_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "What she wants?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_6_wh_questions_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F1.6-wh-questions-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「Where you live?」？",
+          "choices": [
+            {
+              "text": "Where do you live?",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f1_6_wh_questions_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "Where you live?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_6_wh_questions_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "What she wants?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_6_wh_questions_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F1.6-wh-questions-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Where is my book?",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f1_6_wh_questions_example_2.mp3"
+            },
+            {
+              "text": "Why you are tired?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_6_wh_questions_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "When he gets up?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f1_6_wh_questions_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F1.6-wh-questions-speaking",
+          "type": "speaking",
+          "prompt": "Ask one question with \"where\".",
+          "promptAudio": "audio/grammar_db/content/f1_6_wh_questions_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "Wh-word + be/do/does + subject ...?"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F1.6-wh-questions-writing",
+          "type": "writing",
+          "prompt": "Write one question with \"why\" and a be verb.",
+          "promptAudio": "audio/grammar_db/content/f1_6_wh_questions_prompt_writing.mp3",
+          "expectedFeatures": [
+            "Wh-word + be/do/does + subject ...?"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F1.6-wh-questions-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "Where you live? What she wants?",
+        "audio": "audio/grammar_db/content/f1_6_wh_questions_revision.mp3",
+        "expectedCorrections": [
+          "Where do you live?",
+          "What does she want?"
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F1.6-wh-questions-dialogue-1",
+            "speaker": "A",
+            "text": "Where do you live?",
+            "audio": "audio/grammar_db/dialogue_lines/f1_6_wh_questions_dialogue_1.mp3"
+          },
+          {
+            "id": "F1.6-wh-questions-dialogue-2",
+            "speaker": "B",
+            "text": "I live near the park.",
+            "audio": "audio/grammar_db/dialogue_lines/f1_6_wh_questions_dialogue_2.mp3"
+          },
+          {
+            "id": "F1.6-wh-questions-dialogue-3",
+            "speaker": "A",
+            "text": "How do you get to school?",
+            "audio": "audio/grammar_db/dialogue_lines/f1_6_wh_questions_dialogue_3.mp3"
+          },
+          {
+            "id": "F1.6-wh-questions-dialogue-4",
+            "speaker": "B",
+            "text": "I take the bus.",
+            "audio": "audio/grammar_db/dialogue_lines/f1_6_wh_questions_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f1_6_wh_questions.mp3"
+      }
+    }
+  ]
+}

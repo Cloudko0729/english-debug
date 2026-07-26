@@ -1,0 +1,1619 @@
+{
+  "schemaVersion": "1.0.0",
+  "band": "F5",
+  "nodes": [
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F5.1-present-perfect-experience",
+      "band": "F5",
+      "microLevel": 1,
+      "titleZh": "現在完成式：經驗與結果",
+      "titleEn": "Present Perfect for Experience and Result",
+      "communicativeGoalZh": "用 have/has + 過去分詞表達到現在為止的經驗或目前相關結果。",
+      "form": "have/has + past participle",
+      "prerequisites": [
+        "F3.2-past-simple",
+        "F0.2-be-agreement"
+      ],
+      "diagramRef": "tense-timeline",
+      "naturalExamples": [
+        {
+          "id": "F5.1-present-perfect-experience-example-1",
+          "text": "I have visited Japan twice.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_example_1.mp3"
+        },
+        {
+          "id": "F5.1-present-perfect-experience-example-2",
+          "text": "She has never eaten sushi.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_example_2.mp3"
+        },
+        {
+          "id": "F5.1-present-perfect-experience-example-3",
+          "text": "Have you ever seen a whale?",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_example_3.mp3"
+        },
+        {
+          "id": "F5.1-present-perfect-experience-example-4",
+          "text": "We have finished our project.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F5.1-present-perfect-experience-contrast-1",
+          "wrong": {
+            "text": "Did you ever visited Japan?",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Have you ever visited Japan?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_contrast_1_better.mp3"
+          },
+          "reasonZh": "詢問到目前為止的經驗，使用 have + 過去分詞。"
+        },
+        {
+          "id": "F5.1-present-perfect-experience-contrast-2",
+          "wrong": {
+            "text": "I have went there twice.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I have gone there twice.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_contrast_2_better.mp3"
+          },
+          "reasonZh": "go 的過去分詞是 gone。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F5.1-present-perfect-experience-bug-1",
+          "zh": "我看過那部電影三次。",
+          "wrong": {
+            "text": "I saw that movie three times in my life.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I have seen that movie three times.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_bug_1_better.mp3"
+          },
+          "reasonZh": "未限定已結束時間、強調到目前的累積經驗，現在完成式較自然。",
+          "severity": "E2"
+        },
+        {
+          "id": "F5.1-present-perfect-experience-bug-2",
+          "zh": "她已經完成了。",
+          "wrong": {
+            "text": "She has finish it.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "She has finished it.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_bug_2_better.mp3"
+          },
+          "reasonZh": "has 後使用過去分詞 finished。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F5.1-present-perfect-experience-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I have visited Japan twice.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_example_1.mp3"
+            },
+            {
+              "text": "Did you ever visited Japan?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I have went there twice.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F5.1-present-perfect-experience-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「Did you ever visited Japan?」？",
+          "choices": [
+            {
+              "text": "Have you ever visited Japan?",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "Did you ever visited Japan?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I have went there twice.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F5.1-present-perfect-experience-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She has never eaten sushi.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_example_2.mp3"
+            },
+            {
+              "text": "I saw that movie three times in my life.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She has finish it.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F5.1-present-perfect-experience-speaking",
+          "type": "speaking",
+          "prompt": "Ask someone about an experience with \"Have you ever...?\"",
+          "promptAudio": "audio/grammar_db/content/f5_1_present_perfect_experience_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "have/has + past participle"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F5.1-present-perfect-experience-writing",
+          "type": "writing",
+          "prompt": "Write one sentence about something you have done.",
+          "promptAudio": "audio/grammar_db/content/f5_1_present_perfect_experience_prompt_writing.mp3",
+          "expectedFeatures": [
+            "have/has + past participle"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F5.1-present-perfect-experience-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "Did you ever visited Japan? I have went there twice.",
+        "audio": "audio/grammar_db/content/f5_1_present_perfect_experience_revision.mp3",
+        "expectedCorrections": [
+          "Have you ever visited Japan?",
+          "I have gone there twice."
+        ],
+        "severityTargets": [
+          "E2",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F5.1-present-perfect-experience-dialogue-1",
+            "speaker": "A",
+            "text": "Have you ever ridden a horse?",
+            "audio": "audio/grammar_db/dialogue_lines/f5_1_present_perfect_experience_dialogue_1.mp3"
+          },
+          {
+            "id": "F5.1-present-perfect-experience-dialogue-2",
+            "speaker": "B",
+            "text": "Yes, I have ridden one twice.",
+            "audio": "audio/grammar_db/dialogue_lines/f5_1_present_perfect_experience_dialogue_2.mp3"
+          },
+          {
+            "id": "F5.1-present-perfect-experience-dialogue-3",
+            "speaker": "A",
+            "text": "Has your sister tried it?",
+            "audio": "audio/grammar_db/dialogue_lines/f5_1_present_perfect_experience_dialogue_3.mp3"
+          },
+          {
+            "id": "F5.1-present-perfect-experience-dialogue-4",
+            "speaker": "B",
+            "text": "No, she has never ridden a horse.",
+            "audio": "audio/grammar_db/dialogue_lines/f5_1_present_perfect_experience_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f5_1_present_perfect_experience.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F5.2-perfect-markers",
+      "band": "F5",
+      "microLevel": 2,
+      "titleZh": "already、yet、since 與 for",
+      "titleEn": "Present Perfect Time Markers",
+      "communicativeGoalZh": "用 already、yet、since、for 清楚表達完成與持續時間。",
+      "form": "already in affirmative; yet in questions/negatives; since point; for duration",
+      "prerequisites": [
+        "F5.1-present-perfect-experience"
+      ],
+      "diagramRef": "tense-timeline",
+      "naturalExamples": [
+        {
+          "id": "F5.2-perfect-markers-example-1",
+          "text": "I have already finished my homework.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f5_2_perfect_markers_example_1.mp3"
+        },
+        {
+          "id": "F5.2-perfect-markers-example-2",
+          "text": "She hasn't called yet.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f5_2_perfect_markers_example_2.mp3"
+        },
+        {
+          "id": "F5.2-perfect-markers-example-3",
+          "text": "We have lived here since 2022.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f5_2_perfect_markers_example_3.mp3"
+        },
+        {
+          "id": "F5.2-perfect-markers-example-4",
+          "text": "He has studied English for three years.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f5_2_perfect_markers_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F5.2-perfect-markers-contrast-1",
+          "wrong": {
+            "text": "I have lived here since three years.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_2_perfect_markers_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I have lived here for three years.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_2_perfect_markers_contrast_1_better.mp3"
+          },
+          "reasonZh": "三年是一段期間，使用 for。"
+        },
+        {
+          "id": "F5.2-perfect-markers-contrast-2",
+          "wrong": {
+            "text": "I have finished my homework yesterday.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_2_perfect_markers_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I finished my homework yesterday.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_2_perfect_markers_contrast_2_better.mp3"
+          },
+          "reasonZh": "明確已結束的 yesterday 通常使用過去簡單式。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F5.2-perfect-markers-bug-1",
+          "zh": "我們從星期一就一直很忙。",
+          "wrong": {
+            "text": "We have been busy for Monday.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_2_perfect_markers_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "We have been busy since Monday.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_2_perfect_markers_bug_1_better.mp3"
+          },
+          "reasonZh": "Monday 是起點，使用 since。",
+          "severity": "E1"
+        },
+        {
+          "id": "F5.2-perfect-markers-bug-2",
+          "zh": "你已經吃過了嗎？",
+          "wrong": {
+            "text": "Did you eat yet?",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_2_perfect_markers_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "Have you eaten yet?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_2_perfect_markers_bug_2_better.mp3"
+          },
+          "reasonZh": "詢問到現在是否已完成，在標準學習語境用現在完成式。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "Have you eaten yet?",
+            "Did you eat yet?"
+          ],
+          "noteZh": "美式口語可用過去式搭 yet；正式分級先掌握現在完成式。",
+          "dialect": "US"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F5.2-perfect-markers-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I have already finished my homework.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f5_2_perfect_markers_example_1.mp3"
+            },
+            {
+              "text": "I have lived here since three years.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_2_perfect_markers_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I have finished my homework yesterday.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_2_perfect_markers_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F5.2-perfect-markers-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「I have lived here since three years.」？",
+          "choices": [
+            {
+              "text": "I have lived here for three years.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f5_2_perfect_markers_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "I have lived here since three years.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_2_perfect_markers_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I have finished my homework yesterday.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_2_perfect_markers_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F5.2-perfect-markers-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She hasn't called yet.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f5_2_perfect_markers_example_2.mp3"
+            },
+            {
+              "text": "We have been busy for Monday.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_2_perfect_markers_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Did you eat yet?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_2_perfect_markers_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F5.2-perfect-markers-speaking",
+          "type": "speaking",
+          "prompt": "Say how long you have studied English.",
+          "promptAudio": "audio/grammar_db/content/f5_2_perfect_markers_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "already in affirmative; yet in questions/negatives; since point; for duration"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F5.2-perfect-markers-writing",
+          "type": "writing",
+          "prompt": "Write one sentence with \"already\" or \"yet\".",
+          "promptAudio": "audio/grammar_db/content/f5_2_perfect_markers_prompt_writing.mp3",
+          "expectedFeatures": [
+            "already in affirmative; yet in questions/negatives; since point; for duration"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F5.2-perfect-markers-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "I have lived here since three years. I have finished my homework yesterday.",
+        "audio": "audio/grammar_db/content/f5_2_perfect_markers_revision.mp3",
+        "expectedCorrections": [
+          "I have lived here for three years.",
+          "I finished my homework yesterday."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F5.2-perfect-markers-dialogue-1",
+            "speaker": "A",
+            "text": "Have you finished the report yet?",
+            "audio": "audio/grammar_db/dialogue_lines/f5_2_perfect_markers_dialogue_1.mp3"
+          },
+          {
+            "id": "F5.2-perfect-markers-dialogue-2",
+            "speaker": "B",
+            "text": "Yes, I have already finished it.",
+            "audio": "audio/grammar_db/dialogue_lines/f5_2_perfect_markers_dialogue_2.mp3"
+          },
+          {
+            "id": "F5.2-perfect-markers-dialogue-3",
+            "speaker": "A",
+            "text": "How long have you worked on it?",
+            "audio": "audio/grammar_db/dialogue_lines/f5_2_perfect_markers_dialogue_3.mp3"
+          },
+          {
+            "id": "F5.2-perfect-markers-dialogue-4",
+            "speaker": "B",
+            "text": "I have worked on it for three days.",
+            "audio": "audio/grammar_db/dialogue_lines/f5_2_perfect_markers_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f5_2_perfect_markers.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F5.3-perfect-vs-past",
+      "band": "F5",
+      "microLevel": 3,
+      "titleZh": "現在完成式與過去式",
+      "titleEn": "Present Perfect versus Past Simple",
+      "communicativeGoalZh": "依時間是否已結束、是否與現在相關選擇時態。",
+      "form": "finished time: past; life experience/current result: present perfect",
+      "prerequisites": [
+        "F5.1-present-perfect-experience",
+        "F5.2-perfect-markers"
+      ],
+      "diagramRef": "tense-timeline",
+      "naturalExamples": [
+        {
+          "id": "F5.3-perfect-vs-past-example-1",
+          "text": "I visited London in 2024.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_example_1.mp3"
+        },
+        {
+          "id": "F5.3-perfect-vs-past-example-2",
+          "text": "I have visited London three times.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_example_2.mp3"
+        },
+        {
+          "id": "F5.3-perfect-vs-past-example-3",
+          "text": "She lost her keys yesterday.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_example_3.mp3"
+        },
+        {
+          "id": "F5.3-perfect-vs-past-example-4",
+          "text": "She has lost her keys, so she can't open the door.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F5.3-perfect-vs-past-contrast-1",
+          "wrong": {
+            "text": "I have met him last Friday.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I met him last Friday.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_contrast_1_better.mp3"
+          },
+          "reasonZh": "last Friday 是明確結束的過去時間。"
+        },
+        {
+          "id": "F5.3-perfect-vs-past-contrast-2",
+          "wrong": {
+            "text": "I went to Japan three times in my life.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I have been to Japan three times.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_contrast_2_better.mp3"
+          },
+          "reasonZh": "未結束的人生經驗通常用現在完成式更自然。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F5.3-perfect-vs-past-bug-1",
+          "zh": "他2019年搬到這裡。",
+          "wrong": {
+            "text": "He has moved here in 2019.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "He moved here in 2019.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_bug_1_better.mp3"
+          },
+          "reasonZh": "明確過去年份搭配過去簡單式。",
+          "severity": "E1"
+        },
+        {
+          "id": "F5.3-perfect-vs-past-bug-2",
+          "zh": "我的鉛筆不見了，所以現在不能寫。",
+          "wrong": {
+            "text": "I lost my pencil, so I can't write now.",
+            "status": "acceptable",
+            "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I have lost my pencil, so I can't write now.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_bug_2_better.mp3"
+          },
+          "reasonZh": "若強調目前仍找不到，可用現在完成式表現在結果；原句在部分語境仍可接受。",
+          "severity": "E3"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F5.3-perfect-vs-past-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I visited London in 2024.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_example_1.mp3"
+            },
+            {
+              "text": "I have met him last Friday.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I went to Japan three times in my life.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F5.3-perfect-vs-past-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「I have met him last Friday.」？",
+          "choices": [
+            {
+              "text": "I met him last Friday.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "I have met him last Friday.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I went to Japan three times in my life.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F5.3-perfect-vs-past-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I have visited London three times.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_example_2.mp3"
+            },
+            {
+              "text": "He has moved here in 2019.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I lost my pencil, so I can't write now.",
+              "status": "acceptable",
+              "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F5.3-perfect-vs-past-speaking",
+          "type": "speaking",
+          "prompt": "Contrast one finished past event with one life experience.",
+          "promptAudio": "audio/grammar_db/content/f5_3_perfect_vs_past_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "finished time: past; life experience/current result: present perfect"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F5.3-perfect-vs-past-writing",
+          "type": "writing",
+          "prompt": "Write two sentences that show past simple and present perfect.",
+          "promptAudio": "audio/grammar_db/content/f5_3_perfect_vs_past_prompt_writing.mp3",
+          "expectedFeatures": [
+            "finished time: past; life experience/current result: present perfect"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F5.3-perfect-vs-past-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "I have met him last Friday. I went to Japan three times in my life.",
+        "audio": "audio/grammar_db/content/f5_3_perfect_vs_past_revision.mp3",
+        "expectedCorrections": [
+          "I met him last Friday.",
+          "I have been to Japan three times."
+        ],
+        "severityTargets": [
+          "E1",
+          "E3"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F5.3-perfect-vs-past-dialogue-1",
+            "speaker": "A",
+            "text": "Have you seen my notebook?",
+            "audio": "audio/grammar_db/dialogue_lines/f5_3_perfect_vs_past_dialogue_1.mp3"
+          },
+          {
+            "id": "F5.3-perfect-vs-past-dialogue-2",
+            "speaker": "B",
+            "text": "I saw it on your desk this morning.",
+            "audio": "audio/grammar_db/dialogue_lines/f5_3_perfect_vs_past_dialogue_2.mp3"
+          },
+          {
+            "id": "F5.3-perfect-vs-past-dialogue-3",
+            "speaker": "A",
+            "text": "I have checked the desk, but it isn't there.",
+            "audio": "audio/grammar_db/dialogue_lines/f5_3_perfect_vs_past_dialogue_3.mp3"
+          },
+          {
+            "id": "F5.3-perfect-vs-past-dialogue-4",
+            "speaker": "B",
+            "text": "Then someone may have moved it.",
+            "audio": "audio/grammar_db/dialogue_lines/f5_3_perfect_vs_past_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f5_3_perfect_vs_past.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F5.4-first-conditional",
+      "band": "F5",
+      "microLevel": 4,
+      "titleZh": "第一條件句",
+      "titleEn": "First Conditional",
+      "communicativeGoalZh": "用 if + 現在式和 will/can 表達真實可能的未來條件與結果。",
+      "form": "if + present simple, will/can + base verb",
+      "prerequisites": [
+        "F2.1-present-simple",
+        "F3.6-basic-helpers"
+      ],
+      "diagramRef": "connector-relations",
+      "naturalExamples": [
+        {
+          "id": "F5.4-first-conditional-example-1",
+          "text": "If it rains, we will stay inside.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f5_4_first_conditional_example_1.mp3"
+        },
+        {
+          "id": "F5.4-first-conditional-example-2",
+          "text": "If you study, you will learn more.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f5_4_first_conditional_example_2.mp3"
+        },
+        {
+          "id": "F5.4-first-conditional-example-3",
+          "text": "I will call you if I need help.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f5_4_first_conditional_example_3.mp3"
+        },
+        {
+          "id": "F5.4-first-conditional-example-4",
+          "text": "If we leave now, we can catch the bus.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f5_4_first_conditional_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F5.4-first-conditional-contrast-1",
+          "wrong": {
+            "text": "If it will rain, we will stay inside.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_4_first_conditional_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "If it rains, we will stay inside.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_4_first_conditional_contrast_1_better.mp3"
+          },
+          "reasonZh": "第一條件句的 if 子句通常使用現在簡單式。"
+        },
+        {
+          "id": "F5.4-first-conditional-contrast-2",
+          "wrong": {
+            "text": "If you will study, you pass the test.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_4_first_conditional_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "If you study, you will have a better chance of passing the test.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_4_first_conditional_contrast_2_better.mp3"
+          },
+          "reasonZh": "條件與結果的形式要完整，且避免把結果說得不合理地絕對。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F5.4-first-conditional-bug-1",
+          "zh": "如果你早點睡，明天會感覺好一點。",
+          "wrong": {
+            "text": "If you will sleep early, you feel better tomorrow.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_4_first_conditional_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "If you sleep early, you will feel better tomorrow.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_4_first_conditional_bug_1_better.mp3"
+          },
+          "reasonZh": "if 子句用現在式，結果使用 will。",
+          "severity": "E1"
+        },
+        {
+          "id": "F5.4-first-conditional-bug-2",
+          "zh": "如果我們錯過公車，可以走路。",
+          "wrong": {
+            "text": "If we miss the bus, we can to walk.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_4_first_conditional_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "If we miss the bus, we can walk.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_4_first_conditional_bug_2_better.mp3"
+          },
+          "reasonZh": "can 後接原形。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F5.4-first-conditional-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "If it rains, we will stay inside.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f5_4_first_conditional_example_1.mp3"
+            },
+            {
+              "text": "If it will rain, we will stay inside.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_4_first_conditional_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "If you will study, you pass the test.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_4_first_conditional_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F5.4-first-conditional-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「If it will rain, we will stay inside.」？",
+          "choices": [
+            {
+              "text": "If it rains, we will stay inside.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f5_4_first_conditional_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "If it will rain, we will stay inside.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_4_first_conditional_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "If you will study, you pass the test.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_4_first_conditional_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F5.4-first-conditional-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "If you study, you will learn more.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f5_4_first_conditional_example_2.mp3"
+            },
+            {
+              "text": "If you will sleep early, you feel better tomorrow.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_4_first_conditional_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "If we miss the bus, we can to walk.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_4_first_conditional_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F5.4-first-conditional-speaking",
+          "type": "speaking",
+          "prompt": "Say what you will do if it rains tomorrow.",
+          "promptAudio": "audio/grammar_db/content/f5_4_first_conditional_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "if + present simple, will/can + base verb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F5.4-first-conditional-writing",
+          "type": "writing",
+          "prompt": "Write one realistic first conditional sentence.",
+          "promptAudio": "audio/grammar_db/content/f5_4_first_conditional_prompt_writing.mp3",
+          "expectedFeatures": [
+            "if + present simple, will/can + base verb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F5.4-first-conditional-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "If it will rain, we will stay inside. If you will study, you pass the test.",
+        "audio": "audio/grammar_db/content/f5_4_first_conditional_revision.mp3",
+        "expectedCorrections": [
+          "If it rains, we will stay inside.",
+          "If you study, you will have a better chance of passing the test."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F5.4-first-conditional-dialogue-1",
+            "speaker": "A",
+            "text": "What will we do if it rains?",
+            "audio": "audio/grammar_db/dialogue_lines/f5_4_first_conditional_dialogue_1.mp3"
+          },
+          {
+            "id": "F5.4-first-conditional-dialogue-2",
+            "speaker": "B",
+            "text": "If it rains, we will move the picnic inside.",
+            "audio": "audio/grammar_db/dialogue_lines/f5_4_first_conditional_dialogue_2.mp3"
+          },
+          {
+            "id": "F5.4-first-conditional-dialogue-3",
+            "speaker": "A",
+            "text": "Can everyone still come?",
+            "audio": "audio/grammar_db/dialogue_lines/f5_4_first_conditional_dialogue_3.mp3"
+          },
+          {
+            "id": "F5.4-first-conditional-dialogue-4",
+            "speaker": "B",
+            "text": "Yes. We can meet in the gym if the park is wet.",
+            "audio": "audio/grammar_db/dialogue_lines/f5_4_first_conditional_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f5_4_first_conditional.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F5.5-relative-basic",
+      "band": "F5",
+      "microLevel": 5,
+      "titleZh": "基本關係子句",
+      "titleEn": "Basic Relative Clauses",
+      "communicativeGoalZh": "用 who、which、that、where 把必要資訊連到正確的人、物或地點。",
+      "form": "noun + relative word + clause",
+      "prerequisites": [
+        "F0.1-complete-sentence",
+        "F3.5-connectors"
+      ],
+      "diagramRef": "relative-attachment",
+      "naturalExamples": [
+        {
+          "id": "F5.5-relative-basic-example-1",
+          "text": "The girl who won the race is my sister.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f5_5_relative_basic_example_1.mp3"
+        },
+        {
+          "id": "F5.5-relative-basic-example-2",
+          "text": "This is the book that I borrowed.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f5_5_relative_basic_example_2.mp3"
+        },
+        {
+          "id": "F5.5-relative-basic-example-3",
+          "text": "We built a machine which saves water.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f5_5_relative_basic_example_3.mp3"
+        },
+        {
+          "id": "F5.5-relative-basic-example-4",
+          "text": "The park where we play is nearby.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f5_5_relative_basic_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F5.5-relative-basic-contrast-1",
+          "wrong": {
+            "text": "The girl which won the race is my sister.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_5_relative_basic_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "The girl who won the race is my sister.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_5_relative_basic_contrast_1_better.mp3"
+          },
+          "reasonZh": "指人時使用 who。"
+        },
+        {
+          "id": "F5.5-relative-basic-contrast-2",
+          "wrong": {
+            "text": "This is the book who I borrowed.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_5_relative_basic_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "This is the book that I borrowed.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_5_relative_basic_contrast_2_better.mp3"
+          },
+          "reasonZh": "指物時使用 that 或 which。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F5.5-relative-basic-bug-1",
+          "zh": "那位幫我的老師很親切。",
+          "wrong": {
+            "text": "The teacher which helped me is kind.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_5_relative_basic_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "The teacher who helped me is kind.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_5_relative_basic_bug_1_better.mp3"
+          },
+          "reasonZh": "teacher 指人，使用 who。",
+          "severity": "E1"
+        },
+        {
+          "id": "F5.5-relative-basic-bug-2",
+          "zh": "這是我們見面的咖啡店。",
+          "wrong": {
+            "text": "This is the café which we met.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_5_relative_basic_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "This is the café where we met.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_5_relative_basic_bug_2_better.mp3"
+          },
+          "reasonZh": "要表達在該地點發生，使用 where。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "the book that I read",
+            "the book which I read",
+            "the book I read"
+          ],
+          "noteZh": "限定物件子句中 that、which 或省略受詞關係代名詞都可能自然。",
+          "dialect": "general"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F5.5-relative-basic-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The girl who won the race is my sister.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f5_5_relative_basic_example_1.mp3"
+            },
+            {
+              "text": "The girl which won the race is my sister.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_5_relative_basic_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "This is the book who I borrowed.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_5_relative_basic_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F5.5-relative-basic-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「The girl which won the race is my sister.」？",
+          "choices": [
+            {
+              "text": "The girl who won the race is my sister.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f5_5_relative_basic_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "The girl which won the race is my sister.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_5_relative_basic_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "This is the book who I borrowed.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_5_relative_basic_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F5.5-relative-basic-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "This is the book that I borrowed.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f5_5_relative_basic_example_2.mp3"
+            },
+            {
+              "text": "The teacher which helped me is kind.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_5_relative_basic_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "This is the café which we met.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_5_relative_basic_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F5.5-relative-basic-speaking",
+          "type": "speaking",
+          "prompt": "Describe a person with a \"who\" clause.",
+          "promptAudio": "audio/grammar_db/content/f5_5_relative_basic_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "noun + relative word + clause"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F5.5-relative-basic-writing",
+          "type": "writing",
+          "prompt": "Write one sentence with \"that\" or \"which\".",
+          "promptAudio": "audio/grammar_db/content/f5_5_relative_basic_prompt_writing.mp3",
+          "expectedFeatures": [
+            "noun + relative word + clause"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F5.5-relative-basic-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "The girl which won the race is my sister. This is the book who I borrowed.",
+        "audio": "audio/grammar_db/content/f5_5_relative_basic_revision.mp3",
+        "expectedCorrections": [
+          "The girl who won the race is my sister.",
+          "This is the book that I borrowed."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F5.5-relative-basic-dialogue-1",
+            "speaker": "A",
+            "text": "Who is the boy who is holding the map?",
+            "audio": "audio/grammar_db/dialogue_lines/f5_5_relative_basic_dialogue_1.mp3"
+          },
+          {
+            "id": "F5.5-relative-basic-dialogue-2",
+            "speaker": "B",
+            "text": "He is Leo, the student who found the key.",
+            "audio": "audio/grammar_db/dialogue_lines/f5_5_relative_basic_dialogue_2.mp3"
+          },
+          {
+            "id": "F5.5-relative-basic-dialogue-3",
+            "speaker": "A",
+            "text": "Is that the key that opens the box?",
+            "audio": "audio/grammar_db/dialogue_lines/f5_5_relative_basic_dialogue_3.mp3"
+          },
+          {
+            "id": "F5.5-relative-basic-dialogue-4",
+            "speaker": "B",
+            "text": "Yes, it is the key that we need.",
+            "audio": "audio/grammar_db/dialogue_lines/f5_5_relative_basic_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f5_5_relative_basic.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F5.6-reflexive-reference",
+      "band": "F5",
+      "microLevel": 6,
+      "titleZh": "反身代名詞與清楚指涉",
+      "titleEn": "Reflexive Pronouns and Clear Reference",
+      "communicativeGoalZh": "在主詞與受詞同一人時使用反身代名詞，並避免代名詞指涉含糊。",
+      "form": "subject acts on self; intensive self for emphasis",
+      "prerequisites": [
+        "F2.6-pronoun-case"
+      ],
+      "diagramRef": "pronoun-positions",
+      "naturalExamples": [
+        {
+          "id": "F5.6-reflexive-reference-example-1",
+          "text": "I made the card myself.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f5_6_reflexive_reference_example_1.mp3"
+        },
+        {
+          "id": "F5.6-reflexive-reference-example-2",
+          "text": "She hurt herself while running.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f5_6_reflexive_reference_example_2.mp3"
+        },
+        {
+          "id": "F5.6-reflexive-reference-example-3",
+          "text": "They introduced themselves.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f5_6_reflexive_reference_example_3.mp3"
+        },
+        {
+          "id": "F5.6-reflexive-reference-example-4",
+          "text": "Ben told Leo that Ben would lead the team.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f5_6_reflexive_reference_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F5.6-reflexive-reference-contrast-1",
+          "wrong": {
+            "text": "Myself made the card.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_6_reflexive_reference_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I made the card myself.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_6_reflexive_reference_contrast_1_better.mp3"
+          },
+          "reasonZh": "myself 不能取代普通主詞 I。"
+        },
+        {
+          "id": "F5.6-reflexive-reference-contrast-2",
+          "wrong": {
+            "text": "Please give the form to myself.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_6_reflexive_reference_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "Please give the form to me.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_6_reflexive_reference_contrast_2_better.mp3"
+          },
+          "reasonZh": "主詞不是同一人時，普通受詞使用 me。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F5.6-reflexive-reference-bug-1",
+          "zh": "他看著鏡子裡的自己。",
+          "wrong": {
+            "text": "He looked at him in the mirror.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_6_reflexive_reference_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "He looked at himself in the mirror.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_6_reflexive_reference_bug_1_better.mp3"
+          },
+          "reasonZh": "主詞與受詞是同一個人，使用 himself。",
+          "severity": "E0"
+        },
+        {
+          "id": "F5.6-reflexive-reference-bug-2",
+          "zh": "Tom 告訴 Ben 他會當隊長。",
+          "wrong": {
+            "text": "Tom told Ben that he would be the leader.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f5_6_reflexive_reference_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "Tom told Ben that Tom would be the leader.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f5_6_reflexive_reference_bug_2_better.mp3"
+          },
+          "reasonZh": "原句的 he 可能指 Tom 或 Ben；必要時重複名字消除歧義。",
+          "severity": "E0"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F5.6-reflexive-reference-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I made the card myself.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f5_6_reflexive_reference_example_1.mp3"
+            },
+            {
+              "text": "Myself made the card.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_6_reflexive_reference_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Please give the form to myself.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_6_reflexive_reference_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F5.6-reflexive-reference-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「Myself made the card.」？",
+          "choices": [
+            {
+              "text": "I made the card myself.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f5_6_reflexive_reference_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "Myself made the card.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_6_reflexive_reference_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Please give the form to myself.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_6_reflexive_reference_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F5.6-reflexive-reference-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She hurt herself while running.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f5_6_reflexive_reference_example_2.mp3"
+            },
+            {
+              "text": "He looked at him in the mirror.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_6_reflexive_reference_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Tom told Ben that he would be the leader.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f5_6_reflexive_reference_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F5.6-reflexive-reference-speaking",
+          "type": "speaking",
+          "prompt": "Say one thing you did by yourself.",
+          "promptAudio": "audio/grammar_db/content/f5_6_reflexive_reference_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "subject acts on self; intensive self for emphasis"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F5.6-reflexive-reference-writing",
+          "type": "writing",
+          "prompt": "Rewrite an ambiguous pronoun sentence so the meaning is clear.",
+          "promptAudio": "audio/grammar_db/content/f5_6_reflexive_reference_prompt_writing.mp3",
+          "expectedFeatures": [
+            "subject acts on self; intensive self for emphasis"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F5.6-reflexive-reference-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "Myself made the card. Please give the form to myself.",
+        "audio": "audio/grammar_db/content/f5_6_reflexive_reference_revision.mp3",
+        "expectedCorrections": [
+          "I made the card myself.",
+          "Please give the form to me."
+        ],
+        "severityTargets": [
+          "E0",
+          "E0"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F5.6-reflexive-reference-dialogue-1",
+            "speaker": "A",
+            "text": "Did you build this model by yourself?",
+            "audio": "audio/grammar_db/dialogue_lines/f5_6_reflexive_reference_dialogue_1.mp3"
+          },
+          {
+            "id": "F5.6-reflexive-reference-dialogue-2",
+            "speaker": "B",
+            "text": "Yes, I built it myself.",
+            "audio": "audio/grammar_db/dialogue_lines/f5_6_reflexive_reference_dialogue_2.mp3"
+          },
+          {
+            "id": "F5.6-reflexive-reference-dialogue-3",
+            "speaker": "A",
+            "text": "Did Amy make hers by herself?",
+            "audio": "audio/grammar_db/dialogue_lines/f5_6_reflexive_reference_dialogue_3.mp3"
+          },
+          {
+            "id": "F5.6-reflexive-reference-dialogue-4",
+            "speaker": "B",
+            "text": "No, her brother helped her.",
+            "audio": "audio/grammar_db/dialogue_lines/f5_6_reflexive_reference_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f5_6_reflexive_reference.mp3"
+      }
+    }
+  ]
+}

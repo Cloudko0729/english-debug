@@ -1,0 +1,1357 @@
+{
+  "schemaVersion": "1.0.0",
+  "band": "F0",
+  "nodes": [
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F0.1-complete-sentence",
+      "band": "F0",
+      "microLevel": 1,
+      "titleZh": "完整句與片語",
+      "titleEn": "Complete Sentences and Fragments",
+      "communicativeGoalZh": "分辨單字、片語和完整句，建立主詞加述語的最小骨架。",
+      "form": "subject + predicate",
+      "prerequisites": [],
+      "diagramRef": "sentence-slots",
+      "naturalExamples": [
+        {
+          "id": "F0.1-complete-sentence-example-1",
+          "text": "My dog runs.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f0_1_complete_sentence_example_1.mp3"
+        },
+        {
+          "id": "F0.1-complete-sentence-example-2",
+          "text": "The soup is hot.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f0_1_complete_sentence_example_2.mp3"
+        },
+        {
+          "id": "F0.1-complete-sentence-example-3",
+          "text": "We play after school.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f0_1_complete_sentence_example_3.mp3"
+        },
+        {
+          "id": "F0.1-complete-sentence-example-4",
+          "text": "Please sit down.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f0_1_complete_sentence_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F0.1-complete-sentence-contrast-1",
+          "wrong": {
+            "text": "My dog very cute.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_1_complete_sentence_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "My dog is very cute.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_1_complete_sentence_contrast_1_better.mp3"
+          },
+          "reasonZh": "形容詞 cute 前需要 be 動詞，才能形成完整述語。"
+        },
+        {
+          "id": "F0.1-complete-sentence-contrast-2",
+          "wrong": {
+            "text": "In the classroom.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f0_1_complete_sentence_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "The students are in the classroom.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_1_complete_sentence_contrast_2_better.mp3"
+          },
+          "reasonZh": "單獨的地點片語沒有說明誰在那裡；正式寫作需要補完整。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F0.1-complete-sentence-bug-1",
+          "zh": "天氣很冷。",
+          "wrong": {
+            "text": "Is very cold.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_1_complete_sentence_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "It is very cold.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_1_complete_sentence_bug_1_better.mp3"
+          },
+          "reasonZh": "英文天氣句需要形式主詞 it。",
+          "severity": "E0"
+        },
+        {
+          "id": "F0.1-complete-sentence-bug-2",
+          "zh": "我的妹妹很開心。",
+          "wrong": {
+            "text": "My sister very happy.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_1_complete_sentence_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "My sister is very happy.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_1_complete_sentence_bug_2_better.mp3"
+          },
+          "reasonZh": "happy 是形容詞，需要 is 連接主詞。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "In the classroom.",
+            "They are in the classroom."
+          ],
+          "noteZh": "簡短回答可用片語；獨立正式句通常補出主詞與動詞。",
+          "dialect": "general"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F0.1-complete-sentence-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "My dog runs.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f0_1_complete_sentence_example_1.mp3"
+            },
+            {
+              "text": "My dog very cute.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_1_complete_sentence_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "In the classroom.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f0_1_complete_sentence_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F0.1-complete-sentence-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「My dog very cute.」？",
+          "choices": [
+            {
+              "text": "My dog is very cute.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f0_1_complete_sentence_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "My dog very cute.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_1_complete_sentence_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "In the classroom.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f0_1_complete_sentence_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F0.1-complete-sentence-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The soup is hot.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f0_1_complete_sentence_example_2.mp3"
+            },
+            {
+              "text": "Is very cold.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_1_complete_sentence_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "My sister very happy.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_1_complete_sentence_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F0.1-complete-sentence-speaking",
+          "type": "speaking",
+          "prompt": "Say one complete sentence about your family.",
+          "promptAudio": "audio/grammar_db/content/f0_1_complete_sentence_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "subject + predicate"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F0.1-complete-sentence-writing",
+          "type": "writing",
+          "prompt": "Write one complete sentence about your classroom.",
+          "promptAudio": "audio/grammar_db/content/f0_1_complete_sentence_prompt_writing.mp3",
+          "expectedFeatures": [
+            "subject + predicate"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F0.1-complete-sentence-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "My dog very cute. In the classroom.",
+        "audio": "audio/grammar_db/content/f0_1_complete_sentence_revision.mp3",
+        "expectedCorrections": [
+          "My dog is very cute.",
+          "The students are in the classroom."
+        ],
+        "severityTargets": [
+          "E0",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F0.1-complete-sentence-dialogue-1",
+            "speaker": "A",
+            "text": "Is this a complete sentence?",
+            "audio": "audio/grammar_db/dialogue_lines/f0_1_complete_sentence_dialogue_1.mp3"
+          },
+          {
+            "id": "F0.1-complete-sentence-dialogue-2",
+            "speaker": "B",
+            "text": "Yes. The sentence has a subject and a predicate.",
+            "audio": "audio/grammar_db/dialogue_lines/f0_1_complete_sentence_dialogue_2.mp3"
+          },
+          {
+            "id": "F0.1-complete-sentence-dialogue-3",
+            "speaker": "A",
+            "text": "What about \"under the table\"?",
+            "audio": "audio/grammar_db/dialogue_lines/f0_1_complete_sentence_dialogue_3.mp3"
+          },
+          {
+            "id": "F0.1-complete-sentence-dialogue-4",
+            "speaker": "B",
+            "text": "That is a phrase, but it can be a natural short answer.",
+            "audio": "audio/grammar_db/dialogue_lines/f0_1_complete_sentence_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f0_1_complete_sentence.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F0.2-be-agreement",
+      "band": "F0",
+      "microLevel": 2,
+      "titleZh": "主詞與 am / is / are",
+      "titleEn": "Subject Agreement with Be",
+      "communicativeGoalZh": "依主詞選擇 am、is 或 are。",
+      "form": "I am; he/she/it is; you/we/they are",
+      "prerequisites": [
+        "F0.1-complete-sentence"
+      ],
+      "diagramRef": "predicate-routes",
+      "naturalExamples": [
+        {
+          "id": "F0.2-be-agreement-example-1",
+          "text": "I am ready.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f0_2_be_agreement_example_1.mp3"
+        },
+        {
+          "id": "F0.2-be-agreement-example-2",
+          "text": "She is my sister.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f0_2_be_agreement_example_2.mp3"
+        },
+        {
+          "id": "F0.2-be-agreement-example-3",
+          "text": "They are at school.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f0_2_be_agreement_example_3.mp3"
+        },
+        {
+          "id": "F0.2-be-agreement-example-4",
+          "text": "You are very kind.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f0_2_be_agreement_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F0.2-be-agreement-contrast-1",
+          "wrong": {
+            "text": "I is ready.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_2_be_agreement_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I am ready.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_2_be_agreement_contrast_1_better.mp3"
+          },
+          "reasonZh": "主詞 I 固定搭配 am。"
+        },
+        {
+          "id": "F0.2-be-agreement-contrast-2",
+          "wrong": {
+            "text": "They is at school.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_2_be_agreement_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "They are at school.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_2_be_agreement_contrast_2_better.mp3"
+          },
+          "reasonZh": "複數主詞 they 搭配 are。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F0.2-be-agreement-bug-1",
+          "zh": "我是學生。",
+          "wrong": {
+            "text": "I is a student.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_2_be_agreement_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I am a student.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_2_be_agreement_bug_1_better.mp3"
+          },
+          "reasonZh": "不要把中文「是」一律翻成 is。",
+          "severity": "E1"
+        },
+        {
+          "id": "F0.2-be-agreement-bug-2",
+          "zh": "那些書很新。",
+          "wrong": {
+            "text": "Those books is new.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_2_be_agreement_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "Those books are new.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_2_be_agreement_bug_2_better.mp3"
+          },
+          "reasonZh": "複數主詞要用 are。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F0.2-be-agreement-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I am ready.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f0_2_be_agreement_example_1.mp3"
+            },
+            {
+              "text": "I is ready.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_2_be_agreement_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "They is at school.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_2_be_agreement_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F0.2-be-agreement-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「I is ready.」？",
+          "choices": [
+            {
+              "text": "I am ready.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f0_2_be_agreement_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "I is ready.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_2_be_agreement_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "They is at school.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_2_be_agreement_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F0.2-be-agreement-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She is my sister.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f0_2_be_agreement_example_2.mp3"
+            },
+            {
+              "text": "I is a student.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_2_be_agreement_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Those books is new.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_2_be_agreement_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F0.2-be-agreement-speaking",
+          "type": "speaking",
+          "prompt": "Say one sentence with \"I am\".",
+          "promptAudio": "audio/grammar_db/content/f0_2_be_agreement_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "I am; he/she/it is; you/we/they are"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F0.2-be-agreement-writing",
+          "type": "writing",
+          "prompt": "Write one sentence with a plural subject and \"are\".",
+          "promptAudio": "audio/grammar_db/content/f0_2_be_agreement_prompt_writing.mp3",
+          "expectedFeatures": [
+            "I am; he/she/it is; you/we/they are"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F0.2-be-agreement-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "I is ready. They is at school.",
+        "audio": "audio/grammar_db/content/f0_2_be_agreement_revision.mp3",
+        "expectedCorrections": [
+          "I am ready.",
+          "They are at school."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F0.2-be-agreement-dialogue-1",
+            "speaker": "A",
+            "text": "Are you ready for class?",
+            "audio": "audio/grammar_db/dialogue_lines/f0_2_be_agreement_dialogue_1.mp3"
+          },
+          {
+            "id": "F0.2-be-agreement-dialogue-2",
+            "speaker": "B",
+            "text": "Yes, I am ready.",
+            "audio": "audio/grammar_db/dialogue_lines/f0_2_be_agreement_dialogue_2.mp3"
+          },
+          {
+            "id": "F0.2-be-agreement-dialogue-3",
+            "speaker": "A",
+            "text": "Is Ben ready, too?",
+            "audio": "audio/grammar_db/dialogue_lines/f0_2_be_agreement_dialogue_3.mp3"
+          },
+          {
+            "id": "F0.2-be-agreement-dialogue-4",
+            "speaker": "B",
+            "text": "Yes, he is ready.",
+            "audio": "audio/grammar_db/dialogue_lines/f0_2_be_agreement_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f0_2_be_agreement.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F0.3-be-meaning",
+      "band": "F0",
+      "microLevel": 3,
+      "titleZh": "be 表身分、狀態與位置",
+      "titleEn": "Be for Identity, State, and Location",
+      "communicativeGoalZh": "使用 be 連接主詞與身分、狀態或位置。",
+      "form": "subject + be + noun/adjective/place",
+      "prerequisites": [
+        "F0.2-be-agreement"
+      ],
+      "diagramRef": "predicate-routes",
+      "naturalExamples": [
+        {
+          "id": "F0.3-be-meaning-example-1",
+          "text": "Ben is a student.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f0_3_be_meaning_example_1.mp3"
+        },
+        {
+          "id": "F0.3-be-meaning-example-2",
+          "text": "The soup is hot.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f0_3_be_meaning_example_2.mp3"
+        },
+        {
+          "id": "F0.3-be-meaning-example-3",
+          "text": "My bag is on the chair.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f0_3_be_meaning_example_3.mp3"
+        },
+        {
+          "id": "F0.3-be-meaning-example-4",
+          "text": "The children are happy.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f0_3_be_meaning_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F0.3-be-meaning-contrast-1",
+          "wrong": {
+            "text": "Ben a student.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_3_be_meaning_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Ben is a student.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_3_be_meaning_contrast_1_better.mp3"
+          },
+          "reasonZh": "身分名詞前需要 be 形成述語。"
+        },
+        {
+          "id": "F0.3-be-meaning-contrast-2",
+          "wrong": {
+            "text": "My bag under the chair.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_3_be_meaning_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "My bag is under the chair.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_3_be_meaning_contrast_2_better.mp3"
+          },
+          "reasonZh": "位置片語前需要 be。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F0.3-be-meaning-bug-1",
+          "zh": "她很累。",
+          "wrong": {
+            "text": "She very tired.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_3_be_meaning_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "She is very tired.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_3_be_meaning_bug_1_better.mp3"
+          },
+          "reasonZh": "tired 是狀態形容詞，要用 is 連接。",
+          "severity": "E1"
+        },
+        {
+          "id": "F0.3-be-meaning-bug-2",
+          "zh": "我們在家。",
+          "wrong": {
+            "text": "We at home.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_3_be_meaning_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We are at home.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_3_be_meaning_bug_2_better.mp3"
+          },
+          "reasonZh": "英文位置句不能只把主詞和地點放在一起。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F0.3-be-meaning-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Ben is a student.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f0_3_be_meaning_example_1.mp3"
+            },
+            {
+              "text": "Ben a student.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_3_be_meaning_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "My bag under the chair.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_3_be_meaning_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F0.3-be-meaning-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「Ben a student.」？",
+          "choices": [
+            {
+              "text": "Ben is a student.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f0_3_be_meaning_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "Ben a student.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_3_be_meaning_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "My bag under the chair.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_3_be_meaning_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F0.3-be-meaning-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The soup is hot.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f0_3_be_meaning_example_2.mp3"
+            },
+            {
+              "text": "She very tired.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_3_be_meaning_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We at home.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_3_be_meaning_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F0.3-be-meaning-speaking",
+          "type": "speaking",
+          "prompt": "Say where your school bag is.",
+          "promptAudio": "audio/grammar_db/content/f0_3_be_meaning_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "subject + be + noun/adjective/place"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F0.3-be-meaning-writing",
+          "type": "writing",
+          "prompt": "Write one sentence about how you feel today.",
+          "promptAudio": "audio/grammar_db/content/f0_3_be_meaning_prompt_writing.mp3",
+          "expectedFeatures": [
+            "subject + be + noun/adjective/place"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F0.3-be-meaning-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "Ben a student. My bag under the chair.",
+        "audio": "audio/grammar_db/content/f0_3_be_meaning_revision.mp3",
+        "expectedCorrections": [
+          "Ben is a student.",
+          "My bag is under the chair."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F0.3-be-meaning-dialogue-1",
+            "speaker": "A",
+            "text": "Who is Ben?",
+            "audio": "audio/grammar_db/dialogue_lines/f0_3_be_meaning_dialogue_1.mp3"
+          },
+          {
+            "id": "F0.3-be-meaning-dialogue-2",
+            "speaker": "B",
+            "text": "He is a new student.",
+            "audio": "audio/grammar_db/dialogue_lines/f0_3_be_meaning_dialogue_2.mp3"
+          },
+          {
+            "id": "F0.3-be-meaning-dialogue-3",
+            "speaker": "A",
+            "text": "Where is his bag?",
+            "audio": "audio/grammar_db/dialogue_lines/f0_3_be_meaning_dialogue_3.mp3"
+          },
+          {
+            "id": "F0.3-be-meaning-dialogue-4",
+            "speaker": "B",
+            "text": "It is under the desk.",
+            "audio": "audio/grammar_db/dialogue_lines/f0_3_be_meaning_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f0_3_be_meaning.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F0.4-singular-plural",
+      "band": "F0",
+      "microLevel": 4,
+      "titleZh": "一個與多個名詞",
+      "titleEn": "Singular and Plural Nouns",
+      "communicativeGoalZh": "用單複數形式清楚表達數量。",
+      "form": "one + singular noun; two or more + plural noun",
+      "prerequisites": [
+        "F0.1-complete-sentence"
+      ],
+      "diagramRef": "noun-decision",
+      "naturalExamples": [
+        {
+          "id": "F0.4-singular-plural-example-1",
+          "text": "I have one book.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f0_4_singular_plural_example_1.mp3"
+        },
+        {
+          "id": "F0.4-singular-plural-example-2",
+          "text": "She has two books.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f0_4_singular_plural_example_2.mp3"
+        },
+        {
+          "id": "F0.4-singular-plural-example-3",
+          "text": "There are three boxes.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f0_4_singular_plural_example_3.mp3"
+        },
+        {
+          "id": "F0.4-singular-plural-example-4",
+          "text": "The children are outside.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f0_4_singular_plural_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F0.4-singular-plural-contrast-1",
+          "wrong": {
+            "text": "I have two book.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_4_singular_plural_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I have two books.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_4_singular_plural_contrast_1_better.mp3"
+          },
+          "reasonZh": "數量大於一時，可數名詞通常用複數。"
+        },
+        {
+          "id": "F0.4-singular-plural-contrast-2",
+          "wrong": {
+            "text": "Three child are playing.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_4_singular_plural_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "Three children are playing.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_4_singular_plural_contrast_2_better.mp3"
+          },
+          "reasonZh": "child 的複數是不規則形式 children。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F0.4-singular-plural-bug-1",
+          "zh": "五支鉛筆",
+          "wrong": {
+            "text": "five pencil",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_4_singular_plural_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "five pencils",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_4_singular_plural_bug_1_better.mp3"
+          },
+          "reasonZh": "數字 five 後面要接複數可數名詞。",
+          "severity": "E1"
+        },
+        {
+          "id": "F0.4-singular-plural-bug-2",
+          "zh": "兩個盒子",
+          "wrong": {
+            "text": "two boxs",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_4_singular_plural_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "two boxes",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_4_singular_plural_bug_2_better.mp3"
+          },
+          "reasonZh": "box 以 x 結尾，複數加 -es。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "one fish",
+            "two fish",
+            "two fishes"
+          ],
+          "noteZh": "`fish` 常以 fish 作複數；fishes 通常強調不同種類。",
+          "dialect": "general"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F0.4-singular-plural-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I have one book.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f0_4_singular_plural_example_1.mp3"
+            },
+            {
+              "text": "I have two book.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_4_singular_plural_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Three child are playing.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_4_singular_plural_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F0.4-singular-plural-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「I have two book.」？",
+          "choices": [
+            {
+              "text": "I have two books.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f0_4_singular_plural_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "I have two book.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_4_singular_plural_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Three child are playing.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_4_singular_plural_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F0.4-singular-plural-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She has two books.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f0_4_singular_plural_example_2.mp3"
+            },
+            {
+              "text": "five pencil",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_4_singular_plural_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "two boxs",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_4_singular_plural_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F0.4-singular-plural-speaking",
+          "type": "speaking",
+          "prompt": "Say one sentence with a number and a plural noun.",
+          "promptAudio": "audio/grammar_db/content/f0_4_singular_plural_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "one + singular noun; two or more + plural noun"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F0.4-singular-plural-writing",
+          "type": "writing",
+          "prompt": "Write the plural forms of \"box\" and \"child\" in sentences.",
+          "promptAudio": "audio/grammar_db/content/f0_4_singular_plural_prompt_writing.mp3",
+          "expectedFeatures": [
+            "one + singular noun; two or more + plural noun"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F0.4-singular-plural-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "I have two book. Three child are playing.",
+        "audio": "audio/grammar_db/content/f0_4_singular_plural_revision.mp3",
+        "expectedCorrections": [
+          "I have two books.",
+          "Three children are playing."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F0.4-singular-plural-dialogue-1",
+            "speaker": "A",
+            "text": "How many books do you have?",
+            "audio": "audio/grammar_db/dialogue_lines/f0_4_singular_plural_dialogue_1.mp3"
+          },
+          {
+            "id": "F0.4-singular-plural-dialogue-2",
+            "speaker": "B",
+            "text": "I have three books.",
+            "audio": "audio/grammar_db/dialogue_lines/f0_4_singular_plural_dialogue_2.mp3"
+          },
+          {
+            "id": "F0.4-singular-plural-dialogue-3",
+            "speaker": "A",
+            "text": "How many boxes are on the table?",
+            "audio": "audio/grammar_db/dialogue_lines/f0_4_singular_plural_dialogue_3.mp3"
+          },
+          {
+            "id": "F0.4-singular-plural-dialogue-4",
+            "speaker": "B",
+            "text": "There is one box on the table.",
+            "audio": "audio/grammar_db/dialogue_lines/f0_4_singular_plural_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f0_4_singular_plural.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F0.5-a-an-sound",
+      "band": "F0",
+      "microLevel": 5,
+      "titleZh": "a / an 看聲音",
+      "titleEn": "Choosing A or An by Sound",
+      "communicativeGoalZh": "依下一個字的起始聲音選擇 a 或 an。",
+      "form": "a + consonant sound; an + vowel sound",
+      "prerequisites": [
+        "F0.4-singular-plural"
+      ],
+      "diagramRef": "a-an-sound",
+      "naturalExamples": [
+        {
+          "id": "F0.5-a-an-sound-example-1",
+          "text": "I have a red bag.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f0_5_a_an_sound_example_1.mp3"
+        },
+        {
+          "id": "F0.5-a-an-sound-example-2",
+          "text": "She eats an apple.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f0_5_a_an_sound_example_2.mp3"
+        },
+        {
+          "id": "F0.5-a-an-sound-example-3",
+          "text": "We waited for an hour.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f0_5_a_an_sound_example_3.mp3"
+        },
+        {
+          "id": "F0.5-a-an-sound-example-4",
+          "text": "This is a useful book.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f0_5_a_an_sound_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F0.5-a-an-sound-contrast-1",
+          "wrong": {
+            "text": "She has an bag.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_5_a_an_sound_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "She has a bag.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_5_a_an_sound_contrast_1_better.mp3"
+          },
+          "reasonZh": "bag 以子音聲音 /b/ 開始。"
+        },
+        {
+          "id": "F0.5-a-an-sound-contrast-2",
+          "wrong": {
+            "text": "We waited for a hour.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_5_a_an_sound_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We waited for an hour.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_5_a_an_sound_contrast_2_better.mp3"
+          },
+          "reasonZh": "hour 的 h 不發音，開頭是母音聲音。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F0.5-a-an-sound-bug-1",
+          "zh": "一所大學",
+          "wrong": {
+            "text": "an university",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_5_a_an_sound_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "a university",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_5_a_an_sound_bug_1_better.mp3"
+          },
+          "reasonZh": "university 開頭是 /j/ 子音聲音。",
+          "severity": "E1"
+        },
+        {
+          "id": "F0.5-a-an-sound-bug-2",
+          "zh": "一顆橘子",
+          "wrong": {
+            "text": "a orange",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f0_5_a_an_sound_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "an orange",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f0_5_a_an_sound_bug_2_better.mp3"
+          },
+          "reasonZh": "orange 開頭是母音聲音。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "an herb",
+            "a herb"
+          ],
+          "noteZh": "美式英語常不發 herb 的 h，所以用 an；英式英語通常發 h，所以用 a。",
+          "dialect": "US/UK"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F0.5-a-an-sound-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I have a red bag.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f0_5_a_an_sound_example_1.mp3"
+            },
+            {
+              "text": "She has an bag.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_5_a_an_sound_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We waited for a hour.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_5_a_an_sound_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F0.5-a-an-sound-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「She has an bag.」？",
+          "choices": [
+            {
+              "text": "She has a bag.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f0_5_a_an_sound_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "She has an bag.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_5_a_an_sound_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We waited for a hour.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_5_a_an_sound_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F0.5-a-an-sound-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She eats an apple.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f0_5_a_an_sound_example_2.mp3"
+            },
+            {
+              "text": "an university",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_5_a_an_sound_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "a orange",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f0_5_a_an_sound_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F0.5-a-an-sound-speaking",
+          "type": "speaking",
+          "prompt": "Say one noun phrase with \"a\" and one with \"an\".",
+          "promptAudio": "audio/grammar_db/content/f0_5_a_an_sound_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "a + consonant sound; an + vowel sound"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F0.5-a-an-sound-writing",
+          "type": "writing",
+          "prompt": "Write a sentence with \"an hour\".",
+          "promptAudio": "audio/grammar_db/content/f0_5_a_an_sound_prompt_writing.mp3",
+          "expectedFeatures": [
+            "a + consonant sound; an + vowel sound"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F0.5-a-an-sound-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "She has an bag. We waited for a hour.",
+        "audio": "audio/grammar_db/content/f0_5_a_an_sound_revision.mp3",
+        "expectedCorrections": [
+          "She has a bag.",
+          "We waited for an hour."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F0.5-a-an-sound-dialogue-1",
+            "speaker": "A",
+            "text": "Do we say \"a apple\"?",
+            "audio": "audio/grammar_db/dialogue_lines/f0_5_a_an_sound_dialogue_1.mp3"
+          },
+          {
+            "id": "F0.5-a-an-sound-dialogue-2",
+            "speaker": "B",
+            "text": "No. We say \"an apple\".",
+            "audio": "audio/grammar_db/dialogue_lines/f0_5_a_an_sound_dialogue_2.mp3"
+          },
+          {
+            "id": "F0.5-a-an-sound-dialogue-3",
+            "speaker": "A",
+            "text": "What about \"university\"?",
+            "audio": "audio/grammar_db/dialogue_lines/f0_5_a_an_sound_dialogue_3.mp3"
+          },
+          {
+            "id": "F0.5-a-an-sound-dialogue-4",
+            "speaker": "B",
+            "text": "We say \"a university\" because it starts with a /y/ sound.",
+            "audio": "audio/grammar_db/dialogue_lines/f0_5_a_an_sound_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f0_5_a_an_sound.mp3"
+      }
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grammar Diagram Gallery</title>
+  <style>
+    :root { color-scheme: light; font-family: "Segoe UI", "Noto Sans TC", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 32px; color: #18362d; background: #f4f1e8; }
+    h1 { margin: 0 0 8px; font-size: 32px; }
+    p { margin: 0 0 24px; color: #57665f; }
+    main { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+    figure { margin: 0; overflow: hidden; border: 1px solid #d5d0c4; border-radius: 18px; background: white; box-shadow: 0 5px 18px #18362d12; }
+    img { display: block; width: 100%; aspect-ratio: 760 / 440; object-fit: contain; background: #fffdf8; }
+    figcaption { padding: 12px 16px 14px; border-top: 1px solid #ece8df; font-weight: 650; }
+    @media (max-width: 840px) {
+      body { padding: 14px; }
+      main { grid-template-columns: 1fr; }
+      figure { overflow-x: auto; }
+      img { width: 760px; max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <h1>F0–F7 文法示意圖</h1>
+  <p>19 張 SVG 視覺 QA 總覽；圖中文字應清楚、無裁切、決策方向一致。</p>
+  <main>
+    <figure><img src="diagrams/sentence-slots.svg" alt="句子槽位圖"><figcaption>01 句子槽位圖</figcaption></figure>
+    <figure><img src="diagrams/noun-decision.svg" alt="名詞決策樹"><figcaption>02 名詞決策樹</figcaption></figure>
+    <figure><img src="diagrams/a-an-sound.svg" alt="a / an 聲音入口"><figcaption>03 a / an 聲音入口</figcaption></figure>
+    <figure><img src="diagrams/pronoun-positions.svg" alt="代名詞位置圖"><figcaption>04 代名詞位置圖</figcaption></figure>
+    <figure><img src="diagrams/predicate-routes.svg" alt="述語選擇圖"><figcaption>05 述語選擇圖</figcaption></figure>
+    <figure><img src="diagrams/question-routes.svg" alt="問句雙路線"><figcaption>06 問句雙路線</figcaption></figure>
+    <figure><img src="diagrams/tense-timeline.svg" alt="時態與時間關係"><figcaption>07 時態與時間關係</figcaption></figure>
+    <figure><img src="diagrams/frequency-position.svg" alt="頻率副詞位置"><figcaption>08 頻率副詞位置</figcaption></figure>
+    <figure><img src="diagrams/quantifier-matrix.svg" alt="數量詞矩陣"><figcaption>09 數量詞矩陣</figcaption></figure>
+    <figure><img src="diagrams/preposition-map.svg" alt="介系詞關係圖"><figcaption>10 介系詞關係圖</figcaption></figure>
+    <figure><img src="diagrams/connector-relations.svg" alt="連接詞關係圖"><figcaption>11 連接詞關係圖</figcaption></figure>
+    <figure><img src="diagrams/comparison-scale.svg" alt="比較刻度圖"><figcaption>12 比較刻度圖</figcaption></figure>
+    <figure><img src="diagrams/modal-strength.svg" alt="情態功能與強度"><figcaption>13 情態功能與強度</figcaption></figure>
+    <figure><img src="diagrams/relative-attachment.svg" alt="關係子句附著圖"><figcaption>14 關係子句附著圖</figcaption></figure>
+    <figure><img src="diagrams/active-passive-focus.svg" alt="主動與被動焦點"><figcaption>15 主動與被動焦點</figcaption></figure>
+    <figure><img src="diagrams/paragraph-cohesion.svg" alt="段落銜接圖"><figcaption>16 段落銜接圖</figcaption></figure>
+    <figure><img src="diagrams/register-scale.svg" alt="語體選擇刻度"><figcaption>17 語體選擇刻度</figcaption></figure>
+    <figure><img src="diagrams/punctuation-map.svg" alt="標點功能圖"><figcaption>18 標點功能圖</figcaption></figure>
+    <figure><img src="diagrams/revision-layers.svg" alt="自然度修訂層"><figcaption>19 自然度修訂層</figcaption></figure>
+  </main>
+</body>
+</html>

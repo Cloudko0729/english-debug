@@ -1,0 +1,1884 @@
+{
+  "schemaVersion": "1.0.0",
+  "band": "F2",
+  "nodes": [
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F2.1-present-simple",
+      "band": "F2",
+      "microLevel": 1,
+      "titleZh": "現在簡單式",
+      "titleEn": "Present Simple",
+      "communicativeGoalZh": "用現在簡單式表達習慣、反覆事件與一般事實。",
+      "form": "subject + base verb; he/she/it + verb-s",
+      "prerequisites": [
+        "F1.2-action-affirmative",
+        "F1.5-do-does"
+      ],
+      "diagramRef": "tense-timeline",
+      "naturalExamples": [
+        {
+          "id": "F2.1-present-simple-example-1",
+          "text": "I walk to school every day.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f2_1_present_simple_example_1.mp3"
+        },
+        {
+          "id": "F2.1-present-simple-example-2",
+          "text": "My brother plays soccer on Fridays.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f2_1_present_simple_example_2.mp3"
+        },
+        {
+          "id": "F2.1-present-simple-example-3",
+          "text": "Water boils at 100 degrees Celsius.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f2_1_present_simple_example_3.mp3"
+        },
+        {
+          "id": "F2.1-present-simple-example-4",
+          "text": "The library opens at nine.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f2_1_present_simple_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F2.1-present-simple-contrast-1",
+          "wrong": {
+            "text": "He walk to school every day.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_1_present_simple_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "He walks to school every day.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_1_present_simple_contrast_1_better.mp3"
+          },
+          "reasonZh": "第三人稱單數 he 的現在簡單式動詞通常加 -s。"
+        },
+        {
+          "id": "F2.1-present-simple-contrast-2",
+          "wrong": {
+            "text": "She is plays tennis on Fridays.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_1_present_simple_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "She plays tennis on Fridays.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_1_present_simple_contrast_2_better.mp3"
+          },
+          "reasonZh": "現在簡單式的一般動詞不和 is 這樣連用。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F2.1-present-simple-bug-1",
+          "zh": "我妹妹每天讀書。",
+          "wrong": {
+            "text": "My sister read every day.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_1_present_simple_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "My sister reads every day.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_1_present_simple_bug_1_better.mp3"
+          },
+          "reasonZh": "第三人稱單數 sister 要用 reads。",
+          "severity": "E1"
+        },
+        {
+          "id": "F2.1-present-simple-bug-2",
+          "zh": "太陽從東方升起。",
+          "wrong": {
+            "text": "The sun rise in the east.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_1_present_simple_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "The sun rises in the east.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_1_present_simple_bug_2_better.mp3"
+          },
+          "reasonZh": "一般事實使用現在簡單式，單數主詞加 -s。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F2.1-present-simple-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I walk to school every day.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f2_1_present_simple_example_1.mp3"
+            },
+            {
+              "text": "He walk to school every day.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_1_present_simple_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She is plays tennis on Fridays.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_1_present_simple_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F2.1-present-simple-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「He walk to school every day.」？",
+          "choices": [
+            {
+              "text": "He walks to school every day.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f2_1_present_simple_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "He walk to school every day.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_1_present_simple_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She is plays tennis on Fridays.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_1_present_simple_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F2.1-present-simple-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "My brother plays soccer on Fridays.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f2_1_present_simple_example_2.mp3"
+            },
+            {
+              "text": "My sister read every day.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_1_present_simple_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "The sun rise in the east.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_1_present_simple_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F2.1-present-simple-speaking",
+          "type": "speaking",
+          "prompt": "Describe one thing you do every day.",
+          "promptAudio": "audio/grammar_db/content/f2_1_present_simple_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "subject + base verb; he/she/it + verb-s"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F2.1-present-simple-writing",
+          "type": "writing",
+          "prompt": "Write one fact about an animal.",
+          "promptAudio": "audio/grammar_db/content/f2_1_present_simple_prompt_writing.mp3",
+          "expectedFeatures": [
+            "subject + base verb; he/she/it + verb-s"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F2.1-present-simple-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "He walk to school every day. She is plays tennis on Fridays.",
+        "audio": "audio/grammar_db/content/f2_1_present_simple_revision.mp3",
+        "expectedCorrections": [
+          "He walks to school every day.",
+          "She plays tennis on Fridays."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F2.1-present-simple-dialogue-1",
+            "speaker": "A",
+            "text": "What do you do every morning?",
+            "audio": "audio/grammar_db/dialogue_lines/f2_1_present_simple_dialogue_1.mp3"
+          },
+          {
+            "id": "F2.1-present-simple-dialogue-2",
+            "speaker": "B",
+            "text": "I eat breakfast and walk to school.",
+            "audio": "audio/grammar_db/dialogue_lines/f2_1_present_simple_dialogue_2.mp3"
+          },
+          {
+            "id": "F2.1-present-simple-dialogue-3",
+            "speaker": "A",
+            "text": "What does your brother do?",
+            "audio": "audio/grammar_db/dialogue_lines/f2_1_present_simple_dialogue_3.mp3"
+          },
+          {
+            "id": "F2.1-present-simple-dialogue-4",
+            "speaker": "B",
+            "text": "He takes the bus.",
+            "audio": "audio/grammar_db/dialogue_lines/f2_1_present_simple_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f2_1_present_simple.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F2.2-frequency-adverbs",
+      "band": "F2",
+      "microLevel": 2,
+      "titleZh": "頻率副詞的位置",
+      "titleEn": "Position of Frequency Adverbs",
+      "communicativeGoalZh": "把 always、usually、often、sometimes、never 放在自然的位置。",
+      "form": "before most verbs; after be",
+      "prerequisites": [
+        "F2.1-present-simple"
+      ],
+      "diagramRef": "frequency-position",
+      "naturalExamples": [
+        {
+          "id": "F2.2-frequency-adverbs-example-1",
+          "text": "I usually walk to school.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_example_1.mp3"
+        },
+        {
+          "id": "F2.2-frequency-adverbs-example-2",
+          "text": "She is often tired after practice.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_example_2.mp3"
+        },
+        {
+          "id": "F2.2-frequency-adverbs-example-3",
+          "text": "We never drink coffee at night.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_example_3.mp3"
+        },
+        {
+          "id": "F2.2-frequency-adverbs-example-4",
+          "text": "Sometimes, Dad cooks dinner.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F2.2-frequency-adverbs-contrast-1",
+          "wrong": {
+            "text": "I play usually soccer after school.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I usually play soccer after school.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_contrast_1_better.mp3"
+          },
+          "reasonZh": "頻率副詞通常放在一般動詞前。"
+        },
+        {
+          "id": "F2.2-frequency-adverbs-contrast-2",
+          "wrong": {
+            "text": "He always is late.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "He is always late.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_contrast_2_better.mp3"
+          },
+          "reasonZh": "頻率副詞通常放在 be 後；前者只在特殊強調時可能出現。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F2.2-frequency-adverbs-bug-1",
+          "zh": "我常常搭公車。",
+          "wrong": {
+            "text": "I take often the bus.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I often take the bus.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_bug_1_better.mp3"
+          },
+          "reasonZh": "often 放在主要動詞 take 前。",
+          "severity": "E1"
+        },
+        {
+          "id": "F2.2-frequency-adverbs-bug-2",
+          "zh": "她從不遲到。",
+          "wrong": {
+            "text": "She never is late.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "She is never late.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_bug_2_better.mp3"
+          },
+          "reasonZh": "be 句的 never 通常放在 is 後。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F2.2-frequency-adverbs-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I usually walk to school.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_example_1.mp3"
+            },
+            {
+              "text": "I play usually soccer after school.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "He always is late.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F2.2-frequency-adverbs-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「I play usually soccer after school.」？",
+          "choices": [
+            {
+              "text": "I usually play soccer after school.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "I play usually soccer after school.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "He always is late.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F2.2-frequency-adverbs-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She is often tired after practice.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_example_2.mp3"
+            },
+            {
+              "text": "I take often the bus.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She never is late.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F2.2-frequency-adverbs-speaking",
+          "type": "speaking",
+          "prompt": "Say one true sentence with \"usually\".",
+          "promptAudio": "audio/grammar_db/content/f2_2_frequency_adverbs_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "before most verbs; after be"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F2.2-frequency-adverbs-writing",
+          "type": "writing",
+          "prompt": "Write one sentence with \"never\" in a natural position.",
+          "promptAudio": "audio/grammar_db/content/f2_2_frequency_adverbs_prompt_writing.mp3",
+          "expectedFeatures": [
+            "before most verbs; after be"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F2.2-frequency-adverbs-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "I play usually soccer after school. He always is late.",
+        "audio": "audio/grammar_db/content/f2_2_frequency_adverbs_revision.mp3",
+        "expectedCorrections": [
+          "I usually play soccer after school.",
+          "He is always late."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F2.2-frequency-adverbs-dialogue-1",
+            "speaker": "A",
+            "text": "How often do you read?",
+            "audio": "audio/grammar_db/dialogue_lines/f2_2_frequency_adverbs_dialogue_1.mp3"
+          },
+          {
+            "id": "F2.2-frequency-adverbs-dialogue-2",
+            "speaker": "B",
+            "text": "I usually read before bed.",
+            "audio": "audio/grammar_db/dialogue_lines/f2_2_frequency_adverbs_dialogue_2.mp3"
+          },
+          {
+            "id": "F2.2-frequency-adverbs-dialogue-3",
+            "speaker": "A",
+            "text": "Is your brother ever late?",
+            "audio": "audio/grammar_db/dialogue_lines/f2_2_frequency_adverbs_dialogue_3.mp3"
+          },
+          {
+            "id": "F2.2-frequency-adverbs-dialogue-4",
+            "speaker": "B",
+            "text": "No, he is never late.",
+            "audio": "audio/grammar_db/dialogue_lines/f2_2_frequency_adverbs_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f2_2_frequency_adverbs.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F2.3-present-continuous",
+      "band": "F2",
+      "microLevel": 3,
+      "titleZh": "現在進行式",
+      "titleEn": "Present Continuous",
+      "communicativeGoalZh": "用 be + V-ing 表達現在正在發生或暫時進行的事。",
+      "form": "subject + am/is/are + verb-ing",
+      "prerequisites": [
+        "F0.2-be-agreement",
+        "F1.2-action-affirmative"
+      ],
+      "diagramRef": "tense-timeline",
+      "naturalExamples": [
+        {
+          "id": "F2.3-present-continuous-example-1",
+          "text": "I am reading now.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f2_3_present_continuous_example_1.mp3"
+        },
+        {
+          "id": "F2.3-present-continuous-example-2",
+          "text": "She is cooking dinner.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f2_3_present_continuous_example_2.mp3"
+        },
+        {
+          "id": "F2.3-present-continuous-example-3",
+          "text": "They are playing outside.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f2_3_present_continuous_example_3.mp3"
+        },
+        {
+          "id": "F2.3-present-continuous-example-4",
+          "text": "It is raining.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f2_3_present_continuous_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F2.3-present-continuous-contrast-1",
+          "wrong": {
+            "text": "I reading now.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_3_present_continuous_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I am reading now.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_3_present_continuous_contrast_1_better.mp3"
+          },
+          "reasonZh": "現在進行式需要完整的 be + V-ing。"
+        },
+        {
+          "id": "F2.3-present-continuous-contrast-2",
+          "wrong": {
+            "text": "She is cook dinner.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_3_present_continuous_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "She is cooking dinner.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_3_present_continuous_contrast_2_better.mp3"
+          },
+          "reasonZh": "be 後要接 V-ing，不接原形表示進行。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F2.3-present-continuous-bug-1",
+          "zh": "他現在正在跑步。",
+          "wrong": {
+            "text": "He running now.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_3_present_continuous_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "He is running now.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_3_present_continuous_bug_1_better.mp3"
+          },
+          "reasonZh": "不能省略 is。",
+          "severity": "E1"
+        },
+        {
+          "id": "F2.3-present-continuous-bug-2",
+          "zh": "我們正在吃午餐。",
+          "wrong": {
+            "text": "We are eat lunch.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_3_present_continuous_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We are eating lunch.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_3_present_continuous_bug_2_better.mp3"
+          },
+          "reasonZh": "are 後接 eating。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F2.3-present-continuous-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I am reading now.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f2_3_present_continuous_example_1.mp3"
+            },
+            {
+              "text": "I reading now.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_3_present_continuous_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She is cook dinner.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_3_present_continuous_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F2.3-present-continuous-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「I reading now.」？",
+          "choices": [
+            {
+              "text": "I am reading now.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f2_3_present_continuous_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "I reading now.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_3_present_continuous_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She is cook dinner.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_3_present_continuous_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F2.3-present-continuous-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She is cooking dinner.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f2_3_present_continuous_example_2.mp3"
+            },
+            {
+              "text": "He running now.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_3_present_continuous_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We are eat lunch.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_3_present_continuous_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F2.3-present-continuous-speaking",
+          "type": "speaking",
+          "prompt": "Say what you are doing right now.",
+          "promptAudio": "audio/grammar_db/content/f2_3_present_continuous_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "subject + am/is/are + verb-ing"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F2.3-present-continuous-writing",
+          "type": "writing",
+          "prompt": "Write one sentence about what another person is doing.",
+          "promptAudio": "audio/grammar_db/content/f2_3_present_continuous_prompt_writing.mp3",
+          "expectedFeatures": [
+            "subject + am/is/are + verb-ing"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F2.3-present-continuous-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "I reading now. She is cook dinner.",
+        "audio": "audio/grammar_db/content/f2_3_present_continuous_revision.mp3",
+        "expectedCorrections": [
+          "I am reading now.",
+          "She is cooking dinner."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F2.3-present-continuous-dialogue-1",
+            "speaker": "A",
+            "text": "What are you doing?",
+            "audio": "audio/grammar_db/dialogue_lines/f2_3_present_continuous_dialogue_1.mp3"
+          },
+          {
+            "id": "F2.3-present-continuous-dialogue-2",
+            "speaker": "B",
+            "text": "I am drawing a picture.",
+            "audio": "audio/grammar_db/dialogue_lines/f2_3_present_continuous_dialogue_2.mp3"
+          },
+          {
+            "id": "F2.3-present-continuous-dialogue-3",
+            "speaker": "A",
+            "text": "What is Leo doing?",
+            "audio": "audio/grammar_db/dialogue_lines/f2_3_present_continuous_dialogue_3.mp3"
+          },
+          {
+            "id": "F2.3-present-continuous-dialogue-4",
+            "speaker": "B",
+            "text": "He is reading by the window.",
+            "audio": "audio/grammar_db/dialogue_lines/f2_3_present_continuous_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f2_3_present_continuous.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F2.4-present-contrast",
+      "band": "F2",
+      "microLevel": 4,
+      "titleZh": "習慣與此刻",
+      "titleEn": "Present Simple versus Present Continuous",
+      "communicativeGoalZh": "依習慣、事實、此刻或暫時情況選擇現在簡單或進行式。",
+      "form": "routine/fact: present simple; now/temporary: present continuous",
+      "prerequisites": [
+        "F2.1-present-simple",
+        "F2.3-present-continuous"
+      ],
+      "diagramRef": "tense-timeline",
+      "naturalExamples": [
+        {
+          "id": "F2.4-present-contrast-example-1",
+          "text": "I brush my teeth every morning.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f2_4_present_contrast_example_1.mp3"
+        },
+        {
+          "id": "F2.4-present-contrast-example-2",
+          "text": "I am brushing my teeth now.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f2_4_present_contrast_example_2.mp3"
+        },
+        {
+          "id": "F2.4-present-contrast-example-3",
+          "text": "Amy usually walks to school.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f2_4_present_contrast_example_3.mp3"
+        },
+        {
+          "id": "F2.4-present-contrast-example-4",
+          "text": "Amy is taking the bus today.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f2_4_present_contrast_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F2.4-present-contrast-contrast-1",
+          "wrong": {
+            "text": "Look! The dog runs after the ball.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f2_4_present_contrast_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Look! The dog is running after the ball.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_4_present_contrast_contrast_1_better.mp3"
+          },
+          "reasonZh": "眼前正在發生的動作通常用現在進行式。"
+        },
+        {
+          "id": "F2.4-present-contrast-contrast-2",
+          "wrong": {
+            "text": "I am going to school by bus every day.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_4_present_contrast_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I go to school by bus every day.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_4_present_contrast_contrast_2_better.mp3"
+          },
+          "reasonZh": "固定習慣通常用現在簡單式；進行式會暗示暫時安排。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F2.4-present-contrast-bug-1",
+          "zh": "我通常七點起床。",
+          "wrong": {
+            "text": "I am usually getting up at seven.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_4_present_contrast_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I usually get up at seven.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_4_present_contrast_bug_1_better.mp3"
+          },
+          "reasonZh": "穩定習慣使用現在簡單式。",
+          "severity": "E1"
+        },
+        {
+          "id": "F2.4-present-contrast-bug-2",
+          "zh": "安靜！寶寶正在睡覺。",
+          "wrong": {
+            "text": "Be quiet! The baby sleeps.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_4_present_contrast_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "Be quiet! The baby is sleeping.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_4_present_contrast_bug_2_better.mp3"
+          },
+          "reasonZh": "此刻正在發生，用現在進行式。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F2.4-present-contrast-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I brush my teeth every morning.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f2_4_present_contrast_example_1.mp3"
+            },
+            {
+              "text": "Look! The dog runs after the ball.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f2_4_present_contrast_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I am going to school by bus every day.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_4_present_contrast_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F2.4-present-contrast-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「Look! The dog runs after the ball.」？",
+          "choices": [
+            {
+              "text": "Look! The dog is running after the ball.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f2_4_present_contrast_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "Look! The dog runs after the ball.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f2_4_present_contrast_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I am going to school by bus every day.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_4_present_contrast_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F2.4-present-contrast-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I am brushing my teeth now.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f2_4_present_contrast_example_2.mp3"
+            },
+            {
+              "text": "I am usually getting up at seven.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_4_present_contrast_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Be quiet! The baby sleeps.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_4_present_contrast_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F2.4-present-contrast-speaking",
+          "type": "speaking",
+          "prompt": "Contrast what you usually do with what you are doing today.",
+          "promptAudio": "audio/grammar_db/content/f2_4_present_contrast_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "routine/fact: present simple; now/temporary: present continuous"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F2.4-present-contrast-writing",
+          "type": "writing",
+          "prompt": "Write two sentences: one routine and one action happening now.",
+          "promptAudio": "audio/grammar_db/content/f2_4_present_contrast_prompt_writing.mp3",
+          "expectedFeatures": [
+            "routine/fact: present simple; now/temporary: present continuous"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F2.4-present-contrast-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "Look! The dog runs after the ball. I am going to school by bus every day.",
+        "audio": "audio/grammar_db/content/f2_4_present_contrast_revision.mp3",
+        "expectedCorrections": [
+          "Look! The dog is running after the ball.",
+          "I go to school by bus every day."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F2.4-present-contrast-dialogue-1",
+            "speaker": "A",
+            "text": "Do you usually walk to school?",
+            "audio": "audio/grammar_db/dialogue_lines/f2_4_present_contrast_dialogue_1.mp3"
+          },
+          {
+            "id": "F2.4-present-contrast-dialogue-2",
+            "speaker": "B",
+            "text": "Yes, but I am taking the bus today.",
+            "audio": "audio/grammar_db/dialogue_lines/f2_4_present_contrast_dialogue_2.mp3"
+          },
+          {
+            "id": "F2.4-present-contrast-dialogue-3",
+            "speaker": "A",
+            "text": "Why are you taking the bus?",
+            "audio": "audio/grammar_db/dialogue_lines/f2_4_present_contrast_dialogue_3.mp3"
+          },
+          {
+            "id": "F2.4-present-contrast-dialogue-4",
+            "speaker": "B",
+            "text": "It is raining right now.",
+            "audio": "audio/grammar_db/dialogue_lines/f2_4_present_contrast_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f2_4_present_contrast.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F2.5-stative-verbs",
+      "band": "F2",
+      "microLevel": 5,
+      "titleZh": "常見狀態動詞",
+      "titleEn": "Common Stative Verbs",
+      "communicativeGoalZh": "知道 like、want、know、need 等通常用簡單式表狀態。",
+      "form": "stative verb in simple form",
+      "prerequisites": [
+        "F2.4-present-contrast"
+      ],
+      "diagramRef": "tense-timeline",
+      "naturalExamples": [
+        {
+          "id": "F2.5-stative-verbs-example-1",
+          "text": "I like this song.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f2_5_stative_verbs_example_1.mp3"
+        },
+        {
+          "id": "F2.5-stative-verbs-example-2",
+          "text": "I know the answer.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f2_5_stative_verbs_example_2.mp3"
+        },
+        {
+          "id": "F2.5-stative-verbs-example-3",
+          "text": "She wants some water.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f2_5_stative_verbs_example_3.mp3"
+        },
+        {
+          "id": "F2.5-stative-verbs-example-4",
+          "text": "We need more time.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f2_5_stative_verbs_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F2.5-stative-verbs-contrast-1",
+          "wrong": {
+            "text": "I am knowing the answer.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_5_stative_verbs_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I know the answer.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_5_stative_verbs_contrast_1_better.mp3"
+          },
+          "reasonZh": "know 通常描述狀態，不使用進行式。"
+        },
+        {
+          "id": "F2.5-stative-verbs-contrast-2",
+          "wrong": {
+            "text": "She is wanting some water.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_5_stative_verbs_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "She wants some water.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_5_stative_verbs_contrast_2_better.mp3"
+          },
+          "reasonZh": "want 通常使用現在簡單式。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F2.5-stative-verbs-bug-1",
+          "zh": "我不懂。",
+          "wrong": {
+            "text": "I am not understanding.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_5_stative_verbs_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I don't understand.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_5_stative_verbs_bug_1_better.mp3"
+          },
+          "reasonZh": "understand 通常作狀態動詞。",
+          "severity": "E1"
+        },
+        {
+          "id": "F2.5-stative-verbs-bug-2",
+          "zh": "他需要幫忙。",
+          "wrong": {
+            "text": "He is needing help.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_5_stative_verbs_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "He needs help.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_5_stative_verbs_bug_2_better.mp3"
+          },
+          "reasonZh": "need 通常不用進行式。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "I love it.",
+            "I'm loving it."
+          ],
+          "noteZh": "進行式可在廣告或特殊語境強調暫時感受，但不是基礎預設用法。",
+          "dialect": "general"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F2.5-stative-verbs-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I like this song.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f2_5_stative_verbs_example_1.mp3"
+            },
+            {
+              "text": "I am knowing the answer.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_5_stative_verbs_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She is wanting some water.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_5_stative_verbs_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F2.5-stative-verbs-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「I am knowing the answer.」？",
+          "choices": [
+            {
+              "text": "I know the answer.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f2_5_stative_verbs_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "I am knowing the answer.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_5_stative_verbs_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "She is wanting some water.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_5_stative_verbs_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F2.5-stative-verbs-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I know the answer.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f2_5_stative_verbs_example_2.mp3"
+            },
+            {
+              "text": "I am not understanding.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_5_stative_verbs_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "He is needing help.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_5_stative_verbs_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F2.5-stative-verbs-speaking",
+          "type": "speaking",
+          "prompt": "Say one sentence with \"know\" or \"need\".",
+          "promptAudio": "audio/grammar_db/content/f2_5_stative_verbs_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "stative verb in simple form"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F2.5-stative-verbs-writing",
+          "type": "writing",
+          "prompt": "Write one sentence with a stative verb in the present simple.",
+          "promptAudio": "audio/grammar_db/content/f2_5_stative_verbs_prompt_writing.mp3",
+          "expectedFeatures": [
+            "stative verb in simple form"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F2.5-stative-verbs-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "I am knowing the answer. She is wanting some water.",
+        "audio": "audio/grammar_db/content/f2_5_stative_verbs_revision.mp3",
+        "expectedCorrections": [
+          "I know the answer.",
+          "She wants some water."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F2.5-stative-verbs-dialogue-1",
+            "speaker": "A",
+            "text": "Do you know the answer?",
+            "audio": "audio/grammar_db/dialogue_lines/f2_5_stative_verbs_dialogue_1.mp3"
+          },
+          {
+            "id": "F2.5-stative-verbs-dialogue-2",
+            "speaker": "B",
+            "text": "No, but I understand the question.",
+            "audio": "audio/grammar_db/dialogue_lines/f2_5_stative_verbs_dialogue_2.mp3"
+          },
+          {
+            "id": "F2.5-stative-verbs-dialogue-3",
+            "speaker": "A",
+            "text": "Do you need help?",
+            "audio": "audio/grammar_db/dialogue_lines/f2_5_stative_verbs_dialogue_3.mp3"
+          },
+          {
+            "id": "F2.5-stative-verbs-dialogue-4",
+            "speaker": "B",
+            "text": "Yes, I need a little help.",
+            "audio": "audio/grammar_db/dialogue_lines/f2_5_stative_verbs_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f2_5_stative_verbs.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F2.6-pronoun-case",
+      "band": "F2",
+      "microLevel": 6,
+      "titleZh": "主格、受格與所有格",
+      "titleEn": "Pronoun Case and Possessives",
+      "communicativeGoalZh": "依代名詞在句中的位置選擇 I/me/my/mine 等形式。",
+      "form": "subject / object / possessive determiner / possessive pronoun",
+      "prerequisites": [
+        "F1.1-subject-pronouns",
+        "F1.2-action-affirmative"
+      ],
+      "diagramRef": "pronoun-positions",
+      "naturalExamples": [
+        {
+          "id": "F2.6-pronoun-case-example-1",
+          "text": "She helps me.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f2_6_pronoun_case_example_1.mp3"
+        },
+        {
+          "id": "F2.6-pronoun-case-example-2",
+          "text": "This is my bag.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f2_6_pronoun_case_example_2.mp3"
+        },
+        {
+          "id": "F2.6-pronoun-case-example-3",
+          "text": "This bag is mine.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f2_6_pronoun_case_example_3.mp3"
+        },
+        {
+          "id": "F2.6-pronoun-case-example-4",
+          "text": "They gave us their map.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f2_6_pronoun_case_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F2.6-pronoun-case-contrast-1",
+          "wrong": {
+            "text": "The teacher helps I.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_6_pronoun_case_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "The teacher helps me.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_6_pronoun_case_contrast_1_better.mp3"
+          },
+          "reasonZh": "動詞 helps 後面的受詞使用 me。"
+        },
+        {
+          "id": "F2.6-pronoun-case-contrast-2",
+          "wrong": {
+            "text": "This is mine book.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_6_pronoun_case_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "This is my book.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_6_pronoun_case_contrast_2_better.mp3"
+          },
+          "reasonZh": "名詞 book 前用 my；mine 後面不接名詞。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F2.6-pronoun-case-bug-1",
+          "zh": "請看我。",
+          "wrong": {
+            "text": "Please look at I.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_6_pronoun_case_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Please look at me.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_6_pronoun_case_bug_1_better.mp3"
+          },
+          "reasonZh": "介系詞 at 後使用受格 me。",
+          "severity": "E1"
+        },
+        {
+          "id": "F2.6-pronoun-case-bug-2",
+          "zh": "這支筆是她的。",
+          "wrong": {
+            "text": "This pen is her.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_6_pronoun_case_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "This pen is hers.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_6_pronoun_case_bug_2_better.mp3"
+          },
+          "reasonZh": "句尾不接名詞時用 hers。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F2.6-pronoun-case-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She helps me.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f2_6_pronoun_case_example_1.mp3"
+            },
+            {
+              "text": "The teacher helps I.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_6_pronoun_case_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "This is mine book.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_6_pronoun_case_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F2.6-pronoun-case-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「The teacher helps I.」？",
+          "choices": [
+            {
+              "text": "The teacher helps me.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f2_6_pronoun_case_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "The teacher helps I.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_6_pronoun_case_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "This is mine book.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_6_pronoun_case_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F2.6-pronoun-case-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "This is my bag.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f2_6_pronoun_case_example_2.mp3"
+            },
+            {
+              "text": "Please look at I.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_6_pronoun_case_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "This pen is her.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_6_pronoun_case_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F2.6-pronoun-case-speaking",
+          "type": "speaking",
+          "prompt": "Say who helps you using an object pronoun.",
+          "promptAudio": "audio/grammar_db/content/f2_6_pronoun_case_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "subject / object / possessive determiner / possessive pronoun"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F2.6-pronoun-case-writing",
+          "type": "writing",
+          "prompt": "Write one sentence with \"my\" and one with \"mine\".",
+          "promptAudio": "audio/grammar_db/content/f2_6_pronoun_case_prompt_writing.mp3",
+          "expectedFeatures": [
+            "subject / object / possessive determiner / possessive pronoun"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F2.6-pronoun-case-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "The teacher helps I. This is mine book.",
+        "audio": "audio/grammar_db/content/f2_6_pronoun_case_revision.mp3",
+        "expectedCorrections": [
+          "The teacher helps me.",
+          "This is my book."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F2.6-pronoun-case-dialogue-1",
+            "speaker": "A",
+            "text": "Is this your pencil?",
+            "audio": "audio/grammar_db/dialogue_lines/f2_6_pronoun_case_dialogue_1.mp3"
+          },
+          {
+            "id": "F2.6-pronoun-case-dialogue-2",
+            "speaker": "B",
+            "text": "No, mine is blue.",
+            "audio": "audio/grammar_db/dialogue_lines/f2_6_pronoun_case_dialogue_2.mp3"
+          },
+          {
+            "id": "F2.6-pronoun-case-dialogue-3",
+            "speaker": "A",
+            "text": "Does this one belong to Amy?",
+            "audio": "audio/grammar_db/dialogue_lines/f2_6_pronoun_case_dialogue_3.mp3"
+          },
+          {
+            "id": "F2.6-pronoun-case-dialogue-4",
+            "speaker": "B",
+            "text": "Yes, it is hers.",
+            "audio": "audio/grammar_db/dialogue_lines/f2_6_pronoun_case_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f2_6_pronoun_case.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F2.7-there-count-quantity",
+      "band": "F2",
+      "microLevel": 7,
+      "titleZh": "there is/are 與基本數量",
+      "titleEn": "There Is/Are, Countability, and Basic Quantity",
+      "communicativeGoalZh": "描述存在，並搭配單複數、some 與 any。",
+      "form": "there is + singular/uncountable; there are + plural",
+      "prerequisites": [
+        "F0.4-singular-plural",
+        "F1.4-be-questions-negatives"
+      ],
+      "diagramRef": "quantifier-matrix",
+      "naturalExamples": [
+        {
+          "id": "F2.7-there-count-quantity-example-1",
+          "text": "There is a book on the desk.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f2_7_there_count_quantity_example_1.mp3"
+        },
+        {
+          "id": "F2.7-there-count-quantity-example-2",
+          "text": "There are three books on the desk.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f2_7_there_count_quantity_example_2.mp3"
+        },
+        {
+          "id": "F2.7-there-count-quantity-example-3",
+          "text": "There is some water in the bottle.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f2_7_there_count_quantity_example_3.mp3"
+        },
+        {
+          "id": "F2.7-there-count-quantity-example-4",
+          "text": "Are there any questions?",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f2_7_there_count_quantity_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F2.7-there-count-quantity-contrast-1",
+          "wrong": {
+            "text": "There have a park near my house.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_7_there_count_quantity_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "There is a park near my house.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_7_there_count_quantity_contrast_1_better.mp3"
+          },
+          "reasonZh": "英文存在句使用 there is，不直翻中文的「有」成 have。"
+        },
+        {
+          "id": "F2.7-there-count-quantity-contrast-2",
+          "wrong": {
+            "text": "There is three apples.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_7_there_count_quantity_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "There are three apples.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_7_there_count_quantity_contrast_2_better.mp3"
+          },
+          "reasonZh": "複數 apples 搭配 are。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F2.7-there-count-quantity-bug-1",
+          "zh": "冰箱裡有一些牛奶。",
+          "wrong": {
+            "text": "There are some milk in the fridge.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_7_there_count_quantity_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "There is some milk in the fridge.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_7_there_count_quantity_bug_1_better.mp3"
+          },
+          "reasonZh": "milk 是不可數名詞，搭配 is。",
+          "severity": "E1"
+        },
+        {
+          "id": "F2.7-there-count-quantity-bug-2",
+          "zh": "沒有任何問題。",
+          "wrong": {
+            "text": "There aren't some questions.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f2_7_there_count_quantity_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "There aren't any questions.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f2_7_there_count_quantity_bug_2_better.mp3"
+          },
+          "reasonZh": "一般否定句常使用 any。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "There are two people outside.",
+            "There's two people outside."
+          ],
+          "noteZh": "口語常聽到 there's + 複數；正式學習與寫作使用 there are。",
+          "dialect": "general"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F2.7-there-count-quantity-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "There is a book on the desk.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f2_7_there_count_quantity_example_1.mp3"
+            },
+            {
+              "text": "There have a park near my house.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_7_there_count_quantity_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "There is three apples.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_7_there_count_quantity_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F2.7-there-count-quantity-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「There have a park near my house.」？",
+          "choices": [
+            {
+              "text": "There is a park near my house.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f2_7_there_count_quantity_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "There have a park near my house.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_7_there_count_quantity_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "There is three apples.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_7_there_count_quantity_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F2.7-there-count-quantity-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "There are three books on the desk.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f2_7_there_count_quantity_example_2.mp3"
+            },
+            {
+              "text": "There are some milk in the fridge.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_7_there_count_quantity_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "There aren't some questions.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f2_7_there_count_quantity_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F2.7-there-count-quantity-speaking",
+          "type": "speaking",
+          "prompt": "Describe one thing that is in your room.",
+          "promptAudio": "audio/grammar_db/content/f2_7_there_count_quantity_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "there is + singular/uncountable; there are + plural"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F2.7-there-count-quantity-writing",
+          "type": "writing",
+          "prompt": "Write a sentence with \"There are\" and a number.",
+          "promptAudio": "audio/grammar_db/content/f2_7_there_count_quantity_prompt_writing.mp3",
+          "expectedFeatures": [
+            "there is + singular/uncountable; there are + plural"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F2.7-there-count-quantity-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "There have a park near my house. There is three apples.",
+        "audio": "audio/grammar_db/content/f2_7_there_count_quantity_revision.mp3",
+        "expectedCorrections": [
+          "There is a park near my house.",
+          "There are three apples."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F2.7-there-count-quantity-dialogue-1",
+            "speaker": "A",
+            "text": "Is there any juice?",
+            "audio": "audio/grammar_db/dialogue_lines/f2_7_there_count_quantity_dialogue_1.mp3"
+          },
+          {
+            "id": "F2.7-there-count-quantity-dialogue-2",
+            "speaker": "B",
+            "text": "Yes, there is some juice in the fridge.",
+            "audio": "audio/grammar_db/dialogue_lines/f2_7_there_count_quantity_dialogue_2.mp3"
+          },
+          {
+            "id": "F2.7-there-count-quantity-dialogue-3",
+            "speaker": "A",
+            "text": "Are there any cups?",
+            "audio": "audio/grammar_db/dialogue_lines/f2_7_there_count_quantity_dialogue_3.mp3"
+          },
+          {
+            "id": "F2.7-there-count-quantity-dialogue-4",
+            "speaker": "B",
+            "text": "Yes, there are four cups on the table.",
+            "audio": "audio/grammar_db/dialogue_lines/f2_7_there_count_quantity_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f2_7_there_count_quantity.mp3"
+      }
+    }
+  ]
+}

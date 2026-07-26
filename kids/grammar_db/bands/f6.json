@@ -1,0 +1,1612 @@
+{
+  "schemaVersion": "1.0.0",
+  "band": "F6",
+  "nodes": [
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F6.1-tense-choice",
+      "band": "F6",
+      "microLevel": 1,
+      "titleZh": "跨句時態選擇",
+      "titleEn": "Tense Choice Across Sentences",
+      "communicativeGoalZh": "依事件時間、背景與目前關聯，在短文中維持清楚一致的時態。",
+      "form": "choose tense from communicative timeline, not one keyword",
+      "prerequisites": [
+        "F4.1-past-continuous",
+        "F5.3-perfect-vs-past"
+      ],
+      "diagramRef": "tense-timeline",
+      "naturalExamples": [
+        {
+          "id": "F6.1-tense-choice-example-1",
+          "text": "I was walking home when I found the key.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f6_1_tense_choice_example_1.mp3"
+        },
+        {
+          "id": "F6.1-tense-choice-example-2",
+          "text": "We have kept the key since that day.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f6_1_tense_choice_example_2.mp3"
+        },
+        {
+          "id": "F6.1-tense-choice-example-3",
+          "text": "The box was locked, so we asked a teacher for help.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f6_1_tense_choice_example_3.mp3"
+        },
+        {
+          "id": "F6.1-tense-choice-example-4",
+          "text": "Now we are studying the map inside it.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f6_1_tense_choice_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F6.1-tense-choice-contrast-1",
+          "wrong": {
+            "text": "Yesterday we find a key and now we kept it.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_1_tense_choice_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Yesterday we found a key, and we have kept it since then.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_1_tense_choice_contrast_1_better.mp3"
+          },
+          "reasonZh": "已結束事件用 found；從過去持續到現在用 have kept。"
+        },
+        {
+          "id": "F6.1-tense-choice-contrast-2",
+          "wrong": {
+            "text": "I was opening the box, and I saw an old map inside.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f6_1_tense_choice_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I opened the box and saw an old map inside.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_1_tense_choice_contrast_2_better.mp3"
+          },
+          "reasonZh": "兩個依序完成的主要事件通常都用過去簡單式。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F6.1-tense-choice-bug-1",
+          "zh": "我正在回家時開始下雨，所以我跑到商店。",
+          "wrong": {
+            "text": "I walked home when it was starting to rain, so I run to a store.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_1_tense_choice_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I was walking home when it started to rain, so I ran to a store.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_1_tense_choice_bug_1_better.mp3"
+          },
+          "reasonZh": "背景動作用過去進行，短事件與後續事件用過去簡單式。",
+          "severity": "E0"
+        },
+        {
+          "id": "F6.1-tense-choice-bug-2",
+          "zh": "我們從星期一起就在做這份報告。",
+          "wrong": {
+            "text": "We worked on this report since Monday.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_1_tense_choice_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We have worked on this report since Monday.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_1_tense_choice_bug_2_better.mp3"
+          },
+          "reasonZh": "since Monday 連到現在時使用現在完成式。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F6.1-tense-choice-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I was walking home when I found the key.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f6_1_tense_choice_example_1.mp3"
+            },
+            {
+              "text": "Yesterday we find a key and now we kept it.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_1_tense_choice_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I was opening the box, and I saw an old map inside.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f6_1_tense_choice_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F6.1-tense-choice-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「Yesterday we find a key and now we kept it.」？",
+          "choices": [
+            {
+              "text": "Yesterday we found a key, and we have kept it since then.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f6_1_tense_choice_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "Yesterday we find a key and now we kept it.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_1_tense_choice_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I was opening the box, and I saw an old map inside.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f6_1_tense_choice_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F6.1-tense-choice-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "We have kept the key since that day.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f6_1_tense_choice_example_2.mp3"
+            },
+            {
+              "text": "I walked home when it was starting to rain, so I run to a store.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_1_tense_choice_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We worked on this report since Monday.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_1_tense_choice_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F6.1-tense-choice-speaking",
+          "type": "speaking",
+          "prompt": "Tell a short story with a background action and a main event.",
+          "promptAudio": "audio/grammar_db/content/f6_1_tense_choice_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "choose tense from communicative timeline, not one keyword"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F6.1-tense-choice-writing",
+          "type": "writing",
+          "prompt": "Write three connected sentences using past and present perfect clearly.",
+          "promptAudio": "audio/grammar_db/content/f6_1_tense_choice_prompt_writing.mp3",
+          "expectedFeatures": [
+            "choose tense from communicative timeline, not one keyword"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F6.1-tense-choice-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "Yesterday we find a key and now we kept it. I was opening the box, and I saw an old map inside.",
+        "audio": "audio/grammar_db/content/f6_1_tense_choice_revision.mp3",
+        "expectedCorrections": [
+          "Yesterday we found a key, and we have kept it since then.",
+          "I opened the box and saw an old map inside."
+        ],
+        "severityTargets": [
+          "E0",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F6.1-tense-choice-dialogue-1",
+            "speaker": "A",
+            "text": "How did you find the old map?",
+            "audio": "audio/grammar_db/dialogue_lines/f6_1_tense_choice_dialogue_1.mp3"
+          },
+          {
+            "id": "F6.1-tense-choice-dialogue-2",
+            "speaker": "B",
+            "text": "I was cleaning a shelf when a box fell open.",
+            "audio": "audio/grammar_db/dialogue_lines/f6_1_tense_choice_dialogue_2.mp3"
+          },
+          {
+            "id": "F6.1-tense-choice-dialogue-3",
+            "speaker": "A",
+            "text": "What have you done since then?",
+            "audio": "audio/grammar_db/dialogue_lines/f6_1_tense_choice_dialogue_3.mp3"
+          },
+          {
+            "id": "F6.1-tense-choice-dialogue-4",
+            "speaker": "B",
+            "text": "I have compared the map with two newer maps.",
+            "audio": "audio/grammar_db/dialogue_lines/f6_1_tense_choice_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f6_1_tense_choice.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F6.2-passive-process",
+      "band": "F6",
+      "microLevel": 2,
+      "titleZh": "流程被動與資訊焦點",
+      "titleEn": "Passive Voice for Processes and Focus",
+      "communicativeGoalZh": "在做事者未知、不重要或流程本身較重要時使用被動。",
+      "form": "be + past participle; optional by-agent",
+      "prerequisites": [
+        "F0.2-be-agreement",
+        "F3.2-past-simple"
+      ],
+      "diagramRef": "active-passive-focus",
+      "naturalExamples": [
+        {
+          "id": "F6.2-passive-process-example-1",
+          "text": "The bottles are washed before they are reused.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f6_2_passive_process_example_1.mp3"
+        },
+        {
+          "id": "F6.2-passive-process-example-2",
+          "text": "The bridge was built in 1998.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f6_2_passive_process_example_2.mp3"
+        },
+        {
+          "id": "F6.2-passive-process-example-3",
+          "text": "The results are checked by two students.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f6_2_passive_process_example_3.mp3"
+        },
+        {
+          "id": "F6.2-passive-process-example-4",
+          "text": "This material can be recycled.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f6_2_passive_process_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F6.2-passive-process-contrast-1",
+          "wrong": {
+            "text": "The bottles are wash before reuse.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_2_passive_process_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "The bottles are washed before reuse.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_2_passive_process_contrast_1_better.mp3"
+          },
+          "reasonZh": "被動使用 be + 過去分詞 washed。"
+        },
+        {
+          "id": "F6.2-passive-process-contrast-2",
+          "wrong": {
+            "text": "The bridge was build in 1998.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_2_passive_process_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "The bridge was built in 1998.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_2_passive_process_contrast_2_better.mp3"
+          },
+          "reasonZh": "build 的過去分詞是不規則形式 built。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F6.2-passive-process-bug-1",
+          "zh": "紙張在工廠被分類。",
+          "wrong": {
+            "text": "The paper is sort at the factory.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_2_passive_process_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "The paper is sorted at the factory.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_2_passive_process_bug_1_better.mp3"
+          },
+          "reasonZh": "is 後接過去分詞 sorted。",
+          "severity": "E1"
+        },
+        {
+          "id": "F6.2-passive-process-bug-2",
+          "zh": "學生每天使用這台機器。",
+          "wrong": {
+            "text": "This machine is used by students every day.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f6_2_passive_process_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "Students use this machine every day.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_2_passive_process_bug_2_better.mp3"
+          },
+          "reasonZh": "若做事者 students 是句子重點，主動句通常更直接自然。",
+          "severity": "E2"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [
+        "被動不是較正式就一定較好；是否使用取決於資訊焦點。"
+      ],
+      "diagnostics": [
+        {
+          "id": "F6.2-passive-process-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The bottles are washed before they are reused.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f6_2_passive_process_example_1.mp3"
+            },
+            {
+              "text": "The bottles are wash before reuse.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_2_passive_process_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "The bridge was build in 1998.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_2_passive_process_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F6.2-passive-process-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「The bottles are wash before reuse.」？",
+          "choices": [
+            {
+              "text": "The bottles are washed before reuse.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f6_2_passive_process_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "The bottles are wash before reuse.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_2_passive_process_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "The bridge was build in 1998.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_2_passive_process_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F6.2-passive-process-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The bridge was built in 1998.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f6_2_passive_process_example_2.mp3"
+            },
+            {
+              "text": "The paper is sort at the factory.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_2_passive_process_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "This machine is used by students every day.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f6_2_passive_process_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F6.2-passive-process-speaking",
+          "type": "speaking",
+          "prompt": "Explain one process step with the passive voice.",
+          "promptAudio": "audio/grammar_db/content/f6_2_passive_process_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "be + past participle; optional by-agent"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F6.2-passive-process-writing",
+          "type": "writing",
+          "prompt": "Rewrite an active process sentence to focus on the product.",
+          "promptAudio": "audio/grammar_db/content/f6_2_passive_process_prompt_writing.mp3",
+          "expectedFeatures": [
+            "be + past participle; optional by-agent"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F6.2-passive-process-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "The bottles are wash before reuse. The bridge was build in 1998.",
+        "audio": "audio/grammar_db/content/f6_2_passive_process_revision.mp3",
+        "expectedCorrections": [
+          "The bottles are washed before reuse.",
+          "The bridge was built in 1998."
+        ],
+        "severityTargets": [
+          "E1",
+          "E2"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F6.2-passive-process-dialogue-1",
+            "speaker": "A",
+            "text": "How is the water cleaned?",
+            "audio": "audio/grammar_db/dialogue_lines/f6_2_passive_process_dialogue_1.mp3"
+          },
+          {
+            "id": "F6.2-passive-process-dialogue-2",
+            "speaker": "B",
+            "text": "First, it is filtered through sand.",
+            "audio": "audio/grammar_db/dialogue_lines/f6_2_passive_process_dialogue_2.mp3"
+          },
+          {
+            "id": "F6.2-passive-process-dialogue-3",
+            "speaker": "A",
+            "text": "What happens next?",
+            "audio": "audio/grammar_db/dialogue_lines/f6_2_passive_process_dialogue_3.mp3"
+          },
+          {
+            "id": "F6.2-passive-process-dialogue-4",
+            "speaker": "B",
+            "text": "Then it is tested before it is stored.",
+            "audio": "audio/grammar_db/dialogue_lines/f6_2_passive_process_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f6_2_passive_process.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F6.3-future-forms",
+      "band": "F6",
+      "microLevel": 3,
+      "titleZh": "未來形式的細微差異",
+      "titleEn": "Nuance among Future Forms",
+      "communicativeGoalZh": "區分時刻表、已安排活動、意圖計畫與即時決定或預測。",
+      "form": "present simple schedule; present continuous arrangement; going to plan/evidence; will decision/prediction",
+      "prerequisites": [
+        "F2.3-present-continuous",
+        "F3.6-basic-helpers"
+      ],
+      "diagramRef": "tense-timeline",
+      "naturalExamples": [
+        {
+          "id": "F6.3-future-forms-example-1",
+          "text": "The train leaves at six tomorrow.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f6_3_future_forms_example_1.mp3"
+        },
+        {
+          "id": "F6.3-future-forms-example-2",
+          "text": "I am meeting Ms. Lee after school.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f6_3_future_forms_example_2.mp3"
+        },
+        {
+          "id": "F6.3-future-forms-example-3",
+          "text": "We are going to build a model.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f6_3_future_forms_example_3.mp3"
+        },
+        {
+          "id": "F6.3-future-forms-example-4",
+          "text": "I think the plan will work.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f6_3_future_forms_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F6.3-future-forms-contrast-1",
+          "wrong": {
+            "text": "I will meeting Ms. Lee tomorrow.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_3_future_forms_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I am meeting Ms. Lee tomorrow.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_3_future_forms_contrast_1_better.mp3"
+          },
+          "reasonZh": "已安排的會面可用現在進行式；will 後也不能接 meeting。"
+        },
+        {
+          "id": "F6.3-future-forms-contrast-2",
+          "wrong": {
+            "text": "Look at those clouds. It will rain.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f6_3_future_forms_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "Look at those clouds. It is going to rain.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_3_future_forms_contrast_2_better.mp3"
+          },
+          "reasonZh": "根據眼前跡象的預測，going to 通常較自然。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F6.3-future-forms-bug-1",
+          "zh": "公車明天早上七點出發。",
+          "wrong": {
+            "text": "The bus will leaves at seven tomorrow.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_3_future_forms_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "The bus leaves at seven tomorrow.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_3_future_forms_bug_1_better.mp3"
+          },
+          "reasonZh": "固定時刻表可用現在簡單式；will 後也不能加 -s。",
+          "severity": "E1"
+        },
+        {
+          "id": "F6.3-future-forms-bug-2",
+          "zh": "電話響了，我來接。",
+          "wrong": {
+            "text": "The phone is ringing. I am going to answer it.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f6_3_future_forms_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "The phone is ringing. I will answer it.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_3_future_forms_bug_2_better.mp3"
+          },
+          "reasonZh": "說話當下的即時決定常使用 will。",
+          "severity": "E2"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F6.3-future-forms-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The train leaves at six tomorrow.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f6_3_future_forms_example_1.mp3"
+            },
+            {
+              "text": "I will meeting Ms. Lee tomorrow.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_3_future_forms_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Look at those clouds. It will rain.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f6_3_future_forms_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F6.3-future-forms-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「I will meeting Ms. Lee tomorrow.」？",
+          "choices": [
+            {
+              "text": "I am meeting Ms. Lee tomorrow.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f6_3_future_forms_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "I will meeting Ms. Lee tomorrow.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_3_future_forms_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Look at those clouds. It will rain.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f6_3_future_forms_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F6.3-future-forms-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I am meeting Ms. Lee after school.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f6_3_future_forms_example_2.mp3"
+            },
+            {
+              "text": "The bus will leaves at seven tomorrow.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_3_future_forms_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "The phone is ringing. I am going to answer it.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f6_3_future_forms_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F6.3-future-forms-speaking",
+          "type": "speaking",
+          "prompt": "Describe one arrangement and one plan.",
+          "promptAudio": "audio/grammar_db/content/f6_3_future_forms_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "present simple schedule; present continuous arrangement; going to plan/evidence; will decision/prediction"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F6.3-future-forms-writing",
+          "type": "writing",
+          "prompt": "Write a schedule sentence and a prediction sentence.",
+          "promptAudio": "audio/grammar_db/content/f6_3_future_forms_prompt_writing.mp3",
+          "expectedFeatures": [
+            "present simple schedule; present continuous arrangement; going to plan/evidence; will decision/prediction"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F6.3-future-forms-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "I will meeting Ms. Lee tomorrow. Look at those clouds. It will rain.",
+        "audio": "audio/grammar_db/content/f6_3_future_forms_revision.mp3",
+        "expectedCorrections": [
+          "I am meeting Ms. Lee tomorrow.",
+          "Look at those clouds. It is going to rain."
+        ],
+        "severityTargets": [
+          "E1",
+          "E2"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F6.3-future-forms-dialogue-1",
+            "speaker": "A",
+            "text": "What are you doing after school?",
+            "audio": "audio/grammar_db/dialogue_lines/f6_3_future_forms_dialogue_1.mp3"
+          },
+          {
+            "id": "F6.3-future-forms-dialogue-2",
+            "speaker": "B",
+            "text": "I am meeting our science teacher.",
+            "audio": "audio/grammar_db/dialogue_lines/f6_3_future_forms_dialogue_2.mp3"
+          },
+          {
+            "id": "F6.3-future-forms-dialogue-3",
+            "speaker": "A",
+            "text": "What are you going to discuss?",
+            "audio": "audio/grammar_db/dialogue_lines/f6_3_future_forms_dialogue_3.mp3"
+          },
+          {
+            "id": "F6.3-future-forms-dialogue-4",
+            "speaker": "B",
+            "text": "We are going to plan the final presentation.",
+            "audio": "audio/grammar_db/dialogue_lines/f6_3_future_forms_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f6_3_future_forms.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F6.4-expanded-noun-phrases",
+      "band": "F6",
+      "microLevel": 4,
+      "titleZh": "擴展名詞片語",
+      "titleEn": "Expanded Noun Phrases",
+      "communicativeGoalZh": "用有順序的形容詞、介系詞片語或子句精確描述名詞。",
+      "form": "determiner + ordered modifiers + noun + postmodifier",
+      "prerequisites": [
+        "F4.2-adjectives-adverbs",
+        "F5.5-relative-basic"
+      ],
+      "diagramRef": "noun-decision",
+      "naturalExamples": [
+        {
+          "id": "F6.4-expanded-noun-phrases-example-1",
+          "text": "We found a small wooden box.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_example_1.mp3"
+        },
+        {
+          "id": "F6.4-expanded-noun-phrases-example-2",
+          "text": "She carried a beautiful old map.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_example_2.mp3"
+        },
+        {
+          "id": "F6.4-expanded-noun-phrases-example-3",
+          "text": "The students in the library found the clue.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_example_3.mp3"
+        },
+        {
+          "id": "F6.4-expanded-noun-phrases-example-4",
+          "text": "We tested a device that measures temperature.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F6.4-expanded-noun-phrases-contrast-1",
+          "wrong": {
+            "text": "She has a red big bag.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "She has a big red bag.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_1_better.mp3"
+          },
+          "reasonZh": "一般順序中，大小通常放在顏色前。"
+        },
+        {
+          "id": "F6.4-expanded-noun-phrases-contrast-2",
+          "wrong": {
+            "text": "We opened a wooden old box.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We opened an old wooden box.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_2_better.mp3"
+          },
+          "reasonZh": "年齡通常放在材質前，且 old 前用 an。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F6.4-expanded-noun-phrases-bug-1",
+          "zh": "一座漂亮的小石橋",
+          "wrong": {
+            "text": "a stone small beautiful bridge",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "a beautiful small stone bridge",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_bug_1_better.mp3"
+          },
+          "reasonZh": "評價、大小、材質依常見順序排列。",
+          "severity": "E2"
+        },
+        {
+          "id": "F6.4-expanded-noun-phrases-bug-2",
+          "zh": "桌上的那本書",
+          "wrong": {
+            "text": "the on the table book",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "the book on the table",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_bug_2_better.mp3"
+          },
+          "reasonZh": "英文通常把較長的地點修飾語放在名詞後。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F6.4-expanded-noun-phrases-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "We found a small wooden box.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_example_1.mp3"
+            },
+            {
+              "text": "She has a red big bag.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We opened a wooden old box.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F6.4-expanded-noun-phrases-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「She has a red big bag.」？",
+          "choices": [
+            {
+              "text": "She has a big red bag.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "She has a red big bag.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We opened a wooden old box.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F6.4-expanded-noun-phrases-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She carried a beautiful old map.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_example_2.mp3"
+            },
+            {
+              "text": "a stone small beautiful bridge",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "the on the table book",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F6.4-expanded-noun-phrases-speaking",
+          "type": "speaking",
+          "prompt": "Describe an object with two natural modifiers.",
+          "promptAudio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "determiner + ordered modifiers + noun + postmodifier"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F6.4-expanded-noun-phrases-writing",
+          "type": "writing",
+          "prompt": "Write one noun phrase with a modifier after the noun.",
+          "promptAudio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_prompt_writing.mp3",
+          "expectedFeatures": [
+            "determiner + ordered modifiers + noun + postmodifier"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F6.4-expanded-noun-phrases-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "She has a red big bag. We opened a wooden old box.",
+        "audio": "audio/grammar_db/content/f6_4_expanded_noun_phrases_revision.mp3",
+        "expectedCorrections": [
+          "She has a big red bag.",
+          "We opened an old wooden box."
+        ],
+        "severityTargets": [
+          "E2",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F6.4-expanded-noun-phrases-dialogue-1",
+            "speaker": "A",
+            "text": "Which box did you find?",
+            "audio": "audio/grammar_db/dialogue_lines/f6_4_expanded_noun_phrases_dialogue_1.mp3"
+          },
+          {
+            "id": "F6.4-expanded-noun-phrases-dialogue-2",
+            "speaker": "B",
+            "text": "We found a small wooden box under the stairs.",
+            "audio": "audio/grammar_db/dialogue_lines/f6_4_expanded_noun_phrases_dialogue_2.mp3"
+          },
+          {
+            "id": "F6.4-expanded-noun-phrases-dialogue-3",
+            "speaker": "A",
+            "text": "What was inside it?",
+            "audio": "audio/grammar_db/dialogue_lines/f6_4_expanded_noun_phrases_dialogue_3.mp3"
+          },
+          {
+            "id": "F6.4-expanded-noun-phrases-dialogue-4",
+            "speaker": "B",
+            "text": "There was an old map with several handwritten notes.",
+            "audio": "audio/grammar_db/dialogue_lines/f6_4_expanded_noun_phrases_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f6_4_expanded_noun_phrases.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F6.5-reporting-sources",
+      "band": "F6",
+      "microLevel": 5,
+      "titleZh": "引述來源與觀點",
+      "titleEn": "Reporting Sources and Viewpoints",
+      "communicativeGoalZh": "用 according to、says that、explained that 等方式忠實標示資訊來源。",
+      "form": "According to + noun, clause; source + says/explains that + clause",
+      "prerequisites": [
+        "F3.5-connectors"
+      ],
+      "diagramRef": "paragraph-cohesion",
+      "naturalExamples": [
+        {
+          "id": "F6.5-reporting-sources-example-1",
+          "text": "According to the report, traffic has increased.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f6_5_reporting_sources_example_1.mp3"
+        },
+        {
+          "id": "F6.5-reporting-sources-example-2",
+          "text": "The article says that the river is cleaner now.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f6_5_reporting_sources_example_2.mp3"
+        },
+        {
+          "id": "F6.5-reporting-sources-example-3",
+          "text": "Ms. Chen explained that the test was safe.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f6_5_reporting_sources_example_3.mp3"
+        },
+        {
+          "id": "F6.5-reporting-sources-example-4",
+          "text": "Leo said, \"We need more evidence.\"",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f6_5_reporting_sources_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F6.5-reporting-sources-contrast-1",
+          "wrong": {
+            "text": "According to the article says the park is safer.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_5_reporting_sources_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "According to the article, the park is safer.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_5_reporting_sources_contrast_1_better.mp3"
+          },
+          "reasonZh": "according to 已引入來源，後面不要再加 says 形成雙重結構。"
+        },
+        {
+          "id": "F6.5-reporting-sources-contrast-2",
+          "wrong": {
+            "text": "Amy said me that the test was easy.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_5_reporting_sources_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "Amy told me that the test was easy.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_5_reporting_sources_contrast_2_better.mp3"
+          },
+          "reasonZh": "tell 可直接接受詞 me；say 通常不使用 said me。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F6.5-reporting-sources-bug-1",
+          "zh": "根據老師說，活動取消了。",
+          "wrong": {
+            "text": "According to the teacher said, the event was canceled.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_5_reporting_sources_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "According to the teacher, the event was canceled.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_5_reporting_sources_bug_1_better.mp3"
+          },
+          "reasonZh": "避免 according to 與 said 疊在同一來源結構。",
+          "severity": "E1"
+        },
+        {
+          "id": "F6.5-reporting-sources-bug-2",
+          "zh": "文章說水質已改善。",
+          "wrong": {
+            "text": "The article says the water quality improved already.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f6_5_reporting_sources_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "The article says that the water quality has improved.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_5_reporting_sources_bug_2_better.mp3"
+          },
+          "reasonZh": "報告目前相關的改善結果時，has improved 較清楚自然。",
+          "severity": "E2"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "Amy said that the test was easy.",
+            "Amy told me that the test was easy."
+          ],
+          "noteZh": "say 著重內容；tell 通常要指出接收資訊的人。",
+          "dialect": "general"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F6.5-reporting-sources-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "According to the report, traffic has increased.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f6_5_reporting_sources_example_1.mp3"
+            },
+            {
+              "text": "According to the article says the park is safer.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_5_reporting_sources_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Amy said me that the test was easy.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_5_reporting_sources_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F6.5-reporting-sources-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「According to the article says the park is safer.」？",
+          "choices": [
+            {
+              "text": "According to the article, the park is safer.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f6_5_reporting_sources_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "According to the article says the park is safer.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_5_reporting_sources_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Amy said me that the test was easy.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_5_reporting_sources_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F6.5-reporting-sources-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The article says that the river is cleaner now.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f6_5_reporting_sources_example_2.mp3"
+            },
+            {
+              "text": "According to the teacher said, the event was canceled.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_5_reporting_sources_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "The article says the water quality improved already.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f6_5_reporting_sources_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F6.5-reporting-sources-speaking",
+          "type": "speaking",
+          "prompt": "Report one fact with \"According to...\".",
+          "promptAudio": "audio/grammar_db/content/f6_5_reporting_sources_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "According to + noun, clause; source + says/explains that + clause"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F6.5-reporting-sources-writing",
+          "type": "writing",
+          "prompt": "Write one sentence that clearly names an information source.",
+          "promptAudio": "audio/grammar_db/content/f6_5_reporting_sources_prompt_writing.mp3",
+          "expectedFeatures": [
+            "According to + noun, clause; source + says/explains that + clause"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F6.5-reporting-sources-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "According to the article says the park is safer. Amy said me that the test was easy.",
+        "audio": "audio/grammar_db/content/f6_5_reporting_sources_revision.mp3",
+        "expectedCorrections": [
+          "According to the article, the park is safer.",
+          "Amy told me that the test was easy."
+        ],
+        "severityTargets": [
+          "E1",
+          "E2"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F6.5-reporting-sources-dialogue-1",
+            "speaker": "A",
+            "text": "What does the survey show?",
+            "audio": "audio/grammar_db/dialogue_lines/f6_5_reporting_sources_dialogue_1.mp3"
+          },
+          {
+            "id": "F6.5-reporting-sources-dialogue-2",
+            "speaker": "B",
+            "text": "According to the survey, most students walk to school.",
+            "audio": "audio/grammar_db/dialogue_lines/f6_5_reporting_sources_dialogue_2.mp3"
+          },
+          {
+            "id": "F6.5-reporting-sources-dialogue-3",
+            "speaker": "A",
+            "text": "Does the article agree?",
+            "audio": "audio/grammar_db/dialogue_lines/f6_5_reporting_sources_dialogue_3.mp3"
+          },
+          {
+            "id": "F6.5-reporting-sources-dialogue-4",
+            "speaker": "B",
+            "text": "Yes. It says that walking has increased this year.",
+            "audio": "audio/grammar_db/dialogue_lines/f6_5_reporting_sources_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f6_5_reporting_sources.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F6.6-cohesion-basic",
+      "band": "F6",
+      "microLevel": 6,
+      "titleZh": "句內與段內銜接",
+      "titleEn": "Cohesion within and across Sentences",
+      "communicativeGoalZh": "使用時間順序、連接語、代名詞與關鍵詞重複建立清楚段落。",
+      "form": "ordered connectors + clear reference + controlled repetition",
+      "prerequisites": [
+        "F3.5-connectors",
+        "F5.6-reflexive-reference"
+      ],
+      "diagramRef": "paragraph-cohesion",
+      "naturalExamples": [
+        {
+          "id": "F6.6-cohesion-basic-example-1",
+          "text": "First, we measured the water. Then, we recorded the result.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f6_6_cohesion_basic_example_1.mp3"
+        },
+        {
+          "id": "F6.6-cohesion-basic-example-2",
+          "text": "The first plan is cheaper. However, the second plan is safer.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f6_6_cohesion_basic_example_2.mp3"
+        },
+        {
+          "id": "F6.6-cohesion-basic-example-3",
+          "text": "The team tested the bridge. This test revealed a weak point.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f6_6_cohesion_basic_example_3.mp3"
+        },
+        {
+          "id": "F6.6-cohesion-basic-example-4",
+          "text": "Solar panels cost more at first. Therefore, we compared long-term savings.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f6_6_cohesion_basic_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F6.6-cohesion-basic-contrast-1",
+          "wrong": {
+            "text": "The first plan is cheaper. Therefore, the second plan is safer.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_6_cohesion_basic_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "The first plan is cheaper. However, the second plan is safer.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_6_cohesion_basic_contrast_1_better.mp3"
+          },
+          "reasonZh": "兩項優點形成對比，使用 however，不是結果 therefore。"
+        },
+        {
+          "id": "F6.6-cohesion-basic-contrast-2",
+          "wrong": {
+            "text": "We changed the route. This was better.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f6_6_cohesion_basic_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We changed the route. This change made the walk safer.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_6_cohesion_basic_contrast_2_better.mp3"
+          },
+          "reasonZh": "this 單獨指涉可能含糊；補上名詞 change 更清楚。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F6.6-cohesion-basic-bug-1",
+          "zh": "我們先訪問居民。最後，我們整理答案。",
+          "wrong": {
+            "text": "First, we interviewed residents. Finally, we organized their answers.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f6_6_cohesion_basic_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "First, we interviewed residents. Next, we organized their answers.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_6_cohesion_basic_bug_1_better.mp3"
+          },
+          "reasonZh": "只有兩個緊接步驟時 next 比 finally 更符合流程；若確為最後一步才用 finally。",
+          "severity": "E2"
+        },
+        {
+          "id": "F6.6-cohesion-basic-bug-2",
+          "zh": "方案很便宜，因此它不安全。",
+          "wrong": {
+            "text": "The plan is cheap. Therefore, it is unsafe.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f6_6_cohesion_basic_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "The plan is cheap, but it may not be safe.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f6_6_cohesion_basic_bug_2_better.mp3"
+          },
+          "reasonZh": "便宜不必然導致不安全；應標示轉折或可能性。",
+          "severity": "E0"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F6.6-cohesion-basic-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "First, we measured the water. Then, we recorded the result.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f6_6_cohesion_basic_example_1.mp3"
+            },
+            {
+              "text": "The first plan is cheaper. Therefore, the second plan is safer.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_6_cohesion_basic_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We changed the route. This was better.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f6_6_cohesion_basic_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F6.6-cohesion-basic-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「The first plan is cheaper. Therefore, the second plan is safer.」？",
+          "choices": [
+            {
+              "text": "The first plan is cheaper. However, the second plan is safer.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f6_6_cohesion_basic_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "The first plan is cheaper. Therefore, the second plan is safer.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_6_cohesion_basic_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We changed the route. This was better.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f6_6_cohesion_basic_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F6.6-cohesion-basic-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The first plan is cheaper. However, the second plan is safer.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f6_6_cohesion_basic_example_2.mp3"
+            },
+            {
+              "text": "First, we interviewed residents. Finally, we organized their answers.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f6_6_cohesion_basic_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "The plan is cheap. Therefore, it is unsafe.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f6_6_cohesion_basic_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F6.6-cohesion-basic-speaking",
+          "type": "speaking",
+          "prompt": "Connect two contrasting ideas with a clear transition.",
+          "promptAudio": "audio/grammar_db/content/f6_6_cohesion_basic_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "ordered connectors + clear reference + controlled repetition"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F6.6-cohesion-basic-writing",
+          "type": "writing",
+          "prompt": "Write a three-sentence process with clear sequence words.",
+          "promptAudio": "audio/grammar_db/content/f6_6_cohesion_basic_prompt_writing.mp3",
+          "expectedFeatures": [
+            "ordered connectors + clear reference + controlled repetition"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F6.6-cohesion-basic-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "The first plan is cheaper. Therefore, the second plan is safer. We changed the route. This was better.",
+        "audio": "audio/grammar_db/content/f6_6_cohesion_basic_revision.mp3",
+        "expectedCorrections": [
+          "The first plan is cheaper. However, the second plan is safer.",
+          "We changed the route. This change made the walk safer."
+        ],
+        "severityTargets": [
+          "E2",
+          "E0"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F6.6-cohesion-basic-dialogue-1",
+            "speaker": "A",
+            "text": "Which plan is cheaper?",
+            "audio": "audio/grammar_db/dialogue_lines/f6_6_cohesion_basic_dialogue_1.mp3"
+          },
+          {
+            "id": "F6.6-cohesion-basic-dialogue-2",
+            "speaker": "B",
+            "text": "Plan A is cheaper. However, Plan B is safer.",
+            "audio": "audio/grammar_db/dialogue_lines/f6_6_cohesion_basic_dialogue_2.mp3"
+          },
+          {
+            "id": "F6.6-cohesion-basic-dialogue-3",
+            "speaker": "A",
+            "text": "How should we decide?",
+            "audio": "audio/grammar_db/dialogue_lines/f6_6_cohesion_basic_dialogue_3.mp3"
+          },
+          {
+            "id": "F6.6-cohesion-basic-dialogue-4",
+            "speaker": "B",
+            "text": "First, we should compare cost. Then, we should check the evidence.",
+            "audio": "audio/grammar_db/dialogue_lines/f6_6_cohesion_basic_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f6_6_cohesion_basic.mp3"
+      }
+    }
+  ]
+}

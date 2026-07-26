@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0.0",
+  "diagrams": [
+    {
+      "id": "sentence-slots",
+      "titleZh": "句子槽位圖",
+      "descriptionZh": "完整句的主詞、述語與可選補充資訊。",
+      "file": "diagrams/sentence-slots.svg"
+    },
+    {
+      "id": "noun-decision",
+      "titleZh": "名詞決策樹",
+      "descriptionZh": "依可數性與數量選擇單數、複數或不可數形式。",
+      "file": "diagrams/noun-decision.svg"
+    },
+    {
+      "id": "a-an-sound",
+      "titleZh": "a / an 聲音入口",
+      "descriptionZh": "a 或 an 取決於下一個聲音，不只看第一個字母。",
+      "file": "diagrams/a-an-sound.svg"
+    },
+    {
+      "id": "pronoun-positions",
+      "titleZh": "代名詞位置圖",
+      "descriptionZh": "代名詞形式由它在句中的工作決定。",
+      "file": "diagrams/pronoun-positions.svg"
+    },
+    {
+      "id": "predicate-routes",
+      "titleZh": "述語選擇圖",
+      "descriptionZh": "依身分狀態位置或動作，選擇基本述語路線。",
+      "file": "diagrams/predicate-routes.svg"
+    },
+    {
+      "id": "question-routes",
+      "titleZh": "問句雙路線",
+      "descriptionZh": "be 句前移 be；一般動詞句使用 do、does 或 did。",
+      "file": "diagrams/question-routes.svg"
+    },
+    {
+      "id": "tense-timeline",
+      "titleZh": "時態與時間關係",
+      "descriptionZh": "用時間線比較習慣、正在、已結束與連到現在的事件。",
+      "file": "diagrams/tense-timeline.svg"
+    },
+    {
+      "id": "frequency-position",
+      "titleZh": "頻率副詞位置",
+      "descriptionZh": "一般動詞前、be 後是最穩定的基礎位置。",
+      "file": "diagrams/frequency-position.svg"
+    },
+    {
+      "id": "quantifier-matrix",
+      "titleZh": "數量詞矩陣",
+      "descriptionZh": "依可數性選擇 many、much、few、little、fewer 或 less。",
+      "file": "diagrams/quantifier-matrix.svg"
+    },
+    {
+      "id": "preposition-map",
+      "titleZh": "介系詞關係圖",
+      "descriptionZh": "先看空間或時間關係，不用單一中文「在」硬套。",
+      "file": "diagrams/preposition-map.svg"
+    },
+    {
+      "id": "connector-relations",
+      "titleZh": "連接詞關係圖",
+      "descriptionZh": "連接詞標示兩個想法之間的邏輯關係。",
+      "file": "diagrams/connector-relations.svg"
+    },
+    {
+      "id": "comparison-scale",
+      "titleZh": "比較刻度圖",
+      "descriptionZh": "原級、比較級與最高級依比較數量與對象選擇。",
+      "file": "diagrams/comparison-scale.svg"
+    },
+    {
+      "id": "modal-strength",
+      "titleZh": "情態功能與強度",
+      "descriptionZh": "先分開可能性推論與建議義務，再在相同功能內比較強度。",
+      "file": "diagrams/modal-strength.svg"
+    },
+    {
+      "id": "relative-attachment",
+      "titleZh": "關係子句附著圖",
+      "descriptionZh": "關係子句應緊接它所描述的人、物、地點或時間。",
+      "file": "diagrams/relative-attachment.svg"
+    },
+    {
+      "id": "active-passive-focus",
+      "titleZh": "主動與被動焦點",
+      "descriptionZh": "同一事件可依資訊焦點選擇主動或被動。",
+      "file": "diagrams/active-passive-focus.svg"
+    },
+    {
+      "id": "paragraph-cohesion",
+      "titleZh": "段落銜接圖",
+      "descriptionZh": "用順序、邏輯、指涉與關鍵詞讓句子形成段落。",
+      "file": "diagrams/paragraph-cohesion.svg"
+    },
+    {
+      "id": "register-scale",
+      "titleZh": "語體選擇刻度",
+      "descriptionZh": "依對象、目的與媒介調整用字和請求方式。",
+      "file": "diagrams/register-scale.svg"
+    },
+    {
+      "id": "punctuation-map",
+      "titleZh": "標點功能圖",
+      "descriptionZh": "依資訊關係選擇冒號、分號、破折號、括號或連字號。",
+      "file": "diagrams/punctuation-map.svg"
+    },
+    {
+      "id": "revision-layers",
+      "titleZh": "自然度修訂層",
+      "descriptionZh": "先保住意思，再依序檢查結構、搭配與語體。",
+      "file": "diagrams/revision-layers.svg"
+    }
+  ]
+}

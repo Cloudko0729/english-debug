@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0.0",
+  "nameZh": "每月十堂適性文法循環",
+  "selectionPolicy": {
+    "candidatePoolIsNotRequiredCoverage": true,
+    "recommendedNewNodesPerMonth": "3–5",
+    "holdNewPrerequisiteDependentContentWhen": [
+      "出現 E0 意思失真",
+      "同一前置節點連續兩次出現 E1 句型失控",
+      "能選答案但口說或寫作無法保留核心意思"
+    ],
+    "promoteToNewNodeWhen": [
+      "前置節點的形式與意思診斷皆達 80%",
+      "口說或寫作沒有 E0，且目標句型得分至少 3/5",
+      "七日後累積複習仍能正確辨識並產出"
+    ],
+    "monthlyDecision": [
+      "new：前置穩定，從當月候選池選新節點",
+      "bridge：理解部分穩定，但需用最小對比連接新舊概念",
+      "review：E0/E1 未修復，暫停依賴該節點的新課"
+    ]
+  },
+  "weeklyPractice": {
+    "progressDays": 5,
+    "cumulativeReviewDays": 2,
+    "progressScope": "當堂選定的新課或橋接節點",
+    "reviewScope": "包含本月與先前所有 fragile / due 節點",
+    "browserSpeechFallback": false
+  },
+  "lessons": [
+    {
+      "slot": 1,
+      "mode": "diagnostic-and-repair",
+      "goalZh": "用形式、意思、自然度與一題口說／寫作確認月初起點。",
+      "newContent": false
+    },
+    {
+      "slot": 2,
+      "mode": "new-or-bridge-a",
+      "goalZh": "教第一個優先節點的溝通意思與最小句型。",
+      "newContent": true
+    },
+    {
+      "slot": 3,
+      "mode": "stabilize-a",
+      "goalZh": "用中文遷移 bug、可接受變體與短對話穩定第一節點。",
+      "newContent": false
+    },
+    {
+      "slot": 4,
+      "mode": "new-or-bridge-b",
+      "goalZh": "依前一堂表現加入第二節點；未達門檻則改做修復。",
+      "newContent": true
+    },
+    {
+      "slot": 5,
+      "mode": "minimum-contrast",
+      "goalZh": "比較兩個相近形式，確認孩子理解意思差異，不只背規則。",
+      "newContent": false
+    },
+    {
+      "slot": 6,
+      "mode": "dialogue-and-reading",
+      "goalZh": "在對話或短文中理解本月節點，搭配預處理音檔。",
+      "newContent": false
+    },
+    {
+      "slot": 7,
+      "mode": "speaking",
+      "goalZh": "完成有明確情境的口說任務，依 meaning、target form、naturalness 評分。",
+      "newContent": false
+    },
+    {
+      "slot": 8,
+      "mode": "writing-and-revision",
+      "goalZh": "完成短寫作並修改 E0–E2 問題，保留合理變體。",
+      "newContent": false
+    },
+    {
+      "slot": 9,
+      "mode": "cumulative-review",
+      "goalZh": "混合本月與以前到期節點，檢查七日以上的保留。",
+      "newContent": false
+    },
+    {
+      "slot": 10,
+      "mode": "checkpoint-and-replan",
+      "goalZh": "重做精簡診斷、比較產出樣本，決定下月 new / bridge / review。",
+      "newContent": false
+    }
+  ]
+}

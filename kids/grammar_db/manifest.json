@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedOn": "2026-07-26",
+  "scope": "F0-F7 grammar; F0-F3 fine-grained foundation",
+  "policy": {
+    "foundationNodes": 24,
+    "judgmentLabels": [
+      "natural",
+      "acceptable",
+      "awkward",
+      "misleading"
+    ],
+    "errorSeverity": [
+      "E0",
+      "E1",
+      "E2",
+      "E3"
+    ],
+    "browserSpeechFallback": false,
+    "dialogueVoices": {
+      "A": "af_heart",
+      "B": "am_adam"
+    },
+    "diagramFormat": "inline-compatible SVG"
+  },
+  "counts": {
+    "nodes": 48,
+    "byBand": {
+      "F0": 5,
+      "F1": 6,
+      "F2": 7,
+      "F3": 6,
+      "F4": 6,
+      "F5": 6,
+      "F6": 6,
+      "F7": 6
+    },
+    "naturalExamples": 192,
+    "contrastPairs": 96,
+    "chineseTransferBugs": 96,
+    "dialogues": 48,
+    "dialogueTurns": 192,
+    "diagnostics": 144,
+    "productionTasks": 96,
+    "revisionTasks": 48,
+    "diagrams": 19,
+    "generatedAudioLines": 912,
+    "fullDialogueAudio": 48,
+    "totalAudioReferences": 960
+  },
+  "audioSpecs": {
+    "grammar_content.json": 720,
+    "grammar_dialogue_a.json": 96,
+    "grammar_dialogue_b.json": 96
+  },
+  "files": {
+    "bands": [
+      "bands/f0.json",
+      "bands/f1.json",
+      "bands/f2.json",
+      "bands/f3.json",
+      "bands/f4.json",
+      "bands/f5.json",
+      "bands/f6.json",
+      "bands/f7.json"
+    ],
+    "diagrams": "diagrams.json",
+    "outline": "REBUILD_OUTLINE.md",
+    "tenLessonCycle": "ten_lesson_cycle.json",
+    "monthlyCourseMap": "monthly_course_map.json"
+  }
+}

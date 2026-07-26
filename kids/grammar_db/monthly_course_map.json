@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "1.0.0",
+  "schoolYear": "2026-09/2027-06",
+  "lessonCycleRef": "ten_lesson_cycle.json",
+  "candidateOrderPolicy": "前置節點必須在較早月份，或位於同月 candidateNodes 的較前位置。",
+  "months": [
+    {
+      "month": "2026-09",
+      "storyGoalZh": "建立 Map Team，介紹人物、物件與基本動作。",
+      "candidateNodes": [
+        "F0.1-complete-sentence",
+        "F0.2-be-agreement",
+        "F0.3-be-meaning",
+        "F0.4-singular-plural",
+        "F0.5-a-an-sound",
+        "F1.1-subject-pronouns",
+        "F1.2-action-affirmative",
+        "F1.3-predicate-choice"
+      ],
+      "fallbackNodes": [],
+      "adaptationZh": "先細診 F0；未穩定的節點優先修復，候選池不要求全教。"
+    },
+    {
+      "month": "2026-10",
+      "storyGoalZh": "詢問人物、地點與線索，能回答也能追問。",
+      "candidateNodes": [
+        "F1.4-be-questions-negatives",
+        "F1.5-do-does",
+        "F1.6-wh-questions",
+        "F2.6-pronoun-case"
+      ],
+      "fallbackNodes": [
+        "F0.2-be-agreement",
+        "F0.3-be-meaning",
+        "F1.3-predicate-choice"
+      ],
+      "adaptationZh": "be 問句與 do/does 分開過關；若仍混用，取消新的 Wh- 自由產出。"
+    },
+    {
+      "month": "2026-11",
+      "storyGoalZh": "描述日常習慣與眼前正在發生的事件。",
+      "candidateNodes": [
+        "F2.1-present-simple",
+        "F2.2-frequency-adverbs",
+        "F2.3-present-continuous",
+        "F2.4-present-contrast",
+        "F2.5-stative-verbs"
+      ],
+      "fallbackNodes": [
+        "F1.2-action-affirmative",
+        "F1.5-do-does"
+      ],
+      "adaptationZh": "若兩種現在式混淆，先只產出一種，另一種保留辨識與對比。"
+    },
+    {
+      "month": "2026-12",
+      "storyGoalZh": "描述地圖、物品位置與數量，讓聽者能重建場景。",
+      "candidateNodes": [
+        "F2.7-there-count-quantity",
+        "F3.4-prepositions"
+      ],
+      "fallbackNodes": [
+        "F0.4-singular-plural",
+        "F0.5-a-an-sound",
+        "F2.6-pronoun-case"
+      ],
+      "adaptationZh": "數量錯誤先回單複數；位置錯誤先用實物與最短位置句修復。"
+    },
+    {
+      "month": "2027-01",
+      "storyGoalZh": "重建已發生事件的時間、狀態與動作順序。",
+      "candidateNodes": [
+        "F3.1-past-be",
+        "F3.2-past-simple",
+        "F3.3-did-questions",
+        "F4.1-past-continuous"
+      ],
+      "fallbackNodes": [
+        "F1.5-do-does",
+        "F2.1-present-simple",
+        "F2.4-present-contrast"
+      ],
+      "adaptationZh": "先穩定 was/were、10 個高頻過去動詞與 did + 原形，再加入背景事件。"
+    },
+    {
+      "month": "2027-02",
+      "storyGoalZh": "比較人生經驗、目前結果與有明確時間的過去事件。",
+      "candidateNodes": [
+        "F5.1-present-perfect-experience",
+        "F5.2-perfect-markers",
+        "F5.3-perfect-vs-past",
+        "F6.1-tense-choice"
+      ],
+      "fallbackNodes": [
+        "F3.2-past-simple",
+        "F3.3-did-questions",
+        "F4.1-past-continuous"
+      ],
+      "adaptationZh": "過去式若未穩，完成式只做理解；跨句時態延後到兩種形式皆可獨立產出。"
+    },
+    {
+      "month": "2027-03",
+      "storyGoalZh": "比較方案、描述特徵與數量，提出強弱不同的建議。",
+      "candidateNodes": [
+        "F3.6-basic-helpers",
+        "F4.2-adjectives-adverbs",
+        "F4.3-comparatives",
+        "F4.4-quantifiers",
+        "F4.5-modal-functions"
+      ],
+      "fallbackNodes": [
+        "F0.4-singular-plural",
+        "F2.7-there-count-quantity"
+      ],
+      "adaptationZh": "先確認 can/will/going to + 原形，再進 should 等情態功能；最高級與較細數量詞可只辨識。"
+    },
+    {
+      "month": "2027-04",
+      "storyGoalZh": "說明計畫、條件、選擇與行動結果。",
+      "candidateNodes": [
+        "F3.5-connectors",
+        "F4.6-infinitive-gerund",
+        "F5.4-first-conditional",
+        "F6.3-future-forms"
+      ],
+      "fallbackNodes": [
+        "F1.5-do-does",
+        "F3.2-past-simple",
+        "F4.5-modal-functions"
+      ],
+      "adaptationZh": "先穩定原因、結果與條件的邏輯連接；條件句先用固定真實情境，不急著自由延伸。"
+    },
+    {
+      "month": "2027-05",
+      "storyGoalZh": "清楚描述人物、裝置與流程，依對象調整語氣。",
+      "candidateNodes": [
+        "F5.5-relative-basic",
+        "F5.6-reflexive-reference",
+        "F6.2-passive-process",
+        "F6.4-expanded-noun-phrases",
+        "F6.5-reporting-sources",
+        "F7.3-register"
+      ],
+      "fallbackNodes": [
+        "F1.1-subject-pronouns",
+        "F2.6-pronoun-case",
+        "F3.5-connectors"
+      ],
+      "adaptationZh": "先學清楚引述來源，再調整正式／非正式語體；被動與擴展名詞片語可先用句框。"
+    },
+    {
+      "month": "2027-06",
+      "storyGoalZh": "完成報告、發表與修訂，讓跨句意思清楚且語氣自然。",
+      "candidateNodes": [
+        "F6.6-cohesion-basic",
+        "F7.1-relative-advanced",
+        "F7.2-modal-deduction",
+        "F7.4-reference-across-sentences",
+        "F7.5-punctuation",
+        "F7.6-edit-naturalness"
+      ],
+      "fallbackNodes": [
+        "F6.1-tense-choice",
+        "F6.4-expanded-noun-phrases",
+        "F7.3-register"
+      ],
+      "adaptationZh": "以個人 E0–E2 bug list 決定修訂順序；候選節點可作為辨識或教師示範，不要求全部自由產出。"
+    }
+  ]
+}

@@ -1,0 +1,1622 @@
+{
+  "schemaVersion": "1.0.0",
+  "band": "F7",
+  "nodes": [
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F7.1-relative-advanced",
+      "band": "F7",
+      "microLevel": 1,
+      "titleZh": "關係子句深化",
+      "titleEn": "Advanced Relative Clauses and Attachment",
+      "communicativeGoalZh": "使用 whose、when 與非限定關係子句，並讓補充資訊連到正確先行詞。",
+      "form": "defining or non-defining relative clause with clear antecedent",
+      "prerequisites": [
+        "F5.5-relative-basic"
+      ],
+      "diagramRef": "relative-attachment",
+      "naturalExamples": [
+        {
+          "id": "F7.1-relative-advanced-example-1",
+          "text": "The student whose idea won is in my class.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f7_1_relative_advanced_example_1.mp3"
+        },
+        {
+          "id": "F7.1-relative-advanced-example-2",
+          "text": "June is the month when we present our project.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f7_1_relative_advanced_example_2.mp3"
+        },
+        {
+          "id": "F7.1-relative-advanced-example-3",
+          "text": "Ms. Lee, who teaches science, checked our design.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f7_1_relative_advanced_example_3.mp3"
+        },
+        {
+          "id": "F7.1-relative-advanced-example-4",
+          "text": "The device that measures air quality is on the roof.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f7_1_relative_advanced_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F7.1-relative-advanced-contrast-1",
+          "wrong": {
+            "text": "Ms. Lee who teaches science checked our design.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f7_1_relative_advanced_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Ms. Lee, who teaches science, checked our design.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_1_relative_advanced_contrast_1_better.mp3"
+          },
+          "reasonZh": "若 Ms. Lee 身分已明確，非必要補充資訊通常以逗號隔開。"
+        },
+        {
+          "id": "F7.1-relative-advanced-contrast-2",
+          "wrong": {
+            "text": "We spoke to the engineer about the device who designed it.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f7_1_relative_advanced_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We spoke to the engineer who designed the device.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_1_relative_advanced_contrast_2_better.mp3"
+          },
+          "reasonZh": "who 子句應緊接它所描述的 engineer，避免錯誤附著。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F7.1-relative-advanced-bug-1",
+          "zh": "那位腳踏車被偷的學生報警了。",
+          "wrong": {
+            "text": "The student who bike was stolen called the police.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f7_1_relative_advanced_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "The student whose bike was stolen called the police.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_1_relative_advanced_bug_1_better.mp3"
+          },
+          "reasonZh": "表示所屬關係使用 whose。",
+          "severity": "E1"
+        },
+        {
+          "id": "F7.1-relative-advanced-bug-2",
+          "zh": "我們在五月完成，那是雨季開始的月份。",
+          "wrong": {
+            "text": "We finished in May, which the rainy season begins.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f7_1_relative_advanced_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We finished in May, when the rainy season begins.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_1_relative_advanced_bug_2_better.mp3"
+          },
+          "reasonZh": "指時間並表示在那時發生，使用 when。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F7.1-relative-advanced-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The student whose idea won is in my class.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f7_1_relative_advanced_example_1.mp3"
+            },
+            {
+              "text": "Ms. Lee who teaches science checked our design.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_1_relative_advanced_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We spoke to the engineer about the device who designed it.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_1_relative_advanced_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F7.1-relative-advanced-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「Ms. Lee who teaches science checked our design.」？",
+          "choices": [
+            {
+              "text": "Ms. Lee, who teaches science, checked our design.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f7_1_relative_advanced_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "Ms. Lee who teaches science checked our design.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_1_relative_advanced_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We spoke to the engineer about the device who designed it.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_1_relative_advanced_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F7.1-relative-advanced-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "June is the month when we present our project.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f7_1_relative_advanced_example_2.mp3"
+            },
+            {
+              "text": "The student who bike was stolen called the police.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_1_relative_advanced_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We finished in May, which the rainy season begins.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_1_relative_advanced_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F7.1-relative-advanced-speaking",
+          "type": "speaking",
+          "prompt": "Describe a person with \"whose\".",
+          "promptAudio": "audio/grammar_db/content/f7_1_relative_advanced_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "defining or non-defining relative clause with clear antecedent"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F7.1-relative-advanced-writing",
+          "type": "writing",
+          "prompt": "Write one non-defining relative clause with commas.",
+          "promptAudio": "audio/grammar_db/content/f7_1_relative_advanced_prompt_writing.mp3",
+          "expectedFeatures": [
+            "defining or non-defining relative clause with clear antecedent"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F7.1-relative-advanced-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "Ms. Lee who teaches science checked our design. We spoke to the engineer about the device who designed it.",
+        "audio": "audio/grammar_db/content/f7_1_relative_advanced_revision.mp3",
+        "expectedCorrections": [
+          "Ms. Lee, who teaches science, checked our design.",
+          "We spoke to the engineer who designed the device."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F7.1-relative-advanced-dialogue-1",
+            "speaker": "A",
+            "text": "Who checked the final design?",
+            "audio": "audio/grammar_db/dialogue_lines/f7_1_relative_advanced_dialogue_1.mp3"
+          },
+          {
+            "id": "F7.1-relative-advanced-dialogue-2",
+            "speaker": "B",
+            "text": "Ms. Lee, who teaches science, checked it.",
+            "audio": "audio/grammar_db/dialogue_lines/f7_1_relative_advanced_dialogue_2.mp3"
+          },
+          {
+            "id": "F7.1-relative-advanced-dialogue-3",
+            "speaker": "A",
+            "text": "Is she the teacher whose class won last year?",
+            "audio": "audio/grammar_db/dialogue_lines/f7_1_relative_advanced_dialogue_3.mp3"
+          },
+          {
+            "id": "F7.1-relative-advanced-dialogue-4",
+            "speaker": "B",
+            "text": "Yes, and June is the month when her class presents again.",
+            "audio": "audio/grammar_db/dialogue_lines/f7_1_relative_advanced_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f7_1_relative_advanced.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F7.2-modal-deduction",
+      "band": "F7",
+      "microLevel": 2,
+      "titleZh": "情態動詞的推論強度",
+      "titleEn": "Modal Deduction and Degrees of Certainty",
+      "communicativeGoalZh": "用 must、may、might、could、can't 表達有證據的不同確定程度。",
+      "form": "modal + base form; modal + have + past participle for past deduction",
+      "prerequisites": [
+        "F4.5-modal-functions",
+        "F5.1-present-perfect-experience"
+      ],
+      "diagramRef": "modal-strength",
+      "naturalExamples": [
+        {
+          "id": "F7.2-modal-deduction-example-1",
+          "text": "The lights are on, so someone must be home.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f7_2_modal_deduction_example_1.mp3"
+        },
+        {
+          "id": "F7.2-modal-deduction-example-2",
+          "text": "This key might open the old box.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f7_2_modal_deduction_example_2.mp3"
+        },
+        {
+          "id": "F7.2-modal-deduction-example-3",
+          "text": "The answer could be in the report.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f7_2_modal_deduction_example_3.mp3"
+        },
+        {
+          "id": "F7.2-modal-deduction-example-4",
+          "text": "That can't be Ben; he is at school.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f7_2_modal_deduction_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F7.2-modal-deduction-contrast-1",
+          "wrong": {
+            "text": "Someone must to be home.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f7_2_modal_deduction_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Someone must be home.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_2_modal_deduction_contrast_1_better.mp3"
+          },
+          "reasonZh": "must 後接原形 be。"
+        },
+        {
+          "id": "F7.2-modal-deduction-contrast-2",
+          "wrong": {
+            "text": "It must rain tomorrow because the sky is cloudy.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f7_2_modal_deduction_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "It might rain tomorrow because the sky is cloudy.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_2_modal_deduction_contrast_2_better.mp3"
+          },
+          "reasonZh": "多雲只能支持可能性，使用 must 會顯得過度確定。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F7.2-modal-deduction-bug-1",
+          "zh": "她可能忘了。",
+          "wrong": {
+            "text": "She must have forgotten.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f7_2_modal_deduction_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "She might have forgotten.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_2_modal_deduction_bug_1_better.mp3"
+          },
+          "reasonZh": "只有可能性時使用 might have；must have 表強烈推論。",
+          "severity": "E0"
+        },
+        {
+          "id": "F7.2-modal-deduction-bug-2",
+          "zh": "那不可能是真的。",
+          "wrong": {
+            "text": "That must not be true.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f7_2_modal_deduction_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "That can't be true.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_2_modal_deduction_bug_2_better.mp3"
+          },
+          "reasonZh": "表達邏輯上不可能時，can't be 通常更直接自然。",
+          "severity": "E2"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F7.2-modal-deduction-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The lights are on, so someone must be home.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f7_2_modal_deduction_example_1.mp3"
+            },
+            {
+              "text": "Someone must to be home.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_2_modal_deduction_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "It must rain tomorrow because the sky is cloudy.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_2_modal_deduction_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F7.2-modal-deduction-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「Someone must to be home.」？",
+          "choices": [
+            {
+              "text": "Someone must be home.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f7_2_modal_deduction_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "Someone must to be home.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_2_modal_deduction_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "It must rain tomorrow because the sky is cloudy.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_2_modal_deduction_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F7.2-modal-deduction-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "This key might open the old box.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f7_2_modal_deduction_example_2.mp3"
+            },
+            {
+              "text": "She must have forgotten.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_2_modal_deduction_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "That must not be true.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_2_modal_deduction_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F7.2-modal-deduction-speaking",
+          "type": "speaking",
+          "prompt": "Make one careful guess with \"might\".",
+          "promptAudio": "audio/grammar_db/content/f7_2_modal_deduction_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "modal + base form; modal + have + past participle for past deduction"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F7.2-modal-deduction-writing",
+          "type": "writing",
+          "prompt": "Write one strong deduction and include the evidence.",
+          "promptAudio": "audio/grammar_db/content/f7_2_modal_deduction_prompt_writing.mp3",
+          "expectedFeatures": [
+            "modal + base form; modal + have + past participle for past deduction"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F7.2-modal-deduction-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "Someone must to be home. It must rain tomorrow because the sky is cloudy.",
+        "audio": "audio/grammar_db/content/f7_2_modal_deduction_revision.mp3",
+        "expectedCorrections": [
+          "Someone must be home.",
+          "It might rain tomorrow because the sky is cloudy."
+        ],
+        "severityTargets": [
+          "E0",
+          "E2"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F7.2-modal-deduction-dialogue-1",
+            "speaker": "A",
+            "text": "Why is the classroom door open?",
+            "audio": "audio/grammar_db/dialogue_lines/f7_2_modal_deduction_dialogue_1.mp3"
+          },
+          {
+            "id": "F7.2-modal-deduction-dialogue-2",
+            "speaker": "B",
+            "text": "The teacher might be inside.",
+            "audio": "audio/grammar_db/dialogue_lines/f7_2_modal_deduction_dialogue_2.mp3"
+          },
+          {
+            "id": "F7.2-modal-deduction-dialogue-3",
+            "speaker": "A",
+            "text": "Could a student have opened it?",
+            "audio": "audio/grammar_db/dialogue_lines/f7_2_modal_deduction_dialogue_3.mp3"
+          },
+          {
+            "id": "F7.2-modal-deduction-dialogue-4",
+            "speaker": "B",
+            "text": "Yes, but it can't have been Leo because he is absent.",
+            "audio": "audio/grammar_db/dialogue_lines/f7_2_modal_deduction_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f7_2_modal_deduction.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F7.3-register",
+      "band": "F7",
+      "microLevel": 3,
+      "titleZh": "正式與非正式語體",
+      "titleEn": "Formal and Informal Register",
+      "communicativeGoalZh": "依對象與目的調整請求、用字、縮寫與語氣。",
+      "form": "choose wording and contraction level for audience",
+      "prerequisites": [
+        "F4.5-modal-functions",
+        "F6.5-reporting-sources"
+      ],
+      "diagramRef": "register-scale",
+      "naturalExamples": [
+        {
+          "id": "F7.3-register-example-1",
+          "text": "Could you please send me the schedule?",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f7_3_register_example_1.mp3"
+        },
+        {
+          "id": "F7.3-register-example-2",
+          "text": "Hey, can you send me the plan?",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f7_3_register_example_2.mp3"
+        },
+        {
+          "id": "F7.3-register-example-3",
+          "text": "I would like to request more information.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f7_3_register_example_3.mp3"
+        },
+        {
+          "id": "F7.3-register-example-4",
+          "text": "We found out that the event was canceled.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f7_3_register_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F7.3-register-contrast-1",
+          "wrong": {
+            "text": "Hey, teacher, give me the form.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f7_3_register_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Could you please give me the form?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_3_register_contrast_1_better.mp3"
+          },
+          "reasonZh": "對老師提出請求時，後者語氣較合適。"
+        },
+        {
+          "id": "F7.3-register-contrast-2",
+          "wrong": {
+            "text": "I wanna obtain the document.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f7_3_register_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I would like to obtain the document.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_3_register_contrast_2_better.mp3"
+          },
+          "reasonZh": "wanna 與 obtain 的語體混合，正式請求應保持一致。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F7.3-register-bug-1",
+          "zh": "請寄給我詳細資料。",
+          "wrong": {
+            "text": "Send me the details.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f7_3_register_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Could you please send me the details?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_3_register_bug_1_better.mp3"
+          },
+          "reasonZh": "直接命令可能顯得突兀；請求句較自然。",
+          "severity": "E2"
+        },
+        {
+          "id": "F7.3-register-bug-2",
+          "zh": "我們在正式報告中發現污染增加。",
+          "wrong": {
+            "text": "We found out pollution got worse.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f7_3_register_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We found that pollution had increased.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_3_register_bug_2_better.mp3"
+          },
+          "reasonZh": "正式報告使用較精確且一致的語體。",
+          "severity": "E2"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "I can't attend.",
+            "I cannot attend."
+          ],
+          "noteZh": "縮寫較常見於口語與一般書信；完整形式可較正式或帶強調。",
+          "dialect": "general"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F7.3-register-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Could you please send me the schedule?",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f7_3_register_example_1.mp3"
+            },
+            {
+              "text": "Hey, teacher, give me the form.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_3_register_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I wanna obtain the document.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_3_register_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F7.3-register-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「Hey, teacher, give me the form.」？",
+          "choices": [
+            {
+              "text": "Could you please give me the form?",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f7_3_register_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "Hey, teacher, give me the form.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_3_register_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I wanna obtain the document.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_3_register_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F7.3-register-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Hey, can you send me the plan?",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f7_3_register_example_2.mp3"
+            },
+            {
+              "text": "Send me the details.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_3_register_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We found out pollution got worse.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_3_register_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F7.3-register-speaking",
+          "type": "speaking",
+          "prompt": "Make the same request to a friend and to a teacher.",
+          "promptAudio": "audio/grammar_db/content/f7_3_register_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "choose wording and contraction level for audience"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F7.3-register-writing",
+          "type": "writing",
+          "prompt": "Rewrite an informal sentence for a school report.",
+          "promptAudio": "audio/grammar_db/content/f7_3_register_prompt_writing.mp3",
+          "expectedFeatures": [
+            "choose wording and contraction level for audience"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F7.3-register-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "Hey, teacher, give me the form. I wanna obtain the document.",
+        "audio": "audio/grammar_db/content/f7_3_register_revision.mp3",
+        "expectedCorrections": [
+          "Could you please give me the form?",
+          "I would like to obtain the document."
+        ],
+        "severityTargets": [
+          "E2",
+          "E2"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F7.3-register-dialogue-1",
+            "speaker": "A",
+            "text": "How would you ask a friend for the file?",
+            "audio": "audio/grammar_db/dialogue_lines/f7_3_register_dialogue_1.mp3"
+          },
+          {
+            "id": "F7.3-register-dialogue-2",
+            "speaker": "B",
+            "text": "I would say, \"Can you send me the file?\"",
+            "audio": "audio/grammar_db/dialogue_lines/f7_3_register_dialogue_2.mp3"
+          },
+          {
+            "id": "F7.3-register-dialogue-3",
+            "speaker": "A",
+            "text": "What would you write to the principal?",
+            "audio": "audio/grammar_db/dialogue_lines/f7_3_register_dialogue_3.mp3"
+          },
+          {
+            "id": "F7.3-register-dialogue-4",
+            "speaker": "B",
+            "text": "I would write, \"Could you please send me the document?\"",
+            "audio": "audio/grammar_db/dialogue_lines/f7_3_register_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f7_3_register.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F7.4-reference-across-sentences",
+      "band": "F7",
+      "microLevel": 4,
+      "titleZh": "跨句指涉與避免含糊",
+      "titleEn": "Reference across Sentences",
+      "communicativeGoalZh": "讓 it、they、this、these 等清楚指向前文，必要時重複關鍵名詞。",
+      "form": "pronoun/demonstrative + unambiguous antecedent",
+      "prerequisites": [
+        "F5.6-reflexive-reference",
+        "F6.6-cohesion-basic"
+      ],
+      "diagramRef": "paragraph-cohesion",
+      "naturalExamples": [
+        {
+          "id": "F7.4-reference-across-sentences-example-1",
+          "text": "The bridge had a loose board. This problem made it unsafe.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_example_1.mp3"
+        },
+        {
+          "id": "F7.4-reference-across-sentences-example-2",
+          "text": "Mia interviewed two nurses. They described the same issue.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_example_2.mp3"
+        },
+        {
+          "id": "F7.4-reference-across-sentences-example-3",
+          "text": "We changed the bus route. The new route reduced travel time.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_example_3.mp3"
+        },
+        {
+          "id": "F7.4-reference-across-sentences-example-4",
+          "text": "The report and the map disagreed, so we checked both sources.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F7.4-reference-across-sentences-contrast-1",
+          "wrong": {
+            "text": "The map was beside the report, but it was outdated.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "The map was beside the report, but the map was outdated.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_contrast_1_better.mp3"
+          },
+          "reasonZh": "it 可能指 map 或 report；重複名詞可消除歧義。"
+        },
+        {
+          "id": "F7.4-reference-across-sentences-contrast-2",
+          "wrong": {
+            "text": "We moved the meeting online. This was helpful.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We moved the meeting online. This change helped more students attend.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_contrast_2_better.mp3"
+          },
+          "reasonZh": "this 後補上概括名詞 change，資訊更清楚。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F7.4-reference-across-sentences-bug-1",
+          "zh": "John 告訴 Peter，他需要更多時間。",
+          "wrong": {
+            "text": "John told Peter that he needed more time.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "John told Peter, \"I need more time.\"",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_bug_1_better.mp3"
+          },
+          "reasonZh": "原句 he 指涉不清；直接引語可明確指出 John。",
+          "severity": "E0"
+        },
+        {
+          "id": "F7.4-reference-across-sentences-bug-2",
+          "zh": "設備壞了。這造成延誤。",
+          "wrong": {
+            "text": "The device broke. This caused a delay.",
+            "status": "acceptable",
+            "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "The device broke. This failure caused a delay.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_bug_2_better.mp3"
+          },
+          "reasonZh": "原句可接受；正式說明加入 failure 更精確。",
+          "severity": "E3"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F7.4-reference-across-sentences-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The bridge had a loose board. This problem made it unsafe.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_example_1.mp3"
+            },
+            {
+              "text": "The map was beside the report, but it was outdated.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We moved the meeting online. This was helpful.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F7.4-reference-across-sentences-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「The map was beside the report, but it was outdated.」？",
+          "choices": [
+            {
+              "text": "The map was beside the report, but the map was outdated.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "The map was beside the report, but it was outdated.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We moved the meeting online. This was helpful.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F7.4-reference-across-sentences-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Mia interviewed two nurses. They described the same issue.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_example_2.mp3"
+            },
+            {
+              "text": "John told Peter that he needed more time.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "The device broke. This caused a delay.",
+              "status": "acceptable",
+              "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F7.4-reference-across-sentences-speaking",
+          "type": "speaking",
+          "prompt": "Explain what one pronoun refers to in a short paragraph.",
+          "promptAudio": "audio/grammar_db/content/f7_4_reference_across_sentences_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "pronoun/demonstrative + unambiguous antecedent"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F7.4-reference-across-sentences-writing",
+          "type": "writing",
+          "prompt": "Rewrite an ambiguous sentence with a clear noun reference.",
+          "promptAudio": "audio/grammar_db/content/f7_4_reference_across_sentences_prompt_writing.mp3",
+          "expectedFeatures": [
+            "pronoun/demonstrative + unambiguous antecedent"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F7.4-reference-across-sentences-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "The map was beside the report, but it was outdated. We moved the meeting online. This was helpful.",
+        "audio": "audio/grammar_db/content/f7_4_reference_across_sentences_revision.mp3",
+        "expectedCorrections": [
+          "The map was beside the report, but the map was outdated.",
+          "We moved the meeting online. This change helped more students attend."
+        ],
+        "severityTargets": [
+          "E0",
+          "E3"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F7.4-reference-across-sentences-dialogue-1",
+            "speaker": "A",
+            "text": "Why is this sentence unclear?",
+            "audio": "audio/grammar_db/dialogue_lines/f7_4_reference_across_sentences_dialogue_1.mp3"
+          },
+          {
+            "id": "F7.4-reference-across-sentences-dialogue-2",
+            "speaker": "B",
+            "text": "The pronoun \"it\" could refer to two different things.",
+            "audio": "audio/grammar_db/dialogue_lines/f7_4_reference_across_sentences_dialogue_2.mp3"
+          },
+          {
+            "id": "F7.4-reference-across-sentences-dialogue-3",
+            "speaker": "A",
+            "text": "How can we fix it?",
+            "audio": "audio/grammar_db/dialogue_lines/f7_4_reference_across_sentences_dialogue_3.mp3"
+          },
+          {
+            "id": "F7.4-reference-across-sentences-dialogue-4",
+            "speaker": "B",
+            "text": "We can repeat the key noun or use a clearer noun phrase.",
+            "audio": "audio/grammar_db/dialogue_lines/f7_4_reference_across_sentences_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f7_4_reference_across_sentences.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F7.5-punctuation",
+      "band": "F7",
+      "microLevel": 5,
+      "titleZh": "子句與資訊標點",
+      "titleEn": "Punctuation for Clauses and Information",
+      "communicativeGoalZh": "使用冒號、分號、破折號、括號與連字號組織資訊，而不製造逗號拼接。",
+      "form": "colon for introduction; semicolon for related clauses; dash/brackets for parenthesis; hyphen in compounds",
+      "prerequisites": [
+        "F0.1-complete-sentence",
+        "F6.6-cohesion-basic"
+      ],
+      "diagramRef": "punctuation-map",
+      "naturalExamples": [
+        {
+          "id": "F7.5-punctuation-example-1",
+          "text": "We need three things: paper, tape, and scissors.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f7_5_punctuation_example_1.mp3"
+        },
+        {
+          "id": "F7.5-punctuation-example-2",
+          "text": "The first plan is cheaper; the second is safer.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f7_5_punctuation_example_2.mp3"
+        },
+        {
+          "id": "F7.5-punctuation-example-3",
+          "text": "The final test—our most difficult task—starts tomorrow.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f7_5_punctuation_example_3.mp3"
+        },
+        {
+          "id": "F7.5-punctuation-example-4",
+          "text": "We designed a low-cost water filter.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f7_5_punctuation_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F7.5-punctuation-contrast-1",
+          "wrong": {
+            "text": "The first plan is cheaper, the second is safer.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f7_5_punctuation_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "The first plan is cheaper; the second is safer.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_5_punctuation_contrast_1_better.mp3"
+          },
+          "reasonZh": "兩個完整句不能只用逗號連接。"
+        },
+        {
+          "id": "F7.5-punctuation-contrast-2",
+          "wrong": {
+            "text": "We need: paper, tape, and scissors.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f7_5_punctuation_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We need three things: paper, tape, and scissors.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_5_punctuation_contrast_2_better.mp3"
+          },
+          "reasonZh": "冒號前通常需要能獨立成立並完整引出後文的結構。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F7.5-punctuation-bug-1",
+          "zh": "報告有兩部分：問題和建議。",
+          "wrong": {
+            "text": "The report has two parts; the problem and the recommendation.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f7_5_punctuation_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "The report has two parts: the problem and the recommendation.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_5_punctuation_bug_1_better.mp3"
+          },
+          "reasonZh": "後面是前句引出的清單，使用冒號。",
+          "severity": "E1"
+        },
+        {
+          "id": "F7.5-punctuation-bug-2",
+          "zh": "這是一個為期三天的活動。",
+          "wrong": {
+            "text": "This is a three day event.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f7_5_punctuation_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "This is a three-day event.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_5_punctuation_bug_2_better.mp3"
+          },
+          "reasonZh": "數字與單數名詞共同放在名詞前作複合修飾語時加連字號。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "The final test—our hardest task—starts tomorrow.",
+            "The final test (our hardest task) starts tomorrow."
+          ],
+          "noteZh": "破折號較有強調感；括號通常較像附帶資訊。",
+          "dialect": "general"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F7.5-punctuation-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "We need three things: paper, tape, and scissors.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f7_5_punctuation_example_1.mp3"
+            },
+            {
+              "text": "The first plan is cheaper, the second is safer.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_5_punctuation_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We need: paper, tape, and scissors.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_5_punctuation_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F7.5-punctuation-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「The first plan is cheaper, the second is safer.」？",
+          "choices": [
+            {
+              "text": "The first plan is cheaper; the second is safer.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f7_5_punctuation_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "The first plan is cheaper, the second is safer.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_5_punctuation_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We need: paper, tape, and scissors.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_5_punctuation_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F7.5-punctuation-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The first plan is cheaper; the second is safer.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f7_5_punctuation_example_2.mp3"
+            },
+            {
+              "text": "The report has two parts; the problem and the recommendation.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_5_punctuation_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "This is a three day event.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_5_punctuation_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F7.5-punctuation-speaking",
+          "type": "speaking",
+          "prompt": "Read a sentence with a colon and explain what it introduces.",
+          "promptAudio": "audio/grammar_db/content/f7_5_punctuation_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "colon for introduction; semicolon for related clauses; dash/brackets for parenthesis; hyphen in compounds"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F7.5-punctuation-writing",
+          "type": "writing",
+          "prompt": "Write two closely related clauses joined by a semicolon.",
+          "promptAudio": "audio/grammar_db/content/f7_5_punctuation_prompt_writing.mp3",
+          "expectedFeatures": [
+            "colon for introduction; semicolon for related clauses; dash/brackets for parenthesis; hyphen in compounds"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F7.5-punctuation-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "The first plan is cheaper, the second is safer. We need: paper, tape, and scissors.",
+        "audio": "audio/grammar_db/content/f7_5_punctuation_revision.mp3",
+        "expectedCorrections": [
+          "The first plan is cheaper; the second is safer.",
+          "We need three things: paper, tape, and scissors."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F7.5-punctuation-dialogue-1",
+            "speaker": "A",
+            "text": "Why can't we join these sentences with only a comma?",
+            "audio": "audio/grammar_db/dialogue_lines/f7_5_punctuation_dialogue_1.mp3"
+          },
+          {
+            "id": "F7.5-punctuation-dialogue-2",
+            "speaker": "B",
+            "text": "They are both complete clauses.",
+            "audio": "audio/grammar_db/dialogue_lines/f7_5_punctuation_dialogue_2.mp3"
+          },
+          {
+            "id": "F7.5-punctuation-dialogue-3",
+            "speaker": "A",
+            "text": "What can we use instead?",
+            "audio": "audio/grammar_db/dialogue_lines/f7_5_punctuation_dialogue_3.mp3"
+          },
+          {
+            "id": "F7.5-punctuation-dialogue-4",
+            "speaker": "B",
+            "text": "We can use a semicolon or add a coordinating conjunction.",
+            "audio": "audio/grammar_db/dialogue_lines/f7_5_punctuation_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f7_5_punctuation.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F7.6-edit-naturalness",
+      "band": "F7",
+      "microLevel": 6,
+      "titleZh": "修改自然度與語意",
+      "titleEn": "Editing for Naturalness and Meaning",
+      "communicativeGoalZh": "找出文法正確性之外的語序、贅字、搭配與含糊問題。",
+      "form": "meaning first, then structure, collocation, and register",
+      "prerequisites": [
+        "F7.3-register",
+        "F7.4-reference-across-sentences",
+        "F7.5-punctuation"
+      ],
+      "diagramRef": "revision-layers",
+      "naturalExamples": [
+        {
+          "id": "F7.6-edit-naturalness-example-1",
+          "text": "I really like this book.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f7_6_edit_naturalness_example_1.mp3"
+        },
+        {
+          "id": "F7.6-edit-naturalness-example-2",
+          "text": "We discussed the problem after class.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f7_6_edit_naturalness_example_2.mp3"
+        },
+        {
+          "id": "F7.6-edit-naturalness-example-3",
+          "text": "Please enter the room quietly.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f7_6_edit_naturalness_example_3.mp3"
+        },
+        {
+          "id": "F7.6-edit-naturalness-example-4",
+          "text": "The results clearly support our plan.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f7_6_edit_naturalness_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F7.6-edit-naturalness-contrast-1",
+          "wrong": {
+            "text": "I very like this book.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f7_6_edit_naturalness_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I really like this book.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_6_edit_naturalness_contrast_1_better.mp3"
+          },
+          "reasonZh": "very 通常不直接修飾動詞 like；使用 really。"
+        },
+        {
+          "id": "F7.6-edit-naturalness-contrast-2",
+          "wrong": {
+            "text": "We discussed about the problem.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f7_6_edit_naturalness_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We discussed the problem.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_6_edit_naturalness_contrast_2_better.mp3"
+          },
+          "reasonZh": "discuss 直接接受詞，不加 about。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F7.6-edit-naturalness-bug-1",
+          "zh": "請安靜地進入房間。",
+          "wrong": {
+            "text": "Please enter into the room quietly.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f7_6_edit_naturalness_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Please enter the room quietly.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_6_edit_naturalness_bug_1_better.mp3"
+          },
+          "reasonZh": "enter 在此可直接接受詞 room，into 顯得多餘。",
+          "severity": "E2"
+        },
+        {
+          "id": "F7.6-edit-naturalness-bug-2",
+          "zh": "我們返回回學校。",
+          "wrong": {
+            "text": "We returned back to school.",
+            "status": "awkward",
+            "audio": "audio/grammar_db/content/f7_6_edit_naturalness_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We returned to school.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f7_6_edit_naturalness_bug_2_better.mp3"
+          },
+          "reasonZh": "return 已包含「回」的意思，back 通常多餘。",
+          "severity": "E2"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [
+        "最後一級不以更難的規則為主，而是整合 E0–E3 判定，建立自我修改能力。"
+      ],
+      "diagnostics": [
+        {
+          "id": "F7.6-edit-naturalness-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I really like this book.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f7_6_edit_naturalness_example_1.mp3"
+            },
+            {
+              "text": "I very like this book.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_6_edit_naturalness_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We discussed about the problem.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_6_edit_naturalness_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F7.6-edit-naturalness-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「I very like this book.」？",
+          "choices": [
+            {
+              "text": "I really like this book.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f7_6_edit_naturalness_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "I very like this book.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_6_edit_naturalness_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We discussed about the problem.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f7_6_edit_naturalness_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F7.6-edit-naturalness-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "We discussed the problem after class.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f7_6_edit_naturalness_example_2.mp3"
+            },
+            {
+              "text": "Please enter into the room quietly.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_6_edit_naturalness_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We returned back to school.",
+              "status": "awkward",
+              "audio": "audio/grammar_db/content/f7_6_edit_naturalness_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F7.6-edit-naturalness-speaking",
+          "type": "speaking",
+          "prompt": "Explain why one understandable sentence still sounds awkward.",
+          "promptAudio": "audio/grammar_db/content/f7_6_edit_naturalness_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "meaning first, then structure, collocation, and register"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F7.6-edit-naturalness-writing",
+          "type": "writing",
+          "prompt": "Revise a sentence for meaning, naturalness, and register.",
+          "promptAudio": "audio/grammar_db/content/f7_6_edit_naturalness_prompt_writing.mp3",
+          "expectedFeatures": [
+            "meaning first, then structure, collocation, and register"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F7.6-edit-naturalness-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "I very like this book. We discussed about the problem.",
+        "audio": "audio/grammar_db/content/f7_6_edit_naturalness_revision.mp3",
+        "expectedCorrections": [
+          "I really like this book.",
+          "We discussed the problem."
+        ],
+        "severityTargets": [
+          "E2",
+          "E2"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F7.6-edit-naturalness-dialogue-1",
+            "speaker": "A",
+            "text": "Is this sentence understandable?",
+            "audio": "audio/grammar_db/dialogue_lines/f7_6_edit_naturalness_dialogue_1.mp3"
+          },
+          {
+            "id": "F7.6-edit-naturalness-dialogue-2",
+            "speaker": "B",
+            "text": "Yes, but \"I very like it\" sounds unnatural.",
+            "audio": "audio/grammar_db/dialogue_lines/f7_6_edit_naturalness_dialogue_2.mp3"
+          },
+          {
+            "id": "F7.6-edit-naturalness-dialogue-3",
+            "speaker": "A",
+            "text": "How should we revise it?",
+            "audio": "audio/grammar_db/dialogue_lines/f7_6_edit_naturalness_dialogue_3.mp3"
+          },
+          {
+            "id": "F7.6-edit-naturalness-dialogue-4",
+            "speaker": "B",
+            "text": "We should say, \"I really like it.\"",
+            "audio": "audio/grammar_db/dialogue_lines/f7_6_edit_naturalness_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f7_6_edit_naturalness.mp3"
+      }
+    }
+  ]
+}

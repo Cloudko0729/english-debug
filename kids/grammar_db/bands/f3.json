@@ -1,0 +1,1609 @@
+{
+  "schemaVersion": "1.0.0",
+  "band": "F3",
+  "nodes": [
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F3.1-past-be",
+      "band": "F3",
+      "microLevel": 1,
+      "titleZh": "過去的 was / were",
+      "titleEn": "Past Forms of Be",
+      "communicativeGoalZh": "用 was/were 表達過去的身分、狀態與位置。",
+      "form": "I/he/she/it was; you/we/they were",
+      "prerequisites": [
+        "F0.3-be-meaning",
+        "F1.4-be-questions-negatives"
+      ],
+      "diagramRef": "tense-timeline",
+      "naturalExamples": [
+        {
+          "id": "F3.1-past-be-example-1",
+          "text": "I was tired yesterday.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f3_1_past_be_example_1.mp3"
+        },
+        {
+          "id": "F3.1-past-be-example-2",
+          "text": "They were at the park.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f3_1_past_be_example_2.mp3"
+        },
+        {
+          "id": "F3.1-past-be-example-3",
+          "text": "Was she at school?",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f3_1_past_be_example_3.mp3"
+        },
+        {
+          "id": "F3.1-past-be-example-4",
+          "text": "We weren't late.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f3_1_past_be_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F3.1-past-be-contrast-1",
+          "wrong": {
+            "text": "We was at home.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_1_past_be_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "We were at home.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_1_past_be_contrast_1_better.mp3"
+          },
+          "reasonZh": "複數主詞 we 的過去 be 是 were。"
+        },
+        {
+          "id": "F3.1-past-be-contrast-2",
+          "wrong": {
+            "text": "I did be tired.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_1_past_be_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I was tired.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_1_past_be_contrast_2_better.mp3"
+          },
+          "reasonZh": "過去狀態直接使用 was，不使用 did be。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F3.1-past-be-bug-1",
+          "zh": "他昨天很忙。",
+          "wrong": {
+            "text": "He is busy yesterday.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_1_past_be_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "He was busy yesterday.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_1_past_be_bug_1_better.mp3"
+          },
+          "reasonZh": "yesterday 指過去，be 使用 was。",
+          "severity": "E1"
+        },
+        {
+          "id": "F3.1-past-be-bug-2",
+          "zh": "你們在圖書館嗎？",
+          "wrong": {
+            "text": "Was you in the library?",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_1_past_be_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "Were you in the library?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_1_past_be_bug_2_better.mp3"
+          },
+          "reasonZh": "you 的過去 be 使用 were。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F3.1-past-be-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I was tired yesterday.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f3_1_past_be_example_1.mp3"
+            },
+            {
+              "text": "We was at home.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_1_past_be_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I did be tired.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_1_past_be_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F3.1-past-be-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「We was at home.」？",
+          "choices": [
+            {
+              "text": "We were at home.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f3_1_past_be_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "We was at home.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_1_past_be_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I did be tired.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_1_past_be_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F3.1-past-be-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "They were at the park.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f3_1_past_be_example_2.mp3"
+            },
+            {
+              "text": "He is busy yesterday.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_1_past_be_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "Was you in the library?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_1_past_be_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F3.1-past-be-speaking",
+          "type": "speaking",
+          "prompt": "Say where you were yesterday.",
+          "promptAudio": "audio/grammar_db/content/f3_1_past_be_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "I/he/she/it was; you/we/they were"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F3.1-past-be-writing",
+          "type": "writing",
+          "prompt": "Write one past be question with \"was\" or \"were\".",
+          "promptAudio": "audio/grammar_db/content/f3_1_past_be_prompt_writing.mp3",
+          "expectedFeatures": [
+            "I/he/she/it was; you/we/they were"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F3.1-past-be-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "We was at home. I did be tired.",
+        "audio": "audio/grammar_db/content/f3_1_past_be_revision.mp3",
+        "expectedCorrections": [
+          "We were at home.",
+          "I was tired."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F3.1-past-be-dialogue-1",
+            "speaker": "A",
+            "text": "Where were you yesterday?",
+            "audio": "audio/grammar_db/dialogue_lines/f3_1_past_be_dialogue_1.mp3"
+          },
+          {
+            "id": "F3.1-past-be-dialogue-2",
+            "speaker": "B",
+            "text": "I was at the library.",
+            "audio": "audio/grammar_db/dialogue_lines/f3_1_past_be_dialogue_2.mp3"
+          },
+          {
+            "id": "F3.1-past-be-dialogue-3",
+            "speaker": "A",
+            "text": "Was Ben there, too?",
+            "audio": "audio/grammar_db/dialogue_lines/f3_1_past_be_dialogue_3.mp3"
+          },
+          {
+            "id": "F3.1-past-be-dialogue-4",
+            "speaker": "B",
+            "text": "No, he was at home.",
+            "audio": "audio/grammar_db/dialogue_lines/f3_1_past_be_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f3_1_past_be.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F3.2-past-simple",
+      "band": "F3",
+      "microLevel": 2,
+      "titleZh": "一般動詞過去式",
+      "titleEn": "Past Simple of Action Verbs",
+      "communicativeGoalZh": "用規則與高頻不規則過去式描述已結束事件。",
+      "form": "subject + past-tense verb",
+      "prerequisites": [
+        "F2.1-present-simple"
+      ],
+      "diagramRef": "tense-timeline",
+      "naturalExamples": [
+        {
+          "id": "F3.2-past-simple-example-1",
+          "text": "We played soccer yesterday.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f3_2_past_simple_example_1.mp3"
+        },
+        {
+          "id": "F3.2-past-simple-example-2",
+          "text": "She went to the store.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f3_2_past_simple_example_2.mp3"
+        },
+        {
+          "id": "F3.2-past-simple-example-3",
+          "text": "I saw a rainbow.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f3_2_past_simple_example_3.mp3"
+        },
+        {
+          "id": "F3.2-past-simple-example-4",
+          "text": "Dad bought a new lamp.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f3_2_past_simple_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F3.2-past-simple-contrast-1",
+          "wrong": {
+            "text": "She goed to the store.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_2_past_simple_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "She went to the store.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_2_past_simple_contrast_1_better.mp3"
+          },
+          "reasonZh": "go 的過去式是不規則形式 went。"
+        },
+        {
+          "id": "F3.2-past-simple-contrast-2",
+          "wrong": {
+            "text": "I was went to school.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_2_past_simple_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I went to school.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_2_past_simple_contrast_2_better.mp3"
+          },
+          "reasonZh": "went 已是過去式主要動詞，不和 was 這樣連用。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F3.2-past-simple-bug-1",
+          "zh": "我昨天吃了蛋糕。",
+          "wrong": {
+            "text": "I eated cake yesterday.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_2_past_simple_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I ate cake yesterday.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_2_past_simple_bug_1_better.mp3"
+          },
+          "reasonZh": "eat 的過去式是 ate。",
+          "severity": "E1"
+        },
+        {
+          "id": "F3.2-past-simple-bug-2",
+          "zh": "我們上週看了那部電影。",
+          "wrong": {
+            "text": "We watch the movie last week.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_2_past_simple_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We watched the movie last week.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_2_past_simple_bug_2_better.mp3"
+          },
+          "reasonZh": "已結束的過去事件使用 watched。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F3.2-past-simple-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "We played soccer yesterday.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f3_2_past_simple_example_1.mp3"
+            },
+            {
+              "text": "She goed to the store.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_2_past_simple_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I was went to school.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_2_past_simple_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F3.2-past-simple-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「She goed to the store.」？",
+          "choices": [
+            {
+              "text": "She went to the store.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f3_2_past_simple_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "She goed to the store.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_2_past_simple_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I was went to school.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_2_past_simple_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F3.2-past-simple-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She went to the store.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f3_2_past_simple_example_2.mp3"
+            },
+            {
+              "text": "I eated cake yesterday.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_2_past_simple_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We watch the movie last week.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_2_past_simple_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F3.2-past-simple-speaking",
+          "type": "speaking",
+          "prompt": "Say one thing you did yesterday.",
+          "promptAudio": "audio/grammar_db/content/f3_2_past_simple_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "subject + past-tense verb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F3.2-past-simple-writing",
+          "type": "writing",
+          "prompt": "Write two past-tense sentences about last weekend.",
+          "promptAudio": "audio/grammar_db/content/f3_2_past_simple_prompt_writing.mp3",
+          "expectedFeatures": [
+            "subject + past-tense verb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F3.2-past-simple-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "She goed to the store. I was went to school.",
+        "audio": "audio/grammar_db/content/f3_2_past_simple_revision.mp3",
+        "expectedCorrections": [
+          "She went to the store.",
+          "I went to school."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F3.2-past-simple-dialogue-1",
+            "speaker": "A",
+            "text": "What did you do yesterday?",
+            "audio": "audio/grammar_db/dialogue_lines/f3_2_past_simple_dialogue_1.mp3"
+          },
+          {
+            "id": "F3.2-past-simple-dialogue-2",
+            "speaker": "B",
+            "text": "I visited Grandma and played cards.",
+            "audio": "audio/grammar_db/dialogue_lines/f3_2_past_simple_dialogue_2.mp3"
+          },
+          {
+            "id": "F3.2-past-simple-dialogue-3",
+            "speaker": "A",
+            "text": "Did you have fun?",
+            "audio": "audio/grammar_db/dialogue_lines/f3_2_past_simple_dialogue_3.mp3"
+          },
+          {
+            "id": "F3.2-past-simple-dialogue-4",
+            "speaker": "B",
+            "text": "Yes, we had a great time.",
+            "audio": "audio/grammar_db/dialogue_lines/f3_2_past_simple_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f3_2_past_simple.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F3.3-did-questions",
+      "band": "F3",
+      "microLevel": 3,
+      "titleZh": "did 問句與否定",
+      "titleEn": "Past Questions and Negatives with Did",
+      "communicativeGoalZh": "用 did/didn't 詢問或否定過去事件，主要動詞回原形。",
+      "form": "Did + subject + base verb?; subject + did not + base verb",
+      "prerequisites": [
+        "F3.2-past-simple",
+        "F1.5-do-does"
+      ],
+      "diagramRef": "question-routes",
+      "naturalExamples": [
+        {
+          "id": "F3.3-did-questions-example-1",
+          "text": "Did you go to school?",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f3_3_did_questions_example_1.mp3"
+        },
+        {
+          "id": "F3.3-did-questions-example-2",
+          "text": "She didn't eat breakfast.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f3_3_did_questions_example_2.mp3"
+        },
+        {
+          "id": "F3.3-did-questions-example-3",
+          "text": "Where did they play?",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f3_3_did_questions_example_3.mp3"
+        },
+        {
+          "id": "F3.3-did-questions-example-4",
+          "text": "Yes, I did.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f3_3_did_questions_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F3.3-did-questions-contrast-1",
+          "wrong": {
+            "text": "Did you went home?",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_3_did_questions_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Did you go home?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_3_did_questions_contrast_1_better.mp3"
+          },
+          "reasonZh": "did 已標示過去，後面的動詞回原形 go。"
+        },
+        {
+          "id": "F3.3-did-questions-contrast-2",
+          "wrong": {
+            "text": "He doesn't play yesterday.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_3_did_questions_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "He didn't play yesterday.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_3_did_questions_contrast_2_better.mp3"
+          },
+          "reasonZh": "過去否定使用 didn't。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F3.3-did-questions-bug-1",
+          "zh": "她昨天有打電話嗎？",
+          "wrong": {
+            "text": "Did she called yesterday?",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_3_did_questions_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "Did she call yesterday?",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_3_did_questions_bug_1_better.mp3"
+          },
+          "reasonZh": "did 後接原形 call。",
+          "severity": "E1"
+        },
+        {
+          "id": "F3.3-did-questions-bug-2",
+          "zh": "我沒有看到他。",
+          "wrong": {
+            "text": "I didn't saw him.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_3_did_questions_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I didn't see him.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_3_did_questions_bug_2_better.mp3"
+          },
+          "reasonZh": "didn't 後接原形 see。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F3.3-did-questions-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "Did you go to school?",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f3_3_did_questions_example_1.mp3"
+            },
+            {
+              "text": "Did you went home?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_3_did_questions_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "He doesn't play yesterday.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_3_did_questions_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F3.3-did-questions-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「Did you went home?」？",
+          "choices": [
+            {
+              "text": "Did you go home?",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f3_3_did_questions_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "Did you went home?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_3_did_questions_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "He doesn't play yesterday.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_3_did_questions_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F3.3-did-questions-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "She didn't eat breakfast.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f3_3_did_questions_example_2.mp3"
+            },
+            {
+              "text": "Did she called yesterday?",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_3_did_questions_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I didn't saw him.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_3_did_questions_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F3.3-did-questions-speaking",
+          "type": "speaking",
+          "prompt": "Ask one question about yesterday with \"Did\".",
+          "promptAudio": "audio/grammar_db/content/f3_3_did_questions_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "Did + subject + base verb?; subject + did not + base verb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F3.3-did-questions-writing",
+          "type": "writing",
+          "prompt": "Write one past negative sentence with \"didn't\".",
+          "promptAudio": "audio/grammar_db/content/f3_3_did_questions_prompt_writing.mp3",
+          "expectedFeatures": [
+            "Did + subject + base verb?; subject + did not + base verb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F3.3-did-questions-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "Did you went home? He doesn't play yesterday.",
+        "audio": "audio/grammar_db/content/f3_3_did_questions_revision.mp3",
+        "expectedCorrections": [
+          "Did you go home?",
+          "He didn't play yesterday."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F3.3-did-questions-dialogue-1",
+            "speaker": "A",
+            "text": "Did you finish your homework?",
+            "audio": "audio/grammar_db/dialogue_lines/f3_3_did_questions_dialogue_1.mp3"
+          },
+          {
+            "id": "F3.3-did-questions-dialogue-2",
+            "speaker": "B",
+            "text": "No, I didn't finish it.",
+            "audio": "audio/grammar_db/dialogue_lines/f3_3_did_questions_dialogue_2.mp3"
+          },
+          {
+            "id": "F3.3-did-questions-dialogue-3",
+            "speaker": "A",
+            "text": "What did you do instead?",
+            "audio": "audio/grammar_db/dialogue_lines/f3_3_did_questions_dialogue_3.mp3"
+          },
+          {
+            "id": "F3.3-did-questions-dialogue-4",
+            "speaker": "B",
+            "text": "I helped my brother with his project.",
+            "audio": "audio/grammar_db/dialogue_lines/f3_3_did_questions_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f3_3_did_questions.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F3.4-prepositions",
+      "band": "F3",
+      "microLevel": 4,
+      "titleZh": "地點與時間介系詞",
+      "titleEn": "Prepositions of Place and Time",
+      "communicativeGoalZh": "依空間關係或時間範圍選擇常用介系詞。",
+      "form": "in/on/at and spatial relations",
+      "prerequisites": [
+        "F0.3-be-meaning"
+      ],
+      "diagramRef": "preposition-map",
+      "naturalExamples": [
+        {
+          "id": "F3.4-prepositions-example-1",
+          "text": "The keys are in the box.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f3_4_prepositions_example_1.mp3"
+        },
+        {
+          "id": "F3.4-prepositions-example-2",
+          "text": "The picture is on the wall.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f3_4_prepositions_example_2.mp3"
+        },
+        {
+          "id": "F3.4-prepositions-example-3",
+          "text": "We meet at seven.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f3_4_prepositions_example_3.mp3"
+        },
+        {
+          "id": "F3.4-prepositions-example-4",
+          "text": "I have music class on Monday.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f3_4_prepositions_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F3.4-prepositions-contrast-1",
+          "wrong": {
+            "text": "We meet in seven.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_4_prepositions_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "We meet at seven.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_4_prepositions_contrast_1_better.mp3"
+          },
+          "reasonZh": "精確時間點使用 at。"
+        },
+        {
+          "id": "F3.4-prepositions-contrast-2",
+          "wrong": {
+            "text": "I have PE at Monday.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_4_prepositions_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I have PE on Monday.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_4_prepositions_contrast_2_better.mp3"
+          },
+          "reasonZh": "星期與日期通常使用 on。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F3.4-prepositions-bug-1",
+          "zh": "我七月生日。",
+          "wrong": {
+            "text": "My birthday is on July.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_4_prepositions_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "My birthday is in July.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_4_prepositions_bug_1_better.mp3"
+          },
+          "reasonZh": "月份使用 in。",
+          "severity": "E1"
+        },
+        {
+          "id": "F3.4-prepositions-bug-2",
+          "zh": "貓在桌子下面。",
+          "wrong": {
+            "text": "The cat is in the table.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_4_prepositions_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "The cat is under the table.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_4_prepositions_bug_2_better.mp3"
+          },
+          "reasonZh": "under 表示下方，不是裡面。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [
+        {
+          "forms": [
+            "on the weekend",
+            "at the weekend"
+          ],
+          "noteZh": "美式英語常用 on the weekend；英式英語常用 at the weekend。",
+          "dialect": "US/UK"
+        }
+      ],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F3.4-prepositions-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The keys are in the box.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f3_4_prepositions_example_1.mp3"
+            },
+            {
+              "text": "We meet in seven.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_4_prepositions_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I have PE at Monday.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_4_prepositions_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F3.4-prepositions-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「We meet in seven.」？",
+          "choices": [
+            {
+              "text": "We meet at seven.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f3_4_prepositions_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "We meet in seven.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_4_prepositions_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I have PE at Monday.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_4_prepositions_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F3.4-prepositions-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The picture is on the wall.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f3_4_prepositions_example_2.mp3"
+            },
+            {
+              "text": "My birthday is on July.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_4_prepositions_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "The cat is in the table.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_4_prepositions_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F3.4-prepositions-speaking",
+          "type": "speaking",
+          "prompt": "Say where an object is using a place preposition.",
+          "promptAudio": "audio/grammar_db/content/f3_4_prepositions_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "in/on/at and spatial relations"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F3.4-prepositions-writing",
+          "type": "writing",
+          "prompt": "Write a sentence with a time and a day.",
+          "promptAudio": "audio/grammar_db/content/f3_4_prepositions_prompt_writing.mp3",
+          "expectedFeatures": [
+            "in/on/at and spatial relations"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F3.4-prepositions-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "We meet in seven. I have PE at Monday.",
+        "audio": "audio/grammar_db/content/f3_4_prepositions_revision.mp3",
+        "expectedCorrections": [
+          "We meet at seven.",
+          "I have PE on Monday."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F3.4-prepositions-dialogue-1",
+            "speaker": "A",
+            "text": "Where is the school office?",
+            "audio": "audio/grammar_db/dialogue_lines/f3_4_prepositions_dialogue_1.mp3"
+          },
+          {
+            "id": "F3.4-prepositions-dialogue-2",
+            "speaker": "B",
+            "text": "It is next to the library.",
+            "audio": "audio/grammar_db/dialogue_lines/f3_4_prepositions_dialogue_2.mp3"
+          },
+          {
+            "id": "F3.4-prepositions-dialogue-3",
+            "speaker": "A",
+            "text": "When does it open?",
+            "audio": "audio/grammar_db/dialogue_lines/f3_4_prepositions_dialogue_3.mp3"
+          },
+          {
+            "id": "F3.4-prepositions-dialogue-4",
+            "speaker": "B",
+            "text": "It opens at eight on weekdays.",
+            "audio": "audio/grammar_db/dialogue_lines/f3_4_prepositions_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f3_4_prepositions.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F3.5-connectors",
+      "band": "F3",
+      "microLevel": 5,
+      "titleZh": "基本連接詞與邏輯",
+      "titleEn": "Basic Connectors and Logical Relations",
+      "communicativeGoalZh": "用 and、but、or、because、so 清楚表達添加、轉折、選擇、原因與結果。",
+      "form": "clause + connector + clause",
+      "prerequisites": [
+        "F0.1-complete-sentence"
+      ],
+      "diagramRef": "connector-relations",
+      "naturalExamples": [
+        {
+          "id": "F3.5-connectors-example-1",
+          "text": "I have a pencil and an eraser.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f3_5_connectors_example_1.mp3"
+        },
+        {
+          "id": "F3.5-connectors-example-2",
+          "text": "The bag is old, but it is clean.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f3_5_connectors_example_2.mp3"
+        },
+        {
+          "id": "F3.5-connectors-example-3",
+          "text": "Do you want tea or water?",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f3_5_connectors_example_3.mp3"
+        },
+        {
+          "id": "F3.5-connectors-example-4",
+          "text": "I stayed home because I was sick.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f3_5_connectors_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F3.5-connectors-contrast-1",
+          "wrong": {
+            "text": "Because I was sick, so I stayed home.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_5_connectors_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "I stayed home because I was sick.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_5_connectors_contrast_1_better.mp3"
+          },
+          "reasonZh": "標準英文通常不用 because 和 so 同時連接同一組原因結果。"
+        },
+        {
+          "id": "F3.5-connectors-contrast-2",
+          "wrong": {
+            "text": "I was tired, but I went to bed early.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_5_connectors_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I was tired, so I went to bed early.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_5_connectors_contrast_2_better.mp3"
+          },
+          "reasonZh": "早睡是疲累的結果，so 比 but 更符合邏輯。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F3.5-connectors-bug-1",
+          "zh": "下雨了，所以我們待在室內。",
+          "wrong": {
+            "text": "It rained, because we stayed inside.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_5_connectors_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "It rained, so we stayed inside.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_5_connectors_bug_1_better.mp3"
+          },
+          "reasonZh": "前句是原因，後句是結果，使用 so。",
+          "severity": "E0"
+        },
+        {
+          "id": "F3.5-connectors-bug-2",
+          "zh": "我喜歡蘋果和香蕉。",
+          "wrong": {
+            "text": "I like apples but bananas.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_5_connectors_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I like apples and bananas.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_5_connectors_bug_2_better.mp3"
+          },
+          "reasonZh": "兩項是添加關係，不是轉折。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [],
+      "diagnostics": [
+        {
+          "id": "F3.5-connectors-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I have a pencil and an eraser.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f3_5_connectors_example_1.mp3"
+            },
+            {
+              "text": "Because I was sick, so I stayed home.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_5_connectors_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I was tired, but I went to bed early.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_5_connectors_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F3.5-connectors-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「Because I was sick, so I stayed home.」？",
+          "choices": [
+            {
+              "text": "I stayed home because I was sick.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f3_5_connectors_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "Because I was sick, so I stayed home.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_5_connectors_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I was tired, but I went to bed early.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_5_connectors_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F3.5-connectors-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "The bag is old, but it is clean.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f3_5_connectors_example_2.mp3"
+            },
+            {
+              "text": "It rained, because we stayed inside.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_5_connectors_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I like apples but bananas.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_5_connectors_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F3.5-connectors-speaking",
+          "type": "speaking",
+          "prompt": "Join two ideas with \"because\".",
+          "promptAudio": "audio/grammar_db/content/f3_5_connectors_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "clause + connector + clause"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F3.5-connectors-writing",
+          "type": "writing",
+          "prompt": "Write one sentence that shows a contrast with \"but\".",
+          "promptAudio": "audio/grammar_db/content/f3_5_connectors_prompt_writing.mp3",
+          "expectedFeatures": [
+            "clause + connector + clause"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F3.5-connectors-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "Because I was sick, so I stayed home. I was tired, but I went to bed early.",
+        "audio": "audio/grammar_db/content/f3_5_connectors_revision.mp3",
+        "expectedCorrections": [
+          "I stayed home because I was sick.",
+          "I was tired, so I went to bed early."
+        ],
+        "severityTargets": [
+          "E0",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F3.5-connectors-dialogue-1",
+            "speaker": "A",
+            "text": "Why did you stay home?",
+            "audio": "audio/grammar_db/dialogue_lines/f3_5_connectors_dialogue_1.mp3"
+          },
+          {
+            "id": "F3.5-connectors-dialogue-2",
+            "speaker": "B",
+            "text": "I stayed home because I was sick.",
+            "audio": "audio/grammar_db/dialogue_lines/f3_5_connectors_dialogue_2.mp3"
+          },
+          {
+            "id": "F3.5-connectors-dialogue-3",
+            "speaker": "A",
+            "text": "Are you feeling better now?",
+            "audio": "audio/grammar_db/dialogue_lines/f3_5_connectors_dialogue_3.mp3"
+          },
+          {
+            "id": "F3.5-connectors-dialogue-4",
+            "speaker": "B",
+            "text": "Yes, so I can go to school tomorrow.",
+            "audio": "audio/grammar_db/dialogue_lines/f3_5_connectors_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f3_5_connectors.mp3"
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "F3.6-basic-helpers",
+      "band": "F3",
+      "microLevel": 6,
+      "titleZh": "can、will 與 going to",
+      "titleEn": "Can, Will, and Be Going To",
+      "communicativeGoalZh": "用 can 表能力、will 表即時決定或預測、going to 表計畫或有跡象的預測。",
+      "form": "helper + base verb",
+      "prerequisites": [
+        "F1.3-predicate-choice"
+      ],
+      "diagramRef": "modal-strength",
+      "naturalExamples": [
+        {
+          "id": "F3.6-basic-helpers-example-1",
+          "text": "I can swim.",
+          "status": "natural",
+          "purpose": "recognition",
+          "audio": "audio/grammar_db/content/f3_6_basic_helpers_example_1.mp3"
+        },
+        {
+          "id": "F3.6-basic-helpers-example-2",
+          "text": "I will call you tonight.",
+          "status": "natural",
+          "purpose": "conversation",
+          "audio": "audio/grammar_db/content/f3_6_basic_helpers_example_2.mp3"
+        },
+        {
+          "id": "F3.6-basic-helpers-example-3",
+          "text": "We are going to visit Grandma.",
+          "status": "natural",
+          "purpose": "narrative",
+          "audio": "audio/grammar_db/content/f3_6_basic_helpers_example_3.mp3"
+        },
+        {
+          "id": "F3.6-basic-helpers-example-4",
+          "text": "She can't come today.",
+          "status": "natural",
+          "purpose": "writing",
+          "audio": "audio/grammar_db/content/f3_6_basic_helpers_example_4.mp3"
+        }
+      ],
+      "contrastPairs": [
+        {
+          "id": "F3.6-basic-helpers-contrast-1",
+          "wrong": {
+            "text": "He can swims.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_6_basic_helpers_contrast_1_wrong.mp3"
+          },
+          "better": {
+            "text": "He can swim.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_6_basic_helpers_contrast_1_better.mp3"
+          },
+          "reasonZh": "can 後面的動詞使用原形。"
+        },
+        {
+          "id": "F3.6-basic-helpers-contrast-2",
+          "wrong": {
+            "text": "I will to go home.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_6_basic_helpers_contrast_2_wrong.mp3"
+          },
+          "better": {
+            "text": "I will go home.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_6_basic_helpers_contrast_2_better.mp3"
+          },
+          "reasonZh": "will 後直接接原形，不加 to。"
+        }
+      ],
+      "chineseTransferBugs": [
+        {
+          "id": "F3.6-basic-helpers-bug-1",
+          "zh": "她會騎腳踏車。",
+          "wrong": {
+            "text": "She can rides a bike.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_6_basic_helpers_bug_1_wrong.mp3"
+          },
+          "better": {
+            "text": "She can ride a bike.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_6_basic_helpers_bug_1_better.mp3"
+          },
+          "reasonZh": "can 後接 ride。",
+          "severity": "E1"
+        },
+        {
+          "id": "F3.6-basic-helpers-bug-2",
+          "zh": "我們明天打算做蛋糕。",
+          "wrong": {
+            "text": "We going to make a cake tomorrow.",
+            "status": "misleading",
+            "audio": "audio/grammar_db/content/f3_6_basic_helpers_bug_2_wrong.mp3"
+          },
+          "better": {
+            "text": "We are going to make a cake tomorrow.",
+            "status": "natural",
+            "audio": "audio/grammar_db/content/f3_6_basic_helpers_bug_2_better.mp3"
+          },
+          "reasonZh": "going to 前需要正確的 be。",
+          "severity": "E1"
+        }
+      ],
+      "acceptableVariants": [],
+      "notesZh": [
+        "can、will 與 going to 不能全部翻成同一個「會」；資料庫保留各自的溝通功能。"
+      ],
+      "diagnostics": [
+        {
+          "id": "F3.6-basic-helpers-diagnostic-form",
+          "domain": "form",
+          "promptZh": "哪一句最符合本節點的自然英文形式？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I can swim.",
+              "status": "natural",
+              "purpose": "recognition",
+              "audio": "audio/grammar_db/content/f3_6_basic_helpers_example_1.mp3"
+            },
+            {
+              "text": "He can swims.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_6_basic_helpers_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I will to go home.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_6_basic_helpers_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F3.6-basic-helpers-diagnostic-repair",
+          "domain": "repair",
+          "promptZh": "哪一句最適合修正「He can swims.」？",
+          "choices": [
+            {
+              "text": "He can swim.",
+              "status": "natural",
+              "audio": "audio/grammar_db/content/f3_6_basic_helpers_contrast_1_better.mp3",
+              "id": "a"
+            },
+            {
+              "text": "He can swims.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_6_basic_helpers_contrast_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "I will to go home.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_6_basic_helpers_contrast_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        },
+        {
+          "id": "F3.6-basic-helpers-diagnostic-naturalness",
+          "domain": "naturalness",
+          "promptZh": "哪一句在一般情境中最自然，也不會改變核心意思？",
+          "choices": [
+            {
+              "id": "a",
+              "text": "I will call you tonight.",
+              "status": "natural",
+              "purpose": "conversation",
+              "audio": "audio/grammar_db/content/f3_6_basic_helpers_example_2.mp3"
+            },
+            {
+              "text": "She can rides a bike.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_6_basic_helpers_bug_1_wrong.mp3",
+              "id": "b"
+            },
+            {
+              "text": "We going to make a cake tomorrow.",
+              "status": "misleading",
+              "audio": "audio/grammar_db/content/f3_6_basic_helpers_bug_2_wrong.mp3",
+              "id": "c"
+            }
+          ],
+          "answerId": "a"
+        }
+      ],
+      "productionTasks": [
+        {
+          "id": "F3.6-basic-helpers-speaking",
+          "type": "speaking",
+          "prompt": "Say one thing you can do.",
+          "promptAudio": "audio/grammar_db/content/f3_6_basic_helpers_prompt_speaking.mp3",
+          "expectedFeatures": [
+            "helper + base verb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        },
+        {
+          "id": "F3.6-basic-helpers-writing",
+          "type": "writing",
+          "prompt": "Write one plan with \"be going to\".",
+          "promptAudio": "audio/grammar_db/content/f3_6_basic_helpers_prompt_writing.mp3",
+          "expectedFeatures": [
+            "helper + base verb"
+          ],
+          "scoring": {
+            "meaning": 2,
+            "targetForm": 2,
+            "naturalness": 1
+          }
+        }
+      ],
+      "revisionTask": {
+        "id": "F3.6-basic-helpers-revision",
+        "promptZh": "保留原意，修正下列兩句的形式、語意或自然度問題。",
+        "text": "He can swims. I will to go home.",
+        "audio": "audio/grammar_db/content/f3_6_basic_helpers_revision.mp3",
+        "expectedCorrections": [
+          "He can swim.",
+          "I will go home."
+        ],
+        "severityTargets": [
+          "E1",
+          "E1"
+        ]
+      },
+      "dialogue": {
+        "turns": [
+          {
+            "id": "F3.6-basic-helpers-dialogue-1",
+            "speaker": "A",
+            "text": "Can you help me after school?",
+            "audio": "audio/grammar_db/dialogue_lines/f3_6_basic_helpers_dialogue_1.mp3"
+          },
+          {
+            "id": "F3.6-basic-helpers-dialogue-2",
+            "speaker": "B",
+            "text": "Yes, I can help you.",
+            "audio": "audio/grammar_db/dialogue_lines/f3_6_basic_helpers_dialogue_2.mp3"
+          },
+          {
+            "id": "F3.6-basic-helpers-dialogue-3",
+            "speaker": "A",
+            "text": "What are you going to make?",
+            "audio": "audio/grammar_db/dialogue_lines/f3_6_basic_helpers_dialogue_3.mp3"
+          },
+          {
+            "id": "F3.6-basic-helpers-dialogue-4",
+            "speaker": "B",
+            "text": "I am going to make a poster.",
+            "audio": "audio/grammar_db/dialogue_lines/f3_6_basic_helpers_dialogue_4.mp3"
+          }
+        ],
+        "fullAudio": "audio/grammar_db/dialogues/f3_6_basic_helpers.mp3"
+      }
+    }
+  ]
+}
