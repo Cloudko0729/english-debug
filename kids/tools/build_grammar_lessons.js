@@ -33,13 +33,10 @@ const SEV_LABEL = {
   E3: "🔵 這樣說也可以",
 };
 
-// communicativeGoalZh 少數幾句帶公式，孩子端改寫成白話（其餘直接沿用）
-const GOAL_OVERRIDE = {
-  "F2.3-present-continuous": "告訴別人現在正在做什麼",
-  "F4.6-infinitive-gerund": "在常用動詞後面，選對要接哪一種動詞形式",
-  "F5.1-present-perfect-experience": "說出你「曾經做過」的事，或現在還看得到的結果",
-  "F5.4-first-conditional": "說出「如果⋯⋯就會⋯⋯」這種有可能發生的事",
-};
+// 孩子端用語（goal / formZh）獨立成資料檔，不直接用資料庫的 communicativeGoalZh 與 form —
+// 那兩個欄位是寫給教學引擎的術語（例如 "subject + predicate"），孩子看不懂。
+// 見 LESSON_PAGE_SPEC.md 第 1 節。
+const KID = JSON.parse(fs.readFileSync(path.join(DB, "kid_wording.json"), "utf8"));
 
 function esc(s) {
   return String(s == null ? "" : s)
@@ -60,7 +57,14 @@ function loadNodes() {
 }
 
 function goalOf(n) {
-  return GOAL_OVERRIDE[n.id] || String(n.communicativeGoalZh || "").replace(/。$/, "");
+  const k = KID[n.id];
+  if (!k || !k.goal) throw new Error(`kid_wording.json 缺少 ${n.id} 的 goal（孩子端用語必須人工撰寫，不可回退成資料庫術語）`);
+  return k.goal;
+}
+function formZhOf(n) {
+  const k = KID[n.id];
+  if (!k || !k.formZh) throw new Error(`kid_wording.json 缺少 ${n.id} 的 formZh`);
+  return k.formZh;
 }
 
 const STYLE = `
@@ -111,7 +115,9 @@ const STYLE = `
   .why-btn{width:100%;padding:12px;border:2px solid var(--purple);border-radius:12px;background:#f3edff;color:var(--purple);font-weight:800;cursor:pointer;font-size:.92rem;font-family:inherit;}
   .why-content{display:none;background:var(--panel);border:2px solid var(--border);border-top:none;border-radius:0 0 12px 12px;padding:14px;}
   .why-content.show{display:block;}
-  .form-badge{background:#243042;color:#fff;border-radius:8px;padding:8px 12px;font-family:monospace;font-size:.9rem;display:inline-block;margin-bottom:12px;}
+  /* 規則先給中文（孩子看的），英文原式縮小放在下面當對照 */
+  .form-rule{background:#eef5ff;border-left:4px solid var(--primary);border-radius:8px;padding:10px 12px;font-size:.95rem;font-weight:700;color:#1f4463;margin-bottom:6px;}
+  .form-badge{background:#f1f3f6;color:#8a93a0;border-radius:6px;padding:4px 9px;font-family:monospace;font-size:.72rem;display:inline-block;margin-bottom:12px;}
   .bug-line{background:#fff8e1;border-radius:10px;padding:8px 12px;margin:6px 0;font-size:.88rem;}
   .bug-line .tag{display:inline-block;font-size:.72rem;font-weight:800;padding:1px 8px;border-radius:10px;background:#ffe0b3;color:#8a4a12;margin-right:6px;}
   /* 手機：只給「看整張規則圖」時才橫向捲動（LESSON_PAGE_SPEC 第 4 節） */
@@ -197,7 +203,8 @@ function renderNode(n, prev, next) {
 <div class="why-drawer">
   <button class="why-btn" onclick="togWhy()" id="whyBtn">🤔 為什麼？（規則＋常見錯誤）</button>
   <div class="why-content" id="whyContent">
-    <div class="form-badge">${esc(n.form)}</div>
+    <div class="form-rule">📌 ${esc(formZhOf(n))}</div>
+    <div class="form-badge" title="英文文法書上的寫法">${esc(n.form)}</div>
     ${bugs.map(b => `<div class="bug-line">
       <span class="tag">${esc(SEV_LABEL[b.severity] || b.severity)}</span>「${esc(b.zh)}」<br>
       <span style="color:var(--danger)">❌ ${esc(b.wrong.text)}</span> →

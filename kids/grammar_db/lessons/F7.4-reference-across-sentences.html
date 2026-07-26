@@ -52,7 +52,9 @@
   .why-btn{width:100%;padding:12px;border:2px solid var(--purple);border-radius:12px;background:#f3edff;color:var(--purple);font-weight:800;cursor:pointer;font-size:.92rem;font-family:inherit;}
   .why-content{display:none;background:var(--panel);border:2px solid var(--border);border-top:none;border-radius:0 0 12px 12px;padding:14px;}
   .why-content.show{display:block;}
-  .form-badge{background:#243042;color:#fff;border-radius:8px;padding:8px 12px;font-family:monospace;font-size:.9rem;display:inline-block;margin-bottom:12px;}
+  /* 規則先給中文（孩子看的），英文原式縮小放在下面當對照 */
+  .form-rule{background:#eef5ff;border-left:4px solid var(--primary);border-radius:8px;padding:10px 12px;font-size:.95rem;font-weight:700;color:#1f4463;margin-bottom:6px;}
+  .form-badge{background:#f1f3f6;color:#8a93a0;border-radius:6px;padding:4px 9px;font-family:monospace;font-size:.72rem;display:inline-block;margin-bottom:12px;}
   .bug-line{background:#fff8e1;border-radius:10px;padding:8px 12px;margin:6px 0;font-size:.88rem;}
   .bug-line .tag{display:inline-block;font-size:.72rem;font-weight:800;padding:1px 8px;border-radius:10px;background:#ffe0b3;color:#8a4a12;margin-right:6px;}
   /* 手機：只給「看整張規則圖」時才橫向捲動（LESSON_PAGE_SPEC 第 4 節） */
@@ -95,7 +97,7 @@
   <button class="play big" style="margin-top:6px" onclick="pa('../../audio/grammar_db/dialogues/f7_4_reference_across_sentences.mp3')">🔊 整段對話</button>
 </div>
 
-<div class="goal">🎯 今天你要學會：讓 it、they、this、these 等清楚指向前文，必要時重複關鍵名詞</div>
+<div class="goal">🎯 今天你要學會：讓 it、they、this 清楚指到前面講過的東西</div>
 
 <div class="podcast" id="podcastBox">
   <div class="hd">🎧 教學 Podcast（NotebookLM 生成）</div>
@@ -132,7 +134,8 @@
 <div class="why-drawer">
   <button class="why-btn" onclick="togWhy()" id="whyBtn">🤔 為什麼？（規則＋常見錯誤）</button>
   <div class="why-content" id="whyContent">
-    <div class="form-badge">pronoun/demonstrative + unambiguous antecedent</div>
+    <div class="form-rule">📌 代名詞要能明確對應到前面某個名詞；會混淆時就把名詞重講一次</div>
+    <div class="form-badge" title="英文文法書上的寫法">pronoun/demonstrative + unambiguous antecedent</div>
     <div class="bug-line">
       <span class="tag">🔴 意思跑掉了</span>「John 告訴 Peter，他需要更多時間。」<br>
       <span style="color:var(--danger)">❌ John told Peter that he needed more time.</span> →
