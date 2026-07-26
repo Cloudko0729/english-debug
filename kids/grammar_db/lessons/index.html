@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>文法地圖 F0–F7</title>
+<style>
+  :root{--bg:#fff7dc;--panel:#fff;--primary:#2f80ed;--soft:#dbeafe;--accent:#ffb703;--green:#2fbf71;--purple:#7c4dca;--danger:#ef476f;--text:#243042;--muted:#667085;--border:#e2e8f0;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Arial,"Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);max-width:720px;margin:0 auto;padding-bottom:60px;line-height:1.7;}
+  header{background:var(--primary);color:#fff;text-align:center;padding:18px 16px 14px;}
+  header .band{display:inline-block;background:#ffe27a;color:#5a4200;font-size:.7rem;font-weight:800;border-radius:20px;padding:2px 12px;margin-bottom:6px;}
+  header h1{font-size:1.3rem;} header p{font-size:.8rem;opacity:.9;margin-top:4px;}
+  header a{color:#ffe27a;text-decoration:none;font-weight:700;}
+  .card{background:var(--panel);border:2px solid var(--border);border-radius:16px;margin:14px;padding:16px;}
+  .scene{background:#fff8ea;border:2px dashed var(--accent);border-radius:16px;margin:14px;padding:16px;}
+  .scene .hd{font-weight:800;color:#8a6d1a;margin-bottom:8px;font-size:.95rem;}
+  .scene .tip{font-size:.82rem;color:#8a6d1a;margin-top:8px;}
+  .goal{background:#eef5ff;border-left:4px solid var(--primary);border-radius:10px;padding:12px 14px;margin:14px;font-size:1rem;font-weight:700;color:#1f4463;}
+  .podcast{background:#f3edff;border:2px solid #d7c6ff;border-radius:16px;margin:14px;padding:14px 16px;display:none;}
+  .podcast.show{display:block;}
+  .podcast .hd{font-weight:800;color:#5a36a8;font-size:.9rem;margin-bottom:8px;}
+  .podcast audio,.podcast video{width:100%;border-radius:10px;margin-top:4px;display:block;}
+  .podcast .mlabel{font-size:.82rem;font-weight:700;color:#5a36a8;margin-top:8px;}
+  .play{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:none;border-radius:50%;background:var(--primary);color:#fff;font-size:.85rem;cursor:pointer;vertical-align:middle;flex-shrink:0;}
+  .play.big{width:auto;border-radius:8px;padding:6px 14px;font-size:.85rem;gap:6px;font-weight:700;}
+  .step-no{display:inline-block;background:var(--primary);color:#fff;border-radius:8px;font-size:.75rem;font-weight:800;padding:2px 10px;margin-bottom:8px;}
+  .card h2{font-size:1.05rem;color:var(--primary);margin-bottom:8px;}
+  .ex-line{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:1rem;flex-wrap:wrap;}
+  .contrast{border:1.5px solid var(--border);border-radius:12px;padding:10px 12px;margin:8px 0;background:#fbfcff;}
+  .contrast .bad{color:var(--danger);font-weight:700;font-size:.95rem;}
+  .contrast .bad::before{content:"❌ ";}
+  .contrast .good{color:#1a7a4d;font-weight:700;font-size:1rem;margin-top:4px;}
+  .contrast .good::before{content:"✅ ";}
+  .contrast .why{color:var(--muted);font-size:.82rem;margin-top:4px;}
+  .dialog-line{display:flex;gap:10px;align-items:flex-start;margin:10px 0;}
+  .who{font-weight:800;color:var(--primary);width:22px;flex-shrink:0;text-align:center;background:var(--soft);border-radius:50%;height:22px;line-height:22px;font-size:.8rem;}
+  .who.b{color:#fff;background:var(--green);}
+  .more-btn{width:100%;padding:10px;border:2px dashed var(--border);border-radius:10px;background:#fff;color:var(--muted);font-weight:700;cursor:pointer;margin-top:10px;font-size:.88rem;font-family:inherit;}
+  .more-box{display:none;margin-top:10px;}
+  .more-box.show{display:block;}
+  .q{border-top:1px dashed #eee;padding:12px 0;}
+  .q:first-of-type{border-top:none;}
+  .q .qt{font-weight:700;margin-bottom:8px;font-size:.95rem;}
+  .q button.opt{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid var(--border);border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit;}
+  .q button.opt.ok{border-color:var(--green);background:#d9f6e8;}
+  .q button.opt.no{border-color:var(--danger);background:#fde0e8;}
+  .prod-box{background:#f0fff5;border:1.5px solid #bfe8cd;border-radius:12px;padding:14px;margin:10px 0;}
+  .prod-box .prompt{font-weight:700;font-size:.98rem;margin-bottom:8px;}
+  .prod-box .done-check{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.88rem;color:#1a7a4d;font-weight:700;}
+  .why-drawer{margin:14px;}
+  .why-btn{width:100%;padding:12px;border:2px solid var(--purple);border-radius:12px;background:#f3edff;color:var(--purple);font-weight:800;cursor:pointer;font-size:.92rem;font-family:inherit;}
+  .why-content{display:none;background:var(--panel);border:2px solid var(--border);border-top:none;border-radius:0 0 12px 12px;padding:14px;}
+  .why-content.show{display:block;}
+  .form-badge{background:#243042;color:#fff;border-radius:8px;padding:8px 12px;font-family:monospace;font-size:.9rem;display:inline-block;margin-bottom:12px;}
+  .bug-line{background:#fff8e1;border-radius:10px;padding:8px 12px;margin:6px 0;font-size:.88rem;}
+  .bug-line .tag{display:inline-block;font-size:.72rem;font-weight:800;padding:1px 8px;border-radius:10px;background:#ffe0b3;color:#8a4a12;margin-right:6px;}
+  /* 手機：只給「看整張規則圖」時才橫向捲動（LESSON_PAGE_SPEC 第 4 節） */
+  .diagram-wrap{overflow-x:auto;margin-top:12px;border:1px solid var(--border);border-radius:10px;background:#fffdf8;}
+  .diagram-wrap img{display:block;width:760px;max-width:none;}
+  @media (min-width:800px){.diagram-wrap img{width:100%;}}
+  .navbtns{display:flex;gap:8px;margin:16px 14px;}
+  .navbtns a{flex:1;text-align:center;padding:12px;border-radius:12px;text-decoration:none;font-weight:800;font-size:.9rem;border:2px solid var(--border);background:#fff;color:var(--text);}
+  .navbtns a.home{background:var(--green);color:#fff;border-color:var(--green);}
+  .navbtns a.dim{opacity:.4;pointer-events:none;}
+
+  .bandcard{background:var(--panel);border:2px solid var(--border);border-radius:16px;margin:14px;padding:14px 16px;}
+  .bandcard h2{font-size:1.05rem;color:var(--primary);margin-bottom:2px;}
+  .bandcard .sc{font-size:.78rem;color:var(--muted);margin-bottom:10px;}
+  .nlist{display:flex;flex-direction:column;gap:7px;}
+  .nlist a{display:flex;justify-content:space-between;align-items:center;gap:8px;border:2px solid var(--border);border-radius:11px;padding:10px 13px;text-decoration:none;color:inherit;font-weight:700;font-size:.9rem;}
+  .nlist a:hover{border-color:var(--primary);}
+  .nlist .sub{font-weight:400;color:var(--muted);font-size:.78rem;}
+</style>
+</head>
+<body>
+<header>
+  <h1>🗺️ 文法地圖</h1>
+  <p>F0–F7 共 48 課 · <a href="../../index.html">← 回首頁</a></p>
+</header>
+<div class="bandcard">
+  <h2>F0 句子零件島</h2>
+  <div class="sc">情境：家庭與小島物品　·　5 課</div>
+  <div class="nlist">
+    <a href="F0.1-complete-sentence.html"><span>完整句與片語<span class="sub"> Complete Sentences and Fragments</span></span><span>›</span></a><a href="F0.2-be-agreement.html"><span>主詞與 am / is / are<span class="sub"> Subject Agreement with Be</span></span><span>›</span></a><a href="F0.3-be-meaning.html"><span>be 表身分、狀態與位置<span class="sub"> Be for Identity, State, and Location</span></span><span>›</span></a><a href="F0.4-singular-plural.html"><span>一個與多個名詞<span class="sub"> Singular and Plural Nouns</span></span><span>›</span></a><a href="F0.5-a-an-sound.html"><span>a / an 看聲音<span class="sub"> Choosing A or An by Sound</span></span><span>›</span></a>
+  </div>
+</div><div class="bandcard">
+  <h2>F1 動作與問句島</h2>
+  <div class="sc">情境：學校、寵物、問答　·　6 課</div>
+  <div class="nlist">
+    <a href="F1.1-subject-pronouns.html"><span>主詞代名詞<span class="sub"> Subject Pronouns</span></span><span>›</span></a><a href="F1.2-action-affirmative.html"><span>一般動詞肯定句<span class="sub"> Affirmative Action-Verb Sentences</span></span><span>›</span></a><a href="F1.3-predicate-choice.html"><span>be 述語與一般動詞述語<span class="sub"> Choosing a Be or Action Predicate</span></span><span>›</span></a><a href="F1.4-be-questions-negatives.html"><span>be 問句、否定與短答<span class="sub"> Questions, Negatives, and Short Answers with Be</span></span><span>›</span></a><a href="F1.5-do-does.html"><span>do / does 問句與否定<span class="sub"> Questions and Negatives with Do and Does</span></span><span>›</span></a><a href="F1.6-wh-questions.html"><span>Wh- 資訊問句<span class="sub"> Wh- Information Questions</span></span><span>›</span></a>
+  </div>
+</div><div class="bandcard">
+  <h2>F2 日常時間島</h2>
+  <div class="sc">情境：每日作息與正在發生的事　·　7 課</div>
+  <div class="nlist">
+    <a href="F2.1-present-simple.html"><span>現在簡單式<span class="sub"> Present Simple</span></span><span>›</span></a><a href="F2.2-frequency-adverbs.html"><span>頻率副詞的位置<span class="sub"> Position of Frequency Adverbs</span></span><span>›</span></a><a href="F2.3-present-continuous.html"><span>現在進行式<span class="sub"> Present Continuous</span></span><span>›</span></a><a href="F2.4-present-contrast.html"><span>習慣與此刻<span class="sub"> Present Simple versus Present Continuous</span></span><span>›</span></a><a href="F2.5-stative-verbs.html"><span>常見狀態動詞<span class="sub"> Common Stative Verbs</span></span><span>›</span></a><a href="F2.6-pronoun-case.html"><span>主格、受格與所有格<span class="sub"> Pronoun Case and Possessives</span></span><span>›</span></a><a href="F2.7-there-count-quantity.html"><span>there is/are 與基本數量<span class="sub"> There Is/Are, Countability, and Basic Quantity</span></span><span>›</span></a>
+  </div>
+</div><div class="bandcard">
+  <h2>F3 過去故事島</h2>
+  <div class="sc">情境：旅行與昨天的事件　·　6 課</div>
+  <div class="nlist">
+    <a href="F3.1-past-be.html"><span>過去的 was / were<span class="sub"> Past Forms of Be</span></span><span>›</span></a><a href="F3.2-past-simple.html"><span>一般動詞過去式<span class="sub"> Past Simple of Action Verbs</span></span><span>›</span></a><a href="F3.3-did-questions.html"><span>did 問句與否定<span class="sub"> Past Questions and Negatives with Did</span></span><span>›</span></a><a href="F3.4-prepositions.html"><span>地點與時間介系詞<span class="sub"> Prepositions of Place and Time</span></span><span>›</span></a><a href="F3.5-connectors.html"><span>基本連接詞與邏輯<span class="sub"> Basic Connectors and Logical Relations</span></span><span>›</span></a><a href="F3.6-basic-helpers.html"><span>can、will 與 going to<span class="sub"> Can, Will, and Be Going To</span></span><span>›</span></a>
+  </div>
+</div><div class="bandcard">
+  <h2>F4 比較與選擇島</h2>
+  <div class="sc">情境：城市規劃、比較與規則　·　6 課</div>
+  <div class="nlist">
+    <a href="F4.1-past-continuous.html"><span>過去進行式與 when / while<span class="sub"> Past Continuous with When and While</span></span><span>›</span></a><a href="F4.2-adjectives-adverbs.html"><span>形容詞與副詞<span class="sub"> Adjectives and Adverbs</span></span><span>›</span></a><a href="F4.3-comparatives.html"><span>比較級與最高級<span class="sub"> Comparatives and Superlatives</span></span><span>›</span></a><a href="F4.4-quantifiers.html"><span>數量詞<span class="sub"> Quantifiers</span></span><span>›</span></a><a href="F4.5-modal-functions.html"><span>建議、義務與可能性<span class="sub"> Modal Functions: Advice, Obligation, and Possibility</span></span><span>›</span></a><a href="F4.6-infinitive-gerund.html"><span>to + V 與 V-ing 搭配<span class="sub"> Common Infinitive and Gerund Patterns</span></span><span>›</span></a>
+  </div>
+</div><div class="bandcard">
+  <h2>F5 經驗與條件島</h2>
+  <div class="sc">情境：經驗、選擇與條件　·　6 課</div>
+  <div class="nlist">
+    <a href="F5.1-present-perfect-experience.html"><span>現在完成式：經驗與結果<span class="sub"> Present Perfect for Experience and Result</span></span><span>›</span></a><a href="F5.2-perfect-markers.html"><span>already、yet、since 與 for<span class="sub"> Present Perfect Time Markers</span></span><span>›</span></a><a href="F5.3-perfect-vs-past.html"><span>現在完成式與過去式<span class="sub"> Present Perfect versus Past Simple</span></span><span>›</span></a><a href="F5.4-first-conditional.html"><span>第一條件句<span class="sub"> First Conditional</span></span><span>›</span></a><a href="F5.5-relative-basic.html"><span>基本關係子句<span class="sub"> Basic Relative Clauses</span></span><span>›</span></a><a href="F5.6-reflexive-reference.html"><span>反身代名詞與清楚指涉<span class="sub"> Reflexive Pronouns and Clear Reference</span></span><span>›</span></a>
+  </div>
+</div><div class="bandcard">
+  <h2>F6 報告與流程島</h2>
+  <div class="sc">情境：科學實驗、流程與報告　·　6 課</div>
+  <div class="nlist">
+    <a href="F6.1-tense-choice.html"><span>跨句時態選擇<span class="sub"> Tense Choice Across Sentences</span></span><span>›</span></a><a href="F6.2-passive-process.html"><span>流程被動與資訊焦點<span class="sub"> Passive Voice for Processes and Focus</span></span><span>›</span></a><a href="F6.3-future-forms.html"><span>未來形式的細微差異<span class="sub"> Nuance among Future Forms</span></span><span>›</span></a><a href="F6.4-expanded-noun-phrases.html"><span>擴展名詞片語<span class="sub"> Expanded Noun Phrases</span></span><span>›</span></a><a href="F6.5-reporting-sources.html"><span>引述來源與觀點<span class="sub"> Reporting Sources and Viewpoints</span></span><span>›</span></a><a href="F6.6-cohesion-basic.html"><span>句內與段內銜接<span class="sub"> Cohesion within and across Sentences</span></span><span>›</span></a>
+  </div>
+</div><div class="bandcard">
+  <h2>F7 表達修訂島</h2>
+  <div class="sc">情境：簡報、文章修改與自然表達　·　6 課</div>
+  <div class="nlist">
+    <a href="F7.1-relative-advanced.html"><span>關係子句深化<span class="sub"> Advanced Relative Clauses and Attachment</span></span><span>›</span></a><a href="F7.2-modal-deduction.html"><span>情態動詞的推論強度<span class="sub"> Modal Deduction and Degrees of Certainty</span></span><span>›</span></a><a href="F7.3-register.html"><span>正式與非正式語體<span class="sub"> Formal and Informal Register</span></span><span>›</span></a><a href="F7.4-reference-across-sentences.html"><span>跨句指涉與避免含糊<span class="sub"> Reference across Sentences</span></span><span>›</span></a><a href="F7.5-punctuation.html"><span>子句與資訊標點<span class="sub"> Punctuation for Clauses and Information</span></span><span>›</span></a><a href="F7.6-edit-naturalness.html"><span>修改自然度與語意<span class="sub"> Editing for Naturalness and Meaning</span></span><span>›</span></a>
+  </div>
+</div>
+</body>
+</html>

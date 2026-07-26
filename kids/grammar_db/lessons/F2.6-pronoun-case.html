@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>主格、受格與所有格 — 日常時間島</title>
+<style>
+  :root{--bg:#fff7dc;--panel:#fff;--primary:#2f80ed;--soft:#dbeafe;--accent:#ffb703;--green:#2fbf71;--purple:#7c4dca;--danger:#ef476f;--text:#243042;--muted:#667085;--border:#e2e8f0;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Arial,"Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);max-width:720px;margin:0 auto;padding-bottom:60px;line-height:1.7;}
+  header{background:var(--primary);color:#fff;text-align:center;padding:18px 16px 14px;}
+  header .band{display:inline-block;background:#ffe27a;color:#5a4200;font-size:.7rem;font-weight:800;border-radius:20px;padding:2px 12px;margin-bottom:6px;}
+  header h1{font-size:1.3rem;} header p{font-size:.8rem;opacity:.9;margin-top:4px;}
+  header a{color:#ffe27a;text-decoration:none;font-weight:700;}
+  .card{background:var(--panel);border:2px solid var(--border);border-radius:16px;margin:14px;padding:16px;}
+  .scene{background:#fff8ea;border:2px dashed var(--accent);border-radius:16px;margin:14px;padding:16px;}
+  .scene .hd{font-weight:800;color:#8a6d1a;margin-bottom:8px;font-size:.95rem;}
+  .scene .tip{font-size:.82rem;color:#8a6d1a;margin-top:8px;}
+  .goal{background:#eef5ff;border-left:4px solid var(--primary);border-radius:10px;padding:12px 14px;margin:14px;font-size:1rem;font-weight:700;color:#1f4463;}
+  .podcast{background:#f3edff;border:2px solid #d7c6ff;border-radius:16px;margin:14px;padding:14px 16px;display:none;}
+  .podcast.show{display:block;}
+  .podcast .hd{font-weight:800;color:#5a36a8;font-size:.9rem;margin-bottom:8px;}
+  .podcast audio,.podcast video{width:100%;border-radius:10px;margin-top:4px;display:block;}
+  .podcast .mlabel{font-size:.82rem;font-weight:700;color:#5a36a8;margin-top:8px;}
+  .play{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:none;border-radius:50%;background:var(--primary);color:#fff;font-size:.85rem;cursor:pointer;vertical-align:middle;flex-shrink:0;}
+  .play.big{width:auto;border-radius:8px;padding:6px 14px;font-size:.85rem;gap:6px;font-weight:700;}
+  .step-no{display:inline-block;background:var(--primary);color:#fff;border-radius:8px;font-size:.75rem;font-weight:800;padding:2px 10px;margin-bottom:8px;}
+  .card h2{font-size:1.05rem;color:var(--primary);margin-bottom:8px;}
+  .ex-line{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:1rem;flex-wrap:wrap;}
+  .contrast{border:1.5px solid var(--border);border-radius:12px;padding:10px 12px;margin:8px 0;background:#fbfcff;}
+  .contrast .bad{color:var(--danger);font-weight:700;font-size:.95rem;}
+  .contrast .bad::before{content:"❌ ";}
+  .contrast .good{color:#1a7a4d;font-weight:700;font-size:1rem;margin-top:4px;}
+  .contrast .good::before{content:"✅ ";}
+  .contrast .why{color:var(--muted);font-size:.82rem;margin-top:4px;}
+  .dialog-line{display:flex;gap:10px;align-items:flex-start;margin:10px 0;}
+  .who{font-weight:800;color:var(--primary);width:22px;flex-shrink:0;text-align:center;background:var(--soft);border-radius:50%;height:22px;line-height:22px;font-size:.8rem;}
+  .who.b{color:#fff;background:var(--green);}
+  .more-btn{width:100%;padding:10px;border:2px dashed var(--border);border-radius:10px;background:#fff;color:var(--muted);font-weight:700;cursor:pointer;margin-top:10px;font-size:.88rem;font-family:inherit;}
+  .more-box{display:none;margin-top:10px;}
+  .more-box.show{display:block;}
+  .q{border-top:1px dashed #eee;padding:12px 0;}
+  .q:first-of-type{border-top:none;}
+  .q .qt{font-weight:700;margin-bottom:8px;font-size:.95rem;}
+  .q button.opt{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid var(--border);border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit;}
+  .q button.opt.ok{border-color:var(--green);background:#d9f6e8;}
+  .q button.opt.no{border-color:var(--danger);background:#fde0e8;}
+  .prod-box{background:#f0fff5;border:1.5px solid #bfe8cd;border-radius:12px;padding:14px;margin:10px 0;}
+  .prod-box .prompt{font-weight:700;font-size:.98rem;margin-bottom:8px;}
+  .prod-box .done-check{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.88rem;color:#1a7a4d;font-weight:700;}
+  .why-drawer{margin:14px;}
+  .why-btn{width:100%;padding:12px;border:2px solid var(--purple);border-radius:12px;background:#f3edff;color:var(--purple);font-weight:800;cursor:pointer;font-size:.92rem;font-family:inherit;}
+  .why-content{display:none;background:var(--panel);border:2px solid var(--border);border-top:none;border-radius:0 0 12px 12px;padding:14px;}
+  .why-content.show{display:block;}
+  .form-badge{background:#243042;color:#fff;border-radius:8px;padding:8px 12px;font-family:monospace;font-size:.9rem;display:inline-block;margin-bottom:12px;}
+  .bug-line{background:#fff8e1;border-radius:10px;padding:8px 12px;margin:6px 0;font-size:.88rem;}
+  .bug-line .tag{display:inline-block;font-size:.72rem;font-weight:800;padding:1px 8px;border-radius:10px;background:#ffe0b3;color:#8a4a12;margin-right:6px;}
+  /* 手機：只給「看整張規則圖」時才橫向捲動（LESSON_PAGE_SPEC 第 4 節） */
+  .diagram-wrap{overflow-x:auto;margin-top:12px;border:1px solid var(--border);border-radius:10px;background:#fffdf8;}
+  .diagram-wrap img{display:block;width:760px;max-width:none;}
+  @media (min-width:800px){.diagram-wrap img{width:100%;}}
+  .navbtns{display:flex;gap:8px;margin:16px 14px;}
+  .navbtns a{flex:1;text-align:center;padding:12px;border-radius:12px;text-decoration:none;font-weight:800;font-size:.9rem;border:2px solid var(--border);background:#fff;color:var(--text);}
+  .navbtns a.home{background:var(--green);color:#fff;border-color:var(--green);}
+  .navbtns a.dim{opacity:.4;pointer-events:none;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="band">F2 日常時間島</div>
+  <h1>📗 主格、受格與所有格</h1>
+  <p>Pronoun Case and Possessives · <a href="index.html">← 回文法地圖</a></p>
+</header>
+
+<div class="scene">
+  <div class="hd">🏝️ 情境：先看看什麼時候會用到</div>
+  <div class="dialog-line">
+    <span class="who ">A</span>
+    <button class="play" onclick="pa('../../audio/grammar_db/dialogue_lines/f2_6_pronoun_case_dialogue_1.mp3')">🔊</button>
+    <div><div>Is this your pencil?</div></div>
+  </div><div class="dialog-line">
+    <span class="who b">B</span>
+    <button class="play" onclick="pa('../../audio/grammar_db/dialogue_lines/f2_6_pronoun_case_dialogue_2.mp3')">🔊</button>
+    <div><div>No, mine is blue.</div></div>
+  </div><div class="dialog-line">
+    <span class="who ">A</span>
+    <button class="play" onclick="pa('../../audio/grammar_db/dialogue_lines/f2_6_pronoun_case_dialogue_3.mp3')">🔊</button>
+    <div><div>Does this one belong to Amy?</div></div>
+  </div><div class="dialog-line">
+    <span class="who b">B</span>
+    <button class="play" onclick="pa('../../audio/grammar_db/dialogue_lines/f2_6_pronoun_case_dialogue_4.mp3')">🔊</button>
+    <div><div>Yes, it is hers.</div></div>
+  </div>
+  <button class="play big" style="margin-top:6px" onclick="pa('../../audio/grammar_db/dialogues/f2_6_pronoun_case.mp3')">🔊 整段對話</button>
+</div>
+
+<div class="goal">🎯 今天你要學會：依代名詞在句中的位置選擇 I/me/my/mine 等形式</div>
+
+<div class="podcast" id="podcastBox">
+  <div class="hd">🎧 教學 Podcast（NotebookLM 生成）</div>
+  <div class="mlabel">🎬 影片</div>
+  <video id="pcVideo" controls preload="metadata" playsinline></video>
+  <div class="mlabel" style="margin-top:12px">🎧 Podcast</div>
+  <audio id="pcAudio" controls preload="metadata"></audio>
+</div>
+
+<div class="card">
+  <span class="step-no">STEP ①</span>
+  <h2>核心例句</h2>
+  <div class="ex-line"><button class="play" onclick="pa('../../audio/grammar_db/content/f2_6_pronoun_case_example_1.mp3')">🔊</button><span>She helps me.</span></div><div class="ex-line"><button class="play" onclick="pa('../../audio/grammar_db/content/f2_6_pronoun_case_example_2.mp3')">🔊</button><span>This is my bag.</span></div>
+  <button class="more-btn" id="exBtn" onclick="tog('ex')">👀 看更多例句</button>
+  <div class="more-box" id="exBox"><div class="ex-line"><button class="play" onclick="pa('../../audio/grammar_db/content/f2_6_pronoun_case_example_3.mp3')">🔊</button><span>This bag is mine.</span></div><div class="ex-line"><button class="play" onclick="pa('../../audio/grammar_db/content/f2_6_pronoun_case_example_4.mp3')">🔊</button><span>They gave us their map.</span></div></div>
+</div>
+
+<div class="card">
+  <span class="step-no">STEP ②</span>
+  <h2>比一比：哪句對？</h2>
+  <div class="contrast">
+      <div class="bad">The teacher helps I.</div>
+      <div class="good"><button class="play" style="width:24px;height:24px;font-size:.7rem" onclick="pa('../../audio/grammar_db/content/f2_6_pronoun_case_contrast_1_better.mp3')">🔊</button> The teacher helps me.</div>
+      <div class="why">動詞 helps 後面的受詞使用 me。</div>
+    </div>
+  <button class="more-btn" id="ctBtn" onclick="tog('ct')">👀 看更多對照</button>
+  <div class="more-box" id="ctBox"><div class="contrast">
+      <div class="bad">This is mine book.</div>
+      <div class="good"><button class="play" style="width:24px;height:24px;font-size:.7rem" onclick="pa('../../audio/grammar_db/content/f2_6_pronoun_case_contrast_2_better.mp3')">🔊</button> This is my book.</div>
+      <div class="why">名詞 book 前用 my；mine 後面不接名詞。</div>
+    </div></div>
+</div>
+
+<div class="why-drawer">
+  <button class="why-btn" onclick="togWhy()" id="whyBtn">🤔 為什麼？（規則＋常見錯誤）</button>
+  <div class="why-content" id="whyContent">
+    <div class="form-badge">subject / object / possessive determiner / possessive pronoun</div>
+    <div class="bug-line">
+      <span class="tag">🟠 句型少了零件</span>「請看我。」<br>
+      <span style="color:var(--danger)">❌ Please look at I.</span> →
+      <span style="color:#1a7a4d">✅ Please look at me.</span>
+      <button class="play" style="width:22px;height:22px;font-size:.65rem;margin-left:4px" onclick="pa('../../audio/grammar_db/content/f2_6_pronoun_case_bug_1_better.mp3')">🔊</button><br>
+      <span style="color:var(--muted)">介系詞 at 後使用受格 me。</span>
+    </div><div class="bug-line">
+      <span class="tag">🟠 句型少了零件</span>「這支筆是她的。」<br>
+      <span style="color:var(--danger)">❌ This pen is her.</span> →
+      <span style="color:#1a7a4d">✅ This pen is hers.</span>
+      <button class="play" style="width:22px;height:22px;font-size:.65rem;margin-left:4px" onclick="pa('../../audio/grammar_db/content/f2_6_pronoun_case_bug_2_better.mp3')">🔊</button><br>
+      <span style="color:var(--muted)">句尾不接名詞時用 hers。</span>
+    </div>
+    <button class="more-btn" id="dgBtn" onclick="tog('dg')">📊 看整張規則圖</button>
+    <div class="more-box" id="dgBox">
+      <div class="diagram-wrap"><img src="../diagrams/pronoun-positions.svg" alt="主格、受格與所有格示意圖" loading="lazy"></div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <span class="step-no">STEP ③</span>
+  <h2>小測驗</h2>
+  <div id="quiz"></div>
+  <div id="quizScore" style="font-weight:800;margin-top:10px"></div>
+</div>
+
+<div class="card">
+  <span class="step-no">STEP ④</span>
+  <h2>🎤 口說作業</h2>
+  <div class="prod-box">
+    <div class="prompt">🗣️ Say who helps you using an object pronoun.</div>
+    <button class="play big" onclick="pa('../../audio/grammar_db/content/f2_6_pronoun_case_prompt_speaking.mp3')">🔊 聽一次示範</button>
+    <label class="done-check"><input type="checkbox"> 我說完了</label>
+  </div>
+</div>
+
+<div class="card">
+  <span class="step-no">STEP ⑤</span>
+  <h2>✍️ 手寫作業（紙本為主）</h2>
+  <div class="prod-box">
+    <div class="prompt">✍️ Write one sentence with &quot;my&quot; and one with &quot;mine&quot;.</div>
+    <button class="play big" onclick="pa('../../audio/grammar_db/content/f2_6_pronoun_case_prompt_writing.mp3')">🔊 聽一次示範</button>
+    <p style="font-size:.85rem;color:var(--muted);margin-top:8px">紙上寫：① 照抄一次 → ② 遮住憑記憶寫一次 → ③ 自己換個內容寫一句。</p>
+    <label class="done-check"><input type="checkbox"> 我寫完了</label>
+  </div>
+</div>
+
+<div class="navbtns">
+  <a class="" href="F2.5-stative-verbs.html">← 上一課</a>
+  <a class="home" href="index.html">📋 文法地圖</a>
+  <a class="" href="F2.7-there-count-quantity.html">下一課 →</a>
+</div>
+
+<script>
+var cur = null;
+function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
+function tog(k) {
+  var box = document.getElementById(k + "Box"), btn = document.getElementById(k + "Btn");
+  var show = !box.classList.contains("show");
+  box.classList.toggle("show", show);
+  btn.textContent = show ? "🙈 收起來"
+    : (k === "ex" ? "👀 看更多例句" : k === "ct" ? "👀 看更多對照" : "📊 看整張規則圖");
+}
+function togWhy() {
+  var box = document.getElementById("whyContent");
+  var show = !box.classList.contains("show");
+  box.classList.toggle("show", show);
+  document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
+}
+var QUIZ = [{"q":"哪一句最符合本節點的自然英文形式？","opts":[{"t":"She helps me.","id":"a","audio":"../../audio/grammar_db/content/f2_6_pronoun_case_example_1.mp3"},{"t":"The teacher helps I.","id":"b","audio":"../../audio/grammar_db/content/f2_6_pronoun_case_contrast_1_wrong.mp3"},{"t":"This is mine book.","id":"c","audio":"../../audio/grammar_db/content/f2_6_pronoun_case_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「The teacher helps I.」？","opts":[{"t":"The teacher helps me.","id":"a","audio":"../../audio/grammar_db/content/f2_6_pronoun_case_contrast_1_better.mp3"},{"t":"The teacher helps I.","id":"b","audio":"../../audio/grammar_db/content/f2_6_pronoun_case_contrast_1_wrong.mp3"},{"t":"This is mine book.","id":"c","audio":"../../audio/grammar_db/content/f2_6_pronoun_case_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句在一般情境中最自然，也不會改變核心意思？","opts":[{"t":"This is my bag.","id":"a","audio":"../../audio/grammar_db/content/f2_6_pronoun_case_example_2.mp3"},{"t":"Please look at I.","id":"b","audio":"../../audio/grammar_db/content/f2_6_pronoun_case_bug_1_wrong.mp3"},{"t":"This pen is her.","id":"c","audio":"../../audio/grammar_db/content/f2_6_pronoun_case_bug_2_wrong.mp3"}],"a":"a"}];
+var done = 0, ok = 0;
+document.getElementById("quiz").innerHTML = QUIZ.map(function (q, i) {
+  return '<div class="q" id="dq' + i + '"><div class="qt">' + (i + 1) + '. ' + q.q + '</div>' +
+    q.opts.map(function (o) {
+      return '<button class="opt" onclick="ans(' + i + ',\'' + o.id + '\',this)">' + o.t + '</button>';
+    }).join("") + '</div>';
+}).join("");
+function ans(i, id, btn) {
+  var box = document.getElementById("dq" + i);
+  if (box.dataset.done) return; box.dataset.done = "1";
+  var q = QUIZ[i], good = id === q.a;
+  var btns = box.querySelectorAll("button.opt");
+  for (var j = 0; j < btns.length; j++) {
+    btns[j].disabled = true;
+    if (q.opts[j].id === q.a) btns[j].classList.add("ok");
+    else if (btns[j] === btn) btns[j].classList.add("no");
+  }
+  done++; if (good) ok++;
+  if (done === QUIZ.length) document.getElementById("quizScore").textContent = "🎉 答對 " + ok + " / " + QUIZ.length;
+}
+// NotebookLM 素材：有檔才顯示（fail-safe：載入失敗才隱藏，見 LESSON_PAGE_SPEC 第 7 節）
+(function () {
+  var a = document.getElementById("pcAudio"), v = document.getElementById("pcVideo"), box = document.getElementById("podcastBox");
+  a.src = "podcast/F2.6-pronoun-case.m4a"; v.src = "podcast/F2.6-pronoun-case.mp4";
+  var okCount = 0, errCount = 0;
+  function shown() { okCount++; box.classList.add("show"); }
+  function bad() { errCount++; if (errCount >= 2) box.classList.remove("show"); }
+  a.addEventListener("loadedmetadata", shown); a.addEventListener("error", bad);
+  v.addEventListener("loadedmetadata", shown); v.addEventListener("error", bad);
+})();
+</script>
+</body>
+</html>
