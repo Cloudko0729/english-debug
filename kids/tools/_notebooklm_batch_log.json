@@ -1,0 +1,22 @@
+{
+  "startedAt": "2026-07-26T12:53:42.291Z",
+  "done": [
+    "F2.1-present-simple",
+    "F2.6-pronoun-case",
+    "F2.7-there-count-quantity",
+    "F3.1-past-be"
+  ],
+  "skipped": [],
+  "failed": [
+    {
+      "id": "F3.2-past-simple",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「一般動詞過去式」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook e93f6fba-46ac-46c6-811e-506bdc3d501d --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F3.5-connectors",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「基本連接詞與邏輯」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 39c6c360-9215-466e-8a18-ce7131d31110 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    }
+  ],
+  "abortedAuth": false,
+  "finishedAt": "2026-07-26T14:26:49.820Z"
+}

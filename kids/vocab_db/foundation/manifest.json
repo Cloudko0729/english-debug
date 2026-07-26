@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedOn": "2026-07-25",
+  "scope": "F0-F3 / L1-L4",
+  "policy": {
+    "wordsPerUnitMaximum": 15,
+    "examplesPerWord": 2,
+    "passagesPerUnit": 2,
+    "dialogueTurnsPerUnit": 8,
+    "browserSpeechFallback": false,
+    "dialogueVoices": {
+      "A": "af_heart",
+      "B": "am_adam"
+    }
+  },
+  "counts": {
+    "words": 463,
+    "byLevel": {
+      "L1": 106,
+      "L2": 105,
+      "L3": 115,
+      "L4": 137
+    },
+    "examples": 926,
+    "generatedExampleAudio": 630,
+    "reusedExampleAudio": 296,
+    "missingWordAudio": 42,
+    "units": 33,
+    "passages": 66,
+    "dialogues": 33,
+    "dialogueTurns": 264,
+    "confusionSets": 26,
+    "confusionExamples": 104,
+    "confusionDialogueTurns": 104
+  },
+  "audioSpecs": {
+    "foundation_missing_words.json": 42,
+    "foundation_examples.json": 630,
+    "foundation_passages.json": 66,
+    "foundation_dialogue_a.json": 132,
+    "foundation_dialogue_b.json": 132,
+    "foundation_confusion_examples.json": 104,
+    "foundation_confusion_dialogue_a.json": 52,
+    "foundation_confusion_dialogue_b.json": 52
+  },
+  "files": {
+    "words": [
+      "words_l1.json",
+      "words_l2.json",
+      "words_l3.json",
+      "words_l4.json"
+    ],
+    "units": [
+      "units_l1.json",
+      "units_l2.json",
+      "units_l3.json",
+      "units_l4.json"
+    ],
+    "confusions": "confusions_l1_l4.json"
+  }
+}

@@ -1,0 +1,4305 @@
+{
+  "schemaVersion": "1.0.0",
+  "level": 3,
+  "bands": [
+    "F2",
+    "F3"
+  ],
+  "words": [
+    {
+      "id": "l3-a_m",
+      "word": "a.m.",
+      "aliases": [],
+      "zh": "上午",
+      "pos": "adverb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "numbers_time",
+      "collocation": "a.m.",
+      "sentenceFrame": "I get up at seven a.m.",
+      "pronunciationAudio": "audio/words/am.mp3",
+      "examples": [
+        {
+          "id": "l3-a_m-e1",
+          "text": "School starts at eight a.m.",
+          "zhHint": "上午",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-a_m-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-a_m-e2",
+          "text": "I get up at seven a.m.",
+          "zhHint": "上午",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-a_m-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-about",
+      "word": "about",
+      "aliases": [],
+      "zh": "關於；大約",
+      "pos": "preposition",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "language",
+      "collocation": "This book is about animals.",
+      "sentenceFrame": "We talk ___ our weekend.",
+      "pronunciationAudio": "audio/words/about.mp3",
+      "examples": [
+        {
+          "id": "l3-about-e1",
+          "text": "This book is about animals.",
+          "zhHint": "關於；大約",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-about-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-about-e2",
+          "text": "We talk about our weekend.",
+          "zhHint": "關於；大約",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-about-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-after",
+      "word": "after",
+      "aliases": [],
+      "zh": "在……之後",
+      "pos": "preposition",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "numbers_time",
+      "collocation": "I wash my hands after lunch.",
+      "sentenceFrame": "We play outside ___ school.",
+      "pronunciationAudio": "audio/words/after.mp3",
+      "examples": [
+        {
+          "id": "l3-after-e1",
+          "text": "I wash my hands after lunch.",
+          "zhHint": "在……之後",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-after-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-after-e2",
+          "text": "We play outside after school.",
+          "zhHint": "在……之後",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-after-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-afternoon",
+      "word": "afternoon",
+      "aliases": [],
+      "zh": "下午",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "numbers_time",
+      "collocation": "in the afternoon",
+      "sentenceFrame": "We play in the ___.",
+      "pronunciationAudio": "audio/words/afternoon.mp3",
+      "examples": [
+        {
+          "id": "l3-afternoon-e1",
+          "text": "Afternoon is time for class.",
+          "zhHint": "下午",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/afternoon_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-afternoon-e2",
+          "text": "We play in the afternoon.",
+          "zhHint": "下午",
+          "purpose": "application",
+          "audio": "audio/words/ex/afternoon_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": [
+        "time-of-day"
+      ]
+    },
+    {
+      "id": "l3-ago",
+      "word": "ago",
+      "aliases": [],
+      "zh": "……以前",
+      "pos": "adverb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "numbers_time",
+      "collocation": "ago",
+      "sentenceFrame": "She called me an hour ___.",
+      "pronunciationAudio": "audio/words/ago.mp3",
+      "examples": [
+        {
+          "id": "l3-ago-e1",
+          "text": "We met two days ago.",
+          "zhHint": "……以前",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-ago-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-ago-e2",
+          "text": "She called me an hour ago.",
+          "zhHint": "……以前",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-ago-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "day-reference"
+      ]
+    },
+    {
+      "id": "l3-america",
+      "word": "america",
+      "aliases": [],
+      "zh": "美國",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "places_transport",
+      "collocation": "an america",
+      "sentenceFrame": "___ is a large country.",
+      "pronunciationAudio": "audio/words/america.mp3",
+      "examples": [
+        {
+          "id": "l3-america-e1",
+          "text": "My aunt lives in America.",
+          "zhHint": "美國",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-america-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-america-e2",
+          "text": "America is a large country.",
+          "zhHint": "美國",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-america-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-animal",
+      "word": "animal",
+      "aliases": [],
+      "zh": "動物",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "animals_nature",
+      "collocation": "an animal",
+      "sentenceFrame": "The ___ is near the tree.",
+      "pronunciationAudio": "audio/words/animal.mp3",
+      "examples": [
+        {
+          "id": "l3-animal-e1",
+          "text": "I see an animal.",
+          "zhHint": "動物",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-animal-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-animal-e2",
+          "text": "The animal is near the tree.",
+          "zhHint": "動物",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-animal-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-any",
+      "word": "any",
+      "aliases": [],
+      "zh": "任何；一些",
+      "pos": "determiner",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "general",
+      "collocation": "Do you have any questions?",
+      "sentenceFrame": "I do not have ___ money.",
+      "pronunciationAudio": "audio/words/any.mp3",
+      "examples": [
+        {
+          "id": "l3-any-e1",
+          "text": "Do you have any questions?",
+          "zhHint": "任何；一些",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-any-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-any-e2",
+          "text": "I do not have any money.",
+          "zhHint": "任何；一些",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-any-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "some-any"
+      ]
+    },
+    {
+      "id": "l3-ask",
+      "word": "ask",
+      "aliases": [],
+      "zh": "問",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "an ask",
+      "sentenceFrame": "He asks for help.",
+      "pronunciationAudio": "audio/words/ask.mp3",
+      "examples": [
+        {
+          "id": "l3-ask-e1",
+          "text": "I ask a question.",
+          "zhHint": "問",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/ask_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-ask-e2",
+          "text": "He asks for help.",
+          "zhHint": "問",
+          "purpose": "application",
+          "audio": "audio/words/ex/ask_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-aunt",
+      "word": "aunt",
+      "aliases": [],
+      "zh": "阿姨",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "people_family",
+      "collocation": "an aunt",
+      "sentenceFrame": "___ gives me a book.",
+      "pronunciationAudio": "audio/words/aunt.mp3",
+      "examples": [
+        {
+          "id": "l3-aunt-e1",
+          "text": "My aunt makes cake.",
+          "zhHint": "阿姨",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/aunt_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-aunt-e2",
+          "text": "Aunt gives me a book.",
+          "zhHint": "阿姨",
+          "purpose": "application",
+          "audio": "audio/words/ex/aunt_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-autumn",
+      "word": "autumn",
+      "aliases": [],
+      "zh": "秋天",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "seasons_weather",
+      "collocation": "an autumn",
+      "sentenceFrame": "Leaves fall in ___.",
+      "pronunciationAudio": "audio/words/autumn.mp3",
+      "examples": [
+        {
+          "id": "l3-autumn-e1",
+          "text": "Autumn is cool.",
+          "zhHint": "秋天",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/autumn_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-autumn-e2",
+          "text": "Leaves fall in autumn.",
+          "zhHint": "秋天",
+          "purpose": "application",
+          "audio": "audio/words/ex/autumn_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": [
+        "fall-autumn"
+      ]
+    },
+    {
+      "id": "l3-bag",
+      "word": "bag",
+      "aliases": [],
+      "zh": "書包",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "school",
+      "collocation": "a bag",
+      "sentenceFrame": "I put books in my ___.",
+      "pronunciationAudio": "audio/words/bag.mp3",
+      "examples": [
+        {
+          "id": "l3-bag-e1",
+          "text": "My bag is heavy.",
+          "zhHint": "書包",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/bag_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-bag-e2",
+          "text": "I put books in my bag.",
+          "zhHint": "書包",
+          "purpose": "application",
+          "audio": "audio/words/ex/bag_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-banana",
+      "word": "banana",
+      "aliases": [],
+      "zh": "香蕉",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "food",
+      "collocation": "banana",
+      "sentenceFrame": "A ___ is in my bag.",
+      "pronunciationAudio": "audio/words/banana.mp3",
+      "examples": [
+        {
+          "id": "l3-banana-e1",
+          "text": "The banana is yellow.",
+          "zhHint": "香蕉",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/banana_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-banana-e2",
+          "text": "A banana is in my bag.",
+          "zhHint": "香蕉",
+          "purpose": "application",
+          "audio": "audio/words/ex/banana_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-beef",
+      "word": "beef",
+      "aliases": [],
+      "zh": "牛肉",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "food",
+      "collocation": "beef",
+      "sentenceFrame": "The ___ is hot.",
+      "pronunciationAudio": "audio/words/beef.mp3",
+      "examples": [
+        {
+          "id": "l3-beef-e1",
+          "text": "We eat beef with rice.",
+          "zhHint": "牛肉",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-beef-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-beef-e2",
+          "text": "The beef is hot.",
+          "zhHint": "牛肉",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-beef-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-bicycle",
+      "word": "bicycle",
+      "aliases": [],
+      "zh": "腳踏車",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "places_transport",
+      "collocation": "a bicycle",
+      "sentenceFrame": "We can see the ___ from here.",
+      "pronunciationAudio": "audio/words/bicycle.mp3",
+      "examples": [
+        {
+          "id": "l3-bicycle-e1",
+          "text": "The bicycle is near my home.",
+          "zhHint": "腳踏車",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-bicycle-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-bicycle-e2",
+          "text": "We can see the bicycle from here.",
+          "zhHint": "腳踏車",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-bicycle-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-bike",
+      "word": "bike",
+      "aliases": [],
+      "zh": "腳踏車",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "places_transport",
+      "collocation": "a bike",
+      "sentenceFrame": "We can see the ___ from here.",
+      "pronunciationAudio": "audio/words/bike.mp3",
+      "examples": [
+        {
+          "id": "l3-bike-e1",
+          "text": "The bike is near my home.",
+          "zhHint": "腳踏車",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-bike-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-bike-e2",
+          "text": "We can see the bike from here.",
+          "zhHint": "腳踏車",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-bike-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-body",
+      "word": "body",
+      "aliases": [],
+      "zh": "身體",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "body_health",
+      "collocation": "a body",
+      "sentenceFrame": "The ___ has arms and legs.",
+      "pronunciationAudio": "audio/words/body.mp3",
+      "examples": [
+        {
+          "id": "l3-body-e1",
+          "text": "My body needs water.",
+          "zhHint": "身體",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/body_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-body-e2",
+          "text": "The body has arms and legs.",
+          "zhHint": "身體",
+          "purpose": "application",
+          "audio": "audio/words/ex/body_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-breakfast",
+      "word": "breakfast",
+      "aliases": [],
+      "zh": "早餐",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "food",
+      "collocation": "eat breakfast",
+      "sentenceFrame": "We have bread and milk for ___.",
+      "pronunciationAudio": "audio/words/breakfast.mp3",
+      "examples": [
+        {
+          "id": "l3-breakfast-e1",
+          "text": "I eat breakfast at seven.",
+          "zhHint": "早餐",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-breakfast-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-breakfast-e2",
+          "text": "We have bread and milk for breakfast.",
+          "zhHint": "早餐",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-breakfast-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "meal-times"
+      ]
+    },
+    {
+      "id": "l3-call",
+      "word": "call",
+      "aliases": [],
+      "zh": "打電話",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "call + object/place",
+      "sentenceFrame": "She calls her friend.",
+      "pronunciationAudio": "audio/words/call.mp3",
+      "examples": [
+        {
+          "id": "l3-call-e1",
+          "text": "I call my mom.",
+          "zhHint": "打電話",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/call_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-call-e2",
+          "text": "She calls her friend.",
+          "zhHint": "打電話",
+          "purpose": "application",
+          "audio": "audio/words/ex/call_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-chalk",
+      "word": "chalk",
+      "aliases": [],
+      "zh": "粉筆",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "school",
+      "collocation": "a chalk",
+      "sentenceFrame": "There is a piece of ___ by the board.",
+      "pronunciationAudio": "audio/words/chalk.mp3",
+      "examples": [
+        {
+          "id": "l3-chalk-e1",
+          "text": "The teacher writes with chalk.",
+          "zhHint": "粉筆",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-chalk-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-chalk-e2",
+          "text": "There is a piece of chalk by the board.",
+          "zhHint": "粉筆",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-chalk-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-child",
+      "word": "child",
+      "aliases": [],
+      "zh": "孩子",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "people_family",
+      "collocation": "a child",
+      "sentenceFrame": "Every ___ needs a pencil.",
+      "pronunciationAudio": "audio/words/child.mp3",
+      "examples": [
+        {
+          "id": "l3-child-e1",
+          "text": "The child is reading a book.",
+          "zhHint": "孩子",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-child-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-child-e2",
+          "text": "Every child needs a pencil.",
+          "zhHint": "孩子",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-child-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "child-children-kid"
+      ]
+    },
+    {
+      "id": "l3-children",
+      "word": "children",
+      "aliases": [],
+      "zh": "一個以上的孩童、child 的複數",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "people_family",
+      "collocation": "a children",
+      "sentenceFrame": "These ___ are in my class.",
+      "pronunciationAudio": "audio/words/children.mp3",
+      "examples": [
+        {
+          "id": "l3-children-e1",
+          "text": "The children are playing outside.",
+          "zhHint": "一個以上的孩童、child 的複數",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-children-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-children-e2",
+          "text": "These children are in my class.",
+          "zhHint": "一個以上的孩童、child 的複數",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-children-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "child-children-kid"
+      ]
+    },
+    {
+      "id": "l3-coat",
+      "word": "coat",
+      "aliases": [],
+      "zh": "外套",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "clothes",
+      "collocation": "a coat",
+      "sentenceFrame": "I wear a ___ in winter.",
+      "pronunciationAudio": "audio/words/coat.mp3",
+      "examples": [
+        {
+          "id": "l3-coat-e1",
+          "text": "The coat is brown.",
+          "zhHint": "外套",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/coat_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-coat-e2",
+          "text": "I wear a coat in winter.",
+          "zhHint": "外套",
+          "purpose": "application",
+          "audio": "audio/words/ex/coat_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-computer",
+      "word": "computer",
+      "aliases": [],
+      "zh": "電腦",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "school",
+      "collocation": "a computer",
+      "sentenceFrame": "The ___ is on my desk.",
+      "pronunciationAudio": "audio/words/computer.mp3",
+      "examples": [
+        {
+          "id": "l3-computer-e1",
+          "text": "I use a computer at school.",
+          "zhHint": "電腦",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-computer-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-computer-e2",
+          "text": "The computer is on my desk.",
+          "zhHint": "電腦",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-computer-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-cookie",
+      "word": "cookie",
+      "aliases": [],
+      "zh": "餅乾",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "food",
+      "collocation": "cookie",
+      "sentenceFrame": "This ___ is shaped like a star.",
+      "pronunciationAudio": "audio/words/cookie.mp3",
+      "examples": [
+        {
+          "id": "l3-cookie-e1",
+          "text": "I have a cookie for my snack.",
+          "zhHint": "餅乾",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-cookie-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-cookie-e2",
+          "text": "This cookie is shaped like a star.",
+          "zhHint": "餅乾",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-cookie-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "cookie-forms"
+      ]
+    },
+    {
+      "id": "l3-cookies",
+      "word": "cookies",
+      "aliases": [],
+      "zh": "餅乾、小甜點",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "food",
+      "collocation": "cookies",
+      "sentenceFrame": "We made six ___ after school.",
+      "pronunciationAudio": "audio/words/cookies.mp3",
+      "examples": [
+        {
+          "id": "l3-cookies-e1",
+          "text": "The cookies are on the plate.",
+          "zhHint": "餅乾、小甜點",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-cookies-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-cookies-e2",
+          "text": "We made six cookies after school.",
+          "zhHint": "餅乾、小甜點",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-cookies-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "cookie-forms"
+      ]
+    },
+    {
+      "id": "l3-cooky",
+      "word": "cooky",
+      "aliases": [],
+      "zh": "餅乾（舊拼法）",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "food",
+      "collocation": "cooky",
+      "sentenceFrame": "She put the ___ on a plate.",
+      "pronunciationAudio": "audio/words/cooky.mp3",
+      "examples": [
+        {
+          "id": "l3-cooky-e1",
+          "text": "This cooky is round and sweet.",
+          "zhHint": "餅乾（舊拼法）",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-cooky-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-cooky-e2",
+          "text": "She put the cooky on a plate.",
+          "zhHint": "餅乾（舊拼法）",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-cooky-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "cookie-forms"
+      ]
+    },
+    {
+      "id": "l3-cry",
+      "word": "cry",
+      "aliases": [],
+      "zh": "哭",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "cry + object/place",
+      "sentenceFrame": "Do not ___; I can help you.",
+      "pronunciationAudio": "audio/words/cry.mp3",
+      "examples": [
+        {
+          "id": "l3-cry-e1",
+          "text": "The baby cries when she is hungry.",
+          "zhHint": "哭",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-cry-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-cry-e2",
+          "text": "Do not cry; I can help you.",
+          "zhHint": "哭",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-cry-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-dad",
+      "word": "dad",
+      "aliases": [],
+      "zh": "爸爸",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "people_family",
+      "collocation": "a dad",
+      "sentenceFrame": "I help ___ wash the car.",
+      "pronunciationAudio": "audio/words/dad.mp3",
+      "examples": [
+        {
+          "id": "l3-dad-e1",
+          "text": "Dad reads the news after dinner.",
+          "zhHint": "爸爸",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-dad-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-dad-e2",
+          "text": "I help Dad wash the car.",
+          "zhHint": "爸爸",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-dad-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-daddy",
+      "word": "daddy",
+      "aliases": [],
+      "zh": "爸爸",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "people_family",
+      "collocation": "a daddy",
+      "sentenceFrame": "My ___ makes breakfast on Sunday.",
+      "pronunciationAudio": "audio/words/daddy.mp3",
+      "examples": [
+        {
+          "id": "l3-daddy-e1",
+          "text": "Daddy, please read this story.",
+          "zhHint": "爸爸",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-daddy-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-daddy-e2",
+          "text": "My daddy makes breakfast on Sunday.",
+          "zhHint": "爸爸",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-daddy-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-dance",
+      "word": "dance",
+      "aliases": [],
+      "zh": "跳舞",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "dance + object/place",
+      "sentenceFrame": "We ___ in music class.",
+      "pronunciationAudio": "audio/words/dance.mp3",
+      "examples": [
+        {
+          "id": "l3-dance-e1",
+          "text": "I dance with my friends.",
+          "zhHint": "跳舞",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/dance_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-dance-e2",
+          "text": "We dance in music class.",
+          "zhHint": "跳舞",
+          "purpose": "application",
+          "audio": "audio/words/ex/dance_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-die",
+      "word": "die",
+      "aliases": [],
+      "zh": "死亡",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "die + object/place",
+      "sentenceFrame": "The old tree did not ___ in winter.",
+      "pronunciationAudio": "audio/words/die.mp3",
+      "examples": [
+        {
+          "id": "l3-die-e1",
+          "text": "Plants die without water.",
+          "zhHint": "死亡",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-die-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-die-e2",
+          "text": "The old tree did not die in winter.",
+          "zhHint": "死亡",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-die-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-dining_room",
+      "word": "dining room",
+      "aliases": [],
+      "zh": "飯廳",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "home_objects",
+      "collocation": "a dining room",
+      "sentenceFrame": "The ___ has a large table.",
+      "pronunciationAudio": "audio/words/diningroom.mp3",
+      "examples": [
+        {
+          "id": "l3-dining_room-e1",
+          "text": "We eat dinner in the dining room.",
+          "zhHint": "飯廳",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-dining_room-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-dining_room-e2",
+          "text": "The dining room has a large table.",
+          "zhHint": "飯廳",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-dining_room-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-dinner",
+      "word": "dinner",
+      "aliases": [],
+      "zh": "晚餐",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "food",
+      "collocation": "eat dinner",
+      "sentenceFrame": "Mom cooks rice and vegetables for ___.",
+      "pronunciationAudio": "audio/words/dinner.mp3",
+      "examples": [
+        {
+          "id": "l3-dinner-e1",
+          "text": "We eat dinner at six.",
+          "zhHint": "晚餐",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-dinner-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-dinner-e2",
+          "text": "Mom cooks rice and vegetables for dinner.",
+          "zhHint": "晚餐",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-dinner-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "meal-times"
+      ]
+    },
+    {
+      "id": "l3-dollar",
+      "word": "dollar",
+      "aliases": [],
+      "zh": "元",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "general",
+      "collocation": "a dollar",
+      "sentenceFrame": "I have five dollars.",
+      "pronunciationAudio": "audio/words/dollar.mp3",
+      "examples": [
+        {
+          "id": "l3-dollar-e1",
+          "text": "This pen is one dollar.",
+          "zhHint": "元",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/dollar_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-dollar-e2",
+          "text": "I have five dollars.",
+          "zhHint": "元",
+          "purpose": "application",
+          "audio": "audio/words/ex/dollar_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-down",
+      "word": "down",
+      "aliases": [],
+      "zh": "向下；在下面",
+      "pos": "adverb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "general",
+      "collocation": "down",
+      "sentenceFrame": "The ball rolls ___ the road.",
+      "pronunciationAudio": "audio/words/down.mp3",
+      "examples": [
+        {
+          "id": "l3-down-e1",
+          "text": "Please sit down.",
+          "zhHint": "向下；在下面",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-down-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-down-e2",
+          "text": "The ball rolls down the road.",
+          "zhHint": "向下；在下面",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-down-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-dress",
+      "word": "dress",
+      "aliases": [],
+      "zh": "洋裝",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "clothes",
+      "collocation": "wear a dress",
+      "sentenceFrame": "My sister wears a ___.",
+      "pronunciationAudio": "audio/words/dress.mp3",
+      "examples": [
+        {
+          "id": "l3-dress-e1",
+          "text": "The dress is pretty.",
+          "zhHint": "洋裝",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/dress_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-dress-e2",
+          "text": "My sister wears a dress.",
+          "zhHint": "洋裝",
+          "purpose": "application",
+          "audio": "audio/words/ex/dress_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-drink",
+      "word": "drink",
+      "aliases": [],
+      "zh": "喝",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "food",
+      "collocation": "drink + object/place",
+      "sentenceFrame": "She drinks milk.",
+      "pronunciationAudio": "audio/words/drink.mp3",
+      "examples": [
+        {
+          "id": "l3-drink-e1",
+          "text": "I drink water.",
+          "zhHint": "喝",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/drink_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-drink-e2",
+          "text": "She drinks milk.",
+          "zhHint": "喝",
+          "purpose": "application",
+          "audio": "audio/words/ex/drink_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-drinks",
+      "word": "drinks",
+      "aliases": [],
+      "zh": "飲料",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "food",
+      "collocation": "drinks",
+      "sentenceFrame": "We bring ___ to the picnic.",
+      "pronunciationAudio": "audio/words/drinks.mp3",
+      "examples": [
+        {
+          "id": "l3-drinks-e1",
+          "text": "The cold drinks are in the kitchen.",
+          "zhHint": "飲料",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-drinks-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-drinks-e2",
+          "text": "We bring drinks to the picnic.",
+          "zhHint": "飲料",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-drinks-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-drive",
+      "word": "drive",
+      "aliases": [],
+      "zh": "開車",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "places_transport",
+      "collocation": "drive + object/place",
+      "sentenceFrame": "Please ___ slowly on this road.",
+      "pronunciationAudio": "audio/words/drive.mp3",
+      "examples": [
+        {
+          "id": "l3-drive-e1",
+          "text": "My father drives to work.",
+          "zhHint": "開車",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-drive-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-drive-e2",
+          "text": "Please drive slowly on this road.",
+          "zhHint": "開車",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-drive-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-dry",
+      "word": "dry",
+      "aliases": [],
+      "zh": "乾的",
+      "pos": "adjective",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "descriptions",
+      "collocation": "be dry",
+      "sentenceFrame": "Please ___ the wet table.",
+      "pronunciationAudio": "audio/words/dry.mp3",
+      "examples": [
+        {
+          "id": "l3-dry-e1",
+          "text": "My socks are dry now.",
+          "zhHint": "乾的",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-dry-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-dry-e2",
+          "text": "Please dry the wet table.",
+          "zhHint": "乾的",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-dry-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-duck",
+      "word": "duck",
+      "aliases": [],
+      "zh": "鴨子",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "animals_nature",
+      "collocation": "a duck",
+      "sentenceFrame": "The ___ is near the tree.",
+      "pronunciationAudio": "audio/words/duck.mp3",
+      "examples": [
+        {
+          "id": "l3-duck-e1",
+          "text": "I see a duck.",
+          "zhHint": "鴨子",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-duck-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-duck-e2",
+          "text": "The duck is near the tree.",
+          "zhHint": "鴨子",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-duck-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-elephant",
+      "word": "elephant",
+      "aliases": [],
+      "zh": "大象",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "animals_nature",
+      "collocation": "an elephant",
+      "sentenceFrame": "An ___ has a long nose.",
+      "pronunciationAudio": "audio/words/elephant.mp3",
+      "examples": [
+        {
+          "id": "l3-elephant-e1",
+          "text": "The elephant is very big.",
+          "zhHint": "大象",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/elephant_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-elephant-e2",
+          "text": "An elephant has a long nose.",
+          "zhHint": "大象",
+          "purpose": "application",
+          "audio": "audio/words/ex/elephant_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-eleven",
+      "word": "eleven",
+      "aliases": [],
+      "zh": "十一",
+      "pos": "number",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "numbers_time",
+      "collocation": "eleven + plural noun",
+      "sentenceFrame": "I see ___ balloons.",
+      "pronunciationAudio": "audio/words/eleven.mp3",
+      "examples": [
+        {
+          "id": "l3-eleven-e1",
+          "text": "Eleven apples are in the bag.",
+          "zhHint": "十一",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/eleven_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-eleven-e2",
+          "text": "I see eleven balloons.",
+          "zhHint": "十一",
+          "purpose": "application",
+          "audio": "audio/words/ex/eleven_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-eraser",
+      "word": "eraser",
+      "aliases": [],
+      "zh": "橡皮擦",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "school",
+      "collocation": "an eraser",
+      "sentenceFrame": "I use an ___ carefully.",
+      "pronunciationAudio": "audio/words/eraser.mp3",
+      "examples": [
+        {
+          "id": "l3-eraser-e1",
+          "text": "The eraser is pink.",
+          "zhHint": "橡皮擦",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/eraser_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-eraser-e2",
+          "text": "I use an eraser carefully.",
+          "zhHint": "橡皮擦",
+          "purpose": "application",
+          "audio": "audio/words/ex/eraser_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-evening",
+      "word": "evening",
+      "aliases": [],
+      "zh": "傍晚",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "numbers_time",
+      "collocation": "in the evening",
+      "sentenceFrame": "I walk home in the ___.",
+      "pronunciationAudio": "audio/words/evening.mp3",
+      "examples": [
+        {
+          "id": "l3-evening-e1",
+          "text": "Evening is time for dinner.",
+          "zhHint": "傍晚",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/evening_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-evening-e2",
+          "text": "I walk home in the evening.",
+          "zhHint": "傍晚",
+          "purpose": "application",
+          "audio": "audio/words/ex/evening_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": [
+        "time-of-day"
+      ]
+    },
+    {
+      "id": "l3-every",
+      "word": "every",
+      "aliases": [],
+      "zh": "每一個",
+      "pos": "determiner",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "numbers_time",
+      "collocation": "I read every day.",
+      "sentenceFrame": "___ student has a book.",
+      "pronunciationAudio": "audio/words/every.mp3",
+      "examples": [
+        {
+          "id": "l3-every-e1",
+          "text": "I read every day.",
+          "zhHint": "每一個",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-every-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-every-e2",
+          "text": "Every student has a book.",
+          "zhHint": "每一個",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-every-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-family",
+      "word": "family",
+      "aliases": [],
+      "zh": "家庭",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "people_family",
+      "collocation": "a family",
+      "sentenceFrame": "Our ___ goes to the park.",
+      "pronunciationAudio": "audio/words/family.mp3",
+      "examples": [
+        {
+          "id": "l3-family-e1",
+          "text": "My family eats dinner together.",
+          "zhHint": "家庭",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/family_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-family-e2",
+          "text": "Our family goes to the park.",
+          "zhHint": "家庭",
+          "purpose": "application",
+          "audio": "audio/words/ex/family_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-feel",
+      "word": "feel",
+      "aliases": [],
+      "zh": "感覺",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "body_health",
+      "collocation": "feel + object/place",
+      "sentenceFrame": "The water feels warm.",
+      "pronunciationAudio": "audio/words/feel.mp3",
+      "examples": [
+        {
+          "id": "l3-feel-e1",
+          "text": "I feel happy today.",
+          "zhHint": "感覺",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-feel-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-feel-e2",
+          "text": "The water feels warm.",
+          "zhHint": "感覺",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-feel-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-fly",
+      "word": "fly",
+      "aliases": [],
+      "zh": "飛",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "fly + object/place",
+      "sentenceFrame": "We ___ a kite in the park.",
+      "pronunciationAudio": "audio/words/fly.mp3",
+      "examples": [
+        {
+          "id": "l3-fly-e1",
+          "text": "Birds can fly.",
+          "zhHint": "飛",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-fly-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-fly-e2",
+          "text": "We fly a kite in the park.",
+          "zhHint": "飛",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-fly-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-friend",
+      "word": "friend",
+      "aliases": [],
+      "zh": "朋友",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "people_family",
+      "collocation": "a friend",
+      "sentenceFrame": "I talk with my ___ after class.",
+      "pronunciationAudio": "audio/words/friend.mp3",
+      "examples": [
+        {
+          "id": "l3-friend-e1",
+          "text": "Amy is my best friend.",
+          "zhHint": "朋友",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-friend-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-friend-e2",
+          "text": "I talk with my friend after class.",
+          "zhHint": "朋友",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-friend-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-good_bye",
+      "word": "good-bye",
+      "aliases": [],
+      "zh": "再見",
+      "pos": "interjection",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "general",
+      "collocation": "a good-bye",
+      "sentenceFrame": "We say ___ after class.",
+      "pronunciationAudio": "audio/words/goodbye.mp3",
+      "examples": [
+        {
+          "id": "l3-good_bye-e1",
+          "text": "Good-bye, Mr. Lin.",
+          "zhHint": "再見",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-good_bye-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-good_bye-e2",
+          "text": "We say good-bye after class.",
+          "zhHint": "再見",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-good_bye-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-goodbye",
+      "word": "goodbye",
+      "aliases": [],
+      "zh": "再見",
+      "pos": "interjection",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "general",
+      "collocation": "a goodbye",
+      "sentenceFrame": "She waved ___ to her friend.",
+      "pronunciationAudio": "audio/words/goodbye.mp3",
+      "examples": [
+        {
+          "id": "l3-goodbye-e1",
+          "text": "Goodbye! See you tomorrow.",
+          "zhHint": "再見",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-goodbye-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-goodbye-e2",
+          "text": "She waved goodbye to her friend.",
+          "zhHint": "再見",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-goodbye-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-hair",
+      "word": "hair",
+      "aliases": [],
+      "zh": "頭髮",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "body_health",
+      "collocation": "a hair",
+      "sentenceFrame": "I wash my ___ every night.",
+      "pronunciationAudio": "audio/words/hair.mp3",
+      "examples": [
+        {
+          "id": "l3-hair-e1",
+          "text": "My hair is black.",
+          "zhHint": "頭髮",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/hair_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-hair-e2",
+          "text": "I wash my hair every night.",
+          "zhHint": "頭髮",
+          "purpose": "application",
+          "audio": "audio/words/ex/hair_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-hand",
+      "word": "hand",
+      "aliases": [],
+      "zh": "手",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "body_health",
+      "collocation": "a hand",
+      "sentenceFrame": "I wash my ___ before lunch.",
+      "pronunciationAudio": "audio/words/hand.mp3",
+      "examples": [
+        {
+          "id": "l3-hand-e1",
+          "text": "My hand holds a pencil.",
+          "zhHint": "手",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/hand_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-hand-e2",
+          "text": "I wash my hand before lunch.",
+          "zhHint": "手",
+          "purpose": "application",
+          "audio": "audio/words/ex/hand_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-hat",
+      "word": "hat",
+      "aliases": [],
+      "zh": "帽子",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "clothes",
+      "collocation": "a hat",
+      "sentenceFrame": "I wear a ___ in the sun.",
+      "pronunciationAudio": "audio/words/hat.mp3",
+      "examples": [
+        {
+          "id": "l3-hat-e1",
+          "text": "The hat is on my head.",
+          "zhHint": "帽子",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/hat_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-hat-e2",
+          "text": "I wear a hat in the sun.",
+          "zhHint": "帽子",
+          "purpose": "application",
+          "audio": "audio/words/ex/hat_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-head",
+      "word": "head",
+      "aliases": [],
+      "zh": "頭",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "body_health",
+      "collocation": "a head",
+      "sentenceFrame": "A hat covers my ___.",
+      "pronunciationAudio": "audio/words/head.mp3",
+      "examples": [
+        {
+          "id": "l3-head-e1",
+          "text": "My head hurts today.",
+          "zhHint": "頭",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/head_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-head-e2",
+          "text": "A hat covers my head.",
+          "zhHint": "頭",
+          "purpose": "application",
+          "audio": "audio/words/ex/head_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-help",
+      "word": "help",
+      "aliases": [],
+      "zh": "幫助",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "help + object/place",
+      "sentenceFrame": "She helps a friend.",
+      "pronunciationAudio": "audio/words/help.mp3",
+      "examples": [
+        {
+          "id": "l3-help-e1",
+          "text": "I help my dad.",
+          "zhHint": "幫助",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/help_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-help-e2",
+          "text": "She helps a friend.",
+          "zhHint": "幫助",
+          "purpose": "application",
+          "audio": "audio/words/ex/help_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-horse",
+      "word": "horse",
+      "aliases": [],
+      "zh": "馬",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "animals_nature",
+      "collocation": "a horse",
+      "sentenceFrame": "A ___ eats grass.",
+      "pronunciationAudio": "audio/words/horse.mp3",
+      "examples": [
+        {
+          "id": "l3-horse-e1",
+          "text": "The horse runs on the farm.",
+          "zhHint": "馬",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/horse_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-horse-e2",
+          "text": "A horse eats grass.",
+          "zhHint": "馬",
+          "purpose": "application",
+          "audio": "audio/words/ex/horse_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-hot_dog",
+      "word": "hot dog",
+      "aliases": [],
+      "zh": "熱狗",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "food",
+      "collocation": "hot dog",
+      "sentenceFrame": "The ___ is on the plate.",
+      "pronunciationAudio": "audio/words/hotdog.mp3",
+      "examples": [
+        {
+          "id": "l3-hot_dog-e1",
+          "text": "I have a hot dog for lunch.",
+          "zhHint": "熱狗",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-hot_dog-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-hot_dog-e2",
+          "text": "The hot dog is on the plate.",
+          "zhHint": "熱狗",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-hot_dog-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-hour",
+      "word": "hour",
+      "aliases": [],
+      "zh": "小時",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "numbers_time",
+      "collocation": "a hour",
+      "sentenceFrame": "I study for one ___.",
+      "pronunciationAudio": "audio/words/hour.mp3",
+      "examples": [
+        {
+          "id": "l3-hour-e1",
+          "text": "One hour is long.",
+          "zhHint": "小時",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/hour_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-hour-e2",
+          "text": "I study for one hour.",
+          "zhHint": "小時",
+          "purpose": "application",
+          "audio": "audio/words/ex/hour_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-house",
+      "word": "house",
+      "aliases": [],
+      "zh": "房子",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "home_objects",
+      "collocation": "a small house",
+      "sentenceFrame": "There is a tree in front of the ___.",
+      "pronunciationAudio": "audio/words/house.mp3",
+      "examples": [
+        {
+          "id": "l3-house-e1",
+          "text": "My house has three rooms.",
+          "zhHint": "房子",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-house-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-house-e2",
+          "text": "There is a tree in front of the house.",
+          "zhHint": "房子",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-house-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "home-house-room"
+      ]
+    },
+    {
+      "id": "l3-hungry",
+      "word": "hungry",
+      "aliases": [],
+      "zh": "餓的",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "body_health",
+      "collocation": "a hungry",
+      "sentenceFrame": "The ___ dog eats rice.",
+      "pronunciationAudio": "audio/words/hungry.mp3",
+      "examples": [
+        {
+          "id": "l3-hungry-e1",
+          "text": "I am hungry.",
+          "zhHint": "餓的",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/hungry_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-hungry-e2",
+          "text": "The hungry dog eats rice.",
+          "zhHint": "餓的",
+          "purpose": "application",
+          "audio": "audio/words/ex/hungry_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-ice",
+      "word": "ice",
+      "aliases": [],
+      "zh": "冰",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "food",
+      "collocation": "ice",
+      "sentenceFrame": "The ___ melts in the warm sun.",
+      "pronunciationAudio": "audio/words/ice.mp3",
+      "examples": [
+        {
+          "id": "l3-ice-e1",
+          "text": "Please put some ice in my water.",
+          "zhHint": "冰",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-ice-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-ice-e2",
+          "text": "The ice melts in the warm sun.",
+          "zhHint": "冰",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-ice-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-ice_cream",
+      "word": "ice cream",
+      "aliases": [],
+      "zh": "冰淇淋",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "food",
+      "collocation": "ice cream",
+      "sentenceFrame": "___ is on the table.",
+      "pronunciationAudio": "audio/words/icecream.mp3",
+      "examples": [
+        {
+          "id": "l3-ice_cream-e1",
+          "text": "I like ice cream.",
+          "zhHint": "冰淇淋",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-ice_cream-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-ice_cream-e2",
+          "text": "Ice cream is on the table.",
+          "zhHint": "冰淇淋",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-ice_cream-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-into",
+      "word": "into",
+      "aliases": [],
+      "zh": "進入……裡面",
+      "pos": "preposition",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "places_transport",
+      "collocation": "Put the books into the box.",
+      "sentenceFrame": "The dog runs ___ the room.",
+      "pronunciationAudio": "audio/words/into.mp3",
+      "examples": [
+        {
+          "id": "l3-into-e1",
+          "text": "Put the books into the box.",
+          "zhHint": "進入……裡面",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-into-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-into-e2",
+          "text": "The dog runs into the room.",
+          "zhHint": "進入……裡面",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-into-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-invite",
+      "word": "invite",
+      "aliases": [],
+      "zh": "邀請、聘請",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "invite + object/place",
+      "sentenceFrame": "We ___ our friends to the picnic.",
+      "pronunciationAudio": "audio/words/invite.mp3",
+      "examples": [
+        {
+          "id": "l3-invite-e1",
+          "text": "I want to invite Amy to my party.",
+          "zhHint": "邀請、聘請",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-invite-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-invite-e2",
+          "text": "We invite our friends to the picnic.",
+          "zhHint": "邀請、聘請",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-invite-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-join",
+      "word": "join",
+      "aliases": [],
+      "zh": "加入",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "join + object/place",
+      "sentenceFrame": "Please ___ us for lunch.",
+      "pronunciationAudio": "audio/words/join.mp3",
+      "examples": [
+        {
+          "id": "l3-join-e1",
+          "text": "I want to join the music club.",
+          "zhHint": "加入",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-join-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-join-e2",
+          "text": "Please join us for lunch.",
+          "zhHint": "加入",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-join-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-juice",
+      "word": "juice",
+      "aliases": [],
+      "zh": "果汁",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "food",
+      "collocation": "juice",
+      "sentenceFrame": "I drink ___ with lunch.",
+      "pronunciationAudio": "audio/words/juice.mp3",
+      "examples": [
+        {
+          "id": "l3-juice-e1",
+          "text": "Juice is sweet.",
+          "zhHint": "果汁",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/juice_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-juice-e2",
+          "text": "I drink juice with lunch.",
+          "zhHint": "果汁",
+          "purpose": "application",
+          "audio": "audio/words/ex/juice_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-kick",
+      "word": "kick",
+      "aliases": [],
+      "zh": "踢",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "kick + object/place",
+      "sentenceFrame": "He kicks the ball into the goal.",
+      "pronunciationAudio": "audio/words/kick.mp3",
+      "examples": [
+        {
+          "id": "l3-kick-e1",
+          "text": "Do not kick the door.",
+          "zhHint": "踢",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-kick-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-kick-e2",
+          "text": "He kicks the ball into the goal.",
+          "zhHint": "踢",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-kick-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-kiss",
+      "word": "kiss",
+      "aliases": [],
+      "zh": "親吻",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "kiss + object/place",
+      "sentenceFrame": "She kisses her child good night.",
+      "pronunciationAudio": "audio/words/kiss.mp3",
+      "examples": [
+        {
+          "id": "l3-kiss-e1",
+          "text": "Mom gives the baby a kiss.",
+          "zhHint": "親吻",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-kiss-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-kiss-e2",
+          "text": "She kisses her child good night.",
+          "zhHint": "親吻",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-kiss-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-kitchen",
+      "word": "kitchen",
+      "aliases": [],
+      "zh": "廚房",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "home_objects",
+      "collocation": "a kitchen",
+      "sentenceFrame": "The cups are in the ___.",
+      "pronunciationAudio": "audio/words/kitchen.mp3",
+      "examples": [
+        {
+          "id": "l3-kitchen-e1",
+          "text": "Mom is cooking in the kitchen.",
+          "zhHint": "廚房",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-kitchen-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-kitchen-e2",
+          "text": "The cups are in the kitchen.",
+          "zhHint": "廚房",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-kitchen-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-kite",
+      "word": "kite",
+      "aliases": [],
+      "zh": "風箏",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "animals_nature",
+      "collocation": "a kite",
+      "sentenceFrame": "The red ___ is high in the sky.",
+      "pronunciationAudio": "audio/words/kite.mp3",
+      "examples": [
+        {
+          "id": "l3-kite-e1",
+          "text": "We fly a kite in the park.",
+          "zhHint": "風箏",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-kite-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-kite-e2",
+          "text": "The red kite is high in the sky.",
+          "zhHint": "風箏",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-kite-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-learn",
+      "word": "learn",
+      "aliases": [],
+      "zh": "學習",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "school",
+      "collocation": "learn + object/place",
+      "sentenceFrame": "We ___ how to make a card.",
+      "pronunciationAudio": "audio/words/learn.mp3",
+      "examples": [
+        {
+          "id": "l3-learn-e1",
+          "text": "I learn new words at school.",
+          "zhHint": "學習",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-learn-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-learn-e2",
+          "text": "We learn how to make a card.",
+          "zhHint": "學習",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-learn-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-make",
+      "word": "make",
+      "aliases": [],
+      "zh": "製作",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "make + object/place",
+      "sentenceFrame": "He makes a cake.",
+      "pronunciationAudio": "audio/words/make.mp3",
+      "examples": [
+        {
+          "id": "l3-make-e1",
+          "text": "I make a card.",
+          "zhHint": "製作",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/make_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-make-e2",
+          "text": "He makes a cake.",
+          "zhHint": "製作",
+          "purpose": "application",
+          "audio": "audio/words/ex/make_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-money",
+      "word": "money",
+      "aliases": [],
+      "zh": "錢",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "general",
+      "collocation": "a money",
+      "sentenceFrame": "There is some ___ in the bag.",
+      "pronunciationAudio": "audio/words/money.mp3",
+      "examples": [
+        {
+          "id": "l3-money-e1",
+          "text": "I save my money.",
+          "zhHint": "錢",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-money-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-money-e2",
+          "text": "There is some money in the bag.",
+          "zhHint": "錢",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-money-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-morning",
+      "word": "morning",
+      "aliases": [],
+      "zh": "早上",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "numbers_time",
+      "collocation": "in the morning",
+      "sentenceFrame": "I read in the ___.",
+      "pronunciationAudio": "audio/words/morning.mp3",
+      "examples": [
+        {
+          "id": "l3-morning-e1",
+          "text": "Morning is time for breakfast.",
+          "zhHint": "早上",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/morning_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-morning-e2",
+          "text": "I read in the morning.",
+          "zhHint": "早上",
+          "purpose": "application",
+          "audio": "audio/words/ex/morning_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": [
+        "time-of-day"
+      ]
+    },
+    {
+      "id": "l3-need",
+      "word": "need",
+      "aliases": [],
+      "zh": "需要",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "need + object/place",
+      "sentenceFrame": "Plants ___ water and light.",
+      "pronunciationAudio": "audio/words/need.mp3",
+      "examples": [
+        {
+          "id": "l3-need-e1",
+          "text": "I need a pencil.",
+          "zhHint": "需要",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-need-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-need-e2",
+          "text": "Plants need water and light.",
+          "zhHint": "需要",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-need-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-o_clock",
+      "word": "o'clock",
+      "aliases": [],
+      "zh": "……點鐘",
+      "pos": "adverb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "numbers_time",
+      "collocation": "o'clock",
+      "sentenceFrame": "Lunch starts at twelve ___.",
+      "pronunciationAudio": "audio/words/oclock.mp3",
+      "examples": [
+        {
+          "id": "l3-o_clock-e1",
+          "text": "It is nine o'clock.",
+          "zhHint": "……點鐘",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-o_clock-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-o_clock-e2",
+          "text": "Lunch starts at twelve o'clock.",
+          "zhHint": "……點鐘",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-o_clock-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-oh_oh",
+      "word": "oh-oh",
+      "aliases": [],
+      "zh": "哦哦",
+      "pos": "interjection",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "general",
+      "collocation": "an oh-oh",
+      "sentenceFrame": "___! We missed the bus.",
+      "pronunciationAudio": "audio/words/ohoh.mp3",
+      "examples": [
+        {
+          "id": "l3-oh_oh-e1",
+          "text": "Oh-oh! My pencil is broken.",
+          "zhHint": "哦哦",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-oh_oh-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-oh_oh-e2",
+          "text": "Oh-oh! We missed the bus.",
+          "zhHint": "哦哦",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-oh_oh-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-oops",
+      "word": "oops",
+      "aliases": [],
+      "zh": "噢！(等於whoops)",
+      "pos": "interjection",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "general",
+      "collocation": "an oops",
+      "sentenceFrame": "___! This is your cup.",
+      "pronunciationAudio": "audio/words/oops.mp3",
+      "examples": [
+        {
+          "id": "l3-oops-e1",
+          "text": "Oops! I dropped my book.",
+          "zhHint": "噢！(等於whoops)",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-oops-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-oops-e2",
+          "text": "Oops! This is your cup.",
+          "zhHint": "噢！(等於whoops)",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-oops-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-p_m",
+      "word": "p.m.",
+      "aliases": [],
+      "zh": "下午；晚上",
+      "pos": "adverb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "numbers_time",
+      "collocation": "p.m.",
+      "sentenceFrame": "I do my homework at six p.m.",
+      "pronunciationAudio": "audio/words/pm.mp3",
+      "examples": [
+        {
+          "id": "l3-p_m-e1",
+          "text": "The movie starts at three p.m.",
+          "zhHint": "下午；晚上",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-p_m-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-p_m-e2",
+          "text": "I do my homework at six p.m.",
+          "zhHint": "下午；晚上",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-p_m-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-phone",
+      "word": "phone",
+      "aliases": [],
+      "zh": "電話",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "home_objects",
+      "collocation": "a phone",
+      "sentenceFrame": "I talk to Grandma on the ___.",
+      "pronunciationAudio": "audio/words/phone.mp3",
+      "examples": [
+        {
+          "id": "l3-phone-e1",
+          "text": "The phone is ringing.",
+          "zhHint": "電話",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-phone-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-phone-e2",
+          "text": "I talk to Grandma on the phone.",
+          "zhHint": "電話",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-phone-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "phone-words"
+      ]
+    },
+    {
+      "id": "l3-really",
+      "word": "really",
+      "aliases": [],
+      "zh": "真的；非常",
+      "pos": "adverb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "general",
+      "collocation": "really",
+      "sentenceFrame": "Is that ___ your bag?",
+      "pronunciationAudio": "audio/words/really.mp3",
+      "examples": [
+        {
+          "id": "l3-really-e1",
+          "text": "I really like this song.",
+          "zhHint": "真的；非常",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-really-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-really-e2",
+          "text": "Is that really your bag?",
+          "zhHint": "真的；非常",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-really-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-salt",
+      "word": "salt",
+      "aliases": [],
+      "zh": "鹽",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "food",
+      "collocation": "salt",
+      "sentenceFrame": "Too much ___ is not healthy.",
+      "pronunciationAudio": "audio/words/salt.mp3",
+      "examples": [
+        {
+          "id": "l3-salt-e1",
+          "text": "Please put some salt in the soup.",
+          "zhHint": "鹽",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-salt-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-salt-e2",
+          "text": "Too much salt is not healthy.",
+          "zhHint": "鹽",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-salt-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-singing",
+      "word": "singing",
+      "aliases": [],
+      "zh": "(歌)唱、歌聲",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "general",
+      "collocation": "a singing",
+      "sentenceFrame": "We practice ___ for the school show.",
+      "pronunciationAudio": "audio/words/singing.mp3",
+      "examples": [
+        {
+          "id": "l3-singing-e1",
+          "text": "Singing makes me happy.",
+          "zhHint": "(歌)唱、歌聲",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-singing-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-singing-e2",
+          "text": "We practice singing for the school show.",
+          "zhHint": "(歌)唱、歌聲",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-singing-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-sleep",
+      "word": "sleep",
+      "aliases": [],
+      "zh": "睡覺",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "sleep + object/place",
+      "sentenceFrame": "The baby sleeps well.",
+      "pronunciationAudio": "audio/words/sleep.mp3",
+      "examples": [
+        {
+          "id": "l3-sleep-e1",
+          "text": "I sleep at night.",
+          "zhHint": "睡覺",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/sleep_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-sleep-e2",
+          "text": "The baby sleeps well.",
+          "zhHint": "睡覺",
+          "purpose": "application",
+          "audio": "audio/words/ex/sleep_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-spell",
+      "word": "spell",
+      "aliases": [],
+      "zh": "拼字",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "school",
+      "collocation": "spell + object/place",
+      "sentenceFrame": "I can ___ this word.",
+      "pronunciationAudio": "audio/words/spell.mp3",
+      "examples": [
+        {
+          "id": "l3-spell-e1",
+          "text": "Can you spell your name?",
+          "zhHint": "拼字",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-spell-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-spell-e2",
+          "text": "I can spell this word.",
+          "zhHint": "拼字",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-spell-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-star",
+      "word": "star",
+      "aliases": [],
+      "zh": "星星",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "animals_nature",
+      "collocation": "a star",
+      "sentenceFrame": "Draw a ___ next to your name.",
+      "pronunciationAudio": "audio/words/star.mp3",
+      "examples": [
+        {
+          "id": "l3-star-e1",
+          "text": "We can see a bright star tonight.",
+          "zhHint": "星星",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-star-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-star-e2",
+          "text": "Draw a star next to your name.",
+          "zhHint": "星星",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-star-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-start",
+      "word": "start",
+      "aliases": [],
+      "zh": "開始",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "numbers_time",
+      "collocation": "start + object/place",
+      "sentenceFrame": "We ___ our homework after dinner.",
+      "pronunciationAudio": "audio/words/start.mp3",
+      "examples": [
+        {
+          "id": "l3-start-e1",
+          "text": "Class starts at eight.",
+          "zhHint": "開始",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-start-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-start-e2",
+          "text": "We start our homework after dinner.",
+          "zhHint": "開始",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-start-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-take",
+      "word": "take",
+      "aliases": [],
+      "zh": "拿",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "take + object/place",
+      "sentenceFrame": "She takes a book.",
+      "pronunciationAudio": "audio/words/take.mp3",
+      "examples": [
+        {
+          "id": "l3-take-e1",
+          "text": "I take my bag.",
+          "zhHint": "拿",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/take_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-take-e2",
+          "text": "She takes a book.",
+          "zhHint": "拿",
+          "purpose": "application",
+          "audio": "audio/words/ex/take_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-telephone",
+      "word": "telephone",
+      "aliases": [],
+      "zh": "電話",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "home_objects",
+      "collocation": "a telephone",
+      "sentenceFrame": "I use the ___ to call Grandpa.",
+      "pronunciationAudio": "audio/words/telephone.mp3",
+      "examples": [
+        {
+          "id": "l3-telephone-e1",
+          "text": "The telephone is next to the sofa.",
+          "zhHint": "電話",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-telephone-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-telephone-e2",
+          "text": "I use the telephone to call Grandpa.",
+          "zhHint": "電話",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-telephone-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "phone-words"
+      ]
+    },
+    {
+      "id": "l3-there",
+      "word": "there",
+      "aliases": [],
+      "zh": "那裡",
+      "pos": "adverb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "general",
+      "collocation": "there",
+      "sentenceFrame": "___ is a bird in the tree.",
+      "pronunciationAudio": "audio/words/there.mp3",
+      "examples": [
+        {
+          "id": "l3-there-e1",
+          "text": "The bus stop is over there.",
+          "zhHint": "那裡",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-there-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-there-e2",
+          "text": "There is a bird in the tree.",
+          "zhHint": "那裡",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-there-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "here-there"
+      ]
+    },
+    {
+      "id": "l3-together",
+      "word": "together",
+      "aliases": [],
+      "zh": "一起",
+      "pos": "adverb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "general",
+      "collocation": "together",
+      "sentenceFrame": "Let us clean the room ___.",
+      "pronunciationAudio": "audio/words/together.mp3",
+      "examples": [
+        {
+          "id": "l3-together-e1",
+          "text": "We study together.",
+          "zhHint": "一起",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-together-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-together-e2",
+          "text": "Let us clean the room together.",
+          "zhHint": "一起",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-together-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-train",
+      "word": "train",
+      "aliases": [],
+      "zh": "火車",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "places_transport",
+      "collocation": "a train",
+      "sentenceFrame": "The ___ stops at this station.",
+      "pronunciationAudio": "audio/words/train.mp3",
+      "examples": [
+        {
+          "id": "l3-train-e1",
+          "text": "We take the train to the city.",
+          "zhHint": "火車",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-train-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-train-e2",
+          "text": "The train stops at this station.",
+          "zhHint": "火車",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-train-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-trip",
+      "word": "trip",
+      "aliases": [],
+      "zh": "旅行",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "places_transport",
+      "collocation": "a trip",
+      "sentenceFrame": "I packed a hat for the ___.",
+      "pronunciationAudio": "audio/words/trip.mp3",
+      "examples": [
+        {
+          "id": "l3-trip-e1",
+          "text": "Our class trip is on Friday.",
+          "zhHint": "旅行",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-trip-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-trip-e2",
+          "text": "I packed a hat for the trip.",
+          "zhHint": "旅行",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-trip-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-truck",
+      "word": "truck",
+      "aliases": [],
+      "zh": "卡車",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "places_transport",
+      "collocation": "a truck",
+      "sentenceFrame": "We can see the ___ from here.",
+      "pronunciationAudio": "audio/words/truck.mp3",
+      "examples": [
+        {
+          "id": "l3-truck-e1",
+          "text": "The truck is near my home.",
+          "zhHint": "卡車",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-truck-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-truck-e2",
+          "text": "We can see the truck from here.",
+          "zhHint": "卡車",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-truck-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-true",
+      "word": "true",
+      "aliases": [],
+      "zh": "真的；正確的",
+      "pos": "adjective",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "language",
+      "collocation": "be true",
+      "sentenceFrame": "Is it ___ that pandas can swim?",
+      "pronunciationAudio": "audio/words/true.mp3",
+      "examples": [
+        {
+          "id": "l3-true-e1",
+          "text": "The story is true.",
+          "zhHint": "真的；正確的",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-true-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-true-e2",
+          "text": "Is it true that pandas can swim?",
+          "zhHint": "真的；正確的",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-true-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-try",
+      "word": "try",
+      "aliases": [],
+      "zh": "嘗試",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "try + object/place",
+      "sentenceFrame": "I ___ to read every day.",
+      "pronunciationAudio": "audio/words/try.mp3",
+      "examples": [
+        {
+          "id": "l3-try-e1",
+          "text": "Please try this soup.",
+          "zhHint": "嘗試",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-try-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-try-e2",
+          "text": "I try to read every day.",
+          "zhHint": "嘗試",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-try-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-uh_uh",
+      "word": "uh-uh",
+      "aliases": [],
+      "zh": "嗯嗯",
+      "pos": "interjection",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "general",
+      "collocation": "an uh-uh",
+      "sentenceFrame": "___, I do not want coffee.",
+      "pronunciationAudio": "audio/words/uhuh.mp3",
+      "examples": [
+        {
+          "id": "l3-uh_uh-e1",
+          "text": "Uh-uh, that answer is not right.",
+          "zhHint": "嗯嗯",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-uh_uh-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-uh_uh-e2",
+          "text": "Uh-uh, I do not want coffee.",
+          "zhHint": "嗯嗯",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-uh_uh-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-uncle",
+      "word": "uncle",
+      "aliases": [],
+      "zh": "叔叔",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "people_family",
+      "collocation": "an uncle",
+      "sentenceFrame": "___ visits us on Sunday.",
+      "pronunciationAudio": "audio/words/uncle.mp3",
+      "examples": [
+        {
+          "id": "l3-uncle-e1",
+          "text": "My uncle drives a car.",
+          "zhHint": "叔叔",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/uncle_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-uncle-e2",
+          "text": "Uncle visits us on Sunday.",
+          "zhHint": "叔叔",
+          "purpose": "application",
+          "audio": "audio/words/ex/uncle_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-up",
+      "word": "up",
+      "aliases": [],
+      "zh": "向上；在上面",
+      "pos": "adverb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "general",
+      "collocation": "up",
+      "sentenceFrame": "Look ___ at the sky.",
+      "pronunciationAudio": "audio/words/up.mp3",
+      "examples": [
+        {
+          "id": "l3-up-e1",
+          "text": "Please stand up.",
+          "zhHint": "向上；在上面",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-up-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-up-e2",
+          "text": "Look up at the sky.",
+          "zhHint": "向上；在上面",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-up-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-wait",
+      "word": "wait",
+      "aliases": [],
+      "zh": "等待",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "wait + object/place",
+      "sentenceFrame": "We ___ at the bus stop.",
+      "pronunciationAudio": "audio/words/wait.mp3",
+      "examples": [
+        {
+          "id": "l3-wait-e1",
+          "text": "Please wait for me.",
+          "zhHint": "等待",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-wait-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-wait-e2",
+          "text": "We wait at the bus stop.",
+          "zhHint": "等待",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-wait-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-wear",
+      "word": "wear",
+      "aliases": [],
+      "zh": "穿著",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "clothes",
+      "collocation": "wear a coat",
+      "sentenceFrame": "She wears a white shirt.",
+      "pronunciationAudio": "audio/words/wear.mp3",
+      "examples": [
+        {
+          "id": "l3-wear-e1",
+          "text": "I wear a coat in winter.",
+          "zhHint": "穿著",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-wear-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-wear-e2",
+          "text": "She wears a white shirt.",
+          "zhHint": "穿著",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-wear-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-weather",
+      "word": "weather",
+      "aliases": [],
+      "zh": "天氣",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "animals_nature",
+      "collocation": "check the weather",
+      "sentenceFrame": "We check the ___ before our trip.",
+      "pronunciationAudio": "audio/words/weather.mp3",
+      "examples": [
+        {
+          "id": "l3-weather-e1",
+          "text": "The weather is sunny today.",
+          "zhHint": "天氣",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-weather-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-weather-e2",
+          "text": "We check the weather before our trip.",
+          "zhHint": "天氣",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-weather-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-when",
+      "word": "when",
+      "aliases": [],
+      "zh": "何時",
+      "pos": "adverb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "language",
+      "collocation": "when",
+      "sentenceFrame": "Tell me ___ you are ready.",
+      "pronunciationAudio": "audio/words/when.mp3",
+      "examples": [
+        {
+          "id": "l3-when-e1",
+          "text": "When is your birthday?",
+          "zhHint": "何時",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-when-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-when-e2",
+          "text": "Tell me when you are ready.",
+          "zhHint": "何時",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-when-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-where",
+      "word": "where",
+      "aliases": [],
+      "zh": "哪裡",
+      "pos": "adverb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "language",
+      "collocation": "where",
+      "sentenceFrame": "___ do you live?",
+      "pronunciationAudio": "audio/words/where.mp3",
+      "examples": [
+        {
+          "id": "l3-where-e1",
+          "text": "Where is my book?",
+          "zhHint": "哪裡",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-where-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-where-e2",
+          "text": "Where do you live?",
+          "zhHint": "哪裡",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-where-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-why",
+      "word": "why",
+      "aliases": [],
+      "zh": "為什麼",
+      "pos": "adverb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "language",
+      "collocation": "why",
+      "sentenceFrame": "___ do you like this story?",
+      "pronunciationAudio": "audio/words/why.mp3",
+      "examples": [
+        {
+          "id": "l3-why-e1",
+          "text": "Why are you sad?",
+          "zhHint": "為什麼",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-why-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-why-e2",
+          "text": "Why do you like this story?",
+          "zhHint": "為什麼",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-why-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-with",
+      "word": "with",
+      "aliases": [],
+      "zh": "和……一起；用",
+      "pos": "preposition",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "language",
+      "collocation": "I go to school with my sister.",
+      "sentenceFrame": "Write your name ___ a pen.",
+      "pronunciationAudio": "audio/words/with.mp3",
+      "examples": [
+        {
+          "id": "l3-with-e1",
+          "text": "I go to school with my sister.",
+          "zhHint": "和……一起；用",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-with-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-with-e2",
+          "text": "Write your name with a pen.",
+          "zhHint": "和……一起；用",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-with-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-word",
+      "word": "word",
+      "aliases": [],
+      "zh": "單字",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "language",
+      "collocation": "a word",
+      "sentenceFrame": "I use this ___ in a sentence.",
+      "pronunciationAudio": "audio/words/word.mp3",
+      "examples": [
+        {
+          "id": "l3-word-e1",
+          "text": "Read the word on the card.",
+          "zhHint": "單字",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-word-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-word-e2",
+          "text": "I use this word in a sentence.",
+          "zhHint": "單字",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-word-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-work",
+      "word": "work",
+      "aliases": [],
+      "zh": "工作",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "actions",
+      "collocation": "work together",
+      "sentenceFrame": "We ___ together on the picture.",
+      "pronunciationAudio": "audio/words/work.mp3",
+      "examples": [
+        {
+          "id": "l3-work-e1",
+          "text": "My parents work in the city.",
+          "zhHint": "工作",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-work-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-work-e2",
+          "text": "We work together on the picture.",
+          "zhHint": "工作",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-work-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "job-work-worker"
+      ]
+    },
+    {
+      "id": "l3-worker",
+      "word": "worker",
+      "aliases": [],
+      "zh": "工作者",
+      "pos": "noun",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "people_family",
+      "collocation": "a factory worker",
+      "sentenceFrame": "A ___ wears a yellow hat.",
+      "pronunciationAudio": "audio/words/worker.mp3",
+      "examples": [
+        {
+          "id": "l3-worker-e1",
+          "text": "The worker fixes the road.",
+          "zhHint": "工作者",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-worker-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-worker-e2",
+          "text": "A worker wears a yellow hat.",
+          "zhHint": "工作者",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-worker-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "job-work-worker"
+      ]
+    },
+    {
+      "id": "l3-write",
+      "word": "write",
+      "aliases": [],
+      "zh": "寫",
+      "pos": "verb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "school",
+      "collocation": "write a story",
+      "sentenceFrame": "She writes a short story.",
+      "pronunciationAudio": "audio/words/write.mp3",
+      "examples": [
+        {
+          "id": "l3-write-e1",
+          "text": "I write my name on the paper.",
+          "zhHint": "寫",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-write-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-write-e2",
+          "text": "She writes a short story.",
+          "zhHint": "寫",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-write-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": []
+    },
+    {
+      "id": "l3-yesterday",
+      "word": "yesterday",
+      "aliases": [],
+      "zh": "昨天",
+      "pos": "adverb",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "numbers_time",
+      "collocation": "yesterday was",
+      "sentenceFrame": "I saw Tom ___.",
+      "pronunciationAudio": "audio/words/yesterday.mp3",
+      "examples": [
+        {
+          "id": "l3-yesterday-e1",
+          "text": "Yesterday was rainy.",
+          "zhHint": "昨天",
+          "purpose": "recognition",
+          "audio": "audio/vocab_foundation/examples/l3-yesterday-e1.mp3",
+          "source": "foundation-generated"
+        },
+        {
+          "id": "l3-yesterday-e2",
+          "text": "I saw Tom yesterday.",
+          "zhHint": "昨天",
+          "purpose": "application",
+          "audio": "audio/vocab_foundation/examples/l3-yesterday-e2.mp3",
+          "source": "foundation-generated"
+        }
+      ],
+      "confusionRefs": [
+        "day-reference"
+      ]
+    },
+    {
+      "id": "l3-zero",
+      "word": "zero",
+      "aliases": [],
+      "zh": "零(num)  零點、零度",
+      "pos": "number",
+      "level": 3,
+      "bands": [
+        "F2",
+        "F3"
+      ],
+      "difficulty": "Core",
+      "target": "active",
+      "theme": "numbers_time",
+      "collocation": "zero + plural noun",
+      "sentenceFrame": "___ birds are in the tree.",
+      "pronunciationAudio": "audio/words/zero.mp3",
+      "examples": [
+        {
+          "id": "l3-zero-e1",
+          "text": "I have zero apples.",
+          "zhHint": "零(num)  零點、零度",
+          "purpose": "recognition",
+          "audio": "audio/words/ex/zero_0.mp3",
+          "source": "wordbank"
+        },
+        {
+          "id": "l3-zero-e2",
+          "text": "Zero birds are in the tree.",
+          "zhHint": "零(num)  零點、零度",
+          "purpose": "application",
+          "audio": "audio/words/ex/zero_1.mp3",
+          "source": "wordbank"
+        }
+      ],
+      "confusionRefs": []
+    }
+  ]
+}

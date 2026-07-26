@@ -1,0 +1,1026 @@
+{
+  "schemaVersion": "1.0.0",
+  "level": 1,
+  "bands": [
+    "F0",
+    "F1"
+  ],
+  "units": [
+    {
+      "id": "l1-u01",
+      "level": 1,
+      "bands": [
+        "F0",
+        "F1"
+      ],
+      "theme": "language",
+      "sequence": 1,
+      "unitThemes": [
+        {
+          "name": "language",
+          "count": 14
+        }
+      ],
+      "titleZh": "語言與句型",
+      "titleEn": "Language Tools",
+      "targetWords": [
+        "a",
+        "am",
+        "an",
+        "are",
+        "at",
+        "do",
+        "he",
+        "how",
+        "i",
+        "in",
+        "is",
+        "it",
+        "not",
+        "or"
+      ],
+      "passages": [
+        {
+          "id": "l1-u01-p1",
+          "title": "Language Tools: First Reading",
+          "type": "guided-reading",
+          "theme": "language",
+          "text": "Our class is practicing clear English today. I have a red pen. I am happy today. I eat an apple after school. They are in the classroom. We meet at the bus stop. Do you like this song? He is my brother. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "a",
+            "am",
+            "an",
+            "are",
+            "at",
+            "do",
+            "he"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u01-p1.mp3"
+        },
+        {
+          "id": "l1-u01-p2",
+          "title": "Language Tools: Second Reading",
+          "type": "guided-reading",
+          "theme": "language",
+          "text": "Our class is practicing clear English today. How do you go to school? I am ten years old. We play in the park. She is my teacher. I found a key, and it is small. This book is not new. We can walk or take the bus. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "how",
+            "i",
+            "in",
+            "is",
+            "it",
+            "not",
+            "or"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u01-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l1-u01-d1",
+            "speaker": "A",
+            "text": "Can you use \"a\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d1.mp3"
+          },
+          {
+            "id": "l1-u01-d2",
+            "speaker": "B",
+            "text": "I have a red pen.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d2.mp3"
+          },
+          {
+            "id": "l1-u01-d3",
+            "speaker": "A",
+            "text": "What can you say with \"am\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d3.mp3"
+          },
+          {
+            "id": "l1-u01-d4",
+            "speaker": "B",
+            "text": "I am happy today.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d4.mp3"
+          },
+          {
+            "id": "l1-u01-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"an\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d5.mp3"
+          },
+          {
+            "id": "l1-u01-d6",
+            "speaker": "B",
+            "text": "I eat an apple after school.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d6.mp3"
+          },
+          {
+            "id": "l1-u01-d7",
+            "speaker": "A",
+            "text": "How would you use \"are\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d7.mp3"
+          },
+          {
+            "id": "l1-u01-d8",
+            "speaker": "B",
+            "text": "They are in the classroom.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l1-u01-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l1-u02",
+      "level": 1,
+      "bands": [
+        "F0",
+        "F1"
+      ],
+      "theme": "language",
+      "sequence": 2,
+      "unitThemes": [
+        {
+          "name": "language",
+          "count": 10
+        },
+        {
+          "name": "numbers_time",
+          "count": 4
+        }
+      ],
+      "titleZh": "語言與句型 × 數字與時間",
+      "titleEn": "Language Tools & Numbers and Time",
+      "targetWords": [
+        "say",
+        "she",
+        "that",
+        "they",
+        "too",
+        "we",
+        "what",
+        "who",
+        "yes",
+        "you",
+        "eight",
+        "five",
+        "four",
+        "nine"
+      ],
+      "passages": [
+        {
+          "id": "l1-u02-p1",
+          "title": "Language Tools: First Reading",
+          "type": "guided-reading",
+          "theme": "language",
+          "text": "Our class is practicing clear English today. Please say your name. She has a new bag. That is our bus. They walk to school together. I like apples, too. We eat lunch at school. What is your name? After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "say",
+            "she",
+            "that",
+            "they",
+            "too",
+            "we",
+            "what"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u02-p1.mp3"
+        },
+        {
+          "id": "l1-u02-p2",
+          "title": "Numbers and Time: Second Reading",
+          "type": "guided-reading",
+          "theme": "numbers_time",
+          "text": "It is a busy day, and we check the time carefully. Who has my ruler? Yes, I am ready. Do you want some water? I eat eight grapes. Five students play ball. Four cups are on the table. I see nine flowers. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "who",
+            "yes",
+            "you",
+            "eight",
+            "five",
+            "four",
+            "nine"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u02-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l1-u02-d1",
+            "speaker": "A",
+            "text": "Can you use \"say\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d1.mp3"
+          },
+          {
+            "id": "l1-u02-d2",
+            "speaker": "B",
+            "text": "Please say your name.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d2.mp3"
+          },
+          {
+            "id": "l1-u02-d3",
+            "speaker": "A",
+            "text": "What can you say with \"she\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d3.mp3"
+          },
+          {
+            "id": "l1-u02-d4",
+            "speaker": "B",
+            "text": "She has a new bag.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d4.mp3"
+          },
+          {
+            "id": "l1-u02-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"that\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d5.mp3"
+          },
+          {
+            "id": "l1-u02-d6",
+            "speaker": "B",
+            "text": "That is our bus.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d6.mp3"
+          },
+          {
+            "id": "l1-u02-d7",
+            "speaker": "A",
+            "text": "How would you use \"they\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d7.mp3"
+          },
+          {
+            "id": "l1-u02-d8",
+            "speaker": "B",
+            "text": "They walk to school together.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l1-u02-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l1-u03",
+      "level": 1,
+      "bands": [
+        "F0",
+        "F1"
+      ],
+      "theme": "numbers_time",
+      "sequence": 3,
+      "unitThemes": [
+        {
+          "name": "numbers_time",
+          "count": 8
+        },
+        {
+          "name": "people_family",
+          "count": 5
+        }
+      ],
+      "titleZh": "數字與時間 × 人物與家庭",
+      "titleEn": "Numbers and Time & People and Family",
+      "targetWords": [
+        "now",
+        "one",
+        "seven",
+        "six",
+        "ten",
+        "three",
+        "today",
+        "two",
+        "baby",
+        "boy",
+        "girl",
+        "kid",
+        "king"
+      ],
+      "passages": [
+        {
+          "id": "l1-u03-p1",
+          "title": "Numbers and Time: First Reading",
+          "type": "guided-reading",
+          "theme": "numbers_time",
+          "text": "It is a busy day, and we check the time carefully. I am busy now. She has one pencil. Seven days make a week. I see six stars. I have ten toes. He has three books. Today is Monday. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "now",
+            "one",
+            "seven",
+            "six",
+            "ten",
+            "three",
+            "today"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u03-p1.mp3"
+        },
+        {
+          "id": "l1-u03-p2",
+          "title": "People and Family: Second Reading",
+          "type": "guided-reading",
+          "theme": "people_family",
+          "text": "My family and friends are together today. Two cats sit here. The baby drinks milk. A boy is playing with the dog. The girl has a blue kite. Every kid gets a turn. The king lives in a big house. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "two",
+            "baby",
+            "boy",
+            "girl",
+            "kid",
+            "king"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u03-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l1-u03-d1",
+            "speaker": "A",
+            "text": "Can you use \"now\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d1.mp3"
+          },
+          {
+            "id": "l1-u03-d2",
+            "speaker": "B",
+            "text": "I am busy now.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d2.mp3"
+          },
+          {
+            "id": "l1-u03-d3",
+            "speaker": "A",
+            "text": "What can you say with \"one\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d3.mp3"
+          },
+          {
+            "id": "l1-u03-d4",
+            "speaker": "B",
+            "text": "She has one pencil.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d4.mp3"
+          },
+          {
+            "id": "l1-u03-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"seven\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d5.mp3"
+          },
+          {
+            "id": "l1-u03-d6",
+            "speaker": "B",
+            "text": "Seven days make a week.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d6.mp3"
+          },
+          {
+            "id": "l1-u03-d7",
+            "speaker": "A",
+            "text": "How would you use \"six\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d7.mp3"
+          },
+          {
+            "id": "l1-u03-d8",
+            "speaker": "B",
+            "text": "I see six stars.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l1-u03-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l1-u04",
+      "level": 1,
+      "bands": [
+        "F0",
+        "F1"
+      ],
+      "theme": "body_health",
+      "sequence": 4,
+      "unitThemes": [
+        {
+          "name": "body_health",
+          "count": 8
+        },
+        {
+          "name": "people_family",
+          "count": 5
+        }
+      ],
+      "titleZh": "身體與感受 × 人物與家庭",
+      "titleEn": "Body and Feelings & People and Family",
+      "targetWords": [
+        "arm",
+        "ear",
+        "eye",
+        "fat",
+        "fine",
+        "hot",
+        "leg",
+        "neck",
+        "man",
+        "mr",
+        "mrs",
+        "ms",
+        "name"
+      ],
+      "passages": [
+        {
+          "id": "l1-u04-p1",
+          "title": "Body and Feelings: First Reading",
+          "type": "guided-reading",
+          "theme": "body_health",
+          "text": "We are learning how our bodies feel and move. My arm is strong. The ear is small. My eye sees a bird. This pig is short and fat. I am fine, thank you. It is hot in summer. My leg kicks the ball. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "arm",
+            "ear",
+            "eye",
+            "fat",
+            "fine",
+            "hot",
+            "leg"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u04-p1.mp3"
+        },
+        {
+          "id": "l1-u04-p2",
+          "title": "People and Family: Second Reading",
+          "type": "guided-reading",
+          "theme": "people_family",
+          "text": "My family and friends are together today. My neck feels fine. The man is waiting for the bus. I say hello to Mr. Wang. Mrs. Chen has a small store. Please ask Ms. Lin for help. My name is Tina. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "neck",
+            "man",
+            "mr",
+            "mrs",
+            "ms",
+            "name"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u04-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l1-u04-d1",
+            "speaker": "A",
+            "text": "Can you use \"arm\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d1.mp3"
+          },
+          {
+            "id": "l1-u04-d2",
+            "speaker": "B",
+            "text": "My arm is strong.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d2.mp3"
+          },
+          {
+            "id": "l1-u04-d3",
+            "speaker": "A",
+            "text": "What can you say with \"ear\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d3.mp3"
+          },
+          {
+            "id": "l1-u04-d4",
+            "speaker": "B",
+            "text": "The ear is small.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d4.mp3"
+          },
+          {
+            "id": "l1-u04-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"eye\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d5.mp3"
+          },
+          {
+            "id": "l1-u04-d6",
+            "speaker": "B",
+            "text": "My eye sees a bird.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d6.mp3"
+          },
+          {
+            "id": "l1-u04-d7",
+            "speaker": "A",
+            "text": "How would you use \"fat\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d7.mp3"
+          },
+          {
+            "id": "l1-u04-d8",
+            "speaker": "B",
+            "text": "This pig is short and fat.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l1-u04-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l1-u05",
+      "level": 1,
+      "bands": [
+        "F0",
+        "F1"
+      ],
+      "theme": "animals_nature",
+      "sequence": 5,
+      "unitThemes": [
+        {
+          "name": "animals_nature",
+          "count": 10
+        },
+        {
+          "name": "body_health",
+          "count": 2
+        },
+        {
+          "name": "school",
+          "count": 1
+        }
+      ],
+      "titleZh": "動物與自然",
+      "titleEn": "Animals and Nature",
+      "targetWords": [
+        "bird",
+        "cat",
+        "dog",
+        "lion",
+        "moon",
+        "pet",
+        "pig",
+        "sky",
+        "sun",
+        "tree",
+        "nose",
+        "sad",
+        "card"
+      ],
+      "passages": [
+        {
+          "id": "l1-u05-p1",
+          "title": "Animals and Nature: First Reading",
+          "type": "guided-reading",
+          "theme": "animals_nature",
+          "text": "We look around and notice animals and nature. A bird sings in the tree. My cat likes fish. My dog likes milk. A lion lives at the zoo. The moon is bright tonight. We take our pet to the park. I see a pig. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "bird",
+            "cat",
+            "dog",
+            "lion",
+            "moon",
+            "pet",
+            "pig"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u05-p1.mp3"
+        },
+        {
+          "id": "l1-u05-p2",
+          "title": "Animals and Nature: Second Reading",
+          "type": "guided-reading",
+          "theme": "animals_nature",
+          "text": "We look around and notice animals and nature. I can see a kite in the sky. The sun is bright and warm. We planted a small tree by the house. My nose smells soup. The sad boy sits alone. I made a card for Grandma. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "sky",
+            "sun",
+            "tree",
+            "nose",
+            "sad",
+            "card"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u05-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l1-u05-d1",
+            "speaker": "A",
+            "text": "Can you use \"bird\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d1.mp3"
+          },
+          {
+            "id": "l1-u05-d2",
+            "speaker": "B",
+            "text": "A bird sings in the tree.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d2.mp3"
+          },
+          {
+            "id": "l1-u05-d3",
+            "speaker": "A",
+            "text": "What can you say with \"cat\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d3.mp3"
+          },
+          {
+            "id": "l1-u05-d4",
+            "speaker": "B",
+            "text": "My cat likes fish.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d4.mp3"
+          },
+          {
+            "id": "l1-u05-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"dog\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d5.mp3"
+          },
+          {
+            "id": "l1-u05-d6",
+            "speaker": "B",
+            "text": "My dog likes milk.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d6.mp3"
+          },
+          {
+            "id": "l1-u05-d7",
+            "speaker": "A",
+            "text": "How would you use \"lion\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d7.mp3"
+          },
+          {
+            "id": "l1-u05-d8",
+            "speaker": "B",
+            "text": "A lion lives at the zoo.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l1-u05-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l1-u06",
+      "level": 1,
+      "bands": [
+        "F0",
+        "F1"
+      ],
+      "theme": "food",
+      "sequence": 6,
+      "unitThemes": [
+        {
+          "name": "food",
+          "count": 8
+        },
+        {
+          "name": "school",
+          "count": 3
+        },
+        {
+          "name": "home_objects",
+          "count": 2
+        }
+      ],
+      "titleZh": "食物與用餐 × 校園與學習",
+      "titleEn": "Food and Meals & School and Learning",
+      "targetWords": [
+        "cup",
+        "egg",
+        "food",
+        "lunch",
+        "milk",
+        "pie",
+        "tea",
+        "water",
+        "desk",
+        "pen",
+        "picture",
+        "ball",
+        "bed"
+      ],
+      "passages": [
+        {
+          "id": "l1-u06-p1",
+          "title": "Food and Meals: First Reading",
+          "type": "guided-reading",
+          "theme": "food",
+          "text": "Our family is getting food ready for a meal. Please give me a cup of water. I cook an egg for lunch. We need food and water. We have rice and vegetables for lunch. Milk is in my cup. The pie is on the table. I drink warm tea in the morning. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "cup",
+            "egg",
+            "food",
+            "lunch",
+            "milk",
+            "pie",
+            "tea"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u06-p1.mp3"
+        },
+        {
+          "id": "l1-u06-p2",
+          "title": "School and Learning: Second Reading",
+          "type": "guided-reading",
+          "theme": "school",
+          "text": "Our classroom is ready for a new lesson. The water in the cup is warm. My desk is tidy. The pen is on my desk. I draw a picture of my family. The red ball is under the chair. There is a bed in the room. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "water",
+            "desk",
+            "pen",
+            "picture",
+            "ball",
+            "bed"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u06-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l1-u06-d1",
+            "speaker": "A",
+            "text": "Can you use \"cup\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d1.mp3"
+          },
+          {
+            "id": "l1-u06-d2",
+            "speaker": "B",
+            "text": "Please give me a cup of water.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d2.mp3"
+          },
+          {
+            "id": "l1-u06-d3",
+            "speaker": "A",
+            "text": "What can you say with \"egg\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d3.mp3"
+          },
+          {
+            "id": "l1-u06-d4",
+            "speaker": "B",
+            "text": "I cook an egg for lunch.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d4.mp3"
+          },
+          {
+            "id": "l1-u06-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"food\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d5.mp3"
+          },
+          {
+            "id": "l1-u06-d6",
+            "speaker": "B",
+            "text": "We need food and water.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d6.mp3"
+          },
+          {
+            "id": "l1-u06-d7",
+            "speaker": "A",
+            "text": "How would you use \"lunch\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d7.mp3"
+          },
+          {
+            "id": "l1-u06-d8",
+            "speaker": "B",
+            "text": "We have rice and vegetables for lunch.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l1-u06-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l1-u07",
+      "level": 1,
+      "bands": [
+        "F0",
+        "F1"
+      ],
+      "theme": "actions",
+      "sequence": 7,
+      "unitThemes": [
+        {
+          "name": "actions",
+          "count": 7
+        },
+        {
+          "name": "home_objects",
+          "count": 3
+        },
+        {
+          "name": "places_transport",
+          "count": 3
+        }
+      ],
+      "titleZh": "動作與日常 × 住家與物品",
+      "titleEn": "Actions and Routines & Home and Objects",
+      "targetWords": [
+        "come",
+        "go",
+        "jog",
+        "love",
+        "miss",
+        "run",
+        "sit",
+        "door",
+        "room",
+        "toy",
+        "bus",
+        "car",
+        "home"
+      ],
+      "passages": [
+        {
+          "id": "l1-u07-p1",
+          "title": "Actions and Routines: First Reading",
+          "type": "guided-reading",
+          "theme": "actions",
+          "text": "Everyone has something to do today. I come home early. We go home at five. I jog every day. He loves his dog. I miss my friend. The boy runs in the park. I sit on a chair. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "come",
+            "go",
+            "jog",
+            "love",
+            "miss",
+            "run",
+            "sit"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u07-p1.mp3"
+        },
+        {
+          "id": "l1-u07-p2",
+          "title": "Home and Objects: Second Reading",
+          "type": "guided-reading",
+          "theme": "home_objects",
+          "text": "We look around the house and find many useful things. The door is clean. My room is small but clean. Please put the toy in the box. The bus is near my home. We can see the car from here. I go home after school. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "door",
+            "room",
+            "toy",
+            "bus",
+            "car",
+            "home"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u07-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l1-u07-d1",
+            "speaker": "A",
+            "text": "Can you use \"come\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d1.mp3"
+          },
+          {
+            "id": "l1-u07-d2",
+            "speaker": "B",
+            "text": "I come home early.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d2.mp3"
+          },
+          {
+            "id": "l1-u07-d3",
+            "speaker": "A",
+            "text": "What can you say with \"go\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d3.mp3"
+          },
+          {
+            "id": "l1-u07-d4",
+            "speaker": "B",
+            "text": "We go home at five.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d4.mp3"
+          },
+          {
+            "id": "l1-u07-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"jog\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d5.mp3"
+          },
+          {
+            "id": "l1-u07-d6",
+            "speaker": "B",
+            "text": "I jog every day.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d6.mp3"
+          },
+          {
+            "id": "l1-u07-d7",
+            "speaker": "A",
+            "text": "How would you use \"love\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d7.mp3"
+          },
+          {
+            "id": "l1-u07-d8",
+            "speaker": "B",
+            "text": "He loves his dog.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l1-u07-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l1-u08",
+      "level": 1,
+      "bands": [
+        "F0",
+        "F1"
+      ],
+      "theme": "descriptions",
+      "sequence": 8,
+      "unitThemes": [
+        {
+          "name": "descriptions",
+          "count": 8
+        },
+        {
+          "name": "general",
+          "count": 4
+        },
+        {
+          "name": "actions",
+          "count": 1
+        }
+      ],
+      "titleZh": "顏色與描述 × 生活綜合",
+      "titleEn": "Colors and Descriptions & Everyday English",
+      "targetWords": [
+        "bad",
+        "big",
+        "good",
+        "great",
+        "new",
+        "nice",
+        "red",
+        "tall",
+        "here",
+        "job",
+        "no",
+        "ok",
+        "walk"
+      ],
+      "passages": [
+        {
+          "id": "l1-u08-p1",
+          "title": "Colors and Descriptions: First Reading",
+          "type": "guided-reading",
+          "theme": "descriptions",
+          "text": "We look carefully and describe what we see. The milk is bad. I have a big school bag. This is a good book. We had a great day at the zoo. I have a new bike. It is a nice day for a picnic. The apple is red. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "bad",
+            "big",
+            "good",
+            "great",
+            "new",
+            "nice",
+            "red"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u08-p1.mp3"
+        },
+        {
+          "id": "l1-u08-p2",
+          "title": "Everyday English: Second Reading",
+          "type": "guided-reading",
+          "theme": "general",
+          "text": "Today brings many small things to notice and do. That is a tall tree. My bag is here. Teaching is an important job. No, that is not my pen. Is it OK to sit here? I walk to school. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "tall",
+            "here",
+            "job",
+            "no",
+            "ok",
+            "walk"
+          ],
+          "audio": "audio/vocab_foundation/passages/l1-u08-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l1-u08-d1",
+            "speaker": "A",
+            "text": "Can you use \"bad\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d1.mp3"
+          },
+          {
+            "id": "l1-u08-d2",
+            "speaker": "B",
+            "text": "The milk is bad.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d2.mp3"
+          },
+          {
+            "id": "l1-u08-d3",
+            "speaker": "A",
+            "text": "What can you say with \"big\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d3.mp3"
+          },
+          {
+            "id": "l1-u08-d4",
+            "speaker": "B",
+            "text": "I have a big school bag.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d4.mp3"
+          },
+          {
+            "id": "l1-u08-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"good\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d5.mp3"
+          },
+          {
+            "id": "l1-u08-d6",
+            "speaker": "B",
+            "text": "This is a good book.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d6.mp3"
+          },
+          {
+            "id": "l1-u08-d7",
+            "speaker": "A",
+            "text": "How would you use \"great\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d7.mp3"
+          },
+          {
+            "id": "l1-u08-d8",
+            "speaker": "B",
+            "text": "We had a great day at the zoo.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l1-u08-dialogue.mp3"
+      }
+    }
+  ]
+}

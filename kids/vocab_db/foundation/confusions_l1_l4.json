@@ -1,0 +1,2192 @@
+{
+  "schemaVersion": "1.0.0",
+  "confusions": [
+    {
+      "id": "a-an",
+      "titleZh": "a / an：看聲音，不只看字母",
+      "members": [
+        "a",
+        "an"
+      ],
+      "conceptZh": "兩者都放在單數可數名詞前。下一個字以母音聲音開始用 an，其他用 a。",
+      "rules": [
+        "a + consonant sound",
+        "an + vowel sound",
+        "注意 hour 的 h 不發音，因此是 an hour"
+      ],
+      "examples": [
+        {
+          "id": "a-an-e1",
+          "text": "I have a red bag.",
+          "audio": "audio/vocab_foundation/confusions/a-an-e1.mp3"
+        },
+        {
+          "id": "a-an-e2",
+          "text": "She eats an apple.",
+          "audio": "audio/vocab_foundation/confusions/a-an-e2.mp3"
+        },
+        {
+          "id": "a-an-e3",
+          "text": "He waits for an hour.",
+          "audio": "audio/vocab_foundation/confusions/a-an-e3.mp3"
+        },
+        {
+          "id": "a-an-e4",
+          "text": "This is a useful book.",
+          "audio": "audio/vocab_foundation/confusions/a-an-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "a-an-d1",
+          "speaker": "A",
+          "text": "Do you have a pencil?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/a-an-d1.mp3"
+        },
+        {
+          "id": "a-an-d2",
+          "speaker": "B",
+          "text": "Yes, and I have an eraser, too.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/a-an-d2.mp3"
+        },
+        {
+          "id": "a-an-d3",
+          "speaker": "A",
+          "text": "Is it an old eraser?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/a-an-d3.mp3"
+        },
+        {
+          "id": "a-an-d4",
+          "speaker": "B",
+          "text": "No, it is a new one.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/a-an-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "___ apple",
+          "answer": "an",
+          "choices": [
+            "a",
+            "an"
+          ]
+        },
+        {
+          "prompt": "___ useful book",
+          "answer": "a",
+          "choices": [
+            "a",
+            "an"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/a-an.mp3"
+    },
+    {
+      "id": "be-forms",
+      "titleZh": "am / is / are：主詞決定 be 動詞",
+      "members": [
+        "am",
+        "is",
+        "are",
+        "be"
+      ],
+      "conceptZh": "I 配 am；he、she、it 和單數配 is；you、we、they 和複數配 are。情態動詞或 to 後使用 be。",
+      "rules": [
+        "I am",
+        "he/she/it is",
+        "you/we/they are",
+        "can be / to be"
+      ],
+      "examples": [
+        {
+          "id": "be-forms-e1",
+          "text": "I am ready.",
+          "audio": "audio/vocab_foundation/confusions/be-forms-e1.mp3"
+        },
+        {
+          "id": "be-forms-e2",
+          "text": "The dog is under the desk.",
+          "audio": "audio/vocab_foundation/confusions/be-forms-e2.mp3"
+        },
+        {
+          "id": "be-forms-e3",
+          "text": "They are good friends.",
+          "audio": "audio/vocab_foundation/confusions/be-forms-e3.mp3"
+        },
+        {
+          "id": "be-forms-e4",
+          "text": "Please be quiet.",
+          "audio": "audio/vocab_foundation/confusions/be-forms-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "be-forms-d1",
+          "speaker": "A",
+          "text": "Are you ready?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/be-forms-d1.mp3"
+        },
+        {
+          "id": "be-forms-d2",
+          "speaker": "B",
+          "text": "Yes, I am.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/be-forms-d2.mp3"
+        },
+        {
+          "id": "be-forms-d3",
+          "speaker": "A",
+          "text": "Is Ben with you?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/be-forms-d3.mp3"
+        },
+        {
+          "id": "be-forms-d4",
+          "speaker": "B",
+          "text": "Yes, we are in the same class.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/be-forms-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "She ___ my sister.",
+          "answer": "is",
+          "choices": [
+            "am",
+            "is",
+            "are"
+          ]
+        },
+        {
+          "prompt": "We ___ at school.",
+          "answer": "are",
+          "choices": [
+            "am",
+            "is",
+            "are"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/be-forms.mp3"
+    },
+    {
+      "id": "do-does",
+      "titleZh": "do / does：一般動詞問句",
+      "members": [
+        "do",
+        "does"
+      ],
+      "conceptZh": "I、you、we、they 用 do；he、she、it 用 does。用了 does，後面的動詞回原形。",
+      "rules": [
+        "Do + I/you/we/they",
+        "Does + he/she/it",
+        "Does she like，不說 Does she likes"
+      ],
+      "examples": [
+        {
+          "id": "do-does-e1",
+          "text": "Do you like milk?",
+          "audio": "audio/vocab_foundation/confusions/do-does-e1.mp3"
+        },
+        {
+          "id": "do-does-e2",
+          "text": "Does Amy walk to school?",
+          "audio": "audio/vocab_foundation/confusions/do-does-e2.mp3"
+        },
+        {
+          "id": "do-does-e3",
+          "text": "We do our homework.",
+          "audio": "audio/vocab_foundation/confusions/do-does-e3.mp3"
+        },
+        {
+          "id": "do-does-e4",
+          "text": "He does his homework.",
+          "audio": "audio/vocab_foundation/confusions/do-does-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "do-does-d1",
+          "speaker": "A",
+          "text": "Do you play soccer?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/do-does-d1.mp3"
+        },
+        {
+          "id": "do-does-d2",
+          "speaker": "B",
+          "text": "Yes, I do.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/do-does-d2.mp3"
+        },
+        {
+          "id": "do-does-d3",
+          "speaker": "A",
+          "text": "Does your sister play, too?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/do-does-d3.mp3"
+        },
+        {
+          "id": "do-does-d4",
+          "speaker": "B",
+          "text": "No, she does not.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/do-does-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "___ he read every day?",
+          "answer": "Does",
+          "choices": [
+            "Do",
+            "Does"
+          ]
+        },
+        {
+          "prompt": "___ they live here?",
+          "answer": "Do",
+          "choices": [
+            "Do",
+            "Does"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/do-does.mp3"
+    },
+    {
+      "id": "pronouns",
+      "titleZh": "I / you / he / she / it / we / they",
+      "members": [
+        "i",
+        "you",
+        "he",
+        "she",
+        "it",
+        "we",
+        "they"
+      ],
+      "conceptZh": "代名詞替代人物或物品。I 永遠大寫；it 通常代替單一物品或動物；we 包含說話者。",
+      "rules": [
+        "I = 說話者",
+        "you = 對方",
+        "he/she = 單一人物",
+        "it = 單一物品",
+        "we/they = 複數"
+      ],
+      "examples": [
+        {
+          "id": "pronouns-e1",
+          "text": "I am a student.",
+          "audio": "audio/vocab_foundation/confusions/pronouns-e1.mp3"
+        },
+        {
+          "id": "pronouns-e2",
+          "text": "She is my teacher.",
+          "audio": "audio/vocab_foundation/confusions/pronouns-e2.mp3"
+        },
+        {
+          "id": "pronouns-e3",
+          "text": "It is a new book.",
+          "audio": "audio/vocab_foundation/confusions/pronouns-e3.mp3"
+        },
+        {
+          "id": "pronouns-e4",
+          "text": "They are in the library.",
+          "audio": "audio/vocab_foundation/confusions/pronouns-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "pronouns-d1",
+          "speaker": "A",
+          "text": "Who is Amy?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/pronouns-d1.mp3"
+        },
+        {
+          "id": "pronouns-d2",
+          "speaker": "B",
+          "text": "She is my sister.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/pronouns-d2.mp3"
+        },
+        {
+          "id": "pronouns-d3",
+          "speaker": "A",
+          "text": "Where are Ben and Leo?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/pronouns-d3.mp3"
+        },
+        {
+          "id": "pronouns-d4",
+          "speaker": "B",
+          "text": "They are at school.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/pronouns-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "Tom is my friend. ___ is nice.",
+          "answer": "He",
+          "choices": [
+            "He",
+            "She",
+            "It"
+          ]
+        },
+        {
+          "prompt": "The book is new. ___ is red.",
+          "answer": "It",
+          "choices": [
+            "He",
+            "She",
+            "It"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/pronouns.mp3"
+    },
+    {
+      "id": "this-that",
+      "titleZh": "this / that / these / those：距離與單複數",
+      "members": [
+        "this",
+        "that",
+        "these",
+        "those"
+      ],
+      "conceptZh": "近處單數 this、遠處單數 that；近處複數 these、遠處複數 those。",
+      "rules": [
+        "this = 近＋單",
+        "that = 遠＋單",
+        "these = 近＋複",
+        "those = 遠＋複"
+      ],
+      "examples": [
+        {
+          "id": "this-that-e1",
+          "text": "This pencil is mine.",
+          "audio": "audio/vocab_foundation/confusions/this-that-e1.mp3"
+        },
+        {
+          "id": "this-that-e2",
+          "text": "That bus is ours.",
+          "audio": "audio/vocab_foundation/confusions/this-that-e2.mp3"
+        },
+        {
+          "id": "this-that-e3",
+          "text": "These books are new.",
+          "audio": "audio/vocab_foundation/confusions/this-that-e3.mp3"
+        },
+        {
+          "id": "this-that-e4",
+          "text": "Those trees are tall.",
+          "audio": "audio/vocab_foundation/confusions/this-that-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "this-that-d1",
+          "speaker": "A",
+          "text": "Is this your bag?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/this-that-d1.mp3"
+        },
+        {
+          "id": "this-that-d2",
+          "speaker": "B",
+          "text": "Yes, it is.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/this-that-d2.mp3"
+        },
+        {
+          "id": "this-that-d3",
+          "speaker": "A",
+          "text": "Are those your shoes?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/this-that-d3.mp3"
+        },
+        {
+          "id": "this-that-d4",
+          "speaker": "B",
+          "text": "No, my shoes are here.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/this-that-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "___ apples here are sweet.",
+          "answer": "These",
+          "choices": [
+            "This",
+            "That",
+            "These",
+            "Those"
+          ]
+        },
+        {
+          "prompt": "___ bird over there is small.",
+          "answer": "That",
+          "choices": [
+            "This",
+            "That",
+            "These",
+            "Those"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/this-that.mp3"
+    },
+    {
+      "id": "in-on-at",
+      "titleZh": "in / on / at：位置與時間",
+      "members": [
+        "in",
+        "on",
+        "at"
+      ],
+      "conceptZh": "in 表示在裡面或較大時間；on 表示接觸表面或日期；at 表示一個點或精確時間。",
+      "rules": [
+        "in the box / in July",
+        "on the desk / on Monday",
+        "at school / at seven"
+      ],
+      "examples": [
+        {
+          "id": "in-on-at-e1",
+          "text": "The pencil is in the box.",
+          "audio": "audio/vocab_foundation/confusions/in-on-at-e1.mp3"
+        },
+        {
+          "id": "in-on-at-e2",
+          "text": "The book is on the desk.",
+          "audio": "audio/vocab_foundation/confusions/in-on-at-e2.mp3"
+        },
+        {
+          "id": "in-on-at-e3",
+          "text": "We meet at school.",
+          "audio": "audio/vocab_foundation/confusions/in-on-at-e3.mp3"
+        },
+        {
+          "id": "in-on-at-e4",
+          "text": "Class starts at eight.",
+          "audio": "audio/vocab_foundation/confusions/in-on-at-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "in-on-at-d1",
+          "speaker": "A",
+          "text": "Where is your notebook?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/in-on-at-d1.mp3"
+        },
+        {
+          "id": "in-on-at-d2",
+          "speaker": "B",
+          "text": "It is in my bag.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/in-on-at-d2.mp3"
+        },
+        {
+          "id": "in-on-at-d3",
+          "speaker": "A",
+          "text": "When is the test?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/in-on-at-d3.mp3"
+        },
+        {
+          "id": "in-on-at-d4",
+          "speaker": "B",
+          "text": "It is on Friday at nine.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/in-on-at-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "___ Monday",
+          "answer": "on",
+          "choices": [
+            "in",
+            "on",
+            "at"
+          ]
+        },
+        {
+          "prompt": "___ the room",
+          "answer": "in",
+          "choices": [
+            "in",
+            "on",
+            "at"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/in-on-at.mp3"
+    },
+    {
+      "id": "place-relations",
+      "titleZh": "under / in front of / next to",
+      "members": [
+        "under",
+        "in front of",
+        "next to"
+      ],
+      "conceptZh": "under 是正下方；in front of 是前方；next to 是緊鄰旁邊。",
+      "rules": [
+        "under = 下方",
+        "in front of = 前方",
+        "next to = 緊鄰"
+      ],
+      "examples": [
+        {
+          "id": "place-relations-e1",
+          "text": "The cat is under the chair.",
+          "audio": "audio/vocab_foundation/confusions/place-relations-e1.mp3"
+        },
+        {
+          "id": "place-relations-e2",
+          "text": "The bus is in front of the school.",
+          "audio": "audio/vocab_foundation/confusions/place-relations-e2.mp3"
+        },
+        {
+          "id": "place-relations-e3",
+          "text": "The bank is next to the bookstore.",
+          "audio": "audio/vocab_foundation/confusions/place-relations-e3.mp3"
+        },
+        {
+          "id": "place-relations-e4",
+          "text": "My shoes are under the bed.",
+          "audio": "audio/vocab_foundation/confusions/place-relations-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "place-relations-d1",
+          "speaker": "A",
+          "text": "Where is the bus stop?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/place-relations-d1.mp3"
+        },
+        {
+          "id": "place-relations-d2",
+          "speaker": "B",
+          "text": "It is in front of the bank.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/place-relations-d2.mp3"
+        },
+        {
+          "id": "place-relations-d3",
+          "speaker": "A",
+          "text": "Is the bank next to the store?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/place-relations-d3.mp3"
+        },
+        {
+          "id": "place-relations-d4",
+          "speaker": "B",
+          "text": "Yes, they are side by side.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/place-relations-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "The pencil is below the book.",
+          "answer": "under",
+          "choices": [
+            "under",
+            "next to"
+          ]
+        },
+        {
+          "prompt": "The two stores are side by side.",
+          "answer": "next to",
+          "choices": [
+            "in front of",
+            "next to"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/place-relations.mp3"
+    },
+    {
+      "id": "here-there",
+      "titleZh": "here / there：說話者的位置",
+      "members": [
+        "here",
+        "there"
+      ],
+      "conceptZh": "here 是靠近說話者；there 是離說話者較遠的位置。",
+      "rules": [
+        "come here",
+        "over there",
+        "this ... here",
+        "that ... there"
+      ],
+      "examples": [
+        {
+          "id": "here-there-e1",
+          "text": "My bag is here.",
+          "audio": "audio/vocab_foundation/confusions/here-there-e1.mp3"
+        },
+        {
+          "id": "here-there-e2",
+          "text": "The bus stop is over there.",
+          "audio": "audio/vocab_foundation/confusions/here-there-e2.mp3"
+        },
+        {
+          "id": "here-there-e3",
+          "text": "Come here, please.",
+          "audio": "audio/vocab_foundation/confusions/here-there-e3.mp3"
+        },
+        {
+          "id": "here-there-e4",
+          "text": "There is a bird in that tree.",
+          "audio": "audio/vocab_foundation/confusions/here-there-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "here-there-d1",
+          "speaker": "A",
+          "text": "Is my book there?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/here-there-d1.mp3"
+        },
+        {
+          "id": "here-there-d2",
+          "speaker": "B",
+          "text": "No, it is here on my desk.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/here-there-d2.mp3"
+        },
+        {
+          "id": "here-there-d3",
+          "speaker": "A",
+          "text": "Where is the bus?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/here-there-d3.mp3"
+        },
+        {
+          "id": "here-there-d4",
+          "speaker": "B",
+          "text": "It is over there.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/here-there-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "The pencil beside me is ___.",
+          "answer": "here",
+          "choices": [
+            "here",
+            "there"
+          ]
+        },
+        {
+          "prompt": "Look at that tree over ___.",
+          "answer": "there",
+          "choices": [
+            "here",
+            "there"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/here-there.mp3"
+    },
+    {
+      "id": "come-go",
+      "titleZh": "come / go：移動方向",
+      "members": [
+        "come",
+        "go"
+      ],
+      "conceptZh": "come 是朝說話者或目的地靠近；go 是離開目前位置前往別處。",
+      "rules": [
+        "come here",
+        "come home",
+        "go to school",
+        "go there"
+      ],
+      "examples": [
+        {
+          "id": "come-go-e1",
+          "text": "Please come here.",
+          "audio": "audio/vocab_foundation/confusions/come-go-e1.mp3"
+        },
+        {
+          "id": "come-go-e2",
+          "text": "Dad comes home at six.",
+          "audio": "audio/vocab_foundation/confusions/come-go-e2.mp3"
+        },
+        {
+          "id": "come-go-e3",
+          "text": "I go to school by bus.",
+          "audio": "audio/vocab_foundation/confusions/come-go-e3.mp3"
+        },
+        {
+          "id": "come-go-e4",
+          "text": "We go there on Sunday.",
+          "audio": "audio/vocab_foundation/confusions/come-go-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "come-go-d1",
+          "speaker": "A",
+          "text": "Can you come to my house?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/come-go-d1.mp3"
+        },
+        {
+          "id": "come-go-d2",
+          "speaker": "B",
+          "text": "Yes, I can go after lunch.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/come-go-d2.mp3"
+        },
+        {
+          "id": "come-go-d3",
+          "speaker": "A",
+          "text": "When will you come?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/come-go-d3.mp3"
+        },
+        {
+          "id": "come-go-d4",
+          "speaker": "B",
+          "text": "I will come at two.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/come-go-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "Please ___ here.",
+          "answer": "come",
+          "choices": [
+            "come",
+            "go"
+          ]
+        },
+        {
+          "prompt": "We ___ to the zoo tomorrow.",
+          "answer": "go",
+          "choices": [
+            "come",
+            "go"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/come-go.mp3"
+    },
+    {
+      "id": "say-speak-talk",
+      "titleZh": "say / speak / talk",
+      "members": [
+        "say",
+        "speak",
+        "talk"
+      ],
+      "conceptZh": "say 重點是說出的內容；speak 常接語言或正式發言；talk 表示交談，常用 talk to/with/about。",
+      "rules": [
+        "say hello",
+        "speak English",
+        "talk with a friend",
+        "talk about a story"
+      ],
+      "examples": [
+        {
+          "id": "say-speak-talk-e1",
+          "text": "Please say your name.",
+          "audio": "audio/vocab_foundation/confusions/say-speak-talk-e1.mp3"
+        },
+        {
+          "id": "say-speak-talk-e2",
+          "text": "I can speak English.",
+          "audio": "audio/vocab_foundation/confusions/say-speak-talk-e2.mp3"
+        },
+        {
+          "id": "say-speak-talk-e3",
+          "text": "I talk with my friend.",
+          "audio": "audio/vocab_foundation/confusions/say-speak-talk-e3.mp3"
+        },
+        {
+          "id": "say-speak-talk-e4",
+          "text": "We talk about the movie.",
+          "audio": "audio/vocab_foundation/confusions/say-speak-talk-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "say-speak-talk-d1",
+          "speaker": "A",
+          "text": "Can you speak English?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/say-speak-talk-d1.mp3"
+        },
+        {
+          "id": "say-speak-talk-d2",
+          "speaker": "B",
+          "text": "Yes, but I speak slowly.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/say-speak-talk-d2.mp3"
+        },
+        {
+          "id": "say-speak-talk-d3",
+          "speaker": "A",
+          "text": "What do you talk about at school?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/say-speak-talk-d3.mp3"
+        },
+        {
+          "id": "say-speak-talk-d4",
+          "speaker": "B",
+          "text": "We talk about books.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/say-speak-talk-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "___ English",
+          "answer": "speak",
+          "choices": [
+            "say",
+            "speak",
+            "talk"
+          ]
+        },
+        {
+          "prompt": "___ hello",
+          "answer": "say",
+          "choices": [
+            "say",
+            "speak",
+            "talk"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/say-speak-talk.mp3"
+    },
+    {
+      "id": "home-house-room",
+      "titleZh": "home / house / room",
+      "members": [
+        "home",
+        "house",
+        "room"
+      ],
+      "conceptZh": "house 是建築物；room 是房子裡的一個房間；home 強調居住與歸屬，可直接說 go home。",
+      "rules": [
+        "a big house",
+        "my room",
+        "at home",
+        "go home（不加 to）"
+      ],
+      "examples": [
+        {
+          "id": "home-house-room-e1",
+          "text": "My house has three rooms.",
+          "audio": "audio/vocab_foundation/confusions/home-house-room-e1.mp3"
+        },
+        {
+          "id": "home-house-room-e2",
+          "text": "My room is small.",
+          "audio": "audio/vocab_foundation/confusions/home-house-room-e2.mp3"
+        },
+        {
+          "id": "home-house-room-e3",
+          "text": "Mom is at home.",
+          "audio": "audio/vocab_foundation/confusions/home-house-room-e3.mp3"
+        },
+        {
+          "id": "home-house-room-e4",
+          "text": "I go home after school.",
+          "audio": "audio/vocab_foundation/confusions/home-house-room-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "home-house-room-d1",
+          "speaker": "A",
+          "text": "Where do you live?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/home-house-room-d1.mp3"
+        },
+        {
+          "id": "home-house-room-d2",
+          "speaker": "B",
+          "text": "I live in a small house.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/home-house-room-d2.mp3"
+        },
+        {
+          "id": "home-house-room-d3",
+          "speaker": "A",
+          "text": "Is your room upstairs?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/home-house-room-d3.mp3"
+        },
+        {
+          "id": "home-house-room-d4",
+          "speaker": "B",
+          "text": "Yes, but I study at home in the living room.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/home-house-room-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "I go ___ after school.",
+          "answer": "home",
+          "choices": [
+            "home",
+            "house",
+            "room"
+          ]
+        },
+        {
+          "prompt": "The kitchen is a ___ in a house.",
+          "answer": "room",
+          "choices": [
+            "home",
+            "house",
+            "room"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/home-house-room.mp3"
+    },
+    {
+      "id": "job-work-worker",
+      "titleZh": "job / work / worker",
+      "members": [
+        "job",
+        "work",
+        "worker"
+      ],
+      "conceptZh": "job 是一份職業或工作；work 可指工作這件事或動詞；worker 是做工作的人。",
+      "rules": [
+        "have a job",
+        "go to work",
+        "work together",
+        "a factory worker"
+      ],
+      "examples": [
+        {
+          "id": "job-work-worker-e1",
+          "text": "My father has a new job.",
+          "audio": "audio/vocab_foundation/confusions/job-work-worker-e1.mp3"
+        },
+        {
+          "id": "job-work-worker-e2",
+          "text": "My parents work in the city.",
+          "audio": "audio/vocab_foundation/confusions/job-work-worker-e2.mp3"
+        },
+        {
+          "id": "job-work-worker-e3",
+          "text": "We have a lot of work today.",
+          "audio": "audio/vocab_foundation/confusions/job-work-worker-e3.mp3"
+        },
+        {
+          "id": "job-work-worker-e4",
+          "text": "The worker fixes the road.",
+          "audio": "audio/vocab_foundation/confusions/job-work-worker-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "job-work-worker-d1",
+          "speaker": "A",
+          "text": "What is your father's job?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/job-work-worker-d1.mp3"
+        },
+        {
+          "id": "job-work-worker-d2",
+          "speaker": "B",
+          "text": "He is a worker at a bakery.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/job-work-worker-d2.mp3"
+        },
+        {
+          "id": "job-work-worker-d3",
+          "speaker": "A",
+          "text": "Does he work every day?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/job-work-worker-d3.mp3"
+        },
+        {
+          "id": "job-work-worker-d4",
+          "speaker": "B",
+          "text": "He works from Monday to Friday.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/job-work-worker-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "She has a new ___.",
+          "answer": "job",
+          "choices": [
+            "job",
+            "work",
+            "worker"
+          ]
+        },
+        {
+          "prompt": "The ___ repairs the door.",
+          "answer": "worker",
+          "choices": [
+            "job",
+            "work",
+            "worker"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/job-work-worker.mp3"
+    },
+    {
+      "id": "child-children-kid",
+      "titleZh": "child / children / kid",
+      "members": [
+        "child",
+        "children",
+        "kid"
+      ],
+      "conceptZh": "child 是正式的單數；children 是不規則複數；kid 是較口語的孩子。",
+      "rules": [
+        "one child",
+        "two children",
+        "a kid"
+      ],
+      "examples": [
+        {
+          "id": "child-children-kid-e1",
+          "text": "The child is five years old.",
+          "audio": "audio/vocab_foundation/confusions/child-children-kid-e1.mp3"
+        },
+        {
+          "id": "child-children-kid-e2",
+          "text": "The children play outside.",
+          "audio": "audio/vocab_foundation/confusions/child-children-kid-e2.mp3"
+        },
+        {
+          "id": "child-children-kid-e3",
+          "text": "That kid is my friend.",
+          "audio": "audio/vocab_foundation/confusions/child-children-kid-e3.mp3"
+        },
+        {
+          "id": "child-children-kid-e4",
+          "text": "Every child needs help sometimes.",
+          "audio": "audio/vocab_foundation/confusions/child-children-kid-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "child-children-kid-d1",
+          "speaker": "A",
+          "text": "How many children are there?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/child-children-kid-d1.mp3"
+        },
+        {
+          "id": "child-children-kid-d2",
+          "speaker": "B",
+          "text": "There are three children.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/child-children-kid-d2.mp3"
+        },
+        {
+          "id": "child-children-kid-d3",
+          "speaker": "A",
+          "text": "Is that kid your brother?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/child-children-kid-d3.mp3"
+        },
+        {
+          "id": "child-children-kid-d4",
+          "speaker": "B",
+          "text": "Yes, he is the youngest child in my family.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/child-children-kid-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "two ___",
+          "answer": "children",
+          "choices": [
+            "child",
+            "children",
+            "childs"
+          ]
+        },
+        {
+          "prompt": "one ___",
+          "answer": "child",
+          "choices": [
+            "child",
+            "children"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/child-children-kid.mp3"
+    },
+    {
+      "id": "time-of-day",
+      "titleZh": "morning / afternoon / evening",
+      "members": [
+        "morning",
+        "afternoon",
+        "evening"
+      ],
+      "conceptZh": "morning 是起床到中午前；afternoon 是中午後；evening 是傍晚到睡前。",
+      "rules": [
+        "in the morning",
+        "in the afternoon",
+        "in the evening"
+      ],
+      "examples": [
+        {
+          "id": "time-of-day-e1",
+          "text": "I eat breakfast in the morning.",
+          "audio": "audio/vocab_foundation/confusions/time-of-day-e1.mp3"
+        },
+        {
+          "id": "time-of-day-e2",
+          "text": "We have art in the afternoon.",
+          "audio": "audio/vocab_foundation/confusions/time-of-day-e2.mp3"
+        },
+        {
+          "id": "time-of-day-e3",
+          "text": "I eat dinner in the evening.",
+          "audio": "audio/vocab_foundation/confusions/time-of-day-e3.mp3"
+        },
+        {
+          "id": "time-of-day-e4",
+          "text": "The sky gets dark in the evening.",
+          "audio": "audio/vocab_foundation/confusions/time-of-day-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "time-of-day-d1",
+          "speaker": "A",
+          "text": "When do you study?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/time-of-day-d1.mp3"
+        },
+        {
+          "id": "time-of-day-d2",
+          "speaker": "B",
+          "text": "I study in the afternoon.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/time-of-day-d2.mp3"
+        },
+        {
+          "id": "time-of-day-d3",
+          "speaker": "A",
+          "text": "What do you do in the evening?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/time-of-day-d3.mp3"
+        },
+        {
+          "id": "time-of-day-d4",
+          "speaker": "B",
+          "text": "I eat dinner with my family.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/time-of-day-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "Breakfast is usually in the ___.",
+          "answer": "morning",
+          "choices": [
+            "morning",
+            "afternoon",
+            "evening"
+          ]
+        },
+        {
+          "prompt": "Dinner is usually in the ___.",
+          "answer": "evening",
+          "choices": [
+            "morning",
+            "afternoon",
+            "evening"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/time-of-day.mp3"
+    },
+    {
+      "id": "day-reference",
+      "titleZh": "today / yesterday / tomorrow / ago",
+      "members": [
+        "today",
+        "yesterday",
+        "tomorrow",
+        "ago"
+      ],
+      "conceptZh": "today 是今天；yesterday 是昨天；tomorrow 是明天；ago 從現在往前數一段時間。",
+      "rules": [
+        "today is",
+        "yesterday was",
+        "tomorrow will",
+        "two days ago"
+      ],
+      "examples": [
+        {
+          "id": "day-reference-e1",
+          "text": "Today is sunny.",
+          "audio": "audio/vocab_foundation/confusions/day-reference-e1.mp3"
+        },
+        {
+          "id": "day-reference-e2",
+          "text": "Yesterday was rainy.",
+          "audio": "audio/vocab_foundation/confusions/day-reference-e2.mp3"
+        },
+        {
+          "id": "day-reference-e3",
+          "text": "Tomorrow will be warm.",
+          "audio": "audio/vocab_foundation/confusions/day-reference-e3.mp3"
+        },
+        {
+          "id": "day-reference-e4",
+          "text": "We met two days ago.",
+          "audio": "audio/vocab_foundation/confusions/day-reference-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "day-reference-d1",
+          "speaker": "A",
+          "text": "Did you see Amy yesterday?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/day-reference-d1.mp3"
+        },
+        {
+          "id": "day-reference-d2",
+          "speaker": "B",
+          "text": "No, I saw her two days ago.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/day-reference-d2.mp3"
+        },
+        {
+          "id": "day-reference-d3",
+          "speaker": "A",
+          "text": "Will she come tomorrow?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/day-reference-d3.mp3"
+        },
+        {
+          "id": "day-reference-d4",
+          "speaker": "B",
+          "text": "Yes, she will come after lunch.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/day-reference-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "the day before today",
+          "answer": "yesterday",
+          "choices": [
+            "today",
+            "yesterday",
+            "tomorrow"
+          ]
+        },
+        {
+          "prompt": "three hours ___",
+          "answer": "ago",
+          "choices": [
+            "ago",
+            "tomorrow"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/day-reference.mp3"
+    },
+    {
+      "id": "connectors",
+      "titleZh": "and / but / or / so",
+      "members": [
+        "and",
+        "but",
+        "or",
+        "so"
+      ],
+      "conceptZh": "and 加上相同方向資訊；but 表示轉折；or 提供選擇；so 表示前因後果。",
+      "rules": [
+        "A and B",
+        "A, but B",
+        "A or B",
+        "原因, so 結果"
+      ],
+      "examples": [
+        {
+          "id": "connectors-e1",
+          "text": "I have a pen and a ruler.",
+          "audio": "audio/vocab_foundation/confusions/connectors-e1.mp3"
+        },
+        {
+          "id": "connectors-e2",
+          "text": "The bag is old, but it is clean.",
+          "audio": "audio/vocab_foundation/confusions/connectors-e2.mp3"
+        },
+        {
+          "id": "connectors-e3",
+          "text": "Do you want tea or water?",
+          "audio": "audio/vocab_foundation/confusions/connectors-e3.mp3"
+        },
+        {
+          "id": "connectors-e4",
+          "text": "I was tired, so I went home.",
+          "audio": "audio/vocab_foundation/confusions/connectors-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "connectors-d1",
+          "speaker": "A",
+          "text": "Do you want rice or bread?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/connectors-d1.mp3"
+        },
+        {
+          "id": "connectors-d2",
+          "speaker": "B",
+          "text": "I want rice and soup.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/connectors-d2.mp3"
+        },
+        {
+          "id": "connectors-d3",
+          "speaker": "A",
+          "text": "The soup is hot, but it is good.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/connectors-d3.mp3"
+        },
+        {
+          "id": "connectors-d4",
+          "speaker": "B",
+          "text": "I am hungry, so I can eat it.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/connectors-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "It rained, ___ we stayed home.",
+          "answer": "so",
+          "choices": [
+            "and",
+            "but",
+            "or",
+            "so"
+          ]
+        },
+        {
+          "prompt": "The dog is small, ___ it is strong.",
+          "answer": "but",
+          "choices": [
+            "and",
+            "but",
+            "or",
+            "so"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/connectors.mp3"
+    },
+    {
+      "id": "some-any",
+      "titleZh": "some / any",
+      "members": [
+        "some",
+        "any"
+      ],
+      "conceptZh": "肯定句常用 some；一般問句與否定句常用 any。邀請或預期答案是 yes 的問句也可用 some。",
+      "rules": [
+        "some water",
+        "any questions?",
+        "not any",
+        "Would you like some ...?"
+      ],
+      "examples": [
+        {
+          "id": "some-any-e1",
+          "text": "I need some paper.",
+          "audio": "audio/vocab_foundation/confusions/some-any-e1.mp3"
+        },
+        {
+          "id": "some-any-e2",
+          "text": "Do you have any questions?",
+          "audio": "audio/vocab_foundation/confusions/some-any-e2.mp3"
+        },
+        {
+          "id": "some-any-e3",
+          "text": "We do not have any milk.",
+          "audio": "audio/vocab_foundation/confusions/some-any-e3.mp3"
+        },
+        {
+          "id": "some-any-e4",
+          "text": "Would you like some tea?",
+          "audio": "audio/vocab_foundation/confusions/some-any-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "some-any-d1",
+          "speaker": "A",
+          "text": "Do we have any apples?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/some-any-d1.mp3"
+        },
+        {
+          "id": "some-any-d2",
+          "speaker": "B",
+          "text": "Yes, there are some on the table.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/some-any-d2.mp3"
+        },
+        {
+          "id": "some-any-d3",
+          "speaker": "A",
+          "text": "Can I have some?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/some-any-d3.mp3"
+        },
+        {
+          "id": "some-any-d4",
+          "speaker": "B",
+          "text": "Yes, you can have two.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/some-any-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "I have ___ books.",
+          "answer": "some",
+          "choices": [
+            "some",
+            "any"
+          ]
+        },
+        {
+          "prompt": "Do you have ___ pencils?",
+          "answer": "any",
+          "choices": [
+            "some",
+            "any"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/some-any.mp3"
+    },
+    {
+      "id": "size-length-height",
+      "titleZh": "big / small / tall / long / short",
+      "members": [
+        "big",
+        "small",
+        "tall",
+        "long",
+        "short"
+      ],
+      "conceptZh": "big/small 說整體大小；tall 說由下到上的高度；long/short 說長度，short 也可說身高較矮。",
+      "rules": [
+        "a big box",
+        "a small ant",
+        "a tall tree",
+        "a long road",
+        "short hair"
+      ],
+      "examples": [
+        {
+          "id": "size-length-height-e1",
+          "text": "The elephant is big.",
+          "audio": "audio/vocab_foundation/confusions/size-length-height-e1.mp3"
+        },
+        {
+          "id": "size-length-height-e2",
+          "text": "The ant is small.",
+          "audio": "audio/vocab_foundation/confusions/size-length-height-e2.mp3"
+        },
+        {
+          "id": "size-length-height-e3",
+          "text": "The tree is tall.",
+          "audio": "audio/vocab_foundation/confusions/size-length-height-e3.mp3"
+        },
+        {
+          "id": "size-length-height-e4",
+          "text": "The road is long.",
+          "audio": "audio/vocab_foundation/confusions/size-length-height-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "size-length-height-d1",
+          "speaker": "A",
+          "text": "Is the giraffe big?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/size-length-height-d1.mp3"
+        },
+        {
+          "id": "size-length-height-d2",
+          "speaker": "B",
+          "text": "Yes, and it is very tall.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/size-length-height-d2.mp3"
+        },
+        {
+          "id": "size-length-height-d3",
+          "speaker": "A",
+          "text": "Is its tail long?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/size-length-height-d3.mp3"
+        },
+        {
+          "id": "size-length-height-d4",
+          "speaker": "B",
+          "text": "Yes, but its hair is short.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/size-length-height-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "a ___ tree（高）",
+          "answer": "tall",
+          "choices": [
+            "big",
+            "tall",
+            "long"
+          ]
+        },
+        {
+          "prompt": "a ___ road（長）",
+          "answer": "long",
+          "choices": [
+            "tall",
+            "long",
+            "short"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/size-length-height.mp3"
+    },
+    {
+      "id": "temperature",
+      "titleZh": "hot / warm / cool",
+      "members": [
+        "hot",
+        "warm",
+        "cool"
+      ],
+      "conceptZh": "hot 是很熱；warm 是舒適的溫暖；cool 是稍冷或涼爽。",
+      "rules": [
+        "hot soup",
+        "warm tea",
+        "cool air"
+      ],
+      "examples": [
+        {
+          "id": "temperature-e1",
+          "text": "The soup is hot.",
+          "audio": "audio/vocab_foundation/confusions/temperature-e1.mp3"
+        },
+        {
+          "id": "temperature-e2",
+          "text": "The tea is warm.",
+          "audio": "audio/vocab_foundation/confusions/temperature-e2.mp3"
+        },
+        {
+          "id": "temperature-e3",
+          "text": "The evening air is cool.",
+          "audio": "audio/vocab_foundation/confusions/temperature-e3.mp3"
+        },
+        {
+          "id": "temperature-e4",
+          "text": "Summer days are hot.",
+          "audio": "audio/vocab_foundation/confusions/temperature-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "temperature-d1",
+          "speaker": "A",
+          "text": "Is the water hot?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/temperature-d1.mp3"
+        },
+        {
+          "id": "temperature-d2",
+          "speaker": "B",
+          "text": "No, it is warm.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/temperature-d2.mp3"
+        },
+        {
+          "id": "temperature-d3",
+          "speaker": "A",
+          "text": "How is the air outside?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/temperature-d3.mp3"
+        },
+        {
+          "id": "temperature-d4",
+          "speaker": "B",
+          "text": "It is cool this evening.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/temperature-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "Tea that is comfortable to drink is ___.",
+          "answer": "warm",
+          "choices": [
+            "hot",
+            "warm",
+            "cool"
+          ]
+        },
+        {
+          "prompt": "Summer sun can be very ___.",
+          "answer": "hot",
+          "choices": [
+            "hot",
+            "warm",
+            "cool"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/temperature.mp3"
+    },
+    {
+      "id": "quality-words",
+      "titleZh": "good / fine / nice / great",
+      "members": [
+        "good",
+        "fine",
+        "nice",
+        "great"
+      ],
+      "conceptZh": "good 是一般的好；fine 常回答身體狀況沒問題；nice 表示令人愉快或待人友善；great 比 good 更強。",
+      "rules": [
+        "good food",
+        "I am fine",
+        "a nice person",
+        "a great job"
+      ],
+      "examples": [
+        {
+          "id": "quality-words-e1",
+          "text": "The food is good.",
+          "audio": "audio/vocab_foundation/confusions/quality-words-e1.mp3"
+        },
+        {
+          "id": "quality-words-e2",
+          "text": "I am fine, thank you.",
+          "audio": "audio/vocab_foundation/confusions/quality-words-e2.mp3"
+        },
+        {
+          "id": "quality-words-e3",
+          "text": "She is nice to everyone.",
+          "audio": "audio/vocab_foundation/confusions/quality-words-e3.mp3"
+        },
+        {
+          "id": "quality-words-e4",
+          "text": "You did a great job.",
+          "audio": "audio/vocab_foundation/confusions/quality-words-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "quality-words-d1",
+          "speaker": "A",
+          "text": "How are you?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/quality-words-d1.mp3"
+        },
+        {
+          "id": "quality-words-d2",
+          "speaker": "B",
+          "text": "I am fine, thank you.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/quality-words-d2.mp3"
+        },
+        {
+          "id": "quality-words-d3",
+          "speaker": "A",
+          "text": "How was your trip?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/quality-words-d3.mp3"
+        },
+        {
+          "id": "quality-words-d4",
+          "speaker": "B",
+          "text": "It was great, and the people were nice.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/quality-words-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "How are you? I am ___.",
+          "answer": "fine",
+          "choices": [
+            "fine",
+            "great"
+          ]
+        },
+        {
+          "prompt": "You did a ___ job!",
+          "answer": "great",
+          "choices": [
+            "fine",
+            "great"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/quality-words.mp3"
+    },
+    {
+      "id": "meal-times",
+      "titleZh": "breakfast / lunch / dinner",
+      "members": [
+        "breakfast",
+        "lunch",
+        "dinner"
+      ],
+      "conceptZh": "breakfast 是早上第一餐；lunch 是中午餐；dinner 通常是晚餐或一天的主餐。",
+      "rules": [
+        "eat breakfast",
+        "have lunch",
+        "cook dinner"
+      ],
+      "examples": [
+        {
+          "id": "meal-times-e1",
+          "text": "I eat breakfast at seven.",
+          "audio": "audio/vocab_foundation/confusions/meal-times-e1.mp3"
+        },
+        {
+          "id": "meal-times-e2",
+          "text": "We have lunch at school.",
+          "audio": "audio/vocab_foundation/confusions/meal-times-e2.mp3"
+        },
+        {
+          "id": "meal-times-e3",
+          "text": "Dad cooks dinner at six.",
+          "audio": "audio/vocab_foundation/confusions/meal-times-e3.mp3"
+        },
+        {
+          "id": "meal-times-e4",
+          "text": "Dinner is in the dining room.",
+          "audio": "audio/vocab_foundation/confusions/meal-times-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "meal-times-d1",
+          "speaker": "A",
+          "text": "What do you eat for breakfast?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/meal-times-d1.mp3"
+        },
+        {
+          "id": "meal-times-d2",
+          "speaker": "B",
+          "text": "I eat bread and an egg.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/meal-times-d2.mp3"
+        },
+        {
+          "id": "meal-times-d3",
+          "speaker": "A",
+          "text": "Where do you have lunch?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/meal-times-d3.mp3"
+        },
+        {
+          "id": "meal-times-d4",
+          "speaker": "B",
+          "text": "I have lunch at school.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/meal-times-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "the morning meal",
+          "answer": "breakfast",
+          "choices": [
+            "breakfast",
+            "lunch",
+            "dinner"
+          ]
+        },
+        {
+          "prompt": "the midday meal",
+          "answer": "lunch",
+          "choices": [
+            "breakfast",
+            "lunch",
+            "dinner"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/meal-times.mp3"
+    },
+    {
+      "id": "phone-words",
+      "titleZh": "phone / telephone / cellphone",
+      "members": [
+        "phone",
+        "telephone",
+        "cellphone"
+      ],
+      "conceptZh": "phone 是最常用總稱；telephone 可指電話或較正式說法；cellphone 特別指行動電話。",
+      "rules": [
+        "call by phone",
+        "a telephone number",
+        "use a cellphone"
+      ],
+      "examples": [
+        {
+          "id": "phone-words-e1",
+          "text": "I call Mom on the phone.",
+          "audio": "audio/vocab_foundation/confusions/phone-words-e1.mp3"
+        },
+        {
+          "id": "phone-words-e2",
+          "text": "What is your telephone number?",
+          "audio": "audio/vocab_foundation/confusions/phone-words-e2.mp3"
+        },
+        {
+          "id": "phone-words-e3",
+          "text": "My cellphone is in my bag.",
+          "audio": "audio/vocab_foundation/confusions/phone-words-e3.mp3"
+        },
+        {
+          "id": "phone-words-e4",
+          "text": "The office telephone is on the desk.",
+          "audio": "audio/vocab_foundation/confusions/phone-words-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "phone-words-d1",
+          "speaker": "A",
+          "text": "Can I use your phone?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/phone-words-d1.mp3"
+        },
+        {
+          "id": "phone-words-d2",
+          "speaker": "B",
+          "text": "Yes, my cellphone is on the table.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/phone-words-d2.mp3"
+        },
+        {
+          "id": "phone-words-d3",
+          "speaker": "A",
+          "text": "Do you know the school's telephone number?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/phone-words-d3.mp3"
+        },
+        {
+          "id": "phone-words-d4",
+          "speaker": "B",
+          "text": "Yes, it is on this card.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/phone-words-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "a mobile phone",
+          "answer": "cellphone",
+          "choices": [
+            "telephone",
+            "cellphone"
+          ]
+        },
+        {
+          "prompt": "the general short word",
+          "answer": "phone",
+          "choices": [
+            "phone",
+            "cellphone"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/phone-words.mp3"
+    },
+    {
+      "id": "media-words",
+      "titleZh": "TV / television / movie / news",
+      "members": [
+        "tv",
+        "television",
+        "movie",
+        "news"
+      ],
+      "conceptZh": "TV 是 television 的縮寫；movie 是電影；news 是新聞，形式看似複數但通常當不可數名詞。",
+      "rules": [
+        "watch TV",
+        "turn on the television",
+        "watch a movie",
+        "read the news"
+      ],
+      "examples": [
+        {
+          "id": "media-words-e1",
+          "text": "We watch TV after dinner.",
+          "audio": "audio/vocab_foundation/confusions/media-words-e1.mp3"
+        },
+        {
+          "id": "media-words-e2",
+          "text": "Please turn off the television.",
+          "audio": "audio/vocab_foundation/confusions/media-words-e2.mp3"
+        },
+        {
+          "id": "media-words-e3",
+          "text": "The movie is funny.",
+          "audio": "audio/vocab_foundation/confusions/media-words-e3.mp3"
+        },
+        {
+          "id": "media-words-e4",
+          "text": "Dad reads the news.",
+          "audio": "audio/vocab_foundation/confusions/media-words-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "media-words-d1",
+          "speaker": "A",
+          "text": "What is on TV?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/media-words-d1.mp3"
+        },
+        {
+          "id": "media-words-d2",
+          "speaker": "B",
+          "text": "The evening news is on now.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/media-words-d2.mp3"
+        },
+        {
+          "id": "media-words-d3",
+          "speaker": "A",
+          "text": "Can we watch a movie later?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/media-words-d3.mp3"
+        },
+        {
+          "id": "media-words-d4",
+          "speaker": "B",
+          "text": "Yes, after the news.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/media-words-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "TV is short for ___.",
+          "answer": "television",
+          "choices": [
+            "television",
+            "movie"
+          ]
+        },
+        {
+          "prompt": "Information about recent events is ___.",
+          "answer": "news",
+          "choices": [
+            "movie",
+            "news"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/media-words.mp3"
+    },
+    {
+      "id": "fall-autumn",
+      "titleZh": "fall / autumn",
+      "members": [
+        "fall",
+        "autumn"
+      ],
+      "conceptZh": "作為季節時兩者都表示秋天；fall 較常見於美式英文，autumn 英美皆可用。fall 也可作動詞「掉落」。",
+      "rules": [
+        "in fall",
+        "in autumn",
+        "leaves fall"
+      ],
+      "examples": [
+        {
+          "id": "fall-autumn-e1",
+          "text": "Leaves fall in autumn.",
+          "audio": "audio/vocab_foundation/confusions/fall-autumn-e1.mp3"
+        },
+        {
+          "id": "fall-autumn-e2",
+          "text": "We go hiking in the fall.",
+          "audio": "audio/vocab_foundation/confusions/fall-autumn-e2.mp3"
+        },
+        {
+          "id": "fall-autumn-e3",
+          "text": "Autumn is cool.",
+          "audio": "audio/vocab_foundation/confusions/fall-autumn-e3.mp3"
+        },
+        {
+          "id": "fall-autumn-e4",
+          "text": "Do not fall on the wet road.",
+          "audio": "audio/vocab_foundation/confusions/fall-autumn-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "fall-autumn-d1",
+          "speaker": "A",
+          "text": "Which season do you like?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/fall-autumn-d1.mp3"
+        },
+        {
+          "id": "fall-autumn-d2",
+          "speaker": "B",
+          "text": "I like autumn.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/fall-autumn-d2.mp3"
+        },
+        {
+          "id": "fall-autumn-d3",
+          "speaker": "A",
+          "text": "Do you say fall, too?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/fall-autumn-d3.mp3"
+        },
+        {
+          "id": "fall-autumn-d4",
+          "speaker": "B",
+          "text": "Yes, fall and autumn can name the same season.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/fall-autumn-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "Leaves ___ from trees.",
+          "answer": "fall",
+          "choices": [
+            "fall",
+            "autumn"
+          ]
+        },
+        {
+          "prompt": "another word for the season fall",
+          "answer": "autumn",
+          "choices": [
+            "fall",
+            "autumn"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/fall-autumn.mp3"
+    },
+    {
+      "id": "sport-forms",
+      "titleZh": "sport / sports / swimming / soccer",
+      "members": [
+        "sport",
+        "sports",
+        "swimming",
+        "soccer"
+      ],
+      "conceptZh": "sport 可指一種運動；sports 指運動活動的總稱；swimming 與 soccer 是具體運動名稱。",
+      "rules": [
+        "a team sport",
+        "play sports",
+        "go swimming",
+        "play soccer"
+      ],
+      "examples": [
+        {
+          "id": "sport-forms-e1",
+          "text": "Soccer is a team sport.",
+          "audio": "audio/vocab_foundation/confusions/sport-forms-e1.mp3"
+        },
+        {
+          "id": "sport-forms-e2",
+          "text": "We play sports after school.",
+          "audio": "audio/vocab_foundation/confusions/sport-forms-e2.mp3"
+        },
+        {
+          "id": "sport-forms-e3",
+          "text": "I go swimming on Sunday.",
+          "audio": "audio/vocab_foundation/confusions/sport-forms-e3.mp3"
+        },
+        {
+          "id": "sport-forms-e4",
+          "text": "My brother plays soccer.",
+          "audio": "audio/vocab_foundation/confusions/sport-forms-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "sport-forms-d1",
+          "speaker": "A",
+          "text": "What sport do you like?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/sport-forms-d1.mp3"
+        },
+        {
+          "id": "sport-forms-d2",
+          "speaker": "B",
+          "text": "I like swimming.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/sport-forms-d2.mp3"
+        },
+        {
+          "id": "sport-forms-d3",
+          "speaker": "A",
+          "text": "Do you play sports at school?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/sport-forms-d3.mp3"
+        },
+        {
+          "id": "sport-forms-d4",
+          "speaker": "B",
+          "text": "Yes, I play soccer.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/sport-forms-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "I ___ soccer.",
+          "answer": "play",
+          "choices": [
+            "play",
+            "go"
+          ]
+        },
+        {
+          "prompt": "I ___ swimming.",
+          "answer": "go",
+          "choices": [
+            "play",
+            "go"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/sport-forms.mp3"
+    },
+    {
+      "id": "cookie-forms",
+      "titleZh": "cookie / cookies / cooky",
+      "members": [
+        "cookie",
+        "cookies",
+        "cooky"
+      ],
+      "conceptZh": "cookie 是單數，cookies 是複數。cooky 是較少見的舊拼法，學習時以 cookie 為主。",
+      "rules": [
+        "one cookie",
+        "two cookies",
+        "prefer the spelling cookie"
+      ],
+      "examples": [
+        {
+          "id": "cookie-forms-e1",
+          "text": "I have one cookie.",
+          "audio": "audio/vocab_foundation/confusions/cookie-forms-e1.mp3"
+        },
+        {
+          "id": "cookie-forms-e2",
+          "text": "There are three cookies on the plate.",
+          "audio": "audio/vocab_foundation/confusions/cookie-forms-e2.mp3"
+        },
+        {
+          "id": "cookie-forms-e3",
+          "text": "Cookie is the usual spelling.",
+          "audio": "audio/vocab_foundation/confusions/cookie-forms-e3.mp3"
+        },
+        {
+          "id": "cookie-forms-e4",
+          "text": "The old spelling cooky is uncommon.",
+          "audio": "audio/vocab_foundation/confusions/cookie-forms-e4.mp3"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "cookie-forms-d1",
+          "speaker": "A",
+          "text": "Would you like a cookie?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/cookie-forms-d1.mp3"
+        },
+        {
+          "id": "cookie-forms-d2",
+          "speaker": "B",
+          "text": "Yes, may I have two cookies?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/cookie-forms-d2.mp3"
+        },
+        {
+          "id": "cookie-forms-d3",
+          "speaker": "A",
+          "text": "How do you spell it?",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/cookie-forms-d3.mp3"
+        },
+        {
+          "id": "cookie-forms-d4",
+          "speaker": "B",
+          "text": "Use c-o-o-k-i-e.",
+          "audio": "audio/vocab_foundation/confusion_dialogue_lines/cookie-forms-d4.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "prompt": "two ___",
+          "answer": "cookies",
+          "choices": [
+            "cookie",
+            "cookies",
+            "cooky"
+          ]
+        },
+        {
+          "prompt": "the usual singular spelling",
+          "answer": "cookie",
+          "choices": [
+            "cookie",
+            "cooky"
+          ]
+        }
+      ],
+      "fullAudio": "audio/vocab_foundation/confusion_dialogues/cookie-forms.mp3"
+    }
+  ]
+}

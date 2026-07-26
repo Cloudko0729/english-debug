@@ -1,0 +1,937 @@
+{
+  "schemaVersion": "1.0.0",
+  "level": 2,
+  "bands": [
+    "F1",
+    "F2"
+  ],
+  "units": [
+    {
+      "id": "l2-u01",
+      "level": 2,
+      "bands": [
+        "F1",
+        "F2"
+      ],
+      "theme": "language",
+      "sequence": 1,
+      "unitThemes": [
+        {
+          "name": "language",
+          "count": 12
+        },
+        {
+          "name": "numbers_time",
+          "count": 3
+        }
+      ],
+      "titleZh": "語言與句型 × 數字與時間",
+      "titleEn": "Language Tools & Numbers and Time",
+      "targetWords": [
+        "and",
+        "english",
+        "its",
+        "on",
+        "please",
+        "real",
+        "roc",
+        "these",
+        "those",
+        "under",
+        "usa",
+        "very",
+        "birthday",
+        "clock",
+        "day"
+      ],
+      "passages": [
+        {
+          "id": "l2-u01-p1",
+          "title": "Language Tools: First Reading",
+          "type": "guided-reading",
+          "theme": "language",
+          "text": "Our class is practicing clear English today. I have a pencil and an eraser. This book is in English. The dog moves its tail. We have music class on Friday. Please close the door. The story is based on a real animal. ROC means the Republic of China. These apples are sweet. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "and",
+            "english",
+            "its",
+            "on",
+            "please",
+            "real",
+            "roc",
+            "these"
+          ],
+          "audio": "audio/vocab_foundation/passages/l2-u01-p1.mp3"
+        },
+        {
+          "id": "l2-u01-p2",
+          "title": "Language Tools: Second Reading",
+          "type": "guided-reading",
+          "theme": "language",
+          "text": "Our class is practicing clear English today. Those birds are in the tree. The cat is under the chair. My friend is from the USA. The classroom is very clean. We made a card for Dad's birthday. The clock is on the wall. I play every day. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "those",
+            "under",
+            "usa",
+            "very",
+            "birthday",
+            "clock",
+            "day"
+          ],
+          "audio": "audio/vocab_foundation/passages/l2-u01-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l2-u01-d1",
+            "speaker": "A",
+            "text": "Can you use \"and\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u01-d1.mp3"
+          },
+          {
+            "id": "l2-u01-d2",
+            "speaker": "B",
+            "text": "I have a pencil and an eraser.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u01-d2.mp3"
+          },
+          {
+            "id": "l2-u01-d3",
+            "speaker": "A",
+            "text": "What can you say with \"english\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u01-d3.mp3"
+          },
+          {
+            "id": "l2-u01-d4",
+            "speaker": "B",
+            "text": "This book is in English.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u01-d4.mp3"
+          },
+          {
+            "id": "l2-u01-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"its\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u01-d5.mp3"
+          },
+          {
+            "id": "l2-u01-d6",
+            "speaker": "B",
+            "text": "The dog moves its tail.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u01-d6.mp3"
+          },
+          {
+            "id": "l2-u01-d7",
+            "speaker": "A",
+            "text": "How would you use \"on\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u01-d7.mp3"
+          },
+          {
+            "id": "l2-u01-d8",
+            "speaker": "B",
+            "text": "We have music class on Friday.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u01-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l2-u01-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l2-u02",
+      "level": 2,
+      "bands": [
+        "F1",
+        "F2"
+      ],
+      "theme": "people_family",
+      "sequence": 2,
+      "unitThemes": [
+        {
+          "name": "people_family",
+          "count": 9
+        },
+        {
+          "name": "animals_nature",
+          "count": 3
+        },
+        {
+          "name": "numbers_time",
+          "count": 2
+        },
+        {
+          "name": "body_health",
+          "count": 1
+        }
+      ],
+      "titleZh": "人物與家庭 × 動物與自然",
+      "titleEn": "People and Family & Animals and Nature",
+      "targetWords": [
+        "brother",
+        "classmate",
+        "father",
+        "singer",
+        "sister",
+        "son",
+        "student",
+        "teacher",
+        "woman",
+        "air",
+        "ant",
+        "bee",
+        "week",
+        "year",
+        "toe"
+      ],
+      "passages": [
+        {
+          "id": "l2-u02-p1",
+          "title": "People and Family: First Reading",
+          "type": "guided-reading",
+          "theme": "people_family",
+          "text": "My family and friends are together today. My brother plays soccer. I sit next to my classmate. My father reads a book. My aunt is a singer. My sister wears a skirt. Mr. Lee walks to school with his son. The student opens a book. My teacher reads a story. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "brother",
+            "classmate",
+            "father",
+            "singer",
+            "sister",
+            "son",
+            "student",
+            "teacher"
+          ],
+          "audio": "audio/vocab_foundation/passages/l2-u02-p1.mp3"
+        },
+        {
+          "id": "l2-u02-p2",
+          "title": "Animals and Nature: Second Reading",
+          "type": "guided-reading",
+          "theme": "animals_nature",
+          "text": "We look around and notice animals and nature. That woman is our teacher. The air is cool and clean. The ant is near the tree. I see a bee. A week has seven days. A year has twelve months. My toe feels fine. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "woman",
+            "air",
+            "ant",
+            "bee",
+            "week",
+            "year",
+            "toe"
+          ],
+          "audio": "audio/vocab_foundation/passages/l2-u02-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l2-u02-d1",
+            "speaker": "A",
+            "text": "Can you use \"brother\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u02-d1.mp3"
+          },
+          {
+            "id": "l2-u02-d2",
+            "speaker": "B",
+            "text": "My brother plays soccer.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u02-d2.mp3"
+          },
+          {
+            "id": "l2-u02-d3",
+            "speaker": "A",
+            "text": "What can you say with \"classmate\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u02-d3.mp3"
+          },
+          {
+            "id": "l2-u02-d4",
+            "speaker": "B",
+            "text": "I sit next to my classmate.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u02-d4.mp3"
+          },
+          {
+            "id": "l2-u02-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"father\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u02-d5.mp3"
+          },
+          {
+            "id": "l2-u02-d6",
+            "speaker": "B",
+            "text": "My father reads a book.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u02-d6.mp3"
+          },
+          {
+            "id": "l2-u02-d7",
+            "speaker": "A",
+            "text": "How would you use \"singer\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u02-d7.mp3"
+          },
+          {
+            "id": "l2-u02-d8",
+            "speaker": "B",
+            "text": "My aunt is a singer.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u02-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l2-u02-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l2-u03",
+      "level": 2,
+      "bands": [
+        "F1",
+        "F2"
+      ],
+      "theme": "animals_nature",
+      "sequence": 3,
+      "unitThemes": [
+        {
+          "name": "animals_nature",
+          "count": 10
+        },
+        {
+          "name": "school",
+          "count": 5
+        }
+      ],
+      "titleZh": "動物與自然 × 校園與學習",
+      "titleEn": "Animals and Nature & School and Learning",
+      "targetWords": [
+        "cow",
+        "flower",
+        "fox",
+        "frog",
+        "fruit",
+        "hen",
+        "hippo",
+        "sea",
+        "sheep",
+        "zoo",
+        "book",
+        "box",
+        "chair",
+        "classroom",
+        "draw"
+      ],
+      "passages": [
+        {
+          "id": "l2-u03-p1",
+          "title": "Animals and Nature: First Reading",
+          "type": "guided-reading",
+          "theme": "animals_nature",
+          "text": "We look around and notice animals and nature. I see a cow. The flower is near the tree. I see a fox. The frog is near the tree. I eat some fruit after lunch. The hen is near the tree. I see a hippo. We can see ships on the sea. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "cow",
+            "flower",
+            "fox",
+            "frog",
+            "fruit",
+            "hen",
+            "hippo",
+            "sea"
+          ],
+          "audio": "audio/vocab_foundation/passages/l2-u03-p1.mp3"
+        },
+        {
+          "id": "l2-u03-p2",
+          "title": "School and Learning: Second Reading",
+          "type": "guided-reading",
+          "theme": "school",
+          "text": "Our classroom is ready for a new lesson. The sheep is near the tree. The zoo has lions. I read a book at night. Put the books in the box. I sit on a chair. Our classroom is clean. He draws a house. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "sheep",
+            "zoo",
+            "book",
+            "box",
+            "chair",
+            "classroom",
+            "draw"
+          ],
+          "audio": "audio/vocab_foundation/passages/l2-u03-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l2-u03-d1",
+            "speaker": "A",
+            "text": "Can you use \"cow\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u03-d1.mp3"
+          },
+          {
+            "id": "l2-u03-d2",
+            "speaker": "B",
+            "text": "I see a cow.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u03-d2.mp3"
+          },
+          {
+            "id": "l2-u03-d3",
+            "speaker": "A",
+            "text": "What can you say with \"flower\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u03-d3.mp3"
+          },
+          {
+            "id": "l2-u03-d4",
+            "speaker": "B",
+            "text": "The flower is near the tree.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u03-d4.mp3"
+          },
+          {
+            "id": "l2-u03-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"fox\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u03-d5.mp3"
+          },
+          {
+            "id": "l2-u03-d6",
+            "speaker": "B",
+            "text": "I see a fox.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u03-d6.mp3"
+          },
+          {
+            "id": "l2-u03-d7",
+            "speaker": "A",
+            "text": "How would you use \"frog\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u03-d7.mp3"
+          },
+          {
+            "id": "l2-u03-d8",
+            "speaker": "B",
+            "text": "The frog is near the tree.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u03-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l2-u03-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l2-u04",
+      "level": 2,
+      "bands": [
+        "F1",
+        "F2"
+      ],
+      "theme": "food",
+      "sequence": 4,
+      "unitThemes": [
+        {
+          "name": "food",
+          "count": 8
+        },
+        {
+          "name": "school",
+          "count": 7
+        }
+      ],
+      "titleZh": "食物與用餐 × 校園與學習",
+      "titleEn": "Food and Meals & School and Learning",
+      "targetWords": [
+        "apple",
+        "cake",
+        "candy",
+        "coffee",
+        "coke",
+        "cola",
+        "eat",
+        "ham",
+        "glue",
+        "pencil",
+        "read",
+        "ruler",
+        "school",
+        "study",
+        "table"
+      ],
+      "passages": [
+        {
+          "id": "l2-u04-p1",
+          "title": "Food and Meals: First Reading",
+          "type": "guided-reading",
+          "theme": "food",
+          "text": "Our family is getting food ready for a meal. The apple is red. I share cake with my sister. I like candy. Coffee is on the table. I do not drink Coke every day. The cola is in the cup. I eat rice. Ham is on the table. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "apple",
+            "cake",
+            "candy",
+            "coffee",
+            "coke",
+            "cola",
+            "eat",
+            "ham"
+          ],
+          "audio": "audio/vocab_foundation/passages/l2-u04-p1.mp3"
+        },
+        {
+          "id": "l2-u04-p2",
+          "title": "School and Learning: Second Reading",
+          "type": "guided-reading",
+          "theme": "school",
+          "text": "Our classroom is ready for a new lesson. The glue is next to the scissors. I write with a pencil. Please read this page. My ruler is long. I go to school every day. I study English every day. We eat dinner at the kitchen table. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "glue",
+            "pencil",
+            "read",
+            "ruler",
+            "school",
+            "study",
+            "table"
+          ],
+          "audio": "audio/vocab_foundation/passages/l2-u04-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l2-u04-d1",
+            "speaker": "A",
+            "text": "Can you use \"apple\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u04-d1.mp3"
+          },
+          {
+            "id": "l2-u04-d2",
+            "speaker": "B",
+            "text": "The apple is red.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u04-d2.mp3"
+          },
+          {
+            "id": "l2-u04-d3",
+            "speaker": "A",
+            "text": "What can you say with \"cake\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u04-d3.mp3"
+          },
+          {
+            "id": "l2-u04-d4",
+            "speaker": "B",
+            "text": "I share cake with my sister.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u04-d4.mp3"
+          },
+          {
+            "id": "l2-u04-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"candy\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u04-d5.mp3"
+          },
+          {
+            "id": "l2-u04-d6",
+            "speaker": "B",
+            "text": "I like candy.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u04-d6.mp3"
+          },
+          {
+            "id": "l2-u04-d7",
+            "speaker": "A",
+            "text": "How would you use \"coffee\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u04-d7.mp3"
+          },
+          {
+            "id": "l2-u04-d8",
+            "speaker": "B",
+            "text": "Coffee is on the table.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u04-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l2-u04-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l2-u05",
+      "level": 2,
+      "bands": [
+        "F1",
+        "F2"
+      ],
+      "theme": "actions",
+      "sequence": 5,
+      "unitThemes": [
+        {
+          "name": "actions",
+          "count": 5
+        },
+        {
+          "name": "food",
+          "count": 3
+        },
+        {
+          "name": "clothes",
+          "count": 3
+        },
+        {
+          "name": "home_objects",
+          "count": 2
+        },
+        {
+          "name": "places_transport",
+          "count": 2
+        }
+      ],
+      "titleZh": "動作與日常 × 食物與用餐",
+      "titleEn": "Actions and Routines & Food and Meals",
+      "targetWords": [
+        "close",
+        "give",
+        "play",
+        "see",
+        "sing",
+        "rice",
+        "sandwich",
+        "soup",
+        "cap",
+        "shirt",
+        "short",
+        "doll",
+        "sofa",
+        "ship",
+        "store"
+      ],
+      "passages": [
+        {
+          "id": "l2-u05-p1",
+          "title": "Actions and Routines: First Reading",
+          "type": "guided-reading",
+          "theme": "actions",
+          "text": "Everyone has something to do today. I close the book. He gives me a pencil. I play with my friend. She sees a rainbow. I sing a song. The rice is in my bowl. I made a sandwich for lunch. I eat soup for dinner. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "close",
+            "give",
+            "play",
+            "see",
+            "sing",
+            "rice",
+            "sandwich",
+            "soup"
+          ],
+          "audio": "audio/vocab_foundation/passages/l2-u05-p1.mp3"
+        },
+        {
+          "id": "l2-u05-p2",
+          "title": "Clothes and Looks: Second Reading",
+          "type": "guided-reading",
+          "theme": "clothes",
+          "text": "We choose our clothes for the day. The cap is clean. His shirt is white. The boy has short hair. There is a doll in the room. The sofa is clean. The ship is near my home. I buy milk at the store. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "cap",
+            "shirt",
+            "short",
+            "doll",
+            "sofa",
+            "ship",
+            "store"
+          ],
+          "audio": "audio/vocab_foundation/passages/l2-u05-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l2-u05-d1",
+            "speaker": "A",
+            "text": "Can you use \"close\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u05-d1.mp3"
+          },
+          {
+            "id": "l2-u05-d2",
+            "speaker": "B",
+            "text": "I close the book.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u05-d2.mp3"
+          },
+          {
+            "id": "l2-u05-d3",
+            "speaker": "A",
+            "text": "What can you say with \"give\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u05-d3.mp3"
+          },
+          {
+            "id": "l2-u05-d4",
+            "speaker": "B",
+            "text": "He gives me a pencil.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u05-d4.mp3"
+          },
+          {
+            "id": "l2-u05-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"play\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u05-d5.mp3"
+          },
+          {
+            "id": "l2-u05-d6",
+            "speaker": "B",
+            "text": "I play with my friend.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u05-d6.mp3"
+          },
+          {
+            "id": "l2-u05-d7",
+            "speaker": "A",
+            "text": "How would you use \"see\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u05-d7.mp3"
+          },
+          {
+            "id": "l2-u05-d8",
+            "speaker": "B",
+            "text": "She sees a rainbow.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u05-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l2-u05-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l2-u06",
+      "level": 2,
+      "bands": [
+        "F1",
+        "F2"
+      ],
+      "theme": "descriptions",
+      "sequence": 6,
+      "unitThemes": [
+        {
+          "name": "descriptions",
+          "count": 11
+        },
+        {
+          "name": "actions",
+          "count": 4
+        }
+      ],
+      "titleZh": "顏色與描述 × 動作與日常",
+      "titleEn": "Colors and Descriptions & Actions and Routines",
+      "targetWords": [
+        "black",
+        "brown",
+        "busy",
+        "cute",
+        "dear",
+        "dirty",
+        "friendly",
+        "gray",
+        "green",
+        "old",
+        "pink",
+        "stand",
+        "talk",
+        "want",
+        "wash"
+      ],
+      "passages": [
+        {
+          "id": "l2-u06-p1",
+          "title": "Colors and Descriptions: First Reading",
+          "type": "guided-reading",
+          "theme": "descriptions",
+          "text": "We look carefully and describe what we see. The cat is black. I see a brown desk. Mom is busy now. That baby is cute. My dear friend sent me a card. The table is dirty. Our new classmate is friendly. He has a gray coat. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "black",
+            "brown",
+            "busy",
+            "cute",
+            "dear",
+            "dirty",
+            "friendly",
+            "gray"
+          ],
+          "audio": "audio/vocab_foundation/passages/l2-u06-p1.mp3"
+        },
+        {
+          "id": "l2-u06-p2",
+          "title": "Actions and Routines: Second Reading",
+          "type": "guided-reading",
+          "theme": "actions",
+          "text": "Everyone has something to do today. She has a green cup. This is an old chair. I see a pink flower. I stand in line. We talk about the story. I want some water. She washes her cup. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "green",
+            "old",
+            "pink",
+            "stand",
+            "talk",
+            "want",
+            "wash"
+          ],
+          "audio": "audio/vocab_foundation/passages/l2-u06-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l2-u06-d1",
+            "speaker": "A",
+            "text": "Can you use \"black\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u06-d1.mp3"
+          },
+          {
+            "id": "l2-u06-d2",
+            "speaker": "B",
+            "text": "The cat is black.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u06-d2.mp3"
+          },
+          {
+            "id": "l2-u06-d3",
+            "speaker": "A",
+            "text": "What can you say with \"brown\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u06-d3.mp3"
+          },
+          {
+            "id": "l2-u06-d4",
+            "speaker": "B",
+            "text": "I see a brown desk.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u06-d4.mp3"
+          },
+          {
+            "id": "l2-u06-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"busy\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u06-d5.mp3"
+          },
+          {
+            "id": "l2-u06-d6",
+            "speaker": "B",
+            "text": "Mom is busy now.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u06-d6.mp3"
+          },
+          {
+            "id": "l2-u06-d7",
+            "speaker": "A",
+            "text": "How would you use \"cute\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u06-d7.mp3"
+          },
+          {
+            "id": "l2-u06-d8",
+            "speaker": "B",
+            "text": "That baby is cute.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u06-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l2-u06-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l2-u07",
+      "level": 2,
+      "bands": [
+        "F1",
+        "F2"
+      ],
+      "theme": "general",
+      "sequence": 7,
+      "unitThemes": [
+        {
+          "name": "general",
+          "count": 8
+        },
+        {
+          "name": "descriptions",
+          "count": 5
+        },
+        {
+          "name": "recreation_media",
+          "count": 2
+        }
+      ],
+      "titleZh": "生活綜合 × 顏色與描述",
+      "titleEn": "Everyday English & Colors and Descriptions",
+      "targetWords": [
+        "but",
+        "color",
+        "hello",
+        "hey",
+        "hi",
+        "oh",
+        "thank",
+        "wow",
+        "shy",
+        "slow",
+        "small",
+        "white",
+        "yellow",
+        "picnic",
+        "song"
+      ],
+      "passages": [
+        {
+          "id": "l2-u07-p1",
+          "title": "Everyday English: First Reading",
+          "type": "guided-reading",
+          "theme": "general",
+          "text": "Today brings many small things to notice and do. The bag is old, but it is clean. What color is your bag? Hello, my name is Amy. Hey, that is my ball. Hi, Ben! How are you? Oh, this cake is good. I thank Dad for his help. Wow! You can swim fast. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "but",
+            "color",
+            "hello",
+            "hey",
+            "hi",
+            "oh",
+            "thank",
+            "wow"
+          ],
+          "audio": "audio/vocab_foundation/passages/l2-u07-p1.mp3"
+        },
+        {
+          "id": "l2-u07-p2",
+          "title": "Colors and Descriptions: Second Reading",
+          "type": "guided-reading",
+          "theme": "descriptions",
+          "text": "We look carefully and describe what we see. My little sister feels shy around new people. The turtle is slow. She lives in a small house. The milk is white. I see a yellow bus. We have a picnic in the park. This song is easy to learn. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "shy",
+            "slow",
+            "small",
+            "white",
+            "yellow",
+            "picnic",
+            "song"
+          ],
+          "audio": "audio/vocab_foundation/passages/l2-u07-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l2-u07-d1",
+            "speaker": "A",
+            "text": "Can you use \"but\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u07-d1.mp3"
+          },
+          {
+            "id": "l2-u07-d2",
+            "speaker": "B",
+            "text": "The bag is old, but it is clean.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u07-d2.mp3"
+          },
+          {
+            "id": "l2-u07-d3",
+            "speaker": "A",
+            "text": "What can you say with \"color\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u07-d3.mp3"
+          },
+          {
+            "id": "l2-u07-d4",
+            "speaker": "B",
+            "text": "What color is your bag?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u07-d4.mp3"
+          },
+          {
+            "id": "l2-u07-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"hello\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u07-d5.mp3"
+          },
+          {
+            "id": "l2-u07-d6",
+            "speaker": "B",
+            "text": "Hello, my name is Amy.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u07-d6.mp3"
+          },
+          {
+            "id": "l2-u07-d7",
+            "speaker": "A",
+            "text": "How would you use \"hey\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u07-d7.mp3"
+          },
+          {
+            "id": "l2-u07-d8",
+            "speaker": "B",
+            "text": "Hey, that is my ball.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l2-u07-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l2-u07-dialogue.mp3"
+      }
+    }
+  ]
+}

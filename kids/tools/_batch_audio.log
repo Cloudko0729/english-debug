@@ -1,0 +1,267 @@
+[13:56:48] 本批共 30 個節點，其中 17 個待處理（只做音檔）
+[13:56:48] 預估 119 分鐘（約 2.0 小時）；登入效期約 2 小時，超過的部分會中止，重新登入後重跑同一指令即可續做。
+[13:56:50] [1/30] F0.1-complete-sentence 完整句與片語
+[13:56:50]   ↷ F0.1-complete-sentence 已存在，跳過
+[13:56:50] [2/30] F0.2-be-agreement 主詞與 am / is / are
+[13:56:50]   ↷ F0.2-be-agreement 已存在，跳過
+[13:56:50] [3/30] F0.3-be-meaning be 表身分、狀態與位置
+[13:56:50]   ↷ F0.3-be-meaning 已存在，跳過
+[13:56:50] [4/30] F0.4-singular-plural 一個與多個名詞
+[13:56:50]   ↷ F0.4-singular-plural 已存在，跳過
+[13:56:50] [5/30] F0.5-a-an-sound a / an 看聲音
+[13:56:50]   ↷ F0.5-a-an-sound 已存在，跳過
+[13:56:50] [6/30] F1.1-subject-pronouns 主詞代名詞
+[13:56:50]   ↷ F1.1-subject-pronouns 已存在，跳過
+[13:56:50] [7/30] F1.2-action-affirmative 一般動詞肯定句
+[13:56:50]   ↷ F1.2-action-affirmative 已存在，跳過
+[13:56:50] [8/30] F1.3-predicate-choice be 述語與一般動詞述語
+[13:56:50]   ↷ F1.3-predicate-choice 已存在，跳過
+[13:56:50] [9/30] F1.4-be-questions-negatives be 問句、否定與短答
+[13:56:50]   ↷ F1.4-be-questions-negatives 已存在，跳過
+[13:56:50] [10/30] F1.5-do-does do / does 問句與否定
+[13:56:50]   · 建立 notebook…
+[13:56:52]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[13:57:00]   · 生成 podcast…
+[14:02:16]   · 壓縮音檔…
+[14:02:19]   ✔ F1.5-do-does 完成（音 2.19MB / 影 -）
+[14:02:19] [11/30] F1.6-wh-questions Wh- 資訊問句
+[14:02:19]   · 建立 notebook…
+[14:02:22]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:02:31]   · 生成 podcast…
+[14:10:39]   · 壓縮音檔…
+[14:10:42]   ✔ F1.6-wh-questions 完成（音 2.09MB / 影 -）
+[14:10:42] [12/30] F2.1-present-simple 現在簡單式
+[14:10:42]   ↷ F2.1-present-simple 已存在，跳過
+[14:10:42] [13/30] F2.2-frequency-adverbs 頻率副詞的位置
+[14:10:42]   · 建立 notebook…
+[14:10:44]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:10:52]   · 生成 podcast…
+22:10:55 ERROR [notebooklm._rpc_executor] [req=72518a6b] RPC CREATE_ARTIFACT failed after 0.522s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:10:55]   ✘ F2.2-frequency-adverbs 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「頻率副詞的位置」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 9ab8166f-efe0-4d30-9d78-9895ddb2d24f --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:10:55] [14/30] F2.3-present-continuous 現在進行式
+[14:10:55]   ↷ F2.3-present-continuous 已存在，跳過
+[14:10:55] [15/30] F2.4-present-contrast 習慣與此刻
+[14:10:55]   · 建立 notebook…
+[14:10:57]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:11:05]   · 生成 podcast…
+22:11:07 ERROR [notebooklm._rpc_executor] [req=b0a2d24d] RPC CREATE_ARTIFACT failed after 0.678s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:11:07]   ✘ F2.4-present-contrast 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「習慣與此刻」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 800f6f9c-45f7-4018-af59-209c6479da78 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:11:07] [16/30] F2.5-stative-verbs 常見狀態動詞
+[14:11:07]   · 建立 notebook…
+[14:11:10]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:11:18]   · 生成 podcast…
+22:11:20 ERROR [notebooklm._rpc_executor] [req=6dbcabdc] RPC CREATE_ARTIFACT failed after 0.562s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:11:21]   ✘ F2.5-stative-verbs 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「常見狀態動詞」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 5fe0b784-3a40-438b-80cc-d63eb222d770 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:11:21] [17/30] F2.6-pronoun-case 主格、受格與所有格
+[14:11:21]   ↷ F2.6-pronoun-case 已存在，跳過
+[14:11:21] [18/30] F2.7-there-count-quantity there is/are 與基本數量
+[14:11:21]   ↷ F2.7-there-count-quantity 已存在，跳過
+[14:11:21] [19/30] F3.1-past-be 過去的 was / were
+[14:11:21]   · 建立 notebook…
+[14:11:23]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:11:32]   · 生成 podcast…
+22:11:34 ERROR [notebooklm._rpc_executor] [req=b577db28] RPC CREATE_ARTIFACT failed after 0.534s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:11:34]   ✘ F3.1-past-be 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「過去的 was / were」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook c44d6b45-438d-4437-9625-cd71f2fd40bc --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:11:34] [20/30] F3.2-past-simple 一般動詞過去式
+[14:11:34]   · 建立 notebook…
+[14:11:37]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:11:45]   · 生成 podcast…
+22:11:49 ERROR [notebooklm._rpc_executor] [req=14212817] RPC CREATE_ARTIFACT failed after 1.191s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:11:49]   ✘ F3.2-past-simple 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「一般動詞過去式」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 5bf2e65a-f9eb-47c0-9192-516c10ca24fb --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:11:49] [21/30] F3.3-did-questions did 問句與否定
+[14:11:49]   · 建立 notebook…
+[14:11:52]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:12:00]   · 生成 podcast…
+22:12:03 ERROR [notebooklm._rpc_executor] [req=0e52387b] RPC CREATE_ARTIFACT failed after 0.561s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:12:03]   ✘ F3.3-did-questions 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「did 問句與否定」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook a919c0a4-820e-4009-97c6-e19ab43ad63d --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:12:03] [22/30] F3.4-prepositions 地點與時間介系詞
+[14:12:03]   · 建立 notebook…
+[14:12:05]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:12:14]   · 生成 podcast…
+22:12:16 ERROR [notebooklm._rpc_executor] [req=0defe612] RPC CREATE_ARTIFACT failed after 0.547s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:12:16]   ✘ F3.4-prepositions 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「地點與時間介系詞」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 354be0ec-cab3-4359-97cb-35377dbe6496 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:12:16] [23/30] F3.5-connectors 基本連接詞與邏輯
+[14:12:16]   · 建立 notebook…
+[14:12:19]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:12:27]   · 生成 podcast…
+22:12:30 ERROR [notebooklm._rpc_executor] [req=980250b2] RPC CREATE_ARTIFACT failed after 0.542s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:12:30]   ✘ F3.5-connectors 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「基本連接詞與邏輯」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook a5943912-afa4-41dd-81eb-a60cbf8c2585 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:12:30] [24/30] F3.6-basic-helpers can、will 與 going to
+[14:12:30]   · 建立 notebook…
+[14:12:33]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:12:41]   · 生成 podcast…
+22:12:43 ERROR [notebooklm._rpc_executor] [req=dab548d6] RPC CREATE_ARTIFACT failed after 0.587s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:12:43]   ✘ F3.6-basic-helpers 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「can、will 與 going to」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 2fda5a4b-ef42-428e-975a-3b59a7171493 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:12:43] [25/30] F4.1-past-continuous 過去進行式與 when / while
+[14:12:43]   · 建立 notebook…
+[14:12:46]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:12:54]   · 生成 podcast…
+22:12:56 ERROR [notebooklm._rpc_executor] [req=78af1084] RPC CREATE_ARTIFACT failed after 0.675s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:12:57]   ✘ F4.1-past-continuous 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「過去進行式與 when / while」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 9c3585c9-c691-4f7e-94bc-a5dc053adb0e --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:12:57] [26/30] F4.2-adjectives-adverbs 形容詞與副詞
+[14:12:57]   · 建立 notebook…
+[14:13:00]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:13:08]   · 生成 podcast…
+22:13:10 ERROR [notebooklm._rpc_executor] [req=fb9bdc3a] RPC CREATE_ARTIFACT failed after 0.533s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:13:10]   ✘ F4.2-adjectives-adverbs 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「形容詞與副詞」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 373eaaaf-fc1e-4d72-9e20-8a14ba06c76a --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:13:10] [27/30] F4.3-comparatives 比較級與最高級
+[14:13:10]   · 建立 notebook…
+[14:13:13]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:13:21]   · 生成 podcast…
+22:13:24 ERROR [notebooklm._rpc_executor] [req=8c3307a8] RPC CREATE_ARTIFACT failed after 0.654s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:13:24]   ✘ F4.3-comparatives 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「比較級與最高級」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook f211e72d-a2a0-4e15-8e14-d0e6262c7808 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:13:24] [28/30] F4.4-quantifiers 數量詞
+[14:13:24]   · 建立 notebook…
+[14:13:27]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:13:35]   · 生成 podcast…
+22:13:37 ERROR [notebooklm._rpc_executor] [req=3f444f18] RPC CREATE_ARTIFACT failed after 0.567s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:13:37]   ✘ F4.4-quantifiers 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「數量詞」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 9c57921e-8f30-48c7-9644-2cc748cad037 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:13:37] [29/30] F4.5-modal-functions 建議、義務與可能性
+[14:13:37]   · 建立 notebook…
+[14:13:40]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:13:48]   · 生成 podcast…
+22:13:50 ERROR [notebooklm._rpc_executor] [req=4caa41c4] RPC CREATE_ARTIFACT failed after 0.550s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:13:50]   ✘ F4.5-modal-functions 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「建議、義務與可能性」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook f7dfbc4d-4635-4fbb-ae47-58ec92616f8d --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:13:50] [30/30] F4.6-infinitive-gerund to + V 與 V-ing 搭配
+[14:13:50]   · 建立 notebook…
+[14:13:53]   · 上傳來源文件…
+C:\Users\CloudKo_Home\AppData\Local\Programs\Python\Python313\Lib\site-packages\notebooklm\cli\services\source_serializers.py:21: UnknownTypeWarning: Unknown source type code 0. Consider updating notebooklm-py to the latest version.
+  "type": source_kind_value(src.kind),
+[14:14:01]   · 生成 podcast…
+22:14:03 ERROR [notebooklm._rpc_executor] [req=cbaf95c8] RPC CREATE_ARTIFACT failed after 0.570s: RateLimitError rpc_code=USER_DISPLAYABLE_ERROR
+[14:14:03]   ✘ F4.6-infinitive-gerund 失敗：Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「to + V 與 V-ing 搭配」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 38b2f74c-0450-47b0-9549-4147b218d443 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03] 完成：成功 2／跳過 13／失敗 15
+[14:14:03] 失敗清單（可重跑同一指令，已完成的會自動跳過）：
+[14:14:03]    F2.2-frequency-adverbs: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「頻率副詞的位置」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 9ab8166f-efe0-4d30-9d78-9895ddb2d24f --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03]    F2.4-present-contrast: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「習慣與此刻」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 800f6f9c-45f7-4018-af59-209c6479da78 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03]    F2.5-stative-verbs: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「常見狀態動詞」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 5fe0b784-3a40-438b-80cc-d63eb222d770 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03]    F3.1-past-be: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「過去的 was / were」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook c44d6b45-438d-4437-9625-cd71f2fd40bc --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03]    F3.2-past-simple: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「一般動詞過去式」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 5bf2e65a-f9eb-47c0-9192-516c10ca24fb --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03]    F3.3-did-questions: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「did 問句與否定」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook a919c0a4-820e-4009-97c6-e19ab43ad63d --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03]    F3.4-prepositions: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「地點與時間介系詞」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 354be0ec-cab3-4359-97cb-35377dbe6496 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03]    F3.5-connectors: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「基本連接詞與邏輯」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook a5943912-afa4-41dd-81eb-a60cbf8c2585 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03]    F3.6-basic-helpers: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「can、will 與 going to」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 2fda5a4b-ef42-428e-975a-3b59a7171493 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03]    F4.1-past-continuous: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「過去進行式與 when / while」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 9c3585c9-c691-4f7e-94bc-a5dc053adb0e --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03]    F4.2-adjectives-adverbs: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「形容詞與副詞」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 373eaaaf-fc1e-4d72-9e20-8a14ba06c76a --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03]    F4.3-comparatives: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「比較級與最高級」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook f211e72d-a2a0-4e15-8e14-d0e6262c7808 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03]    F4.4-quantifiers: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「數量詞」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 9c57921e-8f30-48c7-9644-2cc748cad037 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03]    F4.5-modal-functions: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「建議、義務與可能性」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook f7dfbc4d-4635-4fbb-ae47-58ec92616f8d --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+[14:14:03]    F4.6-infinitive-gerund: Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「to + V 與 V-ing 搭配」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 38b2f74c-0450-47b0-9549-4147b218d443 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json
+{
+  "startedAt": "2026-07-26T13:56:50.377Z",
+  "done": [
+    "F1.5-do-does",
+    "F1.6-wh-questions"
+  ],
+  "skipped": [
+    "F0.1-complete-sentence",
+    "F0.2-be-agreement",
+    "F0.3-be-meaning",
+    "F0.4-singular-plural",
+    "F0.5-a-an-sound",
+    "F1.1-subject-pronouns",
+    "F1.2-action-affirmative",
+    "F1.3-predicate-choice",
+    "F1.4-be-questions-negatives",
+    "F2.1-present-simple",
+    "F2.3-present-continuous",
+    "F2.6-pronoun-case",
+    "F2.7-there-count-quantity"
+  ],
+  "failed": [
+    {
+      "id": "F2.2-frequency-adverbs",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「頻率副詞的位置」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 9ab8166f-efe0-4d30-9d78-9895ddb2d24f --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F2.4-present-contrast",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「習慣與此刻」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 800f6f9c-45f7-4018-af59-209c6479da78 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F2.5-stative-verbs",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「常見狀態動詞」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 5fe0b784-3a40-438b-80cc-d63eb222d770 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F3.1-past-be",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「過去的 was / were」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook c44d6b45-438d-4437-9625-cd71f2fd40bc --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F3.2-past-simple",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「一般動詞過去式」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 5bf2e65a-f9eb-47c0-9192-516c10ca24fb --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F3.3-did-questions",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「did 問句與否定」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook a919c0a4-820e-4009-97c6-e19ab43ad63d --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F3.4-prepositions",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「地點與時間介系詞」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 354be0ec-cab3-4359-97cb-35377dbe6496 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F3.5-connectors",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「基本連接詞與邏輯」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook a5943912-afa4-41dd-81eb-a60cbf8c2585 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F3.6-basic-helpers",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「can、will 與 going to」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 2fda5a4b-ef42-428e-975a-3b59a7171493 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F4.1-past-continuous",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「過去進行式與 when / while」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 9c3585c9-c691-4f7e-94bc-a5dc053adb0e --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F4.2-adjectives-adverbs",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「形容詞與副詞」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 373eaaaf-fc1e-4d72-9e20-8a14ba06c76a --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F4.3-comparatives",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「比較級與最高級」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook f211e72d-a2a0-4e15-8e14-d0e6262c7808 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F4.4-quantifiers",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「數量詞」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 9c57921e-8f30-48c7-9644-2cc748cad037 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F4.5-modal-functions",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「建議、義務與可能性」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook f7dfbc4d-4635-4fbb-ae47-58ec92616f8d --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    },
+    {
+      "id": "F4.6-infinitive-gerund",
+      "error": "Command failed: notebooklm generate audio 用活潑、口語、像哥哥姊姊跟小學生聊天的語氣，講解「to + V 與 V-ing 搭配」。用來源文件裡的情境對話當開場，帶出中文母語者最容易犯的錯。結尾重複一次句型公式。 --notebook 38b2f74c-0450-47b0-9549-4147b218d443 --format deep-dive --length short --language zh_Hant --wait --timeout 900 --json"
+    }
+  ],
+  "abortedAuth": false,
+  "finishedAt": "2026-07-26T14:14:03.362Z"
+}

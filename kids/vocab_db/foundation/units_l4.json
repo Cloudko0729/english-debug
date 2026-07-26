@@ -1,0 +1,1275 @@
+{
+  "schemaVersion": "1.0.0",
+  "level": 4,
+  "bands": [
+    "F3"
+  ],
+  "units": [
+    {
+      "id": "l4-u01",
+      "level": 4,
+      "bands": [
+        "F3"
+      ],
+      "theme": "language",
+      "sequence": 1,
+      "unitThemes": [
+        {
+          "name": "language",
+          "count": 10
+        },
+        {
+          "name": "numbers_time",
+          "count": 4
+        }
+      ],
+      "titleZh": "語言與句型 × 數字與時間",
+      "titleEn": "Language Tools & Numbers and Time",
+      "targetWords": [
+        "be",
+        "does",
+        "from",
+        "of",
+        "so",
+        "some",
+        "speak",
+        "this",
+        "which",
+        "wrong",
+        "date",
+        "eighteen",
+        "eighty",
+        "fifteen"
+      ],
+      "passages": [
+        {
+          "id": "l4-u01-p1",
+          "title": "Language Tools: First Reading",
+          "type": "guided-reading",
+          "theme": "language",
+          "text": "Our class is practicing clear English today. Please be quiet. Does he walk to school? I am from Taiwan. The door of the room is open. It is raining, so we stay inside. There are some apples on the table. I can speak English. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "be",
+            "does",
+            "from",
+            "of",
+            "so",
+            "some",
+            "speak"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u01-p1.mp3"
+        },
+        {
+          "id": "l4-u01-p2",
+          "title": "Numbers and Time: Second Reading",
+          "type": "guided-reading",
+          "theme": "numbers_time",
+          "text": "It is a busy day, and we check the time carefully. This book is new. Which bag is yours? I took the wrong bus. Write today's date on the page. He sees eighteen birds. Eighty leaves fall down. Fifteen kids sing a song. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "this",
+            "which",
+            "wrong",
+            "date",
+            "eighteen",
+            "eighty",
+            "fifteen"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u01-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l4-u01-d1",
+            "speaker": "A",
+            "text": "Can you use \"be\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d1.mp3"
+          },
+          {
+            "id": "l4-u01-d2",
+            "speaker": "B",
+            "text": "Please be quiet.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d2.mp3"
+          },
+          {
+            "id": "l4-u01-d3",
+            "speaker": "A",
+            "text": "What can you say with \"does\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d3.mp3"
+          },
+          {
+            "id": "l4-u01-d4",
+            "speaker": "B",
+            "text": "Does he walk to school?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d4.mp3"
+          },
+          {
+            "id": "l4-u01-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"from\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d5.mp3"
+          },
+          {
+            "id": "l4-u01-d6",
+            "speaker": "B",
+            "text": "I am from Taiwan.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d6.mp3"
+          },
+          {
+            "id": "l4-u01-d7",
+            "speaker": "A",
+            "text": "How would you use \"of\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d7.mp3"
+          },
+          {
+            "id": "l4-u01-d8",
+            "speaker": "B",
+            "text": "The door of the room is open.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l4-u01-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l4-u02",
+      "level": 4,
+      "bands": [
+        "F3"
+      ],
+      "theme": "numbers_time",
+      "sequence": 2,
+      "unitThemes": [
+        {
+          "name": "numbers_time",
+          "count": 14
+        }
+      ],
+      "titleZh": "數字與時間",
+      "titleEn": "Numbers and Time",
+      "targetWords": [
+        "fifty",
+        "forty",
+        "fourteen",
+        "never",
+        "nineteen",
+        "ninety",
+        "seventeen",
+        "seventy",
+        "sixteen",
+        "sixty",
+        "soon",
+        "still",
+        "thirteen",
+        "thirty"
+      ],
+      "passages": [
+        {
+          "id": "l4-u02-p1",
+          "title": "Numbers and Time: First Reading",
+          "type": "guided-reading",
+          "theme": "numbers_time",
+          "text": "It is a busy day, and we check the time carefully. Fifty cents are in my hand. I see forty desks. Fourteen students are in the room. He is never late for school. Nineteen kids play outside. He sees ninety stars. Seventeen flowers are red. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "fifty",
+            "forty",
+            "fourteen",
+            "never",
+            "nineteen",
+            "ninety",
+            "seventeen"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u02-p1.mp3"
+        },
+        {
+          "id": "l4-u02-p2",
+          "title": "Numbers and Time: Second Reading",
+          "type": "guided-reading",
+          "theme": "numbers_time",
+          "text": "It is a busy day, and we check the time carefully. She has seventy stickers. Sixteen ducks walk by. I see sixty dots. The bus will come soon. The baby is still asleep. Thirteen birds sit on the roof. She counts thirty coins. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "seventy",
+            "sixteen",
+            "sixty",
+            "soon",
+            "still",
+            "thirteen",
+            "thirty"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u02-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l4-u02-d1",
+            "speaker": "A",
+            "text": "Can you use \"fifty\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d1.mp3"
+          },
+          {
+            "id": "l4-u02-d2",
+            "speaker": "B",
+            "text": "Fifty cents are in my hand.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d2.mp3"
+          },
+          {
+            "id": "l4-u02-d3",
+            "speaker": "A",
+            "text": "What can you say with \"forty\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d3.mp3"
+          },
+          {
+            "id": "l4-u02-d4",
+            "speaker": "B",
+            "text": "I see forty desks.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d4.mp3"
+          },
+          {
+            "id": "l4-u02-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"fourteen\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d5.mp3"
+          },
+          {
+            "id": "l4-u02-d6",
+            "speaker": "B",
+            "text": "Fourteen students are in the room.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d6.mp3"
+          },
+          {
+            "id": "l4-u02-d7",
+            "speaker": "A",
+            "text": "How would you use \"never\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d7.mp3"
+          },
+          {
+            "id": "l4-u02-d8",
+            "speaker": "B",
+            "text": "He is never late for school.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l4-u02-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l4-u03",
+      "level": 4,
+      "bands": [
+        "F3"
+      ],
+      "theme": "people_family",
+      "sequence": 3,
+      "unitThemes": [
+        {
+          "name": "people_family",
+          "count": 7
+        },
+        {
+          "name": "numbers_time",
+          "count": 4
+        },
+        {
+          "name": "animals_nature",
+          "count": 2
+        },
+        {
+          "name": "body_health",
+          "count": 1
+        }
+      ],
+      "titleZh": "人物與家庭 × 數字與時間",
+      "titleEn": "People and Family & Numbers and Time",
+      "targetWords": [
+        "grandfather",
+        "grandma",
+        "grandmother",
+        "grandpa",
+        "parents",
+        "sir",
+        "writer",
+        "tomorrow",
+        "twelve",
+        "twenty",
+        "weekend",
+        "butterfly",
+        "panda",
+        "thirsty"
+      ],
+      "passages": [
+        {
+          "id": "l4-u03-p1",
+          "title": "People and Family: First Reading",
+          "type": "guided-reading",
+          "theme": "people_family",
+          "text": "My family and friends are together today. My grandfather walks every morning. My grandma smiles at me. My grandmother makes good soup. My grandpa drinks warm tea. My parents love our family. Excuse me, sir. Is this your bag? The writer makes funny stories. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "grandfather",
+            "grandma",
+            "grandmother",
+            "grandpa",
+            "parents",
+            "sir",
+            "writer"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u03-p1.mp3"
+        },
+        {
+          "id": "l4-u03-p2",
+          "title": "Numbers and Time: Second Reading",
+          "type": "guided-reading",
+          "theme": "numbers_time",
+          "text": "It is a busy day, and we check the time carefully. I will visit Grandma tomorrow. There are twelve months in a year. I see twenty chairs. The weekend is fun. The butterfly is near the tree. The panda is eating. She is thirsty after running. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "tomorrow",
+            "twelve",
+            "twenty",
+            "weekend",
+            "butterfly",
+            "panda",
+            "thirsty"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u03-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l4-u03-d1",
+            "speaker": "A",
+            "text": "Can you use \"grandfather\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d1.mp3"
+          },
+          {
+            "id": "l4-u03-d2",
+            "speaker": "B",
+            "text": "My grandfather walks every morning.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d2.mp3"
+          },
+          {
+            "id": "l4-u03-d3",
+            "speaker": "A",
+            "text": "What can you say with \"grandma\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d3.mp3"
+          },
+          {
+            "id": "l4-u03-d4",
+            "speaker": "B",
+            "text": "My grandma smiles at me.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d4.mp3"
+          },
+          {
+            "id": "l4-u03-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"grandmother\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d5.mp3"
+          },
+          {
+            "id": "l4-u03-d6",
+            "speaker": "B",
+            "text": "My grandmother makes good soup.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d6.mp3"
+          },
+          {
+            "id": "l4-u03-d7",
+            "speaker": "A",
+            "text": "How would you use \"grandpa\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d7.mp3"
+          },
+          {
+            "id": "l4-u03-d8",
+            "speaker": "B",
+            "text": "My grandpa drinks warm tea.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l4-u03-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l4-u04",
+      "level": 4,
+      "bands": [
+        "F3"
+      ],
+      "theme": "school",
+      "sequence": 4,
+      "unitThemes": [
+        {
+          "name": "school",
+          "count": 11
+        },
+        {
+          "name": "animals_nature",
+          "count": 2
+        },
+        {
+          "name": "food",
+          "count": 1
+        }
+      ],
+      "titleZh": "校園與學習",
+      "titleEn": "School and Learning",
+      "targetWords": [
+        "alphabet",
+        "bookstore",
+        "crayon",
+        "drawing",
+        "homework",
+        "page",
+        "paint",
+        "paper",
+        "pencil box",
+        "pencil case",
+        "reading",
+        "snake",
+        "wind",
+        "bread"
+      ],
+      "passages": [
+        {
+          "id": "l4-u04-p1",
+          "title": "School and Learning: First Reading",
+          "type": "guided-reading",
+          "theme": "school",
+          "text": "Our classroom is ready for a new lesson. We sing the alphabet song. The bookstore is next to the bank. I color the sun with a yellow crayon. I made a drawing of my family. I do my homework after school. There is a picture on this page. I paint a red apple. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "alphabet",
+            "bookstore",
+            "crayon",
+            "drawing",
+            "homework",
+            "page",
+            "paint"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u04-p1.mp3"
+        },
+        {
+          "id": "l4-u04-p2",
+          "title": "School and Learning: Second Reading",
+          "type": "guided-reading",
+          "theme": "school",
+          "text": "Our classroom is ready for a new lesson. We need some paper for the picture. My ruler is in the pencil box. Her pencil case is on the desk. Reading helps me learn new words. The snake is near the tree. The wind is strong today. The bread is on the table. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "paper",
+            "pencil box",
+            "pencil case",
+            "reading",
+            "snake",
+            "wind",
+            "bread"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u04-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l4-u04-d1",
+            "speaker": "A",
+            "text": "Can you use \"alphabet\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d1.mp3"
+          },
+          {
+            "id": "l4-u04-d2",
+            "speaker": "B",
+            "text": "We sing the alphabet song.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d2.mp3"
+          },
+          {
+            "id": "l4-u04-d3",
+            "speaker": "A",
+            "text": "What can you say with \"bookstore\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d3.mp3"
+          },
+          {
+            "id": "l4-u04-d4",
+            "speaker": "B",
+            "text": "The bookstore is next to the bank.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d4.mp3"
+          },
+          {
+            "id": "l4-u04-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"crayon\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d5.mp3"
+          },
+          {
+            "id": "l4-u04-d6",
+            "speaker": "B",
+            "text": "I color the sun with a yellow crayon.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d6.mp3"
+          },
+          {
+            "id": "l4-u04-d7",
+            "speaker": "A",
+            "text": "How would you use \"drawing\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d7.mp3"
+          },
+          {
+            "id": "l4-u04-d8",
+            "speaker": "B",
+            "text": "I made a drawing of my family.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l4-u04-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l4-u05",
+      "level": 4,
+      "bands": [
+        "F3"
+      ],
+      "theme": "food",
+      "sequence": 5,
+      "unitThemes": [
+        {
+          "name": "food",
+          "count": 11
+        },
+        {
+          "name": "home_objects",
+          "count": 3
+        }
+      ],
+      "titleZh": "食物與用餐 × 住家與物品",
+      "titleEn": "Food and Meals & Home and Objects",
+      "targetWords": [
+        "dish",
+        "feed",
+        "pork",
+        "salad",
+        "snack",
+        "steak",
+        "sugar",
+        "sweet",
+        "vegetable",
+        "yucky",
+        "yummy",
+        "balloon",
+        "bank",
+        "cellphone"
+      ],
+      "passages": [
+        {
+          "id": "l4-u05-p1",
+          "title": "Food and Meals: First Reading",
+          "type": "guided-reading",
+          "theme": "food",
+          "text": "Our family is getting food ready for a meal. Please put the salad in this dish. We feed the ducks at the park. Mom cooks pork for dinner. The salad has many vegetables. I eat fruit for my afternoon snack. The steak is on the plate. I put a little sugar in my tea. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "dish",
+            "feed",
+            "pork",
+            "salad",
+            "snack",
+            "steak",
+            "sugar"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u05-p1.mp3"
+        },
+        {
+          "id": "l4-u05-p2",
+          "title": "Food and Meals: Second Reading",
+          "type": "guided-reading",
+          "theme": "food",
+          "text": "Our family is getting food ready for a meal. This tea is too sweet. A carrot is a vegetable. This medicine tastes yucky. The cake is yummy. She has a balloon for the party. The bank is near the station. Please put your cellphone in your bag. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "sweet",
+            "vegetable",
+            "yucky",
+            "yummy",
+            "balloon",
+            "bank",
+            "cellphone"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u05-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l4-u05-d1",
+            "speaker": "A",
+            "text": "Can you use \"dish\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d1.mp3"
+          },
+          {
+            "id": "l4-u05-d2",
+            "speaker": "B",
+            "text": "Please put the salad in this dish.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d2.mp3"
+          },
+          {
+            "id": "l4-u05-d3",
+            "speaker": "A",
+            "text": "What can you say with \"feed\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d3.mp3"
+          },
+          {
+            "id": "l4-u05-d4",
+            "speaker": "B",
+            "text": "We feed the ducks at the park.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d4.mp3"
+          },
+          {
+            "id": "l4-u05-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"pork\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d5.mp3"
+          },
+          {
+            "id": "l4-u05-d6",
+            "speaker": "B",
+            "text": "Mom cooks pork for dinner.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d6.mp3"
+          },
+          {
+            "id": "l4-u05-d7",
+            "speaker": "A",
+            "text": "How would you use \"salad\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d7.mp3"
+          },
+          {
+            "id": "l4-u05-d8",
+            "speaker": "B",
+            "text": "The salad has many vegetables.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l4-u05-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l4-u06",
+      "level": 4,
+      "bands": [
+        "F3"
+      ],
+      "theme": "home_objects",
+      "sequence": 6,
+      "unitThemes": [
+        {
+          "name": "home_objects",
+          "count": 8
+        },
+        {
+          "name": "places_transport",
+          "count": 4
+        },
+        {
+          "name": "clothes",
+          "count": 2
+        }
+      ],
+      "titleZh": "住家與物品 × 地點與交通",
+      "titleEn": "Home and Objects & Places and Transport",
+      "targetWords": [
+        "city",
+        "light",
+        "office",
+        "tape",
+        "television",
+        "tv",
+        "wall",
+        "window",
+        "bus stop",
+        "restaurant",
+        "road",
+        "station",
+        "skirt",
+        "socks"
+      ],
+      "passages": [
+        {
+          "id": "l4-u06-p1",
+          "title": "Home and Objects: First Reading",
+          "type": "guided-reading",
+          "theme": "home_objects",
+          "text": "We look around the house and find many useful things. Many people live in the city. The bag is light and easy to carry. My mother works in an office. The tape is in the pencil box. We watch a program on television. The TV is in the living room. There is a clock on the wall. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "city",
+            "light",
+            "office",
+            "tape",
+            "television",
+            "tv",
+            "wall"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u06-p1.mp3"
+        },
+        {
+          "id": "l4-u06-p2",
+          "title": "Places and Transport: Second Reading",
+          "type": "guided-reading",
+          "theme": "places_transport",
+          "text": "We are taking a short trip through our town. The bird is outside the window. We wait for the bus at the bus stop. We eat chicken at the restaurant. The road is near my home. We meet at the station. Her skirt is pink. I wash my socks at night. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "window",
+            "bus stop",
+            "restaurant",
+            "road",
+            "station",
+            "skirt",
+            "socks"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u06-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l4-u06-d1",
+            "speaker": "A",
+            "text": "Can you use \"city\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d1.mp3"
+          },
+          {
+            "id": "l4-u06-d2",
+            "speaker": "B",
+            "text": "Many people live in the city.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d2.mp3"
+          },
+          {
+            "id": "l4-u06-d3",
+            "speaker": "A",
+            "text": "What can you say with \"light\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d3.mp3"
+          },
+          {
+            "id": "l4-u06-d4",
+            "speaker": "B",
+            "text": "The bag is light and easy to carry.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d4.mp3"
+          },
+          {
+            "id": "l4-u06-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"office\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d5.mp3"
+          },
+          {
+            "id": "l4-u06-d6",
+            "speaker": "B",
+            "text": "My mother works in an office.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d6.mp3"
+          },
+          {
+            "id": "l4-u06-d7",
+            "speaker": "A",
+            "text": "How would you use \"tape\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d7.mp3"
+          },
+          {
+            "id": "l4-u06-d8",
+            "speaker": "B",
+            "text": "The tape is in the pencil box.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l4-u06-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l4-u07",
+      "level": 4,
+      "bands": [
+        "F3"
+      ],
+      "theme": "actions",
+      "sequence": 7,
+      "unitThemes": [
+        {
+          "name": "actions",
+          "count": 10
+        },
+        {
+          "name": "places_transport",
+          "count": 2
+        },
+        {
+          "name": "descriptions",
+          "count": 2
+        }
+      ],
+      "titleZh": "動作與日常",
+      "titleEn": "Actions and Routines",
+      "targetWords": [
+        "buy",
+        "dig",
+        "fall",
+        "pay",
+        "send",
+        "stay",
+        "stop",
+        "swim",
+        "use",
+        "worry",
+        "street",
+        "visit",
+        "best",
+        "better"
+      ],
+      "passages": [
+        {
+          "id": "l4-u07-p1",
+          "title": "Actions and Routines: First Reading",
+          "type": "guided-reading",
+          "theme": "actions",
+          "text": "Everyone has something to do today. I buy a pencil. We dig a small hole for the tree. Leaves fall from the tree. He pays ten dollars. Please send this card to Grandma. We stay inside when it rains. Please stop at the red light. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "buy",
+            "dig",
+            "fall",
+            "pay",
+            "send",
+            "stay",
+            "stop"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u07-p1.mp3"
+        },
+        {
+          "id": "l4-u07-p2",
+          "title": "Actions and Routines: Second Reading",
+          "type": "guided-reading",
+          "theme": "actions",
+          "text": "Everyone has something to do today. We swim on warm days. I use a ruler to draw a line. I worry when my dog is missing. Our school is on this street. We will visit the old town soon. This is my best picture. This plan is better than the old one. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "swim",
+            "use",
+            "worry",
+            "street",
+            "visit",
+            "best",
+            "better"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u07-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l4-u07-d1",
+            "speaker": "A",
+            "text": "Can you use \"buy\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d1.mp3"
+          },
+          {
+            "id": "l4-u07-d2",
+            "speaker": "B",
+            "text": "I buy a pencil.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d2.mp3"
+          },
+          {
+            "id": "l4-u07-d3",
+            "speaker": "A",
+            "text": "What can you say with \"dig\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d3.mp3"
+          },
+          {
+            "id": "l4-u07-d4",
+            "speaker": "B",
+            "text": "We dig a small hole for the tree.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d4.mp3"
+          },
+          {
+            "id": "l4-u07-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"fall\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d5.mp3"
+          },
+          {
+            "id": "l4-u07-d6",
+            "speaker": "B",
+            "text": "Leaves fall from the tree.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d6.mp3"
+          },
+          {
+            "id": "l4-u07-d7",
+            "speaker": "A",
+            "text": "How would you use \"pay\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d7.mp3"
+          },
+          {
+            "id": "l4-u07-d8",
+            "speaker": "B",
+            "text": "He pays ten dollars.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l4-u07-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l4-u08",
+      "level": 4,
+      "bands": [
+        "F3"
+      ],
+      "theme": "descriptions",
+      "sequence": 8,
+      "unitThemes": [
+        {
+          "name": "descriptions",
+          "count": 13
+        }
+      ],
+      "titleZh": "顏色與描述",
+      "titleEn": "Colors and Descriptions",
+      "targetWords": [
+        "cool",
+        "funny",
+        "long",
+        "pretty",
+        "same",
+        "smart",
+        "strong",
+        "sunny",
+        "sure",
+        "warm",
+        "wet",
+        "wonderful",
+        "young"
+      ],
+      "passages": [
+        {
+          "id": "l4-u08-p1",
+          "title": "Colors and Descriptions: First Reading",
+          "type": "guided-reading",
+          "theme": "descriptions",
+          "text": "We look carefully and describe what we see. The evening air is cool. He makes a funny face. She has long hair. She has a pretty dress. We are in the same class. That was a smart answer. My brother is strong. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "cool",
+            "funny",
+            "long",
+            "pretty",
+            "same",
+            "smart",
+            "strong"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u08-p1.mp3"
+        },
+        {
+          "id": "l4-u08-p2",
+          "title": "Colors and Descriptions: Second Reading",
+          "type": "guided-reading",
+          "theme": "descriptions",
+          "text": "We look carefully and describe what we see. Sunny weather makes me smile. I am sure this is my book. Spring days are warm. My shoes are wet. That is a wonderful idea. The boy is young. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "sunny",
+            "sure",
+            "warm",
+            "wet",
+            "wonderful",
+            "young"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u08-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l4-u08-d1",
+            "speaker": "A",
+            "text": "Can you use \"cool\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d1.mp3"
+          },
+          {
+            "id": "l4-u08-d2",
+            "speaker": "B",
+            "text": "The evening air is cool.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d2.mp3"
+          },
+          {
+            "id": "l4-u08-d3",
+            "speaker": "A",
+            "text": "What can you say with \"funny\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d3.mp3"
+          },
+          {
+            "id": "l4-u08-d4",
+            "speaker": "B",
+            "text": "He makes a funny face.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d4.mp3"
+          },
+          {
+            "id": "l4-u08-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"long\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d5.mp3"
+          },
+          {
+            "id": "l4-u08-d6",
+            "speaker": "B",
+            "text": "She has long hair.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d6.mp3"
+          },
+          {
+            "id": "l4-u08-d7",
+            "speaker": "A",
+            "text": "How would you use \"pretty\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d7.mp3"
+          },
+          {
+            "id": "l4-u08-d8",
+            "speaker": "B",
+            "text": "She has a pretty dress.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l4-u08-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l4-u09",
+      "level": 4,
+      "bands": [
+        "F3"
+      ],
+      "theme": "recreation_media",
+      "sequence": 9,
+      "unitThemes": [
+        {
+          "name": "recreation_media",
+          "count": 7
+        },
+        {
+          "name": "seasons_weather",
+          "count": 6
+        }
+      ],
+      "titleZh": "休閒與媒體 × 季節與天氣",
+      "titleEn": "Fun and Media & Seasons and Weather",
+      "targetWords": [
+        "cd",
+        "dancing",
+        "movie",
+        "news",
+        "newspaper",
+        "soccer",
+        "sport",
+        "season",
+        "snow",
+        "spring",
+        "summer",
+        "vacation",
+        "winter"
+      ],
+      "passages": [
+        {
+          "id": "l4-u09-p1",
+          "title": "Fun and Media: First Reading",
+          "type": "guided-reading",
+          "theme": "recreation_media",
+          "text": "After school, we have time for fun. This CD has ten songs. We practice dancing after school. We watch a funny movie together. Dad reads the news in the morning. Grandpa reads the newspaper every morning. Soccer is my favorite game. Soccer is my favorite sport. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "cd",
+            "dancing",
+            "movie",
+            "news",
+            "newspaper",
+            "soccer",
+            "sport"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u09-p1.mp3"
+        },
+        {
+          "id": "l4-u09-p2",
+          "title": "Seasons and Weather: Second Reading",
+          "type": "guided-reading",
+          "theme": "seasons_weather",
+          "text": "The season and weather change what we do. Each season has different weather. Snow covers the ground. Flowers grow in spring. Summer is hot. Our winter vacation starts next week. Winter is cold. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "season",
+            "snow",
+            "spring",
+            "summer",
+            "vacation",
+            "winter"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u09-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l4-u09-d1",
+            "speaker": "A",
+            "text": "Can you use \"cd\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d1.mp3"
+          },
+          {
+            "id": "l4-u09-d2",
+            "speaker": "B",
+            "text": "This CD has ten songs.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d2.mp3"
+          },
+          {
+            "id": "l4-u09-d3",
+            "speaker": "A",
+            "text": "What can you say with \"dancing\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d3.mp3"
+          },
+          {
+            "id": "l4-u09-d4",
+            "speaker": "B",
+            "text": "We practice dancing after school.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d4.mp3"
+          },
+          {
+            "id": "l4-u09-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"movie\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d5.mp3"
+          },
+          {
+            "id": "l4-u09-d6",
+            "speaker": "B",
+            "text": "We watch a funny movie together.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d6.mp3"
+          },
+          {
+            "id": "l4-u09-d7",
+            "speaker": "A",
+            "text": "How would you use \"news\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d7.mp3"
+          },
+          {
+            "id": "l4-u09-d8",
+            "speaker": "B",
+            "text": "Dad reads the news in the morning.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l4-u09-dialogue.mp3"
+      }
+    },
+    {
+      "id": "l4-u10",
+      "level": 4,
+      "bands": [
+        "F3"
+      ],
+      "theme": "general",
+      "sequence": 10,
+      "unitThemes": [
+        {
+          "name": "general",
+          "count": 11
+        },
+        {
+          "name": "recreation_media",
+          "count": 2
+        }
+      ],
+      "titleZh": "生活綜合",
+      "titleEn": "Everyday English",
+      "targetWords": [
+        "chinese new year",
+        "even",
+        "in front of",
+        "kitten",
+        "kitty",
+        "next to",
+        "out",
+        "part",
+        "size",
+        "smell",
+        "sound",
+        "sports",
+        "swimming"
+      ],
+      "passages": [
+        {
+          "id": "l4-u10-p1",
+          "title": "Everyday English: First Reading",
+          "type": "guided-reading",
+          "theme": "general",
+          "text": "Today brings many small things to notice and do. We visit Grandma during Chinese New Year. The two sides are even. The bus stops in front of the school. I give the kitten some milk. Here, kitty! Come to me. I sit next to my friend. The children are out in the yard. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "chinese new year",
+            "even",
+            "in front of",
+            "kitten",
+            "kitty",
+            "next to",
+            "out"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u10-p1.mp3"
+        },
+        {
+          "id": "l4-u10-p2",
+          "title": "Everyday English: Second Reading",
+          "type": "guided-reading",
+          "theme": "general",
+          "text": "Today brings many small things to notice and do. Each child reads one part of the dialogue. What size is this shirt? I smell flowers in the garden. I hear a strange sound. Sports help us stay strong. We go swimming in summer. After reading, we choose two new words and make our own sentences.",
+          "focusWords": [
+            "part",
+            "size",
+            "smell",
+            "sound",
+            "sports",
+            "swimming"
+          ],
+          "audio": "audio/vocab_foundation/passages/l4-u10-p2.mp3"
+        }
+      ],
+      "dialogue": {
+        "turns": [
+          {
+            "id": "l4-u10-d1",
+            "speaker": "A",
+            "text": "Can you use \"chinese new year\" in a sentence?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d1.mp3"
+          },
+          {
+            "id": "l4-u10-d2",
+            "speaker": "B",
+            "text": "We visit Grandma during Chinese New Year.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d2.mp3"
+          },
+          {
+            "id": "l4-u10-d3",
+            "speaker": "A",
+            "text": "What can you say with \"even\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d3.mp3"
+          },
+          {
+            "id": "l4-u10-d4",
+            "speaker": "B",
+            "text": "The two sides are even.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d4.mp3"
+          },
+          {
+            "id": "l4-u10-d5",
+            "speaker": "A",
+            "text": "Can you give me an example with \"in front of\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d5.mp3"
+          },
+          {
+            "id": "l4-u10-d6",
+            "speaker": "B",
+            "text": "The bus stops in front of the school.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d6.mp3"
+          },
+          {
+            "id": "l4-u10-d7",
+            "speaker": "A",
+            "text": "How would you use \"kitten\"?",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d7.mp3"
+          },
+          {
+            "id": "l4-u10-d8",
+            "speaker": "B",
+            "text": "I give the kitten some milk.",
+            "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d8.mp3"
+          }
+        ],
+        "fullAudio": "audio/vocab_foundation/dialogues/l4-u10-dialogue.mp3"
+      }
+    }
+  ]
+}
