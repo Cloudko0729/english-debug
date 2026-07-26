@@ -61,10 +61,10 @@ const NODES = [
       bug("我的妹妹很開心。", "My sister very happy.", "My sister is very happy.", "happy 是形容詞，需要 is 連接主詞。"),
     ],
     dialogue: [
-      "Is this a complete sentence?",
-      "Yes. The sentence has a subject and a predicate.",
-      "What about \"under the table\"?",
-      "That is a phrase, but it can be a natural short answer.",
+      "Where is your school bag?",
+      "Under the table.",
+      "Can you say the whole thing?",
+      "My school bag is under the table.",
     ],
     prompts: [
       "Say one complete sentence about your family.",
@@ -199,10 +199,10 @@ const NODES = [
       bug("一顆橘子", "a orange", "an orange", "orange 開頭是母音聲音。"),
     ],
     dialogue: [
-      "Do we say \"a apple\"?",
-      "No. We say \"an apple\".",
-      "What about \"university\"?",
-      "We say \"a university\" because it starts with a /y/ sound.",
+      "What do you want for snack?",
+      "I want an apple, please.",
+      "Do you want a cookie, too?",
+      "Yes, and an orange for my sister.",
     ],
     prompts: [
       "Say one noun phrase with \"a\" and one with \"an\".",
@@ -301,10 +301,10 @@ const NODES = [
       bug("他在教室裡。", "He in the classroom.", "He is in the classroom.", "位置片語前需要 is。"),
     ],
     dialogue: [
-      "Is \"hungry\" an action?",
-      "No. We say, \"I am hungry.\"",
-      "What about \"eat\"?",
-      "That is an action. We say, \"I eat lunch.\"",
+      "Are you tired?",
+      "Yes, I am very tired.",
+      "What do you do after dinner?",
+      "I read a book in my room.",
     ],
     prompts: [
       "Say one be sentence and one action-verb sentence.",

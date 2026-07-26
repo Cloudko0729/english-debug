@@ -249,25 +249,25 @@
           {
             "id": "F0.1-complete-sentence-dialogue-1",
             "speaker": "A",
-            "text": "Is this a complete sentence?",
+            "text": "Where is your school bag?",
             "audio": "audio/grammar_db/dialogue_lines/f0_1_complete_sentence_dialogue_1.mp3"
           },
           {
             "id": "F0.1-complete-sentence-dialogue-2",
             "speaker": "B",
-            "text": "Yes. The sentence has a subject and a predicate.",
+            "text": "Under the table.",
             "audio": "audio/grammar_db/dialogue_lines/f0_1_complete_sentence_dialogue_2.mp3"
           },
           {
             "id": "F0.1-complete-sentence-dialogue-3",
             "speaker": "A",
-            "text": "What about \"under the table\"?",
+            "text": "Can you say the whole thing?",
             "audio": "audio/grammar_db/dialogue_lines/f0_1_complete_sentence_dialogue_3.mp3"
           },
           {
             "id": "F0.1-complete-sentence-dialogue-4",
             "speaker": "B",
-            "text": "That is a phrase, but it can be a natural short answer.",
+            "text": "My school bag is under the table.",
             "audio": "audio/grammar_db/dialogue_lines/f0_1_complete_sentence_dialogue_4.mp3"
           }
         ],
@@ -1328,25 +1328,25 @@
           {
             "id": "F0.5-a-an-sound-dialogue-1",
             "speaker": "A",
-            "text": "Do we say \"a apple\"?",
+            "text": "What do you want for snack?",
             "audio": "audio/grammar_db/dialogue_lines/f0_5_a_an_sound_dialogue_1.mp3"
           },
           {
             "id": "F0.5-a-an-sound-dialogue-2",
             "speaker": "B",
-            "text": "No. We say \"an apple\".",
+            "text": "I want an apple, please.",
             "audio": "audio/grammar_db/dialogue_lines/f0_5_a_an_sound_dialogue_2.mp3"
           },
           {
             "id": "F0.5-a-an-sound-dialogue-3",
             "speaker": "A",
-            "text": "What about \"university\"?",
+            "text": "Do you want a cookie, too?",
             "audio": "audio/grammar_db/dialogue_lines/f0_5_a_an_sound_dialogue_3.mp3"
           },
           {
             "id": "F0.5-a-an-sound-dialogue-4",
             "speaker": "B",
-            "text": "We say \"a university\" because it starts with a /y/ sound.",
+            "text": "Yes, and an orange for my sister.",
             "audio": "audio/grammar_db/dialogue_lines/f0_5_a_an_sound_dialogue_4.mp3"
           }
         ],
