@@ -31,6 +31,8 @@ function arg(name, def) {
   return v && !v.startsWith("--") ? v : true;
 }
 const AUDIO_ONLY = !!arg("audio-only", false);
+// 音檔與影片是兩條獨立配額：音檔被 Google 限流時，影片通常還能繼續生成。
+const VIDEO_ONLY = !!arg("video-only", false);
 const LIMIT = parseInt(arg("limit", "0"), 10) || 0;
 
 function loadNodes() {
@@ -103,7 +105,7 @@ function doNode(n) {
 
   const outA = path.join(OUT_DIR, n.id + ".m4a");
   const outV = path.join(OUT_DIR, n.id + ".mp4");
-  const needA = !fs.existsSync(outA);
+  const needA = !VIDEO_ONLY && !fs.existsSync(outA);
   const needV = !AUDIO_ONLY && !fs.existsSync(outV);
   if (!needA && !needV) { log(`  ↷ ${n.id} 已存在，跳過`); return "skipped"; }
 
@@ -168,10 +170,10 @@ function main() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
   const todo = nodes.filter(n =>
-    !fs.existsSync(path.join(OUT_DIR, n.id + ".m4a")) ||
+    (!VIDEO_ONLY && !fs.existsSync(path.join(OUT_DIR, n.id + ".m4a"))) ||
     (!AUDIO_ONLY && !fs.existsSync(path.join(OUT_DIR, n.id + ".mp4"))));
-  const perNode = AUDIO_ONLY ? 7 : 21;   // 實測分鐘數
-  log(`本批共 ${nodes.length} 個節點，其中 ${todo.length} 個待處理${AUDIO_ONLY ? "（只做音檔）" : ""}`);
+  const perNode = AUDIO_ONLY ? 7 : VIDEO_ONLY ? 14 : 21;   // 實測分鐘數
+  log(`本批共 ${nodes.length} 個節點，其中 ${todo.length} 個待處理${AUDIO_ONLY ? "（只做音檔）" : VIDEO_ONLY ? "（只做影片）" : ""}`);
   log(`預估 ${todo.length * perNode} 分鐘（約 ${(todo.length * perNode / 60).toFixed(1)} 小時）；` +
       `登入效期約 2 小時，超過的部分會中止，重新登入後重跑同一指令即可續做。`);
 
