@@ -76,6 +76,13 @@
   .coin{margin-left:auto;background:#fff;border-radius:16px;padding:4px 12px;font-weight:800;color:#c98a00;font-size:.85rem;}
   .finish-btn{width:100%;padding:14px;border:none;border-radius:12px;background:var(--green);color:#fff;font-weight:800;font-size:1rem;cursor:pointer;font-family:inherit;}
   .finish-btn:disabled{opacity:.5;cursor:default;}
+  /* 領金幣的浮動提示，樣式與 island.html 一致，小孩才認得 */
+  #toast{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-90px);background:#243042;color:#fff;
+    padding:11px 20px;border-radius:20px;font-size:.95rem;font-weight:700;transition:transform .3s;z-index:100;
+    max-width:90%;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.25);}
+  #toast.show{transform:translateX(-50%) translateY(0);}
+  #coinBox.bump{animation:coinBump .6s ease;}
+  @keyframes coinBump{0%,100%{transform:scale(1)}30%{transform:scale(1.35);background:#ffe27a}}
 </style>
 </head>
 <body>
@@ -210,6 +217,8 @@
   </div>
 </div>
 
+<div id="toast"></div>
+
 <div class="card" id="finishCard">
   <h2>🎁 完成這一課</h2>
   <p style="font-size:.85rem;color:var(--muted);margin-bottom:10px">做完上面的小測驗和作業，按這裡領金幣，進度也會記錄下來。</p>
@@ -262,7 +271,11 @@ function ans(i, id, btn) {
     else if (btns[j] === btn) btns[j].classList.add("no");
   }
   done++; if (good) ok++;
-  if (done === QUIZ.length) document.getElementById("quizScore").textContent = "🎉 答對 " + ok + " / " + QUIZ.length;
+  if (done === QUIZ.length) {
+    document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
+      "　<span style='font-weight:400;color:#667085'>↓ 做完下面的作業，按「我學完這一課了」領金幣</span>";
+    if (typeof toast === "function") toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+  }
 }
 // ── 學生 / 進度 / 金幣 ────────────────────────────────────────────────
 var NODE_ID = "F5.4-first-conditional";
@@ -276,9 +289,18 @@ function getProgress(s) {
   return p;
 }
 function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
-function refreshCoin() {
+function refreshCoin(bump) {
   var el = document.getElementById("coinBox");
   el.textContent = currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
+  if (bump) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
+}
+var _toastTimer = null;
+function toast(msg) {
+  var t = document.getElementById("toast");
+  t.innerHTML = msg;
+  t.classList.add("show");
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(function () { t.classList.remove("show"); }, 3200);
 }
 window.pickStudent = function (name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
@@ -333,12 +355,16 @@ window.finishLesson = function () {
   }
   saveProgress(currentStudent, p);
   if (typeof cloudSave === "function") cloudSave(currentStudent);
-  refreshCoin();
+  refreshCoin(delta > 0);
+  toast(delta > 0
+    ? "🪙 +" + delta + " 金幣！　共 " + p.coins.balance
+    : "這一課已經領滿 🪙 " + p.grammar.nodes[NODE_ID].coins + " 了");
   var msg = document.getElementById("finishMsg");
   msg.innerHTML = delta > 0
-    ? "🪙 +" + delta + " 金幣！（這一課共 " + p.grammar.nodes[NODE_ID].coins + " ／ 上限 40）<br>" +
+    ? "🎉 這一課完成！領到 <b>🪙 +" + delta + "</b>（這一課共 " + p.grammar.nodes[NODE_ID].coins + " ／ 上限 40）<br>" +
       "<a href='../../island.html' style='color:#2f80ed;font-weight:700'>👉 去蓋我的島嶼</a>"
     : "這一課的金幣已經領滿了（🪙 " + p.grammar.nodes[NODE_ID].coins + "）。答對更多題才會再補發喔！";
+  msg.scrollIntoView({ behavior: "smooth", block: "center" });
 };
 (function initStudent() {
   var last = localStorage.getItem("kidsCurrentStudent");
