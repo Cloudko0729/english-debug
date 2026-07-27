@@ -203,6 +203,17 @@
       <span class="badge badge-new">進階</span>
     </a>
 
+    <a class="card" href="weekly_test.html" id="wtCard" style="border:2px solid #5b3aa0;background:linear-gradient(135deg,#efe6ff,#fff)">
+      <div class="card-left">
+        <div class="card-icon" style="background:#e6d9ff;font-size:1.3rem">📝</div>
+        <div>
+          <div class="card-title">每週綜合測驗</div>
+          <div class="card-sub" id="wtSub">考你這陣子學過的，看還記不記得 · 週六開放</div>
+        </div>
+      </div>
+      <span class="badge badge-new" id="wtBadge">每週</span>
+    </a>
+
     <a class="card" href="grammar_month.html" id="monthCard" style="border:2px solid #f2a900;background:linear-gradient(135deg,#fff6dc,#fff)">
       <div class="card-left">
         <div class="card-icon" style="background:#ffe4a3;font-size:1.3rem">🗓️</div>
@@ -337,14 +348,15 @@
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607271116"></script>
-<script src="account_lock.js?v=202607271116"></script>
-<script src="supabase_auth.js?v=202607271116"></script>
-<script src="drills_list.js?v=202607271116"></script>
-<script src="grammar_nodes.js?v=202607271116"></script>
-<script src="grammar_plan.js?v=202607271116"></script>
-<script src="vocab_units.js?v=202607271116"></script>
-<script src="vocab_unit_plan.js?v=202607271116"></script>
+<script src="cloud_sync.js?v=202607271139"></script>
+<script src="account_lock.js?v=202607271139"></script>
+<script src="supabase_auth.js?v=202607271139"></script>
+<script src="drills_list.js?v=202607271139"></script>
+<script src="grammar_nodes.js?v=202607271139"></script>
+<script src="grammar_plan.js?v=202607271139"></script>
+<script src="vocab_units.js?v=202607271139"></script>
+<script src="weekly_bank.js?v=202607271139"></script>
+<script src="vocab_unit_plan.js?v=202607271139"></script>
 <script>
 let _homeSynced = false;
 function pickStudent(name) {
@@ -405,7 +417,29 @@ function drawPlanCard(p, engine, ids, unitWord) {
   badge.textContent = s.bonusReady ? "領獎勵" : `${s.done.length}/${s.total}`;
   badge.style.background = s.bonusReady ? "#f2a900" : "#2f80ed";
 }
+// 每週測驗卡：週六開放，考完就顯示成績；一週只能考一次。
+function drawWeeklyCard(p) {
+  const card = document.getElementById("wtCard"), sub = document.getElementById("wtSub"), badge = document.getElementById("wtBadge");
+  if (!card) return;
+  const d = new Date();
+  const back = (d.getDay() + 1) % 7;
+  const sat = new Date(d.getFullYear(), d.getMonth(), d.getDate() - back);
+  const week = `${sat.getFullYear()}-${String(sat.getMonth()+1).padStart(2,"0")}-${String(sat.getDate()).padStart(2,"0")}`;
+  const t = (p.weeklyTests || []).filter(x => x.week === week)[0];
+  if (t) {
+    card.style.borderColor = "#2fbf71";
+    card.style.background = "linear-gradient(135deg,#f3fcf7,#fff)";
+    sub.textContent = `這週已經考完了 · 答對 ${t.correct}/${t.total}`;
+    badge.textContent = "已完成"; badge.style.background = "#2fbf71";
+  } else {
+    card.style.borderColor = "#5b3aa0";
+    card.style.background = "linear-gradient(135deg,#efe6ff,#fff)";
+    sub.textContent = "考你這陣子學過的，看還記不記得 · 可以領金幣 🪙";
+    badge.textContent = "可以考"; badge.style.background = "#5b3aa0";
+  }
+}
 function drawMonthCard(p) {
+  drawWeeklyCard(p);
   drawPlanCard(p, window.GrammarPlan, { card:"monthCard", sub:"monthSub", badge:"monthBadge" }, "文法課");
   drawPlanCard(p, window.VocabPlan,   { card:"vmonthCard", sub:"vmonthSub", badge:"vmonthBadge" }, "單字");
 }

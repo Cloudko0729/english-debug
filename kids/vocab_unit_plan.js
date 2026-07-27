@@ -92,14 +92,37 @@
     return BAND_TO_LEVEL[t.toUpperCase()] || null;
   }
 
+  // 週測連續兩次不及格的單元視為「退化」—— 單元頁證明的是「當時記住了」，
+  // 週測驗的是「一週後還記得嗎」。曾經通過但持續忘掉的單元要重新排回修復路線，
+  // 否則進度表會一直顯示 ✅，小孩卻早就忘光了。
+  function decayed(p) {
+    var tests = p.weeklyTests || [];
+    var hist = {};
+    tests.forEach(function (t) {
+      var m = (t && t.vocab) || {};
+      Object.keys(m).forEach(function (id) {
+        if (!hist[id]) hist[id] = [];
+        hist[id].push(m[id].total ? m[id].correct / m[id].total : 0);
+      });
+    });
+    var out = [];
+    Object.keys(hist).forEach(function (id) {
+      var last2 = hist[id].slice(-2);
+      if (last2.length >= 2 && last2.every(function (r) { return r < PASS; })) out.push(id);
+    });
+    return out;
+  }
+
   // ── 判斷目前程度 ──────────────────────────────────────────────────────
   function assess(p) {
     var all = units();
-    var tried = [], fragile = [];
+    var decay = decayed(p);
+    var tried = [], solidIds = [], fragile = [];
     all.forEach(function (u) {
       if (!isTried(p, u.id)) return;
       tried.push(u.id);
-      if (!isSolid(p, u.id)) fragile.push(u.id);
+      // 單元頁過關但週測一直忘 → 算 fragile，會被排進修復路線
+      if (isSolid(p, u.id) && decay.indexOf(u.id) < 0) solidIds.push(u.id); else fragile.push(u.id);
     });
 
     var perLevel = {};
@@ -108,7 +131,8 @@
       var s = perLevel[u.level]; if (!s) return;
       s.total++;
       if (isTried(p, u.id)) { s.tried++; s.avg += scoreOf(recOf(p, u.id)); }
-      if (isSolid(p, u.id)) s.solid++;
+      // 用同一套退化判定，否則等級評估會以為某級已經走完，實際上小孩早就忘了
+      if (solidIds.indexOf(u.id) >= 0) s.solid++;
     });
     LEVELS.forEach(function (l) { var s = perLevel[l]; s.avg = s.tried ? s.avg / s.tried : 0; });
 

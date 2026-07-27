@@ -95,16 +95,39 @@
     return TIERS.indexOf(t) >= 0 ? t : null;
   }
 
+  // 週測連續兩次不及格的節點視為「退化」—— 教學頁證明的是「當時學會了」，
+  // 週測驗的是「一週後還記得嗎」。曾經通過但持續忘掉的課要重新排回修復路線，
+  // 否則進度表會一直顯示 ✅，小孩卻早就不會了。
+  function decayed(p) {
+    var tests = p.weeklyTests || [];
+    var hist = {};
+    tests.forEach(function (t) {
+      var m = (t && t.grammar) || {};
+      Object.keys(m).forEach(function (id) {
+        if (!hist[id]) hist[id] = [];
+        hist[id].push(m[id].total ? m[id].correct / m[id].total : 0);
+      });
+    });
+    var out = [];
+    Object.keys(hist).forEach(function (id) {
+      var last2 = hist[id].slice(-2);
+      if (last2.length >= 2 && last2.every(function (r) { return r < PASS; })) out.push(id);
+    });
+    return out;
+  }
+
   // ── 判斷目前程度 ──────────────────────────────────────────────────────
   // 課程紀錄優先，診斷只負責初始定位：小孩實際做過的課是持續訊號，
   // 診斷是一次性快照，兩者衝突時聽實際表現。
   function assess(p) {
     var all = nodes();
+    var decay = decayed(p);
     var tried = [], solid = [], fragile = [];
     all.forEach(function (n) {
       if (!isTried(p, n.id)) return;
       tried.push(n.id);
-      if (isSolid(p, n.id)) solid.push(n.id); else fragile.push(n.id);
+      // 教學頁過關但週測一直忘 → 算 fragile，會被排進修復路線
+      if (isSolid(p, n.id) && decay.indexOf(n.id) < 0) solid.push(n.id); else fragile.push(n.id);
     });
 
     // 每一級的完成情況（avg 只計算學過的課，用來分辨「勉強過關」與「輕鬆全對」）
@@ -114,7 +137,8 @@
       var s = perTier[n.band]; if (!s) return;
       s.total++;
       if (isTried(p, n.id)) { s.tried++; s.avg += scoreOf(recOf(p, n.id)); }
-      if (isSolid(p, n.id)) s.solid++;
+      // 用同一套退化判定，否則等級評估會以為某級已經走完，實際上小孩早就忘了
+      if (solid.indexOf(n.id) >= 0) s.solid++;
     });
     TIERS.forEach(function (t) { var s = perTier[t]; s.avg = s.tried ? s.avg / s.tried : 0; });
 
