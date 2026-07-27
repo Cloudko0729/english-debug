@@ -76,14 +76,15 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607271139"></script>
-<script src="account_lock.js?v=202607271139"></script>
-<script src="supabase_auth.js?v=202607271139"></script>
-<script src="grammar_nodes.js?v=202607271139"></script>
-<script src="grammar_plan.js?v=202607271139"></script>
-<script src="vocab_units.js?v=202607271139"></script>
-<script src="vocab_unit_plan.js?v=202607271139"></script>
-<script src="weekly_bank.js?v=202607271139"></script>
+<script src="cloud_sync.js?v=202607271423"></script>
+<script src="account_lock.js?v=202607271423"></script>
+<script src="supabase_auth.js?v=202607271423"></script>
+<script src="week_key.js?v=202607271423"></script>
+<script src="grammar_nodes.js?v=202607271423"></script>
+<script src="grammar_plan.js?v=202607271423"></script>
+<script src="vocab_units.js?v=202607271423"></script>
+<script src="vocab_unit_plan.js?v=202607271423"></script>
+<script src="weekly_bank.js?v=202607271423"></script>
 <script>
 var currentStudent = null, curAudio = null;
 var TEST = null, answers = {}, graded = false;
@@ -106,17 +107,9 @@ function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.str
 function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
   return { "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;" }[c]; }); }
 
-function ymd(d) {
-  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
-}
-// 測驗週用「最近一個週六」當識別碼。週六解鎖，之後到下個週六前都能考 ——
-// 只給週六日太脆弱，小孩週末有活動就整週測不到，但一週仍然只能考一次。
-function testWeekKey(d) {
-  d = d || new Date();
-  var back = (d.getDay() + 1) % 7;          // 0=週日 … 6=週六；週六回推 0 天
-  var sat = new Date(d.getFullYear(), d.getMonth(), d.getDate() - back);
-  return ymd(sat);
-}
+// 週次定義與作業共用 week_key.js —— 週六同時是上週作業截止與本週測驗開放，
+// 兩邊各自實作一份遲早會算出不同的週。
+var ymd = WeekKey.ymd, testWeekKey = WeekKey.weekKey;
 function doneThisWeek(p) {
   var k = testWeekKey();
   return (p.weeklyTests || []).some(function (t) { return t.week === k; });
@@ -161,13 +154,8 @@ function eligible(p, kind) {
   return ids;
 }
 
-// 每週抽到的題目要不一樣，但同一週重新整理頁面必須拿到同一份卷子，
-// 所以用「週次 + 學生 + 項目 id」推出偏移量，不用亂數。
-function offsetFor(week, student, id) {
-  var s = week + "|" + student + "|" + id, n = 0;
-  for (var i = 0; i < s.length; i++) n = (n * 31 + s.charCodeAt(i)) % 100000;
-  return n;
-}
+// 每週抽到的題目要不一樣，但同一週重新整理頁面必須拿到同一份卷子。
+var offsetFor = WeekKey.seedOf;
 
 function buildTest(p) {
   var week = testWeekKey();
@@ -329,7 +317,7 @@ function renderDone(p) {
         '<span class="dot ' + rag.cls + '">' + rag.txt + ' ' + s.correct + '/' + s.total + '</span></div>';
     });
   });
-  var next = new Date(t.week); next.setDate(next.getDate() + 7);
+  var nextWeek = WeekKey.nextWeekKey();
   return '<div class="card"><b>這一週的測驗已經考完了 ✅</b>' +
     '<p class="note">答對 ' + t.correct + ' / ' + t.total + '（' + t.at + '）。' +
     '下一份測驗 ' + ymd(next) + ' 星期六開放。</p></div>' +

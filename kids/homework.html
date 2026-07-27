@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>本週作業 · 手寫與口說</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  background:#f6f8fa;color:#22303f;line-height:1.7;padding:0 0 70px}
+header{background:linear-gradient(135deg,#ffeede,#eef7ff);padding:19px 16px 15px;text-align:center;
+  border-bottom:3px solid #f0b27a}
+header h1{margin:0 0 3px;font-size:1.22rem}
+header p{margin:0;font-size:.8rem;color:#5a6875}
+header a{color:#2f80ed;text-decoration:none}
+.wrap{max-width:720px;margin:0 auto;padding:0 14px}
+.stubar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;background:#fff;border:1px solid #e3e8ee;
+  border-radius:12px;padding:9px 12px;margin:14px 0}
+.stubar .lab{font-size:.8rem;color:#6b7a8c}
+.stu-btn{border:1px solid #cfd8e3;background:#fff;border-radius:16px;padding:5px 13px;font-size:.85rem;cursor:pointer;font-family:inherit}
+.stu-btn.active{background:#2f80ed;color:#fff;border-color:#2f80ed;font-weight:700}
+.coin{margin-left:auto;background:#fff6dc;border:1px solid #f2d38a;border-radius:14px;padding:4px 11px;font-size:.85rem;font-weight:700}
+#coinBox.bump{animation:coinBump .6s ease}
+@keyframes coinBump{0%,100%{transform:scale(1)}30%{transform:scale(1.35);background:#ffe27a}}
+.card{background:#fff;border:1px solid #e3e8ee;border-radius:14px;padding:15px 16px;margin:13px 0}
+.note{font-size:.86rem;color:#5a6875}
+.bar{height:11px;border-radius:6px;background:#e3e8ee;overflow:hidden;margin:9px 0 5px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#f0932b,#f8c471)}
+
+.task{border:2px solid #e3e8ee;border-radius:14px;padding:14px 15px;margin:12px 0;background:#fff}
+.task.done{border-color:#2fbf71;background:#f6fdf9}
+.task .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:3px}
+.task .kind{font-size:.95rem;font-weight:700}
+.task .from{font-size:.72rem;color:#9aa6b3}
+.task .prompt{font-size:1rem;font-weight:700;margin:6px 0 9px;color:#1f4463}
+.task .step{font-size:.85rem;color:#5a6875;margin:0 0 8px}
+.task .step b{color:#22303f}
+.eg{background:#f4f8fc;border-radius:10px;padding:9px 11px;font-size:.88rem;margin:8px 0}
+.eg .lab{font-size:.74rem;color:#8a97a5;display:block;margin-bottom:2px}
+.spk{border:0;background:#e6f0fb;border-radius:8px;padding:3px 10px;font-size:.82rem;cursor:pointer;font-family:inherit}
+textarea{width:100%;min-height:62px;border:1px solid #cfd8e3;border-radius:10px;padding:9px 11px;
+  font-size:.95rem;font-family:inherit;resize:vertical}
+.btn{border:0;border-radius:10px;padding:9px 17px;font-size:.9rem;font-weight:700;color:#fff;
+  cursor:pointer;font-family:inherit;background:#2f80ed;margin-top:8px}
+.btn.g{background:#2fbf71}
+.btn.o{background:#e8863c}
+.btn[disabled]{background:#c3ccd8;cursor:default}
+.rates{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.rate{border:1px solid #cfd8e3;background:#fff;border-radius:10px;padding:8px 13px;font-size:.87rem;
+  cursor:pointer;font-family:inherit}
+.rate:hover{border-color:#2f80ed}
+.rate.sel{background:#2f80ed;color:#fff;border-color:#2f80ed;font-weight:700}
+.fb{margin-top:9px;font-size:.87rem}
+.fb .good{color:#1f8a4c}
+.fb .warn{color:#b3621a}
+.fb ul{margin:5px 0 0;padding-left:19px}
+.bonus{background:linear-gradient(135deg,#fff3cd,#fffdf5);border:2px solid #f2c94c;border-radius:12px;
+  padding:13px;margin:12px 0;text-align:center}
+.bonus button{border:0;background:#f2a900;color:#fff;font-weight:700;border-radius:10px;padding:10px 22px;
+  font-size:.95rem;cursor:pointer;font-family:inherit;margin-top:7px}
+#toast{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-90px);background:#243042;color:#fff;
+  padding:11px 20px;border-radius:20px;font-size:.95rem;font-weight:700;transition:transform .3s;z-index:100;
+  max-width:90%;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+#toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<header>
+  <h1>✍️ 本週作業</h1>
+  <p>手寫 3 次　·　口說 2 次　·　<a href="index.html">← 回首頁</a></p>
+</header>
+
+<div class="wrap">
+  <div class="stubar">
+    <span class="lab">我是：</span>
+    <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
+    <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
+    <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
+    <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+    <span class="coin" id="coinBox">🪙 —</span>
+  </div>
+  <div id="main"><div class="card note">先選上面的名字。</div></div>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="cloud_sync.js?v=202607271423"></script>
+<script src="account_lock.js?v=202607271423"></script>
+<script src="supabase_auth.js?v=202607271423"></script>
+<script src="week_key.js?v=202607271423"></script>
+<script src="grammar_nodes.js?v=202607271423"></script>
+<script src="grammar_plan.js?v=202607271423"></script>
+<script src="homework_tasks.js?v=202607271423"></script>
+<script>
+var currentStudent = null, curAudio = null;
+var WRITE_N = 3, SPEAK_N = 2;      // 每週配額：手寫 3、口說 2
+var COIN_PER_TASK = 10;            // 5 項全做完 = 50，與週測同級
+var KEEP_WEEKS = 6;
+
+function getProgress(s) {
+  var raw = localStorage.getItem("kidsProgress." + s);
+  var p = raw ? JSON.parse(raw) : { wrongCounts:{}, sessions:0, totalCorrect:0, totalWrong:0 };
+  if (!p.coins) p.coins = { balance:0, lifetimeEarned:0, lifetimeSpent:0, transactions:[], claimedDrills:{} };
+  if (!p.grammar) p.grammar = { schemaVersion:1, nodes:{}, completedCount:0, coinsEarned:0, updatedAt:null };
+  if (!p.homework) p.homework = { schemaVersion:1, weeks:{} };
+  if (!p.homework.weeks) p.homework.weeks = {};
+  return p;
+}
+function saveProgress(s, p) {
+  // 只留最近幾週：整份 progress 會同步到 Google Sheet（單格 5 萬字上限），
+  // 作業的作文內容會累積得很快。
+  var wk = p.homework.weeks, keys = Object.keys(wk).sort();
+  while (keys.length > KEEP_WEEKS) { delete wk[keys.shift()]; }
+  localStorage.setItem("kidsProgress." + s, JSON.stringify(p));
+}
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+  return { "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;" }[c]; }); }
+
+function play(src) {
+  if (!src) return;
+  if (curAudio) { curAudio.pause(); curAudio = null; }
+  var a = new Audio(src); curAudio = a; a.play().catch(function () {});
+}
+function refreshCoin(bump) {
+  var el = document.getElementById("coinBox");
+  el.textContent = currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
+  if (bump) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
+}
+var _tt = null;
+function toast(msg) {
+  var t = document.getElementById("toast");
+  t.innerHTML = msg; t.classList.add("show");
+  clearTimeout(_tt); _tt = setTimeout(function () { t.classList.remove("show"); }, 3200);
+}
+
+// ── 選題 ────────────────────────────────────────────────────────────────
+// 從本月文法課表取題；課表裡的排前面，不夠再用其他做過的課補。
+// 一個節點同一週不會既出手寫又出口說 —— 同一句練兩次沒有意義。
+function weekTasks(p) {
+  var week = WeekKey.weekKey();
+  var plan = window.GrammarPlan && GrammarPlan.activePlan(p);
+  var planned = plan ? (plan.nodes || []) : [];
+  var doneIds = Object.keys(p.grammar.nodes || {});
+  var pool = planned.filter(function (id) { return HOMEWORK_TASKS[id]; })
+    .concat(doneIds.filter(function (id) { return HOMEWORK_TASKS[id] && planned.indexOf(id) < 0; }));
+  // 去重
+  var seen = {}, ids = [];
+  pool.forEach(function (id) { if (!seen[id]) { seen[id] = 1; ids.push(id); } });
+  if (!ids.length) return null;
+
+  // 每週輪一次起點，連續幾週不會都練同幾課
+  var off = WeekKey.seedOf(week, currentStudent) % ids.length;
+  var rot = ids.slice(off).concat(ids.slice(0, off));
+
+  var write = [], speak = [];
+  for (var i = 0; i < rot.length && (write.length < WRITE_N || speak.length < SPEAK_N); i++) {
+    var id = rot[i], t = HOMEWORK_TASKS[id];
+    if (write.length < WRITE_N && t.write) write.push(id);
+    else if (speak.length < SPEAK_N && t.speak) speak.push(id);
+  }
+  // 課上得還少時允許重複使用同一課，但仍先把不同課用完
+  var g = 0;
+  while (write.length < WRITE_N && rot.length) { var w = rot[g++ % rot.length]; if (HOMEWORK_TASKS[w].write) write.push(w); if (g > 50) break; }
+  while (speak.length < SPEAK_N && rot.length) { var s2 = rot[g++ % rot.length]; if (HOMEWORK_TASKS[s2].speak) speak.push(s2); if (g > 100) break; }
+
+  return { week: week, write: write.slice(0, WRITE_N), speak: speak.slice(0, SPEAK_N) };
+}
+
+function weekRec(p, week) {
+  if (!p.homework.weeks[week]) p.homework.weeks[week] = { write: {}, speak: {}, coinsPaid: 0 };
+  var r = p.homework.weeks[week];
+  if (!r.write) r.write = {}; if (!r.speak) r.speak = {};
+  return r;
+}
+
+// ── 手寫檢查 ────────────────────────────────────────────────────────────
+// 不做文法批改（做不到，也不該假裝做得到）。只檢查小學生最常漏掉的形式問題，
+// 外加提醒有沒有用到這一課要練的字。全部用中文講，語氣是提醒不是打叉。
+var VERBS = ("am is are was were be been being do does did have has had "
+  + "go goes went like likes liked play plays played eat eats ate see sees saw "
+  + "make makes made get gets got run runs ran read reads write writes wrote "
+  + "can could will would should must may might want wants wanted need needs "
+  + "live lives lived work works worked study studies studied come comes came "
+  + "take takes took give gives gave know knows knew think thinks thought "
+  + "say says said tell tells told feel feels felt look looks looked").split(" ");
+
+function checkWriting(text, task) {
+  var t = (text || "").trim();
+  var out = [];
+  if (t.length < 3) return { ok: false, items: [{ ok: false, msg: "還沒寫東西喔" }] };
+
+  out.push({ ok: /^[A-Z]/.test(t), msg: /^[A-Z]/.test(t) ? "開頭有大寫 ✓" : "英文句子的第一個字母要大寫" });
+  out.push({ ok: /[.!?]$/.test(t), msg: /[.!?]$/.test(t) ? "句尾有標點 ✓" : "句尾要加句點、問號或驚嘆號" });
+
+  var words = t.toLowerCase().replace(/[^a-z'\s-]/g, " ").split(/\s+/).filter(Boolean);
+  out.push({ ok: words.length >= 3, msg: words.length >= 3 ? "長度夠了 ✓" : "太短了，至少寫三個字" });
+
+  var hasVerb = words.some(function (w) { return VERBS.indexOf(w) >= 0; });
+  // 找不到動詞只提醒，不判錯 —— 動詞表不可能收全，誤判會讓小孩以為自己寫錯
+  if (!hasVerb) out.push({ ok: null, msg: "看看句子裡有沒有動詞（is / are / like / go …）" });
+
+  if (task.eg && t.toLowerCase().replace(/[^a-z]/g, "") === task.eg.toLowerCase().replace(/[^a-z]/g, "")) {
+    out.push({ ok: false, msg: "這句跟範例一模一樣，換成你自己的話再寫一次" });
+  }
+
+  // 這一課要練的字：中文提示裡夾的英文，且在範例答案裡出現過才採用
+  // （「be 動詞」的 be 這種是說明用詞，不是要求你寫進句子裡）
+  if (task.must && task.must.length) {
+    var low = t.toLowerCase();
+    var hit = task.must.some(function (m) { return low.indexOf(m.toLowerCase()) >= 0; });
+    // 寬鬆判定：只要用到其中一個就算數（「is not 或 are not」兩種都對）
+    out.push({ ok: hit ? true : null,
+      msg: hit ? "有用到這一課的重點 ✓" : "這一課要練的是 " + task.must.join(" 或 ") + "，看看能不能用進去" });
+  }
+  var bad = out.filter(function (x) { return x.ok === false; });
+  return { ok: bad.length === 0, items: out };
+}
+
+// ── 畫面 ────────────────────────────────────────────────────────────────
+var PLAN = null;
+
+function render() {
+  var box = document.getElementById("main");
+  if (!currentStudent) { box.innerHTML = '<div class="card note">先選上面的名字。</div>'; refreshCoin(); return; }
+  var p = getProgress(currentStudent);
+  PLAN = weekTasks(p);
+
+  if (!PLAN) {
+    box.innerHTML = '<div class="card"><b>還沒有作業可以做</b>' +
+      '<p class="note">作業題目來自你上過的文法課。先去上一課，這裡就會出現這一週的手寫與口說題目。</p>' +
+      '<p class="note" style="margin-top:8px"><a href="grammar_month.html" style="color:#2f80ed;font-weight:700">🗓️ 本月文法課表</a></p></div>';
+    refreshCoin(); return;
+  }
+
+  var rec = weekRec(p, PLAN.week);
+  var doneW = PLAN.write.filter(function (id) { return rec.write[id]; }).length;
+  var doneS = PLAN.speak.filter(function (id) { return rec.speak[id]; }).length;
+  var total = PLAN.write.length + PLAN.speak.length, done = doneW + doneS;
+
+  var h = '<div class="card"><b>這一週：手寫 ' + doneW + '/' + PLAN.write.length +
+    '　·　口說 ' + doneS + '/' + PLAN.speak.length + '</b>' +
+    '<div class="bar"><i style="width:' + Math.round(done / total * 100) + '%"></i></div>' +
+    '<p class="note" style="margin:0">哪一天做都可以，這一週做完就好。每做完一項 🪙 ' + COIN_PER_TASK + '。</p></div>';
+
+  PLAN.write.forEach(function (id, i) { h += writeCard(p, rec, id, i); });
+  PLAN.speak.forEach(function (id, i) { h += speakCard(p, rec, id, i); });
+
+  var owed = done * COIN_PER_TASK - (rec.coinsPaid || 0);
+  if (owed > 0) {
+    h += '<div class="bonus"><div style="font-size:1.5rem">🪙</div><b>有 ' + owed + ' 金幣還沒領</b>' +
+      '<br><button onclick="claimCoins()">領金幣</button></div>';
+  } else if (done === total) {
+    h += '<div class="card note">🎉 這一週的作業全部做完了，金幣也領完了。下週六會出新的。</div>';
+  }
+  box.innerHTML = h;
+  refreshCoin();
+}
+
+function writeCard(p, rec, id, i) {
+  var t = HOMEWORK_TASKS[id].write, saved = rec.write[id];
+  var title = (window.GrammarPlan && GrammarPlan.byId(id) || {}).titleZh || id;
+  var h = '<div class="task' + (saved ? " done" : "") + '">' +
+    '<div class="top"><span class="kind">✍️ 手寫 ' + (i + 1) + '</span>' +
+      '<span class="from">來自：' + esc(title) + '</span></div>' +
+    '<div class="prompt">' + esc(t.zh) + '</div>' +
+    '<p class="step"><b>1.</b> 先在紙上用手寫一次（手寫才記得住）　<b>2.</b> 再打進下面的格子檢查</p>' +
+    '<textarea id="wt' + i + '" placeholder="把你寫的句子打進來">' + esc(saved ? saved.text : "") + '</textarea>' +
+    '<button class="btn" onclick="doCheck(' + i + ',\'' + id + '\')">檢查看看</button>' +
+    '<div class="fb" id="wf' + i + '">' + (saved ? fbHtml(checkWriting(saved.text, t)) : "") + '</div>' +
+    '<div class="eg"><span class="lab">範例（做完再看）</span>' +
+      '<button class="spk" onclick="play(\'' + esc(t.egAudio || "") + '\')">🔊</button> ' + esc(t.eg) + '</div>' +
+    '</div>';
+  return h;
+}
+
+function speakCard(p, rec, id, i) {
+  var t = HOMEWORK_TASKS[id].speak, saved = rec.speak[id];
+  var title = (window.GrammarPlan && GrammarPlan.byId(id) || {}).titleZh || id;
+  var rates = [["good", "😀 很順，說得出來"], ["ok", "🙂 有點卡"], ["again", "😅 還要再練"]];
+  return '<div class="task' + (saved ? " done" : "") + '">' +
+    '<div class="top"><span class="kind">🎤 口說 ' + (i + 1) + '</span>' +
+      '<span class="from">來自：' + esc(title) + '</span></div>' +
+    '<div class="prompt">' + esc(t.zh) + '</div>' +
+    '<p class="step"><b>1.</b> 先自己大聲說一次　<b>2.</b> 再聽範例，比比看哪裡不一樣　<b>3.</b> 再說一次</p>' +
+    '<div class="eg"><span class="lab">範例</span>' +
+      '<button class="spk" onclick="play(\'' + esc(t.egAudio || "") + '\')">🔊 播放</button> ' + esc(t.eg) + '</div>' +
+    '<p class="step" style="margin:9px 0 0">說完了嗎？誠實選一個：</p>' +
+    '<div class="rates">' + rates.map(function (r) {
+      return '<button class="rate' + (saved && saved.rate === r[0] ? " sel" : "") +
+        '" onclick="rateSpeak(' + i + ',\'' + id + '\',\'' + r[0] + '\')">' + r[1] + '</button>';
+    }).join("") + '</div></div>';
+}
+
+function fbHtml(res) {
+  var lis = res.items.map(function (x) {
+    var cls = x.ok === true ? "good" : (x.ok === false ? "warn" : "");
+    var mark = x.ok === true ? "✓" : (x.ok === false ? "✗" : "·");
+    return '<li class="' + cls + '">' + mark + " " + esc(x.msg) + "</li>";
+  }).join("");
+  return (res.ok ? '<span class="good">看起來沒問題！</span>' : '<span class="warn">再看一下這幾點：</span>') +
+    "<ul>" + lis + "</ul>";
+}
+
+window.doCheck = function (i, id) {
+  var t = HOMEWORK_TASKS[id].write;
+  var text = document.getElementById("wt" + i).value;
+  var res = checkWriting(text, t);
+  document.getElementById("wf" + i).innerHTML = fbHtml(res);
+  if ((text || "").trim().length < 3) return;
+  var p = getProgress(currentStudent), rec = weekRec(p, PLAN.week);
+  var isNew = !rec.write[id];
+  rec.write[id] = { text: text.trim().slice(0, 300), ok: res.ok, at: WeekKey.ymd(new Date()) };
+  saveProgress(currentStudent, p);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  if (isNew) toast("✍️ 記錄下來了！記得去領金幣 🪙");
+  render();
+};
+
+window.rateSpeak = function (i, id, rate) {
+  var p = getProgress(currentStudent), rec = weekRec(p, PLAN.week);
+  var isNew = !rec.speak[id];
+  rec.speak[id] = { rate: rate, at: WeekKey.ymd(new Date()) };
+  saveProgress(currentStudent, p);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  if (isNew) toast("🎤 記錄下來了！記得去領金幣 🪙");
+  render();
+};
+
+window.claimCoins = function () {
+  var p = getProgress(currentStudent), rec = weekRec(p, PLAN.week);
+  var done = PLAN.write.filter(function (id) { return rec.write[id]; }).length +
+             PLAN.speak.filter(function (id) { return rec.speak[id]; }).length;
+  var owed = done * COIN_PER_TASK - (rec.coinsPaid || 0);
+  if (owed <= 0) return;
+  var day = WeekKey.ymd(new Date());
+  rec.coinsPaid = (rec.coinsPaid || 0) + owed;
+  p.coins.balance += owed; p.coins.lifetimeEarned += owed;
+  p.coins.transactions.push({ type:"earn", source:"homework", amount:owed,
+    balanceAfter:p.coins.balance, createdAt:day, meta:{ week:PLAN.week, done:done } });
+  saveProgress(currentStudent, p);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  toast("🪙 +" + owed + " 金幣！　共 " + p.coins.balance);
+  refreshCoin(true);
+  render();
+};
+
+function pickStudent(name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
+  currentStudent = name;
+  localStorage.setItem("kidsCurrentStudent", name);
+  var btns = document.querySelectorAll(".stu-btn");
+  for (var i = 0; i < btns.length; i++)
+    btns[i].classList.toggle("active", btns[i].textContent.toLowerCase().indexOf(name) >= 0);
+  render();
+}
+
+(function () {
+  var last = localStorage.getItem("kidsCurrentStudent");
+  if (!window.sbClient && last && last !== "guest") pickStudent(last); else render();
+})();
+</script>
+</body>
+</html>

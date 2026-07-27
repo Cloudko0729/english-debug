@@ -203,6 +203,17 @@
       <span class="badge badge-new">進階</span>
     </a>
 
+    <a class="card" href="homework.html" id="hwCard" style="border:2px solid #e8863c;background:linear-gradient(135deg,#ffeede,#fff)">
+      <div class="card-left">
+        <div class="card-icon" style="background:#ffd9b8;font-size:1.3rem">✍️</div>
+        <div>
+          <div class="card-title">本週作業</div>
+          <div class="card-sub" id="hwSub">手寫 3 次 · 口說 2 次 · 哪天做都可以</div>
+        </div>
+      </div>
+      <span class="badge badge-new" id="hwBadge">作業</span>
+    </a>
+
     <a class="card" href="weekly_test.html" id="wtCard" style="border:2px solid #5b3aa0;background:linear-gradient(135deg,#efe6ff,#fff)">
       <div class="card-left">
         <div class="card-icon" style="background:#e6d9ff;font-size:1.3rem">📝</div>
@@ -348,15 +359,15 @@
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607271139"></script>
-<script src="account_lock.js?v=202607271139"></script>
-<script src="supabase_auth.js?v=202607271139"></script>
-<script src="drills_list.js?v=202607271139"></script>
-<script src="grammar_nodes.js?v=202607271139"></script>
-<script src="grammar_plan.js?v=202607271139"></script>
-<script src="vocab_units.js?v=202607271139"></script>
-<script src="weekly_bank.js?v=202607271139"></script>
-<script src="vocab_unit_plan.js?v=202607271139"></script>
+<script src="cloud_sync.js?v=202607271423"></script>
+<script src="account_lock.js?v=202607271423"></script>
+<script src="supabase_auth.js?v=202607271423"></script>
+<script src="drills_list.js?v=202607271423"></script>
+<script src="grammar_nodes.js?v=202607271423"></script>
+<script src="grammar_plan.js?v=202607271423"></script>
+<script src="vocab_units.js?v=202607271423"></script>
+<script src="weekly_bank.js?v=202607271423"></script>
+<script src="vocab_unit_plan.js?v=202607271423"></script>
 <script>
 let _homeSynced = false;
 function pickStudent(name) {
@@ -421,10 +432,7 @@ function drawPlanCard(p, engine, ids, unitWord) {
 function drawWeeklyCard(p) {
   const card = document.getElementById("wtCard"), sub = document.getElementById("wtSub"), badge = document.getElementById("wtBadge");
   if (!card) return;
-  const d = new Date();
-  const back = (d.getDay() + 1) % 7;
-  const sat = new Date(d.getFullYear(), d.getMonth(), d.getDate() - back);
-  const week = `${sat.getFullYear()}-${String(sat.getMonth()+1).padStart(2,"0")}-${String(sat.getDate()).padStart(2,"0")}`;
+  const week = WeekKey.weekKey();
   const t = (p.weeklyTests || []).filter(x => x.week === week)[0];
   if (t) {
     card.style.borderColor = "#2fbf71";
@@ -438,8 +446,27 @@ function drawWeeklyCard(p) {
     badge.textContent = "可以考"; badge.style.background = "#5b3aa0";
   }
 }
+// 作業卡：顯示這一週做了幾項、有沒有金幣還沒領。
+function drawHomeworkCard(p) {
+  const card = document.getElementById("hwCard"), sub = document.getElementById("hwSub"), badge = document.getElementById("hwBadge");
+  if (!card || !window.WeekKey) return;
+  const rec = ((p.homework || {}).weeks || {})[WeekKey.weekKey()];
+  const done = rec ? Object.keys(rec.write || {}).length + Object.keys(rec.speak || {}).length : 0;
+  const owed = rec ? done * 10 - (rec.coinsPaid || 0) : 0;
+  if (done >= 5) {
+    card.style.borderColor = "#2fbf71"; card.style.background = "linear-gradient(135deg,#f3fcf7,#fff)";
+    sub.textContent = owed > 0 ? `5/5 做完了 · 🪙 ${owed} 還沒領` : "5/5 這一週的作業都做完了";
+    badge.textContent = owed > 0 ? "領金幣" : "已完成";
+    badge.style.background = owed > 0 ? "#f2a900" : "#2fbf71";
+  } else {
+    card.style.borderColor = "#e8863c"; card.style.background = "linear-gradient(135deg,#ffeede,#fff)";
+    sub.textContent = `手寫 3 次 · 口說 2 次 · 已完成 ${done}/5` + (owed > 0 ? ` · 🪙 ${owed} 還沒領` : "");
+    badge.textContent = `${done}/5`; badge.style.background = "#e8863c";
+  }
+}
 function drawMonthCard(p) {
   drawWeeklyCard(p);
+  drawHomeworkCard(p);
   drawPlanCard(p, window.GrammarPlan, { card:"monthCard", sub:"monthSub", badge:"monthBadge" }, "文法課");
   drawPlanCard(p, window.VocabPlan,   { card:"vmonthCard", sub:"vmonthSub", badge:"vmonthBadge" }, "單字");
 }
