@@ -69,6 +69,13 @@
   .navbtns a{flex:1;text-align:center;padding:12px;border-radius:12px;text-decoration:none;font-weight:800;font-size:.9rem;border:2px solid var(--border);background:#fff;color:var(--text);}
   .navbtns a.home{background:var(--green);color:#fff;border-color:var(--green);}
   .navbtns a.dim{opacity:.4;pointer-events:none;}
+  .stubar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center;background:var(--accent);padding:9px 12px;}
+  .stubar .lab{font-size:.8rem;font-weight:800;color:#3a2a00;}
+  .stu-btn{padding:5px 13px;border:2px solid #3a2a00;border-radius:18px;background:transparent;color:#3a2a00;font-weight:700;font-size:.82rem;cursor:pointer;font-family:inherit;}
+  .stu-btn.active{background:#3a2a00;color:#fff;}
+  .coin{margin-left:auto;background:#fff;border-radius:16px;padding:4px 12px;font-weight:800;color:#c98a00;font-size:.85rem;}
+  .finish-btn{width:100%;padding:14px;border:none;border-radius:12px;background:var(--green);color:#fff;font-weight:800;font-size:1rem;cursor:pointer;font-family:inherit;}
+  .finish-btn:disabled{opacity:.5;cursor:default;}
 </style>
 </head>
 <body>
@@ -78,6 +85,15 @@
   <h1>📗 主格、受格與所有格</h1>
   <p>Pronoun Case and Possessives · <a href="index.html">← 回文法地圖</a></p>
 </header>
+
+<div class="stubar">
+  <span class="lab">我是：</span>
+  <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
+  <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
+  <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
+  <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+  <span class="coin" id="coinBox">🪙 —</span>
+</div>
 
 <div class="scene">
   <div class="hd">🏝️ 情境：先看看什麼時候會用到</div>
@@ -194,12 +210,23 @@
   </div>
 </div>
 
+<div class="card" id="finishCard">
+  <h2>🎁 完成這一課</h2>
+  <p style="font-size:.85rem;color:var(--muted);margin-bottom:10px">做完上面的小測驗和作業，按這裡領金幣，進度也會記錄下來。</p>
+  <button id="finishBtn" class="finish-btn" onclick="finishLesson()">✅ 我學完這一課了</button>
+  <div id="finishMsg" style="font-weight:800;margin-top:10px;min-height:1.4em"></div>
+</div>
+
 <div class="navbtns">
   <a class="" href="F2.5-stative-verbs.html">← 上一課</a>
   <a class="home" href="index.html">📋 文法地圖</a>
   <a class="" href="F2.7-there-count-quantity.html">下一課 →</a>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../cloud_sync.js"></script>
+<script src="../../account_lock.js"></script>
+<script src="../../supabase_auth.js"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -237,6 +264,88 @@ function ans(i, id, btn) {
   done++; if (good) ok++;
   if (done === QUIZ.length) document.getElementById("quizScore").textContent = "🎉 答對 " + ok + " / " + QUIZ.length;
 }
+// ── 學生 / 進度 / 金幣 ────────────────────────────────────────────────
+var NODE_ID = "F2.6-pronoun-case";
+var currentStudent = null;
+function getProgress(s) {
+  var raw = localStorage.getItem("kidsProgress." + s);
+  var p = raw ? JSON.parse(raw) : { wrongCounts:{}, sessions:0, totalCorrect:0, totalWrong:0 };
+  if (!p.coins) p.coins = { balance:0, lifetimeEarned:0, lifetimeSpent:0, transactions:[], claimedDrills:{} };
+  // 文法軌進度：只存摘要，逐題紀錄不進這裡（雲端同步有單格上限，見 REPORT 第 0 節）
+  if (!p.grammar) p.grammar = { schemaVersion:1, nodes:{}, completedCount:0, coinsEarned:0, updatedAt:null };
+  return p;
+}
+function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
+function refreshCoin() {
+  var el = document.getElementById("coinBox");
+  el.textContent = currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
+}
+window.pickStudent = function (name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
+  currentStudent = name;
+  localStorage.setItem("kidsCurrentStudent", name);
+  var btns = document.querySelectorAll(".stu-btn");
+  for (var i = 0; i < btns.length; i++) btns[i].classList.toggle("active", btns[i].textContent.toLowerCase().indexOf(name) >= 0);
+  refreshCoin(); renderFinishState();
+};
+function nodeRec() {
+  if (!currentStudent) return null;
+  return getProgress(currentStudent).grammar.nodes[NODE_ID] || null;
+}
+function renderFinishState() {
+  var btn = document.getElementById("finishBtn"), msg = document.getElementById("finishMsg");
+  if (!currentStudent) { btn.disabled = false; msg.textContent = "先在上面選你的名字，才能記錄進度和領金幣。"; return; }
+  var r = nodeRec();
+  if (r) {
+    btn.disabled = false;
+    msg.innerHTML = "✅ 這一課已完成（答對 " + r.best + "/" + r.total + "，已領 🪙 " + r.coins + "）。<br>" +
+      "<span style='font-weight:400;color:#667085'>再做一次如果進步，會補發差額。</span>";
+  } else { btn.disabled = false; msg.textContent = ""; }
+}
+// 金幣：完成 15 ＋ 表現 round(15×正確率) ＋ 全對 10，單課上限 40。
+// 用「應得總額 - 已領」補差額，而不是一次領完就永久鎖住 —— 重做進步才有意義。
+function coinsFor(correct, total) {
+  var base = 15 + Math.round(15 * (total ? correct / total : 0)) + (total && correct === total ? 10 : 0);
+  return Math.min(base, 40);
+}
+window.finishLesson = function () {
+  if (!currentStudent) { document.getElementById("finishMsg").textContent = "先在上面選你的名字喔！"; return; }
+  var p = getProgress(currentStudent);
+  var isFirst = !p.grammar.nodes[NODE_ID];
+  var prev = p.grammar.nodes[NODE_ID] || { best:0, total:QUIZ.length, coins:0, attempts:0 };
+  var bestCorrect = Math.max(prev.best || 0, ok);
+  var should = coinsFor(bestCorrect, QUIZ.length);
+  var delta = Math.max(0, should - (prev.coins || 0));
+  // 只存日期不存完整 ISO 時戳、band 由 node id 前綴推得即可 —— 摘要要塞進雲端單格，
+  // 48 課滿載得壓在 5KB 以內（見 REPORT_2026-07-26 第 0 節）。
+  var now = new Date().toISOString().slice(0, 10);
+  p.grammar.nodes[NODE_ID] = {
+    best: bestCorrect, total: QUIZ.length, coins: prev.coins + delta,
+    attempts: (prev.attempts || 0) + 1, lastAt: now,
+  };
+  if (isFirst) p.grammar.completedCount = (p.grammar.completedCount || 0) + 1;
+  p.grammar.coinsEarned = (p.grammar.coinsEarned || 0) + delta;
+  p.grammar.updatedAt = now;
+  if (delta > 0) {
+    p.coins.balance += delta; p.coins.lifetimeEarned += delta;
+    p.coins.transactions.push({ type:"earn", source:"grammarLesson", amount:delta,
+      balanceAfter:p.coins.balance, createdAt:now, meta:{ nodeId:NODE_ID, correct:bestCorrect, total:QUIZ.length } });
+  }
+  saveProgress(currentStudent, p);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  refreshCoin();
+  var msg = document.getElementById("finishMsg");
+  msg.innerHTML = delta > 0
+    ? "🪙 +" + delta + " 金幣！（這一課共 " + p.grammar.nodes[NODE_ID].coins + " ／ 上限 40）<br>" +
+      "<a href='../../island.html' style='color:#2f80ed;font-weight:700'>👉 去蓋我的島嶼</a>"
+    : "這一課的金幣已經領滿了（🪙 " + p.grammar.nodes[NODE_ID].coins + "）。答對更多題才會再補發喔！";
+};
+(function initStudent() {
+  var last = localStorage.getItem("kidsCurrentStudent");
+  if (!window.sbClient && last && last !== "guest") window.pickStudent(last);
+  else { refreshCoin(); renderFinishState(); }
+})();
+
 // NotebookLM 素材：有檔才顯示（fail-safe：載入失敗才隱藏，見 LESSON_PAGE_SPEC 第 7 節）
 (function () {
   var a = document.getElementById("pcAudio"), v = document.getElementById("pcVideo"), box = document.getElementById("podcastBox");

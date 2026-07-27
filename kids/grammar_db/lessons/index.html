@@ -69,6 +69,13 @@
   .navbtns a{flex:1;text-align:center;padding:12px;border-radius:12px;text-decoration:none;font-weight:800;font-size:.9rem;border:2px solid var(--border);background:#fff;color:var(--text);}
   .navbtns a.home{background:var(--green);color:#fff;border-color:var(--green);}
   .navbtns a.dim{opacity:.4;pointer-events:none;}
+  .stubar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center;background:var(--accent);padding:9px 12px;}
+  .stubar .lab{font-size:.8rem;font-weight:800;color:#3a2a00;}
+  .stu-btn{padding:5px 13px;border:2px solid #3a2a00;border-radius:18px;background:transparent;color:#3a2a00;font-weight:700;font-size:.82rem;cursor:pointer;font-family:inherit;}
+  .stu-btn.active{background:#3a2a00;color:#fff;}
+  .coin{margin-left:auto;background:#fff;border-radius:16px;padding:4px 12px;font-weight:800;color:#c98a00;font-size:.85rem;}
+  .finish-btn{width:100%;padding:14px;border:none;border-radius:12px;background:var(--green);color:#fff;font-weight:800;font-size:1rem;cursor:pointer;font-family:inherit;}
+  .finish-btn:disabled{opacity:.5;cursor:default;}
 
   .bandcard{background:var(--panel);border:2px solid var(--border);border-radius:16px;margin:14px;padding:14px 16px;}
   .bandcard h2{font-size:1.05rem;color:var(--primary);margin-bottom:2px;}
@@ -76,7 +83,16 @@
   .nlist{display:flex;flex-direction:column;gap:7px;}
   .nlist a{display:flex;justify-content:space-between;align-items:center;gap:8px;border:2px solid var(--border);border-radius:11px;padding:10px 13px;text-decoration:none;color:inherit;font-weight:700;font-size:.9rem;}
   .nlist a:hover{border-color:var(--primary);}
+  .nlist a.done{border-color:var(--green);background:#f3fcf7;}
   .nlist .sub{font-weight:400;color:var(--muted);font-size:.78rem;}
+  .nlist .st{font-size:.75rem;font-weight:800;white-space:nowrap;color:var(--muted);}
+  .nlist a.done .st{color:var(--green);}
+  .stubar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center;background:var(--accent);padding:9px 12px;}
+  .stubar .lab{font-size:.8rem;font-weight:800;color:#3a2a00;}
+  .stu-btn{padding:5px 13px;border:2px solid #3a2a00;border-radius:18px;background:transparent;color:#3a2a00;font-weight:700;font-size:.82rem;cursor:pointer;font-family:inherit;}
+  .stu-btn.active{background:#3a2a00;color:#fff;}
+  .coin{margin-left:auto;background:#fff;border-radius:16px;padding:4px 12px;font-weight:800;color:#c98a00;font-size:.85rem;}
+  .overall{background:#eef5ff;border-left:4px solid var(--primary);border-radius:10px;margin:14px;padding:10px 14px;font-size:.9rem;font-weight:700;color:#1f4463;}
 </style>
 </head>
 <body>
@@ -84,54 +100,112 @@
   <h1>🗺️ 文法地圖</h1>
   <p>F0–F7 共 48 課 · <a href="../../index.html">← 回首頁</a></p>
 </header>
+
+<div class="stubar">
+  <span class="lab">我是：</span>
+  <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
+  <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
+  <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
+  <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+  <span class="coin" id="coinBox">🪙 —</span>
+</div>
+<div class="overall" id="overall">先選名字，就會顯示你每一課的進度。</div>
 <div class="bandcard">
   <h2>F0 句子零件島</h2>
   <div class="sc">情境：家庭與小島物品　·　5 課</div>
   <div class="nlist">
-    <a href="F0.1-complete-sentence.html"><span>完整句與片語<span class="sub"> Complete Sentences and Fragments</span></span><span>›</span></a><a href="F0.2-be-agreement.html"><span>主詞與 am / is / are<span class="sub"> Subject Agreement with Be</span></span><span>›</span></a><a href="F0.3-be-meaning.html"><span>be 表身分、狀態與位置<span class="sub"> Be for Identity, State, and Location</span></span><span>›</span></a><a href="F0.4-singular-plural.html"><span>一個與多個名詞<span class="sub"> Singular and Plural Nouns</span></span><span>›</span></a><a href="F0.5-a-an-sound.html"><span>a / an 看聲音<span class="sub"> Choosing A or An by Sound</span></span><span>›</span></a>
+    <a href="F0.1-complete-sentence.html" data-node="F0.1-complete-sentence"><span>完整句與片語<span class="sub"> Complete Sentences and Fragments</span></span><span class="st"></span></a><a href="F0.2-be-agreement.html" data-node="F0.2-be-agreement"><span>主詞與 am / is / are<span class="sub"> Subject Agreement with Be</span></span><span class="st"></span></a><a href="F0.3-be-meaning.html" data-node="F0.3-be-meaning"><span>be 表身分、狀態與位置<span class="sub"> Be for Identity, State, and Location</span></span><span class="st"></span></a><a href="F0.4-singular-plural.html" data-node="F0.4-singular-plural"><span>一個與多個名詞<span class="sub"> Singular and Plural Nouns</span></span><span class="st"></span></a><a href="F0.5-a-an-sound.html" data-node="F0.5-a-an-sound"><span>a / an 看聲音<span class="sub"> Choosing A or An by Sound</span></span><span class="st"></span></a>
   </div>
 </div><div class="bandcard">
   <h2>F1 動作與問句島</h2>
   <div class="sc">情境：學校、寵物、問答　·　6 課</div>
   <div class="nlist">
-    <a href="F1.1-subject-pronouns.html"><span>主詞代名詞<span class="sub"> Subject Pronouns</span></span><span>›</span></a><a href="F1.2-action-affirmative.html"><span>一般動詞肯定句<span class="sub"> Affirmative Action-Verb Sentences</span></span><span>›</span></a><a href="F1.3-predicate-choice.html"><span>be 述語與一般動詞述語<span class="sub"> Choosing a Be or Action Predicate</span></span><span>›</span></a><a href="F1.4-be-questions-negatives.html"><span>be 問句、否定與短答<span class="sub"> Questions, Negatives, and Short Answers with Be</span></span><span>›</span></a><a href="F1.5-do-does.html"><span>do / does 問句與否定<span class="sub"> Questions and Negatives with Do and Does</span></span><span>›</span></a><a href="F1.6-wh-questions.html"><span>Wh- 資訊問句<span class="sub"> Wh- Information Questions</span></span><span>›</span></a>
+    <a href="F1.1-subject-pronouns.html" data-node="F1.1-subject-pronouns"><span>主詞代名詞<span class="sub"> Subject Pronouns</span></span><span class="st"></span></a><a href="F1.2-action-affirmative.html" data-node="F1.2-action-affirmative"><span>一般動詞肯定句<span class="sub"> Affirmative Action-Verb Sentences</span></span><span class="st"></span></a><a href="F1.3-predicate-choice.html" data-node="F1.3-predicate-choice"><span>be 述語與一般動詞述語<span class="sub"> Choosing a Be or Action Predicate</span></span><span class="st"></span></a><a href="F1.4-be-questions-negatives.html" data-node="F1.4-be-questions-negatives"><span>be 問句、否定與短答<span class="sub"> Questions, Negatives, and Short Answers with Be</span></span><span class="st"></span></a><a href="F1.5-do-does.html" data-node="F1.5-do-does"><span>do / does 問句與否定<span class="sub"> Questions and Negatives with Do and Does</span></span><span class="st"></span></a><a href="F1.6-wh-questions.html" data-node="F1.6-wh-questions"><span>Wh- 資訊問句<span class="sub"> Wh- Information Questions</span></span><span class="st"></span></a>
   </div>
 </div><div class="bandcard">
   <h2>F2 日常時間島</h2>
   <div class="sc">情境：每日作息與正在發生的事　·　7 課</div>
   <div class="nlist">
-    <a href="F2.1-present-simple.html"><span>現在簡單式<span class="sub"> Present Simple</span></span><span>›</span></a><a href="F2.2-frequency-adverbs.html"><span>頻率副詞的位置<span class="sub"> Position of Frequency Adverbs</span></span><span>›</span></a><a href="F2.3-present-continuous.html"><span>現在進行式<span class="sub"> Present Continuous</span></span><span>›</span></a><a href="F2.4-present-contrast.html"><span>習慣與此刻<span class="sub"> Present Simple versus Present Continuous</span></span><span>›</span></a><a href="F2.5-stative-verbs.html"><span>常見狀態動詞<span class="sub"> Common Stative Verbs</span></span><span>›</span></a><a href="F2.6-pronoun-case.html"><span>主格、受格與所有格<span class="sub"> Pronoun Case and Possessives</span></span><span>›</span></a><a href="F2.7-there-count-quantity.html"><span>there is/are 與基本數量<span class="sub"> There Is/Are, Countability, and Basic Quantity</span></span><span>›</span></a>
+    <a href="F2.1-present-simple.html" data-node="F2.1-present-simple"><span>現在簡單式<span class="sub"> Present Simple</span></span><span class="st"></span></a><a href="F2.2-frequency-adverbs.html" data-node="F2.2-frequency-adverbs"><span>頻率副詞的位置<span class="sub"> Position of Frequency Adverbs</span></span><span class="st"></span></a><a href="F2.3-present-continuous.html" data-node="F2.3-present-continuous"><span>現在進行式<span class="sub"> Present Continuous</span></span><span class="st"></span></a><a href="F2.4-present-contrast.html" data-node="F2.4-present-contrast"><span>習慣與此刻<span class="sub"> Present Simple versus Present Continuous</span></span><span class="st"></span></a><a href="F2.5-stative-verbs.html" data-node="F2.5-stative-verbs"><span>常見狀態動詞<span class="sub"> Common Stative Verbs</span></span><span class="st"></span></a><a href="F2.6-pronoun-case.html" data-node="F2.6-pronoun-case"><span>主格、受格與所有格<span class="sub"> Pronoun Case and Possessives</span></span><span class="st"></span></a><a href="F2.7-there-count-quantity.html" data-node="F2.7-there-count-quantity"><span>there is/are 與基本數量<span class="sub"> There Is/Are, Countability, and Basic Quantity</span></span><span class="st"></span></a>
   </div>
 </div><div class="bandcard">
   <h2>F3 過去故事島</h2>
   <div class="sc">情境：旅行與昨天的事件　·　6 課</div>
   <div class="nlist">
-    <a href="F3.1-past-be.html"><span>過去的 was / were<span class="sub"> Past Forms of Be</span></span><span>›</span></a><a href="F3.2-past-simple.html"><span>一般動詞過去式<span class="sub"> Past Simple of Action Verbs</span></span><span>›</span></a><a href="F3.3-did-questions.html"><span>did 問句與否定<span class="sub"> Past Questions and Negatives with Did</span></span><span>›</span></a><a href="F3.4-prepositions.html"><span>地點與時間介系詞<span class="sub"> Prepositions of Place and Time</span></span><span>›</span></a><a href="F3.5-connectors.html"><span>基本連接詞與邏輯<span class="sub"> Basic Connectors and Logical Relations</span></span><span>›</span></a><a href="F3.6-basic-helpers.html"><span>can、will 與 going to<span class="sub"> Can, Will, and Be Going To</span></span><span>›</span></a>
+    <a href="F3.1-past-be.html" data-node="F3.1-past-be"><span>過去的 was / were<span class="sub"> Past Forms of Be</span></span><span class="st"></span></a><a href="F3.2-past-simple.html" data-node="F3.2-past-simple"><span>一般動詞過去式<span class="sub"> Past Simple of Action Verbs</span></span><span class="st"></span></a><a href="F3.3-did-questions.html" data-node="F3.3-did-questions"><span>did 問句與否定<span class="sub"> Past Questions and Negatives with Did</span></span><span class="st"></span></a><a href="F3.4-prepositions.html" data-node="F3.4-prepositions"><span>地點與時間介系詞<span class="sub"> Prepositions of Place and Time</span></span><span class="st"></span></a><a href="F3.5-connectors.html" data-node="F3.5-connectors"><span>基本連接詞與邏輯<span class="sub"> Basic Connectors and Logical Relations</span></span><span class="st"></span></a><a href="F3.6-basic-helpers.html" data-node="F3.6-basic-helpers"><span>can、will 與 going to<span class="sub"> Can, Will, and Be Going To</span></span><span class="st"></span></a>
   </div>
 </div><div class="bandcard">
   <h2>F4 比較與選擇島</h2>
   <div class="sc">情境：城市規劃、比較與規則　·　6 課</div>
   <div class="nlist">
-    <a href="F4.1-past-continuous.html"><span>過去進行式與 when / while<span class="sub"> Past Continuous with When and While</span></span><span>›</span></a><a href="F4.2-adjectives-adverbs.html"><span>形容詞與副詞<span class="sub"> Adjectives and Adverbs</span></span><span>›</span></a><a href="F4.3-comparatives.html"><span>比較級與最高級<span class="sub"> Comparatives and Superlatives</span></span><span>›</span></a><a href="F4.4-quantifiers.html"><span>數量詞<span class="sub"> Quantifiers</span></span><span>›</span></a><a href="F4.5-modal-functions.html"><span>建議、義務與可能性<span class="sub"> Modal Functions: Advice, Obligation, and Possibility</span></span><span>›</span></a><a href="F4.6-infinitive-gerund.html"><span>to + V 與 V-ing 搭配<span class="sub"> Common Infinitive and Gerund Patterns</span></span><span>›</span></a>
+    <a href="F4.1-past-continuous.html" data-node="F4.1-past-continuous"><span>過去進行式與 when / while<span class="sub"> Past Continuous with When and While</span></span><span class="st"></span></a><a href="F4.2-adjectives-adverbs.html" data-node="F4.2-adjectives-adverbs"><span>形容詞與副詞<span class="sub"> Adjectives and Adverbs</span></span><span class="st"></span></a><a href="F4.3-comparatives.html" data-node="F4.3-comparatives"><span>比較級與最高級<span class="sub"> Comparatives and Superlatives</span></span><span class="st"></span></a><a href="F4.4-quantifiers.html" data-node="F4.4-quantifiers"><span>數量詞<span class="sub"> Quantifiers</span></span><span class="st"></span></a><a href="F4.5-modal-functions.html" data-node="F4.5-modal-functions"><span>建議、義務與可能性<span class="sub"> Modal Functions: Advice, Obligation, and Possibility</span></span><span class="st"></span></a><a href="F4.6-infinitive-gerund.html" data-node="F4.6-infinitive-gerund"><span>to + V 與 V-ing 搭配<span class="sub"> Common Infinitive and Gerund Patterns</span></span><span class="st"></span></a>
   </div>
 </div><div class="bandcard">
   <h2>F5 經驗與條件島</h2>
   <div class="sc">情境：經驗、選擇與條件　·　6 課</div>
   <div class="nlist">
-    <a href="F5.1-present-perfect-experience.html"><span>現在完成式：經驗與結果<span class="sub"> Present Perfect for Experience and Result</span></span><span>›</span></a><a href="F5.2-perfect-markers.html"><span>already、yet、since 與 for<span class="sub"> Present Perfect Time Markers</span></span><span>›</span></a><a href="F5.3-perfect-vs-past.html"><span>現在完成式與過去式<span class="sub"> Present Perfect versus Past Simple</span></span><span>›</span></a><a href="F5.4-first-conditional.html"><span>第一條件句<span class="sub"> First Conditional</span></span><span>›</span></a><a href="F5.5-relative-basic.html"><span>基本關係子句<span class="sub"> Basic Relative Clauses</span></span><span>›</span></a><a href="F5.6-reflexive-reference.html"><span>反身代名詞與清楚指涉<span class="sub"> Reflexive Pronouns and Clear Reference</span></span><span>›</span></a>
+    <a href="F5.1-present-perfect-experience.html" data-node="F5.1-present-perfect-experience"><span>現在完成式：經驗與結果<span class="sub"> Present Perfect for Experience and Result</span></span><span class="st"></span></a><a href="F5.2-perfect-markers.html" data-node="F5.2-perfect-markers"><span>already、yet、since 與 for<span class="sub"> Present Perfect Time Markers</span></span><span class="st"></span></a><a href="F5.3-perfect-vs-past.html" data-node="F5.3-perfect-vs-past"><span>現在完成式與過去式<span class="sub"> Present Perfect versus Past Simple</span></span><span class="st"></span></a><a href="F5.4-first-conditional.html" data-node="F5.4-first-conditional"><span>第一條件句<span class="sub"> First Conditional</span></span><span class="st"></span></a><a href="F5.5-relative-basic.html" data-node="F5.5-relative-basic"><span>基本關係子句<span class="sub"> Basic Relative Clauses</span></span><span class="st"></span></a><a href="F5.6-reflexive-reference.html" data-node="F5.6-reflexive-reference"><span>反身代名詞與清楚指涉<span class="sub"> Reflexive Pronouns and Clear Reference</span></span><span class="st"></span></a>
   </div>
 </div><div class="bandcard">
   <h2>F6 報告與流程島</h2>
   <div class="sc">情境：科學實驗、流程與報告　·　6 課</div>
   <div class="nlist">
-    <a href="F6.1-tense-choice.html"><span>跨句時態選擇<span class="sub"> Tense Choice Across Sentences</span></span><span>›</span></a><a href="F6.2-passive-process.html"><span>流程被動與資訊焦點<span class="sub"> Passive Voice for Processes and Focus</span></span><span>›</span></a><a href="F6.3-future-forms.html"><span>未來形式的細微差異<span class="sub"> Nuance among Future Forms</span></span><span>›</span></a><a href="F6.4-expanded-noun-phrases.html"><span>擴展名詞片語<span class="sub"> Expanded Noun Phrases</span></span><span>›</span></a><a href="F6.5-reporting-sources.html"><span>引述來源與觀點<span class="sub"> Reporting Sources and Viewpoints</span></span><span>›</span></a><a href="F6.6-cohesion-basic.html"><span>句內與段內銜接<span class="sub"> Cohesion within and across Sentences</span></span><span>›</span></a>
+    <a href="F6.1-tense-choice.html" data-node="F6.1-tense-choice"><span>跨句時態選擇<span class="sub"> Tense Choice Across Sentences</span></span><span class="st"></span></a><a href="F6.2-passive-process.html" data-node="F6.2-passive-process"><span>流程被動與資訊焦點<span class="sub"> Passive Voice for Processes and Focus</span></span><span class="st"></span></a><a href="F6.3-future-forms.html" data-node="F6.3-future-forms"><span>未來形式的細微差異<span class="sub"> Nuance among Future Forms</span></span><span class="st"></span></a><a href="F6.4-expanded-noun-phrases.html" data-node="F6.4-expanded-noun-phrases"><span>擴展名詞片語<span class="sub"> Expanded Noun Phrases</span></span><span class="st"></span></a><a href="F6.5-reporting-sources.html" data-node="F6.5-reporting-sources"><span>引述來源與觀點<span class="sub"> Reporting Sources and Viewpoints</span></span><span class="st"></span></a><a href="F6.6-cohesion-basic.html" data-node="F6.6-cohesion-basic"><span>句內與段內銜接<span class="sub"> Cohesion within and across Sentences</span></span><span class="st"></span></a>
   </div>
 </div><div class="bandcard">
   <h2>F7 表達修訂島</h2>
   <div class="sc">情境：簡報、文章修改與自然表達　·　6 課</div>
   <div class="nlist">
-    <a href="F7.1-relative-advanced.html"><span>關係子句深化<span class="sub"> Advanced Relative Clauses and Attachment</span></span><span>›</span></a><a href="F7.2-modal-deduction.html"><span>情態動詞的推論強度<span class="sub"> Modal Deduction and Degrees of Certainty</span></span><span>›</span></a><a href="F7.3-register.html"><span>正式與非正式語體<span class="sub"> Formal and Informal Register</span></span><span>›</span></a><a href="F7.4-reference-across-sentences.html"><span>跨句指涉與避免含糊<span class="sub"> Reference across Sentences</span></span><span>›</span></a><a href="F7.5-punctuation.html"><span>子句與資訊標點<span class="sub"> Punctuation for Clauses and Information</span></span><span>›</span></a><a href="F7.6-edit-naturalness.html"><span>修改自然度與語意<span class="sub"> Editing for Naturalness and Meaning</span></span><span>›</span></a>
+    <a href="F7.1-relative-advanced.html" data-node="F7.1-relative-advanced"><span>關係子句深化<span class="sub"> Advanced Relative Clauses and Attachment</span></span><span class="st"></span></a><a href="F7.2-modal-deduction.html" data-node="F7.2-modal-deduction"><span>情態動詞的推論強度<span class="sub"> Modal Deduction and Degrees of Certainty</span></span><span class="st"></span></a><a href="F7.3-register.html" data-node="F7.3-register"><span>正式與非正式語體<span class="sub"> Formal and Informal Register</span></span><span class="st"></span></a><a href="F7.4-reference-across-sentences.html" data-node="F7.4-reference-across-sentences"><span>跨句指涉與避免含糊<span class="sub"> Reference across Sentences</span></span><span class="st"></span></a><a href="F7.5-punctuation.html" data-node="F7.5-punctuation"><span>子句與資訊標點<span class="sub"> Punctuation for Clauses and Information</span></span><span class="st"></span></a><a href="F7.6-edit-naturalness.html" data-node="F7.6-edit-naturalness"><span>修改自然度與語意<span class="sub"> Editing for Naturalness and Meaning</span></span><span class="st"></span></a>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../cloud_sync.js"></script>
+<script src="../../account_lock.js"></script>
+<script src="../../supabase_auth.js"></script>
+<script>
+var currentStudent = null;
+function getProgress(s) {
+  var raw = localStorage.getItem("kidsProgress." + s);
+  var p = raw ? JSON.parse(raw) : { wrongCounts:{}, sessions:0, totalCorrect:0, totalWrong:0 };
+  if (!p.coins) p.coins = { balance:0, lifetimeEarned:0, lifetimeSpent:0, transactions:[], claimedDrills:{} };
+  if (!p.grammar) p.grammar = { schemaVersion:1, nodes:{}, completedCount:0, coinsEarned:0, updatedAt:null };
+  return p;
+}
+function draw() {
+  var links = document.querySelectorAll(".nlist a");
+  if (!currentStudent) {
+    for (var i = 0; i < links.length; i++) { links[i].classList.remove("done"); links[i].querySelector(".st").textContent = "›"; }
+    document.getElementById("overall").textContent = "先選名字，就會顯示你每一課的進度。";
+    document.getElementById("coinBox").textContent = "🪙 —";
+    return;
+  }
+  var p = getProgress(currentStudent), recs = p.grammar.nodes || {}, doneN = 0, coinN = 0;
+  for (var j = 0; j < links.length; j++) {
+    var a = links[j], r = recs[a.dataset.node];
+    if (r) {
+      doneN++; coinN += r.coins || 0;
+      a.classList.add("done");
+      a.querySelector(".st").textContent = "✅ " + r.best + "/" + r.total + "　🪙" + r.coins;
+    } else { a.classList.remove("done"); a.querySelector(".st").textContent = "›"; }
+  }
+  document.getElementById("coinBox").textContent = "🪙 " + p.coins.balance;
+  document.getElementById("overall").textContent =
+    "已完成 " + doneN + " / " + links.length + " 課　·　文法課累積 🪙 " + coinN;
+}
+window.pickStudent = function (name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
+  currentStudent = name;
+  localStorage.setItem("kidsCurrentStudent", name);
+  var btns = document.querySelectorAll(".stu-btn");
+  for (var i = 0; i < btns.length; i++) btns[i].classList.toggle("active", btns[i].textContent.toLowerCase().indexOf(name) >= 0);
+  draw();
+};
+(function () {
+  var last = localStorage.getItem("kidsCurrentStudent");
+  if (!window.sbClient && last && last !== "guest") window.pickStudent(last); else draw();
+})();
+</script>
 </body>
 </html>
