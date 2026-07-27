@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>食物與用餐 × 住家與物品 · 單字單元 l3-u05</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  background:#f6f8fa;color:#22303f;line-height:1.7;padding:0 0 70px}
+header{background:linear-gradient(135deg,#e6f4ea,#f1f8ff);padding:18px 16px 14px;border-bottom:3px solid #8fd6a8}
+header h1{margin:0 0 3px;font-size:1.2rem}
+header p{margin:0;font-size:.79rem;color:#5a6875}
+header a{color:#2f80ed;text-decoration:none}
+.wrap{max-width:720px;margin:0 auto;padding:0 14px}
+.stubar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;background:#fff;border:1px solid #e3e8ee;
+  border-radius:12px;padding:9px 12px;margin:14px 0}
+.stubar .lab{font-size:.8rem;color:#6b7a8c}
+.stu-btn{border:1px solid #cfd8e3;background:#fff;border-radius:16px;padding:5px 13px;font-size:.85rem;cursor:pointer;font-family:inherit}
+.stu-btn.active{background:#2f80ed;color:#fff;border-color:#2f80ed;font-weight:700}
+.coin{margin-left:auto;background:#fff6dc;border:1px solid #f2d38a;border-radius:14px;padding:4px 11px;font-size:.85rem;font-weight:700}
+#coinBox.bump{animation:coinBump .6s ease}
+@keyframes coinBump{0%,100%{transform:scale(1)}30%{transform:scale(1.35);background:#ffe27a}}
+.card{background:#fff;border:1px solid #e3e8ee;border-radius:14px;padding:15px 16px;margin:13px 0}
+.card h2{font-size:1rem;margin:0 0 4px}
+.card .hint{font-size:.83rem;color:#6b7a8c;margin:0 0 11px}
+/* 單字卡：先只給英文，點了才翻中文與例句 */
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px}
+.wcard{border:1px solid #dde4ec;border-radius:11px;padding:10px 11px;background:#fcfdff;cursor:pointer}
+.wcard.open{background:#f2fbf5;border-color:#8fd6a8}
+.wcard .en{font-size:1.02rem;font-weight:700;display:flex;align-items:center;gap:6px}
+.wcard .pos{font-size:.7rem;color:#8a97a5;font-weight:400}
+.wcard .back{display:none;margin-top:6px;font-size:.85rem}
+.wcard.open .back{display:block}
+.wcard .zh{font-weight:700;color:#1f6b45}
+.wcard .col{font-size:.77rem;color:#6b7a8c;margin-top:2px}
+.wcard .ex{margin-top:6px;padding-top:6px;border-top:1px dashed #dde4ec;font-size:.84rem}
+.wcard .ex div{margin:3px 0}
+.spk{border:0;background:#e6f0fb;border-radius:8px;padding:2px 8px;font-size:.8rem;cursor:pointer;font-family:inherit}
+.spk:hover{background:#cfe2f7}
+/* 對話 */
+.turn{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid #f0f3f7;font-size:.9rem}
+.turn:first-child{border-top:0}
+.turn .who{font-weight:700;width:1.5em;flex-shrink:0;color:#2f80ed}
+.turn .who.b{color:#b3621a}
+.turn .tx{flex:1}
+.psg{font-size:.93rem;margin:0 0 6px}
+.zhline{font-size:.8rem;color:#8a97a5}
+/* 測驗 */
+.q{border-top:1px solid #eef1f5;padding:12px 0}
+.q:first-of-type{border-top:0}
+.q .ask{font-weight:700;font-size:.93rem;margin-bottom:7px}
+.q .sent{display:block;font-weight:400;color:#3d4b5a;margin-top:3px}
+.opt{display:block;width:100%;text-align:left;border:1px solid #cfd8e3;background:#fff;border-radius:10px;
+  padding:9px 12px;margin:5px 0;font-size:.9rem;cursor:pointer;font-family:inherit}
+.opt:hover{border-color:#2f80ed}
+.opt.ok{background:#e8f7ee;border-color:#2fbf71;font-weight:700}
+.opt.no{background:#fdecec;border-color:#e88}
+.opt[disabled]{cursor:default}
+#quizScore{font-weight:700;margin-top:9px}
+.fin{width:100%;border:0;border-radius:12px;padding:13px;font-size:1rem;font-weight:700;color:#fff;
+  background:#2fbf71;cursor:pointer;font-family:inherit}
+.nav{display:flex;justify-content:space-between;gap:8px;margin:16px 0 0;font-size:.85rem}
+.nav a{color:#2f80ed;text-decoration:none}
+#toast{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-90px);background:#243042;color:#fff;
+  padding:11px 20px;border-radius:20px;font-size:.95rem;font-weight:700;transition:transform .3s;z-index:100;
+  max-width:90%;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+#toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<header>
+  <h1>🔤 食物與用餐 × 住家與物品</h1>
+  <p>L3-U05 · Food and Meals &amp; Home and Objects · 14 個字　·
+     <a href="index.html">← 單元列表</a>　<a href="../../index.html">🏠 首頁</a></p>
+</header>
+
+<div class="wrap">
+  <div class="stubar">
+    <span class="lab">我是：</span>
+    <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
+    <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
+    <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
+    <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+    <span class="coin" id="coinBox">🪙 —</span>
+  </div>
+
+  <div class="card">
+    <h2>① 先認識這些字</h2>
+    <p class="hint">點一下卡片會翻開中文和例句。先自己猜猜看是什麼意思，再翻開對答案。</p>
+    <div class="wgrid">
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">hot dog <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/hotdog.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">熱狗</div>
+        <div class="col">常這樣用：hot dog</div>
+        <div class="ex">
+          <div>I have a hot dog for lunch.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-hot_dog-e1.mp3')">🔊</button></div><div>The hot dog is on the plate.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-hot_dog-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">ice <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ice.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">冰</div>
+        <div class="col">常這樣用：ice</div>
+        <div class="ex">
+          <div>Please put some ice in my water.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-ice-e1.mp3')">🔊</button></div><div>The ice melts in the warm sun.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-ice-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">ice cream <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/icecream.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">冰淇淋</div>
+        <div class="col">常這樣用：ice cream</div>
+        <div class="ex">
+          <div>I like ice cream.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-ice_cream-e1.mp3')">🔊</button></div><div>Ice cream is on the table.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-ice_cream-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">juice <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/juice.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">果汁</div>
+        <div class="col">常這樣用：juice</div>
+        <div class="ex">
+          <div>Juice is sweet.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/juice_0.mp3')">🔊</button></div><div>I drink juice with lunch.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/juice_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">salt <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/salt.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">鹽</div>
+        <div class="col">常這樣用：salt</div>
+        <div class="ex">
+          <div>Please put some salt in the soup.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-salt-e1.mp3')">🔊</button></div><div>Too much salt is not healthy.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-salt-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">dining room <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/diningroom.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">飯廳</div>
+        <div class="col">常這樣用：a dining room</div>
+        <div class="ex">
+          <div>We eat dinner in the dining room.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-dining_room-e1.mp3')">🔊</button></div><div>The dining room has a large table.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-dining_room-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">house <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/house.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">房子</div>
+        <div class="col">常這樣用：a small house</div>
+        <div class="ex">
+          <div>My house has three rooms.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-house-e1.mp3')">🔊</button></div><div>There is a tree in front of the house.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-house-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">kitchen <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/kitchen.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">廚房</div>
+        <div class="col">常這樣用：a kitchen</div>
+        <div class="ex">
+          <div>Mom is cooking in the kitchen.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-kitchen-e1.mp3')">🔊</button></div><div>The cups are in the kitchen.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-kitchen-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">phone <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/phone.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">電話</div>
+        <div class="col">常這樣用：a phone</div>
+        <div class="ex">
+          <div>The phone is ringing.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-phone-e1.mp3')">🔊</button></div><div>I talk to Grandma on the phone.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-phone-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">telephone <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/telephone.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">電話</div>
+        <div class="col">常這樣用：a telephone</div>
+        <div class="ex">
+          <div>The telephone is next to the sofa.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-telephone-e1.mp3')">🔊</button></div><div>I use the telephone to call Grandpa.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-telephone-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">coat <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/coat.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">外套</div>
+        <div class="col">常這樣用：a coat</div>
+        <div class="ex">
+          <div>The coat is brown.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/coat_0.mp3')">🔊</button></div><div>I wear a coat in winter.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/coat_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">dress <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/dress.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">洋裝</div>
+        <div class="col">常這樣用：wear a dress</div>
+        <div class="ex">
+          <div>The dress is pretty.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/dress_0.mp3')">🔊</button></div><div>My sister wears a dress.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/dress_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">hat <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/hat.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">帽子</div>
+        <div class="col">常這樣用：a hat</div>
+        <div class="ex">
+          <div>The hat is on my head.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/hat_0.mp3')">🔊</button></div><div>I wear a hat in the sun.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/hat_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">wear <span class="pos">verb</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/wear.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">穿著</div>
+        <div class="col">常這樣用：wear a coat</div>
+        <div class="ex">
+          <div>I wear a coat in winter.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-wear-e1.mp3')">🔊</button></div><div>She wears a white shirt.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l3-wear-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <h2>② 聽聽看什麼時候會用到</h2>
+    <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l3-u05-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
+    
+    <div class="turn"><span class="who">A</span>
+      <span class="tx">What should we take to the picnic?</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d1.mp3')">🔊</button></div>
+    <div class="turn"><span class="who b">B</span>
+      <span class="tx">We have hot dogs and juice in the kitchen.</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d2.mp3')">🔊</button></div>
+    <div class="turn"><span class="who">A</span>
+      <span class="tx">Can we bring ice cream too?</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d3.mp3')">🔊</button></div>
+    <div class="turn"><span class="who b">B</span>
+      <span class="tx">It may melt before we reach the park.</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d4.mp3')">🔊</button></div>
+    <div class="turn"><span class="who">A</span>
+      <span class="tx">Then I will put some ice in this box.</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d5.mp3')">🔊</button></div>
+    <div class="turn"><span class="who b">B</span>
+      <span class="tx">Good idea. Please wear your coat and hat.</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d6.mp3')">🔊</button></div>
+    <div class="turn"><span class="who">A</span>
+      <span class="tx">Should I call Amy on the phone?</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d7.mp3')">🔊</button></div>
+    <div class="turn"><span class="who b">B</span>
+      <span class="tx">Yes. Tell her to meet us outside the house.</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d8.mp3')">🔊</button></div>
+  </div>
+
+  <div class="card">
+    <h2>③ 讀一段短文</h2>
+    <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    
+    <div style="margin:0 0 13px">
+      <p class="psg">It was hot after school, so my sister and I made ice cream in our kitchen. She mixed milk with ice while I poured juice into small cups. I added a little salt to the ice, but none went into the food. Mom set the dining room table and called our cousins. When they reached our house, we put away their coats and hats. Everyone enjoyed the cold dessert, and we saved one cup for Dad.</p>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l3-u05-p1.mp3')">🔊 聽這一篇</button>
+    </div>
+    <div style="margin:0 0 13px">
+      <p class="psg">Rain started while Lily was walking home in her new dress. She quickly put on her coat and hat, but her shoes still got wet. At the house, the telephone was ringing in the dining room. Lily answered it, and Dad asked her to warm dinner in the kitchen. She made a hot dog, poured some juice, and added a little salt to her soup. Later, she called Dad on her phone and said everything was ready.</p>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l3-u05-p2.mp3')">🔊 聽這一篇</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>④ 這幾組最容易搞混</h2>
+    <p class="hint">看清楚差在哪裡，之後就不會用錯。</p>
+    
+      <div style="margin:0 0 13px;padding:11px;background:#fff9ec;border:1px solid #f3dfae;border-radius:11px">
+        <b style="font-size:.93rem">home / house / room</b>
+        <p class="hint" style="margin:3px 0 6px">house 是建築物；room 是房子裡的一個房間；home 強調居住與歸屬，可直接說 go home。</p>
+        <div style="font-size:.86rem;margin:3px 0">My house has three rooms.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/home-house-room-e1.mp3')">🔊</button></div><div style="font-size:.86rem;margin:3px 0">My room is small.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/home-house-room-e2.mp3')">🔊</button></div><div style="font-size:.86rem;margin:3px 0">Mom is at home.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/home-house-room-e3.mp3')">🔊</button></div><div style="font-size:.86rem;margin:3px 0">I go home after school.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/home-house-room-e4.mp3')">🔊</button></div>
+      </div>
+      <div style="margin:0 0 13px;padding:11px;background:#fff9ec;border:1px solid #f3dfae;border-radius:11px">
+        <b style="font-size:.93rem">phone / telephone / cellphone</b>
+        <p class="hint" style="margin:3px 0 6px">phone 是最常用總稱；telephone 可指電話或較正式說法；cellphone 特別指行動電話。</p>
+        <div style="font-size:.86rem;margin:3px 0">I call Mom on the phone.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/phone-words-e1.mp3')">🔊</button></div><div style="font-size:.86rem;margin:3px 0">What is your telephone number?
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/phone-words-e2.mp3')">🔊</button></div><div style="font-size:.86rem;margin:3px 0">My cellphone is in my bag.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/phone-words-e3.mp3')">🔊</button></div><div style="font-size:.86rem;margin:3px 0">The office telephone is on the desk.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/phone-words-e4.mp3')">🔊</button></div>
+      </div>
+  </div>
+  <div class="card">
+    <h2>⑤ 小測驗</h2>
+    <p class="hint">8 題。答對越多，金幣越多（這一單元最多 🪙 40）。</p>
+    <div id="quizBox"></div>
+    <div id="quizScore"></div>
+  </div>
+
+  <div class="card" id="finishCard">
+    <button class="fin" onclick="finishUnit()">我學完這一單元了 🪙</button>
+    <div id="finishMsg" class="hint" style="margin:9px 0 0"></div>
+  </div>
+
+  <div class="nav">
+    <span><a href="l3-u04.html">← 食物與用餐 × 校園與學習</a></span>
+    <span><a href="l3-u06.html">地點與交通 × 動作與日常 →</a></span>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../cloud_sync.js?v=202607271116"></script>
+<script src="../../account_lock.js?v=202607271116"></script>
+<script src="../../supabase_auth.js?v=202607271116"></script>
+<script>
+var UNIT_ID = "l3-u05";
+var QUIZ = [{"kind":"zh2en","ask":"「熱狗」的英文是哪一個？","answer":"hot dog","options":["ice","hot dog","ice cream","juice"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eice cream\u003c/b\u003e 是什麼意思？","answer":"冰淇淋","options":["熱狗","冰","冰淇淋","果汁"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"salt","options":["salt","hot dog","ice","ice cream"],"audio":"audio/words/salt.mp3"},{"kind":"cloze","ask":"哪個字放進空格才對？\u003cbr\u003e\u003cspan class=\"sent\"\u003eMy ＿＿＿ has three rooms.\u003c/span\u003e","answer":"house","options":["house","hot dog","ice","ice cream"],"audio":null},{"kind":"zh2en","ask":"「電話」的英文是哪一個？","answer":"phone","options":["hot dog","ice","phone","ice cream"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ecoat\u003c/b\u003e 是什麼意思？","answer":"外套","options":["熱狗","外套","冰","冰淇淋"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"hat","options":["hot dog","hat","ice","ice cream"],"audio":"audio/words/hat.mp3"},{"kind":"cloze","ask":"哪個字放進空格才對？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI have a ＿＿＿ for lunch.\u003c/span\u003e","answer":"hot dog","options":["ice","hot dog","ice cream","juice"],"audio":null}];
+var currentStudent = null, curAudio = null, done = 0, ok = 0;
+
+function getProgress(s) {
+  var raw = localStorage.getItem("kidsProgress." + s);
+  var p = raw ? JSON.parse(raw) : { wrongCounts:{}, sessions:0, totalCorrect:0, totalWrong:0 };
+  if (!p.coins) p.coins = { balance:0, lifetimeEarned:0, lifetimeSpent:0, transactions:[], claimedDrills:{} };
+  if (!p.vocab) p.vocab = { schemaVersion:1, units:{}, completedCount:0, coinsEarned:0, updatedAt:null };
+  if (!p.vocab.units) p.vocab.units = {};
+  return p;
+}
+function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
+
+// 只播預先生成的 Kokoro 音檔；沒有音檔就安靜跳過，不退回瀏覽器機械音。
+function play(src) {
+  if (curAudio) { curAudio.pause(); curAudio = null; }
+  var a = new Audio(src); curAudio = a;
+  a.play().catch(function () {});
+}
+function flip(el) { el.classList.toggle("open"); }
+
+function refreshCoin(bump) {
+  var el = document.getElementById("coinBox");
+  el.textContent = currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
+  if (bump) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
+}
+var _tt = null;
+function toast(msg) {
+  var t = document.getElementById("toast");
+  t.innerHTML = msg; t.classList.add("show");
+  clearTimeout(_tt); _tt = setTimeout(function () { t.classList.remove("show"); }, 3200);
+}
+
+function drawQuiz() {
+  var h = "";
+  QUIZ.forEach(function (q, i) {
+    h += '<div class="q" id="q' + i + '"><div class="ask">' + (i + 1) + ". " + q.ask +
+      (q.audio ? ' <button class="spk" onclick="play(\'../../' + q.audio + '\')">🔊 再聽一次</button>' : "") + '</div>';
+    q.options.forEach(function (o, j) {
+      h += '<button class="opt" onclick="ans(' + i + ',' + j + ')">' + o + '</button>';
+    });
+    h += '</div>';
+  });
+  document.getElementById("quizBox").innerHTML = h;
+  // 聽力題一進來先自動播一次，小孩才知道要聽什麼
+}
+function ans(qi, oi) {
+  var q = QUIZ[qi], box = document.getElementById("q" + qi);
+  var btns = box.querySelectorAll(".opt");
+  if (btns[0].disabled) return;
+  var good = q.options[oi] === q.answer;
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].disabled = true;
+    if (q.options[i] === q.answer) btns[i].classList.add("ok");
+    else if (i === oi) btns[i].classList.add("no");
+  }
+  done++; if (good) ok++;
+  if (done === QUIZ.length) {
+    document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
+      "　<span style='font-weight:400;color:#667085'>↓ 按下面的按鈕領金幣</span>";
+    toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+  }
+}
+
+// 與文法課同一條金幣公式：底分 + 依正確率加成 + 全對再加，上限 40。
+// 重做只補差額，所以重複刷同一單元拿不到更多。
+function coinsFor(correct, total) {
+  var base = 15 + Math.round(15 * (total ? correct / total : 0)) + (total && correct === total ? 10 : 0);
+  return Math.min(base, 40);
+}
+
+function finishUnit() {
+  if (!currentStudent) { toast("先選上面的名字，才知道金幣要給誰"); return; }
+  if (done < QUIZ.length) { toast("小測驗還有 " + (QUIZ.length - done) + " 題沒做完"); return; }
+  var p = getProgress(currentStudent);
+  var isFirst = !p.vocab.units[UNIT_ID];
+  var prev = p.vocab.units[UNIT_ID] || { best:0, total:QUIZ.length, coins:0, attempts:0 };
+  var bestCorrect = Math.max(prev.best || 0, ok);
+  var should = coinsFor(bestCorrect, QUIZ.length);
+  var delta = Math.max(0, should - (prev.coins || 0));
+  var now = new Date();
+  var day = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0");
+
+  p.vocab.units[UNIT_ID] = { best: bestCorrect, total: QUIZ.length, coins: (prev.coins || 0) + delta,
+    attempts: (prev.attempts || 0) + 1, lastAt: day };
+  if (isFirst) p.vocab.completedCount = (p.vocab.completedCount || 0) + 1;
+  p.vocab.coinsEarned = (p.vocab.coinsEarned || 0) + delta;
+  p.vocab.updatedAt = day;
+  if (delta > 0) {
+    p.coins.balance += delta; p.coins.lifetimeEarned += delta;
+    p.coins.transactions.push({ type:"earn", source:"vocabUnit", amount:delta,
+      balanceAfter:p.coins.balance, createdAt:day, meta:{ unitId:UNIT_ID, correct:bestCorrect, total:QUIZ.length } });
+  }
+  saveProgress(currentStudent, p);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  refreshCoin(delta > 0);
+  toast(delta > 0 ? "🪙 +" + delta + " 金幣！　共 " + p.coins.balance
+                  : "這一單元已經領滿 🪙 " + p.vocab.units[UNIT_ID].coins + " 了");
+  var msg = document.getElementById("finishMsg");
+  msg.innerHTML = delta > 0
+    ? "🎉 這一單元完成！領到 <b>🪙 +" + delta + "</b>（這一單元共 " + p.vocab.units[UNIT_ID].coins + " ／ 上限 40）<br>" +
+      "<a href='../../island.html' style='color:#2f80ed;font-weight:700'>👉 去蓋我的島嶼</a>"
+    : "這一單元的金幣已經領滿了（🪙 " + p.vocab.units[UNIT_ID].coins + "）。答對更多題才會再補發喔！";
+  msg.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function pickStudent(name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
+  currentStudent = name;
+  localStorage.setItem("kidsCurrentStudent", name);
+  var btns = document.querySelectorAll(".stu-btn");
+  for (var i = 0; i < btns.length; i++)
+    btns[i].classList.toggle("active", btns[i].textContent.toLowerCase().indexOf(name) >= 0);
+  refreshCoin();
+}
+
+drawQuiz();
+(function () {
+  var last = localStorage.getItem("kidsCurrentStudent");
+  if (!window.sbClient && last && last !== "guest") pickStudent(last); else refreshCoin();
+})();
+</script>
+</body>
+</html>

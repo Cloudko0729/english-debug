@@ -214,12 +214,34 @@
       <span class="badge badge-new" id="monthBadge">選課</span>
     </a>
 
+    <a class="card" href="vocab_month.html" id="vmonthCard" style="border:2px solid #2fbf71;background:linear-gradient(135deg,#e9fbf1,#fff)">
+      <div class="card-left">
+        <div class="card-icon" style="background:#c8f0d8;font-size:1.3rem">🔤</div>
+        <div>
+          <div class="card-title">本月單字課表</div>
+          <div class="card-sub" id="vmonthSub">自己決定這個月要背哪些字 · 系統給建議</div>
+        </div>
+      </div>
+      <span class="badge badge-new" id="vmonthBadge">選課</span>
+    </a>
+
     <a class="card" href="grammar_db/lessons/index.html" style="border:2px solid #2fbf71;background:linear-gradient(135deg,#e9fbf1,#fff)">
       <div class="card-left">
         <div class="card-icon" style="background:#c8f0d8;font-size:1.3rem">🗺️</div>
         <div>
           <div class="card-title">文法地圖 F0–F7</div>
           <div class="card-sub">48 課 · 從最基礎到六年級 · 情境→例句→比一比→小測驗＋口說手寫</div>
+        </div>
+      </div>
+      <span class="badge badge-new">新</span>
+    </a>
+
+    <a class="card" href="vocab_db/units/index.html" style="border:2px solid #2fbf71;background:linear-gradient(135deg,#e9fbf1,#fff)">
+      <div class="card-left">
+        <div class="card-icon" style="background:#c8f0d8;font-size:1.3rem">📚</div>
+        <div>
+          <div class="card-title">單字單元地圖 L1–L4</div>
+          <div class="card-sub">33 單元 463 字 · 單字卡→對話→短文→易混淆→小測驗 · 全真人語音</div>
         </div>
       </div>
       <span class="badge badge-new">新</span>
@@ -315,12 +337,14 @@
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607271106"></script>
-<script src="account_lock.js?v=202607271106"></script>
-<script src="supabase_auth.js?v=202607271106"></script>
-<script src="drills_list.js?v=202607271106"></script>
-<script src="grammar_nodes.js?v=202607271106"></script>
-<script src="grammar_plan.js?v=202607271106"></script>
+<script src="cloud_sync.js?v=202607271116"></script>
+<script src="account_lock.js?v=202607271116"></script>
+<script src="supabase_auth.js?v=202607271116"></script>
+<script src="drills_list.js?v=202607271116"></script>
+<script src="grammar_nodes.js?v=202607271116"></script>
+<script src="grammar_plan.js?v=202607271116"></script>
+<script src="vocab_units.js?v=202607271116"></script>
+<script src="vocab_unit_plan.js?v=202607271116"></script>
 <script>
 let _homeSynced = false;
 function pickStudent(name) {
@@ -356,30 +380,34 @@ function pickStudent(name) {
   }
 }
 
-// 本月文法課表：沒選就催一下，選了就顯示進度。
+// 月課表卡片：沒選就催一下，選了就顯示進度。
 // 「還沒選」要看得出來，不然小孩每個月都會忘記回來重新規劃。
-function drawMonthCard(p) {
-  const card = document.getElementById("monthCard");
-  const sub = document.getElementById("monthSub");
-  const badge = document.getElementById("monthBadge");
-  if (!card || !window.GrammarPlan) return;
-  const GP = window.GrammarPlan;
-  const s = GP.planStatus(p);
+// 文法與單字兩軌各自獨立選課，卡片邏輯相同，只有引擎與連結不同。
+function drawPlanCard(p, engine, ids, unitWord) {
+  const card = document.getElementById(ids.card);
+  const sub = document.getElementById(ids.sub);
+  const badge = document.getElementById(ids.badge);
+  if (!card || !engine) return;
+  const s = engine.planStatus(p);
   if (!s) {
     card.style.borderColor = "#f2a900";
     card.style.background = "linear-gradient(135deg,#fff6dc,#fff)";
-    sub.textContent = `${GP.monthLabel(GP.planMonthKey())}的課還沒選 · 進來看系統推薦哪一條路線`;
+    sub.textContent = `${engine.monthLabel(engine.planMonthKey())}的${unitWord}還沒選 · 進來看系統推薦哪一條路線`;
     badge.textContent = "去選課";
     badge.style.background = "#f2a900";
     return;
   }
-  const route = GP.ROUTES.filter(r => r.key === s.plan.route)[0] || {};
+  const route = engine.ROUTES.filter(r => r.key === s.plan.route)[0] || {};
   card.style.borderColor = "#9ccbf5";
   card.style.background = "linear-gradient(135deg,#eef7ff,#fff)";
-  sub.textContent = `${route.icon || ""} ${route.label || ""}路線 · 學完 ${s.done.length}/${s.total} 課` +
+  sub.textContent = `${route.icon || ""} ${route.label || ""}路線 · 完成 ${s.done.length}/${s.total}` +
     (s.bonusReady ? " · 🎁 有獎勵可以領！" : s.rescue ? " · 🛟 有建議要看" : "");
   badge.textContent = s.bonusReady ? "領獎勵" : `${s.done.length}/${s.total}`;
   badge.style.background = s.bonusReady ? "#f2a900" : "#2f80ed";
+}
+function drawMonthCard(p) {
+  drawPlanCard(p, window.GrammarPlan, { card:"monthCard", sub:"monthSub", badge:"monthBadge" }, "文法課");
+  drawPlanCard(p, window.VocabPlan,   { card:"vmonthCard", sub:"vmonthSub", badge:"vmonthBadge" }, "單字");
 }
 
 // 在已完成（已領獎）的練習卡片上打勾

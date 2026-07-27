@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>數字與時間 · 單字單元 l4-u02</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  background:#f6f8fa;color:#22303f;line-height:1.7;padding:0 0 70px}
+header{background:linear-gradient(135deg,#e6f4ea,#f1f8ff);padding:18px 16px 14px;border-bottom:3px solid #8fd6a8}
+header h1{margin:0 0 3px;font-size:1.2rem}
+header p{margin:0;font-size:.79rem;color:#5a6875}
+header a{color:#2f80ed;text-decoration:none}
+.wrap{max-width:720px;margin:0 auto;padding:0 14px}
+.stubar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;background:#fff;border:1px solid #e3e8ee;
+  border-radius:12px;padding:9px 12px;margin:14px 0}
+.stubar .lab{font-size:.8rem;color:#6b7a8c}
+.stu-btn{border:1px solid #cfd8e3;background:#fff;border-radius:16px;padding:5px 13px;font-size:.85rem;cursor:pointer;font-family:inherit}
+.stu-btn.active{background:#2f80ed;color:#fff;border-color:#2f80ed;font-weight:700}
+.coin{margin-left:auto;background:#fff6dc;border:1px solid #f2d38a;border-radius:14px;padding:4px 11px;font-size:.85rem;font-weight:700}
+#coinBox.bump{animation:coinBump .6s ease}
+@keyframes coinBump{0%,100%{transform:scale(1)}30%{transform:scale(1.35);background:#ffe27a}}
+.card{background:#fff;border:1px solid #e3e8ee;border-radius:14px;padding:15px 16px;margin:13px 0}
+.card h2{font-size:1rem;margin:0 0 4px}
+.card .hint{font-size:.83rem;color:#6b7a8c;margin:0 0 11px}
+/* 單字卡：先只給英文，點了才翻中文與例句 */
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px}
+.wcard{border:1px solid #dde4ec;border-radius:11px;padding:10px 11px;background:#fcfdff;cursor:pointer}
+.wcard.open{background:#f2fbf5;border-color:#8fd6a8}
+.wcard .en{font-size:1.02rem;font-weight:700;display:flex;align-items:center;gap:6px}
+.wcard .pos{font-size:.7rem;color:#8a97a5;font-weight:400}
+.wcard .back{display:none;margin-top:6px;font-size:.85rem}
+.wcard.open .back{display:block}
+.wcard .zh{font-weight:700;color:#1f6b45}
+.wcard .col{font-size:.77rem;color:#6b7a8c;margin-top:2px}
+.wcard .ex{margin-top:6px;padding-top:6px;border-top:1px dashed #dde4ec;font-size:.84rem}
+.wcard .ex div{margin:3px 0}
+.spk{border:0;background:#e6f0fb;border-radius:8px;padding:2px 8px;font-size:.8rem;cursor:pointer;font-family:inherit}
+.spk:hover{background:#cfe2f7}
+/* 對話 */
+.turn{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid #f0f3f7;font-size:.9rem}
+.turn:first-child{border-top:0}
+.turn .who{font-weight:700;width:1.5em;flex-shrink:0;color:#2f80ed}
+.turn .who.b{color:#b3621a}
+.turn .tx{flex:1}
+.psg{font-size:.93rem;margin:0 0 6px}
+.zhline{font-size:.8rem;color:#8a97a5}
+/* 測驗 */
+.q{border-top:1px solid #eef1f5;padding:12px 0}
+.q:first-of-type{border-top:0}
+.q .ask{font-weight:700;font-size:.93rem;margin-bottom:7px}
+.q .sent{display:block;font-weight:400;color:#3d4b5a;margin-top:3px}
+.opt{display:block;width:100%;text-align:left;border:1px solid #cfd8e3;background:#fff;border-radius:10px;
+  padding:9px 12px;margin:5px 0;font-size:.9rem;cursor:pointer;font-family:inherit}
+.opt:hover{border-color:#2f80ed}
+.opt.ok{background:#e8f7ee;border-color:#2fbf71;font-weight:700}
+.opt.no{background:#fdecec;border-color:#e88}
+.opt[disabled]{cursor:default}
+#quizScore{font-weight:700;margin-top:9px}
+.fin{width:100%;border:0;border-radius:12px;padding:13px;font-size:1rem;font-weight:700;color:#fff;
+  background:#2fbf71;cursor:pointer;font-family:inherit}
+.nav{display:flex;justify-content:space-between;gap:8px;margin:16px 0 0;font-size:.85rem}
+.nav a{color:#2f80ed;text-decoration:none}
+#toast{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-90px);background:#243042;color:#fff;
+  padding:11px 20px;border-radius:20px;font-size:.95rem;font-weight:700;transition:transform .3s;z-index:100;
+  max-width:90%;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+#toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<header>
+  <h1>🔤 數字與時間</h1>
+  <p>L4-U02 · Numbers and Time · 14 個字　·
+     <a href="index.html">← 單元列表</a>　<a href="../../index.html">🏠 首頁</a></p>
+</header>
+
+<div class="wrap">
+  <div class="stubar">
+    <span class="lab">我是：</span>
+    <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
+    <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
+    <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
+    <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+    <span class="coin" id="coinBox">🪙 —</span>
+  </div>
+
+  <div class="card">
+    <h2>① 先認識這些字</h2>
+    <p class="hint">點一下卡片會翻開中文和例句。先自己猜猜看是什麼意思，再翻開對答案。</p>
+    <div class="wgrid">
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">fifty <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/fifty.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">五十</div>
+        <div class="col">常這樣用：fifty + plural noun</div>
+        <div class="ex">
+          <div>Fifty cents are in my hand.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/fifty_0.mp3')">🔊</button></div><div>He counts fifty cards.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/fifty_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">forty <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/forty.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">四十</div>
+        <div class="col">常這樣用：forty + plural noun</div>
+        <div class="ex">
+          <div>Forty birds fly high.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/forty_0.mp3')">🔊</button></div><div>I see forty desks.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/forty_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">fourteen <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/fourteen.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">十四</div>
+        <div class="col">常這樣用：fourteen + plural noun</div>
+        <div class="ex">
+          <div>Fourteen students are in the room.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/fourteen_0.mp3')">🔊</button></div><div>He has fourteen toy cars.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/fourteen_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">never <span class="pos">adverb</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/never.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">從不</div>
+        <div class="col">常這樣用：never</div>
+        <div class="ex">
+          <div>I never drink coffee.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l4-never-e1.mp3')">🔊</button></div><div>He is never late for school.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l4-never-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">nineteen <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/nineteen.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">十九</div>
+        <div class="col">常這樣用：nineteen + plural noun</div>
+        <div class="ex">
+          <div>Nineteen kids play outside.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/nineteen_0.mp3')">🔊</button></div><div>I have nineteen stamps.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/nineteen_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">ninety <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ninety.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">九十</div>
+        <div class="col">常這樣用：ninety + plural noun</div>
+        <div class="ex">
+          <div>Ninety birds fly away.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/ninety_0.mp3')">🔊</button></div><div>He sees ninety stars.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/ninety_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">seventeen <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/seventeen.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">十七</div>
+        <div class="col">常這樣用：seventeen + plural noun</div>
+        <div class="ex">
+          <div>Seventeen flowers are red.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/seventeen_0.mp3')">🔊</button></div><div>I count seventeen pencils.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/seventeen_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">seventy <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/seventy.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">七十</div>
+        <div class="col">常這樣用：seventy + plural noun</div>
+        <div class="ex">
+          <div>Seventy ants walk fast.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/seventy_0.mp3')">🔊</button></div><div>She has seventy stickers.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/seventy_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">sixteen <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/sixteen.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">十六</div>
+        <div class="col">常這樣用：sixteen + plural noun</div>
+        <div class="ex">
+          <div>Sixteen ducks walk by.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/sixteen_0.mp3')">🔊</button></div><div>She has sixteen beads.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/sixteen_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">sixty <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/sixty.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">六十</div>
+        <div class="col">常這樣用：sixty + plural noun</div>
+        <div class="ex">
+          <div>Sixty minutes make an hour.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/sixty_0.mp3')">🔊</button></div><div>I see sixty dots.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/sixty_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">soon <span class="pos">adverb</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/soon.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">很快</div>
+        <div class="col">常這樣用：soon</div>
+        <div class="ex">
+          <div>The bus will come soon.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l4-soon-e1.mp3')">🔊</button></div><div>See you soon.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l4-soon-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">still <span class="pos">adverb</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/still.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">仍然</div>
+        <div class="col">常這樣用：still</div>
+        <div class="ex">
+          <div>I am still doing my homework.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l4-still-e1.mp3')">🔊</button></div><div>The baby is still asleep.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l4-still-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">thirteen <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/thirteen.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">十三</div>
+        <div class="col">常這樣用：thirteen + plural noun</div>
+        <div class="ex">
+          <div>Thirteen birds sit on the roof.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/thirteen_0.mp3')">🔊</button></div><div>I count thirteen shells.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/thirteen_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">thirty <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/thirty.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">三十</div>
+        <div class="col">常這樣用：thirty + plural noun</div>
+        <div class="ex">
+          <div>Thirty days make a month.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/thirty_0.mp3')">🔊</button></div><div>She counts thirty coins.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/thirty_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <h2>② 聽聽看什麼時候會用到</h2>
+    <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l4-u02-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
+    
+    <div class="turn"><span class="who">A</span>
+      <span class="tx">Is our basketball score still thirteen?</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u02-d1.mp3')">🔊</button></div>
+    <div class="turn"><span class="who b">B</span>
+      <span class="tx">No, Leo made a basket, so we have fifteen.</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u02-d2.mp3')">🔊</button></div>
+    <div class="turn"><span class="who">A</span>
+      <span class="tx">The other team has sixteen, right?</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u02-d3.mp3')">🔊</button></div>
+    <div class="turn"><span class="who b">B</span>
+      <span class="tx">Yes, but there are still two minutes left.</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u02-d4.mp3')">🔊</button></div>
+    <div class="turn"><span class="who">A</span>
+      <span class="tx">Do you think we can reach twenty?</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u02-d5.mp3')">🔊</button></div>
+    <div class="turn"><span class="who b">B</span>
+      <span class="tx">Sure. We never stop trying.</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u02-d6.mp3')">🔊</button></div>
+    <div class="turn"><span class="who">A</span>
+      <span class="tx">Look, Mia scored! We have seventeen now.</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u02-d7.mp3')">🔊</button></div>
+    <div class="turn"><span class="who b">B</span>
+      <span class="tx">Great! One more basket will give us nineteen.</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u02-d8.mp3')">🔊</button></div>
+  </div>
+
+  <div class="card">
+    <h2>③ 讀一段短文</h2>
+    <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    
+    <div style="margin:0 0 13px">
+      <p class="psg">Our class wanted to collect ninety books for a reading corner. On Monday, we brought thirteen books, and the box still looked empty. The next day, fourteen more arrived. By Wednesday, we had thirty books, so our teacher said we were doing well. Soon, parents started helping too. One family gave sixteen storybooks, and another gave nineteen picture books. Our total reached sixty-five. We never thought we could fill the shelf so quickly. On Friday, Mia carried in a bag with twenty-five books. Everyone counted together, and we cheered because the final number was exactly ninety.</p>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l4-u02-p1.mp3')">🔊 聽這一篇</button>
+    </div>
+    <div style="margin:0 0 13px">
+      <p class="psg">Grandma turned seventy last weekend, and our family planned a surprise lunch. Dad printed forty photos from her younger days. My cousin chose seventeen of them for a wall display, while I placed the rest in an album. We expected fifty guests, but almost sixty came. Grandpa was still setting out chairs when the doorbell rang. At twelve thirty, Grandma entered and saw everyone waiting. She covered her face and laughed. During lunch, fourteen children sang for her, and nineteen adults shared short memories. The party lasted until four, but Grandma said she was never tired because she felt so happy.</p>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l4-u02-p2.mp3')">🔊 聽這一篇</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>④ 小測驗</h2>
+    <p class="hint">8 題。答對越多，金幣越多（這一單元最多 🪙 40）。</p>
+    <div id="quizBox"></div>
+    <div id="quizScore"></div>
+  </div>
+
+  <div class="card" id="finishCard">
+    <button class="fin" onclick="finishUnit()">我學完這一單元了 🪙</button>
+    <div id="finishMsg" class="hint" style="margin:9px 0 0"></div>
+  </div>
+
+  <div class="nav">
+    <span><a href="l4-u01.html">← 語言與句型 × 數字與時間</a></span>
+    <span><a href="l4-u03.html">人物與家庭 × 數字與時間 →</a></span>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../cloud_sync.js?v=202607271116"></script>
+<script src="../../account_lock.js?v=202607271116"></script>
+<script src="../../supabase_auth.js?v=202607271116"></script>
+<script>
+var UNIT_ID = "l4-u02";
+var QUIZ = [{"kind":"zh2en","ask":"「五十」的英文是哪一個？","answer":"fifty","options":["forty","fourteen","fifty","nineteen"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003efourteen\u003c/b\u003e 是什麼意思？","answer":"十四","options":["十四","五十","四十","十九"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"nineteen","options":["fifty","forty","nineteen","fourteen"],"audio":"audio/words/nineteen.mp3"},{"kind":"cloze","ask":"哪個字放進空格才對？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ flowers are red.\u003c/span\u003e","answer":"seventeen","options":["fifty","seventeen","forty","fourteen"],"audio":null},{"kind":"zh2en","ask":"「十六」的英文是哪一個？","answer":"sixteen","options":["sixteen","fifty","forty","fourteen"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003esoon\u003c/b\u003e 是什麼意思？","answer":"很快","options":["從不","仍然","甚至；平坦的","很快"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"thirteen","options":["fifty","forty","fourteen","thirteen"],"audio":"audio/words/thirteen.mp3"},{"kind":"cloze","ask":"哪個字放進空格才對？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ cents are in my hand.\u003c/span\u003e","answer":"fifty","options":["forty","fourteen","fifty","nineteen"],"audio":null}];
+var currentStudent = null, curAudio = null, done = 0, ok = 0;
+
+function getProgress(s) {
+  var raw = localStorage.getItem("kidsProgress." + s);
+  var p = raw ? JSON.parse(raw) : { wrongCounts:{}, sessions:0, totalCorrect:0, totalWrong:0 };
+  if (!p.coins) p.coins = { balance:0, lifetimeEarned:0, lifetimeSpent:0, transactions:[], claimedDrills:{} };
+  if (!p.vocab) p.vocab = { schemaVersion:1, units:{}, completedCount:0, coinsEarned:0, updatedAt:null };
+  if (!p.vocab.units) p.vocab.units = {};
+  return p;
+}
+function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
+
+// 只播預先生成的 Kokoro 音檔；沒有音檔就安靜跳過，不退回瀏覽器機械音。
+function play(src) {
+  if (curAudio) { curAudio.pause(); curAudio = null; }
+  var a = new Audio(src); curAudio = a;
+  a.play().catch(function () {});
+}
+function flip(el) { el.classList.toggle("open"); }
+
+function refreshCoin(bump) {
+  var el = document.getElementById("coinBox");
+  el.textContent = currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
+  if (bump) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
+}
+var _tt = null;
+function toast(msg) {
+  var t = document.getElementById("toast");
+  t.innerHTML = msg; t.classList.add("show");
+  clearTimeout(_tt); _tt = setTimeout(function () { t.classList.remove("show"); }, 3200);
+}
+
+function drawQuiz() {
+  var h = "";
+  QUIZ.forEach(function (q, i) {
+    h += '<div class="q" id="q' + i + '"><div class="ask">' + (i + 1) + ". " + q.ask +
+      (q.audio ? ' <button class="spk" onclick="play(\'../../' + q.audio + '\')">🔊 再聽一次</button>' : "") + '</div>';
+    q.options.forEach(function (o, j) {
+      h += '<button class="opt" onclick="ans(' + i + ',' + j + ')">' + o + '</button>';
+    });
+    h += '</div>';
+  });
+  document.getElementById("quizBox").innerHTML = h;
+  // 聽力題一進來先自動播一次，小孩才知道要聽什麼
+}
+function ans(qi, oi) {
+  var q = QUIZ[qi], box = document.getElementById("q" + qi);
+  var btns = box.querySelectorAll(".opt");
+  if (btns[0].disabled) return;
+  var good = q.options[oi] === q.answer;
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].disabled = true;
+    if (q.options[i] === q.answer) btns[i].classList.add("ok");
+    else if (i === oi) btns[i].classList.add("no");
+  }
+  done++; if (good) ok++;
+  if (done === QUIZ.length) {
+    document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
+      "　<span style='font-weight:400;color:#667085'>↓ 按下面的按鈕領金幣</span>";
+    toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+  }
+}
+
+// 與文法課同一條金幣公式：底分 + 依正確率加成 + 全對再加，上限 40。
+// 重做只補差額，所以重複刷同一單元拿不到更多。
+function coinsFor(correct, total) {
+  var base = 15 + Math.round(15 * (total ? correct / total : 0)) + (total && correct === total ? 10 : 0);
+  return Math.min(base, 40);
+}
+
+function finishUnit() {
+  if (!currentStudent) { toast("先選上面的名字，才知道金幣要給誰"); return; }
+  if (done < QUIZ.length) { toast("小測驗還有 " + (QUIZ.length - done) + " 題沒做完"); return; }
+  var p = getProgress(currentStudent);
+  var isFirst = !p.vocab.units[UNIT_ID];
+  var prev = p.vocab.units[UNIT_ID] || { best:0, total:QUIZ.length, coins:0, attempts:0 };
+  var bestCorrect = Math.max(prev.best || 0, ok);
+  var should = coinsFor(bestCorrect, QUIZ.length);
+  var delta = Math.max(0, should - (prev.coins || 0));
+  var now = new Date();
+  var day = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0");
+
+  p.vocab.units[UNIT_ID] = { best: bestCorrect, total: QUIZ.length, coins: (prev.coins || 0) + delta,
+    attempts: (prev.attempts || 0) + 1, lastAt: day };
+  if (isFirst) p.vocab.completedCount = (p.vocab.completedCount || 0) + 1;
+  p.vocab.coinsEarned = (p.vocab.coinsEarned || 0) + delta;
+  p.vocab.updatedAt = day;
+  if (delta > 0) {
+    p.coins.balance += delta; p.coins.lifetimeEarned += delta;
+    p.coins.transactions.push({ type:"earn", source:"vocabUnit", amount:delta,
+      balanceAfter:p.coins.balance, createdAt:day, meta:{ unitId:UNIT_ID, correct:bestCorrect, total:QUIZ.length } });
+  }
+  saveProgress(currentStudent, p);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  refreshCoin(delta > 0);
+  toast(delta > 0 ? "🪙 +" + delta + " 金幣！　共 " + p.coins.balance
+                  : "這一單元已經領滿 🪙 " + p.vocab.units[UNIT_ID].coins + " 了");
+  var msg = document.getElementById("finishMsg");
+  msg.innerHTML = delta > 0
+    ? "🎉 這一單元完成！領到 <b>🪙 +" + delta + "</b>（這一單元共 " + p.vocab.units[UNIT_ID].coins + " ／ 上限 40）<br>" +
+      "<a href='../../island.html' style='color:#2f80ed;font-weight:700'>👉 去蓋我的島嶼</a>"
+    : "這一單元的金幣已經領滿了（🪙 " + p.vocab.units[UNIT_ID].coins + "）。答對更多題才會再補發喔！";
+  msg.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function pickStudent(name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
+  currentStudent = name;
+  localStorage.setItem("kidsCurrentStudent", name);
+  var btns = document.querySelectorAll(".stu-btn");
+  for (var i = 0; i < btns.length; i++)
+    btns[i].classList.toggle("active", btns[i].textContent.toLowerCase().indexOf(name) >= 0);
+  refreshCoin();
+}
+
+drawQuiz();
+(function () {
+  var last = localStorage.getItem("kidsCurrentStudent");
+  if (!window.sbClient && last && last !== "guest") pickStudent(last); else refreshCoin();
+})();
+</script>
+</body>
+</html>

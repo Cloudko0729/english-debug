@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>數字與時間 × 人物與家庭 · 單字單元 l1-u03</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  background:#f6f8fa;color:#22303f;line-height:1.7;padding:0 0 70px}
+header{background:linear-gradient(135deg,#e6f4ea,#f1f8ff);padding:18px 16px 14px;border-bottom:3px solid #8fd6a8}
+header h1{margin:0 0 3px;font-size:1.2rem}
+header p{margin:0;font-size:.79rem;color:#5a6875}
+header a{color:#2f80ed;text-decoration:none}
+.wrap{max-width:720px;margin:0 auto;padding:0 14px}
+.stubar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;background:#fff;border:1px solid #e3e8ee;
+  border-radius:12px;padding:9px 12px;margin:14px 0}
+.stubar .lab{font-size:.8rem;color:#6b7a8c}
+.stu-btn{border:1px solid #cfd8e3;background:#fff;border-radius:16px;padding:5px 13px;font-size:.85rem;cursor:pointer;font-family:inherit}
+.stu-btn.active{background:#2f80ed;color:#fff;border-color:#2f80ed;font-weight:700}
+.coin{margin-left:auto;background:#fff6dc;border:1px solid #f2d38a;border-radius:14px;padding:4px 11px;font-size:.85rem;font-weight:700}
+#coinBox.bump{animation:coinBump .6s ease}
+@keyframes coinBump{0%,100%{transform:scale(1)}30%{transform:scale(1.35);background:#ffe27a}}
+.card{background:#fff;border:1px solid #e3e8ee;border-radius:14px;padding:15px 16px;margin:13px 0}
+.card h2{font-size:1rem;margin:0 0 4px}
+.card .hint{font-size:.83rem;color:#6b7a8c;margin:0 0 11px}
+/* 單字卡：先只給英文，點了才翻中文與例句 */
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px}
+.wcard{border:1px solid #dde4ec;border-radius:11px;padding:10px 11px;background:#fcfdff;cursor:pointer}
+.wcard.open{background:#f2fbf5;border-color:#8fd6a8}
+.wcard .en{font-size:1.02rem;font-weight:700;display:flex;align-items:center;gap:6px}
+.wcard .pos{font-size:.7rem;color:#8a97a5;font-weight:400}
+.wcard .back{display:none;margin-top:6px;font-size:.85rem}
+.wcard.open .back{display:block}
+.wcard .zh{font-weight:700;color:#1f6b45}
+.wcard .col{font-size:.77rem;color:#6b7a8c;margin-top:2px}
+.wcard .ex{margin-top:6px;padding-top:6px;border-top:1px dashed #dde4ec;font-size:.84rem}
+.wcard .ex div{margin:3px 0}
+.spk{border:0;background:#e6f0fb;border-radius:8px;padding:2px 8px;font-size:.8rem;cursor:pointer;font-family:inherit}
+.spk:hover{background:#cfe2f7}
+/* 對話 */
+.turn{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px solid #f0f3f7;font-size:.9rem}
+.turn:first-child{border-top:0}
+.turn .who{font-weight:700;width:1.5em;flex-shrink:0;color:#2f80ed}
+.turn .who.b{color:#b3621a}
+.turn .tx{flex:1}
+.psg{font-size:.93rem;margin:0 0 6px}
+.zhline{font-size:.8rem;color:#8a97a5}
+/* 測驗 */
+.q{border-top:1px solid #eef1f5;padding:12px 0}
+.q:first-of-type{border-top:0}
+.q .ask{font-weight:700;font-size:.93rem;margin-bottom:7px}
+.q .sent{display:block;font-weight:400;color:#3d4b5a;margin-top:3px}
+.opt{display:block;width:100%;text-align:left;border:1px solid #cfd8e3;background:#fff;border-radius:10px;
+  padding:9px 12px;margin:5px 0;font-size:.9rem;cursor:pointer;font-family:inherit}
+.opt:hover{border-color:#2f80ed}
+.opt.ok{background:#e8f7ee;border-color:#2fbf71;font-weight:700}
+.opt.no{background:#fdecec;border-color:#e88}
+.opt[disabled]{cursor:default}
+#quizScore{font-weight:700;margin-top:9px}
+.fin{width:100%;border:0;border-radius:12px;padding:13px;font-size:1rem;font-weight:700;color:#fff;
+  background:#2fbf71;cursor:pointer;font-family:inherit}
+.nav{display:flex;justify-content:space-between;gap:8px;margin:16px 0 0;font-size:.85rem}
+.nav a{color:#2f80ed;text-decoration:none}
+#toast{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-90px);background:#243042;color:#fff;
+  padding:11px 20px;border-radius:20px;font-size:.95rem;font-weight:700;transition:transform .3s;z-index:100;
+  max-width:90%;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+#toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<header>
+  <h1>🔤 數字與時間 × 人物與家庭</h1>
+  <p>L1-U03 · Numbers and Time &amp; People and Family · 13 個字　·
+     <a href="index.html">← 單元列表</a>　<a href="../../index.html">🏠 首頁</a></p>
+</header>
+
+<div class="wrap">
+  <div class="stubar">
+    <span class="lab">我是：</span>
+    <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
+    <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
+    <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
+    <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+    <span class="coin" id="coinBox">🪙 —</span>
+  </div>
+
+  <div class="card">
+    <h2>① 先認識這些字</h2>
+    <p class="hint">點一下卡片會翻開中文和例句。先自己猜猜看是什麼意思，再翻開對答案。</p>
+    <div class="wgrid">
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">now <span class="pos">adverb</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/now.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">現在</div>
+        <div class="col">常這樣用：now</div>
+        <div class="ex">
+          <div>I am busy now.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l1-now-e1.mp3')">🔊</button></div><div>Please open your book now.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l1-now-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">one <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/one.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">一</div>
+        <div class="col">常這樣用：one + plural noun</div>
+        <div class="ex">
+          <div>I see one dog.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/one_0.mp3')">🔊</button></div><div>She has one pencil.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/one_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">seven <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/seven.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">七</div>
+        <div class="col">常這樣用：seven + plural noun</div>
+        <div class="ex">
+          <div>Seven days make a week.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/seven_0.mp3')">🔊</button></div><div>She has seven stickers.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/seven_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">six <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/six.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">六</div>
+        <div class="col">常這樣用：six + plural noun</div>
+        <div class="ex">
+          <div>Six ducks swim in the pond.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/six_0.mp3')">🔊</button></div><div>I see six stars.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/six_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">ten <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ten.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">十</div>
+        <div class="col">常這樣用：ten + plural noun</div>
+        <div class="ex">
+          <div>I have ten toes.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/ten_0.mp3')">🔊</button></div><div>Ten ants walk in line.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/ten_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">three <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/three.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">三</div>
+        <div class="col">常這樣用：three + plural noun</div>
+        <div class="ex">
+          <div>I see three birds.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/three_0.mp3')">🔊</button></div><div>He has three books.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/three_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">today <span class="pos">adverb</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/today.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">今天</div>
+        <div class="col">常這樣用：today is</div>
+        <div class="ex">
+          <div>Today is Monday.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l1-today-e1.mp3')">🔊</button></div><div>We have a test today.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l1-today-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">two <span class="pos">number</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/two.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">二</div>
+        <div class="col">常這樣用：two + plural noun</div>
+        <div class="ex">
+          <div>I have two hands.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/two_0.mp3')">🔊</button></div><div>Two cats sit here.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/two_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">baby <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/baby.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">嬰兒</div>
+        <div class="col">常這樣用：a baby</div>
+        <div class="ex">
+          <div>The baby drinks milk.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/baby_0.mp3')">🔊</button></div><div>A baby sleeps in the room.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/words/ex/baby_1.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">boy <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/boy.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">男孩</div>
+        <div class="col">常這樣用：a boy</div>
+        <div class="ex">
+          <div>The boy is my brother.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l1-boy-e1.mp3')">🔊</button></div><div>A boy is playing with the dog.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l1-boy-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">girl <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/girl.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">女孩</div>
+        <div class="col">常這樣用：a girl</div>
+        <div class="ex">
+          <div>The girl has a blue kite.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l1-girl-e1.mp3')">🔊</button></div><div>That girl is in my class.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l1-girl-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">kid <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/kid.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">小孩</div>
+        <div class="col">常這樣用：a kid</div>
+        <div class="ex">
+          <div>The kid is playing with a toy.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l1-kid-e1.mp3')">🔊</button></div><div>Every kid gets a turn.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l1-kid-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="wcard" onclick="flip(this)">
+      <div class="en">king <span class="pos">noun</span>
+        <button class="spk" onclick="event.stopPropagation();play('../../audio/words/king.mp3')">🔊</button></div>
+      <div class="back">
+        <div class="zh">國王</div>
+        <div class="col">常這樣用：a king</div>
+        <div class="ex">
+          <div>The king lives in a big house.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l1-king-e1.mp3')">🔊</button></div><div>The story is about a kind king.
+            <button class="spk" onclick="event.stopPropagation();play('../../audio/vocab_foundation/examples/l1-king-e2.mp3')">🔊</button></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <h2>② 聽聽看什麼時候會用到</h2>
+    <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l1-u03-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
+    
+    <div class="turn"><span class="who">A</span>
+      <span class="tx">How many kids are on your team?</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u03-d1.mp3')">🔊</button></div>
+    <div class="turn"><span class="who b">B</span>
+      <span class="tx">We have ten kids now.</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u03-d2.mp3')">🔊</button></div>
+    <div class="turn"><span class="who">A</span>
+      <span class="tx">Do you have six boys?</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u03-d3.mp3')">🔊</button></div>
+    <div class="turn"><span class="who b">B</span>
+      <span class="tx">No. We have three boys and seven girls.</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u03-d4.mp3')">🔊</button></div>
+    <div class="turn"><span class="who">A</span>
+      <span class="tx">Who has the ball today?</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u03-d5.mp3')">🔊</button></div>
+    <div class="turn"><span class="who b">B</span>
+      <span class="tx">One girl has it.</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u03-d6.mp3')">🔊</button></div>
+    <div class="turn"><span class="who">A</span>
+      <span class="tx">Can two new kids play with us?</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u03-d7.mp3')">🔊</button></div>
+    <div class="turn"><span class="who b">B</span>
+      <span class="tx">Yes. Every kid can play.</span>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u03-d8.mp3')">🔊</button></div>
+  </div>
+
+  <div class="card">
+    <h2>③ 讀一段短文</h2>
+    <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    
+    <div style="margin:0 0 13px">
+      <p class="psg">Today is sports day. Six kids run, and three kids sit by the tree. One boy has a red ball. Two girls have a blue ball. Now the teacher says, &quot;Go!&quot; Seven kids run to the line. Ten hands go up. Every kid wants to play.</p>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u03-p1.mp3')">🔊 聽這一篇</button>
+    </div>
+    <div style="margin:0 0 13px">
+      <p class="psg">A baby, a boy, and a girl are at home. The girl has one paper hat. The boy has two toy cars. Now they play king and queen. The baby is the king. He sits on a big chair. Today, the three kids have fun together.</p>
+      <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u03-p2.mp3')">🔊 聽這一篇</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>④ 這幾組最容易搞混</h2>
+    <p class="hint">看清楚差在哪裡，之後就不會用錯。</p>
+    
+      <div style="margin:0 0 13px;padding:11px;background:#fff9ec;border:1px solid #f3dfae;border-radius:11px">
+        <b style="font-size:.93rem">child / children / kid</b>
+        <p class="hint" style="margin:3px 0 6px">child 是正式的單數；children 是不規則複數；kid 是較口語的孩子。</p>
+        <div style="font-size:.86rem;margin:3px 0">The child is five years old.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/child-children-kid-e1.mp3')">🔊</button></div><div style="font-size:.86rem;margin:3px 0">The children play outside.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/child-children-kid-e2.mp3')">🔊</button></div><div style="font-size:.86rem;margin:3px 0">That kid is my friend.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/child-children-kid-e3.mp3')">🔊</button></div><div style="font-size:.86rem;margin:3px 0">Every child needs help sometimes.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/child-children-kid-e4.mp3')">🔊</button></div>
+      </div>
+      <div style="margin:0 0 13px;padding:11px;background:#fff9ec;border:1px solid #f3dfae;border-radius:11px">
+        <b style="font-size:.93rem">today / yesterday / tomorrow / ago</b>
+        <p class="hint" style="margin:3px 0 6px">today 是今天；yesterday 是昨天；tomorrow 是明天；ago 從現在往前數一段時間。</p>
+        <div style="font-size:.86rem;margin:3px 0">Today is sunny.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/day-reference-e1.mp3')">🔊</button></div><div style="font-size:.86rem;margin:3px 0">Yesterday was rainy.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/day-reference-e2.mp3')">🔊</button></div><div style="font-size:.86rem;margin:3px 0">Tomorrow will be warm.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/day-reference-e3.mp3')">🔊</button></div><div style="font-size:.86rem;margin:3px 0">We met two days ago.
+          <button class="spk" onclick="play('../../audio/vocab_foundation/confusions/day-reference-e4.mp3')">🔊</button></div>
+      </div>
+  </div>
+  <div class="card">
+    <h2>⑤ 小測驗</h2>
+    <p class="hint">8 題。答對越多，金幣越多（這一單元最多 🪙 40）。</p>
+    <div id="quizBox"></div>
+    <div id="quizScore"></div>
+  </div>
+
+  <div class="card" id="finishCard">
+    <button class="fin" onclick="finishUnit()">我學完這一單元了 🪙</button>
+    <div id="finishMsg" class="hint" style="margin:9px 0 0"></div>
+  </div>
+
+  <div class="nav">
+    <span><a href="l1-u02.html">← 語言與句型 × 數字與時間</a></span>
+    <span><a href="l1-u04.html">身體與感受 × 人物與家庭 →</a></span>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../cloud_sync.js?v=202607271116"></script>
+<script src="../../account_lock.js?v=202607271116"></script>
+<script src="../../supabase_auth.js?v=202607271116"></script>
+<script>
+var UNIT_ID = "l1-u03";
+var QUIZ = [{"kind":"zh2en","ask":"「現在」的英文是哪一個？","answer":"now","options":["now","today","here","how"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eseven\u003c/b\u003e 是什麼意思？","answer":"七","options":["一","六","十","七"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"ten","options":["one","seven","six","ten"],"audio":"audio/words/ten.mp3"},{"kind":"cloze","ask":"哪個字放進空格才對？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ is Monday.\u003c/span\u003e","answer":"today","options":["now","today","here","how"],"audio":null},{"kind":"zh2en","ask":"「嬰兒」的英文是哪一個？","answer":"baby","options":["boy","girl","baby","kid"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003egirl\u003c/b\u003e 是什麼意思？","answer":"女孩","options":["女孩","嬰兒","男孩","小孩"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"king","options":["baby","king","boy","girl"],"audio":"audio/words/king.mp3"},{"kind":"cloze","ask":"哪個字放進空格才對？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI see ＿＿＿ dog.\u003c/span\u003e","answer":"one","options":["seven","six","one","ten"],"audio":null}];
+var currentStudent = null, curAudio = null, done = 0, ok = 0;
+
+function getProgress(s) {
+  var raw = localStorage.getItem("kidsProgress." + s);
+  var p = raw ? JSON.parse(raw) : { wrongCounts:{}, sessions:0, totalCorrect:0, totalWrong:0 };
+  if (!p.coins) p.coins = { balance:0, lifetimeEarned:0, lifetimeSpent:0, transactions:[], claimedDrills:{} };
+  if (!p.vocab) p.vocab = { schemaVersion:1, units:{}, completedCount:0, coinsEarned:0, updatedAt:null };
+  if (!p.vocab.units) p.vocab.units = {};
+  return p;
+}
+function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
+
+// 只播預先生成的 Kokoro 音檔；沒有音檔就安靜跳過，不退回瀏覽器機械音。
+function play(src) {
+  if (curAudio) { curAudio.pause(); curAudio = null; }
+  var a = new Audio(src); curAudio = a;
+  a.play().catch(function () {});
+}
+function flip(el) { el.classList.toggle("open"); }
+
+function refreshCoin(bump) {
+  var el = document.getElementById("coinBox");
+  el.textContent = currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
+  if (bump) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
+}
+var _tt = null;
+function toast(msg) {
+  var t = document.getElementById("toast");
+  t.innerHTML = msg; t.classList.add("show");
+  clearTimeout(_tt); _tt = setTimeout(function () { t.classList.remove("show"); }, 3200);
+}
+
+function drawQuiz() {
+  var h = "";
+  QUIZ.forEach(function (q, i) {
+    h += '<div class="q" id="q' + i + '"><div class="ask">' + (i + 1) + ". " + q.ask +
+      (q.audio ? ' <button class="spk" onclick="play(\'../../' + q.audio + '\')">🔊 再聽一次</button>' : "") + '</div>';
+    q.options.forEach(function (o, j) {
+      h += '<button class="opt" onclick="ans(' + i + ',' + j + ')">' + o + '</button>';
+    });
+    h += '</div>';
+  });
+  document.getElementById("quizBox").innerHTML = h;
+  // 聽力題一進來先自動播一次，小孩才知道要聽什麼
+}
+function ans(qi, oi) {
+  var q = QUIZ[qi], box = document.getElementById("q" + qi);
+  var btns = box.querySelectorAll(".opt");
+  if (btns[0].disabled) return;
+  var good = q.options[oi] === q.answer;
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].disabled = true;
+    if (q.options[i] === q.answer) btns[i].classList.add("ok");
+    else if (i === oi) btns[i].classList.add("no");
+  }
+  done++; if (good) ok++;
+  if (done === QUIZ.length) {
+    document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
+      "　<span style='font-weight:400;color:#667085'>↓ 按下面的按鈕領金幣</span>";
+    toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+  }
+}
+
+// 與文法課同一條金幣公式：底分 + 依正確率加成 + 全對再加，上限 40。
+// 重做只補差額，所以重複刷同一單元拿不到更多。
+function coinsFor(correct, total) {
+  var base = 15 + Math.round(15 * (total ? correct / total : 0)) + (total && correct === total ? 10 : 0);
+  return Math.min(base, 40);
+}
+
+function finishUnit() {
+  if (!currentStudent) { toast("先選上面的名字，才知道金幣要給誰"); return; }
+  if (done < QUIZ.length) { toast("小測驗還有 " + (QUIZ.length - done) + " 題沒做完"); return; }
+  var p = getProgress(currentStudent);
+  var isFirst = !p.vocab.units[UNIT_ID];
+  var prev = p.vocab.units[UNIT_ID] || { best:0, total:QUIZ.length, coins:0, attempts:0 };
+  var bestCorrect = Math.max(prev.best || 0, ok);
+  var should = coinsFor(bestCorrect, QUIZ.length);
+  var delta = Math.max(0, should - (prev.coins || 0));
+  var now = new Date();
+  var day = now.getFullYear() + "-" + String(now.getMonth() + 1).padStart(2, "0") + "-" + String(now.getDate()).padStart(2, "0");
+
+  p.vocab.units[UNIT_ID] = { best: bestCorrect, total: QUIZ.length, coins: (prev.coins || 0) + delta,
+    attempts: (prev.attempts || 0) + 1, lastAt: day };
+  if (isFirst) p.vocab.completedCount = (p.vocab.completedCount || 0) + 1;
+  p.vocab.coinsEarned = (p.vocab.coinsEarned || 0) + delta;
+  p.vocab.updatedAt = day;
+  if (delta > 0) {
+    p.coins.balance += delta; p.coins.lifetimeEarned += delta;
+    p.coins.transactions.push({ type:"earn", source:"vocabUnit", amount:delta,
+      balanceAfter:p.coins.balance, createdAt:day, meta:{ unitId:UNIT_ID, correct:bestCorrect, total:QUIZ.length } });
+  }
+  saveProgress(currentStudent, p);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  refreshCoin(delta > 0);
+  toast(delta > 0 ? "🪙 +" + delta + " 金幣！　共 " + p.coins.balance
+                  : "這一單元已經領滿 🪙 " + p.vocab.units[UNIT_ID].coins + " 了");
+  var msg = document.getElementById("finishMsg");
+  msg.innerHTML = delta > 0
+    ? "🎉 這一單元完成！領到 <b>🪙 +" + delta + "</b>（這一單元共 " + p.vocab.units[UNIT_ID].coins + " ／ 上限 40）<br>" +
+      "<a href='../../island.html' style='color:#2f80ed;font-weight:700'>👉 去蓋我的島嶼</a>"
+    : "這一單元的金幣已經領滿了（🪙 " + p.vocab.units[UNIT_ID].coins + "）。答對更多題才會再補發喔！";
+  msg.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function pickStudent(name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
+  currentStudent = name;
+  localStorage.setItem("kidsCurrentStudent", name);
+  var btns = document.querySelectorAll(".stu-btn");
+  for (var i = 0; i < btns.length; i++)
+    btns[i].classList.toggle("active", btns[i].textContent.toLowerCase().indexOf(name) >= 0);
+  refreshCoin();
+}
+
+drawQuiz();
+(function () {
+  var last = localStorage.getItem("kidsCurrentStudent");
+  if (!window.sbClient && last && last !== "guest") pickStudent(last); else refreshCoin();
+})();
+</script>
+</body>
+</html>

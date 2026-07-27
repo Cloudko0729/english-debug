@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>本月單字課表 · 自己選</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  background:#f6f8fa;color:#22303f;line-height:1.65;padding:0 0 60px}
+header{background:linear-gradient(135deg,#e9fbf1,#eef7ff);padding:20px 16px 16px;text-align:center;
+  border-bottom:3px solid #8fd6a8}
+header h1{margin:0 0 4px;font-size:1.25rem}
+header p{margin:0;font-size:.8rem;color:#6b7a8c}
+header a{color:#2f80ed;text-decoration:none}
+.wrap{max-width:720px;margin:0 auto;padding:0 14px}
+
+.stubar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;background:#fff;border:1px solid #e3e8ee;
+  border-radius:12px;padding:9px 12px;margin:14px 0}
+.stubar .lab{font-size:.8rem;color:#6b7a8c}
+.stu-btn{border:1px solid #cfd8e3;background:#fff;border-radius:16px;padding:5px 13px;font-size:.85rem;
+  cursor:pointer;font-family:inherit}
+.stu-btn.active{background:#2f80ed;color:#fff;border-color:#2f80ed;font-weight:700}
+.coin{margin-left:auto;background:#fff6dc;border:1px solid #f2d38a;border-radius:14px;padding:4px 11px;
+  font-size:.85rem;font-weight:700}
+#coinBox.bump{animation:coinBump .6s ease}
+@keyframes coinBump{0%,100%{transform:scale(1)}30%{transform:scale(1.35);background:#ffe27a}}
+
+.card{background:#fff;border:1px solid #e3e8ee;border-radius:14px;padding:15px 16px;margin:12px 0}
+.note{font-size:.86rem;color:#5a6875}
+h2{font-size:1rem;margin:22px 0 8px}
+
+/* 路線卡 */
+.route{border:2px solid #e3e8ee;border-radius:15px;padding:15px 16px;margin:12px 0;background:#fff;
+  position:relative;transition:box-shadow .15s,transform .15s}
+.route.rec{box-shadow:0 3px 16px rgba(47,128,237,.16)}
+.route .star{position:absolute;top:-11px;left:14px;background:#2f80ed;color:#fff;font-size:.72rem;
+  font-weight:700;padding:2px 10px;border-radius:10px}
+.route h3{margin:0 0 3px;font-size:1.05rem;display:flex;align-items:center;gap:7px}
+.route .why{font-size:.85rem;color:#5a6875;margin:0 0 9px}
+.route .meta{display:flex;gap:8px;flex-wrap:wrap;font-size:.76rem;margin:0 0 9px}
+.route .meta span{background:#f1f5f9;border-radius:9px;padding:2px 9px}
+.route ol{margin:0 0 11px;padding-left:20px;font-size:.87rem}
+.route ol li{margin:2px 0}
+.route ol a{color:#22303f;text-decoration:none}
+.route ol a:hover{text-decoration:underline}
+.route .tag{font-size:.7rem;border-radius:7px;padding:1px 6px;margin-left:5px;vertical-align:1px}
+.tag-new{background:#e8f7ee;color:#1f8a4c}
+.tag-again{background:#fdeee0;color:#b3621a}
+.route .warn{font-size:.8rem;background:#fff6e5;border:1px solid #f3d9a6;border-radius:9px;
+  padding:7px 10px;margin:0 0 10px;color:#8a5a12}
+.pick{width:100%;border:0;border-radius:11px;padding:11px;font-size:.95rem;font-weight:700;color:#fff;
+  cursor:pointer;font-family:inherit}
+
+/* 現行計畫 */
+.plan{background:linear-gradient(135deg,#eef7ff,#fff);border:2px solid #9ccbf5}
+.bar{height:11px;border-radius:6px;background:#e3e8ee;overflow:hidden;margin:9px 0 5px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#2fbf71,#7fdca4)}
+.nlist{margin:10px 0 0;padding:0;list-style:none}
+.nlist li{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:7px 0;
+  border-top:1px solid #eef1f5;font-size:.89rem}
+.nlist li:first-child{border-top:0}
+.nlist a{color:#22303f;text-decoration:none}
+.nlist .st{font-size:.78rem;white-space:nowrap;color:#8a97a5}
+.nlist .st.ok{color:#1f8a4c;font-weight:700}
+.nlist .st.no{color:#b3621a;font-weight:700}
+.rescue{background:#fff6e5;border:1px solid #f3d9a6;border-radius:11px;padding:11px 13px;
+  font-size:.87rem;color:#8a5a12;margin:11px 0 0}
+.bonus{background:linear-gradient(135deg,#fff3cd,#fffdf5);border:2px solid #f2c94c;border-radius:12px;
+  padding:13px;margin:12px 0;text-align:center}
+.bonus button{border:0;background:#f2a900;color:#fff;font-weight:700;border-radius:10px;padding:10px 22px;
+  font-size:.95rem;cursor:pointer;font-family:inherit;margin-top:7px}
+.mini{border:1px solid #cfd8e3;background:#fff;border-radius:10px;padding:8px 15px;font-size:.85rem;
+  cursor:pointer;font-family:inherit;margin-top:10px}
+.big{display:block;text-align:center;text-decoration:none;border-radius:12px;padding:13px;
+  font-weight:700;margin:9px 0}
+
+#toast{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-90px);background:#243042;
+  color:#fff;padding:11px 20px;border-radius:20px;font-size:.95rem;font-weight:700;transition:transform .3s;
+  z-index:100;max-width:90%;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+#toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<header>
+  <h1>🔤 這個月的單字，你自己選</h1>
+  <p><a href="index.html">← 回首頁</a>　·　<a href="vocab_db/units/index.html">🔤 單字單元地圖</a></p>
+</header>
+
+<div class="wrap">
+  <div class="stubar">
+    <span class="lab">我是：</span>
+    <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
+    <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
+    <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
+    <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+    <span class="coin" id="coinBox">🪙 —</span>
+  </div>
+
+  <div id="main"><div class="card note">先選上面的名字，就會看到給你的建議。</div></div>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="cloud_sync.js?v=202607271116"></script>
+<script src="account_lock.js?v=202607271116"></script>
+<script src="supabase_auth.js?v=202607271116"></script>
+<script src="vocab_units.js?v=202607271116"></script>
+<script src="vocab_unit_plan.js?v=202607271116"></script>
+<script>
+var currentStudent = null;
+var GP = window.VocabPlan;
+
+function getProgress(s) {
+  var raw = localStorage.getItem("kidsProgress." + s);
+  var p = raw ? JSON.parse(raw) : { wrongCounts:{}, sessions:0, totalCorrect:0, totalWrong:0 };
+  if (!p.coins) p.coins = { balance:0, lifetimeEarned:0, lifetimeSpent:0, transactions:[], claimedDrills:{} };
+  if (!p.vocab) p.vocab = { schemaVersion:1, units:{}, completedCount:0, coinsEarned:0, updatedAt:null };
+  if (!p.vocab.units) p.vocab.units = {};
+  return p;
+}
+function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
+function esc(s) { return String(s).replace(/[&<>"]/g, function (c) {
+  return { "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;" }[c]; }); }
+
+function refreshCoin(bump) {
+  var el = document.getElementById("coinBox");
+  el.textContent = currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
+  if (bump) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
+}
+var _tt = null;
+function toast(msg) {
+  var t = document.getElementById("toast");
+  t.innerHTML = msg; t.classList.add("show");
+  clearTimeout(_tt); _tt = setTimeout(function () { t.classList.remove("show"); }, 3200);
+}
+function lessonHref(id) { return "vocab_db/units/" + id + ".html"; }
+
+// ── 畫面 ────────────────────────────────────────────────────────────────
+function nodeLine(p, id) {
+  var n = GP.byId(id); if (!n) return "";
+  var r = GP.recOf(p, id);
+  var st = "尚未開始", cls = "";
+  if (r) {
+    var pct = Math.round(GP.scoreOf(r) * 100);
+    if (GP.isSolid(p, id)) { st = "✅ " + pct + "%　🪙" + r.coins; cls = "ok"; }
+    else { st = "🔁 " + pct + "%　再練一次"; cls = "no"; }
+  }
+  return '<li><a href="' + lessonHref(id) + '">' + esc(n.titleZh) +
+    '</a><span class="st ' + cls + '">' + st + '</span></li>';
+}
+
+function renderPlan(p) {
+  var s = GP.planStatus(p);
+  var pl = s.plan;
+  var route = GP.ROUTES.filter(function (r) { return r.key === pl.route; })[0] || GP.ROUTES[1];
+  var pct = Math.round(s.done.length / s.total * 100);
+
+  var h = '<div class="card plan">' +
+    '<h3 style="margin:0 0 2px;font-size:1.05rem">' + route.icon + ' ' + GP.monthLabel(pl.month) +
+      '的單字課表：' + route.label + '路線</h3>' +
+    '<p class="note" style="margin:0">' + esc(route.blurb) + '　（' + esc(pl.level) + ' 為主）</p>' +
+    '<div class="bar"><i style="width:' + pct + '%"></i></div>' +
+    '<p class="note" style="margin:0">學完 ' + s.done.length + ' / ' + s.total + ' 單元（共 ' + s.wordCount + ' 字）' +
+      (s.weak.length ? '　·　' + s.weak.length + ' 個單元還要再練一次' : '') + '</p>' +
+    '<ul class="nlist">' + pl.units.map(function (id) { return nodeLine(p, id); }).join("") + '</ul>';
+
+  if (s.rescue) h += '<div class="rescue">🛟 ' + esc(s.rescue) + '</div>';
+  h += '</div>';
+
+  if (s.bonusReady) {
+    h += '<div class="bonus"><div style="font-size:1.6rem">🎁</div>' +
+      '<b>整份課表都完成了！</b><br><span class="note">領取本月完成獎勵 🪙 ' + s.bonus + '</span><br>' +
+      '<button onclick="claimBonus()">領獎勵</button></div>';
+  } else if (pl.bonusClaimed) {
+    h += '<div class="card note">🎁 本月的完成獎勵已經領過了（🪙 ' + s.bonus + '）。</div>';
+  }
+
+  h += '<a class="big" href="vocab_db/units/index.html" ' +
+    'style="background:#2fbf71;color:#fff">👉 去背單字</a>';
+
+  h += '<div class="card"><b style="font-size:.92rem">想換一條路線嗎？</b>' +
+    '<p class="note" style="margin:4px 0 0">可以隨時換，<b>已經拿到的金幣不會被扣掉</b>，' +
+    '已經做過的單元也會留在新課表裡。' +
+    (pl.switches ? '（這個月已經換過 ' + pl.switches + ' 次）' : '') + '</p>' +
+    '<button class="mini" onclick="showChooser()">🔄 重新選一次</button></div>';
+
+  return h;
+}
+
+function renderChooser(p, forceOpen) {
+  var b = GP.buildRoutes(p);
+  var a = b.assess;
+
+  // 完全沒資料：不要假裝系統知道他的程度
+  if (a.source === "none") {
+    return '<div class="card"><b>先讓系統認識你</b>' +
+      '<p class="note">還沒有你的成績，所以現在給的任何建議都是猜的。選一個方式開始：</p>' +
+      '<a class="big" href="diagnostic_grade6_adaptive.html" style="background:#b67a17;color:#fff">' +
+      '🧭 做一次起點診斷（建議，約 20 分鐘）</a>' +
+      '<a class="big" href="vocab_db/units/index.html" style="background:#fff;color:#22303f;border:1px solid #cfd8e3">' +
+      '📘 不想考試，直接從 L1 試學 2 個單元</a>' +
+      '<p class="note" style="margin:8px 0 0">兩種都可以。試學完 2 個單元，這一頁就會開始給你真正的建議。</p></div>';
+  }
+
+  var head = '<div class="card"><b>' + GP.monthLabel(GP.planMonthKey()) + '要學什麼？</b>' +
+    '<p class="note" style="margin:4px 0 0">' +
+    (a.source === "diagnostic"
+      ? '依照你的起點診斷，你現在大約在 <b>' + esc(a.level) + '</b>。'
+      : '看你已經做過的 ' + a.tried.length + ' 個單元，你現在大約在 <b>' + esc(a.level) + '</b>。') +
+    '<br>下面三條路線<b>你自己選</b>，⭐ 是我的建議，但不選它也完全可以。</p></div>';
+
+  var cards = b.routes.map(function (r) {
+    var items = r.units.map(function (id) {
+      var n = GP.byId(id); if (!n) return "";
+      var isNew = !GP.isTried(p, id);
+      var cls = isNew ? "tag-new" : "tag-again", txt = isNew ? "新" : "再練";
+      return '<li><a href="' + lessonHref(id) + '">' + esc(n.titleZh) + '</a>' +
+        '<span class="tag ' + cls + '">' + txt + '</span></li>';
+    }).join("");
+
+    return '<div class="route' + (r.recommended ? " rec" : "") + '" style="border-color:' +
+      (r.recommended ? r.tone : "#e3e8ee") + '">' +
+      (r.recommended ? '<span class="star">⭐ 建議你選這個</span>' : "") +
+      '<h3>' + r.icon + ' ' + r.label + '</h3>' +
+      '<p class="why">' + esc(r.blurb) + (r.recommended ? '<br>' + esc(b.why) : "") + '</p>' +
+      '<div class="meta"><span>' + r.units.length + ' 單元</span>' +
+        '<span>' + r.wordCount + ' 個字</span>' +
+        '<span>新的 ' + r.newCount + ' 單元</span>' +
+        '<span>' + esc(r.level) + ' 為主</span>' +
+        '<span>最多可拿 🪙 ' + r.coins + '</span></div>' +
+      (r.blocked ? '<div class="warn">⚠️ ' + esc(r.blocked) + '</div>' : "") +
+      '<ol>' + items + '</ol>' +
+      '<button class="pick" style="background:' + r.tone + '" onclick="pick(\'' + r.key + '\')">' +
+        '選這條路線</button></div>';
+  }).join("");
+
+  var back = forceOpen && GP.activePlan(p)
+    ? '<button class="mini" onclick="draw()">← 先不要換，回本月課表</button>' : "";
+
+  return head + cards +
+    '<p class="note" style="margin:14px 0 0">🪙 金幣算法：每課最多 40（答對率越高越多），' +
+    '整份課表全部完成再加 ' + GP.MONTH_BONUS + '。三條路線的完成獎勵一樣多——' +
+    '獎勵的是你把計畫走完，不是選比較難的那條。</p>' + back;
+}
+
+function draw() {
+  var box = document.getElementById("main");
+  if (!currentStudent) {
+    box.innerHTML = '<div class="card note">先選上面的名字，就會看到給你的建議。</div>';
+    refreshCoin(); return;
+  }
+  var p = getProgress(currentStudent);
+  box.innerHTML = GP.needsChoice(p) ? renderChooser(p, false) : renderPlan(p);
+  refreshCoin();
+  window.scrollTo(0, 0);
+}
+window.showChooser = function () {
+  document.getElementById("main").innerHTML = renderChooser(getProgress(currentStudent), true);
+  window.scrollTo(0, 0);
+};
+
+window.pick = function (routeKey) {
+  var p = getProgress(currentStudent);
+  var pl = GP.choose(p, routeKey);
+  if (!pl) return;
+  saveProgress(currentStudent, p);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  var route = GP.ROUTES.filter(function (r) { return r.key === routeKey; })[0];
+  toast(route.icon + " 選好了！這個月走「" + route.label + "」路線");
+  draw();
+};
+
+window.claimBonus = function () {
+  var p = getProgress(currentStudent);
+  var s = GP.planStatus(p);
+  if (!s || !s.bonusReady) return;
+  var now = new Date().toISOString().slice(0, 10);
+  p.vocab.monthlyPlan.bonusClaimed = true;
+  p.vocab.coinsEarned = (p.vocab.coinsEarned || 0) + s.bonus;
+  p.coins.balance += s.bonus;
+  p.coins.lifetimeEarned += s.bonus;
+  p.coins.transactions.push({ type:"earn", source:"vocabMonthlyPlan", amount:s.bonus,
+    balanceAfter:p.coins.balance, createdAt:now,
+    meta:{ month:s.plan.month, route:s.plan.route, units:s.plan.units.length } });
+  saveProgress(currentStudent, p);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  toast("🎁 +" + s.bonus + " 金幣！整個月的課表都完成了");
+  refreshCoin(true);
+  draw();
+};
+
+window.pickStudent = function (name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
+  currentStudent = name;
+  localStorage.setItem("kidsCurrentStudent", name);
+  var btns = document.querySelectorAll(".stu-btn");
+  for (var i = 0; i < btns.length; i++)
+    btns[i].classList.toggle("active", btns[i].textContent.toLowerCase().indexOf(name) >= 0);
+  draw();
+};
+
+(function () {
+  var last = localStorage.getItem("kidsCurrentStudent");
+  if (!window.sbClient && last && last !== "guest") window.pickStudent(last); else draw();
+})();
+</script>
+</body>
+</html>

@@ -10,7 +10,7 @@ const KIDS = path.join(__dirname, "..");
 const TARGETS = ["daily_engine.js", "weekdrills.js", "structure_units.js",
   "curriculum.js", "worddex.js", "word_emoji.js", "word_image.js", "word_roots.js", "wordbank.js",
   "cloud_sync.js", "account_lock.js", "supabase_auth.js", "drills_list.js", "quizbank.js", "city_data.js",
-  "grammar_nodes.js", "grammar_plan.js"];
+  "grammar_nodes.js", "grammar_plan.js", "vocab_units.js", "vocab_unit_plan.js"];
 
 function bump(file) {
   let h = fs.readFileSync(file, "utf8"), changed = false;
@@ -31,6 +31,9 @@ fs.readdirSync(path.join(KIDS, "lessons")).filter(f => f.endsWith(".html")).forE
 // 否則重新產生會把戳記洗掉。
 fs.readdirSync(path.join(KIDS, "grammar_db", "lessons")).filter(f => f.endsWith(".html"))
   .forEach(f => pages.push(path.join(KIDS, "grammar_db", "lessons", f)));
+// 單字單元頁（build_vocab_units.js 產生）。同樣是「先 generate 再 bump」。
+fs.readdirSync(path.join(KIDS, "vocab_db", "units")).filter(f => f.endsWith(".html"))
+  .forEach(f => pages.push(path.join(KIDS, "vocab_db", "units", f)));
 ["index.html", "pusher.html", "pusher3d.html"].forEach(f => pages.push(path.join(KIDS, "..", "typing-game", f)));
 pages.forEach(f => { try { if (bump(f)) n++; } catch (e) {} });
 console.log(`✔ 戳記 v=${STAMP}，更新 ${n} 個頁面`);
