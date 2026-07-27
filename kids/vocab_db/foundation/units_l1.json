@@ -45,7 +45,7 @@
           "title": "Language Tools: First Reading",
           "type": "guided-reading",
           "theme": "language",
-          "text": "Our class is practicing clear English today. I have a red pen. I am happy today. I eat an apple after school. They are in the classroom. We meet at the bus stop. Do you like this song? He is my brother. After reading, we choose two new words and make our own sentences.",
+          "text": "It is seven. I am in the kitchen with Dad. He has an egg and a red cup. The cup is on the table. We are ready for breakfast. I do not want tea. I want milk. Is it hot or cold? Dad says it is cold. I eat the egg at home.",
           "focusWords": [
             "a",
             "am",
@@ -62,7 +62,7 @@
           "title": "Language Tools: Second Reading",
           "type": "guided-reading",
           "theme": "language",
-          "text": "Our class is practicing clear English today. How do you go to school? I am ten years old. We play in the park. She is my teacher. I found a key, and it is small. This book is not new. We can walk or take the bus. After reading, we choose two new words and make our own sentences.",
+          "text": "I am at the park with my sister. She is on a red bike, and I am in a little car. It is a toy car, but it is big for me. We do not go fast. Are we near the tree or the bus? We are near the tree.",
           "focusWords": [
             "how",
             "i",
@@ -80,49 +80,49 @@
           {
             "id": "l1-u01-d1",
             "speaker": "A",
-            "text": "Can you use \"a\" in a sentence?",
+            "text": "Are you at the school door?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d1.mp3"
           },
           {
             "id": "l1-u01-d2",
             "speaker": "B",
-            "text": "I have a red pen.",
+            "text": "Yes, I am here with Ben.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d2.mp3"
           },
           {
             "id": "l1-u01-d3",
             "speaker": "A",
-            "text": "What can you say with \"am\"?",
+            "text": "Is he in your class?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d3.mp3"
           },
           {
             "id": "l1-u01-d4",
             "speaker": "B",
-            "text": "I am happy today.",
+            "text": "Yes. He has a book and an apple.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d4.mp3"
           },
           {
             "id": "l1-u01-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"an\"?",
+            "text": "Do you have a pen?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d5.mp3"
           },
           {
             "id": "l1-u01-d6",
             "speaker": "B",
-            "text": "I eat an apple after school.",
+            "text": "No, I do not. It is at home.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d6.mp3"
           },
           {
             "id": "l1-u01-d7",
             "speaker": "A",
-            "text": "How would you use \"are\"?",
+            "text": "Do you want a red pen or a blue pen?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d7.mp3"
           },
           {
             "id": "l1-u01-d8",
             "speaker": "B",
-            "text": "They are in the classroom.",
+            "text": "A blue pen, please.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u01-d8.mp3"
           }
         ],
@@ -172,7 +172,7 @@
           "title": "Language Tools: First Reading",
           "type": "guided-reading",
           "theme": "language",
-          "text": "Our class is practicing clear English today. Please say your name. She has a new bag. That is our bus. They walk to school together. I like apples, too. We eat lunch at school. What is your name? After reading, we choose two new words and make our own sentences.",
+          "text": "Today we have a class party. We put five red cups and four blue cups on the table. That is nine cups. What do we need now? We need cake, too. They bring the cake, and she brings water. Who has the plates? You do. Yes, we are ready.",
           "focusWords": [
             "say",
             "she",
@@ -189,7 +189,7 @@
           "title": "Numbers and Time: Second Reading",
           "type": "guided-reading",
           "theme": "numbers_time",
-          "text": "It is a busy day, and we check the time carefully. Who has my ruler? Yes, I am ready. Do you want some water? I eat eight grapes. Five students play ball. Four cups are on the table. I see nine flowers. After reading, we choose two new words and make our own sentences.",
+          "text": "A girl and a boy are at the school store. She wants eight pencils, and he wants five pens. They see four red bags and nine blue bags. What bag do you like? The girl says, \"That red bag.\" The boy says, \"I like that bag, too.\"",
           "focusWords": [
             "who",
             "yes",
@@ -207,49 +207,49 @@
           {
             "id": "l1-u02-d1",
             "speaker": "A",
-            "text": "Can you use \"say\" in a sentence?",
+            "text": "What is in that big box?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d1.mp3"
           },
           {
             "id": "l1-u02-d2",
             "speaker": "B",
-            "text": "Please say your name.",
+            "text": "It is a birthday cake.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d2.mp3"
           },
           {
             "id": "l1-u02-d3",
             "speaker": "A",
-            "text": "What can you say with \"she\"?",
+            "text": "Who is the cake for?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d3.mp3"
           },
           {
             "id": "l1-u02-d4",
             "speaker": "B",
-            "text": "She has a new bag.",
+            "text": "It is for Amy. She is nine today.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d4.mp3"
           },
           {
             "id": "l1-u02-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"that\"?",
+            "text": "Do we have eight cups?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d5.mp3"
           },
           {
             "id": "l1-u02-d6",
             "speaker": "B",
-            "text": "That is our bus.",
+            "text": "Yes, and we have four plates, too.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d6.mp3"
           },
           {
             "id": "l1-u02-d7",
             "speaker": "A",
-            "text": "How would you use \"they\"?",
+            "text": "Can you say, \"Happy birthday\" with us?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d7.mp3"
           },
           {
             "id": "l1-u02-d8",
             "speaker": "B",
-            "text": "They walk to school together.",
+            "text": "Yes! We are ready.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u02-d8.mp3"
           }
         ],
@@ -298,7 +298,7 @@
           "title": "Numbers and Time: First Reading",
           "type": "guided-reading",
           "theme": "numbers_time",
-          "text": "It is a busy day, and we check the time carefully. I am busy now. She has one pencil. Seven days make a week. I see six stars. I have ten toes. He has three books. Today is Monday. After reading, we choose two new words and make our own sentences.",
+          "text": "Today is sports day. Six kids run, and three kids sit by the tree. One boy has a red ball. Two girls have a blue ball. Now the teacher says, \"Go!\" Seven kids run to the line. Ten hands go up. Every kid wants to play.",
           "focusWords": [
             "now",
             "one",
@@ -315,7 +315,7 @@
           "title": "People and Family: Second Reading",
           "type": "guided-reading",
           "theme": "people_family",
-          "text": "My family and friends are together today. Two cats sit here. The baby drinks milk. A boy is playing with the dog. The girl has a blue kite. Every kid gets a turn. The king lives in a big house. After reading, we choose two new words and make our own sentences.",
+          "text": "A baby, a boy, and a girl are at home. The girl has one paper hat. The boy has two toy cars. Now they play king and queen. The baby is the king. He sits on a big chair. Today, the three kids have fun together.",
           "focusWords": [
             "two",
             "baby",
@@ -332,49 +332,49 @@
           {
             "id": "l1-u03-d1",
             "speaker": "A",
-            "text": "Can you use \"now\" in a sentence?",
+            "text": "How many kids are on your team?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d1.mp3"
           },
           {
             "id": "l1-u03-d2",
             "speaker": "B",
-            "text": "I am busy now.",
+            "text": "We have ten kids now.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d2.mp3"
           },
           {
             "id": "l1-u03-d3",
             "speaker": "A",
-            "text": "What can you say with \"one\"?",
+            "text": "Do you have six boys?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d3.mp3"
           },
           {
             "id": "l1-u03-d4",
             "speaker": "B",
-            "text": "She has one pencil.",
+            "text": "No. We have three boys and seven girls.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d4.mp3"
           },
           {
             "id": "l1-u03-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"seven\"?",
+            "text": "Who has the ball today?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d5.mp3"
           },
           {
             "id": "l1-u03-d6",
             "speaker": "B",
-            "text": "Seven days make a week.",
+            "text": "One girl has it.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d6.mp3"
           },
           {
             "id": "l1-u03-d7",
             "speaker": "A",
-            "text": "How would you use \"six\"?",
+            "text": "Can two new kids play with us?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d7.mp3"
           },
           {
             "id": "l1-u03-d8",
             "speaker": "B",
-            "text": "I see six stars.",
+            "text": "Yes. Every kid can play.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u03-d8.mp3"
           }
         ],
@@ -423,7 +423,7 @@
           "title": "Body and Feelings: First Reading",
           "type": "guided-reading",
           "theme": "body_health",
-          "text": "We are learning how our bodies feel and move. My arm is strong. The ear is small. My eye sees a bird. This pig is short and fat. I am fine, thank you. It is hot in summer. My leg kicks the ball. After reading, we choose two new words and make our own sentences.",
+          "text": "Tom is at the school health room. His arm and leg hurt. His neck is fine, but one eye is red. The nurse looks at his ear, too. Tom is hot and sad. He sees a fat cat by the door. The cat makes him smile.",
           "focusWords": [
             "arm",
             "ear",
@@ -440,7 +440,7 @@
           "title": "People and Family: Second Reading",
           "type": "guided-reading",
           "theme": "people_family",
-          "text": "My family and friends are together today. My neck feels fine. The man is waiting for the bus. I say hello to Mr. Wang. Mrs. Chen has a small store. Please ask Ms. Lin for help. My name is Tina. After reading, we choose two new words and make our own sentences.",
+          "text": "A man is at the school door. His name is Mr. Brown. Mrs. Green is with him. They need help, so Ms. Hill comes. She says, \"My name is Anna. Come with me.\" The man and Mrs. Green go to the school office. Now they are fine.",
           "focusWords": [
             "neck",
             "man",
@@ -457,49 +457,49 @@
           {
             "id": "l1-u04-d1",
             "speaker": "A",
-            "text": "Can you use \"arm\" in a sentence?",
+            "text": "What is wrong with your arm?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d1.mp3"
           },
           {
             "id": "l1-u04-d2",
             "speaker": "B",
-            "text": "My arm is strong.",
+            "text": "It hurts when I move it.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d2.mp3"
           },
           {
             "id": "l1-u04-d3",
             "speaker": "A",
-            "text": "What can you say with \"ear\"?",
+            "text": "Does your leg hurt, too?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d3.mp3"
           },
           {
             "id": "l1-u04-d4",
             "speaker": "B",
-            "text": "The ear is small.",
+            "text": "No, my leg is fine.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d4.mp3"
           },
           {
             "id": "l1-u04-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"eye\"?",
+            "text": "Is your neck hot?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d5.mp3"
           },
           {
             "id": "l1-u04-d6",
             "speaker": "B",
-            "text": "My eye sees a bird.",
+            "text": "No, but my ear is hot.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d6.mp3"
           },
           {
             "id": "l1-u04-d7",
             "speaker": "A",
-            "text": "How would you use \"fat\"?",
+            "text": "Can you see with this eye?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d7.mp3"
           },
           {
             "id": "l1-u04-d8",
             "speaker": "B",
-            "text": "This pig is short and fat.",
+            "text": "Yes. I can see you.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u04-d8.mp3"
           }
         ],
@@ -552,7 +552,7 @@
           "title": "Animals and Nature: First Reading",
           "type": "guided-reading",
           "theme": "animals_nature",
-          "text": "We look around and notice animals and nature. A bird sings in the tree. My cat likes fish. My dog likes milk. A lion lives at the zoo. The moon is bright tonight. We take our pet to the park. I see a pig. After reading, we choose two new words and make our own sentences.",
+          "text": "Our dog is a good pet, but he likes to run. At the park, he sees a bird and runs to a tree. A cat is under the tree. The cat sees a pig on a card. Our dog sees it, too. He wants to play with them all.",
           "focusWords": [
             "bird",
             "cat",
@@ -569,7 +569,7 @@
           "title": "Animals and Nature: Second Reading",
           "type": "guided-reading",
           "theme": "animals_nature",
-          "text": "We look around and notice animals and nature. I can see a kite in the sky. The sun is bright and warm. We planted a small tree by the house. My nose smells soup. The sad boy sits alone. I made a card for Grandma. After reading, we choose two new words and make our own sentences.",
+          "text": "The sun is in the sky, and a bird sits in our tree. My cat looks up with her nose in the air. At night, the moon comes out. My little pet is sad because the bird is not there. I give her a lion toy, and she is happy.",
           "focusWords": [
             "sky",
             "sun",
@@ -586,49 +586,49 @@
           {
             "id": "l1-u05-d1",
             "speaker": "A",
-            "text": "Can you use \"bird\" in a sentence?",
+            "text": "Is that your dog by the tree?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d1.mp3"
           },
           {
             "id": "l1-u05-d2",
             "speaker": "B",
-            "text": "A bird sings in the tree.",
+            "text": "Yes. He is my new pet.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d2.mp3"
           },
           {
             "id": "l1-u05-d3",
             "speaker": "A",
-            "text": "What can you say with \"cat\"?",
+            "text": "Why is your cat up there?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d3.mp3"
           },
           {
             "id": "l1-u05-d4",
             "speaker": "B",
-            "text": "My cat likes fish.",
+            "text": "She sees a bird in the sky.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d4.mp3"
           },
           {
             "id": "l1-u05-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"dog\"?",
+            "text": "Is the bird near the sun?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d5.mp3"
           },
           {
             "id": "l1-u05-d6",
             "speaker": "B",
-            "text": "My dog likes milk.",
+            "text": "No, it is under the tree.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d6.mp3"
           },
           {
             "id": "l1-u05-d7",
             "speaker": "A",
-            "text": "How would you use \"lion\"?",
+            "text": "Your dog looks sad now.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d7.mp3"
           },
           {
             "id": "l1-u05-d8",
             "speaker": "B",
-            "text": "A lion lives at the zoo.",
+            "text": "He wants the cat to come down.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u05-d8.mp3"
           }
         ],
@@ -681,7 +681,7 @@
           "title": "Food and Meals: First Reading",
           "type": "guided-reading",
           "theme": "food",
-          "text": "Our family is getting food ready for a meal. Please give me a cup of water. I cook an egg for lunch. We need food and water. We have rice and vegetables for lunch. Milk is in my cup. The pie is on the table. I drink warm tea in the morning. After reading, we choose two new words and make our own sentences.",
+          "text": "It is lunch time at home. Dad puts an egg and rice on my plate. Mom gives me a cup of water. My sister has milk, and Grandma has tea. A pie is on the table, too. We have good food. We sit down and eat lunch together.",
           "focusWords": [
             "cup",
             "egg",
@@ -698,7 +698,7 @@
           "title": "School and Learning: Second Reading",
           "type": "guided-reading",
           "theme": "school",
-          "text": "Our classroom is ready for a new lesson. The water in the cup is warm. My desk is tidy. The pen is on my desk. I draw a picture of my family. The red ball is under the chair. There is a bed in the room. After reading, we choose two new words and make our own sentences.",
+          "text": "My room is ready for art time. A pen and a cup are on my desk. I draw a picture of a red ball by my bed. Then I draw milk, tea, and an egg. The picture is for Mom. I put it on her door.",
           "focusWords": [
             "water",
             "desk",
@@ -715,49 +715,49 @@
           {
             "id": "l1-u06-d1",
             "speaker": "A",
-            "text": "Can you use \"cup\" in a sentence?",
+            "text": "What do you want for lunch?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d1.mp3"
           },
           {
             "id": "l1-u06-d2",
             "speaker": "B",
-            "text": "Please give me a cup of water.",
+            "text": "I want an egg and some rice.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d2.mp3"
           },
           {
             "id": "l1-u06-d3",
             "speaker": "A",
-            "text": "What can you say with \"egg\"?",
+            "text": "Do you want milk or tea?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d3.mp3"
           },
           {
             "id": "l1-u06-d4",
             "speaker": "B",
-            "text": "I cook an egg for lunch.",
+            "text": "Milk, please. Is it in the cup?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d4.mp3"
           },
           {
             "id": "l1-u06-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"food\"?",
+            "text": "Yes, and the water is here.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d5.mp3"
           },
           {
             "id": "l1-u06-d6",
             "speaker": "B",
-            "text": "We need food and water.",
+            "text": "Can we have the pie, too?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d6.mp3"
           },
           {
             "id": "l1-u06-d7",
             "speaker": "A",
-            "text": "How would you use \"lunch\"?",
+            "text": "Yes, but eat your food first.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d7.mp3"
           },
           {
             "id": "l1-u06-d8",
             "speaker": "B",
-            "text": "We have rice and vegetables for lunch.",
+            "text": "Okay. I am ready to eat.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u06-d8.mp3"
           }
         ],
@@ -810,7 +810,7 @@
           "title": "Actions and Routines: First Reading",
           "type": "guided-reading",
           "theme": "actions",
-          "text": "Everyone has something to do today. I come home early. We go home at five. I jog every day. He loves his dog. I miss my friend. The boy runs in the park. I sit on a chair. After reading, we choose two new words and make our own sentences.",
+          "text": "I come home at four. My dog and I go to the park. I jog, and he can run. We love this game. Then I sit by the door and watch him. I miss Mom, but she comes home soon. We all go into the room together.",
           "focusWords": [
             "come",
             "go",
@@ -827,7 +827,7 @@
           "title": "Home and Objects: Second Reading",
           "type": "guided-reading",
           "theme": "home_objects",
-          "text": "We look around the house and find many useful things. The door is clean. My room is small but clean. Please put the toy in the box. The bus is near my home. We can see the car from here. I go home after school. After reading, we choose two new words and make our own sentences.",
+          "text": "A toy car is in my room. I sit on the bed and make it go. The car runs to the door. Now it is under a toy bus. Dad comes home and looks in. \"Come with me,\" he says. We go to the real car and ride to Grandma's home.",
           "focusWords": [
             "door",
             "room",
@@ -844,49 +844,49 @@
           {
             "id": "l1-u07-d1",
             "speaker": "A",
-            "text": "Can you use \"come\" in a sentence?",
+            "text": "Do you go home by bus?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d1.mp3"
           },
           {
             "id": "l1-u07-d2",
             "speaker": "B",
-            "text": "I come home early.",
+            "text": "No, I go home in Dad's car.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d2.mp3"
           },
           {
             "id": "l1-u07-d3",
             "speaker": "A",
-            "text": "What can you say with \"go\"?",
+            "text": "Can you come to the park first?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d3.mp3"
           },
           {
             "id": "l1-u07-d4",
             "speaker": "B",
-            "text": "We go home at five.",
+            "text": "Yes. I want to run with you.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d4.mp3"
           },
           {
             "id": "l1-u07-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"jog\"?",
+            "text": "Do you jog every day?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d5.mp3"
           },
           {
             "id": "l1-u07-d6",
             "speaker": "B",
-            "text": "I jog every day.",
+            "text": "No, I sit and play with my toy.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d6.mp3"
           },
           {
             "id": "l1-u07-d7",
             "speaker": "A",
-            "text": "How would you use \"love\"?",
+            "text": "I miss our park games.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d7.mp3"
           },
           {
             "id": "l1-u07-d8",
             "speaker": "B",
-            "text": "He loves his dog.",
+            "text": "Me too. Let us go now.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u07-d8.mp3"
           }
         ],
@@ -939,7 +939,7 @@
           "title": "Colors and Descriptions: First Reading",
           "type": "guided-reading",
           "theme": "descriptions",
-          "text": "We look carefully and describe what we see. The milk is bad. I have a big school bag. This is a good book. We had a great day at the zoo. I have a new bike. It is a nice day for a picnic. The apple is red. After reading, we choose two new words and make our own sentences.",
+          "text": "I see a new bike at the store. It is big, red, and very nice. Dad says the bike is good, but it is too tall for me. A small bike is here. It is not new, but it is great. I can ride it well, so we take it home.",
           "focusWords": [
             "bad",
             "big",
@@ -956,7 +956,7 @@
           "title": "Everyday English: Second Reading",
           "type": "guided-reading",
           "theme": "general",
-          "text": "Today brings many small things to notice and do. That is a tall tree. My bag is here. Teaching is an important job. No, that is not my pen. Is it OK to sit here? I walk to school. After reading, we choose two new words and make our own sentences.",
+          "text": "Today I walk to school with Mom. The new guard has a big job. He stands here by the red door and helps us. A boy has a bad fall, but he is okay. The guard is nice to him. \"No running,\" he says. We walk into school.",
           "focusWords": [
             "tall",
             "here",
@@ -973,49 +973,49 @@
           {
             "id": "l1-u08-d1",
             "speaker": "A",
-            "text": "Can you use \"bad\" in a sentence?",
+            "text": "Is that your new red bike?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d1.mp3"
           },
           {
             "id": "l1-u08-d2",
             "speaker": "B",
-            "text": "The milk is bad.",
+            "text": "Yes. It is big and nice.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d2.mp3"
           },
           {
             "id": "l1-u08-d3",
             "speaker": "A",
-            "text": "What can you say with \"big\"?",
+            "text": "Can you ride it here?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d3.mp3"
           },
           {
             "id": "l1-u08-d4",
             "speaker": "B",
-            "text": "I have a big school bag.",
+            "text": "No, this road is not good.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d4.mp3"
           },
           {
             "id": "l1-u08-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"good\"?",
+            "text": "Is the park okay?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d5.mp3"
           },
           {
             "id": "l1-u08-d6",
             "speaker": "B",
-            "text": "This is a good book.",
+            "text": "Yes. The park is great.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d6.mp3"
           },
           {
             "id": "l1-u08-d7",
             "speaker": "A",
-            "text": "How would you use \"great\"?",
+            "text": "Do you want to walk there now?",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d7.mp3"
           },
           {
             "id": "l1-u08-d8",
             "speaker": "B",
-            "text": "We had a great day at the zoo.",
+            "text": "Okay. My job is to take the bike.",
             "audio": "audio/vocab_foundation/dialogue_lines/l1-u08-d8.mp3"
           }
         ],

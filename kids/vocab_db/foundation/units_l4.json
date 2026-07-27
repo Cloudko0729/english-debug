@@ -47,7 +47,7 @@
           "title": "Language Tools: First Reading",
           "type": "guided-reading",
           "theme": "language",
-          "text": "Our class is practicing clear English today. Please be quiet. Does he walk to school? I am from Taiwan. The door of the room is open. It is raining, so we stay inside. There are some apples on the table. I can speak English. After reading, we choose two new words and make our own sentences.",
+          "text": "On Friday, our class recorded the morning announcement. I had to say the date and speak about the school lunch. The paper said March eighteen, but I read March eighty by mistake. Amy stopped the recording because the number was wrong. We laughed for a moment, and then she showed me which line to read again. This time, I spoke slowly and clearly. The whole message was about fifteen seconds longer, but it sounded much better. Some students heard it from their classrooms later. They said it was good, so I was not worried anymore.",
           "focusWords": [
             "be",
             "does",
@@ -64,7 +64,7 @@
           "title": "Numbers and Time: Second Reading",
           "type": "guided-reading",
           "theme": "numbers_time",
-          "text": "It is a busy day, and we check the time carefully. This book is new. Which bag is yours? I took the wrong bus. Write today's date on the page. He sees eighteen birds. Eighty leaves fall down. Fifteen kids sing a song. After reading, we choose two new words and make our own sentences.",
+          "text": "Grandpa opened a box of old family photos while we were cleaning the living room. Some pictures were from a school trip, but none had a date on the back. We studied this photo of a tall boy beside a bicycle. I thought the boy was Grandpa at fifteen, but he said that was wrong. It was his brother at eighteen. Then we found a picture of a birthday cake with eighty candles. \"Which family member could this be?\" I asked. Grandpa smiled and began to speak about his grandmother. Her long life gave us many true stories to remember.",
           "focusWords": [
             "this",
             "which",
@@ -82,49 +82,49 @@
           {
             "id": "l4-u01-d1",
             "speaker": "A",
-            "text": "Can you use \"be\" in a sentence?",
+            "text": "Does this calendar show the sports day?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d1.mp3"
           },
           {
             "id": "l4-u01-d2",
             "speaker": "B",
-            "text": "Please be quiet.",
+            "text": "Yes, but I think the date is wrong.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d2.mp3"
           },
           {
             "id": "l4-u01-d3",
             "speaker": "A",
-            "text": "What can you say with \"does\"?",
+            "text": "Which day should it be?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d3.mp3"
           },
           {
             "id": "l4-u01-d4",
             "speaker": "B",
-            "text": "Does he walk to school?",
+            "text": "It should be Friday, March eighteen.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d4.mp3"
           },
           {
             "id": "l4-u01-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"from\"?",
+            "text": "Can you speak to the teacher about it?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d5.mp3"
           },
           {
             "id": "l4-u01-d6",
             "speaker": "B",
-            "text": "I am from Taiwan.",
+            "text": "Sure. She is in the office with some parents.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d6.mp3"
           },
           {
             "id": "l4-u01-d7",
             "speaker": "A",
-            "text": "How would you use \"of\"?",
+            "text": "Good, because fifteen students need to know soon.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d7.mp3"
           },
           {
             "id": "l4-u01-d8",
             "speaker": "B",
-            "text": "The door of the room is open.",
+            "text": "I will tell them before the announcement.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u01-d8.mp3"
           }
         ],
@@ -169,7 +169,7 @@
           "title": "Numbers and Time: First Reading",
           "type": "guided-reading",
           "theme": "numbers_time",
-          "text": "It is a busy day, and we check the time carefully. Fifty cents are in my hand. I see forty desks. Fourteen students are in the room. He is never late for school. Nineteen kids play outside. He sees ninety stars. Seventeen flowers are red. After reading, we choose two new words and make our own sentences.",
+          "text": "Our class wanted to collect ninety books for a reading corner. On Monday, we brought thirteen books, and the box still looked empty. The next day, fourteen more arrived. By Wednesday, we had thirty books, so our teacher said we were doing well. Soon, parents started helping too. One family gave sixteen storybooks, and another gave nineteen picture books. Our total reached sixty-five. We never thought we could fill the shelf so quickly. On Friday, Mia carried in a bag with twenty-five books. Everyone counted together, and we cheered because the final number was exactly ninety.",
           "focusWords": [
             "fifty",
             "forty",
@@ -186,7 +186,7 @@
           "title": "Numbers and Time: Second Reading",
           "type": "guided-reading",
           "theme": "numbers_time",
-          "text": "It is a busy day, and we check the time carefully. She has seventy stickers. Sixteen ducks walk by. I see sixty dots. The bus will come soon. The baby is still asleep. Thirteen birds sit on the roof. She counts thirty coins. After reading, we choose two new words and make our own sentences.",
+          "text": "Grandma turned seventy last weekend, and our family planned a surprise lunch. Dad printed forty photos from her younger days. My cousin chose seventeen of them for a wall display, while I placed the rest in an album. We expected fifty guests, but almost sixty came. Grandpa was still setting out chairs when the doorbell rang. At twelve thirty, Grandma entered and saw everyone waiting. She covered her face and laughed. During lunch, fourteen children sang for her, and nineteen adults shared short memories. The party lasted until four, but Grandma said she was never tired because she felt so happy.",
           "focusWords": [
             "seventy",
             "sixteen",
@@ -204,49 +204,49 @@
           {
             "id": "l4-u02-d1",
             "speaker": "A",
-            "text": "Can you use \"fifty\" in a sentence?",
+            "text": "Is our basketball score still thirteen?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d1.mp3"
           },
           {
             "id": "l4-u02-d2",
             "speaker": "B",
-            "text": "Fifty cents are in my hand.",
+            "text": "No, Leo made a basket, so we have fifteen.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d2.mp3"
           },
           {
             "id": "l4-u02-d3",
             "speaker": "A",
-            "text": "What can you say with \"forty\"?",
+            "text": "The other team has sixteen, right?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d3.mp3"
           },
           {
             "id": "l4-u02-d4",
             "speaker": "B",
-            "text": "I see forty desks.",
+            "text": "Yes, but there are still two minutes left.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d4.mp3"
           },
           {
             "id": "l4-u02-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"fourteen\"?",
+            "text": "Do you think we can reach twenty?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d5.mp3"
           },
           {
             "id": "l4-u02-d6",
             "speaker": "B",
-            "text": "Fourteen students are in the room.",
+            "text": "Sure. We never stop trying.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d6.mp3"
           },
           {
             "id": "l4-u02-d7",
             "speaker": "A",
-            "text": "How would you use \"never\"?",
+            "text": "Look, Mia scored! We have seventeen now.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d7.mp3"
           },
           {
             "id": "l4-u02-d8",
             "speaker": "B",
-            "text": "He is never late for school.",
+            "text": "Great! One more basket will give us nineteen.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u02-d8.mp3"
           }
         ],
@@ -303,7 +303,7 @@
           "title": "People and Family: First Reading",
           "type": "guided-reading",
           "theme": "people_family",
-          "text": "My family and friends are together today. My grandfather walks every morning. My grandma smiles at me. My grandmother makes good soup. My grandpa drinks warm tea. My parents love our family. Excuse me, sir. Is this your bag? The writer makes funny stories. After reading, we choose two new words and make our own sentences.",
+          "text": "On Saturday, my parents took me to a butterfly garden with Grandma and Grandpa. A guide showed us a tiny egg under a leaf, and soon we saw a butterfly opening its wings. My grandmother took photos while my grandfather read the signs to me. At noon, we were thirsty, so we rested beside a pond and shared a bottle of water. A young panda was sleeping on a poster near the gift desk, and Grandma bought the card for my cousin. We stayed for almost two hours. On the way home, Grandpa said we should visit again next spring.",
           "focusWords": [
             "grandfather",
             "grandma",
@@ -320,7 +320,7 @@
           "title": "Numbers and Time: Second Reading",
           "type": "guided-reading",
           "theme": "numbers_time",
-          "text": "It is a busy day, and we check the time carefully. I will visit Grandma tomorrow. There are twelve months in a year. I see twenty chairs. The weekend is fun. The butterfly is near the tree. The panda is eating. She is thirsty after running. After reading, we choose two new words and make our own sentences.",
+          "text": "A children's writer visited our town on Sunday afternoon. My parents and I arrived at the reading hall before twelve, but every front seat was taken. The writer told a funny story about a panda that wanted to fly like a butterfly. My little brother laughed so hard that he dropped his bag. After the story, the writer answered twenty questions from the children. I asked how long it took to finish a book. \"Sometimes a year,\" he said. Before we left, he wrote my name inside my book. I will show it to Grandma when we visit her tomorrow.",
           "focusWords": [
             "tomorrow",
             "twelve",
@@ -338,49 +338,49 @@
           {
             "id": "l4-u03-d1",
             "speaker": "A",
-            "text": "Can you use \"grandfather\" in a sentence?",
+            "text": "Are we visiting Grandpa this weekend?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d1.mp3"
           },
           {
             "id": "l4-u03-d2",
             "speaker": "B",
-            "text": "My grandfather walks every morning.",
+            "text": "Yes. My parents want to go tomorrow morning.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d2.mp3"
           },
           {
             "id": "l4-u03-d3",
             "speaker": "A",
-            "text": "What can you say with \"grandma\"?",
+            "text": "Will Grandma make lunch for us?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d3.mp3"
           },
           {
             "id": "l4-u03-d4",
             "speaker": "B",
-            "text": "My grandma smiles at me.",
+            "text": "She said she is making noodles at twelve.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d4.mp3"
           },
           {
             "id": "l4-u03-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"grandmother\"?",
+            "text": "Great. Can we bring the panda puzzle?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d5.mp3"
           },
           {
             "id": "l4-u03-d6",
             "speaker": "B",
-            "text": "My grandmother makes good soup.",
+            "text": "Sure, and Grandpa has a new butterfly book.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d6.mp3"
           },
           {
             "id": "l4-u03-d7",
             "speaker": "A",
-            "text": "How would you use \"grandpa\"?",
+            "text": "I may get thirsty on the long bus ride.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d7.mp3"
           },
           {
             "id": "l4-u03-d8",
             "speaker": "B",
-            "text": "My grandpa drinks warm tea.",
+            "text": "I will pack water for you and Grandmother.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u03-d8.mp3"
           }
         ],
@@ -433,7 +433,7 @@
           "title": "School and Learning: First Reading",
           "type": "guided-reading",
           "theme": "school",
-          "text": "Our classroom is ready for a new lesson. We sing the alphabet song. The bookstore is next to the bank. I color the sun with a yellow crayon. I made a drawing of my family. I do my homework after school. There is a picture on this page. I paint a red apple. After reading, we choose two new words and make our own sentences.",
+          "text": "After school, Mia went to the bookstore to finish her homework in the reading corner. She opened her pencil case and found one pencil, but her crayon box was missing. She remembered using it near the big window. As she walked back, a strong wind came through the open door and blew several pages across the floor. Mia helped the worker pick up the paper. Under a page with a snake drawing, she found her blue pencil box. Nothing was lost after all. She bought a small loaf of bread on the way home and finished her alphabet poster before dinner.",
           "focusWords": [
             "alphabet",
             "bookstore",
@@ -450,7 +450,7 @@
           "title": "School and Learning: Second Reading",
           "type": "guided-reading",
           "theme": "school",
-          "text": "Our classroom is ready for a new lesson. We need some paper for the picture. My ruler is in the pencil box. Her pencil case is on the desk. Reading helps me learn new words. The snake is near the tree. The wind is strong today. The bread is on the table. After reading, we choose two new words and make our own sentences.",
+          "text": "Leo's homework was to make an alphabet book, so he worked at a table outside his aunt's bakery. For the letter B, he painted a basket of bread. For S, he made a long green snake. He used a crayon for the grass and dark paint for the sky. The drawing looked strange, but he liked it. Then the wind lifted one page and carried it toward the road. Leo ran after the paper and caught it beside a parked scooter. He put every page into his pencil case for safety. That evening, his reading group enjoyed the colorful book.",
           "focusWords": [
             "paper",
             "pencil box",
@@ -468,49 +468,49 @@
           {
             "id": "l4-u04-d1",
             "speaker": "A",
-            "text": "Can you use \"alphabet\" in a sentence?",
+            "text": "Did you see my pencil case in the bookstore?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d1.mp3"
           },
           {
             "id": "l4-u04-d2",
             "speaker": "B",
-            "text": "We sing the alphabet song.",
+            "text": "Is it the blue one with a snake drawing?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d2.mp3"
           },
           {
             "id": "l4-u04-d3",
             "speaker": "A",
-            "text": "What can you say with \"bookstore\"?",
+            "text": "Yes. My crayons and pencil are inside.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d3.mp3"
           },
           {
             "id": "l4-u04-d4",
             "speaker": "B",
-            "text": "The bookstore is next to the bank.",
+            "text": "I saw it next to the reading table.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d4.mp3"
           },
           {
             "id": "l4-u04-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"crayon\"?",
+            "text": "Was it under the alphabet book?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d5.mp3"
           },
           {
             "id": "l4-u04-d6",
             "speaker": "B",
-            "text": "I color the sun with a yellow crayon.",
+            "text": "No, it was on a page of brown paper.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d6.mp3"
           },
           {
             "id": "l4-u04-d7",
             "speaker": "A",
-            "text": "How would you use \"drawing\"?",
+            "text": "Thanks! I need it for my homework.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d7.mp3"
           },
           {
             "id": "l4-u04-d8",
             "speaker": "B",
-            "text": "I made a drawing of my family.",
+            "text": "Let's get it before the bookstore closes.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u04-d8.mp3"
           }
         ],
@@ -559,7 +559,7 @@
           "title": "Food and Meals: First Reading",
           "type": "guided-reading",
           "theme": "food",
-          "text": "Our family is getting food ready for a meal. Please put the salad in this dish. We feed the ducks at the park. Mom cooks pork for dinner. The salad has many vegetables. I eat fruit for my afternoon snack. The steak is on the plate. I put a little sugar in my tea. After reading, we choose two new words and make our own sentences.",
+          "text": "At lunch, our class tried a new meal in the school dining hall. The main dish had pork, rice, and a green vegetable. I usually leave vegetables on my plate because they look yucky, but Ben said the spinach was yummy. I took one bite and found it a little sweet. The salad also had corn, so I ate all of it. After lunch, we saved some clean leaves to feed the class rabbit. Our teacher gave us fruit for a snack and reminded us that animals should not eat sugar. I returned my empty dish feeling proud.",
           "focusWords": [
             "dish",
             "feed",
@@ -576,7 +576,7 @@
           "title": "Food and Meals: Second Reading",
           "type": "guided-reading",
           "theme": "food",
-          "text": "Our family is getting food ready for a meal. This tea is too sweet. A carrot is a vegetable. This medicine tastes yucky. The cake is yummy. She has a balloon for the party. The bank is near the station. Please put your cellphone in your bag. After reading, we choose two new words and make our own sentences.",
+          "text": "At the night market, I carried coins from my small bank in a yellow bag. Dad used his cellphone to check where our cousins were waiting. We met them beside a balloon stand, and then everyone chose a snack. My cousin ordered grilled pork, while I picked a vegetable roll. It smelled wonderful, but the first bite was too hot. Later, we shared a sweet pancake with less sugar. Dad wanted steak, but the line was very long, so he bought a cold salad instead. Before going home, I paid for a blue balloon and tied it tightly to my bag.",
           "focusWords": [
             "sweet",
             "vegetable",
@@ -594,49 +594,49 @@
           {
             "id": "l4-u05-d1",
             "speaker": "A",
-            "text": "Can you use \"dish\" in a sentence?",
+            "text": "Do you want pork or steak for dinner?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d1.mp3"
           },
           {
             "id": "l4-u05-d2",
             "speaker": "B",
-            "text": "Please put the salad in this dish.",
+            "text": "I'll have the pork dish with a vegetable.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d2.mp3"
           },
           {
             "id": "l4-u05-d3",
             "speaker": "A",
-            "text": "What can you say with \"feed\"?",
+            "text": "Would you like salad with it?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d3.mp3"
           },
           {
             "id": "l4-u05-d4",
             "speaker": "B",
-            "text": "We feed the ducks at the park.",
+            "text": "Yes, but please don't add the sweet sauce.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d4.mp3"
           },
           {
             "id": "l4-u05-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"pork\"?",
+            "text": "Are you saving room for a snack?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d5.mp3"
           },
           {
             "id": "l4-u05-d6",
             "speaker": "B",
-            "text": "Mom cooks pork for dinner.",
+            "text": "Maybe. The cake looks yummy.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d6.mp3"
           },
           {
             "id": "l4-u05-d7",
             "speaker": "A",
-            "text": "How would you use \"salad\"?",
+            "text": "I think it has too much sugar.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d7.mp3"
           },
           {
             "id": "l4-u05-d8",
             "speaker": "B",
-            "text": "The salad has many vegetables.",
+            "text": "Then let's share one small piece.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u05-d8.mp3"
           }
         ],
@@ -689,7 +689,7 @@
           "title": "Home and Objects: First Reading",
           "type": "guided-reading",
           "theme": "home_objects",
-          "text": "We look around the house and find many useful things. Many people live in the city. The bag is light and easy to carry. My mother works in an office. The tape is in the pencil box. We watch a program on television. The TV is in the living room. There is a clock on the wall. After reading, we choose two new words and make our own sentences.",
+          "text": "Our class visited a local television station to learn how the evening news was made. A worker led us through a quiet office and into a bright studio. Large lights hung above us, and a map of the city covered one wall. Through the window, we could see a busy road and the train station. The host showed us how words appeared beside the camera. Then she used tape to mark where we should stand. I read one short weather report for the TV screen. My voice shook at first, but everyone clapped when I finished.",
           "focusWords": [
             "city",
             "light",
@@ -706,7 +706,7 @@
           "title": "Places and Transport: Second Reading",
           "type": "guided-reading",
           "theme": "places_transport",
-          "text": "We are taking a short trip through our town. The bird is outside the window. We wait for the bus at the bus stop. We eat chicken at the restaurant. The road is near my home. We meet at the station. Her skirt is pink. I wash my socks at night. After reading, we choose two new words and make our own sentences.",
+          "text": "Rain began while Amy was waiting at the bus stop after music class. A passing car splashed water from the road, and her white socks and blue skirt became wet. She moved next to the wall of a small restaurant, where a warm light shone through the window. Amy called Mom, but Mom was still working in her office across the city. The television inside showed that the rain would stop soon. A kind worker gave Amy a towel and let her wait by the door. Twenty minutes later, Mom arrived, and they walked together to the nearby station.",
           "focusWords": [
             "window",
             "bus stop",
@@ -724,49 +724,49 @@
           {
             "id": "l4-u06-d1",
             "speaker": "A",
-            "text": "Can you use \"city\" in a sentence?",
+            "text": "Are we near the station now?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d1.mp3"
           },
           {
             "id": "l4-u06-d2",
             "speaker": "B",
-            "text": "Many people live in the city.",
+            "text": "Yes. I can see its green light.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d2.mp3"
           },
           {
             "id": "l4-u06-d3",
             "speaker": "A",
-            "text": "What can you say with \"light\"?",
+            "text": "Which road leads to the restaurant?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d3.mp3"
           },
           {
             "id": "l4-u06-d4",
             "speaker": "B",
-            "text": "The bag is light and easy to carry.",
+            "text": "Walk past the office and turn at the bus stop.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d4.mp3"
           },
           {
             "id": "l4-u06-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"office\"?",
+            "text": "Is it next to the tall wall?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d5.mp3"
           },
           {
             "id": "l4-u06-d6",
             "speaker": "B",
-            "text": "My mother works in an office.",
+            "text": "No, it's across from the television shop.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d6.mp3"
           },
           {
             "id": "l4-u06-d7",
             "speaker": "A",
-            "text": "How would you use \"tape\"?",
+            "text": "I see it through that big window.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d7.mp3"
           },
           {
             "id": "l4-u06-d8",
             "speaker": "B",
-            "text": "The tape is in the pencil box.",
+            "text": "Great. Let's cross the street carefully.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u06-d8.mp3"
           }
         ],
@@ -819,7 +819,7 @@
           "title": "Actions and Routines: First Reading",
           "type": "guided-reading",
           "theme": "actions",
-          "text": "Everyone has something to do today. I buy a pencil. We dig a small hole for the tree. Leaves fall from the tree. He pays ten dollars. Please send this card to Grandma. We stay inside when it rains. Please stop at the red light. After reading, we choose two new words and make our own sentences.",
+          "text": "During our beach visit, Mia and I wanted to build the best sandcastle on the shore. We used small cups to dig a deep wall, but one side began to fall. I started to worry because the tide was coming in. Mia said we should stop and move farther from the water. Our second castle was smaller, but it stayed strong. After finishing it, we went to swim with Dad and stayed inside the safe area. On the way home, Dad let us buy cold drinks. The first castle looked bigger, but we agreed the second plan was better.",
           "focusWords": [
             "buy",
             "dig",
@@ -836,7 +836,7 @@
           "title": "Actions and Routines: Second Reading",
           "type": "guided-reading",
           "theme": "actions",
-          "text": "Everyone has something to do today. We swim on warm days. I use a ruler to draw a line. I worry when my dog is missing. Our school is on this street. We will visit the old town soon. This is my best picture. This plan is better than the old one. After reading, we choose two new words and make our own sentences.",
+          "text": "Ben wanted to send a birthday card to his cousin, so he visited the post office after school. He wrote the address carefully but forgot to add the street number. A worker noticed the problem before Ben paid for the stamp. \"Do not worry,\" she said. Ben called his mother and used her answer to fix the address. Then he chose the best stamp, paid at the counter, and put the card in the box. Outside, rain started to fall, so he stayed under the roof for a few minutes. When it stopped, he walked home feeling much better.",
           "focusWords": [
             "swim",
             "use",
@@ -854,49 +854,49 @@
           {
             "id": "l4-u07-d1",
             "speaker": "A",
-            "text": "Can you use \"buy\" in a sentence?",
+            "text": "Can I stop at the shallow end today?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d1.mp3"
           },
           {
             "id": "l4-u07-d2",
             "speaker": "B",
-            "text": "I buy a pencil.",
+            "text": "Sure. You don't need to swim far.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d2.mp3"
           },
           {
             "id": "l4-u07-d3",
             "speaker": "A",
-            "text": "What can you say with \"dig\"?",
+            "text": "I fell yesterday, so I still worry.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d3.mp3"
           },
           {
             "id": "l4-u07-d4",
             "speaker": "B",
-            "text": "We dig a small hole for the tree.",
+            "text": "Use the side rail until you feel better.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d4.mp3"
           },
           {
             "id": "l4-u07-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"fall\"?",
+            "text": "Should I stay close to you?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d5.mp3"
           },
           {
             "id": "l4-u07-d6",
             "speaker": "B",
-            "text": "Leaves fall from the tree.",
+            "text": "Yes, and take your time.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d6.mp3"
           },
           {
             "id": "l4-u07-d7",
             "speaker": "A",
-            "text": "How would you use \"pay\"?",
+            "text": "I'll try my best on the next lap.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d7.mp3"
           },
           {
             "id": "l4-u07-d8",
             "speaker": "B",
-            "text": "He pays ten dollars.",
+            "text": "Good. Call me when you reach the end.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u07-d8.mp3"
           }
         ],
@@ -940,7 +940,7 @@
           "title": "Colors and Descriptions: First Reading",
           "type": "guided-reading",
           "theme": "descriptions",
-          "text": "We look carefully and describe what we see. The evening air is cool. He makes a funny face. She has long hair. She has a pretty dress. We are in the same class. That was a smart answer. My brother is strong. After reading, we choose two new words and make our own sentences.",
+          "text": "On a sunny morning, our family walked along a long trail in the hills. The air was cool, but the sun kept us warm. My young cousin Max told funny stories as we climbed. He wanted to carry the same large backpack as Dad, but it was too heavy. At a wooden bridge, Max slipped on a wet board. My strong sister caught his hand before he fell. Dad said she made a smart and quick move. We rested beside a pretty stream and ate lunch. The view was wonderful, and Max was still smiling when we reached home.",
           "focusWords": [
             "cool",
             "funny",
@@ -957,7 +957,7 @@
           "title": "Colors and Descriptions: Second Reading",
           "type": "guided-reading",
           "theme": "descriptions",
-          "text": "We look carefully and describe what we see. Sunny weather makes me smile. I am sure this is my book. Spring days are warm. My shoes are wet. That is a wonderful idea. The boy is young. After reading, we choose two new words and make our own sentences.",
+          "text": "Our class spent an afternoon at a pottery room. The teacher was young and friendly, and she showed us how to shape wet clay. I tried to make a long cup, but one side fell down. It looked funny, so I turned it into a small fish. Nina made a pretty bowl with the same blue lines on every side. The room stayed warm while our work became dry and strong. A week later, we returned to collect our pieces. I was sure my fish would break, but it came out well. Mom called it a wonderful little dish.",
           "focusWords": [
             "sunny",
             "sure",
@@ -974,49 +974,49 @@
           {
             "id": "l4-u08-d1",
             "speaker": "A",
-            "text": "Can you use \"cool\" in a sentence?",
+            "text": "Which paper bridge is the strongest?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d1.mp3"
           },
           {
             "id": "l4-u08-d2",
             "speaker": "B",
-            "text": "The evening air is cool.",
+            "text": "The long blue one held twelve coins.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d2.mp3"
           },
           {
             "id": "l4-u08-d3",
             "speaker": "A",
-            "text": "What can you say with \"funny\"?",
+            "text": "Mine held the same number.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d3.mp3"
           },
           {
             "id": "l4-u08-d4",
             "speaker": "B",
-            "text": "He makes a funny face.",
+            "text": "That's cool! Did it stay dry?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d4.mp3"
           },
           {
             "id": "l4-u08-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"long\"?",
+            "text": "Yes, but one side looks funny now.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d5.mp3"
           },
           {
             "id": "l4-u08-d6",
             "speaker": "B",
-            "text": "She has long hair.",
+            "text": "I'm sure we can make it stronger.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d6.mp3"
           },
           {
             "id": "l4-u08-d7",
             "speaker": "A",
-            "text": "How would you use \"pretty\"?",
+            "text": "Your folded design is very smart.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d7.mp3"
           },
           {
             "id": "l4-u08-d8",
             "speaker": "B",
-            "text": "She has a pretty dress.",
+            "text": "Thanks. Let's build another one together.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u08-d8.mp3"
           }
         ],
@@ -1064,7 +1064,7 @@
           "title": "Fun and Media: First Reading",
           "type": "guided-reading",
           "theme": "recreation_media",
-          "text": "After school, we have time for fun. This CD has ten songs. We practice dancing after school. We watch a funny movie together. Dad reads the news in the morning. Grandpa reads the newspaper every morning. Soccer is my favorite game. Soccer is my favorite sport. After reading, we choose two new words and make our own sentences.",
+          "text": "Last winter, my family spent part of our vacation in the mountains. We woke early because the news said snow might fall before noon. At first, the ground was only wet, but small white pieces soon filled the air. My brother had never seen snow, so he ran outside and tried to catch it. We made a tiny snowman and took a short movie for Grandma. By evening, the road was closing, and Dad decided to leave early. We were sad to go, but he promised another trip in spring, when the season would be warmer and the flowers would return.",
           "focusWords": [
             "cd",
             "dancing",
@@ -1081,7 +1081,7 @@
           "title": "Seasons and Weather: Second Reading",
           "type": "guided-reading",
           "theme": "seasons_weather",
-          "text": "The season and weather change what we do. Each season has different weather. Snow covers the ground. Flowers grow in spring. Summer is hot. Our winter vacation starts next week. Winter is cold. After reading, we choose two new words and make our own sentences.",
+          "text": "During summer vacation, I helped with the school newspaper. My first job was to write about a weekend soccer game. I watched the sport from the side of the field and wrote down every goal. Our team was losing, but they scored twice near the end and won. After the game, I spoke with the coach and two players. Their excited words became the best part of my news story. Back in the club room, a dancing group was practicing with an old CD, so I closed the door to hear better. On Monday, my article and team photo appeared on the front page.",
           "focusWords": [
             "season",
             "snow",
@@ -1098,49 +1098,49 @@
           {
             "id": "l4-u09-d1",
             "speaker": "A",
-            "text": "Can you use \"cd\" in a sentence?",
+            "text": "What should we do on this rainy vacation day?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d1.mp3"
           },
           {
             "id": "l4-u09-d2",
             "speaker": "B",
-            "text": "This CD has ten songs.",
+            "text": "Let's watch the movie Grandpa gave us.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d2.mp3"
           },
           {
             "id": "l4-u09-d3",
             "speaker": "A",
-            "text": "What can you say with \"dancing\"?",
+            "text": "Is that the one about a summer soccer team?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d3.mp3"
           },
           {
             "id": "l4-u09-d4",
             "speaker": "B",
-            "text": "We practice dancing after school.",
+            "text": "Yes. It was in the news last spring.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d4.mp3"
           },
           {
             "id": "l4-u09-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"movie\"?",
+            "text": "Can we play my dancing CD first?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d5.mp3"
           },
           {
             "id": "l4-u09-d6",
             "speaker": "B",
-            "text": "We watch a funny movie together.",
+            "text": "Sure, but only for one song.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d6.mp3"
           },
           {
             "id": "l4-u09-d7",
             "speaker": "A",
-            "text": "How would you use \"news\"?",
+            "text": "Winter is the best season for staying inside.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d7.mp3"
           },
           {
             "id": "l4-u09-d8",
             "speaker": "B",
-            "text": "Dad reads the news in the morning.",
+            "text": "Maybe, but I still want to play a sport tomorrow.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u09-d8.mp3"
           }
         ],
@@ -1188,7 +1188,7 @@
           "title": "Everyday English: First Reading",
           "type": "guided-reading",
           "theme": "general",
-          "text": "Today brings many small things to notice and do. We visit Grandma during Chinese New Year. The two sides are even. The bus stops in front of the school. I give the kitten some milk. Here, kitty! Come to me. I sit next to my friend. The children are out in the yard. After reading, we choose two new words and make our own sentences.",
+          "text": "Two days before Chinese New Year, we heard a soft sound in front of our neighbor's door. A wet kitten was hiding next to a box of oranges. It came out when it smelled the fish in Mom's shopping bag. The kitty was small, but even my little brother could hold it carefully. We gave it water and made a warm bed in a box. Then Dad posted a photo in our building group. That evening, a girl from upstairs knocked on our door. She called the kitten's name, and it ran to her. We were happy to help them meet again.",
           "focusWords": [
             "chinese new year",
             "even",
@@ -1205,7 +1205,7 @@
           "title": "Everyday English: Second Reading",
           "type": "guided-reading",
           "theme": "general",
-          "text": "Today brings many small things to notice and do. Each child reads one part of the dialogue. What size is this shirt? I smell flowers in the garden. I hear a strange sound. Sports help us stay strong. We go swimming in summer. After reading, we choose two new words and make our own sentences.",
+          "text": "Our school held a swimming day at the sports center. I was part of the blue team, and my race began after lunch. The pool looked huge, even though it was the same size as our practice pool. I stood next to Mia in front of the starting line. When the whistle made a sharp sound, we jumped in and started swimming. I was tired near the end, but I did not stop. Mia finished first, and I came in third. When we climbed out, our coach gave us towels. The smell of warm noodles from the snack room made everyone hungry.",
           "focusWords": [
             "part",
             "size",
@@ -1222,49 +1222,49 @@
           {
             "id": "l4-u10-d1",
             "speaker": "A",
-            "text": "Can you use \"chinese new year\" in a sentence?",
+            "text": "Where is the kitten for our Chinese New Year photo?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d1.mp3"
           },
           {
             "id": "l4-u10-d2",
             "speaker": "B",
-            "text": "We visit Grandma during Chinese New Year.",
+            "text": "The kitty is hiding next to the sofa.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d2.mp3"
           },
           {
             "id": "l4-u10-d3",
             "speaker": "A",
-            "text": "What can you say with \"even\"?",
+            "text": "Can you bring it out?",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d3.mp3"
           },
           {
             "id": "l4-u10-d4",
             "speaker": "B",
-            "text": "The two sides are even.",
+            "text": "I tried, but it ran in front of the TV.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d4.mp3"
           },
           {
             "id": "l4-u10-d5",
             "speaker": "A",
-            "text": "Can you give me an example with \"in front of\"?",
+            "text": "Maybe it doesn't like the drum sound.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d5.mp3"
           },
           {
             "id": "l4-u10-d6",
             "speaker": "B",
-            "text": "The bus stops in front of the school.",
+            "text": "Even the small drum is too loud for it.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d6.mp3"
           },
           {
             "id": "l4-u10-d7",
             "speaker": "A",
-            "text": "How would you use \"kitten\"?",
+            "text": "Then let's finish the family part first.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d7.mp3"
           },
           {
             "id": "l4-u10-d8",
             "speaker": "B",
-            "text": "I give the kitten some milk.",
+            "text": "Good idea. I smell fish, so it may come out soon.",
             "audio": "audio/vocab_foundation/dialogue_lines/l4-u10-d8.mp3"
           }
         ],

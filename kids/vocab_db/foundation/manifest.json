@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedOn": "2026-07-25",
+  "generatedOn": "2026-07-27",
   "scope": "F0-F3 / L1-L4",
   "policy": {
     "wordsPerUnitMaximum": 15,
@@ -24,7 +24,7 @@
     "examples": 926,
     "generatedExampleAudio": 630,
     "reusedExampleAudio": 296,
-    "missingWordAudio": 42,
+    "missingWordAudio": 0,
     "units": 33,
     "passages": 66,
     "dialogues": 33,
@@ -34,7 +34,7 @@
     "confusionDialogueTurns": 104
   },
   "audioSpecs": {
-    "foundation_missing_words.json": 42,
+    "foundation_missing_words.json": 0,
     "foundation_examples.json": 630,
     "foundation_passages.json": 66,
     "foundation_dialogue_a.json": 132,

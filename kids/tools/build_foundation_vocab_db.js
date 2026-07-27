@@ -1117,40 +1117,538 @@ function packLevel(words, level) {
   return bins;
 }
 
-const OPENING = {
-  language: "Our class is practicing clear English today.",
-  numbers_time: "It is a busy day, and we check the time carefully.",
-  people_family: "My family and friends are together today.",
-  body_health: "We are learning how our bodies feel and move.",
-  animals_nature: "We look around and notice animals and nature.",
-  school: "Our classroom is ready for a new lesson.",
-  food: "Our family is getting food ready for a meal.",
-  home_objects: "We look around the house and find many useful things.",
-  clothes: "We choose our clothes for the day.",
-  places_transport: "We are taking a short trip through our town.",
-  actions: "Everyone has something to do today.",
-  descriptions: "We look carefully and describe what we see.",
-  seasons_weather: "The season and weather change what we do.",
-  recreation_media: "After school, we have time for fun.",
-  general: "Today brings many small things to notice and do.",
-};
-
-const DIALOGUE_QUESTIONS = {
-  language: ["Can you say that in English?", "Which word do we need?", "Can you give me another example?", "Are you sure?"],
-  numbers_time: ["What time is it?", "What happens next?", "When do we start?", "How many do we need?"],
-  people_family: ["Who is with you?", "Who is that person?", "What do you do together?", "Can they join us?"],
-  body_health: ["How do you feel?", "What can your body do?", "Does anything hurt?", "What should we do now?"],
-  animals_nature: ["What can you see?", "Where is the animal?", "What is it doing?", "What else is outside?"],
-  school: ["What do you need for class?", "Where is it?", "What are you learning?", "Can we work together?"],
-  food: ["What would you like?", "Where is the food?", "How does it taste?", "Can we share it?"],
-  home_objects: ["What is in the room?", "Where is it?", "Is it clean?", "What do we use it for?"],
-  clothes: ["What are you wearing?", "What color is it?", "Does it fit?", "What will you wear tomorrow?"],
-  places_transport: ["Where are you going?", "How will you get there?", "What can you see nearby?", "When will you come home?"],
-  actions: ["What are you doing?", "What do you do next?", "Can I help?", "Are you finished?"],
-  descriptions: ["What does it look like?", "Is it big or small?", "What color is it?", "Do you like it?"],
-  seasons_weather: ["How is the weather?", "Which season is it?", "What will you wear?", "What can we do outside?"],
-  recreation_media: ["What do you do for fun?", "Who plays with you?", "What do you watch or read?", "What will you try next?"],
-  general: ["What do you see?", "What happens next?", "Can you tell me more?", "What will you do?"],
+// Hand-authored, level-controlled reading and dialogue content. Each unit has
+// two complete scenes and one natural eight-turn conversation. Keep this data
+// here so rebuilding the JSON never falls back to concatenated example cards.
+const UNIT_CONTENT = {
+  "l1-u01": {
+    passages: [
+      "It is seven. I am in the kitchen with Dad. He has an egg and a red cup. The cup is on the table. We are ready for breakfast. I do not want tea. I want milk. Is it hot or cold? Dad says it is cold. I eat the egg at home.",
+      "I am at the park with my sister. She is on a red bike, and I am in a little car. It is a toy car, but it is big for me. We do not go fast. Are we near the tree or the bus? We are near the tree.",
+    ],
+    dialogue: [
+      "Are you at the school door?",
+      "Yes, I am here with Ben.",
+      "Is he in your class?",
+      "Yes. He has a book and an apple.",
+      "Do you have a pen?",
+      "No, I do not. It is at home.",
+      "Do you want a red pen or a blue pen?",
+      "A blue pen, please.",
+    ],
+  },
+  "l1-u02": {
+    passages: [
+      "Today we have a class party. We put five red cups and four blue cups on the table. That is nine cups. What do we need now? We need cake, too. They bring the cake, and she brings water. Who has the plates? You do. Yes, we are ready.",
+      "A girl and a boy are at the school store. She wants eight pencils, and he wants five pens. They see four red bags and nine blue bags. What bag do you like? The girl says, \"That red bag.\" The boy says, \"I like that bag, too.\"",
+    ],
+    dialogue: [
+      "What is in that big box?",
+      "It is a birthday cake.",
+      "Who is the cake for?",
+      "It is for Amy. She is nine today.",
+      "Do we have eight cups?",
+      "Yes, and we have four plates, too.",
+      "Can you say, \"Happy birthday\" with us?",
+      "Yes! We are ready.",
+    ],
+  },
+  "l1-u03": {
+    passages: [
+      "Today is sports day. Six kids run, and three kids sit by the tree. One boy has a red ball. Two girls have a blue ball. Now the teacher says, \"Go!\" Seven kids run to the line. Ten hands go up. Every kid wants to play.",
+      "A baby, a boy, and a girl are at home. The girl has one paper hat. The boy has two toy cars. Now they play king and queen. The baby is the king. He sits on a big chair. Today, the three kids have fun together.",
+    ],
+    dialogue: [
+      "How many kids are on your team?",
+      "We have ten kids now.",
+      "Do you have six boys?",
+      "No. We have three boys and seven girls.",
+      "Who has the ball today?",
+      "One girl has it.",
+      "Can two new kids play with us?",
+      "Yes. Every kid can play.",
+    ],
+  },
+  "l1-u04": {
+    passages: [
+      "Tom is at the school health room. His arm and leg hurt. His neck is fine, but one eye is red. The nurse looks at his ear, too. Tom is hot and sad. He sees a fat cat by the door. The cat makes him smile.",
+      "A man is at the school door. His name is Mr. Brown. Mrs. Green is with him. They need help, so Ms. Hill comes. She says, \"My name is Anna. Come with me.\" The man and Mrs. Green go to the school office. Now they are fine.",
+    ],
+    dialogue: [
+      "What is wrong with your arm?",
+      "It hurts when I move it.",
+      "Does your leg hurt, too?",
+      "No, my leg is fine.",
+      "Is your neck hot?",
+      "No, but my ear is hot.",
+      "Can you see with this eye?",
+      "Yes. I can see you.",
+    ],
+  },
+  "l1-u05": {
+    passages: [
+      "Our dog is a good pet, but he likes to run. At the park, he sees a bird and runs to a tree. A cat is under the tree. The cat sees a pig on a card. Our dog sees it, too. He wants to play with them all.",
+      "The sun is in the sky, and a bird sits in our tree. My cat looks up with her nose in the air. At night, the moon comes out. My little pet is sad because the bird is not there. I give her a lion toy, and she is happy.",
+    ],
+    dialogue: [
+      "Is that your dog by the tree?",
+      "Yes. He is my new pet.",
+      "Why is your cat up there?",
+      "She sees a bird in the sky.",
+      "Is the bird near the sun?",
+      "No, it is under the tree.",
+      "Your dog looks sad now.",
+      "He wants the cat to come down.",
+    ],
+  },
+  "l1-u06": {
+    passages: [
+      "It is lunch time at home. Dad puts an egg and rice on my plate. Mom gives me a cup of water. My sister has milk, and Grandma has tea. A pie is on the table, too. We have good food. We sit down and eat lunch together.",
+      "My room is ready for art time. A pen and a cup are on my desk. I draw a picture of a red ball by my bed. Then I draw milk, tea, and an egg. The picture is for Mom. I put it on her door.",
+    ],
+    dialogue: [
+      "What do you want for lunch?",
+      "I want an egg and some rice.",
+      "Do you want milk or tea?",
+      "Milk, please. Is it in the cup?",
+      "Yes, and the water is here.",
+      "Can we have the pie, too?",
+      "Yes, but eat your food first.",
+      "Okay. I am ready to eat.",
+    ],
+  },
+  "l1-u07": {
+    passages: [
+      "I come home at four. My dog and I go to the park. I jog, and he can run. We love this game. Then I sit by the door and watch him. I miss Mom, but she comes home soon. We all go into the room together.",
+      "A toy car is in my room. I sit on the bed and make it go. The car runs to the door. Now it is under a toy bus. Dad comes home and looks in. \"Come with me,\" he says. We go to the real car and ride to Grandma's home.",
+    ],
+    dialogue: [
+      "Do you go home by bus?",
+      "No, I go home in Dad's car.",
+      "Can you come to the park first?",
+      "Yes. I want to run with you.",
+      "Do you jog every day?",
+      "No, I sit and play with my toy.",
+      "I miss our park games.",
+      "Me too. Let us go now.",
+    ],
+  },
+  "l1-u08": {
+    passages: [
+      "I see a new bike at the store. It is big, red, and very nice. Dad says the bike is good, but it is too tall for me. A small bike is here. It is not new, but it is great. I can ride it well, so we take it home.",
+      "Today I walk to school with Mom. The new guard has a big job. He stands here by the red door and helps us. A boy has a bad fall, but he is okay. The guard is nice to him. \"No running,\" he says. We walk into school.",
+    ],
+    dialogue: [
+      "Is that your new red bike?",
+      "Yes. It is big and nice.",
+      "Can you ride it here?",
+      "No, this road is not good.",
+      "Is the park okay?",
+      "Yes. The park is great.",
+      "Do you want to walk there now?",
+      "Okay. My job is to take the bike.",
+    ],
+  },
+  "l2-u01": {
+    passages: [
+      "It is my birthday, and our classroom is very busy. The clock is on the wall, and the party is at three. These red cups are on the table. Those blue plates are under the table. Please put them next to the real cake. My classmate writes \"Happy Birthday\" in English. Dad says its color is very nice.",
+      "Our class has a special day about places. These students have flags, and those students have maps. One map is of the USA. Another card says ROC. Please put each card on the right desk, not under it. Our teacher checks the clock. We have one hour, and the room is very busy.",
+    ],
+    dialogue: [
+      "Please put these cups on the table.",
+      "Okay. What about those plates?",
+      "Put them under the birthday sign.",
+      "Is it a real cake in that box?",
+      "Yes, and its color is pink.",
+      "Wow! The party starts at three, right?",
+      "Yes. Look at the clock.",
+      "It is three now. Let us start!",
+    ],
+  },
+  "l2-u02": {
+    passages: [
+      "Our school has a family music show. My sister is a singer, and my brother plays the drum. My father sits with my little son. A woman helps each student get ready. My classmate stands by our teacher. The air in the hall is cool. After the song, every family smiles and claps.",
+      "A teacher takes her class outside for nature week. One student sees an ant on a flower. Another child finds a bee in the air. My classmate shows me his toe because an ant is near it. A woman helps him stand up. We laugh and talk about the small animals we see this year.",
+    ],
+    dialogue: [
+      "Is that woman your teacher?",
+      "Yes. She is our music teacher.",
+      "Is the singer your sister?",
+      "No, she is my classmate's sister.",
+      "Where is your brother?",
+      "He is next to my father and son.",
+      "Can every student join the song?",
+      "Yes. Our class sings together.",
+    ],
+  },
+  "l2-u03": {
+    passages: [
+      "Our class visits a small zoo. A cow and a sheep eat near the tree. A hen walks by the flower, and a frog sits under it. We see a fox, a hippo, and many birds. At lunch, we eat fruit by the sea animal room. Then we draw our favorite animal in a book.",
+      "Today our classroom becomes an animal art room. Each student takes a book from the box and sits on a chair. I draw a fox near a flower. My friend draws a frog by the sea. The teacher adds a cow, a hen, a hippo, and a sheep to one big zoo picture. We put it on the classroom wall.",
+    ],
+    dialogue: [
+      "What animal is near the flower?",
+      "It is a small frog.",
+      "Can you see the fox, too?",
+      "Yes. It is by the sheep.",
+      "Where is the hippo?",
+      "It is in the water.",
+      "Do you want to draw this zoo?",
+      "Yes. My book is in the classroom.",
+    ],
+  },
+  "l2-u04": {
+    passages: [
+      "We stop at a convenience store after school. I want an apple and a ham sandwich. My sister wants candy, cake, and cola. Dad says we need real food, so we get rice and a salad, too. Mom does not drink coffee or Coke at night. She takes water. We eat together at the table.",
+      "Our class makes a food book. I use a pencil and ruler to draw a long table. Amy uses glue for the apple and cake pictures. We read each page and write one food word. At lunch, we eat rice and ham at school. After lunch, we study the new words and put the book by the classroom door.",
+    ],
+    dialogue: [
+      "Do you want cake or candy?",
+      "I want cake and an apple.",
+      "Can I have a Coke?",
+      "No, please take water today.",
+      "What does Dad want to eat?",
+      "He wants ham and rice.",
+      "Where can we sit?",
+      "That table by the door is free.",
+    ],
+  },
+  "l2-u05": {
+    passages: [
+      "At lunch, Mom gives me a bowl of rice and soup. I close my book and sit on the sofa. My sister makes a sandwich and puts on her cap. We see a ship from the window. I sing a song about the sea, and she plays with her doll. Then we wash our bowls and go to the store.",
+      "A small store has a school play today. One child wears a short shirt and a red cap. Another child sits on a sofa with a doll. I give them a toy ship for the show. They sing, play, and see their teacher smile. After the show, we close the door and share soup and sandwiches.",
+    ],
+    dialogue: [
+      "Please close your book. Lunch is ready.",
+      "What do we have today?",
+      "Rice, soup, and a sandwich.",
+      "Can I eat on the sofa?",
+      "No. Sit at the table.",
+      "Can I play with my doll after lunch?",
+      "Yes, and give me your bowl first.",
+      "Okay. I want to sing, too.",
+    ],
+  },
+  "l2-u06": {
+    passages: [
+      "Our classroom is dirty after art class, and everyone is busy. I wash the gray table while my friendly classmate picks up paper. The old box is brown, and the new box is green. We talk about where things go. A shy girl wants to help, so she stands by me. Soon the room looks very clean.",
+      "Mia wants a cute shirt for the school show. She tries a pink one, but it is very short. The black shirt is old and dirty. A friendly worker shows her a green shirt with brown buttons. Mia is shy, so Mom talks for her. She stands by the mirror and wants the green one. They wash it at home.",
+    ],
+    dialogue: [
+      "Why is your shirt dirty?",
+      "I paint in art class today.",
+      "Do you want the green shirt?",
+      "No, the green one is too short.",
+      "How about this cute pink one?",
+      "I am shy about pink.",
+      "The gray one looks friendly and clean.",
+      "Okay. I want to try it.",
+    ],
+  },
+  "l2-u07": {
+    passages: [
+      "We have a picnic by the school. I say hello to a shy girl in a white cap. She says hi, but she talks very slowly. We show her our small yellow ball and green cups. \"Wow, I like the colors,\" she says. We thank her and ask her to sing a song. Soon we are all friends.",
+      "A small boy comes to the music room. \"Hey, what is your favorite color?\" I ask. He says yellow, but his guitar is white. \"Oh, it is very nice!\" I say. He is shy and plays a slow song. At the end, everyone says, \"Wow!\" The boy smiles and says, \"Thank you.\"",
+    ],
+    dialogue: [
+      "Hi! Can I sit here for the picnic?",
+      "Yes, but this mat is very small.",
+      "Oh, I can sit by the yellow bag.",
+      "Hey, that is my white cap!",
+      "Wow, it looks nice on you.",
+      "Thank you. I am a little shy.",
+      "Do you want to sing our song?",
+      "Yes, but please sing slowly.",
+    ],
+  },
+  "l3-u01": {
+    passages: [
+      "Our English class starts at eleven a.m. Every student brings a short story to read. Mia reads with me because she feels nervous. After an hour, our teacher asks us about one new word: \"true.\" We explain where we found it and why it matters in the story. When the class ends, Mia smiles. She says reading with a friend made the morning easier. We plan to practice again in the afternoon. I happily agree.",
+      "Two hours ago, Grandpa called and invited me to his house. I went there after my afternoon class and stayed until the evening. We talked about the town where he grew up. He told me why he loved the old library and showed me a book with his name in it. I asked, \"Is every story in this book true?\" Grandpa laughed and said some were true, but others came from his imagination. We will read more next week.",
+    ],
+    dialogue: [
+      "When should we meet for our English project?",
+      "How about eleven a.m. in the library?",
+      "I have music class then. Can we meet in the afternoon?",
+      "Sure. Where do you want to sit?",
+      "Let's use the table by the window.",
+      "Good idea. We can work for about an hour.",
+      "Why don't we bring our word cards too?",
+      "Yes, and we can practice them together.",
+    ],
+  },
+  "l3-u02": {
+    passages: [
+      "Yesterday morning, my aunt and uncle came to our house at nine o'clock. My uncle is a factory worker, and he usually starts work very early. He had a free day, so our whole family ate breakfast together. Dad made eggs while my aunt cut fruit for the children. My little cousin is still a young child, but she helped carry the cups. After breakfast, Daddy took a family photo, and everyone smiled. They stayed until after lunch.",
+      "Our school sports day started at two p.m. yesterday. My friend Ben came with his family, including his aunt, uncle, and two children. His dad helped at the starting line, and my daddy gave water to the runners. At three o'clock, the relay race began. Our team had zero points at first, but we did not give up. We ran carefully and finished second. Every child cheered, and the adults clapped for us. We talked about it all afternoon.",
+    ],
+    dialogue: [
+      "Dad, what time does the family picnic start?",
+      "It starts at ten o'clock tomorrow morning.",
+      "Are Aunt May and Uncle Sam coming?",
+      "Yes, and they are bringing the children.",
+      "Can I invite my friend Leo too?",
+      "Of course. His family can join us.",
+      "Great! I will call him before eight p.m.",
+      "Good. Please help Daddy pack the food first.",
+    ],
+  },
+  "l3-u03": {
+    passages: [
+      "Our class visited a small farm when the weather was cool. I fed a brown horse with my hand and watched a duck swim across the pond. The horse moved its head close to my bag because it could smell my lunch. I felt nervous at first, but its soft hair tickled my arm. Soon my whole body relaxed. By noon, I was hungry too, so I ate under a tree and drew each animal with chalk.",
+      "A strong wind blew through the park, so Nina and I took out our kite. She held it above her head while I ran across the grass. The kite climbed high, but the string rubbed my hand and made it sore. We stopped because I did not feel well. After a short rest and a drink, I felt better. The evening weather became calm, and the first star appeared. We packed the kite into its bag and walked home.",
+    ],
+    dialogue: [
+      "Look at that duck near the pond!",
+      "It is hiding its head under its wing.",
+      "Do you think the animal is hungry?",
+      "Maybe, but the sign says we should not feed it.",
+      "The weather is getting windy now.",
+      "Then let's put our chalk and pictures in the bag.",
+      "Can we fly our kite before we leave?",
+      "Sure, but hold the string tightly in your hand.",
+    ],
+  },
+  "l3-u04": {
+    passages: [
+      "Our class had a breakfast lesson in the school kitchen. We used a computer to read a simple recipe for banana cookies. I wrote each step in my notebook, but I made a spelling mistake and used my eraser. Then our teacher showed us how to measure and mix the food. While the cookies baked, we learned how heat changes the dough. At the end, everyone ate one cookie and had a drink of water.",
+      "I helped Dad prepare dinner while my sister finished her homework. Dad cooked beef and vegetables, and I made cold drinks for everyone. My sister came into the kitchen to ask how to spell \"banana\" for a story. I wrote the word on a small board, but she erased it and tried again by herself. After we ate, she used the computer to show us what she had learned. Then we shared two cookies for dessert.",
+    ],
+    dialogue: [
+      "What are we making in cooking class today?",
+      "Banana cookies, but we need to read the recipe first.",
+      "Can I open it on the computer?",
+      "Yes. I will write the steps on the board.",
+      "How do you spell the last word?",
+      "I am not sure. Let me use my eraser.",
+      "The teacher can help us after she checks the drinks.",
+      "Okay. Then we can start making breakfast.",
+    ],
+  },
+  "l3-u05": {
+    passages: [
+      "It was hot after school, so my sister and I made ice cream in our kitchen. She mixed milk with ice while I poured juice into small cups. I added a little salt to the ice, but none went into the food. Mom set the dining room table and called our cousins. When they reached our house, we put away their coats and hats. Everyone enjoyed the cold dessert, and we saved one cup for Dad.",
+      "Rain started while Lily was walking home in her new dress. She quickly put on her coat and hat, but her shoes still got wet. At the house, the telephone was ringing in the dining room. Lily answered it, and Dad asked her to warm dinner in the kitchen. She made a hot dog, poured some juice, and added a little salt to her soup. Later, she called Dad on her phone and said everything was ready.",
+    ],
+    dialogue: [
+      "What should we take to the picnic?",
+      "We have hot dogs and juice in the kitchen.",
+      "Can we bring ice cream too?",
+      "It may melt before we reach the park.",
+      "Then I will put some ice in this box.",
+      "Good idea. Please wear your coat and hat.",
+      "Should I call Amy on the phone?",
+      "Yes. Tell her to meet us outside the house.",
+    ],
+  },
+  "l3-u06": {
+    passages: [
+      "My cousin Jack came from America during the school holiday. We planned a day trip to a mountain town and took an early train. At the station, Jack saw many bicycles and asked if we could rent a bike. Mom said the road was too steep, so we rode a bus instead. A truck drove slowly in front of us, but we reached the town before lunch. Jack took photos and called the trip his favorite day in Taiwan.",
+      "Emma was learning to ride a bicycle in the park. Dad held the bike while she pushed the pedals, but she turned too quickly and fell into the grass. She began to cry, so Dad asked if she was hurt. Emma shook her head and tried again. Soon she could ride past a parked truck without help. Above her, a red kite flew across the sky. Dad called Mom and said, \"Emma can ride by herself now!\"",
+    ],
+    dialogue: [
+      "How are we getting to the beach for our trip?",
+      "We can take the train at eight.",
+      "Can we bring our bikes on it?",
+      "Yes, but we need to ask at the station.",
+      "My dad could drive us in his car instead.",
+      "The road may have many trucks this morning.",
+      "Then I will call him and choose the train.",
+      "Great. Let's meet by the bicycle shop.",
+    ],
+  },
+  "l3-u07": {
+    passages: [
+      "Our school held an autumn fair on Saturday. I joined the art team because they needed help with the signs. We worked together to make bright posters and waited for the paint to dry. Then we invited families into the hall. Some children tried a ball game, and others learned a simple dance. I helped a small boy kick the ball toward a basket. He missed twice, but his third try went in, so everyone cheered.",
+      "We found a wet puppy near our gate after a rainy walk. My sister took it inside while I called a neighbor for help. We used a towel to dry its fur and tried to make it drink some water. The puppy needed a quiet place to sleep, so we put a box by the door and waited. Soon the owner arrived from work. She kissed the puppy, thanked us, and invited us to visit them again.",
+    ],
+    dialogue: [
+      "Do you want to join our soccer practice?",
+      "Yes, but I need help with my kicks.",
+      "I can work with you after school.",
+      "Thanks. Should I invite Kevin too?",
+      "Sure. We can make two small teams.",
+      "Let's wait until the field is dry.",
+      "Okay. I will take the ball home today.",
+      "Great. We can try again tomorrow.",
+    ],
+  },
+  "l3-u08": {
+    passages: [
+      "Our English class made a pretend shop with play money. I put books on one table and wrote \"one dollar\" on each price card. Ben asked if we had any toy cars, so I looked under the table. \"Oops, they are down here,\" I said. He was really happy and bought two. At the end, we counted the money together and packed everything up. We waved good-bye to our last customer and closed the shop.",
+      "The children were singing together for the school show. Amy stood up front, but she forgot one line and looked down at the floor. \"Oh-oh,\" whispered Leo, but Amy remembered the words and kept going. The audience became quiet and listened. When the song ended, everyone clapped loudly. Amy smiled and said, \"I really did it!\" After the show, we picked up our bags, said goodbye to the teacher, and walked home together before dinner.",
+    ],
+    dialogue: [
+      "Oops, I dropped all the colored paper.",
+      "Oh-oh! Some pieces went under the desk.",
+      "Are there any more down there?",
+      "Uh-uh, I think we found them all.",
+      "Really? Then let's put them up on the shelf.",
+      "We can carry the big box together.",
+      "Thanks. I have to go now. Goodbye!",
+      "Good-bye! See you at school tomorrow.",
+    ],
+  },
+  "l4-u01": {
+    passages: [
+      "On Friday, our class recorded the morning announcement. I had to say the date and speak about the school lunch. The paper said March eighteen, but I read March eighty by mistake. Amy stopped the recording because the number was wrong. We laughed for a moment, and then she showed me which line to read again. This time, I spoke slowly and clearly. The whole message was about fifteen seconds longer, but it sounded much better. Some students heard it from their classrooms later. They said it was good, so I was not worried anymore.",
+      "Grandpa opened a box of old family photos while we were cleaning the living room. Some pictures were from a school trip, but none had a date on the back. We studied this photo of a tall boy beside a bicycle. I thought the boy was Grandpa at fifteen, but he said that was wrong. It was his brother at eighteen. Then we found a picture of a birthday cake with eighty candles. \"Which family member could this be?\" I asked. Grandpa smiled and began to speak about his grandmother. Her long life gave us many true stories to remember.",
+    ],
+    dialogue: [
+      "Does this calendar show the sports day?",
+      "Yes, but I think the date is wrong.",
+      "Which day should it be?",
+      "It should be Friday, March eighteen.",
+      "Can you speak to the teacher about it?",
+      "Sure. She is in the office with some parents.",
+      "Good, because fifteen students need to know soon.",
+      "I will tell them before the announcement.",
+    ],
+  },
+  "l4-u02": {
+    passages: [
+      "Our class wanted to collect ninety books for a reading corner. On Monday, we brought thirteen books, and the box still looked empty. The next day, fourteen more arrived. By Wednesday, we had thirty books, so our teacher said we were doing well. Soon, parents started helping too. One family gave sixteen storybooks, and another gave nineteen picture books. Our total reached sixty-five. We never thought we could fill the shelf so quickly. On Friday, Mia carried in a bag with twenty-five books. Everyone counted together, and we cheered because the final number was exactly ninety.",
+      "Grandma turned seventy last weekend, and our family planned a surprise lunch. Dad printed forty photos from her younger days. My cousin chose seventeen of them for a wall display, while I placed the rest in an album. We expected fifty guests, but almost sixty came. Grandpa was still setting out chairs when the doorbell rang. At twelve thirty, Grandma entered and saw everyone waiting. She covered her face and laughed. During lunch, fourteen children sang for her, and nineteen adults shared short memories. The party lasted until four, but Grandma said she was never tired because she felt so happy.",
+    ],
+    dialogue: [
+      "Is our basketball score still thirteen?",
+      "No, Leo made a basket, so we have fifteen.",
+      "The other team has sixteen, right?",
+      "Yes, but there are still two minutes left.",
+      "Do you think we can reach twenty?",
+      "Sure. We never stop trying.",
+      "Look, Mia scored! We have seventeen now.",
+      "Great! One more basket will give us nineteen.",
+    ],
+  },
+  "l4-u03": {
+    passages: [
+      "On Saturday, my parents took me to a butterfly garden with Grandma and Grandpa. A guide showed us a tiny egg under a leaf, and soon we saw a butterfly opening its wings. My grandmother took photos while my grandfather read the signs to me. At noon, we were thirsty, so we rested beside a pond and shared a bottle of water. A young panda was sleeping on a poster near the gift desk, and Grandma bought the card for my cousin. We stayed for almost two hours. On the way home, Grandpa said we should visit again next spring.",
+      "A children's writer visited our town on Sunday afternoon. My parents and I arrived at the reading hall before twelve, but every front seat was taken. The writer told a funny story about a panda that wanted to fly like a butterfly. My little brother laughed so hard that he dropped his bag. After the story, the writer answered twenty questions from the children. I asked how long it took to finish a book. \"Sometimes a year,\" he said. Before we left, he wrote my name inside my book. I will show it to Grandma when we visit her tomorrow.",
+    ],
+    dialogue: [
+      "Are we visiting Grandpa this weekend?",
+      "Yes. My parents want to go tomorrow morning.",
+      "Will Grandma make lunch for us?",
+      "She said she is making noodles at twelve.",
+      "Great. Can we bring the panda puzzle?",
+      "Sure, and Grandpa has a new butterfly book.",
+      "I may get thirsty on the long bus ride.",
+      "I will pack water for you and Grandmother.",
+    ],
+  },
+  "l4-u04": {
+    passages: [
+      "After school, Mia went to the bookstore to finish her homework in the reading corner. She opened her pencil case and found one pencil, but her crayon box was missing. She remembered using it near the big window. As she walked back, a strong wind came through the open door and blew several pages across the floor. Mia helped the worker pick up the paper. Under a page with a snake drawing, she found her blue pencil box. Nothing was lost after all. She bought a small loaf of bread on the way home and finished her alphabet poster before dinner.",
+      "Leo's homework was to make an alphabet book, so he worked at a table outside his aunt's bakery. For the letter B, he painted a basket of bread. For S, he made a long green snake. He used a crayon for the grass and dark paint for the sky. The drawing looked strange, but he liked it. Then the wind lifted one page and carried it toward the road. Leo ran after the paper and caught it beside a parked scooter. He put every page into his pencil case for safety. That evening, his reading group enjoyed the colorful book.",
+    ],
+    dialogue: [
+      "Did you see my pencil case in the bookstore?",
+      "Is it the blue one with a snake drawing?",
+      "Yes. My crayons and pencil are inside.",
+      "I saw it next to the reading table.",
+      "Was it under the alphabet book?",
+      "No, it was on a page of brown paper.",
+      "Thanks! I need it for my homework.",
+      "Let's get it before the bookstore closes.",
+    ],
+  },
+  "l4-u05": {
+    passages: [
+      "At lunch, our class tried a new meal in the school dining hall. The main dish had pork, rice, and a green vegetable. I usually leave vegetables on my plate because they look yucky, but Ben said the spinach was yummy. I took one bite and found it a little sweet. The salad also had corn, so I ate all of it. After lunch, we saved some clean leaves to feed the class rabbit. Our teacher gave us fruit for a snack and reminded us that animals should not eat sugar. I returned my empty dish feeling proud.",
+      "At the night market, I carried coins from my small bank in a yellow bag. Dad used his cellphone to check where our cousins were waiting. We met them beside a balloon stand, and then everyone chose a snack. My cousin ordered grilled pork, while I picked a vegetable roll. It smelled wonderful, but the first bite was too hot. Later, we shared a sweet pancake with less sugar. Dad wanted steak, but the line was very long, so he bought a cold salad instead. Before going home, I paid for a blue balloon and tied it tightly to my bag.",
+    ],
+    dialogue: [
+      "Do you want pork or steak for dinner?",
+      "I'll have the pork dish with a vegetable.",
+      "Would you like salad with it?",
+      "Yes, but please don't add the sweet sauce.",
+      "Are you saving room for a snack?",
+      "Maybe. The cake looks yummy.",
+      "I think it has too much sugar.",
+      "Then let's share one small piece.",
+    ],
+  },
+  "l4-u06": {
+    passages: [
+      "Our class visited a local television station to learn how the evening news was made. A worker led us through a quiet office and into a bright studio. Large lights hung above us, and a map of the city covered one wall. Through the window, we could see a busy road and the train station. The host showed us how words appeared beside the camera. Then she used tape to mark where we should stand. I read one short weather report for the TV screen. My voice shook at first, but everyone clapped when I finished.",
+      "Rain began while Amy was waiting at the bus stop after music class. A passing car splashed water from the road, and her white socks and blue skirt became wet. She moved next to the wall of a small restaurant, where a warm light shone through the window. Amy called Mom, but Mom was still working in her office across the city. The television inside showed that the rain would stop soon. A kind worker gave Amy a towel and let her wait by the door. Twenty minutes later, Mom arrived, and they walked together to the nearby station.",
+    ],
+    dialogue: [
+      "Are we near the station now?",
+      "Yes. I can see its green light.",
+      "Which road leads to the restaurant?",
+      "Walk past the office and turn at the bus stop.",
+      "Is it next to the tall wall?",
+      "No, it's across from the television shop.",
+      "I see it through that big window.",
+      "Great. Let's cross the street carefully.",
+    ],
+  },
+  "l4-u07": {
+    passages: [
+      "During our beach visit, Mia and I wanted to build the best sandcastle on the shore. We used small cups to dig a deep wall, but one side began to fall. I started to worry because the tide was coming in. Mia said we should stop and move farther from the water. Our second castle was smaller, but it stayed strong. After finishing it, we went to swim with Dad and stayed inside the safe area. On the way home, Dad let us buy cold drinks. The first castle looked bigger, but we agreed the second plan was better.",
+      "Ben wanted to send a birthday card to his cousin, so he visited the post office after school. He wrote the address carefully but forgot to add the street number. A worker noticed the problem before Ben paid for the stamp. \"Do not worry,\" she said. Ben called his mother and used her answer to fix the address. Then he chose the best stamp, paid at the counter, and put the card in the box. Outside, rain started to fall, so he stayed under the roof for a few minutes. When it stopped, he walked home feeling much better.",
+    ],
+    dialogue: [
+      "Can I stop at the shallow end today?",
+      "Sure. You don't need to swim far.",
+      "I fell yesterday, so I still worry.",
+      "Use the side rail until you feel better.",
+      "Should I stay close to you?",
+      "Yes, and take your time.",
+      "I'll try my best on the next lap.",
+      "Good. Call me when you reach the end.",
+    ],
+  },
+  "l4-u08": {
+    passages: [
+      "On a sunny morning, our family walked along a long trail in the hills. The air was cool, but the sun kept us warm. My young cousin Max told funny stories as we climbed. He wanted to carry the same large backpack as Dad, but it was too heavy. At a wooden bridge, Max slipped on a wet board. My strong sister caught his hand before he fell. Dad said she made a smart and quick move. We rested beside a pretty stream and ate lunch. The view was wonderful, and Max was still smiling when we reached home.",
+      "Our class spent an afternoon at a pottery room. The teacher was young and friendly, and she showed us how to shape wet clay. I tried to make a long cup, but one side fell down. It looked funny, so I turned it into a small fish. Nina made a pretty bowl with the same blue lines on every side. The room stayed warm while our work became dry and strong. A week later, we returned to collect our pieces. I was sure my fish would break, but it came out well. Mom called it a wonderful little dish.",
+    ],
+    dialogue: [
+      "Which paper bridge is the strongest?",
+      "The long blue one held twelve coins.",
+      "Mine held the same number.",
+      "That's cool! Did it stay dry?",
+      "Yes, but one side looks funny now.",
+      "I'm sure we can make it stronger.",
+      "Your folded design is very smart.",
+      "Thanks. Let's build another one together.",
+    ],
+  },
+  "l4-u09": {
+    passages: [
+      "Last winter, my family spent part of our vacation in the mountains. We woke early because the news said snow might fall before noon. At first, the ground was only wet, but small white pieces soon filled the air. My brother had never seen snow, so he ran outside and tried to catch it. We made a tiny snowman and took a short movie for Grandma. By evening, the road was closing, and Dad decided to leave early. We were sad to go, but he promised another trip in spring, when the season would be warmer and the flowers would return.",
+      "During summer vacation, I helped with the school newspaper. My first job was to write about a weekend soccer game. I watched the sport from the side of the field and wrote down every goal. Our team was losing, but they scored twice near the end and won. After the game, I spoke with the coach and two players. Their excited words became the best part of my news story. Back in the club room, a dancing group was practicing with an old CD, so I closed the door to hear better. On Monday, my article and team photo appeared on the front page.",
+    ],
+    dialogue: [
+      "What should we do on this rainy vacation day?",
+      "Let's watch the movie Grandpa gave us.",
+      "Is that the one about a summer soccer team?",
+      "Yes. It was in the news last spring.",
+      "Can we play my dancing CD first?",
+      "Sure, but only for one song.",
+      "Winter is the best season for staying inside.",
+      "Maybe, but I still want to play a sport tomorrow.",
+    ],
+  },
+  "l4-u10": {
+    passages: [
+      "Two days before Chinese New Year, we heard a soft sound in front of our neighbor's door. A wet kitten was hiding next to a box of oranges. It came out when it smelled the fish in Mom's shopping bag. The kitty was small, but even my little brother could hold it carefully. We gave it water and made a warm bed in a box. Then Dad posted a photo in our building group. That evening, a girl from upstairs knocked on our door. She called the kitten's name, and it ran to her. We were happy to help them meet again.",
+      "Our school held a swimming day at the sports center. I was part of the blue team, and my race began after lunch. The pool looked huge, even though it was the same size as our practice pool. I stood next to Mia in front of the starting line. When the whistle made a sharp sound, we jumped in and started swimming. I was tired near the end, but I did not stop. Mia finished first, and I came in third. When we climbed out, our coach gave us towels. The smell of warm noodles from the snack room made everyone hungry.",
+    ],
+    dialogue: [
+      "Where is the kitten for our Chinese New Year photo?",
+      "The kitty is hiding next to the sofa.",
+      "Can you bring it out?",
+      "I tried, but it ran in front of the TV.",
+      "Maybe it doesn't like the drum sound.",
+      "Even the small drum is too loud for it.",
+      "Then let's finish the family part first.",
+      "Good idea. I smell fish, so it may come out soon.",
+    ],
+  },
 };
 
 function dominantTheme(bin) {
@@ -1186,6 +1684,20 @@ function buildUnits(words) {
       const themeRank = new Map(rankedThemes.map(([name], index) => [name, index]));
       const ordered = bin.words.slice().sort((a, b) =>
         themeRank.get(a.theme) - themeRank.get(b.theme) || a.word.localeCompare(b.word));
+      // 短文與對話一律取自手寫的 UNIT_CONTENT。
+      // 舊版是把每個目標字的例句串起來當短文、再用 "Can you use X in a sentence?"
+      // 當對話，兩者都不是真實語料，小孩看不到這些字什麼時候會用到。
+      // 這裡刻意直接丟錯而不是退回舊模板 —— 少寫一個單元要立刻被發現，
+      // 不能靜靜地產出一份看起來正常、其實是例句串接的內容。
+      const authored = UNIT_CONTENT[bin.id];
+      if (!authored) throw new Error(`UNIT_CONTENT 缺少 ${bin.id}，請先補寫短文與對話再重跑`);
+      if (!Array.isArray(authored.passages) || authored.passages.length !== 2) {
+        throw new Error(`${bin.id} 需要正好 2 篇短文`);
+      }
+      if (!Array.isArray(authored.dialogue) || authored.dialogue.length !== 8) {
+        throw new Error(`${bin.id} 需要正好 8 回合對話`);
+      }
+
       const splitAt = Math.ceil(ordered.length / 2);
       const passages = [0, 1].map(index => {
         const selected = index === 0 ? ordered.slice(0, splitAt) : ordered.slice(splitAt);
@@ -1193,11 +1705,8 @@ function buildUnits(words) {
         const passageTheme = Object.entries(passageThemeCounts)
           .sort((a, b) => b[1] - a[1] || UNIT_THEME_ORDER.indexOf(a[0]) - UNIT_THEME_ORDER.indexOf(b[0]))[0][0];
         const [, passageTitleEn] = THEME_LABELS[passageTheme] || THEME_LABELS.general;
-        const sentences = [OPENING[passageTheme] || OPENING.general]
-          .concat(selected.map((word, offset) => word.examples[(index + offset) % 2].text))
-          .concat(["After reading, we choose two new words and make our own sentences."]);
         const id = `${bin.id}-p${index + 1}`;
-        const text = sentences.join(" ");
+        const text = authored.passages[index];
         passageAudio[id] = text;
         return {
           id,
@@ -1209,23 +1718,12 @@ function buildUnits(words) {
           audio: `audio/vocab_foundation/passages/${id}.mp3`,
         };
       });
-      const selected = Array.from({ length: 4 }, (_, offset) => ordered[offset % ordered.length]);
-      const questionFrames = [
-        word => `Can you use "${word}" in a sentence?`,
-        word => `What can you say with "${word}"?`,
-        word => `Can you give me an example with "${word}"?`,
-        word => `How would you use "${word}"?`,
-      ];
-      const dialogue = [];
-      selected.forEach((word, index) => {
-        const aId = `${bin.id}-d${index * 2 + 1}`;
-        const bId = `${bin.id}-d${index * 2 + 2}`;
-        const aText = questionFrames[index](word.word);
-        const bText = word.examples[index % 2].text;
-        dialogueA[aId] = aText;
-        dialogueB[bId] = bText;
-        dialogue.push({ id: aId, speaker: "A", text: aText, audio: `audio/vocab_foundation/dialogue_lines/${aId}.mp3` });
-        dialogue.push({ id: bId, speaker: "B", text: bText, audio: `audio/vocab_foundation/dialogue_lines/${bId}.mp3` });
+      // 8 回合，A/B 交替；A 用 af_heart、B 用 am_adam（兩份 spec 分開送 Kokoro）
+      const dialogue = authored.dialogue.map((text, index) => {
+        const id = `${bin.id}-d${index + 1}`;
+        const speaker = index % 2 === 0 ? "A" : "B";
+        (speaker === "A" ? dialogueA : dialogueB)[id] = text;
+        return { id, speaker, text, audio: `audio/vocab_foundation/dialogue_lines/${id}.mp3` };
       });
       units.push({
         id: bin.id, level, bands: BANDS[level], theme,
