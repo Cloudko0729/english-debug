@@ -491,6 +491,15 @@ function renderIndex(nodes) {
   .stu-btn.active{background:#3a2a00;color:#fff;}
   .coin{margin-left:auto;background:#fff;border-radius:16px;padding:4px 12px;font-weight:800;color:#c98a00;font-size:.85rem;}
   .overall{background:#eef5ff;border-left:4px solid var(--primary);border-radius:10px;margin:14px;padding:10px 14px;font-size:.9rem;font-weight:700;color:#1f4463;}
+  /* 本月課表：置頂顯示，讓小孩知道 48 課裡這個月只要做哪幾課 */
+  .mbox{background:linear-gradient(135deg,#eef7ff,#fff);border:2px solid #9ccbf5;border-radius:13px;margin:14px;padding:12px 14px;}
+  .mbox.mgo{background:linear-gradient(135deg,#fff6dc,#fff);border-color:#f2c94c;}
+  .mbox b{font-size:.95rem;}
+  .mbox p{margin:3px 0 8px;font-size:.83rem;color:#5a6875;}
+  .mbox>a{display:inline-block;font-size:.85rem;color:#2f80ed;text-decoration:none;font-weight:700;}
+  .mrow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px;}
+  .mrow a{background:#fff;border:1px solid #cfe0f0;border-radius:9px;padding:5px 10px;font-size:.82rem;color:#22303f;text-decoration:none;}
+  .mrow a:hover{border-color:#2f80ed;}
 </style>
 </head>
 <body>
@@ -508,6 +517,7 @@ function renderIndex(nodes) {
   <span class="coin" id="coinBox">🪙 —</span>
 </div>
 <div class="overall" id="overall">先選名字，就會顯示你每一課的進度。</div>
+<div id="monthBox"></div>
 ${bands.map(b => {
     const info = BAND_NAME[b] || { name: b, scene: "" };
     return `<div class="bandcard">
@@ -523,6 +533,8 @@ ${bands.map(b => {
 <script src="../../cloud_sync.js"></script>
 <script src="../../account_lock.js"></script>
 <script src="../../supabase_auth.js"></script>
+<script src="../../grammar_nodes.js"></script>
+<script src="../../grammar_plan.js"></script>
 <script>
 var currentStudent = null;
 function getProgress(s) {
@@ -532,12 +544,42 @@ function getProgress(s) {
   if (!p.grammar) p.grammar = { schemaVersion:1, nodes:{}, completedCount:0, coinsEarned:0, updatedAt:null };
   return p;
 }
+
+// 本月課表置頂：48 課一次攤開太多，小孩需要知道「這個月只要做這幾課」。
+// 其餘節點不鎖，仍可自由點進去。
+function drawMonth(p) {
+  var box = document.getElementById("monthBox");
+  var GP = window.GrammarPlan;
+  if (!box || !GP) return;
+  var s = p ? GP.planStatus(p) : null;
+  if (!p) { box.innerHTML = ""; return; }
+  if (!s) {
+    box.innerHTML = '<div class="mbox mgo"><b>🗓️ ' + GP.monthLabel(GP.planMonthKey()) +
+      '的課還沒選</b><p>選好路線，這裡就會只顯示這個月要做的幾課。</p>' +
+      '<a href="../../grammar_month.html">👉 去選這個月的課表</a></div>';
+    return;
+  }
+  var route = GP.ROUTES.filter(function (r) { return r.key === s.plan.route; })[0] || {};
+  var items = s.plan.nodes.map(function (id) {
+    var n = GP.byId(id); if (!n) return "";
+    var st = GP.isSolid(p, id) ? "✅" : (GP.isTried(p, id) ? "🔁" : "▫️");
+    return '<a href="' + id + '.html">' + st + " " + n.titleZh + "</a>";
+  }).join("");
+  box.innerHTML = '<div class="mbox"><b>' + (route.icon || "") + " " + GP.monthLabel(s.plan.month) +
+    '的課表 · ' + (route.label || "") + '路線</b>' +
+    '<p>學完 ' + s.done.length + " / " + s.total + ' 課' +
+      (s.bonusReady ? '　🎁 <a href="../../grammar_month.html">有獎勵可以領</a>' : "") + '</p>' +
+    '<div class="mrow">' + items + '</div>' +
+    '<a href="../../grammar_month.html">🔄 換一條路線</a></div>';
+}
+
 function draw() {
   var links = document.querySelectorAll(".nlist a");
   if (!currentStudent) {
     for (var i = 0; i < links.length; i++) { links[i].classList.remove("done"); links[i].querySelector(".st").textContent = "›"; }
     document.getElementById("overall").textContent = "先選名字，就會顯示你每一課的進度。";
     document.getElementById("coinBox").textContent = "🪙 —";
+    drawMonth(null);
     return;
   }
   var p = getProgress(currentStudent), recs = p.grammar.nodes || {}, doneN = 0, coinN = 0;
@@ -552,6 +594,7 @@ function draw() {
   document.getElementById("coinBox").textContent = "🪙 " + p.coins.balance;
   document.getElementById("overall").textContent =
     "已完成 " + doneN + " / " + links.length + " 課　·　文法課累積 🪙 " + coinN;
+  drawMonth(p);
 }
 window.pickStudent = function (name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
@@ -579,7 +622,18 @@ function main() {
     fs.writeFileSync(path.join(OUT, n.id + ".html"), html, "utf8");
   });
   fs.writeFileSync(path.join(OUT, "index.html"), renderIndex(nodes), "utf8");
-  console.log(JSON.stringify({ ok: true, pages: nodes.length, index: 1, out: path.relative(process.cwd(), OUT) }, null, 2));
+
+  // 每月分級選擇頁 / 文法地圖都需要在前端讀到節點清單，但不該各自維護一份。
+  // 從 bands 直接吐出精簡版，欄位只留排課會用到的。
+  const slim = nodes.map(n => ({
+    id: n.id, band: n.band, titleZh: n.titleZh, titleEn: n.titleEn,
+    prerequisites: n.prerequisites || [],
+  }));
+  fs.writeFileSync(path.join(ROOT, "grammar_nodes.js"),
+    "// 由 kids/tools/build_grammar_lessons.js 產生，請勿手動編輯。\n" +
+    "window.GRAMMAR_NODES = " + JSON.stringify(slim, null, 0) + ";\n", "utf8");
+
+  console.log(JSON.stringify({ ok: true, pages: nodes.length, index: 1, nodesJs: slim.length, out: path.relative(process.cwd(), OUT) }, null, 2));
 }
 
 main();

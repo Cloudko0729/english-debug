@@ -9,7 +9,8 @@ const KIDS = path.join(__dirname, "..");
 // 要蓋戳記的本站 script（CDN 不動）
 const TARGETS = ["daily_engine.js", "weekdrills.js", "structure_units.js",
   "curriculum.js", "worddex.js", "word_emoji.js", "word_image.js", "word_roots.js", "wordbank.js",
-  "cloud_sync.js", "account_lock.js", "supabase_auth.js", "drills_list.js", "quizbank.js", "city_data.js"];
+  "cloud_sync.js", "account_lock.js", "supabase_auth.js", "drills_list.js", "quizbank.js", "city_data.js",
+  "grammar_nodes.js", "grammar_plan.js"];
 
 function bump(file) {
   let h = fs.readFileSync(file, "utf8"), changed = false;
@@ -26,6 +27,10 @@ const pages = [];
 fs.readdirSync(KIDS).filter(f => f.endsWith(".html")).forEach(f => pages.push(path.join(KIDS, f)));
 fs.readdirSync(path.join(KIDS, "drills")).filter(f => f.endsWith(".html")).forEach(f => pages.push(path.join(KIDS, "drills", f)));
 fs.readdirSync(path.join(KIDS, "lessons")).filter(f => f.endsWith(".html")).forEach(f => pages.push(path.join(KIDS, "lessons", f)));
+// 文法課頁（build_grammar_lessons.js 產生）。順序必須是「先 generate 再 bump」，
+// 否則重新產生會把戳記洗掉。
+fs.readdirSync(path.join(KIDS, "grammar_db", "lessons")).filter(f => f.endsWith(".html"))
+  .forEach(f => pages.push(path.join(KIDS, "grammar_db", "lessons", f)));
 ["index.html", "pusher.html", "pusher3d.html"].forEach(f => pages.push(path.join(KIDS, "..", "typing-game", f)));
 pages.forEach(f => { try { if (bump(f)) n++; } catch (e) {} });
 console.log(`✔ 戳記 v=${STAMP}，更新 ${n} 個頁面`);
