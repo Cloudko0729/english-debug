@@ -1,4 +1,4 @@
-// Lv.7 / Lv.8 / Lv.9（國中）課程產生器。文法是全新內容（不在 grammar_core），
+// Lv.7 / Lv.8 / Lv.9（國中）課程產生器。文法是這一段獨有的內容，
 // 用一個貫穿三年的主角 Zoe（+同學 Leo）當故事線，讓文法在同一個角色的持續情境裡反覆出現。
 // 用法：node render_lv79.js
 const fs = require("fs");

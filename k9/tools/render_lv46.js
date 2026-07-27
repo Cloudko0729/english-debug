@@ -1,4 +1,5 @@
-// Lv.4 / Lv.5 / Lv.6 課程產生器（文法起點，沿用 grammar_core u1-u12+r1-r4 概念，不重寫該系統本身）。
+// Lv.4 / Lv.5 / Lv.6 課程產生器（文法起點）。
+// 內容自足；早期版本沿用已退役的 grammar_core 單元編號，現已改為直接描述教學主題。
 // 用法：node render_lv46.js
 // 產生 k9/lv4、k9/lv5、k9/lv6 的 8 週頁面與各自的音訊清單。
 const fs = require("fs");
@@ -17,7 +18,7 @@ function audioName(level, week, kind, value) { return `${level}w${week}_${kind}$
 const LEVELS = [
   {
     id: 4, title: "句子如何運作", zh: "國小四年級 · 文法起點", icon: "🏗️",
-    intro: "從這一級開始正式教文法，沿用 grammar_core 的 u1～u4＋r1：句子骨架、名詞與冠詞、代名詞、be動詞與一般動詞。",
+    intro: "從這一級開始正式教文法，文法從最基本的骨架開始：句子骨架、名詞與冠詞、代名詞、be動詞與一般動詞。",
     weeks: [
       { title: "Sentence Lab", zh: "造句實驗室", goal: "認識「主詞＋動詞」，重組並朗讀 8 個有意義句子。", pattern: ["The dog runs.", "Does the dog run?"],
         vocab: [["sentence","句子","📝"],["subject","主詞","🙋"],["verb","動詞","🏃"],["question","問句","❓"],["run","跑","🏃"],["jump","跳","⬆️"],["read","讀","📖"],["write","寫","✏️"]],
@@ -71,7 +72,7 @@ const LEVELS = [
   },
   {
     id: 5, title: "日常、此刻與細節", zh: "國小五年級", icon: "🔁",
-    intro: "沿用 grammar_core u5、u6、u9、u10、r3：現在簡單式、現在進行式、描述詞與頻率副詞、介係詞。",
+    intro: "這一級的文法主軸：現在簡單式、現在進行式、描述詞與頻率副詞、介係詞。",
     weeks: [
       { title: "Habits and Facts", zh: "習慣與事實", goal: "用現在簡單式寫說自己的平日作息。", pattern: ["I brush my teeth every day.", "She wakes up at seven."],
         vocab: [["usually","通常","🔁"],["every day","每天","📅"],["brush","刷","🪥"],["wake up","起床","⏰"],["go to bed","上床睡覺","🛏️"],["homework","功課","📓"],["habit","習慣","🔁"],["fact","事實","💡"]],
@@ -125,7 +126,7 @@ const LEVELS = [
   },
   {
     id: 6, title: "過去、選擇與計畫", zh: "國小六年級", icon: "📖",
-    intro: "沿用 grammar_core u7、r2、u8、u11、u12、r4：過去簡單式、問句與否定、連接詞、can/there is/will、總複習。",
+    intro: "這一級的文法主軸：過去簡單式、問句與否定、連接詞、can/there is/will，最後總複習。",
     weeks: [
       { title: "Yesterday", zh: "昨天", goal: "用過去簡單式規則動詞寫出昨日時間線 6～8 句。", pattern: ["I played soccer yesterday.", "I watched a movie last night."],
         vocab: [["yesterday","昨天","📆"],["last night","昨晚","🌙"],["walked","走了（過去式）","🚶"],["played","玩了（過去式）","⚽"],["watched","看了（過去式）","📺"],["cleaned","打掃了（過去式）","🧹"],["visited","拜訪了（過去式）","🚪"],["cooked","煮了（過去式）","🍳"]],

@@ -10,12 +10,12 @@ const KIDS = path.join(__dirname, "..");
 const TARGETS = ["daily_engine.js", "weekdrills.js", "structure_units.js",
   "curriculum.js", "worddex.js", "word_emoji.js", "word_image.js", "word_roots.js", "wordbank.js",
   "cloud_sync.js", "account_lock.js", "supabase_auth.js", "drills_list.js", "quizbank.js", "city_data.js",
-  "grammar_nodes.js", "grammar_plan.js", "vocab_units.js", "vocab_unit_plan.js", "weekly_bank.js", "week_key.js", "homework_tasks.js"];
+  "grammar_nodes.js", "grammar_plan.js", "vocab_units.js", "vocab_unit_plan.js", "weekly_bank.js", "week_key.js", "homework_tasks.js", "grammar_daily.js"];
 
 function bump(file) {
   let h = fs.readFileSync(file, "utf8"), changed = false;
   TARGETS.forEach(t => {
-    const re = new RegExp(`(src="(?:\\.\\./)*(?:kids/|drills/|grammar_core/)?${t.replace(".", "\\.")})(\\?v=\\d+)?"`, "g");
+    const re = new RegExp(`(src="(?:\\.\\./)*(?:kids/|drills/)?${t.replace(".", "\\.")})(\\?v=\\d+)?"`, "g");
     if (re.test(h)) { h = h.replace(re, `$1?v=${STAMP}"`); changed = true; }
   });
   if (changed) { fs.writeFileSync(file, h); return true; }

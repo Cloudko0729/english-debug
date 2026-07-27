@@ -203,7 +203,8 @@
       s7 = { unit: u, qs };
     }
 
-    // ⑧ 文法（根基課程進度）：主要出「目前單元」，已開放多單元時混 1 題舊單元複習
+    // ⑧ 文法：主要出「目前節點」，已開放多個時混 1 題舊節點複習。
+    // 題庫來自 grammar_daily.js（grammar_db 的 F0–F7 節點），grammar_core 已退役。
     let s8 = null;
     if (typeof gcProgress === "function" && typeof GC_QUIZ !== "undefined") {
       const gp = gcProgress(DRILL_DATE);
@@ -324,7 +325,7 @@
       const u = DRILL.s8.qs[qi].unit;
       const d = document.createElement('div');
       d.className = 'gcfix';
-      d.innerHTML = `📘 這題的觀念在 <a href="../grammar_core/${u.id}.html" target="_blank" rel="noopener">${u.icon}「${u.name}」單元</a>，點過去複習一下！`;
+      d.innerHTML = `📘 這題的觀念在 <a href="../grammar_db/lessons/${u.id}.html" target="_blank" rel="noopener">${u.icon}「${u.name}」</a>，點過去複習一下！`;
       box.appendChild(d);
     }
   };
