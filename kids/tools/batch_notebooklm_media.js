@@ -47,8 +47,12 @@ function loadNodes() {
 // NotebookLM 的 Google 登入實測只有約 2 小時效期，長批次跑到一半一定會過期。
 // 過期後每個節點都會在第一步秒失敗，繼續跑只是把 log 洗版，所以偵測到就整批中止。
 class AuthExpired extends Error {}
-// Google 對 audio/video 生成有配額；額度用完後每次呼叫都會即時失敗，
-// 繼續跑只會把剩下的節點全部標成失敗，所以跟登入過期一樣整批中止、等額度回復再續跑。
+// Google 對生成有配額，且【音檔與影片各自獨立計算】：
+//   實測 2026-07-26 音檔做到第 19 個被限流，同時間影片仍可正常生成。
+//   限流是整個帳號層級（開全新 notebook 一樣被擋），無法繞過。
+//   重置時間為【觸發後 24 小時】，不是隔日零點——例如 07-26 22:15 用完，
+//   要等到 07-27 22:15 左右才會恢復。
+// 額度用完後每次呼叫都即時失敗，繼續跑只會把剩下節點全標成失敗，所以整批中止等額度回復再續跑。
 class RateLimited extends Error {}
 function isAuthError(s) { return /Authentication expired|Run 'notebooklm login'/i.test(String(s)); }
 function isRateLimit(s) { return /RATE_LIMITED|RateLimitError|rate limited by Google/i.test(String(s)); }
@@ -196,7 +200,8 @@ function main() {
         result.finishedAt = new Date().toISOString();
         fs.writeFileSync(LOG, JSON.stringify(result, null, 2), "utf8");
         log(`✘ ${rl ? "Google 生成配額已用盡" : "登入過期"}，於第 ${i + 1}/${nodes.length} 個節點中止（本輪完成 ${result.done.length} 個）`);
-        log(rl ? `  等配額回復（通常隔日）後重跑同一指令即可接著做。`
+        log(rl ? `  配額為觸發後 24 小時重置（不是隔日零點）。屆時重跑同一指令即可接著做。\n` +
+                 `  另註：音檔與影片配額獨立，音檔被擋時可先跑 --video-only。`
                : `  重新登入後重跑同一指令即可接著做：notebooklm login`);
         console.log(JSON.stringify(result, null, 2));
         process.exit(2);
