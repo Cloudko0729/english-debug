@@ -85,13 +85,14 @@ textarea{width:100%;min-height:62px;border:1px solid #cfd8e3;border-radius:10px;
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607280529"></script>
-<script src="account_lock.js?v=202607280529"></script>
-<script src="supabase_auth.js?v=202607280529"></script>
-<script src="week_key.js?v=202607280529"></script>
-<script src="grammar_nodes.js?v=202607280529"></script>
-<script src="grammar_plan.js?v=202607280529"></script>
-<script src="homework_tasks.js?v=202607280529"></script>
+<script src="cloud_sync.js?v=202607280551"></script>
+<script src="account_lock.js?v=202607280551"></script>
+<script src="supabase_auth.js?v=202607280551"></script>
+<script src="ai_review.js?v=202607280551"></script>
+<script src="week_key.js?v=202607280551"></script>
+<script src="grammar_nodes.js?v=202607280551"></script>
+<script src="grammar_plan.js?v=202607280551"></script>
+<script src="homework_tasks.js?v=202607280551"></script>
 <script>
 var currentStudent = null, curAudio = null;
 var WRITE_N = 3, SPEAK_N = 2;      // 每週配額：手寫 3、口說 2
@@ -266,8 +267,10 @@ function writeCard(p, rec, id, i) {
     '<div class="prompt">' + esc(t.zh) + '</div>' +
     '<p class="step"><b>1.</b> 先在紙上用手寫一次（手寫才記得住）　<b>2.</b> 再打進下面的格子檢查</p>' +
     '<textarea id="wt' + i + '" placeholder="把你寫的句子打進來">' + esc(saved ? saved.text : "") + '</textarea>' +
-    '<button class="btn" onclick="doCheck(' + i + ',\'' + id + '\')">檢查看看</button>' +
+    '<button class="btn" onclick="doCheck(' + i + ',\'' + id + '\')">檢查看看</button> ' +
+    '<button class="btn o" onclick="askAIWrite(' + i + ',\'' + id + '\')">🤖 請 AI 幫我看</button>' +
     '<div class="fb" id="wf' + i + '">' + (saved ? fbHtml(checkWriting(saved.text, t)) : "") + '</div>' +
+    '<div id="wai' + i + '"></div>' +
     '<div class="eg"><span class="lab">範例（做完再看）</span>' +
       '<button class="spk" onclick="play(\'' + esc(t.egAudio || "") + '\')">🔊</button> ' + esc(t.eg) + '</div>' +
     '</div>';
@@ -289,7 +292,10 @@ function speakCard(p, rec, id, i) {
     '<div class="rates">' + rates.map(function (r) {
       return '<button class="rate' + (saved && saved.rate === r[0] ? " sel" : "") +
         '" onclick="rateSpeak(' + i + ',\'' + id + '\',\'' + r[0] + '\')">' + r[1] + '</button>';
-    }).join("") + '</div></div>';
+    }).join("") + '</div>' +
+    '<button class="btn o" style="margin-top:10px" onclick="askAISpeak(' + i + ',\'' + id + '\')">🤖 請 AI 陪我練</button>' +
+    '<div id="sai' + i + '"></div>' +
+    '</div>';
 }
 
 function fbHtml(res) {
@@ -301,6 +307,25 @@ function fbHtml(res) {
   return (res.ok ? '<span class="good">看起來沒問題！</span>' : '<span class="warn">再看一下這幾點：</span>') +
     "<ul>" + lis + "</ul>";
 }
+
+// 家長沒空時，讓 AI 代為檢查手寫、或當口說的練習對象。
+// 手寫內容在按下去的當下才讀 —— 小孩可能改過卻沒按「檢查看看」，
+// 用存檔的值會送出過時的句子。
+window.askAIWrite = function (i, id) {
+  if (!window.AIReview) return;
+  var t = HOMEWORK_TASKS[id].write;
+  var el = document.getElementById("wt" + i);
+  AIReview.renderTask("wai" + i, {
+    kind: "write", taskZh: t.zh, example: t.eg, written: el ? el.value : "",
+  });
+  document.getElementById("wai" + i).scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
+window.askAISpeak = function (i, id) {
+  if (!window.AIReview) return;
+  var t = HOMEWORK_TASKS[id].speak;
+  AIReview.renderTask("sai" + i, { kind: "speak", taskZh: t.zh, example: t.eg });
+  document.getElementById("sai" + i).scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 window.doCheck = function (i, id) {
   var t = HOMEWORK_TASKS[id].write;
