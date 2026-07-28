@@ -330,6 +330,8 @@ header a{color:#2f80ed;text-decoration:none}
     <div id="finishMsg" class="hint" style="margin:9px 0 0"></div>
   </div>
 
+  <div id="aiBox"></div>
+
   <div class="nav">
     <span><a href="l4-u01.html">← 語言與句型 × 數字與時間</a></span>
     <span><a href="l4-u03.html">人物與家庭 × 數字與時間 →</a></span>
@@ -339,13 +341,16 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607280153"></script>
-<script src="../../account_lock.js?v=202607280153"></script>
-<script src="../../supabase_auth.js?v=202607280153"></script>
+<script src="../../cloud_sync.js?v=202607280529"></script>
+<script src="../../account_lock.js?v=202607280529"></script>
+<script src="../../supabase_auth.js?v=202607280529"></script>
+<script src="../../ai_review.js?v=202607280529"></script>
 <script>
 var UNIT_ID = "l4-u02";
 var QUIZ = [{"kind":"zh2en","ask":"「五十」的英文是哪一個？","answer":"fifty","options":["forty","fourteen","fifty","nineteen"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003efourteen\u003c/b\u003e 是什麼意思？","answer":"十四","options":["十四","五十","四十","十九"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"nineteen","options":["fifty","forty","nineteen","fourteen"],"audio":"audio/words/nineteen.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ flowers are red.\u003c/span\u003e","answer":"seventeen","options":["fifty","seventeen","forty","fourteen"],"audio":"audio/words/ex/seventeen_0.mp3"},{"kind":"zh2en","ask":"「十六」的英文是哪一個？","answer":"sixteen","options":["sixteen","fifty","forty","fourteen"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003esoon\u003c/b\u003e 是什麼意思？","answer":"很快","options":["從不","仍然","甚至；平坦的","很快"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"thirteen","options":["fifty","forty","fourteen","thirteen"],"audio":"audio/words/thirteen.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ cents are in my hand.\u003c/span\u003e","answer":"fifty","options":["forty","fourteen","fifty","nineteen"],"audio":"audio/words/ex/fifty_0.mp3"}];
-var currentStudent = null, curAudio = null, done = 0, ok = 0;
+var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
+var UNIT_TITLE = "數字與時間";
+var UNIT_GOAL = "這個單元的字：fifty、forty、fourteen、never、nineteen、ninety 等 14 個";
 
 function getProgress(s) {
   var raw = localStorage.getItem("kidsProgress." + s);
@@ -401,10 +406,17 @@ function ans(qi, oi) {
     else if (i === oi) btns[i].classList.add("no");
   }
   done++; if (good) ok++;
+  // 留下錯題內容給 AI 複習用：只記題目與選項文字，不含個人資料
+  if (!good) wrongList.push({ q: q.ask.replace(/<[^>]+>/g, " ").replace(/s+/g, " ").trim(),
+    chose: q.options[oi], answer: q.answer });
   if (done === QUIZ.length) {
     document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
       "　<span style='font-weight:400;color:#667085'>↓ 按下面的按鈕領金幣</span>";
     toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+    if (window.AIReview) AIReview.render("aiBox", {
+      subject: "單字", topic: UNIT_TITLE, goal: UNIT_GOAL,
+      wrong: wrongList, correct: ok, total: QUIZ.length,
+    });
   }
 }
 

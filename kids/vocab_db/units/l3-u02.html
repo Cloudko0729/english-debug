@@ -384,6 +384,8 @@ header a{color:#2f80ed;text-decoration:none}
     <div id="finishMsg" class="hint" style="margin:9px 0 0"></div>
   </div>
 
+  <div id="aiBox"></div>
+
   <div class="nav">
     <span><a href="l3-u01.html">← 數字與時間 × 語言與句型</a></span>
     <span><a href="l3-u03.html">動物與自然 × 身體與感受 →</a></span>
@@ -393,13 +395,16 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607280153"></script>
-<script src="../../account_lock.js?v=202607280153"></script>
-<script src="../../supabase_auth.js?v=202607280153"></script>
+<script src="../../cloud_sync.js?v=202607280529"></script>
+<script src="../../account_lock.js?v=202607280529"></script>
+<script src="../../supabase_auth.js?v=202607280529"></script>
+<script src="../../ai_review.js?v=202607280529"></script>
 <script>
 var UNIT_ID = "l3-u02";
 var QUIZ = [{"kind":"zh2en","ask":"「阿姨」的英文是哪一個？","answer":"aunt","options":["aunt","child","children","dad"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003echildren\u003c/b\u003e 是什麼意思？","answer":"一個以上的孩童、child 的複數","options":["一個以上的孩童、child 的複數","阿姨","孩子","爸爸"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"daddy","options":["aunt","child","daddy","children"],"audio":"audio/words/daddy.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eAmy is my best ＿＿＿.\u003c/span\u003e","answer":"friend","options":["friend","aunt","child","children"],"audio":"audio/vocab_foundation/examples/l3-friend-e1.mp3"},{"kind":"zh2en","ask":"「工作者」的英文是哪一個？","answer":"worker","options":["aunt","child","worker","children"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eo'clock\u003c/b\u003e 是什麼意思？","answer":"……點鐘","options":["下午；晚上","昨天","……點鐘","上午"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"start","options":["call","cry","start","dance"],"audio":"audio/words/start.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI have ＿＿＿ apples.\u003c/span\u003e","answer":"zero","options":["zero","eleven","aunt","child"],"audio":"audio/words/ex/zero_0.mp3"}];
-var currentStudent = null, curAudio = null, done = 0, ok = 0;
+var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
+var UNIT_TITLE = "人物與家庭 × 數字與時間";
+var UNIT_GOAL = "這個單元的字：aunt、child、children、dad、daddy、family 等 15 個";
 
 function getProgress(s) {
   var raw = localStorage.getItem("kidsProgress." + s);
@@ -455,10 +460,17 @@ function ans(qi, oi) {
     else if (i === oi) btns[i].classList.add("no");
   }
   done++; if (good) ok++;
+  // 留下錯題內容給 AI 複習用：只記題目與選項文字，不含個人資料
+  if (!good) wrongList.push({ q: q.ask.replace(/<[^>]+>/g, " ").replace(/s+/g, " ").trim(),
+    chose: q.options[oi], answer: q.answer });
   if (done === QUIZ.length) {
     document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
       "　<span style='font-weight:400;color:#667085'>↓ 按下面的按鈕領金幣</span>";
     toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+    if (window.AIReview) AIReview.render("aiBox", {
+      subject: "單字", topic: UNIT_TITLE, goal: UNIT_GOAL,
+      wrong: wrongList, correct: ok, total: QUIZ.length,
+    });
   }
 }
 

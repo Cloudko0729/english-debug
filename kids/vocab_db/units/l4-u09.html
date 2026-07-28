@@ -340,6 +340,8 @@ header a{color:#2f80ed;text-decoration:none}
     <div id="finishMsg" class="hint" style="margin:9px 0 0"></div>
   </div>
 
+  <div id="aiBox"></div>
+
   <div class="nav">
     <span><a href="l4-u08.html">← 顏色與描述</a></span>
     <span><a href="l4-u10.html">生活綜合 →</a></span>
@@ -349,13 +351,16 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607280153"></script>
-<script src="../../account_lock.js?v=202607280153"></script>
-<script src="../../supabase_auth.js?v=202607280153"></script>
+<script src="../../cloud_sync.js?v=202607280529"></script>
+<script src="../../account_lock.js?v=202607280529"></script>
+<script src="../../supabase_auth.js?v=202607280529"></script>
+<script src="../../ai_review.js?v=202607280529"></script>
 <script>
 var UNIT_ID = "l4-u09";
 var QUIZ = [{"kind":"zh2en","ask":"「光碟(Compact Disk 縮寫)(n)  雷射唱片」的英文是哪一個？","answer":"cd","options":["dancing","movie","news","cd"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003emovie\u003c/b\u003e 是什麼意思？","answer":"電影","options":["電影","光碟(Compact Disk 縮寫)(n)  雷射唱片","跳舞","新聞"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"newspaper","options":["cd","newspaper","dancing","movie"],"audio":"audio/words/newspaper.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eSoccer is my favorite ＿＿＿.\u003c/span\u003e","answer":"sport","options":["sport","cd","dancing","movie"],"audio":"audio/vocab_foundation/examples/l4-sport-e1.mp3"},{"kind":"zh2en","ask":"「雪」的英文是哪一個？","answer":"snow","options":["cd","dancing","movie","snow"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003esummer\u003c/b\u003e 是什麼意思？","answer":"夏天","options":["夏天","光碟(Compact Disk 縮寫)(n)  雷射唱片","跳舞","電影"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"winter","options":["cd","winter","dancing","movie"],"audio":"audio/words/winter.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ is fun and good exercise.\u003c/span\u003e","answer":"dancing","options":["dancing","cd","movie","news"],"audio":"audio/vocab_foundation/examples/l4-dancing-e1.mp3"}];
-var currentStudent = null, curAudio = null, done = 0, ok = 0;
+var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
+var UNIT_TITLE = "休閒與媒體 × 季節與天氣";
+var UNIT_GOAL = "這個單元的字：cd、dancing、movie、news、newspaper、soccer 等 13 個";
 
 function getProgress(s) {
   var raw = localStorage.getItem("kidsProgress." + s);
@@ -411,10 +416,17 @@ function ans(qi, oi) {
     else if (i === oi) btns[i].classList.add("no");
   }
   done++; if (good) ok++;
+  // 留下錯題內容給 AI 複習用：只記題目與選項文字，不含個人資料
+  if (!good) wrongList.push({ q: q.ask.replace(/<[^>]+>/g, " ").replace(/s+/g, " ").trim(),
+    chose: q.options[oi], answer: q.answer });
   if (done === QUIZ.length) {
     document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
       "　<span style='font-weight:400;color:#667085'>↓ 按下面的按鈕領金幣</span>";
     toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+    if (window.AIReview) AIReview.render("aiBox", {
+      subject: "單字", topic: UNIT_TITLE, goal: UNIT_GOAL,
+      wrong: wrongList, correct: ok, total: QUIZ.length,
+    });
   }
 }
 

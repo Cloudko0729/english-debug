@@ -37,6 +37,8 @@ const SEV_LABEL = {
 // 那兩個欄位是寫給教學引擎的術語（例如 "subject + predicate"），孩子看不懂。
 // 見 LESSON_PAGE_SPEC.md 第 1 節。
 const KID = JSON.parse(fs.readFileSync(path.join(DB, "kid_wording.json"), "utf8"));
+// 題幹的孩子端用語（資料庫的 promptZh 帶有「本節點」這類引擎術語）
+const { kidPrompt } = require("./_kid_prompt.js");
 
 function esc(s) {
   return String(s == null ? "" : s)
@@ -296,6 +298,8 @@ function renderNode(n, prev, next) {
   <p style="font-size:.85rem;color:var(--muted);margin-bottom:10px">做完上面的小測驗和作業，按這裡領金幣，進度也會記錄下來。</p>
   <button id="finishBtn" class="finish-btn" onclick="finishLesson()">✅ 我學完這一課了</button>
   <div id="finishMsg" style="font-weight:800;margin-top:10px;min-height:1.4em"></div>
+
+<div id="aiBox"></div>
 </div>
 
 <div class="navbtns">
@@ -308,6 +312,7 @@ function renderNode(n, prev, next) {
 <script src="../../cloud_sync.js"></script>
 <script src="../../account_lock.js"></script>
 <script src="../../supabase_auth.js"></script>
+<script src="../../ai_review.js"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -325,11 +330,13 @@ function togWhy() {
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
 var QUIZ = ${JSON.stringify(n.diagnostics.map(d => ({
-    q: d.promptZh,
+    q: kidPrompt(d.promptZh),
     opts: d.choices.map(c => ({ t: c.text, id: c.id, audio: c.audio ? au(c.audio) : null })),
     a: d.answerId,
   })))};
-var done = 0, ok = 0;
+var done = 0, ok = 0, wrongList = [];
+var NODE_TITLE = ${JSON.stringify(n.titleZh)};
+var NODE_GOAL = ${JSON.stringify((KID[n.id] && KID[n.id].goal) || n.communicativeGoalZh || "")};
 document.getElementById("quiz").innerHTML = QUIZ.map(function (q, i) {
   return '<div class="q" id="dq' + i + '"><div class="qt">' + (i + 1) + '. ' + q.q + '</div>' +
     q.opts.map(function (o) {
@@ -347,10 +354,22 @@ function ans(i, id, btn) {
     else if (btns[j] === btn) btns[j].classList.add("no");
   }
   done++; if (good) ok++;
+  // 留下錯題內容給 AI 複習用：只記題目與選項文字，不含任何個人資料
+  if (!good) {
+    var chosen = null;
+    for (var k = 0; k < q.opts.length; k++) if (q.opts[k].id === id) chosen = q.opts[k].t;
+    var right = null;
+    for (var m = 0; m < q.opts.length; m++) if (q.opts[m].id === q.a) right = q.opts[m].t;
+    wrongList.push({ q: q.q, chose: chosen, answer: right });
+  }
   if (done === QUIZ.length) {
     document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
       "　<span style='font-weight:400;color:#667085'>↓ 做完下面的作業，按「我學完這一課了」領金幣</span>";
     if (typeof toast === "function") toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+    if (window.AIReview) AIReview.render("aiBox", {
+      subject: "文法", topic: NODE_TITLE, goal: NODE_GOAL,
+      wrong: wrongList, correct: ok, total: QUIZ.length,
+    });
   }
 }
 // ── 學生 / 進度 / 金幣 ────────────────────────────────────────────────

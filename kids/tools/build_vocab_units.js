@@ -300,6 +300,8 @@ ${conBlock}
     <div id="finishMsg" class="hint" style="margin:9px 0 0"></div>
   </div>
 
+  <div id="aiBox"></div>
+
   <div class="nav">
     <span>${prev ? `<a href="${esc(prev.id)}.html">← ${esc(prev.titleZh)}</a>` : ""}</span>
     <span>${next ? `<a href="${esc(next.id)}.html">${esc(next.titleZh)} →</a>` : ""}</span>
@@ -312,10 +314,13 @@ ${conBlock}
 <script src="../../cloud_sync.js"></script>
 <script src="../../account_lock.js"></script>
 <script src="../../supabase_auth.js"></script>
+<script src="../../ai_review.js"></script>
 <script>
 var UNIT_ID = ${jsonInline(unit.id)};
 var QUIZ = ${jsonInline(quiz)};
-var currentStudent = null, curAudio = null, done = 0, ok = 0;
+var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
+var UNIT_TITLE = ${jsonInline(unit.titleZh)};
+var UNIT_GOAL = ${jsonInline("這個單元的字：" + words.slice(0, 6).map(w => disp(w.word)).join("、") + " 等 " + words.length + " 個")};
 
 function getProgress(s) {
   var raw = localStorage.getItem("kidsProgress." + s);
@@ -371,10 +376,17 @@ function ans(qi, oi) {
     else if (i === oi) btns[i].classList.add("no");
   }
   done++; if (good) ok++;
+  // 留下錯題內容給 AI 複習用：只記題目與選項文字，不含個人資料
+  if (!good) wrongList.push({ q: q.ask.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(),
+    chose: q.options[oi], answer: q.answer });
   if (done === QUIZ.length) {
     document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
       "　<span style='font-weight:400;color:#667085'>↓ 按下面的按鈕領金幣</span>";
     toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+    if (window.AIReview) AIReview.render("aiBox", {
+      subject: "單字", topic: UNIT_TITLE, goal: UNIT_GOAL,
+      wrong: wrongList, correct: ok, total: QUIZ.length,
+    });
   }
 }
 
@@ -512,6 +524,7 @@ ${byLevel[l].map(u => `      <a href="${esc(u.id)}.html" data-unit="${esc(u.id)}
 <script src="../../cloud_sync.js"></script>
 <script src="../../account_lock.js"></script>
 <script src="../../supabase_auth.js"></script>
+<script src="../../ai_review.js"></script>
 <script src="../../vocab_units.js"></script>
 <script src="../../vocab_unit_plan.js"></script>
 <script>

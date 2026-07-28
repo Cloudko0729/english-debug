@@ -76,18 +76,19 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607280153"></script>
-<script src="account_lock.js?v=202607280153"></script>
-<script src="supabase_auth.js?v=202607280153"></script>
-<script src="week_key.js?v=202607280153"></script>
-<script src="grammar_nodes.js?v=202607280153"></script>
-<script src="grammar_plan.js?v=202607280153"></script>
-<script src="vocab_units.js?v=202607280153"></script>
-<script src="vocab_unit_plan.js?v=202607280153"></script>
-<script src="weekly_bank.js?v=202607280153"></script>
+<script src="cloud_sync.js?v=202607280529"></script>
+<script src="account_lock.js?v=202607280529"></script>
+<script src="supabase_auth.js?v=202607280529"></script>
+<script src="ai_review.js?v=202607280529"></script>
+<script src="week_key.js?v=202607280529"></script>
+<script src="grammar_nodes.js?v=202607280529"></script>
+<script src="grammar_plan.js?v=202607280529"></script>
+<script src="vocab_units.js?v=202607280529"></script>
+<script src="vocab_unit_plan.js?v=202607280529"></script>
+<script src="weekly_bank.js?v=202607280529"></script>
 <script>
 var currentStudent = null, curAudio = null;
-var TEST = null, answers = {}, graded = false;
+var TEST = null, answers = {}, graded = false, wrongForAI = [];
 
 var GRAMMAR_ITEMS = 3, VOCAB_ITEMS = 3, Q_PER_ITEM = 2;   // 3+3 項 × 2 題 = 12 題，約 10 分鐘
 var COIN_BASE = 20, COIN_ACC = 30;                        // 20 + 依正確率最多 30
@@ -251,6 +252,11 @@ function grade() {
       else if (j === answers[i]) btns[j].classList.add("no");
     }
     if (!good && q.why) document.getElementById("w" + i).textContent = "💡 " + q.why;
+    // 錯題內容留給 AI 複習：標明是哪一課的，AI 才知道該補哪個觀念
+    if (!good) wrongForAI.push({
+      q: "（" + itemTitle(item.kind, item.itemId) + "）" + q.ask.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(),
+      chose: chosen, answer: q.answer, note: q.why || null,
+    });
   });
 
   var total = TEST.questions.length;
@@ -277,6 +283,16 @@ function grade() {
   var res = document.createElement("div");
   res.innerHTML = renderResult(p, byItem, correct, total, earned);
   document.querySelector(".wrap").insertBefore(res, document.getElementById("main"));
+  if (window.AIReview) {
+    var aiWrap = document.createElement("div");
+    aiWrap.id = "aiBox";
+    res.appendChild(aiWrap);
+    AIReview.render("aiBox", {
+      subject: "綜合測驗", topic: "這一週學過的文法與單字",
+      goal: "把這陣子上過的課再確認一次",
+      wrong: wrongForAI, correct: correct, total: total,
+    });
+  }
   res.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 

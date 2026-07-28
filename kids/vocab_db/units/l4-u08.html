@@ -340,6 +340,8 @@ header a{color:#2f80ed;text-decoration:none}
     <div id="finishMsg" class="hint" style="margin:9px 0 0"></div>
   </div>
 
+  <div id="aiBox"></div>
+
   <div class="nav">
     <span><a href="l4-u07.html">← 動作與日常</a></span>
     <span><a href="l4-u09.html">休閒與媒體 × 季節與天氣 →</a></span>
@@ -349,13 +351,16 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607280153"></script>
-<script src="../../account_lock.js?v=202607280153"></script>
-<script src="../../supabase_auth.js?v=202607280153"></script>
+<script src="../../cloud_sync.js?v=202607280529"></script>
+<script src="../../account_lock.js?v=202607280529"></script>
+<script src="../../supabase_auth.js?v=202607280529"></script>
+<script src="../../ai_review.js?v=202607280529"></script>
 <script>
 var UNIT_ID = "l4-u08";
 var QUIZ = [{"kind":"zh2en","ask":"「涼爽」的英文是哪一個？","answer":"cool","options":["funny","cool","long","pretty"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003elong\u003c/b\u003e 是什麼意思？","answer":"長的","options":["涼爽","有趣的","漂亮的","長的"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"same","options":["cool","funny","same","long"],"audio":"audio/words/same.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eMy brother is ＿＿＿.\u003c/span\u003e","answer":"strong","options":["cool","strong","funny","long"],"audio":"audio/vocab_foundation/examples/l4-strong-e1.mp3"},{"kind":"zh2en","ask":"「確定的」的英文是哪一個？","answer":"sure","options":["cool","funny","long","sure"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ewet\u003c/b\u003e 是什麼意思？","answer":"濕的","options":["涼爽","濕的","有趣的","長的"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"young","options":["cool","funny","young","long"],"audio":"audio/words/young.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eThe story is ＿＿＿.\u003c/span\u003e","answer":"funny","options":["funny","cool","long","pretty"],"audio":"audio/words/ex/funny_0.mp3"}];
-var currentStudent = null, curAudio = null, done = 0, ok = 0;
+var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
+var UNIT_TITLE = "顏色與描述";
+var UNIT_GOAL = "這個單元的字：cool、funny、long、pretty、same、smart 等 13 個";
 
 function getProgress(s) {
   var raw = localStorage.getItem("kidsProgress." + s);
@@ -411,10 +416,17 @@ function ans(qi, oi) {
     else if (i === oi) btns[i].classList.add("no");
   }
   done++; if (good) ok++;
+  // 留下錯題內容給 AI 複習用：只記題目與選項文字，不含個人資料
+  if (!good) wrongList.push({ q: q.ask.replace(/<[^>]+>/g, " ").replace(/s+/g, " ").trim(),
+    chose: q.options[oi], answer: q.answer });
   if (done === QUIZ.length) {
     document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
       "　<span style='font-weight:400;color:#667085'>↓ 按下面的按鈕領金幣</span>";
     toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+    if (window.AIReview) AIReview.render("aiBox", {
+      subject: "單字", topic: UNIT_TITLE, goal: UNIT_GOAL,
+      wrong: wrongList, correct: ok, total: QUIZ.length,
+    });
   }
 }
 

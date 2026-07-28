@@ -357,6 +357,8 @@ header a{color:#2f80ed;text-decoration:none}
     <div id="finishMsg" class="hint" style="margin:9px 0 0"></div>
   </div>
 
+  <div id="aiBox"></div>
+
   <div class="nav">
     <span><a href="l2-u04.html">← 食物與用餐 × 校園與學習</a></span>
     <span><a href="l2-u06.html">顏色與描述 × 動作與日常 →</a></span>
@@ -366,13 +368,16 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607280153"></script>
-<script src="../../account_lock.js?v=202607280153"></script>
-<script src="../../supabase_auth.js?v=202607280153"></script>
+<script src="../../cloud_sync.js?v=202607280529"></script>
+<script src="../../account_lock.js?v=202607280529"></script>
+<script src="../../supabase_auth.js?v=202607280529"></script>
+<script src="../../ai_review.js?v=202607280529"></script>
 <script>
 var UNIT_ID = "l2-u05";
 var QUIZ = [{"kind":"zh2en","ask":"「關上」的英文是哪一個？","answer":"close","options":["give","play","close","see"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eplay\u003c/b\u003e 是什麼意思？","answer":"玩","options":["關上","玩","給","看見"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"sing","options":["close","sing","give","play"],"audio":"audio/words/sing.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI made a ＿＿＿ for lunch.\u003c/span\u003e","answer":"sandwich","options":["rice","sandwich","soup","cap"],"audio":"audio/vocab_foundation/examples/l2-sandwich-e1.mp3"},{"kind":"zh2en","ask":"「帽子」的英文是哪一個？","answer":"cap","options":["cap","rice","sandwich","soup"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eshort\u003c/b\u003e 是什麼意思？","answer":"短的","options":["黑色","短的","棕色","忙碌的"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"sofa","options":["rice","sofa","sandwich","soup"],"audio":"audio/words/sofa.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eThe ＿＿＿ sells shoes.\u003c/span\u003e","answer":"store","options":["rice","store","sandwich","soup"],"audio":"audio/words/ex/store_0.mp3"}];
-var currentStudent = null, curAudio = null, done = 0, ok = 0;
+var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
+var UNIT_TITLE = "動作與日常 × 食物與用餐";
+var UNIT_GOAL = "這個單元的字：close、give、play、see、sing、rice 等 15 個";
 
 function getProgress(s) {
   var raw = localStorage.getItem("kidsProgress." + s);
@@ -428,10 +433,17 @@ function ans(qi, oi) {
     else if (i === oi) btns[i].classList.add("no");
   }
   done++; if (good) ok++;
+  // 留下錯題內容給 AI 複習用：只記題目與選項文字，不含個人資料
+  if (!good) wrongList.push({ q: q.ask.replace(/<[^>]+>/g, " ").replace(/s+/g, " ").trim(),
+    chose: q.options[oi], answer: q.answer });
   if (done === QUIZ.length) {
     document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
       "　<span style='font-weight:400;color:#667085'>↓ 按下面的按鈕領金幣</span>";
     toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+    if (window.AIReview) AIReview.render("aiBox", {
+      subject: "單字", topic: UNIT_TITLE, goal: UNIT_GOAL,
+      wrong: wrongList, correct: ok, total: QUIZ.length,
+    });
   }
 }
 

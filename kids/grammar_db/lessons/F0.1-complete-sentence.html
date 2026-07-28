@@ -224,6 +224,8 @@
   <p style="font-size:.85rem;color:var(--muted);margin-bottom:10px">做完上面的小測驗和作業，按這裡領金幣，進度也會記錄下來。</p>
   <button id="finishBtn" class="finish-btn" onclick="finishLesson()">✅ 我學完這一課了</button>
   <div id="finishMsg" style="font-weight:800;margin-top:10px;min-height:1.4em"></div>
+
+<div id="aiBox"></div>
 </div>
 
 <div class="navbtns">
@@ -233,9 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607280153"></script>
-<script src="../../account_lock.js?v=202607280153"></script>
-<script src="../../supabase_auth.js?v=202607280153"></script>
+<script src="../../cloud_sync.js?v=202607280529"></script>
+<script src="../../account_lock.js?v=202607280529"></script>
+<script src="../../supabase_auth.js?v=202607280529"></script>
+<script src="../../ai_review.js?v=202607280529"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -252,8 +255,10 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句最符合本節點的自然英文形式？","opts":[{"t":"My dog runs.","id":"a","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_example_1.mp3"},{"t":"My dog very cute.","id":"b","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_1_wrong.mp3"},{"t":"In the classroom.","id":"c","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「My dog very cute.」？","opts":[{"t":"My dog is very cute.","id":"a","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_1_better.mp3"},{"t":"My dog very cute.","id":"b","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_1_wrong.mp3"},{"t":"In the classroom.","id":"c","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句在一般情境中最自然，也不會改變核心意思？","opts":[{"t":"The soup is hot.","id":"a","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_example_2.mp3"},{"t":"Is very cold.","id":"b","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_bug_1_wrong.mp3"},{"t":"My sister very happy.","id":"c","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_bug_2_wrong.mp3"}],"a":"a"}];
-var done = 0, ok = 0;
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"My dog runs.","id":"a","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_example_1.mp3"},{"t":"My dog very cute.","id":"b","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_1_wrong.mp3"},{"t":"In the classroom.","id":"c","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「My dog very cute.」？","opts":[{"t":"My dog is very cute.","id":"a","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_1_better.mp3"},{"t":"My dog very cute.","id":"b","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_1_wrong.mp3"},{"t":"In the classroom.","id":"c","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"The soup is hot.","id":"a","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_example_2.mp3"},{"t":"Is very cold.","id":"b","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_bug_1_wrong.mp3"},{"t":"My sister very happy.","id":"c","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_bug_2_wrong.mp3"}],"a":"a"}];
+var done = 0, ok = 0, wrongList = [];
+var NODE_TITLE = "完整句與片語";
+var NODE_GOAL = "看出一句話有沒有說完整";
 document.getElementById("quiz").innerHTML = QUIZ.map(function (q, i) {
   return '<div class="q" id="dq' + i + '"><div class="qt">' + (i + 1) + '. ' + q.q + '</div>' +
     q.opts.map(function (o) {
@@ -271,10 +276,22 @@ function ans(i, id, btn) {
     else if (btns[j] === btn) btns[j].classList.add("no");
   }
   done++; if (good) ok++;
+  // 留下錯題內容給 AI 複習用：只記題目與選項文字，不含任何個人資料
+  if (!good) {
+    var chosen = null;
+    for (var k = 0; k < q.opts.length; k++) if (q.opts[k].id === id) chosen = q.opts[k].t;
+    var right = null;
+    for (var m = 0; m < q.opts.length; m++) if (q.opts[m].id === q.a) right = q.opts[m].t;
+    wrongList.push({ q: q.q, chose: chosen, answer: right });
+  }
   if (done === QUIZ.length) {
     document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
       "　<span style='font-weight:400;color:#667085'>↓ 做完下面的作業，按「我學完這一課了」領金幣</span>";
     if (typeof toast === "function") toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+    if (window.AIReview) AIReview.render("aiBox", {
+      subject: "文法", topic: NODE_TITLE, goal: NODE_GOAL,
+      wrong: wrongList, correct: ok, total: QUIZ.length,
+    });
   }
 }
 // ── 學生 / 進度 / 金幣 ────────────────────────────────────────────────

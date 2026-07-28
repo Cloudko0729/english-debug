@@ -13,6 +13,7 @@
 // 接觸一下」，個人化的部分由文法課表、週測與作業負責。
 const fs = require("fs");
 const path = require("path");
+const { kidPrompt } = require("./_kid_prompt.js");
 
 const KIDS = path.join(__dirname, "..");
 const DB = path.join(KIDS, "grammar_db");
@@ -59,7 +60,7 @@ function questionsFor(n) {
     const ansChoice = (d.choices || []).find(c => c.id === d.answerId);
     if (!ansChoice || choices.length < 3) return;
     const ordered = order(choices, ansChoice.text);
-    if (ordered) qs.push({ q: d.promptZh || "哪一句最自然？", choices: ordered, answer: ansChoice.text });
+    if (ordered) qs.push({ q: kidPrompt(d.promptZh), choices: ordered, answer: ansChoice.text });
   });
 
   (n.chineseTransferBugs || []).forEach(b => {

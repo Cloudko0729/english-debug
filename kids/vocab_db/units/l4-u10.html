@@ -340,6 +340,8 @@ header a{color:#2f80ed;text-decoration:none}
     <div id="finishMsg" class="hint" style="margin:9px 0 0"></div>
   </div>
 
+  <div id="aiBox"></div>
+
   <div class="nav">
     <span><a href="l4-u09.html">← 休閒與媒體 × 季節與天氣</a></span>
     <span></span>
@@ -349,13 +351,16 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607280153"></script>
-<script src="../../account_lock.js?v=202607280153"></script>
-<script src="../../supabase_auth.js?v=202607280153"></script>
+<script src="../../cloud_sync.js?v=202607280529"></script>
+<script src="../../account_lock.js?v=202607280529"></script>
+<script src="../../supabase_auth.js?v=202607280529"></script>
+<script src="../../ai_review.js?v=202607280529"></script>
 <script>
 var UNIT_ID = "l4-u10";
 var QUIZ = [{"kind":"zh2en","ask":"「農曆新年」的英文是哪一個？","answer":"chinese new year","options":["kitten","kitty","chinese new year","part"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ein front of\u003c/b\u003e 是什麼意思？","answer":"在…的前面","options":["緊挨著","在…的前面","從；來自","……的"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"kitty","options":["chinese new year","kitty","kitten","part"],"audio":"audio/words/kitty.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eThe children are ＿＿＿ in the yard.\u003c/span\u003e","answer":"out","options":["out","even","never","soon"],"audio":"audio/vocab_foundation/examples/l4-out-e1.mp3"},{"kind":"zh2en","ask":"「尺寸」的英文是哪一個？","answer":"size","options":["chinese new year","kitten","kitty","size"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003esound\u003c/b\u003e 是什麼意思？","answer":"聲音；聽起來","options":["農曆新年","小貓、頑皮的女孩","聲音；聽起來","(兒語)小貓"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"swimming","options":["chinese new year","kitten","kitty","swimming"],"audio":"audio/words/swimming.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ my little brother can do it.\u003c/span\u003e","answer":"even","options":["out","never","even","soon"],"audio":"audio/vocab_foundation/examples/l4-even-e1.mp3"}];
-var currentStudent = null, curAudio = null, done = 0, ok = 0;
+var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
+var UNIT_TITLE = "生活綜合";
+var UNIT_GOAL = "這個單元的字：chinese new year、even、in front of、kitten、kitty、next to 等 13 個";
 
 function getProgress(s) {
   var raw = localStorage.getItem("kidsProgress." + s);
@@ -411,10 +416,17 @@ function ans(qi, oi) {
     else if (i === oi) btns[i].classList.add("no");
   }
   done++; if (good) ok++;
+  // 留下錯題內容給 AI 複習用：只記題目與選項文字，不含個人資料
+  if (!good) wrongList.push({ q: q.ask.replace(/<[^>]+>/g, " ").replace(/s+/g, " ").trim(),
+    chose: q.options[oi], answer: q.answer });
   if (done === QUIZ.length) {
     document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
       "　<span style='font-weight:400;color:#667085'>↓ 按下面的按鈕領金幣</span>";
     toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+    if (window.AIReview) AIReview.render("aiBox", {
+      subject: "單字", topic: UNIT_TITLE, goal: UNIT_GOAL,
+      wrong: wrongList, correct: ok, total: QUIZ.length,
+    });
   }
 }
 

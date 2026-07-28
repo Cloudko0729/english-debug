@@ -384,6 +384,8 @@ header a{color:#2f80ed;text-decoration:none}
     <div id="finishMsg" class="hint" style="margin:9px 0 0"></div>
   </div>
 
+  <div id="aiBox"></div>
+
   <div class="nav">
     <span><a href="l1-u08.html">← 顏色與描述 × 生活綜合</a></span>
     <span><a href="l2-u02.html">人物與家庭 × 動物與自然 →</a></span>
@@ -393,13 +395,16 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607280153"></script>
-<script src="../../account_lock.js?v=202607280153"></script>
-<script src="../../supabase_auth.js?v=202607280153"></script>
+<script src="../../cloud_sync.js?v=202607280529"></script>
+<script src="../../account_lock.js?v=202607280529"></script>
+<script src="../../supabase_auth.js?v=202607280529"></script>
+<script src="../../ai_review.js?v=202607280529"></script>
 <script>
 var UNIT_ID = "l2-u01";
 var QUIZ = [{"kind":"zh2en","ask":"「和；而且」的英文是哪一個？","answer":"and","options":["but","English","its","and"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eits\u003c/b\u003e 是什麼意思？","answer":"它的","options":["這些","那些","和；而且","它的"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"please","options":["hello","hey","please","hi"],"audio":"audio/words/please.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ means the Republic of China.\u003c/span\u003e","answer":"roc","options":["roc","English","USA","birthday"],"audio":"audio/vocab_foundation/examples/l2-roc-e1.mp3"},{"kind":"zh2en","ask":"「那些」的英文是哪一個？","answer":"those","options":["its","these","and","those"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eUSA\u003c/b\u003e 是什麼意思？","answer":"美國","options":["英文","美國","中華民國","生日"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"birthday","options":["English","roc","USA","birthday"],"audio":"audio/words/birthday.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eA ＿＿＿ has morning and night.\u003c/span\u003e","answer":"day","options":["English","roc","day","USA"],"audio":"audio/words/ex/day_0.mp3"}];
-var currentStudent = null, curAudio = null, done = 0, ok = 0;
+var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
+var UNIT_TITLE = "語言與句型 × 數字與時間";
+var UNIT_GOAL = "這個單元的字：and、English、its、on、please、real 等 15 個";
 
 function getProgress(s) {
   var raw = localStorage.getItem("kidsProgress." + s);
@@ -455,10 +460,17 @@ function ans(qi, oi) {
     else if (i === oi) btns[i].classList.add("no");
   }
   done++; if (good) ok++;
+  // 留下錯題內容給 AI 複習用：只記題目與選項文字，不含個人資料
+  if (!good) wrongList.push({ q: q.ask.replace(/<[^>]+>/g, " ").replace(/s+/g, " ").trim(),
+    chose: q.options[oi], answer: q.answer });
   if (done === QUIZ.length) {
     document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
       "　<span style='font-weight:400;color:#667085'>↓ 按下面的按鈕領金幣</span>";
     toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+    if (window.AIReview) AIReview.render("aiBox", {
+      subject: "單字", topic: UNIT_TITLE, goal: UNIT_GOAL,
+      wrong: wrongList, correct: ok, total: QUIZ.length,
+    });
   }
 }
 
