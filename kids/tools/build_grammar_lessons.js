@@ -37,6 +37,10 @@ const SEV_LABEL = {
 // 那兩個欄位是寫給教學引擎的術語（例如 "subject + predicate"），孩子看不懂。
 // 見 LESSON_PAGE_SPEC.md 第 1 節。
 const KID = JSON.parse(fs.readFileSync(path.join(DB, "kid_wording.json"), "utf8"));
+// 影音來源位置（見 grammar_db/media_config.json）。空字串＝跟頁面放在一起。
+const MEDIA = JSON.parse(fs.readFileSync(path.join(DB, "media_config.json"), "utf8"));
+const VIDEO_BASE = MEDIA.videoBase || "podcast/";
+const AUDIO_BASE = MEDIA.audioBase || "podcast/";
 // 題幹的孩子端用語（資料庫的 promptZh 帶有「本節點」這類引擎術語）
 const { kidPrompt } = require("./_kid_prompt.js");
 
@@ -470,7 +474,7 @@ window.finishLesson = function () {
 // NotebookLM 素材：有檔才顯示（fail-safe：載入失敗才隱藏，見 LESSON_PAGE_SPEC 第 7 節）
 (function () {
   var a = document.getElementById("pcAudio"), v = document.getElementById("pcVideo"), box = document.getElementById("podcastBox");
-  a.src = "podcast/${esc(n.id)}.m4a"; v.src = "podcast/${esc(n.id)}.mp4";
+  a.src = "${AUDIO_BASE}${esc(n.id)}.m4a"; v.src = "${VIDEO_BASE}${esc(n.id)}.mp4";
   var okCount = 0, errCount = 0;
   function shown() { okCount++; box.classList.add("show"); }
   function bad() { errCount++; if (errCount >= 2) box.classList.remove("show"); }
