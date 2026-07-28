@@ -339,12 +339,12 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607271502"></script>
-<script src="../../account_lock.js?v=202607271502"></script>
-<script src="../../supabase_auth.js?v=202607271502"></script>
+<script src="../../cloud_sync.js?v=202607280153"></script>
+<script src="../../account_lock.js?v=202607280153"></script>
+<script src="../../supabase_auth.js?v=202607280153"></script>
 <script>
 var UNIT_ID = "l4-u02";
-var QUIZ = [{"kind":"zh2en","ask":"「五十」的英文是哪一個？","answer":"fifty","options":["forty","fourteen","fifty","nineteen"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003efourteen\u003c/b\u003e 是什麼意思？","answer":"十四","options":["十四","五十","四十","十九"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"nineteen","options":["fifty","forty","nineteen","fourteen"],"audio":"audio/words/nineteen.mp3"},{"kind":"cloze","ask":"哪個字放進空格才對？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ flowers are red.\u003c/span\u003e","answer":"seventeen","options":["fifty","seventeen","forty","fourteen"],"audio":null},{"kind":"zh2en","ask":"「十六」的英文是哪一個？","answer":"sixteen","options":["sixteen","fifty","forty","fourteen"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003esoon\u003c/b\u003e 是什麼意思？","answer":"很快","options":["從不","仍然","甚至；平坦的","很快"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"thirteen","options":["fifty","forty","fourteen","thirteen"],"audio":"audio/words/thirteen.mp3"},{"kind":"cloze","ask":"哪個字放進空格才對？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ cents are in my hand.\u003c/span\u003e","answer":"fifty","options":["forty","fourteen","fifty","nineteen"],"audio":null}];
+var QUIZ = [{"kind":"zh2en","ask":"「五十」的英文是哪一個？","answer":"fifty","options":["forty","fourteen","fifty","nineteen"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003efourteen\u003c/b\u003e 是什麼意思？","answer":"十四","options":["十四","五十","四十","十九"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"nineteen","options":["fifty","forty","nineteen","fourteen"],"audio":"audio/words/nineteen.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ flowers are red.\u003c/span\u003e","answer":"seventeen","options":["fifty","seventeen","forty","fourteen"],"audio":"audio/words/ex/seventeen_0.mp3"},{"kind":"zh2en","ask":"「十六」的英文是哪一個？","answer":"sixteen","options":["sixteen","fifty","forty","fourteen"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003esoon\u003c/b\u003e 是什麼意思？","answer":"很快","options":["從不","仍然","甚至；平坦的","很快"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"thirteen","options":["fifty","forty","fourteen","thirteen"],"audio":"audio/words/thirteen.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ cents are in my hand.\u003c/span\u003e","answer":"fifty","options":["forty","fourteen","fifty","nineteen"],"audio":"audio/words/ex/fifty_0.mp3"}];
 var currentStudent = null, curAudio = null, done = 0, ok = 0;
 
 function getProgress(s) {
@@ -381,7 +381,7 @@ function drawQuiz() {
   var h = "";
   QUIZ.forEach(function (q, i) {
     h += '<div class="q" id="q' + i + '"><div class="ask">' + (i + 1) + ". " + q.ask +
-      (q.audio ? ' <button class="spk" onclick="play(\'../../' + q.audio + '\')">🔊 再聽一次</button>' : "") + '</div>';
+      (q.audio ? ' <button class="spk" onclick="play(\'../../' + q.audio + '\')">🔊 播放</button>' : "") + '</div>';
     q.options.forEach(function (o, j) {
       h += '<button class="opt" onclick="ans(' + i + ',' + j + ')">' + o + '</button>';
     });

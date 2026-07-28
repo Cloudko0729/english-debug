@@ -96,16 +96,20 @@ function vocabQuestions(unit, wordMap) {
     if (others.length < 3) return;
     const ds = others.slice(0, 3).map(x => disp(x.word));
 
-    // 克漏字用第二個例句 —— 單元頁的克漏字用的是第一個
+    // 挖空題用第二個例句（單元頁用第一個），且一律搭配朗讀。
+    //
+    // 純文字的「哪個字放進空格才對？」保證不了唯一答案：干擾項來自同一單元，
+    // 而單元是主題式的，所以「I see a ＿＿＿.」的選項會是 pig / bird / cat / dog，
+    // 四個都填得進去。改由音檔決定答案，聽到什麼就只有一個對。
     const ex = (w.examples || [])[1];
-    if (ex && i % 2 === 0) {
+    if (ex && ex.audio && i % 2 === 0) {
       const re = new RegExp("\\b" + w.word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "i");
       if (re.test(ex.text)) {
         const options = order([disp(w.word), ...ds], disp(w.word));
         if (options && options.length === 4) {
           qs.push({
-            kind: "cloze", ask: `哪個字放進空格才對？<br><span class="sent">${esc(ex.text.replace(re, "＿＿＿"))}</span>`,
-            options, answer: disp(w.word), why: "", audio: ex.audio || null,
+            kind: "cloze", ask: `先聽一次，空格裡是哪個字？<br><span class="sent">${esc(ex.text.replace(re, "＿＿＿"))}</span>`,
+            options, answer: disp(w.word), why: "", audio: ex.audio,
           });
         }
       }

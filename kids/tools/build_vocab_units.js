@@ -71,7 +71,8 @@ function buildQuiz(unit, wordMap, levelWords) {
     const kind = kinds[i % kinds.length];
 
     if (kind === "listen" && !w.pronunciationAudio) { qs.push(mk("en2zh", w, pool)); continue; }
-    if (kind === "cloze" && !(w.examples && w.examples.length)) { qs.push(mk("zh2en", w, pool)); continue; }
+    // 挖空題的答案由音檔決定，沒有音檔就出不了這種題
+    if (kind === "cloze" && !(w.examples && w.examples[0] && w.examples[0].audio)) { qs.push(mk("zh2en", w, pool)); continue; }
     qs.push(mk(kind, w, pool));
   }
   // 去掉重複的題目（同字同題型）
@@ -98,14 +99,22 @@ function buildQuiz(unit, wordMap, levelWords) {
       return { kind, ask: "聽聽看，念的是哪一個字？", answer: disp(w.word),
         options: shuffle([disp(w.word), ...ds.map(x => disp(x.word))], disp(w.word)), audio: w.pronunciationAudio };
     }
-    // cloze：把例句裡的目標字挖空。同義字要排除 —— 「I have ___ red pen」填 a 或 an
-    // 在文法上只有一個對，但「爸爸」填 dad 或 daddy 就兩個都對了。
+    // 挖空題一律**搭配例句朗讀**，答案由聽到的內容決定。
+    //
+    // 原本是純文字的「哪個字放進空格才對？」，但那種題目沒辦法保證只有一個答案：
+    // 干擾項取自同單元，而單元是主題式的，所以「I see a ＿＿＿.」的選項會是
+    // pig / bird / cat / dog —— 四個都對。「The ＿＿＿ sleeps on a chair.」選 dog
+    // 也完全正確，卻被判錯。同義字過濾擋不住這種，那四個字中文義並不相同。
+    //
+    // 哪些句子「夠具體到只有一個答案」無法可靠地自動判斷，所以改成由音檔決定答案：
+    // 聽到什麼就只有一個對，順便多練一次聽力。926 個例句音檔都是現成的。
     const ex = w.examples[0];
     const re = new RegExp("\\b" + w.word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "i");
     const blanked = re.test(ex.text) ? ex.text.replace(re, "＿＿＿") : ex.text + "（＿＿＿）";
-    const ds = distractors(w, wide, 3, x => x.word, false);
-    return { kind, ask: `哪個字放進空格才對？<br><span class="sent">${esc(blanked)}</span>`,
-      answer: disp(w.word), options: shuffle([disp(w.word), ...ds.map(x => disp(x.word))], disp(w.word)), audio: null };
+    const ds = distractors(w, wide, 3, x => x.word, true);
+    return { kind, ask: `先聽一次，空格裡是哪個字？<br><span class="sent">${esc(blanked)}</span>`,
+      answer: disp(w.word), options: shuffle([disp(w.word), ...ds.map(x => disp(x.word))], disp(w.word)),
+      audio: ex.audio || null };
   }
 }
 
@@ -342,7 +351,7 @@ function drawQuiz() {
   var h = "";
   QUIZ.forEach(function (q, i) {
     h += '<div class="q" id="q' + i + '"><div class="ask">' + (i + 1) + ". " + q.ask +
-      (q.audio ? ' <button class="spk" onclick="play(\\'../../' + q.audio + '\\')">🔊 再聽一次</button>' : "") + '</div>';
+      (q.audio ? ' <button class="spk" onclick="play(\\'../../' + q.audio + '\\')">🔊 播放</button>' : "") + '</div>';
     q.options.forEach(function (o, j) {
       h += '<button class="opt" onclick="ans(' + i + ',' + j + ')">' + o + '</button>';
     });
