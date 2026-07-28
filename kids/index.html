@@ -126,7 +126,11 @@
   <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
 </div>
 <div id="statsRow"></div>
-<div style="text-align:center;margin-top:8px"><a href="parent.html" style="font-size:.74rem;color:#999;text-decoration:none">👪 家長：進度總覽</a></div>
+<div style="text-align:center;margin-top:8px">
+  <a href="parent.html" style="font-size:.74rem;color:#999;text-decoration:none">👪 家長：進度總覽</a>
+  <span style="color:#ccc;font-size:.74rem">　·　</span>
+  <a href="archive_drills.html" style="font-size:.74rem;color:#999;text-decoration:none">📦 舊版練習</a>
+</div>
 
 <section>
   <h2>我的島嶼</h2>
@@ -170,38 +174,8 @@
       <span class="badge badge-new" style="background:#315c4d">原版</span>
     </a>
 
-    <a class="card" href="drills/exam_final.html" data-claim="final-exam" style="border:2px solid #f2a900;background:linear-gradient(135deg,#fff7dc,#fff)">
-      <div class="card-left">
-        <div class="card-icon" style="background:#fff0b3;font-size:1.3rem">🏅</div>
-        <div>
-          <div class="card-title">期末英文評量</div>
-          <div class="card-sub">發音 / 價格 / 誰的 / 衣物單字 · 全對有大獎 🪙🪙</div>
-        </div>
-      </div>
-      <span class="badge badge-new">大獎</span>
-    </a>
 
-    <a class="card" href="drills/exam_comprehensive.html" data-claim="comprehensive-exam" style="border:2px solid #5b3aa0;background:linear-gradient(135deg,#efe6ff,#fff)">
-      <div class="card-left">
-        <div class="card-icon" style="background:#e6d9ff;font-size:1.3rem">🏆</div>
-        <div>
-          <div class="card-title">綜合測驗</div>
-          <div class="card-sub">基礎+進階 · 國小～小六 · 聽力/閱讀/文法 · 仿劍橋題型 🛡️</div>
-        </div>
-      </div>
-      <span class="badge badge-new">綜合</span>
-    </a>
 
-    <a class="card" href="drills/exam_flyers.html" data-claim="flyers-exam" style="border:2px solid #5b3aa0;background:linear-gradient(135deg,#e6d9ff,#fff)">
-      <div class="card-left">
-        <div class="card-icon" style="background:#d9c7ff;font-size:1.3rem">📘</div>
-        <div>
-          <div class="card-title">進階測驗（小六）</div>
-          <div class="card-sub">進階混合 · 過去式/進行式/be going to · 推論題 · 國小～小六 🛡️</div>
-        </div>
-      </div>
-      <span class="badge badge-new">進階</span>
-    </a>
 
     <a class="card" href="homework.html" id="hwCard" style="border:2px solid #e8863c;background:linear-gradient(135deg,#ffeede,#fff)">
       <div class="card-left">
@@ -349,15 +323,15 @@
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607280957"></script>
-<script src="account_lock.js?v=202607280957"></script>
-<script src="supabase_auth.js?v=202607280957"></script>
-<script src="drills_list.js?v=202607280957"></script>
-<script src="grammar_nodes.js?v=202607280957"></script>
-<script src="grammar_plan.js?v=202607280957"></script>
-<script src="vocab_units.js?v=202607280957"></script>
-<script src="weekly_bank.js?v=202607280957"></script>
-<script src="vocab_unit_plan.js?v=202607280957"></script>
+<script src="cloud_sync.js?v=202607281008"></script>
+<script src="account_lock.js?v=202607281008"></script>
+<script src="supabase_auth.js?v=202607281008"></script>
+<script src="drills_list.js?v=202607281008"></script>
+<script src="grammar_nodes.js?v=202607281008"></script>
+<script src="grammar_plan.js?v=202607281008"></script>
+<script src="vocab_units.js?v=202607281008"></script>
+<script src="weekly_bank.js?v=202607281008"></script>
+<script src="vocab_unit_plan.js?v=202607281008"></script>
 <script>
 let _homeSynced = false;
 function pickStudent(name) {

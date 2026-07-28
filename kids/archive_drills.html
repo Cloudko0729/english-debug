@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>舊版練習</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { font-family: Arial, "Noto Sans TC", sans-serif; max-width: 640px; margin: 0 auto;
+      padding: 0 0 60px; background: #fff7dc; color: #243042; }
+    header { background: #7a8796; color: #fff; text-align: center; padding: 26px 16px 20px; }
+    header h1 { font-size: 1.35rem; margin: 0 0 6px; }
+    header p { font-size: .85rem; opacity: .9; margin: 0; }
+    header a { color: #ffe27a; text-decoration: none; font-weight: 700; }
+    section { margin: 20px 16px 0; }
+    .intro { background: #fff; border-left: 4px solid #7a8796; border-radius: 10px;
+      padding: 13px 15px; font-size: .86rem; line-height: 1.7; color: #4a5765; }
+    .intro b { color: #243042; }
+    .card-list { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+    .card { background: #fff; border-radius: 12px; padding: 14px 16px; text-decoration: none;
+      color: inherit; display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08); border: 2px solid transparent; }
+    .card-left { display: flex; align-items: center; gap: 12px; }
+    .card-icon { width: 42px; height: 42px; border-radius: 10px; display: flex;
+      align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .card-title { font-size: .95rem; font-weight: 700; margin: 0 0 2px; }
+    .card-sub { font-size: .78rem; color: #888; margin: 0; }
+    .card[data-done="1"] { border-color: #2fbf71 !important; background: #f3fcf7 !important; }
+    .card[data-done="1"] .card-title::before { content: "¸5 "; }
+    .badge { font-size: .68rem; font-weight: 700; background: #7a8796; color: #fff;
+      border-radius: 5px; padding: 2px 7px; white-space: nowrap; }
+    .badge-new { background: #7a8796; }
+    #studentRow { background: #e6e9ee; padding: 10px 16px; display: flex; align-items: center;
+      justify-content: center; gap: 10px; font-weight: 700; color: #3a4350; flex-wrap: wrap; }
+    .stu-btn { padding: 5px 16px; border: 2px solid #3a4350; border-radius: 20px;
+      background: transparent; font-size: .9rem; font-weight: 700; cursor: pointer; color: #3a4350; }
+    .stu-btn.active { background: #3a4350; color: #fff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📦 舊版練習</h1>
+  <p>之前做過的固定題組 · <a href="index.html">← 回首頁</a></p>
+</header>
+
+<div id="studentRow">
+  <span>我是：</span>
+  <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
+  <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
+  <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
+  <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+</div>
+
+<section>
+  <div class="intro">
+    這幾份是<b>固定題組</b>：每一份的題目永遠一樣，金幣也只能領一次，做完就沒有新東西了。
+    現在的<b><a href="weekly_test.html" style="color:#2f80ed">每週綜合測驗</a></b>會依照你實際上過的課出題，
+    每星期的題目都不一樣，還會告訴你哪幾課忘記了。<br>
+    這裡留著是為了想重做的時候還找得到。
+  </div>
+
+  <div class="card-list">
+    <a class="card" href="drills/exam_final.html" data-claim="final-exam" style="border:2px solid #f2a900;background:linear-gradient(135deg,#fff7dc,#fff)">
+      <div class="card-left">
+        <div class="card-icon" style="background:#fff0b3;font-size:1.3rem">🏅</div>
+        <div>
+          <div class="card-title">期末英文評量</div>
+          <div class="card-sub">發音 / 價格 / 誰的 / 衣物單字 · 全對有大獎 🪙🪙</div>
+        </div>
+      </div>
+      <span class="badge badge-new">大獎</span>
+    </a>
+
+    <a class="card" href="drills/exam_comprehensive.html" data-claim="comprehensive-exam" style="border:2px solid #5b3aa0;background:linear-gradient(135deg,#efe6ff,#fff)">
+      <div class="card-left">
+        <div class="card-icon" style="background:#e6d9ff;font-size:1.3rem">🏆</div>
+        <div>
+          <div class="card-title">綜合測驗</div>
+          <div class="card-sub">基礎+進階 · 國小～小六 · 聽力/閱讀/文法 · 仿劍橋題型 🛡️</div>
+        </div>
+      </div>
+      <span class="badge badge-new">綜合</span>
+    </a>
+
+    <a class="card" href="drills/exam_flyers.html" data-claim="flyers-exam" style="border:2px solid #5b3aa0;background:linear-gradient(135deg,#e6d9ff,#fff)">
+      <div class="card-left">
+        <div class="card-icon" style="background:#d9c7ff;font-size:1.3rem">📘</div>
+        <div>
+          <div class="card-title">進階測驗（小六）</div>
+          <div class="card-sub">進階混合 · 過去式/進行式/be going to · 推論題 · 國小～小六 🛡️</div>
+        </div>
+      </div>
+      <span class="badge badge-new">進階</span>
+    </a>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="cloud_sync.js?v=202607281008"></script>
+<script src="account_lock.js?v=202607281008"></script>
+<script src="supabase_auth.js?v=202607281008"></script>
+<script>
+function pickStudent(name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
+  localStorage.setItem("kidsCurrentStudent", name);
+  document.querySelectorAll(".stu-btn").forEach(function (b) {
+    b.classList.toggle("active", b.textContent.toLowerCase().indexOf(name) >= 0);
+  });
+  var raw = localStorage.getItem("kidsProgress." + name);
+  var p = raw ? JSON.parse(raw) : {};
+  var claimed = (p.coins && p.coins.claimedDrills) || {};
+  document.querySelectorAll(".card[data-claim]").forEach(function (c) {
+    c.dataset.done = claimed[c.dataset.claim] ? "1" : "0";
+  });
+}
+(function () {
+  var last = localStorage.getItem("kidsCurrentStudent");
+  if (last && last !== "guest") pickStudent(last);
+})();
+</script>
+</body>
+</html>
