@@ -11,3 +11,6 @@ kids/tools/_batch_*.log
 kids/tools/_notebooklm_batch_log.json
 kids/tools/_nbtmp/
 kids/tools/_codex_*.log
+
+# 教學影片改放 Cloudflare R2（見 kids/grammar_db/media_config.json）
+kids/grammar_db/lessons/podcast/*.mp4

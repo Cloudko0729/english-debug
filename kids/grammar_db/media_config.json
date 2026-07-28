@@ -2,7 +2,6 @@
   "_note": "教學頁影音檔的來源位置。空字串＝放在 repo 裡（相對路徑 podcast/），填網址＝改由外部儲存供應。",
   "_why": "影片 48 個約 216MB，佔站台三分之一，而且最可能重做；音檔單檔小、數量多（12000+），留在 repo 反而比較好——搬到外部會變成上萬次跨網域請求。所以只有影片預設要外移。",
   "_howto": "填 videoBase（結尾要有斜線），例如 https://pub-xxxxxxxx.r2.dev/podcast/ 然後重跑 node kids/tools/build_grammar_lessons.js",
-
-  "videoBase": "",
+  "videoBase": "https://pub-65031fbe96a14bf18d0752133404e044.r2.dev/podcast/",
   "audioBase": ""
 }
