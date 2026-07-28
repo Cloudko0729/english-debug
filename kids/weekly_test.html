@@ -41,6 +41,7 @@ header a{color:#2f80ed;text-decoration:none}
 .fin{width:100%;border:0;border-radius:12px;padding:13px;font-size:1rem;font-weight:700;color:#fff;
   background:#5b3aa0;cursor:pointer;font-family:inherit}
 .fin[disabled]{background:#c3ccd8;cursor:default}
+.fin.scored[disabled]{background:#2fbf71;color:#fff}
 /* 紅黃綠：以節點／單元為單位，才知道要回去複習哪一課 */
 .rag{display:flex;justify-content:space-between;gap:9px;align-items:center;padding:9px 0;border-top:1px solid #eef1f5;font-size:.89rem}
 .rag:first-child{border-top:0}
@@ -76,16 +77,16 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607280917"></script>
-<script src="account_lock.js?v=202607280917"></script>
-<script src="supabase_auth.js?v=202607280917"></script>
-<script src="ai_review.js?v=202607280917"></script>
-<script src="week_key.js?v=202607280917"></script>
-<script src="grammar_nodes.js?v=202607280917"></script>
-<script src="grammar_plan.js?v=202607280917"></script>
-<script src="vocab_units.js?v=202607280917"></script>
-<script src="vocab_unit_plan.js?v=202607280917"></script>
-<script src="weekly_bank.js?v=202607280917"></script>
+<script src="cloud_sync.js?v=202607280957"></script>
+<script src="account_lock.js?v=202607280957"></script>
+<script src="supabase_auth.js?v=202607280957"></script>
+<script src="ai_review.js?v=202607280957"></script>
+<script src="week_key.js?v=202607280957"></script>
+<script src="grammar_nodes.js?v=202607280957"></script>
+<script src="grammar_plan.js?v=202607280957"></script>
+<script src="vocab_units.js?v=202607280957"></script>
+<script src="vocab_unit_plan.js?v=202607280957"></script>
+<script src="weekly_bank.js?v=202607280957"></script>
 <script>
 var currentStudent = null, curAudio = null;
 var TEST = null, answers = {}, graded = false, wrongForAI = [];
@@ -275,14 +276,22 @@ function grade() {
   saveProgress(currentStudent, p);
   if (typeof cloudSave === "function") cloudSave(currentStudent);
 
-  document.getElementById("finBtn").disabled = true;
-  document.getElementById("finBtn").textContent = "已完成這一週的測驗";
+  // 按鈕本身先報分數。原本只寫「已完成這一週的測驗」，小孩按完看不出考幾分。
+  var btn = document.getElementById("finBtn");
+  btn.disabled = true;
+  btn.textContent = "答對 " + correct + " / " + total + "　🪙 +" + earned;
+  btn.classList.add("scored");
   refreshCoin(true);
   toast("🪙 +" + earned + " 金幣！答對 " + correct + " / " + total);
 
+  // 結果接在按鈕正下方。
+  // 原本插在 #main 之前（整份 12 題的最上方），小孩在長頁面的最底部按下按鈕，
+  // 結果卻出現在很遠的上面；scrollIntoView 的平滑捲動在手機上跨這種距離會慢、
+  // 也可能被使用者的觸控中斷，看起來就像按了沒反應。
   var res = document.createElement("div");
   res.innerHTML = renderResult(p, byItem, correct, total, earned);
-  document.querySelector(".wrap").insertBefore(res, document.getElementById("main"));
+  var anchor = btn.closest(".card") || document.getElementById("main");
+  anchor.parentNode.insertBefore(res, anchor.nextSibling);
   if (window.AIReview) {
     var aiWrap = document.createElement("div");
     aiWrap.id = "aiBox";
