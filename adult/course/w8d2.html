@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W8 週二 — 核心句練習</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:660px;margin:0 auto;padding:0 16px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.7}
+  header{background:#1f4463;color:#fff;text-align:center;padding:16px;border-radius:0 0 16px 16px;margin:0 -16px 14px}
+  header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .q{background:#fff;border-radius:14px;padding:14px 16px;margin-top:12px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .q .qt{font-weight:700;margin-bottom:8px;font-size:.93rem}
+  .q button{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit}
+  .q button.ok{border-color:#2a9d5c;background:#e3f6ec}
+  .q button.no{border-color:#d64561;background:#fbe3e9}
+  .why{display:none;margin-top:6px;background:#eaf3ff;border-radius:9px;padding:8px 12px;font-size:.84rem;color:#1f4463}
+  #result{font-weight:800;font-size:1.05rem;margin-top:12px;text-align:center;min-height:1.5em}
+</style>
+</head>
+<body>
+<header><h1>✏️ W8 週二 — 核心句練習</h1>
+<p><a href="w8.html">← 本週重點</a> · 5 個核心句的變化題（中翻英＋填空）</p></header>
+<div id="qs"></div><div id="result"></div>
+<script>
+const QUIZ = [
+ { q: "1. 中翻英：預計完成日為 8 月 15 日。",
+   c: ["The estimated completion date is August 15.", "The finish date estimate is August 15.", "The complete date estimated is August 15."],
+   a: 0, why: "estimated completion date 是固定說法，其他兩個是中文語序直翻。" },
+ { q: "2. 填空：The replacement part has a ___ of about two weeks.",
+   c: ["lead time", "long time", "wait time"],
+   a: 0, why: "lead time 是料件從下單到到貨的專門用語。" },
+ { q: "3. 中翻英：料件一到我們就會開始維修。",
+   c: ["We will start the repair as soon as the part arrives.", "We start repair after part arrive.", "We will start repair when part is arrive."],
+   a: 0, why: "will start；the part；時間子句用現在式 arrives。" },
+ { q: "4. 填空：The schedule may change if the part ___ by the supplier.",
+   c: ["is delayed", "delay", "delays"],
+   a: 0, why: "料件是被延遲，要用被動 is delayed。" },
+ { q: "5. 中翻英：預計日期若有變動我們會主動通知您。",
+   c: ["We will update you if the estimated date changes.", "I will tell you when the date change.", "We update you if estimated date will change."],
+   a: 0, why: "changes 三單；if 比 when 準確；update you 比 tell you 專業。" },
+ { q: "6. 客戶問「為什麼要等兩週？」最好的回答是？",
+   c: ["The replacement part has a two-week lead time from the supplier.", "Because we are very busy.", "That's just how long it takes."],
+   a: 0, why: "把原因指向具體的料件交期，而不是模糊的忙碌。" },
+ { q: "7. 「as soon as」後面的動詞為什麼用現在式？",
+   c: ["時間子句用現在式代替未來式", "因為動作已經發生", "as soon as 後面不能用未來式是特例"],
+   a: 0, why: "as soon as / when / once 引導的時間子句，一律用現在式表未來。" },
+ { q: "8. 哪一句最適合在延遲時主動寄出？",
+   c: ["The part has been delayed by one week, and the new estimated date is August 22.", "Sorry, still waiting.", "It will be late, we don't know when."],
+   a: 0, why: "說明延遲多久＋給出新日期，對方才能重新排程。" },
+ { q: "9. 填空：Thank you for your patience ___ we wait for the part.",
+   c: ["while", "during", "when"],
+   a: 0, why: "while＋子句表示「在……期間」；during 後面接名詞。" },
+ { q: "10. 交期信最常見的失誤是什麼？",
+   c: ["給了日期但日期變動時沒有主動更新", "日期給得太精確", "信寫得太短"],
+   a: 0, why: "給日期不難，難的是變動時主動說。沒做到，前面的專業就全毀了。" }
+];
+let done = 0, ok = 0;
+document.getElementById("qs").innerHTML = QUIZ.map((q, i) => `<div class="q" id="q${i}"><div class="qt">${i + 1}. ${q.q}</div>` +
+  q.c.map((c, ci) => `<button onclick="ans(${i},${ci},this)">${c}</button>`).join("") +
+  `<div class="why" id="w${i}">💡 ${q.why}</div></div>`).join("");
+function ans(i, ci, btn) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const good = ci === QUIZ[i].a;
+  box.querySelectorAll("button").forEach((b, bi) => { b.disabled = true;
+    if (bi === QUIZ[i].a) b.classList.add("ok"); else if (bi === ci) b.classList.add("no"); });
+  document.getElementById("w" + i).style.display = "block";
+  done++; if (good) ok++;
+  if (done === QUIZ.length) {
+    document.getElementById("result").textContent = `🎉 答對 ${ok} / ${QUIZ.length}`;
+    try { const p = JSON.parse(localStorage.getItem("adultProgress") || "{}"); p["w8d2"] = { done: new Date().toISOString(), ok, total: QUIZ.length }; localStorage.setItem("adultProgress", JSON.stringify(p)); } catch (e) {}
+  }
+}
+</script>
+</body>
+</html>

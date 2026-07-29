@@ -1,0 +1,604 @@
+{
+  "_note": "W5-W8 內容資料。由 adult/tools/build_weeks.js 產生週總覽頁與 5 個日頁。改內容改這裡再重跑，不要直接改 HTML。",
+  "_scope": "依 adult/outline_final.md：W5-8 報價與 RMA（維修報價 / 議價與價格說明 / RMA 申請與寄送 / 交期說明）",
+  "_rules": [
+    "英文要是工程師工作上真的會寫出去的句子，不追求漂亮",
+    "不出現真實客戶名、金額、序號；一律用假值",
+    "維修紀錄 Symptom 只記錄看到什麼，不提後面才做的處置",
+    "Result 不能宣稱通過了 Symptom 裡當初不合格的那道關卡"
+  ],
+
+  "weeks": [
+    {
+      "n": 5,
+      "title": "維修報價",
+      "produce": "檢查完成後，一封信報出費用與範圍，讓客戶能直接決定修或不修",
+      "goal": "①依檢查結果報出維修費用與涵蓋範圍 ②說明報價有效期，並要求書面確認才動工 ③客戶不修時能提出原樣寄回",
+      "core": [
+        { "en": "Based on the inspection, we have prepared a quotation for the repair.",
+          "zh": "根據檢查結果，我們已備妥維修報價（開場：報價的依據）",
+          "note": "Based on the inspection 先交代報價是怎麼來的，客戶才不會覺得數字是憑空喊的" },
+        { "en": "The total repair cost is USD 480, including parts and labor.",
+          "zh": "維修總費用為 480 美元，含料件與工時（金額＋涵蓋範圍）",
+          "note": "including parts and labor 一定要寫出來，這是客戶最常追問的第一個問題" },
+        { "en": "The quotation is valid for 30 days from the date of this email.",
+          "zh": "本報價自本信日期起 30 天內有效（有效期）",
+          "note": "valid for＋期間＋from the date of，是報價信的固定寫法，避免半年後客戶拿舊報價來談" },
+        { "en": "Please confirm in writing before we proceed with the repair.",
+          "zh": "請以書面確認後我們才會開始維修（先確認才動工）",
+          "note": "in writing 是關鍵字，口頭同意事後說不清；沿用 W4 學過的 before we proceed" },
+        { "en": "If you prefer not to proceed, we can return the unit as it is.",
+          "zh": "若您不打算維修，我們可以將設備原樣寄回（給對方退路）",
+          "note": "as it is＝維持現狀不動工。給對方台階，比只丟一個價格更容易收到回覆" }
+      ],
+      "skeleton": {
+        "subject": "Repair Quotation — Model TX-200, S/N 45120933",
+        "greet": "Dear Mr. Yeh,",
+        "open": "Based on the inspection, we have prepared a quotation for the repair.",
+        "body": "費用與涵蓋範圍 → 報價有效期 → 需書面確認才動工 → 不修的話可原樣寄回",
+        "close": "Please let us know how you would like to proceed. ＋ Best regards, Cloud"
+      },
+      "speech": "Hi, this is Cloud from Fix-well Technology.\nWe've finished the inspection, and I'm calling about the quotation.\nThe total repair cost is four hundred and eighty US dollars, including parts and labor.\nThe quotation is valid for thirty days.\nWe'll need your confirmation in writing before we start the repair — and if you'd rather not proceed, we can return the unit as it is.",
+      "bugs": [
+        { "bad": "We already prepare a quotation for you.",
+          "why": "報價已經備妥是已完成的動作，要用現在完成式 have prepared；already 放在 have 之後",
+          "good": "Based on the inspection, we have prepared a quotation for the repair." },
+        { "bad": "The cost is include parts and labor.",
+          "why": "is 和 include 兩個動詞不能並排。用 including 當補充說明，或改成 The cost includes…",
+          "good": "The total repair cost is USD 480, including parts and labor." },
+        { "bad": "This quotation valid 30 days.",
+          "why": "valid 是形容詞，前面要有 be 動詞；期間要用 for，並說明從哪天起算",
+          "good": "The quotation is valid for 30 days from the date of this email." },
+        { "bad": "Please confirm us before we start repair.",
+          "why": "confirm 後面直接接你要確認的事，不是接人；start repair 少了限定詞，改用 proceed with the repair 更專業",
+          "good": "Please confirm in writing before we proceed with the repair." },
+        { "bad": "If you don't want repair, we can send back the unit for you.",
+          "why": "don't want repair 太口語且少了 to；send back 在正式信裡用 return 較合適",
+          "good": "If you prefer not to proceed, we can return the unit as it is." }
+      ],
+      "recs": [
+        { "s": "The power module was found damaged during the electrical inspection.",
+          "a": "Quoted the replacement cost and held the unit for customer approval.",
+          "r": "The customer approved the quotation and the repair was scheduled.",
+          "short": "Power module damaged @ electrical inspection → quoted replacement, held for approval → approved, repair scheduled." },
+        { "s": "Two capacitors measured out of specification during the functional test.",
+          "a": "Listed both parts in the quotation together with the estimated labor time.",
+          "r": "The quotation was sent and acknowledged by the customer the same day.",
+          "short": "2 caps out of spec @ functional test → listed in quote w/ labor est. → quote sent, acknowledged same day." },
+        { "s": "The board damage was beyond economical repair.",
+          "a": "Informed the customer and offered to return the unit as it is.",
+          "r": "The customer chose to have the unit returned without repair.",
+          "short": "Damage beyond economical repair → informed customer, offered return as-is → returned, no repair." }
+      ],
+      "d1": {
+        "mailNote": "改編自真實維修報價信，已去識別化",
+        "mail": {
+          "subject": "Repair Quotation — Model TX-200, S/N 45120933",
+          "greet": "Dear Mr. Yeh,",
+          "paras": [
+            ["Based on the inspection, we have prepared a quotation for the repair."],
+            ["The total repair cost is USD 480, including parts and labor.",
+             "The quotation is valid for 30 days from the date of this email.",
+             "Please confirm in writing before we proceed with the repair."],
+            ["If you prefer not to proceed, we can return the unit as it is."]
+          ],
+          "close": "Please let us know how you would like to proceed.",
+          "sign": "Best regards,<br>Cloud"
+        },
+        "quiz": [
+          { "q": "1. 哪一句說明了報價是根據什麼做出來的？",
+            "c": ["Based on the inspection, we have prepared a quotation for the repair.", "The total repair cost is USD 480, including parts and labor.", "Best regards."],
+            "a": 0, "why": "Based on the inspection 交代報價的依據，客戶才不會覺得數字是憑空喊的。" },
+          { "q": "2. 「including parts and labor」為什麼一定要寫？",
+            "c": ["這是客戶最常追問的第一個問題：這價錢包含什麼", "為了讓句子看起來比較長", "因為文法規定 cost 後面要接 including"],
+            "a": 0, "why": "報價只給數字不說涵蓋範圍，客戶一定會再問一次，等於多來回一封信。" },
+          { "q": "3. 「valid for 30 days from the date of this email」的作用是？",
+            "c": ["設定報價的有效期限，避免日後拿舊報價來談", "告訴客戶 30 天內一定會修好", "說明料件的交期是 30 天"],
+            "a": 0, "why": "valid for＋期間＋from the date of 是報價信固定寫法，保護自己也讓客戶知道要盡快決定。" },
+          { "q": "4. 填空：Please confirm ___ before we proceed with the repair.",
+            "c": ["in writing", "by talking", "on phone"],
+            "a": 0, "why": "in writing（書面）是關鍵：口頭同意事後說不清楚，維修費用爭議常從這裡開始。" },
+          { "q": "5. 「as it is」在最後一句是什麼意思？",
+            "c": ["維持現狀、不做任何維修就寄回", "照原本的報價寄回", "用原本的包裝寄回"],
+            "a": 0, "why": "as it is＝保持原狀。客戶決定不修時，設備不動工直接退回。" },
+          { "q": "6. 為什麼要主動提「不修可以原樣寄回」？",
+            "c": ["給對方退路，比只丟一個價格更容易收到回覆", "因為公司規定一定要寫", "為了暗示客戶不要修"],
+            "a": 0, "why": "只給價格容易讓對方拖著不回。給出兩條路，對方比較容易做決定。" },
+          { "q": "7. 這封信如果改成 We already prepare a quotation. 哪裡不對？",
+            "c": ["已完成的動作要用 have prepared", "already 不能用在信裡", "quotation 要用複數"],
+            "a": 0, "why": "報價已經做好了，是已完成的動作，現在簡單式 prepare 表達不出來。" },
+          { "q": "8. 這封信的目的是什麼？",
+            "c": ["讓客戶能直接決定修或不修", "告訴客戶我們很專業", "說明檢查花了多少時間"],
+            "a": 0, "why": "報價信只有一個任務：把費用、範圍、期限、確認方式講清楚，讓對方能做決定。" }
+        ]
+      },
+      "d2": {
+        "quiz": [
+          { "q": "1. 中翻英：根據檢查結果，我們已備妥維修報價。", "c": ["Based on the inspection, we have prepared a quotation for the repair.", "Based on inspection, we already prepare quotation for repair.", "We prepare the quotation base on inspect."], "a": 0, "why": "have prepared 現在完成式；the inspection / a quotation 都要有限定詞。" },
+          { "q": "2. 填空：The total repair cost is USD 480, ___ parts and labor.", "c": ["including", "include", "is include"], "a": 0, "why": "including 當補充說明；一個句子不能有 is 和 include 兩個動詞並排。" },
+          { "q": "3. 中翻英：本報價自本信日期起 30 天內有效。", "c": ["The quotation is valid for 30 days from the date of this email.", "This quotation valid 30 days from this email.", "The quotation has valid 30 days."], "a": 0, "why": "valid 是形容詞要配 be 動詞；期間用 for，起算點用 from the date of。" },
+          { "q": "4. 填空：Please confirm ___ before we proceed with the repair.", "c": ["in writing", "in write", "by written"], "a": 0, "why": "in writing 是固定用法，意思是「以書面形式」。" },
+          { "q": "5. 中翻英：若您不打算維修，我們可以將設備原樣寄回。", "c": ["If you prefer not to proceed, we can return the unit as it is.", "If you don't want repair, we send back unit as it is.", "If you no need repair, we can return unit like this."], "a": 0, "why": "prefer not to proceed 比 don't want repair 得體；return 比 send back 正式。" },
+          { "q": "6. 填空：___ the inspection, we have prepared a quotation.", "c": ["Based on", "Base on", "Basing"], "a": 0, "why": "Based on 是固定片語，用來說明依據。" },
+          { "q": "7. 哪一句最適合用在報價信的結尾？", "c": ["Please let us know how you would like to proceed.", "Please answer me quickly.", "Waiting your reply soon."], "a": 0, "why": "how you would like to proceed 把決定權交給對方，語氣得體又明確。" },
+          { "q": "8. 客戶問「這 480 包含什麼？」最好的回答是？", "c": ["The cost covers three replacement parts and about four hours of labor.", "Everything included, don't worry.", "It's the standard price for this model."], "a": 0, "why": "直接拆給對方看，比一句「都包含了」更能建立信任。" },
+          { "q": "9. 填空：We can return the unit ___ if you prefer not to proceed.", "c": ["as it is", "as this", "like it is"], "a": 0, "why": "as it is＝維持現狀，是維修業說「不動工原樣退回」的標準說法。" },
+          { "q": "10. 「proceed with the repair」和「start repair」差在哪？", "c": ["proceed with 較正式且已有前情，適合信件；start repair 少了限定詞不完整", "兩個完全一樣", "start repair 比較正式"], "a": 0, "why": "proceed with the repair 承接前面的檢查與報價，語意連貫；start repair 文法上也不完整。" }
+        ]
+      },
+      "d3": {
+        "brief": "Mr. Yeh 的 TX-200 檢查完成，需要報價。你要回一封信：說明報價依據 → 費用與涵蓋範圍 → 有效期 → 需書面確認才動工 → 不修可原樣寄回。",
+        "lines": [
+          { "zh": "① 報價依據：根據檢查結果，我們已備妥維修報價", "chunks": ["Based on the inspection,", "we have prepared", "a quotation for the repair."] },
+          { "zh": "② 費用與範圍：總費用 480 美元，含料件與工時", "chunks": ["The total repair cost is USD 480,", "including", "parts and labor."] },
+          { "zh": "③ 有效期：自本信日期起 30 天內有效", "chunks": ["The quotation is valid", "for 30 days", "from the date of this email."] },
+          { "zh": "④ 確認方式：請以書面確認後我們才開始維修", "chunks": ["Please confirm in writing", "before we proceed", "with the repair."] },
+          { "zh": "⑤ 給退路：若不打算維修，可原樣寄回", "chunks": ["If you prefer not to proceed,", "we can return the unit", "as it is."] }
+        ]
+      },
+      "d5": {
+        "qs": [
+          { "cue": "How much will the repair cost?", "cueZh": "維修要多少錢？",
+            "choices": ["The total repair cost is USD 480, including parts and labor.", "Maybe four or five hundred, I'm not sure yet.", "Depends, we tell you after we finish."],
+            "a": 0, "why": "給明確金額並說明涵蓋範圍，一次回答客戶真正想問的兩件事。", "swap": "It comes to 480 US dollars with parts and labor." },
+          { "cue": "How long is this quotation good for?", "cueZh": "這份報價有效期多久？",
+            "choices": ["The quotation is valid for 30 days from the date of this email.", "Very long time, no problem.", "Until we change the price."],
+            "a": 0, "why": "明確講期限與起算點，避免日後拿舊報價來談。", "swap": "It's valid for thirty days from today." },
+          { "cue": "Can you just start the repair now?", "cueZh": "可以直接開始修嗎？",
+            "choices": ["We will start as soon as we receive your confirmation in writing.", "Sure, we start now, pay later.", "Yes, no need confirm, we just do it."],
+            "a": 0, "why": "堅持書面確認不是刁難，是避免事後費用爭議；語氣上用 as soon as 讓對方知道你隨時可以開工。", "swap": "Once we have your written approval, we'll begin right away." },
+          { "cue": "What if I decide not to repair it?", "cueZh": "如果我決定不修呢？",
+            "choices": ["We can return the unit as it is, with no repair carried out.", "Then you waste our time.", "You must repair, already inspected."],
+            "a": 0, "why": "給對方退路，並說清楚退回時設備狀態，是專業的處理方式。", "swap": "No problem — we'll send it back untouched." },
+          { "cue": "Is the price negotiable?", "cueZh": "價格可以談嗎？",
+            "choices": ["Let me check what we can adjust and get back to you today.", "No, price is price.", "Maybe, tell me your budget first."],
+            "a": 0, "why": "不當場答應也不硬頂，先承諾回覆時間，把空間留給下一封信（W6 會專門練議價）。", "swap": "I'll see what room we have and reply by end of day." }
+        ]
+      }
+    },
+
+    {
+      "n": 6,
+      "title": "議價與價格說明",
+      "produce": "客戶嫌貴時，能拆給對方看費用組成、提替代方案，而不是直接降價或硬頂回去",
+      "goal": "①用對方聽得懂的方式拆解費用組成 ②提出範圍縮小的替代方案 ③真的不能再降時，能說得得體不失禮",
+      "core": [
+        { "en": "I understand the cost is higher than expected — let me explain what it covers.",
+          "zh": "我理解費用比預期高——讓我說明它包含哪些項目（先接住情緒再講事情）",
+          "note": "先承認對方的感受再解釋，比直接反駁有效得多。higher than expected 比 expensive 中性" },
+        { "en": "The quotation covers three replacement parts and about four hours of labor.",
+          "zh": "報價包含三個更換料件與約四小時工時（拆解組成）",
+          "note": "把數字拆開講，對方才能判斷貴在哪；covers 比 includes 更常用在報價說明" },
+        { "en": "We can reduce the cost if we repair only the failing channel.",
+          "zh": "如果只維修故障的那個通道，費用可以降低（提替代方案）",
+          "note": "降價的正確方式是縮小範圍，不是打折。這句同時保住價格與關係" },
+        { "en": "Unfortunately, we are not able to lower the price further at this stage.",
+          "zh": "很抱歉，目前無法再降價（守住底線）",
+          "note": "are not able to 比 cannot 委婉；at this stage 留下日後轉圜的餘地" },
+        { "en": "Would you like us to quote the alternative option for comparison?",
+          "zh": "需要我們報另一個方案讓您比較嗎？（把球丟回去）",
+          "note": "以問句結尾，讓對話繼續而不是停在拒絕上" }
+      ],
+      "skeleton": {
+        "subject": "RE: Repair Quotation — Cost Breakdown",
+        "greet": "Dear Mr. Yeh,",
+        "open": "I understand the cost is higher than expected — let me explain what it covers.",
+        "body": "拆解費用組成 → 提出縮小範圍的替代方案 → 若不能再降，說明現況 → 詢問是否要報替代方案",
+        "close": "Please let me know which option works better for you. ＋ Best regards, Cloud"
+      },
+      "speech": "Hi Mr. Yeh, this is Cloud from Fix-well Technology.\nI understand the cost is higher than you expected — let me explain what it covers.\nThe quotation covers three replacement parts and about four hours of labor.\nIf you'd like to bring the cost down, we can repair only the failing channel instead of all four.\nUnfortunately we're not able to lower the price further at this stage, but I'm happy to quote the alternative option so you can compare.",
+      "bugs": [
+        { "bad": "I know you feel expensive.",
+          "why": "feel 後面不能直接接形容詞形容別的東西；expensive 形容的是價格不是人。改成中性的 higher than expected",
+          "good": "I understand the cost is higher than expected — let me explain what it covers." },
+        { "bad": "The price is include 3 parts and 4 hour labor.",
+          "why": "is include 兩個動詞並排；hour 要複數 hours；報價說明用 covers 比 include 自然",
+          "good": "The quotation covers three replacement parts and about four hours of labor." },
+        { "bad": "We can more cheap if only repair one channel.",
+          "why": "more cheap 不是比較級（cheaper）；這裡真正要說的是降低費用 reduce the cost；if 子句要有主詞",
+          "good": "We can reduce the cost if we repair only the failing channel." },
+        { "bad": "Sorry we cannot down the price.",
+          "why": "down 不能當動詞用；cannot 直接拒絕太硬，用 are not able to＋at this stage 留餘地",
+          "good": "Unfortunately, we are not able to lower the price further at this stage." },
+        { "bad": "Do you want I quote other option?",
+          "why": "want 後面接人要用 want us to；other option 少了限定詞，改 the alternative option",
+          "good": "Would you like us to quote the alternative option for comparison?" }
+      ],
+      "recs": [
+        { "s": "Only one of the four channels failed the functional test.",
+          "a": "Quoted a partial repair covering the failing channel only.",
+          "r": "The customer accepted the partial repair and the work was scheduled.",
+          "short": "1 of 4 ch failed @ functional test → quoted partial repair, failing ch only → accepted, scheduled." },
+        { "s": "The customer questioned the labor hours listed in the quotation.",
+          "a": "Broke the labor time down into inspection, replacement, and retest.",
+          "r": "The customer accepted the breakdown and approved the original quotation.",
+          "short": "Customer questioned labor hrs → broke down: inspect / replace / retest → accepted, original quote approved." },
+        { "s": "The requested discount was below our minimum repair charge.",
+          "a": "Explained the minimum charge and offered a reduced repair scope instead.",
+          "r": "The customer selected the reduced scope and the case moved forward.",
+          "short": "Requested discount < min charge → explained min charge, offered reduced scope → customer took reduced scope." }
+      ],
+      "d1": {
+        "mailNote": "改編自真實議價回覆信，已去識別化",
+        "mail": {
+          "subject": "RE: Repair Quotation — Cost Breakdown",
+          "greet": "Dear Mr. Yeh,",
+          "paras": [
+            ["I understand the cost is higher than expected — let me explain what it covers."],
+            ["The quotation covers three replacement parts and about four hours of labor.",
+             "We can reduce the cost if we repair only the failing channel.",
+             "Unfortunately, we are not able to lower the price further at this stage."],
+            ["Would you like us to quote the alternative option for comparison?"]
+          ],
+          "close": "Please let me know which option works better for you.",
+          "sign": "Best regards,<br>Cloud"
+        },
+        "quiz": [
+          { "q": "1. 開場為什麼先寫「I understand the cost is higher than expected」？",
+            "c": ["先接住對方的感受，後面的解釋才聽得進去", "為了拖延時間", "因為信一定要有開場白"],
+            "a": 0, "why": "直接反駁會讓對方更堅持。先承認感受再解釋，是議價信最重要的第一步。" },
+          { "q": "2. 為什麼用 higher than expected 而不是 expensive？",
+            "c": ["higher than expected 中性，不等於承認自己開高價", "expensive 是錯字", "兩者完全一樣"],
+            "a": 0, "why": "說 expensive 等於自己承認貴；higher than expected 只是陳述對方的預期落差。" },
+          { "q": "3. 「covers three replacement parts and about four hours of labor」的作用是？",
+            "c": ["把費用拆開，讓對方判斷貴在哪", "證明我們很忙", "讓信看起來比較長"],
+            "a": 0, "why": "只說「都包含了」對方無從判斷。拆成料件數與工時，對方才能自己算。" },
+          { "q": "4. 想降價時，這封信用的方法是什麼？",
+            "c": ["縮小維修範圍，只修故障的通道", "直接打八折", "免收工時費"],
+            "a": 0, "why": "降價的正確方式是縮小範圍，不是打折——打折會讓對方以為原價本來就有水分。" },
+          { "q": "5. 填空：We are not able to lower the price further ___.",
+            "c": ["at this stage", "at this time no", "in this moment"],
+            "a": 0, "why": "at this stage 留下日後轉圜的餘地，不把話說死。" },
+          { "q": "6. 為什麼用 are not able to 而不是 cannot？",
+            "c": ["語氣較委婉，拒絕時不失禮", "cannot 是錯的", "為了讓句子更長"],
+            "a": 0, "why": "cannot 太硬。are not able to 表達同樣的意思但留了餘地。" },
+          { "q": "7. 為什麼結尾要用問句？",
+            "c": ["讓對話繼續，而不是停在拒絕上", "因為問句比較客氣", "為了讓對方一定要回信"],
+            "a": 0, "why": "如果信結束在「不能再降」，對話就斷了。丟一個選項回去，事情才有下一步。" },
+          { "q": "8. 這封信整體的策略是什麼？",
+            "c": ["拆解 → 給替代方案 → 守住底線 → 把球丟回去", "堅持原價不退讓", "先降價再說"],
+            "a": 0, "why": "四個動作缺一不可：只拆解沒方案對方還是嫌貴，只守底線關係會壞掉。" }
+        ]
+      },
+      "d2": {
+        "quiz": [
+          { "q": "1. 中翻英：我理解費用比預期高。", "c": ["I understand the cost is higher than expected.", "I know you feel expensive.", "I understand the cost is very expensive for you."], "a": 0, "why": "higher than expected 中性；feel expensive 文法與語氣都有問題。" },
+          { "q": "2. 填空：The quotation ___ three replacement parts and about four hours of labor.", "c": ["covers", "is include", "including"], "a": 0, "why": "covers 是報價說明最常用的動詞；is include 兩個動詞並排是錯的。" },
+          { "q": "3. 中翻英：如果只維修故障的那個通道，費用可以降低。", "c": ["We can reduce the cost if we repair only the failing channel.", "We can more cheap if only repair one channel.", "The cost can down if we repair one channel only."], "a": 0, "why": "reduce the cost 是標準說法；more cheap 不是比較級，down 不能當動詞。" },
+          { "q": "4. 填空：Unfortunately, we are not able to ___ the price further.", "c": ["lower", "down", "cheap"], "a": 0, "why": "lower 當動詞＝降低。down 和 cheap 都不能這樣用。" },
+          { "q": "5. 中翻英：需要我們報另一個方案讓您比較嗎？", "c": ["Would you like us to quote the alternative option for comparison?", "Do you want I quote other option?", "Do you need we quote another option to compare?"], "a": 0, "why": "Would you like us to＋原形，是請示對方意願的標準句型。" },
+          { "q": "6. 客戶說「你們比別家貴 20%」，最好的第一句回應是？", "c": ["Let me explain what our quotation covers, and we can compare item by item.", "Other companies use cheap parts.", "Then please go to the other company."], "a": 0, "why": "把話題拉回「內容比較」而不是「價格比較」，才有機會說明差異。" },
+          { "q": "7. 「four hours of labor」哪裡容易寫錯？", "c": ["hour 要用複數 hours，中間要有 of", "labor 要用複數", "four 要寫成 4"], "a": 0, "why": "數量＋單位＋of＋不可數名詞：four hours of labor。" },
+          { "q": "8. 哪一句最適合用來守住價格底線？", "c": ["We are not able to lower the price further at this stage.", "No discount, this is final.", "Sorry we cannot down the price."], "a": 0, "why": "委婉但明確，而且 at this stage 沒把話說死。" },
+          { "q": "9. 填空：___ the cost is higher than expected, let me explain what it covers.", "c": ["I understand", "I know you think", "I feel"], "a": 0, "why": "I understand 表達理解而不評價對方；後兩者都帶了主觀判斷。" },
+          { "q": "10. 議價信最不該做的是什麼？", "c": ["直接答應降價而不縮小範圍", "拆解費用組成", "提出替代方案"], "a": 0, "why": "無條件降價會讓對方認為原價有水分，下次一定再殺一次。" }
+        ]
+      },
+      "d3": {
+        "brief": "Mr. Yeh 回信說 480 美元太貴。你要回一封信：先接住感受 → 拆解費用組成 → 提出縮小範圍的替代方案 → 說明無法再降 → 問要不要報替代方案。",
+        "lines": [
+          { "zh": "① 接住感受：我理解費用比預期高，讓我說明包含什麼", "chunks": ["I understand the cost is higher than expected", "— let me explain", "what it covers."] },
+          { "zh": "② 拆解組成：報價包含三個更換料件與約四小時工時", "chunks": ["The quotation covers", "three replacement parts", "and about four hours of labor."] },
+          { "zh": "③ 替代方案：只修故障通道的話費用可以降低", "chunks": ["We can reduce the cost", "if we repair", "only the failing channel."] },
+          { "zh": "④ 守住底線：目前無法再降價", "chunks": ["Unfortunately, we are not able", "to lower the price further", "at this stage."] },
+          { "zh": "⑤ 把球丟回去：需要報另一個方案讓您比較嗎", "chunks": ["Would you like us to quote", "the alternative option", "for comparison?"] }
+        ]
+      },
+      "d5": {
+        "qs": [
+          { "cue": "This is more than we budgeted for.", "cueZh": "這比我們的預算高。",
+            "choices": ["I understand — let me explain what the quotation covers, and we can look at the options.", "That's the price, take it or leave it.", "Every customer says that."],
+            "a": 0, "why": "先理解再說明，並主動提到還有選項可談。", "swap": "I hear you — let me walk you through what's in it." },
+          { "cue": "Why is the labor cost so high?", "cueZh": "工時費為什麼這麼高？",
+            "choices": ["The four hours cover the inspection, the replacement, and the final retest.", "Because our engineers are expensive.", "That's how we always charge."],
+            "a": 0, "why": "把工時拆成三個具體動作，對方就知道錢花在哪。", "swap": "It breaks down into inspection, replacement and retest." },
+          { "cue": "Can you give us a 30% discount?", "cueZh": "可以打七折嗎？",
+            "choices": ["We can reduce the cost by repairing only the failing channel — that would bring it down significantly.", "OK, 30% no problem.", "Impossible, don't ask again."],
+            "a": 0, "why": "用縮小範圍換價格，而不是無條件打折。", "swap": "Instead of a discount, we can narrow the scope to just the bad channel." },
+          { "cue": "Is that your best price?", "cueZh": "這是最好的價格了嗎？",
+            "choices": ["At this stage, yes — but I can quote a reduced scope if that helps.", "Yes, final, no more talk.", "Maybe, let me ask my boss again."],
+            "a": 0, "why": "守住價格但同時給對方一條路，比單純說「就這樣」有用。", "swap": "That's where we are on the full repair — a smaller scope would be less." },
+          { "cue": "What if we only fix the broken part?", "cueZh": "如果只修壞掉的部分呢？",
+            "choices": ["That works — we can quote a partial repair covering the failing channel only.", "Then it will break again, not our problem.", "We don't do partial repair."],
+            "a": 0, "why": "客戶自己提出縮小範圍時，直接接住並確認範圍。", "swap": "Sure — I'll quote a partial repair for that channel." }
+        ]
+      }
+    },
+
+    {
+      "n": 7,
+      "title": "RMA 申請與寄送",
+      "produce": "開出 RMA、說清楚包裝與標示要求，讓設備能正確寄到而不出包",
+      "goal": "①開立 RMA 編號並告知客戶 ②說明包裝與標示要求 ③收件後主動確認",
+      "core": [
+        { "en": "Please fill in the attached RMA form before shipping the unit back.",
+          "zh": "請先填寫附件的 RMA 表單再寄回設備（先填表再寄）",
+          "note": "fill in / fill out 都可以，fill 後面不能直接接 the form。attached 表示附件在這封信裡" },
+        { "en": "We have issued RMA number R-24081 for this case.",
+          "zh": "我們已為此案開立 RMA 編號 R-24081（給編號）",
+          "note": "issue＝開立（編號、單據）。有編號對方才追得到，也是後續所有信的共同索引" },
+        { "en": "Please mark the RMA number clearly on the outside of the package.",
+          "zh": "請將 RMA 編號清楚標示在外箱上（標示位置）",
+          "note": "on the outside of the package 要講明白——標在裡面等於沒標，收貨端拆箱前看不到" },
+        { "en": "The unit should be packed in its original box or equivalent protective packaging.",
+          "zh": "設備應以原廠外箱或同等防護包裝寄送（包裝要求）",
+          "note": "or equivalent 是關鍵：原箱丟了也有替代方案，不會卡住對方" },
+        { "en": "Once we receive the unit, we will confirm by email.",
+          "zh": "設備一到我們會以 email 確認（收件後主動回報）",
+          "note": "Once＋完成點，比 after 更強調「一發生就」。主動確認能省掉對方一封追問信" }
+      ],
+      "skeleton": {
+        "subject": "RMA R-24081 — Return Instructions",
+        "greet": "Dear Mr. Yeh,",
+        "open": "We have issued RMA number R-24081 for this case.",
+        "body": "填寫附件表單 → 外箱清楚標示 RMA 編號 → 包裝要求 → 收到後我們會確認",
+        "close": "Please let us know the tracking number once the unit is shipped. ＋ Best regards, Cloud"
+      },
+      "speech": "Hi Mr. Yeh, this is Cloud from Fix-well Technology.\nWe've issued RMA number R dash two four zero eight one for this case.\nBefore you ship the unit back, please fill in the RMA form I attached, and mark the RMA number clearly on the outside of the package.\nThe unit should go in its original box, or equivalent protective packaging.\nOnce we receive it, we'll confirm by email — and if you can send me the tracking number, I'll keep an eye out for it.",
+      "bugs": [
+        { "bad": "Please fill the RMA form before you ship back the unit.",
+          "why": "fill 後面不能直接接表單，要用 fill in／fill out；ship back the unit 語序改成 shipping the unit back 更自然",
+          "good": "Please fill in the attached RMA form before shipping the unit back." },
+        { "bad": "We issue RMA number already.",
+          "why": "已完成的動作要用現在完成式 have issued；already 位置錯了，而且沒給編號等於沒說",
+          "good": "We have issued RMA number R-24081 for this case." },
+        { "bad": "Please write RMA number on outside package.",
+          "why": "RMA number 前要有限定詞 the；outside package 少了 the 和 of，正確是 on the outside of the package",
+          "good": "Please mark the RMA number clearly on the outside of the package." },
+        { "bad": "The unit must pack with original box.",
+          "why": "設備是被包裝，要用被動 should be packed；用 in 不是 with；original box 前要有 its",
+          "good": "The unit should be packed in its original box or equivalent protective packaging." },
+        { "bad": "After we receive, we confirm you by mail.",
+          "why": "receive 後面缺受詞；confirm 不接人；by mail 是實體郵件，email 要寫 by email",
+          "good": "Once we receive the unit, we will confirm by email." }
+      ],
+      "recs": [
+        { "s": "The unit arrived without an RMA number marked on the package.",
+          "a": "Matched the serial number against the open RMA list and logged the unit manually.",
+          "r": "The unit was accepted and the customer was asked to mark the number on future shipments.",
+          "short": "Unit arrived, no RMA# on box → matched S/N vs open RMA list, logged manually → accepted, customer reminded." },
+        { "s": "One corner of the package was crushed on arrival.",
+          "a": "Photographed the packaging and checked the unit for shipping damage before opening the case.",
+          "r": "No damage was found on the unit and the inspection continued as planned.",
+          "short": "Box corner crushed on arrival → photographed packaging, checked for shipping damage → unit OK, inspection continued." },
+        { "s": "The unit was shipped without any protective foam inside the box.",
+          "a": "Reported the packaging issue to the customer with photos taken at receiving.",
+          "r": "The customer agreed to use protective packaging for future shipments.",
+          "short": "No protective foam in box → reported to customer w/ receiving photos → customer agreed to pack properly next time." }
+      ],
+      "d1": {
+        "mailNote": "改編自真實 RMA 通知信，已去識別化",
+        "mail": {
+          "subject": "RMA R-24081 — Return Instructions",
+          "greet": "Dear Mr. Yeh,",
+          "paras": [
+            ["We have issued RMA number R-24081 for this case.",
+             "Please fill in the attached RMA form before shipping the unit back."],
+            ["Please mark the RMA number clearly on the outside of the package.",
+             "The unit should be packed in its original box or equivalent protective packaging."],
+            ["Once we receive the unit, we will confirm by email."]
+          ],
+          "close": "Please let us know the tracking number once the unit is shipped.",
+          "sign": "Best regards,<br>Cloud"
+        },
+        "quiz": [
+          { "q": "1. 為什麼要先給 RMA 編號？",
+            "c": ["有編號對方才追得到，也是後續所有信的共同索引", "因為公司規定", "為了讓信看起來正式"],
+            "a": 0, "why": "沒有編號，後面每一封信都要重講一次是哪一台，很快就會亂掉。" },
+          { "q": "2. 「fill the form」哪裡不對？",
+            "c": ["fill 後面不能直接接表單，要用 fill in 或 fill out", "form 要用複數", "fill 要改成 write"],
+            "a": 0, "why": "fill 單獨用是「裝滿」；填表要用 fill in / fill out。" },
+          { "q": "3. 為什麼要特別寫「on the outside of the package」？",
+            "c": ["標在裡面等於沒標，收貨端拆箱前看不到", "為了讓句子完整", "因為外箱比較大好寫"],
+            "a": 0, "why": "收貨端是先看外箱才決定怎麼收，標在裡面完全沒有作用。" },
+          { "q": "4. 「or equivalent protective packaging」的用意是？",
+            "c": ["原箱丟了也有替代方案，不會卡住對方", "讓對方隨便包", "為了免責"],
+            "a": 0, "why": "只寫 original box，客戶找不到原箱就會停在那裡不敢寄。" },
+          { "q": "5. 填空：___ we receive the unit, we will confirm by email.",
+            "c": ["Once", "After that", "Until"],
+            "a": 0, "why": "Once＋完成點＝一……就……，比 after 更強調即時。" },
+          { "q": "6. 「confirm you by mail」哪裡有問題？",
+            "c": ["confirm 不接人，而且 by mail 是實體郵件，email 要寫 by email", "confirm 要改成 tell", "by mail 是對的"],
+            "a": 0, "why": "兩個錯：confirm 的受詞應該是事情；mail 在正式用語裡指實體郵件。" },
+          { "q": "7. 為什麼結尾要問 tracking number？",
+            "c": ["有追蹤號才能主動掌握到貨時間，不用一直問對方", "為了確認客戶有寄", "因為信要有結尾"],
+            "a": 0, "why": "拿到追蹤號後，到貨時間自己就能查，省掉來回追問。" },
+          { "q": "8. 這封信的四個動作依序是？",
+            "c": ["給編號 → 填表 → 標示與包裝 → 收到後確認", "填表 → 給編號 → 收件 → 包裝", "包裝 → 標示 → 填表 → 給編號"],
+            "a": 0, "why": "先給編號對方才知道要標什麼；最後承諾收到會確認，讓對方安心。" }
+        ]
+      },
+      "d2": {
+        "quiz": [
+          { "q": "1. 中翻英：請先填寫附件的 RMA 表單再寄回設備。", "c": ["Please fill in the attached RMA form before shipping the unit back.", "Please fill the RMA form before you ship back the unit.", "Please write the attach RMA form before ship the unit."], "a": 0, "why": "fill in＋表單；before＋動名詞 shipping。" },
+          { "q": "2. 填空：We have ___ RMA number R-24081 for this case.", "c": ["issued", "issue", "issuing"], "a": 0, "why": "have＋過去分詞 issued，表示編號已經開出來了。" },
+          { "q": "3. 中翻英：請將 RMA 編號清楚標示在外箱上。", "c": ["Please mark the RMA number clearly on the outside of the package.", "Please write RMA number on outside package.", "Please mark clearly RMA number outside of package."], "a": 0, "why": "the RMA number 要限定詞；on the outside of the package 是完整說法。" },
+          { "q": "4. 填空：The unit should be ___ in its original box.", "c": ["packed", "pack", "packing"], "a": 0, "why": "設備是被包裝，用被動 should be packed。" },
+          { "q": "5. 中翻英：設備一到我們會以 email 確認。", "c": ["Once we receive the unit, we will confirm by email.", "After we receive, we confirm you by mail.", "When we received the unit, we confirm by email."], "a": 0, "why": "Once＋現在式；confirm 不接人；email 要寫 by email。" },
+          { "q": "6. 「or equivalent protective packaging」中的 equivalent 是什麼意思？", "c": ["同等級的（替代品）", "額外的", "昂貴的"], "a": 0, "why": "equivalent＝同等的，用來給對方替代方案。" },
+          { "q": "7. 客戶說原廠箱子已經丟了，怎麼回？", "c": ["Any box with equivalent protective packaging is fine.", "Then you cannot ship it.", "You must find the original box."], "a": 0, "why": "給替代方案讓事情繼續，不要卡住對方。" },
+          { "q": "8. 填空：Please let us know the tracking number once the unit ___.", "c": ["is shipped", "ships out", "was shipped"], "a": 0, "why": "設備是被寄出，用被動 is shipped；once 子句用現在式表未來。" },
+          { "q": "9. 哪一句最適合用來說明 RMA 編號的用途？", "c": ["Please quote this RMA number in all future correspondence.", "This number is just for our record.", "You can ignore the RMA number."], "a": 0, "why": "quote this number in all future correspondence 讓對方知道以後每封信都要帶上。" },
+          { "q": "10. RMA 通知信最容易漏掉的是什麼？", "c": ["標示位置（外箱）與包裝要求", "問候語", "公司名稱"], "a": 0, "why": "漏掉標示與包裝要求，設備到廠常常認不出是哪一案，或途中就摔壞了。" }
+        ]
+      },
+      "d3": {
+        "brief": "客戶決定送修，你要開 RMA 並告知寄送方式：給編號 → 請填附件表單 → 外箱標示 → 包裝要求 → 收到後會確認。",
+        "lines": [
+          { "zh": "① 給編號：我們已為此案開立 RMA 編號 R-24081", "chunks": ["We have issued", "RMA number R-24081", "for this case."] },
+          { "zh": "② 請填表：請先填寫附件的 RMA 表單再寄回設備", "chunks": ["Please fill in the attached RMA form", "before shipping", "the unit back."] },
+          { "zh": "③ 外箱標示：請將 RMA 編號清楚標示在外箱上", "chunks": ["Please mark the RMA number clearly", "on the outside", "of the package."] },
+          { "zh": "④ 包裝要求：以原廠外箱或同等防護包裝寄送", "chunks": ["The unit should be packed", "in its original box", "or equivalent protective packaging."] },
+          { "zh": "⑤ 收件確認：設備一到我們會以 email 確認", "chunks": ["Once we receive the unit,", "we will confirm", "by email."] }
+        ]
+      },
+      "d5": {
+        "qs": [
+          { "cue": "Do I need an RMA number before sending it?", "cueZh": "寄回之前需要 RMA 編號嗎？",
+            "choices": ["Yes — we've issued R-24081 for this case, please mark it on the outside of the box.", "Not really, just send it.", "You can write anything on the box."],
+            "a": 0, "why": "確認需要，直接給編號，並順帶講標示位置。", "swap": "Yes, it's R-24081 — please write it on the outside." },
+          { "cue": "I threw away the original box. Is that a problem?", "cueZh": "原廠箱子我丟了，有問題嗎？",
+            "choices": ["No problem — any equivalent protective packaging is fine.", "Yes, you must find the original box.", "Then we cannot accept it."],
+            "a": 0, "why": "給替代方案讓事情繼續，不要用規定卡住對方。", "swap": "That's fine, just pack it with equivalent protection." },
+          { "cue": "Where exactly should I write the RMA number?", "cueZh": "RMA 編號要寫在哪裡？",
+            "choices": ["Please mark it clearly on the outside of the package.", "Anywhere is fine.", "Inside the box with the unit."],
+            "a": 0, "why": "標在裡面等於沒標——收貨端拆箱前看不到。", "swap": "On the outside of the box, somewhere easy to see." },
+          { "cue": "How will I know you received it?", "cueZh": "我怎麼知道你們收到了？",
+            "choices": ["Once we receive the unit, we will confirm by email.", "You can call us to check.", "You will know when we finish repair."],
+            "a": 0, "why": "主動承諾確認，省掉對方一封追問信。", "swap": "We'll email you as soon as it arrives." },
+          { "cue": "Should I send the power cable and accessories too?", "cueZh": "電源線和配件要一起寄嗎？",
+            "choices": ["Please send only the unit unless the issue involves the accessories — that keeps the RMA record clean.", "Send everything you have.", "Doesn't matter, up to you."],
+            "a": 0, "why": "說明原則和理由，對方才知道怎麼判斷，而不是每次都要問。", "swap": "Just the unit is enough, unless the fault involves them." }
+        ]
+      }
+    },
+
+    {
+      "n": 8,
+      "title": "交期說明（ETA / lead time）",
+      "produce": "把預計完成時間、料件到貨的影響講清楚，延遲時能主動更新而不是等對方追",
+      "goal": "①給出明確的預計完成日 ②說明料件交期如何影響進度 ③日期有變時主動更新",
+      "core": [
+        { "en": "The estimated completion date is August 15.",
+          "zh": "預計完成日為 8 月 15 日（給明確日期）",
+          "note": "estimated completion date 是交期溝通的核心名詞。給日期不要給「大概兩三週」，對方沒辦法排程" },
+        { "en": "The replacement part has a lead time of about two weeks.",
+          "zh": "更換料件的交期約兩週（說明卡在哪）",
+          "note": "lead time＝從下單到到貨的時間，是採購與維修共通的字。has a lead time of＋期間" },
+        { "en": "We will start the repair as soon as the part arrives.",
+          "zh": "料件一到我們就會開始維修（承諾動作）",
+          "note": "as soon as＋明確事件，讓對方知道你沒有在拖，只是在等料" },
+        { "en": "The schedule may change if the part is delayed by the supplier.",
+          "zh": "若料件因供應商延遲，時程可能會變動（先講風險）",
+          "note": "先講風險比事後解釋有效得多。用 may change 而不是 will change，保留彈性" },
+        { "en": "We will update you if the estimated date changes.",
+          "zh": "預計日期若有變動我們會主動通知您（承諾主動回報）",
+          "note": "這句是整封信最重要的承諾：主動更新。做到了，客戶就不會每兩天來追一次" }
+      ],
+      "skeleton": {
+        "subject": "RMA R-24081 — Estimated Completion Date",
+        "greet": "Dear Mr. Yeh,",
+        "open": "The estimated completion date is August 15.",
+        "body": "料件交期說明 → 料到就開工 → 供應商延遲的風險 → 日期有變會主動更新",
+        "close": "Thank you for your patience while we wait for the part. ＋ Best regards, Cloud"
+      },
+      "speech": "Hi Mr. Yeh, this is Cloud from Fix-well Technology.\nI'm calling with an update on RMA R dash two four zero eight one.\nThe estimated completion date is August fifteenth.\nThe replacement part has a lead time of about two weeks, and we'll start the repair as soon as it arrives.\nThe schedule may change if the supplier delays the shipment — but if the estimated date changes, I'll update you right away.",
+      "bugs": [
+        { "bad": "The finish date estimate is August 15.",
+          "why": "finish date estimate 是中文語序直翻；英文的固定說法是 estimated completion date",
+          "good": "The estimated completion date is August 15." },
+        { "bad": "The part need about 2 week to arrive.",
+          "why": "need 少了三單 s；week 要複數 weeks；交期有專門說法 has a lead time of",
+          "good": "The replacement part has a lead time of about two weeks." },
+        { "bad": "We start repair after part arrive.",
+          "why": "start 要用未來式 will start；part 前要有限定詞；時間子句動詞要三單 arrives",
+          "good": "We will start the repair as soon as the part arrives." },
+        { "bad": "If supplier delay, maybe schedule will change.",
+          "why": "supplier 前要有限定詞；delay 要三單且這裡料件是被延遲，用被動 is delayed；maybe 和 will 語意衝突，用 may 就好",
+          "good": "The schedule may change if the part is delayed by the supplier." },
+        { "bad": "I will tell you when the date change.",
+          "why": "date 是第三人稱單數要用 changes；when 表示一定會變，用 if 較準確；tell you 改 update you 更專業",
+          "good": "We will update you if the estimated date changes." }
+      ],
+      "recs": [
+        { "s": "The replacement relay was not in stock when the repair was scheduled.",
+          "a": "Placed an order and informed the customer of the two-week lead time.",
+          "r": "The relay arrived on schedule and the repair was completed the same week.",
+          "short": "Relay out of stock @ scheduling → ordered, told customer 2-wk lead time → arrived on time, repair done same week." },
+        { "s": "The supplier delayed the power module shipment by one week.",
+          "a": "Informed the customer of the revised estimated completion date.",
+          "r": "The unit was completed one week later than originally planned.",
+          "short": "Supplier delayed power module 1 wk → informed customer, revised ETA → completed 1 wk later than planned." },
+        { "s": "The repair was finished ahead of the estimated completion date.",
+          "a": "Notified the customer and arranged an earlier shipment.",
+          "r": "The unit was returned three days ahead of schedule.",
+          "short": "Repair finished ahead of ETA → notified customer, arranged earlier shipment → returned 3 days early." }
+      ],
+      "d1": {
+        "mailNote": "改編自真實交期通知信，已去識別化",
+        "mail": {
+          "subject": "RMA R-24081 — Estimated Completion Date",
+          "greet": "Dear Mr. Yeh,",
+          "paras": [
+            ["The estimated completion date is August 15.",
+             "The replacement part has a lead time of about two weeks."],
+            ["We will start the repair as soon as the part arrives.",
+             "The schedule may change if the part is delayed by the supplier.",
+             "We will update you if the estimated date changes."]
+          ],
+          "close": "Thank you for your patience while we wait for the part.",
+          "sign": "Best regards,<br>Cloud"
+        },
+        "quiz": [
+          { "q": "1. 為什麼要給明確日期而不是「大概兩三週」？",
+            "c": ["對方要用這個日期去排自己的生產或出貨", "為了顯得專業", "因為英文沒有「大概」的說法"],
+            "a": 0, "why": "客戶拿到日期才能往下排程。模糊的期間對他毫無用處。" },
+          { "q": "2. 「lead time」是什麼意思？",
+            "c": ["從下單到到貨所需的時間", "維修所需的時間", "客戶等待回覆的時間"],
+            "a": 0, "why": "lead time 是採購與維修共通的字，專指料件從下單到入手的時間。" },
+          { "q": "3. 為什麼要寫「as soon as the part arrives」？",
+            "c": ["讓對方知道我們沒在拖，只是在等料", "為了拖延時間", "因為要湊句數"],
+            "a": 0, "why": "把等待的原因講明白，對方才不會以為是我們動作慢。" },
+          { "q": "4. 為什麼要先講供應商可能延遲的風險？",
+            "c": ["先講風險比事後解釋有效得多", "為了推卸責任", "因為一定會延遲"],
+            "a": 0, "why": "事前說過，延遲時對方比較能接受；事後才講就變成藉口。" },
+          { "q": "5. 填空：The schedule ___ change if the part is delayed.",
+            "c": ["may", "will", "must"],
+            "a": 0, "why": "may 表示可能性，保留彈性；will 等於保證會變，反而製造焦慮。" },
+          { "q": "6. 整封信最重要的承諾是哪一句？",
+            "c": ["We will update you if the estimated date changes.", "The estimated completion date is August 15.", "Thank you for your patience."],
+            "a": 0, "why": "做到主動更新，客戶就不會每兩天追問一次——這才是真正省下時間的地方。" },
+          { "q": "7. 「is delayed by the supplier」為什麼用被動？",
+            "c": ["料件是被延遲的，動作者是供應商", "被動比較禮貌", "主動語態文法錯誤"],
+            "a": 0, "why": "主角是料件（the part），供應商是動作者，用 by 帶出來。" },
+          { "q": "8. 如果日期真的延後了，最好的做法是？",
+            "c": ["主動寄信告知新日期與原因", "等客戶問了再說", "先不講，看能不能趕上"],
+            "a": 0, "why": "主動更新是這封信給過的承諾，做到了信任才建立得起來。" }
+        ]
+      },
+      "d2": {
+        "quiz": [
+          { "q": "1. 中翻英：預計完成日為 8 月 15 日。", "c": ["The estimated completion date is August 15.", "The finish date estimate is August 15.", "The complete date estimated is August 15."], "a": 0, "why": "estimated completion date 是固定說法，其他兩個是中文語序直翻。" },
+          { "q": "2. 填空：The replacement part has a ___ of about two weeks.", "c": ["lead time", "long time", "wait time"], "a": 0, "why": "lead time 是料件從下單到到貨的專門用語。" },
+          { "q": "3. 中翻英：料件一到我們就會開始維修。", "c": ["We will start the repair as soon as the part arrives.", "We start repair after part arrive.", "We will start repair when part is arrive."], "a": 0, "why": "will start；the part；時間子句用現在式 arrives。" },
+          { "q": "4. 填空：The schedule may change if the part ___ by the supplier.", "c": ["is delayed", "delay", "delays"], "a": 0, "why": "料件是被延遲，要用被動 is delayed。" },
+          { "q": "5. 中翻英：預計日期若有變動我們會主動通知您。", "c": ["We will update you if the estimated date changes.", "I will tell you when the date change.", "We update you if estimated date will change."], "a": 0, "why": "changes 三單；if 比 when 準確；update you 比 tell you 專業。" },
+          { "q": "6. 客戶問「為什麼要等兩週？」最好的回答是？", "c": ["The replacement part has a two-week lead time from the supplier.", "Because we are very busy.", "That's just how long it takes."], "a": 0, "why": "把原因指向具體的料件交期，而不是模糊的忙碌。" },
+          { "q": "7. 「as soon as」後面的動詞為什麼用現在式？", "c": ["時間子句用現在式代替未來式", "因為動作已經發生", "as soon as 後面不能用未來式是特例"], "a": 0, "why": "as soon as / when / once 引導的時間子句，一律用現在式表未來。" },
+          { "q": "8. 哪一句最適合在延遲時主動寄出？", "c": ["The part has been delayed by one week, and the new estimated date is August 22.", "Sorry, still waiting.", "It will be late, we don't know when."], "a": 0, "why": "說明延遲多久＋給出新日期，對方才能重新排程。" },
+          { "q": "9. 填空：Thank you for your patience ___ we wait for the part.", "c": ["while", "during", "when"], "a": 0, "why": "while＋子句表示「在……期間」；during 後面接名詞。" },
+          { "q": "10. 交期信最常見的失誤是什麼？", "c": ["給了日期但日期變動時沒有主動更新", "日期給得太精確", "信寫得太短"], "a": 0, "why": "給日期不難，難的是變動時主動說。沒做到，前面的專業就全毀了。" }
+        ]
+      },
+      "d3": {
+        "brief": "料件要等兩週，你要主動告知客戶交期：給預計完成日 → 說明料件交期 → 料到就開工 → 先講供應商延遲的風險 → 承諾日期有變會更新。",
+        "lines": [
+          { "zh": "① 預計完成日：預計完成日為 8 月 15 日", "chunks": ["The estimated", "completion date", "is August 15."] },
+          { "zh": "② 料件交期：更換料件的交期約兩週", "chunks": ["The replacement part", "has a lead time", "of about two weeks."] },
+          { "zh": "③ 料到開工：料件一到我們就會開始維修", "chunks": ["We will start the repair", "as soon as", "the part arrives."] },
+          { "zh": "④ 先講風險：若料件因供應商延遲，時程可能變動", "chunks": ["The schedule may change", "if the part is delayed", "by the supplier."] },
+          { "zh": "⑤ 承諾更新：預計日期若有變動會主動通知", "chunks": ["We will update you", "if the estimated date", "changes."] }
+        ]
+      },
+      "d5": {
+        "qs": [
+          { "cue": "When will the repair be finished?", "cueZh": "維修什麼時候會完成？",
+            "choices": ["The estimated completion date is August 15 — I'll update you if that changes.", "Hard to say, maybe soon.", "When the part comes, then we know."],
+            "a": 0, "why": "給明確日期並附上「有變會通知」，對方就能安心排程。", "swap": "We're looking at August 15th, and I'll let you know if it shifts." },
+          { "cue": "Why does it take two weeks?", "cueZh": "為什麼要兩週？",
+            "choices": ["The replacement part has a two-week lead time from the supplier.", "We have many units in the queue.", "That's our normal speed."],
+            "a": 0, "why": "把原因指向具體的料件交期，不要用「我們很忙」帶過。", "swap": "It's the part — the supplier needs two weeks." },
+          { "cue": "Can you start the repair before the part arrives?", "cueZh": "料件到之前可以先開始修嗎？",
+            "choices": ["We'll do everything we can in advance, but the replacement itself needs the part.", "No, impossible.", "Yes, we can start now."],
+            "a": 0, "why": "先表達願意配合，再說明卡點，比直接說不行好接受得多。", "swap": "We'll prep what we can, but the swap needs the part in hand." },
+          { "cue": "What if the supplier is late again?", "cueZh": "如果供應商又延遲呢？",
+            "choices": ["If that happens, I'll send you a revised date as soon as I know.", "Then it's their fault, not ours.", "Won't happen, don't worry."],
+            "a": 0, "why": "承諾主動更新，而不是保證不會發生或推給供應商。", "swap": "I'd let you know a new date straight away." },
+          { "cue": "The unit is finished earlier than expected — great!", "cueZh": "比預期早修好了，太好了！",
+            "choices": ["Yes — would you like us to arrange an earlier shipment?", "Yes, we are very fast.", "Yes, but we still ship on August 15."],
+            "a": 0, "why": "提早完成要主動問要不要提早出貨，這是額外的價值。", "swap": "It is — shall I book the shipment earlier?" }
+        ]
+      }
+    }
+  ]
+}

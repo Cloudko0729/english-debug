@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W5 週一 — 讀信＋圈句型</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:680px;margin:0 auto;padding:0 16px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.7}
+  header{background:#1f4463;color:#fff;text-align:center;padding:16px;border-radius:0 0 16px 16px;margin:0 -16px 16px}
+  header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .card{background:#fff;border-radius:14px;padding:16px 18px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .card h2{font-size:1rem;color:#1f4463;margin:0 0 10px}
+  .mail{background:#fdfdf8;border:1.5px solid #e3ddc8;border-radius:12px;padding:14px 16px;font-size:.93rem}
+  .mail .subj{font-weight:800;border-bottom:1px solid #e3ddc8;padding-bottom:6px;margin-bottom:8px}
+  .q{border-top:1px dashed #e5e5e5;padding:12px 0}
+  .q .qt{font-weight:700;margin-bottom:7px;font-size:.92rem}
+  .q button{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit}
+  .q button.ok{border-color:#2a9d5c;background:#e3f6ec}
+  .q button.no{border-color:#d64561;background:#fbe3e9}
+  .q .why{display:none;margin-top:6px;background:#eaf3ff;border-radius:9px;padding:8px 12px;font-size:.84rem;color:#1f4463}
+  #result{font-weight:800;font-size:1.05rem;margin-top:12px;min-height:1.5em}
+  .gobtn{width:100%;padding:13px;border:none;border-radius:12px;background:#1f4463;color:#fff;font-weight:800;font-size:1rem;cursor:pointer;margin-top:14px}
+</style>
+</head>
+<body>
+<header><h1>📖 W5 週一 — 讀信＋圈句型</h1>
+<p><a href="w5.html">← 本週重點</a> · 讀一封已收件通知信，找出可重複使用的句型</p></header>
+
+<div class="card"><h2>先讀這封信（改編自真實維修報價信，已去識別化）</h2>
+<div class="mail">
+  <div class="subj">Subject: Repair Quotation — Model TX-200, S/N 45120933</div>
+  Dear Mr. Yeh,<br><br>
+  <b>Based on the inspection, we have prepared a quotation for the repair.</b><br><br>
+  <b>The total repair cost is USD 480, including parts and labor.</b>
+  <b>The quotation is valid for 30 days from the date of this email.</b>
+  <b>Please confirm in writing before we proceed with the repair.</b><br><br>
+  <b>If you prefer not to proceed, we can return the unit as it is.</b><br><br>
+  Please let us know how you would like to proceed.<br><br>
+  Best regards,<br>Cloud
+</div>
+<p style="font-size:.84rem;color:#777">粗體就是本週 5 個核心句——它們在幾乎每封「已收件通知」的信都能重複使用。讀兩次再作答。</p>
+</div>
+
+<div class="card"><h2>✏️ 練習（8 題）</h2><div id="quiz"></div>
+<div id="result"></div>
+</div>
+
+<script>
+const QUIZ = [
+ { q: "1. 哪一句說明了報價是根據什麼做出來的？",
+   c: ["Based on the inspection, we have prepared a quotation for the repair.", "The total repair cost is USD 480, including parts and labor.", "Best regards."],
+   a: 0, why: "Based on the inspection 交代報價的依據，客戶才不會覺得數字是憑空喊的。" },
+ { q: "2. 「including parts and labor」為什麼一定要寫？",
+   c: ["這是客戶最常追問的第一個問題：這價錢包含什麼", "為了讓句子看起來比較長", "因為文法規定 cost 後面要接 including"],
+   a: 0, why: "報價只給數字不說涵蓋範圍，客戶一定會再問一次，等於多來回一封信。" },
+ { q: "3. 「valid for 30 days from the date of this email」的作用是？",
+   c: ["設定報價的有效期限，避免日後拿舊報價來談", "告訴客戶 30 天內一定會修好", "說明料件的交期是 30 天"],
+   a: 0, why: "valid for＋期間＋from the date of 是報價信固定寫法，保護自己也讓客戶知道要盡快決定。" },
+ { q: "4. 填空：Please confirm ___ before we proceed with the repair.",
+   c: ["in writing", "by talking", "on phone"],
+   a: 0, why: "in writing（書面）是關鍵：口頭同意事後說不清楚，維修費用爭議常從這裡開始。" },
+ { q: "5. 「as it is」在最後一句是什麼意思？",
+   c: ["維持現狀、不做任何維修就寄回", "照原本的報價寄回", "用原本的包裝寄回"],
+   a: 0, why: "as it is＝保持原狀。客戶決定不修時，設備不動工直接退回。" },
+ { q: "6. 為什麼要主動提「不修可以原樣寄回」？",
+   c: ["給對方退路，比只丟一個價格更容易收到回覆", "因為公司規定一定要寫", "為了暗示客戶不要修"],
+   a: 0, why: "只給價格容易讓對方拖著不回。給出兩條路，對方比較容易做決定。" },
+ { q: "7. 這封信如果改成 We already prepare a quotation. 哪裡不對？",
+   c: ["已完成的動作要用 have prepared", "already 不能用在信裡", "quotation 要用複數"],
+   a: 0, why: "報價已經做好了，是已完成的動作，現在簡單式 prepare 表達不出來。" },
+ { q: "8. 這封信的目的是什麼？",
+   c: ["讓客戶能直接決定修或不修", "告訴客戶我們很專業", "說明檢查花了多少時間"],
+   a: 0, why: "報價信只有一個任務：把費用、範圍、期限、確認方式講清楚，讓對方能做決定。" }
+];
+let done = 0, ok = 0;
+const el = document.getElementById("quiz");
+el.innerHTML = QUIZ.map((q, i) => `<div class="q" id="q${i}"><div class="qt">${q.q}</div>` +
+  q.c.map((c, ci) => `<button onclick="ans(${i},${ci},this)">${c}</button>`).join("") +
+  `<div class="why" id="why${i}">💡 ${q.why}</div></div>`).join("");
+function ans(i, ci, btn) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const good = ci === QUIZ[i].a;
+  box.querySelectorAll("button").forEach((b, bi) => { b.disabled = true;
+    if (bi === QUIZ[i].a) b.classList.add("ok"); else if (bi === ci) b.classList.add("no"); });
+  document.getElementById("why" + i).style.display = "block";
+  done++; if (good) ok++;
+  if (done === QUIZ.length) {
+    const r = document.getElementById("result");
+    r.textContent = `🎉 答對 ${ok} / ${QUIZ.length}` + (ok === QUIZ.length ? "，全對！" : "，答錯的句子明天會再出現");
+    try {
+      const p = JSON.parse(localStorage.getItem("adultProgress") || "{}");
+      p["w5d1"] = { done: new Date().toISOString(), ok, total: QUIZ.length };
+      localStorage.setItem("adultProgress", JSON.stringify(p));
+    } catch (e) {}
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W8 週一 — 讀信＋圈句型</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:680px;margin:0 auto;padding:0 16px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.7}
+  header{background:#1f4463;color:#fff;text-align:center;padding:16px;border-radius:0 0 16px 16px;margin:0 -16px 16px}
+  header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .card{background:#fff;border-radius:14px;padding:16px 18px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .card h2{font-size:1rem;color:#1f4463;margin:0 0 10px}
+  .mail{background:#fdfdf8;border:1.5px solid #e3ddc8;border-radius:12px;padding:14px 16px;font-size:.93rem}
+  .mail .subj{font-weight:800;border-bottom:1px solid #e3ddc8;padding-bottom:6px;margin-bottom:8px}
+  .q{border-top:1px dashed #e5e5e5;padding:12px 0}
+  .q .qt{font-weight:700;margin-bottom:7px;font-size:.92rem}
+  .q button{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit}
+  .q button.ok{border-color:#2a9d5c;background:#e3f6ec}
+  .q button.no{border-color:#d64561;background:#fbe3e9}
+  .q .why{display:none;margin-top:6px;background:#eaf3ff;border-radius:9px;padding:8px 12px;font-size:.84rem;color:#1f4463}
+  #result{font-weight:800;font-size:1.05rem;margin-top:12px;min-height:1.5em}
+  .gobtn{width:100%;padding:13px;border:none;border-radius:12px;background:#1f4463;color:#fff;font-weight:800;font-size:1rem;cursor:pointer;margin-top:14px}
+</style>
+</head>
+<body>
+<header><h1>📖 W8 週一 — 讀信＋圈句型</h1>
+<p><a href="w8.html">← 本週重點</a> · 讀一封已收件通知信，找出可重複使用的句型</p></header>
+
+<div class="card"><h2>先讀這封信（改編自真實交期通知信，已去識別化）</h2>
+<div class="mail">
+  <div class="subj">Subject: RMA R-24081 — Estimated Completion Date</div>
+  Dear Mr. Yeh,<br><br>
+  <b>The estimated completion date is August 15.</b>
+  <b>The replacement part has a lead time of about two weeks.</b><br><br>
+  <b>We will start the repair as soon as the part arrives.</b>
+  <b>The schedule may change if the part is delayed by the supplier.</b>
+  <b>We will update you if the estimated date changes.</b><br><br>
+  Thank you for your patience while we wait for the part.<br><br>
+  Best regards,<br>Cloud
+</div>
+<p style="font-size:.84rem;color:#777">粗體就是本週 5 個核心句——它們在幾乎每封「已收件通知」的信都能重複使用。讀兩次再作答。</p>
+</div>
+
+<div class="card"><h2>✏️ 練習（8 題）</h2><div id="quiz"></div>
+<div id="result"></div>
+</div>
+
+<script>
+const QUIZ = [
+ { q: "1. 為什麼要給明確日期而不是「大概兩三週」？",
+   c: ["對方要用這個日期去排自己的生產或出貨", "為了顯得專業", "因為英文沒有「大概」的說法"],
+   a: 0, why: "客戶拿到日期才能往下排程。模糊的期間對他毫無用處。" },
+ { q: "2. 「lead time」是什麼意思？",
+   c: ["從下單到到貨所需的時間", "維修所需的時間", "客戶等待回覆的時間"],
+   a: 0, why: "lead time 是採購與維修共通的字，專指料件從下單到入手的時間。" },
+ { q: "3. 為什麼要寫「as soon as the part arrives」？",
+   c: ["讓對方知道我們沒在拖，只是在等料", "為了拖延時間", "因為要湊句數"],
+   a: 0, why: "把等待的原因講明白，對方才不會以為是我們動作慢。" },
+ { q: "4. 為什麼要先講供應商可能延遲的風險？",
+   c: ["先講風險比事後解釋有效得多", "為了推卸責任", "因為一定會延遲"],
+   a: 0, why: "事前說過，延遲時對方比較能接受；事後才講就變成藉口。" },
+ { q: "5. 填空：The schedule ___ change if the part is delayed.",
+   c: ["may", "will", "must"],
+   a: 0, why: "may 表示可能性，保留彈性；will 等於保證會變，反而製造焦慮。" },
+ { q: "6. 整封信最重要的承諾是哪一句？",
+   c: ["We will update you if the estimated date changes.", "The estimated completion date is August 15.", "Thank you for your patience."],
+   a: 0, why: "做到主動更新，客戶就不會每兩天追問一次——這才是真正省下時間的地方。" },
+ { q: "7. 「is delayed by the supplier」為什麼用被動？",
+   c: ["料件是被延遲的，動作者是供應商", "被動比較禮貌", "主動語態文法錯誤"],
+   a: 0, why: "主角是料件（the part），供應商是動作者，用 by 帶出來。" },
+ { q: "8. 如果日期真的延後了，最好的做法是？",
+   c: ["主動寄信告知新日期與原因", "等客戶問了再說", "先不講，看能不能趕上"],
+   a: 0, why: "主動更新是這封信給過的承諾，做到了信任才建立得起來。" }
+];
+let done = 0, ok = 0;
+const el = document.getElementById("quiz");
+el.innerHTML = QUIZ.map((q, i) => `<div class="q" id="q${i}"><div class="qt">${q.q}</div>` +
+  q.c.map((c, ci) => `<button onclick="ans(${i},${ci},this)">${c}</button>`).join("") +
+  `<div class="why" id="why${i}">💡 ${q.why}</div></div>`).join("");
+function ans(i, ci, btn) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const good = ci === QUIZ[i].a;
+  box.querySelectorAll("button").forEach((b, bi) => { b.disabled = true;
+    if (bi === QUIZ[i].a) b.classList.add("ok"); else if (bi === ci) b.classList.add("no"); });
+  document.getElementById("why" + i).style.display = "block";
+  done++; if (good) ok++;
+  if (done === QUIZ.length) {
+    const r = document.getElementById("result");
+    r.textContent = `🎉 答對 ${ok} / ${QUIZ.length}` + (ok === QUIZ.length ? "，全對！" : "，答錯的句子明天會再出現");
+    try {
+      const p = JSON.parse(localStorage.getItem("adultProgress") || "{}");
+      p["w8d1"] = { done: new Date().toISOString(), ok, total: QUIZ.length };
+      localStorage.setItem("adultProgress", JSON.stringify(p));
+    } catch (e) {}
+  }
+}
+</script>
+</body>
+</html>

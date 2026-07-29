@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W5 週二 — 核心句練習</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:660px;margin:0 auto;padding:0 16px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.7}
+  header{background:#1f4463;color:#fff;text-align:center;padding:16px;border-radius:0 0 16px 16px;margin:0 -16px 14px}
+  header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .q{background:#fff;border-radius:14px;padding:14px 16px;margin-top:12px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .q .qt{font-weight:700;margin-bottom:8px;font-size:.93rem}
+  .q button{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit}
+  .q button.ok{border-color:#2a9d5c;background:#e3f6ec}
+  .q button.no{border-color:#d64561;background:#fbe3e9}
+  .why{display:none;margin-top:6px;background:#eaf3ff;border-radius:9px;padding:8px 12px;font-size:.84rem;color:#1f4463}
+  #result{font-weight:800;font-size:1.05rem;margin-top:12px;text-align:center;min-height:1.5em}
+</style>
+</head>
+<body>
+<header><h1>✏️ W5 週二 — 核心句練習</h1>
+<p><a href="w5.html">← 本週重點</a> · 5 個核心句的變化題（中翻英＋填空）</p></header>
+<div id="qs"></div><div id="result"></div>
+<script>
+const QUIZ = [
+ { q: "1. 中翻英：根據檢查結果，我們已備妥維修報價。",
+   c: ["Based on the inspection, we have prepared a quotation for the repair.", "Based on inspection, we already prepare quotation for repair.", "We prepare the quotation base on inspect."],
+   a: 0, why: "have prepared 現在完成式；the inspection / a quotation 都要有限定詞。" },
+ { q: "2. 填空：The total repair cost is USD 480, ___ parts and labor.",
+   c: ["including", "include", "is include"],
+   a: 0, why: "including 當補充說明；一個句子不能有 is 和 include 兩個動詞並排。" },
+ { q: "3. 中翻英：本報價自本信日期起 30 天內有效。",
+   c: ["The quotation is valid for 30 days from the date of this email.", "This quotation valid 30 days from this email.", "The quotation has valid 30 days."],
+   a: 0, why: "valid 是形容詞要配 be 動詞；期間用 for，起算點用 from the date of。" },
+ { q: "4. 填空：Please confirm ___ before we proceed with the repair.",
+   c: ["in writing", "in write", "by written"],
+   a: 0, why: "in writing 是固定用法，意思是「以書面形式」。" },
+ { q: "5. 中翻英：若您不打算維修，我們可以將設備原樣寄回。",
+   c: ["If you prefer not to proceed, we can return the unit as it is.", "If you don't want repair, we send back unit as it is.", "If you no need repair, we can return unit like this."],
+   a: 0, why: "prefer not to proceed 比 don't want repair 得體；return 比 send back 正式。" },
+ { q: "6. 填空：___ the inspection, we have prepared a quotation.",
+   c: ["Based on", "Base on", "Basing"],
+   a: 0, why: "Based on 是固定片語，用來說明依據。" },
+ { q: "7. 哪一句最適合用在報價信的結尾？",
+   c: ["Please let us know how you would like to proceed.", "Please answer me quickly.", "Waiting your reply soon."],
+   a: 0, why: "how you would like to proceed 把決定權交給對方，語氣得體又明確。" },
+ { q: "8. 客戶問「這 480 包含什麼？」最好的回答是？",
+   c: ["The cost covers three replacement parts and about four hours of labor.", "Everything included, don't worry.", "It's the standard price for this model."],
+   a: 0, why: "直接拆給對方看，比一句「都包含了」更能建立信任。" },
+ { q: "9. 填空：We can return the unit ___ if you prefer not to proceed.",
+   c: ["as it is", "as this", "like it is"],
+   a: 0, why: "as it is＝維持現狀，是維修業說「不動工原樣退回」的標準說法。" },
+ { q: "10. 「proceed with the repair」和「start repair」差在哪？",
+   c: ["proceed with 較正式且已有前情，適合信件；start repair 少了限定詞不完整", "兩個完全一樣", "start repair 比較正式"],
+   a: 0, why: "proceed with the repair 承接前面的檢查與報價，語意連貫；start repair 文法上也不完整。" }
+];
+let done = 0, ok = 0;
+document.getElementById("qs").innerHTML = QUIZ.map((q, i) => `<div class="q" id="q${i}"><div class="qt">${i + 1}. ${q.q}</div>` +
+  q.c.map((c, ci) => `<button onclick="ans(${i},${ci},this)">${c}</button>`).join("") +
+  `<div class="why" id="w${i}">💡 ${q.why}</div></div>`).join("");
+function ans(i, ci, btn) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const good = ci === QUIZ[i].a;
+  box.querySelectorAll("button").forEach((b, bi) => { b.disabled = true;
+    if (bi === QUIZ[i].a) b.classList.add("ok"); else if (bi === ci) b.classList.add("no"); });
+  document.getElementById("w" + i).style.display = "block";
+  done++; if (good) ok++;
+  if (done === QUIZ.length) {
+    document.getElementById("result").textContent = `🎉 答對 ${ok} / ${QUIZ.length}`;
+    try { const p = JSON.parse(localStorage.getItem("adultProgress") || "{}"); p["w5d2"] = { done: new Date().toISOString(), ok, total: QUIZ.length }; localStorage.setItem("adultProgress", JSON.stringify(p)); } catch (e) {}
+  }
+}
+</script>
+</body>
+</html>

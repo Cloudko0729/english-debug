@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W6 週一 — 讀信＋圈句型</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:680px;margin:0 auto;padding:0 16px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.7}
+  header{background:#1f4463;color:#fff;text-align:center;padding:16px;border-radius:0 0 16px 16px;margin:0 -16px 16px}
+  header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .card{background:#fff;border-radius:14px;padding:16px 18px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .card h2{font-size:1rem;color:#1f4463;margin:0 0 10px}
+  .mail{background:#fdfdf8;border:1.5px solid #e3ddc8;border-radius:12px;padding:14px 16px;font-size:.93rem}
+  .mail .subj{font-weight:800;border-bottom:1px solid #e3ddc8;padding-bottom:6px;margin-bottom:8px}
+  .q{border-top:1px dashed #e5e5e5;padding:12px 0}
+  .q .qt{font-weight:700;margin-bottom:7px;font-size:.92rem}
+  .q button{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit}
+  .q button.ok{border-color:#2a9d5c;background:#e3f6ec}
+  .q button.no{border-color:#d64561;background:#fbe3e9}
+  .q .why{display:none;margin-top:6px;background:#eaf3ff;border-radius:9px;padding:8px 12px;font-size:.84rem;color:#1f4463}
+  #result{font-weight:800;font-size:1.05rem;margin-top:12px;min-height:1.5em}
+  .gobtn{width:100%;padding:13px;border:none;border-radius:12px;background:#1f4463;color:#fff;font-weight:800;font-size:1rem;cursor:pointer;margin-top:14px}
+</style>
+</head>
+<body>
+<header><h1>📖 W6 週一 — 讀信＋圈句型</h1>
+<p><a href="w6.html">← 本週重點</a> · 讀一封已收件通知信，找出可重複使用的句型</p></header>
+
+<div class="card"><h2>先讀這封信（改編自真實議價回覆信，已去識別化）</h2>
+<div class="mail">
+  <div class="subj">Subject: RE: Repair Quotation — Cost Breakdown</div>
+  Dear Mr. Yeh,<br><br>
+  <b>I understand the cost is higher than expected — let me explain what it covers.</b><br><br>
+  <b>The quotation covers three replacement parts and about four hours of labor.</b>
+  <b>We can reduce the cost if we repair only the failing channel.</b>
+  <b>Unfortunately, we are not able to lower the price further at this stage.</b><br><br>
+  <b>Would you like us to quote the alternative option for comparison?</b><br><br>
+  Please let me know which option works better for you.<br><br>
+  Best regards,<br>Cloud
+</div>
+<p style="font-size:.84rem;color:#777">粗體就是本週 5 個核心句——它們在幾乎每封「已收件通知」的信都能重複使用。讀兩次再作答。</p>
+</div>
+
+<div class="card"><h2>✏️ 練習（8 題）</h2><div id="quiz"></div>
+<div id="result"></div>
+</div>
+
+<script>
+const QUIZ = [
+ { q: "1. 開場為什麼先寫「I understand the cost is higher than expected」？",
+   c: ["先接住對方的感受，後面的解釋才聽得進去", "為了拖延時間", "因為信一定要有開場白"],
+   a: 0, why: "直接反駁會讓對方更堅持。先承認感受再解釋，是議價信最重要的第一步。" },
+ { q: "2. 為什麼用 higher than expected 而不是 expensive？",
+   c: ["higher than expected 中性，不等於承認自己開高價", "expensive 是錯字", "兩者完全一樣"],
+   a: 0, why: "說 expensive 等於自己承認貴；higher than expected 只是陳述對方的預期落差。" },
+ { q: "3. 「covers three replacement parts and about four hours of labor」的作用是？",
+   c: ["把費用拆開，讓對方判斷貴在哪", "證明我們很忙", "讓信看起來比較長"],
+   a: 0, why: "只說「都包含了」對方無從判斷。拆成料件數與工時，對方才能自己算。" },
+ { q: "4. 想降價時，這封信用的方法是什麼？",
+   c: ["縮小維修範圍，只修故障的通道", "直接打八折", "免收工時費"],
+   a: 0, why: "降價的正確方式是縮小範圍，不是打折——打折會讓對方以為原價本來就有水分。" },
+ { q: "5. 填空：We are not able to lower the price further ___.",
+   c: ["at this stage", "at this time no", "in this moment"],
+   a: 0, why: "at this stage 留下日後轉圜的餘地，不把話說死。" },
+ { q: "6. 為什麼用 are not able to 而不是 cannot？",
+   c: ["語氣較委婉，拒絕時不失禮", "cannot 是錯的", "為了讓句子更長"],
+   a: 0, why: "cannot 太硬。are not able to 表達同樣的意思但留了餘地。" },
+ { q: "7. 為什麼結尾要用問句？",
+   c: ["讓對話繼續，而不是停在拒絕上", "因為問句比較客氣", "為了讓對方一定要回信"],
+   a: 0, why: "如果信結束在「不能再降」，對話就斷了。丟一個選項回去，事情才有下一步。" },
+ { q: "8. 這封信整體的策略是什麼？",
+   c: ["拆解 → 給替代方案 → 守住底線 → 把球丟回去", "堅持原價不退讓", "先降價再說"],
+   a: 0, why: "四個動作缺一不可：只拆解沒方案對方還是嫌貴，只守底線關係會壞掉。" }
+];
+let done = 0, ok = 0;
+const el = document.getElementById("quiz");
+el.innerHTML = QUIZ.map((q, i) => `<div class="q" id="q${i}"><div class="qt">${q.q}</div>` +
+  q.c.map((c, ci) => `<button onclick="ans(${i},${ci},this)">${c}</button>`).join("") +
+  `<div class="why" id="why${i}">💡 ${q.why}</div></div>`).join("");
+function ans(i, ci, btn) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const good = ci === QUIZ[i].a;
+  box.querySelectorAll("button").forEach((b, bi) => { b.disabled = true;
+    if (bi === QUIZ[i].a) b.classList.add("ok"); else if (bi === ci) b.classList.add("no"); });
+  document.getElementById("why" + i).style.display = "block";
+  done++; if (good) ok++;
+  if (done === QUIZ.length) {
+    const r = document.getElementById("result");
+    r.textContent = `🎉 答對 ${ok} / ${QUIZ.length}` + (ok === QUIZ.length ? "，全對！" : "，答錯的句子明天會再出現");
+    try {
+      const p = JSON.parse(localStorage.getItem("adultProgress") || "{}");
+      p["w6d1"] = { done: new Date().toISOString(), ok, total: QUIZ.length };
+      localStorage.setItem("adultProgress", JSON.stringify(p));
+    } catch (e) {}
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W7 週一 — 讀信＋圈句型</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:680px;margin:0 auto;padding:0 16px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.7}
+  header{background:#1f4463;color:#fff;text-align:center;padding:16px;border-radius:0 0 16px 16px;margin:0 -16px 16px}
+  header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .card{background:#fff;border-radius:14px;padding:16px 18px;margin-top:14px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .card h2{font-size:1rem;color:#1f4463;margin:0 0 10px}
+  .mail{background:#fdfdf8;border:1.5px solid #e3ddc8;border-radius:12px;padding:14px 16px;font-size:.93rem}
+  .mail .subj{font-weight:800;border-bottom:1px solid #e3ddc8;padding-bottom:6px;margin-bottom:8px}
+  .q{border-top:1px dashed #e5e5e5;padding:12px 0}
+  .q .qt{font-weight:700;margin-bottom:7px;font-size:.92rem}
+  .q button{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit}
+  .q button.ok{border-color:#2a9d5c;background:#e3f6ec}
+  .q button.no{border-color:#d64561;background:#fbe3e9}
+  .q .why{display:none;margin-top:6px;background:#eaf3ff;border-radius:9px;padding:8px 12px;font-size:.84rem;color:#1f4463}
+  #result{font-weight:800;font-size:1.05rem;margin-top:12px;min-height:1.5em}
+  .gobtn{width:100%;padding:13px;border:none;border-radius:12px;background:#1f4463;color:#fff;font-weight:800;font-size:1rem;cursor:pointer;margin-top:14px}
+</style>
+</head>
+<body>
+<header><h1>📖 W7 週一 — 讀信＋圈句型</h1>
+<p><a href="w7.html">← 本週重點</a> · 讀一封已收件通知信，找出可重複使用的句型</p></header>
+
+<div class="card"><h2>先讀這封信（改編自真實 RMA 通知信，已去識別化）</h2>
+<div class="mail">
+  <div class="subj">Subject: RMA R-24081 — Return Instructions</div>
+  Dear Mr. Yeh,<br><br>
+  <b>We have issued RMA number R-24081 for this case.</b>
+  <b>Please fill in the attached RMA form before shipping the unit back.</b><br><br>
+  <b>Please mark the RMA number clearly on the outside of the package.</b>
+  <b>The unit should be packed in its original box or equivalent protective packaging.</b><br><br>
+  <b>Once we receive the unit, we will confirm by email.</b><br><br>
+  Please let us know the tracking number once the unit is shipped.<br><br>
+  Best regards,<br>Cloud
+</div>
+<p style="font-size:.84rem;color:#777">粗體就是本週 5 個核心句——它們在幾乎每封「已收件通知」的信都能重複使用。讀兩次再作答。</p>
+</div>
+
+<div class="card"><h2>✏️ 練習（8 題）</h2><div id="quiz"></div>
+<div id="result"></div>
+</div>
+
+<script>
+const QUIZ = [
+ { q: "1. 為什麼要先給 RMA 編號？",
+   c: ["有編號對方才追得到，也是後續所有信的共同索引", "因為公司規定", "為了讓信看起來正式"],
+   a: 0, why: "沒有編號，後面每一封信都要重講一次是哪一台，很快就會亂掉。" },
+ { q: "2. 「fill the form」哪裡不對？",
+   c: ["fill 後面不能直接接表單，要用 fill in 或 fill out", "form 要用複數", "fill 要改成 write"],
+   a: 0, why: "fill 單獨用是「裝滿」；填表要用 fill in / fill out。" },
+ { q: "3. 為什麼要特別寫「on the outside of the package」？",
+   c: ["標在裡面等於沒標，收貨端拆箱前看不到", "為了讓句子完整", "因為外箱比較大好寫"],
+   a: 0, why: "收貨端是先看外箱才決定怎麼收，標在裡面完全沒有作用。" },
+ { q: "4. 「or equivalent protective packaging」的用意是？",
+   c: ["原箱丟了也有替代方案，不會卡住對方", "讓對方隨便包", "為了免責"],
+   a: 0, why: "只寫 original box，客戶找不到原箱就會停在那裡不敢寄。" },
+ { q: "5. 填空：___ we receive the unit, we will confirm by email.",
+   c: ["Once", "After that", "Until"],
+   a: 0, why: "Once＋完成點＝一……就……，比 after 更強調即時。" },
+ { q: "6. 「confirm you by mail」哪裡有問題？",
+   c: ["confirm 不接人，而且 by mail 是實體郵件，email 要寫 by email", "confirm 要改成 tell", "by mail 是對的"],
+   a: 0, why: "兩個錯：confirm 的受詞應該是事情；mail 在正式用語裡指實體郵件。" },
+ { q: "7. 為什麼結尾要問 tracking number？",
+   c: ["有追蹤號才能主動掌握到貨時間，不用一直問對方", "為了確認客戶有寄", "因為信要有結尾"],
+   a: 0, why: "拿到追蹤號後，到貨時間自己就能查，省掉來回追問。" },
+ { q: "8. 這封信的四個動作依序是？",
+   c: ["給編號 → 填表 → 標示與包裝 → 收到後確認", "填表 → 給編號 → 收件 → 包裝", "包裝 → 標示 → 填表 → 給編號"],
+   a: 0, why: "先給編號對方才知道要標什麼；最後承諾收到會確認，讓對方安心。" }
+];
+let done = 0, ok = 0;
+const el = document.getElementById("quiz");
+el.innerHTML = QUIZ.map((q, i) => `<div class="q" id="q${i}"><div class="qt">${q.q}</div>` +
+  q.c.map((c, ci) => `<button onclick="ans(${i},${ci},this)">${c}</button>`).join("") +
+  `<div class="why" id="why${i}">💡 ${q.why}</div></div>`).join("");
+function ans(i, ci, btn) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const good = ci === QUIZ[i].a;
+  box.querySelectorAll("button").forEach((b, bi) => { b.disabled = true;
+    if (bi === QUIZ[i].a) b.classList.add("ok"); else if (bi === ci) b.classList.add("no"); });
+  document.getElementById("why" + i).style.display = "block";
+  done++; if (good) ok++;
+  if (done === QUIZ.length) {
+    const r = document.getElementById("result");
+    r.textContent = `🎉 答對 ${ok} / ${QUIZ.length}` + (ok === QUIZ.length ? "，全對！" : "，答錯的句子明天會再出現");
+    try {
+      const p = JSON.parse(localStorage.getItem("adultProgress") || "{}");
+      p["w7d1"] = { done: new Date().toISOString(), ok, total: QUIZ.length };
+      localStorage.setItem("adultProgress", JSON.stringify(p));
+    } catch (e) {}
+  }
+}
+</script>
+</body>
+</html>

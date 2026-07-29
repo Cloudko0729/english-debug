@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W5 週五 — 情境應答＋回收</title>
+<style>
+  body{font-family:"Segoe UI","Microsoft JhengHei","Noto Sans TC",sans-serif;max-width:660px;margin:0 auto;padding:0 16px 60px;background:#f4f6fb;color:#1a1a2e;line-height:1.7}
+  header{background:#1f4463;color:#fff;text-align:center;padding:16px;border-radius:0 0 16px 16px;margin:0 -16px 14px}
+  header h1{margin:0;font-size:1.15rem} header p{margin:5px 0 0;font-size:.8rem;opacity:.85}
+  header a{color:#9fd0ff;text-decoration:none;font-weight:700}
+  .q{background:#fff;border-radius:14px;padding:14px 16px;margin-top:12px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+  .q .no{font-size:.72rem;color:#98a3bd;font-weight:700}
+  .q .qt{font-weight:700;margin:4px 0 8px;font-size:.93rem}
+  .q button{display:block;width:100%;text-align:left;padding:10px 13px;border:2px solid #d9e2ec;border-radius:10px;background:#fff;font-weight:600;cursor:pointer;margin:5px 0;font-size:.9rem;font-family:inherit}
+  .q button.play{display:inline-block;width:auto;background:#2c5f8a;color:#fff;border:none;font-weight:700}
+  .q button.ok{border-color:#2a9d5c;background:#e3f6ec}
+  .q button.no2{border-color:#d64561;background:#fbe3e9}
+  .why{display:none;margin-top:6px;background:#eaf3ff;border-radius:9px;padding:8px 12px;font-size:.84rem;color:#1f4463}
+  #result{font-weight:800;font-size:1.02rem;margin-top:12px;text-align:center;min-height:1.5em}
+  .next{display:block;text-align:center;background:#1f4463;color:#fff;border-radius:12px;padding:12px;margin-top:12px;text-decoration:none;font-weight:800}
+</style>
+</head>
+<body>
+<header><h1>💬 W5 週五 — 情境應答</h1>
+<p><a href="w5.html">← 本週重點</a> · 聽客戶說話（別看字！）選出得體的進度回應</p></header>
+<div id="qs"></div><div id="result"></div>
+<a class="next" href="quick.html">➡️ 接著做「今日快練」回收本週錯題</a>
+
+<script>
+const QS = [
+ { id: "w5dg1", cue: "How much will the repair cost?", cueZh: "維修要多少錢？",
+   choices: ["The total repair cost is USD 480, including parts and labor.", "Maybe four or five hundred, I'm not sure yet.", "Depends, we tell you after we finish."],
+   a: 0, why: "給明確金額並說明涵蓋範圍，一次回答客戶真正想問的兩件事。", swap: "It comes to 480 US dollars with parts and labor." },
+ { id: "w5dg2", cue: "How long is this quotation good for?", cueZh: "這份報價有效期多久？",
+   choices: ["The quotation is valid for 30 days from the date of this email.", "Very long time, no problem.", "Until we change the price."],
+   a: 0, why: "明確講期限與起算點，避免日後拿舊報價來談。", swap: "It's valid for thirty days from today." },
+ { id: "w5dg3", cue: "Can you just start the repair now?", cueZh: "可以直接開始修嗎？",
+   choices: ["We will start as soon as we receive your confirmation in writing.", "Sure, we start now, pay later.", "Yes, no need confirm, we just do it."],
+   a: 0, why: "堅持書面確認不是刁難，是避免事後費用爭議；語氣上用 as soon as 讓對方知道你隨時可以開工。", swap: "Once we have your written approval, we'll begin right away." },
+ { id: "w5dg4", cue: "What if I decide not to repair it?", cueZh: "如果我決定不修呢？",
+   choices: ["We can return the unit as it is, with no repair carried out.", "Then you waste our time.", "You must repair, already inspected."],
+   a: 0, why: "給對方退路，並說清楚退回時設備狀態，是專業的處理方式。", swap: "No problem — we'll send it back untouched." },
+ { id: "w5dg5", cue: "Is the price negotiable?", cueZh: "價格可以談嗎？",
+   choices: ["Let me check what we can adjust and get back to you today.", "No, price is price.", "Maybe, tell me your budget first."],
+   a: 0, why: "不當場答應也不硬頂，先承諾回覆時間，把空間留給下一封信（W6 會專門練議價）。", swap: "I'll see what room we have and reply by end of day." }
+];
+let done = 0, ok = 0;
+document.getElementById("qs").innerHTML = QS.map((q, i) => `<div class="q" id="q${i}">
+  <div class="no">${i + 1} / ${QS.length} 🎧</div>
+  <div class="qt">客戶說：</div>
+  <button class="play" onclick="new Audio('audio/${q.id}.mp3').play()">🔊 播放（聽不懂再按一次）</button>
+  <div class="qt" style="margin-top:8px">你回：</div>` +
+  q.choices.map((c, ci) => `<button onclick="ans(${i},${ci},this)">${c}</button>`).join("") +
+  `<div class="why" id="w${i}">💡 他說的是：“${q.cue}”（${q.cueZh}）。${q.why}<br><b>可套用：${q.swap || ""}</b></div></div>`).join("");
+function ans(i, ci, btn) {
+  const box = document.getElementById("q" + i); if (box.dataset.done) return; box.dataset.done = "1";
+  const good = ci === QS[i].a;
+  box.querySelectorAll("button:not(.play)").forEach((b, bi) => { b.disabled = true;
+    if (bi === QS[i].a) b.classList.add("ok"); else if (bi === ci) b.classList.add("no2"); });
+  document.getElementById("w" + i).style.display = "block";
+  done++; if (good) ok++;
+  if (done === QS.length) {
+    document.getElementById("result").textContent = `🎉 答對 ${ok} / ${QS.length}，接著去快練回收錯題！`;
+    try { const p = JSON.parse(localStorage.getItem("adultProgress") || "{}"); p["w5d5"] = { done: new Date().toISOString(), ok, total: QS.length }; localStorage.setItem("adultProgress", JSON.stringify(p)); } catch (e) {}
+  }
+}
+</script>
+</body>
+</html>
