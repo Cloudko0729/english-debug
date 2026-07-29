@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>舊版練習</title>
+  <title>舊版內容</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     body { font-family: Arial, "Noto Sans TC", sans-serif; max-width: 640px; margin: 0 auto;
@@ -40,8 +40,8 @@
 <body>
 
 <header>
-  <h1>📦 舊版練習</h1>
-  <p>之前做過的固定題組 · <a href="index.html">← 回首頁</a></p>
+  <h1>📦 舊版內容</h1>
+  <p>被新系統取代的測驗與教學頁 · <a href="index.html">← 回首頁</a></p>
 </header>
 
 <div id="studentRow">
@@ -54,13 +54,28 @@
 
 <section>
   <div class="intro">
-    這幾份是<b>固定題組</b>：每一份的題目永遠一樣，金幣也只能領一次，做完就沒有新東西了。
+    <b>固定題組測驗</b>：每一份的題目永遠一樣，金幣也只能領一次，做完就沒有新東西了。
     現在的<b><a href="weekly_test.html" style="color:#2f80ed">每週綜合測驗</a></b>會依照你實際上過的課出題，
-    每星期的題目都不一樣，還會告訴你哪幾課忘記了。<br>
+    每星期的題目都不一樣，還會告訴你哪幾課忘記了；
+    起點分級改用<b><a href="diagnostic_grade6_adaptive.html" style="color:#2f80ed">適性起點診斷</a></b>，會自動分流、細分到 F0–F7。<br><br>
+    <b>舊版教學</b>：月曆式的文法教學頁，已由
+    <b><a href="grammar_db/lessons/index.html" style="color:#2f80ed">文法地圖 F0–F7</a></b>
+    與每月自選課表取代。<span style="color:#a05a2c">注意：舊教學頁的語音還是瀏覽器機械音，不是新系統的真人語音。</span><br><br>
     這裡留著是為了想重做的時候還找得到。
   </div>
 
+  <h2 style="font-size:.8rem;color:#7a8796;letter-spacing:.06em;margin:18px 0 8px">固定題組測驗</h2>
   <div class="card-list">
+    <a class="card" href="diagnostic_grade6.html" style="border:2px solid #315c4d;background:linear-gradient(135deg,#e9f4ee,#fff)">
+      <div class="card-left">
+        <div class="card-icon" style="background:#d7eadf;font-size:1.3rem">🧭</div>
+        <div>
+          <div class="card-title">六年級完整診斷（固定題組）</div>
+          <div class="card-sub">原版保留 · 聽力／單字／文法／閱讀／寫作／口說 · 全員使用同一題組</div>
+        </div>
+      </div>
+      <span class="badge badge-new" style="background:#315c4d">原版</span>
+    </a>
     <a class="card" href="drills/exam_final.html" data-claim="final-exam" style="border:2px solid #f2a900;background:linear-gradient(135deg,#fff7dc,#fff)">
       <div class="card-left">
         <div class="card-icon" style="background:#fff0b3;font-size:1.3rem">🏅</div>
@@ -94,12 +109,26 @@
       <span class="badge badge-new">進階</span>
     </a>
   </div>
+
+  <h2 style="font-size:.8rem;color:#7a8796;letter-spacing:.06em;margin:22px 0 8px">舊版教學</h2>
+  <div class="card-list">
+    <a class="card" href="grammar.html" style="border:2px solid #c3ccd8;background:#fafbfc;opacity:.72">
+      <div class="card-left">
+        <div class="card-icon" style="background:#e4e9ef;font-size:1.3rem">📘</div>
+        <div>
+          <div class="card-title">本月文法教學<span style="font-size:.72rem;color:#8a93a0;font-weight:400">（舊版）</span></div>
+          <div class="card-sub">月曆式教學頁 · 單字/文法步驟/對話/短文/小測驗</div>
+        </div>
+      </div>
+      <span class="badge" style="background:#e4e9ef;color:#8a93a0">舊版</span>
+    </a>
+  </div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607281008"></script>
-<script src="account_lock.js?v=202607281008"></script>
-<script src="supabase_auth.js?v=202607281008"></script>
+<script src="cloud_sync.js?v=202607290533"></script>
+<script src="account_lock.js?v=202607290533"></script>
+<script src="supabase_auth.js?v=202607290533"></script>
 <script>
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
