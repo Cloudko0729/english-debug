@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"The keys are in the box.","id":"a","audio":"../../audio/grammar_db/content/f3_4_prepositions_example_1.mp3"},{"t":"We meet in seven.","id":"b","audio":"../../audio/grammar_db/content/f3_4_prepositions_contrast_1_wrong.mp3"},{"t":"I have PE at Monday.","id":"c","audio":"../../audio/grammar_db/content/f3_4_prepositions_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「We meet in seven.」？","opts":[{"t":"We meet at seven.","id":"a","audio":"../../audio/grammar_db/content/f3_4_prepositions_contrast_1_better.mp3"},{"t":"We meet in seven.","id":"b","audio":"../../audio/grammar_db/content/f3_4_prepositions_contrast_1_wrong.mp3"},{"t":"I have PE at Monday.","id":"c","audio":"../../audio/grammar_db/content/f3_4_prepositions_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"The picture is on the wall.","id":"a","audio":"../../audio/grammar_db/content/f3_4_prepositions_example_2.mp3"},{"t":"My birthday is on July.","id":"b","audio":"../../audio/grammar_db/content/f3_4_prepositions_bug_1_wrong.mp3"},{"t":"The cat is in the table.","id":"c","audio":"../../audio/grammar_db/content/f3_4_prepositions_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"We meet in seven.","id":"b","audio":"../../audio/grammar_db/content/f3_4_prepositions_contrast_1_wrong.mp3"},{"t":"I have PE at Monday.","id":"c","audio":"../../audio/grammar_db/content/f3_4_prepositions_contrast_2_wrong.mp3"},{"t":"The keys are in the box.","id":"a","audio":"../../audio/grammar_db/content/f3_4_prepositions_example_1.mp3"}],"a":"a"},{"q":"哪一句最適合修正「We meet in seven.」？","opts":[{"t":"We meet in seven.","id":"b","audio":"../../audio/grammar_db/content/f3_4_prepositions_contrast_1_wrong.mp3"},{"t":"We meet at seven.","id":"a","audio":"../../audio/grammar_db/content/f3_4_prepositions_contrast_1_better.mp3"},{"t":"I have PE at Monday.","id":"c","audio":"../../audio/grammar_db/content/f3_4_prepositions_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"My birthday is on July.","id":"b","audio":"../../audio/grammar_db/content/f3_4_prepositions_bug_1_wrong.mp3"},{"t":"The cat is in the table.","id":"c","audio":"../../audio/grammar_db/content/f3_4_prepositions_bug_2_wrong.mp3"},{"t":"The picture is on the wall.","id":"a","audio":"../../audio/grammar_db/content/f3_4_prepositions_example_2.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "地點與時間介系詞";
 var NODE_GOAL = "說清楚東西在哪裡、事情在什麼時候";

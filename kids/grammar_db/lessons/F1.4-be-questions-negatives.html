@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"Are you tired?","id":"a","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_example_1.mp3"},{"t":"Do you tired?","id":"b","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_contrast_1_wrong.mp3"},{"t":"She not is here.","id":"c","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Do you tired?」？","opts":[{"t":"Are you tired?","id":"a","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_contrast_1_better.mp3"},{"t":"Do you tired?","id":"b","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_contrast_1_wrong.mp3"},{"t":"She not is here.","id":"c","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"Is she at home?","id":"a","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_example_2.mp3"},{"t":"Does he a teacher?","id":"b","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_bug_1_wrong.mp3"},{"t":"We not cold.","id":"c","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"Do you tired?","id":"b","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_contrast_1_wrong.mp3"},{"t":"She not is here.","id":"c","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_contrast_2_wrong.mp3"},{"t":"Are you tired?","id":"a","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_example_1.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Do you tired?」？","opts":[{"t":"Do you tired?","id":"b","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_contrast_1_wrong.mp3"},{"t":"She not is here.","id":"c","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_contrast_2_wrong.mp3"},{"t":"Are you tired?","id":"a","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_contrast_1_better.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"We not cold.","id":"c","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_bug_2_wrong.mp3"},{"t":"Does he a teacher?","id":"b","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_bug_1_wrong.mp3"},{"t":"Is she at home?","id":"a","audio":"../../audio/grammar_db/content/f1_4_be_questions_negatives_example_2.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "be 問句、否定與短答";
 var NODE_GOAL = "用 be 問問題、說「不是」";

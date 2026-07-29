@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"The train leaves at six tomorrow.","id":"a","audio":"../../audio/grammar_db/content/f6_3_future_forms_example_1.mp3"},{"t":"I will meeting Ms. Lee tomorrow.","id":"b","audio":"../../audio/grammar_db/content/f6_3_future_forms_contrast_1_wrong.mp3"},{"t":"Look at those clouds. It will rain.","id":"c","audio":"../../audio/grammar_db/content/f6_3_future_forms_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「I will meeting Ms. Lee tomorrow.」？","opts":[{"t":"I am meeting Ms. Lee tomorrow.","id":"a","audio":"../../audio/grammar_db/content/f6_3_future_forms_contrast_1_better.mp3"},{"t":"I will meeting Ms. Lee tomorrow.","id":"b","audio":"../../audio/grammar_db/content/f6_3_future_forms_contrast_1_wrong.mp3"},{"t":"Look at those clouds. It will rain.","id":"c","audio":"../../audio/grammar_db/content/f6_3_future_forms_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"I am meeting Ms. Lee after school.","id":"a","audio":"../../audio/grammar_db/content/f6_3_future_forms_example_2.mp3"},{"t":"The bus will leaves at seven tomorrow.","id":"b","audio":"../../audio/grammar_db/content/f6_3_future_forms_bug_1_wrong.mp3"},{"t":"The phone is ringing. I am going to answer it.","id":"c","audio":"../../audio/grammar_db/content/f6_3_future_forms_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"The train leaves at six tomorrow.","id":"a","audio":"../../audio/grammar_db/content/f6_3_future_forms_example_1.mp3"},{"t":"I will meeting Ms. Lee tomorrow.","id":"b","audio":"../../audio/grammar_db/content/f6_3_future_forms_contrast_1_wrong.mp3"},{"t":"Look at those clouds. It will rain.","id":"c","audio":"../../audio/grammar_db/content/f6_3_future_forms_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「I will meeting Ms. Lee tomorrow.」？","opts":[{"t":"I am meeting Ms. Lee tomorrow.","id":"a","audio":"../../audio/grammar_db/content/f6_3_future_forms_contrast_1_better.mp3"},{"t":"Look at those clouds. It will rain.","id":"c","audio":"../../audio/grammar_db/content/f6_3_future_forms_contrast_2_wrong.mp3"},{"t":"I will meeting Ms. Lee tomorrow.","id":"b","audio":"../../audio/grammar_db/content/f6_3_future_forms_contrast_1_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"The phone is ringing. I am going to answer it.","id":"c","audio":"../../audio/grammar_db/content/f6_3_future_forms_bug_2_wrong.mp3"},{"t":"The bus will leaves at seven tomorrow.","id":"b","audio":"../../audio/grammar_db/content/f6_3_future_forms_bug_1_wrong.mp3"},{"t":"I am meeting Ms. Lee after school.","id":"a","audio":"../../audio/grammar_db/content/f6_3_future_forms_example_2.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "未來形式的細微差異";
 var NODE_GOAL = "分清楚四種講未來的說法";

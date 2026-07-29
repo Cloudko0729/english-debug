@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"If it rains, we will stay inside.","id":"a","audio":"../../audio/grammar_db/content/f5_4_first_conditional_example_1.mp3"},{"t":"If it will rain, we will stay inside.","id":"b","audio":"../../audio/grammar_db/content/f5_4_first_conditional_contrast_1_wrong.mp3"},{"t":"If you will study, you pass the test.","id":"c","audio":"../../audio/grammar_db/content/f5_4_first_conditional_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「If it will rain, we will stay inside.」？","opts":[{"t":"If it rains, we will stay inside.","id":"a","audio":"../../audio/grammar_db/content/f5_4_first_conditional_contrast_1_better.mp3"},{"t":"If it will rain, we will stay inside.","id":"b","audio":"../../audio/grammar_db/content/f5_4_first_conditional_contrast_1_wrong.mp3"},{"t":"If you will study, you pass the test.","id":"c","audio":"../../audio/grammar_db/content/f5_4_first_conditional_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"If you study, you will learn more.","id":"a","audio":"../../audio/grammar_db/content/f5_4_first_conditional_example_2.mp3"},{"t":"If you will sleep early, you feel better tomorrow.","id":"b","audio":"../../audio/grammar_db/content/f5_4_first_conditional_bug_1_wrong.mp3"},{"t":"If we miss the bus, we can to walk.","id":"c","audio":"../../audio/grammar_db/content/f5_4_first_conditional_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"If you will study, you pass the test.","id":"c","audio":"../../audio/grammar_db/content/f5_4_first_conditional_contrast_2_wrong.mp3"},{"t":"If it rains, we will stay inside.","id":"a","audio":"../../audio/grammar_db/content/f5_4_first_conditional_example_1.mp3"},{"t":"If it will rain, we will stay inside.","id":"b","audio":"../../audio/grammar_db/content/f5_4_first_conditional_contrast_1_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「If it will rain, we will stay inside.」？","opts":[{"t":"If you will study, you pass the test.","id":"c","audio":"../../audio/grammar_db/content/f5_4_first_conditional_contrast_2_wrong.mp3"},{"t":"If it rains, we will stay inside.","id":"a","audio":"../../audio/grammar_db/content/f5_4_first_conditional_contrast_1_better.mp3"},{"t":"If it will rain, we will stay inside.","id":"b","audio":"../../audio/grammar_db/content/f5_4_first_conditional_contrast_1_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"If we miss the bus, we can to walk.","id":"c","audio":"../../audio/grammar_db/content/f5_4_first_conditional_bug_2_wrong.mp3"},{"t":"If you study, you will learn more.","id":"a","audio":"../../audio/grammar_db/content/f5_4_first_conditional_example_2.mp3"},{"t":"If you will sleep early, you feel better tomorrow.","id":"b","audio":"../../audio/grammar_db/content/f5_4_first_conditional_bug_1_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "第一條件句";
 var NODE_GOAL = "說出「如果⋯⋯就會⋯⋯」這種有可能發生的事";

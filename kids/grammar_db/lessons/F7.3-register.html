@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"Could you please send me the schedule?","id":"a","audio":"../../audio/grammar_db/content/f7_3_register_example_1.mp3"},{"t":"Hey, teacher, give me the form.","id":"b","audio":"../../audio/grammar_db/content/f7_3_register_contrast_1_wrong.mp3"},{"t":"I wanna obtain the document.","id":"c","audio":"../../audio/grammar_db/content/f7_3_register_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Hey, teacher, give me the form.」？","opts":[{"t":"Could you please give me the form?","id":"a","audio":"../../audio/grammar_db/content/f7_3_register_contrast_1_better.mp3"},{"t":"Hey, teacher, give me the form.","id":"b","audio":"../../audio/grammar_db/content/f7_3_register_contrast_1_wrong.mp3"},{"t":"I wanna obtain the document.","id":"c","audio":"../../audio/grammar_db/content/f7_3_register_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"Hey, can you send me the plan?","id":"a","audio":"../../audio/grammar_db/content/f7_3_register_example_2.mp3"},{"t":"Send me the details.","id":"b","audio":"../../audio/grammar_db/content/f7_3_register_bug_1_wrong.mp3"},{"t":"We found out pollution got worse.","id":"c","audio":"../../audio/grammar_db/content/f7_3_register_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"Hey, teacher, give me the form.","id":"b","audio":"../../audio/grammar_db/content/f7_3_register_contrast_1_wrong.mp3"},{"t":"Could you please send me the schedule?","id":"a","audio":"../../audio/grammar_db/content/f7_3_register_example_1.mp3"},{"t":"I wanna obtain the document.","id":"c","audio":"../../audio/grammar_db/content/f7_3_register_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Hey, teacher, give me the form.」？","opts":[{"t":"Hey, teacher, give me the form.","id":"b","audio":"../../audio/grammar_db/content/f7_3_register_contrast_1_wrong.mp3"},{"t":"I wanna obtain the document.","id":"c","audio":"../../audio/grammar_db/content/f7_3_register_contrast_2_wrong.mp3"},{"t":"Could you please give me the form?","id":"a","audio":"../../audio/grammar_db/content/f7_3_register_contrast_1_better.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"Send me the details.","id":"b","audio":"../../audio/grammar_db/content/f7_3_register_bug_1_wrong.mp3"},{"t":"Hey, can you send me the plan?","id":"a","audio":"../../audio/grammar_db/content/f7_3_register_example_2.mp3"},{"t":"We found out pollution got worse.","id":"c","audio":"../../audio/grammar_db/content/f7_3_register_bug_2_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "正式與非正式語體";
 var NODE_GOAL = "看對象調整說話的正式程度";

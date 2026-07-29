@@ -29,21 +29,51 @@
 
 <script>
 const QS = [
- { id: "w3dg1", cue: "I don't know the serial number, is that okay?", cueZh: "我不知道序號，這樣可以嗎？",
+ {
+   id: "w3dg1",
+   cue: "I don't know the serial number, is that okay?",
+   cueZh: "我不知道序號，這樣可以嗎？",
    choices: ["No problem, could you send us a photo of the nameplate instead?", "You must find it, we cannot help without it.", "Serial number is not important, don't worry."],
-   a: 0, why: "不直接拒絕，提供替代方案（拍名牌照片）讓客戶容易配合。", swap: "That's fine, a photo of the label works too." },
- { id: "w3dg2", cue: "Here is a screenshot of the error.", cueZh: "這是錯誤的截圖。",
-   choices: ["Thank you, this is very helpful. Let me check it with our engineer.", "This picture is not clear enough, useless.", "OK I look later, maybe tomorrow."],
-   a: 0, why: "先感謝再說明下一步，讓客戶知道資訊已經被重視、正在處理。", swap: "Thanks, this helps a lot — I'll review it now." },
- { id: "w3dg3", cue: "It happens randomly, I can't say exactly when.", cueZh: "它是隨機發生的，我沒辦法說出確切時間。",
-   choices: ["That's okay — could you tell us roughly how often it happens?", "You must know exactly, please check again.", "Randomly is not useful information for us."],
-   a: 0, why: "接受模糊回答，改問範圍更小的問題（大概多久一次），比要求「精確」更務實。", swap: "No worries — even a rough estimate would help." },
- { id: "w3dg4", cue: "Why do you need the model number again? I already told your colleague.", cueZh: "為什麼又要問型號？我已經跟你同事說過了。",
-   choices: ["I'm sorry for the trouble — let me check our record first.", "Your colleague didn't tell me anything.", "You need to tell me again, no choice."],
-   a: 0, why: "先道歉、自己查記錄，不要把責任推給客戶或同事。", swap: "Sorry about that, let me look into our notes." },
- { id: "w3dg5", cue: "I'll send the details later today.", cueZh: "我今天稍晚會把細節傳給你。",
-   choices: ["Great, thank you — we'll start the diagnosis as soon as we receive them.", "Later is too slow, please send now.", "OK, whenever you want."],
-   a: 0, why: "感謝並說明「收到後」會做的下一步，呼應本週核心句 once we receive...", swap: "Sounds good, we'll begin once it arrives." },
+   a: 0,
+   why: "不直接拒絕，提供替代方案（拍名牌照片）讓客戶容易配合。",
+   swap: "That's fine, a photo of the label works too."
+ },
+ {
+   id: "w3dg2",
+   cue: "Here is a screenshot of the error.",
+   cueZh: "這是錯誤的截圖。",
+   choices: ["This picture is not clear enough, useless.", "Thank you, this is very helpful. Let me check it with our engineer.", "OK I look later, maybe tomorrow."],
+   a: 1,
+   why: "先感謝再說明下一步，讓客戶知道資訊已經被重視、正在處理。",
+   swap: "Thanks, this helps a lot — I'll review it now."
+ },
+ {
+   id: "w3dg3",
+   cue: "It happens randomly, I can't say exactly when.",
+   cueZh: "它是隨機發生的，我沒辦法說出確切時間。",
+   choices: ["You must know exactly, please check again.", "That's okay — could you tell us roughly how often it happens?", "Randomly is not useful information for us."],
+   a: 1,
+   why: "接受模糊回答，改問範圍更小的問題（大概多久一次），比要求「精確」更務實。",
+   swap: "No worries — even a rough estimate would help."
+ },
+ {
+   id: "w3dg4",
+   cue: "Why do you need the model number again? I already told your colleague.",
+   cueZh: "為什麼又要問型號？我已經跟你同事說過了。",
+   choices: ["You need to tell me again, no choice.", "Your colleague didn't tell me anything.", "I'm sorry for the trouble — let me check our record first."],
+   a: 2,
+   why: "先道歉、自己查記錄，不要把責任推給客戶或同事。",
+   swap: "Sorry about that, let me look into our notes."
+ },
+ {
+   id: "w3dg5",
+   cue: "I'll send the details later today.",
+   cueZh: "我今天稍晚會把細節傳給你。",
+   choices: ["Great, thank you — we'll start the diagnosis as soon as we receive them.", "OK, whenever you want.", "Later is too slow, please send now."],
+   a: 0,
+   why: "感謝並說明「收到後」會做的下一步，呼應本週核心句 once we receive...",
+   swap: "Sounds good, we'll begin once it arrives."
+ }
 ];
 let done = 0, ok = 0;
 document.getElementById("qs").innerHTML = QS.map((q, i) => `<div class="q" id="q${i}">

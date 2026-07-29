@@ -47,30 +47,54 @@
 
 <script>
 const QUIZ = [
- { q: "1. 信裡哪一句的功能是「自報身分」？",
-   c: ["This is Cloud from Fix-well Technology.", "Thank you for your email.", "Please let me know if you have any questions."],
-   a: 0, why: "第一次聯絡（信/電話）自報身分用 This is ＋名字＋from＋公司。" },
- { q: "2. 哪一句是「承諾下一步＋期限」？",
-   c: ["We have received your inquiry.", "I will check the details with our engineer and update you by Friday.", "Best regards."],
-   a: 1, why: "will＋動作＋update you by＋時間。給期限是讓客戶安心的關鍵。" },
- { q: "3. 「update you by Friday」的 by 意思是？",
-   c: ["最晚在週五（之前）", "在週五那天整天", "從週五開始"],
-   a: 0, why: "by＋時間＝最晚在那之前完成。訂交期、承諾回覆都用 by。" },
- { q: "4. 收到客戶詢問信，最自然的第一句是？",
+ {
+   q: "1. 信裡哪一句的功能是「自報身分」？",
+   c: ["Thank you for your email.", "Please let me know if you have any questions.", "This is Cloud from Fix-well Technology."],
+   a: 2,
+   why: "第一次聯絡（信/電話）自報身分用 This is ＋名字＋from＋公司。"
+ },
+ {
+   q: "2. 哪一句是「承諾下一步＋期限」？",
+   c: ["We have received your inquiry.", "Best regards.", "I will check the details with our engineer and update you by Friday."],
+   a: 2,
+   why: "will＋動作＋update you by＋時間。給期限是讓客戶安心的關鍵。"
+ },
+ {
+   q: "3. 「update you by Friday」的 by 意思是？",
+   c: ["在週五那天整天", "從週五開始", "最晚在週五（之前）"],
+   a: 2,
+   why: "by＋時間＝最晚在那之前完成。訂交期、承諾回覆都用 by。"
+ },
+ {
+   q: "4. 收到客戶詢問信，最自然的第一句是？",
    c: ["Thank you for your email.", "Thanks your email.", "I have seen your email."],
-   a: 0, why: "Thank you for＋名詞。Thanks your email 少了 for，是常見中式寫法。" },
- { q: "5. 填空：We are a repair service company ___ semiconductor test equipment.",
-   c: ["for", "of", "to"],
-   a: 0, why: "「服務對象」用 for：a repair company for ○○ 設備。" },
- { q: "6. 「有任何問題請告訴我」最自然的寫法是？",
+   a: 0,
+   why: "Thank you for＋名詞。Thanks your email 少了 for，是常見中式寫法。"
+ },
+ {
+   q: "5. 填空：We are a repair service company ___ semiconductor test equipment.",
+   c: ["to", "for", "of"],
+   a: 1,
+   why: "「服務對象」用 for：a repair company for ○○ 設備。"
+ },
+ {
+   q: "6. 「有任何問題請告訴我」最自然的寫法是？",
    c: ["Please let me know if you have any questions.", "If you have any question please tell me.", "Any question please let me know."],
-   a: 0, why: "固定結尾句直接背。另外 questions 用複數。" },
- { q: "7. 一封回信的正確順序是？",
-   c: ["稱呼 → 謝謝來信 → 自報身分 → 正事 → 結尾", "自報身分 → 正事 → 稱呼 → 結尾", "正事 → 謝謝來信 → 稱呼 → 結尾"],
-   a: 0, why: "Dear○○ → Thank you for... → This is...（首次聯絡才需要）→ 正事 → Please let me know..." },
- { q: "8. 電話中自報身分，下面哪個對？",
-   c: ["This is Cloud from Fix-well.", "I am Cloud from Fix-well.", "Here is Cloud from Fix-well."],
-   a: 0, why: "電話慣用 This is＋名字。I am 文法沒錯但電話中不道地；Here is 是給東西。" },
+   a: 0,
+   why: "固定結尾句直接背。另外 questions 用複數。"
+ },
+ {
+   q: "7. 一封回信的正確順序是？",
+   c: ["正事 → 謝謝來信 → 稱呼 → 結尾", "自報身分 → 正事 → 稱呼 → 結尾", "稱呼 → 謝謝來信 → 自報身分 → 正事 → 結尾"],
+   a: 2,
+   why: "Dear○○ → Thank you for... → This is...（首次聯絡才需要）→ 正事 → Please let me know..."
+ },
+ {
+   q: "8. 電話中自報身分，下面哪個對？",
+   c: ["This is Cloud from Fix-well.", "Here is Cloud from Fix-well.", "I am Cloud from Fix-well."],
+   a: 0,
+   why: "電話慣用 This is＋名字。I am 文法沒錯但電話中不道地；Here is 是給東西。"
+ }
 ];
 let done = 0, ok = 0;
 const el = document.getElementById("quiz");

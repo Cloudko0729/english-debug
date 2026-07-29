@@ -43,6 +43,8 @@ const VIDEO_BASE = MEDIA.videoBase || "podcast/";
 const AUDIO_BASE = MEDIA.audioBase || "podcast/";
 // 題幹的孩子端用語（資料庫的 promptZh 帶有「本節點」這類引擎術語）
 const { kidPrompt } = require("./_kid_prompt.js");
+// 選項要洗牌：diagnostics 的正解一律排在第一個，不洗的話每題點第一個就全對
+const { shuffleObjects } = require("../../tools/_shuffle.js");
 
 function esc(s) {
   return String(s == null ? "" : s)
@@ -333,11 +335,12 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = ${JSON.stringify(n.diagnostics.map(d => ({
-    q: kidPrompt(d.promptZh),
-    opts: d.choices.map(c => ({ t: c.text, id: c.id, audio: c.audio ? au(c.audio) : null })),
-    a: d.answerId,
-  })))};
+var QUIZ = ${JSON.stringify(n.diagnostics.map(d => {
+    const opts = d.choices.map(c => ({ t: c.text, id: c.id, audio: c.audio ? au(c.audio) : null }));
+    // 種子帶題目與節點，同一個正解在不同題目也會落在不同位置
+    const sh = shuffleObjects(opts, o => o.id === d.answerId, n.id + "|" + d.id + "|" + d.answerId);
+    return { q: kidPrompt(d.promptZh), opts: sh.options, a: d.answerId };
+  }))};
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = ${JSON.stringify(n.titleZh)};
 var NODE_GOAL = ${JSON.stringify((KID[n.id] && KID[n.id].goal) || n.communicativeGoalZh || "")};

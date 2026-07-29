@@ -24,16 +24,66 @@
 <div id="qs"></div><div id="result"></div>
 <script>
 const QUIZ = [
- { q: "「謝謝你的來信」怎麼寫？", c: ["Thank you for your email.", "Thanks your email.", "Thank your email."], a: 0, why: "Thank you for＋名詞，for 不能省。" },
- { q: "填空：Thank you ___ your quick reply.", c: ["for", "of", "to"], a: 0, why: "同一句型換個名詞照樣用：reply / inquiry / support。" },
- { q: "電話中自報身分：", c: ["This is Cloud from Fix-well Technology.", "I am Cloud from Fix-well Technology.", "Here is Cloud."], a: 0, why: "電話慣例用 This is＋名字＋from＋公司。" },
- { q: "填空：We are a repair service company ___ semiconductor test equipment.", c: ["for", "of", "with"], a: 0, why: "服務對象用 for。這句是公司一句話，背熟。" },
- { q: "「我會確認細節，最晚週五回覆你」：", c: ["I will check the details and update you by Friday.", "I will check detail and answer you until Friday.", "I check the details and update you Friday."], a: 0, why: "will＋原形；期限用 by；details 複數。" },
- { q: "填空：I will confirm the schedule and update you ___ Wednesday.", c: ["by", "until", "at"], a: 0, why: "by＝最晚在…之前。承諾回覆一定用它。" },
- { q: "「有任何問題請告訴我」：", c: ["Please let me know if you have any questions.", "If you have any question please tell me.", "Any questions please let me know."], a: 0, why: "標準結尾句直接背；questions 複數。" },
- { q: "填空：Please let me know if you ___ any questions.", c: ["have", "has", "had"], a: 0, why: "you＋have；別被 if 影響。" },
- { q: "自我介紹說「我負責維修案件與客戶聯繫」：", c: ["I handle repair cases and customer communication.", "I am charge of repair case and customer contact.", "My job is repair and talk to customer."], a: 0, why: "handle＝負責處理；in charge of 也可但別漏 in。" },
- { q: "組合題：回信第一句＋最後一句的正確組合是？", c: ["Thank you for your email. ⋯ Please let me know if you have any questions.", "Please let me know. ⋯ Thank you for your email.", "This is Cloud. ⋯ Thanks your email."], a: 0, why: "開場謝→正事→結尾邀請提問，是最穩的信件骨架。" },
+ {
+   q: "「謝謝你的來信」怎麼寫？",
+   c: ["Thanks your email.", "Thank you for your email.", "Thank your email."],
+   a: 1,
+   why: "Thank you for＋名詞，for 不能省。"
+ },
+ {
+   q: "填空：Thank you ___ your quick reply.",
+   c: ["for", "to", "of"],
+   a: 0,
+   why: "同一句型換個名詞照樣用：reply / inquiry / support。"
+ },
+ {
+   q: "電話中自報身分：",
+   c: ["Here is Cloud.", "I am Cloud from Fix-well Technology.", "This is Cloud from Fix-well Technology."],
+   a: 2,
+   why: "電話慣例用 This is＋名字＋from＋公司。"
+ },
+ {
+   q: "填空：We are a repair service company ___ semiconductor test equipment.",
+   c: ["with", "of", "for"],
+   a: 2,
+   why: "服務對象用 for。這句是公司一句話，背熟。"
+ },
+ {
+   q: "「我會確認細節，最晚週五回覆你」：",
+   c: ["I will check detail and answer you until Friday.", "I check the details and update you Friday.", "I will check the details and update you by Friday."],
+   a: 2,
+   why: "will＋原形；期限用 by；details 複數。"
+ },
+ {
+   q: "填空：I will confirm the schedule and update you ___ Wednesday.",
+   c: ["until", "by", "at"],
+   a: 1,
+   why: "by＝最晚在…之前。承諾回覆一定用它。"
+ },
+ {
+   q: "「有任何問題請告訴我」：",
+   c: ["Please let me know if you have any questions.", "Any questions please let me know.", "If you have any question please tell me."],
+   a: 0,
+   why: "標準結尾句直接背；questions 複數。"
+ },
+ {
+   q: "填空：Please let me know if you ___ any questions.",
+   c: ["have", "had", "has"],
+   a: 0,
+   why: "you＋have；別被 if 影響。"
+ },
+ {
+   q: "自我介紹說「我負責維修案件與客戶聯繫」：",
+   c: ["I am charge of repair case and customer contact.", "My job is repair and talk to customer.", "I handle repair cases and customer communication."],
+   a: 2,
+   why: "handle＝負責處理；in charge of 也可但別漏 in。"
+ },
+ {
+   q: "組合題：回信第一句＋最後一句的正確組合是？",
+   c: ["Please let me know. ⋯ Thank you for your email.", "This is Cloud. ⋯ Thanks your email.", "Thank you for your email. ⋯ Please let me know if you have any questions."],
+   a: 2,
+   why: "開場謝→正事→結尾邀請提問，是最穩的信件骨架。"
+ }
 ];
 let done = 0, ok = 0;
 document.getElementById("qs").innerHTML = QUIZ.map((q, i) => `<div class="q" id="q${i}"><div class="qt">${i + 1}. ${q.q}</div>` +

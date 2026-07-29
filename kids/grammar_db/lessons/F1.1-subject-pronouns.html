@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"I like music.","id":"a","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_example_1.mp3"},{"t":"Me am ready.","id":"b","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_contrast_1_wrong.mp3"},{"t":"Tom and Amy is here.","id":"c","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Me am ready.」？","opts":[{"t":"I am ready.","id":"a","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_contrast_1_better.mp3"},{"t":"Me am ready.","id":"b","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_contrast_1_wrong.mp3"},{"t":"Tom and Amy is here.","id":"c","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"She is my teacher.","id":"a","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_example_2.mp3"},{"t":"Her is my sister.","id":"b","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_bug_1_wrong.mp3"},{"t":"Is heavy.","id":"c","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"Tom and Amy is here.","id":"c","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_contrast_2_wrong.mp3"},{"t":"Me am ready.","id":"b","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_contrast_1_wrong.mp3"},{"t":"I like music.","id":"a","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_example_1.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Me am ready.」？","opts":[{"t":"Me am ready.","id":"b","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_contrast_1_wrong.mp3"},{"t":"Tom and Amy is here.","id":"c","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_contrast_2_wrong.mp3"},{"t":"I am ready.","id":"a","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_contrast_1_better.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"Is heavy.","id":"c","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_bug_2_wrong.mp3"},{"t":"Her is my sister.","id":"b","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_bug_1_wrong.mp3"},{"t":"She is my teacher.","id":"a","audio":"../../audio/grammar_db/content/f1_1_subject_pronouns_example_2.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "主詞代名詞";
 var NODE_GOAL = "用「他、她、它、他們」代替一直重複的名字";

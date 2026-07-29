@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"I have a pencil and an eraser.","id":"a","audio":"../../audio/grammar_db/content/f3_5_connectors_example_1.mp3"},{"t":"Because I was sick, so I stayed home.","id":"b","audio":"../../audio/grammar_db/content/f3_5_connectors_contrast_1_wrong.mp3"},{"t":"I was tired, but I went to bed early.","id":"c","audio":"../../audio/grammar_db/content/f3_5_connectors_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Because I was sick, so I stayed home.」？","opts":[{"t":"I stayed home because I was sick.","id":"a","audio":"../../audio/grammar_db/content/f3_5_connectors_contrast_1_better.mp3"},{"t":"Because I was sick, so I stayed home.","id":"b","audio":"../../audio/grammar_db/content/f3_5_connectors_contrast_1_wrong.mp3"},{"t":"I was tired, but I went to bed early.","id":"c","audio":"../../audio/grammar_db/content/f3_5_connectors_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"The bag is old, but it is clean.","id":"a","audio":"../../audio/grammar_db/content/f3_5_connectors_example_2.mp3"},{"t":"It rained, because we stayed inside.","id":"b","audio":"../../audio/grammar_db/content/f3_5_connectors_bug_1_wrong.mp3"},{"t":"I like apples but bananas.","id":"c","audio":"../../audio/grammar_db/content/f3_5_connectors_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"Because I was sick, so I stayed home.","id":"b","audio":"../../audio/grammar_db/content/f3_5_connectors_contrast_1_wrong.mp3"},{"t":"I was tired, but I went to bed early.","id":"c","audio":"../../audio/grammar_db/content/f3_5_connectors_contrast_2_wrong.mp3"},{"t":"I have a pencil and an eraser.","id":"a","audio":"../../audio/grammar_db/content/f3_5_connectors_example_1.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Because I was sick, so I stayed home.」？","opts":[{"t":"I stayed home because I was sick.","id":"a","audio":"../../audio/grammar_db/content/f3_5_connectors_contrast_1_better.mp3"},{"t":"I was tired, but I went to bed early.","id":"c","audio":"../../audio/grammar_db/content/f3_5_connectors_contrast_2_wrong.mp3"},{"t":"Because I was sick, so I stayed home.","id":"b","audio":"../../audio/grammar_db/content/f3_5_connectors_contrast_1_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"It rained, because we stayed inside.","id":"b","audio":"../../audio/grammar_db/content/f3_5_connectors_bug_1_wrong.mp3"},{"t":"I like apples but bananas.","id":"c","audio":"../../audio/grammar_db/content/f3_5_connectors_bug_2_wrong.mp3"},{"t":"The bag is old, but it is clean.","id":"a","audio":"../../audio/grammar_db/content/f3_5_connectors_example_2.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "基本連接詞與邏輯";
 var NODE_GOAL = "把兩句話連起來：而且／但是／因為／所以";

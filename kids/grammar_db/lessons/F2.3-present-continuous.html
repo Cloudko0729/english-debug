@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"I am reading now.","id":"a","audio":"../../audio/grammar_db/content/f2_3_present_continuous_example_1.mp3"},{"t":"I reading now.","id":"b","audio":"../../audio/grammar_db/content/f2_3_present_continuous_contrast_1_wrong.mp3"},{"t":"She is cook dinner.","id":"c","audio":"../../audio/grammar_db/content/f2_3_present_continuous_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「I reading now.」？","opts":[{"t":"I am reading now.","id":"a","audio":"../../audio/grammar_db/content/f2_3_present_continuous_contrast_1_better.mp3"},{"t":"I reading now.","id":"b","audio":"../../audio/grammar_db/content/f2_3_present_continuous_contrast_1_wrong.mp3"},{"t":"She is cook dinner.","id":"c","audio":"../../audio/grammar_db/content/f2_3_present_continuous_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"She is cooking dinner.","id":"a","audio":"../../audio/grammar_db/content/f2_3_present_continuous_example_2.mp3"},{"t":"He running now.","id":"b","audio":"../../audio/grammar_db/content/f2_3_present_continuous_bug_1_wrong.mp3"},{"t":"We are eat lunch.","id":"c","audio":"../../audio/grammar_db/content/f2_3_present_continuous_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"She is cook dinner.","id":"c","audio":"../../audio/grammar_db/content/f2_3_present_continuous_contrast_2_wrong.mp3"},{"t":"I reading now.","id":"b","audio":"../../audio/grammar_db/content/f2_3_present_continuous_contrast_1_wrong.mp3"},{"t":"I am reading now.","id":"a","audio":"../../audio/grammar_db/content/f2_3_present_continuous_example_1.mp3"}],"a":"a"},{"q":"哪一句最適合修正「I reading now.」？","opts":[{"t":"I reading now.","id":"b","audio":"../../audio/grammar_db/content/f2_3_present_continuous_contrast_1_wrong.mp3"},{"t":"I am reading now.","id":"a","audio":"../../audio/grammar_db/content/f2_3_present_continuous_contrast_1_better.mp3"},{"t":"She is cook dinner.","id":"c","audio":"../../audio/grammar_db/content/f2_3_present_continuous_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"She is cooking dinner.","id":"a","audio":"../../audio/grammar_db/content/f2_3_present_continuous_example_2.mp3"},{"t":"We are eat lunch.","id":"c","audio":"../../audio/grammar_db/content/f2_3_present_continuous_bug_2_wrong.mp3"},{"t":"He running now.","id":"b","audio":"../../audio/grammar_db/content/f2_3_present_continuous_bug_1_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "現在進行式";
 var NODE_GOAL = "告訴別人現在正在做什麼";

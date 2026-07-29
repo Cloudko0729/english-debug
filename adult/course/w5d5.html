@@ -30,19 +30,19 @@
 <script>
 const QS = [
  { id: "w5dg1", cue: "How much will the repair cost?", cueZh: "維修要多少錢？",
-   choices: ["The total repair cost is USD 480, including parts and labor.", "Maybe four or five hundred, I'm not sure yet.", "Depends, we tell you after we finish."],
-   a: 0, why: "給明確金額並說明涵蓋範圍，一次回答客戶真正想問的兩件事。", swap: "It comes to 480 US dollars with parts and labor." },
+   choices: ["Maybe four or five hundred, I'm not sure yet.", "Depends, we tell you after we finish.", "The total repair cost is USD 480, including parts and labor."],
+   a: 2, why: "給明確金額並說明涵蓋範圍，一次回答客戶真正想問的兩件事。", swap: "It comes to 480 US dollars with parts and labor." },
  { id: "w5dg2", cue: "How long is this quotation good for?", cueZh: "這份報價有效期多久？",
-   choices: ["The quotation is valid for 30 days from the date of this email.", "Very long time, no problem.", "Until we change the price."],
-   a: 0, why: "明確講期限與起算點，避免日後拿舊報價來談。", swap: "It's valid for thirty days from today." },
+   choices: ["Until we change the price.", "Very long time, no problem.", "The quotation is valid for 30 days from the date of this email."],
+   a: 2, why: "明確講期限與起算點，避免日後拿舊報價來談。", swap: "It's valid for thirty days from today." },
  { id: "w5dg3", cue: "Can you just start the repair now?", cueZh: "可以直接開始修嗎？",
-   choices: ["We will start as soon as we receive your confirmation in writing.", "Sure, we start now, pay later.", "Yes, no need confirm, we just do it."],
-   a: 0, why: "堅持書面確認不是刁難，是避免事後費用爭議；語氣上用 as soon as 讓對方知道你隨時可以開工。", swap: "Once we have your written approval, we'll begin right away." },
+   choices: ["Yes, no need confirm, we just do it.", "We will start as soon as we receive your confirmation in writing.", "Sure, we start now, pay later."],
+   a: 1, why: "堅持書面確認不是刁難，是避免事後費用爭議；語氣上用 as soon as 讓對方知道你隨時可以開工。", swap: "Once we have your written approval, we'll begin right away." },
  { id: "w5dg4", cue: "What if I decide not to repair it?", cueZh: "如果我決定不修呢？",
    choices: ["We can return the unit as it is, with no repair carried out.", "Then you waste our time.", "You must repair, already inspected."],
    a: 0, why: "給對方退路，並說清楚退回時設備狀態，是專業的處理方式。", swap: "No problem — we'll send it back untouched." },
  { id: "w5dg5", cue: "Is the price negotiable?", cueZh: "價格可以談嗎？",
-   choices: ["Let me check what we can adjust and get back to you today.", "No, price is price.", "Maybe, tell me your budget first."],
+   choices: ["Let me check what we can adjust and get back to you today.", "Maybe, tell me your budget first.", "No, price is price."],
    a: 0, why: "不當場答應也不硬頂，先承諾回覆時間，把空間留給下一封信（W6 會專門練議價）。", swap: "I'll see what room we have and reply by end of day." }
 ];
 let done = 0, ok = 0;

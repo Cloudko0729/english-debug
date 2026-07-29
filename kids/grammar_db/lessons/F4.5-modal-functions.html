@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"You should get more sleep.","id":"a","audio":"../../audio/grammar_db/content/f4_5_modal_functions_example_1.mp3"},{"t":"You must to wear a helmet.","id":"b","audio":"../../audio/grammar_db/content/f4_5_modal_functions_contrast_1_wrong.mp3"},{"t":"She shoulds see a doctor.","id":"c","audio":"../../audio/grammar_db/content/f4_5_modal_functions_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「You must to wear a helmet.」？","opts":[{"t":"You must wear a helmet.","id":"a","audio":"../../audio/grammar_db/content/f4_5_modal_functions_contrast_1_better.mp3"},{"t":"You must to wear a helmet.","id":"b","audio":"../../audio/grammar_db/content/f4_5_modal_functions_contrast_1_wrong.mp3"},{"t":"She shoulds see a doctor.","id":"c","audio":"../../audio/grammar_db/content/f4_5_modal_functions_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"Students must wear a helmet here.","id":"a","audio":"../../audio/grammar_db/content/f4_5_modal_functions_example_2.mp3"},{"t":"You should to take a break.","id":"b","audio":"../../audio/grammar_db/content/f4_5_modal_functions_bug_1_wrong.mp3"},{"t":"It must snow tomorrow.","id":"c","audio":"../../audio/grammar_db/content/f4_5_modal_functions_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"You should get more sleep.","id":"a","audio":"../../audio/grammar_db/content/f4_5_modal_functions_example_1.mp3"},{"t":"You must to wear a helmet.","id":"b","audio":"../../audio/grammar_db/content/f4_5_modal_functions_contrast_1_wrong.mp3"},{"t":"She shoulds see a doctor.","id":"c","audio":"../../audio/grammar_db/content/f4_5_modal_functions_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「You must to wear a helmet.」？","opts":[{"t":"She shoulds see a doctor.","id":"c","audio":"../../audio/grammar_db/content/f4_5_modal_functions_contrast_2_wrong.mp3"},{"t":"You must wear a helmet.","id":"a","audio":"../../audio/grammar_db/content/f4_5_modal_functions_contrast_1_better.mp3"},{"t":"You must to wear a helmet.","id":"b","audio":"../../audio/grammar_db/content/f4_5_modal_functions_contrast_1_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"Students must wear a helmet here.","id":"a","audio":"../../audio/grammar_db/content/f4_5_modal_functions_example_2.mp3"},{"t":"It must snow tomorrow.","id":"c","audio":"../../audio/grammar_db/content/f4_5_modal_functions_bug_2_wrong.mp3"},{"t":"You should to take a break.","id":"b","audio":"../../audio/grammar_db/content/f4_5_modal_functions_bug_1_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "建議、義務與可能性";
 var NODE_GOAL = "說「應該、必須、可能」";

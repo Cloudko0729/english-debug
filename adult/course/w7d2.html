@@ -25,20 +25,20 @@
 <script>
 const QUIZ = [
  { q: "1. 中翻英：請先填寫附件的 RMA 表單再寄回設備。",
-   c: ["Please fill in the attached RMA form before shipping the unit back.", "Please fill the RMA form before you ship back the unit.", "Please write the attach RMA form before ship the unit."],
+   c: ["Please fill in the attached RMA form before shipping the unit back.", "Please write the attach RMA form before ship the unit.", "Please fill the RMA form before you ship back the unit."],
    a: 0, why: "fill in＋表單；before＋動名詞 shipping。" },
  { q: "2. 填空：We have ___ RMA number R-24081 for this case.",
-   c: ["issued", "issue", "issuing"],
+   c: ["issued", "issuing", "issue"],
    a: 0, why: "have＋過去分詞 issued，表示編號已經開出來了。" },
  { q: "3. 中翻英：請將 RMA 編號清楚標示在外箱上。",
-   c: ["Please mark the RMA number clearly on the outside of the package.", "Please write RMA number on outside package.", "Please mark clearly RMA number outside of package."],
+   c: ["Please mark the RMA number clearly on the outside of the package.", "Please mark clearly RMA number outside of package.", "Please write RMA number on outside package."],
    a: 0, why: "the RMA number 要限定詞；on the outside of the package 是完整說法。" },
  { q: "4. 填空：The unit should be ___ in its original box.",
-   c: ["packed", "pack", "packing"],
-   a: 0, why: "設備是被包裝，用被動 should be packed。" },
+   c: ["packing", "pack", "packed"],
+   a: 2, why: "設備是被包裝，用被動 should be packed。" },
  { q: "5. 中翻英：設備一到我們會以 email 確認。",
-   c: ["Once we receive the unit, we will confirm by email.", "After we receive, we confirm you by mail.", "When we received the unit, we confirm by email."],
-   a: 0, why: "Once＋現在式；confirm 不接人；email 要寫 by email。" },
+   c: ["After we receive, we confirm you by mail.", "Once we receive the unit, we will confirm by email.", "When we received the unit, we confirm by email."],
+   a: 1, why: "Once＋現在式；confirm 不接人；email 要寫 by email。" },
  { q: "6. 「or equivalent protective packaging」中的 equivalent 是什麼意思？",
    c: ["同等級的（替代品）", "額外的", "昂貴的"],
    a: 0, why: "equivalent＝同等的，用來給對方替代方案。" },
@@ -46,14 +46,14 @@ const QUIZ = [
    c: ["Any box with equivalent protective packaging is fine.", "Then you cannot ship it.", "You must find the original box."],
    a: 0, why: "給替代方案讓事情繼續，不要卡住對方。" },
  { q: "8. 填空：Please let us know the tracking number once the unit ___.",
-   c: ["is shipped", "ships out", "was shipped"],
-   a: 0, why: "設備是被寄出，用被動 is shipped；once 子句用現在式表未來。" },
+   c: ["ships out", "is shipped", "was shipped"],
+   a: 1, why: "設備是被寄出，用被動 is shipped；once 子句用現在式表未來。" },
  { q: "9. 哪一句最適合用來說明 RMA 編號的用途？",
-   c: ["Please quote this RMA number in all future correspondence.", "This number is just for our record.", "You can ignore the RMA number."],
+   c: ["Please quote this RMA number in all future correspondence.", "You can ignore the RMA number.", "This number is just for our record."],
    a: 0, why: "quote this number in all future correspondence 讓對方知道以後每封信都要帶上。" },
  { q: "10. RMA 通知信最容易漏掉的是什麼？",
-   c: ["標示位置（外箱）與包裝要求", "問候語", "公司名稱"],
-   a: 0, why: "漏掉標示與包裝要求，設備到廠常常認不出是哪一案，或途中就摔壞了。" }
+   c: ["問候語", "標示位置（外箱）與包裝要求", "公司名稱"],
+   a: 1, why: "漏掉標示與包裝要求，設備到廠常常認不出是哪一案，或途中就摔壞了。" }
 ];
 let done = 0, ok = 0;
 document.getElementById("qs").innerHTML = QUIZ.map((q, i) => `<div class="q" id="q${i}"><div class="qt">${i + 1}. ${q.q}</div>` +

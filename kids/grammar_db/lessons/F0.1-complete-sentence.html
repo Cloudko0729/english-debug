@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"My dog runs.","id":"a","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_example_1.mp3"},{"t":"My dog very cute.","id":"b","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_1_wrong.mp3"},{"t":"In the classroom.","id":"c","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「My dog very cute.」？","opts":[{"t":"My dog is very cute.","id":"a","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_1_better.mp3"},{"t":"My dog very cute.","id":"b","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_1_wrong.mp3"},{"t":"In the classroom.","id":"c","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"The soup is hot.","id":"a","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_example_2.mp3"},{"t":"Is very cold.","id":"b","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_bug_1_wrong.mp3"},{"t":"My sister very happy.","id":"c","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"My dog very cute.","id":"b","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_1_wrong.mp3"},{"t":"In the classroom.","id":"c","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_2_wrong.mp3"},{"t":"My dog runs.","id":"a","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_example_1.mp3"}],"a":"a"},{"q":"哪一句最適合修正「My dog very cute.」？","opts":[{"t":"In the classroom.","id":"c","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_2_wrong.mp3"},{"t":"My dog is very cute.","id":"a","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_1_better.mp3"},{"t":"My dog very cute.","id":"b","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_contrast_1_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"The soup is hot.","id":"a","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_example_2.mp3"},{"t":"My sister very happy.","id":"c","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_bug_2_wrong.mp3"},{"t":"Is very cold.","id":"b","audio":"../../audio/grammar_db/content/f0_1_complete_sentence_bug_1_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "完整句與片語";
 var NODE_GOAL = "看出一句話有沒有說完整";

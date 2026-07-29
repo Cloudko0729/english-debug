@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"The lights are on, so someone must be home.","id":"a","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_example_1.mp3"},{"t":"Someone must to be home.","id":"b","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_contrast_1_wrong.mp3"},{"t":"It must rain tomorrow because the sky is cloudy.","id":"c","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Someone must to be home.」？","opts":[{"t":"Someone must be home.","id":"a","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_contrast_1_better.mp3"},{"t":"Someone must to be home.","id":"b","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_contrast_1_wrong.mp3"},{"t":"It must rain tomorrow because the sky is cloudy.","id":"c","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"This key might open the old box.","id":"a","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_example_2.mp3"},{"t":"She must have forgotten.","id":"b","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_bug_1_wrong.mp3"},{"t":"That must not be true.","id":"c","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"It must rain tomorrow because the sky is cloudy.","id":"c","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_contrast_2_wrong.mp3"},{"t":"The lights are on, so someone must be home.","id":"a","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_example_1.mp3"},{"t":"Someone must to be home.","id":"b","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_contrast_1_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Someone must to be home.」？","opts":[{"t":"It must rain tomorrow because the sky is cloudy.","id":"c","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_contrast_2_wrong.mp3"},{"t":"Someone must to be home.","id":"b","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_contrast_1_wrong.mp3"},{"t":"Someone must be home.","id":"a","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_contrast_1_better.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"She must have forgotten.","id":"b","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_bug_1_wrong.mp3"},{"t":"That must not be true.","id":"c","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_bug_2_wrong.mp3"},{"t":"This key might open the old box.","id":"a","audio":"../../audio/grammar_db/content/f7_2_modal_deduction_example_2.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "情態動詞的推論強度";
 var NODE_GOAL = "用 must／may／might／can't 表達「有多確定」";

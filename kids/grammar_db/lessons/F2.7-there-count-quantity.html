@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"There is a book on the desk.","id":"a","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_example_1.mp3"},{"t":"There have a park near my house.","id":"b","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_contrast_1_wrong.mp3"},{"t":"There is three apples.","id":"c","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「There have a park near my house.」？","opts":[{"t":"There is a park near my house.","id":"a","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_contrast_1_better.mp3"},{"t":"There have a park near my house.","id":"b","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_contrast_1_wrong.mp3"},{"t":"There is three apples.","id":"c","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"There are three books on the desk.","id":"a","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_example_2.mp3"},{"t":"There are some milk in the fridge.","id":"b","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_bug_1_wrong.mp3"},{"t":"There aren't some questions.","id":"c","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"There is a book on the desk.","id":"a","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_example_1.mp3"},{"t":"There have a park near my house.","id":"b","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_contrast_1_wrong.mp3"},{"t":"There is three apples.","id":"c","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「There have a park near my house.」？","opts":[{"t":"There have a park near my house.","id":"b","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_contrast_1_wrong.mp3"},{"t":"There is three apples.","id":"c","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_contrast_2_wrong.mp3"},{"t":"There is a park near my house.","id":"a","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_contrast_1_better.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"There are some milk in the fridge.","id":"b","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_bug_1_wrong.mp3"},{"t":"There are three books on the desk.","id":"a","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_example_2.mp3"},{"t":"There aren't some questions.","id":"c","audio":"../../audio/grammar_db/content/f2_7_there_count_quantity_bug_2_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "there is/are 與基本數量";
 var NODE_GOAL = "說「有一個⋯⋯」「有很多⋯⋯」";

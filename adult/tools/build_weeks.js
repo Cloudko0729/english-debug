@@ -8,6 +8,7 @@
 // 其餘原樣沿用。W1-W4 本身不動。
 const fs = require("fs");
 const path = require("path");
+const { shuffleChoices } = require("../../tools/_shuffle.js");
 
 const ROOT = path.join(__dirname, "..");
 const DIR = path.join(ROOT, "course");
@@ -114,11 +115,15 @@ function buildD1(w) {
   return write(`w${w.n}d1.html`, s);
 }
 
+// 選項要洗牌：內容資料裡正解一律寫在第一個（"a": 0），照原順序輸出的話
+// 使用者每題點第一個就全對，測驗完全失效。
 function quizJs(qs) {
-  return qs.map(q =>
-    ` { q: ${JSON.stringify(q.q)},\n` +
-    `   c: [${q.c.map(x => JSON.stringify(x)).join(", ")}],\n` +
-    `   a: ${q.a}, why: ${JSON.stringify(q.why)} },`).join("\n").replace(/,$/, "");
+  return qs.map(q => {
+    const sh = shuffleChoices(q.c, q.c[q.a], q.q);
+    return ` { q: ${JSON.stringify(q.q)},\n` +
+      `   c: [${sh.options.map(x => JSON.stringify(x)).join(", ")}],\n` +
+      `   a: ${sh.answerIndex}, why: ${JSON.stringify(q.why)} },`;
+  }).join("\n").replace(/,$/, "");
 }
 
 function buildD2(w) {
@@ -155,10 +160,12 @@ function buildD5(w) {
   let s = renumber(read(`w${TPL}d5.html`), w.n);
   s = swapLine(s, /<title>[^<]*<\/title>/, `<title>W${w.n} 週五 — 情境應答＋回收</title>`, "d5 title");
   s = swapLine(s, /<h1>💬 W\d+ 週五 — 情境應答<\/h1>/, `<h1>💬 W${w.n} 週五 — 情境應答</h1>`, "d5 h1");
-  const qs = w.d5.qs.map((q, i) =>
-    ` { id: "w${w.n}dg${i + 1}", cue: ${JSON.stringify(q.cue)}, cueZh: ${JSON.stringify(q.cueZh)},\n` +
-    `   choices: [${q.choices.map(c => JSON.stringify(c)).join(", ")}],\n` +
-    `   a: ${q.a}, why: ${JSON.stringify(q.why)}, swap: ${JSON.stringify(q.swap)} },`).join("\n");
+  const qs = w.d5.qs.map((q, i) => {
+    const sh = shuffleChoices(q.choices, q.choices[q.a], q.cue);
+    return ` { id: "w${w.n}dg${i + 1}", cue: ${JSON.stringify(q.cue)}, cueZh: ${JSON.stringify(q.cueZh)},\n` +
+      `   choices: [${sh.options.map(c => JSON.stringify(c)).join(", ")}],\n` +
+      `   a: ${sh.answerIndex}, why: ${JSON.stringify(q.why)}, swap: ${JSON.stringify(q.swap)} },`;
+  }).join("\n");
   s = swap(s, `const QS = [\n`, `\n];`, qs.replace(/,$/, ""), "d5 題目");
   return write(`w${w.n}d5.html`, s);
 }

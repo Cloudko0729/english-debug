@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"What do you need?","id":"a","audio":"../../audio/grammar_db/content/f1_6_wh_questions_example_1.mp3"},{"t":"Where you live?","id":"b","audio":"../../audio/grammar_db/content/f1_6_wh_questions_contrast_1_wrong.mp3"},{"t":"What she wants?","id":"c","audio":"../../audio/grammar_db/content/f1_6_wh_questions_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Where you live?」？","opts":[{"t":"Where do you live?","id":"a","audio":"../../audio/grammar_db/content/f1_6_wh_questions_contrast_1_better.mp3"},{"t":"Where you live?","id":"b","audio":"../../audio/grammar_db/content/f1_6_wh_questions_contrast_1_wrong.mp3"},{"t":"What she wants?","id":"c","audio":"../../audio/grammar_db/content/f1_6_wh_questions_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"Where is my book?","id":"a","audio":"../../audio/grammar_db/content/f1_6_wh_questions_example_2.mp3"},{"t":"Why you are tired?","id":"b","audio":"../../audio/grammar_db/content/f1_6_wh_questions_bug_1_wrong.mp3"},{"t":"When he gets up?","id":"c","audio":"../../audio/grammar_db/content/f1_6_wh_questions_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"What she wants?","id":"c","audio":"../../audio/grammar_db/content/f1_6_wh_questions_contrast_2_wrong.mp3"},{"t":"What do you need?","id":"a","audio":"../../audio/grammar_db/content/f1_6_wh_questions_example_1.mp3"},{"t":"Where you live?","id":"b","audio":"../../audio/grammar_db/content/f1_6_wh_questions_contrast_1_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Where you live?」？","opts":[{"t":"Where do you live?","id":"a","audio":"../../audio/grammar_db/content/f1_6_wh_questions_contrast_1_better.mp3"},{"t":"What she wants?","id":"c","audio":"../../audio/grammar_db/content/f1_6_wh_questions_contrast_2_wrong.mp3"},{"t":"Where you live?","id":"b","audio":"../../audio/grammar_db/content/f1_6_wh_questions_contrast_1_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"When he gets up?","id":"c","audio":"../../audio/grammar_db/content/f1_6_wh_questions_bug_2_wrong.mp3"},{"t":"Why you are tired?","id":"b","audio":"../../audio/grammar_db/content/f1_6_wh_questions_bug_1_wrong.mp3"},{"t":"Where is my book?","id":"a","audio":"../../audio/grammar_db/content/f1_6_wh_questions_example_2.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "Wh- 資訊問句";
 var NODE_GOAL = "問「誰、什麼、哪裡、什麼時候、為什麼、怎麼樣」";

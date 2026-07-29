@@ -30,20 +30,20 @@
 <script>
 const QS = [
  { id: "w6dg1", cue: "This is more than we budgeted for.", cueZh: "這比我們的預算高。",
-   choices: ["I understand — let me explain what the quotation covers, and we can look at the options.", "That's the price, take it or leave it.", "Every customer says that."],
-   a: 0, why: "先理解再說明，並主動提到還有選項可談。", swap: "I hear you — let me walk you through what's in it." },
+   choices: ["Every customer says that.", "That's the price, take it or leave it.", "I understand — let me explain what the quotation covers, and we can look at the options."],
+   a: 2, why: "先理解再說明，並主動提到還有選項可談。", swap: "I hear you — let me walk you through what's in it." },
  { id: "w6dg2", cue: "Why is the labor cost so high?", cueZh: "工時費為什麼這麼高？",
-   choices: ["The four hours cover the inspection, the replacement, and the final retest.", "Because our engineers are expensive.", "That's how we always charge."],
+   choices: ["The four hours cover the inspection, the replacement, and the final retest.", "That's how we always charge.", "Because our engineers are expensive."],
    a: 0, why: "把工時拆成三個具體動作，對方就知道錢花在哪。", swap: "It breaks down into inspection, replacement and retest." },
  { id: "w6dg3", cue: "Can you give us a 30% discount?", cueZh: "可以打七折嗎？",
-   choices: ["We can reduce the cost by repairing only the failing channel — that would bring it down significantly.", "OK, 30% no problem.", "Impossible, don't ask again."],
-   a: 0, why: "用縮小範圍換價格，而不是無條件打折。", swap: "Instead of a discount, we can narrow the scope to just the bad channel." },
+   choices: ["Impossible, don't ask again.", "OK, 30% no problem.", "We can reduce the cost by repairing only the failing channel — that would bring it down significantly."],
+   a: 2, why: "用縮小範圍換價格，而不是無條件打折。", swap: "Instead of a discount, we can narrow the scope to just the bad channel." },
  { id: "w6dg4", cue: "Is that your best price?", cueZh: "這是最好的價格了嗎？",
-   choices: ["At this stage, yes — but I can quote a reduced scope if that helps.", "Yes, final, no more talk.", "Maybe, let me ask my boss again."],
+   choices: ["At this stage, yes — but I can quote a reduced scope if that helps.", "Maybe, let me ask my boss again.", "Yes, final, no more talk."],
    a: 0, why: "守住價格但同時給對方一條路，比單純說「就這樣」有用。", swap: "That's where we are on the full repair — a smaller scope would be less." },
  { id: "w6dg5", cue: "What if we only fix the broken part?", cueZh: "如果只修壞掉的部分呢？",
-   choices: ["That works — we can quote a partial repair covering the failing channel only.", "Then it will break again, not our problem.", "We don't do partial repair."],
-   a: 0, why: "客戶自己提出縮小範圍時，直接接住並確認範圍。", swap: "Sure — I'll quote a partial repair for that channel." }
+   choices: ["Then it will break again, not our problem.", "That works — we can quote a partial repair covering the failing channel only.", "We don't do partial repair."],
+   a: 1, why: "客戶自己提出縮小範圍時，直接接住並確認範圍。", swap: "Sure — I'll quote a partial repair for that channel." }
 ];
 let done = 0, ok = 0;
 document.getElementById("qs").innerHTML = QS.map((q, i) => `<div class="q" id="q${i}">

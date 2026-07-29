@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"The student whose idea won is in my class.","id":"a","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_example_1.mp3"},{"t":"Ms. Lee who teaches science checked our design.","id":"b","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_contrast_1_wrong.mp3"},{"t":"We spoke to the engineer about the device who designed it.","id":"c","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Ms. Lee who teaches science checked our design.」？","opts":[{"t":"Ms. Lee, who teaches science, checked our design.","id":"a","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_contrast_1_better.mp3"},{"t":"Ms. Lee who teaches science checked our design.","id":"b","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_contrast_1_wrong.mp3"},{"t":"We spoke to the engineer about the device who designed it.","id":"c","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"June is the month when we present our project.","id":"a","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_example_2.mp3"},{"t":"The student who bike was stolen called the police.","id":"b","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_bug_1_wrong.mp3"},{"t":"We finished in May, which the rainy season begins.","id":"c","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"Ms. Lee who teaches science checked our design.","id":"b","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_contrast_1_wrong.mp3"},{"t":"We spoke to the engineer about the device who designed it.","id":"c","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_contrast_2_wrong.mp3"},{"t":"The student whose idea won is in my class.","id":"a","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_example_1.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Ms. Lee who teaches science checked our design.」？","opts":[{"t":"We spoke to the engineer about the device who designed it.","id":"c","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_contrast_2_wrong.mp3"},{"t":"Ms. Lee who teaches science checked our design.","id":"b","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_contrast_1_wrong.mp3"},{"t":"Ms. Lee, who teaches science, checked our design.","id":"a","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_contrast_1_better.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"June is the month when we present our project.","id":"a","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_example_2.mp3"},{"t":"We finished in May, which the rainy season begins.","id":"c","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_bug_2_wrong.mp3"},{"t":"The student who bike was stolen called the police.","id":"b","audio":"../../audio/grammar_db/content/f7_1_relative_advanced_bug_1_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "關係子句深化";
 var NODE_GOAL = "用補充子句時，讓補充說明連到正確的對象";

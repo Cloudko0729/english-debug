@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"I was tired yesterday.","id":"a","audio":"../../audio/grammar_db/content/f3_1_past_be_example_1.mp3"},{"t":"We was at home.","id":"b","audio":"../../audio/grammar_db/content/f3_1_past_be_contrast_1_wrong.mp3"},{"t":"I did be tired.","id":"c","audio":"../../audio/grammar_db/content/f3_1_past_be_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「We was at home.」？","opts":[{"t":"We were at home.","id":"a","audio":"../../audio/grammar_db/content/f3_1_past_be_contrast_1_better.mp3"},{"t":"We was at home.","id":"b","audio":"../../audio/grammar_db/content/f3_1_past_be_contrast_1_wrong.mp3"},{"t":"I did be tired.","id":"c","audio":"../../audio/grammar_db/content/f3_1_past_be_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"They were at the park.","id":"a","audio":"../../audio/grammar_db/content/f3_1_past_be_example_2.mp3"},{"t":"He is busy yesterday.","id":"b","audio":"../../audio/grammar_db/content/f3_1_past_be_bug_1_wrong.mp3"},{"t":"Was you in the library?","id":"c","audio":"../../audio/grammar_db/content/f3_1_past_be_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"I did be tired.","id":"c","audio":"../../audio/grammar_db/content/f3_1_past_be_contrast_2_wrong.mp3"},{"t":"We was at home.","id":"b","audio":"../../audio/grammar_db/content/f3_1_past_be_contrast_1_wrong.mp3"},{"t":"I was tired yesterday.","id":"a","audio":"../../audio/grammar_db/content/f3_1_past_be_example_1.mp3"}],"a":"a"},{"q":"哪一句最適合修正「We was at home.」？","opts":[{"t":"I did be tired.","id":"c","audio":"../../audio/grammar_db/content/f3_1_past_be_contrast_2_wrong.mp3"},{"t":"We were at home.","id":"a","audio":"../../audio/grammar_db/content/f3_1_past_be_contrast_1_better.mp3"},{"t":"We was at home.","id":"b","audio":"../../audio/grammar_db/content/f3_1_past_be_contrast_1_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"They were at the park.","id":"a","audio":"../../audio/grammar_db/content/f3_1_past_be_example_2.mp3"},{"t":"He is busy yesterday.","id":"b","audio":"../../audio/grammar_db/content/f3_1_past_be_bug_1_wrong.mp3"},{"t":"Was you in the library?","id":"c","audio":"../../audio/grammar_db/content/f3_1_past_be_bug_2_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "過去的 was / were";
 var NODE_GOAL = "說「以前是⋯⋯」「昨天在⋯⋯」";

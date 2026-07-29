@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"I usually walk to school.","id":"a","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_example_1.mp3"},{"t":"I play usually soccer after school.","id":"b","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_contrast_1_wrong.mp3"},{"t":"He always is late.","id":"c","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「I play usually soccer after school.」？","opts":[{"t":"I usually play soccer after school.","id":"a","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_contrast_1_better.mp3"},{"t":"I play usually soccer after school.","id":"b","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_contrast_1_wrong.mp3"},{"t":"He always is late.","id":"c","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"She is often tired after practice.","id":"a","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_example_2.mp3"},{"t":"I take often the bus.","id":"b","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_bug_1_wrong.mp3"},{"t":"She never is late.","id":"c","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"He always is late.","id":"c","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_contrast_2_wrong.mp3"},{"t":"I usually walk to school.","id":"a","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_example_1.mp3"},{"t":"I play usually soccer after school.","id":"b","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_contrast_1_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「I play usually soccer after school.」？","opts":[{"t":"I play usually soccer after school.","id":"b","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_contrast_1_wrong.mp3"},{"t":"I usually play soccer after school.","id":"a","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_contrast_1_better.mp3"},{"t":"He always is late.","id":"c","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"She is often tired after practice.","id":"a","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_example_2.mp3"},{"t":"She never is late.","id":"c","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_bug_2_wrong.mp3"},{"t":"I take often the bus.","id":"b","audio":"../../audio/grammar_db/content/f2_2_frequency_adverbs_bug_1_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "頻率副詞的位置";
 var NODE_GOAL = "把「總是、常常、有時候、從不」放在對的位置";

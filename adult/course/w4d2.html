@@ -24,16 +24,66 @@
 <div id="qs"></div><div id="result"></div>
 <script>
 const QUIZ = [
- { q: "「謝謝你寄送設備，我們已收到會盡快安排檢查」：", c: ["Thank you for sending the unit — we have received it and will arrange the inspection shortly.", "Thanks send unit, we receive and will check.", "Thank you send the unit, we got it will check."], a: 0, why: "have received 是現在完成式；received it 用 it 避免重複 unit。" },
- { q: "填空：We have ___ the unit and will arrange the inspection shortly.", c: ["received", "receive", "receiving"], a: 0, why: "have＋過去分詞＝現在完成式，表示動作已完成。" },
- { q: "「進廠檢查預計需要一到兩個工作天」：", c: ["The incoming inspection is expected to take one to two business days.", "Inspection need one two day.", "Check will take one or two day maybe."], a: 0, why: "is expected to take＋時間，是給估計工期的標準句型；days 要複數。" },
- { q: "填空：The incoming inspection is expected ___ take one to two business days.", c: ["to", "for", "at"], a: 0, why: "be expected to＋原形動詞，固定搭配。" },
- { q: "「檢查完成後我們會盡快跟你分享結果」：", c: ["We will share the findings with you as soon as the inspection is complete.", "We tell you result when inspection finish.", "We will let you know when check is done maybe."], a: 0, why: "as soon as＋明確完成點；findings 比籠統的 result 更專業。" },
- { q: "填空：We will share the findings with you ___ the inspection is complete.", c: ["as soon as", "until", "since"], a: 0, why: "as soon as表示「一…就…」，是承諾下一步最常用的連接詞。" },
- { q: "「如果我們發現額外問題，會在繼續維修前先告知你」：", c: ["If we find any additional issues, we will inform you before proceeding with the repair.", "If we found more problem, we tell you before continue.", "We continue even if find new problem, don't worry."], a: 0, why: "if 子句現在式 find；before proceeding with，proceeding 是動名詞。" },
- { q: "填空：If we find any additional issues, we will inform you before ___ with the repair.", c: ["proceeding", "proceed", "to proceed"], a: 0, why: "介係詞 before 後面接動名詞。" },
- { q: "「謝謝你在這段過程中的耐心等候」：", c: ["Thank you for your patience while we complete this process.", "Thanks you patient for this process.", "Thank you for wait during this process."], a: 0, why: "patience 是名詞（耐心），patient 是形容詞，別搞混。" },
- { q: "組合題：已收件通知信第一句＋最後一句的正確組合是？", c: ["Thank you for sending the unit — we have received it and will arrange the inspection shortly. ⋯ Thank you for your patience while we complete this process.", "Thank you for your patience. ⋯ We have received the unit.", "The inspection is expected to take two days. ⋯ Thanks send unit."], a: 0, why: "先確認收件＋下一步，最後感謝耐心等候，是已收件通知信最穩的骨架。" },
+ {
+   q: "「謝謝你寄送設備，我們已收到會盡快安排檢查」：",
+   c: ["Thank you send the unit, we got it will check.", "Thank you for sending the unit — we have received it and will arrange the inspection shortly.", "Thanks send unit, we receive and will check."],
+   a: 1,
+   why: "have received 是現在完成式；received it 用 it 避免重複 unit。"
+ },
+ {
+   q: "填空：We have ___ the unit and will arrange the inspection shortly.",
+   c: ["received", "receiving", "receive"],
+   a: 0,
+   why: "have＋過去分詞＝現在完成式，表示動作已完成。"
+ },
+ {
+   q: "「進廠檢查預計需要一到兩個工作天」：",
+   c: ["The incoming inspection is expected to take one to two business days.", "Inspection need one two day.", "Check will take one or two day maybe."],
+   a: 0,
+   why: "is expected to take＋時間，是給估計工期的標準句型；days 要複數。"
+ },
+ {
+   q: "填空：The incoming inspection is expected ___ take one to two business days.",
+   c: ["for", "at", "to"],
+   a: 2,
+   why: "be expected to＋原形動詞，固定搭配。"
+ },
+ {
+   q: "「檢查完成後我們會盡快跟你分享結果」：",
+   c: ["We will let you know when check is done maybe.", "We will share the findings with you as soon as the inspection is complete.", "We tell you result when inspection finish."],
+   a: 1,
+   why: "as soon as＋明確完成點；findings 比籠統的 result 更專業。"
+ },
+ {
+   q: "填空：We will share the findings with you ___ the inspection is complete.",
+   c: ["since", "as soon as", "until"],
+   a: 1,
+   why: "as soon as表示「一…就…」，是承諾下一步最常用的連接詞。"
+ },
+ {
+   q: "「如果我們發現額外問題，會在繼續維修前先告知你」：",
+   c: ["If we found more problem, we tell you before continue.", "We continue even if find new problem, don't worry.", "If we find any additional issues, we will inform you before proceeding with the repair."],
+   a: 2,
+   why: "if 子句現在式 find；before proceeding with，proceeding 是動名詞。"
+ },
+ {
+   q: "填空：If we find any additional issues, we will inform you before ___ with the repair.",
+   c: ["proceed", "to proceed", "proceeding"],
+   a: 2,
+   why: "介係詞 before 後面接動名詞。"
+ },
+ {
+   q: "「謝謝你在這段過程中的耐心等候」：",
+   c: ["Thank you for wait during this process.", "Thank you for your patience while we complete this process.", "Thanks you patient for this process."],
+   a: 1,
+   why: "patience 是名詞（耐心），patient 是形容詞，別搞混。"
+ },
+ {
+   q: "組合題：已收件通知信第一句＋最後一句的正確組合是？",
+   c: ["Thank you for sending the unit — we have received it and will arrange the inspection shortly. ⋯ Thank you for your patience while we complete this process.", "Thank you for your patience. ⋯ We have received the unit.", "The inspection is expected to take two days. ⋯ Thanks send unit."],
+   a: 0,
+   why: "先確認收件＋下一步，最後感謝耐心等候，是已收件通知信最穩的骨架。"
+ }
 ];
 let done = 0, ok = 0;
 document.getElementById("qs").innerHTML = QUIZ.map((q, i) => `<div class="q" id="q${i}"><div class="qt">${i + 1}. ${q.q}</div>` +

@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"We found a small wooden box.","id":"a","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_example_1.mp3"},{"t":"She has a red big bag.","id":"b","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_1_wrong.mp3"},{"t":"We opened a wooden old box.","id":"c","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「She has a red big bag.」？","opts":[{"t":"She has a big red bag.","id":"a","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_1_better.mp3"},{"t":"She has a red big bag.","id":"b","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_1_wrong.mp3"},{"t":"We opened a wooden old box.","id":"c","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"She carried a beautiful old map.","id":"a","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_example_2.mp3"},{"t":"a stone small beautiful bridge","id":"b","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_bug_1_wrong.mp3"},{"t":"the on the table book","id":"c","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"We opened a wooden old box.","id":"c","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_2_wrong.mp3"},{"t":"She has a red big bag.","id":"b","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_1_wrong.mp3"},{"t":"We found a small wooden box.","id":"a","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_example_1.mp3"}],"a":"a"},{"q":"哪一句最適合修正「She has a red big bag.」？","opts":[{"t":"We opened a wooden old box.","id":"c","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_2_wrong.mp3"},{"t":"She has a big red bag.","id":"a","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_1_better.mp3"},{"t":"She has a red big bag.","id":"b","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_contrast_1_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"She carried a beautiful old map.","id":"a","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_example_2.mp3"},{"t":"a stone small beautiful bridge","id":"b","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_bug_1_wrong.mp3"},{"t":"the on the table book","id":"c","audio":"../../audio/grammar_db/content/f6_4_expanded_noun_phrases_bug_2_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "擴展名詞片語";
 var NODE_GOAL = "把一個東西描述得更精確";

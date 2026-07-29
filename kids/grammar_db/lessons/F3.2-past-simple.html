@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"We played soccer yesterday.","id":"a","audio":"../../audio/grammar_db/content/f3_2_past_simple_example_1.mp3"},{"t":"She goed to the store.","id":"b","audio":"../../audio/grammar_db/content/f3_2_past_simple_contrast_1_wrong.mp3"},{"t":"I was went to school.","id":"c","audio":"../../audio/grammar_db/content/f3_2_past_simple_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「She goed to the store.」？","opts":[{"t":"She went to the store.","id":"a","audio":"../../audio/grammar_db/content/f3_2_past_simple_contrast_1_better.mp3"},{"t":"She goed to the store.","id":"b","audio":"../../audio/grammar_db/content/f3_2_past_simple_contrast_1_wrong.mp3"},{"t":"I was went to school.","id":"c","audio":"../../audio/grammar_db/content/f3_2_past_simple_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"She went to the store.","id":"a","audio":"../../audio/grammar_db/content/f3_2_past_simple_example_2.mp3"},{"t":"I eated cake yesterday.","id":"b","audio":"../../audio/grammar_db/content/f3_2_past_simple_bug_1_wrong.mp3"},{"t":"We watch the movie last week.","id":"c","audio":"../../audio/grammar_db/content/f3_2_past_simple_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"We played soccer yesterday.","id":"a","audio":"../../audio/grammar_db/content/f3_2_past_simple_example_1.mp3"},{"t":"I was went to school.","id":"c","audio":"../../audio/grammar_db/content/f3_2_past_simple_contrast_2_wrong.mp3"},{"t":"She goed to the store.","id":"b","audio":"../../audio/grammar_db/content/f3_2_past_simple_contrast_1_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「She goed to the store.」？","opts":[{"t":"She goed to the store.","id":"b","audio":"../../audio/grammar_db/content/f3_2_past_simple_contrast_1_wrong.mp3"},{"t":"She went to the store.","id":"a","audio":"../../audio/grammar_db/content/f3_2_past_simple_contrast_1_better.mp3"},{"t":"I was went to school.","id":"c","audio":"../../audio/grammar_db/content/f3_2_past_simple_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"I eated cake yesterday.","id":"b","audio":"../../audio/grammar_db/content/f3_2_past_simple_bug_1_wrong.mp3"},{"t":"She went to the store.","id":"a","audio":"../../audio/grammar_db/content/f3_2_past_simple_example_2.mp3"},{"t":"We watch the movie last week.","id":"c","audio":"../../audio/grammar_db/content/f3_2_past_simple_bug_2_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "一般動詞過去式";
 var NODE_GOAL = "說出昨天、剛才已經做過的事";

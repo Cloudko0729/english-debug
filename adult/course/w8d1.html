@@ -49,11 +49,11 @@
 <script>
 const QUIZ = [
  { q: "1. 為什麼要給明確日期而不是「大概兩三週」？",
-   c: ["對方要用這個日期去排自己的生產或出貨", "為了顯得專業", "因為英文沒有「大概」的說法"],
-   a: 0, why: "客戶拿到日期才能往下排程。模糊的期間對他毫無用處。" },
+   c: ["為了顯得專業", "因為英文沒有「大概」的說法", "對方要用這個日期去排自己的生產或出貨"],
+   a: 2, why: "客戶拿到日期才能往下排程。模糊的期間對他毫無用處。" },
  { q: "2. 「lead time」是什麼意思？",
-   c: ["從下單到到貨所需的時間", "維修所需的時間", "客戶等待回覆的時間"],
-   a: 0, why: "lead time 是採購與維修共通的字，專指料件從下單到入手的時間。" },
+   c: ["客戶等待回覆的時間", "從下單到到貨所需的時間", "維修所需的時間"],
+   a: 1, why: "lead time 是採購與維修共通的字，專指料件從下單到入手的時間。" },
  { q: "3. 為什麼要寫「as soon as the part arrives」？",
    c: ["讓對方知道我們沒在拖，只是在等料", "為了拖延時間", "因為要湊句數"],
    a: 0, why: "把等待的原因講明白，對方才不會以為是我們動作慢。" },
@@ -61,17 +61,17 @@ const QUIZ = [
    c: ["先講風險比事後解釋有效得多", "為了推卸責任", "因為一定會延遲"],
    a: 0, why: "事前說過，延遲時對方比較能接受；事後才講就變成藉口。" },
  { q: "5. 填空：The schedule ___ change if the part is delayed.",
-   c: ["may", "will", "must"],
-   a: 0, why: "may 表示可能性，保留彈性；will 等於保證會變，反而製造焦慮。" },
+   c: ["will", "must", "may"],
+   a: 2, why: "may 表示可能性，保留彈性；will 等於保證會變，反而製造焦慮。" },
  { q: "6. 整封信最重要的承諾是哪一句？",
-   c: ["We will update you if the estimated date changes.", "The estimated completion date is August 15.", "Thank you for your patience."],
-   a: 0, why: "做到主動更新，客戶就不會每兩天追問一次——這才是真正省下時間的地方。" },
+   c: ["Thank you for your patience.", "The estimated completion date is August 15.", "We will update you if the estimated date changes."],
+   a: 2, why: "做到主動更新，客戶就不會每兩天追問一次——這才是真正省下時間的地方。" },
  { q: "7. 「is delayed by the supplier」為什麼用被動？",
    c: ["料件是被延遲的，動作者是供應商", "被動比較禮貌", "主動語態文法錯誤"],
    a: 0, why: "主角是料件（the part），供應商是動作者，用 by 帶出來。" },
  { q: "8. 如果日期真的延後了，最好的做法是？",
-   c: ["主動寄信告知新日期與原因", "等客戶問了再說", "先不講，看能不能趕上"],
-   a: 0, why: "主動更新是這封信給過的承諾，做到了信任才建立得起來。" }
+   c: ["先不講，看能不能趕上", "等客戶問了再說", "主動寄信告知新日期與原因"],
+   a: 2, why: "主動更新是這封信給過的承諾，做到了信任才建立得起來。" }
 ];
 let done = 0, ok = 0;
 const el = document.getElementById("quiz");

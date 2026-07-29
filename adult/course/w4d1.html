@@ -47,30 +47,54 @@
 
 <script>
 const QUIZ = [
- { q: "1. 信裡哪一句確認「已收到設備並會安排檢查」？",
+ {
+   q: "1. 信裡哪一句確認「已收到設備並會安排檢查」？",
    c: ["Thank you for sending the unit — we have received it and will arrange the inspection shortly.", "The incoming inspection is expected to take one to two business days.", "Best regards."],
-   a: 0, why: "have received（現在完成式）表示動作已完成，will arrange 說明下一步。" },
- { q: "2. 「incoming inspection」最接近的意思是？",
-   c: ["進廠檢查／來料檢驗", "維修完成後的出貨檢查", "客戶端的驗收測試"],
-   a: 0, why: "incoming inspection 是設備到廠後、正式維修前的第一道檢查。" },
- { q: "3. 「is expected to take」用來表達什麼？",
-   c: ["預估需要的時間", "已經確定完成的時間", "客戶要求的期限"],
-   a: 0, why: "is expected to take＋時間＝預計需要多久，是給估計工期的標準句型。" },
- { q: "4. 填空：We will share the findings with you ___ the inspection is complete.",
-   c: ["as soon as", "until", "since"],
-   a: 0, why: "as soon as＋明確完成點，比 as soon as possible 更具體。" },
- { q: "5. 「若發現額外問題，會先告知才繼續」的句子是？",
-   c: ["If we find any additional issues, we will inform you before proceeding with the repair.", "If we found more problem, we tell you before continue.", "We continue repair even find new problem."],
-   a: 0, why: "if 子句用現在式 find；before proceeding with，proceeding 是動名詞。" },
- { q: "6. 「謝謝你在這段過程中的耐心等候」最自然的寫法是？",
-   c: ["Thank you for your patience while we complete this process.", "Thanks you patient for this process.", "Thank you wait patient during process."],
-   a: 0, why: "patience 是名詞，patient 是形容詞，這裡要用 for your patience。" },
- { q: "7. 一封已收件通知信的正確順序是？",
-   c: ["稱呼 → 確認收件＋會安排檢查 → 說明檢查時間 → 承諾分享結果 → 若有額外問題先告知 → 感謝耐心 → 結尾", "說明檢查時間 → 稱呼 → 確認收件 → 結尾", "感謝耐心 → 確認收件 → 稱呼 → 說明檢查時間"],
-   a: 0, why: "先讓對方安心（收到了、會處理），再說明時程，最後給下一步承諾。" },
- { q: "8. 電話中告知客戶「檢查大概需要一到兩個工作天」，下面哪個對？",
+   a: 0,
+   why: "have received（現在完成式）表示動作已完成，will arrange 說明下一步。"
+ },
+ {
+   q: "2. 「incoming inspection」最接近的意思是？",
+   c: ["客戶端的驗收測試", "維修完成後的出貨檢查", "進廠檢查／來料檢驗"],
+   a: 2,
+   why: "incoming inspection 是設備到廠後、正式維修前的第一道檢查。"
+ },
+ {
+   q: "3. 「is expected to take」用來表達什麼？",
+   c: ["客戶要求的期限", "已經確定完成的時間", "預估需要的時間"],
+   a: 2,
+   why: "is expected to take＋時間＝預計需要多久，是給估計工期的標準句型。"
+ },
+ {
+   q: "4. 填空：We will share the findings with you ___ the inspection is complete.",
+   c: ["as soon as", "since", "until"],
+   a: 0,
+   why: "as soon as＋明確完成點，比 as soon as possible 更具體。"
+ },
+ {
+   q: "5. 「若發現額外問題，會先告知才繼續」的句子是？",
+   c: ["If we found more problem, we tell you before continue.", "If we find any additional issues, we will inform you before proceeding with the repair.", "We continue repair even find new problem."],
+   a: 1,
+   why: "if 子句用現在式 find；before proceeding with，proceeding 是動名詞。"
+ },
+ {
+   q: "6. 「謝謝你在這段過程中的耐心等候」最自然的寫法是？",
+   c: ["Thanks you patient for this process.", "Thank you for your patience while we complete this process.", "Thank you wait patient during process."],
+   a: 1,
+   why: "patience 是名詞，patient 是形容詞，這裡要用 for your patience。"
+ },
+ {
+   q: "7. 一封已收件通知信的正確順序是？",
+   c: ["感謝耐心 → 確認收件 → 稱呼 → 說明檢查時間", "稱呼 → 確認收件＋會安排檢查 → 說明檢查時間 → 承諾分享結果 → 若有額外問題先告知 → 感謝耐心 → 結尾", "說明檢查時間 → 稱呼 → 確認收件 → 結尾"],
+   a: 1,
+   why: "先讓對方安心（收到了、會處理），再說明時程，最後給下一步承諾。"
+ },
+ {
+   q: "8. 電話中告知客戶「檢查大概需要一到兩個工作天」，下面哪個對？",
    c: ["The incoming inspection usually takes one to two business days.", "Inspection need one two day, not sure.", "Maybe fast maybe slow, don't know."],
-   a: 0, why: "電話中一樣可以給明確的時間範圍，讓客戶安心。" },
+   a: 0,
+   why: "電話中一樣可以給明確的時間範圍，讓客戶安心。"
+ }
 ];
 let done = 0, ok = 0;
 const el = document.getElementById("quiz");

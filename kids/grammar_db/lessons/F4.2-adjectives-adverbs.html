@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"She is a careful student.","id":"a","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_example_1.mp3"},{"t":"He is a carefully boy.","id":"b","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_1_wrong.mp3"},{"t":"She speaks English good.","id":"c","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「He is a carefully boy.」？","opts":[{"t":"He is a careful boy.","id":"a","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_1_better.mp3"},{"t":"He is a carefully boy.","id":"b","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_1_wrong.mp3"},{"t":"She speaks English good.","id":"c","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"She checks her work carefully.","id":"a","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_example_2.mp3"},{"t":"He walks slow.","id":"b","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_bug_1_wrong.mp3"},{"t":"This flower smells sweetly.","id":"c","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"He is a carefully boy.","id":"b","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_1_wrong.mp3"},{"t":"She is a careful student.","id":"a","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_example_1.mp3"},{"t":"She speaks English good.","id":"c","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「He is a carefully boy.」？","opts":[{"t":"She speaks English good.","id":"c","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_2_wrong.mp3"},{"t":"He is a carefully boy.","id":"b","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_1_wrong.mp3"},{"t":"He is a careful boy.","id":"a","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_contrast_1_better.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"She checks her work carefully.","id":"a","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_example_2.mp3"},{"t":"This flower smells sweetly.","id":"c","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_bug_2_wrong.mp3"},{"t":"He walks slow.","id":"b","audio":"../../audio/grammar_db/content/f4_2_adjectives_adverbs_bug_1_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "形容詞與副詞";
 var NODE_GOAL = "分清楚「形容東西」和「形容做事的樣子」";

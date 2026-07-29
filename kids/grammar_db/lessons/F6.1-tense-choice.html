@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"I was walking home when I found the key.","id":"a","audio":"../../audio/grammar_db/content/f6_1_tense_choice_example_1.mp3"},{"t":"Yesterday we find a key and now we kept it.","id":"b","audio":"../../audio/grammar_db/content/f6_1_tense_choice_contrast_1_wrong.mp3"},{"t":"I was opening the box, and I saw an old map inside.","id":"c","audio":"../../audio/grammar_db/content/f6_1_tense_choice_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Yesterday we find a key and now we kept it.」？","opts":[{"t":"Yesterday we found a key, and we have kept it since then.","id":"a","audio":"../../audio/grammar_db/content/f6_1_tense_choice_contrast_1_better.mp3"},{"t":"Yesterday we find a key and now we kept it.","id":"b","audio":"../../audio/grammar_db/content/f6_1_tense_choice_contrast_1_wrong.mp3"},{"t":"I was opening the box, and I saw an old map inside.","id":"c","audio":"../../audio/grammar_db/content/f6_1_tense_choice_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"We have kept the key since that day.","id":"a","audio":"../../audio/grammar_db/content/f6_1_tense_choice_example_2.mp3"},{"t":"I walked home when it was starting to rain, so I run to a store.","id":"b","audio":"../../audio/grammar_db/content/f6_1_tense_choice_bug_1_wrong.mp3"},{"t":"We worked on this report since Monday.","id":"c","audio":"../../audio/grammar_db/content/f6_1_tense_choice_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"I was opening the box, and I saw an old map inside.","id":"c","audio":"../../audio/grammar_db/content/f6_1_tense_choice_contrast_2_wrong.mp3"},{"t":"Yesterday we find a key and now we kept it.","id":"b","audio":"../../audio/grammar_db/content/f6_1_tense_choice_contrast_1_wrong.mp3"},{"t":"I was walking home when I found the key.","id":"a","audio":"../../audio/grammar_db/content/f6_1_tense_choice_example_1.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Yesterday we find a key and now we kept it.」？","opts":[{"t":"I was opening the box, and I saw an old map inside.","id":"c","audio":"../../audio/grammar_db/content/f6_1_tense_choice_contrast_2_wrong.mp3"},{"t":"Yesterday we find a key and now we kept it.","id":"b","audio":"../../audio/grammar_db/content/f6_1_tense_choice_contrast_1_wrong.mp3"},{"t":"Yesterday we found a key, and we have kept it since then.","id":"a","audio":"../../audio/grammar_db/content/f6_1_tense_choice_contrast_1_better.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"We have kept the key since that day.","id":"a","audio":"../../audio/grammar_db/content/f6_1_tense_choice_example_2.mp3"},{"t":"We worked on this report since Monday.","id":"c","audio":"../../audio/grammar_db/content/f6_1_tense_choice_bug_2_wrong.mp3"},{"t":"I walked home when it was starting to rain, so I run to a store.","id":"b","audio":"../../audio/grammar_db/content/f6_1_tense_choice_bug_1_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "跨句時態選擇";
 var NODE_GOAL = "寫一整段的時候，時態前後要一致";

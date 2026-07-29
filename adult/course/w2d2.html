@@ -24,16 +24,66 @@
 <div id="qs"></div><div id="result"></div>
 <script>
 const QUIZ = [
- { q: "「謝謝你來信詢問電源供應器的問題」怎麼寫？", c: ["Thank you for reaching out regarding the power supply issue.", "Thanks you send email about power supply.", "Thank you reach out about power supply."], a: 0, why: "reach out regarding＋主題，regarding 不能省。" },
- { q: "填空：Thank you for reaching out ___ the shipment delay.", c: ["regarding", "for", "to"], a: 0, why: "同一句型換主題照樣用：regarding＋任何事件。" },
- { q: "「我們收到你的詢問了，會馬上處理」：", c: ["We have received your inquiry and will look into it right away.", "We receive your inquiry, will check it right away.", "We got your inquiry and will look it right away."], a: 0, why: "have received 是完成式；look into it，into 不能省。" },
- { q: "填空：We have received your quotation request and will ___ into it right away.", c: ["look", "check", "see"], a: 0, why: "look into 是固定搭配，不能換成 check into 或 see into。" },
- { q: "「確認一下，你是要我們檢查電源供應器，對嗎？」：", c: ["To confirm, you would like us to check the power supply — is that correct?", "To confirm you want check power supply, right?", "Confirm you ask us check power supply?"], a: 0, why: "To confirm, 後面接完整句子；want us to check，別漏 to。" },
- { q: "填空：To confirm, you would like us ___ check the shipping address — is that correct?", c: ["to", "for", "with"], a: 0, why: "want/would like ＋人＋to＋原形動詞。" },
- { q: "「我們最晚明天會回覆你更詳細的內容」：", c: ["We will get back to you with more details by tomorrow.", "We will reply you more details tomorrow.", "We answer you detail by tomorrow."], a: 0, why: "reply 不能直接接人當受詞；get back to you 才對。" },
- { q: "填空：We will get back to you ___ the test result by Friday.", c: ["with", "for", "of"], a: 0, why: "get back to you with＋內容，固定搭配。" },
- { q: "「如果有其他我們該知道的資訊，請告訴我們」：", c: ["Please let us know if there is any additional information we should know.", "Please tell us if have different information.", "If you have other information please say to us."], a: 0, why: "if 子句要有主詞 there；additional information 才是「額外資訊」。" },
- { q: "組合題：確認回覆信第一句＋最後一句的正確組合是？", c: ["Thank you for reaching out regarding the issue. ⋯ Please let us know if there is any additional information we should know.", "Please let us know. ⋯ Thank you for reaching out.", "To confirm, is that correct? ⋯ Thanks your email."], a: 0, why: "開場點題→確認理解→承諾回覆→邀請補充，是確認回覆信最穩的骨架。" },
+ {
+   q: "「謝謝你來信詢問電源供應器的問題」怎麼寫？",
+   c: ["Thanks you send email about power supply.", "Thank you for reaching out regarding the power supply issue.", "Thank you reach out about power supply."],
+   a: 1,
+   why: "reach out regarding＋主題，regarding 不能省。"
+ },
+ {
+   q: "填空：Thank you for reaching out ___ the shipment delay.",
+   c: ["regarding", "to", "for"],
+   a: 0,
+   why: "同一句型換主題照樣用：regarding＋任何事件。"
+ },
+ {
+   q: "「我們收到你的詢問了，會馬上處理」：",
+   c: ["We got your inquiry and will look it right away.", "We have received your inquiry and will look into it right away.", "We receive your inquiry, will check it right away."],
+   a: 1,
+   why: "have received 是完成式；look into it，into 不能省。"
+ },
+ {
+   q: "填空：We have received your quotation request and will ___ into it right away.",
+   c: ["check", "look", "see"],
+   a: 1,
+   why: "look into 是固定搭配，不能換成 check into 或 see into。"
+ },
+ {
+   q: "「確認一下，你是要我們檢查電源供應器，對嗎？」：",
+   c: ["Confirm you ask us check power supply?", "To confirm, you would like us to check the power supply — is that correct?", "To confirm you want check power supply, right?"],
+   a: 1,
+   why: "To confirm, 後面接完整句子；want us to check，別漏 to。"
+ },
+ {
+   q: "填空：To confirm, you would like us ___ check the shipping address — is that correct?",
+   c: ["to", "with", "for"],
+   a: 0,
+   why: "want/would like ＋人＋to＋原形動詞。"
+ },
+ {
+   q: "「我們最晚明天會回覆你更詳細的內容」：",
+   c: ["We will reply you more details tomorrow.", "We answer you detail by tomorrow.", "We will get back to you with more details by tomorrow."],
+   a: 2,
+   why: "reply 不能直接接人當受詞；get back to you 才對。"
+ },
+ {
+   q: "填空：We will get back to you ___ the test result by Friday.",
+   c: ["of", "with", "for"],
+   a: 1,
+   why: "get back to you with＋內容，固定搭配。"
+ },
+ {
+   q: "「如果有其他我們該知道的資訊，請告訴我們」：",
+   c: ["If you have other information please say to us.", "Please tell us if have different information.", "Please let us know if there is any additional information we should know."],
+   a: 2,
+   why: "if 子句要有主詞 there；additional information 才是「額外資訊」。"
+ },
+ {
+   q: "組合題：確認回覆信第一句＋最後一句的正確組合是？",
+   c: ["Please let us know. ⋯ Thank you for reaching out.", "To confirm, is that correct? ⋯ Thanks your email.", "Thank you for reaching out regarding the issue. ⋯ Please let us know if there is any additional information we should know."],
+   a: 2,
+   why: "開場點題→確認理解→承諾回覆→邀請補充，是確認回覆信最穩的骨架。"
+ }
 ];
 let done = 0, ok = 0;
 document.getElementById("qs").innerHTML = QUIZ.map((q, i) => `<div class="q" id="q${i}"><div class="qt">${i + 1}. ${q.q}</div>` +

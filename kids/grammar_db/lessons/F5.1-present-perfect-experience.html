@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"I have visited Japan twice.","id":"a","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_example_1.mp3"},{"t":"Did you ever visited Japan?","id":"b","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_contrast_1_wrong.mp3"},{"t":"I have went there twice.","id":"c","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Did you ever visited Japan?」？","opts":[{"t":"Have you ever visited Japan?","id":"a","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_contrast_1_better.mp3"},{"t":"Did you ever visited Japan?","id":"b","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_contrast_1_wrong.mp3"},{"t":"I have went there twice.","id":"c","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"She has never eaten sushi.","id":"a","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_example_2.mp3"},{"t":"I saw that movie three times in my life.","id":"b","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_bug_1_wrong.mp3"},{"t":"She has finish it.","id":"c","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"I have went there twice.","id":"c","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_contrast_2_wrong.mp3"},{"t":"Did you ever visited Japan?","id":"b","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_contrast_1_wrong.mp3"},{"t":"I have visited Japan twice.","id":"a","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_example_1.mp3"}],"a":"a"},{"q":"哪一句最適合修正「Did you ever visited Japan?」？","opts":[{"t":"Did you ever visited Japan?","id":"b","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_contrast_1_wrong.mp3"},{"t":"I have went there twice.","id":"c","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_contrast_2_wrong.mp3"},{"t":"Have you ever visited Japan?","id":"a","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_contrast_1_better.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"She has never eaten sushi.","id":"a","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_example_2.mp3"},{"t":"She has finish it.","id":"c","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_bug_2_wrong.mp3"},{"t":"I saw that movie three times in my life.","id":"b","audio":"../../audio/grammar_db/content/f5_1_present_perfect_experience_bug_1_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "現在完成式：經驗與結果";
 var NODE_GOAL = "說出你「曾經做過」的事，或現在還看得到的結果";

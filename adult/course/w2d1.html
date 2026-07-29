@@ -47,30 +47,54 @@
 
 <script>
 const QUIZ = [
- { q: "1. 信裡哪一句的功能是「確認收到詢問，馬上處理」？",
-   c: ["We have received your inquiry and will look into it right away.", "Thank you for reaching out regarding the power supply issue.", "Best regards."],
-   a: 0, why: "have received＋will look into＝已收到＋馬上處理，是確認回覆信的核心動作。" },
- { q: "2. 「To confirm, ... is that correct?」這句的功能是？",
-   c: ["重述你聽懂的內容，請對方核對", "拒絕對方的要求", "詢問對方的公司資訊"],
-   a: 0, why: "先重述再問 is that correct，避免會錯意——這句型任何情境都能套用。" },
- { q: "3. 「look into it」最接近的意思是？",
-   c: ["著手查看／處理這件事", "忽略這件事", "已經處理完這件事"],
-   a: 0, why: "look into＝著手查看，比 check 正式一點，email 很常用。" },
- { q: "4. 填空：We will get back to you ___ more details by tomorrow.",
-   c: ["with", "for", "in"],
-   a: 0, why: "get back to you with＋內容＝帶著這些內容回覆你。" },
- { q: "5. 「有其他我們該知道的資訊請告訴我們」最自然的寫法是？",
-   c: ["Please let us know if there is any additional information we should know.", "Please tell me if have different information.", "If you have other information please say."],
-   a: 0, why: "if 子句要有主詞 there；additional information 才是「額外資訊」。" },
- { q: "6. 收到客戶詢問信，最自然的開場是？",
+ {
+   q: "1. 信裡哪一句的功能是「確認收到詢問，馬上處理」？",
+   c: ["Thank you for reaching out regarding the power supply issue.", "We have received your inquiry and will look into it right away.", "Best regards."],
+   a: 1,
+   why: "have received＋will look into＝已收到＋馬上處理，是確認回覆信的核心動作。"
+ },
+ {
+   q: "2. 「To confirm, ... is that correct?」這句的功能是？",
+   c: ["詢問對方的公司資訊", "拒絕對方的要求", "重述你聽懂的內容，請對方核對"],
+   a: 2,
+   why: "先重述再問 is that correct，避免會錯意——這句型任何情境都能套用。"
+ },
+ {
+   q: "3. 「look into it」最接近的意思是？",
+   c: ["已經處理完這件事", "著手查看／處理這件事", "忽略這件事"],
+   a: 1,
+   why: "look into＝著手查看，比 check 正式一點，email 很常用。"
+ },
+ {
+   q: "4. 填空：We will get back to you ___ more details by tomorrow.",
+   c: ["in", "with", "for"],
+   a: 1,
+   why: "get back to you with＋內容＝帶著這些內容回覆你。"
+ },
+ {
+   q: "5. 「有其他我們該知道的資訊請告訴我們」最自然的寫法是？",
+   c: ["If you have other information please say.", "Please tell me if have different information.", "Please let us know if there is any additional information we should know."],
+   a: 2,
+   why: "if 子句要有主詞 there；additional information 才是「額外資訊」。"
+ },
+ {
+   q: "6. 收到客戶詢問信，最自然的開場是？",
    c: ["Thank you for reaching out regarding the power supply issue.", "We see your email about power supply.", "You send email about power supply, we got it."],
-   a: 0, why: "reach out regarding＋主題，明確點出這封信在談什麼事。" },
- { q: "7. 一封確認回覆信的正確順序是？",
-   c: ["稱呼 → 開場點題 → 確認收到＋處理 → 重述確認 → 承諾回覆時間 → 邀請補充 → 結尾", "重述確認 → 稱呼 → 開場 → 結尾", "承諾回覆時間 → 開場 → 稱呼 → 確認收到"],
-   a: 0, why: "先讓對方安心（收到了、會處理），再確認理解，最後承諾下一步。" },
- { q: "8. 電話裡要確認客戶剛剛說的內容，下面哪個對？",
-   c: ["To confirm, you're seeing an intermittent output problem, is that right?", "You say what? I not understand.", "Repeat again your problem."],
-   a: 0, why: "電話中一樣可以用 To confirm... is that right? 重述再確認，比較有禮貌也清楚。" },
+   a: 0,
+   why: "reach out regarding＋主題，明確點出這封信在談什麼事。"
+ },
+ {
+   q: "7. 一封確認回覆信的正確順序是？",
+   c: ["承諾回覆時間 → 開場 → 稱呼 → 確認收到", "重述確認 → 稱呼 → 開場 → 結尾", "稱呼 → 開場點題 → 確認收到＋處理 → 重述確認 → 承諾回覆時間 → 邀請補充 → 結尾"],
+   a: 2,
+   why: "先讓對方安心（收到了、會處理），再確認理解，最後承諾下一步。"
+ },
+ {
+   q: "8. 電話裡要確認客戶剛剛說的內容，下面哪個對？",
+   c: ["Repeat again your problem.", "To confirm, you're seeing an intermittent output problem, is that right?", "You say what? I not understand."],
+   a: 1,
+   why: "電話中一樣可以用 To confirm... is that right? 重述再確認，比較有禮貌也清楚。"
+ }
 ];
 let done = 0, ok = 0;
 const el = document.getElementById("quiz");

@@ -49,29 +49,29 @@
 <script>
 const QUIZ = [
  { q: "1. 哪一句說明了報價是根據什麼做出來的？",
-   c: ["Based on the inspection, we have prepared a quotation for the repair.", "The total repair cost is USD 480, including parts and labor.", "Best regards."],
-   a: 0, why: "Based on the inspection 交代報價的依據，客戶才不會覺得數字是憑空喊的。" },
+   c: ["The total repair cost is USD 480, including parts and labor.", "Best regards.", "Based on the inspection, we have prepared a quotation for the repair."],
+   a: 2, why: "Based on the inspection 交代報價的依據，客戶才不會覺得數字是憑空喊的。" },
  { q: "2. 「including parts and labor」為什麼一定要寫？",
-   c: ["這是客戶最常追問的第一個問題：這價錢包含什麼", "為了讓句子看起來比較長", "因為文法規定 cost 後面要接 including"],
-   a: 0, why: "報價只給數字不說涵蓋範圍，客戶一定會再問一次，等於多來回一封信。" },
+   c: ["為了讓句子看起來比較長", "因為文法規定 cost 後面要接 including", "這是客戶最常追問的第一個問題：這價錢包含什麼"],
+   a: 2, why: "報價只給數字不說涵蓋範圍，客戶一定會再問一次，等於多來回一封信。" },
  { q: "3. 「valid for 30 days from the date of this email」的作用是？",
-   c: ["設定報價的有效期限，避免日後拿舊報價來談", "告訴客戶 30 天內一定會修好", "說明料件的交期是 30 天"],
+   c: ["設定報價的有效期限，避免日後拿舊報價來談", "說明料件的交期是 30 天", "告訴客戶 30 天內一定會修好"],
    a: 0, why: "valid for＋期間＋from the date of 是報價信固定寫法，保護自己也讓客戶知道要盡快決定。" },
  { q: "4. 填空：Please confirm ___ before we proceed with the repair.",
-   c: ["in writing", "by talking", "on phone"],
-   a: 0, why: "in writing（書面）是關鍵：口頭同意事後說不清楚，維修費用爭議常從這裡開始。" },
+   c: ["by talking", "in writing", "on phone"],
+   a: 1, why: "in writing（書面）是關鍵：口頭同意事後說不清楚，維修費用爭議常從這裡開始。" },
  { q: "5. 「as it is」在最後一句是什麼意思？",
-   c: ["維持現狀、不做任何維修就寄回", "照原本的報價寄回", "用原本的包裝寄回"],
-   a: 0, why: "as it is＝保持原狀。客戶決定不修時，設備不動工直接退回。" },
+   c: ["照原本的報價寄回", "維持現狀、不做任何維修就寄回", "用原本的包裝寄回"],
+   a: 1, why: "as it is＝保持原狀。客戶決定不修時，設備不動工直接退回。" },
  { q: "6. 為什麼要主動提「不修可以原樣寄回」？",
-   c: ["給對方退路，比只丟一個價格更容易收到回覆", "因為公司規定一定要寫", "為了暗示客戶不要修"],
-   a: 0, why: "只給價格容易讓對方拖著不回。給出兩條路，對方比較容易做決定。" },
+   c: ["因為公司規定一定要寫", "給對方退路，比只丟一個價格更容易收到回覆", "為了暗示客戶不要修"],
+   a: 1, why: "只給價格容易讓對方拖著不回。給出兩條路，對方比較容易做決定。" },
  { q: "7. 這封信如果改成 We already prepare a quotation. 哪裡不對？",
    c: ["已完成的動作要用 have prepared", "already 不能用在信裡", "quotation 要用複數"],
    a: 0, why: "報價已經做好了，是已完成的動作，現在簡單式 prepare 表達不出來。" },
  { q: "8. 這封信的目的是什麼？",
-   c: ["讓客戶能直接決定修或不修", "告訴客戶我們很專業", "說明檢查花了多少時間"],
-   a: 0, why: "報價信只有一個任務：把費用、範圍、期限、確認方式講清楚，讓對方能做決定。" }
+   c: ["告訴客戶我們很專業", "說明檢查花了多少時間", "讓客戶能直接決定修或不修"],
+   a: 2, why: "報價信只有一個任務：把費用、範圍、期限、確認方式講清楚，讓對方能做決定。" }
 ];
 let done = 0, ok = 0;
 const el = document.getElementById("quiz");

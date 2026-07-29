@@ -30,20 +30,20 @@
 <script>
 const QS = [
  { id: "w8dg1", cue: "When will the repair be finished?", cueZh: "維修什麼時候會完成？",
-   choices: ["The estimated completion date is August 15 — I'll update you if that changes.", "Hard to say, maybe soon.", "When the part comes, then we know."],
-   a: 0, why: "給明確日期並附上「有變會通知」，對方就能安心排程。", swap: "We're looking at August 15th, and I'll let you know if it shifts." },
+   choices: ["Hard to say, maybe soon.", "The estimated completion date is August 15 — I'll update you if that changes.", "When the part comes, then we know."],
+   a: 1, why: "給明確日期並附上「有變會通知」，對方就能安心排程。", swap: "We're looking at August 15th, and I'll let you know if it shifts." },
  { id: "w8dg2", cue: "Why does it take two weeks?", cueZh: "為什麼要兩週？",
-   choices: ["The replacement part has a two-week lead time from the supplier.", "We have many units in the queue.", "That's our normal speed."],
+   choices: ["The replacement part has a two-week lead time from the supplier.", "That's our normal speed.", "We have many units in the queue."],
    a: 0, why: "把原因指向具體的料件交期，不要用「我們很忙」帶過。", swap: "It's the part — the supplier needs two weeks." },
  { id: "w8dg3", cue: "Can you start the repair before the part arrives?", cueZh: "料件到之前可以先開始修嗎？",
-   choices: ["We'll do everything we can in advance, but the replacement itself needs the part.", "No, impossible.", "Yes, we can start now."],
-   a: 0, why: "先表達願意配合，再說明卡點，比直接說不行好接受得多。", swap: "We'll prep what we can, but the swap needs the part in hand." },
+   choices: ["No, impossible.", "Yes, we can start now.", "We'll do everything we can in advance, but the replacement itself needs the part."],
+   a: 2, why: "先表達願意配合，再說明卡點，比直接說不行好接受得多。", swap: "We'll prep what we can, but the swap needs the part in hand." },
  { id: "w8dg4", cue: "What if the supplier is late again?", cueZh: "如果供應商又延遲呢？",
-   choices: ["If that happens, I'll send you a revised date as soon as I know.", "Then it's their fault, not ours.", "Won't happen, don't worry."],
-   a: 0, why: "承諾主動更新，而不是保證不會發生或推給供應商。", swap: "I'd let you know a new date straight away." },
+   choices: ["Won't happen, don't worry.", "Then it's their fault, not ours.", "If that happens, I'll send you a revised date as soon as I know."],
+   a: 2, why: "承諾主動更新，而不是保證不會發生或推給供應商。", swap: "I'd let you know a new date straight away." },
  { id: "w8dg5", cue: "The unit is finished earlier than expected — great!", cueZh: "比預期早修好了，太好了！",
-   choices: ["Yes — would you like us to arrange an earlier shipment?", "Yes, we are very fast.", "Yes, but we still ship on August 15."],
-   a: 0, why: "提早完成要主動問要不要提早出貨，這是額外的價值。", swap: "It is — shall I book the shipment earlier?" }
+   choices: ["Yes, we are very fast.", "Yes, but we still ship on August 15.", "Yes — would you like us to arrange an earlier shipment?"],
+   a: 2, why: "提早完成要主動問要不要提早出貨，這是額外的價值。", swap: "It is — shall I book the shipment earlier?" }
 ];
 let done = 0, ok = 0;
 document.getElementById("qs").innerHTML = QS.map((q, i) => `<div class="q" id="q${i}">

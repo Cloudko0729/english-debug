@@ -235,10 +235,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607290533"></script>
-<script src="../../account_lock.js?v=202607290533"></script>
-<script src="../../supabase_auth.js?v=202607290533"></script>
-<script src="../../ai_review.js?v=202607290533"></script>
+<script src="../../cloud_sync.js?v=202607292352"></script>
+<script src="../../account_lock.js?v=202607292352"></script>
+<script src="../../supabase_auth.js?v=202607292352"></script>
+<script src="../../ai_review.js?v=202607292352"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -255,7 +255,7 @@ function togWhy() {
   box.classList.toggle("show", show);
   document.getElementById("whyBtn").textContent = show ? "🙈 收起來" : "🤔 為什麼？（規則＋常見錯誤）";
 }
-var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"The bridge had a loose board. This problem made it unsafe.","id":"a","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_example_1.mp3"},{"t":"The map was beside the report, but it was outdated.","id":"b","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_contrast_1_wrong.mp3"},{"t":"We moved the meeting online. This was helpful.","id":"c","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「The map was beside the report, but it was outdated.」？","opts":[{"t":"The map was beside the report, but the map was outdated.","id":"a","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_contrast_1_better.mp3"},{"t":"The map was beside the report, but it was outdated.","id":"b","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_contrast_1_wrong.mp3"},{"t":"We moved the meeting online. This was helpful.","id":"c","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"Mia interviewed two nurses. They described the same issue.","id":"a","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_example_2.mp3"},{"t":"John told Peter that he needed more time.","id":"b","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_bug_1_wrong.mp3"},{"t":"The device broke. This caused a delay.","id":"c","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_bug_2_wrong.mp3"}],"a":"a"}];
+var QUIZ = [{"q":"哪一句是對的？","opts":[{"t":"We moved the meeting online. This was helpful.","id":"c","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_contrast_2_wrong.mp3"},{"t":"The bridge had a loose board. This problem made it unsafe.","id":"a","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_example_1.mp3"},{"t":"The map was beside the report, but it was outdated.","id":"b","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_contrast_1_wrong.mp3"}],"a":"a"},{"q":"哪一句最適合修正「The map was beside the report, but it was outdated.」？","opts":[{"t":"The map was beside the report, but the map was outdated.","id":"a","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_contrast_1_better.mp3"},{"t":"The map was beside the report, but it was outdated.","id":"b","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_contrast_1_wrong.mp3"},{"t":"We moved the meeting online. This was helpful.","id":"c","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_contrast_2_wrong.mp3"}],"a":"a"},{"q":"哪一句聽起來最自然？","opts":[{"t":"The device broke. This caused a delay.","id":"c","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_bug_2_wrong.mp3"},{"t":"Mia interviewed two nurses. They described the same issue.","id":"a","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_example_2.mp3"},{"t":"John told Peter that he needed more time.","id":"b","audio":"../../audio/grammar_db/content/f7_4_reference_across_sentences_bug_1_wrong.mp3"}],"a":"a"}];
 var done = 0, ok = 0, wrongList = [];
 var NODE_TITLE = "跨句指涉與避免含糊";
 var NODE_GOAL = "讓 it、they、this 清楚指到前面講過的東西";

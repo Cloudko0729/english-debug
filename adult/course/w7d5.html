@@ -42,8 +42,8 @@ const QS = [
    choices: ["Once we receive the unit, we will confirm by email.", "You can call us to check.", "You will know when we finish repair."],
    a: 0, why: "主動承諾確認，省掉對方一封追問信。", swap: "We'll email you as soon as it arrives." },
  { id: "w7dg5", cue: "Should I send the power cable and accessories too?", cueZh: "電源線和配件要一起寄嗎？",
-   choices: ["Please send only the unit unless the issue involves the accessories — that keeps the RMA record clean.", "Send everything you have.", "Doesn't matter, up to you."],
-   a: 0, why: "說明原則和理由，對方才知道怎麼判斷，而不是每次都要問。", swap: "Just the unit is enough, unless the fault involves them." }
+   choices: ["Send everything you have.", "Please send only the unit unless the issue involves the accessories — that keeps the RMA record clean.", "Doesn't matter, up to you."],
+   a: 1, why: "說明原則和理由，對方才知道怎麼判斷，而不是每次都要問。", swap: "Just the unit is enough, unless the fault involves them." }
 ];
 let done = 0, ok = 0;
 document.getElementById("qs").innerHTML = QS.map((q, i) => `<div class="q" id="q${i}">

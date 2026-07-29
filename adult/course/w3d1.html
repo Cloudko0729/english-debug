@@ -47,30 +47,54 @@
 
 <script>
 const QUIZ = [
- { q: "1. 信裡哪一句的功能是「先感謝再過渡到請求」？",
-   c: ["Thank you for your inquiry — to help us get started, could you provide a few more details?", "Please let us know if you need any help finding this information.", "Best regards."],
-   a: 0, why: "先謝再說明目的（to help us get started），比直接列問題清單更有禮貌。" },
- { q: "2. 「型號序號都要問」的句子是？",
-   c: ["Could you please provide the model number and serial number of the unit?", "What is your model number and serial number?", "Please let us know if you need any help finding this information."],
-   a: 0, why: "Could you please provide 比直接問句 What is 更委婉、更專業。" },
- { q: "3. 「screenshot of the error message」的 of 可以換成什麼字？",
-   c: ["不行，screenshot 固定接 of", "about", "for"],
-   a: 0, why: "screenshot／picture 後面接內容都用 of，about 是中式英文常見錯誤。" },
- { q: "4. 「during power-up or under load」用來描述什麼？",
-   c: ["故障發生的兩種常見情境（開機時／負載中）", "維修完成的兩個階段", "客戶付款的兩種方式"],
-   a: 0, why: "這是問「何時發生」最常用的兩個分類，可以直接套用在任何症狀詢問句。" },
- { q: "5. 填空：Once we ___ this information, we can start the diagnosis right away.",
-   c: ["receive", "will receive", "received"],
-   a: 0, why: "once／if 子句用現在式表示未來，不能用 will。" },
- { q: "6. 「如果你需要協助找這些資訊，請告訴我們」最自然的寫法是？",
-   c: ["Please let us know if you need any help finding this information.", "Please let us know if you need help find this information.", "If you need help finding, please tell us information."],
-   a: 0, why: "need help 後面接動詞要用 -ing：need help finding。" },
- { q: "7. 一封索取資訊信的正確順序是？",
-   c: ["稱呼 → 感謝＋過渡句 → 依序列出所需資訊 → 收到後下一步 → 提供協助 → 結尾", "依序列出所需資訊 → 稱呼 → 感謝 → 結尾", "提供協助 → 稱呼 → 依序列出所需資訊 → 感謝"],
-   a: 0, why: "先讓對方知道為什麼要問（過渡句），再一次問齊，最後說明收到後會怎麼做。" },
- { q: "8. 電話中禮貌地一次問齊型號跟錯誤訊息，下面哪個對？",
-   c: ["Could you tell me the model number and serial number, and send us a screenshot of the error message?", "Give me model number, serial number, error message now.", "You must tell model number and error message."],
-   a: 0, why: "電話中一樣可以用 Could you 開頭的完整句子，一次問齊比較有效率也有禮貌。" },
+ {
+   q: "1. 信裡哪一句的功能是「先感謝再過渡到請求」？",
+   c: ["Best regards.", "Thank you for your inquiry — to help us get started, could you provide a few more details?", "Please let us know if you need any help finding this information."],
+   a: 1,
+   why: "先謝再說明目的（to help us get started），比直接列問題清單更有禮貌。"
+ },
+ {
+   q: "2. 「型號序號都要問」的句子是？",
+   c: ["Please let us know if you need any help finding this information.", "Could you please provide the model number and serial number of the unit?", "What is your model number and serial number?"],
+   a: 1,
+   why: "Could you please provide 比直接問句 What is 更委婉、更專業。"
+ },
+ {
+   q: "3. 「screenshot of the error message」的 of 可以換成什麼字？",
+   c: ["for", "不行，screenshot 固定接 of", "about"],
+   a: 1,
+   why: "screenshot／picture 後面接內容都用 of，about 是中式英文常見錯誤。"
+ },
+ {
+   q: "4. 「during power-up or under load」用來描述什麼？",
+   c: ["故障發生的兩種常見情境（開機時／負載中）", "客戶付款的兩種方式", "維修完成的兩個階段"],
+   a: 0,
+   why: "這是問「何時發生」最常用的兩個分類，可以直接套用在任何症狀詢問句。"
+ },
+ {
+   q: "5. 填空：Once we ___ this information, we can start the diagnosis right away.",
+   c: ["will receive", "received", "receive"],
+   a: 2,
+   why: "once／if 子句用現在式表示未來，不能用 will。"
+ },
+ {
+   q: "6. 「如果你需要協助找這些資訊，請告訴我們」最自然的寫法是？",
+   c: ["If you need help finding, please tell us information.", "Please let us know if you need help find this information.", "Please let us know if you need any help finding this information."],
+   a: 2,
+   why: "need help 後面接動詞要用 -ing：need help finding。"
+ },
+ {
+   q: "7. 一封索取資訊信的正確順序是？",
+   c: ["提供協助 → 稱呼 → 依序列出所需資訊 → 感謝", "依序列出所需資訊 → 稱呼 → 感謝 → 結尾", "稱呼 → 感謝＋過渡句 → 依序列出所需資訊 → 收到後下一步 → 提供協助 → 結尾"],
+   a: 2,
+   why: "先讓對方知道為什麼要問（過渡句），再一次問齊，最後說明收到後會怎麼做。"
+ },
+ {
+   q: "8. 電話中禮貌地一次問齊型號跟錯誤訊息，下面哪個對？",
+   c: ["Give me model number, serial number, error message now.", "You must tell model number and error message.", "Could you tell me the model number and serial number, and send us a screenshot of the error message?"],
+   a: 2,
+   why: "電話中一樣可以用 Could you 開頭的完整句子，一次問齊比較有效率也有禮貌。"
+ }
 ];
 let done = 0, ok = 0;
 const el = document.getElementById("quiz");
