@@ -1,0 +1,12 @@
+{
+  "outdir": "D:/english/adult/course/audio",
+  "voice": "af_heart",
+  "speed": 0.92,
+  "items": {
+    "w1_rec2": "DCCAL failed on the first calibration run. Replaced the PPMU module and repeated DCCAL. DCCAL passed; the unit was released for final verification.",
+    "w1_recshort2": "DCCAL fail @ first run → replaced PPMU, re-ran DCCAL → pass, released for FV.",
+    "w4_rec1": "Poor contact was found at the socket during the incoming inspection. Cleaned the socket and repeated the contact test. The unit passed the retest with no further contact issue.",
+    "w4_rec2": "A missing component was found during IQC. Installed the missing component before proceeding with the repair. The board passed the follow-up inspection.",
+    "w4_recshort2": "Missing component found @ IQC → installed before proceeding → passed follow-up inspection."
+  }
+}
