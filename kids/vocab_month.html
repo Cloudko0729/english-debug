@@ -103,11 +103,11 @@ h2{font-size:1rem;margin:22px 0 8px}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607310236"></script>
-<script src="account_lock.js?v=202607310236"></script>
-<script src="supabase_auth.js?v=202607310236"></script>
-<script src="vocab_units.js?v=202607310236"></script>
-<script src="vocab_unit_plan.js?v=202607310236"></script>
+<script src="cloud_sync.js?v=202607310442"></script>
+<script src="account_lock.js?v=202607310442"></script>
+<script src="supabase_auth.js?v=202607310442"></script>
+<script src="vocab_units.js?v=202607310442"></script>
+<script src="vocab_unit_plan.js?v=202607310442"></script>
 <script>
 var currentStudent = null;
 var GP = window.VocabPlan;
@@ -167,6 +167,9 @@ function renderPlan(p) {
     '<ul class="nlist">' + pl.units.map(function (id) { return nodeLine(p, id); }).join("") + '</ul>';
 
   if (s.rescue) h += '<div class="rescue">🛟 ' + esc(s.rescue) + '</div>';
+  // 程度已經跟課表對不上就明說，並讓他自己決定要不要重選
+  if (s.drift) h += '<div class="rescue">' + (s.drift.kind === "ahead" ? "⚠️ " : "📈 ") +
+    esc(s.drift.msg) + '</div>';
   h += '</div>';
 
   if (s.bonusReady) {

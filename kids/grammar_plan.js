@@ -337,13 +337,34 @@
       if (lowRun >= 2) rescue = "這一級有兩課還沒站穩。先回去把它們練熟，再回來挑戰會輕鬆很多——不是你學不會，是順序拿掉了會比較好走。";
     }
 
+    // 課表是選課當下的快照。小孩學了一陣子程度會前進，但課表不會自己改
+    // —— 那是他選的，不該偷偷換掉。可是完全不講也不對：實際看過的狀況是
+    // 課表停在 L4、小孩其實才剛走完 L2，L3 一片空白卻被指去做 L4。
+    // 所以偏離就明說，並讓他自己決定要不要重選。
+    var drift = null;
+    var nowLevel = assess(p).tier;
+    if (nowLevel && pl.tier) {
+      var dNow = tierIndex(nowLevel), dPlan = tierIndex(pl.tier);
+      // 挑戰路線本來就會超前一級，所以超過一級才算偏離
+      var ahead = pl.route === "challenge" ? 1 : 0;
+      if (dPlan > dNow + ahead) {
+        drift = { kind: "ahead", now: nowLevel,
+          msg: "這個月的課表是 " + pl.tier + " 的內容，但你目前的程度大約在 " + nowLevel +
+               "，中間跳過的部分可能會讓這幾課做起來很吃力。" };
+      } else if (dPlan < dNow) {
+        drift = { kind: "behind", now: nowLevel,
+          msg: "你的程度已經前進到 " + nowLevel + " 了，這個月的課表還停在 " + pl.tier +
+               "。想換成新的也可以，已經拿到的金幣不會被扣掉。" };
+      }
+    }
+
     var bonusReady = !pl.bonusClaimed &&
       done.length === pl.nodes.length &&
       done.length >= BONUS_MIN_NODES;
 
     return {
       plan: pl, done: done, weak: weak, todo: todo,
-      total: pl.nodes.length, bonusReady: bonusReady, bonus: MONTH_BONUS,
+      total: pl.nodes.length, bonusReady: bonusReady, bonus: MONTH_BONUS, drift: drift,
       rescue: rescue,
     };
   }

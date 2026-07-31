@@ -506,6 +506,12 @@ function renderIndex(units) {
 .mbox>a{display:inline-block;font-size:.85rem;color:#2f80ed;text-decoration:none;font-weight:700}
 .mrow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}
 .mrow a{background:#fff;border:1px solid #cfe0f0;border-radius:9px;padding:5px 10px;font-size:.82rem;color:#22303f;text-decoration:none}
+/* 本月課表的單元要一眼看得出來；其餘淡化但不鎖 —— 想先看下一級可以點，
+   只是不會被誤認為「這個月要做的」 */
+.nlist a.thismonth{background:#f2f8ff;border-radius:9px;padding-left:9px;padding-right:9px}
+.nlist a.thismonth .tag{background:#2f80ed;color:#fff;font-size:.68rem;font-weight:700;border-radius:8px;padding:1px 7px;margin-left:6px;white-space:nowrap}
+.nlist a.offplan{opacity:.45}
+.offnote{font-size:.78rem;color:#8a97a5;margin:10px 0 0}
 </style>
 </head>
 <body>
