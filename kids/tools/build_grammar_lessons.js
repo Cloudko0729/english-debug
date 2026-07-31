@@ -218,6 +218,7 @@ function renderNode(n, prev, next) {
   ${n.dialogue && n.dialogue.fullAudio ? `<button class="play big" style="margin-top:6px" onclick="pa('${jsq(au(n.dialogue.fullAudio))}')">🔊 整段對話</button>` : ""}
 </div>
 
+<div id="offPlan" style="display:none;background:#fff8e1;border:2px solid #f2d38a;border-radius:12px;margin:14px;padding:11px 14px;font-size:.85rem;color:#8a6d1a"></div>
 <div class="goal">🎯 今天你要學會：${esc(goal)}</div>
 
 <div class="podcast" id="podcastBox">
@@ -319,6 +320,8 @@ function renderNode(n, prev, next) {
 <script src="../../account_lock.js"></script>
 <script src="../../supabase_auth.js"></script>
 <script src="../../ai_review.js"></script>
+<script src="../../grammar_nodes.js"></script>
+<script src="../../grammar_plan.js"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -468,10 +471,24 @@ window.finishLesson = function () {
     : "這一課的金幣已經領滿了（🪙 " + p.grammar.nodes[NODE_ID].coins + "）。答對更多題才會再補發喔！";
   msg.scrollIntoView({ behavior: "smooth", block: "center" });
 };
+// 這一課如果不在本月課表裡，講清楚 —— 小孩可能是從地圖點進來的，
+// 不說的話他不會知道自己跑到課表外，做完也不會計入這個月的進度。
+function drawOffPlan() {
+  var el = document.getElementById("offPlan");
+  if (!el || !window.GrammarPlan || !currentStudent) { if (el) el.style.display = "none"; return; }
+  var pl = GrammarPlan.activePlan(getProgress(currentStudent));
+  if (!pl || (pl.nodes || []).indexOf(NODE_ID) >= 0) { el.style.display = "none"; return; }
+  el.style.display = "block";
+  el.innerHTML = "📌 這一課不在你這個月的課表裡。想先看完全可以，金幣一樣會給，" +
+    "只是它不算進這個月的進度。<br>" +
+    "<a href='../../grammar_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
+}
+
 (function initStudent() {
   var last = localStorage.getItem("kidsCurrentStudent");
   if (!window.sbClient && last && last !== "guest") window.pickStudent(last);
   else { refreshCoin(); renderFinishState(); }
+  drawOffPlan();
 })();
 
 // NotebookLM 素材：有檔才顯示（fail-safe：載入失敗才隱藏，見 LESSON_PAGE_SPEC 第 7 節）
@@ -526,6 +543,12 @@ function renderIndex(nodes) {
   .mrow{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px;}
   .mrow a{background:#fff;border:1px solid #cfe0f0;border-radius:9px;padding:5px 10px;font-size:.82rem;color:#22303f;text-decoration:none;}
   .mrow a:hover{border-color:#2f80ed;}
+  /* 本月課表的課要一眼看得出來；其餘淡化但不鎖 —— 想先看下一級可以點，
+     只是不會被誤認為「這個月要做的」 */
+  .nlist a.thismonth{border-color:#2f80ed;background:#f2f8ff;}
+  .nlist a.thismonth .tag{background:#2f80ed;color:#fff;font-size:.68rem;border-radius:8px;padding:1px 7px;margin-left:6px;}
+  .nlist a.offplan{opacity:.5;}
+  .offnote{font-size:.78rem;color:var(--muted);margin:10px 14px 0;}
 </style>
 </head>
 <body>
@@ -544,6 +567,7 @@ function renderIndex(nodes) {
 </div>
 <div class="overall" id="overall">先選名字，就會顯示你每一課的進度。</div>
 <div id="monthBox"></div>
+<p class="offnote" id="offNote" style="display:none">淡掉的是這個月課表以外的課。想先看可以點進去，只是它們不算在這個月的進度裡。</p>
 ${bands.map(b => {
     const info = BAND_NAME[b] || { name: b, scene: "" };
     return `<div class="bandcard">
@@ -609,8 +633,23 @@ function draw() {
     return;
   }
   var p = getProgress(currentStudent), recs = p.grammar.nodes || {}, doneN = 0, coinN = 0;
+  // 本月課表的課標出來，其餘淡化 —— 48 課全部一樣亮的話，選了課表也看不出差別
+  var planIds = [];
+  if (window.GrammarPlan) {
+    var pl = GrammarPlan.activePlan(p);
+    if (pl) planIds = pl.nodes || [];
+  }
   for (var j = 0; j < links.length; j++) {
     var a = links[j], r = recs[a.dataset.node];
+    var inPlan = planIds.indexOf(a.dataset.node) >= 0;
+    a.classList.toggle("thismonth", inPlan);
+    a.classList.toggle("offplan", planIds.length > 0 && !inPlan && !r);
+    var tag = a.querySelector(".tag");
+    if (inPlan && !tag) {
+      tag = document.createElement("span");
+      tag.className = "tag"; tag.textContent = "本月";
+      a.querySelector("span").appendChild(tag);
+    } else if (!inPlan && tag) { tag.parentNode.removeChild(tag); }
     if (r) {
       doneN++; coinN += r.coins || 0;
       a.classList.add("done");
@@ -620,6 +659,8 @@ function draw() {
   document.getElementById("coinBox").textContent = "🪙 " + p.coins.balance;
   document.getElementById("overall").textContent =
     "已完成 " + doneN + " / " + links.length + " 課　·　文法課累積 🪙 " + coinN;
+  var note = document.getElementById("offNote");
+  if (note) note.style.display = planIds.length ? "block" : "none";
   drawMonth(p);
 }
 window.pickStudent = function (name) {

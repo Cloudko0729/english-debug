@@ -269,6 +269,8 @@ function renderUnit(unit, wordMap, confusions, prev, next, levelWords) {
     <span class="coin" id="coinBox">🪙 —</span>
   </div>
 
+  <div id="offPlan" style="display:none;background:#fff8e1;border:2px solid #f2d38a;border-radius:12px;margin:13px 0;padding:11px 14px;font-size:.85rem;color:#8a6d1a"></div>
+
   <div class="card">
     <h2>① 先認識這些字</h2>
     <p class="hint">點一下卡片會翻開中文和例句。先自己猜猜看是什麼意思，再翻開對答案。</p>
@@ -315,6 +317,8 @@ ${conBlock}
 <script src="../../account_lock.js"></script>
 <script src="../../supabase_auth.js"></script>
 <script src="../../ai_review.js"></script>
+<script src="../../vocab_units.js"></script>
+<script src="../../vocab_unit_plan.js"></script>
 <script>
 var UNIT_ID = ${jsonInline(unit.id)};
 var QUIZ = ${jsonInline(quiz)};
@@ -432,6 +436,18 @@ function finishUnit() {
   msg.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
+// 這個單元如果不在本月課表裡，講清楚
+function drawOffPlan() {
+  var el = document.getElementById("offPlan");
+  if (!el || !window.VocabPlan || !currentStudent) { if (el) el.style.display = "none"; return; }
+  var pl = VocabPlan.activePlan(getProgress(currentStudent));
+  if (!pl || (pl.units || []).indexOf(UNIT_ID) >= 0) { el.style.display = "none"; return; }
+  el.style.display = "block";
+  el.innerHTML = "📌 這個單元不在你這個月的課表裡。想先看完全可以，金幣一樣會給，" +
+    "只是它不算進這個月的進度。<br>" +
+    "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
+}
+
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
   currentStudent = name;
@@ -440,12 +456,14 @@ function pickStudent(name) {
   for (var i = 0; i < btns.length; i++)
     btns[i].classList.toggle("active", btns[i].textContent.toLowerCase().indexOf(name) >= 0);
   refreshCoin();
+  drawOffPlan();
 }
 
 drawQuiz();
 (function () {
   var last = localStorage.getItem("kidsCurrentStudent");
   if (!window.sbClient && last && last !== "guest") pickStudent(last); else refreshCoin();
+  drawOffPlan();
 })();
 </script>
 </body>
@@ -508,6 +526,7 @@ function renderIndex(units) {
   </div>
   <div class="overall" id="overall">先選名字，就會顯示你每個單元的進度。</div>
   <div id="monthBox"></div>
+  <p class="offnote" id="offNote" style="display:none">淡掉的是這個月課表以外的單元。想先看可以點進去，只是它們不算在這個月的進度裡。</p>
 ${Object.keys(byLevel).sort().map(l => {
     const info = LEVEL_NOTE[l];
     return `  <div class="bandcard">
@@ -574,8 +593,23 @@ function draw() {
     return;
   }
   var p = getProgress(currentStudent), recs = p.vocab.units || {}, doneN = 0, coinN = 0;
+  // 本月課表的單元標出來，其餘淡化 —— 33 單元全部一樣亮的話，選了課表也看不出差別
+  var planIds = [];
+  if (window.VocabPlan) {
+    var pl = VocabPlan.activePlan(p);
+    if (pl) planIds = pl.units || [];
+  }
   for (var j = 0; j < links.length; j++) {
     var a = links[j], r = recs[a.dataset.unit];
+    var inPlan = planIds.indexOf(a.dataset.unit) >= 0;
+    a.classList.toggle("thismonth", inPlan);
+    a.classList.toggle("offplan", planIds.length > 0 && !inPlan && !r);
+    var tag = a.querySelector(".tag");
+    if (inPlan && !tag) {
+      tag = document.createElement("span");
+      tag.className = "tag"; tag.textContent = "本月";
+      a.querySelector("span").appendChild(tag);
+    } else if (!inPlan && tag) { tag.parentNode.removeChild(tag); }
     if (r) {
       doneN++; coinN += r.coins || 0;
       a.classList.add("done");
@@ -585,6 +619,8 @@ function draw() {
   document.getElementById("coinBox").textContent = "🪙 " + p.coins.balance;
   document.getElementById("overall").textContent =
     "已完成 " + doneN + " / " + links.length + " 單元　·　單字課累積 🪙 " + coinN;
+  var note = document.getElementById("offNote");
+  if (note) note.style.display = planIds.length ? "block" : "none";
   drawMonth(p);
 }
 window.pickStudent = function (name) {

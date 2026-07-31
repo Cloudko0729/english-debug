@@ -105,6 +105,7 @@ header a{color:#2f80ed;text-decoration:none}
   </div>
   <div class="overall" id="overall">先選名字，就會顯示你每個單元的進度。</div>
   <div id="monthBox"></div>
+  <p class="offnote" id="offNote" style="display:none">淡掉的是這個月課表以外的單元。想先看可以點進去，只是它們不算在這個月的進度裡。</p>
   <div class="bandcard">
     <h2>L1 起步</h2>
     <div class="sc">最基本的字：人、東西、動作、數字　·　8 單元</div>
@@ -165,12 +166,12 @@ header a{color:#2f80ed;text-decoration:none}
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607292352"></script>
-<script src="../../account_lock.js?v=202607292352"></script>
-<script src="../../supabase_auth.js?v=202607292352"></script>
-<script src="../../ai_review.js?v=202607292352"></script>
-<script src="../../vocab_units.js?v=202607292352"></script>
-<script src="../../vocab_unit_plan.js?v=202607292352"></script>
+<script src="../../cloud_sync.js?v=202607310236"></script>
+<script src="../../account_lock.js?v=202607310236"></script>
+<script src="../../supabase_auth.js?v=202607310236"></script>
+<script src="../../ai_review.js?v=202607310236"></script>
+<script src="../../vocab_units.js?v=202607310236"></script>
+<script src="../../vocab_unit_plan.js?v=202607310236"></script>
 <script>
 var currentStudent = null;
 function getProgress(s) {
@@ -218,8 +219,23 @@ function draw() {
     return;
   }
   var p = getProgress(currentStudent), recs = p.vocab.units || {}, doneN = 0, coinN = 0;
+  // 本月課表的單元標出來，其餘淡化 —— 33 單元全部一樣亮的話，選了課表也看不出差別
+  var planIds = [];
+  if (window.VocabPlan) {
+    var pl = VocabPlan.activePlan(p);
+    if (pl) planIds = pl.units || [];
+  }
   for (var j = 0; j < links.length; j++) {
     var a = links[j], r = recs[a.dataset.unit];
+    var inPlan = planIds.indexOf(a.dataset.unit) >= 0;
+    a.classList.toggle("thismonth", inPlan);
+    a.classList.toggle("offplan", planIds.length > 0 && !inPlan && !r);
+    var tag = a.querySelector(".tag");
+    if (inPlan && !tag) {
+      tag = document.createElement("span");
+      tag.className = "tag"; tag.textContent = "本月";
+      a.querySelector("span").appendChild(tag);
+    } else if (!inPlan && tag) { tag.parentNode.removeChild(tag); }
     if (r) {
       doneN++; coinN += r.coins || 0;
       a.classList.add("done");
@@ -229,6 +245,8 @@ function draw() {
   document.getElementById("coinBox").textContent = "🪙 " + p.coins.balance;
   document.getElementById("overall").textContent =
     "已完成 " + doneN + " / " + links.length + " 單元　·　單字課累積 🪙 " + coinN;
+  var note = document.getElementById("offNote");
+  if (note) note.style.display = planIds.length ? "block" : "none";
   drawMonth(p);
 }
 window.pickStudent = function (name) {

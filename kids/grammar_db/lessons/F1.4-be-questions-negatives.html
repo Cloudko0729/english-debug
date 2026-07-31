@@ -124,6 +124,7 @@
   <button class="play big" style="margin-top:6px" onclick="pa('../../audio/grammar_db/dialogues/f1_4_be_questions_negatives.mp3')">🔊 整段對話</button>
 </div>
 
+<div id="offPlan" style="display:none;background:#fff8e1;border:2px solid #f2d38a;border-radius:12px;margin:14px;padding:11px 14px;font-size:.85rem;color:#8a6d1a"></div>
 <div class="goal">🎯 今天你要學會：用 be 問問題、說「不是」</div>
 
 <div class="podcast" id="podcastBox">
@@ -235,10 +236,12 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607292352"></script>
-<script src="../../account_lock.js?v=202607292352"></script>
-<script src="../../supabase_auth.js?v=202607292352"></script>
-<script src="../../ai_review.js?v=202607292352"></script>
+<script src="../../cloud_sync.js?v=202607310236"></script>
+<script src="../../account_lock.js?v=202607310236"></script>
+<script src="../../supabase_auth.js?v=202607310236"></script>
+<script src="../../ai_review.js?v=202607310236"></script>
+<script src="../../grammar_nodes.js?v=202607310236"></script>
+<script src="../../grammar_plan.js?v=202607310236"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -383,10 +386,24 @@ window.finishLesson = function () {
     : "這一課的金幣已經領滿了（🪙 " + p.grammar.nodes[NODE_ID].coins + "）。答對更多題才會再補發喔！";
   msg.scrollIntoView({ behavior: "smooth", block: "center" });
 };
+// 這一課如果不在本月課表裡，講清楚 —— 小孩可能是從地圖點進來的，
+// 不說的話他不會知道自己跑到課表外，做完也不會計入這個月的進度。
+function drawOffPlan() {
+  var el = document.getElementById("offPlan");
+  if (!el || !window.GrammarPlan || !currentStudent) { if (el) el.style.display = "none"; return; }
+  var pl = GrammarPlan.activePlan(getProgress(currentStudent));
+  if (!pl || (pl.nodes || []).indexOf(NODE_ID) >= 0) { el.style.display = "none"; return; }
+  el.style.display = "block";
+  el.innerHTML = "📌 這一課不在你這個月的課表裡。想先看完全可以，金幣一樣會給，" +
+    "只是它不算進這個月的進度。<br>" +
+    "<a href='../../grammar_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
+}
+
 (function initStudent() {
   var last = localStorage.getItem("kidsCurrentStudent");
   if (!window.sbClient && last && last !== "guest") window.pickStudent(last);
   else { refreshCoin(); renderFinishState(); }
+  drawOffPlan();
 })();
 
 // NotebookLM 素材：有檔才顯示（fail-safe：載入失敗才隱藏，見 LESSON_PAGE_SPEC 第 7 節）

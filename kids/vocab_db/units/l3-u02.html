@@ -85,6 +85,8 @@ header a{color:#2f80ed;text-decoration:none}
     <span class="coin" id="coinBox">🪙 —</span>
   </div>
 
+  <div id="offPlan" style="display:none;background:#fff8e1;border:2px solid #f2d38a;border-radius:12px;margin:13px 0;padding:11px 14px;font-size:.85rem;color:#8a6d1a"></div>
+
   <div class="card">
     <h2>① 先認識這些字</h2>
     <p class="hint">點一下卡片會翻開中文和例句。先自己猜猜看是什麼意思，再翻開對答案。</p>
@@ -395,10 +397,12 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202607292352"></script>
-<script src="../../account_lock.js?v=202607292352"></script>
-<script src="../../supabase_auth.js?v=202607292352"></script>
-<script src="../../ai_review.js?v=202607292352"></script>
+<script src="../../cloud_sync.js?v=202607310236"></script>
+<script src="../../account_lock.js?v=202607310236"></script>
+<script src="../../supabase_auth.js?v=202607310236"></script>
+<script src="../../ai_review.js?v=202607310236"></script>
+<script src="../../vocab_units.js?v=202607310236"></script>
+<script src="../../vocab_unit_plan.js?v=202607310236"></script>
 <script>
 var UNIT_ID = "l3-u02";
 var QUIZ = [{"kind":"zh2en","ask":"「阿姨」的英文是哪一個？","answer":"aunt","options":["aunt","child","children","dad"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003echildren\u003c/b\u003e 是什麼意思？","answer":"一個以上的孩童、child 的複數","options":["一個以上的孩童、child 的複數","阿姨","孩子","爸爸"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"daddy","options":["aunt","child","daddy","children"],"audio":"audio/words/daddy.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eAmy is my best ＿＿＿.\u003c/span\u003e","answer":"friend","options":["friend","aunt","child","children"],"audio":"audio/vocab_foundation/examples/l3-friend-e1.mp3"},{"kind":"zh2en","ask":"「工作者」的英文是哪一個？","answer":"worker","options":["aunt","child","worker","children"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eo'clock\u003c/b\u003e 是什麼意思？","answer":"……點鐘","options":["下午；晚上","昨天","……點鐘","上午"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"start","options":["call","cry","start","dance"],"audio":"audio/words/start.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI have ＿＿＿ apples.\u003c/span\u003e","answer":"zero","options":["zero","eleven","aunt","child"],"audio":"audio/words/ex/zero_0.mp3"}];
@@ -516,6 +520,18 @@ function finishUnit() {
   msg.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
+// 這個單元如果不在本月課表裡，講清楚
+function drawOffPlan() {
+  var el = document.getElementById("offPlan");
+  if (!el || !window.VocabPlan || !currentStudent) { if (el) el.style.display = "none"; return; }
+  var pl = VocabPlan.activePlan(getProgress(currentStudent));
+  if (!pl || (pl.units || []).indexOf(UNIT_ID) >= 0) { el.style.display = "none"; return; }
+  el.style.display = "block";
+  el.innerHTML = "📌 這個單元不在你這個月的課表裡。想先看完全可以，金幣一樣會給，" +
+    "只是它不算進這個月的進度。<br>" +
+    "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
+}
+
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
   currentStudent = name;
@@ -524,12 +540,14 @@ function pickStudent(name) {
   for (var i = 0; i < btns.length; i++)
     btns[i].classList.toggle("active", btns[i].textContent.toLowerCase().indexOf(name) >= 0);
   refreshCoin();
+  drawOffPlan();
 }
 
 drawQuiz();
 (function () {
   var last = localStorage.getItem("kidsCurrentStudent");
   if (!window.sbClient && last && last !== "guest") pickStudent(last); else refreshCoin();
+  drawOffPlan();
 })();
 </script>
 </body>

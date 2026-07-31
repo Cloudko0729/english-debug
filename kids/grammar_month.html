@@ -103,11 +103,11 @@ h2{font-size:1rem;margin:22px 0 8px}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607292352"></script>
-<script src="account_lock.js?v=202607292352"></script>
-<script src="supabase_auth.js?v=202607292352"></script>
-<script src="grammar_nodes.js?v=202607292352"></script>
-<script src="grammar_plan.js?v=202607292352"></script>
+<script src="cloud_sync.js?v=202607310236"></script>
+<script src="account_lock.js?v=202607310236"></script>
+<script src="supabase_auth.js?v=202607310236"></script>
+<script src="grammar_nodes.js?v=202607310236"></script>
+<script src="grammar_plan.js?v=202607310236"></script>
 <script>
 var currentStudent = null;
 var GP = window.GrammarPlan;
@@ -176,8 +176,12 @@ function renderPlan(p) {
     h += '<div class="card note">🎁 本月的完成獎勵已經領過了（🪙 ' + s.bonus + '）。</div>';
   }
 
-  h += '<a class="big" href="grammar_db/lessons/index.html" ' +
-    'style="background:#2fbf71;color:#fff">👉 去上課</a>';
+  // 直接進「下一課」而不是 48 課的地圖 —— 選了課表卻被丟回全部攤開的列表，
+  // 等於這個選擇沒有作用。全部學完才回地圖。
+  var nextId = s.todo[0] || s.weak[0] || null;
+  h += nextId
+    ? '<a class="big" href="grammar_db/lessons/' + nextId + '.html" style="background:#2fbf71;color:#fff">👉 去上課（下一課：' + esc((GP.byId(nextId)||{}).titleZh || '') + '）</a>'
+    : '<a class="big" href="grammar_db/lessons/index.html" style="background:#2fbf71;color:#fff">🗺️ 這個月的都學完了，去看看其他課</a>';
 
   h += '<div class="card"><b style="font-size:.92rem">想換一條路線嗎？</b>' +
     '<p class="note" style="margin:4px 0 0">可以隨時換，<b>已經拿到的金幣不會被扣掉</b>，' +
