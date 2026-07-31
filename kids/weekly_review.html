@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>本週總複習</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  background:#f6f8fa;color:#22303f;line-height:1.7;padding:0 0 70px}
+header{background:linear-gradient(135deg,#fff3d6,#e9fbf1);padding:19px 16px 15px;text-align:center;
+  border-bottom:3px solid #f2c94c}
+header h1{margin:0 0 3px;font-size:1.22rem}
+header p{margin:0;font-size:.8rem;color:#5a6875}
+header a{color:#2f80ed;text-decoration:none}
+.wrap{max-width:720px;margin:0 auto;padding:0 14px}
+.stubar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;background:#fff;border:1px solid #e3e8ee;
+  border-radius:12px;padding:9px 12px;margin:14px 0}
+.stubar .lab{font-size:.8rem;color:#6b7a8c}
+.stu-btn{border:1px solid #cfd8e3;background:#fff;border-radius:16px;padding:5px 13px;font-size:.85rem;cursor:pointer;font-family:inherit}
+.stu-btn.active{background:#2f80ed;color:#fff;border-color:#2f80ed;font-weight:700}
+.coin{margin-left:auto;background:#fff6dc;border:1px solid #f2d38a;border-radius:14px;padding:4px 11px;font-size:.85rem;font-weight:700}
+.card{background:#fff;border:1px solid #e3e8ee;border-radius:14px;padding:15px 16px;margin:13px 0}
+.card h2{font-size:1rem;margin:0 0 4px}
+.note{font-size:.86rem;color:#5a6875}
+/* 成績單 */
+.sheet{background:linear-gradient(135deg,#fffdf5,#fff);border:2px solid #f2c94c}
+.big{font-size:2rem;font-weight:800;text-align:center;margin:4px 0}
+.row{display:flex;justify-content:space-between;gap:9px;align-items:center;padding:9px 0;
+  border-top:1px solid #eef1f5;font-size:.9rem}
+.row:first-of-type{border-top:0}
+.row .v{font-weight:700;white-space:nowrap}
+.g{color:#1f8a4c}.y{color:#b3621a}.r{color:#c0392b}.mute{color:#8a97a5}
+.bar{height:10px;border-radius:5px;background:#e3e8ee;overflow:hidden;margin:7px 0 3px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#2fbf71,#7fdca4)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chips a{background:#fff;border:1px solid #cfe0f0;border-radius:9px;padding:5px 10px;font-size:.82rem;
+  color:#22303f;text-decoration:none}
+.chips a.weak{border-color:#e8a0a0;background:#fdf3f3}
+.go{display:block;text-align:center;text-decoration:none;border-radius:12px;padding:13px;font-weight:700;margin:9px 0}
+#toast{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-90px);background:#243042;color:#fff;
+  padding:11px 20px;border-radius:20px;font-size:.95rem;font-weight:700;transition:transform .3s;z-index:100;
+  max-width:90%;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+#toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<header>
+  <h1>🏁 本週總複習</h1>
+  <p>看看這一週學了什麼、哪裡還要加強　·　<a href="index.html">← 回首頁</a></p>
+</header>
+
+<div class="wrap">
+  <div class="stubar">
+    <span class="lab">我是：</span>
+    <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
+    <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
+    <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
+    <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+    <span class="coin" id="coinBox">🪙 —</span>
+  </div>
+  <div id="main"><div class="card note">先選上面的名字。</div></div>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="cloud_sync.js?v=202607310612"></script>
+<script src="account_lock.js?v=202607310612"></script>
+<script src="supabase_auth.js?v=202607310612"></script>
+<script src="ai_review.js?v=202607310612"></script>
+<script src="week_key.js?v=202607310612"></script>
+<script src="curriculum.js?v=202607310612"></script>
+<script src="grammar_nodes.js?v=202607310612"></script>
+<script src="grammar_plan.js?v=202607310612"></script>
+<script src="vocab_units.js?v=202607310612"></script>
+<script src="vocab_unit_plan.js?v=202607310612"></script>
+<script>
+var currentStudent = null;
+
+function getProgress(s) {
+  var raw = localStorage.getItem("kidsProgress." + s);
+  var p = raw ? JSON.parse(raw) : { wrongCounts:{}, sessions:0, totalCorrect:0, totalWrong:0 };
+  if (!p.coins) p.coins = { balance:0, lifetimeEarned:0, lifetimeSpent:0, transactions:[], claimedDrills:{} };
+  if (!p.grammar) p.grammar = { schemaVersion:1, nodes:{}, completedCount:0, coinsEarned:0 };
+  if (!p.vocab) p.vocab = { schemaVersion:1, units:{}, completedCount:0, coinsEarned:0 };
+  if (!p.vocab.units) p.vocab.units = {};
+  if (!p.homework) p.homework = { schemaVersion:1, weeks:{} };
+  if (!p.weeklyTests) p.weeklyTests = [];
+  return p;
+}
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+  return { "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;" }[c]; }); }
+function refreshCoin() {
+  document.getElementById("coinBox").textContent =
+    currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
+}
+var _tt = null;
+function toast(msg) {
+  var t = document.getElementById("toast");
+  t.innerHTML = msg; t.classList.add("show");
+  clearTimeout(_tt); _tt = setTimeout(function () { t.classList.remove("show"); }, 3200);
+}
+
+// ── 蒐集本週成果 ────────────────────────────────────────────────────────
+// 這一頁不再考一次 —— 週測已經負責考了。這裡是把這一週真的做了什麼攤開來看，
+// 包含哪幾課紅燈要重看，並且能把弱項一次交給 AI 再教一遍。
+function weekRange() {
+  var sat = WeekKey.weekKey();                 // 本週識別碼＝最近的週六
+  var p = sat.split("-");
+  var end = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+  var start = new Date(end.getFullYear(), end.getMonth(), end.getDate() - 6);
+  return { start: WeekKey.ymd(start), end: sat };
+}
+
+function collect(p) {
+  var r = weekRange();
+  var inWeek = function (d) { return d && d >= r.start && d <= r.end; };
+
+  // 這一週完成的文法課與單字單元（用 lastAt 判斷）
+  var gDone = [], gWeak = [];
+  Object.keys(p.grammar.nodes || {}).forEach(function (id) {
+    var rec = p.grammar.nodes[id];
+    if (!inWeek(rec.lastAt)) return;
+    (GrammarPlan.isSolid(p, id) ? gDone : gWeak).push(id);
+  });
+  var vDone = [], vWeak = [];
+  Object.keys(p.vocab.units || {}).forEach(function (id) {
+    var rec = p.vocab.units[id];
+    if (!inWeek(rec.lastAt)) return;
+    (VocabPlan.isSolid(p, id) ? vDone : vWeak).push(id);
+  });
+
+  // 作業
+  var hw = (p.homework.weeks || {})[r.end] || { write:{}, speak:{} };
+  var hwDone = Object.keys(hw.write || {}).length + Object.keys(hw.speak || {}).length;
+
+  // 週測
+  var test = (p.weeklyTests || []).filter(function (t) { return t.week === r.end; })[0] || null;
+
+  // 本週單字（年度週計畫，兩個小孩一樣）
+  var week = null;
+  if (typeof CURRICULUM !== "undefined") {
+    CURRICULUM.forEach(function (m) {
+      (m.weeks || []).forEach(function (w) {
+        if (w.start <= r.end && w.end >= r.start) week = w;
+      });
+    });
+  }
+  return { range: r, gDone: gDone, gWeak: gWeak, vDone: vDone, vWeak: vWeak,
+           hwDone: hwDone, test: test, week: week };
+}
+
+function gname(id) { var o = GrammarPlan.byId(id); return o ? o.titleZh : id; }
+function vname(id) { var o = VocabPlan.byId(id); return o ? o.titleZh : id; }
+
+function render() {
+  var box = document.getElementById("main");
+  if (!currentStudent) { box.innerHTML = '<div class="card note">先選上面的名字。</div>'; refreshCoin(); return; }
+  var p = getProgress(currentStudent);
+  var c = collect(p);
+
+  var total = c.gDone.length + c.gWeak.length + c.vDone.length + c.vWeak.length;
+  var solid = c.gDone.length + c.vDone.length;
+
+  var h = '<div class="card sheet"><h2>📋 ' + c.range.start.slice(5) + ' ～ ' + c.range.end.slice(5) + ' 的成果</h2>' +
+    '<div class="big">' + (total ? solid + " / " + total : "—") + '</div>' +
+    '<p class="note" style="text-align:center;margin:0">' +
+      (total ? "這一週做完的課，有 " + solid + " 個學得很穩" : "這一週還沒有完成的課") + '</p>' +
+    '<div class="bar"><i style="width:' + (total ? Math.round(solid / total * 100) : 0) + '%"></i></div></div>';
+
+  // 逐項
+  h += '<div class="card"><h2>這一週做了什麼</h2>';
+  h += row("📘 文法課", c.gDone.length + c.gWeak.length ? (c.gDone.length + " 穩 · " + c.gWeak.length + " 要再練") : "還沒開始", c.gWeak.length ? "y" : (c.gDone.length ? "g" : "mute"));
+  h += row("🔤 單字單元", c.vDone.length + c.vWeak.length ? (c.vDone.length + " 穩 · " + c.vWeak.length + " 要再練") : "還沒開始", c.vWeak.length ? "y" : (c.vDone.length ? "g" : "mute"));
+  h += row("✍️ 作業（手寫3＋口說2）", c.hwDone + " / 5", c.hwDone >= 5 ? "g" : (c.hwDone ? "y" : "mute"));
+  h += row("📝 每週綜合測驗", c.test ? ("答對 " + c.test.correct + " / " + c.test.total) : "還沒考", c.test ? (c.test.correct / c.test.total >= 0.65 ? "g" : "y") : "mute");
+  if (c.week) h += row("🗂️ 本週單字主題", c.week.theme + "（" + c.week.words.length + " 字）", "mute");
+  h += '</div>';
+
+  // 要重看的
+  var weak = c.gWeak.map(function (id) { return { id:id, t:gname(id), href:"grammar_db/lessons/" + id + ".html" }; })
+    .concat(c.vWeak.map(function (id) { return { id:id, t:vname(id), href:"vocab_db/units/" + id + ".html" }; }));
+  if (c.test) {
+    ["grammar","vocab"].forEach(function (k) {
+      var m = c.test[k] || {};
+      Object.keys(m).forEach(function (id) {
+        if (m[id].total && m[id].correct / m[id].total >= 0.65) return;
+        if (weak.some(function (w) { return w.id === id; })) return;
+        weak.push({ id:id, t: k === "grammar" ? gname(id) : vname(id),
+          href: (k === "grammar" ? "grammar_db/lessons/" : "vocab_db/units/") + id + ".html" });
+      });
+    });
+  }
+  if (weak.length) {
+    h += '<div class="card"><h2>🔴 這幾課下週要再看一次</h2>' +
+      '<p class="note">週測或練習分數沒到的。點進去重做，分數會覆蓋成比較高的那次。</p>' +
+      '<div class="chips">' + weak.map(function (w) {
+        return '<a class="weak" href="' + w.href + '">' + esc(w.t) + '</a>'; }).join("") + '</div></div>';
+  } else if (total) {
+    h += '<div class="card"><h2>🟢 這一週沒有紅燈</h2><p class="note">做過的都達標了，下週可以往前走。</p></div>';
+  }
+
+  // 還沒做完的事
+  var todo = [];
+  if (!c.test) todo.push('<a href="weekly_test.html">📝 這一週的綜合測驗還沒考</a>');
+  if (c.hwDone < 5) todo.push('<a href="homework.html">✍️ 作業還有 ' + (5 - c.hwDone) + ' 項沒做</a>');
+  if (todo.length) {
+    h += '<div class="card"><h2>還差這些</h2><div class="chips">' + todo.join("") + '</div></div>';
+  }
+
+  h += '<a class="go" href="weekly_test.html" style="background:#5b3aa0;color:#fff">📝 去做每週綜合測驗</a>';
+  h += '<div id="aiBox"></div>';
+  box.innerHTML = h;
+  refreshCoin();
+
+  // 把弱項交給 AI 再教一遍
+  if (window.AIReview) {
+    AIReview.render("aiBox", {
+      subject: "本週總複習",
+      topic: weak.length ? weak.map(function (w) { return w.t; }).join("、") : "這一週學過的內容",
+      goal: "把這一週沒學穩的地方補起來",
+      wrong: weak.map(function (w) {
+        return { q: "這一課還沒學穩：" + w.t, chose: "（練習分數沒到標準）", answer: "需要重新複習" };
+      }),
+      correct: solid, total: total || 1,
+    });
+  }
+}
+
+function row(label, value, cls) {
+  return '<div class="row"><span>' + label + '</span><span class="v ' + cls + '">' + esc(value) + '</span></div>';
+}
+
+function pickStudent(name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
+  currentStudent = name;
+  localStorage.setItem("kidsCurrentStudent", name);
+  var btns = document.querySelectorAll(".stu-btn");
+  for (var i = 0; i < btns.length; i++)
+    btns[i].classList.toggle("active", btns[i].textContent.toLowerCase().indexOf(name) >= 0);
+  render();
+}
+
+(function () {
+  var last = localStorage.getItem("kidsCurrentStudent");
+  if (!window.sbClient && last && last !== "guest") pickStudent(last); else render();
+})();
+</script>
+</body>
+</html>

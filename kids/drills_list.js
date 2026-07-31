@@ -54,4 +54,9 @@ const DRILLS = [
   { day: 49, date: "2026-07-30", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第4週 露營單字＋文法根基", icon: "📝" },
   { day: 50, date: "2026-07-31", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第4週 露營單字＋文法根基", icon: "📝" },
   { day: 51, date: "2026-08-01", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第4週 露營單字＋文法根基", icon: "📝" },
+  { day: 52, date: "2026-08-03", theme: "outdoor", eng: "Summer Outdoors", zh: "夏日戶外", icon: "🏕️" },
+  { day: 53, date: "2026-08-04", theme: "outdoor", eng: "Summer Outdoors", zh: "夏日戶外", icon: "🏕️" },
+  { day: 54, date: "2026-08-05", theme: "outdoor", eng: "Summer Outdoors", zh: "夏日戶外", icon: "🏕️" },
+  { day: 55, date: "2026-08-06", theme: "outdoor", eng: "Summer Outdoors", zh: "夏日戶外", icon: "🏕️" },
+  { day: 56, date: "2026-08-07", theme: "outdoor", eng: "Summer Outdoors", zh: "夏日戶外", icon: "🏕️" },
 ];

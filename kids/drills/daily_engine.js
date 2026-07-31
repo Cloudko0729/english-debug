@@ -207,7 +207,22 @@
     // 題庫來自 grammar_daily.js（grammar_db 的 F0–F7 節點），grammar_core 已退役。
     let s8 = null;
     if (typeof gcProgress === "function" && typeof GC_QUIZ !== "undefined") {
-      const gp = gcProgress(DRILL_DATE);
+      // 優先出「這個小孩自己這個月要學的」節點 —— 月課表是各自選的，
+      // 考別人的課沒有意義。buildDrill 是在選完名字之後才跑（見 selectStudent），
+      // 所以這裡拿得到個人進度。
+      // 還沒選課表的就退回日期排程，不要讓文法段落空著。
+      let gp = null;
+      const plan = window.GrammarPlan && currentStudent
+        ? GrammarPlan.activePlan(getProgress(currentStudent)) : null;
+      if (plan && plan.nodes && plan.nodes.length) {
+        const opened = plan.nodes.map(id => GC_UNITS.find(u => u.id === id)).filter(Boolean);
+        if (opened.length) {
+          // 當天主打課表裡的第幾課：依日期輪替，一週內不會每天都同一課
+          const dayShift = Math.floor(Date.parse(DRILL_DATE) / 86400000) % opened.length;
+          gp = { current: opened[dayShift], opened };
+        }
+      }
+      if (!gp) gp = gcProgress(DRILL_DATE);
       if (gp) {
         const cur = gp.current;
         const mk = (raw, unit) => ({ q: raw.q, unit, choices: shuffleArr(raw.choices.map(c => ({ label: c, correct: c === raw.answer })), rnd) });
