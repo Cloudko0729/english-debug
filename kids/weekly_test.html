@@ -81,16 +81,16 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202608010119"></script>
-<script src="account_lock.js?v=202608010119"></script>
-<script src="supabase_auth.js?v=202608010119"></script>
-<script src="ai_review.js?v=202608010119"></script>
-<script src="week_key.js?v=202608010119"></script>
-<script src="grammar_nodes.js?v=202608010119"></script>
-<script src="grammar_plan.js?v=202608010119"></script>
-<script src="vocab_units.js?v=202608010119"></script>
-<script src="vocab_unit_plan.js?v=202608010119"></script>
-<script src="weekly_bank.js?v=202608010119"></script>
+<script src="cloud_sync.js?v=202608010134"></script>
+<script src="account_lock.js?v=202608010134"></script>
+<script src="supabase_auth.js?v=202608010134"></script>
+<script src="ai_review.js?v=202608010134"></script>
+<script src="week_key.js?v=202608010134"></script>
+<script src="grammar_nodes.js?v=202608010134"></script>
+<script src="grammar_plan.js?v=202608010134"></script>
+<script src="vocab_units.js?v=202608010134"></script>
+<script src="vocab_unit_plan.js?v=202608010134"></script>
+<script src="weekly_bank.js?v=202608010134"></script>
 <script>
 var currentStudent = null, curAudio = null;
 var TEST = null, answers = {}, graded = false, wrongForAI = [];
@@ -350,7 +350,7 @@ function renderDone(p) {
   var nextWeek = WeekKey.nextWeekKey();
   return '<div class="card"><b>這一週的測驗已經考完了 ✅</b>' +
     '<p class="note">答對 ' + t.correct + ' / ' + t.total + '（' + t.at + '）。' +
-    '下一份測驗 ' + ymd(next) + ' 星期六開放。</p></div>' +
+    '下一份測驗 ' + nextWeek + ' 星期六開放。</p></div>' +
     '<div class="card"><h2>上次的結果</h2>' + rows + '</div>';
 }
 
