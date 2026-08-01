@@ -177,6 +177,13 @@ header a{color:#2f80ed;text-decoration:none}
 .turn .who.b{color:#b3621a}
 .turn .tx{flex:1}
 .psg{font-size:.93rem;margin:0 0 6px}
+/* 超出 L1-L4 的字：標出來並可點看中文。
+   L3 短文有 23.9%、L4 有 26.6% 的內容詞沒教過，不標的話小孩只能猜。 */
+.gw{border-bottom:1.5px dotted #b3621a;cursor:pointer}
+.gw.on{background:#fff3cd;border-radius:4px}
+.gz{display:none;font-size:.78rem;color:#8a5a12;background:#fff8e1;border-radius:6px;padding:1px 6px;margin-left:4px}
+.gw.on+.gz{display:inline}
+.glegend{font-size:.78rem;color:#8a97a5;margin:0 0 9px}
 .zhline{font-size:.8rem;color:#8a97a5}
 /* 測驗 */
 .q{border-top:1px solid #eef1f5;padding:12px 0}
@@ -200,7 +207,17 @@ header a{color:#2f80ed;text-decoration:none}
 #toast.show{transform:translateX(-50%) translateY(0)}
 `;
 
-function renderUnit(unit, wordMap, confusions, prev, next, levelWords) {
+// 把超綱字包起來，附上中文。產生時就決定好，頁面不用再算一次。
+function markText(text, gloss) {
+  return String(text).replace(/[A-Za-z][A-Za-z'’]*/g, w => {
+    const zh = gloss[w.toLowerCase()];
+    if (!zh) return esc(w);
+    return `<span class="gw" onclick="this.classList.toggle('on')">${esc(w)}</span><span class="gz">${esc(zh)}</span>`;
+  });
+}
+
+function renderUnit(unit, wordMap, confusions, prev, next, levelWords, gloss) {
+  const mark = t => markText(t, gloss || {});
   const words = unit.targetWords.map(w => wordMap.get(w)).filter(Boolean);
   const quiz = buildQuiz(unit, wordMap, levelWords);
 
@@ -224,12 +241,12 @@ function renderUnit(unit, wordMap, confusions, prev, next, levelWords) {
 
   const turns = unit.dialogue.turns.map(t => `
     <div class="turn"><span class="who${t.speaker === "B" ? " b" : ""}">${esc(t.speaker)}</span>
-      <span class="tx">${esc(t.text)}</span>
+      <span class="tx">${mark(t.text)}</span>
       ${t.audio ? `<button class="spk" onclick="play('../../${esc(t.audio)}')">🔊</button>` : ""}</div>`).join("");
 
   const psgs = unit.passages.map(p => `
     <div style="margin:0 0 13px">
-      <p class="psg">${esc(p.text)}</p>
+      <p class="psg">${mark(p.text)}</p>
       ${p.audio ? `<button class="spk" onclick="play('../../${esc(p.audio)}')">🔊 聽這一篇</button>` : ""}
     </div>`).join("");
 
@@ -284,6 +301,7 @@ function renderUnit(unit, wordMap, confusions, prev, next, levelWords) {
   <div class="card">
     <h2>② 聽聽看什麼時候會用到</h2>
     <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     ${unit.dialogue.fullAudio ? `<button class="spk" onclick="play('../../${esc(unit.dialogue.fullAudio)}')" style="margin-bottom:8px">▶️ 整段播放</button>` : ""}
     ${turns}
   </div>
@@ -291,7 +309,10 @@ function renderUnit(unit, wordMap, confusions, prev, next, levelWords) {
   <div class="card">
     <h2>③ 讀一段短文</h2>
     <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     ${psgs}
+    <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
+    <div id="aiRead"></div>
   </div>
 ${conBlock}
   <div class="card">
@@ -328,6 +349,19 @@ var UNIT_ID = ${jsonInline(unit.id)};
 var QUIZ = ${jsonInline(quiz)};
 var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = ${jsonInline(unit.titleZh)};
+var UNIT_DIALOGUE = ${jsonInline(unit.dialogue.turns.map(t => t.speaker + ": " + t.text).join("\n"))};
+var UNIT_PASSAGE = ${jsonInline(unit.passages.map(p => p.text).join("\n\n"))};
+var UNIT_NEWWORDS = ${jsonInline((() => {
+    const g = gloss || {};
+    const seen = [];
+    unit.dialogue.turns.map(t => t.text).concat(unit.passages.map(p => p.text)).forEach(t => {
+      (String(t).match(/[A-Za-z][A-Za-z'’]*/g) || []).forEach(w => {
+        const k = w.toLowerCase();
+        if (g[k] && !seen.some(x => x.w === k)) seen.push({ w: k, zh: g[k] });
+      });
+    });
+    return seen;
+  })())};
 var UNIT_GOAL = ${jsonInline("這個單元的字：" + words.slice(0, 6).map(w => disp(w.word)).join("、") + " 等 " + words.length + " 個")};
 
 function getProgress(s) {
@@ -452,6 +486,29 @@ function drawOffPlan() {
     "只是它不算進這個月的進度。<br>" +
     "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
 }
+
+// 讓小孩把整篇交給 AI 自己讀懂 —— 家長沒空時也能問到底
+window.askAIRead = function () {
+  if (!window.AIReview) return;
+  var NL = String.fromCharCode(10);
+  var newWords = UNIT_NEWWORDS.map(function (x) { return x.w + "（" + x.zh + "）"; }).join("、");
+  var text = [
+    "我是台灣的小學生，正在學英文。以下是我這個單元要讀的對話和短文，請幫我讀懂。", "",
+    "【單元主題】" + UNIT_TITLE, "",
+    "【對話】", UNIT_DIALOGUE, "",
+    "【短文】", UNIT_PASSAGE, "",
+  ].concat(newWords ? ["【課本已經標成生字的】" + newWords, ""] : []).concat([
+    "【請這樣幫我】",
+    "1. 先用兩三句中文說這篇在講什麼，不要逐句翻譯。",
+    "2. 挑出 5 個我最該記住的字，各給一句很短的英文例句。",
+    "3. 如果還有我可能看不懂的字，用中文簡單說它的意思。",
+    "4. 最後問我 3 個關於這篇內容的問題，先不要給答案，等我回答再批改。",
+    "5. 說明用繁體中文，英文句子保持英文。請講簡短一點。",
+  ]).join(NL);
+  AIReview.paintPrompt("aiRead", "把這篇交給 AI 講一次",
+    "複製下面這段貼到 ChatGPT，它會用中文說這篇在講什麼，再挑重點字考你。", text);
+  document.getElementById("aiRead").scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
@@ -656,6 +713,12 @@ window.pickStudent = function (name) {
 
 function main() {
   const { words, units, confusions } = load();
+  // 超綱字中文（由 build_gloss.js 產生）
+  let gloss = {};
+  try {
+    const src = fs.readFileSync(path.join(KIDS, "vocab_db", "gloss.js"), "utf8");
+    gloss = new Function("var window={};" + src + "; return window.VOCAB_GLOSS;")();
+  } catch (e) { console.warn("⚠️ 讀不到 gloss.js，超綱字不會標註：", e.message); }
   fs.mkdirSync(OUT, { recursive: true });
 
   const allWords = Array.from(words.values());
@@ -665,7 +728,7 @@ function main() {
     if (q.length < 4) throw new Error(`${u.id} 只出得出 ${q.length} 題，資料有問題`);
     quizTotal += q.length;
     fs.writeFileSync(path.join(OUT, u.id + ".html"),
-      renderUnit(u, words, confusions, units[i - 1] || null, units[i + 1] || null, allWords), "utf8");
+      renderUnit(u, words, confusions, units[i - 1] || null, units[i + 1] || null, allWords, gloss), "utf8");
   });
   fs.writeFileSync(path.join(OUT, "index.html"), renderIndex(units), "utf8");
 

@@ -49,6 +49,13 @@ header a{color:#2f80ed;text-decoration:none}
 .turn .who.b{color:#b3621a}
 .turn .tx{flex:1}
 .psg{font-size:.93rem;margin:0 0 6px}
+/* 超出 L1-L4 的字：標出來並可點看中文。
+   L3 短文有 23.9%、L4 有 26.6% 的內容詞沒教過，不標的話小孩只能猜。 */
+.gw{border-bottom:1.5px dotted #b3621a;cursor:pointer}
+.gw.on{background:#fff3cd;border-radius:4px}
+.gz{display:none;font-size:.78rem;color:#8a5a12;background:#fff8e1;border-radius:6px;padding:1px 6px;margin-left:4px}
+.gw.on+.gz{display:inline}
+.glegend{font-size:.78rem;color:#8a97a5;margin:0 0 9px}
 .zhline{font-size:.8rem;color:#8a97a5}
 /* 測驗 */
 .q{border-top:1px solid #eef1f5;padding:12px 0}
@@ -282,46 +289,50 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>② 聽聽看什麼時候會用到</h2>
     <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l3-u06-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
     
     <div class="turn"><span class="who">A</span>
-      <span class="tx">How are we getting to the beach for our trip?</span>
+      <span class="tx">How are we <span class="gw" onclick="this.classList.toggle('on')">getting</span><span class="gz">得到</span> to the <span class="gw" onclick="this.classList.toggle('on')">beach</span><span class="gz">海灘</span> for our trip?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u06-d1.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
       <span class="tx">We can take the train at eight.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u06-d2.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Can we bring our bikes on it?</span>
+      <span class="tx">Can we <span class="gw" onclick="this.classList.toggle('on')">bring</span><span class="gz">帶來</span> our bikes on it?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u06-d3.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
       <span class="tx">Yes, but we need to ask at the station.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u06-d4.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">My dad could drive us in his car instead.</span>
+      <span class="tx">My dad could drive us in his car <span class="gw" onclick="this.classList.toggle('on')">instead</span><span class="gz">改成、反而</span>.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u06-d5.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
       <span class="tx">The road may have many trucks this morning.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u06-d6.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Then I will call him and choose the train.</span>
+      <span class="tx">Then I will call him and <span class="gw" onclick="this.classList.toggle('on')">choose</span><span class="gz">選擇</span> the train.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u06-d7.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Great. Let's meet by the bicycle shop.</span>
+      <span class="tx">Great. <span class="gw" onclick="this.classList.toggle('on')">Let's</span><span class="gz">我們來…吧</span> <span class="gw" onclick="this.classList.toggle('on')">meet</span><span class="gz">見面</span> by the bicycle <span class="gw" onclick="this.classList.toggle('on')">shop</span><span class="gz">商店</span>.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u06-d8.mp3')">🔊</button></div>
   </div>
 
   <div class="card">
     <h2>③ 讀一段短文</h2>
     <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">My cousin Jack came from America during the school holiday. We planned a day trip to a mountain town and took an early train. At the station, Jack saw many bicycles and asked if we could rent a bike. Mom said the road was too steep, so we rode a bus instead. A truck drove slowly in front of us, but we reached the town before lunch. Jack took photos and called the trip his favorite day in Taiwan.</p>
+      <p class="psg">My <span class="gw" onclick="this.classList.toggle('on')">cousin</span><span class="gz">表／堂兄弟姊妹</span> Jack <span class="gw" onclick="this.classList.toggle('on')">came</span><span class="gz">來（come 的過去式）</span> from America <span class="gw" onclick="this.classList.toggle('on')">during</span><span class="gz">在期間</span> the school <span class="gw" onclick="this.classList.toggle('on')">holiday</span><span class="gz">假日</span>. We <span class="gw" onclick="this.classList.toggle('on')">planned</span><span class="gz">計畫</span> a day trip to a <span class="gw" onclick="this.classList.toggle('on')">mountain</span><span class="gz">山</span> <span class="gw" onclick="this.classList.toggle('on')">town</span><span class="gz">城鎮</span> and <span class="gw" onclick="this.classList.toggle('on')">took</span><span class="gz">拿（take 的過去式）</span> an early train. At the station, Jack <span class="gw" onclick="this.classList.toggle('on')">saw</span><span class="gz">看見（see 的過去式）</span> many bicycles and asked if we could <span class="gw" onclick="this.classList.toggle('on')">rent</span><span class="gz">租金</span> a bike. <span class="gw" onclick="this.classList.toggle('on')">Mom</span><span class="gz">媽媽</span> <span class="gw" onclick="this.classList.toggle('on')">said</span><span class="gz">說（say 的過去式）</span> the road was too <span class="gw" onclick="this.classList.toggle('on')">steep</span><span class="gz">陡的</span>, so we <span class="gw" onclick="this.classList.toggle('on')">rode</span><span class="gz">騎（ride 的過去式）</span> a bus <span class="gw" onclick="this.classList.toggle('on')">instead</span><span class="gz">改成、反而</span>. A truck <span class="gw" onclick="this.classList.toggle('on')">drove</span><span class="gz">開車（drive 的過去式）</span> slowly in <span class="gw" onclick="this.classList.toggle('on')">front</span><span class="gz">前面</span> of us, but we <span class="gw" onclick="this.classList.toggle('on')">reached</span><span class="gz">到達</span> the <span class="gw" onclick="this.classList.toggle('on')">town</span><span class="gz">城鎮</span> before lunch. Jack <span class="gw" onclick="this.classList.toggle('on')">took</span><span class="gz">拿（take 的過去式）</span> <span class="gw" onclick="this.classList.toggle('on')">photos</span><span class="gz">相片</span> and called the trip his <span class="gw" onclick="this.classList.toggle('on')">favorite</span><span class="gz">最喜愛的</span> day in <span class="gw" onclick="this.classList.toggle('on')">Taiwan</span><span class="gz">台灣</span>.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l3-u06-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">Emma was learning to ride a bicycle in the park. Dad held the bike while she pushed the pedals, but she turned too quickly and fell into the grass. She began to cry, so Dad asked if she was hurt. Emma shook her head and tried again. Soon she could ride past a parked truck without help. Above her, a red kite flew across the sky. Dad called Mom and said, &quot;Emma can ride by herself now!&quot;</p>
+      <p class="psg">Emma was learning to <span class="gw" onclick="this.classList.toggle('on')">ride</span><span class="gz">騎、搭乘</span> a bicycle in the <span class="gw" onclick="this.classList.toggle('on')">park</span><span class="gz">公園</span>. Dad <span class="gw" onclick="this.classList.toggle('on')">held</span><span class="gz">握住（hold 的過去式）</span> the bike while she <span class="gw" onclick="this.classList.toggle('on')">pushed</span><span class="gz">推</span> the <span class="gw" onclick="this.classList.toggle('on')">pedals</span><span class="gz">踏板</span>, but she <span class="gw" onclick="this.classList.toggle('on')">turned</span><span class="gz">轉、變成</span> too <span class="gw" onclick="this.classList.toggle('on')">quickly</span><span class="gz">快</span> and <span class="gw" onclick="this.classList.toggle('on')">fell</span><span class="gz">秋天（fall 的過去式）</span> into the <span class="gw" onclick="this.classList.toggle('on')">grass</span><span class="gz">草</span>. She <span class="gw" onclick="this.classList.toggle('on')">began</span><span class="gz">開始（begin 的過去式）</span> to cry, so Dad asked if she was <span class="gw" onclick="this.classList.toggle('on')">hurt</span><span class="gz">受傷、痛</span>. Emma <span class="gw" onclick="this.classList.toggle('on')">shook</span><span class="gz">握手（shake 的過去式）</span> her head and tried again. Soon she could <span class="gw" onclick="this.classList.toggle('on')">ride</span><span class="gz">騎、搭乘</span> <span class="gw" onclick="this.classList.toggle('on')">past</span><span class="gz">過去</span> a <span class="gw" onclick="this.classList.toggle('on')">parked</span><span class="gz">公園</span> truck without help. <span class="gw" onclick="this.classList.toggle('on')">Above</span><span class="gz">在上面</span> her, a red kite <span class="gw" onclick="this.classList.toggle('on')">flew</span><span class="gz">飛（fly 的過去式）</span> <span class="gw" onclick="this.classList.toggle('on')">across</span><span class="gz">橫越</span> the sky. Dad called <span class="gw" onclick="this.classList.toggle('on')">Mom</span><span class="gz">媽媽</span> and <span class="gw" onclick="this.classList.toggle('on')">said</span><span class="gz">說（say 的過去式）</span>, "Emma can <span class="gw" onclick="this.classList.toggle('on')">ride</span><span class="gz">騎、搭乘</span> by <span class="gw" onclick="this.classList.toggle('on')">herself</span><span class="gz">她自己</span> now!"</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l3-u06-p2.mp3')">🔊 聽這一篇</button>
     </div>
+    <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
+    <div id="aiRead"></div>
   </div>
 
   <div class="card">
@@ -347,17 +358,20 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010142"></script>
-<script src="../../account_lock.js?v=202608010142"></script>
-<script src="../../supabase_auth.js?v=202608010142"></script>
-<script src="../../ai_review.js?v=202608010142"></script>
-<script src="../../vocab_units.js?v=202608010142"></script>
-<script src="../../vocab_unit_plan.js?v=202608010142"></script>
+<script src="../../cloud_sync.js?v=202608010250"></script>
+<script src="../../account_lock.js?v=202608010250"></script>
+<script src="../../supabase_auth.js?v=202608010250"></script>
+<script src="../../ai_review.js?v=202608010250"></script>
+<script src="../../vocab_units.js?v=202608010250"></script>
+<script src="../../vocab_unit_plan.js?v=202608010250"></script>
 <script>
 var UNIT_ID = "l3-u06";
 var QUIZ = [{"kind":"zh2en","ask":"「美國」的英文是哪一個？","answer":"America","options":["bicycle","bike","America","train"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ebike\u003c/b\u003e 是什麼意思？","answer":"腳踏車","options":["腳踏車","美國","火車","旅行"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"into","options":["about","after","into","with"],"audio":"audio/words/into.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eOur class ＿＿＿ is on Friday.\u003c/span\u003e","answer":"trip","options":["America","bicycle","bike","trip"],"audio":"audio/vocab_foundation/examples/l3-trip-e1.mp3"},{"kind":"zh2en","ask":"「問」的英文是哪一個？","answer":"ask","options":["America","bicycle","bike","ask"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ecry\u003c/b\u003e 是什麼意思？","answer":"哭","options":["開車","哭","打電話","跳舞"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"die","options":["drive","call","die","cry"],"audio":"audio/words/die.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eMy aunt lives in ＿＿＿.\u003c/span\u003e","answer":"America","options":["bicycle","bike","America","train"],"audio":"audio/vocab_foundation/examples/l3-america-e1.mp3"}];
 var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "地點與交通 × 動作與日常";
+var UNIT_DIALOGUE = "A: How are we getting to the beach for our trip?\nB: We can take the train at eight.\nA: Can we bring our bikes on it?\nB: Yes, but we need to ask at the station.\nA: My dad could drive us in his car instead.\nB: The road may have many trucks this morning.\nA: Then I will call him and choose the train.\nB: Great. Let's meet by the bicycle shop.";
+var UNIT_PASSAGE = "My cousin Jack came from America during the school holiday. We planned a day trip to a mountain town and took an early train. At the station, Jack saw many bicycles and asked if we could rent a bike. Mom said the road was too steep, so we rode a bus instead. A truck drove slowly in front of us, but we reached the town before lunch. Jack took photos and called the trip his favorite day in Taiwan.\n\nEmma was learning to ride a bicycle in the park. Dad held the bike while she pushed the pedals, but she turned too quickly and fell into the grass. She began to cry, so Dad asked if she was hurt. Emma shook her head and tried again. Soon she could ride past a parked truck without help. Above her, a red kite flew across the sky. Dad called Mom and said, \"Emma can ride by herself now!\"";
+var UNIT_NEWWORDS = [{"w":"getting","zh":"得到"},{"w":"beach","zh":"海灘"},{"w":"bring","zh":"帶來"},{"w":"instead","zh":"改成、反而"},{"w":"choose","zh":"選擇"},{"w":"let's","zh":"我們來…吧"},{"w":"meet","zh":"見面"},{"w":"shop","zh":"商店"},{"w":"cousin","zh":"表／堂兄弟姊妹"},{"w":"came","zh":"來（come 的過去式）"},{"w":"during","zh":"在期間"},{"w":"holiday","zh":"假日"},{"w":"planned","zh":"計畫"},{"w":"mountain","zh":"山"},{"w":"town","zh":"城鎮"},{"w":"took","zh":"拿（take 的過去式）"},{"w":"saw","zh":"看見（see 的過去式）"},{"w":"rent","zh":"租金"},{"w":"mom","zh":"媽媽"},{"w":"said","zh":"說（say 的過去式）"},{"w":"steep","zh":"陡的"},{"w":"rode","zh":"騎（ride 的過去式）"},{"w":"drove","zh":"開車（drive 的過去式）"},{"w":"front","zh":"前面"},{"w":"reached","zh":"到達"},{"w":"photos","zh":"相片"},{"w":"favorite","zh":"最喜愛的"},{"w":"taiwan","zh":"台灣"},{"w":"ride","zh":"騎、搭乘"},{"w":"park","zh":"公園"},{"w":"held","zh":"握住（hold 的過去式）"},{"w":"pushed","zh":"推"},{"w":"pedals","zh":"踏板"},{"w":"turned","zh":"轉、變成"},{"w":"quickly","zh":"快"},{"w":"fell","zh":"秋天（fall 的過去式）"},{"w":"grass","zh":"草"},{"w":"began","zh":"開始（begin 的過去式）"},{"w":"hurt","zh":"受傷、痛"},{"w":"shook","zh":"握手（shake 的過去式）"},{"w":"past","zh":"過去"},{"w":"parked","zh":"公園"},{"w":"above","zh":"在上面"},{"w":"flew","zh":"飛（fly 的過去式）"},{"w":"across","zh":"橫越"},{"w":"herself","zh":"她自己"}];
 var UNIT_GOAL = "這個單元的字：America、bicycle、bike、drive、into、train 等 14 個";
 
 function getProgress(s) {
@@ -482,6 +496,29 @@ function drawOffPlan() {
     "只是它不算進這個月的進度。<br>" +
     "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
 }
+
+// 讓小孩把整篇交給 AI 自己讀懂 —— 家長沒空時也能問到底
+window.askAIRead = function () {
+  if (!window.AIReview) return;
+  var NL = String.fromCharCode(10);
+  var newWords = UNIT_NEWWORDS.map(function (x) { return x.w + "（" + x.zh + "）"; }).join("、");
+  var text = [
+    "我是台灣的小學生，正在學英文。以下是我這個單元要讀的對話和短文，請幫我讀懂。", "",
+    "【單元主題】" + UNIT_TITLE, "",
+    "【對話】", UNIT_DIALOGUE, "",
+    "【短文】", UNIT_PASSAGE, "",
+  ].concat(newWords ? ["【課本已經標成生字的】" + newWords, ""] : []).concat([
+    "【請這樣幫我】",
+    "1. 先用兩三句中文說這篇在講什麼，不要逐句翻譯。",
+    "2. 挑出 5 個我最該記住的字，各給一句很短的英文例句。",
+    "3. 如果還有我可能看不懂的字，用中文簡單說它的意思。",
+    "4. 最後問我 3 個關於這篇內容的問題，先不要給答案，等我回答再批改。",
+    "5. 說明用繁體中文，英文句子保持英文。請講簡短一點。",
+  ]).join(NL);
+  AIReview.paintPrompt("aiRead", "把這篇交給 AI 講一次",
+    "複製下面這段貼到 ChatGPT，它會用中文說這篇在講什麼，再挑重點字考你。", text);
+  document.getElementById("aiRead").scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;

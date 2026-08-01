@@ -49,6 +49,13 @@ header a{color:#2f80ed;text-decoration:none}
 .turn .who.b{color:#b3621a}
 .turn .tx{flex:1}
 .psg{font-size:.93rem;margin:0 0 6px}
+/* 超出 L1-L4 的字：標出來並可點看中文。
+   L3 短文有 23.9%、L4 有 26.6% 的內容詞沒教過，不標的話小孩只能猜。 */
+.gw{border-bottom:1.5px dotted #b3621a;cursor:pointer}
+.gw.on{background:#fff3cd;border-radius:4px}
+.gz{display:none;font-size:.78rem;color:#8a5a12;background:#fff8e1;border-radius:6px;padding:1px 6px;margin-left:4px}
+.gw.on+.gz{display:inline}
+.glegend{font-size:.78rem;color:#8a97a5;margin:0 0 9px}
 .zhline{font-size:.8rem;color:#8a97a5}
 /* 測驗 */
 .q{border-top:1px solid #eef1f5;padding:12px 0}
@@ -269,6 +276,7 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>② 聽聽看什麼時候會用到</h2>
     <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l1-u07-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
     
     <div class="turn"><span class="who">A</span>
@@ -278,7 +286,7 @@ header a{color:#2f80ed;text-decoration:none}
       <span class="tx">No, I go home in Dad's car.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u07-d2.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Can you come to the park first?</span>
+      <span class="tx">Can you come to the <span class="gw" onclick="this.classList.toggle('on')">park</span><span class="gz">公園</span> first?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u07-d3.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
       <span class="tx">Yes. I want to run with you.</span>
@@ -290,7 +298,7 @@ header a{color:#2f80ed;text-decoration:none}
       <span class="tx">No, I sit and play with my toy.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u07-d6.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">I miss our park games.</span>
+      <span class="tx">I miss our <span class="gw" onclick="this.classList.toggle('on')">park</span><span class="gz">公園</span> <span class="gw" onclick="this.classList.toggle('on')">games</span><span class="gz">遊戲</span>.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u07-d7.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
       <span class="tx">Me too. Let us go now.</span>
@@ -300,15 +308,18 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>③ 讀一段短文</h2>
     <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">I come home at four. My dog and I go to the park. I jog, and he can run. We love this game. Then I sit by the door and watch him. I miss Mom, but she comes home soon. We all go into the room together.</p>
+      <p class="psg">I come home at four. My dog and I go to the <span class="gw" onclick="this.classList.toggle('on')">park</span><span class="gz">公園</span>. I jog, and he can run. We love this <span class="gw" onclick="this.classList.toggle('on')">game</span><span class="gz">遊戲</span>. Then I sit by the door and <span class="gw" onclick="this.classList.toggle('on')">watch</span><span class="gz">注意</span> him. I miss <span class="gw" onclick="this.classList.toggle('on')">Mom</span><span class="gz">媽媽</span>, but she comes home soon. We all go into the room together.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u07-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">A toy car is in my room. I sit on the bed and make it go. The car runs to the door. Now it is under a toy bus. Dad comes home and looks in. &quot;Come with me,&quot; he says. We go to the real car and ride to Grandma's home.</p>
+      <p class="psg">A toy car is in my room. I sit on the bed and make it go. The car runs to the door. Now it is under a toy bus. Dad comes home and <span class="gw" onclick="this.classList.toggle('on')">looks</span><span class="gz">看</span> in. "Come with me," he says. We go to the real car and <span class="gw" onclick="this.classList.toggle('on')">ride</span><span class="gz">騎、搭乘</span> to Grandma's home.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u07-p2.mp3')">🔊 聽這一篇</button>
     </div>
+    <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
+    <div id="aiRead"></div>
   </div>
 
   <div class="card">
@@ -357,17 +368,20 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010142"></script>
-<script src="../../account_lock.js?v=202608010142"></script>
-<script src="../../supabase_auth.js?v=202608010142"></script>
-<script src="../../ai_review.js?v=202608010142"></script>
-<script src="../../vocab_units.js?v=202608010142"></script>
-<script src="../../vocab_unit_plan.js?v=202608010142"></script>
+<script src="../../cloud_sync.js?v=202608010250"></script>
+<script src="../../account_lock.js?v=202608010250"></script>
+<script src="../../supabase_auth.js?v=202608010250"></script>
+<script src="../../ai_review.js?v=202608010250"></script>
+<script src="../../vocab_units.js?v=202608010250"></script>
+<script src="../../vocab_unit_plan.js?v=202608010250"></script>
 <script>
 var UNIT_ID = "l1-u07";
 var QUIZ = [{"kind":"zh2en","ask":"「來」的英文是哪一個？","answer":"come","options":["come","go","jog","love"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ejog\u003c/b\u003e 是什麼意思？","answer":"慢跑","options":["來","去","愛","慢跑"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"miss","options":["miss","come","go","jog"],"audio":"audio/words/miss.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI ＿＿＿ on a chair.\u003c/span\u003e","answer":"sit","options":["sit","come","go","jog"],"audio":"audio/words/ex/sit_0.mp3"},{"kind":"zh2en","ask":"「房間」的英文是哪一個？","answer":"room","options":["door","room","toy","bus"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ebus\u003c/b\u003e 是什麼意思？","answer":"公車","options":["門","房間","公車","玩具"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"home","options":["door","home","room","toy"],"audio":"audio/words/home.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI ＿＿＿ to school.\u003c/span\u003e","answer":"go","options":["come","jog","go","love"],"audio":"audio/words/ex/go_0.mp3"}];
 var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "動作與日常 × 住家與物品";
+var UNIT_DIALOGUE = "A: Do you go home by bus?\nB: No, I go home in Dad's car.\nA: Can you come to the park first?\nB: Yes. I want to run with you.\nA: Do you jog every day?\nB: No, I sit and play with my toy.\nA: I miss our park games.\nB: Me too. Let us go now.";
+var UNIT_PASSAGE = "I come home at four. My dog and I go to the park. I jog, and he can run. We love this game. Then I sit by the door and watch him. I miss Mom, but she comes home soon. We all go into the room together.\n\nA toy car is in my room. I sit on the bed and make it go. The car runs to the door. Now it is under a toy bus. Dad comes home and looks in. \"Come with me,\" he says. We go to the real car and ride to Grandma's home.";
+var UNIT_NEWWORDS = [{"w":"park","zh":"公園"},{"w":"games","zh":"遊戲"},{"w":"game","zh":"遊戲"},{"w":"watch","zh":"注意"},{"w":"mom","zh":"媽媽"},{"w":"looks","zh":"看"},{"w":"ride","zh":"騎、搭乘"}];
 var UNIT_GOAL = "這個單元的字：come、go、jog、love、miss、run 等 13 個";
 
 function getProgress(s) {
@@ -492,6 +506,29 @@ function drawOffPlan() {
     "只是它不算進這個月的進度。<br>" +
     "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
 }
+
+// 讓小孩把整篇交給 AI 自己讀懂 —— 家長沒空時也能問到底
+window.askAIRead = function () {
+  if (!window.AIReview) return;
+  var NL = String.fromCharCode(10);
+  var newWords = UNIT_NEWWORDS.map(function (x) { return x.w + "（" + x.zh + "）"; }).join("、");
+  var text = [
+    "我是台灣的小學生，正在學英文。以下是我這個單元要讀的對話和短文，請幫我讀懂。", "",
+    "【單元主題】" + UNIT_TITLE, "",
+    "【對話】", UNIT_DIALOGUE, "",
+    "【短文】", UNIT_PASSAGE, "",
+  ].concat(newWords ? ["【課本已經標成生字的】" + newWords, ""] : []).concat([
+    "【請這樣幫我】",
+    "1. 先用兩三句中文說這篇在講什麼，不要逐句翻譯。",
+    "2. 挑出 5 個我最該記住的字，各給一句很短的英文例句。",
+    "3. 如果還有我可能看不懂的字，用中文簡單說它的意思。",
+    "4. 最後問我 3 個關於這篇內容的問題，先不要給答案，等我回答再批改。",
+    "5. 說明用繁體中文，英文句子保持英文。請講簡短一點。",
+  ]).join(NL);
+  AIReview.paintPrompt("aiRead", "把這篇交給 AI 講一次",
+    "複製下面這段貼到 ChatGPT，它會用中文說這篇在講什麼，再挑重點字考你。", text);
+  document.getElementById("aiRead").scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;

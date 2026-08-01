@@ -49,6 +49,13 @@ header a{color:#2f80ed;text-decoration:none}
 .turn .who.b{color:#b3621a}
 .turn .tx{flex:1}
 .psg{font-size:.93rem;margin:0 0 6px}
+/* 超出 L1-L4 的字：標出來並可點看中文。
+   L3 短文有 23.9%、L4 有 26.6% 的內容詞沒教過，不標的話小孩只能猜。 */
+.gw{border-bottom:1.5px dotted #b3621a;cursor:pointer}
+.gw.on{background:#fff3cd;border-radius:4px}
+.gz{display:none;font-size:.78rem;color:#8a5a12;background:#fff8e1;border-radius:6px;padding:1px 6px;margin-left:4px}
+.gw.on+.gz{display:inline}
+.glegend{font-size:.78rem;color:#8a97a5;margin:0 0 9px}
 .zhline{font-size:.8rem;color:#8a97a5}
 /* 測驗 */
 .q{border-top:1px solid #eef1f5;padding:12px 0}
@@ -269,6 +276,7 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>② 聽聽看什麼時候會用到</h2>
     <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l1-u06-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
     
     <div class="turn"><span class="who">A</span>
@@ -293,22 +301,25 @@ header a{color:#2f80ed;text-decoration:none}
       <span class="tx">Yes, but eat your food first.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u06-d7.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Okay. I am ready to eat.</span>
+      <span class="tx"><span class="gw" onclick="this.classList.toggle('on')">Okay</span><span class="gz">好、可以</span>. I am <span class="gw" onclick="this.classList.toggle('on')">ready</span><span class="gz">準備好的</span> to eat.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u06-d8.mp3')">🔊</button></div>
   </div>
 
   <div class="card">
     <h2>③ 讀一段短文</h2>
     <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">It is lunch time at home. Dad puts an egg and rice on my plate. Mom gives me a cup of water. My sister has milk, and Grandma has tea. A pie is on the table, too. We have good food. We sit down and eat lunch together.</p>
+      <p class="psg">It is lunch <span class="gw" onclick="this.classList.toggle('on')">time</span><span class="gz">時間</span> at home. Dad <span class="gw" onclick="this.classList.toggle('on')">puts</span><span class="gz">放</span> an egg and rice on my <span class="gw" onclick="this.classList.toggle('on')">plate</span><span class="gz">盤子</span>. <span class="gw" onclick="this.classList.toggle('on')">Mom</span><span class="gz">媽媽</span> gives me a cup of water. My sister has milk, and Grandma has tea. A pie is on the table, too. We have good food. We sit down and eat lunch together.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u06-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">My room is ready for art time. A pen and a cup are on my desk. I draw a picture of a red ball by my bed. Then I draw milk, tea, and an egg. The picture is for Mom. I put it on her door.</p>
+      <p class="psg">My room is <span class="gw" onclick="this.classList.toggle('on')">ready</span><span class="gz">準備好的</span> for <span class="gw" onclick="this.classList.toggle('on')">art</span><span class="gz">美術</span> <span class="gw" onclick="this.classList.toggle('on')">time</span><span class="gz">時間</span>. A pen and a cup are on my desk. I draw a picture of a red ball by my bed. Then I draw milk, tea, and an egg. The picture is for <span class="gw" onclick="this.classList.toggle('on')">Mom</span><span class="gz">媽媽</span>. I <span class="gw" onclick="this.classList.toggle('on')">put</span><span class="gz">放</span> it on her door.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u06-p2.mp3')">🔊 聽這一篇</button>
     </div>
+    <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
+    <div id="aiRead"></div>
   </div>
 
   <div class="card">
@@ -348,17 +359,20 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010142"></script>
-<script src="../../account_lock.js?v=202608010142"></script>
-<script src="../../supabase_auth.js?v=202608010142"></script>
-<script src="../../ai_review.js?v=202608010142"></script>
-<script src="../../vocab_units.js?v=202608010142"></script>
-<script src="../../vocab_unit_plan.js?v=202608010142"></script>
+<script src="../../cloud_sync.js?v=202608010250"></script>
+<script src="../../account_lock.js?v=202608010250"></script>
+<script src="../../supabase_auth.js?v=202608010250"></script>
+<script src="../../ai_review.js?v=202608010250"></script>
+<script src="../../vocab_units.js?v=202608010250"></script>
+<script src="../../vocab_unit_plan.js?v=202608010250"></script>
 <script>
 var UNIT_ID = "l1-u06";
 var QUIZ = [{"kind":"zh2en","ask":"「杯子」的英文是哪一個？","answer":"cup","options":["cup","egg","food","lunch"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003efood\u003c/b\u003e 是什麼意思？","answer":"食物","options":["食物","杯子","蛋","午餐"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"milk","options":["cup","milk","egg","food"],"audio":"audio/words/milk.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI drink warm ＿＿＿ in the morning.\u003c/span\u003e","answer":"tea","options":["cup","egg","tea","food"],"audio":"audio/vocab_foundation/examples/l1-tea-e1.mp3"},{"kind":"zh2en","ask":"「書桌」的英文是哪一個？","answer":"desk","options":["cup","egg","food","desk"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003epicture\u003c/b\u003e 是什麼意思？","answer":"圖片；照片","options":["杯子","蛋","圖片；照片","食物"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"bed","options":["cup","egg","food","bed"],"audio":"audio/words/bed.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eThe ＿＿＿ is white.\u003c/span\u003e","answer":"egg","options":["cup","food","lunch","egg"],"audio":"audio/words/ex/egg_0.mp3"}];
 var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "食物與用餐 × 校園與學習";
+var UNIT_DIALOGUE = "A: What do you want for lunch?\nB: I want an egg and some rice.\nA: Do you want milk or tea?\nB: Milk, please. Is it in the cup?\nA: Yes, and the water is here.\nB: Can we have the pie, too?\nA: Yes, but eat your food first.\nB: Okay. I am ready to eat.";
+var UNIT_PASSAGE = "It is lunch time at home. Dad puts an egg and rice on my plate. Mom gives me a cup of water. My sister has milk, and Grandma has tea. A pie is on the table, too. We have good food. We sit down and eat lunch together.\n\nMy room is ready for art time. A pen and a cup are on my desk. I draw a picture of a red ball by my bed. Then I draw milk, tea, and an egg. The picture is for Mom. I put it on her door.";
+var UNIT_NEWWORDS = [{"w":"okay","zh":"好、可以"},{"w":"ready","zh":"準備好的"},{"w":"time","zh":"時間"},{"w":"puts","zh":"放"},{"w":"plate","zh":"盤子"},{"w":"mom","zh":"媽媽"},{"w":"art","zh":"美術"},{"w":"put","zh":"放"}];
 var UNIT_GOAL = "這個單元的字：cup、egg、food、lunch、milk、pie 等 13 個";
 
 function getProgress(s) {
@@ -483,6 +497,29 @@ function drawOffPlan() {
     "只是它不算進這個月的進度。<br>" +
     "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
 }
+
+// 讓小孩把整篇交給 AI 自己讀懂 —— 家長沒空時也能問到底
+window.askAIRead = function () {
+  if (!window.AIReview) return;
+  var NL = String.fromCharCode(10);
+  var newWords = UNIT_NEWWORDS.map(function (x) { return x.w + "（" + x.zh + "）"; }).join("、");
+  var text = [
+    "我是台灣的小學生，正在學英文。以下是我這個單元要讀的對話和短文，請幫我讀懂。", "",
+    "【單元主題】" + UNIT_TITLE, "",
+    "【對話】", UNIT_DIALOGUE, "",
+    "【短文】", UNIT_PASSAGE, "",
+  ].concat(newWords ? ["【課本已經標成生字的】" + newWords, ""] : []).concat([
+    "【請這樣幫我】",
+    "1. 先用兩三句中文說這篇在講什麼，不要逐句翻譯。",
+    "2. 挑出 5 個我最該記住的字，各給一句很短的英文例句。",
+    "3. 如果還有我可能看不懂的字，用中文簡單說它的意思。",
+    "4. 最後問我 3 個關於這篇內容的問題，先不要給答案，等我回答再批改。",
+    "5. 說明用繁體中文，英文句子保持英文。請講簡短一點。",
+  ]).join(NL);
+  AIReview.paintPrompt("aiRead", "把這篇交給 AI 講一次",
+    "複製下面這段貼到 ChatGPT，它會用中文說這篇在講什麼，再挑重點字考你。", text);
+  document.getElementById("aiRead").scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;

@@ -49,6 +49,13 @@ header a{color:#2f80ed;text-decoration:none}
 .turn .who.b{color:#b3621a}
 .turn .tx{flex:1}
 .psg{font-size:.93rem;margin:0 0 6px}
+/* 超出 L1-L4 的字：標出來並可點看中文。
+   L3 短文有 23.9%、L4 有 26.6% 的內容詞沒教過，不標的話小孩只能猜。 */
+.gw{border-bottom:1.5px dotted #b3621a;cursor:pointer}
+.gw.on{background:#fff3cd;border-radius:4px}
+.gz{display:none;font-size:.78rem;color:#8a5a12;background:#fff8e1;border-radius:6px;padding:1px 6px;margin-left:4px}
+.gw.on+.gz{display:inline}
+.glegend{font-size:.78rem;color:#8a97a5;margin:0 0 9px}
 .zhline{font-size:.8rem;color:#8a97a5}
 /* 測驗 */
 .q{border-top:1px solid #eef1f5;padding:12px 0}
@@ -282,6 +289,7 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>② 聽聽看什麼時候會用到</h2>
     <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l3-u05-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
     
     <div class="turn"><span class="who">A</span>
@@ -291,37 +299,40 @@ header a{color:#2f80ed;text-decoration:none}
       <span class="tx">We have hot dogs and juice in the kitchen.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d2.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Can we bring ice cream too?</span>
+      <span class="tx">Can we <span class="gw" onclick="this.classList.toggle('on')">bring</span><span class="gz">帶來</span> ice <span class="gw" onclick="this.classList.toggle('on')">cream</span><span class="gz">奶油</span> too?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d3.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">It may melt before we reach the park.</span>
+      <span class="tx">It may <span class="gw" onclick="this.classList.toggle('on')">melt</span><span class="gz">融化</span> before we <span class="gw" onclick="this.classList.toggle('on')">reach</span><span class="gz">到達</span> the <span class="gw" onclick="this.classList.toggle('on')">park</span><span class="gz">公園</span>.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d4.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Then I will put some ice in this box.</span>
+      <span class="tx">Then I will <span class="gw" onclick="this.classList.toggle('on')">put</span><span class="gz">放</span> some ice in this box.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d5.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Good idea. Please wear your coat and hat.</span>
+      <span class="tx">Good <span class="gw" onclick="this.classList.toggle('on')">idea</span><span class="gz">點子</span>. Please wear your coat and hat.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d6.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
       <span class="tx">Should I call Amy on the phone?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d7.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Yes. Tell her to meet us outside the house.</span>
+      <span class="tx">Yes. <span class="gw" onclick="this.classList.toggle('on')">Tell</span><span class="gz">告訴</span> her to <span class="gw" onclick="this.classList.toggle('on')">meet</span><span class="gz">見面</span> us <span class="gw" onclick="this.classList.toggle('on')">outside</span><span class="gz">在外面</span> the house.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u05-d8.mp3')">🔊</button></div>
   </div>
 
   <div class="card">
     <h2>③ 讀一段短文</h2>
     <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">It was hot after school, so my sister and I made ice cream in our kitchen. She mixed milk with ice while I poured juice into small cups. I added a little salt to the ice, but none went into the food. Mom set the dining room table and called our cousins. When they reached our house, we put away their coats and hats. Everyone enjoyed the cold dessert, and we saved one cup for Dad.</p>
+      <p class="psg">It was hot after school, so my sister and I <span class="gw" onclick="this.classList.toggle('on')">made</span><span class="gz">製作（make 的過去式）</span> ice <span class="gw" onclick="this.classList.toggle('on')">cream</span><span class="gz">奶油</span> in our kitchen. She mixed milk with ice while I <span class="gw" onclick="this.classList.toggle('on')">poured</span><span class="gz">倒（水）</span> juice into small cups. I added a little salt to the ice, but <span class="gw" onclick="this.classList.toggle('on')">none</span><span class="gz">沒有一人</span> <span class="gw" onclick="this.classList.toggle('on')">went</span><span class="gz">去（go 的過去式）</span> into the food. <span class="gw" onclick="this.classList.toggle('on')">Mom</span><span class="gz">媽媽</span> set the <span class="gw" onclick="this.classList.toggle('on')">dining</span><span class="gz">用餐（的）</span> room table and called our <span class="gw" onclick="this.classList.toggle('on')">cousins</span><span class="gz">表親</span>. When they <span class="gw" onclick="this.classList.toggle('on')">reached</span><span class="gz">到達</span> our house, we <span class="gw" onclick="this.classList.toggle('on')">put</span><span class="gz">放</span> <span class="gw" onclick="this.classList.toggle('on')">away</span><span class="gz">離開</span> their coats and hats. <span class="gw" onclick="this.classList.toggle('on')">Everyone</span><span class="gz">每個人</span> <span class="gw" onclick="this.classList.toggle('on')">enjoyed</span><span class="gz">喜愛</span> the <span class="gw" onclick="this.classList.toggle('on')">cold</span><span class="gz">冷</span> <span class="gw" onclick="this.classList.toggle('on')">dessert</span><span class="gz">甜點</span>, and we <span class="gw" onclick="this.classList.toggle('on')">saved</span><span class="gz">存下來、救</span> one cup for Dad.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l3-u05-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">Rain started while Lily was walking home in her new dress. She quickly put on her coat and hat, but her shoes still got wet. At the house, the telephone was ringing in the dining room. Lily answered it, and Dad asked her to warm dinner in the kitchen. She made a hot dog, poured some juice, and added a little salt to her soup. Later, she called Dad on her phone and said everything was ready.</p>
+      <p class="psg"><span class="gw" onclick="this.classList.toggle('on')">Rain</span><span class="gz">雨</span> started while Lily was walking home in her new dress. She <span class="gw" onclick="this.classList.toggle('on')">quickly</span><span class="gz">快</span> <span class="gw" onclick="this.classList.toggle('on')">put</span><span class="gz">放</span> on her coat and hat, but her <span class="gw" onclick="this.classList.toggle('on')">shoes</span><span class="gz">鞋子</span> still <span class="gw" onclick="this.classList.toggle('on')">got</span><span class="gz">得到（get 的過去式）</span> wet. At the house, the telephone was <span class="gw" onclick="this.classList.toggle('on')">ringing</span><span class="gz">在響</span> in the <span class="gw" onclick="this.classList.toggle('on')">dining</span><span class="gz">用餐（的）</span> room. Lily <span class="gw" onclick="this.classList.toggle('on')">answered</span><span class="gz">答案</span> it, and Dad asked her to warm dinner in the kitchen. She <span class="gw" onclick="this.classList.toggle('on')">made</span><span class="gz">製作（make 的過去式）</span> a hot dog, <span class="gw" onclick="this.classList.toggle('on')">poured</span><span class="gz">倒（水）</span> some juice, and added a little salt to her soup. <span class="gw" onclick="this.classList.toggle('on')">Later</span><span class="gz">稍後</span>, she called Dad on her phone and <span class="gw" onclick="this.classList.toggle('on')">said</span><span class="gz">說（say 的過去式）</span> <span class="gw" onclick="this.classList.toggle('on')">everything</span><span class="gz">每件事</span> was <span class="gw" onclick="this.classList.toggle('on')">ready</span><span class="gz">準備好的</span>.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l3-u05-p2.mp3')">🔊 聽這一篇</button>
     </div>
+    <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
+    <div id="aiRead"></div>
   </div>
 
   <div class="card">
@@ -370,17 +381,20 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010142"></script>
-<script src="../../account_lock.js?v=202608010142"></script>
-<script src="../../supabase_auth.js?v=202608010142"></script>
-<script src="../../ai_review.js?v=202608010142"></script>
-<script src="../../vocab_units.js?v=202608010142"></script>
-<script src="../../vocab_unit_plan.js?v=202608010142"></script>
+<script src="../../cloud_sync.js?v=202608010250"></script>
+<script src="../../account_lock.js?v=202608010250"></script>
+<script src="../../supabase_auth.js?v=202608010250"></script>
+<script src="../../ai_review.js?v=202608010250"></script>
+<script src="../../vocab_units.js?v=202608010250"></script>
+<script src="../../vocab_unit_plan.js?v=202608010250"></script>
 <script>
 var UNIT_ID = "l3-u05";
 var QUIZ = [{"kind":"zh2en","ask":"「熱狗」的英文是哪一個？","answer":"hot dog","options":["ice","hot dog","ice cream","juice"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eice cream\u003c/b\u003e 是什麼意思？","answer":"冰淇淋","options":["熱狗","冰","冰淇淋","果汁"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"salt","options":["salt","hot dog","ice","ice cream"],"audio":"audio/words/salt.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eMy ＿＿＿ has three rooms.\u003c/span\u003e","answer":"house","options":["house","hot dog","ice","ice cream"],"audio":"audio/vocab_foundation/examples/l3-house-e1.mp3"},{"kind":"zh2en","ask":"「電話」的英文是哪一個？","answer":"phone","options":["hot dog","ice","phone","ice cream"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ecoat\u003c/b\u003e 是什麼意思？","answer":"外套","options":["熱狗","外套","冰","冰淇淋"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"hat","options":["hot dog","hat","ice","ice cream"],"audio":"audio/words/hat.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI have a ＿＿＿ for lunch.\u003c/span\u003e","answer":"hot dog","options":["ice","hot dog","ice cream","juice"],"audio":"audio/vocab_foundation/examples/l3-hot_dog-e1.mp3"}];
 var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "食物與用餐 × 住家與物品";
+var UNIT_DIALOGUE = "A: What should we take to the picnic?\nB: We have hot dogs and juice in the kitchen.\nA: Can we bring ice cream too?\nB: It may melt before we reach the park.\nA: Then I will put some ice in this box.\nB: Good idea. Please wear your coat and hat.\nA: Should I call Amy on the phone?\nB: Yes. Tell her to meet us outside the house.";
+var UNIT_PASSAGE = "It was hot after school, so my sister and I made ice cream in our kitchen. She mixed milk with ice while I poured juice into small cups. I added a little salt to the ice, but none went into the food. Mom set the dining room table and called our cousins. When they reached our house, we put away their coats and hats. Everyone enjoyed the cold dessert, and we saved one cup for Dad.\n\nRain started while Lily was walking home in her new dress. She quickly put on her coat and hat, but her shoes still got wet. At the house, the telephone was ringing in the dining room. Lily answered it, and Dad asked her to warm dinner in the kitchen. She made a hot dog, poured some juice, and added a little salt to her soup. Later, she called Dad on her phone and said everything was ready.";
+var UNIT_NEWWORDS = [{"w":"bring","zh":"帶來"},{"w":"cream","zh":"奶油"},{"w":"melt","zh":"融化"},{"w":"reach","zh":"到達"},{"w":"park","zh":"公園"},{"w":"put","zh":"放"},{"w":"idea","zh":"點子"},{"w":"tell","zh":"告訴"},{"w":"meet","zh":"見面"},{"w":"outside","zh":"在外面"},{"w":"made","zh":"製作（make 的過去式）"},{"w":"poured","zh":"倒（水）"},{"w":"none","zh":"沒有一人"},{"w":"went","zh":"去（go 的過去式）"},{"w":"mom","zh":"媽媽"},{"w":"dining","zh":"用餐（的）"},{"w":"cousins","zh":"表親"},{"w":"reached","zh":"到達"},{"w":"away","zh":"離開"},{"w":"everyone","zh":"每個人"},{"w":"enjoyed","zh":"喜愛"},{"w":"cold","zh":"冷"},{"w":"dessert","zh":"甜點"},{"w":"saved","zh":"存下來、救"},{"w":"rain","zh":"雨"},{"w":"quickly","zh":"快"},{"w":"shoes","zh":"鞋子"},{"w":"got","zh":"得到（get 的過去式）"},{"w":"ringing","zh":"在響"},{"w":"answered","zh":"答案"},{"w":"later","zh":"稍後"},{"w":"said","zh":"說（say 的過去式）"},{"w":"everything","zh":"每件事"},{"w":"ready","zh":"準備好的"}];
 var UNIT_GOAL = "這個單元的字：hot dog、ice、ice cream、juice、salt、dining room 等 14 個";
 
 function getProgress(s) {
@@ -505,6 +519,29 @@ function drawOffPlan() {
     "只是它不算進這個月的進度。<br>" +
     "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
 }
+
+// 讓小孩把整篇交給 AI 自己讀懂 —— 家長沒空時也能問到底
+window.askAIRead = function () {
+  if (!window.AIReview) return;
+  var NL = String.fromCharCode(10);
+  var newWords = UNIT_NEWWORDS.map(function (x) { return x.w + "（" + x.zh + "）"; }).join("、");
+  var text = [
+    "我是台灣的小學生，正在學英文。以下是我這個單元要讀的對話和短文，請幫我讀懂。", "",
+    "【單元主題】" + UNIT_TITLE, "",
+    "【對話】", UNIT_DIALOGUE, "",
+    "【短文】", UNIT_PASSAGE, "",
+  ].concat(newWords ? ["【課本已經標成生字的】" + newWords, ""] : []).concat([
+    "【請這樣幫我】",
+    "1. 先用兩三句中文說這篇在講什麼，不要逐句翻譯。",
+    "2. 挑出 5 個我最該記住的字，各給一句很短的英文例句。",
+    "3. 如果還有我可能看不懂的字，用中文簡單說它的意思。",
+    "4. 最後問我 3 個關於這篇內容的問題，先不要給答案，等我回答再批改。",
+    "5. 說明用繁體中文，英文句子保持英文。請講簡短一點。",
+  ]).join(NL);
+  AIReview.paintPrompt("aiRead", "把這篇交給 AI 講一次",
+    "複製下面這段貼到 ChatGPT，它會用中文說這篇在講什麼，再挑重點字考你。", text);
+  document.getElementById("aiRead").scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;

@@ -49,6 +49,13 @@ header a{color:#2f80ed;text-decoration:none}
 .turn .who.b{color:#b3621a}
 .turn .tx{flex:1}
 .psg{font-size:.93rem;margin:0 0 6px}
+/* 超出 L1-L4 的字：標出來並可點看中文。
+   L3 短文有 23.9%、L4 有 26.6% 的內容詞沒教過，不標的話小孩只能猜。 */
+.gw{border-bottom:1.5px dotted #b3621a;cursor:pointer}
+.gw.on{background:#fff3cd;border-radius:4px}
+.gz{display:none;font-size:.78rem;color:#8a5a12;background:#fff8e1;border-radius:6px;padding:1px 6px;margin-left:4px}
+.gw.on+.gz{display:inline}
+.glegend{font-size:.78rem;color:#8a97a5;margin:0 0 9px}
 .zhline{font-size:.8rem;color:#8a97a5}
 /* 測驗 */
 .q{border-top:1px solid #eef1f5;padding:12px 0}
@@ -269,10 +276,11 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>② 聽聽看什麼時候會用到</h2>
     <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l1-u03-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
     
     <div class="turn"><span class="who">A</span>
-      <span class="tx">How many kids are on your team?</span>
+      <span class="tx">How many kids are on your <span class="gw" onclick="this.classList.toggle('on')">team</span><span class="gz">隊伍</span>?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u03-d1.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
       <span class="tx">We have ten kids now.</span>
@@ -300,15 +308,18 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>③ 讀一段短文</h2>
     <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">Today is sports day. Six kids run, and three kids sit by the tree. One boy has a red ball. Two girls have a blue ball. Now the teacher says, &quot;Go!&quot; Seven kids run to the line. Ten hands go up. Every kid wants to play.</p>
+      <p class="psg">Today is sports day. Six kids run, and three kids sit by the tree. One boy has a red ball. Two girls have a <span class="gw" onclick="this.classList.toggle('on')">blue</span><span class="gz">藍色</span> ball. Now the teacher says, "Go!" Seven kids run to the <span class="gw" onclick="this.classList.toggle('on')">line</span><span class="gz">線、排隊</span>. Ten hands go up. Every kid wants to play.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u03-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">A baby, a boy, and a girl are at home. The girl has one paper hat. The boy has two toy cars. Now they play king and queen. The baby is the king. He sits on a big chair. Today, the three kids have fun together.</p>
+      <p class="psg">A baby, a boy, and a girl are at home. The girl has one paper hat. The boy has two toy cars. Now they play king and <span class="gw" onclick="this.classList.toggle('on')">queen</span><span class="gz">女王</span>. The baby is the king. He sits on a big chair. Today, the three kids have <span class="gw" onclick="this.classList.toggle('on')">fun</span><span class="gz">樂趣</span> together.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u03-p2.mp3')">🔊 聽這一篇</button>
     </div>
+    <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
+    <div id="aiRead"></div>
   </div>
 
   <div class="card">
@@ -357,17 +368,20 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010142"></script>
-<script src="../../account_lock.js?v=202608010142"></script>
-<script src="../../supabase_auth.js?v=202608010142"></script>
-<script src="../../ai_review.js?v=202608010142"></script>
-<script src="../../vocab_units.js?v=202608010142"></script>
-<script src="../../vocab_unit_plan.js?v=202608010142"></script>
+<script src="../../cloud_sync.js?v=202608010250"></script>
+<script src="../../account_lock.js?v=202608010250"></script>
+<script src="../../supabase_auth.js?v=202608010250"></script>
+<script src="../../ai_review.js?v=202608010250"></script>
+<script src="../../vocab_units.js?v=202608010250"></script>
+<script src="../../vocab_unit_plan.js?v=202608010250"></script>
 <script>
 var UNIT_ID = "l1-u03";
 var QUIZ = [{"kind":"zh2en","ask":"「現在」的英文是哪一個？","answer":"now","options":["now","today","here","how"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eseven\u003c/b\u003e 是什麼意思？","answer":"七","options":["一","六","十","七"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"ten","options":["one","seven","six","ten"],"audio":"audio/words/ten.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ is Monday.\u003c/span\u003e","answer":"today","options":["now","today","here","how"],"audio":"audio/vocab_foundation/examples/l1-today-e1.mp3"},{"kind":"zh2en","ask":"「嬰兒」的英文是哪一個？","answer":"baby","options":["boy","girl","baby","kid"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003egirl\u003c/b\u003e 是什麼意思？","answer":"女孩","options":["女孩","嬰兒","男孩","小孩"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"king","options":["baby","king","boy","girl"],"audio":"audio/words/king.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI see ＿＿＿ dog.\u003c/span\u003e","answer":"one","options":["seven","six","one","ten"],"audio":"audio/words/ex/one_0.mp3"}];
 var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "數字與時間 × 人物與家庭";
+var UNIT_DIALOGUE = "A: How many kids are on your team?\nB: We have ten kids now.\nA: Do you have six boys?\nB: No. We have three boys and seven girls.\nA: Who has the ball today?\nB: One girl has it.\nA: Can two new kids play with us?\nB: Yes. Every kid can play.";
+var UNIT_PASSAGE = "Today is sports day. Six kids run, and three kids sit by the tree. One boy has a red ball. Two girls have a blue ball. Now the teacher says, \"Go!\" Seven kids run to the line. Ten hands go up. Every kid wants to play.\n\nA baby, a boy, and a girl are at home. The girl has one paper hat. The boy has two toy cars. Now they play king and queen. The baby is the king. He sits on a big chair. Today, the three kids have fun together.";
+var UNIT_NEWWORDS = [{"w":"team","zh":"隊伍"},{"w":"blue","zh":"藍色"},{"w":"line","zh":"線、排隊"},{"w":"queen","zh":"女王"},{"w":"fun","zh":"樂趣"}];
 var UNIT_GOAL = "這個單元的字：now、one、seven、six、ten、three 等 13 個";
 
 function getProgress(s) {
@@ -492,6 +506,29 @@ function drawOffPlan() {
     "只是它不算進這個月的進度。<br>" +
     "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
 }
+
+// 讓小孩把整篇交給 AI 自己讀懂 —— 家長沒空時也能問到底
+window.askAIRead = function () {
+  if (!window.AIReview) return;
+  var NL = String.fromCharCode(10);
+  var newWords = UNIT_NEWWORDS.map(function (x) { return x.w + "（" + x.zh + "）"; }).join("、");
+  var text = [
+    "我是台灣的小學生，正在學英文。以下是我這個單元要讀的對話和短文，請幫我讀懂。", "",
+    "【單元主題】" + UNIT_TITLE, "",
+    "【對話】", UNIT_DIALOGUE, "",
+    "【短文】", UNIT_PASSAGE, "",
+  ].concat(newWords ? ["【課本已經標成生字的】" + newWords, ""] : []).concat([
+    "【請這樣幫我】",
+    "1. 先用兩三句中文說這篇在講什麼，不要逐句翻譯。",
+    "2. 挑出 5 個我最該記住的字，各給一句很短的英文例句。",
+    "3. 如果還有我可能看不懂的字，用中文簡單說它的意思。",
+    "4. 最後問我 3 個關於這篇內容的問題，先不要給答案，等我回答再批改。",
+    "5. 說明用繁體中文，英文句子保持英文。請講簡短一點。",
+  ]).join(NL);
+  AIReview.paintPrompt("aiRead", "把這篇交給 AI 講一次",
+    "複製下面這段貼到 ChatGPT，它會用中文說這篇在講什麼，再挑重點字考你。", text);
+  document.getElementById("aiRead").scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;

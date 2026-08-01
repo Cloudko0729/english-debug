@@ -49,6 +49,13 @@ header a{color:#2f80ed;text-decoration:none}
 .turn .who.b{color:#b3621a}
 .turn .tx{flex:1}
 .psg{font-size:.93rem;margin:0 0 6px}
+/* 超出 L1-L4 的字：標出來並可點看中文。
+   L3 短文有 23.9%、L4 有 26.6% 的內容詞沒教過，不標的話小孩只能猜。 */
+.gw{border-bottom:1.5px dotted #b3621a;cursor:pointer}
+.gw.on{background:#fff3cd;border-radius:4px}
+.gz{display:none;font-size:.78rem;color:#8a5a12;background:#fff8e1;border-radius:6px;padding:1px 6px;margin-left:4px}
+.gw.on+.gz{display:inline}
+.glegend{font-size:.78rem;color:#8a97a5;margin:0 0 9px}
 .zhline{font-size:.8rem;color:#8a97a5}
 /* 測驗 */
 .q{border-top:1px solid #eef1f5;padding:12px 0}
@@ -282,19 +289,20 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>② 聽聽看什麼時候會用到</h2>
     <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l4-u04-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
     
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Did you see my pencil case in the bookstore?</span>
+      <span class="tx">Did you see my pencil <span class="gw" onclick="this.classList.toggle('on')">case</span><span class="gz">盒子、情況</span> in the bookstore?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u04-d1.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Is it the blue one with a snake drawing?</span>
+      <span class="tx">Is it the <span class="gw" onclick="this.classList.toggle('on')">blue</span><span class="gz">藍色</span> one with a snake drawing?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u04-d2.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Yes. My crayons and pencil are inside.</span>
+      <span class="tx">Yes. My crayons and pencil are <span class="gw" onclick="this.classList.toggle('on')">inside</span><span class="gz">在裡面</span>.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u04-d3.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">I saw it next to the reading table.</span>
+      <span class="tx">I <span class="gw" onclick="this.classList.toggle('on')">saw</span><span class="gz">看見（see 的過去式）</span> it next to the reading table.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u04-d4.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
       <span class="tx">Was it under the alphabet book?</span>
@@ -306,22 +314,25 @@ header a{color:#2f80ed;text-decoration:none}
       <span class="tx">Thanks! I need it for my homework.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u04-d7.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Let's get it before the bookstore closes.</span>
+      <span class="tx"><span class="gw" onclick="this.classList.toggle('on')">Let's</span><span class="gz">我們來…吧</span> <span class="gw" onclick="this.classList.toggle('on')">get</span><span class="gz">得到</span> it before the bookstore closes.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u04-d8.mp3')">🔊</button></div>
   </div>
 
   <div class="card">
     <h2>③ 讀一段短文</h2>
     <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">After school, Mia went to the bookstore to finish her homework in the reading corner. She opened her pencil case and found one pencil, but her crayon box was missing. She remembered using it near the big window. As she walked back, a strong wind came through the open door and blew several pages across the floor. Mia helped the worker pick up the paper. Under a page with a snake drawing, she found her blue pencil box. Nothing was lost after all. She bought a small loaf of bread on the way home and finished her alphabet poster before dinner.</p>
+      <p class="psg">After school, Mia <span class="gw" onclick="this.classList.toggle('on')">went</span><span class="gz">去（go 的過去式）</span> to the bookstore to <span class="gw" onclick="this.classList.toggle('on')">finish</span><span class="gz">完成</span> her homework in the reading <span class="gw" onclick="this.classList.toggle('on')">corner</span><span class="gz">角</span>. She <span class="gw" onclick="this.classList.toggle('on')">opened</span><span class="gz">打開</span> her pencil <span class="gw" onclick="this.classList.toggle('on')">case</span><span class="gz">盒子、情況</span> and <span class="gw" onclick="this.classList.toggle('on')">found</span><span class="gz">找到（find 的過去式）</span> one pencil, but her crayon box was missing. She <span class="gw" onclick="this.classList.toggle('on')">remembered</span><span class="gz">記得</span> using it near the big window. As she walked <span class="gw" onclick="this.classList.toggle('on')">back</span><span class="gz">回來</span>, a strong wind <span class="gw" onclick="this.classList.toggle('on')">came</span><span class="gz">來（come 的過去式）</span> <span class="gw" onclick="this.classList.toggle('on')">through</span><span class="gz">穿過</span> the <span class="gw" onclick="this.classList.toggle('on')">open</span><span class="gz">打開</span> door and <span class="gw" onclick="this.classList.toggle('on')">blew</span><span class="gz">吹（過去式）</span> <span class="gw" onclick="this.classList.toggle('on')">several</span><span class="gz">幾個</span> pages <span class="gw" onclick="this.classList.toggle('on')">across</span><span class="gz">橫越</span> the <span class="gw" onclick="this.classList.toggle('on')">floor</span><span class="gz">地板</span>. Mia helped the worker <span class="gw" onclick="this.classList.toggle('on')">pick</span><span class="gz">挑選</span> up the paper. Under a page with a snake drawing, she <span class="gw" onclick="this.classList.toggle('on')">found</span><span class="gz">找到（find 的過去式）</span> her <span class="gw" onclick="this.classList.toggle('on')">blue</span><span class="gz">藍色</span> pencil box. <span class="gw" onclick="this.classList.toggle('on')">Nothing</span><span class="gz">沒有東西</span> was <span class="gw" onclick="this.classList.toggle('on')">lost</span><span class="gz">失去（lose 的過去式）</span> after all. She <span class="gw" onclick="this.classList.toggle('on')">bought</span><span class="gz">買（buy 的過去式）</span> a small <span class="gw" onclick="this.classList.toggle('on')">loaf</span><span class="gz">一條</span> of bread on the <span class="gw" onclick="this.classList.toggle('on')">way</span><span class="gz">道路</span> home and <span class="gw" onclick="this.classList.toggle('on')">finished</span><span class="gz">完成</span> her alphabet <span class="gw" onclick="this.classList.toggle('on')">poster</span><span class="gz">張貼</span> before dinner.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l4-u04-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">Leo's homework was to make an alphabet book, so he worked at a table outside his aunt's bakery. For the letter B, he painted a basket of bread. For S, he made a long green snake. He used a crayon for the grass and dark paint for the sky. The drawing looked strange, but he liked it. Then the wind lifted one page and carried it toward the road. Leo ran after the paper and caught it beside a parked scooter. He put every page into his pencil case for safety. That evening, his reading group enjoyed the colorful book.</p>
+      <p class="psg">Leo's homework was to make an alphabet book, so he worked at a table <span class="gw" onclick="this.classList.toggle('on')">outside</span><span class="gz">在外面</span> his aunt's <span class="gw" onclick="this.classList.toggle('on')">bakery</span><span class="gz">麵包店</span>. For the <span class="gw" onclick="this.classList.toggle('on')">letter</span><span class="gz">信</span> B, he painted a <span class="gw" onclick="this.classList.toggle('on')">basket</span><span class="gz">籃子</span> of bread. For S, he <span class="gw" onclick="this.classList.toggle('on')">made</span><span class="gz">製作（make 的過去式）</span> a long green snake. He used a crayon for the <span class="gw" onclick="this.classList.toggle('on')">grass</span><span class="gz">草</span> and <span class="gw" onclick="this.classList.toggle('on')">dark</span><span class="gz">暗的</span> paint for the sky. The drawing <span class="gw" onclick="this.classList.toggle('on')">looked</span><span class="gz">看</span> <span class="gw" onclick="this.classList.toggle('on')">strange</span><span class="gz">奇怪的</span>, but he <span class="gw" onclick="this.classList.toggle('on')">liked</span><span class="gz">喜歡</span> it. Then the wind <span class="gw" onclick="this.classList.toggle('on')">lifted</span><span class="gz">提</span> one page and <span class="gw" onclick="this.classList.toggle('on')">carried</span><span class="gz">搬運</span> it toward the road. Leo <span class="gw" onclick="this.classList.toggle('on')">ran</span><span class="gz">跑步（run 的過去式）</span> after the paper and <span class="gw" onclick="this.classList.toggle('on')">caught</span><span class="gz">接住（catch 的過去式）</span> it <span class="gw" onclick="this.classList.toggle('on')">beside</span><span class="gz">在旁邊</span> a <span class="gw" onclick="this.classList.toggle('on')">parked</span><span class="gz">公園</span> <span class="gw" onclick="this.classList.toggle('on')">scooter</span><span class="gz">滑板車</span>. He <span class="gw" onclick="this.classList.toggle('on')">put</span><span class="gz">放</span> every page into his pencil <span class="gw" onclick="this.classList.toggle('on')">case</span><span class="gz">盒子、情況</span> for <span class="gw" onclick="this.classList.toggle('on')">safety</span><span class="gz">安全</span>. That evening, his reading <span class="gw" onclick="this.classList.toggle('on')">group</span><span class="gz">一組人</span> <span class="gw" onclick="this.classList.toggle('on')">enjoyed</span><span class="gz">喜愛</span> the <span class="gw" onclick="this.classList.toggle('on')">colorful</span><span class="gz">色彩繽紛的</span> book.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l4-u04-p2.mp3')">🔊 聽這一篇</button>
     </div>
+    <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
+    <div id="aiRead"></div>
   </div>
 
   <div class="card">
@@ -347,17 +358,20 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010142"></script>
-<script src="../../account_lock.js?v=202608010142"></script>
-<script src="../../supabase_auth.js?v=202608010142"></script>
-<script src="../../ai_review.js?v=202608010142"></script>
-<script src="../../vocab_units.js?v=202608010142"></script>
-<script src="../../vocab_unit_plan.js?v=202608010142"></script>
+<script src="../../cloud_sync.js?v=202608010250"></script>
+<script src="../../account_lock.js?v=202608010250"></script>
+<script src="../../supabase_auth.js?v=202608010250"></script>
+<script src="../../ai_review.js?v=202608010250"></script>
+<script src="../../vocab_units.js?v=202608010250"></script>
+<script src="../../vocab_unit_plan.js?v=202608010250"></script>
 <script>
 var UNIT_ID = "l4-u04";
 var QUIZ = [{"kind":"zh2en","ask":"「字母、字母表」的英文是哪一個？","answer":"alphabet","options":["bookstore","alphabet","crayon","drawing"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ecrayon\u003c/b\u003e 是什麼意思？","answer":"有色粉筆、蠟筆、粉筆畫","options":["字母、字母表","書店","畫畫、圖畫、素描","有色粉筆、蠟筆、粉筆畫"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"homework","options":["homework","alphabet","bookstore","crayon"],"audio":"audio/words/homework.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI ＿＿＿ a red apple.\u003c/span\u003e","answer":"paint","options":["paint","buy","dig","fall"],"audio":"audio/words/ex/paint_0.mp3"},{"kind":"zh2en","ask":"「鉛筆盒」的英文是哪一個？","answer":"pencil box","options":["pencil box","alphabet","bookstore","crayon"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ereading\u003c/b\u003e 是什麼意思？","answer":"閱讀、朗讀","options":["字母、字母表","閱讀、朗讀","書店","有色粉筆、蠟筆、粉筆畫"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"wind","options":["alphabet","bookstore","wind","crayon"],"audio":"audio/words/wind.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eWe sing the ＿＿＿ song.\u003c/span\u003e","answer":"alphabet","options":["bookstore","alphabet","crayon","drawing"],"audio":"audio/vocab_foundation/examples/l4-alphabet-e1.mp3"}];
 var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "校園與學習";
+var UNIT_DIALOGUE = "A: Did you see my pencil case in the bookstore?\nB: Is it the blue one with a snake drawing?\nA: Yes. My crayons and pencil are inside.\nB: I saw it next to the reading table.\nA: Was it under the alphabet book?\nB: No, it was on a page of brown paper.\nA: Thanks! I need it for my homework.\nB: Let's get it before the bookstore closes.";
+var UNIT_PASSAGE = "After school, Mia went to the bookstore to finish her homework in the reading corner. She opened her pencil case and found one pencil, but her crayon box was missing. She remembered using it near the big window. As she walked back, a strong wind came through the open door and blew several pages across the floor. Mia helped the worker pick up the paper. Under a page with a snake drawing, she found her blue pencil box. Nothing was lost after all. She bought a small loaf of bread on the way home and finished her alphabet poster before dinner.\n\nLeo's homework was to make an alphabet book, so he worked at a table outside his aunt's bakery. For the letter B, he painted a basket of bread. For S, he made a long green snake. He used a crayon for the grass and dark paint for the sky. The drawing looked strange, but he liked it. Then the wind lifted one page and carried it toward the road. Leo ran after the paper and caught it beside a parked scooter. He put every page into his pencil case for safety. That evening, his reading group enjoyed the colorful book.";
+var UNIT_NEWWORDS = [{"w":"case","zh":"盒子、情況"},{"w":"blue","zh":"藍色"},{"w":"inside","zh":"在裡面"},{"w":"saw","zh":"看見（see 的過去式）"},{"w":"let's","zh":"我們來…吧"},{"w":"get","zh":"得到"},{"w":"went","zh":"去（go 的過去式）"},{"w":"finish","zh":"完成"},{"w":"corner","zh":"角"},{"w":"opened","zh":"打開"},{"w":"found","zh":"找到（find 的過去式）"},{"w":"remembered","zh":"記得"},{"w":"back","zh":"回來"},{"w":"came","zh":"來（come 的過去式）"},{"w":"through","zh":"穿過"},{"w":"open","zh":"打開"},{"w":"blew","zh":"吹（過去式）"},{"w":"several","zh":"幾個"},{"w":"across","zh":"橫越"},{"w":"floor","zh":"地板"},{"w":"pick","zh":"挑選"},{"w":"nothing","zh":"沒有東西"},{"w":"lost","zh":"失去（lose 的過去式）"},{"w":"bought","zh":"買（buy 的過去式）"},{"w":"loaf","zh":"一條"},{"w":"way","zh":"道路"},{"w":"finished","zh":"完成"},{"w":"poster","zh":"張貼"},{"w":"outside","zh":"在外面"},{"w":"bakery","zh":"麵包店"},{"w":"letter","zh":"信"},{"w":"basket","zh":"籃子"},{"w":"made","zh":"製作（make 的過去式）"},{"w":"grass","zh":"草"},{"w":"dark","zh":"暗的"},{"w":"looked","zh":"看"},{"w":"strange","zh":"奇怪的"},{"w":"liked","zh":"喜歡"},{"w":"lifted","zh":"提"},{"w":"carried","zh":"搬運"},{"w":"ran","zh":"跑步（run 的過去式）"},{"w":"caught","zh":"接住（catch 的過去式）"},{"w":"beside","zh":"在旁邊"},{"w":"parked","zh":"公園"},{"w":"scooter","zh":"滑板車"},{"w":"put","zh":"放"},{"w":"safety","zh":"安全"},{"w":"group","zh":"一組人"},{"w":"enjoyed","zh":"喜愛"},{"w":"colorful","zh":"色彩繽紛的"}];
 var UNIT_GOAL = "這個單元的字：alphabet、bookstore、crayon、drawing、homework、page 等 14 個";
 
 function getProgress(s) {
@@ -482,6 +496,29 @@ function drawOffPlan() {
     "只是它不算進這個月的進度。<br>" +
     "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
 }
+
+// 讓小孩把整篇交給 AI 自己讀懂 —— 家長沒空時也能問到底
+window.askAIRead = function () {
+  if (!window.AIReview) return;
+  var NL = String.fromCharCode(10);
+  var newWords = UNIT_NEWWORDS.map(function (x) { return x.w + "（" + x.zh + "）"; }).join("、");
+  var text = [
+    "我是台灣的小學生，正在學英文。以下是我這個單元要讀的對話和短文，請幫我讀懂。", "",
+    "【單元主題】" + UNIT_TITLE, "",
+    "【對話】", UNIT_DIALOGUE, "",
+    "【短文】", UNIT_PASSAGE, "",
+  ].concat(newWords ? ["【課本已經標成生字的】" + newWords, ""] : []).concat([
+    "【請這樣幫我】",
+    "1. 先用兩三句中文說這篇在講什麼，不要逐句翻譯。",
+    "2. 挑出 5 個我最該記住的字，各給一句很短的英文例句。",
+    "3. 如果還有我可能看不懂的字，用中文簡單說它的意思。",
+    "4. 最後問我 3 個關於這篇內容的問題，先不要給答案，等我回答再批改。",
+    "5. 說明用繁體中文，英文句子保持英文。請講簡短一點。",
+  ]).join(NL);
+  AIReview.paintPrompt("aiRead", "把這篇交給 AI 講一次",
+    "複製下面這段貼到 ChatGPT，它會用中文說這篇在講什麼，再挑重點字考你。", text);
+  document.getElementById("aiRead").scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;

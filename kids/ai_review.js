@@ -203,8 +203,15 @@
       taskPrompt(o));
   }
 
+  // paintPrompt：任何頁面都能丟一段自訂提示進來，共用同一套外觀與複製行為
+  function paintPrompt(containerId, title, hint, text) {
+    var box = document.getElementById(containerId);
+    if (!box) return;
+    paint(box, containerId, title, hint, text);
+  }
+
   window.AIReview = {
-    render: render, renderTask: renderTask,
+    render: render, renderTask: renderTask, paintPrompt: paintPrompt,
     buildPrompt: buildPrompt, taskPrompt: taskPrompt,
   };
 })();

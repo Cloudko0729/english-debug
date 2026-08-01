@@ -49,6 +49,13 @@ header a{color:#2f80ed;text-decoration:none}
 .turn .who.b{color:#b3621a}
 .turn .tx{flex:1}
 .psg{font-size:.93rem;margin:0 0 6px}
+/* 超出 L1-L4 的字：標出來並可點看中文。
+   L3 短文有 23.9%、L4 有 26.6% 的內容詞沒教過，不標的話小孩只能猜。 */
+.gw{border-bottom:1.5px dotted #b3621a;cursor:pointer}
+.gw.on{background:#fff3cd;border-radius:4px}
+.gz{display:none;font-size:.78rem;color:#8a5a12;background:#fff8e1;border-radius:6px;padding:1px 6px;margin-left:4px}
+.gw.on+.gz{display:inline}
+.glegend{font-size:.78rem;color:#8a97a5;margin:0 0 9px}
 .zhline{font-size:.8rem;color:#8a97a5}
 /* 測驗 */
 .q{border-top:1px solid #eef1f5;padding:12px 0}
@@ -282,10 +289,11 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>② 聽聽看什麼時候會用到</h2>
     <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l3-u07-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
     
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Do you want to join our soccer practice?</span>
+      <span class="tx">Do you want to join our soccer <span class="gw" onclick="this.classList.toggle('on')">practice</span><span class="gz">練習</span>?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u07-d1.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
       <span class="tx">Yes, but I need help with my kicks.</span>
@@ -297,13 +305,13 @@ header a{color:#2f80ed;text-decoration:none}
       <span class="tx">Thanks. Should I invite Kevin too?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u07-d4.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Sure. We can make two small teams.</span>
+      <span class="tx">Sure. We can make two small <span class="gw" onclick="this.classList.toggle('on')">teams</span><span class="gz">隊伍</span>.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u07-d5.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Let's wait until the field is dry.</span>
+      <span class="tx"><span class="gw" onclick="this.classList.toggle('on')">Let's</span><span class="gz">我們來…吧</span> wait <span class="gw" onclick="this.classList.toggle('on')">until</span><span class="gz">直到</span> the <span class="gw" onclick="this.classList.toggle('on')">field</span><span class="gz">田地</span> is dry.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u07-d6.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Okay. I will take the ball home today.</span>
+      <span class="tx"><span class="gw" onclick="this.classList.toggle('on')">Okay</span><span class="gz">好、可以</span>. I will take the ball home today.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u07-d7.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
       <span class="tx">Great. We can try again tomorrow.</span>
@@ -313,15 +321,18 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>③ 讀一段短文</h2>
     <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">Our school held an autumn fair on Saturday. I joined the art team because they needed help with the signs. We worked together to make bright posters and waited for the paint to dry. Then we invited families into the hall. Some children tried a ball game, and others learned a simple dance. I helped a small boy kick the ball toward a basket. He missed twice, but his third try went in, so everyone cheered.</p>
+      <p class="psg">Our school <span class="gw" onclick="this.classList.toggle('on')">held</span><span class="gz">握住（hold 的過去式）</span> an autumn <span class="gw" onclick="this.classList.toggle('on')">fair</span><span class="gz">公平的</span> on <span class="gw" onclick="this.classList.toggle('on')">Saturday</span><span class="gz">星期六</span>. I joined the <span class="gw" onclick="this.classList.toggle('on')">art</span><span class="gz">美術</span> <span class="gw" onclick="this.classList.toggle('on')">team</span><span class="gz">隊伍</span> because they needed help with the <span class="gw" onclick="this.classList.toggle('on')">signs</span><span class="gz">標記</span>. We worked together to make <span class="gw" onclick="this.classList.toggle('on')">bright</span><span class="gz">明亮的</span> <span class="gw" onclick="this.classList.toggle('on')">posters</span><span class="gz">海報</span> and waited for the paint to dry. Then we invited families into the <span class="gw" onclick="this.classList.toggle('on')">hall</span><span class="gz">大廳</span>. Some children tried a ball <span class="gw" onclick="this.classList.toggle('on')">game</span><span class="gz">遊戲</span>, and <span class="gw" onclick="this.classList.toggle('on')">others</span><span class="gz">其他的</span> learned a <span class="gw" onclick="this.classList.toggle('on')">simple</span><span class="gz">簡單的</span> dance. I helped a small boy kick the ball toward a <span class="gw" onclick="this.classList.toggle('on')">basket</span><span class="gz">籃子</span>. He missed <span class="gw" onclick="this.classList.toggle('on')">twice</span><span class="gz">兩倍</span>, but his <span class="gw" onclick="this.classList.toggle('on')">third</span><span class="gz">第三</span> try <span class="gw" onclick="this.classList.toggle('on')">went</span><span class="gz">去（go 的過去式）</span> in, so <span class="gw" onclick="this.classList.toggle('on')">everyone</span><span class="gz">每個人</span> <span class="gw" onclick="this.classList.toggle('on')">cheered</span><span class="gz">歡呼</span>.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l3-u07-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">We found a wet puppy near our gate after a rainy walk. My sister took it inside while I called a neighbor for help. We used a towel to dry its fur and tried to make it drink some water. The puppy needed a quiet place to sleep, so we put a box by the door and waited. Soon the owner arrived from work. She kissed the puppy, thanked us, and invited us to visit them again.</p>
+      <p class="psg">We <span class="gw" onclick="this.classList.toggle('on')">found</span><span class="gz">找到（find 的過去式）</span> a wet <span class="gw" onclick="this.classList.toggle('on')">puppy</span><span class="gz">小狗</span> near our <span class="gw" onclick="this.classList.toggle('on')">gate</span><span class="gz">大門</span> after a <span class="gw" onclick="this.classList.toggle('on')">rainy</span><span class="gz">下雨</span> walk. My sister <span class="gw" onclick="this.classList.toggle('on')">took</span><span class="gz">拿（take 的過去式）</span> it <span class="gw" onclick="this.classList.toggle('on')">inside</span><span class="gz">在裡面</span> while I called a <span class="gw" onclick="this.classList.toggle('on')">neighbor</span><span class="gz">鄰居</span> for help. We used a <span class="gw" onclick="this.classList.toggle('on')">towel</span><span class="gz">毛巾</span> to dry its <span class="gw" onclick="this.classList.toggle('on')">fur</span><span class="gz">毛皮</span> and tried to make it drink some water. The <span class="gw" onclick="this.classList.toggle('on')">puppy</span><span class="gz">小狗</span> needed a <span class="gw" onclick="this.classList.toggle('on')">quiet</span><span class="gz">安靜的</span> <span class="gw" onclick="this.classList.toggle('on')">place</span><span class="gz">地方</span> to sleep, so we <span class="gw" onclick="this.classList.toggle('on')">put</span><span class="gz">放</span> a box by the door and waited. Soon the <span class="gw" onclick="this.classList.toggle('on')">owner</span><span class="gz">所有人</span> <span class="gw" onclick="this.classList.toggle('on')">arrived</span><span class="gz">抵達</span> from work. She kissed the <span class="gw" onclick="this.classList.toggle('on')">puppy</span><span class="gz">小狗</span>, thanked us, and invited us to visit them again.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l3-u07-p2.mp3')">🔊 聽這一篇</button>
     </div>
+    <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
+    <div id="aiRead"></div>
   </div>
 
   <div class="card">
@@ -370,17 +381,20 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010142"></script>
-<script src="../../account_lock.js?v=202608010142"></script>
-<script src="../../supabase_auth.js?v=202608010142"></script>
-<script src="../../ai_review.js?v=202608010142"></script>
-<script src="../../vocab_units.js?v=202608010142"></script>
-<script src="../../vocab_unit_plan.js?v=202608010142"></script>
+<script src="../../cloud_sync.js?v=202608010250"></script>
+<script src="../../account_lock.js?v=202608010250"></script>
+<script src="../../supabase_auth.js?v=202608010250"></script>
+<script src="../../ai_review.js?v=202608010250"></script>
+<script src="../../vocab_units.js?v=202608010250"></script>
+<script src="../../vocab_unit_plan.js?v=202608010250"></script>
 <script>
 var UNIT_ID = "l3-u07";
 var QUIZ = [{"kind":"zh2en","ask":"「幫助」的英文是哪一個？","answer":"help","options":["invite","help","join","kick"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ejoin\u003c/b\u003e 是什麼意思？","answer":"加入","options":["幫助","加入","邀請、聘請","踢"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"kiss","options":["help","invite","kiss","join"],"audio":"audio/words/kiss.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI ＿＿＿ a pencil.\u003c/span\u003e","answer":"need","options":["need","help","invite","join"],"audio":"audio/vocab_foundation/examples/l3-need-e1.mp3"},{"kind":"zh2en","ask":"「拿」的英文是哪一個？","answer":"take","options":["help","take","invite","join"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ewait\u003c/b\u003e 是什麼意思？","answer":"等待","options":["幫助","邀請、聘請","等待","加入"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"dry","options":["true","help","invite","dry"],"audio":"audio/words/dry.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI ＿＿＿ my dad.\u003c/span\u003e","answer":"help","options":["invite","help","join","kick"],"audio":"audio/words/ex/help_0.mp3"}];
 var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "動作與日常";
+var UNIT_DIALOGUE = "A: Do you want to join our soccer practice?\nB: Yes, but I need help with my kicks.\nA: I can work with you after school.\nB: Thanks. Should I invite Kevin too?\nA: Sure. We can make two small teams.\nB: Let's wait until the field is dry.\nA: Okay. I will take the ball home today.\nB: Great. We can try again tomorrow.";
+var UNIT_PASSAGE = "Our school held an autumn fair on Saturday. I joined the art team because they needed help with the signs. We worked together to make bright posters and waited for the paint to dry. Then we invited families into the hall. Some children tried a ball game, and others learned a simple dance. I helped a small boy kick the ball toward a basket. He missed twice, but his third try went in, so everyone cheered.\n\nWe found a wet puppy near our gate after a rainy walk. My sister took it inside while I called a neighbor for help. We used a towel to dry its fur and tried to make it drink some water. The puppy needed a quiet place to sleep, so we put a box by the door and waited. Soon the owner arrived from work. She kissed the puppy, thanked us, and invited us to visit them again.";
+var UNIT_NEWWORDS = [{"w":"practice","zh":"練習"},{"w":"teams","zh":"隊伍"},{"w":"let's","zh":"我們來…吧"},{"w":"until","zh":"直到"},{"w":"field","zh":"田地"},{"w":"okay","zh":"好、可以"},{"w":"held","zh":"握住（hold 的過去式）"},{"w":"fair","zh":"公平的"},{"w":"saturday","zh":"星期六"},{"w":"art","zh":"美術"},{"w":"team","zh":"隊伍"},{"w":"signs","zh":"標記"},{"w":"bright","zh":"明亮的"},{"w":"posters","zh":"海報"},{"w":"hall","zh":"大廳"},{"w":"game","zh":"遊戲"},{"w":"others","zh":"其他的"},{"w":"simple","zh":"簡單的"},{"w":"basket","zh":"籃子"},{"w":"twice","zh":"兩倍"},{"w":"third","zh":"第三"},{"w":"went","zh":"去（go 的過去式）"},{"w":"everyone","zh":"每個人"},{"w":"cheered","zh":"歡呼"},{"w":"found","zh":"找到（find 的過去式）"},{"w":"puppy","zh":"小狗"},{"w":"gate","zh":"大門"},{"w":"rainy","zh":"下雨"},{"w":"took","zh":"拿（take 的過去式）"},{"w":"inside","zh":"在裡面"},{"w":"neighbor","zh":"鄰居"},{"w":"towel","zh":"毛巾"},{"w":"fur","zh":"毛皮"},{"w":"quiet","zh":"安靜的"},{"w":"place","zh":"地方"},{"w":"put","zh":"放"},{"w":"owner","zh":"所有人"},{"w":"arrived","zh":"抵達"}];
 var UNIT_GOAL = "這個單元的字：help、invite、join、kick、kiss、make 等 14 個";
 
 function getProgress(s) {
@@ -505,6 +519,29 @@ function drawOffPlan() {
     "只是它不算進這個月的進度。<br>" +
     "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
 }
+
+// 讓小孩把整篇交給 AI 自己讀懂 —— 家長沒空時也能問到底
+window.askAIRead = function () {
+  if (!window.AIReview) return;
+  var NL = String.fromCharCode(10);
+  var newWords = UNIT_NEWWORDS.map(function (x) { return x.w + "（" + x.zh + "）"; }).join("、");
+  var text = [
+    "我是台灣的小學生，正在學英文。以下是我這個單元要讀的對話和短文，請幫我讀懂。", "",
+    "【單元主題】" + UNIT_TITLE, "",
+    "【對話】", UNIT_DIALOGUE, "",
+    "【短文】", UNIT_PASSAGE, "",
+  ].concat(newWords ? ["【課本已經標成生字的】" + newWords, ""] : []).concat([
+    "【請這樣幫我】",
+    "1. 先用兩三句中文說這篇在講什麼，不要逐句翻譯。",
+    "2. 挑出 5 個我最該記住的字，各給一句很短的英文例句。",
+    "3. 如果還有我可能看不懂的字，用中文簡單說它的意思。",
+    "4. 最後問我 3 個關於這篇內容的問題，先不要給答案，等我回答再批改。",
+    "5. 說明用繁體中文，英文句子保持英文。請講簡短一點。",
+  ]).join(NL);
+  AIReview.paintPrompt("aiRead", "把這篇交給 AI 講一次",
+    "複製下面這段貼到 ChatGPT，它會用中文說這篇在講什麼，再挑重點字考你。", text);
+  document.getElementById("aiRead").scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;

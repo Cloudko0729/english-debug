@@ -49,6 +49,13 @@ header a{color:#2f80ed;text-decoration:none}
 .turn .who.b{color:#b3621a}
 .turn .tx{flex:1}
 .psg{font-size:.93rem;margin:0 0 6px}
+/* 超出 L1-L4 的字：標出來並可點看中文。
+   L3 短文有 23.9%、L4 有 26.6% 的內容詞沒教過，不標的話小孩只能猜。 */
+.gw{border-bottom:1.5px dotted #b3621a;cursor:pointer}
+.gw.on{background:#fff3cd;border-radius:4px}
+.gz{display:none;font-size:.78rem;color:#8a5a12;background:#fff8e1;border-radius:6px;padding:1px 6px;margin-left:4px}
+.gw.on+.gz{display:inline}
+.glegend{font-size:.78rem;color:#8a97a5;margin:0 0 9px}
 .zhline{font-size:.8rem;color:#8a97a5}
 /* 測驗 */
 .q{border-top:1px solid #eef1f5;padding:12px 0}
@@ -269,6 +276,7 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>② 聽聽看什麼時候會用到</h2>
     <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l1-u08-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
     
     <div class="turn"><span class="who">A</span>
@@ -278,37 +286,40 @@ header a{color:#2f80ed;text-decoration:none}
       <span class="tx">Yes. It is big and nice.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u08-d2.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Can you ride it here?</span>
+      <span class="tx">Can you <span class="gw" onclick="this.classList.toggle('on')">ride</span><span class="gz">騎、搭乘</span> it here?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u08-d3.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
       <span class="tx">No, this road is not good.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u08-d4.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Is the park okay?</span>
+      <span class="tx">Is the <span class="gw" onclick="this.classList.toggle('on')">park</span><span class="gz">公園</span> <span class="gw" onclick="this.classList.toggle('on')">okay</span><span class="gz">好、可以</span>?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u08-d5.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Yes. The park is great.</span>
+      <span class="tx">Yes. The <span class="gw" onclick="this.classList.toggle('on')">park</span><span class="gz">公園</span> is great.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u08-d6.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
       <span class="tx">Do you want to walk there now?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u08-d7.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Okay. My job is to take the bike.</span>
+      <span class="tx"><span class="gw" onclick="this.classList.toggle('on')">Okay</span><span class="gz">好、可以</span>. My job is to take the bike.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u08-d8.mp3')">🔊</button></div>
   </div>
 
   <div class="card">
     <h2>③ 讀一段短文</h2>
     <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">I see a new bike at the store. It is big, red, and very nice. Dad says the bike is good, but it is too tall for me. A small bike is here. It is not new, but it is great. I can ride it well, so we take it home.</p>
+      <p class="psg">I see a new bike at the store. It is big, red, and very nice. Dad says the bike is good, but it is too tall for me. A small bike is here. It is not new, but it is great. I can <span class="gw" onclick="this.classList.toggle('on')">ride</span><span class="gz">騎、搭乘</span> it <span class="gw" onclick="this.classList.toggle('on')">well</span><span class="gz">好地</span>, so we take it home.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u08-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">Today I walk to school with Mom. The new guard has a big job. He stands here by the red door and helps us. A boy has a bad fall, but he is okay. The guard is nice to him. &quot;No running,&quot; he says. We walk into school.</p>
+      <p class="psg">Today I walk to school with <span class="gw" onclick="this.classList.toggle('on')">Mom</span><span class="gz">媽媽</span>. The new <span class="gw" onclick="this.classList.toggle('on')">guard</span><span class="gz">看守</span> has a big job. He stands here by the red door and helps us. A boy has a bad fall, but he is <span class="gw" onclick="this.classList.toggle('on')">okay</span><span class="gz">好、可以</span>. The <span class="gw" onclick="this.classList.toggle('on')">guard</span><span class="gz">看守</span> is nice to him. "No <span class="gw" onclick="this.classList.toggle('on')">running</span><span class="gz">奔跑的</span>," he says. We walk into school.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u08-p2.mp3')">🔊 聽這一篇</button>
     </div>
+    <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
+    <div id="aiRead"></div>
   </div>
 
   <div class="card">
@@ -375,17 +386,20 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010142"></script>
-<script src="../../account_lock.js?v=202608010142"></script>
-<script src="../../supabase_auth.js?v=202608010142"></script>
-<script src="../../ai_review.js?v=202608010142"></script>
-<script src="../../vocab_units.js?v=202608010142"></script>
-<script src="../../vocab_unit_plan.js?v=202608010142"></script>
+<script src="../../cloud_sync.js?v=202608010250"></script>
+<script src="../../account_lock.js?v=202608010250"></script>
+<script src="../../supabase_auth.js?v=202608010250"></script>
+<script src="../../ai_review.js?v=202608010250"></script>
+<script src="../../vocab_units.js?v=202608010250"></script>
+<script src="../../vocab_unit_plan.js?v=202608010250"></script>
 <script>
 var UNIT_ID = "l1-u08";
 var QUIZ = [{"kind":"zh2en","ask":"「壞的」的英文是哪一個？","answer":"bad","options":["big","good","great","bad"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003egood\u003c/b\u003e 是什麼意思？","answer":"好的","options":["壞的","好的","大的","很棒的"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"new","options":["bad","big","new","good"],"audio":"audio/words/new.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eThe apple is ＿＿＿.\u003c/span\u003e","answer":"red","options":["bad","big","good","red"],"audio":"audio/words/ex/red_0.mp3"},{"kind":"zh2en","ask":"「這裡」的英文是哪一個？","answer":"here","options":["here","how","not","now"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eno\u003c/b\u003e 是什麼意思？","answer":"不；沒有","options":["好；可以","是；好","壞的","不；沒有"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"walk","options":["come","go","jog","walk"],"audio":"audio/words/walk.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eThe elephant is ＿＿＿.\u003c/span\u003e","answer":"big","options":["bad","good","big","great"],"audio":"audio/vocab_foundation/examples/l1-big-e1.mp3"}];
 var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "顏色與描述 × 生活綜合";
+var UNIT_DIALOGUE = "A: Is that your new red bike?\nB: Yes. It is big and nice.\nA: Can you ride it here?\nB: No, this road is not good.\nA: Is the park okay?\nB: Yes. The park is great.\nA: Do you want to walk there now?\nB: Okay. My job is to take the bike.";
+var UNIT_PASSAGE = "I see a new bike at the store. It is big, red, and very nice. Dad says the bike is good, but it is too tall for me. A small bike is here. It is not new, but it is great. I can ride it well, so we take it home.\n\nToday I walk to school with Mom. The new guard has a big job. He stands here by the red door and helps us. A boy has a bad fall, but he is okay. The guard is nice to him. \"No running,\" he says. We walk into school.";
+var UNIT_NEWWORDS = [{"w":"ride","zh":"騎、搭乘"},{"w":"park","zh":"公園"},{"w":"okay","zh":"好、可以"},{"w":"well","zh":"好地"},{"w":"mom","zh":"媽媽"},{"w":"guard","zh":"看守"},{"w":"running","zh":"奔跑的"}];
 var UNIT_GOAL = "這個單元的字：bad、big、good、great、new、nice 等 13 個";
 
 function getProgress(s) {
@@ -510,6 +524,29 @@ function drawOffPlan() {
     "只是它不算進這個月的進度。<br>" +
     "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
 }
+
+// 讓小孩把整篇交給 AI 自己讀懂 —— 家長沒空時也能問到底
+window.askAIRead = function () {
+  if (!window.AIReview) return;
+  var NL = String.fromCharCode(10);
+  var newWords = UNIT_NEWWORDS.map(function (x) { return x.w + "（" + x.zh + "）"; }).join("、");
+  var text = [
+    "我是台灣的小學生，正在學英文。以下是我這個單元要讀的對話和短文，請幫我讀懂。", "",
+    "【單元主題】" + UNIT_TITLE, "",
+    "【對話】", UNIT_DIALOGUE, "",
+    "【短文】", UNIT_PASSAGE, "",
+  ].concat(newWords ? ["【課本已經標成生字的】" + newWords, ""] : []).concat([
+    "【請這樣幫我】",
+    "1. 先用兩三句中文說這篇在講什麼，不要逐句翻譯。",
+    "2. 挑出 5 個我最該記住的字，各給一句很短的英文例句。",
+    "3. 如果還有我可能看不懂的字，用中文簡單說它的意思。",
+    "4. 最後問我 3 個關於這篇內容的問題，先不要給答案，等我回答再批改。",
+    "5. 說明用繁體中文，英文句子保持英文。請講簡短一點。",
+  ]).join(NL);
+  AIReview.paintPrompt("aiRead", "把這篇交給 AI 講一次",
+    "複製下面這段貼到 ChatGPT，它會用中文說這篇在講什麼，再挑重點字考你。", text);
+  document.getElementById("aiRead").scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;

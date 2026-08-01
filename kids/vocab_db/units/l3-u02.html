@@ -49,6 +49,13 @@ header a{color:#2f80ed;text-decoration:none}
 .turn .who.b{color:#b3621a}
 .turn .tx{flex:1}
 .psg{font-size:.93rem;margin:0 0 6px}
+/* 超出 L1-L4 的字：標出來並可點看中文。
+   L3 短文有 23.9%、L4 有 26.6% 的內容詞沒教過，不標的話小孩只能猜。 */
+.gw{border-bottom:1.5px dotted #b3621a;cursor:pointer}
+.gw.on{background:#fff3cd;border-radius:4px}
+.gz{display:none;font-size:.78rem;color:#8a5a12;background:#fff8e1;border-radius:6px;padding:1px 6px;margin-left:4px}
+.gw.on+.gz{display:inline}
+.glegend{font-size:.78rem;color:#8a97a5;margin:0 0 9px}
 .zhline{font-size:.8rem;color:#8a97a5}
 /* 測驗 */
 .q{border-top:1px solid #eef1f5;padding:12px 0}
@@ -295,10 +302,11 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>② 聽聽看什麼時候會用到</h2>
     <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l3-u02-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
     
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Dad, what time does the family picnic start?</span>
+      <span class="tx">Dad, what <span class="gw" onclick="this.classList.toggle('on')">time</span><span class="gz">時間</span> does the family picnic start?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u02-d1.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
       <span class="tx">It starts at ten o'clock tomorrow morning.</span>
@@ -307,34 +315,37 @@ header a{color:#2f80ed;text-decoration:none}
       <span class="tx">Are Aunt May and Uncle Sam coming?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u02-d3.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Yes, and they are bringing the children.</span>
+      <span class="tx">Yes, and they are <span class="gw" onclick="this.classList.toggle('on')">bringing</span><span class="gz">帶來</span> the children.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u02-d4.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
       <span class="tx">Can I invite my friend Leo too?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u02-d5.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Of course. His family can join us.</span>
+      <span class="tx">Of <span class="gw" onclick="this.classList.toggle('on')">course</span><span class="gz">課程</span>. His family can join us.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u02-d6.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
       <span class="tx">Great! I will call him before eight p.m.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u02-d7.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Good. Please help Daddy pack the food first.</span>
+      <span class="tx">Good. Please help Daddy <span class="gw" onclick="this.classList.toggle('on')">pack</span><span class="gz">打包</span> the food first.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l3-u02-d8.mp3')">🔊</button></div>
   </div>
 
   <div class="card">
     <h2>③ 讀一段短文</h2>
     <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">Yesterday morning, my aunt and uncle came to our house at nine o'clock. My uncle is a factory worker, and he usually starts work very early. He had a free day, so our whole family ate breakfast together. Dad made eggs while my aunt cut fruit for the children. My little cousin is still a young child, but she helped carry the cups. After breakfast, Daddy took a family photo, and everyone smiled. They stayed until after lunch.</p>
+      <p class="psg">Yesterday morning, my aunt and uncle <span class="gw" onclick="this.classList.toggle('on')">came</span><span class="gz">來（come 的過去式）</span> to our house at nine o'clock. My uncle is a <span class="gw" onclick="this.classList.toggle('on')">factory</span><span class="gz">工廠</span> worker, and he usually starts work very early. He had a <span class="gw" onclick="this.classList.toggle('on')">free</span><span class="gz">免費的、有空的</span> day, so our <span class="gw" onclick="this.classList.toggle('on')">whole</span><span class="gz">全部的</span> family <span class="gw" onclick="this.classList.toggle('on')">ate</span><span class="gz">吃（eat 的過去式）</span> breakfast together. Dad <span class="gw" onclick="this.classList.toggle('on')">made</span><span class="gz">製作（make 的過去式）</span> eggs while my aunt <span class="gw" onclick="this.classList.toggle('on')">cut</span><span class="gz">剪下</span> fruit for the children. My little <span class="gw" onclick="this.classList.toggle('on')">cousin</span><span class="gz">表／堂兄弟姊妹</span> is still a young child, but she helped <span class="gw" onclick="this.classList.toggle('on')">carry</span><span class="gz">搬運</span> the cups. After breakfast, Daddy <span class="gw" onclick="this.classList.toggle('on')">took</span><span class="gz">拿（take 的過去式）</span> a family <span class="gw" onclick="this.classList.toggle('on')">photo</span><span class="gz">相片</span>, and <span class="gw" onclick="this.classList.toggle('on')">everyone</span><span class="gz">每個人</span> <span class="gw" onclick="this.classList.toggle('on')">smiled</span><span class="gz">微笑</span>. They stayed <span class="gw" onclick="this.classList.toggle('on')">until</span><span class="gz">直到</span> after lunch.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l3-u02-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">Our school sports day started at two p.m. yesterday. My friend Ben came with his family, including his aunt, uncle, and two children. His dad helped at the starting line, and my daddy gave water to the runners. At three o'clock, the relay race began. Our team had zero points at first, but we did not give up. We ran carefully and finished second. Every child cheered, and the adults clapped for us. We talked about it all afternoon.</p>
+      <p class="psg">Our school sports day started at two p.m. yesterday. My friend Ben <span class="gw" onclick="this.classList.toggle('on')">came</span><span class="gz">來（come 的過去式）</span> with his family, <span class="gw" onclick="this.classList.toggle('on')">including</span><span class="gz">包括</span> his aunt, uncle, and two children. His dad helped at the starting <span class="gw" onclick="this.classList.toggle('on')">line</span><span class="gz">線、排隊</span>, and my daddy <span class="gw" onclick="this.classList.toggle('on')">gave</span><span class="gz">給（give 的過去式）</span> water to the <span class="gw" onclick="this.classList.toggle('on')">runners</span><span class="gz">跑者</span>. At three o'clock, the <span class="gw" onclick="this.classList.toggle('on')">relay</span><span class="gz">接力</span> <span class="gw" onclick="this.classList.toggle('on')">race</span><span class="gz">比賽</span> <span class="gw" onclick="this.classList.toggle('on')">began</span><span class="gz">開始（begin 的過去式）</span>. Our <span class="gw" onclick="this.classList.toggle('on')">team</span><span class="gz">隊伍</span> had zero points at first, but we did not give up. We <span class="gw" onclick="this.classList.toggle('on')">ran</span><span class="gz">跑步（run 的過去式）</span> <span class="gw" onclick="this.classList.toggle('on')">carefully</span><span class="gz">小心地</span> and <span class="gw" onclick="this.classList.toggle('on')">finished</span><span class="gz">完成</span> second. Every child <span class="gw" onclick="this.classList.toggle('on')">cheered</span><span class="gz">歡呼</span>, and the <span class="gw" onclick="this.classList.toggle('on')">adults</span><span class="gz">成人</span> <span class="gw" onclick="this.classList.toggle('on')">clapped</span><span class="gz">拍手</span> for us. We talked about it all afternoon.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l3-u02-p2.mp3')">🔊 聽這一篇</button>
     </div>
+    <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
+    <div id="aiRead"></div>
   </div>
 
   <div class="card">
@@ -401,17 +412,20 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010142"></script>
-<script src="../../account_lock.js?v=202608010142"></script>
-<script src="../../supabase_auth.js?v=202608010142"></script>
-<script src="../../ai_review.js?v=202608010142"></script>
-<script src="../../vocab_units.js?v=202608010142"></script>
-<script src="../../vocab_unit_plan.js?v=202608010142"></script>
+<script src="../../cloud_sync.js?v=202608010250"></script>
+<script src="../../account_lock.js?v=202608010250"></script>
+<script src="../../supabase_auth.js?v=202608010250"></script>
+<script src="../../ai_review.js?v=202608010250"></script>
+<script src="../../vocab_units.js?v=202608010250"></script>
+<script src="../../vocab_unit_plan.js?v=202608010250"></script>
 <script>
 var UNIT_ID = "l3-u02";
 var QUIZ = [{"kind":"zh2en","ask":"「阿姨」的英文是哪一個？","answer":"aunt","options":["aunt","child","children","dad"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003echildren\u003c/b\u003e 是什麼意思？","answer":"一個以上的孩童、child 的複數","options":["一個以上的孩童、child 的複數","阿姨","孩子","爸爸"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"daddy","options":["aunt","child","daddy","children"],"audio":"audio/words/daddy.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eAmy is my best ＿＿＿.\u003c/span\u003e","answer":"friend","options":["friend","aunt","child","children"],"audio":"audio/vocab_foundation/examples/l3-friend-e1.mp3"},{"kind":"zh2en","ask":"「工作者」的英文是哪一個？","answer":"worker","options":["aunt","child","worker","children"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eo'clock\u003c/b\u003e 是什麼意思？","answer":"……點鐘","options":["下午；晚上","昨天","……點鐘","上午"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"start","options":["call","cry","start","dance"],"audio":"audio/words/start.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI have ＿＿＿ apples.\u003c/span\u003e","answer":"zero","options":["zero","eleven","aunt","child"],"audio":"audio/words/ex/zero_0.mp3"}];
 var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "人物與家庭 × 數字與時間";
+var UNIT_DIALOGUE = "A: Dad, what time does the family picnic start?\nB: It starts at ten o'clock tomorrow morning.\nA: Are Aunt May and Uncle Sam coming?\nB: Yes, and they are bringing the children.\nA: Can I invite my friend Leo too?\nB: Of course. His family can join us.\nA: Great! I will call him before eight p.m.\nB: Good. Please help Daddy pack the food first.";
+var UNIT_PASSAGE = "Yesterday morning, my aunt and uncle came to our house at nine o'clock. My uncle is a factory worker, and he usually starts work very early. He had a free day, so our whole family ate breakfast together. Dad made eggs while my aunt cut fruit for the children. My little cousin is still a young child, but she helped carry the cups. After breakfast, Daddy took a family photo, and everyone smiled. They stayed until after lunch.\n\nOur school sports day started at two p.m. yesterday. My friend Ben came with his family, including his aunt, uncle, and two children. His dad helped at the starting line, and my daddy gave water to the runners. At three o'clock, the relay race began. Our team had zero points at first, but we did not give up. We ran carefully and finished second. Every child cheered, and the adults clapped for us. We talked about it all afternoon.";
+var UNIT_NEWWORDS = [{"w":"time","zh":"時間"},{"w":"bringing","zh":"帶來"},{"w":"course","zh":"課程"},{"w":"pack","zh":"打包"},{"w":"came","zh":"來（come 的過去式）"},{"w":"factory","zh":"工廠"},{"w":"free","zh":"免費的、有空的"},{"w":"whole","zh":"全部的"},{"w":"ate","zh":"吃（eat 的過去式）"},{"w":"made","zh":"製作（make 的過去式）"},{"w":"cut","zh":"剪下"},{"w":"cousin","zh":"表／堂兄弟姊妹"},{"w":"carry","zh":"搬運"},{"w":"took","zh":"拿（take 的過去式）"},{"w":"photo","zh":"相片"},{"w":"everyone","zh":"每個人"},{"w":"smiled","zh":"微笑"},{"w":"until","zh":"直到"},{"w":"including","zh":"包括"},{"w":"line","zh":"線、排隊"},{"w":"gave","zh":"給（give 的過去式）"},{"w":"runners","zh":"跑者"},{"w":"relay","zh":"接力"},{"w":"race","zh":"比賽"},{"w":"began","zh":"開始（begin 的過去式）"},{"w":"team","zh":"隊伍"},{"w":"ran","zh":"跑步（run 的過去式）"},{"w":"carefully","zh":"小心地"},{"w":"finished","zh":"完成"},{"w":"cheered","zh":"歡呼"},{"w":"adults","zh":"成人"},{"w":"clapped","zh":"拍手"}];
 var UNIT_GOAL = "這個單元的字：aunt、child、children、dad、daddy、family 等 15 個";
 
 function getProgress(s) {
@@ -536,6 +550,29 @@ function drawOffPlan() {
     "只是它不算進這個月的進度。<br>" +
     "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
 }
+
+// 讓小孩把整篇交給 AI 自己讀懂 —— 家長沒空時也能問到底
+window.askAIRead = function () {
+  if (!window.AIReview) return;
+  var NL = String.fromCharCode(10);
+  var newWords = UNIT_NEWWORDS.map(function (x) { return x.w + "（" + x.zh + "）"; }).join("、");
+  var text = [
+    "我是台灣的小學生，正在學英文。以下是我這個單元要讀的對話和短文，請幫我讀懂。", "",
+    "【單元主題】" + UNIT_TITLE, "",
+    "【對話】", UNIT_DIALOGUE, "",
+    "【短文】", UNIT_PASSAGE, "",
+  ].concat(newWords ? ["【課本已經標成生字的】" + newWords, ""] : []).concat([
+    "【請這樣幫我】",
+    "1. 先用兩三句中文說這篇在講什麼，不要逐句翻譯。",
+    "2. 挑出 5 個我最該記住的字，各給一句很短的英文例句。",
+    "3. 如果還有我可能看不懂的字，用中文簡單說它的意思。",
+    "4. 最後問我 3 個關於這篇內容的問題，先不要給答案，等我回答再批改。",
+    "5. 說明用繁體中文，英文句子保持英文。請講簡短一點。",
+  ]).join(NL);
+  AIReview.paintPrompt("aiRead", "把這篇交給 AI 講一次",
+    "複製下面這段貼到 ChatGPT，它會用中文說這篇在講什麼，再挑重點字考你。", text);
+  document.getElementById("aiRead").scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;

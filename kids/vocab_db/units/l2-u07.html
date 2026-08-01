@@ -49,6 +49,13 @@ header a{color:#2f80ed;text-decoration:none}
 .turn .who.b{color:#b3621a}
 .turn .tx{flex:1}
 .psg{font-size:.93rem;margin:0 0 6px}
+/* 超出 L1-L4 的字：標出來並可點看中文。
+   L3 短文有 23.9%、L4 有 26.6% 的內容詞沒教過，不標的話小孩只能猜。 */
+.gw{border-bottom:1.5px dotted #b3621a;cursor:pointer}
+.gw.on{background:#fff3cd;border-radius:4px}
+.gz{display:none;font-size:.78rem;color:#8a5a12;background:#fff8e1;border-radius:6px;padding:1px 6px;margin-left:4px}
+.gw.on+.gz{display:inline}
+.glegend{font-size:.78rem;color:#8a97a5;margin:0 0 9px}
 .zhline{font-size:.8rem;color:#8a97a5}
 /* 測驗 */
 .q{border-top:1px solid #eef1f5;padding:12px 0}
@@ -295,13 +302,14 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>② 聽聽看什麼時候會用到</h2>
     <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l2-u07-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
     
     <div class="turn"><span class="who">A</span>
       <span class="tx">Hi! Can I sit here for the picnic?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l2-u07-d1.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Yes, but this mat is very small.</span>
+      <span class="tx">Yes, but this <span class="gw" onclick="this.classList.toggle('on')">mat</span><span class="gz">席子</span> is very small.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l2-u07-d2.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
       <span class="tx">Oh, I can sit by the yellow bag.</span>
@@ -310,7 +318,7 @@ header a{color:#2f80ed;text-decoration:none}
       <span class="tx">Hey, that is my white cap!</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l2-u07-d4.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Wow, it looks nice on you.</span>
+      <span class="tx">Wow, it <span class="gw" onclick="this.classList.toggle('on')">looks</span><span class="gz">看</span> nice on you.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l2-u07-d5.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
       <span class="tx">Thank you. I am a little shy.</span>
@@ -326,15 +334,18 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>③ 讀一段短文</h2>
     <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">We have a picnic by the school. I say hello to a shy girl in a white cap. She says hi, but she talks very slowly. We show her our small yellow ball and green cups. &quot;Wow, I like the colors,&quot; she says. We thank her and ask her to sing a song. Soon we are all friends.</p>
+      <p class="psg">We have a picnic by the school. I say hello to a shy girl in a white cap. She says hi, but she talks very slowly. We <span class="gw" onclick="this.classList.toggle('on')">show</span><span class="gz">給…看、表演</span> her our small yellow ball and green cups. "Wow, I <span class="gw" onclick="this.classList.toggle('on')">like</span><span class="gz">喜歡</span> the colors," she says. We thank her and ask her to sing a song. Soon we are all friends.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l2-u07-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">A small boy comes to the music room. &quot;Hey, what is your favorite color?&quot; I ask. He says yellow, but his guitar is white. &quot;Oh, it is very nice!&quot; I say. He is shy and plays a slow song. At the end, everyone says, &quot;Wow!&quot; The boy smiles and says, &quot;Thank you.&quot;</p>
+      <p class="psg">A small boy comes to the <span class="gw" onclick="this.classList.toggle('on')">music</span><span class="gz">音樂</span> room. "Hey, what is your <span class="gw" onclick="this.classList.toggle('on')">favorite</span><span class="gz">最喜愛的</span> color?" I ask. He says yellow, but his <span class="gw" onclick="this.classList.toggle('on')">guitar</span><span class="gz">吉他</span> is white. "Oh, it is very nice!" I say. He is shy and plays a slow song. At the <span class="gw" onclick="this.classList.toggle('on')">end</span><span class="gz">結尾、結束</span>, <span class="gw" onclick="this.classList.toggle('on')">everyone</span><span class="gz">每個人</span> says, "Wow!" The boy <span class="gw" onclick="this.classList.toggle('on')">smiles</span><span class="gz">微笑</span> and says, "Thank you."</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l2-u07-p2.mp3')">🔊 聽這一篇</button>
     </div>
+    <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
+    <div id="aiRead"></div>
   </div>
 
   <div class="card">
@@ -383,17 +394,20 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010142"></script>
-<script src="../../account_lock.js?v=202608010142"></script>
-<script src="../../supabase_auth.js?v=202608010142"></script>
-<script src="../../ai_review.js?v=202608010142"></script>
-<script src="../../vocab_units.js?v=202608010142"></script>
-<script src="../../vocab_unit_plan.js?v=202608010142"></script>
+<script src="../../cloud_sync.js?v=202608010250"></script>
+<script src="../../account_lock.js?v=202608010250"></script>
+<script src="../../supabase_auth.js?v=202608010250"></script>
+<script src="../../ai_review.js?v=202608010250"></script>
+<script src="../../vocab_units.js?v=202608010250"></script>
+<script src="../../vocab_unit_plan.js?v=202608010250"></script>
 <script>
 var UNIT_ID = "l2-u07";
 var QUIZ = [{"kind":"zh2en","ask":"「但是」的英文是哪一個？","answer":"but","options":["and","color","hello","but"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ehello\u003c/b\u003e 是什麼意思？","answer":"哈囉","options":["嘿、喂","哈囉","嗨","噢、啊、唉"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"hi","options":["hello","hi","hey","oh"],"audio":"audio/words/hi.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI ＿＿＿ Dad for his help.\u003c/span\u003e","answer":"thank","options":["hello","hey","thank","hi"],"audio":"audio/vocab_foundation/examples/l2-thank-e1.mp3"},{"kind":"zh2en","ask":"「害羞的」的英文是哪一個？","answer":"shy","options":["shy","slow","small","white"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003esmall\u003c/b\u003e 是什麼意思？","answer":"小的","options":["害羞的","慢的","白色","小的"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"yellow","options":["yellow","shy","slow","small"],"audio":"audio/words/yellow.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eWe sing a ＿＿＿ in music class.\u003c/span\u003e","answer":"song","options":["color","picnic","air","song"],"audio":"audio/vocab_foundation/examples/l2-song-e1.mp3"}];
 var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "生活綜合 × 顏色與描述";
+var UNIT_DIALOGUE = "A: Hi! Can I sit here for the picnic?\nB: Yes, but this mat is very small.\nA: Oh, I can sit by the yellow bag.\nB: Hey, that is my white cap!\nA: Wow, it looks nice on you.\nB: Thank you. I am a little shy.\nA: Do you want to sing our song?\nB: Yes, but please sing slowly.";
+var UNIT_PASSAGE = "We have a picnic by the school. I say hello to a shy girl in a white cap. She says hi, but she talks very slowly. We show her our small yellow ball and green cups. \"Wow, I like the colors,\" she says. We thank her and ask her to sing a song. Soon we are all friends.\n\nA small boy comes to the music room. \"Hey, what is your favorite color?\" I ask. He says yellow, but his guitar is white. \"Oh, it is very nice!\" I say. He is shy and plays a slow song. At the end, everyone says, \"Wow!\" The boy smiles and says, \"Thank you.\"";
+var UNIT_NEWWORDS = [{"w":"mat","zh":"席子"},{"w":"looks","zh":"看"},{"w":"show","zh":"給…看、表演"},{"w":"like","zh":"喜歡"},{"w":"music","zh":"音樂"},{"w":"favorite","zh":"最喜愛的"},{"w":"guitar","zh":"吉他"},{"w":"end","zh":"結尾、結束"},{"w":"everyone","zh":"每個人"},{"w":"smiles","zh":"微笑"}];
 var UNIT_GOAL = "這個單元的字：but、color、hello、hey、hi、oh 等 15 個";
 
 function getProgress(s) {
@@ -518,6 +532,29 @@ function drawOffPlan() {
     "只是它不算進這個月的進度。<br>" +
     "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
 }
+
+// 讓小孩把整篇交給 AI 自己讀懂 —— 家長沒空時也能問到底
+window.askAIRead = function () {
+  if (!window.AIReview) return;
+  var NL = String.fromCharCode(10);
+  var newWords = UNIT_NEWWORDS.map(function (x) { return x.w + "（" + x.zh + "）"; }).join("、");
+  var text = [
+    "我是台灣的小學生，正在學英文。以下是我這個單元要讀的對話和短文，請幫我讀懂。", "",
+    "【單元主題】" + UNIT_TITLE, "",
+    "【對話】", UNIT_DIALOGUE, "",
+    "【短文】", UNIT_PASSAGE, "",
+  ].concat(newWords ? ["【課本已經標成生字的】" + newWords, ""] : []).concat([
+    "【請這樣幫我】",
+    "1. 先用兩三句中文說這篇在講什麼，不要逐句翻譯。",
+    "2. 挑出 5 個我最該記住的字，各給一句很短的英文例句。",
+    "3. 如果還有我可能看不懂的字，用中文簡單說它的意思。",
+    "4. 最後問我 3 個關於這篇內容的問題，先不要給答案，等我回答再批改。",
+    "5. 說明用繁體中文，英文句子保持英文。請講簡短一點。",
+  ]).join(NL);
+  AIReview.paintPrompt("aiRead", "把這篇交給 AI 講一次",
+    "複製下面這段貼到 ChatGPT，它會用中文說這篇在講什麼，再挑重點字考你。", text);
+  document.getElementById("aiRead").scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;

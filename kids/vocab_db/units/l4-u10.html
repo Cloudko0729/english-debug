@@ -49,6 +49,13 @@ header a{color:#2f80ed;text-decoration:none}
 .turn .who.b{color:#b3621a}
 .turn .tx{flex:1}
 .psg{font-size:.93rem;margin:0 0 6px}
+/* 超出 L1-L4 的字：標出來並可點看中文。
+   L3 短文有 23.9%、L4 有 26.6% 的內容詞沒教過，不標的話小孩只能猜。 */
+.gw{border-bottom:1.5px dotted #b3621a;cursor:pointer}
+.gw.on{background:#fff3cd;border-radius:4px}
+.gz{display:none;font-size:.78rem;color:#8a5a12;background:#fff8e1;border-radius:6px;padding:1px 6px;margin-left:4px}
+.gw.on+.gz{display:inline}
+.glegend{font-size:.78rem;color:#8a97a5;margin:0 0 9px}
 .zhline{font-size:.8rem;color:#8a97a5}
 /* 測驗 */
 .q{border-top:1px solid #eef1f5;padding:12px 0}
@@ -269,46 +276,50 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>② 聽聽看什麼時候會用到</h2>
     <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l4-u10-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
     
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Where is the kitten for our Chinese New Year photo?</span>
+      <span class="tx">Where is the kitten for our Chinese New Year <span class="gw" onclick="this.classList.toggle('on')">photo</span><span class="gz">相片</span>?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u10-d1.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">The kitty is hiding next to the sofa.</span>
+      <span class="tx">The kitty is <span class="gw" onclick="this.classList.toggle('on')">hiding</span><span class="gz">躲起來</span> next to the sofa.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u10-d2.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Can you bring it out?</span>
+      <span class="tx">Can you <span class="gw" onclick="this.classList.toggle('on')">bring</span><span class="gz">帶來</span> it out?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u10-d3.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">I tried, but it ran in front of the TV.</span>
+      <span class="tx">I tried, but it <span class="gw" onclick="this.classList.toggle('on')">ran</span><span class="gz">跑步（run 的過去式）</span> in <span class="gw" onclick="this.classList.toggle('on')">front</span><span class="gz">前面</span> of the TV.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u10-d4.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Maybe it doesn't like the drum sound.</span>
+      <span class="tx"><span class="gw" onclick="this.classList.toggle('on')">Maybe</span><span class="gz">也許</span> it doesn't <span class="gw" onclick="this.classList.toggle('on')">like</span><span class="gz">喜歡</span> the <span class="gw" onclick="this.classList.toggle('on')">drum</span><span class="gz">鼓</span> sound.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u10-d5.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Even the small drum is too loud for it.</span>
+      <span class="tx">Even the small <span class="gw" onclick="this.classList.toggle('on')">drum</span><span class="gz">鼓</span> is too <span class="gw" onclick="this.classList.toggle('on')">loud</span><span class="gz">大聲的</span> for it.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u10-d6.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Then let's finish the family part first.</span>
+      <span class="tx">Then <span class="gw" onclick="this.classList.toggle('on')">let's</span><span class="gz">我們來…吧</span> <span class="gw" onclick="this.classList.toggle('on')">finish</span><span class="gz">完成</span> the family part first.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u10-d7.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">Good idea. I smell fish, so it may come out soon.</span>
+      <span class="tx">Good <span class="gw" onclick="this.classList.toggle('on')">idea</span><span class="gz">點子</span>. I smell <span class="gw" onclick="this.classList.toggle('on')">fish</span><span class="gz">魚</span>, so it may come out soon.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u10-d8.mp3')">🔊</button></div>
   </div>
 
   <div class="card">
     <h2>③ 讀一段短文</h2>
     <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">Two days before Chinese New Year, we heard a soft sound in front of our neighbor's door. A wet kitten was hiding next to a box of oranges. It came out when it smelled the fish in Mom's shopping bag. The kitty was small, but even my little brother could hold it carefully. We gave it water and made a warm bed in a box. Then Dad posted a photo in our building group. That evening, a girl from upstairs knocked on our door. She called the kitten's name, and it ran to her. We were happy to help them meet again.</p>
+      <p class="psg">Two days before Chinese New Year, we <span class="gw" onclick="this.classList.toggle('on')">heard</span><span class="gz">聽見（hear 的過去式）</span> a <span class="gw" onclick="this.classList.toggle('on')">soft</span><span class="gz">軟的</span> sound in <span class="gw" onclick="this.classList.toggle('on')">front</span><span class="gz">前面</span> of our neighbor's door. A wet kitten was <span class="gw" onclick="this.classList.toggle('on')">hiding</span><span class="gz">躲起來</span> next to a box of <span class="gw" onclick="this.classList.toggle('on')">oranges</span><span class="gz">橘色</span>. It <span class="gw" onclick="this.classList.toggle('on')">came</span><span class="gz">來（come 的過去式）</span> out when it smelled the <span class="gw" onclick="this.classList.toggle('on')">fish</span><span class="gz">魚</span> in Mom's <span class="gw" onclick="this.classList.toggle('on')">shopping</span><span class="gz">購物</span> bag. The kitty was small, but even my little brother could <span class="gw" onclick="this.classList.toggle('on')">hold</span><span class="gz">握住</span> it <span class="gw" onclick="this.classList.toggle('on')">carefully</span><span class="gz">小心地</span>. We <span class="gw" onclick="this.classList.toggle('on')">gave</span><span class="gz">給（give 的過去式）</span> it water and <span class="gw" onclick="this.classList.toggle('on')">made</span><span class="gz">製作（make 的過去式）</span> a warm bed in a box. Then Dad <span class="gw" onclick="this.classList.toggle('on')">posted</span><span class="gz">張貼</span> a <span class="gw" onclick="this.classList.toggle('on')">photo</span><span class="gz">相片</span> in our <span class="gw" onclick="this.classList.toggle('on')">building</span><span class="gz">建築物</span> <span class="gw" onclick="this.classList.toggle('on')">group</span><span class="gz">一組人</span>. That evening, a girl from <span class="gw" onclick="this.classList.toggle('on')">upstairs</span><span class="gz">在樓上</span> <span class="gw" onclick="this.classList.toggle('on')">knocked</span><span class="gz">敲（門）</span> on our door. She called the kitten's name, and it <span class="gw" onclick="this.classList.toggle('on')">ran</span><span class="gz">跑步（run 的過去式）</span> to her. We were <span class="gw" onclick="this.classList.toggle('on')">happy</span><span class="gz">快樂的</span> to help them <span class="gw" onclick="this.classList.toggle('on')">meet</span><span class="gz">見面</span> again.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l4-u10-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">Our school held a swimming day at the sports center. I was part of the blue team, and my race began after lunch. The pool looked huge, even though it was the same size as our practice pool. I stood next to Mia in front of the starting line. When the whistle made a sharp sound, we jumped in and started swimming. I was tired near the end, but I did not stop. Mia finished first, and I came in third. When we climbed out, our coach gave us towels. The smell of warm noodles from the snack room made everyone hungry.</p>
+      <p class="psg">Our school <span class="gw" onclick="this.classList.toggle('on')">held</span><span class="gz">握住（hold 的過去式）</span> a swimming day at the sports <span class="gw" onclick="this.classList.toggle('on')">center</span><span class="gz">中心</span>. I was part of the <span class="gw" onclick="this.classList.toggle('on')">blue</span><span class="gz">藍色</span> <span class="gw" onclick="this.classList.toggle('on')">team</span><span class="gz">隊伍</span>, and my <span class="gw" onclick="this.classList.toggle('on')">race</span><span class="gz">比賽</span> <span class="gw" onclick="this.classList.toggle('on')">began</span><span class="gz">開始（begin 的過去式）</span> after lunch. The <span class="gw" onclick="this.classList.toggle('on')">pool</span><span class="gz">水池</span> <span class="gw" onclick="this.classList.toggle('on')">looked</span><span class="gz">看</span> <span class="gw" onclick="this.classList.toggle('on')">huge</span><span class="gz">巨大的</span>, even <span class="gw" onclick="this.classList.toggle('on')">though</span><span class="gz">雖然</span> it was the same size as our <span class="gw" onclick="this.classList.toggle('on')">practice</span><span class="gz">練習</span> <span class="gw" onclick="this.classList.toggle('on')">pool</span><span class="gz">水池</span>. I <span class="gw" onclick="this.classList.toggle('on')">stood</span><span class="gz">站（stand 的過去式）</span> next to Mia in <span class="gw" onclick="this.classList.toggle('on')">front</span><span class="gz">前面</span> of the starting <span class="gw" onclick="this.classList.toggle('on')">line</span><span class="gz">線、排隊</span>. When the <span class="gw" onclick="this.classList.toggle('on')">whistle</span><span class="gz">哨子</span> <span class="gw" onclick="this.classList.toggle('on')">made</span><span class="gz">製作（make 的過去式）</span> a <span class="gw" onclick="this.classList.toggle('on')">sharp</span><span class="gz">鋒利的</span> sound, we <span class="gw" onclick="this.classList.toggle('on')">jumped</span><span class="gz">跳</span> in and started swimming. I was <span class="gw" onclick="this.classList.toggle('on')">tired</span><span class="gz">疲倦的</span> near the <span class="gw" onclick="this.classList.toggle('on')">end</span><span class="gz">結尾、結束</span>, but I did not stop. Mia <span class="gw" onclick="this.classList.toggle('on')">finished</span><span class="gz">完成</span> first, and I <span class="gw" onclick="this.classList.toggle('on')">came</span><span class="gz">來（come 的過去式）</span> in <span class="gw" onclick="this.classList.toggle('on')">third</span><span class="gz">第三</span>. When we <span class="gw" onclick="this.classList.toggle('on')">climbed</span><span class="gz">爬</span> out, our <span class="gw" onclick="this.classList.toggle('on')">coach</span><span class="gz">長途公共汽車</span> <span class="gw" onclick="this.classList.toggle('on')">gave</span><span class="gz">給（give 的過去式）</span> us <span class="gw" onclick="this.classList.toggle('on')">towels</span><span class="gz">毛巾</span>. The smell of warm <span class="gw" onclick="this.classList.toggle('on')">noodles</span><span class="gz">麵</span> from the snack room <span class="gw" onclick="this.classList.toggle('on')">made</span><span class="gz">製作（make 的過去式）</span> <span class="gw" onclick="this.classList.toggle('on')">everyone</span><span class="gz">每個人</span> hungry.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l4-u10-p2.mp3')">🔊 聽這一篇</button>
     </div>
+    <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
+    <div id="aiRead"></div>
   </div>
 
   <div class="card">
@@ -357,17 +368,20 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010142"></script>
-<script src="../../account_lock.js?v=202608010142"></script>
-<script src="../../supabase_auth.js?v=202608010142"></script>
-<script src="../../ai_review.js?v=202608010142"></script>
-<script src="../../vocab_units.js?v=202608010142"></script>
-<script src="../../vocab_unit_plan.js?v=202608010142"></script>
+<script src="../../cloud_sync.js?v=202608010250"></script>
+<script src="../../account_lock.js?v=202608010250"></script>
+<script src="../../supabase_auth.js?v=202608010250"></script>
+<script src="../../ai_review.js?v=202608010250"></script>
+<script src="../../vocab_units.js?v=202608010250"></script>
+<script src="../../vocab_unit_plan.js?v=202608010250"></script>
 <script>
 var UNIT_ID = "l4-u10";
 var QUIZ = [{"kind":"zh2en","ask":"「農曆新年」的英文是哪一個？","answer":"chinese new year","options":["kitten","kitty","chinese new year","part"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ein front of\u003c/b\u003e 是什麼意思？","answer":"在…的前面","options":["緊挨著","在…的前面","從；來自","……的"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"kitty","options":["chinese new year","kitty","kitten","part"],"audio":"audio/words/kitty.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eThe children are ＿＿＿ in the yard.\u003c/span\u003e","answer":"out","options":["out","even","never","soon"],"audio":"audio/vocab_foundation/examples/l4-out-e1.mp3"},{"kind":"zh2en","ask":"「尺寸」的英文是哪一個？","answer":"size","options":["chinese new year","kitten","kitty","size"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003esound\u003c/b\u003e 是什麼意思？","answer":"聲音；聽起來","options":["農曆新年","小貓、頑皮的女孩","聲音；聽起來","(兒語)小貓"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"swimming","options":["chinese new year","kitten","kitty","swimming"],"audio":"audio/words/swimming.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ my little brother can do it.\u003c/span\u003e","answer":"even","options":["out","never","even","soon"],"audio":"audio/vocab_foundation/examples/l4-even-e1.mp3"}];
 var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "生活綜合";
+var UNIT_DIALOGUE = "A: Where is the kitten for our Chinese New Year photo?\nB: The kitty is hiding next to the sofa.\nA: Can you bring it out?\nB: I tried, but it ran in front of the TV.\nA: Maybe it doesn't like the drum sound.\nB: Even the small drum is too loud for it.\nA: Then let's finish the family part first.\nB: Good idea. I smell fish, so it may come out soon.";
+var UNIT_PASSAGE = "Two days before Chinese New Year, we heard a soft sound in front of our neighbor's door. A wet kitten was hiding next to a box of oranges. It came out when it smelled the fish in Mom's shopping bag. The kitty was small, but even my little brother could hold it carefully. We gave it water and made a warm bed in a box. Then Dad posted a photo in our building group. That evening, a girl from upstairs knocked on our door. She called the kitten's name, and it ran to her. We were happy to help them meet again.\n\nOur school held a swimming day at the sports center. I was part of the blue team, and my race began after lunch. The pool looked huge, even though it was the same size as our practice pool. I stood next to Mia in front of the starting line. When the whistle made a sharp sound, we jumped in and started swimming. I was tired near the end, but I did not stop. Mia finished first, and I came in third. When we climbed out, our coach gave us towels. The smell of warm noodles from the snack room made everyone hungry.";
+var UNIT_NEWWORDS = [{"w":"photo","zh":"相片"},{"w":"hiding","zh":"躲起來"},{"w":"bring","zh":"帶來"},{"w":"ran","zh":"跑步（run 的過去式）"},{"w":"front","zh":"前面"},{"w":"maybe","zh":"也許"},{"w":"like","zh":"喜歡"},{"w":"drum","zh":"鼓"},{"w":"loud","zh":"大聲的"},{"w":"let's","zh":"我們來…吧"},{"w":"finish","zh":"完成"},{"w":"idea","zh":"點子"},{"w":"fish","zh":"魚"},{"w":"heard","zh":"聽見（hear 的過去式）"},{"w":"soft","zh":"軟的"},{"w":"oranges","zh":"橘色"},{"w":"came","zh":"來（come 的過去式）"},{"w":"shopping","zh":"購物"},{"w":"hold","zh":"握住"},{"w":"carefully","zh":"小心地"},{"w":"gave","zh":"給（give 的過去式）"},{"w":"made","zh":"製作（make 的過去式）"},{"w":"posted","zh":"張貼"},{"w":"building","zh":"建築物"},{"w":"group","zh":"一組人"},{"w":"upstairs","zh":"在樓上"},{"w":"knocked","zh":"敲（門）"},{"w":"happy","zh":"快樂的"},{"w":"meet","zh":"見面"},{"w":"held","zh":"握住（hold 的過去式）"},{"w":"center","zh":"中心"},{"w":"blue","zh":"藍色"},{"w":"team","zh":"隊伍"},{"w":"race","zh":"比賽"},{"w":"began","zh":"開始（begin 的過去式）"},{"w":"pool","zh":"水池"},{"w":"looked","zh":"看"},{"w":"huge","zh":"巨大的"},{"w":"though","zh":"雖然"},{"w":"practice","zh":"練習"},{"w":"stood","zh":"站（stand 的過去式）"},{"w":"line","zh":"線、排隊"},{"w":"whistle","zh":"哨子"},{"w":"sharp","zh":"鋒利的"},{"w":"jumped","zh":"跳"},{"w":"tired","zh":"疲倦的"},{"w":"end","zh":"結尾、結束"},{"w":"finished","zh":"完成"},{"w":"third","zh":"第三"},{"w":"climbed","zh":"爬"},{"w":"coach","zh":"長途公共汽車"},{"w":"towels","zh":"毛巾"},{"w":"noodles","zh":"麵"},{"w":"everyone","zh":"每個人"}];
 var UNIT_GOAL = "這個單元的字：chinese new year、even、in front of、kitten、kitty、next to 等 13 個";
 
 function getProgress(s) {
@@ -492,6 +506,29 @@ function drawOffPlan() {
     "只是它不算進這個月的進度。<br>" +
     "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
 }
+
+// 讓小孩把整篇交給 AI 自己讀懂 —— 家長沒空時也能問到底
+window.askAIRead = function () {
+  if (!window.AIReview) return;
+  var NL = String.fromCharCode(10);
+  var newWords = UNIT_NEWWORDS.map(function (x) { return x.w + "（" + x.zh + "）"; }).join("、");
+  var text = [
+    "我是台灣的小學生，正在學英文。以下是我這個單元要讀的對話和短文，請幫我讀懂。", "",
+    "【單元主題】" + UNIT_TITLE, "",
+    "【對話】", UNIT_DIALOGUE, "",
+    "【短文】", UNIT_PASSAGE, "",
+  ].concat(newWords ? ["【課本已經標成生字的】" + newWords, ""] : []).concat([
+    "【請這樣幫我】",
+    "1. 先用兩三句中文說這篇在講什麼，不要逐句翻譯。",
+    "2. 挑出 5 個我最該記住的字，各給一句很短的英文例句。",
+    "3. 如果還有我可能看不懂的字，用中文簡單說它的意思。",
+    "4. 最後問我 3 個關於這篇內容的問題，先不要給答案，等我回答再批改。",
+    "5. 說明用繁體中文，英文句子保持英文。請講簡短一點。",
+  ]).join(NL);
+  AIReview.paintPrompt("aiRead", "把這篇交給 AI 講一次",
+    "複製下面這段貼到 ChatGPT，它會用中文說這篇在講什麼，再挑重點字考你。", text);
+  document.getElementById("aiRead").scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;

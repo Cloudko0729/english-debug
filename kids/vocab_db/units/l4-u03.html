@@ -49,6 +49,13 @@ header a{color:#2f80ed;text-decoration:none}
 .turn .who.b{color:#b3621a}
 .turn .tx{flex:1}
 .psg{font-size:.93rem;margin:0 0 6px}
+/* 超出 L1-L4 的字：標出來並可點看中文。
+   L3 短文有 23.9%、L4 有 26.6% 的內容詞沒教過，不標的話小孩只能猜。 */
+.gw{border-bottom:1.5px dotted #b3621a;cursor:pointer}
+.gw.on{background:#fff3cd;border-radius:4px}
+.gz{display:none;font-size:.78rem;color:#8a5a12;background:#fff8e1;border-radius:6px;padding:1px 6px;margin-left:4px}
+.gw.on+.gz{display:inline}
+.glegend{font-size:.78rem;color:#8a97a5;margin:0 0 9px}
 .zhline{font-size:.8rem;color:#8a97a5}
 /* 測驗 */
 .q{border-top:1px solid #eef1f5;padding:12px 0}
@@ -282,6 +289,7 @@ header a{color:#2f80ed;text-decoration:none}
   <div class="card">
     <h2>② 聽聽看什麼時候會用到</h2>
     <p class="hint">這些字在真的講話時長這樣。先整段聽一次，再一句一句聽。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     <button class="spk" onclick="play('../../audio/vocab_foundation/dialogues/l4-u03-dialogue.mp3')" style="margin-bottom:8px">▶️ 整段播放</button>
     
     <div class="turn"><span class="who">A</span>
@@ -294,34 +302,37 @@ header a{color:#2f80ed;text-decoration:none}
       <span class="tx">Will Grandma make lunch for us?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u03-d3.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">She said she is making noodles at twelve.</span>
+      <span class="tx">She <span class="gw" onclick="this.classList.toggle('on')">said</span><span class="gz">說（say 的過去式）</span> she is making <span class="gw" onclick="this.classList.toggle('on')">noodles</span><span class="gz">麵</span> at twelve.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u03-d4.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Great. Can we bring the panda puzzle?</span>
+      <span class="tx">Great. Can we <span class="gw" onclick="this.classList.toggle('on')">bring</span><span class="gz">帶來</span> the panda puzzle?</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u03-d5.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
       <span class="tx">Sure, and Grandpa has a new butterfly book.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u03-d6.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">I may get thirsty on the long bus ride.</span>
+      <span class="tx">I may <span class="gw" onclick="this.classList.toggle('on')">get</span><span class="gz">得到</span> thirsty on the long bus <span class="gw" onclick="this.classList.toggle('on')">ride</span><span class="gz">騎、搭乘</span>.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u03-d7.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
-      <span class="tx">I will pack water for you and Grandmother.</span>
+      <span class="tx">I will <span class="gw" onclick="this.classList.toggle('on')">pack</span><span class="gz">打包</span> water for you and Grandmother.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l4-u03-d8.mp3')">🔊</button></div>
   </div>
 
   <div class="card">
     <h2>③ 讀一段短文</h2>
     <p class="hint">同樣這些字，放在一個完整的故事裡。可以邊聽邊看。</p>
+    <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">On Saturday, my parents took me to a butterfly garden with Grandma and Grandpa. A guide showed us a tiny egg under a leaf, and soon we saw a butterfly opening its wings. My grandmother took photos while my grandfather read the signs to me. At noon, we were thirsty, so we rested beside a pond and shared a bottle of water. A young panda was sleeping on a poster near the gift desk, and Grandma bought the card for my cousin. We stayed for almost two hours. On the way home, Grandpa said we should visit again next spring.</p>
+      <p class="psg">On <span class="gw" onclick="this.classList.toggle('on')">Saturday</span><span class="gz">星期六</span>, my parents <span class="gw" onclick="this.classList.toggle('on')">took</span><span class="gz">拿（take 的過去式）</span> me to a butterfly <span class="gw" onclick="this.classList.toggle('on')">garden</span><span class="gz">花園</span> with Grandma and Grandpa. A <span class="gw" onclick="this.classList.toggle('on')">guide</span><span class="gz">嚮導</span> <span class="gw" onclick="this.classList.toggle('on')">showed</span><span class="gz">表演</span> us a <span class="gw" onclick="this.classList.toggle('on')">tiny</span><span class="gz">極小的</span> egg under a <span class="gw" onclick="this.classList.toggle('on')">leaf</span><span class="gz">葉子</span>, and soon we <span class="gw" onclick="this.classList.toggle('on')">saw</span><span class="gz">看見（see 的過去式）</span> a butterfly <span class="gw" onclick="this.classList.toggle('on')">opening</span><span class="gz">打開</span> its <span class="gw" onclick="this.classList.toggle('on')">wings</span><span class="gz">翅膀</span>. My grandmother <span class="gw" onclick="this.classList.toggle('on')">took</span><span class="gz">拿（take 的過去式）</span> <span class="gw" onclick="this.classList.toggle('on')">photos</span><span class="gz">相片</span> while my grandfather read the <span class="gw" onclick="this.classList.toggle('on')">signs</span><span class="gz">標記</span> to me. At <span class="gw" onclick="this.classList.toggle('on')">noon</span><span class="gz">中午</span>, we were thirsty, so we <span class="gw" onclick="this.classList.toggle('on')">rested</span><span class="gz">休息</span> <span class="gw" onclick="this.classList.toggle('on')">beside</span><span class="gz">在旁邊</span> a <span class="gw" onclick="this.classList.toggle('on')">pond</span><span class="gz">池塘</span> and <span class="gw" onclick="this.classList.toggle('on')">shared</span><span class="gz">分享</span> a <span class="gw" onclick="this.classList.toggle('on')">bottle</span><span class="gz">瓶子</span> of water. A young panda was sleeping on a <span class="gw" onclick="this.classList.toggle('on')">poster</span><span class="gz">張貼</span> near the <span class="gw" onclick="this.classList.toggle('on')">gift</span><span class="gz">禮物</span> desk, and Grandma <span class="gw" onclick="this.classList.toggle('on')">bought</span><span class="gz">買（buy 的過去式）</span> the card for my <span class="gw" onclick="this.classList.toggle('on')">cousin</span><span class="gz">表／堂兄弟姊妹</span>. We stayed for <span class="gw" onclick="this.classList.toggle('on')">almost</span><span class="gz">幾乎</span> two hours. On the <span class="gw" onclick="this.classList.toggle('on')">way</span><span class="gz">道路</span> home, Grandpa <span class="gw" onclick="this.classList.toggle('on')">said</span><span class="gz">說（say 的過去式）</span> we should visit again next spring.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l4-u03-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">A children's writer visited our town on Sunday afternoon. My parents and I arrived at the reading hall before twelve, but every front seat was taken. The writer told a funny story about a panda that wanted to fly like a butterfly. My little brother laughed so hard that he dropped his bag. After the story, the writer answered twenty questions from the children. I asked how long it took to finish a book. &quot;Sometimes a year,&quot; he said. Before we left, he wrote my name inside my book. I will show it to Grandma when we visit her tomorrow.</p>
+      <p class="psg">A children's writer visited our <span class="gw" onclick="this.classList.toggle('on')">town</span><span class="gz">城鎮</span> on <span class="gw" onclick="this.classList.toggle('on')">Sunday</span><span class="gz">星期日</span> afternoon. My parents and I <span class="gw" onclick="this.classList.toggle('on')">arrived</span><span class="gz">抵達</span> at the reading <span class="gw" onclick="this.classList.toggle('on')">hall</span><span class="gz">大廳</span> before twelve, but every <span class="gw" onclick="this.classList.toggle('on')">front</span><span class="gz">前面</span> <span class="gw" onclick="this.classList.toggle('on')">seat</span><span class="gz">座位</span> was taken. The writer <span class="gw" onclick="this.classList.toggle('on')">told</span><span class="gz">告訴（tell 的過去式）</span> a funny <span class="gw" onclick="this.classList.toggle('on')">story</span><span class="gz">故事</span> about a panda that wanted to fly <span class="gw" onclick="this.classList.toggle('on')">like</span><span class="gz">喜歡</span> a butterfly. My little brother <span class="gw" onclick="this.classList.toggle('on')">laughed</span><span class="gz">笑</span> so <span class="gw" onclick="this.classList.toggle('on')">hard</span><span class="gz">困難的</span> that he <span class="gw" onclick="this.classList.toggle('on')">dropped</span><span class="gz">落下</span> his bag. After the <span class="gw" onclick="this.classList.toggle('on')">story</span><span class="gz">故事</span>, the writer <span class="gw" onclick="this.classList.toggle('on')">answered</span><span class="gz">答案</span> twenty <span class="gw" onclick="this.classList.toggle('on')">questions</span><span class="gz">問題</span> from the children. I asked how long it <span class="gw" onclick="this.classList.toggle('on')">took</span><span class="gz">拿（take 的過去式）</span> to <span class="gw" onclick="this.classList.toggle('on')">finish</span><span class="gz">完成</span> a book. "Sometimes a year," he <span class="gw" onclick="this.classList.toggle('on')">said</span><span class="gz">說（say 的過去式）</span>. Before we <span class="gw" onclick="this.classList.toggle('on')">left</span><span class="gz">左邊（leave 的過去式）</span>, he <span class="gw" onclick="this.classList.toggle('on')">wrote</span><span class="gz">寫（write 的過去式）</span> my name <span class="gw" onclick="this.classList.toggle('on')">inside</span><span class="gz">在裡面</span> my book. I will <span class="gw" onclick="this.classList.toggle('on')">show</span><span class="gz">給…看、表演</span> it to Grandma when we visit her tomorrow.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l4-u03-p2.mp3')">🔊 聽這一篇</button>
     </div>
+    <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
+    <div id="aiRead"></div>
   </div>
 
   <div class="card">
@@ -361,17 +372,20 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010142"></script>
-<script src="../../account_lock.js?v=202608010142"></script>
-<script src="../../supabase_auth.js?v=202608010142"></script>
-<script src="../../ai_review.js?v=202608010142"></script>
-<script src="../../vocab_units.js?v=202608010142"></script>
-<script src="../../vocab_unit_plan.js?v=202608010142"></script>
+<script src="../../cloud_sync.js?v=202608010250"></script>
+<script src="../../account_lock.js?v=202608010250"></script>
+<script src="../../supabase_auth.js?v=202608010250"></script>
+<script src="../../ai_review.js?v=202608010250"></script>
+<script src="../../vocab_units.js?v=202608010250"></script>
+<script src="../../vocab_unit_plan.js?v=202608010250"></script>
 <script>
 var UNIT_ID = "l4-u03";
 var QUIZ = [{"kind":"zh2en","ask":"「祖父；外祖父」的英文是哪一個？","answer":"grandfather","options":["grandma","grandmother","grandfather","grandpa"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003egrandmother\u003c/b\u003e 是什麼意思？","answer":"祖母；外祖母","options":["祖父；外祖父","奶奶","爺爺","祖母；外祖母"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"parents","options":["grandfather","parents","grandma","grandmother"],"audio":"audio/words/parents.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eThe ＿＿＿ makes funny stories.\u003c/span\u003e","answer":"writer","options":["grandfather","writer","grandma","grandmother"],"audio":"audio/vocab_foundation/examples/l4-writer-e1.mp3"},{"kind":"zh2en","ask":"「十二」的英文是哪一個？","answer":"twelve","options":["twenty","eighteen","eighty","twelve"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eweekend\u003c/b\u003e 是什麼意思？","answer":"週末","options":["週末","祖父；外祖父","奶奶","祖母；外祖母"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"panda","options":["panda","grandfather","grandma","grandmother"],"audio":"audio/words/panda.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eMy ＿＿＿ walks every morning.\u003c/span\u003e","answer":"grandfather","options":["grandma","grandmother","grandfather","grandpa"],"audio":"audio/vocab_foundation/examples/l4-grandfather-e1.mp3"}];
 var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "人物與家庭 × 數字與時間";
+var UNIT_DIALOGUE = "A: Are we visiting Grandpa this weekend?\nB: Yes. My parents want to go tomorrow morning.\nA: Will Grandma make lunch for us?\nB: She said she is making noodles at twelve.\nA: Great. Can we bring the panda puzzle?\nB: Sure, and Grandpa has a new butterfly book.\nA: I may get thirsty on the long bus ride.\nB: I will pack water for you and Grandmother.";
+var UNIT_PASSAGE = "On Saturday, my parents took me to a butterfly garden with Grandma and Grandpa. A guide showed us a tiny egg under a leaf, and soon we saw a butterfly opening its wings. My grandmother took photos while my grandfather read the signs to me. At noon, we were thirsty, so we rested beside a pond and shared a bottle of water. A young panda was sleeping on a poster near the gift desk, and Grandma bought the card for my cousin. We stayed for almost two hours. On the way home, Grandpa said we should visit again next spring.\n\nA children's writer visited our town on Sunday afternoon. My parents and I arrived at the reading hall before twelve, but every front seat was taken. The writer told a funny story about a panda that wanted to fly like a butterfly. My little brother laughed so hard that he dropped his bag. After the story, the writer answered twenty questions from the children. I asked how long it took to finish a book. \"Sometimes a year,\" he said. Before we left, he wrote my name inside my book. I will show it to Grandma when we visit her tomorrow.";
+var UNIT_NEWWORDS = [{"w":"said","zh":"說（say 的過去式）"},{"w":"noodles","zh":"麵"},{"w":"bring","zh":"帶來"},{"w":"get","zh":"得到"},{"w":"ride","zh":"騎、搭乘"},{"w":"pack","zh":"打包"},{"w":"saturday","zh":"星期六"},{"w":"took","zh":"拿（take 的過去式）"},{"w":"garden","zh":"花園"},{"w":"guide","zh":"嚮導"},{"w":"showed","zh":"表演"},{"w":"tiny","zh":"極小的"},{"w":"leaf","zh":"葉子"},{"w":"saw","zh":"看見（see 的過去式）"},{"w":"opening","zh":"打開"},{"w":"wings","zh":"翅膀"},{"w":"photos","zh":"相片"},{"w":"signs","zh":"標記"},{"w":"noon","zh":"中午"},{"w":"rested","zh":"休息"},{"w":"beside","zh":"在旁邊"},{"w":"pond","zh":"池塘"},{"w":"shared","zh":"分享"},{"w":"bottle","zh":"瓶子"},{"w":"poster","zh":"張貼"},{"w":"gift","zh":"禮物"},{"w":"bought","zh":"買（buy 的過去式）"},{"w":"cousin","zh":"表／堂兄弟姊妹"},{"w":"almost","zh":"幾乎"},{"w":"way","zh":"道路"},{"w":"town","zh":"城鎮"},{"w":"sunday","zh":"星期日"},{"w":"arrived","zh":"抵達"},{"w":"hall","zh":"大廳"},{"w":"front","zh":"前面"},{"w":"seat","zh":"座位"},{"w":"told","zh":"告訴（tell 的過去式）"},{"w":"story","zh":"故事"},{"w":"like","zh":"喜歡"},{"w":"laughed","zh":"笑"},{"w":"hard","zh":"困難的"},{"w":"dropped","zh":"落下"},{"w":"answered","zh":"答案"},{"w":"questions","zh":"問題"},{"w":"finish","zh":"完成"},{"w":"left","zh":"左邊（leave 的過去式）"},{"w":"wrote","zh":"寫（write 的過去式）"},{"w":"inside","zh":"在裡面"},{"w":"show","zh":"給…看、表演"}];
 var UNIT_GOAL = "這個單元的字：grandfather、grandma、grandmother、grandpa、parents、sir 等 14 個";
 
 function getProgress(s) {
@@ -496,6 +510,29 @@ function drawOffPlan() {
     "只是它不算進這個月的進度。<br>" +
     "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
 }
+
+// 讓小孩把整篇交給 AI 自己讀懂 —— 家長沒空時也能問到底
+window.askAIRead = function () {
+  if (!window.AIReview) return;
+  var NL = String.fromCharCode(10);
+  var newWords = UNIT_NEWWORDS.map(function (x) { return x.w + "（" + x.zh + "）"; }).join("、");
+  var text = [
+    "我是台灣的小學生，正在學英文。以下是我這個單元要讀的對話和短文，請幫我讀懂。", "",
+    "【單元主題】" + UNIT_TITLE, "",
+    "【對話】", UNIT_DIALOGUE, "",
+    "【短文】", UNIT_PASSAGE, "",
+  ].concat(newWords ? ["【課本已經標成生字的】" + newWords, ""] : []).concat([
+    "【請這樣幫我】",
+    "1. 先用兩三句中文說這篇在講什麼，不要逐句翻譯。",
+    "2. 挑出 5 個我最該記住的字，各給一句很短的英文例句。",
+    "3. 如果還有我可能看不懂的字，用中文簡單說它的意思。",
+    "4. 最後問我 3 個關於這篇內容的問題，先不要給答案，等我回答再批改。",
+    "5. 說明用繁體中文，英文句子保持英文。請講簡短一點。",
+  ]).join(NL);
+  AIReview.paintPrompt("aiRead", "把這篇交給 AI 講一次",
+    "複製下面這段貼到 ChatGPT，它會用中文說這篇在講什麼，再挑重點字考你。", text);
+  document.getElementById("aiRead").scrollIntoView({ behavior: "smooth", block: "nearest" });
+};
 
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
