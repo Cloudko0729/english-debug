@@ -143,6 +143,10 @@ header a{color:#2f80ed;text-decoration:none}
 .wrap{max-width:720px;margin:0 auto;padding:0 14px}
 .stubar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;background:#fff;border:1px solid #e3e8ee;
   border-radius:12px;padding:9px 12px;margin:14px 0}
+/* 按鈕另外包一層：supabase_auth 登入後會把 .stu-btn 的父容器整個換成
+   「目前：Name／登出」，金幣如果跟按鈕同層就會被一起清掉，
+   接著 refreshCoin() 對 null 取值拋錯，整個頁面卡在「先選上面的名字」。 */
+.stubar .btns{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .stubar .lab{font-size:.8rem;color:#6b7a8c}
 .stu-btn{border:1px solid #cfd8e3;background:#fff;border-radius:16px;padding:5px 13px;font-size:.85rem;cursor:pointer;font-family:inherit}
 .stu-btn.active{background:#2f80ed;color:#fff;border-color:#2f80ed;font-weight:700}
@@ -261,11 +265,11 @@ function renderUnit(unit, wordMap, confusions, prev, next, levelWords) {
 
 <div class="wrap">
   <div class="stubar">
-    <span class="lab">我是：</span>
+    <span class="btns"><span class="lab">我是：</span>
     <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
     <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
     <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
-    <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+    <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button></span>
     <span class="coin" id="coinBox">🪙 —</span>
   </div>
 
@@ -346,6 +350,7 @@ function flip(el) { el.classList.toggle("open"); }
 
 function refreshCoin(bump) {
   var el = document.getElementById("coinBox");
+  if (!el) return;          // 登入列可能把它換掉了；少顯示金幣不該讓整頁停擺
   el.textContent = currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
   if (bump) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
 }
@@ -523,11 +528,13 @@ function renderIndex(units) {
 
 <div class="wrap">
   <div class="stubar">
-    <span class="lab">我是：</span>
-    <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
-    <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
-    <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
-    <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+    <span class="btns">
+      <span class="lab">我是：</span>
+      <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
+      <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
+      <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
+      <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+    </span>
     <span class="coin" id="coinBox">🪙 —</span>
   </div>
   <div class="overall" id="overall">先選名字，就會顯示你每個單元的進度。</div>

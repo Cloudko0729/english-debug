@@ -15,6 +15,10 @@ header a{color:#2f80ed;text-decoration:none}
 .wrap{max-width:720px;margin:0 auto;padding:0 14px}
 .stubar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;background:#fff;border:1px solid #e3e8ee;
   border-radius:12px;padding:9px 12px;margin:14px 0}
+/* 按鈕另外包一層：supabase_auth 登入後會把 .stu-btn 的父容器整個換成
+   「目前：Name／登出」，金幣如果跟按鈕同層就會被一起清掉，
+   接著 refreshCoin() 對 null 取值拋錯，整個頁面卡在「先選上面的名字」。 */
+.stubar .btns{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .stubar .lab{font-size:.8rem;color:#6b7a8c}
 .stu-btn{border:1px solid #cfd8e3;background:#fff;border-radius:16px;padding:5px 13px;font-size:.85rem;cursor:pointer;font-family:inherit}
 .stu-btn.active{background:#2f80ed;color:#fff;border-color:#2f80ed;font-weight:700}
@@ -77,11 +81,11 @@ header a{color:#2f80ed;text-decoration:none}
 
 <div class="wrap">
   <div class="stubar">
-    <span class="lab">我是：</span>
+    <span class="btns"><span class="lab">我是：</span>
     <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
     <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
     <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
-    <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+    <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button></span>
     <span class="coin" id="coinBox">🪙 —</span>
   </div>
 
@@ -397,12 +401,12 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010110"></script>
-<script src="../../account_lock.js?v=202608010110"></script>
-<script src="../../supabase_auth.js?v=202608010110"></script>
-<script src="../../ai_review.js?v=202608010110"></script>
-<script src="../../vocab_units.js?v=202608010110"></script>
-<script src="../../vocab_unit_plan.js?v=202608010110"></script>
+<script src="../../cloud_sync.js?v=202608010119"></script>
+<script src="../../account_lock.js?v=202608010119"></script>
+<script src="../../supabase_auth.js?v=202608010119"></script>
+<script src="../../ai_review.js?v=202608010119"></script>
+<script src="../../vocab_units.js?v=202608010119"></script>
+<script src="../../vocab_unit_plan.js?v=202608010119"></script>
 <script>
 var UNIT_ID = "l3-u02";
 var QUIZ = [{"kind":"zh2en","ask":"「阿姨」的英文是哪一個？","answer":"aunt","options":["aunt","child","children","dad"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003echildren\u003c/b\u003e 是什麼意思？","answer":"一個以上的孩童、child 的複數","options":["一個以上的孩童、child 的複數","阿姨","孩子","爸爸"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"daddy","options":["aunt","child","daddy","children"],"audio":"audio/words/daddy.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eAmy is my best ＿＿＿.\u003c/span\u003e","answer":"friend","options":["friend","aunt","child","children"],"audio":"audio/vocab_foundation/examples/l3-friend-e1.mp3"},{"kind":"zh2en","ask":"「工作者」的英文是哪一個？","answer":"worker","options":["aunt","child","worker","children"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eo'clock\u003c/b\u003e 是什麼意思？","answer":"……點鐘","options":["下午；晚上","昨天","……點鐘","上午"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"start","options":["call","cry","start","dance"],"audio":"audio/words/start.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI have ＿＿＿ apples.\u003c/span\u003e","answer":"zero","options":["zero","eleven","aunt","child"],"audio":"audio/words/ex/zero_0.mp3"}];
@@ -430,6 +434,7 @@ function flip(el) { el.classList.toggle("open"); }
 
 function refreshCoin(bump) {
   var el = document.getElementById("coinBox");
+  if (!el) return;          // 登入列可能把它換掉了；少顯示金幣不該讓整頁停擺
   el.textContent = currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
   if (bump) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
 }

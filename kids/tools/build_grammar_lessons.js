@@ -150,6 +150,10 @@ const STYLE = `
   .navbtns a.home{background:var(--green);color:#fff;border-color:var(--green);}
   .navbtns a.dim{opacity:.4;pointer-events:none;}
   .stubar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;justify-content:center;background:var(--accent);padding:9px 12px;}
+/* 按鈕另外包一層：supabase_auth 登入後會把 .stu-btn 的父容器整個換成
+   「目前：Name／登出」，金幣如果跟按鈕同層就會被一起清掉，
+   接著 refreshCoin() 對 null 取值拋錯，整個頁面卡在「先選上面的名字」。 */
+.stubar .btns{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
   .stubar .lab{font-size:.8rem;font-weight:800;color:#3a2a00;}
   .stu-btn{padding:5px 13px;border:2px solid #3a2a00;border-radius:18px;background:transparent;color:#3a2a00;font-weight:700;font-size:.82rem;cursor:pointer;font-family:inherit;}
   .stu-btn.active{background:#3a2a00;color:#fff;}
@@ -200,12 +204,12 @@ function renderNode(n, prev, next) {
 </header>
 
 <div class="stubar">
-  <span class="lab">我是：</span>
+  <span class="btns"><span class="lab">我是：</span>
   <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
   <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
   <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
-  <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
-  <span class="coin" id="coinBox">🪙 —</span>
+  <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button></span>
+    <span class="coin" id="coinBox">🪙 —</span>
 </div>
 
 <div class="scene">
@@ -396,6 +400,7 @@ function getProgress(s) {
 function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
 function refreshCoin(bump) {
   var el = document.getElementById("coinBox");
+  if (!el) return;          // 登入列可能把它換掉了；少顯示金幣不該讓整頁停擺
   el.textContent = currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
   if (bump) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
 }
@@ -558,11 +563,13 @@ function renderIndex(nodes) {
 </header>
 
 <div class="stubar">
-  <span class="lab">我是：</span>
-  <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
-  <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
-  <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
-  <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+  <span class="btns">
+    <span class="lab">我是：</span>
+    <button class="stu-btn" onclick="pickStudent('albert')">Albert</button>
+    <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
+    <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
+    <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
+  </span>
   <span class="coin" id="coinBox">🪙 —</span>
 </div>
 <div class="overall" id="overall">先選名字，就會顯示你每一課的進度。</div>
