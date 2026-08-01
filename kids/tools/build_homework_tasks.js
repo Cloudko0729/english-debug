@@ -3,7 +3,8 @@
 // 用法: node kids/tools/build_homework_tasks.js
 //
 // 題目文字取自 grammar_db/kid_wording.json 的 speak / write（那是已經白話化過、
-// 小孩讀得懂的版本），語音取自 bands/*.json 的 productionTasks.promptAudio。
+// 小孩讀得懂的版本），範例語音取自 audio/grammar_db/task_examples/
+// （由 build_task_example_audio.js 產生，唸的是範例答案本身）。
 //
 // 另外抽出「這一課必須用到的英文字」給手寫檢查用：
 // 中文提示裡常常夾著要練的字（「寫一句用 they 講兩個人的話」），
@@ -33,39 +34,49 @@ function extractMust(zh, eg) {
   return raw.some(t => low.includes(t.toLowerCase())) ? raw : [];
 }
 
+// 範例答案的語音，由 build_task_example_audio.js 產生。
+//
+// 絕對不要用節點資料裡的 productionTasks[].promptAudio —— 那唸的是英文「指令」
+// （"Say one sentence with 'I am'."），不是示範答案。教學頁當初就踩過這個，
+// 作業頁又踩了一次：小孩按下「範例」聽到的是題目本身，等於沒有示範。
+function egAudioPath(nodeId, kind) {
+  return "audio/grammar_db/task_examples/" +
+    nodeId.replace(/[.\-]/g, "_").toLowerCase() + "_" + kind + ".mp3";
+}
+
 function main() {
   const wording = JSON.parse(fs.readFileSync(path.join(DB, "kid_wording.json"), "utf8"));
-  const audio = {};
+  const nodeIds = [];
   BANDS.forEach(b => {
     const d = JSON.parse(fs.readFileSync(path.join(DB, "bands", b + ".json"), "utf8"));
-    (d.nodes || d).forEach(n => {
-      (n.productionTasks || []).forEach(t => {
-        if (!audio[n.id]) audio[n.id] = {};
-        const kind = t.type === "speaking" ? "speak" : "write";
-        if (t.promptAudio) audio[n.id][kind] = t.promptAudio;
-      });
-    });
+    (d.nodes || d).forEach(n => nodeIds.push(n.id));
   });
 
   const out = {};
-  let withMust = 0, genericOnly = 0, missing = [];
+  let withMust = 0, genericOnly = 0, missing = [], noAudio = [];
   Object.keys(wording).forEach(id => {
     if (id.startsWith("_")) return;                  // _note 之類的說明欄位
     const w = wording[id];
     if (!w || (!w.speak && !w.write)) { missing.push(id); return; }
     const rec = {};
-    if (w.speak) {
-      rec.speak = { zh: w.speak.zh, eg: w.speak.eg, egAudio: (audio[id] || {}).speak || null };
-    }
-    if (w.write) {
+    ["speak", "write"].forEach(kind => {
+      if (!w[kind]) return;
+      const rel = egAudioPath(id, kind);
+      // 檔案不在就寧可留 null，讓播放鈕安靜跳過 —— 總比播到別的內容好
+      const ok = fs.existsSync(path.join(KIDS, rel));
+      if (!ok) noAudio.push(id + "/" + kind);
+      rec[kind] = { zh: w[kind].zh, eg: w[kind].eg, egAudio: ok ? rel : null };
+    });
+    if (rec.write) {
       const must = extractMust(w.write.zh, w.write.eg);
       if (must.length) withMust++; else genericOnly++;
-      rec.write = { zh: w.write.zh, eg: w.write.eg, egAudio: (audio[id] || {}).write || null, must: must };
+      rec.write.must = must;
     }
     out[id] = rec;
   });
 
   if (missing.length) console.warn("⚠️ 沒有作業文字的節點：", missing.join(" "));
+  if (noAudio.length) console.warn("⚠️ 缺範例語音：", noAudio.join(" "));
 
   fs.writeFileSync(path.join(KIDS, "homework_tasks.js"),
     "// 由 kids/tools/build_homework_tasks.js 產生，請勿手動編輯。\n" +
