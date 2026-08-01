@@ -348,15 +348,15 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202607310612"></script>
-<script src="curriculum.js?v=202607310612"></script>
-<script src="word_roots.js?v=202607310612"></script>
-<script src="worddex.js?v=202607310612"></script>
-<script src="city_data.js?v=202607310612"></script>
+<script src="wordbank.js?v=202608010054"></script>
+<script src="curriculum.js?v=202608010054"></script>
+<script src="word_roots.js?v=202608010054"></script>
+<script src="worddex.js?v=202608010054"></script>
+<script src="city_data.js?v=202608010054"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202607310612"></script>
-<script src="account_lock.js?v=202607310612"></script>
-<script src="supabase_auth.js?v=202607310612"></script>
+<script src="cloud_sync.js?v=202608010054"></script>
+<script src="account_lock.js?v=202608010054"></script>
+<script src="supabase_auth.js?v=202608010054"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -637,6 +637,42 @@ function migrateIsland(isl, student) {
   lastMigration = { removed: removed, refund: refunded };
   return true;
 }
+// ── 委託板禮物券（兩座島共用）───────────────────────────────────────────────
+// 原本存在 island.giftAvail，但委託板按鈕在二號島是隱藏的，所以券只會在一號島
+// 累積，二號島永遠是 0 —— 禮物建築在那裡蓋不起來。委託板本來就設計成兩島共用
+// 一份，獎勵當然也該共用，所以搬到 kidsProgress（雲端同步也會一起帶走）。
+function giftTickets(s) {
+  const p = getProgress(s);
+  if (typeof p.giftAvail !== "number") {
+    // 舊資料一次性搬移：兩座島的殘留券數加總後清掉，避免重複計算。
+    // 直接讀 localStorage 而不是 loadIsland —— 後者找不到資料會順手建一座新島，
+    // 那會讓「查券數」這種唯讀動作幫還沒開過二號島的小孩憑空生出一座島。
+    let n = 0;
+    [1, 2].forEach(id => {
+      const key = islandStorageKey(s, id);
+      const raw = localStorage.getItem(key);
+      if (!raw) return;
+      try {
+        const isl = JSON.parse(raw);
+        if (isl && isl.giftAvail) {
+          n += isl.giftAvail;
+          delete isl.giftAvail;
+          localStorage.setItem(key, JSON.stringify(isl));
+        }
+      } catch (e) {}
+    });
+    p.giftAvail = n;
+    saveProgress(s, p);
+  }
+  return p.giftAvail;
+}
+function addGiftTicket(s, n) {
+  const p = getProgress(s);
+  p.giftAvail = giftTickets(s) + n;
+  saveProgress(s, p);
+  return p.giftAvail;
+}
+
 function saveIsland(s, isl) {
   isl.updatedAt = new Date().toISOString();
   localStorage.setItem(islandStorageKey(s, isl.islandId || 1), JSON.stringify(isl));
@@ -811,7 +847,7 @@ function specialLock(key) {   // 回傳鎖定原因文字；null = 沒鎖
     const st = (w && typeof dexThemeStats === "function") ? dexThemeStats(p, w) : { collected: 0, total: 30 };
     return `🔒 圖鑑 ${st.collected}/${st.total}`;
   }
-  if (c.gift && !((island.giftAvail || 0) > 0)) return "🔒 需要禮物券";
+  if (c.gift && giftTickets(currentStudent) <= 0) return "🔒 需要禮物券";
   if (c.visitor && !((island.visitorStock && island.visitorStock[key]) > 0)) return "🔒 訪客未上架";
   return null;
 }
@@ -854,7 +890,7 @@ function openBuild(x, y) {
         <div class="emoji">${icon}</div>
         <div class="info">
           <div class="bname">${c.name}</div>
-          <div class="bdesc">${c.desc}</div>
+          <div class="bdesc">${c.desc}${c.gift ? `　<b style="color:#8a4a12">（目前有 ${giftTickets(currentStudent)} 張券）</b>` : ""}</div>
           <div class="bstat">${_statLine(c)}</div>
         </div>
         <div class="bcost">${costLabel}</div>
@@ -876,7 +912,7 @@ function build(key) {
   const _sl = specialLock(key); if (_sl) { toast(_sl); return; }
   const p = getProgress(currentStudent);
   if (p.coins.balance < c.cost) { toast("金幣不夠！"); return; }
-  if (c.gift) island.giftAvail = (island.giftAvail || 0) - 1;                       // 消耗禮物券
+  if (c.gift) addGiftTicket(currentStudent, -1);                                    // 消耗禮物券（兩島共用）
   if (c.visitor) island.visitorStock[key] = (island.visitorStock[key] || 0) - 1;    // 消耗上架商品
   p.coins.balance -= c.cost;
   p.coins.lifetimeSpent += c.cost;
@@ -2040,7 +2076,7 @@ function finishBoard() {
   saveProgress(currentStudent, p);
   island.board = { last: todayStr(), total: ((island.board && island.board.total) || 0) + 1 };
   let giftMsg = "";
-  if (island.board.total % GIFT_EVERY === 0) { island.giftAvail = (island.giftAvail || 0) + 1; giftMsg = `<br>🎁 完成 ${island.board.total} 天委託，得到 1 張禮物券！去空地蓋 📮🧺🏮`; }
+  if (island.board.total % GIFT_EVERY === 0) { addGiftTicket(currentStudent, 1); giftMsg = `<br>🎁 完成 ${island.board.total} 天委託，得到 1 張禮物券！<b>兩座島都能用</b>，去空地蓋 📮🧺🏮`; }
   saveIsland(currentStudent, island);
   if (typeof cloudSave === "function") cloudSave(currentStudent);
   document.getElementById("boardMsg").innerHTML = `🎉 答對 ${_bq.ok}/3，島民送你 🪙 ${earned}！${giftMsg}`;
