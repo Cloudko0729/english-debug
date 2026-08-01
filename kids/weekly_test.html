@@ -81,19 +81,21 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202608010134"></script>
-<script src="account_lock.js?v=202608010134"></script>
-<script src="supabase_auth.js?v=202608010134"></script>
-<script src="ai_review.js?v=202608010134"></script>
-<script src="week_key.js?v=202608010134"></script>
-<script src="grammar_nodes.js?v=202608010134"></script>
-<script src="grammar_plan.js?v=202608010134"></script>
-<script src="vocab_units.js?v=202608010134"></script>
-<script src="vocab_unit_plan.js?v=202608010134"></script>
-<script src="weekly_bank.js?v=202608010134"></script>
+<script src="cloud_sync.js?v=202608010142"></script>
+<script src="account_lock.js?v=202608010142"></script>
+<script src="supabase_auth.js?v=202608010142"></script>
+<script src="ai_review.js?v=202608010142"></script>
+<script src="week_key.js?v=202608010142"></script>
+<script src="grammar_nodes.js?v=202608010142"></script>
+<script src="grammar_plan.js?v=202608010142"></script>
+<script src="vocab_units.js?v=202608010142"></script>
+<script src="vocab_unit_plan.js?v=202608010142"></script>
+<script src="weekly_bank.js?v=202608010142"></script>
 <script>
 var currentStudent = null, curAudio = null;
 var TEST = null, answers = {}, graded = false, wrongForAI = [];
+// 0 = 正式（一週一次、計分、給金幣）；>0 = 再練一次（不記錄、不給金幣、題目換一批）
+var practiceRound = 0;
 
 var GRAMMAR_ITEMS = 3, VOCAB_ITEMS = 3, Q_PER_ITEM = 2;   // 3+3 項 × 2 題 = 12 題，約 10 分鐘
 var COIN_BASE = 20, COIN_ACC = 30;                        // 20 + 依正確率最多 30
@@ -172,7 +174,7 @@ function buildTest(p) {
     var ids = eligible(p, kind).slice(0, want);
     ids.forEach(function (id) {
       var bank = WEEKLY_BANK[kind][id];
-      var off = offsetFor(week, currentStudent, id);
+      var off = offsetFor(week, currentStudent, id, practiceRound);
       for (var i = 0; i < Q_PER_ITEM; i++) {
         var q = bank[(off + i) % bank.length];
         qs.push({ kind: kind, itemId: id, q: q });
@@ -191,12 +193,13 @@ function itemHref(kind, id) {
 }
 
 // ── 畫面 ────────────────────────────────────────────────────────────────
-function render() {
+function render(practice) {
   var box = document.getElementById("main");
   if (!currentStudent) { box.innerHTML = '<div class="card note">先選上面的名字。</div>'; refreshCoin(); return; }
   var p = getProgress(currentStudent);
+  if (!practice) practiceRound = 0;
 
-  if (doneThisWeek(p)) { box.innerHTML = renderDone(p); refreshCoin(); return; }
+  if (!practice && doneThisWeek(p)) { box.innerHTML = renderDone(p); refreshCoin(); return; }
 
   TEST = buildTest(p); answers = {}; graded = false;
   if (TEST.questions.length < 4) {
@@ -267,27 +270,34 @@ function grade() {
 
   var total = TEST.questions.length;
   var p = getProgress(currentStudent);
-  var earned = COIN_BASE + Math.round(COIN_ACC * correct / total);
+  var practice = practiceRound > 0;
+  // 練習不寫紀錄也不給金幣：週測的分數要代表「一週後還記得多少」，
+  // 讓它被同一週的重複練習蓋掉就沒有意義了。
+  var earned = practice ? 0 : COIN_BASE + Math.round(COIN_ACC * correct / total);
   var now = new Date(), day = ymd(now);
 
-  p.weeklyTests.push({ week: TEST.week, at: day, correct: correct, total: total,
-    grammar: byItem.grammar, vocab: byItem.vocab });
-  if (p.weeklyTests.length > KEEP_TESTS) p.weeklyTests = p.weeklyTests.slice(-KEEP_TESTS);
-  p.totalCorrect = (p.totalCorrect || 0) + correct;
-  p.totalWrong = (p.totalWrong || 0) + (total - correct);
-  p.coins.balance += earned; p.coins.lifetimeEarned += earned;
-  p.coins.transactions.push({ type:"earn", source:"weeklyTest", amount:earned,
-    balanceAfter:p.coins.balance, createdAt:day, meta:{ week:TEST.week, correct:correct, total:total } });
-  saveProgress(currentStudent, p);
-  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  if (!practice) {
+    p.weeklyTests.push({ week: TEST.week, at: day, correct: correct, total: total,
+      grammar: byItem.grammar, vocab: byItem.vocab });
+    if (p.weeklyTests.length > KEEP_TESTS) p.weeklyTests = p.weeklyTests.slice(-KEEP_TESTS);
+    p.totalCorrect = (p.totalCorrect || 0) + correct;
+    p.totalWrong = (p.totalWrong || 0) + (total - correct);
+    p.coins.balance += earned; p.coins.lifetimeEarned += earned;
+    p.coins.transactions.push({ type:"earn", source:"weeklyTest", amount:earned,
+      balanceAfter:p.coins.balance, createdAt:day, meta:{ week:TEST.week, correct:correct, total:total } });
+    saveProgress(currentStudent, p);
+    if (typeof cloudSave === "function") cloudSave(currentStudent);
+  }
 
   // 按鈕本身先報分數。原本只寫「已完成這一週的測驗」，小孩按完看不出考幾分。
   var btn = document.getElementById("finBtn");
   btn.disabled = true;
-  btn.textContent = "答對 " + correct + " / " + total + "　🪙 +" + earned;
+  btn.textContent = practice ? ("練習：答對 " + correct + " / " + total)
+                            : ("答對 " + correct + " / " + total + "　🪙 +" + earned);
   btn.classList.add("scored");
   refreshCoin(true);
-  toast("🪙 +" + earned + " 金幣！答對 " + correct + " / " + total);
+  toast(practice ? ("練習完成：答對 " + correct + " / " + total + "（不計分）")
+                 : ("🪙 +" + earned + " 金幣！答對 " + correct + " / " + total));
 
   // 結果接在按鈕正下方。
   // 原本插在 #main 之前（整份 12 題的最上方），小孩在長頁面的最底部按下按鈕，
@@ -351,8 +361,34 @@ function renderDone(p) {
   return '<div class="card"><b>這一週的測驗已經考完了 ✅</b>' +
     '<p class="note">答對 ' + t.correct + ' / ' + t.total + '（' + t.at + '）。' +
     '下一份測驗 ' + nextWeek + ' 星期六開放。</p></div>' +
-    '<div class="card"><h2>上次的結果</h2>' + rows + '</div>';
+    '<div class="card"><h2>上次的結果</h2>' + rows + '</div>' +
+    // 一週一次是為了讓分數代表「隔一週還記得多少」。想多練不該被擋，
+    // 但練習不能蓋掉那個量測，所以分開兩條路，並各自講清楚後果。
+    '<div class="card"><h2>還想再做一次嗎？</h2>' +
+      '<p class="note">「再練一次」會出<b>另一批題目</b>，不記錄成績也不給金幣，純粹練習。' +
+      '如果上面那筆成績不對（例如不是你考的），才用「重考」把它換掉。</p>' +
+      '<button class="fin" style="background:#2f80ed" onclick="startPractice()">🔁 再練一次（不計分）</button>' +
+      '<button class="fin" style="background:#fff;color:#c0392b;border:2px solid #e8a0a0;margin-top:8px" ' +
+        'onclick="retake()">🗑️ 重考（會覆蓋上面的成績）</button>' +
+    '</div>';
 }
+
+window.startPractice = function () {
+  practiceRound++;
+  render(true);
+  toast("🔁 這次是練習，不會記錄成績");
+};
+window.retake = function () {
+  if (!confirm("確定要重考嗎？上面那筆成績會被刪掉，金幣不會退回。")) return;
+  var p = getProgress(currentStudent);
+  var k = testWeekKey();
+  p.weeklyTests = (p.weeklyTests || []).filter(function (t) { return t.week !== k; });
+  saveProgress(currentStudent, p);
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+  practiceRound = 0;
+  render();
+  toast("紀錄已清除，可以重考了");
+};
 
 function pickStudent(name) {
   if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
