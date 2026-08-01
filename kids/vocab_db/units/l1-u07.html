@@ -315,7 +315,7 @@ header a{color:#2f80ed;text-decoration:none}
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u07-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">A toy car is in my room. I sit on the bed and make it go. The car runs to the door. Now it is under a toy bus. Dad comes home and <span class="gw" onclick="this.classList.toggle('on')">looks</span><span class="gz">看</span> in. "Come with me," he says. We go to the real car and <span class="gw" onclick="this.classList.toggle('on')">ride</span><span class="gz">騎、搭乘</span> to Grandma's home.</p>
+      <p class="psg">A toy car is in my room. I sit on the bed and make it go. The car runs to the door. Now it is under a toy bus. Dad comes home and looks in. "Come with me," he says. We go to the real car and <span class="gw" onclick="this.classList.toggle('on')">ride</span><span class="gz">騎、搭乘</span> to Grandma's home.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u07-p2.mp3')">🔊 聽這一篇</button>
     </div>
     <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
@@ -368,12 +368,12 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010250"></script>
-<script src="../../account_lock.js?v=202608010250"></script>
-<script src="../../supabase_auth.js?v=202608010250"></script>
-<script src="../../ai_review.js?v=202608010250"></script>
-<script src="../../vocab_units.js?v=202608010250"></script>
-<script src="../../vocab_unit_plan.js?v=202608010250"></script>
+<script src="../../cloud_sync.js?v=202608011210"></script>
+<script src="../../account_lock.js?v=202608011210"></script>
+<script src="../../supabase_auth.js?v=202608011210"></script>
+<script src="../../ai_review.js?v=202608011210"></script>
+<script src="../../vocab_units.js?v=202608011210"></script>
+<script src="../../vocab_unit_plan.js?v=202608011210"></script>
 <script>
 var UNIT_ID = "l1-u07";
 var QUIZ = [{"kind":"zh2en","ask":"「來」的英文是哪一個？","answer":"come","options":["come","go","jog","love"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ejog\u003c/b\u003e 是什麼意思？","answer":"慢跑","options":["來","去","愛","慢跑"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"miss","options":["miss","come","go","jog"],"audio":"audio/words/miss.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI ＿＿＿ on a chair.\u003c/span\u003e","answer":"sit","options":["sit","come","go","jog"],"audio":"audio/words/ex/sit_0.mp3"},{"kind":"zh2en","ask":"「房間」的英文是哪一個？","answer":"room","options":["door","room","toy","bus"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ebus\u003c/b\u003e 是什麼意思？","answer":"公車","options":["門","房間","公車","玩具"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"home","options":["door","home","room","toy"],"audio":"audio/words/home.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI ＿＿＿ to school.\u003c/span\u003e","answer":"go","options":["come","jog","go","love"],"audio":"audio/words/ex/go_0.mp3"}];
@@ -381,7 +381,7 @@ var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "動作與日常 × 住家與物品";
 var UNIT_DIALOGUE = "A: Do you go home by bus?\nB: No, I go home in Dad's car.\nA: Can you come to the park first?\nB: Yes. I want to run with you.\nA: Do you jog every day?\nB: No, I sit and play with my toy.\nA: I miss our park games.\nB: Me too. Let us go now.";
 var UNIT_PASSAGE = "I come home at four. My dog and I go to the park. I jog, and he can run. We love this game. Then I sit by the door and watch him. I miss Mom, but she comes home soon. We all go into the room together.\n\nA toy car is in my room. I sit on the bed and make it go. The car runs to the door. Now it is under a toy bus. Dad comes home and looks in. \"Come with me,\" he says. We go to the real car and ride to Grandma's home.";
-var UNIT_NEWWORDS = [{"w":"park","zh":"公園"},{"w":"games","zh":"遊戲"},{"w":"game","zh":"遊戲"},{"w":"watch","zh":"注意"},{"w":"mom","zh":"媽媽"},{"w":"looks","zh":"看"},{"w":"ride","zh":"騎、搭乘"}];
+var UNIT_NEWWORDS = [{"w":"park","zh":"公園"},{"w":"games","zh":"遊戲"},{"w":"game","zh":"遊戲"},{"w":"watch","zh":"注意"},{"w":"mom","zh":"媽媽"},{"w":"ride","zh":"騎、搭乘"}];
 var UNIT_GOAL = "這個單元的字：come、go、jog、love、miss、run 等 13 個";
 
 function getProgress(s) {

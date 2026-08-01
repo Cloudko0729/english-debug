@@ -324,11 +324,11 @@ header a{color:#2f80ed;text-decoration:none}
     <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">Today we have a <span class="gw" onclick="this.classList.toggle('on')">class</span><span class="gz">班級</span> <span class="gw" onclick="this.classList.toggle('on')">party</span><span class="gz">聚會</span>. We <span class="gw" onclick="this.classList.toggle('on')">put</span><span class="gz">放</span> five red cups and four <span class="gw" onclick="this.classList.toggle('on')">blue</span><span class="gz">藍色</span> cups on the table. That is nine cups. What do we need now? We need cake, too. They <span class="gw" onclick="this.classList.toggle('on')">bring</span><span class="gz">帶來</span> the cake, and she <span class="gw" onclick="this.classList.toggle('on')">brings</span><span class="gz">帶來</span> water. Who has the <span class="gw" onclick="this.classList.toggle('on')">plates</span><span class="gz">盤子</span>? You do. Yes, we are <span class="gw" onclick="this.classList.toggle('on')">ready</span><span class="gz">準備好的</span>.</p>
+      <p class="psg">Today we have a <span class="gw" onclick="this.classList.toggle('on')">class</span><span class="gz">班級</span> <span class="gw" onclick="this.classList.toggle('on')">party</span><span class="gz">聚會</span>. We put five red cups and four <span class="gw" onclick="this.classList.toggle('on')">blue</span><span class="gz">藍色</span> cups on the table. That is nine cups. What do we need now? We need cake, too. They <span class="gw" onclick="this.classList.toggle('on')">bring</span><span class="gz">帶來</span> the cake, and she <span class="gw" onclick="this.classList.toggle('on')">brings</span><span class="gz">帶來</span> water. Who has the <span class="gw" onclick="this.classList.toggle('on')">plates</span><span class="gz">盤子</span>? You do. Yes, we are <span class="gw" onclick="this.classList.toggle('on')">ready</span><span class="gz">準備好的</span>.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u02-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">A girl and a boy are at the school store. She wants eight pencils, and he wants five pens. They see four red bags and nine <span class="gw" onclick="this.classList.toggle('on')">blue</span><span class="gz">藍色</span> bags. What bag do you <span class="gw" onclick="this.classList.toggle('on')">like</span><span class="gz">喜歡</span>? The girl says, "That red bag." The boy says, "I <span class="gw" onclick="this.classList.toggle('on')">like</span><span class="gz">喜歡</span> that bag, too."</p>
+      <p class="psg">A girl and a boy are at the school store. She wants eight pencils, and he wants five pens. They see four red bags and nine <span class="gw" onclick="this.classList.toggle('on')">blue</span><span class="gz">藍色</span> bags. What bag do you like? The girl says, "That red bag." The boy says, "I like that bag, too."</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u02-p2.mp3')">🔊 聽這一篇</button>
     </div>
     <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
@@ -390,12 +390,12 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010250"></script>
-<script src="../../account_lock.js?v=202608010250"></script>
-<script src="../../supabase_auth.js?v=202608010250"></script>
-<script src="../../ai_review.js?v=202608010250"></script>
-<script src="../../vocab_units.js?v=202608010250"></script>
-<script src="../../vocab_unit_plan.js?v=202608010250"></script>
+<script src="../../cloud_sync.js?v=202608011210"></script>
+<script src="../../account_lock.js?v=202608011210"></script>
+<script src="../../supabase_auth.js?v=202608011210"></script>
+<script src="../../ai_review.js?v=202608011210"></script>
+<script src="../../vocab_units.js?v=202608011210"></script>
+<script src="../../vocab_unit_plan.js?v=202608011210"></script>
 <script>
 var UNIT_ID = "l1-u02";
 var QUIZ = [{"kind":"zh2en","ask":"「說」的英文是哪一個？","answer":"say","options":["come","say","go","jog"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ethat\u003c/b\u003e 是什麼意思？","answer":"那個","options":["什麼","說","那個","她"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"too","options":["here","how","too","not"],"audio":"audio/words/too.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003e＿＿＿ is your name?\u003c/span\u003e","answer":"what","options":["what","that","say","she"],"audio":"audio/vocab_foundation/examples/l1-what-e1.mp3"},{"kind":"zh2en","ask":"「是；好」的英文是哪一個？","answer":"yes","options":["no","yes","OK","say"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eeight\u003c/b\u003e 是什麼意思？","answer":"八","options":["五","四","九","八"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"four","options":["four","eight","five","nine"],"audio":"audio/words/four.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003ePlease ＿＿＿ your name.\u003c/span\u003e","answer":"say","options":["come","say","go","jog"],"audio":"audio/vocab_foundation/examples/l1-say-e1.mp3"}];
@@ -403,7 +403,7 @@ var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "語言與句型 × 數字與時間";
 var UNIT_DIALOGUE = "A: What is in that big box?\nB: It is a birthday cake.\nA: Who is the cake for?\nB: It is for Amy. She is nine today.\nA: Do we have eight cups?\nB: Yes, and we have four plates, too.\nA: Can you say, \"Happy birthday\" with us?\nB: Yes! We are ready.";
 var UNIT_PASSAGE = "Today we have a class party. We put five red cups and four blue cups on the table. That is nine cups. What do we need now? We need cake, too. They bring the cake, and she brings water. Who has the plates? You do. Yes, we are ready.\n\nA girl and a boy are at the school store. She wants eight pencils, and he wants five pens. They see four red bags and nine blue bags. What bag do you like? The girl says, \"That red bag.\" The boy says, \"I like that bag, too.\"";
-var UNIT_NEWWORDS = [{"w":"plates","zh":"盤子"},{"w":"happy","zh":"快樂的"},{"w":"ready","zh":"準備好的"},{"w":"class","zh":"班級"},{"w":"party","zh":"聚會"},{"w":"put","zh":"放"},{"w":"blue","zh":"藍色"},{"w":"bring","zh":"帶來"},{"w":"brings","zh":"帶來"},{"w":"like","zh":"喜歡"}];
+var UNIT_NEWWORDS = [{"w":"plates","zh":"盤子"},{"w":"happy","zh":"快樂的"},{"w":"ready","zh":"準備好的"},{"w":"class","zh":"班級"},{"w":"party","zh":"聚會"},{"w":"blue","zh":"藍色"},{"w":"bring","zh":"帶來"},{"w":"brings","zh":"帶來"}];
 var UNIT_GOAL = "這個單元的字：say、she、that、they、too、we 等 14 個";
 
 function getProgress(s) {

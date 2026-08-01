@@ -337,7 +337,7 @@ header a{color:#2f80ed;text-decoration:none}
     <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">At lunch, <span class="gw" onclick="this.classList.toggle('on')">Mom</span><span class="gz">媽媽</span> gives me a <span class="gw" onclick="this.classList.toggle('on')">bowl</span><span class="gz">碗</span> of rice and soup. I close my book and sit on the sofa. My sister makes a sandwich and <span class="gw" onclick="this.classList.toggle('on')">puts</span><span class="gz">放</span> on her cap. We see a ship from the window. I sing a song about the sea, and she plays with her doll. Then we wash our <span class="gw" onclick="this.classList.toggle('on')">bowls</span><span class="gz">碗</span> and go to the store.</p>
+      <p class="psg">At lunch, <span class="gw" onclick="this.classList.toggle('on')">Mom</span><span class="gz">媽媽</span> gives me a <span class="gw" onclick="this.classList.toggle('on')">bowl</span><span class="gz">碗</span> of rice and soup. I close my book and sit on the sofa. My sister makes a sandwich and puts on her cap. We see a ship from the window. I sing a song about the sea, and she plays with her doll. Then we wash our <span class="gw" onclick="this.classList.toggle('on')">bowls</span><span class="gz">碗</span> and go to the store.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l2-u05-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
@@ -385,12 +385,12 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010250"></script>
-<script src="../../account_lock.js?v=202608010250"></script>
-<script src="../../supabase_auth.js?v=202608010250"></script>
-<script src="../../ai_review.js?v=202608010250"></script>
-<script src="../../vocab_units.js?v=202608010250"></script>
-<script src="../../vocab_unit_plan.js?v=202608010250"></script>
+<script src="../../cloud_sync.js?v=202608011210"></script>
+<script src="../../account_lock.js?v=202608011210"></script>
+<script src="../../supabase_auth.js?v=202608011210"></script>
+<script src="../../ai_review.js?v=202608011210"></script>
+<script src="../../vocab_units.js?v=202608011210"></script>
+<script src="../../vocab_unit_plan.js?v=202608011210"></script>
 <script>
 var UNIT_ID = "l2-u05";
 var QUIZ = [{"kind":"zh2en","ask":"「關上」的英文是哪一個？","answer":"close","options":["give","play","close","see"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eplay\u003c/b\u003e 是什麼意思？","answer":"玩","options":["關上","玩","給","看見"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"sing","options":["close","sing","give","play"],"audio":"audio/words/sing.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI made a ＿＿＿ for lunch.\u003c/span\u003e","answer":"sandwich","options":["rice","sandwich","soup","cap"],"audio":"audio/vocab_foundation/examples/l2-sandwich-e1.mp3"},{"kind":"zh2en","ask":"「帽子」的英文是哪一個？","answer":"cap","options":["cap","rice","sandwich","soup"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eshort\u003c/b\u003e 是什麼意思？","answer":"短的","options":["黑色","短的","棕色","忙碌的"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"sofa","options":["rice","sofa","sandwich","soup"],"audio":"audio/words/sofa.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eThe ＿＿＿ sells shoes.\u003c/span\u003e","answer":"store","options":["rice","store","sandwich","soup"],"audio":"audio/words/ex/store_0.mp3"}];
@@ -398,7 +398,7 @@ var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "動作與日常 × 食物與用餐";
 var UNIT_DIALOGUE = "A: Please close your book. Lunch is ready.\nB: What do we have today?\nA: Rice, soup, and a sandwich.\nB: Can I eat on the sofa?\nA: No. Sit at the table.\nB: Can I play with my doll after lunch?\nA: Yes, and give me your bowl first.\nB: Okay. I want to sing, too.";
 var UNIT_PASSAGE = "At lunch, Mom gives me a bowl of rice and soup. I close my book and sit on the sofa. My sister makes a sandwich and puts on her cap. We see a ship from the window. I sing a song about the sea, and she plays with her doll. Then we wash our bowls and go to the store.\n\nA small store has a school play today. One child wears a short shirt and a red cap. Another child sits on a sofa with a doll. I give them a toy ship for the show. They sing, play, and see their teacher smile. After the show, we close the door and share soup and sandwiches.";
-var UNIT_NEWWORDS = [{"w":"ready","zh":"準備好的"},{"w":"bowl","zh":"碗"},{"w":"okay","zh":"好、可以"},{"w":"mom","zh":"媽媽"},{"w":"puts","zh":"放"},{"w":"bowls","zh":"碗"},{"w":"show","zh":"給…看、表演"},{"w":"smile","zh":"微笑"},{"w":"share","zh":"分享"}];
+var UNIT_NEWWORDS = [{"w":"ready","zh":"準備好的"},{"w":"bowl","zh":"碗"},{"w":"okay","zh":"好、可以"},{"w":"mom","zh":"媽媽"},{"w":"bowls","zh":"碗"},{"w":"show","zh":"給…看、表演"},{"w":"smile","zh":"微笑"},{"w":"share","zh":"分享"}];
 var UNIT_GOAL = "這個單元的字：close、give、play、see、sing、rice 等 15 個";
 
 function getProgress(s) {

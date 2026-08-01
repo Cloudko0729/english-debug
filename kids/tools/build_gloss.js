@@ -11,26 +11,13 @@
 // 查不到的先做形態還原（複數、過去式、不規則動詞），再查一次；仍查不到的走人工表。
 const fs = require("fs");
 const path = require("path");
+// 「什麼算已教」與 validate_unit_text.js 共用同一份 —— 兩邊各自維護會出現
+// 「驗收說達標、頁面卻標了一堆基本字」這種對不起來的狀況。
+const K = require("./_known_words.js");
 
 const KIDS = path.join(__dirname, "..");
 const DB = path.join(KIDS, "vocab_db", "foundation");
 const OUT = path.join(KIDS, "vocab_db", "gloss.js");
-
-// 不規則動詞：過去式／過去分詞 → 原形。查不到中文的 179 個字裡絕大多數是這類。
-const IRREG = {
-  said: "say", made: "make", came: "come", took: "take", gave: "give", found: "find",
-  went: "go", ate: "eat", began: "begin", ran: "run", held: "hold", wrote: "write",
-  became: "become", saw: "see", fell: "fall", bought: "buy", told: "tell", felt: "feel",
-  chose: "choose", paid: "pay", stood: "stand", blew: "blow", shook: "shake",
-  brought: "bring", caught: "catch", taught: "teach", thought: "think", knew: "know",
-  grew: "grow", drew: "draw", threw: "throw", flew: "fly", swam: "swim", sang: "sing",
-  drank: "drink", rang: "ring", sat: "sit", met: "meet", left: "leave", kept: "keep",
-  slept: "sleep", read: "read", put: "put", cut: "cut", lost: "lose", sent: "send",
-  spent: "spend", built: "build", heard: "hear", won: "win", wore: "wear", broke: "break",
-  spoke: "speak", woke: "wake", rode: "ride", drove: "drive", wrote_: "write",
-  hid: "hide", hidden: "hide", hiding: "hide", risen: "rise", rose: "rise",
-  understood: "understand", forgot: "forget", got: "get", had: "have",
-};
 
 // 站上湊不到、又常出現的，人工補。寫成小學生看得懂的短意思，不要辭典式長解釋。
 const MANUAL = {
@@ -64,6 +51,8 @@ const MANUAL = {
   tickled: "搔癢", tide: "潮水", trail: "步道", view: "景色",
   whispered: "小聲說", whistle: "哨子", woke: "醒來（過去式）",
   announcement: "廣播、通知", blew: "吹（過去式）", hiding: "躲起來",
+  gone: "不見了（go 的過去分詞）", grandparents: "祖父母", himself: "他自己", lives: "住（在）",
+  living: "客廳的（living room）", p: "p.m. 的 p", uh: "呃（語助詞）",
 };
 
 // 功能詞不註解：任何句子都會用到，標出來只是雜訊
@@ -76,11 +65,6 @@ const FUNC = new Set(("a an the this that these those i you he she it we they me
   "what which who whom whose where why how there here now today tomorrow yesterday " +
   "again always never often sometimes usually one two three four five six seven eight nine ten " +
   "first second next last t s m re ve ll d don doesn didn isn aren wasn weren won couldn shouldn b p uh i'll i'm it's that's don't doesn't let turn seen taken break changes points lines living mark piece").split(/\s+/).filter(Boolean));
-
-// 故事人物名字：不是要學的單字
-const NAMES = new Set(("mia amy ben leo lily tom ken max anna sam emma jack lin chen wu yeh nina ray kevin " +
-  // 所有格形式也是同一個人／同一個字，不必註解
-  "aunt's dad's mom's leo's grandma's kitten's neighbor's classmate's children's chinese").split(" "));
 
 function loadZh() {
   const zh = new Map();
@@ -103,40 +87,21 @@ function baseWords() {
   const s = new Set();
   [1, 2, 3, 4].forEach(l => {
     JSON.parse(fs.readFileSync(path.join(DB, `words_l${l}.json`), "utf8")).words.forEach(w => {
-      s.add(w.word.toLowerCase());
-      (w.aliases || []).forEach(a => s.add(a.toLowerCase()));
+      K.addEntry(s, w.word);
+      (w.aliases || []).forEach(a => K.addEntry(s, a));
     });
   });
   return s;
 }
-
-// 形態還原：規則變化 + 不規則動詞
-function stems(w) {
-  const out = [w];
-  if (IRREG[w]) out.push(IRREG[w]);
-  [[/ies$/, "y"], [/ied$/, "y"], [/es$/, ""], [/s$/, ""], [/ed$/, ""], [/ed$/, "e"],
-   [/ing$/, ""], [/ing$/, "e"], [/er$/, ""], [/est$/, ""], [/ly$/, ""]]
-    .forEach(([re, rep]) => { if (re.test(w)) out.push(w.replace(re, rep)); });
-  if (/(.)\1(ed|ing)$/.test(w)) out.push(w.replace(/(.)\1(ed|ing)$/, "$1"));
-  return out;
-}
-
-const tok = t => (String(t).toLowerCase().match(/[a-z][a-z'’]*/g) || []);
+const IRREG = K.IRREG;
+const stems = K.allForms;
+const tok = K.tokenize;
 
 function main() {
   const zh = loadZh(), base = baseWords();
-  // 不規則變化不算已教：look→looked 一眼看得出來，say→said 看不出來。
-  // 規則變化還原後算已教，不規則的照樣標註並點明是哪個字的過去式。
-  const regular = w => {
-    const o = [];
-    [[/ies$/, "y"], [/ied$/, "y"], [/es$/, ""], [/s$/, ""], [/ed$/, ""], [/ed$/, "e"],
-     [/ing$/, ""], [/ing$/, "e"], [/er$/, ""], [/est$/, ""], [/ly$/, ""]]
-      .forEach(([re, rep]) => { if (re.test(w)) o.push(w.replace(re, rep)); });
-    if (/(.)(ed|ing)$/.test(w)) o.push(w.replace(/(.)(ed|ing)$/, "$1"));
-    return o;
-  };
-  const known = w => base.has(w) || FUNC.has(w) || NAMES.has(w)
-    || (!IRREG[w] && regular(w).some(s => base.has(s)));
+  // forGloss=true：不規則變化即使原形教過也要標，並點名原形。
+  // look→looked 一眼看得出來，say→said 看不出來 —— 那是真正的學習負擔。
+  const known = w => K.isKnown(w, base, true);
 
   // 蒐集所有單元對話與短文的超綱字
   const seen = new Map();

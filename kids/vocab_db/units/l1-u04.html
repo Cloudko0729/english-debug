@@ -311,7 +311,7 @@ header a{color:#2f80ed;text-decoration:none}
     <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">Tom is at the school <span class="gw" onclick="this.classList.toggle('on')">health</span><span class="gz">健康</span> room. His arm and leg <span class="gw" onclick="this.classList.toggle('on')">hurt</span><span class="gz">受傷、痛</span>. His neck is fine, but one eye is red. The <span class="gw" onclick="this.classList.toggle('on')">nurse</span><span class="gz">護士</span> <span class="gw" onclick="this.classList.toggle('on')">looks</span><span class="gz">看</span> at his ear, too. Tom is hot and sad. He sees a fat cat by the door. The cat makes him <span class="gw" onclick="this.classList.toggle('on')">smile</span><span class="gz">微笑</span>.</p>
+      <p class="psg">Tom is at the school <span class="gw" onclick="this.classList.toggle('on')">health</span><span class="gz">健康</span> room. His arm and leg <span class="gw" onclick="this.classList.toggle('on')">hurt</span><span class="gz">受傷、痛</span>. His neck is fine, but one eye is red. The <span class="gw" onclick="this.classList.toggle('on')">nurse</span><span class="gz">護士</span> looks at his ear, too. Tom is hot and sad. He sees a fat cat by the door. The cat makes him <span class="gw" onclick="this.classList.toggle('on')">smile</span><span class="gz">微笑</span>.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u04-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
@@ -368,12 +368,12 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010250"></script>
-<script src="../../account_lock.js?v=202608010250"></script>
-<script src="../../supabase_auth.js?v=202608010250"></script>
-<script src="../../ai_review.js?v=202608010250"></script>
-<script src="../../vocab_units.js?v=202608010250"></script>
-<script src="../../vocab_unit_plan.js?v=202608010250"></script>
+<script src="../../cloud_sync.js?v=202608011210"></script>
+<script src="../../account_lock.js?v=202608011210"></script>
+<script src="../../supabase_auth.js?v=202608011210"></script>
+<script src="../../ai_review.js?v=202608011210"></script>
+<script src="../../vocab_units.js?v=202608011210"></script>
+<script src="../../vocab_unit_plan.js?v=202608011210"></script>
 <script>
 var UNIT_ID = "l1-u04";
 var QUIZ = [{"kind":"zh2en","ask":"「手臂」的英文是哪一個？","answer":"arm","options":["arm","ear","eye","leg"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eeye\u003c/b\u003e 是什麼意思？","answer":"眼睛","options":["手臂","耳朵","腿","眼睛"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"fine","options":["fat","hot","fine","bad"],"audio":"audio/words/fine.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eMy ＿＿＿ kicks the ball.\u003c/span\u003e","answer":"leg","options":["leg","arm","ear","eye"],"audio":"audio/words/ex/leg_0.mp3"},{"kind":"zh2en","ask":"「男人」的英文是哪一個？","answer":"man","options":["man","arm","ear","eye"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eMrs.\u003c/b\u003e 是什麼意思？","answer":"太太","options":["太太","先生","女士","手臂"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"name","options":["arm","name","ear","eye"],"audio":"audio/words/name.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eMy ＿＿＿ hears music.\u003c/span\u003e","answer":"ear","options":["ear","arm","eye","leg"],"audio":"audio/words/ex/ear_0.mp3"}];
@@ -381,7 +381,7 @@ var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "身體與感受 × 人物與家庭";
 var UNIT_DIALOGUE = "A: What is wrong with your arm?\nB: It hurts when I move it.\nA: Does your leg hurt, too?\nB: No, my leg is fine.\nA: Is your neck hot?\nB: No, but my ear is hot.\nA: Can you see with this eye?\nB: Yes. I can see you.";
 var UNIT_PASSAGE = "Tom is at the school health room. His arm and leg hurt. His neck is fine, but one eye is red. The nurse looks at his ear, too. Tom is hot and sad. He sees a fat cat by the door. The cat makes him smile.\n\nA man is at the school door. His name is Mr. Brown. Mrs. Green is with him. They need help, so Ms. Hill comes. She says, \"My name is Anna. Come with me.\" The man and Mrs. Green go to the school office. Now they are fine.";
-var UNIT_NEWWORDS = [{"w":"hurts","zh":"會痛"},{"w":"move","zh":"移動"},{"w":"hurt","zh":"受傷、痛"},{"w":"health","zh":"健康"},{"w":"nurse","zh":"護士"},{"w":"looks","zh":"看"},{"w":"smile","zh":"微笑"},{"w":"hill","zh":"小山"}];
+var UNIT_NEWWORDS = [{"w":"hurts","zh":"會痛"},{"w":"move","zh":"移動"},{"w":"hurt","zh":"受傷、痛"},{"w":"health","zh":"健康"},{"w":"nurse","zh":"護士"},{"w":"smile","zh":"微笑"},{"w":"hill","zh":"小山"}];
 var UNIT_GOAL = "這個單元的字：arm、ear、eye、fat、fine、hot 等 13 個";
 
 function getProgress(s) {

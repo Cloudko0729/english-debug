@@ -315,7 +315,7 @@ header a{color:#2f80ed;text-decoration:none}
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u08-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">Today I walk to school with <span class="gw" onclick="this.classList.toggle('on')">Mom</span><span class="gz">媽媽</span>. The new <span class="gw" onclick="this.classList.toggle('on')">guard</span><span class="gz">看守</span> has a big job. He stands here by the red door and helps us. A boy has a bad fall, but he is <span class="gw" onclick="this.classList.toggle('on')">okay</span><span class="gz">好、可以</span>. The <span class="gw" onclick="this.classList.toggle('on')">guard</span><span class="gz">看守</span> is nice to him. "No <span class="gw" onclick="this.classList.toggle('on')">running</span><span class="gz">奔跑的</span>," he says. We walk into school.</p>
+      <p class="psg">Today I walk to school with <span class="gw" onclick="this.classList.toggle('on')">Mom</span><span class="gz">媽媽</span>. The new <span class="gw" onclick="this.classList.toggle('on')">guard</span><span class="gz">看守</span> has a big job. He stands here by the red door and helps us. A boy has a bad fall, but he is <span class="gw" onclick="this.classList.toggle('on')">okay</span><span class="gz">好、可以</span>. The <span class="gw" onclick="this.classList.toggle('on')">guard</span><span class="gz">看守</span> is nice to him. "No running," he says. We walk into school.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u08-p2.mp3')">🔊 聽這一篇</button>
     </div>
     <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
@@ -386,12 +386,12 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010250"></script>
-<script src="../../account_lock.js?v=202608010250"></script>
-<script src="../../supabase_auth.js?v=202608010250"></script>
-<script src="../../ai_review.js?v=202608010250"></script>
-<script src="../../vocab_units.js?v=202608010250"></script>
-<script src="../../vocab_unit_plan.js?v=202608010250"></script>
+<script src="../../cloud_sync.js?v=202608011210"></script>
+<script src="../../account_lock.js?v=202608011210"></script>
+<script src="../../supabase_auth.js?v=202608011210"></script>
+<script src="../../ai_review.js?v=202608011210"></script>
+<script src="../../vocab_units.js?v=202608011210"></script>
+<script src="../../vocab_unit_plan.js?v=202608011210"></script>
 <script>
 var UNIT_ID = "l1-u08";
 var QUIZ = [{"kind":"zh2en","ask":"「壞的」的英文是哪一個？","answer":"bad","options":["big","good","great","bad"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003egood\u003c/b\u003e 是什麼意思？","answer":"好的","options":["壞的","好的","大的","很棒的"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"new","options":["bad","big","new","good"],"audio":"audio/words/new.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eThe apple is ＿＿＿.\u003c/span\u003e","answer":"red","options":["bad","big","good","red"],"audio":"audio/words/ex/red_0.mp3"},{"kind":"zh2en","ask":"「這裡」的英文是哪一個？","answer":"here","options":["here","how","not","now"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003eno\u003c/b\u003e 是什麼意思？","answer":"不；沒有","options":["好；可以","是；好","壞的","不；沒有"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"walk","options":["come","go","jog","walk"],"audio":"audio/words/walk.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eThe elephant is ＿＿＿.\u003c/span\u003e","answer":"big","options":["bad","good","big","great"],"audio":"audio/vocab_foundation/examples/l1-big-e1.mp3"}];
@@ -399,7 +399,7 @@ var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "顏色與描述 × 生活綜合";
 var UNIT_DIALOGUE = "A: Is that your new red bike?\nB: Yes. It is big and nice.\nA: Can you ride it here?\nB: No, this road is not good.\nA: Is the park okay?\nB: Yes. The park is great.\nA: Do you want to walk there now?\nB: Okay. My job is to take the bike.";
 var UNIT_PASSAGE = "I see a new bike at the store. It is big, red, and very nice. Dad says the bike is good, but it is too tall for me. A small bike is here. It is not new, but it is great. I can ride it well, so we take it home.\n\nToday I walk to school with Mom. The new guard has a big job. He stands here by the red door and helps us. A boy has a bad fall, but he is okay. The guard is nice to him. \"No running,\" he says. We walk into school.";
-var UNIT_NEWWORDS = [{"w":"ride","zh":"騎、搭乘"},{"w":"park","zh":"公園"},{"w":"okay","zh":"好、可以"},{"w":"well","zh":"好地"},{"w":"mom","zh":"媽媽"},{"w":"guard","zh":"看守"},{"w":"running","zh":"奔跑的"}];
+var UNIT_NEWWORDS = [{"w":"ride","zh":"騎、搭乘"},{"w":"park","zh":"公園"},{"w":"okay","zh":"好、可以"},{"w":"well","zh":"好地"},{"w":"mom","zh":"媽媽"},{"w":"guard","zh":"看守"}];
 var UNIT_GOAL = "這個單元的字：bad、big、good、great、new、nice 等 13 個";
 
 function getProgress(s) {

@@ -341,7 +341,7 @@ header a{color:#2f80ed;text-decoration:none}
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l2-u03-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">Today our classroom <span class="gw" onclick="this.classList.toggle('on')">becomes</span><span class="gz">成為</span> an animal <span class="gw" onclick="this.classList.toggle('on')">art</span><span class="gz">美術</span> room. Each student takes a book from the box and sits on a chair. I draw a fox near a flower. My friend draws a frog by the sea. The teacher adds a cow, a hen, a hippo, and a sheep to one big zoo picture. We <span class="gw" onclick="this.classList.toggle('on')">put</span><span class="gz">放</span> it on the classroom wall.</p>
+      <p class="psg">Today our classroom <span class="gw" onclick="this.classList.toggle('on')">becomes</span><span class="gz">成為</span> an animal <span class="gw" onclick="this.classList.toggle('on')">art</span><span class="gz">美術</span> room. Each student takes a book from the box and sits on a chair. I draw a fox near a flower. My friend draws a frog by the sea. The teacher adds a cow, a hen, a hippo, and a sheep to one big zoo picture. We put it on the classroom wall.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l2-u03-p2.mp3')">🔊 聽這一篇</button>
     </div>
     <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
@@ -371,12 +371,12 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010250"></script>
-<script src="../../account_lock.js?v=202608010250"></script>
-<script src="../../supabase_auth.js?v=202608010250"></script>
-<script src="../../ai_review.js?v=202608010250"></script>
-<script src="../../vocab_units.js?v=202608010250"></script>
-<script src="../../vocab_unit_plan.js?v=202608010250"></script>
+<script src="../../cloud_sync.js?v=202608011210"></script>
+<script src="../../account_lock.js?v=202608011210"></script>
+<script src="../../supabase_auth.js?v=202608011210"></script>
+<script src="../../ai_review.js?v=202608011210"></script>
+<script src="../../vocab_units.js?v=202608011210"></script>
+<script src="../../vocab_unit_plan.js?v=202608011210"></script>
 <script>
 var UNIT_ID = "l2-u03";
 var QUIZ = [{"kind":"zh2en","ask":"「乳牛」的英文是哪一個？","answer":"cow","options":["flower","cow","fox","frog"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003efox\u003c/b\u003e 是什麼意思？","answer":"狐狸、狡猾的人","options":["乳牛","花","狐狸、狡猾的人","青蛙"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"fruit","options":["cow","flower","fruit","fox"],"audio":"audio/words/fruit.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI see a ＿＿＿.\u003c/span\u003e","answer":"hippo","options":["hippo","cow","flower","fox"],"audio":"audio/vocab_foundation/examples/l2-hippo-e1.mp3"},{"kind":"zh2en","ask":"「綿羊」的英文是哪一個？","answer":"sheep","options":["cow","sheep","flower","fox"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003ebook\u003c/b\u003e 是什麼意思？","answer":"書","options":["書","乳牛","花","狐狸、狡猾的人"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"chair","options":["cow","flower","fox","chair"],"audio":"audio/words/chair.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI ＿＿＿ a cat.\u003c/span\u003e","answer":"draw","options":["close","eat","draw","give"],"audio":"audio/words/ex/draw_0.mp3"}];
@@ -384,7 +384,7 @@ var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "動物與自然 × 校園與學習";
 var UNIT_DIALOGUE = "A: What animal is near the flower?\nB: It is a small frog.\nA: Can you see the fox, too?\nB: Yes. It is by the sheep.\nA: Where is the hippo?\nB: It is in the water.\nA: Do you want to draw this zoo?\nB: Yes. My book is in the classroom.";
 var UNIT_PASSAGE = "Our class visits a small zoo. A cow and a sheep eat near the tree. A hen walks by the flower, and a frog sits under it. We see a fox, a hippo, and many birds. At lunch, we eat fruit by the sea animal room. Then we draw our favorite animal in a book.\n\nToday our classroom becomes an animal art room. Each student takes a book from the box and sits on a chair. I draw a fox near a flower. My friend draws a frog by the sea. The teacher adds a cow, a hen, a hippo, and a sheep to one big zoo picture. We put it on the classroom wall.";
-var UNIT_NEWWORDS = [{"w":"class","zh":"班級"},{"w":"favorite","zh":"最喜愛的"},{"w":"becomes","zh":"成為"},{"w":"art","zh":"美術"},{"w":"put","zh":"放"}];
+var UNIT_NEWWORDS = [{"w":"class","zh":"班級"},{"w":"favorite","zh":"最喜愛的"},{"w":"becomes","zh":"成為"},{"w":"art","zh":"美術"}];
 var UNIT_GOAL = "這個單元的字：cow、flower、fox、frog、fruit、hen 等 15 個";
 
 function getProgress(s) {

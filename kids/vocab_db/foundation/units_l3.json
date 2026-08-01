@@ -50,7 +50,7 @@
           "title": "Numbers and Time: First Reading",
           "type": "guided-reading",
           "theme": "numbers_time",
-          "text": "Our English class starts at eleven a.m. Every student brings a short story to read. Mia reads with me because she feels nervous. After an hour, our teacher asks us about one new word: \"true.\" We explain where we found it and why it matters in the story. When the class ends, Mia smiles. She says reading with a friend made the morning easier. We plan to practice again in the afternoon. I happily agree.",
+          "text": "At eleven a.m., our English teacher gives us a new word. We read it together and ask what it is about. Ben knows where it is in the book, but he does not know why it is there. After an hour, we can say the word and write it. Every child feels great because what we say is true. We will study together every afternoon.",
           "focusWords": [
             "a.m.",
             "after",
@@ -68,7 +68,7 @@
           "title": "Language Tools: Second Reading",
           "type": "guided-reading",
           "theme": "language",
-          "text": "Two hours ago, Grandpa called and invited me to his house. I went there after my afternoon class and stayed until the evening. We talked about the town where he grew up. He told me why he loved the old library and showed me a book with his name in it. I asked, \"Is every story in this book true?\" Grandpa laughed and said some were true, but others came from his imagination. We will read more next week.",
+          "text": "Two hours ago, Amy called me after school. She wanted help with three English words, so she walked to my home. We read the words with my sister in the afternoon. When the sun was down, Amy asked where she could put her book. I put her book in a bag. In the evening, she walked home and said, \"I know every word now.\" I said, \"Great!\" because it was true.",
           "focusWords": [
             "about",
             "true",
@@ -86,49 +86,49 @@
           {
             "id": "l3-u01-d1",
             "speaker": "A",
-            "text": "When should we meet for our English project?",
+            "text": "When can we study our English words together?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u01-d1.mp3"
           },
           {
             "id": "l3-u01-d2",
             "speaker": "B",
-            "text": "How about eleven a.m. in the library?",
+            "text": "How about eleven a.m. after breakfast?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u01-d2.mp3"
           },
           {
             "id": "l3-u01-d3",
             "speaker": "A",
-            "text": "I have music class then. Can we meet in the afternoon?",
+            "text": "I have school then. Is the afternoon OK?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u01-d3.mp3"
           },
           {
             "id": "l3-u01-d4",
             "speaker": "B",
-            "text": "Sure. Where do you want to sit?",
+            "text": "Yes. Where do you want to study?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u01-d4.mp3"
           },
           {
             "id": "l3-u01-d5",
             "speaker": "A",
-            "text": "Let's use the table by the window.",
+            "text": "At my house, with my sister.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u01-d5.mp3"
           },
           {
             "id": "l3-u01-d6",
             "speaker": "B",
-            "text": "Good idea. We can work for about an hour.",
+            "text": "Great. We can study for one hour.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u01-d6.mp3"
           },
           {
             "id": "l3-u01-d7",
             "speaker": "A",
-            "text": "Why don't we bring our word cards too?",
+            "text": "Why do you need these word cards?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u01-d7.mp3"
           },
           {
             "id": "l3-u01-d8",
             "speaker": "B",
-            "text": "Yes, and we can practice them together.",
+            "text": "Because I read them every evening.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u01-d8.mp3"
           }
         ],
@@ -179,7 +179,7 @@
           "title": "People and Family: First Reading",
           "type": "guided-reading",
           "theme": "people_family",
-          "text": "Yesterday morning, my aunt and uncle came to our house at nine o'clock. My uncle is a factory worker, and he usually starts work very early. He had a free day, so our whole family ate breakfast together. Dad made eggs while my aunt cut fruit for the children. My little cousin is still a young child, but she helped carry the cups. After breakfast, Daddy took a family photo, and everyone smiled. They stayed until after lunch.",
+          "text": "Yesterday morning, my aunt and uncle came to our house at eight o'clock. Dad made breakfast, and every child helped. My brother gave the children milk, and I put food on the table. My uncle is a worker, so he had to go at eleven a.m. Before he went, Daddy took a family picture. We said good-bye and asked him to come again in one week.",
           "focusWords": [
             "aunt",
             "child",
@@ -197,7 +197,7 @@
           "title": "Numbers and Time: Second Reading",
           "type": "guided-reading",
           "theme": "numbers_time",
-          "text": "Our school sports day started at two p.m. yesterday. My friend Ben came with his family, including his aunt, uncle, and two children. His dad helped at the starting line, and my daddy gave water to the runners. At three o'clock, the relay race began. Our team had zero points at first, but we did not give up. We ran carefully and finished second. Every child cheered, and the adults clapped for us. We talked about it all afternoon.",
+          "text": "Our school family day started at two p.m. yesterday. My friend Ben came with his dad, aunt, and two children. His daddy helped the teacher, and my family made drinks. At three o'clock, the children started to run. Ben was slow, but his friend helped him. They tried to run together. Every child said their run was great, even with zero prizes.",
           "focusWords": [
             "worker",
             "morning",
@@ -215,49 +215,49 @@
           {
             "id": "l3-u02-d1",
             "speaker": "A",
-            "text": "Dad, what time does the family picnic start?",
+            "text": "When does our family breakfast start tomorrow?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u02-d1.mp3"
           },
           {
             "id": "l3-u02-d2",
             "speaker": "B",
-            "text": "It starts at ten o'clock tomorrow morning.",
+            "text": "It starts at eight o'clock in the morning.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u02-d2.mp3"
           },
           {
             "id": "l3-u02-d3",
             "speaker": "A",
-            "text": "Are Aunt May and Uncle Sam coming?",
+            "text": "Will Aunt Anna and Uncle Ben come?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u02-d3.mp3"
           },
           {
             "id": "l3-u02-d4",
             "speaker": "B",
-            "text": "Yes, and they are bringing the children.",
+            "text": "Yes, they will come with their children.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u02-d4.mp3"
           },
           {
             "id": "l3-u02-d5",
             "speaker": "A",
-            "text": "Can I invite my friend Leo too?",
+            "text": "Can I invite my friend Sam too?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u02-d5.mp3"
           },
           {
             "id": "l3-u02-d6",
             "speaker": "B",
-            "text": "Of course. His family can join us.",
+            "text": "Yes, his dad can come after work.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u02-d6.mp3"
           },
           {
             "id": "l3-u02-d7",
             "speaker": "A",
-            "text": "Great! I will call him before eight p.m.",
+            "text": "Great, I will call him before two p.m.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u02-d7.mp3"
           },
           {
             "id": "l3-u02-d8",
             "speaker": "B",
-            "text": "Good. Please help Daddy pack the food first.",
+            "text": "Please help Daddy put the food on the table.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u02-d8.mp3"
           }
         ],
@@ -312,7 +312,7 @@
           "title": "Animals and Nature: First Reading",
           "type": "guided-reading",
           "theme": "animals_nature",
-          "text": "Our class visited a small farm when the weather was cool. I fed a brown horse with my hand and watched a duck swim across the pond. The horse moved its head close to my bag because it could smell my lunch. I felt nervous at first, but its soft hair tickled my arm. Soon my whole body relaxed. By noon, I was hungry too, so I ate under a tree and drew each animal with chalk.",
+          "text": "The weather was hot when our teacher took us to the zoo. I saw a big elephant take food with its nose. A child asked why the animal had no hair on its body. A duck put its head down and sat under a tree. I put my hand in my bag and found an apple. I was hungry, so I ate it with my lunch.",
           "focusWords": [
             "animal",
             "duck",
@@ -330,7 +330,7 @@
           "title": "Body and Feelings: Second Reading",
           "type": "guided-reading",
           "theme": "body_health",
-          "text": "A strong wind blew through the park, so Nina and I took out our kite. She held it above her head while I ran across the grass. The kite climbed high, but the string rubbed my hand and made it sore. We stopped because I did not feel well. After a short rest and a drink, I felt better. The evening weather became calm, and the first star appeared. We packed the kite into its bag and walked home.",
+          "text": "Ben and I went to the sea with a kite. The weather was fine, so Ben started to run. The kite went up, but it came down into a tree. Ben was sad and put his head on my arm. I asked him to help me. He took my hand, and we got it down together. The kite was fine. A star was in the evening sky when we walked home.",
           "focusWords": [
             "feel",
             "hair",
@@ -348,49 +348,49 @@
           {
             "id": "l3-u03-d1",
             "speaker": "A",
-            "text": "Look at that duck near the pond!",
+            "text": "Why is that duck under the tree?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u03-d1.mp3"
           },
           {
             "id": "l3-u03-d2",
             "speaker": "B",
-            "text": "It is hiding its head under its wing.",
+            "text": "It may feel hot in this weather.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u03-d2.mp3"
           },
           {
             "id": "l3-u03-d3",
             "speaker": "A",
-            "text": "Do you think the animal is hungry?",
+            "text": "Can we give the animal some water?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u03-d3.mp3"
           },
           {
             "id": "l3-u03-d4",
             "speaker": "B",
-            "text": "Maybe, but the sign says we should not feed it.",
+            "text": "Yes, put the cup by its head.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u03-d4.mp3"
           },
           {
             "id": "l3-u03-d5",
             "speaker": "A",
-            "text": "The weather is getting windy now.",
+            "text": "My hand is dirty from the chalk.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u03-d5.mp3"
           },
           {
             "id": "l3-u03-d6",
             "speaker": "B",
-            "text": "Then let's put our chalk and pictures in the bag.",
+            "text": "Your bag has water. Please wash it.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u03-d6.mp3"
           },
           {
             "id": "l3-u03-d7",
             "speaker": "A",
-            "text": "Can we fly our kite before we leave?",
+            "text": "After that, can we fly my kite?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u03-d7.mp3"
           },
           {
             "id": "l3-u03-d8",
             "speaker": "B",
-            "text": "Sure, but hold the string tightly in your hand.",
+            "text": "Yes, we can fly it this evening.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u03-d8.mp3"
           }
         ],
@@ -440,7 +440,7 @@
           "title": "Food and Meals: First Reading",
           "type": "guided-reading",
           "theme": "food",
-          "text": "Our class had a breakfast lesson in the school kitchen. We used a computer to read a simple recipe for banana cookies. I wrote each step in my notebook, but I made a spelling mistake and used my eraser. Then our teacher showed us how to measure and mix the food. While the cookies baked, we learned how heat changes the dough. At the end, everyone ate one cookie and had a drink of water.",
+          "text": "Before school, Mia ate a banana and drank milk for breakfast. In the classroom, the teacher asked the children to write about their food. Mia had a computer, but she could not spell banana. She asked a friend and then wrote the word. Her eraser fell under the desk. She found it with an old cookie under the desk. The teacher said, \"Please do not eat cookies in the classroom.\"",
           "focusWords": [
             "banana",
             "beef",
@@ -457,7 +457,7 @@
           "title": "School and Learning: Second Reading",
           "type": "guided-reading",
           "theme": "school",
-          "text": "I helped Dad prepare dinner while my sister finished her homework. Dad cooked beef and vegetables, and I made cold drinks for everyone. My sister came into the kitchen to ask how to spell \"banana\" for a story. I wrote the word on a small board, but she erased it and tried again by herself. After we ate, she used the computer to show us what she had learned. Then we shared two cookies for dessert.",
+          "text": "Dad and I made beef and rice for dinner. My sister made cold drinks with juice and ice. She gave me a cookie, but I wanted it after dinner. While Dad made the food, I used the computer to learn a new English word. I wrote it on a card and asked my sister to spell it. She spelled it well, so I gave her two cookies after we ate.",
           "focusWords": [
             "drink",
             "drinks",
@@ -475,49 +475,49 @@
           {
             "id": "l3-u04-d1",
             "speaker": "A",
-            "text": "What are we making in cooking class today?",
+            "text": "What did you eat for breakfast today?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u04-d1.mp3"
           },
           {
             "id": "l3-u04-d2",
             "speaker": "B",
-            "text": "Banana cookies, but we need to read the recipe first.",
+            "text": "I ate a banana and two cookies.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u04-d2.mp3"
           },
           {
             "id": "l3-u04-d3",
             "speaker": "A",
-            "text": "Can I open it on the computer?",
+            "text": "Did you make the cookies at school?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u04-d3.mp3"
           },
           {
             "id": "l3-u04-d4",
             "speaker": "B",
-            "text": "Yes. I will write the steps on the board.",
+            "text": "Yes, we read about them on a computer.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u04-d4.mp3"
           },
           {
             "id": "l3-u04-d5",
             "speaker": "A",
-            "text": "How do you spell the last word?",
+            "text": "Did you write how to make them?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u04-d5.mp3"
           },
           {
             "id": "l3-u04-d6",
             "speaker": "B",
-            "text": "I am not sure. Let me use my eraser.",
+            "text": "Yes, but I could not spell banana.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u04-d6.mp3"
           },
           {
             "id": "l3-u04-d7",
             "speaker": "A",
-            "text": "The teacher can help us after she checks the drinks.",
+            "text": "Did your teacher give you an eraser?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u04-d7.mp3"
           },
           {
             "id": "l3-u04-d8",
             "speaker": "B",
-            "text": "Okay. Then we can start making breakfast.",
+            "text": "Yes, then each child ate one cookie.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u04-d8.mp3"
           }
         ],
@@ -571,7 +571,7 @@
           "title": "Food and Meals: First Reading",
           "type": "guided-reading",
           "theme": "food",
-          "text": "It was hot after school, so my sister and I made ice cream in our kitchen. She mixed milk with ice while I poured juice into small cups. I added a little salt to the ice, but none went into the food. Mom set the dining room table and called our cousins. When they reached our house, we put away their coats and hats. Everyone enjoyed the cold dessert, and we saved one cup for Dad.",
+          "text": "It was hot after school, so Amy came to my house. We went into the kitchen and made ice cream with milk and ice. I put in too much salt, but Amy said it was still good. We took the ice cream and juice to the dining room. Dad came home with hot dogs for dinner. We ate together and gave him a big cup of ice cream.",
           "focusWords": [
             "hot dog",
             "ice",
@@ -588,7 +588,7 @@
           "title": "Clothes and Looks: Second Reading",
           "type": "guided-reading",
           "theme": "clothes",
-          "text": "Rain started while Lily was walking home in her new dress. She quickly put on her coat and hat, but her shoes still got wet. At the house, the telephone was ringing in the dining room. Lily answered it, and Dad asked her to warm dinner in the kitchen. She made a hot dog, poured some juice, and added a little salt to her soup. Later, she called Dad on her phone and said everything was ready.",
+          "text": "Mia wanted to wear her new dress to a family dinner. The weather was cold, so her aunt gave her a coat and a red hat. Before they left the house, the telephone rang in the dining room. Her uncle was on the phone. He asked Mia to call him on her phone when they got there. Mia said yes, put on her coat, and walked out with her aunt.",
           "focusWords": [
             "kitchen",
             "phone",
@@ -606,49 +606,49 @@
           {
             "id": "l3-u05-d1",
             "speaker": "A",
-            "text": "What should we take to the picnic?",
+            "text": "Why are you wearing that coat and hat?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u05-d1.mp3"
           },
           {
             "id": "l3-u05-d2",
             "speaker": "B",
-            "text": "We have hot dogs and juice in the kitchen.",
+            "text": "We are eating dinner at my aunt's house.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u05-d2.mp3"
           },
           {
             "id": "l3-u05-d3",
             "speaker": "A",
-            "text": "Can we bring ice cream too?",
+            "text": "Are you wearing your new red dress?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u05-d3.mp3"
           },
           {
             "id": "l3-u05-d4",
             "speaker": "B",
-            "text": "It may melt before we reach the park.",
+            "text": "Yes, but the weather is very cold.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u05-d4.mp3"
           },
           {
             "id": "l3-u05-d5",
             "speaker": "A",
-            "text": "Then I will put some ice in this box.",
+            "text": "Should I bring some juice?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u05-d5.mp3"
           },
           {
             "id": "l3-u05-d6",
             "speaker": "B",
-            "text": "Good idea. Please wear your coat and hat.",
+            "text": "Bring juice, because we have hot dogs.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u05-d6.mp3"
           },
           {
             "id": "l3-u05-d7",
             "speaker": "A",
-            "text": "Should I call Amy on the phone?",
+            "text": "Good, I will call her on my phone.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u05-d7.mp3"
           },
           {
             "id": "l3-u05-d8",
             "speaker": "B",
-            "text": "Yes. Tell her to meet us outside the house.",
+            "text": "Great, please come before dinner starts.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u05-d8.mp3"
           }
         ],
@@ -698,7 +698,7 @@
           "title": "Places and Transport: First Reading",
           "type": "guided-reading",
           "theme": "places_transport",
-          "text": "My cousin Jack came from America during the school holiday. We planned a day trip to a mountain town and took an early train. At the station, Jack saw many bicycles and asked if we could rent a bike. Mom said the road was too steep, so we rode a bus instead. A truck drove slowly in front of us, but we reached the town before lunch. Jack took photos and called the trip his favorite day in Taiwan.",
+          "text": "My friend Sam came from America for a family trip. Dad did not drive because we wanted to take a train to the sea. On the train, Sam saw a bird fly in the sky. When we got there, we saw a big truck at a store. Dad called his friend, and the man gave us two bicycles. We had a great afternoon on the bikes.",
           "focusWords": [
             "america",
             "bicycle",
@@ -715,7 +715,7 @@
           "title": "Actions and Routines: Second Reading",
           "type": "guided-reading",
           "theme": "actions",
-          "text": "Emma was learning to ride a bicycle in the park. Dad held the bike while she pushed the pedals, but she turned too quickly and fell into the grass. She began to cry, so Dad asked if she was hurt. Emma shook her head and tried again. Soon she could ride past a parked truck without help. Above her, a red kite flew across the sky. Dad called Mom and said, \"Emma can ride by herself now!\"",
+          "text": "Emma wanted to try her new bicycle after school. Dad helped her get on the bike, and she started to go. A truck came by, so Dad asked her to wait. When it was gone, Emma tried again. She went too fast, and her bike went into a tree. She did not cry because her arm and leg were fine. Dad called home and said, \"Emma can go now!\"",
           "focusWords": [
             "truck",
             "ask",
@@ -733,49 +733,49 @@
           {
             "id": "l3-u06-d1",
             "speaker": "A",
-            "text": "How are we getting to the beach for our trip?",
+            "text": "Are we taking the train for our trip?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u06-d1.mp3"
           },
           {
             "id": "l3-u06-d2",
             "speaker": "B",
-            "text": "We can take the train at eight.",
+            "text": "Yes, Dad does not want to drive.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u06-d2.mp3"
           },
           {
             "id": "l3-u06-d3",
             "speaker": "A",
-            "text": "Can we bring our bikes on it?",
+            "text": "Can we take our bikes with us?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u06-d3.mp3"
           },
           {
             "id": "l3-u06-d4",
             "speaker": "B",
-            "text": "Yes, but we need to ask at the station.",
+            "text": "No, but Uncle Sam has two bicycles.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u06-d4.mp3"
           },
           {
             "id": "l3-u06-d5",
             "speaker": "A",
-            "text": "My dad could drive us in his car instead.",
+            "text": "Should I call him and ask now?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u06-d5.mp3"
           },
           {
             "id": "l3-u06-d6",
             "speaker": "B",
-            "text": "The road may have many trucks this morning.",
+            "text": "Yes, he came back from America yesterday.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u06-d6.mp3"
           },
           {
             "id": "l3-u06-d7",
             "speaker": "A",
-            "text": "Then I will call him and choose the train.",
+            "text": "Look, a red kite can fly very high.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u06-d7.mp3"
           },
           {
             "id": "l3-u06-d8",
             "speaker": "B",
-            "text": "Great. Let's meet by the bicycle shop.",
+            "text": "Great, we can take it on our trip.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u06-d8.mp3"
           }
         ],
@@ -829,7 +829,7 @@
           "title": "Actions and Routines: First Reading",
           "type": "guided-reading",
           "theme": "actions",
-          "text": "Our school held an autumn fair on Saturday. I joined the art team because they needed help with the signs. We worked together to make bright posters and waited for the paint to dry. Then we invited families into the hall. Some children tried a ball game, and others learned a simple dance. I helped a small boy kick the ball toward a basket. He missed twice, but his third try went in, so everyone cheered.",
+          "text": "In autumn, our school asked families to join a dance. I invited my friend Lily because she wanted to try it. We needed two hats, so we made them with old cards. Lily helped me, and we waited for the glue to dry. At school, the teacher asked us to dance together. We tried three times. After the dance, I took the hats home.",
           "focusWords": [
             "help",
             "invite",
@@ -846,7 +846,7 @@
           "title": "Actions and Routines: Second Reading",
           "type": "guided-reading",
           "theme": "actions",
-          "text": "We found a wet puppy near our gate after a rainy walk. My sister took it inside while I called a neighbor for help. We used a towel to dry its fur and tried to make it drink some water. The puppy needed a quiet place to sleep, so we put a box by the door and waited. Soon the owner arrived from work. She kissed the puppy, thanked us, and invited us to visit them again.",
+          "text": "Dad came home from work and said he needed help. Our dog was dirty after a walk, so we had to wash and dry it. I took water, and Dad made a warm bed. The dog tried to run, but Dad asked it to wait. When its hair was dry, I kissed its head. The dog went to sleep, and Dad said we did great work.",
           "focusWords": [
             "sleep",
             "take",
@@ -864,49 +864,49 @@
           {
             "id": "l3-u07-d1",
             "speaker": "A",
-            "text": "Do you want to join our soccer practice?",
+            "text": "Do you want to join our ball game?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u07-d1.mp3"
           },
           {
             "id": "l3-u07-d2",
             "speaker": "B",
-            "text": "Yes, but I need help with my kicks.",
+            "text": "Yes, but I need help kicking the ball.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u07-d2.mp3"
           },
           {
             "id": "l3-u07-d3",
             "speaker": "A",
-            "text": "I can work with you after school.",
+            "text": "Try again, and kick the ball slowly.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u07-d3.mp3"
           },
           {
             "id": "l3-u07-d4",
             "speaker": "B",
-            "text": "Thanks. Should I invite Kevin too?",
+            "text": "Okay, please wait while I take my coat.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u07-d4.mp3"
           },
           {
             "id": "l3-u07-d5",
             "speaker": "A",
-            "text": "Sure. We can make two small teams.",
+            "text": "Your coat is still wet from the rain.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u07-d5.mp3"
           },
           {
             "id": "l3-u07-d6",
             "speaker": "B",
-            "text": "Let's wait until the field is dry.",
+            "text": "I will put it here to dry.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u07-d6.mp3"
           },
           {
             "id": "l3-u07-d7",
             "speaker": "A",
-            "text": "Okay. I will take the ball home today.",
+            "text": "Good. We can make two teams together.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u07-d7.mp3"
           },
           {
             "id": "l3-u07-d8",
             "speaker": "B",
-            "text": "Great. We can try again tomorrow.",
+            "text": "Great, I will invite Lily after school.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u07-d8.mp3"
           }
         ],
@@ -952,7 +952,7 @@
           "title": "Everyday English: First Reading",
           "type": "guided-reading",
           "theme": "general",
-          "text": "Our English class made a pretend shop with play money. I put books on one table and wrote \"one dollar\" on each price card. Ben asked if we had any toy cars, so I looked under the table. \"Oops, they are down here,\" I said. He was really happy and bought two. At the end, we counted the money together and packed everything up. We waved good-bye to our last customer and closed the shop.",
+          "text": "At school, we made a store with toys and books. I had ten dollars in play money. I looked down and saw a car under the table. \"Oops, is there any money with it?\" I asked. Ben said, \"Uh-uh, but the car is one dollar.\" I really wanted it, so I gave him one dollar. Then we put everything up and said good-bye.",
           "focusWords": [
             "any",
             "dollar",
@@ -969,7 +969,7 @@
           "title": "Everyday English: Second Reading",
           "type": "guided-reading",
           "theme": "general",
-          "text": "The children were singing together for the school show. Amy stood up front, but she forgot one line and looked down at the floor. \"Oh-oh,\" whispered Leo, but Amy remembered the words and kept going. The audience became quiet and listened. When the song ended, everyone clapped loudly. Amy smiled and said, \"I really did it!\" After the show, we picked up our bags, said goodbye to the teacher, and walked home together before dinner.",
+          "text": "Emma and I were singing together in her room. Her baby brother was sleeping, so we had to sing slowly. Then Emma stood up, but I looked down at the words. \"Oh-oh, I do not know this word,\" I said. Emma said it with me, and I could sing again. Her brother opened his eyes. \"Oops!\" we said, and we gave him a toy.",
           "focusWords": [
             "oops",
             "really",
@@ -987,49 +987,49 @@
           {
             "id": "l3-u08-d1",
             "speaker": "A",
-            "text": "Oops, I dropped all the colored paper.",
+            "text": "Do you have any money with you?",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u08-d1.mp3"
           },
           {
             "id": "l3-u08-d2",
             "speaker": "B",
-            "text": "Oh-oh! Some pieces went under the desk.",
+            "text": "Uh-uh, I only have one dollar.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u08-d2.mp3"
           },
           {
             "id": "l3-u08-d3",
             "speaker": "A",
-            "text": "Are there any more down there?",
+            "text": "Really? Your bag is down there.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u08-d3.mp3"
           },
           {
             "id": "l3-u08-d4",
             "speaker": "B",
-            "text": "Uh-uh, I think we found them all.",
+            "text": "Oops, my money is in that bag.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u08-d4.mp3"
           },
           {
             "id": "l3-u08-d5",
             "speaker": "A",
-            "text": "Really? Then let's put them up on the shelf.",
+            "text": "Good, but our bus is here now.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u08-d5.mp3"
           },
           {
             "id": "l3-u08-d6",
             "speaker": "B",
-            "text": "We can carry the big box together.",
+            "text": "Let us take the bag together.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u08-d6.mp3"
           },
           {
             "id": "l3-u08-d7",
             "speaker": "A",
-            "text": "Thanks. I have to go now. Goodbye!",
+            "text": "Okay, I have it. Good-bye, Amy.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u08-d7.mp3"
           },
           {
             "id": "l3-u08-d8",
             "speaker": "B",
-            "text": "Good-bye! See you at school tomorrow.",
+            "text": "Goodbye, Ben. See you at school.",
             "audio": "audio/vocab_foundation/dialogue_lines/l3-u08-d8.mp3"
           }
         ],

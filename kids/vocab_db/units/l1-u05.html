@@ -298,7 +298,7 @@ header a{color:#2f80ed;text-decoration:none}
       <span class="tx">No, it is under the tree.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u05-d6.mp3')">🔊</button></div>
     <div class="turn"><span class="who">A</span>
-      <span class="tx">Your dog <span class="gw" onclick="this.classList.toggle('on')">looks</span><span class="gz">看</span> sad now.</span>
+      <span class="tx">Your dog looks sad now.</span>
       <button class="spk" onclick="play('../../audio/vocab_foundation/dialogue_lines/l1-u05-d7.mp3')">🔊</button></div>
     <div class="turn"><span class="who b">B</span>
       <span class="tx">He wants the cat to come down.</span>
@@ -311,11 +311,11 @@ header a{color:#2f80ed;text-decoration:none}
     <p class="glegend">📖 有<span class="gw">虛線</span>的字是還沒學過的，點一下會出現中文。</p>
     
     <div style="margin:0 0 13px">
-      <p class="psg">Our dog is a good pet, but he <span class="gw" onclick="this.classList.toggle('on')">likes</span><span class="gz">喜歡</span> to run. At the <span class="gw" onclick="this.classList.toggle('on')">park</span><span class="gz">公園</span>, he sees a bird and runs to a tree. A cat is under the tree. The cat sees a pig on a card. Our dog sees it, too. He wants to play with them all.</p>
+      <p class="psg">Our dog is a good pet, but he likes to run. At the <span class="gw" onclick="this.classList.toggle('on')">park</span><span class="gz">公園</span>, he sees a bird and runs to a tree. A cat is under the tree. The cat sees a pig on a card. Our dog sees it, too. He wants to play with them all.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u05-p1.mp3')">🔊 聽這一篇</button>
     </div>
     <div style="margin:0 0 13px">
-      <p class="psg">The sun is in the sky, and a bird sits in our tree. My cat <span class="gw" onclick="this.classList.toggle('on')">looks</span><span class="gz">看</span> up with her nose in the air. At <span class="gw" onclick="this.classList.toggle('on')">night</span><span class="gz">夜晚</span>, the moon comes out. My little pet is sad because the bird is not there. I give her a lion toy, and she is <span class="gw" onclick="this.classList.toggle('on')">happy</span><span class="gz">快樂的</span>.</p>
+      <p class="psg">The sun is in the sky, and a bird sits in our tree. My cat looks up with her nose in the air. At <span class="gw" onclick="this.classList.toggle('on')">night</span><span class="gz">夜晚</span>, the moon comes out. My little pet is sad because the bird is not there. I give her a lion toy, and she is <span class="gw" onclick="this.classList.toggle('on')">happy</span><span class="gz">快樂的</span>.</p>
       <button class="spk" onclick="play('../../audio/vocab_foundation/passages/l1-u05-p2.mp3')">🔊 聽這一篇</button>
     </div>
     <button class="spk" style="margin-top:4px" onclick="askAIRead()">🤖 請 AI 幫我讀懂這篇</button>
@@ -345,12 +345,12 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608010250"></script>
-<script src="../../account_lock.js?v=202608010250"></script>
-<script src="../../supabase_auth.js?v=202608010250"></script>
-<script src="../../ai_review.js?v=202608010250"></script>
-<script src="../../vocab_units.js?v=202608010250"></script>
-<script src="../../vocab_unit_plan.js?v=202608010250"></script>
+<script src="../../cloud_sync.js?v=202608011210"></script>
+<script src="../../account_lock.js?v=202608011210"></script>
+<script src="../../supabase_auth.js?v=202608011210"></script>
+<script src="../../ai_review.js?v=202608011210"></script>
+<script src="../../vocab_units.js?v=202608011210"></script>
+<script src="../../vocab_unit_plan.js?v=202608011210"></script>
 <script>
 var UNIT_ID = "l1-u05";
 var QUIZ = [{"kind":"zh2en","ask":"「鳥」的英文是哪一個？","answer":"bird","options":["cat","bird","dog","lion"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003edog\u003c/b\u003e 是什麼意思？","answer":"狗","options":["鳥","貓","獅子","狗"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"moon","options":["bird","moon","cat","dog"],"audio":"audio/words/moon.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eI see a ＿＿＿.\u003c/span\u003e","answer":"pig","options":["pig","bird","cat","dog"],"audio":"audio/vocab_foundation/examples/l1-pig-e1.mp3"},{"kind":"zh2en","ask":"「太陽」的英文是哪一個？","answer":"sun","options":["bird","cat","sun","dog"],"audio":null},{"kind":"en2zh","ask":"\u003cb\u003enose\u003c/b\u003e 是什麼意思？","answer":"鼻子","options":["鳥","貓","狗","鼻子"],"audio":null},{"kind":"listen","ask":"聽聽看，念的是哪一個字？","answer":"card","options":["bird","cat","card","dog"],"audio":"audio/words/card.mp3"},{"kind":"cloze","ask":"先聽一次，空格裡是哪個字？\u003cbr\u003e\u003cspan class=\"sent\"\u003eThe ＿＿＿ sleeps on a chair.\u003c/span\u003e","answer":"cat","options":["cat","bird","dog","lion"],"audio":"audio/words/ex/cat_0.mp3"}];
@@ -358,7 +358,7 @@ var currentStudent = null, curAudio = null, done = 0, ok = 0, wrongList = [];
 var UNIT_TITLE = "動物與自然";
 var UNIT_DIALOGUE = "A: Is that your dog by the tree?\nB: Yes. He is my new pet.\nA: Why is your cat up there?\nB: She sees a bird in the sky.\nA: Is the bird near the sun?\nB: No, it is under the tree.\nA: Your dog looks sad now.\nB: He wants the cat to come down.";
 var UNIT_PASSAGE = "Our dog is a good pet, but he likes to run. At the park, he sees a bird and runs to a tree. A cat is under the tree. The cat sees a pig on a card. Our dog sees it, too. He wants to play with them all.\n\nThe sun is in the sky, and a bird sits in our tree. My cat looks up with her nose in the air. At night, the moon comes out. My little pet is sad because the bird is not there. I give her a lion toy, and she is happy.";
-var UNIT_NEWWORDS = [{"w":"looks","zh":"看"},{"w":"likes","zh":"喜歡"},{"w":"park","zh":"公園"},{"w":"night","zh":"夜晚"},{"w":"happy","zh":"快樂的"}];
+var UNIT_NEWWORDS = [{"w":"park","zh":"公園"},{"w":"night","zh":"夜晚"},{"w":"happy","zh":"快樂的"}];
 var UNIT_GOAL = "這個單元的字：bird、cat、dog、lion、moon、pet 等 13 個";
 
 function getProgress(s) {
