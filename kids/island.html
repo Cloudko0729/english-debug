@@ -348,15 +348,15 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202608011210"></script>
-<script src="curriculum.js?v=202608011210"></script>
-<script src="word_roots.js?v=202608011210"></script>
-<script src="worddex.js?v=202608011210"></script>
-<script src="city_data.js?v=202608011210"></script>
+<script src="wordbank.js?v=202608060030"></script>
+<script src="curriculum.js?v=202608060030"></script>
+<script src="word_roots.js?v=202608060030"></script>
+<script src="worddex.js?v=202608060030"></script>
+<script src="city_data.js?v=202608060030"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202608011210"></script>
-<script src="account_lock.js?v=202608011210"></script>
-<script src="supabase_auth.js?v=202608011210"></script>
+<script src="cloud_sync.js?v=202608060030"></script>
+<script src="account_lock.js?v=202608060030"></script>
+<script src="supabase_auth.js?v=202608060030"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -679,47 +679,88 @@ function saveIsland(s, isl) {
 }
 
 // ─── Daily tick: grow buildings + collect production ────────────────────────
+// 離線收益上限：沒開島的日子會補算，但最多補 3 天。
+// 有上限才留得住「每天回來看一下」的動機；沒上限的話出門一個月回來一次領爆，
+// 島嶼就從每日習慣變成偶爾登入的存錢筒。
+const OFFLINE_DAYS_MAX = 3;
+
+// 兩個日期字串（YYYY-MM-DD）相差幾天。用中午當基準點，才不會被日光節約時間
+// 或時區偏移弄成 0.96 天而少算一天。
+function daysBetween(from, to) {
+  const at = s => { const p = String(s).split("-"); return new Date(+p[0], +p[1] - 1, +p[2], 12); };
+  const a = at(from), b = at(to);
+  if (isNaN(a) || isNaN(b)) return 1;
+  return Math.round((b - a) / 86400000);
+}
+
 function runDailyTick() {
   const today = todayStr();
   if (island.lastProcessedDate === today) return 0;
-  // count number of days passed (at least 1)
+  // 沒玩的日子要補算，不是只發一天份。舊存檔沒有 lastProcessedDate 就當一天。
+  const elapsed = island.lastProcessedDate ? daysBetween(island.lastProcessedDate, today) : 1;
+  const days = Math.max(1, Math.min(OFFLINE_DAYS_MAX, elapsed));
+
   let totalProduced = 0;
   island.buildings.forEach(b => {
     const cat = BUILDINGS[b.type];
-    b.activeDays = (b.activeDays || 0) + 1;
-    // level up by activeDays thresholds (城鎮中心除外，它靠人口+美化達標升級)
     const maxLv = cat.maxLevel || 3;
-    if (cat.levelDays && b.level < maxLv) {
-      const need = cat.levelDays[b.level - 1];   // 升到下一級所需天數
-      if (need != null && b.activeDays >= need) b.level++;
+    const paid = b.lastProductionDate !== today;   // 同一天不重複發
+    // 一天一天跑，不是乘上天數：中途升級的建築，升級後那幾天要用新等級的產量算，
+    // 而且補三天有可能連升兩級。
+    for (let d = 0; d < days; d++) {
+      b.activeDays = (b.activeDays || 0) + 1;
+      // level up by activeDays thresholds (城鎮中心除外，它靠人口+美化達標升級)
+      if (cat.levelDays && b.level < maxLv) {
+        const need = cat.levelDays[b.level - 1];   // 升到下一級所需天數
+        if (need != null && b.activeDays >= need) b.level++;
+      }
+      // production（先累計原始產量,稍後依快樂值打折；含合併星星倍率）
+      if (paid) totalProduced += Math.round((cat.coin[b.level - 1] || 0) * starMult(b));
     }
-    // production（先累計原始產量,稍後依快樂值打折；含合併星星倍率）
-    const produce = Math.round((cat.coin[b.level - 1] || 0) * starMult(b));
-    if (produce > 0 && b.lastProductionDate !== today) {
-      totalProduced += produce;
-      b.lastProductionDate = today;
-    }
+    if (paid) b.lastProductionDate = today;
   });
   island.lastProcessedDate = today;
   recalcStats();  // 取得當下快樂值
-  totalProduced = Math.round(totalProduced * incomeMult(island.stats.happiness));  // 快樂值影響每日收入
+  // 快樂值只取現在這一刻，不回推每一天 —— 沒有歷史紀錄可以還原，而且補算上限只有 3 天，
+  // 誤差比多存一份每日快樂值紀錄划算。
+  totalProduced = Math.round(totalProduced * incomeMult(island.stats.happiness));
   // 多餘食物自動賣掉：3 🍞 = 1 🪙（市場價,不受快樂影響）
   const _surplus = Math.max(0, (island.stats.food || 0) - (island.stats.foodNeed || 0));
-  const _foodCoins = Math.floor(_surplus / 3);
+  const _foodCoins = Math.floor(_surplus / 3) * days;
   if (_foodCoins > 0) totalProduced += _foodCoins;
   if (totalProduced > 0) {
     const p = getProgress(currentStudent);
     p.coins.balance += totalProduced;
     p.coins.lifetimeEarned += totalProduced;
     p.coins.transactions.push({ type: "earn", source: "islandProduction", amount: totalProduced,
-      balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { date: today } });
+      balanceAfter: p.coins.balance, createdAt: new Date().toISOString(),
+      meta: { date: today, islandId: island.islandId || 1, days } });
     saveProgress(currentStudent, p);
-    island.events.push({ id: "prod-" + today, type: "production", date: today,
-      message: `島嶼生產了 ${totalProduced} 金幣${_foodCoins > 0 ? `（含賣出多餘食物 🍞${_surplus} → 🪙${_foodCoins}）` : ""}`, coinsDelta: totalProduced, seen: false });
+    island.events.push({ id: "prod-" + today + "-" + (island.islandId || 1), type: "production", date: today,
+      message: `島嶼生產了 ${totalProduced} 金幣${days > 1 ? `（補算 ${days} 天）` : ""}${_foodCoins > 0 ? `（含賣出多餘食物 🍞${_surplus} → 🪙${_foodCoins}）` : ""}`,
+      coinsDelta: totalProduced, seen: false });
   }
   recalcStats();
   saveIsland(currentStudent, island);
+  lastTickDays = days;
   return totalProduced;
+}
+let lastTickDays = 1;   // 給提示訊息用：這次補算了幾天
+
+// 把另一座島暫時當成「目前這座」來結算。
+// 以前只有 switchIsland() 會呼叫 runDailyTick，所以沒手動點進二號島的那天，
+// 二號島的產出就直接消失、隔天也補不回來。
+// 需要連 TERRAIN_MAP 一起換：recalcStats() → terrainBeauty() 讀的是全域地圖，
+// 不換就會拿一號島的地形去算二號島的美化分。
+function tickIslandInBackground(id) {
+  const isl = loadIsland(currentStudent, id);
+  // 空島直接跳過：loadIsland 查無資料會回傳一座新島，跑下去會把它存檔建出來
+  if (!isl.buildings || !isl.buildings.length) return 0;
+  const oldIsland = island, oldMap = TERRAIN_MAP;
+  island = isl;
+  TERRAIN_MAP = terrainMapFor(isl.islandId || id);
+  try { return runDailyTick(); }
+  finally { island = oldIsland; TERRAIN_MAP = oldMap; }
 }
 
 // ─── Stats ──────────────────────────────────────────────────────────────────
@@ -1371,6 +1412,12 @@ function openManual() {
     收入倍率 = 0.6 + 0.6 × 快樂%。<br>
     快樂 100% → 拿 <b>120%</b> 金幣(加成!);快樂 50% → 90%;快樂 0% → 60%。<br>
     所以人口和美化要<b>一起發展</b>才賺最多。</p>
+
+    <p><b>🌅 沒來的日子怎麼算</b><br>
+    幾天沒進來,下次一進來會<b>一次補發</b>金幣,建築也會補長那幾天。<br>
+    但<b>最多只補 3 天</b> —— 隔太久沒回來的部分就領不到了。<br>
+    兩座島<b>都會自動結算</b>,不必手動切過去二號島。<br>
+    （🐕 小狗的每日金幣要自己點,不會補發。）</p>
 
     <p><b>🏛️ 城鎮中心(5 級)</b><br>
     免費蓋 1 個。升級要同時達到<b>人口 + 美化</b>目標：<br>
@@ -2157,6 +2204,7 @@ function switchIsland(id) {
   const migrated = migrateIsland(island, currentStudent);
   recalcStats();
   if (migrated) saveIsland(currentStudent, island);
+  // 兩座島在選學生時就都結算過了，這裡通常回 0。留著是為了跨午夜還開著頁面的情況。
   const produced = runDailyTick();
   render();
   updateQuestBtns();
@@ -2165,7 +2213,8 @@ function switchIsland(id) {
   const notice = document.getElementById("notice");
   if (produced > 0) {
     notice.style.display = "block";
-    notice.innerHTML = `🌅 ${currentIslandId === 2 ? "二號島" : "一號島"}建築生產了 <b>🪙 ${produced}</b> 金幣！`;
+    notice.innerHTML = `🌅 ${currentIslandId === 2 ? "二號島" : "一號島"}建築生產了 <b>🪙 ${produced}</b> 金幣！`
+      + (lastTickDays > 1 ? `（補算 ${lastTickDays} 天）` : "");
   } else {
     notice.style.display = "none";
   }
@@ -2202,6 +2251,8 @@ function selectStudent(name) {
   recalcStats();
   if (migrated) saveIsland(name, island);
   const produced = runDailyTick();
+  const days = lastTickDays;
+  const produced2 = tickIslandInBackground(2);   // 二號島不必手動切過去也會結算
   render();
   const notice = document.getElementById("notice");
   if (lastMigration.removed > 0) {
@@ -2210,9 +2261,14 @@ function selectStudent(name) {
   } else if (migrated) {
     notice.style.display = "block";
     notice.innerHTML = `🗺️ 島嶼已升級成 15×15 新地圖！海洋 / 丘陵 / 高山只能在平地蓋建築。`;
-  } else if (produced > 0) {
+  } else if (produced > 0 || produced2 > 0) {
     notice.style.display = "block";
-    notice.innerHTML = `🌅 新的一天！島嶼建築生產了 <b>🪙 ${produced}</b> 金幣！（含賣出多餘食物）`;
+    const parts = [];
+    if (produced > 0) parts.push(`一號島 <b>🪙 ${produced}</b>`);
+    if (produced2 > 0) parts.push(`二號島 <b>🪙 ${produced2}</b>`);
+    notice.innerHTML = (days > 1 ? `🌅 歡迎回來！補算了 <b>${days}</b> 天的產出：` : "🌅 新的一天！島嶼生產了：")
+      + parts.join("、") + "（含賣出多餘食物）"
+      + (days >= OFFLINE_DAYS_MAX ? `<br><span style="font-size:.85em">離線最多補 ${OFFLINE_DAYS_MAX} 天，每天回來看一下才不會漏掉喔！</span>` : "");
   } else {
     notice.style.display = "none";
   }
