@@ -87,6 +87,16 @@ function runDay(date, theme) {
   return sandbox.document.getElementById("app").innerHTML || "";
 }
 
+// 那一天所屬的週一（週日算前一週的，跟 curriculum 的週日起算對得上）
+function mondayOf(date) {
+  const p = date.split("-");
+  const d = new Date(+p[0], +p[1] - 1, +p[2]);
+  const dow = d.getDay();
+  d.setDate(d.getDate() - (dow === 0 ? 6 : dow - 1));
+  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") +
+         "-" + String(d.getDate()).padStart(2, "0");
+}
+
 function main() {
   const args = process.argv.slice(2);
   const list = new Function(fs.readFileSync(path.join(KIDS, "drills_list.js"), "utf8") + ";return DRILLS;")();
@@ -101,6 +111,7 @@ function main() {
   if (!rows.length) { console.log("沒有要檢查的日期"); return; }
 
   let bad = 0;
+  const byWeek = {};   // 週一日期 → { 題目 key: [出現在哪幾天] }
   rows.forEach(d => {
     let html = "", err = null;
     try { html = runDay(d.date, d.theme); } catch (e) { err = e; }
@@ -120,6 +131,26 @@ function main() {
     console.log(`     ${html.length} 字元 · 選擇/填空 ${qs} 題 · 重組 ${roq} 題 · 發音字 ${words}` +
                 (missing.length ? `　⚠️ 缺段落：${missing.join("、")}` : "") +
                 (/這份測驗還沒開放/.test(html) ? "　⚠️ 被日期鎖擋住" : ""));
+
+    // 記下這天實際抽到哪幾題，等一下比對同一週有沒有重複
+    const mon = mondayOf(d.date);
+    const w = (byWeek[mon] = byWeek[mon] || {});
+    [...html.matchAll(/__pwd\('([a-z]+\d+)'\)/g)].forEach(m => {
+      (w[m[1]] = w[m[1]] || []).push(d.date.slice(5));
+    });
+  });
+
+  // 一週五天應該完全不重複。重複代表題庫不夠大，小孩會覺得「昨天寫過了」。
+  Object.keys(byWeek).sort().forEach(mon => {
+    const w = byWeek[mon];
+    const keys = Object.keys(w);
+    if (!keys.length) return;
+    const dup = keys.filter(k => w[k].length > 1);
+    const days = new Set([].concat(...keys.map(k => w[k]))).size;
+    if (days < 2) return;                       // 只驗了一兩天，比對沒意義
+    const tag = dup.length ? "⚠️" : "✓";
+    console.log(`${tag} ${mon} 那一週：${days} 天共 ${keys.length} 題，重複 ${dup.length}` +
+      (dup.length ? `　${dup.slice(0, 5).map(k => k + "(" + w[k].join(",") + ")").join(" ")}` : ""));
   });
 
   console.log(`\n${bad === 0 ? "✅" : "❌"} ${rows.length - bad} / ${rows.length} 天出得了題`);
