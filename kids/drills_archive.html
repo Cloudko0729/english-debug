@@ -34,16 +34,32 @@
 <div id="who"></div>
 <div id="months"></div>
 
-<script src="drills_list.js?v=202608060030"></script>
+<script src="drills_list.js?v=202608071556"></script>
 <script>
 function todayStr(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
 function currentStudent(){return localStorage.getItem("kidsCurrentStudent")||"";}
 function progress(){ const s=currentStudent(); if(!s)return null; try{return JSON.parse(localStorage.getItem("kidsProgress."+s)||"null");}catch(e){return null;} }
 
+// 完成判斷有兩個來源，任一個成立就算完成：
+//   1) coins.claimedDrills[date::date-theme]
+//   2) coins.transactions 裡 source=dailyDrill 且 meta.date 是那一天
+// awardCoins 是同一次把兩邊一起寫下去的，照理會同進退。但雲端同步是「整包覆蓋」
+// 不是合併（cloud_sync.js cloudSyncOnOpen），換裝置或還原舊快照就可能只剩一邊；
+// 而且送去 Google Sheet 的那份會把 transactions 砍到最近 150 筆。
+// 只認一邊，小孩明明做完卻沒有勾。
+function doneLookup(){
+  const p=progress()||{};
+  const claimed=(p.coins&&p.coins.claimedDrills)||{};
+  const byDate={};
+  ((p.coins&&p.coins.transactions)||[]).forEach(t=>{
+    if(t&&t.source==="dailyDrill"&&t.meta&&t.meta.date) byDate[t.meta.date]=true;
+  });
+  return {claimed,byDate};
+}
 function render(){
   const s=currentStudent();
   document.getElementById("who").textContent = s ? ("目前帳號："+s.charAt(0).toUpperCase()+s.slice(1)+"（✅ = 已完成）") : "（尚未登入，完成狀態請先到首頁登入）";
-  const claimed=((progress()||{}).coins||{}).claimedDrills||{};
+  const {claimed,byDate}=doneLookup();
   const today=todayStr();
   const isTest=s==="test";
   // 依月份分組
@@ -55,7 +71,7 @@ function render(){
     const [y,mo]=m.split("-");
     const cards=byMonth[m].sort((a,b)=>a.date<b.date?1:-1).map(d=>{
       const claim=d.date+"::"+d.date+"-"+d.theme;
-      const done=claimed[claim]?"1":"0";
+      const done=(claimed[claim]||byDate[d.date])?"1":"0";
       const locked=!isTest && today<d.date;
       const sub = d.kind==="vocab" ? `${d.eng}：${d.zh}` : `${d.eng} ${d.zh}${d.day>=17?" ＋📘進階":""}`;
       const right = locked

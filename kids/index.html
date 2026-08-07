@@ -314,15 +314,15 @@
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202608060030"></script>
-<script src="account_lock.js?v=202608060030"></script>
-<script src="supabase_auth.js?v=202608060030"></script>
-<script src="drills_list.js?v=202608060030"></script>
-<script src="grammar_nodes.js?v=202608060030"></script>
-<script src="grammar_plan.js?v=202608060030"></script>
-<script src="vocab_units.js?v=202608060030"></script>
-<script src="weekly_bank.js?v=202608060030"></script>
-<script src="vocab_unit_plan.js?v=202608060030"></script>
+<script src="cloud_sync.js?v=202608071556"></script>
+<script src="account_lock.js?v=202608071556"></script>
+<script src="supabase_auth.js?v=202608071556"></script>
+<script src="drills_list.js?v=202608071556"></script>
+<script src="grammar_nodes.js?v=202608071556"></script>
+<script src="grammar_plan.js?v=202608071556"></script>
+<script src="vocab_units.js?v=202608071556"></script>
+<script src="weekly_bank.js?v=202608071556"></script>
+<script src="vocab_unit_plan.js?v=202608071556"></script>
 <script>
 let _homeSynced = false;
 function pickStudent(name) {
@@ -434,8 +434,14 @@ function todayStr() {
 function markDone(p) {
   const claimed = (p.coins && p.coins.claimedDrills) || {};
   const today = todayStr();
+  // 除了 claimedDrills，也認金幣交易紀錄 —— 兩邊是 awardCoins 同一次寫的，但雲端同步
+  // 是整包覆蓋不是合併，只剩一邊的話小孩做完了卻沒有勾。drills_archive.html 同一套。
+  const drillDates = {};
+  ((p.coins && p.coins.transactions) || []).forEach(t => {
+    if (t && t.source === "dailyDrill" && t.meta && t.meta.date) drillDates[t.meta.date] = true;
+  });
   document.querySelectorAll(".card[data-claim]").forEach(c => {
-    c.dataset.done = claimed[c.dataset.claim] ? "1" : "0";
+    c.dataset.done = (claimed[c.dataset.claim] || drillDates[c.dataset.date]) ? "1" : "0";
   });
   document.querySelectorAll(".card[data-claim-today]").forEach(c => {
     c.dataset.done = claimed[today + "::" + c.dataset.claimToday] ? "1" : "0";
@@ -475,7 +481,7 @@ function _drillCard(d) {
   const sub = d.kind === "vocab"
     ? `${d.eng}：${d.zh} · 自動批改 · 賺金幣 🪙`
     : `${d.eng} ${d.zh} · 英聽/填空/閱讀/重組/圖片${d.day >= 17 ? " ＋📘進階" : ""}`;
-  return `<a class="card" href="drills/daily_${d.date}.html" data-claim="${claim}" data-unlock="${d.date}">
+  return `<a class="card" href="drills/daily_${d.date}.html" data-claim="${claim}" data-date="${d.date}" data-unlock="${d.date}">
       <div class="card-left"><div class="card-icon icon-drill">${d.icon}</div>
         <div><div class="card-title">Day ${d.day} — ${d.date}</div>
         <div class="card-sub">${sub}</div></div></div>
