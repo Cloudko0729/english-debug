@@ -50,6 +50,25 @@ ${fmtWords(w.words, 10)}
   return "weeks: [\n" + body + "\n    ]";
 }
 
+// 從 open（必須指向 '['）掃到對應的 ']'，回傳它的位置。
+// 字串裡的中括號要跳過 —— 中文詞義可能含有「[」這種字元。
+function matchBracket(src, open) {
+  if (src[open] !== "[") throw new Error("matchBracket 的起點不是 [");
+  let depth = 0, quote = null;
+  for (let i = open; i < src.length; i++) {
+    const c = src[i];
+    if (quote) {
+      if (c === "\\") { i++; continue; }
+      if (c === quote) quote = null;
+      continue;
+    }
+    if (c === '"' || c === "'" || c === "`") { quote = c; continue; }
+    if (c === "[") depth++;
+    else if (c === "]" && --depth === 0) return i;
+  }
+  throw new Error("找不到對應的 ]");
+}
+
 function main() {
   const plan = loadConst(PLAN_FILE, "VOCAB_PLAN");
   const curriculum = loadConst(CURRICULUM_FILE, "CURRICULUM");
@@ -80,18 +99,18 @@ function main() {
     const anchor = `month: ${JSON.stringify(month.month)}`;
     const at = src.indexOf(anchor);
     if (at < 0) throw new Error(`找不到 ${month.month} 的定義`);
-    const emptyAt = src.indexOf("weeks: []", at);
-    if (emptyAt < 0) {
-      if (!FORCE) { skipped.push(month.month); return; }
-      throw new Error(`${month.month} 的 weeks 不是空的，--force 尚未支援覆蓋非空週次`);
-    }
-    // 確認這個 weeks: [] 確實屬於這個月（下一個 month: 之前）
+    const startAt = src.indexOf("weeks: [", at);
+    if (startAt < 0) throw new Error(`找不到 ${month.month} 的 weeks:`);
+    // 確認這個 weeks: 確實屬於這個月（下一個 month: 之前）
     const nextMonthAt = src.indexOf("month: \"", at + anchor.length);
-    if (nextMonthAt >= 0 && emptyAt > nextMonthAt) {
-      throw new Error(`${month.month} 的 weeks: [] 落在下一個月份區塊，格式與預期不符`);
+    if (nextMonthAt >= 0 && startAt > nextMonthAt) {
+      throw new Error(`${month.month} 的 weeks: 落在下一個月份區塊，格式與預期不符`);
     }
+    const endAt = matchBracket(src, startAt + "weeks: ".length);
+    const isEmpty = src.slice(startAt, endAt + 1) === "weeks: []";
+    if (!isEmpty && !FORCE) { skipped.push(month.month); return; }
 
-    src = src.slice(0, emptyAt) + fmtWeeks(weeks, labels) + src.slice(emptyAt + "weeks: []".length);
+    src = src.slice(0, startAt) + fmtWeeks(weeks, labels) + src.slice(endAt + 1);
     filled.push({ month: month.month, weeks: weeks.length, words: weeks.reduce((s, w) => s + w.words.length, 0) });
   });
 

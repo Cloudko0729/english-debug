@@ -627,7 +627,203 @@ const WEEK_DRILLS = {
       }
     ]
   },
-  "2026-08-3": {            // 第3週 商店與購物 · 比較級/現在完成式
+  "2026-08-3": {            // 複習週① 7 月總複習 · 比較級/現在完成式
+    listenBlank: [
+      { full: "We want to explore the old town.", display: "We want to ___ the old town.", answer: "explore" },
+      { full: "My cousin has studied abroad for a year.", display: "My cousin has studied ___ for a year.", answer: "abroad" },
+      { full: "Her luggage is heavier than mine.", display: "Her ___ is heavier than mine.", answer: "luggage" },
+      { full: "A tourist asked me for directions.", display: "A ___ asked me for directions.", answer: "tourist" },
+      { full: "We waited at the airport for two hours.", display: "We waited at the ___ for two hours.", answer: "airport" },
+      { full: "The museum is quieter than the mall.", display: "The ___ is quieter than the mall.", answer: "museum" },
+      { full: "They have visited the beach three times.", display: "They have visited the ___ three times.", answer: "beach" },
+      { full: "I drew a small map for my friend.", display: "I drew a small ___ for my friend.", answer: "map" },
+      { full: "Our apartment is on the fifth floor.", display: "Our ___ is on the fifth floor.", answer: "apartment" },
+      { full: "The bakery opens earlier than the store.", display: "The ___ opens earlier than the store.", answer: "bakery" },
+      { full: "Please clean the bathroom before dinner.", display: "Please clean the ___ before dinner.", answer: "bathroom" },
+      { full: "My bedroom is smaller than my sister's.", display: "My ___ is smaller than my sister's.", answer: "bedroom" },
+      { full: "Someone is waiting at the gate.", display: "Someone is waiting at the ___.", answer: "gate" },
+      { full: "We watch TV in the living room.", display: "We watch TV in the ___.", answer: "living room" },
+      { full: "I mailed the card at the post office.", display: "I mailed the card at the ___.", answer: "post office" },
+      { full: "May I borrow your pencil?", display: "May I ___ your pencil?", answer: "borrow" },
+      { full: "She has joined the science club.", display: "She has joined the science ___.", answer: "club" },
+      { full: "Our class will put on a short drama.", display: "Our class will put on a short ___.", answer: "drama" },
+      { full: "Dad has bought a new camera.", display: "Dad has bought a new ___.", answer: "camera" },
+      { full: "I finished my book report last night.", display: "I finished my book ___ last night.", answer: "report" },
+      { full: "Please put the empty bottle in the box.", display: "Please put the empty ___ in the box.", answer: "bottle" },
+      { full: "My favorite subject is English.", display: "My favorite ___ is English.", answer: "subject" },
+      { full: "Her goal is to swim faster.", display: "Her ___ is to swim faster.", answer: "goal" },
+      { full: "Grandma washed the blanket yesterday.", display: "Grandma washed the ___ yesterday.", answer: "blanket" },
+      { full: "Please boil the water before you drink it.", display: "Please ___ the water before you drink it.", answer: "boil" }
+    ],
+    reorder: [
+      { sentence: "We have explored the old town twice.", chunks: ["We", "have explored", "the old town", "twice."] },
+      { sentence: "My cousin has studied abroad for a year.", chunks: ["My cousin", "has studied", "abroad", "for a year."] },
+      { sentence: "Her luggage is heavier than mine.", chunks: ["Her luggage", "is", "heavier than", "mine."] },
+      { sentence: "A tourist asked me for directions.", chunks: ["A tourist", "asked me", "for", "directions."] },
+      { sentence: "We waited at the airport for two hours.", chunks: ["We", "waited", "at the airport", "for two hours."] },
+      { sentence: "The museum is quieter than the mall.", chunks: ["The museum", "is", "quieter than", "the mall."] },
+      { sentence: "They have visited the beach three times.", chunks: ["They", "have visited", "the beach", "three times."] },
+      { sentence: "I drew a small map for my friend.", chunks: ["I", "drew", "a small map", "for my friend."] },
+      { sentence: "Our apartment is on the fifth floor.", chunks: ["Our apartment", "is", "on the", "fifth floor."] },
+      { sentence: "The bakery opens earlier than the store.", chunks: ["The bakery", "opens", "earlier than", "the store."] },
+      { sentence: "Please clean the bathroom before dinner.", chunks: ["Please", "clean", "the bathroom", "before dinner."] },
+      { sentence: "My bedroom is smaller than my sister's.", chunks: ["My bedroom", "is", "smaller than", "my sister's."] },
+      { sentence: "Someone is waiting at the gate.", chunks: ["Someone", "is waiting", "at the gate."] },
+      { sentence: "We watch TV in the living room.", chunks: ["We", "watch TV", "in the living room."] },
+      { sentence: "I mailed the card at the post office.", chunks: ["I", "mailed", "the card", "at the post office."] },
+      { sentence: "She has joined the science club.", chunks: ["She", "has joined", "the science club."] },
+      { sentence: "Our class will put on a short drama.", chunks: ["Our class", "will put on", "a short", "drama."] },
+      { sentence: "The brave boy climbed the tree carefully.", chunks: ["The brave boy", "climbed", "the tree", "carefully."] },
+      { sentence: "We finally found the way back.", chunks: ["We", "finally", "found", "the way back."] },
+      { sentence: "They have camped near the lake before.", chunks: ["They", "have camped", "near the lake", "before."] }
+    ],
+    reading: [
+      {
+        passage: "Last month my aunt came home from abroad. Her luggage was heavier than ours because she brought gifts for everyone. We met her at the airport with a big sign. On the way home she showed us photos on her camera. She has traveled to eight countries, and she says Japan is cleaner than most places she has seen.",
+        questions: [
+          { q: "Where did the aunt come home from?", choices: ["Abroad", "The beach", "School", "The museum"], answer: "Abroad" },
+          { q: "Why was her luggage heavier?", choices: ["She brought gifts", "It was old", "It was wet", "It was full of books"], answer: "She brought gifts" },
+          { q: "Where did they meet her?", choices: ["The airport", "The train station", "The gate of the school", "At home"], answer: "The airport" },
+          { q: "How many countries has she traveled to?", choices: ["Eight", "Three", "Two", "Ten"], answer: "Eight" }
+        ]
+      },
+      {
+        passage: "Our class went to the museum on Friday. A guide told us about old maps and how people explored the world. The science room was more interesting than I expected. Later we wrote a short report about what we saw. Our teacher said I had written mine carefully.",
+        questions: [
+          { q: "Where did the class go?", choices: ["The museum", "The bakery", "The beach", "The post office"], answer: "The museum" },
+          { q: "What did the guide talk about?", choices: ["Old maps and exploring", "Food and drinks", "Sports", "Animals"], answer: "Old maps and exploring" },
+          { q: "Which room was more interesting than expected?", choices: ["The science room", "The drama room", "The club room", "The map room"], answer: "The science room" },
+          { q: "What did they write afterwards?", choices: ["A short report", "A letter", "A map", "A story"], answer: "A short report" }
+        ]
+      },
+      {
+        passage: "We moved to a new apartment last summer. My bedroom is smaller than the old one, but the living room is much bigger. There is a bakery near the gate of our building, so I can smell bread every morning. The post office is only two minutes away. I have never lived in a place this convenient.",
+        questions: [
+          { q: "When did they move?", choices: ["Last summer", "Last winter", "Last week", "This month"], answer: "Last summer" },
+          { q: "How is the new bedroom?", choices: ["Smaller than the old one", "Bigger than the old one", "The same size", "Very dark"], answer: "Smaller than the old one" },
+          { q: "What is near the gate?", choices: ["A bakery", "A museum", "A post office", "A club"], answer: "A bakery" },
+          { q: "How does the writer feel about the place?", choices: ["It is very convenient", "It is too small", "It is noisy", "It is far from everything"], answer: "It is very convenient" }
+        ]
+      },
+      {
+        passage: "My brother joined the drama club this year, and I joined the science club. He says acting is harder than it looks. Last week he was brave enough to speak in front of the whole school. I helped him practice at home every night. Finally, on Saturday, his group won second place.",
+        questions: [
+          { q: "Which club did the brother join?", choices: ["The drama club", "The science club", "The music club", "The sports club"], answer: "The drama club" },
+          { q: "What does he say about acting?", choices: ["It is harder than it looks", "It is easy", "It is boring", "It is too short"], answer: "It is harder than it looks" },
+          { q: "How did the writer help?", choices: ["Practiced with him at home", "Wrote his lines", "Made his clothes", "Took photos"], answer: "Practiced with him at home" },
+          { q: "What happened on Saturday?", choices: ["His group won second place", "He was late", "He forgot his lines", "School closed"], answer: "His group won second place" }
+        ]
+      },
+      {
+        passage: "Every summer our family goes camping near the beach. Dad boils water for tea while Mom puts a blanket on the sand. I always bring a bottle of cold juice and a map of the trails. This year the water was warmer than last year, so we swam longer. Camping is more fun than staying in a hotel.",
+        questions: [
+          { q: "Where does the family go camping?", choices: ["Near the beach", "In the woods", "Near a lake", "Downtown"], answer: "Near the beach" },
+          { q: "What does Dad do?", choices: ["Boils water for tea", "Puts up the tent", "Draws a map", "Cooks fish"], answer: "Boils water for tea" },
+          { q: "What does the writer bring?", choices: ["A bottle of juice and a map", "A camera", "A blanket", "A bottle of milk"], answer: "A bottle of juice and a map" },
+          { q: "Why did they swim longer this year?", choices: ["The water was warmer", "The day was longer", "It did not rain", "They came early"], answer: "The water was warmer" }
+        ]
+      }
+    ]
+  },
+  "2026-08-4": {            // 複習週② 8 月上半總複習 · 比較級/現在完成式
+    listenBlank: [
+      { full: "The sign warns us about danger.", display: "The sign warns us about ___.", answer: "danger" },
+      { full: "Swimming alone is dangerous.", display: "Swimming alone is ___.", answer: "dangerous" },
+      { full: "Our teacher talks about safety every Monday.", display: "Our teacher talks about ___ every Monday.", answer: "safety" },
+      { full: "I feel calm when I am close to nature.", display: "I feel calm when I am close to ___.", answer: "nature" },
+      { full: "My family goes camping every August.", display: "My family goes ___ every August.", answer: "camping" },
+      { full: "My uncle enjoys mountain-climbing.", display: "My uncle enjoys ___.", answer: "mountain-climbing" },
+      { full: "I think hiking is cheaper than traveling.", display: "I think ___ is cheaper than traveling.", answer: "hiking" },
+      { full: "We will hike to the top tomorrow.", display: "We will ___ to the top tomorrow.", answer: "hike" },
+      { full: "My swimsuit is still wet.", display: "My ___ is still wet.", answer: "swimsuit" },
+      { full: "The boat is smaller than I remembered.", display: "The ___ is smaller than I remembered.", answer: "boat" },
+      { full: "We heard the waterfall before we saw it.", display: "We heard the ___ before we saw it.", answer: "waterfall" },
+      { full: "Ducks are swimming in the pond.", display: "Ducks are swimming in the ___.", answer: "pond" },
+      { full: "The ocean looks calmer today.", display: "The ___ looks calmer today.", answer: "ocean" },
+      { full: "Birds sing in the woods every morning.", display: "Birds sing in the ___ every morning.", answer: "woods" },
+      { full: "A mosquito flew into my room.", display: "A ___ flew into my room.", answer: "mosquito" },
+      { full: "Please pass me the big bowl.", display: "Please pass me the big ___.", answer: "bowl" },
+      { full: "The milk is in the refrigerator.", display: "The milk is in the ___.", answer: "refrigerator" },
+      { full: "Grandma put the cup on a saucer.", display: "Grandma put the cup on a ___.", answer: "saucer" },
+      { full: "We washed all the tableware after the party.", display: "We washed all the ___ after the party.", answer: "tableware" },
+      { full: "I think cooking is more fun than cleaning.", display: "I think ___ is more fun than cleaning.", answer: "cooking" },
+      { full: "Be careful with that sharp knife.", display: "Be careful with that sharp ___.", answer: "knife" },
+      { full: "There is one cookie left on the plate.", display: "There is one cookie left on the ___.", answer: "plate" },
+      { full: "The bread has been in the oven for ten minutes.", display: "The bread has been in the ___ for ten minutes.", answer: "oven" },
+      { full: "Heat the soup in the microwave.", display: "Heat the soup in the ___.", answer: "microwave" },
+      { full: "Turn off the stove when you finish.", display: "Turn off the ___ when you finish.", answer: "stove" }
+    ],
+    reorder: [
+      { sentence: "The sign warns us about danger.", chunks: ["The sign", "warns us", "about danger."] },
+      { sentence: "Swimming alone is more dangerous than you think.", chunks: ["Swimming alone", "is", "more dangerous", "than you think."] },
+      { sentence: "Our teacher talks about safety every Monday.", chunks: ["Our teacher", "talks about", "safety", "every Monday."] },
+      { sentence: "I feel calm when I am in nature.", chunks: ["I", "feel calm", "when I am", "in nature."] },
+      { sentence: "My family goes camping every August.", chunks: ["My family", "goes camping", "every August."] },
+      { sentence: "My uncle has enjoyed mountain-climbing for years.", chunks: ["My uncle", "has enjoyed", "mountain-climbing", "for years."] },
+      { sentence: "Hiking is cheaper than traveling abroad.", chunks: ["Hiking", "is", "cheaper than", "traveling abroad."] },
+      { sentence: "We will hike to the top tomorrow.", chunks: ["We", "will hike", "to the top", "tomorrow."] },
+      { sentence: "My swimsuit is still wet.", chunks: ["My swimsuit", "is", "still wet."] },
+      { sentence: "The boat is smaller than I remembered.", chunks: ["The boat", "is", "smaller than", "I remembered."] },
+      { sentence: "We heard the waterfall before we saw it.", chunks: ["We", "heard", "the waterfall", "before we saw it."] },
+      { sentence: "The ocean looks calmer today.", chunks: ["The ocean", "looks", "calmer", "today."] },
+      { sentence: "A mosquito flew into my room.", chunks: ["A mosquito", "flew", "into my room."] },
+      { sentence: "Please pass me the big bowl.", chunks: ["Please", "pass me", "the big bowl."] },
+      { sentence: "Mom keeps the ice cream in the freezer.", chunks: ["Mom", "keeps", "the ice cream", "in the freezer."] },
+      { sentence: "Grandma put a napkin next to each plate.", chunks: ["Grandma", "put", "a napkin", "next to each plate."] },
+      { sentence: "We washed all the tableware after the party.", chunks: ["We", "washed", "all the tableware", "after the party."] },
+      { sentence: "Dad has filled the teapot with hot water.", chunks: ["Dad", "has filled", "the teapot", "with hot water."] },
+      { sentence: "Please put a clean table cloth on the table.", chunks: ["Please", "put", "a clean table cloth", "on the table."] },
+      { sentence: "Turn off the stove when you finish.", chunks: ["Turn off", "the stove", "when you finish."] }
+    ],
+    reading: [
+      {
+        passage: "Last weekend our family went camping in the woods again. It was my third time this summer, so I have learned the safety rules well. Dad said the river is more dangerous than it looks, so we stayed near the pond. At night a mosquito kept me awake. Even so, sleeping in nature is better than sleeping at home.",
+        questions: [
+          { q: "How many times has the writer been camping this summer?", choices: ["Three", "One", "Two", "Five"], answer: "Three" },
+          { q: "What did Dad say about the river?", choices: ["It is more dangerous than it looks", "It is shallow", "It is clean", "It is far away"], answer: "It is more dangerous than it looks" },
+          { q: "What kept the writer awake?", choices: ["A mosquito", "The rain", "The wind", "A bird"], answer: "A mosquito" },
+          { q: "What does the writer think?", choices: ["Sleeping in nature is better", "Home is better", "Camping is boring", "The pond is too cold"], answer: "Sleeping in nature is better" }
+        ]
+      },
+      {
+        passage: "Our class walked to the waterfall on Tuesday. Hiking there took two hours, which is longer than our teacher expected. On the way we saw a small boat on the pond. One boy forgot his swimsuit, so he could not swim with us. Our teacher reminded everyone that safety comes before fun.",
+        questions: [
+          { q: "Where did the class walk to?", choices: ["The waterfall", "The ocean", "The woods", "The pond"], answer: "The waterfall" },
+          { q: "How long did the hiking take?", choices: ["Two hours", "One hour", "Three hours", "All day"], answer: "Two hours" },
+          { q: "Why could one boy not swim?", choices: ["He forgot his swimsuit", "He was sick", "He was scared", "He came late"], answer: "He forgot his swimsuit" },
+          { q: "What did the teacher remind them?", choices: ["Safety comes before fun", "To walk faster", "To bring water", "To stay together"], answer: "Safety comes before fun" }
+        ]
+      },
+      {
+        passage: "My grandmother has cooked for our family for forty years. This morning she took a bowl of eggs from the refrigerator and made breakfast. She heated the milk in the microwave because it is faster than the stove. Then she put a clean table cloth on the table and a napkin beside every plate. Her breakfast is better than any restaurant's.",
+        questions: [
+          { q: "How long has Grandma cooked for the family?", choices: ["Forty years", "Four years", "Fourteen years", "All summer"], answer: "Forty years" },
+          { q: "Where did she take the eggs from?", choices: ["The refrigerator", "The freezer", "The oven", "A jar"], answer: "The refrigerator" },
+          { q: "Why did she use the microwave?", choices: ["It is faster than the stove", "It is cleaner", "It is quieter", "It is bigger"], answer: "It is faster than the stove" },
+          { q: "What did she put on the table?", choices: ["A table cloth and napkins", "A teapot", "A saucer", "A bowl of soup"], answer: "A table cloth and napkins" }
+        ]
+      },
+      {
+        passage: "Dad taught me how to use a knife safely today. He said a sharp knife is safer than a dull one if you hold it correctly. First we cut vegetables and put them on a plate. Then we baked bread in the oven for twenty minutes. Cooking has become my favorite thing to do on Sundays.",
+        questions: [
+          { q: "What did Dad teach?", choices: ["How to use a knife safely", "How to bake bread", "How to wash plates", "How to boil water"], answer: "How to use a knife safely" },
+          { q: "What did they do first?", choices: ["Cut vegetables", "Bake bread", "Wash the plate", "Heat the oven"], answer: "Cut vegetables" },
+          { q: "How long was the bread in the oven?", choices: ["Twenty minutes", "Ten minutes", "One hour", "Two minutes"], answer: "Twenty minutes" },
+          { q: "What has become the writer's favorite Sunday activity?", choices: ["Cooking", "Hiking", "Swimming", "Reading"], answer: "Cooking" }
+        ]
+      },
+      {
+        passage: "The ocean near my grandparents' house is calmer in the morning than in the afternoon. My cousin and I have swum there every summer since we were six. This year we rented a small boat and rowed to a rock. On the way back my swimsuit got caught on the side of the boat. We laughed the whole way home.",
+        questions: [
+          { q: "When is the ocean calmer?", choices: ["In the morning", "In the afternoon", "At night", "On Sunday"], answer: "In the morning" },
+          { q: "How long have they swum there?", choices: ["Since they were six", "For one year", "Since last summer", "For ten days"], answer: "Since they were six" },
+          { q: "What did they rent this year?", choices: ["A small boat", "A swimsuit", "A bowl", "A camera"], answer: "A small boat" },
+          { q: "What happened on the way back?", choices: ["The swimsuit got caught", "The boat sank", "It rained", "They got lost"], answer: "The swimsuit got caught" }
+        ]
+      }
+    ]
+  },
+  "2026-09-1": {            // 第3週 商店與購物 · 比較級/現在完成式
     listenBlank: [
       { full: "We went shopping on Saturday morning.", display: "We went ___ on Saturday morning.", answer: "shopping" },
       { full: "I bought milk at the convenience store.", display: "I bought milk at the ___.", answer: "convenience store" },
@@ -725,7 +921,7 @@ const WEEK_DRILLS = {
       }
     ]
   },
-  "2026-08-4": {            // 第4週 城市與交通 · 比較級/現在完成式
+  "2026-09-2": {            // 第4週 城市與交通 · 比較級/現在完成式
     listenBlank: [
       { full: "The airplane landed ten minutes late.", display: "The ___ landed ten minutes late.", answer: "airplane" },
       { full: "We took a taxi to the hospital.", display: "We took a ___ to the hospital.", answer: "taxi" },
@@ -975,13 +1171,27 @@ const PASSAGE_GLOSSARY = {
     [{"en":"saltier","zh":"更鹹的"}, {"en":"expected","zh":"預期"}]
   ],
   "2026-08-3": [
+    [{"en":"countries","zh":"國家（複數）"}],
+    [{"en":"guide","zh":"導覽員"}, {"en":"expected","zh":"預期"}],
+    [{"en":"convenient","zh":"方便的"}],
+    [{"en":"acting","zh":"演戲"}, {"en":"second place","zh":"第二名"}],
+    [{"en":"trails","zh":"步道"}]
+  ],
+  "2026-08-4": [
+    [{"en":"awake","zh":"醒著的"}],
+    [{"en":"expected","zh":"預期"}, {"en":"reminded","zh":"提醒"}],
+    [{"en":"heated","zh":"加熱"}],
+    [{"en":"dull","zh":"鈍的"}, {"en":"correctly","zh":"正確地"}, {"en":"vegetables","zh":"蔬菜"}],
+    [{"en":"calmer","zh":"更平靜的"}, {"en":"rowed","zh":"划（船）"}, {"en":"caught","zh":"卡住（catch 的過去式）"}]
+  ],
+  "2026-09-1": [
     [],
     [{"en":"thought","zh":"心意；想法"}],
     [{"en":"front desk","zh":"服務台"}, {"en":"missing","zh":"不見的"}],
     [{"en":"machines","zh":"機器"}],
     []
   ],
-  "2026-08-4": [
+  "2026-09-2": [
     [],
     [{"en":"honesty","zh":"誠實"}],
     [{"en":"expected","zh":"預期"}],

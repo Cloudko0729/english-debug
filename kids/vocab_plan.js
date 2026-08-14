@@ -325,157 +325,157 @@ const VOCAB_PLAN = {
    "n": 3,
    "start": "2026-08-16",
    "end": "2026-08-22",
-   "theme": "商店與購物",
+   "theme": "7 月總複習",
    "words": [
     {
-     "en": "shopping",
-     "zh": "購物",
-     "pos": "n"
-    },
-    {
-     "en": "convenience store",
-     "zh": "便利商店",
-     "pos": "n"
-    },
-    {
-     "en": "department store",
-     "zh": "百貨公司",
-     "pos": "n"
-    },
-    {
-     "en": "drugstore",
-     "zh": "藥局",
-     "pos": "n"
-    },
-    {
-     "en": "flower shop",
-     "zh": "花店",
-     "pos": "n"
-    },
-    {
-     "en": "stationery store",
-     "zh": "文具店",
-     "pos": "n"
-    },
-    {
-     "en": "clerk",
-     "zh": "店員",
-     "pos": "n"
-    },
-    {
-     "en": "shopkeeper",
-     "zh": "店主",
-     "pos": "n"
-    },
-    {
-     "en": "sale",
-     "zh": "特價",
-     "pos": "n"
-    },
-    {
-     "en": "sell",
-     "zh": "賣",
+     "en": "explore",
+     "zh": "探索",
      "pos": "v"
     },
     {
-     "en": "cost",
-     "zh": "花費",
+     "en": "abroad",
+     "zh": "在國外、到國外",
+     "pos": "adv"
+    },
+    {
+     "en": "luggage",
+     "zh": "行李",
+     "pos": "n"
+    },
+    {
+     "en": "tourist",
+     "zh": "觀光客",
+     "pos": "n"
+    },
+    {
+     "en": "airport",
+     "zh": "機場",
+     "pos": "n"
+    },
+    {
+     "en": "museum",
+     "zh": "博物館",
+     "pos": "n"
+    },
+    {
+     "en": "beach",
+     "zh": "海灘",
+     "pos": "n"
+    },
+    {
+     "en": "map",
+     "zh": "地圖",
+     "pos": "n"
+    },
+    {
+     "en": "apartment",
+     "zh": "公寓",
+     "pos": "n"
+    },
+    {
+     "en": "bakery",
+     "zh": "麵包店",
+     "pos": "n"
+    },
+    {
+     "en": "bathroom",
+     "zh": "浴室",
+     "pos": "n"
+    },
+    {
+     "en": "bedroom",
+     "zh": "臥室",
+     "pos": "n"
+    },
+    {
+     "en": "gate",
+     "zh": "大門",
+     "pos": "n"
+    },
+    {
+     "en": "living room",
+     "zh": "客廳",
+     "pos": "n"
+    },
+    {
+     "en": "post office",
+     "zh": "郵局",
+     "pos": "n"
+    },
+    {
+     "en": "borrow",
+     "zh": "借入",
      "pos": "v"
     },
     {
-     "en": "coin",
-     "zh": "硬幣",
+     "en": "club",
+     "zh": "社團",
      "pos": "n"
     },
     {
-     "en": "purse",
-     "zh": "錢包",
+     "en": "drama",
+     "zh": "戲劇",
      "pos": "n"
     },
     {
-     "en": "wallet",
-     "zh": "錢包",
+     "en": "camera",
+     "zh": "相機",
      "pos": "n"
     },
     {
-     "en": "mall",
-     "zh": "散步式商店街",
+     "en": "report",
+     "zh": "報告",
      "pos": "n"
     },
     {
-     "en": "postcard",
-     "zh": "明信片",
+     "en": "science",
+     "zh": "科學",
      "pos": "n"
     },
     {
-     "en": "stationery",
-     "zh": "文具",
+     "en": "subject",
+     "zh": "科目",
      "pos": "n"
     },
     {
-     "en": "cd player",
-     "zh": "雷射唱片播放器",
+     "en": "goal",
+     "zh": "目標",
      "pos": "n"
     },
     {
-     "en": "tape recorder",
-     "zh": "錄音機",
+     "en": "blanket",
+     "zh": "毯子",
      "pos": "n"
     },
     {
-     "en": "vcr",
-     "zh": "錄影機",
+     "en": "boil",
+     "zh": "煮沸",
+     "pos": "v"
+    },
+    {
+     "en": "bottle",
+     "zh": "瓶子",
      "pos": "n"
     },
     {
-     "en": "video",
-     "zh": "影片",
-     "pos": "n"
+     "en": "brave",
+     "zh": "勇敢的",
+     "pos": "adj"
     },
     {
-     "en": "radio",
-     "zh": "收音機",
-     "pos": "n"
+     "en": "camp",
+     "zh": "露營、營地",
+     "pos": "v"
     },
     {
-     "en": "blouse",
-     "zh": "女式襯衫",
-     "pos": "n"
+     "en": "carefully",
+     "zh": "小心地",
+     "pos": "adv"
     },
     {
-     "en": "glove",
-     "zh": "手套",
-     "pos": "n"
-    },
-    {
-     "en": "sneakers",
-     "zh": "膠底運動鞋",
-     "pos": "n"
-    },
-    {
-     "en": "suitcase",
-     "zh": "衣箱",
-     "pos": "n"
-    },
-    {
-     "en": "cash",
-     "zh": "現金",
-     "pos": "n"
-    },
-    {
-     "en": "credit card",
-     "zh": "信用卡",
-     "pos": "n"
-    },
-    {
-     "en": "customer",
-     "zh": "顧客",
-     "pos": "n"
-    },
-    {
-     "en": "salesman",
-     "zh": "銷售員",
-     "pos": "n"
+     "en": "finally",
+     "zh": "最後、終於",
+     "pos": "adv"
     }
    ],
    "review": []
@@ -484,156 +484,156 @@ const VOCAB_PLAN = {
    "n": 4,
    "start": "2026-08-23",
    "end": "2026-08-29",
-   "theme": "城市與交通",
+   "theme": "8 月上半總複習",
    "words": [
     {
-     "en": "airplane",
-     "zh": "飛機",
+     "en": "danger",
+     "zh": "危險",
      "pos": "n"
     },
     {
-     "en": "taxi",
-     "zh": "計程車",
+     "en": "dangerous",
+     "zh": "危險的",
+     "pos": "adj"
+    },
+    {
+     "en": "safety",
+     "zh": "安全",
      "pos": "n"
     },
     {
-     "en": "subway",
-     "zh": "地鐵",
+     "en": "nature",
+     "zh": "大自然",
      "pos": "n"
     },
     {
-     "en": "mrt",
-     "zh": "大眾捷運系統 Mas",
+     "en": "camping",
+     "zh": "露營",
      "pos": "n"
     },
     {
-     "en": "motorcycle",
-     "zh": "機車",
+     "en": "mountain-climbing",
+     "zh": "登山",
      "pos": "n"
     },
     {
-     "en": "bicycle riding",
-     "zh": "騎腳踏車",
+     "en": "hiking",
+     "zh": "步行",
      "pos": "n"
     },
     {
-     "en": "driver",
-     "zh": "司機",
+     "en": "hike",
+     "zh": "遠足",
+     "pos": "v"
+    },
+    {
+     "en": "swimsuit",
+     "zh": "游泳衣",
      "pos": "n"
     },
     {
-     "en": "gas station",
-     "zh": "加油站",
+     "en": "boat",
+     "zh": "船",
      "pos": "n"
     },
     {
-     "en": "parking lot",
-     "zh": "停車場",
+     "en": "waterfall",
+     "zh": "瀑布",
      "pos": "n"
     },
     {
-     "en": "train station",
-     "zh": "火車站",
+     "en": "pond",
+     "zh": "池塘",
      "pos": "n"
     },
     {
-     "en": "traffic jam",
-     "zh": "交通阻塞",
+     "en": "ocean",
+     "zh": "洋",
      "pos": "n"
     },
     {
-     "en": "traffic light",
-     "zh": "交通燈號誌",
+     "en": "woods",
+     "zh": "樹林",
      "pos": "n"
     },
     {
-     "en": "traffic lights",
-     "zh": "紅綠燈",
+     "en": "mosquito",
+     "zh": "蚊子",
      "pos": "n"
     },
     {
-     "en": "traffic sign",
-     "zh": "交通號誌",
+     "en": "bowl",
+     "zh": "碗",
      "pos": "n"
     },
     {
-     "en": "downtown",
-     "zh": "往市中心",
-     "pos": "adv"
-    },
-    {
-     "en": "building",
-     "zh": "建築物",
+     "en": "refrigerator",
+     "zh": "冰箱",
      "pos": "n"
     },
     {
-     "en": "corner",
-     "zh": "角",
+     "en": "saucer",
+     "zh": "碟子",
      "pos": "n"
     },
     {
-     "en": "sign",
-     "zh": "標記",
+     "en": "tableware",
+     "zh": "餐具",
      "pos": "n"
     },
     {
-     "en": "entrance",
-     "zh": "入口",
+     "en": "cooking",
+     "zh": "烹調(n)  烹調用",
      "pos": "n"
     },
     {
-     "en": "exit",
-     "zh": "出口",
+     "en": "knife",
+     "zh": "刀子",
      "pos": "n"
     },
     {
-     "en": "get on",
-     "zh": "上車",
-     "pos": "phr"
-    },
-    {
-     "en": "get off",
-     "zh": "下車",
-     "pos": "phr"
-    },
-    {
-     "en": "get in",
-     "zh": "進入",
-     "pos": "phr"
-    },
-    {
-     "en": "garage",
-     "zh": "車庫",
+     "en": "plate",
+     "zh": "盤子",
      "pos": "n"
     },
     {
-     "en": "flat tire",
-     "zh": "洩了氣的輪胎",
+     "en": "oven",
+     "zh": "烤爐",
      "pos": "n"
     },
     {
-     "en": "wheel",
-     "zh": "輪",
+     "en": "microwave",
+     "zh": "微波",
      "pos": "n"
     },
     {
-     "en": "traffic",
-     "zh": "交通",
+     "en": "microwave oven",
+     "zh": "微波爐",
      "pos": "n"
     },
     {
-     "en": "sidewalk",
-     "zh": "人行道",
+     "en": "stove",
+     "zh": "爐",
      "pos": "n"
     },
     {
-     "en": "highway",
-     "zh": "公路",
+     "en": "freezer",
+     "zh": "冷凍裝置",
      "pos": "n"
     },
     {
-     "en": "passenger",
-     "zh": "乘客",
+     "en": "table cloth",
+     "zh": "桌布",
+     "pos": "n"
+    },
+    {
+     "en": "teapot",
+     "zh": "茶壺",
+     "pos": "n"
+    },
+    {
+     "en": "napkin",
+     "zh": "餐巾",
      "pos": "n"
     }
    ],
@@ -799,325 +799,325 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 6,
+   "n": 1,
    "start": "2026-09-06",
    "end": "2026-09-12",
-   "theme": "天氣與季節",
+   "theme": "商店與購物",
    "words": [
     {
-     "en": "raincoat",
-     "zh": "雨衣",
+     "en": "shopping",
+     "zh": "購物",
      "pos": "n"
     },
     {
-     "en": "shower",
-     "zh": "陣雨",
+     "en": "convenience store",
+     "zh": "便利商店",
      "pos": "n"
     },
     {
-     "en": "snowman",
-     "zh": "雪人",
+     "en": "department store",
+     "zh": "百貨公司",
      "pos": "n"
     },
     {
-     "en": "snowy",
-     "zh": "下雪的",
-     "pos": "adj"
-    },
-    {
-     "en": "storm",
-     "zh": "暴風雨",
+     "en": "drugstore",
+     "zh": "藥局",
      "pos": "n"
     },
     {
-     "en": "stormy",
-     "zh": "暴風雨的",
-     "pos": "adj"
-    },
-    {
-     "en": "thunder",
-     "zh": "雷(n)  打雷",
+     "en": "flower shop",
+     "zh": "花店",
      "pos": "n"
     },
     {
-     "en": "temperature",
-     "zh": "溫度",
+     "en": "stationery store",
+     "zh": "文具店",
      "pos": "n"
     },
     {
-     "en": "fog",
-     "zh": "霧(n)  霧",
+     "en": "clerk",
+     "zh": "店員",
      "pos": "n"
     },
     {
-     "en": "foggy",
-     "zh": "多霧的",
-     "pos": "adj"
+     "en": "shopkeeper",
+     "zh": "店主",
+     "pos": "n"
     },
     {
-     "en": "freezing",
-     "zh": "結冰的",
-     "pos": "adj"
+     "en": "sale",
+     "zh": "特價",
+     "pos": "n"
     },
     {
-     "en": "shine",
-     "zh": "照耀",
+     "en": "sell",
+     "zh": "賣",
      "pos": "v"
     },
     {
-     "en": "sweater",
-     "zh": "毛衣",
+     "en": "cost",
+     "zh": "花費",
+     "pos": "v"
+    },
+    {
+     "en": "coin",
+     "zh": "硬幣",
      "pos": "n"
     },
     {
-     "en": "scarf",
-     "zh": "圍巾",
+     "en": "purse",
+     "zh": "錢包",
      "pos": "n"
     },
     {
-     "en": "gloves",
+     "en": "wallet",
+     "zh": "錢包",
+     "pos": "n"
+    },
+    {
+     "en": "mall",
+     "zh": "散步式商店街",
+     "pos": "n"
+    },
+    {
+     "en": "postcard",
+     "zh": "明信片",
+     "pos": "n"
+    },
+    {
+     "en": "stationery",
+     "zh": "文具",
+     "pos": "n"
+    },
+    {
+     "en": "cd player",
+     "zh": "雷射唱片播放器",
+     "pos": "n"
+    },
+    {
+     "en": "tape recorder",
+     "zh": "錄音機",
+     "pos": "n"
+    },
+    {
+     "en": "vcr",
+     "zh": "錄影機",
+     "pos": "n"
+    },
+    {
+     "en": "video",
+     "zh": "影片",
+     "pos": "n"
+    },
+    {
+     "en": "radio",
+     "zh": "收音機",
+     "pos": "n"
+    },
+    {
+     "en": "blouse",
+     "zh": "女式襯衫",
+     "pos": "n"
+    },
+    {
+     "en": "glove",
      "zh": "手套",
      "pos": "n"
     },
     {
-     "en": "north",
-     "zh": "北方",
+     "en": "sneakers",
+     "zh": "膠底運動鞋",
      "pos": "n"
     },
     {
-     "en": "south",
-     "zh": "南方",
+     "en": "suitcase",
+     "zh": "衣箱",
      "pos": "n"
     },
     {
-     "en": "east",
-     "zh": "東方",
+     "en": "cash",
+     "zh": "現金",
      "pos": "n"
     },
     {
-     "en": "west",
-     "zh": "西方",
+     "en": "credit card",
+     "zh": "信用卡",
      "pos": "n"
     },
     {
-     "en": "outer space",
-     "zh": "外太空",
+     "en": "customer",
+     "zh": "顧客",
      "pos": "n"
     },
     {
-     "en": "earth",
-     "zh": "地球",
+     "en": "salesman",
+     "zh": "銷售員",
      "pos": "n"
-    },
-    {
-     "en": "space",
-     "zh": "太空",
-     "pos": "n"
-    },
-    {
-     "en": "typhoon",
-     "zh": "颱風",
-     "pos": "n"
-    },
-    {
-     "en": "rainbow",
-     "zh": "彩虹",
-     "pos": "n"
-    },
-    {
-     "en": "lightning",
-     "zh": "閃電",
-     "pos": "n"
-    },
-    {
-     "en": "humid",
-     "zh": "有濕氣的",
-     "pos": "adj"
-    },
-    {
-     "en": "northern",
-     "zh": "北方的",
-     "pos": "adj"
-    },
-    {
-     "en": "southern",
-     "zh": "南方的",
-     "pos": "adj"
-    },
-    {
-     "en": "eastern",
-     "zh": "東方的",
-     "pos": "adj"
-    },
-    {
-     "en": "western",
-     "zh": "西的",
-     "pos": "adj"
     }
    ],
    "review": []
   },
   {
-   "n": 7,
+   "n": 2,
    "start": "2026-09-13",
    "end": "2026-09-19",
-   "theme": "圖書館與閱讀",
+   "theme": "城市與交通",
    "words": [
     {
-     "en": "bookcase",
-     "zh": "書櫥",
+     "en": "airplane",
+     "zh": "飛機",
      "pos": "n"
     },
     {
-     "en": "dictionary",
-     "zh": "字典",
+     "en": "taxi",
+     "zh": "計程車",
      "pos": "n"
     },
     {
-     "en": "magazine",
-     "zh": "雜誌",
+     "en": "subway",
+     "zh": "地鐵",
      "pos": "n"
     },
     {
-     "en": "story",
-     "zh": "故事",
+     "en": "mrt",
+     "zh": "大眾捷運系統 Mas",
      "pos": "n"
     },
     {
-     "en": "textbook",
-     "zh": "教科書",
+     "en": "motorcycle",
+     "zh": "機車",
      "pos": "n"
     },
     {
-     "en": "workbook",
-     "zh": "習作",
+     "en": "bicycle riding",
+     "zh": "騎腳踏車",
      "pos": "n"
     },
     {
-     "en": "reading test",
-     "zh": "閱讀測驗",
+     "en": "driver",
+     "zh": "司機",
      "pos": "n"
     },
     {
-     "en": "print",
-     "zh": "印刷",
-     "pos": "v"
-    },
-    {
-     "en": "printer",
-     "zh": "印表機",
+     "en": "gas station",
+     "zh": "加油站",
      "pos": "n"
     },
     {
-     "en": "sheet",
-     "zh": "(一)張",
+     "en": "parking lot",
+     "zh": "停車場",
      "pos": "n"
     },
     {
-     "en": "note",
-     "zh": "便條",
+     "en": "train station",
+     "zh": "火車站",
      "pos": "n"
     },
     {
-     "en": "ink",
-     "zh": "墨水",
+     "en": "traffic jam",
+     "zh": "交通阻塞",
      "pos": "n"
     },
     {
-     "en": "rubber",
-     "zh": "橡皮",
+     "en": "traffic light",
+     "zh": "交通燈號誌",
      "pos": "n"
     },
     {
-     "en": "envelope",
-     "zh": "信封",
+     "en": "traffic lights",
+     "zh": "紅綠燈",
      "pos": "n"
     },
     {
-     "en": "e-mail",
-     "zh": "電子郵件",
+     "en": "traffic sign",
+     "zh": "交通號誌",
      "pos": "n"
     },
     {
-     "en": "email",
-     "zh": "電子郵件",
-     "pos": "n"
-    },
-    {
-     "en": "review",
-     "zh": "評論",
-     "pos": "v"
-    },
-    {
-     "en": "history",
-     "zh": "歷史",
-     "pos": "n"
-    },
-    {
-     "en": "leaf",
-     "zh": "葉子(書刊的)張",
-     "pos": "n"
-    },
-    {
-     "en": "marker",
-     "zh": "作記號的人",
-     "pos": "n"
-    },
-    {
-     "en": "aloud",
-     "zh": "出聲地",
+     "en": "downtown",
+     "zh": "往市中心",
      "pos": "adv"
     },
     {
-     "en": "album",
-     "zh": "相簿",
+     "en": "building",
+     "zh": "建築物",
      "pos": "n"
     },
     {
-     "en": "article",
-     "zh": "文章",
+     "en": "corner",
+     "zh": "角",
      "pos": "n"
     },
     {
-     "en": "chapter",
-     "zh": "(書籍)章",
+     "en": "sign",
+     "zh": "標記",
      "pos": "n"
     },
     {
-     "en": "comic",
-     "zh": "漫畫",
+     "en": "entrance",
+     "zh": "入口",
      "pos": "n"
     },
     {
-     "en": "letter",
-     "zh": "信",
+     "en": "exit",
+     "zh": "出口",
      "pos": "n"
     },
     {
-     "en": "typewriter",
-     "zh": "打字機",
+     "en": "get on",
+     "zh": "上車",
+     "pos": "phr"
+    },
+    {
+     "en": "get off",
+     "zh": "下車",
+     "pos": "phr"
+    },
+    {
+     "en": "get in",
+     "zh": "進入",
+     "pos": "phr"
+    },
+    {
+     "en": "garage",
+     "zh": "車庫",
      "pos": "n"
     },
     {
-     "en": "title",
-     "zh": "標題",
+     "en": "flat tire",
+     "zh": "洩了氣的輪胎",
      "pos": "n"
     },
     {
-     "en": "vocabulary",
-     "zh": "字彙",
+     "en": "wheel",
+     "zh": "輪",
      "pos": "n"
     },
     {
-     "en": "poem",
-     "zh": "詩",
+     "en": "traffic",
+     "zh": "交通",
+     "pos": "n"
+    },
+    {
+     "en": "sidewalk",
+     "zh": "人行道",
+     "pos": "n"
+    },
+    {
+     "en": "highway",
+     "zh": "公路",
+     "pos": "n"
+    },
+    {
+     "en": "passenger",
+     "zh": "乘客",
      "pos": "n"
     }
    ],
    "review": []
   },
   {
-   "n": 8,
+   "n": 3,
    "start": "2026-09-20",
    "end": "2026-09-26",
    "theme": "中秋與家人",
@@ -1276,9 +1276,327 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 9,
+   "n": 4,
    "start": "2026-09-27",
    "end": "2026-10-03",
+   "theme": "天氣與季節",
+   "words": [
+    {
+     "en": "raincoat",
+     "zh": "雨衣",
+     "pos": "n"
+    },
+    {
+     "en": "shower",
+     "zh": "陣雨",
+     "pos": "n"
+    },
+    {
+     "en": "snowman",
+     "zh": "雪人",
+     "pos": "n"
+    },
+    {
+     "en": "snowy",
+     "zh": "下雪的",
+     "pos": "adj"
+    },
+    {
+     "en": "storm",
+     "zh": "暴風雨",
+     "pos": "n"
+    },
+    {
+     "en": "stormy",
+     "zh": "暴風雨的",
+     "pos": "adj"
+    },
+    {
+     "en": "thunder",
+     "zh": "雷(n)  打雷",
+     "pos": "n"
+    },
+    {
+     "en": "temperature",
+     "zh": "溫度",
+     "pos": "n"
+    },
+    {
+     "en": "fog",
+     "zh": "霧(n)  霧",
+     "pos": "n"
+    },
+    {
+     "en": "foggy",
+     "zh": "多霧的",
+     "pos": "adj"
+    },
+    {
+     "en": "freezing",
+     "zh": "結冰的",
+     "pos": "adj"
+    },
+    {
+     "en": "shine",
+     "zh": "照耀",
+     "pos": "v"
+    },
+    {
+     "en": "sweater",
+     "zh": "毛衣",
+     "pos": "n"
+    },
+    {
+     "en": "scarf",
+     "zh": "圍巾",
+     "pos": "n"
+    },
+    {
+     "en": "gloves",
+     "zh": "手套",
+     "pos": "n"
+    },
+    {
+     "en": "north",
+     "zh": "北方",
+     "pos": "n"
+    },
+    {
+     "en": "south",
+     "zh": "南方",
+     "pos": "n"
+    },
+    {
+     "en": "east",
+     "zh": "東方",
+     "pos": "n"
+    },
+    {
+     "en": "west",
+     "zh": "西方",
+     "pos": "n"
+    },
+    {
+     "en": "outer space",
+     "zh": "外太空",
+     "pos": "n"
+    },
+    {
+     "en": "earth",
+     "zh": "地球",
+     "pos": "n"
+    },
+    {
+     "en": "space",
+     "zh": "太空",
+     "pos": "n"
+    },
+    {
+     "en": "typhoon",
+     "zh": "颱風",
+     "pos": "n"
+    },
+    {
+     "en": "rainbow",
+     "zh": "彩虹",
+     "pos": "n"
+    },
+    {
+     "en": "lightning",
+     "zh": "閃電",
+     "pos": "n"
+    },
+    {
+     "en": "humid",
+     "zh": "有濕氣的",
+     "pos": "adj"
+    },
+    {
+     "en": "northern",
+     "zh": "北方的",
+     "pos": "adj"
+    },
+    {
+     "en": "southern",
+     "zh": "南方的",
+     "pos": "adj"
+    },
+    {
+     "en": "eastern",
+     "zh": "東方的",
+     "pos": "adj"
+    },
+    {
+     "en": "western",
+     "zh": "西的",
+     "pos": "adj"
+    }
+   ],
+   "review": []
+  },
+  {
+   "n": 1,
+   "start": "2026-10-04",
+   "end": "2026-10-10",
+   "theme": "圖書館與閱讀",
+   "words": [
+    {
+     "en": "bookcase",
+     "zh": "書櫥",
+     "pos": "n"
+    },
+    {
+     "en": "dictionary",
+     "zh": "字典",
+     "pos": "n"
+    },
+    {
+     "en": "magazine",
+     "zh": "雜誌",
+     "pos": "n"
+    },
+    {
+     "en": "story",
+     "zh": "故事",
+     "pos": "n"
+    },
+    {
+     "en": "textbook",
+     "zh": "教科書",
+     "pos": "n"
+    },
+    {
+     "en": "workbook",
+     "zh": "習作",
+     "pos": "n"
+    },
+    {
+     "en": "reading test",
+     "zh": "閱讀測驗",
+     "pos": "n"
+    },
+    {
+     "en": "print",
+     "zh": "印刷",
+     "pos": "v"
+    },
+    {
+     "en": "printer",
+     "zh": "印表機",
+     "pos": "n"
+    },
+    {
+     "en": "sheet",
+     "zh": "(一)張",
+     "pos": "n"
+    },
+    {
+     "en": "note",
+     "zh": "便條",
+     "pos": "n"
+    },
+    {
+     "en": "ink",
+     "zh": "墨水",
+     "pos": "n"
+    },
+    {
+     "en": "rubber",
+     "zh": "橡皮",
+     "pos": "n"
+    },
+    {
+     "en": "envelope",
+     "zh": "信封",
+     "pos": "n"
+    },
+    {
+     "en": "e-mail",
+     "zh": "電子郵件",
+     "pos": "n"
+    },
+    {
+     "en": "email",
+     "zh": "電子郵件",
+     "pos": "n"
+    },
+    {
+     "en": "review",
+     "zh": "評論",
+     "pos": "v"
+    },
+    {
+     "en": "history",
+     "zh": "歷史",
+     "pos": "n"
+    },
+    {
+     "en": "leaf",
+     "zh": "葉子(書刊的)張",
+     "pos": "n"
+    },
+    {
+     "en": "marker",
+     "zh": "作記號的人",
+     "pos": "n"
+    },
+    {
+     "en": "aloud",
+     "zh": "出聲地",
+     "pos": "adv"
+    },
+    {
+     "en": "album",
+     "zh": "相簿",
+     "pos": "n"
+    },
+    {
+     "en": "article",
+     "zh": "文章",
+     "pos": "n"
+    },
+    {
+     "en": "chapter",
+     "zh": "(書籍)章",
+     "pos": "n"
+    },
+    {
+     "en": "comic",
+     "zh": "漫畫",
+     "pos": "n"
+    },
+    {
+     "en": "letter",
+     "zh": "信",
+     "pos": "n"
+    },
+    {
+     "en": "typewriter",
+     "zh": "打字機",
+     "pos": "n"
+    },
+    {
+     "en": "title",
+     "zh": "標題",
+     "pos": "n"
+    },
+    {
+     "en": "vocabulary",
+     "zh": "字彙",
+     "pos": "n"
+    },
+    {
+     "en": "poem",
+     "zh": "詩",
+     "pos": "n"
+    }
+   ],
+   "review": []
+  },
+  {
+   "n": 2,
+   "start": "2026-10-11",
+   "end": "2026-10-17",
    "theme": "朋友與情緒",
    "words": [
     {
@@ -1435,9 +1753,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 10,
-   "start": "2026-10-04",
-   "end": "2026-10-10",
+   "n": 3,
+   "start": "2026-10-18",
+   "end": "2026-10-24",
    "theme": "運動與比賽",
    "words": [
     {
@@ -1594,9 +1912,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 11,
-   "start": "2026-10-11",
-   "end": "2026-10-17",
+   "n": 4,
+   "start": "2026-10-25",
+   "end": "2026-10-31",
    "theme": "身體與健康",
    "words": [
     {
@@ -1753,9 +2071,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 12,
-   "start": "2026-10-18",
-   "end": "2026-10-24",
+   "n": 1,
+   "start": "2026-11-01",
+   "end": "2026-11-07",
    "theme": "食物與營養",
    "words": [
     {
@@ -1912,9 +2230,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 13,
-   "start": "2026-10-25",
-   "end": "2026-10-31",
+   "n": 2,
+   "start": "2026-11-08",
+   "end": "2026-11-14",
    "theme": "動物與棲地",
    "words": [
     {
@@ -2071,9 +2389,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 14,
-   "start": "2026-11-01",
-   "end": "2026-11-07",
+   "n": 3,
+   "start": "2026-11-15",
+   "end": "2026-11-21",
    "theme": "家事與幫忙",
    "words": [
     {
@@ -2230,9 +2548,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 15,
-   "start": "2026-11-08",
-   "end": "2026-11-14",
+   "n": 4,
+   "start": "2026-11-22",
+   "end": "2026-11-28",
    "theme": "科技與3C",
    "words": [
     {
@@ -2389,9 +2707,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 16,
-   "start": "2026-11-15",
-   "end": "2026-11-21",
+   "n": 5,
+   "start": "2026-11-29",
+   "end": "2026-12-05",
    "theme": "職業與夢想",
    "words": [
     {
@@ -2548,9 +2866,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 17,
-   "start": "2026-11-22",
-   "end": "2026-11-28",
+   "n": 1,
+   "start": "2026-12-06",
+   "end": "2026-12-12",
    "theme": "金錢與零用錢",
    "words": [
     {
@@ -2707,9 +3025,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 18,
-   "start": "2026-11-29",
-   "end": "2026-12-05",
+   "n": 2,
+   "start": "2026-12-13",
+   "end": "2026-12-19",
    "theme": "冬天與衣物",
    "words": [
     {
@@ -2866,336 +3184,7 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 19,
-   "start": "2026-12-06",
-   "end": "2026-12-12",
-   "theme": "時間與計畫",
-   "words": [
-    {
-     "en": "alarm",
-     "zh": "警報",
-     "pos": "n"
-    },
-    {
-     "en": "alarm clock",
-     "zh": "鬧鐘",
-     "pos": "n"
-    },
-    {
-     "en": "before",
-     "zh": "在以前",
-     "pos": "prep"
-    },
-    {
-     "en": "during",
-     "zh": "在期間",
-     "pos": "prep"
-    },
-    {
-     "en": "double tenth day",
-     "zh": "雙十節",
-     "pos": "n"
-    },
-    {
-     "en": "eighteenth",
-     "zh": "第十八",
-     "pos": "adj"
-    },
-    {
-     "en": "eleventh",
-     "zh": "第十一(num)",
-     "pos": "adj"
-    },
-    {
-     "en": "fifteenth",
-     "zh": "第十五",
-     "pos": "adj"
-    },
-    {
-     "en": "fourteenth",
-     "zh": "第十四",
-     "pos": "adj"
-    },
-    {
-     "en": "nineteenth",
-     "zh": "第十九",
-     "pos": "adj"
-    },
-    {
-     "en": "seventeenth",
-     "zh": "第十七",
-     "pos": "adj"
-    },
-    {
-     "en": "sixteenth",
-     "zh": "第十六",
-     "pos": "adj"
-    },
-    {
-     "en": "thirteenth",
-     "zh": "第十三",
-     "pos": "adj"
-    },
-    {
-     "en": "twelfth",
-     "zh": "第十二(num)",
-     "pos": "adj"
-    },
-    {
-     "en": "twentieth",
-     "zh": "第二十(num)",
-     "pos": "adj"
-    },
-    {
-     "en": "valentine's day",
-     "zh": "西洋情人節",
-     "pos": "n"
-    },
-    {
-     "en": "arrange",
-     "zh": "安排",
-     "pos": "v"
-    },
-    {
-     "en": "depend",
-     "zh": "依靠",
-     "pos": "v"
-    },
-    {
-     "en": "future",
-     "zh": "未來",
-     "pos": "n"
-    },
-    {
-     "en": "later",
-     "zh": "稍後",
-     "pos": "adv"
-    },
-    {
-     "en": "nearly",
-     "zh": "幾乎",
-     "pos": "adv"
-    },
-    {
-     "en": "time",
-     "zh": "時間",
-     "pos": "n"
-    },
-    {
-     "en": "adult",
-     "zh": "成人",
-     "pos": "n"
-    },
-    {
-     "en": "ahead",
-     "zh": "在前",
-     "pos": "adv"
-    },
-    {
-     "en": "alike",
-     "zh": "同樣的",
-     "pos": "adj"
-    },
-    {
-     "en": "alive",
-     "zh": "活著的",
-     "pos": "adj"
-    },
-    {
-     "en": "almost",
-     "zh": "幾乎",
-     "pos": "adv"
-    },
-    {
-     "en": "among",
-     "zh": "在…之中",
-     "pos": "prep"
-    },
-    {
-     "en": "as soon as",
-     "zh": "儘快",
-     "pos": "phr"
-    },
-    {
-     "en": "delay",
-     "zh": "推遲",
-     "pos": "v"
-    }
-   ],
-   "review": []
-  },
-  {
-   "n": 20,
-   "start": "2026-12-13",
-   "end": "2026-12-19",
-   "theme": "年度回顧複習週",
-   "words": [
-    {
-     "en": "again",
-     "zh": "再一次",
-     "pos": "adv"
-    },
-    {
-     "en": "already",
-     "zh": "已經",
-     "pos": "adv"
-    },
-    {
-     "en": "past",
-     "zh": "過去",
-     "pos": "n"
-    },
-    {
-     "en": "error",
-     "zh": "錯誤",
-     "pos": "n"
-    },
-    {
-     "en": "example",
-     "zh": "例子",
-     "pos": "n"
-    },
-    {
-     "en": "fact",
-     "zh": "事實",
-     "pos": "n"
-    },
-    {
-     "en": "another",
-     "zh": "另一個",
-     "pos": "adj"
-    },
-    {
-     "en": "anywhere",
-     "zh": "任何地方",
-     "pos": "adv"
-    },
-    {
-     "en": "blank",
-     "zh": "空的",
-     "pos": "adj"
-    },
-    {
-     "en": "bottom",
-     "zh": "底部",
-     "pos": "n"
-    },
-    {
-     "en": "different",
-     "zh": "不同的",
-     "pos": "adj"
-    },
-    {
-     "en": "false",
-     "zh": "假的",
-     "pos": "adj"
-    },
-    {
-     "en": "few",
-     "zh": "少數",
-     "pos": "adj"
-    },
-    {
-     "en": "front",
-     "zh": "前面",
-     "pos": "n"
-    },
-    {
-     "en": "middle",
-     "zh": "中間",
-     "pos": "n"
-    },
-    {
-     "en": "other",
-     "zh": "其他的",
-     "pos": "adj"
-    },
-    {
-     "en": "list",
-     "zh": "清單",
-     "pos": "n"
-    },
-    {
-     "en": "memory",
-     "zh": "記憶",
-     "pos": "n"
-    },
-    {
-     "en": "discussion",
-     "zh": "討論",
-     "pos": "n"
-    },
-    {
-     "en": "experience",
-     "zh": "經驗",
-     "pos": "n"
-    },
-    {
-     "en": "course",
-     "zh": "課程",
-     "pos": "n"
-    },
-    {
-     "en": "semester",
-     "zh": "學期",
-     "pos": "n"
-    },
-    {
-     "en": "period",
-     "zh": "(一段)時間",
-     "pos": "n"
-    },
-    {
-     "en": "article",
-     "zh": "文章",
-     "pos": "n"
-    },
-    {
-     "en": "chapter",
-     "zh": "(書籍)章",
-     "pos": "n"
-    },
-    {
-     "en": "title",
-     "zh": "標題",
-     "pos": "n"
-    },
-    {
-     "en": "vocabulary",
-     "zh": "字彙",
-     "pos": "n"
-    },
-    {
-     "en": "poem",
-     "zh": "詩",
-     "pos": "n"
-    },
-    {
-     "en": "comic",
-     "zh": "漫畫",
-     "pos": "n"
-    },
-    {
-     "en": "letter",
-     "zh": "信",
-     "pos": "n"
-    }
-   ],
-   "review": [
-    "course",
-    "semester",
-    "period",
-    "article",
-    "chapter",
-    "title",
-    "vocabulary",
-    "poem",
-    "comic",
-    "letter"
-   ]
-  },
-  {
-   "n": 21,
+   "n": 3,
    "start": "2026-12-20",
    "end": "2026-12-26",
    "theme": "聖誕與禮物",
@@ -3354,7 +3343,7 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 22,
+   "n": 4,
    "start": "2026-12-27",
    "end": "2027-01-02",
    "theme": "跨年與願望",
@@ -3513,7 +3502,7 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 23,
+   "n": 1,
    "start": "2027-01-03",
    "end": "2027-01-09",
    "theme": "新年目標與習慣",
@@ -3672,9 +3661,327 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 24,
+   "n": 2,
    "start": "2027-01-10",
    "end": "2027-01-16",
+   "theme": "時間與計畫",
+   "words": [
+    {
+     "en": "alarm",
+     "zh": "警報",
+     "pos": "n"
+    },
+    {
+     "en": "alarm clock",
+     "zh": "鬧鐘",
+     "pos": "n"
+    },
+    {
+     "en": "before",
+     "zh": "在以前",
+     "pos": "prep"
+    },
+    {
+     "en": "during",
+     "zh": "在期間",
+     "pos": "prep"
+    },
+    {
+     "en": "double tenth day",
+     "zh": "雙十節",
+     "pos": "n"
+    },
+    {
+     "en": "eighteenth",
+     "zh": "第十八",
+     "pos": "adj"
+    },
+    {
+     "en": "eleventh",
+     "zh": "第十一(num)",
+     "pos": "adj"
+    },
+    {
+     "en": "fifteenth",
+     "zh": "第十五",
+     "pos": "adj"
+    },
+    {
+     "en": "fourteenth",
+     "zh": "第十四",
+     "pos": "adj"
+    },
+    {
+     "en": "nineteenth",
+     "zh": "第十九",
+     "pos": "adj"
+    },
+    {
+     "en": "seventeenth",
+     "zh": "第十七",
+     "pos": "adj"
+    },
+    {
+     "en": "sixteenth",
+     "zh": "第十六",
+     "pos": "adj"
+    },
+    {
+     "en": "thirteenth",
+     "zh": "第十三",
+     "pos": "adj"
+    },
+    {
+     "en": "twelfth",
+     "zh": "第十二(num)",
+     "pos": "adj"
+    },
+    {
+     "en": "twentieth",
+     "zh": "第二十(num)",
+     "pos": "adj"
+    },
+    {
+     "en": "valentine's day",
+     "zh": "西洋情人節",
+     "pos": "n"
+    },
+    {
+     "en": "arrange",
+     "zh": "安排",
+     "pos": "v"
+    },
+    {
+     "en": "depend",
+     "zh": "依靠",
+     "pos": "v"
+    },
+    {
+     "en": "future",
+     "zh": "未來",
+     "pos": "n"
+    },
+    {
+     "en": "later",
+     "zh": "稍後",
+     "pos": "adv"
+    },
+    {
+     "en": "nearly",
+     "zh": "幾乎",
+     "pos": "adv"
+    },
+    {
+     "en": "time",
+     "zh": "時間",
+     "pos": "n"
+    },
+    {
+     "en": "adult",
+     "zh": "成人",
+     "pos": "n"
+    },
+    {
+     "en": "ahead",
+     "zh": "在前",
+     "pos": "adv"
+    },
+    {
+     "en": "alike",
+     "zh": "同樣的",
+     "pos": "adj"
+    },
+    {
+     "en": "alive",
+     "zh": "活著的",
+     "pos": "adj"
+    },
+    {
+     "en": "almost",
+     "zh": "幾乎",
+     "pos": "adv"
+    },
+    {
+     "en": "among",
+     "zh": "在…之中",
+     "pos": "prep"
+    },
+    {
+     "en": "as soon as",
+     "zh": "儘快",
+     "pos": "phr"
+    },
+    {
+     "en": "delay",
+     "zh": "推遲",
+     "pos": "v"
+    }
+   ],
+   "review": []
+  },
+  {
+   "n": 3,
+   "start": "2027-01-17",
+   "end": "2027-01-23",
+   "theme": "年度回顧複習週",
+   "words": [
+    {
+     "en": "again",
+     "zh": "再一次",
+     "pos": "adv"
+    },
+    {
+     "en": "already",
+     "zh": "已經",
+     "pos": "adv"
+    },
+    {
+     "en": "past",
+     "zh": "過去",
+     "pos": "n"
+    },
+    {
+     "en": "error",
+     "zh": "錯誤",
+     "pos": "n"
+    },
+    {
+     "en": "example",
+     "zh": "例子",
+     "pos": "n"
+    },
+    {
+     "en": "fact",
+     "zh": "事實",
+     "pos": "n"
+    },
+    {
+     "en": "another",
+     "zh": "另一個",
+     "pos": "adj"
+    },
+    {
+     "en": "anywhere",
+     "zh": "任何地方",
+     "pos": "adv"
+    },
+    {
+     "en": "blank",
+     "zh": "空的",
+     "pos": "adj"
+    },
+    {
+     "en": "bottom",
+     "zh": "底部",
+     "pos": "n"
+    },
+    {
+     "en": "different",
+     "zh": "不同的",
+     "pos": "adj"
+    },
+    {
+     "en": "false",
+     "zh": "假的",
+     "pos": "adj"
+    },
+    {
+     "en": "few",
+     "zh": "少數",
+     "pos": "adj"
+    },
+    {
+     "en": "front",
+     "zh": "前面",
+     "pos": "n"
+    },
+    {
+     "en": "middle",
+     "zh": "中間",
+     "pos": "n"
+    },
+    {
+     "en": "other",
+     "zh": "其他的",
+     "pos": "adj"
+    },
+    {
+     "en": "list",
+     "zh": "清單",
+     "pos": "n"
+    },
+    {
+     "en": "memory",
+     "zh": "記憶",
+     "pos": "n"
+    },
+    {
+     "en": "discussion",
+     "zh": "討論",
+     "pos": "n"
+    },
+    {
+     "en": "experience",
+     "zh": "經驗",
+     "pos": "n"
+    },
+    {
+     "en": "course",
+     "zh": "課程",
+     "pos": "n"
+    },
+    {
+     "en": "semester",
+     "zh": "學期",
+     "pos": "n"
+    },
+    {
+     "en": "period",
+     "zh": "(一段)時間",
+     "pos": "n"
+    },
+    {
+     "en": "article",
+     "zh": "文章",
+     "pos": "n"
+    },
+    {
+     "en": "chapter",
+     "zh": "(書籍)章",
+     "pos": "n"
+    },
+    {
+     "en": "title",
+     "zh": "標題",
+     "pos": "n"
+    },
+    {
+     "en": "vocabulary",
+     "zh": "字彙",
+     "pos": "n"
+    },
+    {
+     "en": "poem",
+     "zh": "詩",
+     "pos": "n"
+    },
+    {
+     "en": "comic",
+     "zh": "漫畫",
+     "pos": "n"
+    },
+    {
+     "en": "letter",
+     "zh": "信",
+     "pos": "n"
+    }
+   ],
+   "review": []
+  },
+  {
+   "n": 4,
+   "start": "2027-01-24",
+   "end": "2027-01-30",
    "theme": "旅行進階",
    "words": [
     {
@@ -3831,325 +4138,7 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 25,
-   "start": "2027-01-17",
-   "end": "2027-01-23",
-   "theme": "個性與描述人",
-   "words": [
-    {
-     "en": "age",
-     "zh": "年齡",
-     "pos": "n"
-    },
-    {
-     "en": "chubby",
-     "zh": "胖嘟嘟的",
-     "pos": "adj"
-    },
-    {
-     "en": "lazy",
-     "zh": "懶惰的",
-     "pos": "adj"
-    },
-    {
-     "en": "silly",
-     "zh": "傻的",
-     "pos": "adj"
-    },
-    {
-     "en": "ugly",
-     "zh": "醜陋的",
-     "pos": "adj"
-    },
-    {
-     "en": "thin",
-     "zh": "瘦的",
-     "pos": "adj"
-    },
-    {
-     "en": "weak",
-     "zh": "虛弱的",
-     "pos": "adj"
-    },
-    {
-     "en": "person",
-     "zh": "人",
-     "pos": "n"
-    },
-    {
-     "en": "people",
-     "zh": "人們",
-     "pos": "n"
-    },
-    {
-     "en": "lady",
-     "zh": "淑女",
-     "pos": "n"
-    },
-    {
-     "en": "character",
-     "zh": "性格",
-     "pos": "n"
-    },
-    {
-     "en": "behave",
-     "zh": "行為",
-     "pos": "v"
-    },
-    {
-     "en": "describe",
-     "zh": "形容",
-     "pos": "v"
-    },
-    {
-     "en": "diligent",
-     "zh": "勤奮的",
-     "pos": "adj"
-    },
-    {
-     "en": "fair",
-     "zh": "公平的",
-     "pos": "adj"
-    },
-    {
-     "en": "foolish",
-     "zh": "愚蠢的",
-     "pos": "adj"
-    },
-    {
-     "en": "gentle",
-     "zh": "和藹的",
-     "pos": "adj"
-    },
-    {
-     "en": "greedy",
-     "zh": "貪食的",
-     "pos": "adj"
-    },
-    {
-     "en": "human",
-     "zh": "人的",
-     "pos": "adj"
-    },
-    {
-     "en": "manner",
-     "zh": "禮貌",
-     "pos": "n"
-    },
-    {
-     "en": "naughty",
-     "zh": "調皮的",
-     "pos": "adj"
-    },
-    {
-     "en": "patient",
-     "zh": "忍耐的",
-     "pos": "adj"
-    },
-    {
-     "en": "selfish",
-     "zh": "自私的",
-     "pos": "adj"
-    },
-    {
-     "en": "talkative",
-     "zh": "多嘴的",
-     "pos": "adj"
-    },
-    {
-     "en": "appearance",
-     "zh": "出現",
-     "pos": "n"
-    },
-    {
-     "en": "childish",
-     "zh": "孩子氣的",
-     "pos": "adj"
-    },
-    {
-     "en": "cruel",
-     "zh": "殘酷的",
-     "pos": "adj"
-    },
-    {
-     "en": "creative",
-     "zh": "有創意的",
-     "pos": "adj"
-    },
-    {
-     "en": "curious",
-     "zh": "好奇的",
-     "pos": "adj"
-    },
-    {
-     "en": "intelligent",
-     "zh": "有智力的",
-     "pos": "adj"
-    }
-   ],
-   "review": []
-  },
-  {
-   "n": 26,
-   "start": "2027-01-24",
-   "end": "2027-01-30",
-   "theme": "居家與安全",
-   "words": [
-    {
-     "en": "downstairs",
-     "zh": "樓下(的)",
-     "pos": "adv"
-    },
-    {
-     "en": "upstairs",
-     "zh": "在樓上",
-     "pos": "adv"
-    },
-    {
-     "en": "pillow",
-     "zh": "枕頭",
-     "pos": "n"
-    },
-    {
-     "en": "slippers",
-     "zh": "拖鞋",
-     "pos": "n"
-    },
-    {
-     "en": "mirror",
-     "zh": "鏡子",
-     "pos": "n"
-    },
-    {
-     "en": "match",
-     "zh": "火柴",
-     "pos": "n"
-    },
-    {
-     "en": "armchair",
-     "zh": "扶手椅",
-     "pos": "n"
-    },
-    {
-     "en": "drawer",
-     "zh": "付款人",
-     "pos": "n"
-    },
-    {
-     "en": "lock",
-     "zh": "鎖(n)  鎖(被)",
-     "pos": "n"
-    },
-    {
-     "en": "roof",
-     "zh": "屋頂",
-     "pos": "n"
-    },
-    {
-     "en": "air conditioner",
-     "zh": "空調機",
-     "pos": "n"
-    },
-    {
-     "en": "basement",
-     "zh": "地下室",
-     "pos": "n"
-    },
-    {
-     "en": "ceiling",
-     "zh": "天花板",
-     "pos": "n"
-    },
-    {
-     "en": "fence",
-     "zh": "柵欄",
-     "pos": "n"
-    },
-    {
-     "en": "guard",
-     "zh": "看守",
-     "pos": "n"
-    },
-    {
-     "en": "hammer",
-     "zh": "槌",
-     "pos": "n"
-    },
-    {
-     "en": "handle",
-     "zh": "柄",
-     "pos": "n"
-    },
-    {
-     "en": "key",
-     "zh": "鑰匙",
-     "pos": "n"
-    },
-    {
-     "en": "lamp",
-     "zh": "燈",
-     "pos": "n"
-    },
-    {
-     "en": "lid",
-     "zh": "蓋子",
-     "pos": "n"
-    },
-    {
-     "en": "needle",
-     "zh": "針",
-     "pos": "n"
-    },
-    {
-     "en": "pipe",
-     "zh": "管子",
-     "pos": "n"
-    },
-    {
-     "en": "protect",
-     "zh": "保護",
-     "pos": "v"
-    },
-    {
-     "en": "sharp",
-     "zh": "鋒利的",
-     "pos": "adj"
-    },
-    {
-     "en": "damage",
-     "zh": "毀壞",
-     "pos": "v"
-    },
-    {
-     "en": "poison",
-     "zh": "毒",
-     "pos": "n"
-    },
-    {
-     "en": "trap",
-     "zh": "陷阱",
-     "pos": "n"
-    },
-    {
-     "en": "wound",
-     "zh": "創傷",
-     "pos": "n"
-    },
-    {
-     "en": "aware",
-     "zh": "意識到",
-     "pos": "adj"
-    },
-    {
-     "en": "private",
-     "zh": "私人的",
-     "pos": "adj"
-    }
-   ],
-   "review": []
-  },
-  {
-   "n": 27,
+   "n": 5,
    "start": "2027-01-31",
    "end": "2027-02-06",
    "theme": "農曆新年與家族",
@@ -4308,9 +4297,327 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 28,
+   "n": 1,
    "start": "2027-02-07",
    "end": "2027-02-13",
+   "theme": "個性與描述人",
+   "words": [
+    {
+     "en": "age",
+     "zh": "年齡",
+     "pos": "n"
+    },
+    {
+     "en": "chubby",
+     "zh": "胖嘟嘟的",
+     "pos": "adj"
+    },
+    {
+     "en": "lazy",
+     "zh": "懶惰的",
+     "pos": "adj"
+    },
+    {
+     "en": "silly",
+     "zh": "傻的",
+     "pos": "adj"
+    },
+    {
+     "en": "ugly",
+     "zh": "醜陋的",
+     "pos": "adj"
+    },
+    {
+     "en": "thin",
+     "zh": "瘦的",
+     "pos": "adj"
+    },
+    {
+     "en": "weak",
+     "zh": "虛弱的",
+     "pos": "adj"
+    },
+    {
+     "en": "person",
+     "zh": "人",
+     "pos": "n"
+    },
+    {
+     "en": "people",
+     "zh": "人們",
+     "pos": "n"
+    },
+    {
+     "en": "lady",
+     "zh": "淑女",
+     "pos": "n"
+    },
+    {
+     "en": "character",
+     "zh": "性格",
+     "pos": "n"
+    },
+    {
+     "en": "behave",
+     "zh": "行為",
+     "pos": "v"
+    },
+    {
+     "en": "describe",
+     "zh": "形容",
+     "pos": "v"
+    },
+    {
+     "en": "diligent",
+     "zh": "勤奮的",
+     "pos": "adj"
+    },
+    {
+     "en": "fair",
+     "zh": "公平的",
+     "pos": "adj"
+    },
+    {
+     "en": "foolish",
+     "zh": "愚蠢的",
+     "pos": "adj"
+    },
+    {
+     "en": "gentle",
+     "zh": "和藹的",
+     "pos": "adj"
+    },
+    {
+     "en": "greedy",
+     "zh": "貪食的",
+     "pos": "adj"
+    },
+    {
+     "en": "human",
+     "zh": "人的",
+     "pos": "adj"
+    },
+    {
+     "en": "manner",
+     "zh": "禮貌",
+     "pos": "n"
+    },
+    {
+     "en": "naughty",
+     "zh": "調皮的",
+     "pos": "adj"
+    },
+    {
+     "en": "patient",
+     "zh": "忍耐的",
+     "pos": "adj"
+    },
+    {
+     "en": "selfish",
+     "zh": "自私的",
+     "pos": "adj"
+    },
+    {
+     "en": "talkative",
+     "zh": "多嘴的",
+     "pos": "adj"
+    },
+    {
+     "en": "appearance",
+     "zh": "出現",
+     "pos": "n"
+    },
+    {
+     "en": "childish",
+     "zh": "孩子氣的",
+     "pos": "adj"
+    },
+    {
+     "en": "cruel",
+     "zh": "殘酷的",
+     "pos": "adj"
+    },
+    {
+     "en": "creative",
+     "zh": "有創意的",
+     "pos": "adj"
+    },
+    {
+     "en": "curious",
+     "zh": "好奇的",
+     "pos": "adj"
+    },
+    {
+     "en": "intelligent",
+     "zh": "有智力的",
+     "pos": "adj"
+    }
+   ],
+   "review": []
+  },
+  {
+   "n": 2,
+   "start": "2027-02-14",
+   "end": "2027-02-20",
+   "theme": "居家與安全",
+   "words": [
+    {
+     "en": "downstairs",
+     "zh": "樓下(的)",
+     "pos": "adv"
+    },
+    {
+     "en": "upstairs",
+     "zh": "在樓上",
+     "pos": "adv"
+    },
+    {
+     "en": "pillow",
+     "zh": "枕頭",
+     "pos": "n"
+    },
+    {
+     "en": "slippers",
+     "zh": "拖鞋",
+     "pos": "n"
+    },
+    {
+     "en": "mirror",
+     "zh": "鏡子",
+     "pos": "n"
+    },
+    {
+     "en": "match",
+     "zh": "火柴",
+     "pos": "n"
+    },
+    {
+     "en": "armchair",
+     "zh": "扶手椅",
+     "pos": "n"
+    },
+    {
+     "en": "drawer",
+     "zh": "付款人",
+     "pos": "n"
+    },
+    {
+     "en": "lock",
+     "zh": "鎖(n)  鎖(被)",
+     "pos": "n"
+    },
+    {
+     "en": "roof",
+     "zh": "屋頂",
+     "pos": "n"
+    },
+    {
+     "en": "air conditioner",
+     "zh": "空調機",
+     "pos": "n"
+    },
+    {
+     "en": "basement",
+     "zh": "地下室",
+     "pos": "n"
+    },
+    {
+     "en": "ceiling",
+     "zh": "天花板",
+     "pos": "n"
+    },
+    {
+     "en": "fence",
+     "zh": "柵欄",
+     "pos": "n"
+    },
+    {
+     "en": "guard",
+     "zh": "看守",
+     "pos": "n"
+    },
+    {
+     "en": "hammer",
+     "zh": "槌",
+     "pos": "n"
+    },
+    {
+     "en": "handle",
+     "zh": "柄",
+     "pos": "n"
+    },
+    {
+     "en": "key",
+     "zh": "鑰匙",
+     "pos": "n"
+    },
+    {
+     "en": "lamp",
+     "zh": "燈",
+     "pos": "n"
+    },
+    {
+     "en": "lid",
+     "zh": "蓋子",
+     "pos": "n"
+    },
+    {
+     "en": "needle",
+     "zh": "針",
+     "pos": "n"
+    },
+    {
+     "en": "pipe",
+     "zh": "管子",
+     "pos": "n"
+    },
+    {
+     "en": "protect",
+     "zh": "保護",
+     "pos": "v"
+    },
+    {
+     "en": "sharp",
+     "zh": "鋒利的",
+     "pos": "adj"
+    },
+    {
+     "en": "damage",
+     "zh": "毀壞",
+     "pos": "v"
+    },
+    {
+     "en": "poison",
+     "zh": "毒",
+     "pos": "n"
+    },
+    {
+     "en": "trap",
+     "zh": "陷阱",
+     "pos": "n"
+    },
+    {
+     "en": "wound",
+     "zh": "創傷",
+     "pos": "n"
+    },
+    {
+     "en": "aware",
+     "zh": "意識到",
+     "pos": "adj"
+    },
+    {
+     "en": "private",
+     "zh": "私人的",
+     "pos": "adj"
+    }
+   ],
+   "review": []
+  },
+  {
+   "n": 3,
+   "start": "2027-02-21",
+   "end": "2027-02-27",
    "theme": "傳統與文化",
    "words": [
     {
@@ -4467,9 +4774,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 29,
-   "start": "2027-02-14",
-   "end": "2027-02-20",
+   "n": 4,
+   "start": "2027-02-28",
+   "end": "2027-03-06",
    "theme": "娛樂與休閒",
    "words": [
     {
@@ -4626,9 +4933,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 30,
-   "start": "2027-02-21",
-   "end": "2027-02-27",
+   "n": 1,
+   "start": "2027-03-07",
+   "end": "2027-03-13",
    "theme": "收心與學習方法",
    "words": [
     {
@@ -4785,9 +5092,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 31,
-   "start": "2027-02-28",
-   "end": "2027-03-06",
+   "n": 2,
+   "start": "2027-03-14",
+   "end": "2027-03-20",
    "theme": "環境與地球",
    "words": [
     {
@@ -4944,9 +5251,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 32,
-   "start": "2027-03-07",
-   "end": "2027-03-13",
+   "n": 3,
+   "start": "2027-03-21",
+   "end": "2027-03-27",
    "theme": "植物與昆蟲",
    "words": [
     {
@@ -5103,9 +5410,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 33,
-   "start": "2027-03-14",
-   "end": "2027-03-20",
+   "n": 4,
+   "start": "2027-03-28",
+   "end": "2027-04-03",
    "theme": "科學與實驗",
    "words": [
     {
@@ -5262,325 +5569,7 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 34,
-   "start": "2027-03-21",
-   "end": "2027-03-27",
-   "theme": "城市與方向",
-   "words": [
-    {
-     "en": "taichung",
-     "zh": "台中",
-     "pos": "n"
-    },
-    {
-     "en": "tainan",
-     "zh": "台南",
-     "pos": "n"
-    },
-    {
-     "en": "taipei",
-     "zh": "台北",
-     "pos": "n"
-    },
-    {
-     "en": "hong kong",
-     "zh": "香港",
-     "pos": "n"
-    },
-    {
-     "en": "london",
-     "zh": "倫敦",
-     "pos": "n"
-    },
-    {
-     "en": "los angeles",
-     "zh": "洛杉磯",
-     "pos": "n"
-    },
-    {
-     "en": "new york",
-     "zh": "紐約",
-     "pos": "n"
-    },
-    {
-     "en": "paris",
-     "zh": "巴黎",
-     "pos": "n"
-    },
-    {
-     "en": "tokyo",
-     "zh": "東京",
-     "pos": "n"
-    },
-    {
-     "en": "tower",
-     "zh": "塔(樓)",
-     "pos": "n"
-    },
-    {
-     "en": "alley",
-     "zh": "弄",
-     "pos": "n"
-    },
-    {
-     "en": "around",
-     "zh": "在周圍",
-     "pos": "prep"
-    },
-    {
-     "en": "backward",
-     "zh": "向後地(的)  相反",
-     "pos": "adv"
-    },
-    {
-     "en": "center",
-     "zh": "中心",
-     "pos": "n"
-    },
-    {
-     "en": "forward",
-     "zh": "向前的",
-     "pos": "adv"
-    },
-    {
-     "en": "lane",
-     "zh": "小路",
-     "pos": "n"
-    },
-    {
-     "en": "overpass",
-     "zh": "陸橋",
-     "pos": "n"
-    },
-    {
-     "en": "railroad",
-     "zh": "鐵路",
-     "pos": "n"
-    },
-    {
-     "en": "railway",
-     "zh": "鐵路",
-     "pos": "n"
-    },
-    {
-     "en": "reach",
-     "zh": "到達",
-     "pos": "v"
-    },
-    {
-     "en": "toward",
-     "zh": "(表示方向)朝",
-     "pos": "prep"
-    },
-    {
-     "en": "tunnel",
-     "zh": "隧道",
-     "pos": "n"
-    },
-    {
-     "en": "underpass",
-     "zh": "地道",
-     "pos": "n"
-    },
-    {
-     "en": "way",
-     "zh": "道路",
-     "pos": "n"
-    },
-    {
-     "en": "beyond",
-     "zh": "在…那邊",
-     "pos": "prep"
-    },
-    {
-     "en": "central",
-     "zh": "中央的",
-     "pos": "adj"
-    },
-    {
-     "en": "direct",
-     "zh": "直接的(adj)  ",
-     "pos": "adj"
-    },
-    {
-     "en": "geographical",
-     "zh": "地理(學)的",
-     "pos": "adj"
-    },
-    {
-     "en": "location",
-     "zh": "場所",
-     "pos": "n"
-    },
-    {
-     "en": "position",
-     "zh": "位置",
-     "pos": "n"
-    }
-   ],
-   "review": []
-  },
-  {
-   "n": 35,
-   "start": "2027-03-28",
-   "end": "2027-04-03",
-   "theme": "春季複習週",
-   "words": [
-    {
-     "en": "understand",
-     "zh": "了解",
-     "pos": "v"
-    },
-    {
-     "en": "reply",
-     "zh": "回答",
-     "pos": "v"
-    },
-    {
-     "en": "usual",
-     "zh": "通常的",
-     "pos": "adj"
-    },
-    {
-     "en": "maybe",
-     "zh": "也許",
-     "pos": "adv"
-    },
-    {
-     "en": "must",
-     "zh": "必須",
-     "pos": "v"
-    },
-    {
-     "en": "will",
-     "zh": "將會",
-     "pos": "v"
-    },
-    {
-     "en": "would",
-     "zh": "會",
-     "pos": "v"
-    },
-    {
-     "en": "well",
-     "zh": "好地",
-     "pos": "adv"
-    },
-    {
-     "en": "thing",
-     "zh": "事情",
-     "pos": "n"
-    },
-    {
-     "en": "set",
-     "zh": "(一)套",
-     "pos": "n"
-    },
-    {
-     "en": "revise",
-     "zh": "修訂",
-     "pos": "v"
-    },
-    {
-     "en": "final",
-     "zh": "最後的",
-     "pos": "adj"
-    },
-    {
-     "en": "mistake",
-     "zh": "錯誤",
-     "pos": "n"
-    },
-    {
-     "en": "fail",
-     "zh": "失敗",
-     "pos": "v"
-    },
-    {
-     "en": "check",
-     "zh": "檢查",
-     "pos": "v"
-    },
-    {
-     "en": "done",
-     "zh": "完成的",
-     "pos": "adj"
-    },
-    {
-     "en": "term",
-     "zh": "學期",
-     "pos": "n"
-    },
-    {
-     "en": "unit",
-     "zh": "個體(計量)單位(軍",
-     "pos": "n"
-    },
-    {
-     "en": "topic",
-     "zh": "題目",
-     "pos": "n"
-    },
-    {
-     "en": "possible",
-     "zh": "可能的",
-     "pos": "adj"
-    },
-    {
-     "en": "impossible",
-     "zh": "不可能的",
-     "pos": "adj"
-    },
-    {
-     "en": "perfect",
-     "zh": "完美的",
-     "pos": "adj"
-    },
-    {
-     "en": "primary",
-     "zh": "第一的",
-     "pos": "adj"
-    },
-    {
-     "en": "principal",
-     "zh": "校長",
-     "pos": "n"
-    },
-    {
-     "en": "difficulty",
-     "zh": "困難",
-     "pos": "n"
-    },
-    {
-     "en": "effective",
-     "zh": "有效的",
-     "pos": "adj"
-    },
-    {
-     "en": "encourage",
-     "zh": "鼓勵",
-     "pos": "v"
-    },
-    {
-     "en": "information",
-     "zh": "消息",
-     "pos": "n"
-    },
-    {
-     "en": "necessary",
-     "zh": "必要的",
-     "pos": "adj"
-    },
-    {
-     "en": "standard",
-     "zh": "標準",
-     "pos": "n"
-    }
-   ],
-   "review": []
-  },
-  {
-   "n": 36,
+   "n": 1,
    "start": "2027-04-04",
    "end": "2027-04-10",
    "theme": "清明家族與戶外",
@@ -5739,9 +5728,327 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 37,
+   "n": 2,
    "start": "2027-04-11",
    "end": "2027-04-17",
+   "theme": "城市與方向",
+   "words": [
+    {
+     "en": "taichung",
+     "zh": "台中",
+     "pos": "n"
+    },
+    {
+     "en": "tainan",
+     "zh": "台南",
+     "pos": "n"
+    },
+    {
+     "en": "taipei",
+     "zh": "台北",
+     "pos": "n"
+    },
+    {
+     "en": "hong kong",
+     "zh": "香港",
+     "pos": "n"
+    },
+    {
+     "en": "london",
+     "zh": "倫敦",
+     "pos": "n"
+    },
+    {
+     "en": "los angeles",
+     "zh": "洛杉磯",
+     "pos": "n"
+    },
+    {
+     "en": "new york",
+     "zh": "紐約",
+     "pos": "n"
+    },
+    {
+     "en": "paris",
+     "zh": "巴黎",
+     "pos": "n"
+    },
+    {
+     "en": "tokyo",
+     "zh": "東京",
+     "pos": "n"
+    },
+    {
+     "en": "tower",
+     "zh": "塔(樓)",
+     "pos": "n"
+    },
+    {
+     "en": "alley",
+     "zh": "弄",
+     "pos": "n"
+    },
+    {
+     "en": "around",
+     "zh": "在周圍",
+     "pos": "prep"
+    },
+    {
+     "en": "backward",
+     "zh": "向後地(的)  相反",
+     "pos": "adv"
+    },
+    {
+     "en": "center",
+     "zh": "中心",
+     "pos": "n"
+    },
+    {
+     "en": "forward",
+     "zh": "向前的",
+     "pos": "adv"
+    },
+    {
+     "en": "lane",
+     "zh": "小路",
+     "pos": "n"
+    },
+    {
+     "en": "overpass",
+     "zh": "陸橋",
+     "pos": "n"
+    },
+    {
+     "en": "railroad",
+     "zh": "鐵路",
+     "pos": "n"
+    },
+    {
+     "en": "railway",
+     "zh": "鐵路",
+     "pos": "n"
+    },
+    {
+     "en": "reach",
+     "zh": "到達",
+     "pos": "v"
+    },
+    {
+     "en": "toward",
+     "zh": "(表示方向)朝",
+     "pos": "prep"
+    },
+    {
+     "en": "tunnel",
+     "zh": "隧道",
+     "pos": "n"
+    },
+    {
+     "en": "underpass",
+     "zh": "地道",
+     "pos": "n"
+    },
+    {
+     "en": "way",
+     "zh": "道路",
+     "pos": "n"
+    },
+    {
+     "en": "beyond",
+     "zh": "在…那邊",
+     "pos": "prep"
+    },
+    {
+     "en": "central",
+     "zh": "中央的",
+     "pos": "adj"
+    },
+    {
+     "en": "direct",
+     "zh": "直接的(adj)  ",
+     "pos": "adj"
+    },
+    {
+     "en": "geographical",
+     "zh": "地理(學)的",
+     "pos": "adj"
+    },
+    {
+     "en": "location",
+     "zh": "場所",
+     "pos": "n"
+    },
+    {
+     "en": "position",
+     "zh": "位置",
+     "pos": "n"
+    }
+   ],
+   "review": []
+  },
+  {
+   "n": 3,
+   "start": "2027-04-18",
+   "end": "2027-04-24",
+   "theme": "春季複習週",
+   "words": [
+    {
+     "en": "understand",
+     "zh": "了解",
+     "pos": "v"
+    },
+    {
+     "en": "reply",
+     "zh": "回答",
+     "pos": "v"
+    },
+    {
+     "en": "usual",
+     "zh": "通常的",
+     "pos": "adj"
+    },
+    {
+     "en": "maybe",
+     "zh": "也許",
+     "pos": "adv"
+    },
+    {
+     "en": "must",
+     "zh": "必須",
+     "pos": "v"
+    },
+    {
+     "en": "will",
+     "zh": "將會",
+     "pos": "v"
+    },
+    {
+     "en": "would",
+     "zh": "會",
+     "pos": "v"
+    },
+    {
+     "en": "well",
+     "zh": "好地",
+     "pos": "adv"
+    },
+    {
+     "en": "thing",
+     "zh": "事情",
+     "pos": "n"
+    },
+    {
+     "en": "set",
+     "zh": "(一)套",
+     "pos": "n"
+    },
+    {
+     "en": "revise",
+     "zh": "修訂",
+     "pos": "v"
+    },
+    {
+     "en": "final",
+     "zh": "最後的",
+     "pos": "adj"
+    },
+    {
+     "en": "mistake",
+     "zh": "錯誤",
+     "pos": "n"
+    },
+    {
+     "en": "fail",
+     "zh": "失敗",
+     "pos": "v"
+    },
+    {
+     "en": "check",
+     "zh": "檢查",
+     "pos": "v"
+    },
+    {
+     "en": "done",
+     "zh": "完成的",
+     "pos": "adj"
+    },
+    {
+     "en": "term",
+     "zh": "學期",
+     "pos": "n"
+    },
+    {
+     "en": "unit",
+     "zh": "個體(計量)單位(軍",
+     "pos": "n"
+    },
+    {
+     "en": "topic",
+     "zh": "題目",
+     "pos": "n"
+    },
+    {
+     "en": "possible",
+     "zh": "可能的",
+     "pos": "adj"
+    },
+    {
+     "en": "impossible",
+     "zh": "不可能的",
+     "pos": "adj"
+    },
+    {
+     "en": "perfect",
+     "zh": "完美的",
+     "pos": "adj"
+    },
+    {
+     "en": "primary",
+     "zh": "第一的",
+     "pos": "adj"
+    },
+    {
+     "en": "principal",
+     "zh": "校長",
+     "pos": "n"
+    },
+    {
+     "en": "difficulty",
+     "zh": "困難",
+     "pos": "n"
+    },
+    {
+     "en": "effective",
+     "zh": "有效的",
+     "pos": "adj"
+    },
+    {
+     "en": "encourage",
+     "zh": "鼓勵",
+     "pos": "v"
+    },
+    {
+     "en": "information",
+     "zh": "消息",
+     "pos": "n"
+    },
+    {
+     "en": "necessary",
+     "zh": "必要的",
+     "pos": "adj"
+    },
+    {
+     "en": "standard",
+     "zh": "標準",
+     "pos": "n"
+    }
+   ],
+   "review": []
+  },
+  {
+   "n": 4,
+   "start": "2027-04-25",
+   "end": "2027-05-01",
    "theme": "溝通與表達",
    "words": [
     {
@@ -5898,9 +6205,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 38,
-   "start": "2027-04-18",
-   "end": "2027-04-24",
+   "n": 1,
+   "start": "2027-05-02",
+   "end": "2027-05-08",
    "theme": "媒體與訊息",
    "words": [
     {
@@ -6057,9 +6364,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 39,
-   "start": "2027-04-25",
-   "end": "2027-05-01",
+   "n": 2,
+   "start": "2027-05-09",
+   "end": "2027-05-15",
    "theme": "比較與選擇",
    "words": [
     {
@@ -6216,9 +6523,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 40,
-   "start": "2027-05-02",
-   "end": "2027-05-08",
+   "n": 3,
+   "start": "2027-05-16",
+   "end": "2027-05-22",
    "theme": "世界與國家",
    "words": [
     {
@@ -6375,9 +6682,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 41,
-   "start": "2027-05-09",
-   "end": "2027-05-15",
+   "n": 4,
+   "start": "2027-05-23",
+   "end": "2027-05-29",
    "theme": "國中教室英語",
    "words": [
     {
@@ -6534,9 +6841,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 42,
-   "start": "2027-05-16",
-   "end": "2027-05-22",
+   "n": 5,
+   "start": "2027-05-30",
+   "end": "2027-06-05",
    "theme": "考試與作業英語",
    "words": [
     {
@@ -6690,18 +6997,12 @@ const VOCAB_PLAN = {
      "pos": "v"
     }
    ],
-   "review": [
-    "revise",
-    "final",
-    "mistake",
-    "fail",
-    "examine"
-   ]
+   "review": []
   },
   {
-   "n": 43,
-   "start": "2027-05-23",
-   "end": "2027-05-29",
+   "n": 1,
+   "start": "2027-06-06",
+   "end": "2027-06-12",
    "theme": "意見與理由",
    "words": [
     {
@@ -6858,9 +7159,9 @@ const VOCAB_PLAN = {
    "review": []
   },
   {
-   "n": 44,
-   "start": "2027-05-30",
-   "end": "2027-06-05",
+   "n": 2,
+   "start": "2027-06-13",
+   "end": "2027-06-19",
    "theme": "畢業與轉銜複習",
    "words": [
     {
@@ -7014,23 +7315,12 @@ const VOCAB_PLAN = {
      "pos": "n"
     }
    ],
-   "review": [
-    "campus",
-    "course",
-    "semester",
-    "future",
-    "complete",
-    "continue",
-    "primary",
-    "principal",
-    "education",
-    "skill"
-   ]
+   "review": []
   },
   {
-   "n": 45,
-   "start": "2027-06-06",
-   "end": "2027-06-12",
+   "n": 3,
+   "start": "2027-06-20",
+   "end": "2027-06-26",
    "theme": "國一先修(上)",
    "words": [
     {
@@ -7184,23 +7474,12 @@ const VOCAB_PLAN = {
      "pos": "n"
     }
    ],
-   "review": [
-    "adjective",
-    "adverb",
-    "advice",
-    "advise",
-    "compare",
-    "discuss",
-    "explain",
-    "introduce",
-    "meaning",
-    "method"
-   ]
+   "review": []
   },
   {
-   "n": 46,
-   "start": "2027-06-13",
-   "end": "2027-06-19",
+   "n": 4,
+   "start": "2027-06-27",
+   "end": "2027-07-03",
    "theme": "國一先修(下)",
    "words": [
     {
@@ -7354,23 +7633,12 @@ const VOCAB_PLAN = {
      "pos": "adj"
     }
    ],
-   "review": [
-    "divide",
-    "division",
-    "equal",
-    "ability",
-    "apply",
-    "basis",
-    "chart",
-    "result",
-    "measure",
-    "exact"
-   ]
+   "review": []
   },
   {
-   "n": 47,
-   "start": "2027-06-20",
-   "end": "2027-06-26",
+   "n": 1,
+   "start": "2027-07-04",
+   "end": "2027-07-10",
    "theme": "難字總複習A",
    "words": [
     {
@@ -7524,23 +7792,12 @@ const VOCAB_PLAN = {
      "pos": "v"
     }
    ],
-   "review": [
-    "environment",
-    "pollute",
-    "pollution",
-    "population",
-    "industry",
-    "energy",
-    "biology",
-    "chemical",
-    "degree",
-    "detect"
-   ]
+   "review": []
   },
   {
-   "n": 48,
-   "start": "2027-06-27",
-   "end": "2027-07-03",
+   "n": 2,
+   "start": "2027-07-11",
+   "end": "2027-07-17",
    "theme": "難字總複習B",
    "words": [
     {
@@ -7694,18 +7951,7 @@ const VOCAB_PLAN = {
      "pos": "n"
     }
    ],
-   "review": [
-    "control",
-    "create",
-    "design",
-    "discover",
-    "movement",
-    "scientist",
-    "difficulty",
-    "effective",
-    "necessary",
-    "standard"
-   ]
+   "review": []
   }
  ]
 };
