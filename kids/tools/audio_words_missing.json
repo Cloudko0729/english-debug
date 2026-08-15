@@ -1,0 +1,17 @@
+{
+ "outdir": "D:/english/kids/audio/words",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "oil": "oil",
+  "elementaryschool": "elementary school",
+  "seniorhighschool": "senior high school",
+  "cost": "cost",
+  "mom": "mom",
+  "mommy": "mommy",
+  "email": "email",
+  "voice": "voice",
+  "rollerskate": "roller skate",
+  "physicaleducation": "physical education"
+ }
+}

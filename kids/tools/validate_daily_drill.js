@@ -87,6 +87,23 @@ function runDay(date, theme) {
   return sandbox.document.getElementById("app").innerHTML || "";
 }
 
+// 檔名規則跟 wordbank.js 的 wordAudioKey 一致
+const audioKey = en => String(en).toLowerCase().replace(/[^a-z0-9]+/g, "");
+
+// 那一天屬於哪一週 —— weekdrill 音檔按 <月份>-<該月第幾週> 分資料夾。
+// 直接用 curriculum.js 的 vocabWeekForDate，不要自己再算一次：它會把超出範圍的
+// 日期夾到頭尾那一週（六月那批舊練習就是靠這個借用 2026-07-1 的素材），
+// 自己重算就會誤判成「沒有這一週」。
+let _weekFor = null;
+function wdidFor(date) {
+  if (!_weekFor) {
+    _weekFor = new Function(fs.readFileSync(path.join(KIDS, "curriculum.js"), "utf8") +
+      ";return vocabWeekForDate;")();
+  }
+  const ctx = _weekFor(date);          // ctx.month 是整個月份物件，不是字串
+  return ctx.month.month + "-" + ctx.week.n;
+}
+
 // 那一天所屬的週一（週日算前一週的，跟 curriculum 的週日起算對得上）
 function mondayOf(date) {
   const p = date.split("-");
@@ -131,6 +148,24 @@ function main() {
     console.log(`     ${html.length} 字元 · 選擇/填空 ${qs} 題 · 重組 ${roq} 題 · 發音字 ${words}` +
                 (missing.length ? `　⚠️ 缺段落：${missing.join("、")}` : "") +
                 (/這份測驗還沒開放/.test(html) ? "　⚠️ 被日期鎖擋住" : ""));
+
+    // 每個 🔊 按鈕都要真的有檔案。缺檔不會報錯 —— Audio.play() 的 rejection 被
+    // playUrl 吃掉，小孩只會看到一顆按了沒反應的按鈕。（廚房那一週的 oil 就是這樣。）
+    const mute = [];
+    [...html.matchAll(/__pw\('((?:[^'\\]|\\.)*)'\)/g)].forEach(m => {
+      const en = m[1].replace(/\\'/g, "'");
+      if (!fs.existsSync(path.join(KIDS, "audio", "words", audioKey(en) + ".mp3"))) mute.push("words/" + en);
+    });
+    [...html.matchAll(/__pwd\('([^']+)'\)/g)].forEach(m => {
+      if (!fs.existsSync(path.join(KIDS, "audio", "weekdrill", wdidFor(d.date), m[1] + ".mp3"))) mute.push("weekdrill/" + m[1]);
+    });
+    [...html.matchAll(/__pst\('([^']+)'/g)].forEach(m => {
+      if (!fs.existsSync(path.join(KIDS, "audio", "structure", m[1] + ".mp3"))) mute.push("structure/" + m[1]);
+    });
+    if (mute.length) {
+      bad++;
+      console.log(`     ✗ ${mute.length} 顆 🔊 沒有音檔：${[...new Set(mute)].slice(0, 6).join("、")}`);
+    }
 
     // 記下這天實際抽到哪幾題，等一下比對同一週有沒有重複
     const mon = mondayOf(d.date);
