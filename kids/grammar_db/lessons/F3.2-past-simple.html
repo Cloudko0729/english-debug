@@ -240,12 +240,12 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202608150723"></script>
-<script src="../../account_lock.js?v=202608150723"></script>
-<script src="../../supabase_auth.js?v=202608150723"></script>
-<script src="../../ai_review.js?v=202608150723"></script>
-<script src="../../grammar_nodes.js?v=202608150723"></script>
-<script src="../../grammar_plan.js?v=202608150723"></script>
+<script src="../../cloud_sync.js?v=202608200224"></script>
+<script src="../../account_lock.js?v=202608200224"></script>
+<script src="../../supabase_auth.js?v=202608200224"></script>
+<script src="../../ai_review.js?v=202608200224"></script>
+<script src="../../grammar_nodes.js?v=202608200224"></script>
+<script src="../../grammar_plan.js?v=202608200224"></script>
 <script>
 var cur = null;
 function pa(src) { if (cur) { cur.pause(); cur = null; } var a = new Audio(src); cur = a; a.play().catch(function(){}); }
@@ -413,12 +413,14 @@ function drawOffPlan() {
 
 // NotebookLM 素材：有檔才顯示（fail-safe：載入失敗才隱藏，見 LESSON_PAGE_SPEC 第 7 節）
 (function () {
-  var a = document.getElementById("pcAudio"), v = document.getElementById("pcVideo"), box = document.getElementById("podcastBox");
-  a.src = "podcast/F3.2-past-simple.m4a"; v.src = "https://pub-65031fbe96a14bf18d0752133404e044.r2.dev/podcast/F3.2-past-simple.mp4";
-  var okCount = 0, errCount = 0;
-  function shown() { okCount++; box.classList.add("show"); }
-  function bad() { errCount++; if (errCount >= 2) box.classList.remove("show"); }
+  var a = document.getElementById("pcAudio"), box = document.getElementById("podcastBox");
+  a.src = "podcast/F3.2-past-simple.m4a";
+  var errCount = 0, needFail = 2;
+  function shown() { box.classList.add("show"); }
+  function bad() { errCount++; if (errCount >= needFail) box.classList.remove("show"); }
   a.addEventListener("loadedmetadata", shown); a.addEventListener("error", bad);
+  var v = document.getElementById("pcVideo");
+  v.src = "https://pub-65031fbe96a14bf18d0752133404e044.r2.dev/podcast/F3.2-past-simple.mp4";
   v.addEventListener("loadedmetadata", shown); v.addEventListener("error", bad);
 })();
 </script>

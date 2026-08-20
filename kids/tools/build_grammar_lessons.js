@@ -40,6 +40,10 @@ const KID = JSON.parse(fs.readFileSync(path.join(DB, "kid_wording.json"), "utf8"
 // 影音來源位置（見 grammar_db/media_config.json）。空字串＝跟頁面放在一起。
 const MEDIA = JSON.parse(fs.readFileSync(path.join(DB, "media_config.json"), "utf8"));
 const VIDEO_BASE = MEDIA.videoBase || "podcast/";
+// 影片是否已經生成 —— 用本機 lessons/podcast/ 的 mp4 判斷（R2 那份是從這裡上傳的）。
+// 沒有的節點就整段不要輸出 <video>：fail-safe 是「音檔和影片都失敗才隱藏」，
+// 音檔存在時區塊照樣展開，小孩會看到一個播不動的黑色播放器。
+const hasVideo = id => fs.existsSync(path.join(OUT, "podcast", id + ".mp4"));
 const AUDIO_BASE = MEDIA.audioBase || "podcast/";
 // 題幹的孩子端用語（資料庫的 promptZh 帶有「本節點」這類引擎術語）
 const { kidPrompt } = require("./_kid_prompt.js");
@@ -227,9 +231,9 @@ function renderNode(n, prev, next) {
 
 <div class="podcast" id="podcastBox">
   <div class="hd">🎧 教學 Podcast（NotebookLM 生成）</div>
-  <div class="mlabel">🎬 影片</div>
+${hasVideo(n.id) ? `  <div class="mlabel">🎬 影片</div>
   <video id="pcVideo" controls preload="metadata" playsinline></video>
-  <div class="mlabel" style="margin-top:12px">🎧 Podcast</div>
+  <div class="mlabel" style="margin-top:12px">🎧 Podcast</div>` : `  <div class="mlabel">🎧 Podcast</div>`}
   <audio id="pcAudio" controls preload="metadata"></audio>
 </div>
 
@@ -498,13 +502,15 @@ function drawOffPlan() {
 
 // NotebookLM 素材：有檔才顯示（fail-safe：載入失敗才隱藏，見 LESSON_PAGE_SPEC 第 7 節）
 (function () {
-  var a = document.getElementById("pcAudio"), v = document.getElementById("pcVideo"), box = document.getElementById("podcastBox");
-  a.src = "${AUDIO_BASE}${esc(n.id)}.m4a"; v.src = "${VIDEO_BASE}${esc(n.id)}.mp4";
-  var okCount = 0, errCount = 0;
-  function shown() { okCount++; box.classList.add("show"); }
-  function bad() { errCount++; if (errCount >= 2) box.classList.remove("show"); }
-  a.addEventListener("loadedmetadata", shown); a.addEventListener("error", bad);
-  v.addEventListener("loadedmetadata", shown); v.addEventListener("error", bad);
+  var a = document.getElementById("pcAudio"), box = document.getElementById("podcastBox");
+  a.src = "${AUDIO_BASE}${esc(n.id)}.m4a";
+  var errCount = 0, needFail = ${hasVideo(n.id) ? 2 : 1};
+  function shown() { box.classList.add("show"); }
+  function bad() { errCount++; if (errCount >= needFail) box.classList.remove("show"); }
+  a.addEventListener("loadedmetadata", shown); a.addEventListener("error", bad);${hasVideo(n.id) ? `
+  var v = document.getElementById("pcVideo");
+  v.src = "${VIDEO_BASE}${esc(n.id)}.mp4";
+  v.addEventListener("loadedmetadata", shown); v.addEventListener("error", bad);` : ""}
 })();
 </script>
 </body>
