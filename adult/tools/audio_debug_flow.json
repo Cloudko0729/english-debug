@@ -1,0 +1,33 @@
+{
+ "outdir": "D:/english/adult/audio/debug_flow",
+ "voice": "af_heart",
+ "speed": 0.92,
+ "items": {
+  "f1": "circuit analysis, traced AWG function to DAC circuit, replaced DAC, PASS",
+  "f2": "board missing after flying probe, cross-verified cable and found cable failure causing board missing, IV check found ASIC Ch97 fail, swapped channel and issue followed, RETURN",
+  "f3": "replaced ADC, power alarm on motherboard, found burned resistor causing poor ADC soldering or contact",
+  "f4": "loop unstable, traced to DCDC failure after forcing Enable pin, found alternative DCDC part has different TM pin definition",
+  "f5": "DIMM memory init fail, checked the board manual, found memory HW configuration requires fully populated DIMMs",
+  "f6": "checked thermal, code, resistor array, and IV per SOP, no issue found, replaced PIC interface BGA, PASS",
+  "f7": "replaced and swapped all related parts, still fail, found code issue, re-wrote code, PASS",
+  "f8": "found version issue, compared code differences between versions, checked version matching rule",
+  "f9": "main board fail, IV check on connector found open trace to FPGA, added jumper wire, PASS",
+  "f10": "channel module fail, checked connector per SOP, still fail, cross-verified and traced issue to target FPGA, replaced FPGA, PASS",
+  "f11": "found poor soldering on all DACs, re-soldered all DACs, Ch1 or 2 or 5 still fail, replaced channel DACs, PASS",
+  "f12": "cleaned conductive rubber strip, channel still fail, found burned diode, re-checked thermal and IV, both OK, replaced diode again, PASS",
+  "f13": "SOP check and replaced failed parts, Ch11 still fail, found poor soldering from previous vendor repair, replaced related parts, PASS",
+  "f14": "test system data record issue, found duplicated or extra data file, removed data file, PASS",
+  "p1": "still fail",
+  "p2": "no issue found",
+  "p3": "traced issue to",
+  "p4": "issue followed",
+  "p5": "cross-verified",
+  "p6": "alternative part",
+  "p7": "fully populated",
+  "p8": "poor soldering",
+  "p9": "open trace",
+  "p10": "burned resistor",
+  "p11": "per SOP",
+  "p12": "previous vendor repair"
+ }
+}

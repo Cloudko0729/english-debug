@@ -1,0 +1,23 @@
+{
+ "outdir": "D:/english/adult/audio/repair_terms",
+ "voice": "af_heart",
+ "speed": 0.92,
+ "items": {
+  "t124_term": "alternative part",
+  "t124_ex": "This DC-DC converter uses an alternative component.",
+  "t125_term": "flying probe",
+  "t125_ex": "The board went missing after the flying probe test.",
+  "t126_term": "fully populated",
+  "t126_ex": "The manual requires all DIMM slots to be fully populated.",
+  "t127_term": "poor soldering",
+  "t127_ex": "We found poor soldering left by the previous vendor repair.",
+  "t128_term": "open trace",
+  "t128_ex": "The IV check found an open trace to the FPGA.",
+  "t129_term": "cross-verify",
+  "t129_ex": "We cross-verified the cable with a known good one.",
+  "t130_term": "still fail",
+  "t130_ex": "Channel eleven still failed after the parts were replaced.",
+  "t131_term": "conductive rubber strip",
+  "t131_ex": "The conductive rubber strip was cleaned before the retest."
+ }
+}
