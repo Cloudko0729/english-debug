@@ -60,7 +60,7 @@ const DEBUG_FLOW = [
     flow: "DIMM memory init fail → checked the board manual → found memory HW configuration requires fully populated DIMMs",
     flow_zh: "DIMM 記憶體初始化失敗 → 查板子手冊 → 發現記憶體硬體配置要求 DIMM 必須插滿",
     raw: "init DIMMs memory fail->found Memory hardware config and fully populated after check board manual",
-    fix: "原句的 found ... and fully populated 讀不出因果。要分清楚兩種意思：「規範要求插滿」是 requires fully populated DIMMs，「檢查後確認已經插滿」是 confirmed DIMMs were fully populated。",
+    fix: "原句的 found ... and fully populated 讀不出因果。這裡要講的是「規範要求插滿」，所以用 requires fully populated DIMMs。對照組：如果是「檢查後確認已經插滿」，要寫 confirmed DIMMs were fully populated —— 一個是規格要求，一個是現場事實，別人看紀錄會採取完全不同的下一步。",
   },
   {
     id: 6, cat: "missing",
@@ -84,10 +84,10 @@ const DEBUG_FLOW = [
     id: 8, cat: "code",
     title: "DONE LED red",
     zh: "DONE LED 亮紅燈",
-    flow: "found version issue → compared code differences between versions → checked version matching rule",
-    flow_zh: "發現是版本問題 → 比對不同版本的程式差異 → 檢查版本相容規則",
+    flow: "found version issue → compared code addresses between versions → checked version matching rule",
+    flow_zh: "發現是版本問題 → 比對不同版本的 code address → 檢查版本相容規則",
     raw: "version issue -> compare the different code address -> version matching rule",
-    fix: "「compare the different code address」有歧義：是比較不同版本的 code address，還是比較不同 address 裡的內容？前者要寫 compared code between versions。",
+    fix: "原句的 the different code address 會被讀成「比較不同 address 裡的內容」。實際要講的是「比對不同版本的 code address」，差異在版本之間，所以寫 compared code addresses between versions —— between versions 把比較的對象講死。",
   },
   {
     id: 9, cat: "power",

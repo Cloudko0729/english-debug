@@ -10,7 +10,7 @@
   "f5": "DIMM memory init fail, checked the board manual, found memory HW configuration requires fully populated DIMMs",
   "f6": "checked thermal, code, resistor array, and IV per SOP, no issue found, replaced PIC interface BGA, PASS",
   "f7": "replaced and swapped all related parts, still fail, found code issue, re-wrote code, PASS",
-  "f8": "found version issue, compared code differences between versions, checked version matching rule",
+  "f8": "found version issue, compared code addresses between versions, checked version matching rule",
   "f9": "main board fail, IV check on connector found open trace to FPGA, added jumper wire, PASS",
   "f10": "channel module fail, checked connector per SOP, still fail, cross-verified and traced issue to target FPGA, replaced FPGA, PASS",
   "f11": "found poor soldering on all DACs, re-soldered all DACs, Ch1 or 2 or 5 still fail, replaced channel DACs, PASS",
