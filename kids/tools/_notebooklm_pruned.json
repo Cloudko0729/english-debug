@@ -1,0 +1,407 @@
+{
+ "at": "2026-08-22T07:06:50.733Z",
+ "deleted": 100,
+ "failed": [],
+ "ids": [
+  {
+   "id": "dc4d846e-4db7-4fa6-b4ce-c1efb6ef3d24",
+   "title": "文法 F3.4-prepositions 地點與時間介系詞"
+  },
+  {
+   "id": "ce92cc42-1f0d-4ec1-b67e-a6ce7e5bfd83",
+   "title": "文法 F2.2-frequency-adverbs 頻率副詞的位置"
+  },
+  {
+   "id": "2d9cfd8c-f923-4806-9d1d-a6037ad482a1",
+   "title": "文法 F7.6-edit-naturalness 修改自然度與語意"
+  },
+  {
+   "id": "e630b8db-c098-47a4-9af3-59b6d2e36f9c",
+   "title": "文法 F7.5-punctuation 子句與資訊標點"
+  },
+  {
+   "id": "7e1e161a-4207-4983-a3c1-573976870e8a",
+   "title": "文法 F7.4-reference-across-sentences 跨句指涉與避免含糊"
+  },
+  {
+   "id": "ea22ab95-b9df-465a-8539-a0a1a7847749",
+   "title": "文法 F7.3-register 正式與非正式語體"
+  },
+  {
+   "id": "b88313e0-0ca2-4898-ad9f-17ec7a7494d7",
+   "title": "文法 F7.2-modal-deduction 情態動詞的推論強度"
+  },
+  {
+   "id": "b1201cbf-3bf2-44fc-9669-685863877a40",
+   "title": "文法 F7.1-relative-advanced 關係子句深化"
+  },
+  {
+   "id": "94509081-776c-49f3-a6d6-b3e42252688e",
+   "title": "文法 F6.6-cohesion-basic 句內與段內銜接"
+  },
+  {
+   "id": "b065777b-e4a4-4d43-8b16-4089b9a3808a",
+   "title": "文法 F6.5-reporting-sources 引述來源與觀點"
+  },
+  {
+   "id": "a91b0666-f969-4785-9d75-a3183f44d92c",
+   "title": "文法 F6.4-expanded-noun-phrases 擴展名詞片語"
+  },
+  {
+   "id": "32126601-5532-48e9-8a16-adec4e63e6b3",
+   "title": "文法 F6.3-future-forms 未來形式的細微差異"
+  },
+  {
+   "id": "a7295e51-11e7-481d-ab21-c8f84ad933be",
+   "title": "文法 F6.2-passive-process 流程被動與資訊焦點"
+  },
+  {
+   "id": "34422874-f208-4350-a759-706e3e25ac82",
+   "title": "文法 F3.4-prepositions 地點與時間介系詞"
+  },
+  {
+   "id": "9cc8f8ed-eeed-4903-a4cc-b3b892efdc2f",
+   "title": "文法 F3.3-did-questions did 問句與否定"
+  },
+  {
+   "id": "d0f1a81f-168e-4ed8-b95c-c54608c550f6",
+   "title": "文法 F3.2-past-simple 一般動詞過去式"
+  },
+  {
+   "id": "65fd9fe7-d976-4fc7-b8d2-f43628991e64",
+   "title": "文法 F2.5-stative-verbs 常見狀態動詞"
+  },
+  {
+   "id": "8e53daee-c623-4935-bd11-18c2f3e67673",
+   "title": "文法 F2.4-present-contrast 習慣與此刻"
+  },
+  {
+   "id": "7d2d1dd7-b767-42b8-ae2b-f573b1f8e194",
+   "title": "文法 F2.2-frequency-adverbs 頻率副詞的位置"
+  },
+  {
+   "id": "c54839b2-ceed-47f9-9bc4-e853a384704f",
+   "title": "文法 F1.6-wh-questions Wh- 資訊問句"
+  },
+  {
+   "id": "40b55c43-ff94-407e-bf9b-e5cbe5ae2260",
+   "title": "文法 F1.5-do-does do / does 問句與否定"
+  },
+  {
+   "id": "19c6c640-e83e-492c-b741-c807da5c60f7",
+   "title": "文法 F5.3-perfect-vs-past 現在完成式與過去式"
+  },
+  {
+   "id": "0b3ac376-8984-426c-a173-ad062d2a8ab1",
+   "title": "文法 F1.5-do-does do / does 問句與否定"
+  },
+  {
+   "id": "1c472568-d088-4f10-af05-83b824ceb200",
+   "title": "文法 F6.2-passive-process 流程被動與資訊焦點"
+  },
+  {
+   "id": "12d270e3-6e87-4fe3-9361-65c37ea7a4db",
+   "title": "文法 F6.1-tense-choice 跨句時態選擇"
+  },
+  {
+   "id": "da2867a1-bf2a-432d-a072-3ff3983b1980",
+   "title": "文法 F5.6-reflexive-reference 反身代名詞與清楚指涉"
+  },
+  {
+   "id": "78d27a74-b3e5-429c-9687-42f08c05be1b",
+   "title": "文法 F5.5-relative-basic 基本關係子句"
+  },
+  {
+   "id": "1e9ebd6c-f724-4f63-8fea-bd1a1e4ff977",
+   "title": "文法 F5.4-first-conditional 第一條件句"
+  },
+  {
+   "id": "33d05efb-a219-40fd-9825-7bdf2d1bc13a",
+   "title": "文法 F5.2-perfect-markers already、yet、since 與 for"
+  },
+  {
+   "id": "83a497f5-d0aa-40fe-9ec8-c75821eeb570",
+   "title": "文法 F5.1-present-perfect-experience 現在完成式：經驗與結果"
+  },
+  {
+   "id": "eed84dce-3222-423f-a49e-c6a27449e6be",
+   "title": "文法 F4.6-infinitive-gerund to + V 與 V-ing 搭配"
+  },
+  {
+   "id": "e0a4ece3-35be-4edc-80da-ee7110380a97",
+   "title": "文法 F4.5-modal-functions 建議、義務與可能性"
+  },
+  {
+   "id": "54f8def7-b094-4d7a-b988-d77b938d4bef",
+   "title": "文法 F4.4-quantifiers 數量詞"
+  },
+  {
+   "id": "6e403124-6a4a-410f-ba56-5f0b67f756d8",
+   "title": "文法 F4.3-comparatives 比較級與最高級"
+  },
+  {
+   "id": "0b2b7446-9df1-4ec6-9ff3-b67d37ef0b45",
+   "title": "文法 F4.2-adjectives-adverbs 形容詞與副詞"
+  },
+  {
+   "id": "f6e24d3d-d221-4337-b178-1e71d6c55ccc",
+   "title": "文法 F4.1-past-continuous 過去進行式與 when / while"
+  },
+  {
+   "id": "854c9094-ac3d-4562-ac5d-61dd8197f374",
+   "title": "文法 F3.6-basic-helpers can、will 與 going to"
+  },
+  {
+   "id": "7f3637d9-9e1a-4015-9823-ea98cf18f894",
+   "title": "文法 F3.5-connectors 基本連接詞與邏輯"
+  },
+  {
+   "id": "af4a2303-64f4-4ec4-ae28-e1a45f114d2f",
+   "title": "文法 F3.4-prepositions 地點與時間介系詞"
+  },
+  {
+   "id": "45540e3a-6cc4-4323-ba70-3c6ac005f59a",
+   "title": "文法 F3.3-did-questions did 問句與否定"
+  },
+  {
+   "id": "1d7d83b5-24c9-405e-ab63-8162717a6ee2",
+   "title": "文法 F3.2-past-simple 一般動詞過去式"
+  },
+  {
+   "id": "fd464b60-2031-4a31-8f7b-718980a40371",
+   "title": "文法 F2.5-stative-verbs 常見狀態動詞"
+  },
+  {
+   "id": "16c3a628-9ddd-41b0-a8fe-cd327f242f71",
+   "title": "文法 F2.4-present-contrast 習慣與此刻"
+  },
+  {
+   "id": "6385e508-4e47-462d-bffb-a1a4539f79e7",
+   "title": "文法 F1.4-be-questions-negatives be 問句、否定與短答"
+  },
+  {
+   "id": "68cf7713-e700-4953-819d-addd19f6a20e",
+   "title": "文法 F1.3-predicate-choice be 述語與一般動詞述語"
+  },
+  {
+   "id": "861ed369-7527-49d2-9792-3b4199559298",
+   "title": "文法 F1.2-action-affirmative 一般動詞肯定句"
+  },
+  {
+   "id": "312ba2e5-1ed0-40ed-9ab9-f3b6507e33f4",
+   "title": "文法 F1.1-subject-pronouns 主詞代名詞"
+  },
+  {
+   "id": "0b4fabb5-6869-4cbd-848e-e313e96533af",
+   "title": "文法 F0.5-a-an-sound a / an 看聲音"
+  },
+  {
+   "id": "956ff7b0-16c4-407f-8361-adf2b8bfb94e",
+   "title": "文法 F0.5-a-an-sound a / an 看聲音"
+  },
+  {
+   "id": "6c785ae1-c3d7-4303-b576-75f1a26a1d32",
+   "title": "文法 F3.2-past-simple 一般動詞過去式"
+  },
+  {
+   "id": "29634cb1-208c-413a-86f9-e50b4744a18c",
+   "title": "文法 F3.1-past-be 過去的 was / were"
+  },
+  {
+   "id": "e72783d6-285b-4423-8eac-eb2b0253196f",
+   "title": "文法 F3.6-basic-helpers can、will 與 going to"
+  },
+  {
+   "id": "0f54e18f-8292-4ff2-b825-c0ff6f92a7a2",
+   "title": "文法 F4.5-modal-functions 建議、義務與可能性"
+  },
+  {
+   "id": "38b2f74c-0450-47b0-9549-4147b218d443",
+   "title": "文法 F4.6-infinitive-gerund to + V 與 V-ing 搭配"
+  },
+  {
+   "id": "6ba2f6cd-b285-40b7-951d-e1635e849698",
+   "title": "文法 F0.4-singular-plural 一個與多個名詞"
+  },
+  {
+   "id": "d84884ab-26b1-4a2a-ada2-5dbf461b375b",
+   "title": "文法 F0.3-be-meaning be 表身分、狀態與位置"
+  },
+  {
+   "id": "1ca4c456-e60b-423f-b3ed-4bf639cc2d00",
+   "title": "文法 F0.1-complete-sentence 完整句與片語"
+  },
+  {
+   "id": "fa56ebc2-9871-41d1-a3ac-dd22589e8fc6",
+   "title": "文法 F1.5-do-does do / does 問句與否定"
+  },
+  {
+   "id": "39c6c360-9215-466e-8a18-ce7131d31110",
+   "title": "文法 F3.5-connectors 基本連接詞與邏輯"
+  },
+  {
+   "id": "e93f6fba-46ac-46c6-811e-506bdc3d501d",
+   "title": "文法 F3.2-past-simple 一般動詞過去式"
+  },
+  {
+   "id": "b7503c56-1827-403a-a767-615d04a46efa",
+   "title": "文法 F4.6-infinitive-gerund to + V 與 V-ing 搭配"
+  },
+  {
+   "id": "22281f74-a927-44f1-925c-12b6fbcab8fa",
+   "title": "文法 F4.4-quantifiers 數量詞"
+  },
+  {
+   "id": "ac068cff-94fe-440b-935c-81f06015b695",
+   "title": "文法 F4.3-comparatives 比較級與最高級"
+  },
+  {
+   "id": "efe1efc4-9845-4ada-9985-5e5e01d2f488",
+   "title": "文法 F4.2-adjectives-adverbs 形容詞與副詞"
+  },
+  {
+   "id": "aae443c4-be06-4185-8531-7c569152bd7f",
+   "title": "文法 F4.1-past-continuous 過去進行式與 when / while"
+  },
+  {
+   "id": "c4665bec-f777-4978-b494-f559639bb3a0",
+   "title": "文法 F3.5-connectors 基本連接詞與邏輯"
+  },
+  {
+   "id": "6b2ce278-f8ad-4b36-adec-b5f9bfd21dfb",
+   "title": "文法 F3.4-prepositions 地點與時間介系詞"
+  },
+  {
+   "id": "0aea7b0f-4aee-4b39-84ba-c23680d42315",
+   "title": "文法 F3.3-did-questions did 問句與否定"
+  },
+  {
+   "id": "47fc2a14-ba69-466f-9486-1ac3f3acf797",
+   "title": "文法 F3.1-past-be 過去的 was / were"
+  },
+  {
+   "id": "bb29651e-d56e-4675-bad9-108c4653c7fe",
+   "title": "文法 F2.5-stative-verbs 常見狀態動詞"
+  },
+  {
+   "id": "f7dfbc4d-4635-4fbb-ae47-58ec92616f8d",
+   "title": "文法 F4.5-modal-functions 建議、義務與可能性"
+  },
+  {
+   "id": "eb4bc4d8-b5f1-453e-8ef3-544a3be44249",
+   "title": "文法 F2.4-present-contrast 習慣與此刻"
+  },
+  {
+   "id": "9c57921e-8f30-48c7-9644-2cc748cad037",
+   "title": "文法 F4.4-quantifiers 數量詞"
+  },
+  {
+   "id": "f211e72d-a2a0-4e15-8e14-d0e6262c7808",
+   "title": "文法 F4.3-comparatives 比較級與最高級"
+  },
+  {
+   "id": "373eaaaf-fc1e-4d72-9e20-8a14ba06c76a",
+   "title": "文法 F4.2-adjectives-adverbs 形容詞與副詞"
+  },
+  {
+   "id": "9c3585c9-c691-4f7e-94bc-a5dc053adb0e",
+   "title": "文法 F4.1-past-continuous 過去進行式與 when / while"
+  },
+  {
+   "id": "2fda5a4b-ef42-428e-975a-3b59a7171493",
+   "title": "文法 F3.6-basic-helpers can、will 與 going to"
+  },
+  {
+   "id": "a5943912-afa4-41dd-81eb-a60cbf8c2585",
+   "title": "文法 F3.5-connectors 基本連接詞與邏輯"
+  },
+  {
+   "id": "354be0ec-cab3-4359-97cb-35377dbe6496",
+   "title": "文法 F3.4-prepositions 地點與時間介系詞"
+  },
+  {
+   "id": "a919c0a4-820e-4009-97c6-e19ab43ad63d",
+   "title": "文法 F3.3-did-questions did 問句與否定"
+  },
+  {
+   "id": "5bf2e65a-f9eb-47c0-9192-516c10ca24fb",
+   "title": "文法 F3.2-past-simple 一般動詞過去式"
+  },
+  {
+   "id": "c44d6b45-438d-4437-9625-cd71f2fd40bc",
+   "title": "文法 F3.1-past-be 過去的 was / were"
+  },
+  {
+   "id": "5fe0b784-3a40-438b-80cc-d63eb222d770",
+   "title": "文法 F2.5-stative-verbs 常見狀態動詞"
+  },
+  {
+   "id": "800f6f9c-45f7-4018-af59-209c6479da78",
+   "title": "文法 F2.4-present-contrast 習慣與此刻"
+  },
+  {
+   "id": "9ab8166f-efe0-4d30-9d78-9895ddb2d24f",
+   "title": "文法 F2.2-frequency-adverbs 頻率副詞的位置"
+  },
+  {
+   "id": "5e6d42d0-caef-4e86-ad70-5c8b70ee5604",
+   "title": "文法 F2.2-frequency-adverbs 頻率副詞的位置"
+  },
+  {
+   "id": "82b72212-26e2-4d2d-92f5-f841c9eb3f87",
+   "title": "文法 F1.6-wh-questions Wh- 資訊問句"
+  },
+  {
+   "id": "b1ddaaac-18ae-4f30-855c-cd7f9e80ba58",
+   "title": "文法 F1.6-wh-questions Wh- 資訊問句"
+  },
+  {
+   "id": "4131d889-656c-46bc-a332-535679b74af5",
+   "title": "文法 F1.5-do-does do / does 問句與否定"
+  },
+  {
+   "id": "6575e5bd-4d87-4ca3-9e91-81f623a85734",
+   "title": "文法 F2.7-there-count-quantity there is/are 與基本數量"
+  },
+  {
+   "id": "cfc17eb8-f10e-4726-8dfd-8e41ad461f88",
+   "title": "文法 F1.4-be-questions-negatives be 問句、否定與短答"
+  },
+  {
+   "id": "c59fc2ac-442b-42ea-b20e-02a11096bc91",
+   "title": "文法 F1.3-predicate-choice be 述語與一般動詞述語"
+  },
+  {
+   "id": "c63a2e58-1b58-498f-b14e-6e4b595425a0",
+   "title": "文法 F1.2-action-affirmative 一般動詞肯定句"
+  },
+  {
+   "id": "52578128-694e-4fa0-b695-d4472a7cc6e6",
+   "title": "文法 F2.6-pronoun-case 主格、受格與所有格"
+  },
+  {
+   "id": "8da9c5e2-ebdc-4eb9-8ea0-95cb633fa591",
+   "title": "文法 F1.1-subject-pronouns 主詞代名詞"
+  },
+  {
+   "id": "9cdd18f5-0d7f-496c-a169-e450b0c680fe",
+   "title": "文法 F0.1-complete-sentence 完整句與片語"
+  },
+  {
+   "id": "52defad9-1046-4613-9ed7-d2ca8fc2d278",
+   "title": "文法 F0.2-be-agreement 主詞與 am / is / are"
+  },
+  {
+   "id": "a02d6e89-0f09-4a7d-b80c-57535bf0d0bb",
+   "title": "文法 F0.4-singular-plural 一個與多個名詞"
+  },
+  {
+   "id": "a7bcefff-f710-4df2-83c0-070a58773e8c",
+   "title": "文法 F0.3-be-meaning be 表身分、狀態與位置"
+  },
+  {
+   "id": "b8163d2b-38b4-40a7-a119-a8390a4a917f",
+   "title": "文法 F2.1-present-simple 現在簡單式"
+  }
+ ]
+}
