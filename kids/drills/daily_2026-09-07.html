@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>每日測驗 2026-09-07 — Kids English</title>
+<style>
+ body{font-family:Arial,"Noto Sans TC",sans-serif;background:#fff7dc;color:#243042;margin:0}
+ header{background:#2f80ed;color:#fff;text-align:center;padding:18px 16px}
+ header h1{margin:0;font-size:1.25rem} header p{margin:4px 0 0;font-size:.82rem;opacity:.9}
+ header a{color:#ffe27a;text-decoration:none;font-weight:700}
+ #studentBar{max-width:680px;margin:14px auto 0;padding:0 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-weight:700;color:#3a2a00}
+ .stu-btn{padding:7px 16px;border:2px solid #2f80ed;border-radius:18px;background:#fff;color:#2f80ed;font-weight:700;cursor:pointer}
+ .stu-btn.active{background:#2f80ed;color:#fff}
+</style>
+</head>
+<body>
+<header><h1>📝 每日測驗</h1><p>當週單字 ＋ 當月文法 · <a href="../index.html">← 回首頁</a></p></header>
+<div id="studentBar">我是：
+ <button class="stu-btn" onclick="selectStudent('albert')">Albert</button>
+ <button class="stu-btn" onclick="selectStudent('jonathan')">Jonathan</button>
+ <button class="stu-btn" onclick="selectStudent('ryder')">Ryder</button>
+ <button class="stu-btn" onclick="selectStudent('guest')">🎫 訪客</button>
+ <button class="stu-btn" style="opacity:.7" onclick="selectStudent('test')">🧪 測試</button>
+</div>
+<div id="app"></div>
+<script>const DRILL_DATE="2026-09-07";const DRILL_THEME="vocab";</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../wordbank.js?v=202608281410"></script>
+<script src="../worddex.js?v=202608281410"></script>
+<script src="../curriculum.js?v=202608281410"></script>
+<script src="../word_emoji.js?v=202608281410"></script>
+<script src="../word_image.js?v=202608281410"></script>
+<script src="../cloud_sync.js?v=202608281410"></script>
+<script src="../account_lock.js?v=202608281410"></script>
+<script src="../supabase_auth.js?v=202608281410"></script>
+<script src="weekdrills.js?v=202608281410"></script>
+<script src="structure_units.js?v=202608281410"></script>
+<script src="../grammar_nodes.js?v=202608281410"></script>
+<script src="../grammar_plan.js?v=202608281410"></script>
+<script src="grammar_daily.js?v=202608281410"></script>
+<script src="../school_db/textbook_g6a.js?v=202608210210"></script>
+<script src="../school_db/exam_plan.js?v=202608210210"></script>
+<script src="school_daily.js?v=202608210210"></script>
+<script src="daily_engine.js?v=202608281410"></script>
+</body>
+</html>

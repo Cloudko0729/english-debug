@@ -22,6 +22,7 @@ const DEPS = [
   "wordbank.js", "worddex.js", "curriculum.js", "word_emoji.js", "word_image.js",
   "drills/weekdrills.js", "drills/structure_units.js",
   "grammar_nodes.js", "grammar_plan.js", "drills/grammar_daily.js",
+  "school_db/textbook_g6a.js", "school_db/exam_plan.js", "drills/school_daily.js",
 ];
 const ENGINE = "drills/daily_engine.js";
 
@@ -158,6 +159,9 @@ function main() {
     });
     [...html.matchAll(/__pwd\('([^']+)'\)/g)].forEach(m => {
       if (!fs.existsSync(path.join(KIDS, "audio", "weekdrill", wdidFor(d.date), m[1] + ".mp3"))) mute.push("weekdrill/" + m[1]);
+    });
+    [...html.matchAll(/__psc\('([^']+)'\)/g)].forEach(m => {
+      if (!fs.existsSync(path.join(KIDS, "audio", "school", m[1] + ".mp3"))) mute.push("school/" + m[1]);
     });
     [...html.matchAll(/__pst\('([^']+)'/g)].forEach(m => {
       if (!fs.existsSync(path.join(KIDS, "audio", "structure", m[1] + ".mp3"))) mute.push("structure/" + m[1]);

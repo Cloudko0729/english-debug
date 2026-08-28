@@ -167,6 +167,17 @@
 
 
 
+    <a class="card" href="school_exam.html" id="schCard" style="border:2px solid #e8563f;background:linear-gradient(135deg,#ffeae6,#fff)">
+      <div class="card-left">
+        <div class="card-icon" style="background:#ffc9bd;font-size:1.3rem">📕</div>
+        <div>
+          <div class="card-title">學校課本（期中考）</div>
+          <div class="card-sub" id="schSub">Unit 1–4 單字句型 · 每日練習第 ⑨ 段同步</div>
+        </div>
+      </div>
+      <span class="badge badge-new" id="schBadge" style="background:#e8563f">學校</span>
+    </a>
+
     <a class="card" href="homework.html" id="hwCard" style="border:2px solid #e8863c;background:linear-gradient(135deg,#ffeede,#fff)">
       <div class="card-left">
         <div class="card-icon" style="background:#ffd9b8;font-size:1.3rem">✍️</div>
@@ -314,15 +325,15 @@
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202608210210"></script>
-<script src="account_lock.js?v=202608210210"></script>
-<script src="supabase_auth.js?v=202608210210"></script>
-<script src="drills_list.js?v=202608210210"></script>
-<script src="grammar_nodes.js?v=202608210210"></script>
-<script src="grammar_plan.js?v=202608210210"></script>
-<script src="vocab_units.js?v=202608210210"></script>
-<script src="weekly_bank.js?v=202608210210"></script>
-<script src="vocab_unit_plan.js?v=202608210210"></script>
+<script src="cloud_sync.js?v=202608281410"></script>
+<script src="account_lock.js?v=202608281410"></script>
+<script src="supabase_auth.js?v=202608281410"></script>
+<script src="drills_list.js?v=202608281410"></script>
+<script src="grammar_nodes.js?v=202608281410"></script>
+<script src="grammar_plan.js?v=202608281410"></script>
+<script src="vocab_units.js?v=202608281410"></script>
+<script src="weekly_bank.js?v=202608281410"></script>
+<script src="vocab_unit_plan.js?v=202608281410"></script>
 <script>
 let _homeSynced = false;
 function pickStudent(name) {
@@ -495,6 +506,16 @@ function renderWeekDrills() {
   el.innerHTML = wk.length ? wk.map(_drillCard).join("")
     : '<p style="color:#888;padding:8px 4px;font-size:.85rem">本週還沒有練習，去看 📚 歷史題庫。</p>';
 }
+// 學校課本卡片顯示考試倒數（exam_plan.js 只在每日練習頁載入，這裡直接算）
+(function(){
+  var el=document.getElementById("schSub"), b=document.getElementById("schBadge");
+  if(!el) return;
+  var ex="2026-11-05", p=ex.split("-");
+  var days=Math.round((new Date(+p[0],+p[1]-1,+p[2],12)-new Date(new Date().setHours(12,0,0,0)))/86400000);
+  if(days>0){ el.textContent="Unit 1–4 單字句型 · 距離期中考還有 "+days+" 天"; b.textContent="D-"+days; }
+  else if(days===0){ el.textContent="今天期中考，加油！"; b.textContent="今天"; }
+  else { el.textContent="Unit 1–4 單字句型（期中考已結束）"; b.textContent="複習"; }
+})();
 renderWeekDrills();
 lockFutureDrills();
 

@@ -85,6 +85,7 @@
   window.__pw = en => playUrl(WORD_AUDIO + akey(en) + ".mp3", en);
   window.__pwd = key => playUrl("../audio/weekdrill/" + WDID + "/" + key + ".mp3");
   window.__pst = (key, fb) => playUrl("../audio/structure/" + key + ".mp3", fb);
+  window.__psc = key => playUrl("../audio/school/" + key + ".mp3");
 
   // 干擾選項（en 不同、zh 也不同）
   function distinctChoices(answerWord, pool, rnd) {
@@ -238,7 +239,26 @@
       }
     }
 
-    return { week, month, s1, s2, s3, s4, s5, s6, s7, s8, hasWd: !!wd };
+    // ⑨ 學校課本（期中考範圍）。只在考前出現，考完就自動消失。
+    // 這一段跟其他段落的來源不同：其他是我們自己的年度計畫，這一段是學校的進度，
+    // 所以照 exam_plan.js 的週次表走，不看 curriculum 的週。
+    let s9 = null;
+    if (typeof examFocusFor === "function" && typeof SCHOOL_BANK !== "undefined") {
+      const wk = examFocusFor(DRILL_DATE);
+      if (wk) {
+        const pool = [];
+        wk.focus.forEach(id => (SCHOOL_BANK[id] || []).forEach((q, i) => pool.push({ ...q, _i: id + i })));
+        if (pool.length >= 3) {
+          const qs = pickBlock(pool, 4, dayIdx, "school-" + wk.start, retake).map(q => ({
+            kind: q.kind, q: q.q, passage: q.passage, audio: q.audio, full: q.full,
+            choices: shuffleArr(q.choices.map(c => ({ label: c, correct: c === q.answer })), rnd),
+          }));
+          s9 = { wk, qs, days: typeof daysToExam === "function" ? daysToExam(DRILL_DATE) : null };
+        }
+      }
+    }
+
+    return { week, month, s1, s2, s3, s4, s5, s6, s7, s8, s9, hasWd: !!wd };
   }
 
   function optsHtml(sec, qi, choices) { return `<div class="opts">${choices.map((c, ci) => `<button class="opt" onclick="__ans('${sec}',${qi},${ci},this)">${c.label}</button>`).join("")}</div>`; }
@@ -315,6 +335,20 @@
       DRILL.s8.qs.forEach((q, i) => { h += `<div class="q"><div class="q-no">${i + 1}. ${q.q}</div>${optsHtml('s8', i, q.choices)}</div>`; });
       h += `</div>`;
     }
+    // ⑨ 學校課本
+    if (DRILL.s9) {
+      const d = DRILL.s9.days;
+      const countdown = d > 0 ? `　·　距離期中考還有 <b>${d}</b> 天` : (d === 0 ? "　·　<b>今天考試！</b>" : "");
+      h += `<div class="sec"><div class="sec-h">⑨ 學校課本 — ${DRILL.s9.wk.label}</div><div class="sec-d">學校進度同步${countdown}</div>`;
+      DRILL.s9.qs.forEach((q, i) => {
+        h += `<div class="q">` +
+             (q.passage ? `<div class="passage">${q.passage}</div>` : "") +
+             `<div class="q-no">${i + 1}. ${q.q}</div>` +
+             (q.audio ? `<button class="play" onclick="__psc('${q.audio}')">🔊 點我聽</button>` : "") +
+             optsHtml('s9', i, q.choices) + `</div>`;
+      });
+      h += `</div>`;
+    }
     h += `<button class="gobtn" onclick="__showTotal()">看總成績 🎉</button><div id="totalBox"></div>`;
     const app = document.getElementById("app"); app.innerHTML = h; app.style.display = "block";
     // 計分容器
@@ -324,12 +358,13 @@
     sectionScores.s6 = [0, DRILL.s6 ? DRILL.s6.qs.length : 0];
     sectionScores.s7 = [0, DRILL.s7 ? DRILL.s7.qs.length : 0];
     sectionScores.s8 = [0, DRILL.s8 ? DRILL.s8.qs.length : 0];
+    sectionScores.s9 = [0, DRILL.s9 ? DRILL.s9.qs.length : 0];
   }
 
   window.__ans = (sec, qi, ci, btn) => {
     const box = btn.closest('.q'); if (box.dataset.done) return; box.dataset.done = "1";
     const list = (sec === 's3') ? DRILL.s3.questions[qi].choices
-               : (sec === 's6' || sec === 's7' || sec === 's8') ? DRILL[sec].qs[qi].choices
+               : (sec === 's6' || sec === 's7' || sec === 's8' || sec === 's9') ? DRILL[sec].qs[qi].choices
                : DRILL[sec][qi].choices;
     const ok = list[ci].correct;
     box.querySelectorAll('.opt').forEach((b, bi) => { b.disabled = true; if (list[bi].correct) b.classList.add('ok'); else if (bi === ci) b.classList.add('no'); });

@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>學校課本 — 期中考範圍</title><style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,"Noto Sans TC",sans-serif;max-width:680px;margin:0 auto;background:#fff7dc;color:#243042;padding:0 14px 60px}
+header{background:#e8563f;color:#fff;text-align:center;padding:20px 16px 15px;border-radius:0 0 16px 16px;margin:0 -14px 12px}
+header h1{font-size:1.25rem} header p{font-size:.82rem;opacity:.9;margin-top:5px}
+header a{color:#ffe27a;text-decoration:none;font-weight:700}
+#cd{background:#fff;border:2px solid #e8563f;border-radius:14px;padding:12px 15px;text-align:center;margin-bottom:12px}
+#cd .big{font-size:1.9rem;font-weight:800;color:#e8563f}
+#cd .sub{font-size:.82rem;color:#666;margin-top:3px}
+#bar{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+#bar button{padding:6px 13px;border:2px solid #e3d5b8;border-radius:16px;background:#fff;font-weight:700;cursor:pointer;font-size:.82rem}
+#bar button.on{border-color:#e8563f;background:#e8563f;color:#fff}
+.u{background:#fff;border-radius:14px;padding:14px 16px;margin-bottom:11px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.u h2{font-size:1.02rem;color:#b8371f;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.u h2 small{font-size:.78rem;color:#888;font-weight:400}
+.u .goal{font-size:.84rem;color:#5a6875;margin:6px 0 10px}
+.lab{font-size:.72rem;font-weight:800;color:#8a6d1a;background:#fff3d6;border-radius:5px;padding:2px 8px;display:inline-block;margin:10px 0 5px}
+.vv{display:flex;flex-wrap:wrap;gap:6px}
+.vv span{background:#f6f9fd;border:1px solid #dbe6f2;border-radius:8px;padding:4px 9px;font-size:.85rem;cursor:pointer}
+.vv span b{color:#14324a} .vv span i{color:#888;font-style:normal;font-size:.78rem;margin-left:4px}
+.pat{background:#f3fcf7;border-left:3px solid #2fbf71;border-radius:0 8px 8px 0;padding:7px 11px;margin-bottom:6px;font-size:.88rem;cursor:pointer}
+.pat .a{color:#1f8a4c;font-weight:700} .pat .z{font-size:.76rem;color:#8a949e;margin-top:3px}
+.ph{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ph .g{background:#e8563f;color:#fff;border-radius:6px;padding:2px 9px;font-weight:800;font-size:.82rem}
+.ph .w{background:#fff6f4;border:1px solid #f2c4b8;border-radius:8px;padding:3px 9px;font-size:.85rem;cursor:pointer}
+.tip{font-size:.8rem;color:#8a6d1a;background:#fffbf0;border:1px dashed #e8c89a;border-radius:8px;padding:7px 11px;margin-top:8px;line-height:1.7}
+.story{font-size:.85rem;line-height:1.9;color:#2c4a68;background:#f6f9fd;border-radius:8px;padding:9px 12px;margin-top:6px}
+.story div{cursor:pointer}
+.missing{font-size:.8rem;color:#b3621a;background:#fff6ec;border:1px dashed #f0c9a0;border-radius:8px;padding:8px 11px;margin-top:8px}
+.pgrid{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.pgrid span{background:#f6f9fd;border:1px solid #dbe6f2;border-radius:6px;padding:3px 8px;font-size:.8rem;cursor:pointer}
+</style></head><body>
+<header><h1>📕 學校課本 — 期中考範圍</h1>
+<p><a href="index.html">← 回首頁</a> · 國小六上 Unit 1–4 · 點單字或句子發音</p></header>
+
+<div id="cd"></div>
+<div id="bar"></div>
+<div id="main"></div>
+
+<script src="school_db/textbook_g6a.js?v=202608282100"></script>
+<script src="school_db/exam_plan.js?v=202608282100"></script>
+<script>
+var T=TEXTBOOK_G6A, fc="all";
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function akey(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"");}
+
+// 倒數
+(function(){
+  var d=new Date();
+  var t=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  var n=daysToExam(t);
+  var el=document.getElementById("cd");
+  if(n>0) el.innerHTML='<div class="big">還有 '+n+' 天</div><div class="sub">期中考 '+T.meta.examDate+'（四）　·　'+esc(T.meta.scope)+'</div>';
+  else if(n===0) el.innerHTML='<div class="big">今天考試！</div><div class="sub">加油 💪</div>';
+  else el.innerHTML='<div class="big">考完了</div><div class="sub">'+T.meta.examDate+' 的期中考已結束</div>';
+})();
+
+function vlist(arr){
+  return '<div class="vv">'+arr.map(function(v){
+    return '<span onclick="say(\''+akey(v.en)+'\')"><b>'+esc(v.en)+'</b><i>'+esc(v.zh)+'</i></span>';
+  }).join("")+'</div>';
+}
+
+function unitHtml(u){
+  var h='<div class="u"><h2>Unit '+u.n+' '+esc(u.title)+' <small>'+esc(u.zh)+'　p.'+u.pages+'</small></h2>'+
+        '<div class="goal">🎯 '+esc(u.goal)+'</div>';
+  h+='<div class="lab">主題單字 '+u.vocab.length+'</div>'+vlist(u.vocab);
+  h+='<div class="lab">句型</div>';
+  u.patterns.forEach(function(p,i){
+    h+='<div class="pat" onclick="say(\''+akey(u.id+"_pat"+i)+'\')">'+esc(p.q)+'<br><span class="a">'+esc(p.a)+'</span>'+
+       '<div class="z">'+esc(p.zh)+'</div></div>';
+  });
+  if(u.grammarTip) h+='<div class="tip">📎 '+esc(u.grammarTip)+'</div>';
+  if(u.wordBuilding&&u.wordBuilding.length){
+    h+='<div class="lab">構詞</div><div class="vv">'+u.wordBuilding.map(function(w){
+      return '<span onclick="say(\''+akey(w.ache)+'\')"><b>'+esc(w.part)+' → '+esc(w.ache)+'</b><i>'+esc(w.zh)+'</i></span>';
+    }).join("")+'</div>';
+  }
+  if(u.phonics&&u.phonics.groups.length){
+    h+='<div class="lab">Phonics</div><div class="ph">';
+    u.phonics.groups.forEach(function(g){
+      h+='<span class="g">'+esc(g)+'</span>';
+      (u.phonics.words||[]).filter(function(w){return w.g===g;}).forEach(function(w){
+        h+='<span class="w" onclick="say(\''+akey(w.w)+'\')">'+esc(w.w)+'</span>';
+      });
+    });
+    h+='</div>';
+    if((u.phonics.chant||[]).length)
+      h+='<div class="story">'+u.phonics.chant.map(function(c){return '<div>'+esc(c)+'</div>';}).join("")+'</div>';
+  }
+  if(u.readingSkill) h+='<div class="lab">閱讀技巧</div><div class="goal">'+esc(u.readingSkill.en)+'　'+esc(u.readingSkill.zh)+'</div>';
+  if((u.story||[]).length){
+    h+='<div class="lab">課文對白 '+u.story.length+' 句</div><div class="story">'+
+       u.story.map(function(s,i){return '<div onclick="say(\''+akey(u.id+"_st"+i)+'\')">'+esc(s)+'</div>';}).join("")+'</div>';
+  }
+  if(u.reading) h+='<div class="lab">Reading — '+esc(u.reading.title)+'</div><div class="story">'+esc(u.reading.text)+'</div>';
+  if(u.moreToLearn){
+    h+='<div class="lab">More to Learn — '+esc(u.moreToLearn.title)+'</div><div class="story">'+esc(u.moreToLearn.text)+'</div>'+
+       '<div class="vv" style="margin-top:6px">'+u.moreToLearn.items.map(function(x){
+         return '<span><b>'+esc(x.en)+'</b><i>'+esc(x.zh)+'（'+esc(x.from)+'）</i></span>';}).join("")+'</div>';
+  }
+  if(u.extraWords&&u.extraWords.length) h+='<div class="lab">其他生字</div>'+vlist(u.extraWords);
+  if(u._note) h+='<div class="missing">⚠️ '+esc(u._note)+'</div>';
+  return h+'</div>';
+}
+
+function draw(){
+  var tabs=[["all","全部"]].concat(T.units.map(function(u){return ["u"+u.n,"U"+u.n];}),
+            [["r","Review"],["moon","中秋"]]);
+  document.getElementById("bar").innerHTML=tabs.map(function(t){
+    return '<button class="'+(fc===t[0]?"on":"")+'" onclick="fc=\''+t[0]+'\';draw()">'+t[1]+'</button>';
+  }).join("");
+
+  var h="";
+  T.units.forEach(function(u){ if(fc==="all"||fc==="u"+u.n) h+=unitHtml(u); });
+
+  if(fc==="all"||fc==="r"){
+    T.reviews.forEach(function(r){
+      h+='<div class="u"><h2>Review '+r.n+' <small>複習 Unit '+r.covers.map(function(c){return c.slice(1);}).join("、")+'　p.'+r.pages+'</small></h2>'+
+         '<div class="goal">閱讀技巧：'+esc(r.skill.en)+' '+esc(r.skill.zh)+'</div>';
+      if(r.passages.length){
+        h+='<div class="lab">短文</div>';
+        r.passages.forEach(function(p,i){
+          h+='<div class="story" style="margin-bottom:6px" onclick="say(\''+akey("r1_p"+i)+'\')">'+esc(p.text)+
+             '<div style="font-size:.76rem;color:#8a949e;margin-top:5px">'+esc(p.country)+'　症狀：'+p.symptoms.join("、")+'　→ '+esc(p.remedy)+'</div></div>';
+        });
+      }
+      if(r.phonicsGrid.length){
+        h+='<div class="lab">Four in a Row（'+r.phonicsGrid.length+' 字混合辨音）</div><div class="pgrid">'+
+           r.phonicsGrid.map(function(w){return '<span onclick="say(\''+akey(w)+'\')">'+esc(w)+'</span>';}).join("")+'</div>';
+      }
+      if(r._note) h+='<div class="missing">⚠️ '+esc(r._note)+'</div>';
+      h+='</div>';
+    });
+  }
+
+  if(fc==="all"||fc==="moon"){
+    var c=T.culture;
+    h+='<div class="u"><h2>Culture — '+esc(c.title)+' <small>'+esc(c.zh)+'　p.'+c.pages+'</small></h2>'+
+       '<div class="goal">🎯 '+esc(c.goal)+'</div>'+vlist(c.vocab)+'</div>';
+    h+='<div class="u"><h2>Task — '+esc(T.task.title)+' <small>'+esc(T.task.zh)+'　p.'+T.task.pages+'</small></h2>'+
+       '<div class="goal">'+esc(T.task.goal)+'</div></div>';
+  }
+  document.getElementById("main").innerHTML=h;
+}
+
+var cur=null;
+function say(k){
+  if(cur){cur.pause();cur=null;}
+  var a=new Audio("audio/school/"+k+".mp3");
+  cur=a; a.play().catch(function(){});
+}
+draw();
+</script></body></html>

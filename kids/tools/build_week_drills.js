@@ -113,6 +113,9 @@ function pageHtml(date, v) {
 <script src="../grammar_nodes.js?v=${v}"></script>
 <script src="../grammar_plan.js?v=${v}"></script>
 <script src="grammar_daily.js?v=${v}"></script>
+<script src="../school_db/textbook_g6a.js?v=${v}"></script>
+<script src="../school_db/exam_plan.js?v=${v}"></script>
+<script src="school_daily.js?v=${v}"></script>
 <script src="daily_engine.js?v=${v}"></script>
 </body>
 </html>
