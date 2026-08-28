@@ -49,7 +49,7 @@ function main() {
   t("4 個 Unit 都畫出來", (main.match(/<h2>Unit /g) || []).length === 4);
   t("Review 有 2 個", (main.match(/<h2>Review /g) || []).length === 2);
   t("中秋與 Task 有出現", /Moon Festival/.test(main) && /Country Guessing/.test(main));
-  t("分頁鈕 7 個", (bar.match(/<button/g) || []).length === 7);
+  t("分頁鈕 9 個", (bar.match(/<button/g) || []).length === 9);
   // 未拍照的三處（U3、U4、Review 2）要標出來，不要讓人以為那裡本來就是空的
   t("未拍照的單元有標註", (main.match(/⚠️/g) || []).length === 3, (main.match(/⚠️/g) || []).length);
 

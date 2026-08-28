@@ -325,15 +325,15 @@
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202608281410"></script>
-<script src="account_lock.js?v=202608281410"></script>
-<script src="supabase_auth.js?v=202608281410"></script>
-<script src="drills_list.js?v=202608281410"></script>
-<script src="grammar_nodes.js?v=202608281410"></script>
-<script src="grammar_plan.js?v=202608281410"></script>
-<script src="vocab_units.js?v=202608281410"></script>
-<script src="weekly_bank.js?v=202608281410"></script>
-<script src="vocab_unit_plan.js?v=202608281410"></script>
+<script src="cloud_sync.js?v=202608281428"></script>
+<script src="account_lock.js?v=202608281428"></script>
+<script src="supabase_auth.js?v=202608281428"></script>
+<script src="drills_list.js?v=202608281428"></script>
+<script src="grammar_nodes.js?v=202608281428"></script>
+<script src="grammar_plan.js?v=202608281428"></script>
+<script src="vocab_units.js?v=202608281428"></script>
+<script src="weekly_bank.js?v=202608281428"></script>
+<script src="vocab_unit_plan.js?v=202608281428"></script>
 <script>
 let _homeSynced = false;
 function pickStudent(name) {
@@ -510,11 +510,12 @@ function renderWeekDrills() {
 (function(){
   var el=document.getElementById("schSub"), b=document.getElementById("schBadge");
   if(!el) return;
-  var ex="2026-11-05", p=ex.split("-");
+  // 期中考 11/5 考 Unit 1-2；之後換成準備期末考（Unit 3-4，日期學校還沒公布）
+  var mid="2026-11-05", p=mid.split("-");
   var days=Math.round((new Date(+p[0],+p[1]-1,+p[2],12)-new Date(new Date().setHours(12,0,0,0)))/86400000);
-  if(days>0){ el.textContent="Unit 1–4 單字句型 · 距離期中考還有 "+days+" 天"; b.textContent="D-"+days; }
+  if(days>0){ el.textContent="Unit 1–2 單字句型 · 距離期中考還有 "+days+" 天"; b.textContent="D-"+days; }
   else if(days===0){ el.textContent="今天期中考，加油！"; b.textContent="今天"; }
-  else { el.textContent="Unit 1–4 單字句型（期中考已結束）"; b.textContent="複習"; }
+  else { el.textContent="Unit 3–4 單字句型 · 準備期末考"; b.textContent="期末"; }
 })();
 renderWeekDrills();
 lockFutureDrills();

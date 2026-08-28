@@ -253,7 +253,8 @@
             kind: q.kind, q: q.q, passage: q.passage, audio: q.audio, full: q.full,
             choices: shuffleArr(q.choices.map(c => ({ label: c, correct: c === q.answer })), rnd),
           }));
-          s9 = { wk, qs, days: typeof daysToExam === "function" ? daysToExam(DRILL_DATE) : null };
+          const ex = typeof nextExamFor === "function" ? nextExamFor(DRILL_DATE) : null;
+          s9 = { wk, qs, exam: ex };
         }
       }
     }
@@ -337,8 +338,11 @@
     }
     // ⑨ 學校課本
     if (DRILL.s9) {
-      const d = DRILL.s9.days;
-      const countdown = d > 0 ? `　·　距離期中考還有 <b>${d}</b> 天` : (d === 0 ? "　·　<b>今天考試！</b>" : "");
+      const ex = DRILL.s9.exam;
+      const countdown = !ex ? ""
+        : ex.days === null ? `　·　準備${ex.name}（日期未定）`
+        : ex.days > 0 ? `　·　距離${ex.name}還有 <b>${ex.days}</b> 天`
+        : ex.days === 0 ? `　·　<b>今天${ex.name}！</b>` : "";
       h += `<div class="sec"><div class="sec-h">⑨ 學校課本 — ${DRILL.s9.wk.label}</div><div class="sec-d">學校進度同步${countdown}</div>`;
       DRILL.s9.qs.forEach((q, i) => {
         h += `<div class="q">` +

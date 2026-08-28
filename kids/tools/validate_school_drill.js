@@ -11,7 +11,7 @@ const path = require("path");
 const KIDS = path.join(__dirname, "..");
 const { TEXTBOOK_G6A: T } = require(path.join(KIDS, "school_db", "textbook_g6a.js"));
 const { SCHOOL_BANK } = require(path.join(KIDS, "drills", "school_daily.js"));
-const { EXAM_PLAN, examFocusFor, daysToExam } = require(path.join(KIDS, "school_db", "exam_plan.js"));
+const { EXAM_PLAN, EXAMS, examFocusFor, nextExamFor, daysToExam } = require(path.join(KIDS, "school_db", "exam_plan.js"));
 const AUDIO = path.join(KIDS, "audio", "school");
 
 let fail = 0;
@@ -100,9 +100,30 @@ function main() {
     const n = w.focus.reduce((s, f) => s + (SCHOOL_BANK[f] || []).length, 0);
     if (n < 4) bad(`${w.start} 那一週只有 ${n} 題可抽（要 4 題）`);
   });
-  // 考完就不該再出題
-  if (examFocusFor("2026-11-06")) bad("考完隔天還在出學校題");
-  else console.log("  ✓ 11/06（考後）不再出學校題");
+  // 期中考範圍不能混進期末的單元，反之亦然 —— 這正是原本排錯的地方
+  EXAM_PLAN.weeks.forEach(w => {
+    const belong = EXAMS[w.phase].units.concat(["warmup"]);
+    const wrong = w.focus.filter(f => !belong.includes(f));
+    if (wrong.length) bad(`${w.start}（${w.phase}）排到不屬於這場考試的：${wrong.join(" ")}`);
+  });
+  // 兩場考試的範圍不能重疊，也不能漏掉單元
+  const overlap = EXAMS.midterm.units.filter(u => EXAMS.final.units.includes(u));
+  if (overlap.length) bad(`兩場考試範圍重疊：${overlap.join(" ")}`);
+  const allScoped = EXAMS.midterm.units.concat(EXAMS.final.units);
+  const notScoped = T.units.map(u => u.id).concat(["r1", "r2", "moon"]).filter(x => !allScoped.includes(x));
+  if (notScoped.length) bad(`沒歸到任何一場考試：${notScoped.join(" ")}`);
+  if (!overlap.length && !notScoped.length) console.log("  ✓ 期中／期末範圍不重疊、不遺漏");
+
+  // 11/5 之前準備期中，之後準備期末
+  const before = nextExamFor("2026-10-20"), after = nextExamFor("2026-11-10");
+  if (before.phase !== "midterm") bad(`10/20 應該在準備期中，實際 ${before.phase}`);
+  else if (after.phase !== "final") bad(`11/10 應該在準備期末，實際 ${after.phase}`);
+  else console.log("  ✓ 11/5 前後自動換場（期中 → 期末）");
+  if (after.days !== null) bad("期末日期未公布，倒數不該有數字");
+  // 期中考在週四，那一週到週日才結束 —— 11/06 不該還在複習考完的東西
+  const d6 = examFocusFor("2026-11-06");
+  if (!d6 || d6.phase !== "final") bad("11/06 沒有換到期末範圍：" + (d6 ? d6.label : "無"));
+  else console.log("  ✓ 11/06 直接換到期末（不再複習考完的期中）");
   const d = daysToExam("2026-09-01");
   if (d !== 65) bad(`倒數天數算錯：9/1 應為 65 天，實際 ${d}`);
   else console.log("  ✓ 倒數天數正確");

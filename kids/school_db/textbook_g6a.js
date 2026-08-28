@@ -1,4 +1,6 @@
-// 學校英語課本（國小六上）期中考範圍。考試日 2026-11-05（四）。
+// 學校英語課本（國小六上）。
+// 期中考 2026-11-05（四）：Unit 1、Unit 2、Review 1
+// 期末考 日期未定：       Unit 3、Unit 4、Review 2、中秋節、Task
 //
 // 來源：P:\AI\claude\國小六上-期中考\ 的 23 張課本照片（2026-08-28 提供）。
 // 照片涵蓋 p.2–46，也就是 Unit 1、Unit 2、Review 1 的完整內容。
@@ -12,8 +14,8 @@ const TEXTBOOK_G6A = {
   meta: {
     grade: "國小六上",
     examDate: "2026-11-05",
-    examName: "期中考",
-    scope: "Unit 1–4 ＋ Review 1–2 ＋ Culture: Moon Festival",
+    midtermScope: "Unit 1、Unit 2、Review 1",
+    finalScope: "Unit 3、Unit 4、Review 2、中秋節、Task",
     photographed: "p.2–46（Unit 1、Unit 2、Review 1）",
     missing: "Unit 3、Unit 4 的課文與練習頁未拍（大綱已從 Contents 取得）",
   },

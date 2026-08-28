@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>學校課本 — 期中考範圍</title><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>學校課本 — 期中考與期末考</title><style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,"Noto Sans TC",sans-serif;max-width:680px;margin:0 auto;background:#fff7dc;color:#243042;padding:0 14px 60px}
 header{background:#e8563f;color:#fff;text-align:center;padding:20px 16px 15px;border-radius:0 0 16px 16px;margin:0 -14px 12px}
@@ -14,6 +14,8 @@ header a{color:#ffe27a;text-decoration:none;font-weight:700}
 .u{background:#fff;border-radius:14px;padding:14px 16px;margin-bottom:11px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
 .u h2{font-size:1.02rem;color:#b8371f;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
 .u h2 small{font-size:.78rem;color:#888;font-weight:400}
+.tag{font-size:.68rem;font-weight:800;border-radius:5px;padding:2px 8px;vertical-align:middle}
+.tag.mid{background:#e8563f;color:#fff} .tag.fin{background:#2f80ed;color:#fff}
 .u .goal{font-size:.84rem;color:#5a6875;margin:6px 0 10px}
 .lab{font-size:.72rem;font-weight:800;color:#8a6d1a;background:#fff3d6;border-radius:5px;padding:2px 8px;display:inline-block;margin:10px 0 5px}
 .vv{display:flex;flex-wrap:wrap;gap:6px}
@@ -31,8 +33,8 @@ header a{color:#ffe27a;text-decoration:none;font-weight:700}
 .pgrid{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
 .pgrid span{background:#f6f9fd;border:1px solid #dbe6f2;border-radius:6px;padding:3px 8px;font-size:.8rem;cursor:pointer}
 </style></head><body>
-<header><h1>📕 學校課本 — 期中考範圍</h1>
-<p><a href="index.html">← 回首頁</a> · 國小六上 Unit 1–4 · 點單字或句子發音</p></header>
+<header><h1>📕 學校課本</h1>
+<p><a href="index.html">← 回首頁</a> · 國小六上 · 點單字或句子發音</p></header>
 
 <div id="cd"></div>
 <div id="bar"></div>
@@ -50,11 +52,16 @@ function akey(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,"_").repla
 (function(){
   var d=new Date();
   var t=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-  var n=daysToExam(t);
   var el=document.getElementById("cd");
-  if(n>0) el.innerHTML='<div class="big">還有 '+n+' 天</div><div class="sub">期中考 '+T.meta.examDate+'（四）　·　'+esc(T.meta.scope)+'</div>';
-  else if(n===0) el.innerHTML='<div class="big">今天考試！</div><div class="sub">加油 💪</div>';
-  else el.innerHTML='<div class="big">考完了</div><div class="sub">'+T.meta.examDate+' 的期中考已結束</div>';
+  var ex=nextExamFor(t);
+  if(ex.days===null)
+    el.innerHTML='<div class="big">'+esc(ex.name)+'</div><div class="sub">日期未定　·　'+esc(ex.scope)+'</div>';
+  else if(ex.days>0)
+    el.innerHTML='<div class="big">還有 '+ex.days+' 天</div><div class="sub">'+esc(ex.name)+' '+ex.date+'　·　'+esc(ex.scope)+'</div>';
+  else if(ex.days===0)
+    el.innerHTML='<div class="big">今天考試！</div><div class="sub">'+esc(ex.name)+'　·　加油 💪</div>';
+  else
+    el.innerHTML='<div class="big">'+esc(ex.name)+'考完了</div><div class="sub">'+ex.date+'　·　接下來準備期末考</div>';
 })();
 
 function vlist(arr){
@@ -64,7 +71,9 @@ function vlist(arr){
 }
 
 function unitHtml(u){
-  var h='<div class="u"><h2>Unit '+u.n+' '+esc(u.title)+' <small>'+esc(u.zh)+'　p.'+u.pages+'</small></h2>'+
+  var mid=(EXAMS.midterm.units.indexOf(u.id)>=0);
+  var tag='<span class="tag '+(mid?"mid":"fin")+'">'+(mid?"期中":"期末")+'</span>';
+  var h='<div class="u"><h2>Unit '+u.n+' '+esc(u.title)+' '+tag+' <small>'+esc(u.zh)+'　p.'+u.pages+'</small></h2>'+
         '<div class="goal">🎯 '+esc(u.goal)+'</div>';
   h+='<div class="lab">主題單字 '+u.vocab.length+'</div>'+vlist(u.vocab);
   h+='<div class="lab">句型</div>';
@@ -107,18 +116,25 @@ function unitHtml(u){
 }
 
 function draw(){
-  var tabs=[["all","全部"]].concat(T.units.map(function(u){return ["u"+u.n,"U"+u.n];}),
-            [["r","Review"],["moon","中秋"]]);
+  var tabs=[["all","全部"],["mid","📕 期中考"],["fin","📗 期末考"]]
+    .concat(T.units.map(function(u){return ["u"+u.n,"U"+u.n];}), [["r","Review"],["moon","中秋"]]);
   document.getElementById("bar").innerHTML=tabs.map(function(t){
     return '<button class="'+(fc===t[0]?"on":"")+'" onclick="fc=\''+t[0]+'\';draw()">'+t[1]+'</button>';
   }).join("");
 
   var h="";
-  T.units.forEach(function(u){ if(fc==="all"||fc==="u"+u.n) h+=unitHtml(u); });
+  function inPhase(id){
+    if(fc==="mid") return EXAMS.midterm.units.indexOf(id)>=0;
+    if(fc==="fin") return EXAMS.final.units.indexOf(id)>=0;
+    return false;
+  }
+  T.units.forEach(function(u){ if(fc==="all"||fc==="u"+u.n||inPhase(u.id)) h+=unitHtml(u); });
 
-  if(fc==="all"||fc==="r"){
+  if(fc==="all"||fc==="r"||fc==="mid"||fc==="fin"){
     T.reviews.forEach(function(r){
-      h+='<div class="u"><h2>Review '+r.n+' <small>複習 Unit '+r.covers.map(function(c){return c.slice(1);}).join("、")+'　p.'+r.pages+'</small></h2>'+
+      if((fc==="mid"||fc==="fin")&&!inPhase(r.id)) return;
+      var rmid=(EXAMS.midterm.units.indexOf(r.id)>=0);
+      h+='<div class="u"><h2>Review '+r.n+' <span class="tag '+(rmid?"mid":"fin")+'">'+(rmid?"期中":"期末")+'</span> <small>複習 Unit '+r.covers.map(function(c){return c.slice(1);}).join("、")+'　p.'+r.pages+'</small></h2>'+
          '<div class="goal">閱讀技巧：'+esc(r.skill.en)+' '+esc(r.skill.zh)+'</div>';
       if(r.passages.length){
         h+='<div class="lab">短文</div>';
@@ -136,9 +152,9 @@ function draw(){
     });
   }
 
-  if(fc==="all"||fc==="moon"){
+  if(fc==="all"||fc==="moon"||fc==="fin"){
     var c=T.culture;
-    h+='<div class="u"><h2>Culture — '+esc(c.title)+' <small>'+esc(c.zh)+'　p.'+c.pages+'</small></h2>'+
+    h+='<div class="u"><h2>Culture — '+esc(c.title)+' <span class="tag fin">期末</span> <small>'+esc(c.zh)+'　p.'+c.pages+'</small></h2>'+
        '<div class="goal">🎯 '+esc(c.goal)+'</div>'+vlist(c.vocab)+'</div>';
     h+='<div class="u"><h2>Task — '+esc(T.task.title)+' <small>'+esc(T.task.zh)+'　p.'+T.task.pages+'</small></h2>'+
        '<div class="goal">'+esc(T.task.goal)+'</div></div>';
