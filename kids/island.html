@@ -315,6 +315,14 @@
 
 <main>
   <div id="notice"></div>
+  <!-- 合併模式的常駐提示。toast 兩秒就消失，小孩看不到自己還在合併模式，
+       也沒有明顯的退出方式（以前是「點空地取消」，等於手滑就重來）。 -->
+  <div id="mergeBar" style="display:none;align-items:center;gap:8px;flex-wrap:wrap;
+       background:#ffe9f4;border:2px solid #ff5db1;border-radius:12px;padding:9px 12px;margin-bottom:12px">
+    <span id="mergeMsg" style="flex:1;min-width:150px;font-size:.88rem;font-weight:700;color:#a01a5e"></span>
+    <button onclick="cancelMerge()" style="padding:7px 14px;border:2px solid #ff5db1;border-radius:10px;
+      background:#fff;color:#a01a5e;font-weight:800;cursor:pointer;font-size:.85rem">✕ 取消合併</button>
+  </div>
   <div id="questRow" style="display:none;gap:8px;margin:8px 0;flex-wrap:wrap">
     <button id="boardBtn" onclick="openBoard()" style="flex:1;min-width:130px;padding:10px;border:2px solid #b5651d;border-radius:12px;background:#fff3e0;color:#8a4a12;font-weight:800;cursor:pointer">📋 島民委託板</button>
     <button id="visitorBtn" onclick="openTravel()" style="flex:1;min-width:130px;padding:10px;border:2px solid #2f80ed;border-radius:12px;background:#eaf3ff;color:#1e5fb8;font-weight:800;cursor:pointer">✈️ 今日旅客</button>
@@ -348,15 +356,15 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202608290107"></script>
-<script src="curriculum.js?v=202608290107"></script>
-<script src="word_roots.js?v=202608290107"></script>
-<script src="worddex.js?v=202608290107"></script>
-<script src="city_data.js?v=202608290107"></script>
+<script src="wordbank.js?v=202608290158"></script>
+<script src="curriculum.js?v=202608290158"></script>
+<script src="word_roots.js?v=202608290158"></script>
+<script src="worddex.js?v=202608290158"></script>
+<script src="city_data.js?v=202608290158"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202608290107"></script>
-<script src="account_lock.js?v=202608290107"></script>
-<script src="supabase_auth.js?v=202608290107"></script>
+<script src="cloud_sync.js?v=202608290158"></script>
+<script src="account_lock.js?v=202608290158"></script>
+<script src="supabase_auth.js?v=202608290158"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -814,6 +822,18 @@ function render() {
   document.getElementById("stProd").textContent = island.stats.dailyCoinProduction;
   document.getElementById("stBld").textContent = island.stats.totalBuildings;
 
+  // 合併模式提示列（toast 會消失，這條不會）
+  const mb = document.getElementById("mergeBar");
+  if (mb) {
+    mb.style.display = mergeState ? "flex" : "none";
+    if (mergeState) {
+      const mc = BUILDINGS[mergeState.type];
+      const n = island.buildings.filter(x => _isMergeTarget(x)).length;
+      document.getElementById("mergeMsg").textContent =
+        `✨ 合併中：點粉紅色外框的 ${mc.name}（可選 ${n} 棟）`;
+    }
+  }
+
   const grid = document.getElementById("island");
   grid.innerHTML = "";
   const today = todayStr();
@@ -831,7 +851,7 @@ function render() {
           ? `<img class="tile-img pet-dog" src="island_img/dog.png" alt="狗" onerror="this.replaceWith(document.createTextNode('🐶'))">`
           : `<span class="pet-dog">🐶</span>`;
         tile.innerHTML = dogInner + (ready ? `<span class="dog-ready">🪙</span>` : "");
-        tile.onclick = () => tapDog(b);
+        tile.onclick = mergeState ? (() => nudgeMerge()) : (() => tapDog(b));
       } else if (b) {
         const cat = BUILDINGS[b.type];
         if (b.level > 1) tile.classList.add("lv" + Math.min(b.level, 5));   // 等級外框顏色
@@ -846,12 +866,12 @@ function render() {
       } else if (island.rubble && island.rubble[x + "_" + y]) {
         tile.textContent = "🪨";
         tile.title = "碎石地，開墾後才能蓋建築";
-        if (mergeState) tile.onclick = () => cancelMerge();
+        if (mergeState) tile.onclick = () => nudgeMerge();
         else tile.onclick = () => openReclaim(x, y);
       } else {
         if (t === "H") tile.textContent = "⛰️";
         else if (t === "M") tile.textContent = "🏔️";
-        if (mergeState) tile.onclick = () => cancelMerge();
+        if (mergeState) tile.onclick = () => nudgeMerge();
         else if (buildableOn(t)) tile.onclick = () => openBuild(x, y);
         else tile.onclick = () => toast(TERR_NAME[t] + "不能蓋建築");
       }
@@ -1154,13 +1174,25 @@ function _isMergeTarget(b) {
 function startMerge(buildingId) {
   const b = island.buildings.find(x => x.id === buildingId);
   if (!b) return;
-  mergeState = { firstId: b.id, type: b.type, star: (b.star || 0) };
+  // at：進入合併模式的時間。按下面板上的「合併升級」時面板會關閉，同一次觸控接著
+  // 送出的 click 會落到底下剛重繪出來的格子上（手機的 ghost click），那一下以前會
+  // 直接取消合併 —— 症狀就是按完按鈕立刻跳「已取消合併」。開頭這段時間的點擊一律忽略。
+  mergeState = { firstId: b.id, type: b.type, star: (b.star || 0), at: Date.now() };
   closeSheet(); render();
-  toast(`點另一棟滿級的 ${BUILDINGS[b.type].name} 完成合併（點空地取消）`);
+  toast(`點粉紅色外框的那一棟 ${BUILDINGS[b.type].name} 完成合併`);
 }
+// 剛進入合併模式的短時間內，點格子不算數（見上面的 ghost click）
+function _mergeSettling() { return mergeState && (Date.now() - (mergeState.at || 0)) < 500; }
 function cancelMerge() { mergeState = null; render(); toast("已取消合併"); }
+// 點到不能合併的地方：以前直接取消，一次手滑就要重來。現在只提示，取消要按上面的按鈕。
+function nudgeMerge() {
+  if (_mergeSettling()) return;
+  const c = mergeState && BUILDINGS[mergeState.type];
+  toast(c ? `要點粉紅色外框的 ${c.name}（取消請按上面的「✕ 取消合併」）` : "已取消合併");
+}
 function tapDuringMerge(b) {
-  if (!_isMergeTarget(b)) { cancelMerge(); return; }
+  if (_mergeSettling()) return;
+  if (!_isMergeTarget(b)) { nudgeMerge(); return; }
   const first = island.buildings.find(x => x.id === mergeState.firstId);
   if (!first) { cancelMerge(); return; }
   const c = BUILDINGS[first.type];

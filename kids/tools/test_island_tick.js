@@ -72,6 +72,9 @@ const bridge = `;globalThis.__T = {
   get island(){return island}, set island(v){island=v},
   get TERRAIN_MAP(){return TERRAIN_MAP}, set TERRAIN_MAP(v){TERRAIN_MAP=v},
   get currentStudent(){return currentStudent}, set currentStudent(v){currentStudent=v},
+  get mergeState(){return mergeState},
+  _isMergeTarget:_isMergeTarget, _mergePartners:_mergePartners, _atMaxLevel:_atMaxLevel,
+  _canMergeType:_canMergeType, mergeCost:mergeCost,
 };`;
 vm.runInContext(code + bridge, sandbox, { filename: "island.html<script>" });
 const T = sandbox.__T;      // const / let 綁定
@@ -236,6 +239,89 @@ byId.get("notice").style.display = "";
 try { S.selectStudent("albert"); } catch (e) { ok("第二次 selectStudent 沒拋錯", false, e.message); }
 eq("金幣沒變", coins("albert"), before);
 eq("提示收起來", byId.get("notice").style.display, "none");
+
+// ── 合併建築 ────────────────────────────────────────────────────────────────
+// 2026-08 回報：按下「合併升級」立刻跳「已取消合併」。原因是面板關閉後，同一次
+// 觸控送出的 click 落到底下剛重繪的格子，而那時格子的 onclick 是 cancelMerge。
+console.log("\n── 合併建築 ──");
+const MTYPE = Object.keys(S.BUILDINGS).find(k =>
+  S._canMergeType(k) && !S.BUILDINGS[k].max && !S.BUILDINGS[k].category);
+const MCAT = S.BUILDINGS[MTYPE];
+const MLV = MCAT.maxLevel || 3;
+console.log(`  (用建築: ${MTYPE} / ${MCAT.name}, 滿級 Lv${MLV})`);
+
+function twoBuildings(coins, lvA, lvB, starA, starB) {
+  store.clear();
+  S.currentStudent = "m";
+  store.set("kidsProgress.m", JSON.stringify({ wrongCounts: {}, sessions: 0, totalCorrect: 0, totalWrong: 0,
+    coins: { balance: coins, lifetimeEarned: coins, lifetimeSpent: 0, transactions: [], claimedDrills: {} } }));
+  const isl = S.newIsland("m", 1);
+  isl.rubble = {};
+  isl.buildings = [
+    { id: "A", type: MTYPE, x: 1, y: 1, level: lvA, star: starA || 0, activeDays: 99, paid: MCAT.cost },
+    { id: "B", type: MTYPE, x: 2, y: 1, level: lvB, star: starB || 0, activeDays: 99, paid: MCAT.cost },
+  ];
+  store.set("kidsIsland.m", JSON.stringify(isl));
+  S.island = isl; S.TERRAIN_MAP = S.terrainMapFor(1);
+  S.recalcStats();
+}
+const bld = id => S.island.buildings.find(x => x.id === id);
+
+twoBuildings(99999, MLV, MLV);
+ok("兩棟滿級時找得到合併夥伴", S._mergePartners(bld("A")).length === 1);
+S.startMerge("A");
+ok("進入合併模式", !!S.mergeState);
+ok("B 是合法目標", S._isMergeTarget(bld("B")));
+
+// ghost click：進入合併模式後立刻點到格子，不能有任何效果
+S.tapDuringMerge(bld("B"));
+ok("剛進入時的 ghost click 不會誤觸合併", !!bld("B") && bld("A").star === 0);
+ok("ghost click 後仍在合併模式", !!S.mergeState);
+S.nudgeMerge();
+ok("ghost click 期間點空地也不取消", !!S.mergeState);
+
+// 過了緩衝時間才算數
+S.mergeState.at = 0;
+const feeExp = S.mergeCost(MCAT, 1);
+const balBefore = S.getProgress("m").coins.balance;
+S.tapDuringMerge(bld("B"));
+ok("B 被吸收", !bld("B"));
+eq("A 升到 1 星", bld("A").star, 1);
+eq("A 回到 Lv1", bld("A").level, 1);
+eq("扣款", S.getProgress("m").coins.balance, balBefore - feeExp);
+ok("離開合併模式", !S.mergeState);
+
+// 手滑點到不能合併的地方：只提示，不取消
+twoBuildings(99999, MLV, MLV);
+S.startMerge("A"); S.mergeState.at = 0;
+S.nudgeMerge();
+ok("點空地不會取消合併", !!S.mergeState);
+S.tapDuringMerge(bld("A"));
+ok("點自己那一棟也不會取消", !!S.mergeState);
+S.cancelMerge();
+ok("按取消鈕才會離開", !S.mergeState);
+
+// 條件不符就不該是候選
+twoBuildings(99999, MLV, MLV - 1);
+eq("有一棟沒滿級 → 沒有夥伴", S._mergePartners(bld("A")).length, 0);
+twoBuildings(99999, MLV, MLV, 0, 1);
+eq("星數不同 → 沒有夥伴", S._mergePartners(bld("A")).length, 0);
+
+// 錢不夠
+twoBuildings(1, MLV, MLV);
+S.startMerge("A"); S.mergeState.at = 0;
+S.tapDuringMerge(bld("B"));
+ok("金幣不夠時 B 不會消失", !!bld("B"));
+eq("金幣不夠時不升星", bld("A").star, 0);
+
+// 常駐提示列
+twoBuildings(99999, MLV, MLV);
+S.startMerge("A");
+eq("合併提示列顯示", byId.get("mergeBar").style.display, "flex");
+ok("提示列說得出還能選幾棟", /可選 1 棟/.test(byId.get("mergeMsg").textContent),
+   byId.get("mergeMsg").textContent);
+S.cancelMerge();
+eq("取消後提示列收起", byId.get("mergeBar").style.display, "none");
 
 console.log(`\n${fail === 0 ? "✅" : "❌"} pass ${pass} / fail ${fail}\n`);
 process.exit(fail ? 1 : 0);
