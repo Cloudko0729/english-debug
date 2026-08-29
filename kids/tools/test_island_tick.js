@@ -21,8 +21,14 @@ const code = scripts[0][2];
 const store = new Map();
 function el() {
   const e = {
+    // classList 要真的記得加了什麼 —— 全部空實作的話，「合併模式有沒有標記地圖」
+    // 這種斷言永遠會過（contains 恆假），等於沒測到。
     style: {}, dataset: {}, children: [], classList: {
-      add() {}, remove() {}, toggle() {}, contains() { return false; },
+      _s: new Set(),
+      add(...a) { a.forEach(x => this._s.add(x)); },
+      remove(...a) { a.forEach(x => this._s.delete(x)); },
+      toggle(c, on) { if (on === undefined) on = !this._s.has(c); on ? this._s.add(c) : this._s.delete(c); },
+      contains(x) { return this._s.has(x); },
     },
     textContent: "", innerHTML: "", value: "",
     appendChild(c) { this.children.push(c); return c; },
@@ -307,12 +313,20 @@ eq("有一棟沒滿級 → 沒有夥伴", S._mergePartners(bld("A")).length, 0);
 twoBuildings(99999, MLV, MLV, 0, 1);
 eq("星數不同 → 沒有夥伴", S._mergePartners(bld("A")).length, 0);
 
-// 錢不夠
+// 錢不夠。2026-08 回報：訊息被「已取消合併」蓋掉，小孩只看到合併沒了、不知道是錢的問題。
 twoBuildings(1, MLV, MLV);
 S.startMerge("A"); S.mergeState.at = 0;
 S.tapDuringMerge(bld("B"));
 ok("金幣不夠時 B 不會消失", !!bld("B"));
 eq("金幣不夠時不升星", bld("A").star, 0);
+ok("金幣不夠時說得出原因", /金幣不夠/.test(byId.get("toast").textContent),
+   byId.get("toast").textContent);
+ok("金幣不夠時留在合併模式（賺完錢回來不用重選）", !!S.mergeState);
+S.cancelMerge();
+
+// 取消時要能帶出原因，否則 toast 會被蓋掉
+S.cancelMerge("測試原因");
+eq("cancelMerge 帶原因", byId.get("toast").textContent, "測試原因");
 
 // 常駐提示列
 twoBuildings(99999, MLV, MLV);
@@ -320,8 +334,11 @@ S.startMerge("A");
 eq("合併提示列顯示", byId.get("mergeBar").style.display, "flex");
 ok("提示列說得出還能選幾棟", /可選 1 棟/.test(byId.get("mergeMsg").textContent),
    byId.get("mergeMsg").textContent);
+// 候選要看得出來：合併模式時整張圖壓暗，只留候選
+ok("合併模式時地圖標記 merging", byId.get("island").classList.contains("merging"));
 S.cancelMerge();
 eq("取消後提示列收起", byId.get("mergeBar").style.display, "none");
+ok("取消後 merging 拿掉", !byId.get("island").classList.contains("merging"));
 
 console.log(`\n${fail === 0 ? "✅" : "❌"} pass ${pass} / fail ${fail}\n`);
 process.exit(fail ? 1 : 0);

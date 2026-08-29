@@ -145,7 +145,12 @@
     @keyframes dogBob { 0%,100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-3px) rotate(5deg); } }
     .dog-ready { position: absolute; top: -2px; right: 0; font-size: .55rem; pointer-events: none; animation: dogPulse 1s ease-in-out infinite; }
     .star-badge { position: absolute; top: -3px; left: 0; font-size: .5rem; pointer-events: none; text-shadow: 0 0 3px #fff; font-weight: 800; }
-    .merge-cand { outline: 3px solid #ff5db1; outline-offset: -3px; animation: mergePulse .9s ease-in-out infinite; cursor: pointer; z-index: 2; }
+    /* 合併模式：把不能選的格子壓暗，候選才看得出來。
+       只靠粉紅細框不夠 —— 五個候選散在 225 格裡，而且每格本來就有等級色框。 */
+    #island.merging .tile { opacity: .3; filter: grayscale(.7); }
+    #island.merging .merge-cand { opacity: 1; filter: none; }
+    .merge-cand { outline: 3px solid #ff5db1; outline-offset: -3px; animation: mergePulse .9s ease-in-out infinite; cursor: pointer; z-index: 2;
+      box-shadow: 0 0 8px 2px rgba(255,93,177,.9); }
     @keyframes mergePulse { 0%,100% { outline-color: #ff5db1; } 50% { outline-color: #ffd24d; } }
     @keyframes dogPulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(1.25); } }
     .opt-img { width: 2rem; height: 2rem; object-fit: contain; }
@@ -356,15 +361,15 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202608290158"></script>
-<script src="curriculum.js?v=202608290158"></script>
-<script src="word_roots.js?v=202608290158"></script>
-<script src="worddex.js?v=202608290158"></script>
-<script src="city_data.js?v=202608290158"></script>
+<script src="wordbank.js?v=202608290712"></script>
+<script src="curriculum.js?v=202608290712"></script>
+<script src="word_roots.js?v=202608290712"></script>
+<script src="worddex.js?v=202608290712"></script>
+<script src="city_data.js?v=202608290712"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202608290158"></script>
-<script src="account_lock.js?v=202608290158"></script>
-<script src="supabase_auth.js?v=202608290158"></script>
+<script src="cloud_sync.js?v=202608290712"></script>
+<script src="account_lock.js?v=202608290712"></script>
+<script src="supabase_auth.js?v=202608290712"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -835,6 +840,7 @@ function render() {
   }
 
   const grid = document.getElementById("island");
+  grid.classList.toggle("merging", !!mergeState);
   grid.innerHTML = "";
   const today = todayStr();
   const map = {};
@@ -1183,7 +1189,10 @@ function startMerge(buildingId) {
 }
 // 剛進入合併模式的短時間內，點格子不算數（見上面的 ghost click）
 function _mergeSettling() { return mergeState && (Date.now() - (mergeState.at || 0)) < 500; }
-function cancelMerge() { mergeState = null; render(); toast("已取消合併"); }
+// reason：為什麼結束。不給就是使用者自己按取消。
+// 一定要由 cancelMerge 自己講原因 —— toast 只有一顆、後蓋前，先 toast("金幣不夠…")
+// 再呼叫 cancelMerge() 的話，理由會被「已取消合併」蓋掉，小孩只看到合併沒了。
+function cancelMerge(reason) { mergeState = null; render(); toast(reason || "已取消合併"); }
 // 點到不能合併的地方：以前直接取消，一次手滑就要重來。現在只提示，取消要按上面的按鈕。
 function nudgeMerge() {
   if (_mergeSettling()) return;
@@ -1194,12 +1203,16 @@ function tapDuringMerge(b) {
   if (_mergeSettling()) return;
   if (!_isMergeTarget(b)) { nudgeMerge(); return; }
   const first = island.buildings.find(x => x.id === mergeState.firstId);
-  if (!first) { cancelMerge(); return; }
+  if (!first) { cancelMerge("剛才選的那一棟不見了，請重新選一次"); return; }
   const c = BUILDINGS[first.type];
   const newStar = (first.star || 0) + 1;
   const fee = mergeCost(c, newStar);
   const p = getProgress(currentStudent);
-  if (p.coins.balance < fee) { toast(`金幣不夠！合併需要 🪙 ${fee}`); cancelMerge(); return; }
+  // 錢不夠不取消 —— 留在合併模式，去賺完金幣回來還在原地，不用重選
+  if (p.coins.balance < fee) {
+    toast(`金幣不夠！合併 ${c.name}${"🌟".repeat(newStar)} 要 🪙 ${fee}，你只有 🪙 ${p.coins.balance}`);
+    return;
+  }
   p.coins.balance -= fee;
   p.coins.lifetimeSpent += fee;
   p.coins.transactions.push({ type: "spend", source: "islandMerge", amount: fee,
