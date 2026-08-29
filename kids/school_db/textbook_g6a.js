@@ -1,6 +1,6 @@
 // 學校英語課本（國小六上）。
-// 期中考 2026-11-05（四）：Unit 1、Unit 2、Review 1
-// 期末考 日期未定：       Unit 3、Unit 4、Review 2、中秋節、Task
+// 期中考 2026-11-05（四）：Unit 1、Unit 2、Review 1、中秋節（補充教材）
+// 期末考 日期未定：       Unit 3、Unit 4、Review 2、Task
 //
 // 來源：P:\AI\claude\國小六上-期中考\ 的 23 張課本照片（2026-08-28 提供）。
 // 照片涵蓋 p.2–46，也就是 Unit 1、Unit 2、Review 1 的完整內容。
@@ -14,9 +14,9 @@ const TEXTBOOK_G6A = {
   meta: {
     grade: "國小六上",
     examDate: "2026-11-05",
-    midtermScope: "Unit 1、Unit 2、Review 1",
-    finalScope: "Unit 3、Unit 4、Review 2、中秋節、Task",
-    photographed: "p.2–46（Unit 1、Unit 2、Review 1）",
+    midtermScope: "Unit 1、Unit 2、Review 1、中秋節",
+    finalScope: "Unit 3、Unit 4、Review 2、Task",
+    photographed: "p.2–46（Unit 1、Unit 2、Review 1）＋ p.79–85（中秋節）",
     missing: "Unit 3、Unit 4 的課文與練習頁未拍（大綱已從 Contents 取得）",
   },
 
@@ -268,12 +268,57 @@ const TEXTBOOK_G6A = {
       passages: [], phonicsGrid: [], _note: "未拍照" },
   ],
 
+  // 中秋節（p.79–85）。算補充教材，但列入期中考範圍。
+  // 這一課的句型其實是「回收」：Would you like some…? 是 Unit 3 的主句型（提前見到），
+  // What's wrong? 是 Unit 2 的。所以拿它來練 Unit 2 特別順。
   culture: {
     id: "moon", title: "Moon Festival", zh: "中秋節", pages: "79–85",
     goal: "說出中秋節相關用語",
     vocab: [
       { en: "moon cake", zh: "月餅" }, { en: "pomelo", zh: "柚子" },
       { en: "full moon", zh: "滿月" }, { en: "have a barbecue", zh: "烤肉" },
+    ],
+    patterns: [
+      { q: "Would you like some moon cakes?", a: "Yes, please.", zh: "你想要一些月餅嗎？好的，謝謝。" },
+      { q: "Do you like pomelos, Joe?", a: "Yes, I do.", zh: "Joe，你喜歡柚子嗎？是的，我喜歡。" },
+    ],
+    story: [
+      "Hi, guys!",
+      "Hi, Amy! We are having a barbecue. Join us!",
+      "Would you like some barbecue?",
+      "Sure!",
+      "Would you like some moon cakes?",
+      "Yes, please.",
+      "What's wrong?",
+      "Don't eat too fast.",
+      "Would you like to try some pomelos, Joe?",
+      "Sure. Thank you.",
+      "This one looks good.",
+      "But this one tastes good.",
+      "You're right, Amy. It's sweet.",
+      "Do you like pomelos, Joe?",
+      "Yes, I do.",
+      "I like Moon Festival. It's fun!",
+      "Happy Moon Festival!",
+    ],
+    // p.84 挑柚子：green/big → yellowish-green/small
+    tips: {
+      title: "Tips for Picking Pomelos", zh: "挑柚子的訣竅",
+      before: ["green", "big"], after: ["yellowish-green", "small"], wait: "After 1–2 Weeks",
+      text: "Put pomelos in a cool place for one to two weeks. The pomelos will become sweet!",
+    },
+    // p.85 圈出不屬於中秋的東西 —— 考的是「哪些才是中秋的」
+    activity: {
+      title: "Circle and Say",
+      q: "It's Moon Festival. Which objects are not parts of this festival?",
+      belong: ["moon cake", "pomelo", "full moon", "barbecue"],
+      notBelong: ["Christmas tree", "Santa", "jack-o'-lantern", "red envelope", "zongzi"],
+    },
+    extraWords: [
+      { en: "Join us!", zh: "加入我們吧！" }, { en: "sure", zh: "當然" },
+      { en: "taste", zh: "嘗起來" }, { en: "sweet", zh: "甜的" },
+      { en: "pick", zh: "挑選" }, { en: "yellowish-green", zh: "黃綠色的" },
+      { en: "become", zh: "變得" }, { en: "object", zh: "物品" },
     ],
   },
 

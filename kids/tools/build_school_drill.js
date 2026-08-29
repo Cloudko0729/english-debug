@@ -34,6 +34,8 @@ const akey = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^
 function unitQuestions(u, allVocab) {
   const qs = [];
   const pool = allVocab.filter(v => !u.vocab.some(x => x.en === v.en));
+  const patterns = u.patterns || [];
+  const phonics = u.phonics || { groups: [], words: [] };
 
   // ① 單字：看中文選英文
   u.vocab.forEach(v => {
@@ -45,8 +47,9 @@ function unitQuestions(u, allVocab) {
   });
 
   // ② 句型：給問句選答句。干擾項用同課的其他答句與別課的答句，才考得出「聽懂問句」
-  u.patterns.forEach((p, i) => {
-    const others = T.units.flatMap(x => x.patterns).filter(x => x.a !== p.a).map(x => x.a);
+  patterns.forEach((p, i) => {
+    const others = T.units.flatMap(x => x.patterns).concat(T.culture.patterns || [])
+      .filter(x => x.a !== p.a).map(x => x.a);
     // 答句可能有 " / " 分隔的兩種回答，取第一種當正解
     const ans = p.a.split(" / ")[0].trim();
     const ch = order([ans, ...others.map(o => o.split(" / ")[0].trim())].slice(0, 4), ans);
@@ -54,8 +57,8 @@ function unitQuestions(u, allVocab) {
   });
 
   // ③ phonics：哪一個字是這一組的音
-  (u.phonics.groups || []).forEach(g => {
-    const mine = (u.phonics.words || []).filter(w => w.g === g).map(w => w.w);
+  (phonics.groups || []).forEach(g => {
+    const mine = (phonics.words || []).filter(w => w.g === g).map(w => w.w);
     if (!mine.length) return;
     const others = T.units.flatMap(x => (x.phonics.words || []))
       .filter(w => w.g !== g).map(w => w.w);
@@ -129,12 +132,30 @@ function main() {
   bank.r1 = r1;
   bank.r2 = [];
 
-  // 中秋節
-  bank.moon = T.culture.vocab.map(v => {
-    const others = T.culture.vocab.filter(x => x.en !== v.en).map(x => x.en).concat(["pizza", "noodles", "steak"]);
-    const ch = order([v.en, ...others].slice(0, 4), v.en);
-    return ch && ch.length >= 3 ? { kind: "vocab", q: `「${v.zh}」的英文是？`, choices: ch, answer: v.en, audio: akey(v.en) } : null;
-  }).filter(Boolean);
+  // 中秋節：跟各單元用同一支產生器（它現在也有 patterns 與 story），
+  // 再加上課本 p.85「圈出不屬於中秋的東西」那個活動改成的辨識題。
+  const moon = unitQuestions(T.culture, allVocab);
+  const act = T.culture.activity;
+  if (act) {
+    act.belong.forEach(x => {
+      const ch = order([x, ...act.notBelong.slice(0, 3)], x);
+      if (ch && ch.length >= 3)
+        moon.push({ kind: "vocab", q: "哪一個是中秋節會出現的？", choices: ch, answer: x, audio: akey(x) });
+    });
+    act.notBelong.slice(0, 4).forEach(x => {
+      const ch = order([x, ...act.belong.slice(0, 3)], x);
+      if (ch && ch.length >= 3)
+        moon.push({ kind: "vocab", q: "哪一個「不是」中秋節的東西？", choices: ch, answer: x, audio: akey(x) });
+    });
+  }
+  const tips = T.culture.tips;
+  if (tips) {
+    // 挑柚子：放一兩週之後會變成什麼樣子
+    const ch = order([tips.after[0], ...tips.before, "sweet"], tips.after[0]);
+    if (ch && ch.length >= 3)
+      moon.push({ kind: "vocab", q: "柚子放一到兩週後會變成什麼顏色？", choices: ch, answer: tips.after[0], audio: akey(tips.after[0]) });
+  }
+  bank.moon = moon;
 
   const total = Object.values(bank).reduce((s, a) => s + a.length, 0);
   const thin = Object.entries(bank).filter(([, a]) => a.length < 3).map(([k, a]) => k + "(" + a.length + ")");

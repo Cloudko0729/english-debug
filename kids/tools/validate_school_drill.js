@@ -27,7 +27,7 @@ const gridGroup = w => (/ir/.test(w) ? "ir" : /ur/.test(w) ? "ur" : /er/.test(w)
 
 // 中文 → 英文對照，抓「兩個選項中文意思一樣」
 const ZH = {};
-T.units.flatMap(u => u.vocab).concat(T.culture.vocab).forEach(v => { ZH[v.en] = v.zh; });
+T.units.flatMap(u => u.vocab).concat(T.culture.vocab, T.culture.extraWords || []).forEach(v => { ZH[v.en] = v.zh; });
 
 function main() {
   console.log("題庫結構：");

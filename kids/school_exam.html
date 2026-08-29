@@ -152,10 +152,36 @@ function draw(){
     });
   }
 
-  if(fc==="all"||fc==="moon"||fc==="fin"){
+  if(fc==="all"||fc==="moon"||(fc==="mid"&&EXAMS.midterm.units.indexOf("moon")>=0)||(fc==="fin"&&EXAMS.final.units.indexOf("moon")>=0)){
     var c=T.culture;
-    h+='<div class="u"><h2>Culture — '+esc(c.title)+' <span class="tag fin">期末</span> <small>'+esc(c.zh)+'　p.'+c.pages+'</small></h2>'+
-       '<div class="goal">🎯 '+esc(c.goal)+'</div>'+vlist(c.vocab)+'</div>';
+    var cmid=(EXAMS.midterm.units.indexOf(c.id)>=0);
+    h+='<div class="u"><h2>Culture — '+esc(c.title)+' <span class="tag '+(cmid?"mid":"fin")+'">'+(cmid?"期中":"期末")+'</span> <small>'+esc(c.zh)+'　p.'+c.pages+'</small></h2>'+
+       '<div class="goal">🎯 '+esc(c.goal)+'</div>'+
+       '<div class="lab">主題單字 '+c.vocab.length+'</div>'+vlist(c.vocab);
+    (c.patterns||[]).forEach(function(p,i){
+      if(i===0) h+='<div class="lab">句型</div>';
+      h+='<div class="pat" onclick="say(\''+akey(c.id+"_pat"+i)+'\')">'+esc(p.q)+'<br><span class="a">'+esc(p.a)+'</span>'+
+         '<div class="z">'+esc(p.zh)+'</div></div>';
+    });
+    if((c.story||[]).length){
+      h+='<div class="lab">課文對白 '+c.story.length+' 句</div><div class="story">'+
+         c.story.map(function(s,i){return '<div onclick="say(\''+akey(c.id+"_st"+i)+'\')">'+esc(s)+'</div>';}).join("")+'</div>';
+    }
+    if(c.tips){
+      h+='<div class="lab">'+esc(c.tips.title)+'　'+esc(c.tips.zh)+'</div>'+
+         '<div class="story"><div onclick="say(\''+akey(c.id+"_tips")+'\')">'+esc(c.tips.text)+'</div>'+
+         '<div style="font-size:.8rem;color:#8a949e;margin-top:6px">'+
+         c.tips.before.join("、")+'　→（'+esc(c.tips.wait)+'）→　'+c.tips.after.join("、")+'</div></div>';
+    }
+    if(c.activity){
+      h+='<div class="lab">'+esc(c.activity.title)+'</div><div class="goal">'+esc(c.activity.q)+'</div>'+
+         '<div class="vv">'+c.activity.belong.map(function(x){
+           return '<span onclick="say(\''+akey(x)+'\')" style="border-color:#8fd6ab;background:#f3fcf7"><b>'+esc(x)+'</b><i>✓ 是</i></span>';}).join("")+
+         c.activity.notBelong.map(function(x){
+           return '<span onclick="say(\''+akey(x)+'\')" style="border-color:#f0b8ac;background:#fff6f4"><b>'+esc(x)+'</b><i>✗ 不是</i></span>';}).join("")+'</div>';
+    }
+    if(c.extraWords&&c.extraWords.length) h+='<div class="lab">其他生字</div>'+vlist(c.extraWords);
+    h+='</div>';
     h+='<div class="u"><h2>Task — '+esc(T.task.title)+' <small>'+esc(T.task.zh)+'　p.'+T.task.pages+'</small></h2>'+
        '<div class="goal">'+esc(T.task.goal)+'</div></div>';
   }
