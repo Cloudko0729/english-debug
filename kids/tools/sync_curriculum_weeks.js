@@ -85,7 +85,28 @@ function main() {
   });
 
   let src = fs.readFileSync(CURRICULUM_FILE, "utf8");
-  const filled = [], skipped = [], noSource = [];
+  const filled = [], skipped = [], noSource = [], created = [];
+
+  // 年度計畫有、curriculum 還沒有的月份：先補一個空殼，下面的填週迴圈才接得到。
+  // 以前這一步是人工的 —— 每個月要記得手動加 month 區塊，忘了就開天窗。
+  // 文法欄位留空：現在每個小孩的文法是 grammar_plan.js 各自選的，這裡的 grammar
+  // 只剩顯示用途（build_week_drills 空的會退回「文法根基」）。
+  const have = new Set(curriculum.map(m => m.month));
+  const missing = Object.keys(byMonth).filter(m => !have.has(m)).sort();
+  if (missing.length) {
+    const label = m => `${parseInt(m.slice(5), 10)} 月`;
+    const blocks = missing.map(m =>
+`  {
+    month: ${JSON.stringify(m)}, label: ${JSON.stringify(label(m))}, grammar: [
+    ], weeks: []
+  },`).join("\n");
+    const endAt = src.indexOf("\n];");
+    if (endAt < 0) throw new Error("找不到 CURRICULUM 陣列的結尾 ];");
+    // 陣列最後一個月份的 } 後面本來沒逗號，接新區塊前要補上，不然檔案會壞掉
+    const head = src.slice(0, endAt).replace(/\}\s*$/, "},");
+    src = head + "\n" + blocks + src.slice(endAt);
+    missing.forEach(m => { curriculum.push({ month: m, label: label(m), grammar: [], weeks: [] }); created.push(m); });
+  }
 
   curriculum.forEach(month => {
     const weeks = byMonth[month.month];
@@ -125,7 +146,7 @@ function main() {
   }));
 
   console.log(JSON.stringify({
-    ok: true, filled, skipped,
+    ok: true, createdMonths: created, filled, skipped,
     noSourceInPlan: noSource,
     curriculumAfter: report,
   }, null, 2));
