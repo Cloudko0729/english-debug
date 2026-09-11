@@ -84,4 +84,9 @@ const DRILLS = [
   { day: 79, date: "2026-09-09", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 商店與購物＋情態動詞／連接詞", icon: "🛒" },
   { day: 80, date: "2026-09-10", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 商店與購物＋情態動詞／連接詞", icon: "🛒" },
   { day: 81, date: "2026-09-11", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 商店與購物＋情態動詞／連接詞", icon: "🛒" },
+  { day: 82, date: "2026-09-14", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 城市與交通＋情態動詞／連接詞", icon: "🚇" },
+  { day: 83, date: "2026-09-15", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 城市與交通＋情態動詞／連接詞", icon: "🚇" },
+  { day: 84, date: "2026-09-16", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 城市與交通＋情態動詞／連接詞", icon: "🚇" },
+  { day: 85, date: "2026-09-17", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 城市與交通＋情態動詞／連接詞", icon: "🚇" },
+  { day: 86, date: "2026-09-18", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 城市與交通＋情態動詞／連接詞", icon: "🚇" },
 ];
