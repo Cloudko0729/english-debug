@@ -79,6 +79,7 @@ const bridge = `;globalThis.__T = {
   get TERRAIN_MAP(){return TERRAIN_MAP}, set TERRAIN_MAP(v){TERRAIN_MAP=v},
   get currentStudent(){return currentStudent}, set currentStudent(v){currentStudent=v},
   get mergeState(){return mergeState},
+  get selectedTile(){return selectedTile}, set selectedTile(v){selectedTile=v},
   _isMergeTarget:_isMergeTarget, _mergePartners:_mergePartners, _atMaxLevel:_atMaxLevel,
   _canMergeType:_canMergeType, mergeCost:mergeCost,
 };`;
@@ -339,6 +340,44 @@ ok("合併模式時地圖標記 merging", byId.get("island").classList.contains(
 S.cancelMerge();
 eq("取消後提示列收起", byId.get("mergeBar").style.display, "none");
 ok("取消後 merging 拿掉", !byId.get("island").classList.contains("merging"));
+
+
+// ── 同一格不能蓋兩棟 ────────────────────────────────────────────────────────
+// Jonathan 二號島 (12,13) 疊了兩座風車，建立時間差 4.9 秒 —— 手機連點兩下，
+// build() 從頭到尾沒檢查過那一格有沒有東西。疊上去的那棟看不見，但照樣產金幣。
+console.log("");
+console.log("── 同一格不能蓋兩棟 ──");
+{
+  const isl = seed("test", 1, "forest", 0, 0);
+  S.currentStudent = "test";
+  S.island = isl;
+  S.TERRAIN_MAP = S.terrainMapFor(1);
+  const p = S.getProgress("test");
+  p.coins.balance = 99999;
+  S.saveProgress("test", p);
+
+  let tile = null;
+  for (let y = 0; y < 15 && !tile; y++) for (let x = 0; x < 15; x++)
+    if (S.terrainAt(x, y) === "P") { tile = { x, y }; break; }
+  ok("找得到平地", !!tile);
+
+  S.selectedTile = tile;
+  S.build("forest");
+  eq("第一次蓋得起來", S.island.buildings.length, 1);
+
+  const before = S.getProgress("test").coins.balance;
+  S.selectedTile = tile;          // 同一格再點一次（連點）
+  S.build("forest");
+  eq("第二次不會疊上去", S.island.buildings.length, 1);
+  eq("第二次不扣錢", S.getProgress("test").coins.balance, before);
+
+  // 隔壁空格仍然蓋得起來，確認擋的是「這一格」不是全部
+  const nb = { x: tile.x, y: tile.y };
+  for (let x = tile.x + 1; x < 15; x++) if (S.terrainAt(x, tile.y) === "P") { nb.x = x; break; }
+  S.selectedTile = nb;
+  S.build("forest");
+  eq("隔壁空格照樣蓋得起來", S.island.buildings.length, 2);
+}
 
 console.log(`\n${fail === 0 ? "✅" : "❌"} pass ${pass} / fail ${fail}\n`);
 process.exit(fail ? 1 : 0);
