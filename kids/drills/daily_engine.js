@@ -135,7 +135,34 @@
     const dayIdx = baseIdx + (round2 ? _weekDays() : 0);   // 第 2 輪 → 題塊往後跳一週長，不重複
 
     // ① 英聽選擇 6（分塊輪替；重測→隨機）
-    const s1 = pickBlock(words, 6, dayIdx, WDID + "-v", retake).map(w => ({ en: w.en, choices: distinctChoices(w, words, rnd).map(o => ({ label: o.en, correct: o.en === w.en })) }));
+    // (1) 英聽選擇：本週字 4 題 + 舊字複習 2 題。
+    // 以前這裡只抽當週 30 字 -- 學過的字過了那一週就再也不出現，錯題表 wrongCounts
+    // 也只寫不讀。間隔複習只存在於單字測驗那一頁，小孩不一定會點進去。
+    // 舊字優先挑錯過的；答對答錯照樣回寫 wrongCounts（recordResult 已經在做）。
+    const pastPool = (function () {
+      if (typeof CURRICULUM === "undefined") return [];
+      const seen = new Map();
+      CURRICULUM.forEach(mo => (mo.weeks || []).forEach(wk => {
+        if (wk.end >= week.start) return;
+        (wk.words || []).forEach(x => { if (!seen.has(x.en)) seen.set(x.en, { en: x.en, zh: x.zh }); });
+      }));
+      return [...seen.values()];
+    })();
+    const s1rev = (function (k) {
+      if (!pastPool.length) return [];
+      let wc = {};
+      try { if (currentStudent) wc = getProgress(currentStudent).wrongCounts || {}; } catch (e) {}
+      const weak = pastPool.filter(x => (wc[x.en] || 0) >= 1);
+      const rest = pastPool.filter(x => !(wc[x.en] > 0));
+      return shuffleArr(weak, seeded(WDID + "-rw" + dayIdx))
+        .concat(shuffleArr(rest, seeded(WDID + "-rr" + dayIdx))).slice(0, k);
+    })(2);
+    const s1pool = words.concat(pastPool);
+    const s1 = pickBlock(words, 6 - s1rev.length, dayIdx, WDID + "-v", retake)
+      .map(w => ({ w: w, review: false }))
+      .concat(s1rev.map(w => ({ w: w, review: true })))
+      .map(it => ({ en: it.w.en, review: it.review,
+                    choices: distinctChoices(it.w, s1pool, rnd).map(o => ({ label: o.en, correct: o.en === it.w.en })) }));
 
     // ⑤ 圖片題 6：本週可圖示字 + 小學程度較難可圖示字（池固定/週），分塊輪替
     // 顯示優先序：WORD_IMAGE（生成圖）→ WORD_EMOJI → 不進圖片題
@@ -259,7 +286,12 @@
       }
     }
 
-    return { week, month, s1, s2, s3, s4, s5, s6, s7, s8, s9, hasWd: !!wd };
+    // (10) 開口說：拿當天重組題的前 3 句，聽一次再自己念一次。
+    // 九個大題全部用點的，沒有一題要求產出英文。朗讀與默念會啟動同一批語言產出區，
+    // 所以就算不做語音辨識也有效。音檔直接用 ro<i>.mp3，不必另外配音。
+    const s10 = s4.slice(0, 3).map(q => ({ key: q.key, sentence: q.sentence }));
+
+    return { week, month, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, hasWd: !!wd };
   }
 
   function optsHtml(sec, qi, choices) { return `<div class="opts">${choices.map((c, ci) => `<button class="opt" onclick="__ans('${sec}',${qi},${ci},this)">${c.label}</button>`).join("")}</div>`; }
@@ -272,8 +304,8 @@
     const gramNote = DRILL.s8 ? `文法課程：${DRILL.s8.current.icon} ${DRILL.s8.current.name}` : `文法：${m.grammar.map(g => g.topic).join("、")}`;
     let h = `<div class="meta">📒 ${m.label} 第 ${w.n} 週 · ${w.theme} · ${gramNote}${retakeNote}</div>`;
     // ①
-    h += `<div class="sec"><div class="sec-h">① 英聽選擇</div><div class="sec-d">點 🔊 聽單字，選出正確英文</div>`;
-    DRILL.s1.forEach((q, i) => { h += `<div class="q"><div class="q-no">${i + 1}.</div><button class="play" onclick="__pw('${q.en.replace(/'/g, "\\'")}')">🔊 點我聽</button>${optsHtml('s1', i, q.choices)}</div>`; });
+    h += `<div class="sec"><div class="sec-h">① 英聽選擇</div><div class="sec-d">點 🔊 聽單字，選出正確英文（標 🔁 的是以前學過的字）</div>`;
+    DRILL.s1.forEach((q, i) => { h += `<div class="q"><div class="q-no">${i + 1}.${q.review ? ' <span class="sub">🔁 以前學過的字</span>' : ''}</div><button class="play" onclick="__pw('${q.en.replace(/'/g, "\\'")}')">🔊 點我聽</button>${optsHtml('s1', i, q.choices)}</div>`; });
     h += `</div>`;
     // ②
     if (DRILL.hasWd) {
@@ -353,6 +385,17 @@
       });
       h += `</div>`;
     }
+    // (10) 開口說
+    if (DRILL.s10 && DRILL.s10.length) {
+      h += `<div class="sec"><div class="sec-h">⑩ 開口說</div><div class="sec-d">先點 🔊 聽一次，再自己大聲念一次，念完才按下面的按鈕</div>`;
+      DRILL.s10.forEach((q, i) => {
+        h += `<div class="q" id="say_${i}"><div class="q-no">${i + 1}.</div>
+          <div class="blank">${q.sentence}</div>
+          <button class="play" onclick="__pwd('${q.key}')">🔊 聽一次</button>
+          <div class="opts"><button class="opt" onclick="__say(${i},this)">🗣️ 我念好了</button></div></div>`;
+      });
+      h += `</div>`;
+    }
     h += `<button class="gobtn" onclick="__showTotal()">看總成績 🎉</button><div id="totalBox"></div>`;
     const app = document.getElementById("app"); app.innerHTML = h; app.style.display = "block";
     // 計分容器
@@ -363,6 +406,7 @@
     sectionScores.s7 = [0, DRILL.s7 ? DRILL.s7.qs.length : 0];
     sectionScores.s8 = [0, DRILL.s8 ? DRILL.s8.qs.length : 0];
     sectionScores.s9 = [0, DRILL.s9 ? DRILL.s9.qs.length : 0];
+    sectionScores.s10 = [0, DRILL.s10 ? DRILL.s10.length : 0];
   }
 
   window.__ans = (sec, qi, ci, btn) => {
@@ -382,6 +426,14 @@
       d.innerHTML = `📘 這題的觀念在 <a href="../grammar_db/lessons/${u.id}.html" target="_blank" rel="noopener">${u.icon}「${u.name}」</a>，點過去複習一下！`;
       box.appendChild(d);
     }
+  };
+
+  // 開口說（自己回報念完了 -- 沒有語音辨識，這裡靠的是說出口這件事本身）
+  window.__say = (i, btn) => {
+    const box = document.getElementById('say_' + i);
+    if (!box || box.dataset.done) return; box.dataset.done = "1";
+    btn.disabled = true; btn.classList.add('ok'); btn.textContent = "✅ 念好了";
+    sectionScores.s10[0]++;
   };
 
   // 句子重組

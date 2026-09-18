@@ -27,7 +27,7 @@ const DEPS = [
 const ENGINE = "drills/daily_engine.js";
 
 // 期待的段落。引擎的段落標題就長這樣，少一段就是那天的素材不夠。
-const SECTIONS = ["單字", "文法"];
+const SECTIONS = ["單字", "文法", "開口說"];
 const MIN_QUESTIONS = 8;      // 一天低於這個題數就太薄，不值得小孩打開
 
 function el(byId, id) {
@@ -175,7 +175,11 @@ function main() {
     const mon = mondayOf(d.date);
     const w = (byWeek[mon] = byWeek[mon] || {});
     [...html.matchAll(/__pwd\('([a-z]+\d+)'\)/g)].forEach(m => {
-      (w[m[1]] = w[m[1]] || []).push(d.date.slice(5));
+      // 同一天同一個 key 只算一次 —— 第十大題「開口說」是刻意重念第四大題的句子，
+      // 用的是同一個 ro<i>.mp3。那是設計上的重複練習，不是題庫不夠大。
+      const seenDays = (w[m[1]] = w[m[1]] || []);
+      const day = d.date.slice(5);
+      if (seenDays.indexOf(day) < 0) seenDays.push(day);
     });
   });
 

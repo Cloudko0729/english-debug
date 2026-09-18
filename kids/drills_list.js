@@ -89,4 +89,9 @@ const DRILLS = [
   { day: 84, date: "2026-09-16", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 城市與交通＋情態動詞／連接詞", icon: "🚇" },
   { day: 85, date: "2026-09-17", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 城市與交通＋情態動詞／連接詞", icon: "🚇" },
   { day: 86, date: "2026-09-18", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 城市與交通＋情態動詞／連接詞", icon: "🚇" },
+  { day: 87, date: "2026-09-21", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 中秋與家人＋情態動詞／連接詞", icon: "🥮" },
+  { day: 88, date: "2026-09-22", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 中秋與家人＋情態動詞／連接詞", icon: "🥮" },
+  { day: 89, date: "2026-09-23", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 中秋與家人＋情態動詞／連接詞", icon: "🥮" },
+  { day: 90, date: "2026-09-24", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 中秋與家人＋情態動詞／連接詞", icon: "🥮" },
+  { day: 91, date: "2026-09-25", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 中秋與家人＋情態動詞／連接詞", icon: "🥮" },
 ];

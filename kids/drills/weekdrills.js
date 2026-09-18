@@ -1116,7 +1116,105 @@ const WEEK_DRILLS = {
         ]
       }
     ]
-  }
+  },
+  "2026-09-3": {            // 第3週 中秋與家人 · 情態動詞/連接詞
+    listenBlank: [
+      { full: "We eat moon cakes at the mid-autumn festival.", display: "We eat moon cakes at the ___.", answer: "mid-autumn festival" },
+      { full: "My grandmother made a moon cake for me.", display: "My grandmother made a ___ for me.", answer: "moon cake" },
+      { full: "The lantern festival comes after Chinese New Year.", display: "The ___ comes after Chinese New Year.", answer: "lantern festival" },
+      { full: "We watch boat races at the dragon-boat festival.", display: "We watch boat races at the ___.", answer: "dragon-boat festival" },
+      { full: "My family name is easy to spell.", display: "My ___ is easy to spell.", answer: "family name" },
+      { full: "Each parent must sign the school form.", display: "Each ___ must sign the school form.", answer: "parent" },
+      { full: "Grandma hugged her granddaughter at the door.", display: "Grandma hugged her ___ at the door.", answer: "granddaughter" },
+      { full: "Her grandson helped her carry the bags.", display: "Her ___ helped her carry the bags.", answer: "grandson" },
+      { full: "My aunt is a housewife and she is always busy.", display: "My aunt is a ___ and she is always busy.", answer: "housewife" },
+      { full: "I must finish my housework before supper.", display: "I must finish my ___ before supper.", answer: "housework" },
+      { full: "We gave Mom flowers on mother's day.", display: "We gave Mom flowers on ___.", answer: "mother's day" },
+      { full: "Their daughter can play the piano well.", display: "Their ___ can play the piano well.", answer: "daughter" },
+      { full: "Her husband cooks dinner every Friday.", display: "Her ___ cooks dinner every Friday.", answer: "husband" },
+      { full: "His wife works at the shop near our school.", display: "His ___ works at the shop near our school.", answer: "wife" },
+      { full: "Every visitor should sign in at the gate.", display: "Every ___ should sign in at the gate.", answer: "visitor" },
+      { full: "We had one guest for dinner last night.", display: "We had one ___ for dinner last night.", answer: "guest" },
+      { full: "The party will start after the moon rises.", display: "The ___ will start after the moon rises.", answer: "party" },
+      { full: "We can have supper on the balcony tonight.", display: "We can have ___ on the balcony tonight.", answer: "supper" },
+      { full: "I wrapped a present for my cousin.", display: "I wrapped a ___ for my cousin.", answer: "present" },
+      { full: "They walked to the temple and lit a candle.", display: "They walked to the ___ and lit a candle.", answer: "temple" },
+      { full: "Dad started the barbecue because the sky was clear.", display: "Dad started the ___ because the sky was clear.", answer: "barbecue" },
+      { full: "My niece painted a paper lantern.", display: "My niece painted a paper ___.", answer: "lantern" },
+      { full: "My cousin felt homesick but he called home.", display: "My cousin felt ___ but he called home.", answer: "homesick" },
+      { full: "My nephew can carry the heavy box.", display: "My ___ can carry the heavy box.", answer: "nephew" },
+      { full: "Her niece brought a small cake to school.", display: "Her ___ brought a small cake to school.", answer: "niece" },
+    ],
+    reorder: [
+      { sentence: "My mom will bake moon cakes tonight.", chunks: ["My mom","will bake","moon cakes","tonight."] },
+      { sentence: "The whole family sat down for supper.", chunks: ["The whole family","sat down","for supper."] },
+      { sentence: "We had twelve people altogether.", chunks: ["We","had","twelve people","altogether."] },
+      { sentence: "This meal is bigger than last year's.", chunks: ["This meal","is bigger than","last year's."] },
+      { sentence: "The old couple walked to the temple.", chunks: ["The old couple","walked","to the temple."] },
+      { sentence: "The baby called her mommy loudly.", chunks: ["The baby","called","her mommy","loudly."] },
+      { sentence: "My niece painted a paper lantern.", chunks: ["My niece","painted","a paper lantern."] },
+      { sentence: "We can have a barbecue on the roof.", chunks: ["We","can have","a barbecue","on the roof."] },
+      { sentence: "Dad lit the fire because the sky was clear.", chunks: ["Dad","lit the fire","because","the sky was clear."] },
+      { sentence: "My cousin felt homesick but he smiled.", chunks: ["My cousin","felt homesick","but","he smiled."] },
+      { sentence: "Every visitor should take off their shoes.", chunks: ["Every visitor","should take off","their shoes."] },
+      { sentence: "Grandma gave her grandson a red present.", chunks: ["Grandma","gave","her grandson","a red present."] },
+      { sentence: "Each parent must sign the form.", chunks: ["Each parent","must sign","the form."] },
+      { sentence: "We watch boat races at the dragon-boat festival.", chunks: ["We","watch","boat races","at the dragon-boat festival."] },
+      { sentence: "The lantern festival comes after Chinese New Year.", chunks: ["The lantern festival","comes","after","Chinese New Year."] },
+      { sentence: "My aunt does the housework before work.", chunks: ["My aunt","does","the housework","before work."] },
+      { sentence: "Her husband cooked the whole meal.", chunks: ["Her husband","cooked","the whole meal."] },
+      { sentence: "We will visit my uncle on Sunday.", chunks: ["We","will visit","my uncle","on Sunday."] },
+      { sentence: "The guest brought a moon cake.", chunks: ["The guest","brought","a moon cake."] },
+      { sentence: "My family name is easy to spell.", chunks: ["My family name","is easy","to spell."] },
+    ],
+    reading: [
+      {
+        passage: "Every year my family gets together for the mid-autumn festival. My mom starts cooking early because we always have many guests. This year twelve people came altogether. After supper we carried our chairs up to the roof and watched the moon. My little niece said the moon looked like a huge moon cake, and everyone laughed.",
+        questions: [
+          { q: "Which festival is the family celebrating?", choices: ["The mid-autumn festival","The lantern festival","The dragon-boat festival","Mother's day"], answer: "The mid-autumn festival" },
+          { q: "Why does the mom start cooking early?", choices: ["Because many guests come","Because she works late","Because the stove is slow","Because she is hungry"], answer: "Because many guests come" },
+          { q: "How many people came this year?", choices: ["Twelve","Two","Twenty","Five"], answer: "Twelve" },
+          { q: "What did the niece say the moon looked like?", choices: ["A huge moon cake","A lantern","A white plate","A balloon"], answer: "A huge moon cake" },
+        ]
+      },
+      {
+        passage: "My grandmother has been a housewife for forty years. She says housework is never finished, but she still sings while she works. Last Saturday my brother and I helped her clean the kitchen before the party. She gave each of us a small present and told us that a home is not a building, it is the people inside.",
+        questions: [
+          { q: "How long has the grandmother been a housewife?", choices: ["Forty years","Four years","Fourteen years","Ten years"], answer: "Forty years" },
+          { q: "What does she do while she works?", choices: ["She sings","She listens to the radio","She talks on the phone","She watches TV"], answer: "She sings" },
+          { q: "When did the children help her?", choices: ["Last Saturday","Last Sunday","This morning","Last night"], answer: "Last Saturday" },
+          { q: "What did she tell them about a home?", choices: ["It is the people inside","It must be big","It must be clean","It needs a garden"], answer: "It is the people inside" },
+        ]
+      },
+      {
+        passage: "On the night of the lantern festival my father takes us to the temple near the river. Hundreds of red lanterns hang over the street, and the whole road turns warm and bright. My nephew is only four, so my father carries him on his shoulders. Last year my cousin felt homesick because he studies far from home, but when he saw the lanterns he said he felt better.",
+        questions: [
+          { q: "Where does the father take them?", choices: ["The temple near the river","The school","The park","The train station"], answer: "The temple near the river" },
+          { q: "What colour are the lanterns?", choices: ["Red","Blue","White","Green"], answer: "Red" },
+          { q: "Why does the father carry the nephew?", choices: ["The nephew is only four","The nephew is tired","The nephew is sick","The nephew cannot walk"], answer: "The nephew is only four" },
+          { q: "How did the cousin feel after he saw the lanterns?", choices: ["Better","Angry","Bored","Sleepy"], answer: "Better" },
+        ]
+      },
+      {
+        passage: "In Taiwan many families have a barbecue at the mid-autumn festival. My uncle says nobody knows exactly why we started, but now every street smells of grilled food that night. This year my aunt's family joined us, so we needed two grills. My cousin cannot eat meat, so my mother made her a plate of corn and mushrooms. We ate until the moon was high.",
+        questions: [
+          { q: "What do many families in Taiwan do at the mid-autumn festival?", choices: ["Have a barbecue","Fly kites","Row boats","Plant trees"], answer: "Have a barbecue" },
+          { q: "Why did they need two grills?", choices: ["The aunt's family joined them","The first grill broke","They cooked twice","The food was wet"], answer: "The aunt's family joined them" },
+          { q: "What did the mother make for the cousin?", choices: ["Corn and mushrooms","Fish and rice","Hot soup","Moon cakes"], answer: "Corn and mushrooms" },
+          { q: "When did they stop eating?", choices: ["When the moon was high","At six o'clock","When it rained","Before supper"], answer: "When the moon was high" },
+        ]
+      },
+      {
+        passage: "My brother and I play a farm game together after our housework is done. In the game there is an autumn festival where everyone in the village brings food and watches the lights on the water. Last night a visitor came to our farm and gave us a present because we had helped him in the spring. My brother said the game feels like our own mid-autumn festival, only quieter.",
+        questions: [
+          { q: "When do the children play the game?", choices: ["After their housework","Before breakfast","At school","On the bus"], answer: "After their housework" },
+          { q: "What happens at the festival in the game?", choices: ["Everyone brings food and watches the lights","Everyone races boats","Everyone plants seeds","Everyone sings songs"], answer: "Everyone brings food and watches the lights" },
+          { q: "Why did the visitor give them a present?", choices: ["They had helped him in the spring","They paid him","They won a race","It was his birthday"], answer: "They had helped him in the spring" },
+          { q: "What did the brother say about the game?", choices: ["It feels like their own mid-autumn festival","It is too hard","It is too short","It is boring"], answer: "It feels like their own mid-autumn festival" },
+        ]
+      },
+    ]
+  },
 };
 // 每篇短文的「沒教過的生字」中文解釋（index 對應該週 reading[]）
 const PASSAGE_GLOSSARY = {
@@ -1204,7 +1302,14 @@ const PASSAGE_GLOSSARY = {
     [{"en":"marked","zh":"標記"}, {"en":"hangs","zh":"掛著"}],
     [{"en":"band","zh":"樂團"}, {"en":"talent","zh":"天分"}],
     [{"en":"voted","zh":"投票"}, {"en":"winner","zh":"獲勝者"}]
-  ]
+  ],
+  "2026-09-3": [
+    [{"en":"roof","zh":"屋頂"},{"en":"huge","zh":"巨大的"}],
+    [{"en":"finished","zh":"完成的"},{"en":"inside","zh":"裡面"}],
+    [{"en":"hundreds","zh":"數百"},{"en":"shoulders","zh":"肩膀"},{"en":"bright","zh":"明亮的"}],
+    [{"en":"grills","zh":"烤爐"},{"en":"grilled","zh":"烤過的"},{"en":"corn","zh":"玉米"},{"en":"mushrooms","zh":"蘑菇"}],
+    [{"en":"village","zh":"村莊"},{"en":"quieter","zh":"比較安靜的"}],
+  ],
 };
 function weekDrillFor(monthStr, weekN) { return WEEK_DRILLS[monthStr + "-" + weekN] || null; }
 function passageGlossary(wid, idx) { return (PASSAGE_GLOSSARY[wid] && PASSAGE_GLOSSARY[wid][idx]) || []; }
