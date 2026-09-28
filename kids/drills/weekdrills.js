@@ -1215,6 +1215,104 @@ const WEEK_DRILLS = {
       },
     ]
   },
+  "2026-09-4": {            // 第4週 天氣與季節 · 情態動詞/連接詞
+    listenBlank: [
+      { full: "My raincoat keeps me dry in the rain.", display: "My ___ keeps me dry in the rain.", answer: "raincoat", exclude: ["sweater","scarf","gloves"] },
+      { full: "It's only a light shower, so we don't need an umbrella.", display: "It's only a light ___, so we don't need an umbrella.", answer: "shower", exclude: ["storm","stormy"] },
+      { full: "The children built a snowman with a carrot nose.", display: "The children built a ___ with a carrot nose.", answer: "snowman" },
+      { full: "On snowy days, we can build a snowman.", display: "On ___ days, we can build a snowman.", answer: "snowy", exclude: ["foggy","stormy","freezing","fog"] },
+      { full: "We heard loud thunder after the lightning.", display: "We heard loud ___ after the lightning.", answer: "thunder" },
+      { full: "The temperature today is thirty-five degrees.", display: "The ___ today is thirty-five degrees.", answer: "temperature" },
+      { full: "The fog was so thick that the plane could not land.", display: "The ___ was so thick that the plane could not land.", answer: "fog", exclude: ["shower","storm","typhoon"] },
+      { full: "Water turns to ice when it is freezing.", display: "Water turns to ice when it is ___.", answer: "freezing", exclude: ["snowy","stormy","foggy"] },
+      { full: "The sun will shine again after the rain.", display: "The sun will ___ again after the rain.", answer: "shine" },
+      { full: "This wool sweater keeps my body warm.", display: "This wool ___ keeps my body warm.", answer: "sweater", exclude: ["raincoat","scarf","gloves"] },
+      { full: "Wrap this scarf around your neck.", display: "Wrap this ___ around your neck.", answer: "scarf", exclude: ["sweater","raincoat"] },
+      { full: "I wear gloves to keep my fingers warm.", display: "I wear ___ to keep my fingers warm.", answer: "gloves", exclude: ["sweater","scarf","raincoat"] },
+      { full: "Keelung is in the north of Taiwan.", display: "Keelung is in the ___ of Taiwan.", answer: "north" },
+      { full: "Kenting is in the south of Taiwan.", display: "Kenting is in the ___ of Taiwan.", answer: "south" },
+      { full: "The sun rises in the east.", display: "The sun rises in the ___.", answer: "east" },
+      { full: "The sun sets in the west.", display: "The sun sets in the ___.", answer: "west" },
+      { full: "The earth moves around the sun.", display: "The ___ moves around the sun.", answer: "earth" },
+      { full: "We had a day off from school because of a typhoon.", display: "We had a day off from school because of a ___.", answer: "typhoon", exclude: ["storm"] },
+      { full: "A rainbow is a curve of seven colors in the sky.", display: "A ___ is a curve of seven colors in the sky.", answer: "rainbow", exclude: ["raincoat","sweater","scarf","snowman"] },
+      { full: "A flash of lightning lit up the sky.", display: "A flash of ___ lit up the sky.", answer: "lightning" },
+      { full: "When the air is hot and wet, we say it is humid.", display: "When the air is hot and wet, we say it is ___.", answer: "humid", exclude: ["stormy","foggy"] },
+      { full: "In winter, northern Taiwan is colder than southern Taiwan.", display: "In winter, ___ Taiwan is colder than southern Taiwan.", answer: "northern", exclude: ["north","south","east","west","eastern","western"] },
+      { full: "Pingtung is in southern Taiwan.", display: "Pingtung is in ___ Taiwan.", answer: "southern", exclude: ["south","west","western"] },
+      { full: "Hualien is on the eastern side of Taiwan.", display: "Hualien is on the ___ side of Taiwan.", answer: "eastern", exclude: ["east"] },
+      { full: "Taichung is on the western side of Taiwan.", display: "Taichung is on the ___ side of Taiwan.", answer: "western", exclude: ["west"] },
+    ],
+    reorder: [
+      { sentence: "You should wear a raincoat today.", chunks: ["You","should wear","a raincoat","today."] },
+      { sentence: "It will be stormy tomorrow afternoon.", chunks: ["It","will be","stormy","tomorrow afternoon."] },
+      { sentence: "We can't go out because of the typhoon.", chunks: ["We","can't go out","because of","the typhoon."] },
+      { sentence: "The sun rises in the east.", chunks: ["The sun","rises","in the east."] },
+      { sentence: "The sun sets in the west.", chunks: ["The sun","sets","in the west."] },
+      { sentence: "Put on your gloves and your scarf.", chunks: ["Put on","your gloves","and","your scarf."] },
+      { sentence: "The temperature will drop tonight.", chunks: ["The temperature","will drop","tonight."] },
+      { sentence: "It was foggy, so the bus was late.", chunks: ["It was foggy,","so","the bus","was late."] },
+      { sentence: "I saw lightning, but I didn't hear thunder.", chunks: ["I saw lightning,","but","I didn't hear","thunder."] },
+      { sentence: "We built a snowman in the snowy park.", chunks: ["We","built","a snowman","in the snowy park."] },
+      { sentence: "A rainbow came out after the shower.", chunks: ["A rainbow","came out","after","the shower."] },
+      { sentence: "The earth goes around the sun.", chunks: ["The earth","goes around","the sun."] },
+      { sentence: "Astronauts live in outer space for months.", chunks: ["Astronauts","live in outer space","for months."] },
+      { sentence: "It is humid in southern Taiwan.", chunks: ["It is","humid","in southern Taiwan."] },
+      { sentence: "Winter is cold in northern Taiwan.", chunks: ["Winter","is cold","in northern Taiwan."] },
+      { sentence: "Hualien is in eastern Taiwan.", chunks: ["Hualien","is","in eastern Taiwan."] },
+      { sentence: "Most people live in western Taiwan.", chunks: ["Most people","live","in western Taiwan."] },
+      { sentence: "My sweater is too warm for today.", chunks: ["My sweater","is","too warm","for today."] },
+      { sentence: "It is freezing, so you must stay inside.", chunks: ["It is freezing,","so","you must","stay inside."] },
+      { sentence: "The sun will shine after the storm.", chunks: ["The sun","will shine","after","the storm."] },
+    ],
+    reading: [
+      {
+        passage: "Last week a strong typhoon came to Taiwan. There was no school, so my brother and I stayed home. The wind was loud, and we saw lightning and heard thunder all night. Mom said we must not go outside. The next morning the storm was gone, and we saw a big rainbow over the river.",
+        questions: [
+          { q: "Why was there no school?", choices: ["A strong typhoon came","It was Sunday","The teacher was sick","It snowed"], answer: "A strong typhoon came" },
+          { q: "What did they see and hear at night?", choices: ["Lightning and thunder","Fireworks","A rainbow","Snow"], answer: "Lightning and thunder" },
+          { q: "What did Mom say?", choices: ["They must not go outside","They should play outside","They can go to the river","They will go to school"], answer: "They must not go outside" },
+          { q: "What did they see the next morning?", choices: ["A big rainbow over the river","A snowman","Thick fog","Another typhoon"], answer: "A big rainbow over the river" },
+        ]
+      },
+      {
+        passage: "Our class went hiking with a map and a compass. The teacher asked, \"Where does the sun rise?\" Ben said, \"In the east!\" In the afternoon the sun moved to the west. We walked north to the lake and then walked south back to the bus. It was hot and humid, so everyone drank a lot of water.",
+        questions: [
+          { q: "Where does the sun rise?", choices: ["In the east","In the west","In the north","In the south"], answer: "In the east" },
+          { q: "Where was the sun in the afternoon?", choices: ["In the west","In the east","In the north","Under the lake"], answer: "In the west" },
+          { q: "Which way did they walk to the lake?", choices: ["North","South","East","West"], answer: "North" },
+          { q: "Why did everyone drink a lot of water?", choices: ["It was hot and humid","It was freezing","It was snowy","They were sick"], answer: "It was hot and humid" },
+        ]
+      },
+      {
+        passage: "In winter it can be freezing on Hehuan Mountain in central Taiwan. Last year we saw snow there for the first time! I wore my sweater, my scarf and my gloves, but my ears were still cold. My sister and I built a small snowman. The temperature was below zero, so Dad made hot chocolate for everyone.",
+        questions: [
+          { q: "Where did they see snow?", choices: ["On Hehuan Mountain","In Taipei","In Kenting","At the beach"], answer: "On Hehuan Mountain" },
+          { q: "What did the writer wear?", choices: ["A sweater, a scarf and gloves","A raincoat","A T-shirt","Shorts"], answer: "A sweater, a scarf and gloves" },
+          { q: "What did the children build?", choices: ["A small snowman","A house","A rainbow","A boat"], answer: "A small snowman" },
+          { q: "Why did Dad make hot chocolate?", choices: ["Because it was very cold","Because it was a birthday","Because they were hungry","Because it rained"], answer: "Because it was very cold" },
+        ]
+      },
+      {
+        passage: "My cousin wants to be an astronaut. He says the earth looks blue from outer space. In space there is no rain, no fog and no rainbow, because there is no air. He showed me a photo taken from space. The storm in it looked like a big white circle. \"One day I will see the earth from space with my own eyes,\" he said.",
+        questions: [
+          { q: "What does the cousin want to be?", choices: ["An astronaut","A pilot","A teacher","A farmer"], answer: "An astronaut" },
+          { q: "What color does the earth look from outer space?", choices: ["Blue","Red","Yellow","Black"], answer: "Blue" },
+          { q: "Why is there no rain in space?", choices: ["There is no air","It is too hot","It is always night","The sun is too far"], answer: "There is no air" },
+          { q: "What did the storm look like from space?", choices: ["A big white circle","A rainbow","A snowman","A black line"], answer: "A big white circle" },
+        ]
+      },
+      {
+        passage: "In our farm game, every season has different weather. In spring there are many rainy days, so we don't need to water the crops. In summer there are storms with thunder and lightning. In winter it is snowy, and almost nothing grows on the farm. My brother likes stormy days because lightning sometimes hits a tree! I like foggy mornings, because the farm looks quiet and soft.",
+        questions: [
+          { q: "Why don't they need to water the crops in spring?", choices: ["There are many rainy days","The crops are dead","It is freezing","They have no seeds"], answer: "There are many rainy days" },
+          { q: "What comes with the summer storms?", choices: ["Thunder and lightning","Snow","Fog","A rainbow"], answer: "Thunder and lightning" },
+          { q: "What happens on the farm in winter?", choices: ["Almost nothing grows","Crops grow faster","It is humid","It is sunny every day"], answer: "Almost nothing grows" },
+          { q: "Why does the writer like foggy mornings?", choices: ["The farm looks quiet and soft","It is warm","There is no work","The crops grow"], answer: "The farm looks quiet and soft" },
+        ]
+      },
+    ]
+  },
 };
 // 每篇短文的「沒教過的生字」中文解釋（index 對應該週 reading[]）
 const PASSAGE_GLOSSARY = {
@@ -1309,6 +1407,13 @@ const PASSAGE_GLOSSARY = {
     [{"en":"hundreds","zh":"數百"},{"en":"shoulders","zh":"肩膀"},{"en":"bright","zh":"明亮的"}],
     [{"en":"grills","zh":"烤爐"},{"en":"grilled","zh":"烤過的"},{"en":"corn","zh":"玉米"},{"en":"mushrooms","zh":"蘑菇"}],
     [{"en":"village","zh":"村莊"},{"en":"quieter","zh":"比較安靜的"}],
+  ],
+  "2026-09-4": [
+    [{"en":"gone","zh":"消失了"},{"en":"loud","zh":"大聲的"}],
+    [{"en":"hiking","zh":"健行"},{"en":"compass","zh":"指南針"}],
+    [{"en":"Hehuan Mountain","zh":"合歡山"},{"en":"central","zh":"中部的"},{"en":"below zero","zh":"零度以下"},{"en":"hot chocolate","zh":"熱可可"}],
+    [{"en":"astronaut","zh":"太空人"},{"en":"air","zh":"空氣"},{"en":"circle","zh":"圓圈"}],
+    [{"en":"crops","zh":"作物"},{"en":"hits","zh":"擊中"},{"en":"quiet","zh":"安靜的"}],
   ],
 };
 function weekDrillFor(monthStr, weekN) { return WEEK_DRILLS[monthStr + "-" + weekN] || null; }

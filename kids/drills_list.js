@@ -94,4 +94,9 @@ const DRILLS = [
   { day: 89, date: "2026-09-23", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 中秋與家人＋情態動詞／連接詞", icon: "🥮" },
   { day: 90, date: "2026-09-24", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 中秋與家人＋情態動詞／連接詞", icon: "🥮" },
   { day: 91, date: "2026-09-25", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 中秋與家人＋情態動詞／連接詞", icon: "🥮" },
+  { day: 92, date: "2026-09-28", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第4週 天氣與季節＋情態動詞／連接詞", icon: "🌦️" },
+  { day: 93, date: "2026-09-29", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第4週 天氣與季節＋情態動詞／連接詞", icon: "🌦️" },
+  { day: 94, date: "2026-09-30", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第4週 天氣與季節＋情態動詞／連接詞", icon: "🌦️" },
+  { day: 95, date: "2026-10-01", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第4週 天氣與季節＋情態動詞／連接詞", icon: "🌦️" },
+  { day: 96, date: "2026-10-02", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第4週 天氣與季節＋情態動詞／連接詞", icon: "🌦️" },
 ];

@@ -58,6 +58,7 @@ function main() {
       const expect = q.full.replace(q.answer, "___");
       if (expect !== q.display) bad(wid, `${at} display 對不上 full\n       應為 ${expect}\n       實為 ${q.display}`);
       if ((q.display.match(/___/g) || []).length !== 1) bad(wid, `${at} 空格不是剛好一個：${q.display}`);
+      if (q.exclude && q.exclude.map(x => String(x).toLowerCase()).includes(String(q.answer).toLowerCase())) bad(wid, `${at} 排除清單裡有答案本身：${q.answer}`);
     });
 
     // ── 句子重組：詞塊拼回去要一字不差

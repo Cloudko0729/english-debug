@@ -187,7 +187,11 @@
     const lbPool = wd ? wd.listenBlank.map((q, i) => ({ ...q, _i: i })) : [];
     const s2 = pickBlock(lbPool, 5, dayIdx, WDID + "-lb", retake).map(q => {
       const ansW = { en: q.answer, zh: "" };
-      const ch = distinctChoices(ansW, words.concat(lbPool.map(x => ({ en: x.answer, zh: "" }))), rnd).map(o => ({ label: o.en, correct: o.en === q.answer }));
+      // exclude：這題的空格裡也說得通的字，不能抽來當干擾選項。干擾字是從本週 30 字隨機抽的，
+      // 衣物互換（sweater/scarf）、天氣共存（snowy/foggy）、east/eastern 同義，只靠句子擋不住。
+      const ex = new Set((q.exclude || []).map(s => String(s).toLowerCase()));
+      const pool = words.concat(lbPool.map(x => ({ en: x.answer, zh: "" }))).filter(x => !ex.has(String(x.en).toLowerCase()));
+      const ch = distinctChoices(ansW, pool, rnd).map(o => ({ label: o.en, correct: o.en === q.answer }));
       return { key: "lb" + q._i, display: q.display, choices: ch };
     });
 
