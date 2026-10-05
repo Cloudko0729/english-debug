@@ -256,7 +256,7 @@ const CURRICULUM = [
           { en: "sheet", zh: "(一)張", pos: "n" }, { en: "note", zh: "便條", pos: "n" }, { en: "ink", zh: "墨水", pos: "n" },
           { en: "rubber", zh: "橡皮", pos: "n" }, { en: "envelope", zh: "信封", pos: "n" }, { en: "e-mail", zh: "電子郵件", pos: "n" },
           { en: "email", zh: "電子郵件", pos: "n" }, { en: "review", zh: "評論", pos: "v" }, { en: "history", zh: "歷史", pos: "n" },
-          { en: "leaf", zh: "葉子(書刊的)張", pos: "n" }, { en: "marker", zh: "作記號的人", pos: "n" }, { en: "aloud", zh: "出聲地", pos: "adv" },
+          { en: "leaf", zh: "葉子；（書的）一張", pos: "n" }, { en: "marker", zh: "麥克筆、記號筆", pos: "n" }, { en: "aloud", zh: "出聲地", pos: "adv" },
           { en: "album", zh: "相簿", pos: "n" }, { en: "article", zh: "文章", pos: "n" }, { en: "chapter", zh: "(書籍)章", pos: "n" },
           { en: "comic", zh: "漫畫", pos: "n" }, { en: "letter", zh: "信", pos: "n" }, { en: "typewriter", zh: "打字機", pos: "n" },
           { en: "title", zh: "標題", pos: "n" }, { en: "vocabulary", zh: "字彙", pos: "n" }, { en: "poem", zh: "詩", pos: "n" },

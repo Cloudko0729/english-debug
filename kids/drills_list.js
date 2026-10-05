@@ -99,4 +99,9 @@ const DRILLS = [
   { day: 94, date: "2026-09-30", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第4週 天氣與季節＋情態動詞／連接詞", icon: "🌦️" },
   { day: 95, date: "2026-10-01", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第4週 天氣與季節＋情態動詞／連接詞", icon: "🌦️" },
   { day: 96, date: "2026-10-02", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第4週 天氣與季節＋情態動詞／連接詞", icon: "🌦️" },
+  { day: 97, date: "2026-10-05", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 圖書館與閱讀＋動名詞 / 不定詞", icon: "📚" },
+  { day: 98, date: "2026-10-06", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 圖書館與閱讀＋動名詞 / 不定詞", icon: "📚" },
+  { day: 99, date: "2026-10-07", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 圖書館與閱讀＋動名詞 / 不定詞", icon: "📚" },
+  { day: 100, date: "2026-10-08", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 圖書館與閱讀＋動名詞 / 不定詞", icon: "📚" },
+  { day: 101, date: "2026-10-09", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 圖書館與閱讀＋動名詞 / 不定詞", icon: "📚" },
 ];

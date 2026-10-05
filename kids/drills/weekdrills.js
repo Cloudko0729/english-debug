@@ -1313,6 +1313,104 @@ const WEEK_DRILLS = {
       },
     ]
   },
+  "2026-10-1": {            // 第1週 圖書館與閱讀 · 動名詞/不定詞
+    listenBlank: [
+      { full: "Please put the books back on a shelf in the bookcase.", display: "Please put the books back on a shelf in the ___.", answer: "bookcase", exclude: ["printer","typewriter"] },
+      { full: "A dictionary tells you what a word means.", display: "A ___ tells you what a word means.", answer: "dictionary", exclude: ["textbook","workbook","vocabulary"] },
+      { full: "This magazine comes out every month.", display: "This ___ comes out every month.", answer: "magazine", exclude: ["comic","article","review"] },
+      { full: "Grandpa told us a funny story before bed.", display: "Grandpa told us a funny ___ before bed.", answer: "story", exclude: ["poem","comic","article","title","history"] },
+      { full: "Open your English textbook to page twenty.", display: "Open your English ___ to page twenty.", answer: "textbook", exclude: ["workbook","dictionary","magazine","comic","album","story","reading test","review","article","poem","letter","history"] },
+      { full: "My workbook has exercises for every lesson.", display: "My ___ has exercises for every lesson.", answer: "workbook", exclude: ["textbook","reading test","magazine","comic","dictionary","review"] },
+      { full: "We had a reading test, so we read a story and answered questions.", display: "We had a ___, so we read a story and answered questions.", answer: "reading test", exclude: ["review","note","letter","sheet","poem","comic","chapter","magazine","textbook","workbook"] },
+      { full: "Can you print this page for me?", display: "Can you ___ this page for me?", answer: "print", exclude: ["review","e-mail","email","note","title"] },
+      { full: "The printer is out of paper.", display: "The ___ is out of paper.", answer: "printer", exclude: ["typewriter"] },
+      { full: "Please give me a sheet of paper.", display: "Please give me a ___ of paper.", answer: "sheet", exclude: ["leaf"] },
+      { full: "My pen is out of ink.", display: "My pen is out of ___.", answer: "ink" },
+      { full: "Write the address on the front of the envelope.", display: "Write the address on the front of the ___.", answer: "envelope", exclude: ["letter","note","magazine","comic","album"] },
+      { full: "I sent my teacher an e-mail last night.", display: "I sent my teacher an ___ last night.", answer: "e-mail", exclude: ["email","envelope","article","album"] },
+      { full: "Let's review the new words before the test.", display: "Let's ___ the new words before the test.", answer: "review", exclude: ["print","note","e-mail","email"] },
+      { full: "We learn about old kings in history class.", display: "We learn about old kings in ___ class.", answer: "history", exclude: ["vocabulary","story"] },
+      { full: "Please read the poem aloud so everyone can hear.", display: "Please read the poem ___ so everyone can hear.", answer: "aloud", exclude: ["title","review"] },
+      { full: "We keep our family photos in a photo album.", display: "We keep our family photos in a photo ___.", answer: "album", exclude: ["magazine","comic","bookcase","envelope","dictionary","textbook","workbook"] },
+      { full: "I finished the first chapter of the book.", display: "I finished the first ___ of the book.", answer: "chapter", exclude: ["story","poem","article","comic","letter","note","reading test","review"] },
+      { full: "A comic tells a story with pictures and speech bubbles.", display: "A ___ tells a story with pictures and speech bubbles.", answer: "comic", exclude: ["magazine","story","album","poem","article"] },
+      { full: "Grandma wrote me a long letter by hand.", display: "Grandma wrote me a long ___ by hand.", answer: "letter", exclude: ["note","poem","story","article","review","chapter","comic","history","reading test"] },
+      { full: "Before computers, people used a typewriter to write.", display: "Before computers, people used a ___ to write.", answer: "typewriter", exclude: ["printer","marker"] },
+      { full: "The title of the book is on the cover.", display: "The ___ of the book is on the cover.", answer: "title", exclude: ["review","note","poem","comic","story"] },
+      { full: "Reading helps you learn new vocabulary.", display: "Reading helps you learn new ___.", answer: "vocabulary", exclude: ["history"] },
+      { full: "A poem often has lines that rhyme.", display: "A ___ often has lines that rhyme.", answer: "poem", exclude: ["story","letter","article","comic","review","chapter"] },
+      { full: "Take the cap off the marker before you write.", display: "Take the cap off the ___ before you write.", answer: "marker", exclude: ["printer","ink","typewriter"] },
+    ],
+    reorder: [
+      { sentence: "I like reading comic books.", chunks: ["I","like reading","comic books."] },
+      { sentence: "She wants to borrow a magazine.", chunks: ["She","wants to borrow","a magazine."] },
+      { sentence: "We need to print this article.", chunks: ["We","need to print","this article."] },
+      { sentence: "Reading aloud helps me remember.", chunks: ["Reading aloud","helps me","remember."] },
+      { sentence: "Please put the dictionary on the bookcase.", chunks: ["Please put","the dictionary","on the bookcase."] },
+      { sentence: "He forgot to bring his workbook.", chunks: ["He","forgot to bring","his workbook."] },
+      { sentence: "I enjoy writing poems.", chunks: ["I","enjoy writing","poems."] },
+      { sentence: "The printer needs more ink.", chunks: ["The printer","needs","more ink."] },
+      { sentence: "Don't forget to write the title.", chunks: ["Don't forget","to write","the title."] },
+      { sentence: "Let's review chapter three tonight.", chunks: ["Let's review","chapter three","tonight."] },
+      { sentence: "My sister likes making photo albums.", chunks: ["My sister","likes making","photo albums."] },
+      { sentence: "I sent an e-mail to my friend.", chunks: ["I","sent an e-mail","to my friend."] },
+      { sentence: "Put the letter in the envelope.", chunks: ["Put","the letter","in the envelope."] },
+      { sentence: "Learning new vocabulary is fun.", chunks: ["Learning","new vocabulary","is fun."] },
+      { sentence: "We have a reading test on Friday.", chunks: ["We have","a reading test","on Friday."] },
+      { sentence: "My grandpa still uses a typewriter.", chunks: ["My grandpa","still uses","a typewriter."] },
+      { sentence: "Can I have a sheet of paper?", chunks: ["Can I have","a sheet","of paper?"] },
+      { sentence: "I like learning about history.", chunks: ["I","like learning","about history."] },
+      { sentence: "Open your textbook to page ten.", chunks: ["Open","your textbook","to page ten."] },
+      { sentence: "Write the answer with a marker.", chunks: ["Write","the answer","with a marker."] },
+    ],
+    reading: [
+      {
+        passage: "Every Saturday I go to the library with my brother. He likes reading comics, but I enjoy reading stories about history. Last week I found a big dictionary on the top shelf of the bookcase. The librarian asked us to speak quietly, so we did not read aloud. Before we left, I borrowed two magazines.",
+        questions: [
+          { q: "What does the brother like reading?", choices: ["Comics","Poems","Dictionaries","Letters"], answer: "Comics" },
+          { q: "Where was the big dictionary?", choices: ["On the top shelf of the bookcase","On the floor","In a box","Next to the printer"], answer: "On the top shelf of the bookcase" },
+          { q: "Why didn't they read aloud?", choices: ["They had to speak quietly","They were tired","The books were boring","They forgot how"], answer: "They had to speak quietly" },
+          { q: "What did the writer borrow?", choices: ["Two magazines","Three comics","A dictionary","A typewriter"], answer: "Two magazines" },
+        ]
+      },
+      {
+        passage: "Grandma doesn't use e-mail, so she writes letters. Last week an envelope came with my name on it. Inside there was a letter and a red leaf from her garden. At the end she wrote a short poem about autumn. I want to write back, so I need to buy some stamps.",
+        questions: [
+          { q: "Why does Grandma write letters?", choices: ["She doesn't use e-mail","She likes stamps","Her phone is broken","She has a printer"], answer: "She doesn't use e-mail" },
+          { q: "What was inside the envelope?", choices: ["A letter and a red leaf","Some money","A photo album","A comic book"], answer: "A letter and a red leaf" },
+          { q: "What did Grandma write at the end?", choices: ["A short poem","A long story","A reading test","A list of words"], answer: "A short poem" },
+          { q: "What does the writer need to buy?", choices: ["Some stamps","A typewriter","Some ink","A magazine"], answer: "Some stamps" },
+        ]
+      },
+      {
+        passage: "My history report was due today. Last night I wanted to print it, but the printer was out of ink. Dad tried to fix it, but it still didn't work. In the end, I copied my report by hand on three sheets of paper. My teacher said the title was very good.",
+        questions: [
+          { q: "What did the writer want to print?", choices: ["A history report","A comic","A photo","A poem"], answer: "A history report" },
+          { q: "What was wrong with the printer?", choices: ["It was out of ink","It had no paper","It was too old","It was lost"], answer: "It was out of ink" },
+          { q: "What did the writer do in the end?", choices: ["Copied the report by hand","Bought a new printer","Wrote a poem","Used a typewriter"], answer: "Copied the report by hand" },
+          { q: "What did the teacher like?", choices: ["The title","The pictures","The colors","The envelope"], answer: "The title" },
+        ]
+      },
+      {
+        passage: "In Grandpa's room there is an old typewriter. He used it to write letters when he was young. Yesterday he showed me a photo album from 1975. In one photo, he was sitting at the typewriter and smiling. \"Typing was slow, but I loved it,\" he said.",
+        questions: [
+          { q: "What is in Grandpa's room?", choices: ["An old typewriter","A new printer","A comic book","A big dictionary"], answer: "An old typewriter" },
+          { q: "What did Grandpa use it for?", choices: ["To write letters","To print photos","To play games","To read stories"], answer: "To write letters" },
+          { q: "What did he show the writer?", choices: ["A photo album","A magazine","A textbook","A workbook"], answer: "A photo album" },
+          { q: "What did Grandpa say about typing?", choices: ["It was slow, but he loved it","It was fast and easy","It was boring","It was too hard"], answer: "It was slow, but he loved it" },
+        ]
+      },
+      {
+        passage: "In our farm game, the library and the museum are in the same building. When we find old books on the farm, we give them to the library and read them later. Each book has a title and a short story inside. My brother likes collecting them, and I like reading them aloud to him. We want to find all the books before winter.",
+        questions: [
+          { q: "What is in the same building as the library?", choices: ["The museum","A shop","A school","The farm"], answer: "The museum" },
+          { q: "What does each book have?", choices: ["A title and a short story","A map","A photo album","Nothing inside"], answer: "A title and a short story" },
+          { q: "What does the brother like doing?", choices: ["Collecting the books","Writing poems","Printing pages","Selling books"], answer: "Collecting the books" },
+          { q: "What do they want to do before winter?", choices: ["Find all the books","Build a bookcase","Buy a printer","Write a letter"], answer: "Find all the books" },
+        ]
+      },
+    ]
+  },
 };
 // 每篇短文的「沒教過的生字」中文解釋（index 對應該週 reading[]）
 const PASSAGE_GLOSSARY = {
@@ -1414,6 +1512,13 @@ const PASSAGE_GLOSSARY = {
     [{"en":"Hehuan Mountain","zh":"合歡山"},{"en":"central","zh":"中部的"},{"en":"below zero","zh":"零度以下"},{"en":"hot chocolate","zh":"熱可可"}],
     [{"en":"astronaut","zh":"太空人"},{"en":"air","zh":"空氣"},{"en":"circle","zh":"圓圈"}],
     [{"en":"crops","zh":"作物"},{"en":"hits","zh":"擊中"},{"en":"quiet","zh":"安靜的"}],
+  ],
+  "2026-10-1": [
+    [{"en":"librarian","zh":"圖書館員"},{"en":"shelf","zh":"架子"},{"en":"quietly","zh":"安靜地"},{"en":"borrowed","zh":"借了"}],
+    [{"en":"garden","zh":"花園"},{"en":"autumn","zh":"秋天"},{"en":"write back","zh":"回信"},{"en":"stamps","zh":"郵票"}],
+    [{"en":"report","zh":"報告"},{"en":"due","zh":"到期、該交"},{"en":"fix","zh":"修理"},{"en":"by hand","zh":"用手寫"}],
+    [{"en":"young","zh":"年輕的"},{"en":"typing","zh":"打字"},{"en":"smiling","zh":"微笑"}],
+    [{"en":"museum","zh":"博物館"},{"en":"collecting","zh":"收集"}],
   ],
 };
 function weekDrillFor(monthStr, weekN) { return WEEK_DRILLS[monthStr + "-" + weekN] || null; }
