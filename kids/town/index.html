@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>四季小鎮</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Silkscreen&display=swap">
+<style>
+:root{
+  --wood:#7a4b2a; --wood-d:#4e2e17; --wood-l:#a8703f; --panel:#fbf1d9; --panel2:#f3e2bb;
+  --ink:#2f2416; --muted:#7a6a52; --ap:#e0a526; --coin:#c9861f; --ok:#3f8a3a; --bad:#c0453a;
+  --grass:#8fcf6a; --grass2:#84c461; --soil:#9a6b43; --soil-wet:#6b4428; --water:#5aa3c8; --path:#e2cf9a;
+  --pixel:"Silkscreen","Courier New",monospace;
+}
+body.s-秋{--grass:#c9b25a;--grass2:#bea64f}
+body.s-冬{--grass:#e3ecef;--grass2:#d6e2e6}
+body.s-春{--grass:#8fcf6a;--grass2:#84c461}
+body.s-夏{--grass:#5fae4a;--grass2:#57a243}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:#5b3a20}
+body{margin:0;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;color:var(--ink);
+  background:repeating-linear-gradient(90deg,#5b3a20 0 38px,#62402a 38px 40px);min-height:100vh}
+.wrap{max-width:780px;margin:0 auto;padding:12px 12px 90px}
+header{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;color:#fbe7b8}
+header h1{margin:0;font-size:1.35rem;font-weight:900;letter-spacing:.06em;text-shadow:2px 2px 0 #2a170a}
+header a{color:#ffe08a;font-weight:700;text-decoration:none;font-size:.85rem}
+.who{display:flex;gap:6px;flex-wrap:wrap}
+.who button{border:2px solid #2a170a;background:#f3e2bb;color:var(--ink);font-weight:700;border-radius:6px;padding:4px 10px;cursor:pointer;font-family:inherit}
+.who button.on{background:var(--ap);}
+.frame{background:var(--panel);border:4px solid var(--wood);box-shadow:0 0 0 3px var(--wood-d),4px 6px 0 3px rgba(0,0,0,.35);border-radius:8px}
+.hud{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;padding:8px 12px;margin:10px 0}
+.hud .stat{display:flex;align-items:center;gap:6px;font-weight:700}
+.hud .num{font-family:var(--pixel);font-size:1.05rem}
+.bar{width:90px;height:12px;border:2px solid var(--wood-d);background:#3b2716;border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(#ffd25a,#e0a526)}
+.chip{font-size:.78rem;font-weight:900;padding:2px 9px;border-radius:4px;color:#fff;background:var(--wood)}
+.chip.s-秋{background:#b8742a}.chip.s-冬{background:#4f6f8f}.chip.s-春{background:#5e9a48}.chip.s-夏{background:#2e8c8a}
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:6px 0 10px}
+.tabs button{font-family:inherit;font-weight:900;font-size:.9rem;padding:9px 4px;border:3px solid var(--wood-d);background:var(--panel2);color:var(--ink);border-radius:8px 8px 4px 4px;cursor:pointer}
+.tabs button.on{background:var(--panel);transform:translateY(2px)}
+.tabs button .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--bad);margin-left:4px;vertical-align:middle}
+.pane{padding:12px}
+.pane[hidden]{display:none}
+h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
+.muted{color:var(--muted);font-size:.86rem}
+
+/* 農莊 */
+.map{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));grid-template-rows:repeat(12,minmax(0,1fr));background:var(--grass);aspect-ratio:16/12;width:100%;
+  border:3px solid var(--wood-d);border-radius:4px;overflow:hidden;position:relative;user-select:none}
+.cell{background:var(--grass);min-width:0;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:clamp(12px,3.2vw,22px);cursor:pointer}
+.cell.alt{background:var(--grass2)}
+.cell.water{background:var(--water);cursor:default}
+.cell.path{background:var(--path)}
+.cell.house{background:#c9533b;cursor:pointer}
+.cell.bin{background:#8a5a32}
+.cell.target{outline:2px dashed #fff;outline-offset:-3px}
+.cell:hover{filter:brightness(1.07)}
+.field{min-width:0;min-height:0;overflow:hidden;background:var(--soil);border:2px solid #5c3b20;display:flex;align-items:center;justify-content:center;flex-direction:column;
+  font-size:clamp(16px,4.6vw,30px);cursor:pointer;position:relative;z-index:1}
+.field.wet{background:var(--soil-wet)}
+.field.ripe{box-shadow:inset 0 0 0 3px #ffd25a}
+.field .pips{font-size:.4em;letter-spacing:2px;color:#ffe08a;font-family:var(--pixel)}
+.decor{background:var(--grass);display:flex;align-items:center;justify-content:center;font-size:clamp(14px,3.6vw,24px);cursor:pointer;z-index:1}
+.sel{outline:3px solid #fff;outline-offset:-3px;z-index:2}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn{font-family:inherit;font-weight:700;font-size:.92rem;border:3px solid var(--wood-d);background:#fff6e0;color:var(--ink);border-radius:8px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.go{background:#ffe08a}
+.btn .cost{font-family:var(--pixel);font-size:.8rem;color:var(--wood)}
+.sheet{margin-top:10px;padding:12px;background:#fff8e6;border:3px dashed var(--wood-l);border-radius:8px}
+.sheet[hidden]{display:none}
+.banner{background:#2f2416;color:#ffe08a;padding:8px 12px;border-radius:6px;margin-top:8px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.today{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 12px;margin-bottom:10px;background:#fff8e6;border:2px solid var(--wood-l);border-radius:8px}
+
+/* 商店 */
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.item{background:#fff8e6;border:2px solid var(--wood-l);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:4px}
+.item .top{display:flex;align-items:center;gap:8px}
+.item .em{font-size:1.6rem}
+.item .en{font-weight:900}
+.item .zh{font-size:.8rem;color:var(--muted)}
+.item .n{font-family:var(--pixel);font-size:.85rem}
+
+/* 信件 */
+.card{background:#fffdf4;border:2px solid var(--wood-l);border-radius:8px;padding:12px;margin-bottom:10px}
+.card.new{border-color:var(--ap);box-shadow:0 0 0 2px #ffe08a}
+.card .who2{font-weight:900;display:flex;align-items:center;gap:6px}
+.card .en{font-family:Georgia,"Times New Roman",serif;font-size:1.1rem;line-height:1.55;margin:8px 0}
+.card .zh{color:var(--muted);font-size:.88rem}
+.choice{display:block;width:100%;text-align:left;margin-top:6px;font-family:Georgia,serif;font-size:1rem}
+.card:not(.showzh) .zh,.card:not(.showzh) .zhc{display:none}
+.zhc{font-family:'Noto Sans TC',sans-serif;font-size:.82rem;color:var(--muted);margin-left:6px}
+.choice.picked{background:#e7f5df;border-color:var(--ok)}
+.story .line{font-family:Georgia,serif;font-size:1.05rem;margin:6px 0}
+.say{margin-top:10px;padding:10px;background:#fff3cf;border-radius:8px}
+.say .en{font-weight:900}
+.hearts{font-size:1.1rem;letter-spacing:2px}
+
+/* 小鎮 */
+.landmark{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.landmark .look{font-size:2.6rem;background:#fff8e6;border:2px solid var(--wood-l);border-radius:8px;padding:8px 14px}
+.need li{margin:2px 0}
+.need .miss{color:var(--bad)}
+.book h3{font-size:.95rem;margin:12px 0 4px}
+.book li{margin:3px 0;font-size:.9rem}
+.book .en{font-family:Georgia,serif;font-weight:700}
+
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#2f2416;color:#ffe08a;
+  padding:10px 16px;border-radius:10px;font-weight:700;z-index:50;max-width:90vw;box-shadow:0 4px 0 rgba(0,0,0,.3)}
+.toast[hidden]{display:none}
+:focus-visible{outline:3px solid #ffe08a;outline-offset:2px}
+@media (max-width:520px){.tabs button{font-size:.78rem;padding:8px 2px}.bar{width:60px}.wrap{padding:8px 8px 90px}.btn{font-size:.85rem;padding:7px 9px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🌾 四季小鎮</h1>
+    <div class="who" id="who"></div>
+    <a href="../index.html">← 回首頁</a>
+  </header>
+
+  <div class="frame hud" id="hud"></div>
+
+  <div class="tabs" role="tablist">
+    <button id="t-farm" class="on" onclick="tab('farm')">🌾 農莊</button>
+    <button id="t-shop" onclick="tab('shop')">🛒 商店</button>
+    <button id="t-mail" onclick="tab('mail')">📨 村民</button>
+    <button id="t-town" onclick="tab('town')">🏛️ 小鎮</button>
+  </div>
+
+  <div class="frame">
+    <section class="pane" id="p-farm">
+      <div class="today" id="today"></div>
+      <div class="map" id="map" aria-label="農莊地圖"></div>
+      <div class="banner" id="moveBar" hidden><span id="moveMsg"></span><button class="btn" onclick="cancelMove()">✕ 取消</button></div>
+      <div class="actions">
+        <button class="btn go" id="careBtn" onclick="doCare()">🚿 照料全部田 <span class="cost">1⚡</span></button>
+        <button class="btn" onclick="doGather('wood')">🪵 撿木材 <span class="cost">2⚡</span></button>
+        <button class="btn" onclick="doGather('stone')">🪨 撿石頭 <span class="cost">2⚡</span></button>
+      </div>
+      <div class="sheet" id="sheet" hidden></div>
+      <p class="muted">點空地可以開田或擺裝飾；點田可以播種、收成或搬家。作物要照料 3 天，每天照料一次，隔天才會長大。沒來的日子它會停在原地等你，不會枯掉。</p>
+    </section>
+
+    <section class="pane" id="p-shop" hidden></section>
+    <section class="pane" id="p-mail" hidden></section>
+    <section class="pane" id="p-town" hidden></section>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script src="../drills_list.js?v=202610050742"></script>
+<script src="town_core.js?v=202610050742"></script>
+<script src="town_content.js?v=202610050742"></script>
+<script>
+"use strict";
+const T = TownCore, C = TownContent;
+const STUDENTS = [["albert", "Albert"], ["jonathan", "Jonathan"], ["test", "🧪 測試"]];
+let student = null, st = null, sel = null, moving = null;
+const zhOpen = new Set();      // 按過「看中文」的卡片，重繪時保持展開
+
+// 今天：測試帳號可以用 ?date=YYYY-MM-DD 假裝是別天，才能試跨日成長
+function today() {
+  const q = new URLSearchParams(location.search).get("date");
+  if (student === "test" && q && /^\d{4}-\d{2}-\d{2}$/.test(q)) return q;
+  return T.ymd(new Date());
+}
+function storage() { return window.localStorage; }
+function progress() { try { return JSON.parse(storage().getItem("kidsProgress." + student) || "null"); } catch (e) { return null; } }
+// 存檔：別的分頁先存了更新的版本就不蓋過去，改成重新載入那一份
+function persist() {
+  try {
+    const r = T.save(storage(), st);
+    if (r.conflict) { reload("另一個分頁更新了進度，已經重新載入"); return false; }
+    return true;
+  } catch (e) { toast("存檔失敗：" + e.message); return false; }
+}
+function reload(msg) {
+  const r = T.load(storage(), student, today(), C);
+  st = r.st; sel = null; moving = null;
+  T.syncFromProgress(st, progress());
+  if (msg) toast(msg);
+  render();
+}
+
+function toast(msg) {
+  const t = document.getElementById("toast"); if (!msg) return;
+  t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => t.hidden = true, 2600);
+}
+function play(path) { try { new Audio(path).play().catch(() => {}); } catch (e) {} }
+const wordAudio = en => "../audio/words/" + String(en).toLowerCase().replace(/[^a-z0-9]+/g, "") + ".mp3";
+const townAudio = key => "../audio/town/" + key + ".mp3";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+function act(r) { if (r && r.msg) toast(r.msg); if (r && r.ok) persist(); render(); return r; }
+
+// ── 帳號 ─────────────────────────────────────────────────────────────
+function pick(name) {
+  student = name; try { storage().setItem("kidsCurrentStudent", name); } catch (e) {}
+  const r = T.load(storage(), student, today(), C);
+  st = r.st;
+  const got = T.syncFromProgress(st, progress());
+  persist();
+  if (r.problem) toast("原本的存檔讀不懂（" + r.problem + "），已經另存備份，先開一份新的");
+  else if (got) toast("做英文換來的體力：+" + got + " ⚡");
+  sel = null; moving = null; render();
+}
+
+// ── 畫面 ─────────────────────────────────────────────────────────────
+function render() {
+  document.getElementById("who").innerHTML = STUDENTS.map(([k, n]) =>
+    `<button class="${k === student ? "on" : ""}" onclick="pick('${k}')">${n}</button>`).join("");
+  if (!st) return;
+  const d = today(), season = T.season(d), wk = T.contentWeek(d), W = C.WEEKS[wk];
+  document.body.className = "s-" + season;
+  const e = st.energy;
+  document.getElementById("hud").innerHTML = `
+    <span class="stat">⚡ <span class="bar"><i style="width:${Math.round(e.wallet / T.AP_WALLET_CAP * 100)}%"></i></span>
+      <span class="num">${e.wallet}/${T.AP_WALLET_CAP}</span>${e.reserve ? `<span class="muted">＋儲備 <span class="num">${e.reserve}</span></span>` : ""}</span>
+    <span class="stat">🪙 <span class="num">${st.money}</span> <span class="muted">小鎮幣</span></span>
+    <span class="chip s-${season}">${season}季</span>
+    <span class="muted">本週：${W ? W.theme : "（內容準備中）"}</span>
+    ${student === "test" ? `<button class="btn" onclick="act(T.grant(st,'test:'+Date.now(),10,today()))">🧪 +10⚡</button>` : ""}`;
+  // 有新信的分頁加紅點
+  const unread = visibleCards().some(c => !st.cards[c.id]);
+  document.getElementById("t-mail").innerHTML = "📨 村民" + (unread ? '<span class="dot"></span>' : "");
+  renderToday(d); renderMap(d); renderSheet(d); renderShop(); renderMail(d); renderTown(d);
+}
+
+function renderToday(d) {
+  const used = (st.energy.byWeek || {})[T.apWeek(d)] || 0;
+  const got = Object.keys(st.energy.receipts).some(k => k.startsWith("daily:" + d + "::"));
+  const hasDrill = typeof DRILLS !== "undefined" && DRILLS.some(x => x.date === d);
+  const dow = new Date(d + "T12:00:00").getDay();
+  let h;
+  if (got) h = `<span>✅ 今天的英文做完了，體力已經補進來。</span><span class="muted">本週已拿 ${used}/${T.AP_WEEKLY_CAP}</span>`;
+  else if (hasDrill) h = `<span>📝 做完今天的每日練習，就能 +${T.AP_PER_TASK} ⚡</span><a class="btn go" href="../drills/daily_${d}.html">去做練習 →</a>`;
+  else if (dow === 6) h = `<span>🏁 週六沒有每日練習，可以去做本週總複習。體力用之前存的。</span><a class="btn" href="../weekly_review.html">本週總複習 →</a>`;
+  else h = `<span>😴 今天沒有每日練習，體力用之前存的。</span><span class="muted">本週已拿 ${used}/${T.AP_WEEKLY_CAP}</span>`;
+  document.getElementById("today").innerHTML = h;
+}
+
+function fieldAt(x, y) { return st.farm.fields.find(f => x >= f.x && x <= f.x + 1 && y >= f.y && y <= f.y + 1); }
+function decorAt(x, y) { return st.farm.decor.find(q => q.x === x && q.y === y); }
+
+function renderMap(d) {
+  let h = "";
+  for (let y = 0; y < T.H; y++) for (let x = 0; x < T.W; x++) {
+    const t = T.terrainAt(x, y);
+    if (fieldAt(x, y) || decorAt(x, y)) continue;
+    let cls = "cell" + ((x + y) % 2 ? " alt" : ""), em = "";
+    if (t === "water") { cls = "cell water"; em = (x * 7 + y) % 9 === 0 ? "〰️" : ""; }
+    else if (t === "house") { cls = "cell house"; em = (x === 0 && y === 0) ? "🏠" : ""; }
+    else if (t === "path") { cls = "cell path"; em = x === 15 ? "🪧" : ""; }
+    else if (t === "bin") { cls = "cell bin"; em = "📦"; }
+    if (moving && t === "free") cls += " target";
+    h += `<div class="${cls}" style="grid-column:${x + 1};grid-row:${y + 1}" onclick="tapCell(${x},${y})"></div>`.replace("></div>", `>${em}</div>`);
+  }
+  st.farm.fields.forEach(f => {
+    const g = T.growth(f, d), ripe = T.isRipe(f, d), wet = T.caredToday(f, d);
+    const c = f.crop && C.CROPS[f.crop];
+    const em = !f.crop ? "" : ripe ? c.emoji : ["🟤", "🌱", "🌿"][g];
+    const pips = f.crop && !ripe ? "●".repeat(g) + "○".repeat(T.GROW_DAYS - g) : "";
+    h += `<div class="field${wet ? " wet" : ""}${ripe ? " ripe" : ""}${sel === f.id ? " sel" : ""}"
+      style="grid-column:${f.x + 1}/span 2;grid-row:${f.y + 1}/span 2" onclick="tapThing('${f.id}')"
+      aria-label="${c ? c.zh : "空田"}">${em}${pips ? `<span class="pips">${pips}</span>` : ""}</div>`;
+  });
+  st.farm.decor.forEach(q => {
+    h += `<div class="decor${sel === q.id ? " sel" : ""}" style="grid-column:${q.x + 1};grid-row:${q.y + 1}" onclick="tapThing('${q.id}')">${C.DECOR[q.type].emoji}</div>`;
+  });
+  document.getElementById("map").innerHTML = h;
+  const growing = st.farm.fields.filter(f => f.crop && !T.isRipe(f, d) && !T.caredToday(f, d)).length;
+  const btn = document.getElementById("careBtn");
+  btn.disabled = !growing;
+  btn.innerHTML = growing ? `🚿 照料 ${growing} 片田 <span class="cost">1⚡</span>` : (st.farm.lastCare === d ? "🚿 今天照料過了" : "🚿 沒有要照料的田");
+  document.getElementById("moveBar").hidden = !moving;
+  if (moving) document.getElementById("moveMsg").textContent = "點一塊空地放下" + (moving.type ? "：" + C.DECOR[moving.type].zh : "");
+}
+
+function tapCell(x, y) {
+  const t = T.terrainAt(x, y);
+  if (moving) {
+    const r = moving.type ? T.placeDecor(st, moving.type, x, y) : T.move(st, moving.id, x, y);
+    if (r.ok) { moving = null; sel = null; }
+    return act(r);
+  }
+  if (t === "bin") { tab("shop"); return; }
+  if (t === "house") { sel = "house"; return render(); }
+  if (t !== "free") return;
+  sel = { x, y }; render();
+}
+function tapThing(id) { if (moving) return toast("要放在空地上"); sel = id; render(); }
+function cancelMove() { moving = null; render(); }
+
+function renderSheet(d) {
+  const el = document.getElementById("sheet");
+  if (!sel) { el.hidden = true; return; }
+  el.hidden = false;
+  if (sel === "house") {
+    el.innerHTML = `<h2>🏠 我的家</h2><p class="muted">做英文就像吃早餐，吃飽了才有體力下田。</p>
+      <button class="btn" onclick="sel=null;render()">關閉</button>`; return;
+  }
+  if (typeof sel === "object") {
+    const owned = Object.keys(st.decorOwned).filter(k => st.decorOwned[k] > 0);
+    el.innerHTML = `<h2>這塊空地</h2><div class="actions">
+      <button class="btn" onclick="act(T.addField(st,${sel.x},${sel.y}));sel=null;render()">🟫 開一片田（2×2，免費）</button>
+      ${owned.map(k => `<button class="btn" onclick="act(T.placeDecor(st,'${k}',${sel.x},${sel.y}));sel=null;render()">${C.DECOR[k].emoji} 擺${C.DECOR[k].zh}（${st.decorOwned[k]}）</button>`).join("")}
+      <button class="btn" onclick="sel=null;render()">關閉</button></div>
+      ${owned.length ? "" : '<p class="muted">裝飾可以在商店買。</p>'}`;
+    return;
+  }
+  const f = st.farm.fields.find(q => q.id === sel);
+  if (f) {
+    const c = f.crop && C.CROPS[f.crop], g = T.growth(f, d), ripe = T.isRipe(f, d);
+    let h = `<h2>${c ? `${c.emoji} ${c.en} <span class="muted">${c.zh}</span> <button class="btn" onclick="play(wordAudio('${c.en}'))">🔊</button>` : "🟫 空田"}</h2>`;
+    if (!f.crop) {
+      h += `<p class="muted">要種什麼？播種要 2 ⚡。</p><div class="actions">` + Object.keys(C.CROPS).map(k => {
+        const cc = C.CROPS[k], n = cc.freeSeed ? "免費" : `種子 ${st.inv[k + "_seed"] || 0}`;
+        return `<button class="btn" onclick="act(T.plant(st,'${f.id}','${k}',today(),C))">${cc.emoji} ${cc.en} <span class="cost">${n}</span></button>`;
+      }).join("") + `</div>`;
+    } else if (ripe) {
+      h += `<p>成熟了！收成不花體力。</p><div class="actions"><button class="btn go" onclick="act(T.harvest(st,'${f.id}',today(),C));sel=null;render()">🧺 收成</button></div>`;
+    } else {
+      h += `<p>照料了 ${g}/${T.GROW_DAYS} 天。${T.caredToday(f, d) ? "今天照料過了，明天會長大。" : "今天還沒照料。"}</p>`;
+    }
+    h += `<div class="actions"><button class="btn" onclick="moving={id:'${f.id}'};sel=null;render()">↔ 搬家（免費）</button><button class="btn" onclick="sel=null;render()">關閉</button></div>`;
+    el.innerHTML = h; return;
+  }
+  const q = st.farm.decor.find(z => z.id === sel);
+  if (q) {
+    const dd = C.DECOR[q.type];
+    el.innerHTML = `<h2>${dd.emoji} ${dd.en} <span class="muted">${dd.zh}</span> <button class="btn" onclick="play(wordAudio('${dd.en}'))">🔊</button></h2>
+      <div class="actions"><button class="btn" onclick="moving={id:'${q.id}'};sel=null;render()">↔ 搬家</button>
+      <button class="btn" onclick="act(T.storeDecor(st,'${q.id}'));sel=null;render()">🎒 收回背包</button>
+      <button class="btn" onclick="sel=null;render()">關閉</button></div>`;
+    return;
+  }
+  sel = null; el.hidden = true;
+}
+
+function doCare() { act(T.care(st, today(), C)); }
+function doGather(m) { act(T.gather(st, m, today(), C)); }
+
+// ── 商店與背包 ─────────────────────────────────────────────────────
+function renderShop() {
+  const sellRows = Object.keys(C.SELL).map(k => {
+    const c = C.CROPS[k], n = st.inv[k] || 0;
+    return `<div class="item"><div class="top"><span class="em">${c.emoji}</span><div><div class="en">${c.en}</div><div class="zh">${c.zh}　有 <span class="n">${n}</span></div></div></div>
+      <button class="btn" ${n ? "" : "disabled"} onclick="act(T.sell(st,'${k}',1,C))">賣 1 個 +${C.SELL[k]}🪙</button>
+      <button class="btn" ${n > 1 ? "" : "disabled"} onclick="act(T.sell(st,'${k}',${n},C))">全部賣</button></div>`;
+  }).join("");
+  const seeds = ["carrot", "potato"].map(k => {
+    const c = C.CROPS[k];
+    return `<div class="item"><div class="top"><span class="em">${c.emoji}</span><div><div class="en">${c.en} seeds</div><div class="zh">${c.zh}種子　有 <span class="n">${st.inv[k + "_seed"] || 0}</span></div></div></div>
+      <button class="btn" onclick="act(T.buy(st,'${k}_seed',1,C))">買 1 包 −${C.BUY[k + "_seed"]}🪙</button></div>`;
+  }).join("");
+  const decor = Object.keys(C.DECOR).map(k => {
+    const dd = C.DECOR[k];
+    return `<div class="item"><div class="top"><span class="em">${dd.emoji}</span><div><div class="en">${dd.en}</div><div class="zh">${dd.zh}　背包 <span class="n">${st.decorOwned[k] || 0}</span></div></div></div>
+      <button class="btn" onclick="act(T.buy(st,'${k}',1,C))">買 −${C.BUY[k]}🪙</button></div>`;
+  }).join("");
+  document.getElementById("p-shop").innerHTML = `
+    <h2>📦 出貨</h2><p class="muted">作物賣掉換小鎮幣。稻米種子永遠免費，錢花光也能重新開始。</p><div class="grid2">${sellRows}</div>
+    <h2 style="margin-top:16px">🌱 種子</h2><div class="grid2">${seeds}</div>
+    <h2 style="margin-top:16px">🌼 裝飾</h2><p class="muted">擺在農莊裡不會賺錢，純粹好看。買了可以隨時免費搬家或收回。</p><div class="grid2">${decor}</div>
+    <h2 style="margin-top:16px">🎒 材料</h2><p>🪵 wood <span class="n">${st.inv.wood}</span>　🪨 stone <span class="n">${st.inv.stone}</span></p>`;
+}
+
+// ── 村民與信件 ─────────────────────────────────────────────────────
+function visibleWeeks() { const wk = T.contentWeek(today()); return Object.keys(C.WEEKS).filter(k => k <= wk).sort().reverse(); }
+function visibleCards() { return visibleWeeks().flatMap(k => C.WEEKS[k].cards); }
+
+function renderMail(d) {
+  const weeks = visibleWeeks();
+  if (!weeks.length) { document.getElementById("p-mail").innerHTML = "<p>村民還沒搬來，下週再來看看。</p>"; return; }
+  let h = `<p class="hearts">${Object.keys(C.VILLAGERS).map(v => `${C.VILLAGERS[v].emoji} ${v} ${"❤".repeat(st.hearts[v] || 0) || "🤍"}`).join("　")}</p>`;
+  weeks.forEach(wk => {
+    const W = C.WEEKS[wk];
+    h += `<h2>${wk.slice(5).replace("-", "/")} 那週・${W.theme}</h2>`;
+    W.cards.forEach(c => h += cardHtml(c));
+    const s = W.story, open = st.cards[s.needCard], doneS = st.stories[s.id] && st.stories[s.id].done;
+    h += open ? storyHtml(s, doneS) : `<div class="card"><span class="muted">🔒 先讀 ${s.speaker} 的信，會解鎖一段小故事。</span></div>`;
+  });
+  document.getElementById("p-mail").innerHTML = h;
+}
+function cardHtml(c) {
+  const v = C.VILLAGERS[c.speaker], seen = st.cards[c.id], icon = { letter: "📨", talk: "💬", quest: "📋" }[c.type];
+  let h = `<div class="card${seen ? "" : " new"}${zhOpen.has(c.id) ? " showzh" : ""}"><div class="who2">${icon} ${v.emoji} ${c.speaker}${seen ? "" : ' <span class="chip">新</span>'}</div>
+    <div class="en">${esc(c.en)}</div>
+    <div class="actions"><button class="btn" onclick="play(townAudio('${c.id}'));markRead('${c.id}')">🔊 聽</button>
+    <button class="btn" onclick="showZh('${c.id}')">看中文</button></div>
+    <div class="zh">${esc(c.zh)}</div>`;
+  if (c.type === "talk") {
+    const chosen = seen && seen.choice;
+    h += c.choices.map(o => `<button class="btn choice${chosen === o.id ? " picked" : ""}" onclick="act(T.answer(st,findCard('${c.id}'),'${o.id}',today()));play(townAudio('${c.id}_${o.id}'))">
+      ${esc(o.en)}<span class="zhc">${esc(o.zh)}</span></button>`).join("");
+    if (chosen) h += `<p class="muted">每個回答都可以，${c.speaker} 會記得你的選擇。</p>`;
+  }
+  if (c.type === "quest") {
+    const q = c.quest, cr = C.CROPS[q.item], have = st.inv[q.item] || 0, doneQ = st.quests[c.id];
+    h += doneQ ? `<p>✅ 已經交給 ${c.speaker} 了</p>`
+      : `<div class="actions"><button class="btn go" ${have >= q.n ? "" : "disabled"} onclick="act(T.deliver(st,findCard('${c.id}'),today(),C))">交出 ${cr.emoji}×${q.n}（你有 ${have}）</button></div>`;
+  }
+  return h + `</div>`;
+}
+function storyHtml(s, doneS) {
+  return `<div class="card story${zhOpen.has(s.id) ? " showzh" : ""}"><div class="who2">✨ ${C.VILLAGERS[s.speaker].emoji} ${s.speaker} 的小故事：${s.title}</div>
+    <div class="actions"><button class="btn" onclick="play(townAudio('${s.id}'))">🔊 聽故事</button><button class="btn" onclick="showZh('${s.id}')">看中文</button></div>
+    ${s.lines.map(l => `<div class="line">${esc(l.en)}</div><div class="zh">${esc(l.zh)}</div>`).join("")}
+    <div class="say"><div>🗣️ 換你說最後一句，大聲念出來：</div><div class="en" style="font-family:Georgia,serif;font-size:1.15rem">${esc(s.speak)}</div>
+    <div class="zh">${esc(s.speakZh)}</div>
+    <div class="actions"><button class="btn" onclick="play(townAudio('${s.id}_say'))">🔊 先聽一次</button>
+    ${doneS ? `<span>✅ 完成了（${doneS}）</span>` : `<button class="btn go" onclick="act(T.finishStory(st,findStory('${s.id}'),today()))">我念好了 ❤</button>`}</div></div></div>`;
+}
+function findCard(id) { return visibleCards().find(c => c.id === id); }
+function findStory(id) { return Object.values(C.WEEKS).map(w => w.story).find(s => s.id === id); }
+function showZh(id) { zhOpen.add(id); if (findCard(id)) markRead(id); render(); }
+function markRead(id) { const c = findCard(id); if (c && !st.cards[id]) { T.readCard(st, c, today()); persist(); render(); } }
+
+// ── 小鎮與生活冊 ───────────────────────────────────────────────────
+function renderTown(d) {
+  const L = C.LANDMARKS.plaza, stage = st.town.plaza || 0, chk = T.canRepair(st, "plaza", C);
+  const next = L.stages[stage];
+  let h = `<h2>🏛️ ${L.zh}</h2><div class="landmark"><div class="look">${L.look[stage].split(" ")[0]}</div><div><b>${L.look[stage].split(" ").slice(1).join(" ")}</b>
+    <div class="muted">第 ${stage}/${L.stages.length} 階段</div></div></div>`;
+  if (next) {
+    h += `<p>下一步：${next.done}</p><ul class="need">
+      <li>⚡ 體力 ${next.ap}</li><li>🪙 小鎮幣 ${next.money}</li>
+      ${Object.keys(next.items).map(k => `<li>${C.NAME[k] || k} × ${next.items[k]}</li>`).join("")}</ul>
+      ${chk.ok ? "" : `<p class="muted">還缺：<span class="miss">${chk.missing.join("、")}</span></p>`}
+      <button class="btn go" ${chk.ok ? "" : "disabled"} onclick="act(T.repair(st,'plaza',today(),C))">🔨 修理</button>`;
+  } else h += `<p>✅ 小樣能修的部分都修好了。</p>`;
+  const weeks = Object.keys(st.book).sort().reverse();
+  h += `<h2 style="margin-top:18px">📖 四季生活冊</h2>` + (weeks.length ? `<div class="book">` + weeks.map(w =>
+    `<h3>${w.slice(5).replace("-", "/")} 那週（${T.season(w)}季）</h3><ul>${st.book[w].map(e =>
+      `<li>${e.date.slice(5)}　${esc(e.text)}${e.en ? `　<span class="en">${esc(e.en)}</span>` : ""}</li>`).join("")}</ul>`).join("") + `</div>`
+    : `<p class="muted">收成、讀信、跟村民聊天，都會記在這裡。</p>`);
+  h += `<h2 style="margin-top:18px">💾 存檔</h2><p class="muted">小樣的存檔只放在這台裝置上。換裝置前先匯出，到新裝置匯入。</p>
+    <div class="actions"><button class="btn" onclick="exportSave()">⬇ 匯出存檔</button>
+    <label class="btn">⬆ 匯入存檔<input type="file" accept="application/json" hidden onchange="importSave(this)"></label></div>`;
+  document.getElementById("p-town").innerHTML = h;
+}
+function exportSave() {
+  const blob = new Blob([JSON.stringify(st, null, 1)], { type: "application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  a.download = `town_${student}_${today()}.json`; a.click();
+}
+function importSave(inp) {
+  const f = inp.files[0]; if (!f) return;
+  f.text().then(t => {
+    const next = T.normalize(JSON.parse(t), student, today(), C);
+    next._baseRev = -1;                     // 匯入是有意覆蓋，不做分頁衝突檢查
+    T.save(storage(), next);                // 寫不進去會丟例外，原本的 st 不動
+    st = next; sel = null; moving = null; render(); toast("匯入完成");
+  }).catch(e => toast("匯入失敗：" + e.message + "（原本的存檔沒有被動到）"));
+  inp.value = "";
+}
+
+function tab(name) {
+  ["farm", "shop", "mail", "town"].forEach(k => {
+    document.getElementById("p-" + k).hidden = k !== name;
+    document.getElementById("t-" + k).classList.toggle("on", k === name);
+  });
+}
+
+function refresh() {
+  if (!st) return;
+  let cur = null;
+  try { cur = JSON.parse(storage().getItem(T.key(student)) || "null"); } catch (e) {}
+  if (cur && cur.rev > st._baseRev && st._baseRev >= 0) return reload("另一個分頁更新了進度，已經重新載入");
+  const got = T.syncFromProgress(st, progress());
+  if (got) { persist(); toast("做英文換來的體力：+" + got + " ⚡"); }
+  render();
+}
+document.addEventListener && document.addEventListener("visibilitychange", () => { if (!document.hidden) refresh(); });
+window.addEventListener && window.addEventListener("focus", refresh);
+let lastDay = null;
+setInterval(() => { const d = today(); if (d !== lastDay) { lastDay = d; refresh(); } }, 60000);
+
+(function boot() {
+  let last = null; try { last = storage().getItem("kidsCurrentStudent"); } catch (e) {}
+  pick(STUDENTS.some(s => s[0] === last) ? last : "test");
+})();
+</script>
+</body>
+</html>

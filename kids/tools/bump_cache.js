@@ -10,7 +10,7 @@ const KIDS = path.join(__dirname, "..");
 const TARGETS = ["daily_engine.js", "weekdrills.js", "structure_units.js",
   "curriculum.js", "worddex.js", "word_emoji.js", "word_image.js", "word_roots.js", "wordbank.js",
   "cloud_sync.js", "account_lock.js", "supabase_auth.js", "drills_list.js", "quizbank.js", "city_data.js",
-  "grammar_nodes.js", "grammar_plan.js", "vocab_units.js", "vocab_unit_plan.js", "weekly_bank.js", "week_key.js", "homework_tasks.js", "grammar_daily.js", "ai_review.js"];
+  "grammar_nodes.js", "grammar_plan.js", "vocab_units.js", "vocab_unit_plan.js", "weekly_bank.js", "week_key.js", "homework_tasks.js", "grammar_daily.js", "ai_review.js", "town_core.js", "town_content.js"];
 
 function bump(file) {
   let h = fs.readFileSync(file, "utf8"), changed = false;
@@ -34,6 +34,7 @@ fs.readdirSync(path.join(KIDS, "grammar_db", "lessons")).filter(f => f.endsWith(
 // 單字單元頁（build_vocab_units.js 產生）。同樣是「先 generate 再 bump」。
 fs.readdirSync(path.join(KIDS, "vocab_db", "units")).filter(f => f.endsWith(".html"))
   .forEach(f => pages.push(path.join(KIDS, "vocab_db", "units", f)));
+pages.push(path.join(KIDS, "town", "index.html"));
 ["index.html", "pusher.html", "pusher3d.html"].forEach(f => pages.push(path.join(KIDS, "..", "typing-game", f)));
 pages.forEach(f => { try { if (bump(f)) n++; } catch (e) {} });
 console.log(`✔ 戳記 v=${STAMP}，更新 ${n} 個頁面`);

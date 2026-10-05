@@ -1,0 +1,31 @@
+{
+ "outdir": "D:/english/kids/audio/town",
+ "voice": "af_heart",
+ "speed": 0.9,
+ "items": {
+  "w1-mail-mia": "Hi! I'm Mia. I work at the town library. We have a lot of comics and magazines. Come and read a story with me!",
+  "w1-mail-leo": "Hello, neighbor! I'm Leo. The plaza is old and dirty. Can you help me fix it? I need some wood and two crops.",
+  "w1-talk-mia": "Do you like reading aloud?",
+  "w1-talk-mia_a": "Yes, I like reading aloud.",
+  "w1-talk-mia_b": "I like reading quietly.",
+  "w1-talk-leo": "What do you want to grow on your farm?",
+  "w1-talk-leo_a": "I want to grow carrots.",
+  "w1-talk-leo_b": "I want to grow potatoes.",
+  "w1-talk-leo_c": "I want to grow rice.",
+  "w1-quest-mia": "We will have a reading party soon. Please bring two carrots for the snacks.",
+  "w1-story-mia": "Mia shows you an old book. \"This book has no title,\" she says. \"It is a story about a happy farm.\" \"Can you give it a title?\"",
+  "w1-story-mia_say": "Let's call it The Happy Farm.",
+  "w2-mail-leo": "Thank you for your help! I was nervous about the plaza, but now I feel calm. You are a lovely neighbor.",
+  "w2-mail-mia": "I'm sorry I was not at the library yesterday. I felt unhappy and wanted to be alone. Today I'm glad again!",
+  "w2-talk-leo": "How do you feel today?",
+  "w2-talk-leo_a": "I feel excited!",
+  "w2-talk-leo_b": "I feel a little bored.",
+  "w2-talk-leo_c": "I feel nervous.",
+  "w2-talk-mia": "Do you want to hear a joke?",
+  "w2-talk-mia_a": "Sure! I love jokes.",
+  "w2-talk-mia_b": "Maybe later, thanks.",
+  "w2-quest-leo": "My friends are coming to the plaza. Please bring two potatoes. We will cook together and laugh a lot.",
+  "w2-story-leo": "Leo is shouting at a broken chair. Then he stops and smiles. \"Sorry, I was angry,\" he says. \"Shouting does not fix chairs. Friends do.\"",
+  "w2-story-leo_say": "Let's fix it together."
+ }
+}
