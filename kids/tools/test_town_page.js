@@ -50,6 +50,13 @@ ok("兩份練習 → 20 ⚡", run("T.apTotal(st)") === 20, run("T.apTotal(st)"))
 day("2026-10-05");
 ok("今天做過練習會顯示 ✅", el("today").innerHTML.includes("✅"));
 
+console.log("\n── 測試帳號加體力 ──");
+ok("測試帳號看得到不限量按鈕", el("hud").innerHTML.includes("testBoost(50)"));
+const ap0 = run("T.apTotal(st)");
+for (let i = 0; i < 4; i++) run("testBoost(50)");
+ok("連按 4 次 +200，不受每週 70 限制", run("T.apTotal(st)") === ap0 + 200, run("T.apTotal(st)"));
+ok("體力條先補滿 60，其餘進儲備", G.st.energy.wallet === 60 && G.st.energy.reserve === ap0 + 200 - 60, G.st.energy);
+
 console.log("\n── 種田一輪 ──");
 const fid = run("st.farm.fields[0].id");
 run(`tapThing('${fid}')`);
@@ -117,6 +124,9 @@ console.log("\n── 存檔 ──");
 const saved = JSON.parse(store.get("kidsTown.v1.test"));
 ok("存檔寫進 localStorage", saved.schemaVersion === 1 && saved.hearts.Mia === 1);
 run("pick('albert')"); ok("換帳號是另一份存檔", G.st.student === "albert" && G.st.hearts.Mia === undefined);
+ok("一般帳號沒有不限量按鈕", !el("hud").innerHTML.includes("testBoost"));
+const apA = run("T.apTotal(st)"); run("testBoost(50)");
+ok("一般帳號就算呼叫也不會加", run("T.apTotal(st)") === apA);
 run("pick('test')"); ok("換回來進度還在", G.st.hearts.Mia === 1);
 
 console.log(`\n${fail === 0 ? "✅" : "❌"} pass ${pass} / fail ${fail}\n`);

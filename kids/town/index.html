@@ -154,9 +154,9 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 </div>
 <div class="toast" id="toast" hidden></div>
 
-<script src="../drills_list.js?v=202610050742"></script>
-<script src="town_core.js?v=202610050742"></script>
-<script src="town_content.js?v=202610050742"></script>
+<script src="../drills_list.js?v=202610050918"></script>
+<script src="town_core.js?v=202610050918"></script>
+<script src="town_content.js?v=202610050918"></script>
 <script>
 "use strict";
 const T = TownCore, C = TownContent;
@@ -197,6 +197,14 @@ const wordAudio = en => "../audio/words/" + String(en).toLowerCase().replace(/[^
 const townAudio = key => "../audio/town/" + key + ".mp3";
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
+// 測試帳號專用：直接加體力，不經過每週上限。先放進儲備，再補滿體力條（跟正式溢出規則一樣的顯示）
+function testBoost(n) {
+  if (student !== "test") return;
+  st.energy.reserve += n;
+  T.spend(st, 0);
+  st.rev++;
+  act({ ok: true, msg: "🧪 +" + n + " ⚡（測試用，不算週上限）" });
+}
 function act(r) { if (r && r.msg) toast(r.msg); if (r && r.ok) persist(); render(); return r; }
 
 // ── 帳號 ─────────────────────────────────────────────────────────────
@@ -225,7 +233,8 @@ function render() {
     <span class="stat">🪙 <span class="num">${st.money}</span> <span class="muted">小鎮幣</span></span>
     <span class="chip s-${season}">${season}季</span>
     <span class="muted">本週：${W ? W.theme : "（內容準備中）"}</span>
-    ${student === "test" ? `<button class="btn" onclick="act(T.grant(st,'test:'+Date.now(),10,today()))">🧪 +10⚡</button>` : ""}`;
+    ${student === "test" ? `<button class="btn" title="跟做一份練習一樣，算進每週 70 的上限" onclick="act(T.grant(st,'test:'+Date.now(),10,today()))">🧪 +10⚡</button>
+      <button class="btn" title="只有測試帳號有，不算進每週上限" onclick="testBoost(50)">🧪 +50⚡ 不限</button>` : ""}`;
   // 有新信的分頁加紅點
   const unread = visibleCards().some(c => !st.cards[c.id]);
   document.getElementById("t-mail").innerHTML = "📨 村民" + (unread ? '<span class="dot"></span>' : "");
