@@ -20,6 +20,10 @@ Object.values(C.WEEKS).forEach(w => {
   items[w.story.id] = w.story.lines.map(l => l.en).join(" ");
   items[w.story.id + "_say"] = w.story.speak;
 });
+Object.keys(C.VILLAGERS).forEach(v => {
+  items["villager_" + v] = C.VILLAGERS[v].intro;
+  items["villager_" + v + "_motto"] = C.VILLAGERS[v].motto;
+});
 const out = path.join(__dirname, "audio_town.json");
 fs.writeFileSync(out, JSON.stringify({
   outdir: path.join(__dirname, "..", "audio", "town").replace(/\\/g, "/"),

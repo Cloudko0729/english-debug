@@ -14,7 +14,7 @@ if (inline.length !== 1) throw new Error("預期一段內嵌 script，實際 " +
 const els = new Map();
 function el(id) {
   if (!els.has(id)) els.set(id, { id, innerHTML: "", textContent: "", hidden: false, disabled: false,
-    classList: { _s: new Set(), toggle(c, on) { on ? this._s.add(c) : this._s.delete(c); }, contains(c) { return this._s.has(c); } } });
+    classList: { _s: new Set(), add(c) { this._s.add(c); }, remove(c) { this._s.delete(c); }, toggle(c, on) { on ? this._s.add(c) : this._s.delete(c); }, contains(c) { return this._s.has(c); } } });
   return els.get(id);
 }
 const store = new Map();
@@ -94,6 +94,19 @@ ok("商店有賣稻米按鈕", el("p-shop").innerHTML.includes("賣 1 個"));
 ok("村民分頁看到本週的信", el("p-mail").innerHTML.includes("Mia"));
 ok("下週的卡片還看不到", !el("p-mail").innerHTML.includes("w2-mail-leo"));
 ok("小鎮分頁有廣場", el("p-town").innerHTML.includes("小鎮廣場"));
+
+console.log("\n── 村民人物卡 ──");
+run("tab('mail')");
+ok("村民分頁有可以點的頭像", el("p-mail").innerHTML.includes("openFolk('Mia')") && el("p-mail").innerHTML.includes("img/mia.png"));
+run("openFolk('Leo')");
+ok("點頭像打開人物卡", el("folkModal").hidden === false && el("folkBox").innerHTML.includes("carpenter"));
+ok("人物卡有喜歡和不喜歡", el("folkBox").innerHTML.includes("potatoes") && el("folkBox").innerHTML.includes("broken tools"));
+ok("人物卡有自我介紹語音", el("folkBox").innerHTML.includes("villager_Leo"));
+run("closeFolk()"); ok("可以關掉", el("folkModal").hidden === true);
+["Mia", "Leo"].forEach(v => ["", "_motto"].forEach(x => {
+  const f = "villager_" + v + x;
+  ok("音檔存在 " + f, fs.existsSync(path.join(__dirname, "..", "audio", "town", f + ".mp3")));
+}));
 
 console.log("\n── 村民 ──");
 run("markRead('w1-mail-mia')");

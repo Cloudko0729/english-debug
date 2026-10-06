@@ -105,6 +105,26 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 .say{margin-top:10px;padding:10px;background:#fff3cf;border-radius:8px}
 .say .en{font-weight:900}
 .hearts{font-size:1.1rem;letter-spacing:2px}
+.folks{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.folk{display:flex;align-items:center;gap:10px;background:#fffdf4;border:3px solid var(--wood-l);border-radius:10px;padding:6px 12px 6px 6px;cursor:pointer;font-family:inherit;color:var(--ink)}
+.folk:hover{border-color:var(--ap)}
+.folk .nm{font-weight:900;text-align:left}
+.folk .sm{font-size:.76rem;color:var(--muted);text-align:left}
+.pic{width:56px;height:56px;border-radius:8px;background:#fff8e6;border:2px solid var(--wood-d);image-rendering:pixelated;object-fit:cover;display:inline-flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0}
+.pic.sm{width:30px;height:30px;font-size:18px;border-width:1px;cursor:pointer}
+.modal{position:fixed;inset:0;background:rgba(30,18,8,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:40}
+.modal .box{max-width:520px;width:100%;max-height:90vh;overflow:auto;padding:16px}
+.modal .head{display:flex;gap:14px;align-items:center}
+.modal .pic{width:120px;height:120px;font-size:64px}
+.modal h3{margin:0;font-size:1.3rem}
+.modal .en{font-family:Georgia,"Times New Roman",serif;font-size:1.08rem;line-height:1.55;margin:10px 0 4px}
+.modal .zh{color:var(--muted);font-size:.88rem}
+.modal:not(.showzh) .zh{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chips span{background:#fff8e6;border:1px solid var(--wood-l);border-radius:999px;padding:2px 10px;font-size:.86rem}
+.chips span i{font-style:normal;color:var(--muted);font-size:.78rem;margin-left:4px}
+.modal:not(.showzh) .chips i{display:none}
+.lbl{font-weight:900;margin-top:10px;font-size:.9rem}
 
 /* 小鎮 */
 .landmark{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
@@ -162,10 +182,11 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
   </div>
 </div>
 <div class="toast" id="toast" hidden></div>
+<div class="modal" id="folkModal" hidden onclick="if(event.target===this)closeFolk()"><div class="frame box" id="folkBox"></div></div>
 
-<script src="../drills_list.js?v=202610060333"></script>
-<script src="town_core.js?v=202610060333"></script>
-<script src="town_content.js?v=202610060333"></script>
+<script src="../drills_list.js?v=202610060403"></script>
+<script src="town_core.js?v=202610060403"></script>
+<script src="town_content.js?v=202610060403"></script>
 <script>
 "use strict";
 const T = TownCore, C = TownContent;
@@ -427,7 +448,9 @@ function visibleCards() { return visibleWeeks().flatMap(k => C.WEEKS[k].cards); 
 function renderMail(d) {
   const weeks = visibleWeeks();
   if (!weeks.length) { document.getElementById("p-mail").innerHTML = "<p>村民還沒搬來，下週再來看看。</p>"; return; }
-  let h = `<p class="hearts">${Object.keys(C.VILLAGERS).map(v => `${C.VILLAGERS[v].emoji} ${v} ${"❤".repeat(st.hearts[v] || 0) || "🤍"}`).join("　")}</p>`;
+  let h = `<div class="folks">${Object.keys(C.VILLAGERS).map(v => { const p = C.VILLAGERS[v];
+    return `<button class="folk" onclick="openFolk('${v}')" aria-label="看 ${v} 的介紹">${pic(v)}<span><div class="nm">${v}</div>
+      <div class="sm">${p.role.zh}　<span class="hearts">${"❤️".repeat(st.hearts[v] || 0) || "🤍"}</span></div><div class="sm">點我看介紹</div></span></button>`; }).join("")}</div>`;
   weeks.forEach(wk => {
     const W = C.WEEKS[wk];
     h += `<h2>${wk.slice(5).replace("-", "/")} 那週・${W.theme}</h2>`;
@@ -439,7 +462,7 @@ function renderMail(d) {
 }
 function cardHtml(c) {
   const v = C.VILLAGERS[c.speaker], seen = st.cards[c.id], icon = { letter: "📨", talk: "💬", quest: "📋" }[c.type];
-  let h = `<div class="card${seen ? "" : " new"}${zhOpen.has(c.id) ? " showzh" : ""}"><div class="who2">${icon} ${v.emoji} ${c.speaker}${seen ? "" : ' <span class="chip">新</span>'}</div>
+  let h = `<div class="card${seen ? "" : " new"}${zhOpen.has(c.id) ? " showzh" : ""}"><div class="who2">${icon} <span onclick="openFolk('${c.speaker}')">${pic(c.speaker, true)}</span> ${c.speaker}${seen ? "" : ' <span class="chip">新</span>'}</div>
     <div class="en">${esc(c.en)}</div>
     <div class="actions"><button class="btn" onclick="play(townAudio('${c.id}'));markRead('${c.id}')">🔊 聽</button>
     <button class="btn" onclick="showZh('${c.id}')">看中文</button></div>
@@ -458,14 +481,43 @@ function cardHtml(c) {
   return h + `</div>`;
 }
 function storyHtml(s, doneS) {
-  return `<div class="card story${zhOpen.has(s.id) ? " showzh" : ""}"><div class="who2">✨ ${C.VILLAGERS[s.speaker].emoji} ${s.speaker} 的小故事：${s.title}</div>
+  return `<div class="card story${zhOpen.has(s.id) ? " showzh" : ""}"><div class="who2">✨ <span onclick="openFolk('${s.speaker}')">${pic(s.speaker, true)}</span> ${s.speaker} 的小故事：${s.title}</div>
     <div class="actions"><button class="btn" onclick="play(townAudio('${s.id}'))">🔊 聽故事</button><button class="btn" onclick="showZh('${s.id}')">看中文</button></div>
     ${s.lines.map(l => `<div class="line">${esc(l.en)}</div><div class="zh">${esc(l.zh)}</div>`).join("")}
     <div class="say"><div>🗣️ 換你說最後一句，大聲念出來：</div><div class="en" style="font-family:Georgia,serif;font-size:1.15rem">${esc(s.speak)}</div>
     <div class="zh">${esc(s.speakZh)}</div>
     <div class="actions"><button class="btn" onclick="play(townAudio('${s.id}_say'))">🔊 先聽一次</button>
-    ${doneS ? `<span>✅ 完成了（${doneS}）</span>` : `<button class="btn go" onclick="act(T.finishStory(st,findStory('${s.id}'),today()))">我念好了 ❤</button>`}</div></div></div>`;
+    ${doneS ? `<span>✅ 完成了（${doneS}）</span>` : `<button class="btn go" onclick="act(T.finishStory(st,findStory('${s.id}'),today()))">我念好了 ❤️</button>`}</div></div></div>`;
 }
+// 村民頭像：有圖用圖，圖還沒好或載入失敗就退回 emoji
+function pic(v, small) {
+  const p = C.VILLAGERS[v];
+  return `<img class="pic${small ? " sm" : ""}" src="${p.img}" alt="${v}" onerror="this.outerHTML='<span class=&quot;pic${small ? " sm" : ""}&quot;>${p.emoji}</span>'">`;
+}
+// 人物卡：英文自我介紹（有語音）、個性、喜歡與討厭的東西
+function openFolk(v) {
+  const p = C.VILLAGERS[v]; if (!p) return;
+  const chips = arr => arr.map(x => `<span>${x.emoji} ${esc(x.en)}<i>${esc(x.zh)}</i></span>`).join("");
+  const m = document.getElementById("folkModal");
+  m.classList.remove("showzh");
+  document.getElementById("folkBox").innerHTML = `
+    <div class="head">${pic(v)}<div><h3>${v}</h3><div>${esc(p.role.en)} <span class="muted">${esc(p.role.zh)}</span></div>
+      <div class="muted">📍 ${esc(p.place.en)}（${esc(p.place.zh)}）</div>
+      <div class="hearts">${"❤️".repeat(st.hearts[v] || 0) || "🤍"} <span class="muted">好感</span></div></div></div>
+    <div class="en">${esc(p.intro)}</div><div class="zh">${esc(p.introZh)}</div>
+    <div class="actions"><button class="btn" onclick="play(townAudio('villager_${v}'))">🔊 聽自我介紹</button>
+      <button class="btn" onclick="document.getElementById('folkModal').classList.add('showzh')">看中文</button></div>
+    <div class="lbl">個性</div><div class="chips">${chips(p.traits.map(t => ({ emoji: "✨", en: t.en, zh: t.zh })))}</div>
+    <div class="lbl">💛 喜歡</div><div class="chips">${chips(p.likes)}</div>
+    <div class="lbl">💢 不喜歡</div><div class="chips">${chips(p.dislikes)}</div>
+    <div class="lbl">口頭禪</div><div class="en">“${esc(p.motto)}”</div><div class="zh">${esc(p.mottoZh)}</div>
+    <div class="actions"><button class="btn" onclick="play(townAudio('villager_${v}_motto'))">🔊 聽口頭禪</button></div>
+    <p class="muted" style="margin-top:10px">${esc(p.about)}</p>
+    <div class="actions"><button class="btn go" onclick="closeFolk()">關閉</button></div>`;
+  m.hidden = false;
+}
+function closeFolk() { document.getElementById("folkModal").hidden = true; }
+
 function findCard(id) { return visibleCards().find(c => c.id === id); }
 function findStory(id) { return Object.values(C.WEEKS).map(w => w.story).find(s => s.id === id); }
 function showZh(id) { zhOpen.add(id); if (findCard(id)) markRead(id); render(); }

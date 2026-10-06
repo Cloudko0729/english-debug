@@ -34,9 +34,41 @@
     },
   };
 
+  // 村民設定。個性要跟已經寫好的信和故事對得上：
+  //   Mia 在第二週的信裡說過心情不好、想一個人靜一靜 → 溫和、愛書、需要獨處
+  //   Leo 在故事裡對椅子大吼、接著道歉 → 熱情、急性子、很快認錯、喜歡熱鬧
+  // likes / dislikes 盡量用遊戲裡有的東西（item），之後做送禮時直接沿用。
   var VILLAGERS = {
-    Mia: { emoji: "👩‍🦰", zh: "Mia，圖書館員" },
-    Leo: { emoji: "🧔", zh: "Leo，木匠" },
+    Mia: {
+      emoji: "👩‍🦰", img: "img/mia.png", zh: "Mia，圖書館員",
+      role: { en: "librarian", zh: "圖書館員" }, place: { en: "the town library", zh: "小鎮圖書館" },
+      traits: [{ en: "gentle", zh: "溫和" }, { en: "curious", zh: "好奇" }, { en: "a little shy", zh: "有點害羞" }],
+      likes: [
+        { emoji: "📚", en: "books", zh: "書" },
+        { emoji: "🥕", en: "carrots", zh: "紅蘿蔔", item: "carrot" },
+        { emoji: "🌼", en: "flowers", zh: "花", item: "flowers" },
+        { emoji: "🌧️", en: "rainy days", zh: "下雨天" } ],
+      dislikes: [{ emoji: "📢", en: "loud noise", zh: "很吵的聲音" }, { emoji: "📄", en: "torn pages", zh: "破掉的書頁" }],
+      intro: "Hi, I'm Mia. I'm the town librarian. I love quiet rainy days and a good story. I'm a little shy, but I always want to hear about your day.",
+      introZh: "嗨，我是 Mia，小鎮的圖書館員。我喜歡安靜的下雨天和好看的故事。我有點害羞，但我一直都很想聽你說說你的一天。",
+      motto: "Every book is a new friend.", mottoZh: "每一本書都是一個新朋友。",
+      about: "Mia 從小就在圖書館長大。她最喜歡下雨天，因為大家會躲進來看書。人多的時候她會有點緊張，需要一個人安靜一下；但只要有人問她推薦哪本書，她就會笑得很開心。",
+    },
+    Leo: {
+      emoji: "🧔", img: "img/leo.png", zh: "Leo，木匠",
+      role: { en: "carpenter", zh: "木匠" }, place: { en: "the plaza workshop", zh: "廣場旁的工坊" },
+      traits: [{ en: "cheerful", zh: "開朗" }, { en: "hard-working", zh: "認真" }, { en: "a little hot-tempered", zh: "有點急性子" }],
+      likes: [
+        { emoji: "🪵", en: "wood", zh: "木材", item: "wood" },
+        { emoji: "🥔", en: "potatoes", zh: "馬鈴薯", item: "potato" },
+        { emoji: "🪑", en: "making chairs", zh: "做椅子", item: "bench" },
+        { emoji: "😂", en: "jokes", zh: "笑話" } ],
+      dislikes: [{ emoji: "🔧", en: "broken tools", zh: "壞掉的工具" }, { emoji: "🍽️", en: "eating alone", zh: "一個人吃飯" }],
+      intro: "Hello! I'm Leo, the town carpenter. I can fix almost anything with my hammer. I get angry fast, but I say sorry fast too!",
+      introZh: "哈囉！我是 Leo，小鎮的木匠。我拿著鐵鎚幾乎什麼都修得好。我很容易生氣，但我道歉也很快！",
+      motto: "Let's fix it together!", mottoZh: "我們一起把它修好吧！",
+      about: "Leo 是小鎮最愛熱鬧的人，每次修好東西都要找朋友來一起吃馬鈴薯慶祝。他脾氣來得快去得也快，生氣完會馬上說對不起。他最大的心願是把舊廣場修成大家都想來的地方。",
+    },
   };
 
   // 每週 5 張卡（2 信、2 對話、1 委託）＋ 1 段心事件。週次用課表週的週日。

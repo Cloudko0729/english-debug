@@ -26,6 +26,10 @@
   "w2-talk-mia_b": "Maybe later, thanks.",
   "w2-quest-leo": "My friends are coming to the plaza. Please bring two potatoes. We will cook together and laugh a lot.",
   "w2-story-leo": "Leo is shouting at a broken chair. Then he stops and smiles. \"Sorry, I was angry,\" he says. \"Shouting does not fix chairs. Friends do.\"",
-  "w2-story-leo_say": "Let's fix it together."
+  "w2-story-leo_say": "Let's fix it together.",
+  "villager_Mia": "Hi, I'm Mia. I'm the town librarian. I love quiet rainy days and a good story. I'm a little shy, but I always want to hear about your day.",
+  "villager_Mia_motto": "Every book is a new friend.",
+  "villager_Leo": "Hello! I'm Leo, the town carpenter. I can fix almost anything with my hammer. I get angry fast, but I say sorry fast too!",
+  "villager_Leo_motto": "Let's fix it together!"
  }
 }

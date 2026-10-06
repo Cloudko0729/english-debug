@@ -350,7 +350,7 @@
     st.stories[story.id].done = today;
     st.hearts[story.speaker] = (st.hearts[story.speaker] || 0) + 1;
     note(st, today, "和 " + story.speaker + " 的故事：" + story.title, story.speak);
-    return done(st, story.speaker + " 的心亮了一顆 ❤");
+    return done(st, story.speaker + " 的心亮了一顆 ❤️");
   }
 
   // ── 存檔 ────────────────────────────────────────────────────────────
