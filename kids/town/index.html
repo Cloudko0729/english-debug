@@ -73,6 +73,13 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 .sheet{margin-top:10px;padding:12px;background:#fff8e6;border:3px dashed var(--wood-l);border-radius:8px}
 .sheet[hidden]{display:none}
 .banner{background:#2f2416;color:#ffe08a;padding:8px 12px;border-radius:6px;margin-top:8px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.goal{display:block;text-decoration:none;color:inherit;padding:10px 12px;margin-bottom:10px;background:#fff3cf;border:2px solid var(--ap);border-radius:8px;cursor:pointer}
+.goal .ttl{font-weight:900}
+.goal .parts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.goal .pt{font-size:.82rem;font-weight:700;border-radius:999px;padding:2px 9px;background:#fff;border:1px solid var(--wood-l)}
+.goal .pt.ok{background:#e7f5df;border-color:#9fd38f;color:var(--ok)}
+.goal .foot{font-size:.78rem;color:var(--muted);margin-top:6px}
+.hint{padding:9px 12px;margin-bottom:10px;background:#e8f4ff;border:2px dashed #6aa9e0;border-radius:8px;font-weight:700}
 .today{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 12px;margin-bottom:10px;background:#fff8e6;border:2px solid var(--wood-l);border-radius:8px}
 
 /* 商店 */
@@ -136,12 +143,14 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
   <div class="frame">
     <section class="pane" id="p-farm">
       <div class="today" id="today"></div>
+      <div id="goal"></div>
+      <div class="hint" id="hint" hidden></div>
       <div class="map" id="map" aria-label="農莊地圖"></div>
       <div class="banner" id="moveBar" hidden><span id="moveMsg"></span><button class="btn" onclick="cancelMove()">✕ 取消</button></div>
       <div class="actions">
         <button class="btn go" id="careBtn" onclick="doCare()">🚿 照料全部田 <span class="cost">1⚡</span></button>
-        <button class="btn" onclick="doGather('wood')">🪵 撿木材 <span class="cost">2⚡</span></button>
-        <button class="btn" onclick="doGather('stone')">🪨 撿石頭 <span class="cost">2⚡</span></button>
+        <button class="btn" id="woodBtn" onclick="doGather('wood')"></button>
+        <button class="btn" id="stoneBtn" onclick="doGather('stone')"></button>
       </div>
       <div class="sheet" id="sheet" hidden></div>
       <p class="muted">點空地可以開田或擺裝飾；點田可以播種、收成或搬家。作物要照料 3 天，每天照料一次，隔天才會長大。沒來的日子它會停在原地等你，不會枯掉。</p>
@@ -154,9 +163,9 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 </div>
 <div class="toast" id="toast" hidden></div>
 
-<script src="../drills_list.js?v=202610060104"></script>
-<script src="town_core.js?v=202610060104"></script>
-<script src="town_content.js?v=202610060104"></script>
+<script src="../drills_list.js?v=202610060333"></script>
+<script src="town_core.js?v=202610060333"></script>
+<script src="town_content.js?v=202610060333"></script>
 <script>
 "use strict";
 const T = TownCore, C = TownContent;
@@ -229,7 +238,7 @@ function render() {
   const e = st.energy;
   document.getElementById("hud").innerHTML = `
     <span class="stat">⚡ <span class="bar"><i style="width:${Math.round(e.wallet / T.AP_WALLET_CAP * 100)}%"></i></span>
-      <span class="num">${e.wallet}/${T.AP_WALLET_CAP}</span>${e.reserve ? `<span class="muted">＋儲備 <span class="num">${e.reserve}</span></span>` : ""}</span>
+      <span class="num" title="用不完的會存進儲備，不會不見">${e.wallet}/${T.AP_WALLET_CAP}</span>${e.reserve ? `<span class="muted">＋儲備 <span class="num">${e.reserve}</span></span>` : ""}</span>
     <span class="stat">🪙 <span class="num">${st.money}</span> <span class="muted">小鎮幣</span></span>
     <span class="chip s-${season}">${season}季</span>
     <span class="muted">本週：${W ? W.theme : "（內容準備中）"}</span>
@@ -238,7 +247,7 @@ function render() {
   // 有新信的分頁加紅點
   const unread = visibleCards().some(c => !st.cards[c.id]);
   document.getElementById("t-mail").innerHTML = "📨 村民" + (unread ? '<span class="dot"></span>' : "");
-  renderToday(d); renderMap(d); renderSheet(d); renderShop(); renderMail(d); renderTown(d);
+  renderToday(d); renderGoal(); renderHint(); renderGather(); renderMap(d); renderSheet(d); renderShop(); renderMail(d); renderTown(d);
 }
 
 function renderToday(d) {
@@ -252,6 +261,37 @@ function renderToday(d) {
   else if (dow === 6) h = `<span>🏁 週六沒有每日練習，可以去做本週總複習。體力用之前存的。</span><a class="btn" href="../weekly_review.html">本週總複習 →</a>`;
   else h = `<span>😴 今天沒有每日練習，體力用之前存的。</span><span class="muted">本週已拿 ${used}/${T.AP_WEEKLY_CAP}</span>`;
   document.getElementById("today").innerHTML = h;
+}
+
+// 下一個目標：孩子每次打開農莊都知道自己在攢什麼
+const PART = { ap: "⚡ 體力", money: "🪙 小鎮幣", crop: "🧺 作物", wood: "🪵 木材", stone: "🪨 石頭" };
+function renderGoal() {
+  const g = T.nextGoal(st, C), el = document.getElementById("goal");
+  if (!g) { el.innerHTML = `<div class="goal">🎉 廣場修好了！下一個地標還在準備中。</div>`; return; }
+  el.innerHTML = `<div class="goal" onclick="tab('town')" role="button" tabindex="0">
+    <div class="ttl">🎯 下一個目標：${g.name}第 ${g.stage + 1} 階${g.ready ? "　✅ 材料都齊了，點這裡去修！" : ""}</div>
+    <div class="parts">${g.parts.map(x => `<span class="pt${x.have >= x.need ? " ok" : ""}">${PART[x.k] || x.k} ${Math.min(x.have, x.need)}/${x.need}</span>`).join("")}</div>
+    <div class="foot">⚡ 用不完的體力會存進儲備，永遠不會不見。不用急著花掉。</div></div>`;
+}
+// 第一次玩：還沒收成過、田也還沒開第二片時，告訴他田可以自己開
+function renderHint() {
+  const el = document.getElementById("hint");
+  const fresh = !st.firstHarvest && st.farm.fields.length < 2;
+  el.hidden = !fresh;
+  if (fresh) el.innerHTML = st.farm.fields.some(f => f.crop)
+    ? "👆 點<b>綠色空地</b>可以再開一片田，最多 8 片。田越多，一次收成越多。"
+    : "👆 先點<b>咖啡色的田</b>種稻米（種子免費）。再點<b>綠色空地</b>可以多開幾片田，最多 8 片。";
+}
+// 撿材料：寫出用途和進度，夠了就不給撿
+function renderGather() {
+  [["wood", "woodBtn", "🪵", "木材"], ["stone", "stoneBtn", "🪨", "石頭"]].forEach(([k, id, em, zh]) => {
+    const need = T.materialNeed(st, k, C), have = st.inv[k] || 0, b = document.getElementById(id);
+    if (!need) { b.hidden = true; return; }
+    b.hidden = false;
+    b.disabled = have >= need;
+    b.innerHTML = have >= need ? `${em} ${zh}夠了 ✓ <span class="cost">${have}/${need}</span>`
+      : `${em} 撿${zh}（修廣場用 ${have}/${need}） <span class="cost">2⚡</span>`;
+  });
 }
 
 function fieldAt(x, y) { return st.farm.fields.find(f => x >= f.x && x <= f.x + 1 && y >= f.y && y <= f.y + 1); }

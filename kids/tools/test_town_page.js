@@ -57,6 +57,12 @@ for (let i = 0; i < 4; i++) run("testBoost(50)");
 ok("連按 4 次 +200，不受每週 70 限制", run("T.apTotal(st)") === ap0 + 200, run("T.apTotal(st)"));
 ok("體力條先補滿 60，其餘進儲備", G.st.energy.wallet === 60 && G.st.energy.reserve === ap0 + 200 - 60, G.st.energy);
 
+console.log("\n── 新手提示與目標卡 ──");
+ok("第一次玩有開田提示", el("hint").hidden === false && el("hint").innerHTML.includes("綠色空地"));
+ok("農莊頁有下一個目標", el("goal").innerHTML.includes("下一個目標") && el("goal").innerHTML.includes("🪵 木材 0/5"));
+ok("目標卡說明體力會存起來", el("goal").innerHTML.includes("不會不見"));
+ok("撿木材按鈕寫出用途", el("woodBtn").innerHTML.includes("修廣場用 0/5"));
+
 console.log("\n── 種田一輪 ──");
 const fid = run("st.farm.fields[0].id");
 run(`tapThing('${fid}')`);

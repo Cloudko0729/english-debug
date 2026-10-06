@@ -117,6 +117,23 @@ console.log("\n── 買賣與委託不加成 ──");
   ok("同一個委託不能交兩次", !T.deliver(st, card, "2026-10-05", C).ok);
 }
 
+console.log("\n── 材料夠了就不給撿 ──");
+{
+  const st = fresh(); give(st, 7);
+  eq("廣場兩階總共要 5 木材", T.materialNeed(st, "wood", C), 5);
+  for (let i = 0; i < 5; i++) T.gather(st, "wood", "2026-10-05", C);
+  const ap = T.apTotal(st);
+  ok("第 6 份木材不給撿", !T.gather(st, "wood", "2026-10-05", C).ok);
+  eq("也不扣體力", T.apTotal(st), ap);
+  ok("石頭還能撿", T.gather(st, "stone", "2026-10-05", C).ok);
+  st.money = 20; st.inv.rice = 2; T.repair(st, "plaza", "2026-10-05", C);
+  eq("修完第一階後就不再需要木材", T.materialNeed(st, "wood", C), 0);
+  const g = T.nextGoal(st, C);
+  ok("下一個目標是第 2 階、要石頭", g.stage === 1 && g.parts.some(x => x.k === "stone" && x.need === 5 && x.have === 1), g);
+  st.town.plaza = 2;
+  ok("全部修完就沒有下一個目標", T.nextGoal(st, C) === null);
+}
+
 console.log("\n── 廣場修復 ──");
 {
   const st = fresh(); give(st, 1); st.money = 25; st.inv.rice = 2; st.inv.wood = 4;

@@ -238,8 +238,28 @@
     else st.inv[item] = (st.inv[item] || 0) + n;
     return done(st, "買好了");
   }
+  // 還沒修完的地標，總共還要多少某種材料（從目前階段算到最後一階）
+  function materialNeed(st, item, C) {
+    var need = 0;
+    Object.keys(C.LANDMARKS).forEach(function (k) {
+      C.LANDMARKS[k].stages.slice(st.town[k] || 0).forEach(function (sg) { need += sg.items[item] || 0; });
+    });
+    return need;
+  }
+  // 下一個目標：第一個還沒修完的地標的下一階，以及每樣東西的進度
+  function nextGoal(st, C) {
+    var key = Object.keys(C.LANDMARKS).find(function (k) { return (st.town[k] || 0) < C.LANDMARKS[k].stages.length; });
+    if (!key) return null;
+    var L = C.LANDMARKS[key], stage = st.town[key] || 0, need = L.stages[stage];
+    var crops = st.inv.rice + st.inv.carrot + st.inv.potato;
+    var parts = [{ k: "ap", have: apTotal(st), need: need.ap }, { k: "money", have: st.money, need: need.money }];
+    Object.keys(need.items).forEach(function (k) { parts.push({ k: k, have: k === "crop" ? crops : (st.inv[k] || 0), need: need.items[k] }); });
+    return { key: key, stage: stage, total: L.stages.length, name: L.zh, done: need.done, parts: parts,
+             ready: parts.every(function (x) { return x.have >= x.need; }) };
+  }
   function gather(st, material, today, C) {
     if (material !== "wood" && material !== "stone") return fail("沒有這種材料");
+    if ((st.inv[material] || 0) >= materialNeed(st, material, C)) return fail((C.NAME[material] || material) + "已經夠了，先去修廣場吧");
     if (!spend(st, C.COST.gather)) return fail("體力不夠（採集要 " + C.COST.gather + "）");
     st.inv[material]++;
     return done(st, "採到 1 份 " + material);
@@ -435,7 +455,7 @@
     growth: growth, isRipe: isRipe, caredToday: caredToday,
     addField: addField, move: move, plant: plant, care: care, harvest: harvest,
     sell: sell, buy: buy, gather: gather, placeDecor: placeDecor, storeDecor: storeDecor,
-    canRepair: canRepair, repair: repair,
+    canRepair: canRepair, repair: repair, materialNeed: materialNeed, nextGoal: nextGoal,
     readCard: readCard, answer: answer, deliver: deliver, finishStory: finishStory,
     key: key, load: load, save: save, normalize: normalize, weekOpen: weekOpen,
   };
