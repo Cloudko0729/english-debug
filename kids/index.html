@@ -97,6 +97,17 @@
     /* 完成（已領獎）打勾 */
     .card[data-done="1"] { border-color: #2fbf71 !important; background: #f3fcf7 !important; }
     .card[data-done="1"] .card-title::before { content: "✅ "; }
+    /* 還沒完成：橘框＋一行提醒 */
+    .card[data-todo="1"] { border-color: #f2994a !important; background: #fff8ef !important; }
+    .todo-hint { font-size: .76rem; font-weight: 700; color: #c2410c; margin-top: 3px; }
+    #todoBar { max-width: 640px; margin: 10px auto 0; padding: 0 16px; display: none; }
+    #todoBar .box { background: #fff; border-radius: 12px; padding: 10px 14px; box-shadow: 0 1px 4px rgba(0,0,0,.08); font-size: .86rem; }
+    #todoBar .row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 3px 0; }
+    #todoBar .lab { font-weight: 700; color: #555; min-width: 4.5em; }
+    #todoBar a { text-decoration: none; border-radius: 999px; padding: 2px 10px; font-weight: 700; font-size: .8rem; }
+    #todoBar a.todo { background: #ffedd5; color: #c2410c; border: 1px solid #fdba74; }
+    #todoBar a.ok { background: #e7f8ee; color: #1f8a4c; border: 1px solid #a7e3c0; }
+    #todoBar .all { color: #1f8a4c; font-weight: 700; }
     /* 時間鎖：未開放的練習 */
     .card.locked { opacity: .55; pointer-events: none; filter: grayscale(.4); }
     .lock-badge { font-size: .7rem; font-weight: 700; background: #9aa0ad; color: #fff; border-radius: 5px; padding: 2px 7px; white-space: nowrap; }
@@ -126,6 +137,7 @@
   <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
 </div>
 <div id="statsRow"></div>
+<div id="todoBar"></div>
 <div style="text-align:center;margin-top:8px">
   <a href="parent.html" style="font-size:.74rem;color:#999;text-decoration:none">👪 家長：進度總覽</a>
   <span style="color:#ccc;font-size:.74rem">　·　</span>
@@ -152,7 +164,7 @@
   <h2>每日練習</h2>
   <div class="card-list">
 
-    <a class="card" href="diagnostic_grade6_adaptive.html" style="border:2px solid #b67a17;background:linear-gradient(135deg,#fff5d9,#f1f8f3)">
+    <a class="card" href="diagnostic_grade6_adaptive.html" id="diagCard" style="border:2px solid #b67a17;background:linear-gradient(135deg,#fff5d9,#f1f8f3)">
       <div class="card-left">
         <div class="card-icon" style="background:#ffe4a3;font-size:1.3rem">🧭</div>
         <div>
@@ -325,15 +337,16 @@
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202610050918"></script>
-<script src="account_lock.js?v=202610050918"></script>
-<script src="supabase_auth.js?v=202610050918"></script>
-<script src="drills_list.js?v=202610050918"></script>
-<script src="grammar_nodes.js?v=202610050918"></script>
-<script src="grammar_plan.js?v=202610050918"></script>
-<script src="vocab_units.js?v=202610050918"></script>
-<script src="weekly_bank.js?v=202610050918"></script>
-<script src="vocab_unit_plan.js?v=202610050918"></script>
+<script src="cloud_sync.js?v=202610060104"></script>
+<script src="account_lock.js?v=202610060104"></script>
+<script src="supabase_auth.js?v=202610060104"></script>
+<script src="week_key.js?v=202610060104"></script>
+<script src="drills_list.js?v=202610060104"></script>
+<script src="grammar_nodes.js?v=202610060104"></script>
+<script src="grammar_plan.js?v=202610060104"></script>
+<script src="vocab_units.js?v=202610060104"></script>
+<script src="weekly_bank.js?v=202610060104"></script>
+<script src="vocab_unit_plan.js?v=202610060104"></script>
 <script>
 let _homeSynced = false;
 function pickStudent(name) {
@@ -353,6 +366,7 @@ function pickStudent(name) {
   if (peek) peek.textContent = coins;
   markDone(p);
   drawMonthCard(p);
+  drawTasks(p);
   lockFutureDrills();   // 切換帳號後重新評估日期鎖（test 解鎖、其他鎖回）
   // 訪客不能玩小島：把島嶼卡灰掉
   const isGuest = name === "guest";
@@ -457,6 +471,88 @@ function markDone(p) {
   document.querySelectorAll(".card[data-claim-today]").forEach(c => {
     c.dataset.done = claimed[today + "::" + c.dataset.claimToday] ? "1" : "0";
   });
+}
+
+// ── 完成打勾、未完成提醒 ─────────────────────────────────────────────
+// 全部從既有的學習紀錄推算，不另外存東西：
+//   每日練習／單字測驗 → coins.claimedDrills；作業 → homework.weeks；週測 → weeklyTests；
+//   選課 → GrammarPlan / VocabPlan.planStatus；診斷 → diagnostics.grade6Adaptive。
+// 島嶼、圖鑑、打字遊戲、學校課本整理是資源不是任務，不標。
+function setTask(card, done, hint) {
+  if (!card) return;
+  card.dataset.done = done ? "1" : "0";
+  card.dataset.todo = (!done && hint) ? "1" : "0";
+  let h = card.querySelector(".todo-hint");
+  if (!done && hint) {
+    if (!h) {
+      h = document.createElement("div"); h.className = "todo-hint";
+      const sub = card.querySelector(".card-sub");
+      (sub ? sub.parentNode : card).appendChild(h);
+    }
+    h.textContent = "⚠️ " + hint;
+  } else if (h) h.remove();
+}
+function drawTasks(p) {
+  const today = todayStr();
+  const claimed = (p.coins && p.coins.claimedDrills) || {};
+  const todayItems = [], weekItems = [];
+
+  // 本週每日練習：今天的、之前沒做的要提醒；還沒到的不提醒
+  let hasToday = false;
+  document.querySelectorAll("#weekDrills .card[data-claim]").forEach(c => {
+    const d = c.dataset.date, ok = c.dataset.done === "1";
+    if (d > today) { setTask(c, ok, ""); return; }
+    setTask(c, ok, d === today ? "今天還沒做" : "還沒做，有空可以補");
+    if (d === today) { hasToday = true; todayItems.push({ t: "每日練習", ok, href: c.getAttribute("href") }); }
+  });
+
+  // 單字測驗：每天一次
+  const vq = document.querySelector(".card[data-claim-today]");
+  if (vq) {
+    const ok = !!claimed[today + "::" + vq.dataset.claimToday];
+    setTask(vq, ok, "今天還沒做");
+    todayItems.push({ t: "單字測驗", ok, href: vq.getAttribute("href") });
+  }
+
+  // 作業：一週 5 項
+  const wk = window.WeekKey ? WeekKey.weekKey() : null;
+  const rec = wk ? ((p.homework || {}).weeks || {})[wk] : null;
+  const hwDone = rec ? Object.keys(rec.write || {}).length + Object.keys(rec.speak || {}).length : 0;
+  setTask(document.getElementById("hwCard"), hwDone >= 5, "還差 " + (5 - hwDone) + " 項");
+  weekItems.push({ t: "作業 " + Math.min(hwDone, 5) + "/5", ok: hwDone >= 5, href: "homework.html" });
+
+  // 週測：一週一次
+  const test = wk ? (p.weeklyTests || []).filter(x => x.week === wk)[0] : null;
+  setTask(document.getElementById("wtCard"), !!test, "這週還沒考");
+  weekItems.push({ t: "週測", ok: !!test, href: "weekly_test.html" });
+
+  // 總複習：它要孩子做的就是週測與作業，兩樣都完成才算
+  const miss = [];
+  if (!test) miss.push("週測還沒考");
+  if (hwDone < 5) miss.push("作業還差 " + (5 - hwDone) + " 項");
+  setTask(document.getElementById("wrCard"), !miss.length, miss.join("、"));
+
+  // 這個月的選課
+  [["monthCard", window.GrammarPlan, "文法選課"], ["vmonthCard", window.VocabPlan, "單字選課"]].forEach(([id, eng, name]) => {
+    if (!eng) return;
+    const ok = !!eng.planStatus(p);
+    setTask(document.getElementById(id), ok, "這個月還沒選課");
+    if (!ok) weekItems.push({ t: name, ok, href: document.getElementById(id).getAttribute("href") });
+  });
+
+  // 能力診斷：做一次就好
+  const diag = !!(p.diagnostics && p.diagnostics.grade6Adaptive && p.diagnostics.grade6Adaptive.latest);
+  setTask(document.getElementById("diagCard"), diag, "還沒做");
+
+  // 最上面的摘要
+  const bar = document.getElementById("todoBar");
+  const chip = x => `<a class="${x.ok ? "ok" : "todo"}" href="${x.href}">${x.ok ? "✅" : "⚠️"} ${x.t}</a>`;
+  const left = todayItems.concat(weekItems).filter(x => !x.ok).length;
+  bar.innerHTML = `<div class="box">
+    <div class="row"><span class="lab">今天</span>${todayItems.map(chip).join("")}${hasToday ? "" : '<span style="color:#888">今天沒有每日練習</span>'}</div>
+    <div class="row"><span class="lab">這一週</span>${weekItems.map(chip).join("")}</div>
+    ${left ? "" : '<div class="row all">🎉 今天和這一週的事都做完了</div>'}</div>`;
+  bar.style.display = "block";
 }
 
 // 時間鎖：未到開放日的每日練習鎖住、不能點，顯示「🔒 月/日 開放」
