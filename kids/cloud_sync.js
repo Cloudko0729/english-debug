@@ -42,27 +42,43 @@ function _summarize(progress, island) {
 }
 
 function _localData(student) {
-  let progress = null, island = null, island2 = null;
+  let progress = null, island = null, island2 = null, town = null;
   try { progress = JSON.parse(localStorage.getItem("kidsProgress." + student) || "null"); } catch (e) {}
   try { island = JSON.parse(localStorage.getItem("kidsIsland." + student) || "null"); } catch (e) {}
   try { island2 = JSON.parse(localStorage.getItem("kidsIsland2." + student) || "null"); } catch (e) {}
-  return { progress, island, island2 };
+  try { town = JSON.parse(localStorage.getItem("kidsTown.v1." + student) || "null"); } catch (e) {}
+  return { progress, island, island2, town };
 }
 
 // ── 二號島打包／拆包：island2 塞進 island._island2 一起同步 ──────────────────
 // island 欄位是 JSON blob（Supabase jsonb / Sheets 存字串），塞巢狀欄位不用改後端 schema；
 // 舊存檔沒有 _island2 也完全相容。
-function _packIslands(island, island2) {
-  if (!island || !island2) return island;
-  return Object.assign({}, island, { _island2: island2 });
+// 四季小鎮（kidsTown.v1）也用同一招塞在 island._town；沒有舊島的帳號就只放 _town。
+function _packIslands(island, island2, town) {
+  let out = island ? Object.assign({}, island) : null;
+  if (island && island2) out._island2 = island2;
+  if (town) { out = out || {}; out._town = town; }
+  return out;
 }
-function _storeIslands(student, islandData) {
+// 小鎮存檔：兩邊都有時看 savedAt，較新的勝出（force＝指定某天還原，照雲端那份）
+function _townAt(t) { return (t && Date.parse(t.savedAt || 0)) || 0; }
+function _storeTown(student, town, force) {
+  if (!town || typeof town !== "object") return false;
+  let local = null;
+  try { local = JSON.parse(localStorage.getItem("kidsTown.v1." + student) || "null"); } catch (e) {}
+  if (!force && local && _townAt(local) >= _townAt(town)) return false;
+  localStorage.setItem("kidsTown.v1." + student, JSON.stringify(town));
+  return true;
+}
+function _storeIslands(student, islandData, force) {
   if (!islandData) return;
   const isl2 = islandData._island2 || null;
+  const town = islandData._town || null;
   const isl1 = Object.assign({}, islandData);
-  delete isl1._island2;
-  localStorage.setItem("kidsIsland." + student, JSON.stringify(isl1));
+  delete isl1._island2; delete isl1._town;
+  if (Object.keys(isl1).length) localStorage.setItem("kidsIsland." + student, JSON.stringify(isl1));
   if (isl2) localStorage.setItem("kidsIsland2." + student, JSON.stringify(isl2));
+  _storeTown(student, town, force);
 }
 
 // 取目前登入的 Supabase 使用者（沒有就 null）
@@ -113,8 +129,8 @@ function _capForSheet(progress) {
 // ── 存檔：Supabase（若已登入）+ Google Sheet（雙寫）─────────────────────────
 function cloudSave(student) {
   if (!student) return;
-  const { progress, island, island2 } = _localData(student);
-  const islandPacked = _packIslands(island, island2);
+  const { progress, island, island2, town } = _localData(student);
+  const islandPacked = _packIslands(island, island2, town);
   const day = _todayStr();
   const summary = _summarize(progress, island);
 
@@ -188,7 +204,10 @@ function cloudSyncOnOpen(student, onRestored) {
       if (cloud.island) _storeIslands(student, cloud.island);
       if (typeof onRestored === "function") onRestored();
     } else {
+      // 學習進度本機較新，但小鎮可能是在別台玩的：先把較新的小鎮拉下來，再整包推上去
+      const townNew = _storeTown(student, cloud && cloud.island && cloud.island._town);
       cloudSave(student);
+      if (townNew && typeof onRestored === "function") onRestored();
     }
   }).catch(() => cloudSave(student));
 }
@@ -268,7 +287,7 @@ async function cloudLoadDate(student, date) {
         .select("progress, island, day").eq("user_id", user.id).eq("day", date).maybeSingle();
       if (data) {
         if (data.progress) localStorage.setItem("kidsProgress." + student, JSON.stringify(data.progress));
-        if (data.island) _storeIslands(student, data.island);
+        if (data.island) _storeIslands(student, data.island, true);
         return data;
       }
       return null;
@@ -280,7 +299,7 @@ async function cloudLoadDate(student, date) {
     .then(r => r.json()).then(d => {
       if (d && d.ok) {
         if (d.progress) localStorage.setItem("kidsProgress." + student, JSON.stringify(d.progress));
-        if (d.island) _storeIslands(student, d.island);
+        if (d.island) _storeIslands(student, d.island, true);
         return d;
       }
       return null;

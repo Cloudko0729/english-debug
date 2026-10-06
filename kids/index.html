@@ -145,14 +145,24 @@
 </div>
 
 <section>
-  <h2>我的島嶼</h2>
+  <h2>遊戲</h2>
   <div class="card-list">
+    <a class="card" href="town/index.html" id="townCard" style="background:linear-gradient(135deg,#fff3cf,#eaf7e1);border:2px solid #d9a441">
+      <div class="card-left">
+        <div class="card-icon" style="background:#ffe4a3;font-size:1.4rem">🌾</div>
+        <div>
+          <div class="card-title">四季小鎮</div>
+          <div class="card-sub">做完英文換體力，種田、修廣場、認識村民 ⚡ <span id="apPeek">—</span></div>
+        </div>
+      </div>
+      <span class="badge badge-new">新</span>
+    </a>
     <a class="card" href="island.html" style="background:linear-gradient(135deg,#d8f3ff,#fff);border:2px solid #5bb8e6">
       <div class="card-left">
         <div class="card-icon" style="background:#bfeaff;font-size:1.4rem">🏝️</div>
         <div>
           <div class="card-title">My Island 我的島嶼</div>
-          <div class="card-sub">用答題賺的金幣蓋島！🪙 <span id="coinPeek">—</span></div>
+          <div class="card-sub">🪙 <span id="coinPeek">—</span>　·　10/31 後變成紀念館，只能看不能蓋</div>
         </div>
       </div>
       <span class="arrow">›</span>
@@ -364,16 +374,22 @@ function pickStudent(name) {
   const coins = (p.coins && p.coins.balance) || 0;
   const peek = document.getElementById("coinPeek");
   if (peek) peek.textContent = coins;
+  // 小鎮體力：體力條＋儲備（小鎮頁會把新做的練習算進去，這裡只顯示上次存檔的數字）
+  const apPeek = document.getElementById("apPeek");
+  if (apPeek) {
+    let t = null; try { t = JSON.parse(localStorage.getItem("kidsTown.v1." + name) || "null"); } catch (e) {}
+    apPeek.textContent = t && t.energy ? (t.energy.wallet || 0) + (t.energy.reserve || 0) : "去看看";
+  }
   markDone(p);
   drawMonthCard(p);
   drawTasks(p);
   lockFutureDrills();   // 切換帳號後重新評估日期鎖（test 解鎖、其他鎖回）
   // 訪客不能玩小島：把島嶼卡灰掉
   const isGuest = name === "guest";
-  document.querySelectorAll('a.card[href="island.html"]').forEach(c => {
+  document.querySelectorAll('a.card[href="island.html"], #townCard').forEach(c => {
     c.style.opacity = isGuest ? ".45" : "1";
     c.style.pointerEvents = isGuest ? "none" : "auto";
-    if (isGuest) { const sub = c.querySelector(".card-sub"); if (sub) sub.textContent = "🎫 訪客不能玩小島（登入自己的帳號才行）"; }
+    if (isGuest) { const sub = c.querySelector(".card-sub"); if (sub) sub.textContent = "🎫 訪客不能玩（登入自己的帳號才行）"; }
   });
   if (isGuest) return;   // 訪客不接雲端同步
   // 開頁時做雲端同步（較新的勝出）；只做一次避免重入

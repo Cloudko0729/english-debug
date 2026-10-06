@@ -368,6 +368,7 @@
     if (raw.student !== student) throw new Error("這不是 " + student + " 的存檔");
     var st = newState(student, DATE_RE.test(raw.createdAt) ? raw.createdAt : today);
     st.rev = int(raw.rev);
+    if (typeof raw.savedAt === "string" && !isNaN(Date.parse(raw.savedAt))) st.savedAt = raw.savedAt.slice(0, 30);
     st.nextId = Math.max(int(raw.nextId), 2);
     var e = obj(raw.energy);
     st.energy.wallet = int(e.wallet, AP_WALLET_CAP);
@@ -440,6 +441,7 @@
     var cur = null;
     try { cur = JSON.parse(storage.getItem(key(st.student)) || "null"); } catch (e) { cur = null; }
     if (cur && typeof cur.rev === "number" && st._baseRev >= 0 && cur.rev > st._baseRev) return { ok: false, conflict: true };
+    st.savedAt = new Date().toISOString();                       // 雲端合併時「較新的勝出」看這個
     var copy = Object.assign({}, st); delete copy._baseRev;
     storage.setItem(key(st.student), JSON.stringify(copy));      // 寫不進去會丟例外，交給呼叫端
     st._baseRev = st.rev;

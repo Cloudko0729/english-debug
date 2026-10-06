@@ -184,6 +184,9 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 <div class="toast" id="toast" hidden></div>
 <div class="modal" id="folkModal" hidden onclick="if(event.target===this)closeFolk()"><div class="frame box" id="folkBox"></div></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../cloud_sync.js?v=202610060403"></script>
+<script src="../supabase_auth.js?v=202610060403"></script>
 <script src="../drills_list.js?v=202610060403"></script>
 <script src="town_core.js?v=202610060403"></script>
 <script src="town_content.js?v=202610060403"></script>
@@ -192,6 +195,7 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 const T = TownCore, C = TownContent;
 const STUDENTS = [["albert", "Albert"], ["jonathan", "Jonathan"], ["test", "🧪 測試"]];
 let student = null, st = null, sel = null, moving = null;
+let authed = null;             // 有登入時＝帳號名，畫面上就不給切換學生
 const zhOpen = new Set();      // 按過「看中文」的卡片，重繪時保持展開
 
 // 今天：測試帳號可以用 ?date=YYYY-MM-DD 假裝是別天，才能試跨日成長
@@ -207,8 +211,17 @@ function persist() {
   try {
     const r = T.save(storage(), st);
     if (r.conflict) { reload("另一個分頁更新了進度，已經重新載入"); return false; }
+    pushCloud();
     return true;
   } catch (e) { toast("存檔失敗：" + e.message); return false; }
+}
+// 雲端備份：連續操作只送最後一次；切到背景時馬上送
+let cloudTimer = null;
+function pushCloud(now) {
+  if (typeof cloudSave !== "function" || !student || student === "guest") return;
+  clearTimeout(cloudTimer);
+  if (now) { cloudSave(student); return; }
+  cloudTimer = setTimeout(() => { cloudTimer = null; cloudSave(student); }, 4000);
 }
 function reload(msg) {
   const r = T.load(storage(), student, today(), C);
@@ -238,6 +251,19 @@ function testBoost(n) {
 function act(r) { if (r && r.msg) toast(r.msg); if (r && r.ok) persist(); render(); return r; }
 
 // ── 帳號 ─────────────────────────────────────────────────────────────
+// 登入守門（supabase_auth.js）登入後會呼叫這裡；訪客跟舊島一樣不能玩
+function selectStudent(name) {
+  if (name === "guest") {
+    document.getElementById("who").innerHTML = "";
+    document.querySelector(".wrap").innerHTML = `<div class="frame" style="margin-top:24px;text-align:center;line-height:1.8">
+      🎫 訪客帳號不能玩四季小鎮喔！<br>小鎮要用自己的帳號，進度才存得住。<br><br><a href="../index.html">← 回首頁</a></div>`;
+    return;
+  }
+  authed = name;
+  pick(name);
+  if (typeof cloudSyncOnOpen === "function") cloudSyncOnOpen(name, () => reload("已經讀取雲端的小鎮進度"));
+}
+window.selectStudent = selectStudent;
 function pick(name) {
   student = name; try { storage().setItem("kidsCurrentStudent", name); } catch (e) {}
   const r = T.load(storage(), student, today(), C);
@@ -251,8 +277,9 @@ function pick(name) {
 
 // ── 畫面 ─────────────────────────────────────────────────────────────
 function render() {
-  document.getElementById("who").innerHTML = STUDENTS.map(([k, n]) =>
-    `<button class="${k === student ? "on" : ""}" onclick="pick('${k}')">${n}</button>`).join("");
+  document.getElementById("who").innerHTML = authed
+    ? `<span>${esc(authed.charAt(0).toUpperCase() + authed.slice(1))}</span><button onclick="doLogout()">登出</button>`
+    : STUDENTS.map(([k, n]) => `<button class="${k === student ? "on" : ""}" onclick="pick('${k}')">${n}</button>`).join("");
   if (!st) return;
   const d = today(), season = T.season(d), wk = T.contentWeek(d), W = C.WEEKS[wk];
   document.body.className = "s-" + season;
@@ -578,12 +605,16 @@ function refresh() {
   if (got) { persist(); toast("做英文換來的體力：+" + got + " ⚡"); }
   render();
 }
-document.addEventListener && document.addEventListener("visibilitychange", () => { if (!document.hidden) refresh(); });
+document.addEventListener && document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) refresh();
+  else if (cloudTimer) pushCloud(true);
+});
 window.addEventListener && window.addEventListener("focus", refresh);
 let lastDay = null;
 setInterval(() => { const d = today(); if (d !== lastDay) { lastDay = d; refresh(); } }, 60000);
 
 (function boot() {
+  if (window.sbClient) return;   // 有登入系統：等守門確認帳號後呼叫 selectStudent
   let last = null; try { last = storage().getItem("kidsCurrentStudent"); } catch (e) {}
   pick(STUDENTS.some(s => s[0] === last) ? last : "test");
 })();

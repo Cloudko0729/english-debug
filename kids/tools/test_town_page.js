@@ -147,6 +147,18 @@ ok("一般帳號沒有不限量按鈕", !el("hud").innerHTML.includes("testBoost
 const apA = run("T.apTotal(st)"); run("testBoost(50)");
 ok("一般帳號就算呼叫也不會加", run("T.apTotal(st)") === apA);
 run("pick('test')"); ok("換回來進度還在", G.st.hearts.Mia === 1);
+ok("存檔帶 savedAt（雲端合併用）", !isNaN(Date.parse(JSON.parse(store.get("kidsTown.v1.test")).savedAt)));
+
+console.log("\n── 登入與雲端 ──");
+const pushed = [];
+S.cloudSave = s => pushed.push(s);
+S.cloudSyncOnOpen = () => {};
+run("selectStudent('albert')");
+ok("登入後頂端顯示帳號和登出，不給切換", el("who").innerHTML.includes("Albert") && el("who").innerHTML.includes("登出") && !el("who").innerHTML.includes("pick("));
+run("st.rev++; persist(); st.rev++; persist()");
+ok("連續存檔不會每一步都推雲端", pushed.length === 0 && run("cloudTimer !== null"));
+run("pushCloud(true)");
+ok("切到背景時推一次", pushed.length === 1 && pushed[0] === "albert", pushed);
 
 console.log(`\n${fail === 0 ? "✅" : "❌"} pass ${pass} / fail ${fail}\n`);
 process.exit(fail ? 1 : 0);
