@@ -127,6 +127,31 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 .lbl{font-weight:900;margin-top:10px;font-size:.9rem}
 
 /* 小鎮 */
+.prosper{padding:10px 12px;margin-bottom:12px;background:#fff3cf;border:2px solid var(--ap);border-radius:8px}
+.prosper .ttl{font-weight:900;font-size:1.05rem}
+.pbar{height:12px;background:#fff;border:2px solid var(--wood-d);border-radius:999px;overflow:hidden;margin:6px 0}
+.pbar i{display:block;height:100%;background:linear-gradient(90deg,#f6c453,#f08a24)}
+.residents{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:6px 0}
+.residents .pic{cursor:pointer}
+.residents .soon{width:56px;height:56px;border:2px dashed var(--wood-l);border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:26px;color:var(--muted)}
+.sum{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.sum span{font-size:.85rem;font-weight:700;border-radius:999px;padding:3px 10px;background:#fff;border:1px solid var(--wood-l)}
+.sum span.ok{background:#e7f5df;border-color:#9fd38f;color:var(--ok)}
+.tasks{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.task{background:#fffdf4;border:2px solid var(--wood-l);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.task.ready{border-color:var(--ap);box-shadow:0 0 0 2px #ffe08a}
+.task.done{opacity:.6;background:#f1f6ec}
+.task .who2{font-weight:900;display:flex;align-items:center;gap:6px}
+.task .en{font-family:Georgia,"Times New Roman",serif;font-size:1rem;line-height:1.45}
+.task .zh{color:var(--muted);font-size:.84rem}
+.task:not(.showzh) .zh{display:none}
+.task .nd{font-weight:900}
+.task .nd.ok{color:var(--ok)}
+.task .where{font-size:.78rem;color:var(--muted)}
+.task .actions{margin-top:4px}
+.later{margin:4px 0;padding:6px 10px;border:2px dashed var(--wood-l);border-radius:8px;color:var(--muted);font-size:.9rem}
+.cele{text-align:center}
+.cele .big{font-size:3.2rem;margin:6px 0}
 .landmark{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 .landmark .look{font-size:2.6rem;background:#fff8e6;border:2px solid var(--wood-l);border-radius:8px;padding:8px 14px}
 .need li{margin:2px 0}
@@ -233,7 +258,7 @@ function reload(msg) {
 
 function toast(msg) {
   const t = document.getElementById("toast"); if (!msg) return;
-  t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => t.hidden = true, 2600);
+  t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => t.hidden = true, Math.max(2600, msg.length * 110));
 }
 function play(path) { try { new Audio(path).play().catch(() => {}); } catch (e) {} }
 const wordAudio = en => "../audio/words/" + String(en).toLowerCase().replace(/[^a-z0-9]+/g, "") + ".mp3";
@@ -248,7 +273,11 @@ function testBoost(n) {
   st.rev++;
   act({ ok: true, msg: "🧪 +" + n + " ⚡（測試用，不算週上限）" });
 }
-function act(r) { if (r && r.msg) toast(r.msg); if (r && r.ok) persist(); render(); return r; }
+function act(r) {
+  if (r && r.ok) persist();
+  if (r && r.ok && (r.stageDone || (r.arrived && r.arrived.length))) celebrate(r); else if (r && r.msg) toast(r.msg);
+  render(); return r;
+}
 
 // ── 帳號 ─────────────────────────────────────────────────────────────
 // 登入守門（supabase_auth.js）登入後會呼叫這裡；訪客跟舊島一樣不能玩
@@ -288,6 +317,7 @@ function render() {
     <span class="stat">⚡ <span class="bar"><i style="width:${Math.round(e.wallet / T.AP_WALLET_CAP * 100)}%"></i></span>
       <span class="num" title="用不完的會存進儲備，不會不見">${e.wallet}/${T.AP_WALLET_CAP}</span>${e.reserve ? `<span class="muted">＋儲備 <span class="num">${e.reserve}</span></span>` : ""}</span>
     <span class="stat">🪙 <span class="num">${st.money}</span> <span class="muted">小鎮幣</span></span>
+    <span class="stat" style="cursor:pointer" onclick="tab('town')" title="小鎮越繁榮，越多村民搬來">🏘️ <span class="num">${T.prosperity(st, C)}</span> <span class="muted">繁榮度</span></span>
     <span class="chip s-${season}">${season}季</span>
     <span class="muted">本週：${W ? W.theme : "（內容準備中）"}</span>
     ${student === "test" ? `<button class="btn" title="跟做一份練習一樣，算進每週 70 的上限" onclick="act(T.grant(st,'test:'+Date.now(),10,today()))">🧪 +10⚡</button>
@@ -311,14 +341,24 @@ function renderToday(d) {
   document.getElementById("today").innerHTML = h;
 }
 
+// 東西的圖示、名字、去哪裡拿
+const ICON = { ap: "⚡", money: "🪙", wood: "🪵", stone: "🪨" };
+const itemIcon = k => ICON[k] || (C.CROPS[k] && C.CROPS[k].emoji) || (C.DECOR[k] && C.DECOR[k].emoji) || "📦";
+const itemName = k => C.NAME[k] || k;
+function whereToGet(k) {
+  if (k === "ap") return "做英文練習換體力";
+  if (k === "wood" || k === "stone") return "在農莊撿";
+  if (C.CROPS[k]) return C.CROPS[k].freeSeed ? "種田收成（種子免費）" : "去商店買種子，種田收成";
+  if (C.DECOR[k]) return "去商店買（擺在農莊的可以收回再交）";
+  return "";
+}
 // 下一個目標：孩子每次打開農莊都知道自己在攢什麼
-const PART = { ap: "⚡ 體力", money: "🪙 小鎮幣", crop: "🧺 作物", wood: "🪵 木材", stone: "🪨 石頭" };
 function renderGoal() {
   const g = T.nextGoal(st, C), el = document.getElementById("goal");
   if (!g) { el.innerHTML = `<div class="goal">🎉 廣場修好了！下一個地標還在準備中。</div>`; return; }
   el.innerHTML = `<div class="goal" onclick="tab('town')" role="button" tabindex="0">
-    <div class="ttl">🎯 下一個目標：${g.name}第 ${g.stage + 1} 階${g.ready ? "　✅ 材料都齊了，點這裡去修！" : ""}</div>
-    <div class="parts">${g.parts.map(x => `<span class="pt${x.have >= x.need ? " ok" : ""}">${PART[x.k] || x.k} ${Math.min(x.have, x.need)}/${x.need}</span>`).join("")}</div>
+    <div class="ttl">🎯 ${g.name}第 ${g.stage + 1} 階「${esc(g.title)}」：任務完成 ${5 - g.left}/5${g.ready ? "　✅ 有任務可以交了，點這裡！" : ""}</div>
+    <div class="parts">${g.parts.map(x => `<span class="pt${x.have >= x.need ? " ok" : ""}">${itemIcon(x.k)} ${itemName(x.k)} ${Math.min(x.have, x.need)}/${x.need}</span>`).join("")}</div>
     <div class="foot">⚡ 用不完的體力會存進儲備，永遠不會不見。不用急著花掉。</div></div>`;
 }
 // 第一次玩：還沒收成過、田也還沒開第二片時，告訴他田可以自己開
@@ -334,8 +374,8 @@ function renderHint() {
 function renderGather() {
   [["wood", "woodBtn", "🪵", "木材"], ["stone", "stoneBtn", "🪨", "石頭"]].forEach(([k, id, em, zh]) => {
     const need = T.materialNeed(st, k, C), have = st.inv[k] || 0, b = document.getElementById(id);
-    if (!need) { b.hidden = true; return; }
     b.hidden = false;
+    if (!need) { b.disabled = true; b.innerHTML = `${em} 這一階用不到${zh}`; return; }
     b.disabled = have >= need;
     b.innerHTML = have >= need ? `${em} ${zh}夠了 ✓ <span class="cost">${have}/${need}</span>`
       : `${em} 撿${zh}（修廣場用 ${have}/${need}） <span class="cost">2⚡</span>`;
@@ -382,7 +422,7 @@ function renderMap(d) {
 function tapCell(x, y) {
   const t = T.terrainAt(x, y);
   if (moving) {
-    const r = moving.type ? T.placeDecor(st, moving.type, x, y) : T.move(st, moving.id, x, y);
+    const r = moving.type ? T.placeDecor(st, moving.type, x, y, today(), C) : T.move(st, moving.id, x, y);
     if (r.ok) { moving = null; sel = null; }
     return act(r);
   }
@@ -406,7 +446,7 @@ function renderSheet(d) {
     const owned = Object.keys(st.decorOwned).filter(k => st.decorOwned[k] > 0);
     el.innerHTML = `<h2>這塊空地</h2><div class="actions">
       <button class="btn" onclick="act(T.addField(st,${sel.x},${sel.y}));sel=null;render()">🟫 開一片田（2×2，免費）</button>
-      ${owned.map(k => `<button class="btn" onclick="act(T.placeDecor(st,'${k}',${sel.x},${sel.y}));sel=null;render()">${C.DECOR[k].emoji} 擺${C.DECOR[k].zh}（${st.decorOwned[k]}）</button>`).join("")}
+      ${owned.map(k => `<button class="btn" onclick="act(T.placeDecor(st,'${k}',${sel.x},${sel.y},today(),C));sel=null;render()">${C.DECOR[k].emoji} 擺${C.DECOR[k].zh}（${st.decorOwned[k]}）</button>`).join("")}
       <button class="btn" onclick="sel=null;render()">關閉</button></div>
       ${owned.length ? "" : '<p class="muted">裝飾可以在商店買。</p>'}`;
     return;
@@ -470,14 +510,30 @@ function renderShop() {
 
 // ── 村民與信件 ─────────────────────────────────────────────────────
 function visibleWeeks() { const wk = T.contentWeek(today()); return Object.keys(C.WEEKS).filter(k => k <= wk).sort().reverse(); }
-function visibleCards() { return visibleWeeks().flatMap(k => C.WEEKS[k].cards); }
+// 新村民搬來時寄的信：跟每週的信一樣可以聽、看中文、標已讀
+function welcomeCards() {
+  return Object.keys(C.VILLAGERS).filter(v => C.VILLAGERS[v].welcome && st.residents[v]).map(v => ({
+    id: "arrive_" + v, type: "letter", speaker: v, week: T.contentWeek(T.TOWN_START), en: C.VILLAGERS[v].welcome, zh: C.VILLAGERS[v].welcomeZh }));
+}
+function visibleCards() { return welcomeCards().concat(visibleWeeks().flatMap(k => C.WEEKS[k].cards)); }
+const residents = () => Object.keys(C.VILLAGERS).filter(v => T.isResident(st, v, C));
+// 還沒搬來的下一位：只給門檻，不透露是誰
+function soonHtml() {
+  const lv = T.prosperityLevel(st, C), v = lv.nextVillager;
+  if (!v) return "";
+  const need = C.VILLAGERS[v].arrive;
+  return `<span class="soon" title="繁榮度 ${need} 搬來">❔</span><span class="muted">繁榮度到 <b>${need}</b> 會有新村民搬來（還差 ${Math.max(0, need - lv.score)}）</span>`;
+}
 
 function renderMail(d) {
   const weeks = visibleWeeks();
   if (!weeks.length) { document.getElementById("p-mail").innerHTML = "<p>村民還沒搬來，下週再來看看。</p>"; return; }
-  let h = `<div class="folks">${Object.keys(C.VILLAGERS).map(v => { const p = C.VILLAGERS[v];
+  let h = `<div class="folks">${residents().map(v => { const p = C.VILLAGERS[v];
     return `<button class="folk" onclick="openFolk('${v}')" aria-label="看 ${v} 的介紹">${pic(v)}<span><div class="nm">${v}</div>
-      <div class="sm">${p.role.zh}　<span class="hearts">${"❤️".repeat(st.hearts[v] || 0) || "🤍"}</span></div><div class="sm">點我看介紹</div></span></button>`; }).join("")}</div>`;
+      <div class="sm">${p.role.zh}　<span class="hearts">${"❤️".repeat(st.hearts[v] || 0) || "🤍"}</span></div><div class="sm">點我看介紹</div></span></button>`; }).join("")}</div>
+    <div class="residents">${soonHtml()}</div>`;
+  const wel = welcomeCards();
+  if (wel.length) { h += `<h2>🏠 新鄰居</h2>`; wel.slice().reverse().forEach(c => h += cardHtml(c)); }
   weeks.forEach(wk => {
     const W = C.WEEKS[wk];
     h += `<h2>${wk.slice(5).replace("-", "/")} 那週・${W.theme}</h2>`;
@@ -514,7 +570,7 @@ function storyHtml(s, doneS) {
     <div class="say"><div>🗣️ 換你說最後一句，大聲念出來：</div><div class="en" style="font-family:Georgia,serif;font-size:1.15rem">${esc(s.speak)}</div>
     <div class="zh">${esc(s.speakZh)}</div>
     <div class="actions"><button class="btn" onclick="play(townAudio('${s.id}_say'))">🔊 先聽一次</button>
-    ${doneS ? `<span>✅ 完成了（${doneS}）</span>` : `<button class="btn go" onclick="act(T.finishStory(st,findStory('${s.id}'),today()))">我念好了 ❤️</button>`}</div></div></div>`;
+    ${doneS ? `<span>✅ 完成了（${esc(doneS)}）</span>` : `<button class="btn go" onclick="act(T.finishStory(st,findStory('${s.id}'),today(),C))">我念好了 ❤️</button>`}</div></div></div>`;
 }
 // 村民頭像：有圖用圖，圖還沒好或載入失敗就退回 emoji
 function pic(v, small) {
@@ -544,6 +600,23 @@ function openFolk(v) {
   m.hidden = false;
 }
 function closeFolk() { document.getElementById("folkModal").hidden = true; }
+function celebrate(r) {
+  const L = C.LANDMARKS.plaza, stage = st.town.plaza || 0, came = r.arrived || [];
+  const m = document.getElementById("folkModal");
+  m.classList.remove("showzh");
+  let h = `<div class="cele">`;
+  if (r.stageDone) h += `<h3>🎉 ${L.zh}第 ${stage} 階修好了！</h3><div class="big">${L.look[stage].split(" ")[0]}</div>
+    <p>${esc(L.look[stage].split(" ").slice(1).join(" "))}</p><p class="muted">🏘️ 繁榮度現在是 ${T.prosperity(st, C)}</p>`;
+  came.forEach(v => { const p = C.VILLAGERS[v];
+    h += `<h3>🏠 ${v} 搬來小鎮了！</h3><div>${pic(v)}</div><p><b>${esc(p.role.en)}</b> <span class="muted">${esc(p.role.zh)}</span></p>
+      <div class="en">${esc(p.welcome || p.intro)}</div><div class="zh">${esc(p.welcomeZh || p.introZh)}</div>
+      <div class="actions" style="justify-content:center"><button class="btn" onclick="play(townAudio('${p.welcome ? "arrive_" + v : "villager_" + v}'))">🔊 聽 ${v} 說話</button>
+      <button class="btn" onclick="document.getElementById('folkModal').classList.add('showzh')">看中文</button>
+      <button class="btn" onclick="openFolk('${v}')">認識 ${v}</button></div>`; });
+  h += `<div class="actions" style="justify-content:center"><button class="btn go" onclick="closeFolk()">太好了！</button></div></div>`;
+  document.getElementById("folkBox").innerHTML = h;
+  m.hidden = false;
+}
 
 function findCard(id) { return visibleCards().find(c => c.id === id); }
 function findStory(id) { return Object.values(C.WEEKS).map(w => w.story).find(s => s.id === id); }
@@ -551,24 +624,46 @@ function showZh(id) { zhOpen.add(id); if (findCard(id)) markRead(id); render(); 
 function markRead(id) { const c = findCard(id); if (c && !st.cards[id]) { T.readCard(st, c, today()); persist(); render(); } }
 
 // ── 小鎮與生活冊 ───────────────────────────────────────────────────
+function prosperHtml() {
+  const lv = T.prosperityLevel(st, C), P = C.PROSPERITY;
+  const from = lv.level.at, to = lv.next ? lv.next.at : from, pct = lv.next ? Math.round((lv.score - from) / (to - from) * 100) : 100;
+  return `<div class="prosper"><div class="ttl">🏘️ 繁榮度 ${lv.score}　${lv.level.emoji} ${lv.level.zh}</div>
+    <div class="pbar"><i style="width:${Math.min(100, pct)}%"></i></div>
+    <div class="muted">${lv.next ? `下一級 ${lv.next.at}「${lv.next.zh}」` : "已經是最高一級"}</div>
+    <div class="residents">${residents().map(n => `<span onclick="openFolk('${n}')">${pic(n)}</span>`).join("")}${soonHtml()}</div>
+    <div class="muted" style="font-size:.78rem">繁榮度怎麼來：完成任務 +${P.task}、修好一階 +${P.stage}、村民每顆 ❤️ +${P.heart}、農莊擺裝飾每件 +${P.decor}（最多算 ${P.decorMax} 件）</div></div>`;
+}
+function taskHtml(x) {
+  const t = x.task, id = t.id, k = t.need.item, enough = x.have >= x.need;
+  let foot;
+  if (x.done) foot = `<span>✅ 已經交給 ${t.by} 了</span>`;
+  else if (!x.here) foot = `<span class="muted">🔒 ${t.by} 還沒搬來</span>`;
+  else foot = `<button class="btn go" ${x.ready ? "" : "disabled"} onclick="act(T.doTask(st,'plaza','${id}',today(),C))">交給 ${t.by}</button>`;
+  return `<div class="task${x.done ? " done" : ""}${x.ready ? " ready" : ""}${zhOpen.has(id) ? " showzh" : ""}">
+    <div class="who2"><span onclick="openFolk('${t.by}')">${pic(t.by, true)}</span> ${t.by}</div>
+    <div class="en">${esc(t.en)}</div><div class="zh">${esc(t.zh)}</div>
+    <div class="nd${x.done || enough ? " ok" : ""}">${itemIcon(k)} ${itemName(k)} ${x.done ? x.need : Math.min(x.have, x.need)}/${x.need}</div>
+    ${x.done || enough ? "" : `<div class="where">👉 ${whereToGet(k)}</div>`}
+    <div class="actions"><button class="btn" onclick="play(townAudio('task_${id}'))">🔊</button><button class="btn" onclick="showZh('${id}')">看中文</button>${foot}</div></div>`;
+}
 function renderTown(d) {
-  const L = C.LANDMARKS.plaza, stage = st.town.plaza || 0, chk = T.canRepair(st, "plaza", C);
-  const next = L.stages[stage];
-  let h = `<h2>🏛️ ${L.zh}</h2><div class="landmark"><div class="look">${L.look[stage].split(" ")[0]}</div><div><b>${L.look[stage].split(" ").slice(1).join(" ")}</b>
-    <div class="muted">第 ${stage}/${L.stages.length} 階段</div></div></div>`;
-  if (next) {
-    h += `<p>下一步：${next.done}</p><ul class="need">
-      <li>⚡ 體力 ${next.ap}</li><li>🪙 小鎮幣 ${next.money}</li>
-      ${Object.keys(next.items).map(k => `<li>${C.NAME[k] || k} × ${next.items[k]}</li>`).join("")}</ul>
-      ${chk.ok ? "" : `<p class="muted">還缺：<span class="miss">${chk.missing.join("、")}</span></p>`}
-      <button class="btn go" ${chk.ok ? "" : "disabled"} onclick="act(T.repair(st,'plaza',today(),C))">🔨 修理</button>`;
-  } else h += `<p>✅ 小樣能修的部分都修好了。</p>`;
+  const L = C.LANDMARKS.plaza, stage = st.town.plaza || 0, g = T.stageView(st, "plaza", C);
+  let h = prosperHtml();
+  h += `<h2>🏛️ ${L.zh}</h2><div class="landmark"><div class="look">${L.look[stage].split(" ")[0]}</div><div><b>${L.look[stage].split(" ").slice(1).join(" ")}</b>
+    <div class="muted">已修好 ${stage}/${L.stages.length} 階</div></div></div>`;
+  if (g) {
+    h += `<h3>第 ${stage + 1} 階「${esc(g.title)}」：任務完成 ${5 - g.left}/5</h3>
+      <p class="muted">5 個任務都交完，這一階就修好了：${esc(g.done)}。順序隨便你。</p>
+      <div class="sum"><b>還需要：</b>${g.parts.map(x => `<span class="${x.have >= x.need ? "ok" : ""}">${itemIcon(x.k)} ${itemName(x.k)} ${Math.min(x.have, x.need)}/${x.need}</span>`).join("")}</div>
+      <div class="tasks">${g.tasks.map(taskHtml).join("")}</div>`;
+    L.stages.slice(stage + 1).forEach((sg, j) => h += `<div class="later">🔒 第 ${stage + 2 + j} 階「${esc(sg.title)}」：上一階修好後開放</div>`);
+  } else h += `<p>✅ 廣場三階都修好了！下一個地標還在準備中。</p>`;
   const weeks = Object.keys(st.book).sort().reverse();
   h += `<h2 style="margin-top:18px">📖 四季生活冊</h2>` + (weeks.length ? `<div class="book">` + weeks.map(w =>
     `<h3>${w.slice(5).replace("-", "/")} 那週（${T.season(w)}季）</h3><ul>${st.book[w].map(e =>
       `<li>${e.date.slice(5)}　${esc(e.text)}${e.en ? `　<span class="en">${esc(e.en)}</span>` : ""}</li>`).join("")}</ul>`).join("") + `</div>`
     : `<p class="muted">收成、讀信、跟村民聊天，都會記在這裡。</p>`);
-  h += `<h2 style="margin-top:18px">💾 存檔</h2><p class="muted">小樣的存檔只放在這台裝置上。換裝置前先匯出，到新裝置匯入。</p>
+  h += `<h2 style="margin-top:18px">💾 存檔</h2><p class="muted">登入帳號後，進度會自動備份到雲端。也可以匯出一份檔案自己留著。</p>
     <div class="actions"><button class="btn" onclick="exportSave()">⬇ 匯出存檔</button>
     <label class="btn">⬆ 匯入存檔<input type="file" accept="application/json" hidden onchange="importSave(this)"></label></div>`;
   document.getElementById("p-town").innerHTML = h;
@@ -582,6 +677,7 @@ function importSave(inp) {
   const f = inp.files[0]; if (!f) return;
   f.text().then(t => {
     const next = T.normalize(JSON.parse(t), student, today(), C);
+    T.arrive(next, today(), C);             // 跟讀檔一樣：繁榮度夠的村民直接搬來
     next._baseRev = -1;                     // 匯入是有意覆蓋，不做分頁衝突檢查
     T.save(storage(), next);                // 寫不進去會丟例外，原本的 st 不動
     st = next; sel = null; moving = null; render(); toast("匯入完成");

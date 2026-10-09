@@ -64,7 +64,9 @@
         fields: [{ id: "f1", x: 4, y: 3, crop: null, plantedDate: null, careDates: [] }],
         decor: [], lastCare: null,
       },
-      town: { plaza: 0 },
+      town: { plaza: 0 },        // 每個地標修好了幾階
+      tasks: {},                 // 這一階交過的任務 { 任務id: { date } }；更早的階段整階算完成
+      residents: {},             // 後來搬來的村民 { 名字: 搬來那天 }；Mia、Leo 一開始就在
       cards: {}, stories: {}, hearts: {}, quests: {},
       book: {},          // 生活冊：{ 週日日期: [ { date, text, en } ] }
       log: [],
@@ -238,24 +240,19 @@
     else st.inv[item] = (st.inv[item] || 0) + n;
     return done(st, "買好了");
   }
-  // 還沒修完的地標，總共還要多少某種材料（從目前階段算到最後一階）
+  // 這一階還沒交的任務，總共還要多少某種材料（只算目前這一階，跟畫面上列出來的一致）
   function materialNeed(st, item, C) {
     var need = 0;
     Object.keys(C.LANDMARKS).forEach(function (k) {
-      C.LANDMARKS[k].stages.slice(st.town[k] || 0).forEach(function (sg) { need += sg.items[item] || 0; });
+      var sg = C.LANDMARKS[k].stages[st.town[k] || 0];
+      if (sg) sg.tasks.forEach(function (t) { if (!st.tasks[t.id] && t.need.item === item) need += t.need.n; });
     });
     return need;
   }
-  // 下一個目標：第一個還沒修完的地標的下一階，以及每樣東西的進度
+  // 下一個目標：第一個還沒修完的地標的這一階（給農莊頁的目標卡）
   function nextGoal(st, C) {
     var key = Object.keys(C.LANDMARKS).find(function (k) { return (st.town[k] || 0) < C.LANDMARKS[k].stages.length; });
-    if (!key) return null;
-    var L = C.LANDMARKS[key], stage = st.town[key] || 0, need = L.stages[stage];
-    var crops = st.inv.rice + st.inv.carrot + st.inv.potato;
-    var parts = [{ k: "ap", have: apTotal(st), need: need.ap }, { k: "money", have: st.money, need: need.money }];
-    Object.keys(need.items).forEach(function (k) { parts.push({ k: k, have: k === "crop" ? crops : (st.inv[k] || 0), need: need.items[k] }); });
-    return { key: key, stage: stage, total: L.stages.length, name: L.zh, done: need.done, parts: parts,
-             ready: parts.every(function (x) { return x.have >= x.need; }) };
+    return key ? stageView(st, key, C) : null;
   }
   function gather(st, material, today, C) {
     if (material !== "wood" && material !== "stone") return fail("沒有這種材料");
@@ -264,13 +261,15 @@
     st.inv[material]++;
     return done(st, "採到 1 份 " + material);
   }
-  function placeDecor(st, type, x, y) {
+  function placeDecor(st, type, x, y, today, C) {
     if ((st.decorOwned[type] || 0) < 1) return fail("背包裡沒有這個裝飾");
     if (st.farm.decor.length >= MAX_DECOR) return fail("裝飾最多 " + MAX_DECOR + " 件");
     if (!areaFree(st, x, y, 1, 1)) return fail("這裡放不下");
     st.decorOwned[type]--;
     st.farm.decor.push({ id: "d" + (st.nextId++), type: type, x: x, y: y });
-    return done(st, "擺好了");
+    var came = (today && C) ? arrive(st, today, C) : [];
+    var r = done(st, "擺好了" + (came.length ? "　🏠 " + came.join("、") + " 搬來小鎮了！" : ""));
+    r.arrived = came; return r;
   }
   function storeDecor(st, id) {
     var i = st.farm.decor.findIndex(function (d) { return d.id === id; });
@@ -280,33 +279,98 @@
     return done(st, "收回背包了");
   }
 
-  // ── 小鎮修復 ────────────────────────────────────────────────────────────
-  function canRepair(st, key, C) {
-    var L = C.LANDMARKS[key], stage = st.town[key] || 0, need = L && L.stages[stage];
-    if (!need) return { ok: false, missing: ["已經全部修好"] };
-    var miss = [];
-    if (apTotal(st) < need.ap) miss.push("體力 " + need.ap);
-    if (st.money < need.money) miss.push("小鎮幣 " + need.money);
-    Object.keys(need.items).forEach(function (k) {
-      var have = k === "crop" ? (st.inv.rice + st.inv.carrot + st.inv.potato) : (st.inv[k] || 0);
-      if (have < need.items[k]) miss.push((C.NAME[k] || k) + " " + need.items[k]);
-    });
-    return { ok: !miss.length, missing: miss, need: need };
+  // ── 小鎮任務 ────────────────────────────────────────────────────────────
+  // 每一階 5 個任務同時開放、順序隨意；5 個都交完，地標升一階。
+  // 手上有多少：ap＝體力總量、裝飾＝背包裡還沒擺出去的、其他＝背包
+  function haveOf(st, item, C) {
+    if (item === "ap") return apTotal(st);
+    if (item === "money") return st.money;
+    if (C.DECOR[item]) return st.decorOwned[item] || 0;
+    return st.inv[item] || 0;
   }
-  function takeCrops(st, n) {
-    ["rice", "carrot", "potato"].forEach(function (c) { var t = Math.min(n, st.inv[c]); st.inv[c] -= t; n -= t; });
-  }
-  function repair(st, key, today, C) {
-    var chk = canRepair(st, key, C);
-    if (!chk.ok) return fail("還缺：" + chk.missing.join("、"));
-    var need = chk.need;
-    spend(st, need.ap); st.money -= need.money;
-    Object.keys(need.items).forEach(function (k) {
-      if (k === "crop") takeCrops(st, need.items[k]); else st.inv[k] -= need.items[k];
+  function isResident(st, v, C) { var p = C.VILLAGERS[v]; return !!p && (!p.arrive || !!st.residents[v]); }
+  // 某個地標目前這一階的樣子：每個任務的進度，以及「還沒交的任務」合計要多少東西
+  function stageView(st, key, C) {
+    var L = C.LANDMARKS[key], i = st.town[key] || 0, sg = L.stages[i];
+    if (!sg) return null;
+    var sum = {};
+    var tasks = sg.tasks.map(function (t) {
+      var have = haveOf(st, t.need.item, C), doneT = !!st.tasks[t.id], here = isResident(st, t.by, C);
+      if (!doneT) sum[t.need.item] = (sum[t.need.item] || 0) + t.need.n;
+      return { task: t, done: doneT, have: have, need: t.need.n, here: here, ready: !doneT && here && have >= t.need.n };
     });
-    st.town[key] = (st.town[key] || 0) + 1;
-    note(st, today, C.LANDMARKS[key].zh + "：" + need.done, "");
-    return done(st, need.done);
+    var parts = Object.keys(sum).map(function (k) { return { k: k, need: sum[k], have: haveOf(st, k, C) }; });
+    return { key: key, name: L.zh, stage: i, total: L.stages.length, title: sg.title, done: sg.done, tasks: tasks, parts: parts,
+             left: tasks.filter(function (x) { return !x.done; }).length,
+             ready: tasks.some(function (x) { return x.ready; }) };
+  }
+  function doTask(st, key, taskId, today, C) {
+    var L = C.LANDMARKS[key];
+    if (!L) return fail("沒有這個地方");
+    var i = st.town[key] || 0, sg = L.stages[i];
+    if (!sg) return fail("已經全部修好了");
+    var t = sg.tasks.find(function (q) { return q.id === taskId; });
+    if (!t) return fail("這個任務不在這一階");
+    if (st.tasks[t.id]) return fail("這個任務已經完成了");
+    if (!isResident(st, t.by, C)) return fail(t.by + " 還沒搬來");
+    var item = t.need.item, n = t.need.n, have = haveOf(st, item, C);
+    if (have < n) {
+      return fail("還差 " + (n - have) + " " + (C.NAME[item] || item) + (C.DECOR[item] ? "（擺在農莊的可以先收回背包）" : ""));
+    }
+    if (item === "ap") spend(st, n);
+    else if (item === "money") st.money -= n;
+    else if (C.DECOR[item]) st.decorOwned[item] -= n;
+    else st.inv[item] -= n;
+    st.tasks[t.id] = { date: today };
+    st.hearts[t.by] = Math.min(10, (st.hearts[t.by] || 0) + 1);
+    note(st, today, "幫 " + t.by + " 完成廣場任務", t.en);
+    var msg = "交給 " + t.by + " 了！❤️ +1、繁榮度 +" + C.PROSPERITY.task;
+    var stageDone = sg.tasks.every(function (q) { return st.tasks[q.id]; });
+    if (stageDone) {
+      st.town[key] = i + 1;
+      note(st, today, L.zh + "第 " + (i + 1) + " 階完成：" + sg.done, "");
+      msg += "　🎉 " + L.zh + "第 " + (i + 1) + " 階完成：" + sg.done;
+    }
+    var came = arrive(st, today, C);
+    if (came.length) msg += "　🏠 " + came.join("、") + " 搬來小鎮了！";
+    st.rev++;
+    return { ok: true, msg: msg, stageDone: stageDone, arrived: came };
+  }
+
+  // ── 繁榮度與新村民 ──────────────────────────────────────────────────────
+  // 繁榮度不存檔，每次從進度算：交過的任務、修好的階段、所有好感、擺在農莊的裝飾（有上限）
+  function prosperity(st, C) {
+    var P = C.PROSPERITY, tasks = 0, stages = 0, hearts = 0;
+    Object.keys(C.LANDMARKS).forEach(function (k) {
+      var built = st.town[k] || 0;
+      stages += built;
+      C.LANDMARKS[k].stages.forEach(function (sg, i) {
+        sg.tasks.forEach(function (t) { if (i < built || st.tasks[t.id]) tasks++; });
+      });
+    });
+    Object.keys(st.hearts).forEach(function (v) { hearts += st.hearts[v] || 0; });
+    var decor = Math.min(st.farm.decor.length, P.decorMax);
+    return tasks * P.task + stages * P.stage + hearts * P.heart + decor * P.decor;
+  }
+  function prosperityLevel(st, C) {
+    var score = prosperity(st, C), lv = C.PROSPERITY.levels, i = 0;
+    while (i + 1 < lv.length && score >= lv[i + 1].at) i++;
+    var waiting = Object.keys(C.VILLAGERS).filter(function (v) { return C.VILLAGERS[v].arrive && !st.residents[v]; })
+      .sort(function (a, b) { return C.VILLAGERS[a].arrive - C.VILLAGERS[b].arrive; });
+    return { score: score, level: lv[i], index: i, next: lv[i + 1] || null, nextVillager: waiting[0] || null };
+  }
+  // 繁榮度夠了就搬來（只會多不會少：之後收回裝飾讓分數掉下來，已經搬來的也不會走）
+  function arrive(st, today, C) {
+    var score = prosperity(st, C), came = [];
+    Object.keys(C.VILLAGERS).forEach(function (v) {
+      var p = C.VILLAGERS[v];
+      if (p.arrive && !st.residents[v] && score >= p.arrive) {
+        st.residents[v] = today;
+        note(st, today, v + " 搬來小鎮了", "");
+        came.push(v);
+      }
+    });
+    return came;
   }
 
   // ── 英文內容 ────────────────────────────────────────────────────────────
@@ -342,7 +406,7 @@
   }
   // 心事件：讀完、最後一句自己念出來，亮一顆心。只看有沒有完成，不看答對率。
   function weekOpen(item, today) { return !!item && !!item.week && item.week <= contentWeek(today); }
-  function finishStory(st, story, today) {
+  function finishStory(st, story, today, C) {
     if (!weekOpen(story, today)) return fail("這段故事還沒開放");
     if (!st.cards[story.needCard]) return fail("先讀 " + story.speaker + " 的信");
     st.stories[story.id] = st.stories[story.id] || {};
@@ -350,7 +414,9 @@
     st.stories[story.id].done = today;
     st.hearts[story.speaker] = (st.hearts[story.speaker] || 0) + 1;
     note(st, today, "和 " + story.speaker + " 的故事：" + story.title, story.speak);
-    return done(st, story.speaker + " 的心亮了一顆 ❤️");
+    var came = C ? arrive(st, today, C) : [];
+    var r = done(st, story.speaker + " 的心亮了一顆 ❤️" + (came.length ? "　🏠 " + came.join("、") + " 搬來小鎮了！" : ""));
+    r.arrived = came; return r;
   }
 
   // ── 存檔 ────────────────────────────────────────────────────────────
@@ -401,13 +467,27 @@
     Object.keys(C.LANDMARKS).forEach(function (k) { st.town[k] = int(town[k], C.LANDMARKS[k].stages.length); });
     ["cards", "stories", "quests"].forEach(function (k) {
       var src = obj(raw[k]);
+      // 只收認得的欄位：日期欄位要是日期、choice 只能是短代號（這些值會被插進畫面）
       Object.keys(src).forEach(function (id) {
         var v = obj(src[id]), o = {};
-        Object.keys(v).forEach(function (f) { o[str(f, 20)] = str(v[f], 40); });
+        ["readAt", "done", "date"].forEach(function (f) { if (DATE_RE.test(v[f])) o[f] = v[f]; });
+        if (/^[a-z0-9]{1,8}$/.test(v.choice)) o.choice = v.choice;
         st[k][str(id, 60)] = o;
       });
     });
     Object.keys(C.VILLAGERS).forEach(function (v) { var h = obj(raw.hearts)[v]; if (h != null) st.hearts[v] = int(h, 10); });
+    // 任務：只收這一階的；這一階 5 個都交了就升階（不重發獎勵）；還沒開放的階段一律不算
+    var tk = obj(raw.tasks), own = Object.prototype.hasOwnProperty;
+    Object.keys(C.LANDMARKS).forEach(function (k) {
+      var stages = C.LANDMARKS[k].stages;
+      stages.forEach(function (sg) { sg.tasks.forEach(function (t) {
+        if (own.call(tk, t.id)) st.tasks[t.id] = { date: DATE_RE.test(obj(tk[t.id]).date) ? tk[t.id].date : today };
+      }); });
+      while (st.town[k] < stages.length && stages[st.town[k]].tasks.every(function (t) { return st.tasks[t.id]; })) st.town[k]++;
+      stages.forEach(function (sg, i) { if (i !== st.town[k]) sg.tasks.forEach(function (t) { delete st.tasks[t.id]; }); });
+    });
+    var rs = obj(raw.residents);
+    Object.keys(rs).forEach(function (v) { if (own.call(C.VILLAGERS, v) && C.VILLAGERS[v].arrive) st.residents[v] = DATE_RE.test(rs[v]) ? rs[v] : today; });
     var book = obj(raw.book);
     Object.keys(book).forEach(function (wk) {
       if (!DATE_RE.test(wk) || !Array.isArray(book[wk])) return;
@@ -433,6 +513,7 @@
     }
     if (!st) st = newState(student, today);
     rollWeek(st, today);
+    arrive(st, today, C);
     st._baseRev = raw && !problem ? st.rev : -1;
     return { st: st, problem: problem };
   }
@@ -457,7 +538,8 @@
     growth: growth, isRipe: isRipe, caredToday: caredToday,
     addField: addField, move: move, plant: plant, care: care, harvest: harvest,
     sell: sell, buy: buy, gather: gather, placeDecor: placeDecor, storeDecor: storeDecor,
-    canRepair: canRepair, repair: repair, materialNeed: materialNeed, nextGoal: nextGoal,
+    materialNeed: materialNeed, nextGoal: nextGoal, stageView: stageView, doTask: doTask, haveOf: haveOf,
+    isResident: isResident, prosperity: prosperity, prosperityLevel: prosperityLevel, arrive: arrive,
     readCard: readCard, answer: answer, deliver: deliver, finishStory: finishStory,
     key: key, load: load, save: save, normalize: normalize, weekOpen: weekOpen,
   };

@@ -7,6 +7,8 @@
 //   <cardId>_<choiceId>.mp3 對話的每個回答
 //   <storyId>.mp3           故事全文
 //   <storyId>_say.mp3       孩子要自己念的最後一句
+//   villager_<名字>(_motto)、arrive_<名字>  村民自我介紹、口頭禪、搬來的信
+//   task_<任務id>.mp3       廣場任務
 const fs = require("fs");
 const path = require("path");
 const C = require("../town/town_content.js");
@@ -23,7 +25,9 @@ Object.values(C.WEEKS).forEach(w => {
 Object.keys(C.VILLAGERS).forEach(v => {
   items["villager_" + v] = C.VILLAGERS[v].intro;
   items["villager_" + v + "_motto"] = C.VILLAGERS[v].motto;
+  if (C.VILLAGERS[v].welcome) items["arrive_" + v] = C.VILLAGERS[v].welcome;
 });
+Object.values(C.LANDMARKS).forEach(L => L.stages.forEach(sg => sg.tasks.forEach(t => { items["task_" + t.id] = t.en; })));
 const out = path.join(__dirname, "audio_town.json");
 fs.writeFileSync(out, JSON.stringify({
   outdir: path.join(__dirname, "..", "audio", "town").replace(/\\/g, "/"),

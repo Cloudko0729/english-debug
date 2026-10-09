@@ -59,9 +59,9 @@ ok("體力條先補滿 60，其餘進儲備", G.st.energy.wallet === 60 && G.st.
 
 console.log("\n── 新手提示與目標卡 ──");
 ok("第一次玩有開田提示", el("hint").hidden === false && el("hint").innerHTML.includes("綠色空地"));
-ok("農莊頁有下一個目標", el("goal").innerHTML.includes("下一個目標") && el("goal").innerHTML.includes("🪵 木材 0/5"));
+ok("農莊頁的目標卡列出這一階要的東西", el("goal").innerHTML.includes("清理廣場") && el("goal").innerHTML.includes("🪵 木材 0/4") && el("goal").innerHTML.includes("🌼 花圃 0/1"));
 ok("目標卡說明體力會存起來", el("goal").innerHTML.includes("不會不見"));
-ok("撿木材按鈕寫出用途", el("woodBtn").innerHTML.includes("修廣場用 0/5"));
+ok("撿木材按鈕寫出用途", el("woodBtn").innerHTML.includes("修廣場用 0/4"));
 
 console.log("\n── 種田一輪 ──");
 const fid = run("st.farm.fields[0].id");
@@ -95,6 +95,33 @@ ok("村民分頁看到本週的信", el("p-mail").innerHTML.includes("Mia"));
 ok("下週的卡片還看不到", !el("p-mail").innerHTML.includes("w2-mail-leo"));
 ok("小鎮分頁有廣場", el("p-town").innerHTML.includes("小鎮廣場"));
 
+console.log("\n── 廣場任務與繁榮度 ──");
+{
+  const html = el("p-town").innerHTML;
+  const shown = (html.match(/class="task[ "]/g) || []).length;
+  ok("5 個任務同時列出來", shown === 5, shown);
+  ok("每個任務都有村民頭像和語音", ["p1-wood", "p1-weeds", "p1-stone", "p1-carrot", "p1-flowers"].every(id => html.includes(`task_${id}`)));
+  ok("合計需求列出來", html.includes("還需要") && html.includes("🪨 石頭 0/3"));
+  ok("不夠的會說去哪裡拿", html.includes("去商店買"));
+  ok("後面兩階有預告", html.includes("石板路與燈籠") && html.includes("小舞台"));
+  ok("有繁榮度條和下一位村民的門檻", html.includes("繁榮度") && html.includes("繁榮度到 <b>60</b>"));
+  ok("頂端也有繁榮度", el("hud").innerHTML.includes("繁榮度"));
+  ok("村民分頁還沒有 Nora", !el("p-mail").innerHTML.includes("openFolk('Nora')"));
+  // 直接把第 1 階交到剩最後一個，交最後一個時應該升階、Nora 搬來、跳出慶祝卡
+  run("['p1-wood','p1-weeds','p1-stone','p1-flowers'].forEach(id => st.tasks[id] = { date: today() }); st.inv.carrot = 2");
+  run("act(T.doTask(st,'plaza','p1-carrot',today(),C))");
+  ok("交完第 5 個升到第 2 階", G.st.town.plaza === 1);
+  ok("跳出慶祝卡：階段完成＋Nora 搬來", el("folkModal").hidden === false && el("folkBox").innerHTML.includes("第 1 階修好了") && el("folkBox").innerHTML.includes("Nora 搬來小鎮了"));
+  ok("慶祝卡可以聽 Nora 的信", el("folkBox").innerHTML.includes("arrive_Nora"));
+  run("closeFolk(); tab('mail')");
+  ok("村民分頁多了 Nora 和她的信", el("p-mail").innerHTML.includes("openFolk('Nora')") && el("p-mail").innerHTML.includes("新鄰居"));
+  ok("新信有紅點", el("t-mail").innerHTML.includes("dot"));
+  run("tab('town')");
+  ok("第 2 階的任務換上來（有 Nora 的）", el("p-town").innerHTML.includes("task_p2-rice") && !el("p-town").innerHTML.includes("task_p1-wood"));
+  ok("這一階用不到木材時按鈕會說", el("woodBtn").innerHTML.includes("用不到"));
+  run("tab('farm')");
+}
+
 console.log("\n── 村民人物卡 ──");
 run("tab('mail')");
 ok("村民分頁有可以點的頭像", el("p-mail").innerHTML.includes("openFolk('Mia')") && el("p-mail").innerHTML.includes("img/mia.png"));
@@ -111,8 +138,9 @@ run("closeFolk()"); ok("可以關掉", el("folkModal").hidden === true);
 console.log("\n── 村民 ──");
 run("markRead('w1-mail-mia')");
 ok("讀信後解鎖故事", el("p-mail").innerHTML.includes("沒有書名的書") && el("p-mail").innerHTML.includes("我念好了"));
-run("act(T.finishStory(st,findStory('w1-story-mia'),today()))");
-ok("念完 Mia 亮一顆心", G.st.hearts.Mia === 1);
+const miaH0 = G.st.hearts.Mia || 0;
+run("act(T.finishStory(st,findStory('w1-story-mia'),today(),C))");
+ok("念完 Mia 亮一顆心", G.st.hearts.Mia === miaH0 + 1);
 run("act(T.answer(st,findCard('w1-talk-leo'),'a',today()))");
 ok("對話選擇被記住", el("p-mail").innerHTML.includes("choice picked"));
 day("2026-10-11"); run("tab('mail')");
@@ -123,6 +151,12 @@ console.log("\n── 每顆 🔊 都有音檔 ──");
 const all = [...el("p-mail").innerHTML.matchAll(/townAudio\('([^']+)'\)/g)].map(m => m[1]);
 const missing = [...new Set(all)].filter(k => !fs.existsSync(path.join(__dirname, "..", "audio", "town", k + ".mp3")));
 ok("村民分頁 " + new Set(all).size + " 個音檔全部存在", all.length > 10 && !missing.length, missing);
+// 還沒輪到的任務、還沒搬來的村民也要先有音檔
+const later = [];
+run("C.LANDMARKS.plaza.stages").forEach(sg => sg.tasks.forEach(t => later.push("task_" + t.id)));
+Object.keys(run("C.VILLAGERS")).forEach(v => { later.push("villager_" + v, "villager_" + v + "_motto"); if (run(`C.VILLAGERS.${v}.welcome`)) later.push("arrive_" + v); });
+const miss2 = later.filter(k => !fs.existsSync(path.join(__dirname, "..", "audio", "town", k + ".mp3")));
+ok("廣場任務與所有村民 " + later.length + " 個音檔全部存在", !miss2.length, miss2);
 run("tapThing(st.farm.fields[1].id)");
 const words = [...el("sheet").innerHTML.matchAll(/wordAudio\('([^']+)'\)/g)].map(m => m[1]);
 Object.values(run("C.CROPS")).concat(Object.values(run("C.DECOR"))).forEach(x => words.push(x.en));
@@ -141,12 +175,12 @@ setTimeout(() => {
 
 console.log("\n── 存檔 ──");
 const saved = JSON.parse(store.get("kidsTown.v1.test"));
-ok("存檔寫進 localStorage", saved.schemaVersion === 1 && saved.hearts.Mia === 1);
+ok("存檔寫進 localStorage", saved.schemaVersion === 1 && saved.hearts.Mia === miaH0 + 1);
 run("pick('albert')"); ok("換帳號是另一份存檔", G.st.student === "albert" && G.st.hearts.Mia === undefined);
 ok("一般帳號沒有不限量按鈕", !el("hud").innerHTML.includes("testBoost"));
 const apA = run("T.apTotal(st)"); run("testBoost(50)");
 ok("一般帳號就算呼叫也不會加", run("T.apTotal(st)") === apA);
-run("pick('test')"); ok("換回來進度還在", G.st.hearts.Mia === 1);
+run("pick('test')"); ok("換回來進度還在", G.st.hearts.Mia === miaH0 + 1);
 ok("存檔帶 savedAt（雲端合併用）", !isNaN(Date.parse(JSON.parse(store.get("kidsTown.v1.test")).savedAt)));
 
 console.log("\n── 登入與雲端 ──");
@@ -160,6 +194,13 @@ ok("連續存檔不會每一步都推雲端", pushed.length === 0 && run("cloudT
 run("pushCloud(true)");
 ok("切到背景時推一次", pushed.length === 1 && pushed[0] === "albert", pushed);
 
-console.log(`\n${fail === 0 ? "✅" : "❌"} pass ${pass} / fail ${fail}\n`);
-process.exit(fail ? 1 : 0);
+console.log("\n── 匯入舊存檔：村民馬上搬來 ──");
+run("pick('test')");
+const rawOld = JSON.parse(JSON.stringify(G.st)); rawOld.town = { plaza: 2 }; rawOld.tasks = {}; rawOld.residents = {};
+run(`importSave({ files: [{ text: () => Promise.resolve(${JSON.stringify(JSON.stringify(rawOld))}) }], value: "" })`);
+setTimeout(() => {
+  ok("匯入兩階制存檔：Nora、Ben 直接搬來", G.st.town.plaza === 2 && !!G.st.residents.Nora && !!G.st.residents.Ben, G.st.residents);
+  console.log(`\n${fail === 0 ? "✅" : "❌"} pass ${pass} / fail ${fail}\n`);
+  process.exit(fail ? 1 : 0);
+}, 20);
 }, 50);

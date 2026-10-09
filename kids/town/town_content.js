@@ -20,18 +20,71 @@
   };
   var BUY = { carrot_seed: 1, potato_seed: 1, flowers: 10, tree: 10, lantern: 10, bench: 10, mailbox: 10, rock: 10 };
   var COST = { plant: 2, care: 1, gather: 2 };
-  var NAME = { wood: "木材", stone: "石頭", crop: "作物", carrot_seed: "紅蘿蔔種子", potato_seed: "馬鈴薯種子" };
+  var NAME = { wood: "木材", stone: "石頭", crop: "作物", carrot_seed: "紅蘿蔔種子", potato_seed: "馬鈴薯種子",
+               rice: "稻米", carrot: "紅蘿蔔", potato: "馬鈴薯", ap: "體力", money: "小鎮幣",
+               flowers: "花圃", tree: "小樹", lantern: "燈籠", bench: "長椅", mailbox: "信箱", rock: "石頭堆" };
 
-  // 小鎮地標。小樣只有廣場的前兩階段。
+  // 小鎮地標：每一階 5 個任務，同時列出來，順序隨意。5 個都交完，這一階就修好了。
+  // 每個任務由一位村民提出（有英文語音 task_<id>），交完那位村民 +1 好感、小鎮繁榮度 +10。
+  // need.item：ap＝出力幫忙（直接扣體力）、wood/stone/rice/carrot/potato＝背包、花圃燈籠等＝背包裡還沒擺出去的裝飾。
+  // 估算（Codex 從零模擬，含播種、照料、出售、買種子與裝飾）：8 片田一起種是 34／44／46 體力，合計約 124，
+  // 一週約 50 體力的話要兩週半；只用一片田要 43／71／73，因為照料費沒有分攤。新手提示要鼓勵多開田。
   var LANDMARKS = {
     plaza: {
       zh: "小鎮廣場", en: "the plaza",
-      look: ["🚧 雜草和破木板", "🧹 清乾淨了，有一張長桌", "🎪 掛上燈串，可以辦活動"],
+      look: ["🚧 雜草和破木板", "🧹 清乾淨了，有一張長桌", "🏮 鋪好石板路，掛上燈籠", "🎪 有一座小舞台，可以辦活動"],
       stages: [
-        { ap: 6, money: 20, items: { crop: 2, wood: 5 }, done: "清掉雜草，Leo 用木材做了一張長桌" },
-        { ap: 6, money: 20, items: { crop: 2, stone: 5 }, done: "鋪好石板路，掛上燈串" },
+        { title: "清理廣場", done: "雜草清光了，Leo 做好一張長桌", tasks: [
+          { id: "p1-wood", by: "Leo", need: { item: "wood", n: 4 },
+            en: "I need four pieces of wood. I will make a long table.", zh: "我需要四塊木材，我要做一張長桌。" },
+          { id: "p1-weeds", by: "Leo", need: { item: "ap", n: 4 },
+            en: "There are so many weeds! Can you help me pull them?", zh: "雜草好多！你可以幫我拔嗎？" },
+          { id: "p1-stone", by: "Leo", need: { item: "stone", n: 3 },
+            en: "Please bring three stones. I want to fix the old wall.", zh: "請帶三顆石頭來，我想修好那道舊牆。" },
+          { id: "p1-carrot", by: "Mia", need: { item: "carrot", n: 2 },
+            en: "Working is hard. Let's eat some carrots! Can you bring two?", zh: "工作好累，我們來吃紅蘿蔔吧！你可以帶兩根來嗎？" },
+          { id: "p1-flowers", by: "Mia", need: { item: "flowers", n: 1 },
+            en: "The plaza looks sad. Could we put some flowers here?", zh: "廣場看起來好冷清。我們可以在這裡放一些花嗎？" },
+        ] },
+        { title: "石板路與燈籠", done: "鋪好石板路，晚上也有燈籠照亮", tasks: [
+          { id: "p2-stone", by: "Leo", need: { item: "stone", n: 5 },
+            en: "Let's make a stone path. We need five stones.", zh: "我們來鋪一條石板路，需要五顆石頭。" },
+          { id: "p2-carry", by: "Leo", need: { item: "ap", n: 6 },
+            en: "These stones are heavy! Help me carry them, please.", zh: "這些石頭好重！請幫我一起搬。" },
+          { id: "p2-rice", by: "Nora", need: { item: "rice", n: 3 },
+            en: "I want to make rice cakes for everyone. Please bring three bags of rice.", zh: "我想做米糕給大家吃，請帶三袋稻米來。" },
+          { id: "p2-potato", by: "Nora", need: { item: "potato", n: 2 },
+            en: "Potato bread is my favorite. Can you bring two potatoes?", zh: "馬鈴薯麵包是我的最愛。你可以帶兩顆馬鈴薯來嗎？" },
+          { id: "p2-lantern", by: "Mia", need: { item: "lantern", n: 2 },
+            en: "At night the plaza is too dark. Two lanterns will help.", zh: "晚上廣場太暗了，兩個燈籠就會好很多。" },
+        ] },
+        { title: "小舞台", done: "小舞台搭好了！Ben 在上面打鼓，大家都來看", tasks: [
+          { id: "p3-wood", by: "Leo", need: { item: "wood", n: 6 },
+            en: "We need six pieces of wood to build a stage.", zh: "我們需要六塊木材來搭舞台。" },
+          { id: "p3-drums", by: "Ben", need: { item: "ap", n: 6 },
+            en: "Let's get ready for the show! Help me set up the drums.", zh: "來準備表演吧！幫我把鼓架好。" },
+          { id: "p3-bench", by: "Ben", need: { item: "bench", n: 1 },
+            en: "People need a place to sit. Can we get a bench?", zh: "大家需要地方坐。我們可以弄一張長椅嗎？" },
+          { id: "p3-carrot", by: "Nora", need: { item: "carrot", n: 3 },
+            en: "I'm making carrot cake for the party. I need three carrots.", zh: "我要為派對做紅蘿蔔蛋糕，需要三根紅蘿蔔。" },
+          { id: "p3-flowers", by: "Mia", need: { item: "flowers", n: 2 },
+            en: "Flowers make everyone smile. Can you bring two more flowers for the stage?", zh: "花會讓大家微笑。你可以再帶兩個花圃來布置舞台嗎？" },
+        ] },
       ],
     },
+  };
+
+  // 繁榮度：不存檔，每次從進度算出來（任務、修好的階段、好感、擺出來的裝飾）。
+  // 新村民在繁榮度到門檻時搬來；門檻都不超過「只靠任務」就拿得到的分數，
+  // 所以照著任務做一定會搬來，多照顧村民、多佈置農莊只會讓他們早一點來。
+  var PROSPERITY = {
+    task: 10, stage: 20, heart: 3, decor: 2, decorMax: 10,
+    levels: [
+      { at: 0,   zh: "冷清的小村",   emoji: "🏚️" },
+      { at: 60,  zh: "有點人氣的小村", emoji: "🏡" },
+      { at: 130, zh: "熱鬧的小村",   emoji: "🏘️" },
+      { at: 200, zh: "繁榮的小鎮",   emoji: "🎪" },
+    ],
   };
 
   // 村民設定。個性要跟已經寫好的信和故事對得上：
@@ -68,6 +121,58 @@
       introZh: "哈囉！我是 Leo，小鎮的木匠。我拿著鐵鎚幾乎什麼都修得好。我很容易生氣，但我道歉也很快！",
       motto: "Let's fix it together!", mottoZh: "我們一起把它修好吧！",
       about: "Leo 是小鎮最愛熱鬧的人，每次修好東西都要找朋友來一起吃馬鈴薯慶祝。他脾氣來得快去得也快，生氣完會馬上說對不起。他最大的心願是把舊廣場修成大家都想來的地方。",
+    },
+    // 之後搬來的村民：arrive＝繁榮度門檻，welcome＝搬來時寄來的信（語音 arrive_<名字>）
+    Nora: {
+      emoji: "👩‍🍳", img: "img/nora.png", zh: "Nora，麵包師", arrive: 60,
+      role: { en: "baker", zh: "麵包師" }, place: { en: "the bakery by the plaza", zh: "廣場旁的麵包店" },
+      traits: [{ en: "warm", zh: "熱心" }, { en: "busy", zh: "很忙" }, { en: "a little forgetful", zh: "有點健忘" }],
+      likes: [
+        { emoji: "🍞", en: "bread", zh: "麵包" },
+        { emoji: "🌾", en: "rice", zh: "稻米", item: "rice" },
+        { emoji: "🥔", en: "potatoes", zh: "馬鈴薯", item: "potato" },
+        { emoji: "🎶", en: "singing", zh: "唱歌" } ],
+      dislikes: [{ emoji: "🔥", en: "burnt bread", zh: "烤焦的麵包" }, { emoji: "⏰", en: "being late", zh: "遲到" }],
+      intro: "Good morning! I'm Nora, the baker. I get up very early to make bread. Please come and eat with me!",
+      introZh: "早安！我是 Nora，麵包師。我每天很早起來做麵包。歡迎來跟我一起吃！",
+      motto: "Bread tastes better with friends.", mottoZh: "跟朋友一起吃，麵包更好吃。",
+      about: "Nora 聽說小鎮廣場變乾淨了，就先搬來開麵包店，兒子 Ben 之後也會來。她每天天還沒亮就起床烤麵包，一邊揉麵一邊唱歌。她常常忘記東西放哪裡，但從來不會忘記大家喜歡吃什麼。",
+      welcome: "Hello, neighbor! I just moved to your town. My son Ben will join me soon. I opened a small bakery by the plaza. Come and try my bread!",
+      welcomeZh: "哈囉，鄰居！我剛搬來你們小鎮，兒子 Ben 很快也會來。我在廣場旁開了一家小麵包店，來嚐嚐我的麵包吧！",
+    },
+    Ben: {
+      emoji: "🧒", img: "img/ben.png", zh: "Ben，愛打鼓的男孩", arrive: 130,
+      role: { en: "student", zh: "學生" }, place: { en: "the room above the bakery", zh: "麵包店樓上" },
+      traits: [{ en: "energetic", zh: "精力旺盛" }, { en: "funny", zh: "很搞笑" }, { en: "a little careless", zh: "有點粗心" }],
+      likes: [
+        { emoji: "⚽", en: "soccer", zh: "足球" },
+        { emoji: "🥁", en: "playing the drums", zh: "打鼓" },
+        { emoji: "🏮", en: "lanterns", zh: "燈籠", item: "lantern" },
+        { emoji: "🍙", en: "rice cakes", zh: "米糕", item: "rice" } ],
+      dislikes: [{ emoji: "🌧️", en: "rainy days", zh: "下雨天" }, { emoji: "🛏️", en: "going to bed early", zh: "早早上床睡覺" }],
+      intro: "Hey! I'm Ben. I'm twelve years old. I love soccer and music. One day I want to play the drums on a big stage!",
+      introZh: "嘿！我是 Ben，今年十二歲。我喜歡足球和音樂。總有一天，我要在大舞台上打鼓！",
+      motto: "Let's make some noise!", mottoZh: "我們來熱鬧一下吧！",
+      about: "Ben 是 Nora 的兒子，跟你差不多大。他最討厭下雨天，因為不能踢球——剛好跟喜歡下雨天的 Mia 相反。他打鼓很大聲，Mia 會摀住耳朵，但每次都還是笑著聽完。",
+      welcome: "Hi! I'm Ben, Nora's son. The plaza looks so cool now! Can we build a stage? I want to play the drums there.",
+      welcomeZh: "嗨！我是 Ben，Nora 的兒子。廣場現在好酷！我們可以搭一座舞台嗎？我想在那裡打鼓。",
+    },
+    Sam: {
+      emoji: "🧓", img: "img/sam.png", zh: "Sam，旅行商人", arrive: 200,
+      role: { en: "traveling merchant", zh: "旅行商人" }, place: { en: "his cart by the gate", zh: "小鎮入口的推車" },
+      traits: [{ en: "calm", zh: "沉穩" }, { en: "smart", zh: "聰明" }, { en: "a little mysterious", zh: "有點神祕" }],
+      likes: [
+        { emoji: "🗺️", en: "old maps", zh: "舊地圖" },
+        { emoji: "🍵", en: "hot tea", zh: "熱茶" },
+        { emoji: "🪨", en: "pretty stones", zh: "漂亮的石頭", item: "stone" },
+        { emoji: "🌳", en: "trees", zh: "樹", item: "tree" } ],
+      dislikes: [{ emoji: "📦", en: "messy shelves", zh: "亂七八糟的貨架" }, { emoji: "⌛", en: "waiting in line", zh: "排隊等候" }],
+      intro: "Hello there. I'm Sam. I travel from town to town and sell things from far away. This town is lively now, so I want to stay a while.",
+      introZh: "你好。我是 Sam。我從一個小鎮旅行到另一個小鎮，賣遠方來的東西。這個小鎮現在很熱鬧，所以我想待一陣子。",
+      motto: "A fair price makes everyone happy.", mottoZh: "公道的價錢讓大家都開心。",
+      about: "Sam 推著一台裝滿寶物的木推車，走過很多地方。他聽說這個小鎮越來越熱鬧，就決定留下來。他說等小鎮再繁榮一點，就要在廣場旁邊開一個市集。",
+      welcome: "Hello! This town looks happy. Can I park my cart here? I want to open a market here one day.",
+      welcomeZh: "你好！這個小鎮看起來好快樂。我可以把推車停在這裡嗎？我希望有一天在這裡開個市集。",
     },
   };
 
@@ -157,7 +262,7 @@
   });
 
   var api = { CROPS: CROPS, SELL: SELL, BUY: BUY, DECOR: DECOR, COST: COST, NAME: NAME,
-              LANDMARKS: LANDMARKS, VILLAGERS: VILLAGERS, WEEKS: WEEKS };
+              LANDMARKS: LANDMARKS, PROSPERITY: PROSPERITY, VILLAGERS: VILLAGERS, WEEKS: WEEKS };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.TownContent = api;
 })(typeof window !== "undefined" ? window : this);

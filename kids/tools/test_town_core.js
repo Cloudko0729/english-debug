@@ -117,31 +117,117 @@ console.log("\n── 買賣與委託不加成 ──");
   ok("同一個委託不能交兩次", !T.deliver(st, card, "2026-10-05", C).ok);
 }
 
-console.log("\n── 材料夠了就不給撿 ──");
+console.log("\n── 廣場任務：每階 5 個、同時開放 ──");
+{
+  const L = C.LANDMARKS.plaza;
+  eq("廣場有 3 階", L.stages.length, 3);
+  ok("每階剛好 5 個任務", L.stages.every(sg => sg.tasks.length === 5));
+  ok("外觀比階段多一張（含還沒修）", L.look.length === L.stages.length + 1);
+  const ids = L.stages.flatMap(sg => sg.tasks.map(t => t.id));
+  ok("任務 id 不重複", new Set(ids).size === ids.length);
+  ok("每個任務的人都是村民、東西都認得", L.stages.every(sg => sg.tasks.every(t => C.VILLAGERS[t.by] && t.need.n > 0 &&
+    (t.need.item === "ap" || t.need.item in T.newState("x", "2026-10-05").inv || C.DECOR[t.need.item]))));
+  // 照著任務做一定會搬來：某位村民第一次出任務的那一階之前，只靠任務拿到的繁榮度要過他的門檻
+  const P = C.PROSPERITY;
+  L.stages.forEach((sg, i) => sg.tasks.forEach(t => {
+    const a = C.VILLAGERS[t.by].arrive || 0, guaranteed = i * (5 * P.task + P.stage);
+    ok(`第 ${i + 1} 階 ${t.by} 的任務：前面的任務保證夠他搬來（${guaranteed} ≥ ${a}）`, guaranteed >= a);
+  }));
+  const last = Object.keys(C.VILLAGERS).map(v => C.VILLAGERS[v].arrive || 0).sort((a, b) => b - a)[0];
+  ok("最後一位村民修完三階一定會來", L.stages.length * (5 * P.task + P.stage) >= last);
+}
 {
   const st = fresh(); give(st, 7);
-  eq("廣場兩階總共要 5 木材", T.materialNeed(st, "wood", C), 5);
-  for (let i = 0; i < 5; i++) T.gather(st, "wood", "2026-10-05", C);
+  const g = T.stageView(st, "plaza", C);
+  eq("一開始 5 個都沒交", g.left, 5);
+  ok("合計需求有木材 4、石頭 3", g.parts.some(x => x.k === "wood" && x.need === 4) && g.parts.some(x => x.k === "stone" && x.need === 3));
+  eq("撿木材的上限是這一階要的量", T.materialNeed(st, "wood", C), 4);
+  for (let i = 0; i < 4; i++) T.gather(st, "wood", "2026-10-05", C);
   const ap = T.apTotal(st);
-  ok("第 6 份木材不給撿", !T.gather(st, "wood", "2026-10-05", C).ok);
+  ok("第 5 份木材不給撿", !T.gather(st, "wood", "2026-10-05", C).ok);
   eq("也不扣體力", T.apTotal(st), ap);
-  ok("石頭還能撿", T.gather(st, "stone", "2026-10-05", C).ok);
-  st.money = 20; st.inv.rice = 2; T.repair(st, "plaza", "2026-10-05", C);
-  eq("修完第一階後就不再需要木材", T.materialNeed(st, "wood", C), 0);
-  const g = T.nextGoal(st, C);
-  ok("下一個目標是第 2 階、要石頭", g.stage === 1 && g.parts.some(x => x.k === "stone" && x.need === 5 && x.have === 1), g);
-  st.town.plaza = 2;
-  ok("全部修完就沒有下一個目標", T.nextGoal(st, C) === null);
+  ok("交木材任務", T.doTask(st, "plaza", "p1-wood", "2026-10-05", C).ok);
+  eq("木材扣掉了", st.inv.wood, 0);
+  eq("交完就不再需要木材", T.materialNeed(st, "wood", C), 0);
+  ok("同一個任務不能交兩次", !T.doTask(st, "plaza", "p1-wood", "2026-10-05", C).ok);
+  eq("Leo 好感 +1", st.hearts.Leo, 1);
+  eq("繁榮度 = 任務 10 + 好感 3", T.prosperity(st, C), 13);
+  ok("別階的任務現在不能交", !T.doTask(st, "plaza", "p2-stone", "2026-10-05", C).ok);
+  const a0 = T.apTotal(st);
+  ok("出力任務直接扣體力", T.doTask(st, "plaza", "p1-weeds", "2026-10-05", C).ok && T.apTotal(st) === a0 - 4);
+  const r = T.doTask(st, "plaza", "p1-flowers", "2026-10-05", C);
+  ok("背包沒有花圃交不了，還會提醒可以收回", !r.ok && r.msg.includes("收回"), r.msg);
+  st.decorOwned.flowers = 1; T.placeDecor(st, "flowers", 12, 2, "2026-10-05", C);
+  ok("擺在農莊的不算", !T.doTask(st, "plaza", "p1-flowers", "2026-10-05", C).ok);
+  T.storeDecor(st, st.farm.decor[0].id);
+  ok("收回背包就能交", T.doTask(st, "plaza", "p1-flowers", "2026-10-05", C).ok && st.decorOwned.flowers === 0);
+  st.inv.stone = 3; st.inv.carrot = 2;
+  ok("交第 4 個", T.doTask(st, "plaza", "p1-stone", "2026-10-05", C).ok);
+  eq("還沒滿 5 個不會升階", st.town.plaza, 0);
+  ok("Nora 還沒搬來", !T.isResident(st, "Nora", C));
+  const fin = T.doTask(st, "plaza", "p1-carrot", "2026-10-05", C);
+  ok("第 5 個交完：升到第 2 階", fin.stageDone && st.town.plaza === 1, fin);
+  ok("繁榮度過 60，Nora 搬來", fin.arrived.includes("Nora") && T.isResident(st, "Nora", C), fin);
+  eq("繁榮度 = 5 任務 + 1 階 + 5 顆心", T.prosperity(st, C), 50 + 20 + 15);
+  ok("第 2 階的需求換成石頭", T.materialNeed(st, "stone", C) === 5 && T.materialNeed(st, "wood", C) === 0);
+  const g2 = T.nextGoal(st, C);
+  ok("下一個目標是第 2 階", g2.stage === 1 && g2.left === 5 && g2.title === "石板路與燈籠", g2);
+}
+{
+  const st = fresh();
+  st.town.plaza = 1; st.inv.rice = 3;
+  ok("還沒搬來的村民不能交任務", !T.doTask(st, "plaza", "p2-rice", "2026-10-05", C).ok);
+  T.arrive(st, "2026-10-05", C);
+  ok("前一階修好就夠 Nora 搬來", T.isResident(st, "Nora", C));
+  st.town.plaza = 3;
+  ok("三階都修好就沒有下一個目標", T.nextGoal(st, C) === null && !T.doTask(st, "plaza", "p3-wood", "2026-10-05", C).ok);
 }
 
-console.log("\n── 廣場修復 ──");
+console.log("\n── 繁榮度與新村民 ──");
 {
-  const st = fresh(); give(st, 1); st.money = 25; st.inv.rice = 2; st.inv.wood = 4;
-  ok("木材不夠修不了", !T.repair(st, "plaza", "2026-10-05", C).ok);
-  st.inv.wood = 5;
-  ok("材料齊了可以修", T.repair(st, "plaza", "2026-10-05", C).ok);
-  eq("扣掉 6 體力 20 幣 2 作物 5 木材", [T.apTotal(st), st.money, st.inv.rice, st.inv.wood], [4, 5, 0, 0]);
-  eq("廣場到第 1 階", st.town.plaza, 1);
+  const st = fresh();
+  eq("一開始 0", T.prosperity(st, C), 0);
+  ok("一開始只有 Mia、Leo", ["Mia", "Leo"].every(v => T.isResident(st, v, C)) && !["Nora", "Ben", "Sam"].some(v => T.isResident(st, v, C)));
+  st.decorOwned.flowers = 30;
+  for (let i = 0; i < 12; i++) T.placeDecor(st, "flowers", 4 + i % 8, 6 + Math.floor(i / 8), "2026-10-05", C);
+  eq("裝飾最多算 10 件", T.prosperity(st, C), 20);
+  st.hearts.Mia = 10; st.hearts.Leo = 10;
+  const r = T.placeDecor(st, "flowers", 12, 8, "2026-10-05", C);
+  ok("好感和裝飾也能讓村民早點來", T.prosperity(st, C) === 80 && T.isResident(st, "Nora", C) && r.arrived.includes("Nora"), r);
+  st.farm.decor.slice().forEach(d => T.storeDecor(st, d.id));
+  ok("收回裝飾、分數掉了，搬來的人也不會走", T.prosperity(st, C) === 60 && T.isResident(st, "Nora", C));
+  const lv = T.prosperityLevel(st, C);
+  ok("等級：60 是第 2 級，下一位是 Ben", lv.index === 1 && lv.next.at === 130 && lv.nextVillager === "Ben", lv);
+}
+{
+  // 舊存檔：兩階制時修好兩階 → 讀進來是第 3 階，Nora、Ben 直接搬來
+  const store = new Map(), S = { getItem: k => store.get(k) || null, setItem: (k, v) => store.set(k, v) };
+  const old = fresh(); old.town.plaza = 2; delete old.tasks; delete old.residents;
+  store.set(T.key("test"), JSON.stringify(old));
+  const { st } = T.load(S, "test", "2026-10-09", C);
+  ok("舊存檔修好兩階：現在在第 3 階", st.town.plaza === 2 && T.stageView(st, "plaza", C).title === "小舞台");
+  ok("舊存檔讀進來，Nora、Ben 搬來、Sam 還沒", T.isResident(st, "Nora", C) && T.isResident(st, "Ben", C) && !T.isResident(st, "Sam", C));
+  const raw = JSON.parse(JSON.stringify(st)); raw.tasks = { "p3-wood": { date: "2026-10-09" }, "evil<script>": { date: "x" } };
+  raw.residents = { Sam: "2026-10-09", Mia: "2026-10-01", Nobody: "2026-10-01" };
+  const n = T.normalize(raw, "test", "2026-10-09", C);
+  ok("存檔整理：只留認得的任務", Object.keys(n.tasks).join() === "p3-wood");
+  ok("存檔整理：只留後來搬來的村民", Object.keys(n.residents).join() === "Sam");
+}
+
+console.log("\n── 審查修正：匯入存檔的任務要對得上階段 ──");
+{
+  const base = JSON.parse(JSON.stringify(fresh()));
+  const all1 = Object.fromEntries(C.LANDMARKS.plaza.stages[0].tasks.map(t => [t.id, { date: "2026-10-06" }]));
+  const a = T.normalize(Object.assign({}, base, { tasks: all1 }), "test", "2026-10-09", C);
+  ok("第 1 階 5 個都交了卻停在 0 階：整理後升到第 2 階", a.town.plaza === 1 && !Object.keys(a.tasks).length, a.town);
+  const b = T.normalize(Object.assign({}, base, { tasks: { "p3-wood": { date: "2026-10-06" }, "p1-wood": { date: "2026-10-06" } } }), "test", "2026-10-09", C);
+  ok("還沒開放的階段的任務不算", Object.keys(b.tasks).join() === "p1-wood" && T.prosperity(b, C) === 10);
+  const c = T.normalize(Object.assign({}, base, { tasks: { constructor: { date: "2026-10-06" } }, residents: { constructor: "2026-10-06" } }), "test", "2026-10-09", C);
+  ok("constructor 這種內建名字不會混進來", !Object.keys(c.tasks).length && !Object.keys(c.residents).length);
+  const d = T.normalize(Object.assign({}, base, { stories: { "w1-story-mia": { done: "<img src=x onerror=alert(1)>" } },
+    cards: { "w1-talk-mia": { readAt: "2026-10-06", choice: "<b>", evil: "x" } } }), "test", "2026-10-09", C);
+  ok("故事完成日不是日期就丟掉", !("done" in d.stories["w1-story-mia"]));
+  ok("卡片只留認得的欄位", JSON.stringify(d.cards["w1-talk-mia"]) === JSON.stringify({ readAt: "2026-10-06" }));
 }
 
 console.log("\n── 經濟上限：每 1 體力最多賺 2 幣 ──");
