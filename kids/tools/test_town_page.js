@@ -61,7 +61,7 @@ console.log("\n── 新手提示與目標卡 ──");
 ok("第一次玩有開田提示", el("hint").hidden === false && el("hint").innerHTML.includes("綠色空地"));
 ok("農莊頁的目標卡列出這一階要的東西", el("goal").innerHTML.includes("清理廣場") && el("goal").innerHTML.includes("🪵 木材 0/4") && el("goal").innerHTML.includes("🌼 花圃 0/1"));
 ok("目標卡說明體力會存起來", el("goal").innerHTML.includes("不會不見"));
-ok("撿木材按鈕寫出用途", el("woodBtn").innerHTML.includes("修廣場用 0/4"));
+ok("撿木材按鈕寫出用途", el("woodBtn").innerHTML.includes("小鎮廣場任務用 0/4"));
 
 console.log("\n── 種田一輪 ──");
 const fid = run("st.farm.fields[0].id");
@@ -95,6 +95,17 @@ ok("村民分頁看到本週的信", el("p-mail").innerHTML.includes("Mia"));
 ok("下週的卡片還看不到", !el("p-mail").innerHTML.includes("w2-mail-leo"));
 ok("小鎮分頁有廣場", el("p-town").innerHTML.includes("小鎮廣場"));
 
+console.log("\n── 照料：加豐收機率 ──");
+ok("農莊說明寫出不照料也會熟", html.includes("不照料也會長大") && html.includes("+10%"));
+{
+  const keep = run("JSON.stringify(st.farm.fields[0])"); run("Object.assign(st.farm.fields[0], { crop: 'rice', plantedDate: today(), careDates: [today()], days: 3 })"); const id = run("st.farm.fields[0].id");
+  if (id) {
+    run(`tapThing('${id}')`);
+    ok("點田看得到還要幾天、豐收機率", el("sheet").innerHTML.includes("天成熟") && el("sheet").innerHTML.includes("收成 2 個的機率"));
+    run(`sel = null; st.farm.fields[0] = ${keep}; render()`);
+  } else ok("（找不到生長中的田，跳過）", true);
+}
+
 console.log("\n── 廣場任務與繁榮度 ──");
 {
   const html = el("p-town").innerHTML;
@@ -119,7 +130,20 @@ console.log("\n── 廣場任務與繁榮度 ──");
   run("tab('town')");
   ok("第 2 階的任務換上來（有 Nora 的）", el("p-town").innerHTML.includes("task_p2-rice") && !el("p-town").innerHTML.includes("task_p1-wood"));
   ok("這一階用不到木材時按鈕會說", el("woodBtn").innerHTML.includes("用不到"));
-  run("tab('farm')");
+  ok("市集還鎖著，寫出開放條件", el("p-town").innerHTML.includes("週末市集：小鎮廣場全部修好後開放"));
+  run("tab('shop')");
+  ok("商店：南瓜種子還沒開賣、寫出條件", el("p-shop").innerHTML.includes("pumpkin seeds") && el("p-shop").innerHTML.includes("週末市集第 1 階修好後開賣"));
+  ok("商店：還沒開賣的不能買", !el("p-shop").innerHTML.includes("buy(st,'pumpkin_seed'"));
+  // 廣場第 3 階交到剩最後一個 → 交完應該說市集開放了
+  run("st.town.plaza = 2; st.tasks = {}; ['p3-wood','p3-drums','p3-bench','p3-carrot'].forEach(id => st.tasks[id] = { date: today() }); st.decorOwned.flowers = 2; T.arrive(st, today(), C)");
+  run("act(T.doTask(st,'plaza','p3-flowers',today(),C))");
+  ok("廣場修完：慶祝卡說市集開放了", G.st.town.plaza === 3 && el("folkBox").innerHTML.includes("週末市集開放了"));
+  run("closeFolk(); tab('town')");
+  ok("小鎮分頁換成市集的 5 個任務", ["m1-wood", "m1-build", "m1-stone", "m1-potato", "m1-lantern"].every(id => el("p-town").innerHTML.includes("task_" + id)));
+  ok("交市集任務的按鈕帶市集", el("p-town").innerHTML.includes("doTask(st,'market','m1-wood'"));
+  ok("廣場縮成一行打勾", el("p-town").innerHTML.includes("小鎮廣場 ✅"));
+  ok("農莊目標卡換成市集", el("goal").innerHTML.includes("週末市集") && el("goal").innerHTML.includes("搭起攤位"));
+  run("st.town.plaza = 1; st.town.market = 0; st.tasks = {}; tab('farm')");
 }
 
 console.log("\n── 村民人物卡 ──");
@@ -153,7 +177,7 @@ const missing = [...new Set(all)].filter(k => !fs.existsSync(path.join(__dirname
 ok("村民分頁 " + new Set(all).size + " 個音檔全部存在", all.length > 10 && !missing.length, missing);
 // 還沒輪到的任務、還沒搬來的村民也要先有音檔
 const later = [];
-run("C.LANDMARKS.plaza.stages").forEach(sg => sg.tasks.forEach(t => later.push("task_" + t.id)));
+Object.values(run("C.LANDMARKS")).forEach(L => L.stages.forEach(sg => sg.tasks.forEach(t => later.push("task_" + t.id))));
 Object.keys(run("C.VILLAGERS")).forEach(v => { later.push("villager_" + v, "villager_" + v + "_motto"); if (run(`C.VILLAGERS.${v}.welcome`)) later.push("arrive_" + v); });
 const miss2 = later.filter(k => !fs.existsSync(path.join(__dirname, "..", "audio", "town", k + ".mp3")));
 ok("廣場任務與所有村民 " + later.length + " 個音檔全部存在", !miss2.length, miss2);

@@ -3,13 +3,20 @@
 (function (root) {
   "use strict";
 
+  // days＝種下幾天後成熟（不照料也會熟）；unlock＝地標修到第幾階才開賣種子
   var CROPS = {
-    rice:   { en: "rice",   zh: "稻米",   emoji: "🌾", freeSeed: true },
-    carrot: { en: "carrot", zh: "紅蘿蔔", emoji: "🥕" },
-    potato: { en: "potato", zh: "馬鈴薯", emoji: "🥔" },
+    rice:    { en: "rice",    zh: "稻米",   emoji: "🌾", freeSeed: true },
+    carrot:  { en: "carrot",  zh: "紅蘿蔔", emoji: "🥕" },
+    potato:  { en: "potato",  zh: "馬鈴薯", emoji: "🥔" },
+    corn:    { en: "corn",    zh: "玉米",   emoji: "🌽", unlock: { market: 1 } },
+    pumpkin: { en: "pumpkin", zh: "南瓜",   emoji: "🎃", unlock: { market: 1 }, days: 4 },
   };
-  // 售價：免費種子 4、付費種子作物 5（種子 1 幣 → 淨 4），每片播種 2 體力 → 每體力最多 2 幣
-  var SELL = { rice: 4, carrot: 5, potato: 5 };
+  // 售價：每片扣掉種子錢都是淨 4 幣，播種 2 體力 → 不照料時每體力 2 幣。
+  // 照料一天 +10% 收成 2 個的機率（3 天作物最多 30%），8 片田全照料時期望值約每體力 2.3 幣。
+  // 南瓜長 4 天、照料最多 40%，所以售價跟紅蘿蔔一樣，全照料才不會超過每體力 2.4 幣
+  var SELL = { rice: 4, carrot: 5, potato: 5, corn: 5, pumpkin: 5 };
+  // 照料：每照料一天，收成時拿到 2 個的機率 +10%
+  var CARE_BONUS = 10;
   var DECOR = {
     flowers: { en: "flowers",  zh: "花圃",   emoji: "🌼" },
     tree:    { en: "tree",     zh: "小樹",   emoji: "🌳" },
@@ -17,12 +24,15 @@
     bench:   { en: "bench",    zh: "長椅",   emoji: "🪑" },
     mailbox: { en: "mailbox",  zh: "信箱",   emoji: "📮" },
     rock:    { en: "rock",     zh: "石頭堆", emoji: "🪨" },
+    fountain: { en: "fountain", zh: "噴水池", emoji: "⛲", unlock: { market: 2 } },
   };
-  var BUY = { carrot_seed: 1, potato_seed: 1, flowers: 10, tree: 10, lantern: 10, bench: 10, mailbox: 10, rock: 10 };
+  var BUY = { carrot_seed: 1, potato_seed: 1, corn_seed: 1, pumpkin_seed: 1,
+              flowers: 10, tree: 10, lantern: 10, bench: 10, mailbox: 10, rock: 10, fountain: 20 };
   var COST = { plant: 2, care: 1, gather: 2 };
   var NAME = { wood: "木材", stone: "石頭", crop: "作物", carrot_seed: "紅蘿蔔種子", potato_seed: "馬鈴薯種子",
-               rice: "稻米", carrot: "紅蘿蔔", potato: "馬鈴薯", ap: "體力", money: "小鎮幣",
-               flowers: "花圃", tree: "小樹", lantern: "燈籠", bench: "長椅", mailbox: "信箱", rock: "石頭堆" };
+               corn_seed: "玉米種子", pumpkin_seed: "南瓜種子",
+               rice: "稻米", carrot: "紅蘿蔔", potato: "馬鈴薯", corn: "玉米", pumpkin: "南瓜", ap: "體力", money: "小鎮幣",
+               flowers: "花圃", tree: "小樹", lantern: "燈籠", bench: "長椅", mailbox: "信箱", rock: "石頭堆", fountain: "噴水池" };
 
   // 小鎮地標：每一階 5 個任務，同時列出來，順序隨意。5 個都交完，這一階就修好了。
   // 每個任務由一位村民提出（有英文語音 task_<id>），交完那位村民 +1 好感、小鎮繁榮度 +10。
@@ -72,6 +82,51 @@
         ] },
       ],
     },
+    // 市集：Sam 的推車停下來的地方。after＝前一個地標全部修好才開放。
+    // 第 1 階修好開賣玉米、南瓜種子；第 2 階修好開賣噴水池。
+    market: {
+      zh: "週末市集", en: "the market", after: "plaza",
+      look: ["🌾 小鎮入口的空地", "🛖 搭好木頭攤位", "🪧 掛上大招牌，擺滿了花", "🏪 熱鬧的週末市集"],
+      stages: [
+        { title: "搭起攤位", done: "木頭攤位搭好了，Sam 的推車有了固定的位子；商店開始賣玉米和南瓜種子", tasks: [
+          { id: "m1-wood", by: "Sam", need: { item: "wood", n: 5 },
+            en: "A market needs stalls. Can you bring five pieces of wood?", zh: "市集需要攤位。你可以帶五塊木材來嗎？" },
+          { id: "m1-build", by: "Leo", need: { item: "ap", n: 6 },
+            en: "I will build the stalls. Can you help me hold the boards?", zh: "我來搭攤位。你可以幫我扶著木板嗎？" },
+          { id: "m1-stone", by: "Sam", need: { item: "stone", n: 4 },
+            en: "The ground is too soft. Please bring four stones for the floor.", zh: "地面太軟了。請帶四顆石頭來鋪地板。" },
+          { id: "m1-potato", by: "Nora", need: { item: "potato", n: 3 },
+            en: "I want to sell potato bread at the market. I need three potatoes.", zh: "我想在市集賣馬鈴薯麵包，需要三顆馬鈴薯。" },
+          { id: "m1-lantern", by: "Ben", need: { item: "lantern", n: 1 },
+            en: "Let's hang a lantern on the gate. Then people can find us at night.", zh: "我們在大門掛一個燈籠吧，這樣晚上大家也找得到我們。" },
+        ] },
+        { title: "招牌與花", done: "掛上大招牌，攤位前擺滿了花；商店開始賣噴水池", tasks: [
+          { id: "m2-corn", by: "Sam", need: { item: "corn", n: 3 },
+            // an ear of corn＝一根玉米
+            en: "Can you grow some corn for me? I need three ears of corn for my stall.", zh: "你可以幫我種一些玉米嗎？我的攤位需要三根玉米。" },
+          { id: "m2-pumpkin", by: "Nora", need: { item: "pumpkin", n: 2 },
+            en: "I'm making pumpkin soup! Can you bring two pumpkins?", zh: "我要煮南瓜湯！你可以帶兩顆南瓜來嗎？" },
+          { id: "m2-flowers", by: "Lily", need: { item: "flowers", n: 2 },
+            en: "Flowers make the market look nice. Can you help me add two flower beds?", zh: "花讓市集變漂亮。你可以幫我多擺兩個花圃嗎？" },
+          { id: "m2-sign", by: "Ben", need: { item: "ap", n: 6 },
+            en: "Let's paint a big sign for the market. Can you help me?", zh: "我們來幫市集畫一塊大招牌吧。你可以幫我嗎？" },
+          { id: "m2-wood", by: "Leo", need: { item: "wood", n: 6 },
+            en: "The tables are too small. I need six more pieces of wood.", zh: "桌子太小了，我還需要六塊木材。" },
+        ] },
+        { title: "第一次市集日", done: "第一次市集日！大家都來逛，Sam 說這是他見過最溫暖的小鎮", tasks: [
+          { id: "m3-mailbox", by: "Tom", need: { item: "mailbox", n: 1 },
+            en: "People will send letters about the market. We need a mailbox here.", zh: "大家會寄信聊市集的事，這裡需要一個信箱。" },
+          { id: "m3-carry", by: "Tom", need: { item: "ap", n: 8 },
+            en: "So many boxes! Help me carry them to the stalls.", zh: "箱子好多！幫我把它們搬到攤位上。" },
+          { id: "m3-pumpkin", by: "Sam", need: { item: "pumpkin", n: 3 },
+            en: "Big pumpkins make people stop and look. Please bring three.", zh: "大南瓜會讓大家停下來看。請帶三顆來。" },
+          { id: "m3-tree", by: "Lily", need: { item: "tree", n: 1 },
+            en: "A tree gives us shade. Can we plant one by the stalls?", zh: "樹可以給我們遮陰。我們可以在攤位旁邊種一棵嗎？" },
+          { id: "m3-rice", by: "Nora", need: { item: "rice", n: 4 },
+            en: "I'll make rice balls for the shoppers. I need four bags of rice.", zh: "我要幫來逛的人做飯糰，需要四袋稻米。" },
+        ] },
+      ],
+    },
   };
 
   // 繁榮度：不存檔，每次從進度算出來（任務、修好的階段、好感、擺出來的裝飾）。
@@ -84,6 +139,9 @@
       { at: 60,  zh: "有點人氣的小村", emoji: "🏡" },
       { at: 130, zh: "熱鬧的小村",   emoji: "🏘️" },
       { at: 200, zh: "繁榮的小鎮",   emoji: "🎪" },
+      { at: 270, zh: "有市集的小鎮", emoji: "🛖" },
+      { at: 340, zh: "人來人往的小鎮", emoji: "🏪" },
+      { at: 420, zh: "四季都熱鬧的小鎮", emoji: "🌟" },
     ],
   };
 
@@ -174,6 +232,40 @@
       welcome: "Hello! This town looks happy. Can I park my cart here? I want to open a market here one day.",
       welcomeZh: "你好！這個小鎮看起來好快樂。我可以把推車停在這裡嗎？我希望有一天在這裡開個市集。",
     },
+    Lily: {
+      emoji: "💐", img: "img/lily.png", zh: "Lily，花店老闆", arrive: 270,
+      role: { en: "florist", zh: "花店老闆" }, place: { en: "my flower cart", zh: "我的花車" },
+      traits: [{ en: "kind", zh: "善良" }, { en: "dreamy", zh: "愛做夢" }, { en: "a little messy", zh: "有點亂" }],
+      likes: [
+        { emoji: "🌼", en: "flowers", zh: "花", item: "flowers" },
+        { emoji: "🌳", en: "trees", zh: "樹", item: "tree" },
+        { emoji: "🎨", en: "drawing", zh: "畫畫" },
+        { emoji: "☀️", en: "sunny mornings", zh: "晴朗的早晨" } ],
+      dislikes: [{ emoji: "🌬️", en: "cold wind", zh: "冷風" }, { emoji: "👣", en: "people stepping on flowers", zh: "有人踩到花" }],
+      intro: "Hi! I'm Lily. I sell flowers. I think every town needs more colors!",
+      introZh: "嗨！我是 Lily，我賣花。我覺得每個小鎮都需要多一點顏色！",
+      motto: "Let's add some color!", mottoZh: "我們來加一點顏色吧！",
+      about: "Lily 是 Mia 從小一起長大的好朋友。她聽 Mia 介紹小鎮，就帶著一整車的花搬來。她的攤位總是有點亂，花盆和畫筆堆在一起，但每個經過的人都會忍不住停下來看。",
+      welcome: "Hello! I'm Lily, Mia's old friend. Mia told me about your town. Can I sell flowers here?",
+      welcomeZh: "哈囉！我是 Lily，Mia 的老朋友。Mia 跟我介紹了你們的小鎮。我可以在這裡賣花嗎？",
+    },
+    Tom: {
+      emoji: "📬", img: "img/tom.png", zh: "Tom，郵差", arrive: 340,
+      role: { en: "mail carrier", zh: "郵差" }, place: { en: "the post office by the market", zh: "市集旁的郵局" },
+      traits: [{ en: "friendly", zh: "友善" }, { en: "fast", zh: "動作很快" }, { en: "talkative", zh: "很愛聊天" }],
+      likes: [
+        { emoji: "📮", en: "mailboxes", zh: "信箱", item: "mailbox" },
+        { emoji: "🚶", en: "long walks", zh: "散步走很遠" },
+        { emoji: "🍙", en: "rice balls", zh: "飯糰", item: "rice" },
+        { emoji: "💬", en: "talking with everyone", zh: "跟大家聊天" } ],
+      dislikes: [{ emoji: "✉️", en: "lost letters", zh: "寄丟的信" }, { emoji: "☔", en: "wet letters", zh: "被雨淋濕的信" }],
+      intro: "Hi there! I'm Tom, the mail carrier. I walk all over town every day. I know everyone's name!",
+      introZh: "你好！我是 Tom，郵差。我每天走遍整個小鎮，我知道每個人的名字！",
+      motto: "Every letter has a story.", mottoZh: "每一封信都有一個故事。",
+      about: "Tom 以前每個月才來小鎮送一次信。現在小鎮越來越熱鬧，信多到一個月送不完，他乾脆搬來住。他走路很快、話很多，送一封信常常要聊半小時。",
+      welcome: "Good morning! I'm Tom. Your town gets so many letters now, so I moved here to help. I will bring your mail every day!",
+      welcomeZh: "早安！我是 Tom。你們小鎮現在的信好多，所以我搬來幫忙。我每天都會幫你送信！",
+    },
   };
 
   // 每週 5 張卡（2 信、2 對話、1 委託）＋ 1 段心事件。週次用課表週的週日。
@@ -261,7 +353,7 @@
     WEEKS[wk].story.week = wk;
   });
 
-  var api = { CROPS: CROPS, SELL: SELL, BUY: BUY, DECOR: DECOR, COST: COST, NAME: NAME,
+  var api = { CROPS: CROPS, SELL: SELL, BUY: BUY, DECOR: DECOR, COST: COST, NAME: NAME, CARE_BONUS: CARE_BONUS,
               LANDMARKS: LANDMARKS, PROSPERITY: PROSPERITY, VILLAGERS: VILLAGERS, WEEKS: WEEKS };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.TownContent = api;

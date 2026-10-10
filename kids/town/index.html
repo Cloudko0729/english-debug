@@ -198,7 +198,7 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
         <button class="btn" id="stoneBtn" onclick="doGather('stone')"></button>
       </div>
       <div class="sheet" id="sheet" hidden></div>
-      <p class="muted">點空地可以開田或擺裝飾；點田可以播種、收成或搬家。作物要照料 3 天，每天照料一次，隔天才會長大。沒來的日子它會停在原地等你，不會枯掉。</p>
+      <p class="muted">點空地可以開田或擺裝飾；點田可以播種、收成或搬家。作物種下後時間到就會成熟（多數 3 天），不照料也會長大，也不會枯掉。每天照料一次（全部的田只要 1 ⚡），每照料一天，收成時拿到 <b>2 個</b>的機率 +10%。</p>
     </section>
 
     <section class="pane" id="p-shop" hidden></section>
@@ -355,7 +355,7 @@ function whereToGet(k) {
 // 下一個目標：孩子每次打開農莊都知道自己在攢什麼
 function renderGoal() {
   const g = T.nextGoal(st, C), el = document.getElementById("goal");
-  if (!g) { el.innerHTML = `<div class="goal">🎉 廣場修好了！下一個地標還在準備中。</div>`; return; }
+  if (!g) { el.innerHTML = `<div class="goal">🎉 小鎮的地標都修好了！下一個地標還在準備中。</div>`; return; }
   el.innerHTML = `<div class="goal" onclick="tab('town')" role="button" tabindex="0">
     <div class="ttl">🎯 ${g.name}第 ${g.stage + 1} 階「${esc(g.title)}」：任務完成 ${5 - g.left}/5${g.ready ? "　✅ 有任務可以交了，點這裡！" : ""}</div>
     <div class="parts">${g.parts.map(x => `<span class="pt${x.have >= x.need ? " ok" : ""}">${itemIcon(x.k)} ${itemName(x.k)} ${Math.min(x.have, x.need)}/${x.need}</span>`).join("")}</div>
@@ -378,7 +378,7 @@ function renderGather() {
     if (!need) { b.disabled = true; b.innerHTML = `${em} 這一階用不到${zh}`; return; }
     b.disabled = have >= need;
     b.innerHTML = have >= need ? `${em} ${zh}夠了 ✓ <span class="cost">${have}/${need}</span>`
-      : `${em} 撿${zh}（修廣場用 ${have}/${need}） <span class="cost">2⚡</span>`;
+      : `${em} 撿${zh}（${(T.nextGoal(st, C) || {}).name || "小鎮"}任務用 ${have}/${need}） <span class="cost">2⚡</span>`;
   });
 }
 
@@ -401,8 +401,8 @@ function renderMap(d) {
   st.farm.fields.forEach(f => {
     const g = T.growth(f, d), ripe = T.isRipe(f, d), wet = T.caredToday(f, d);
     const c = f.crop && C.CROPS[f.crop];
-    const em = !f.crop ? "" : ripe ? c.emoji : ["🟤", "🌱", "🌿"][g];
-    const pips = f.crop && !ripe ? "●".repeat(g) + "○".repeat(T.GROW_DAYS - g) : "";
+    const days = T.cropDays(f), em = !f.crop ? "" : ripe ? c.emoji : g === 0 ? "🟤" : g < days - 1 ? "🌱" : "🌿";
+    const pips = f.crop && !ripe ? "●".repeat(g) + "○".repeat(days - g) : "";
     h += `<div class="field${wet ? " wet" : ""}${ripe ? " ripe" : ""}${sel === f.id ? " sel" : ""}"
       style="grid-column:${f.x + 1}/span 2;grid-row:${f.y + 1}/span 2" onclick="tapThing('${f.id}')"
       aria-label="${c ? c.zh : "空田"}">${em}${pips ? `<span class="pips">${pips}</span>` : ""}</div>`;
@@ -414,7 +414,7 @@ function renderMap(d) {
   const growing = st.farm.fields.filter(f => f.crop && !T.isRipe(f, d) && !T.caredToday(f, d)).length;
   const btn = document.getElementById("careBtn");
   btn.disabled = !growing;
-  btn.innerHTML = growing ? `🚿 照料 ${growing} 片田 <span class="cost">1⚡</span>` : (st.farm.lastCare === d ? "🚿 今天照料過了" : "🚿 沒有要照料的田");
+  btn.innerHTML = growing ? `🚿 照料 ${growing} 片田（豐收機率 +${C.CARE_BONUS}%） <span class="cost">${st.farm.lastCare === d ? "今天付過了" : C.COST.care + "⚡"}</span>` : (st.farm.lastCare === d ? "🚿 今天照料過了，明天再來" : "🚿 沒有要照料的田");
   document.getElementById("moveBar").hidden = !moving;
   if (moving) document.getElementById("moveMsg").textContent = "點一塊空地放下" + (moving.type ? "：" + C.DECOR[moving.type].zh : "");
 }
@@ -456,14 +456,16 @@ function renderSheet(d) {
     const c = f.crop && C.CROPS[f.crop], g = T.growth(f, d), ripe = T.isRipe(f, d);
     let h = `<h2>${c ? `${c.emoji} ${c.en} <span class="muted">${c.zh}</span> <button class="btn" onclick="play(wordAudio('${c.en}'))">🔊</button>` : "🟫 空田"}</h2>`;
     if (!f.crop) {
-      h += `<p class="muted">要種什麼？播種要 2 ⚡。</p><div class="actions">` + Object.keys(C.CROPS).map(k => {
+      h += `<p class="muted">要種什麼？播種要 2 ⚡。</p><div class="actions">` + Object.keys(C.CROPS).filter(k => T.unlocked(st, C.CROPS[k])).map(k => {
         const cc = C.CROPS[k], n = cc.freeSeed ? "免費" : `種子 ${st.inv[k + "_seed"] || 0}`;
-        return `<button class="btn" onclick="act(T.plant(st,'${f.id}','${k}',today(),C))">${cc.emoji} ${cc.en} <span class="cost">${n}</span></button>`;
+        return `<button class="btn" onclick="act(T.plant(st,'${f.id}','${k}',today(),C))">${cc.emoji} ${cc.en} <span class="cost">${n}・${cc.days || T.GROW_DAYS} 天</span></button>`;
       }).join("") + `</div>`;
     } else if (ripe) {
       h += `<p>成熟了！收成不花體力。</p><div class="actions"><button class="btn go" onclick="act(T.harvest(st,'${f.id}',today(),C));sel=null;render()">🧺 收成</button></div>`;
     } else {
-      h += `<p>照料了 ${g}/${T.GROW_DAYS} 天。${T.caredToday(f, d) ? "今天照料過了，明天會長大。" : "今天還沒照料。"}</p>`;
+      const left = T.cropDays(f) - g, pct = T.doubleChance(f, C);
+      h += `<p>再 <b>${left}</b> 天成熟（不照料也會熟）。</p>
+        <p>💧 照料了 ${T.careDays(f)} 天：收成 2 個的機率 <b>${pct}%</b>。${T.caredToday(f, d) ? "今天照料過了。" : `今天還沒照料，照料一次 +${C.CARE_BONUS}%。`}</p>`;
     }
     h += `<div class="actions"><button class="btn" onclick="moving={id:'${f.id}'};sel=null;render()">↔ 搬家（免費）</button><button class="btn" onclick="sel=null;render()">關閉</button></div>`;
     el.innerHTML = h; return;
@@ -485,26 +487,28 @@ function doGather(m) { act(T.gather(st, m, today(), C)); }
 
 // ── 商店與背包 ─────────────────────────────────────────────────────
 function renderShop() {
-  const sellRows = Object.keys(C.SELL).map(k => {
+  const sellRows = Object.keys(C.SELL).filter(k => T.unlocked(st, C.CROPS[k]) || st.inv[k]).map(k => {
     const c = C.CROPS[k], n = st.inv[k] || 0;
     return `<div class="item"><div class="top"><span class="em">${c.emoji}</span><div><div class="en">${c.en}</div><div class="zh">${c.zh}　有 <span class="n">${n}</span></div></div></div>
       <button class="btn" ${n ? "" : "disabled"} onclick="act(T.sell(st,'${k}',1,C))">賣 1 個 +${C.SELL[k]}🪙</button>
       <button class="btn" ${n > 1 ? "" : "disabled"} onclick="act(T.sell(st,'${k}',${n},C))">全部賣</button></div>`;
   }).join("");
-  const seeds = ["carrot", "potato"].map(k => {
-    const c = C.CROPS[k];
-    return `<div class="item"><div class="top"><span class="em">${c.emoji}</span><div><div class="en">${c.en} seeds</div><div class="zh">${c.zh}種子　有 <span class="n">${st.inv[k + "_seed"] || 0}</span></div></div></div>
-      <button class="btn" onclick="act(T.buy(st,'${k}_seed',1,C))">買 1 包 −${C.BUY[k + "_seed"]}🪙</button></div>`;
+  // 還沒開賣的東西也列出來，寫清楚修到哪裡才會賣
+  const lockNote = thing => Object.keys(thing.unlock || {}).map(k => `${C.LANDMARKS[k].zh}第 ${thing.unlock[k]} 階修好後開賣`).join("、");
+  const seeds = Object.keys(C.CROPS).filter(k => !C.CROPS[k].freeSeed).map(k => {
+    const c = C.CROPS[k], open = T.unlocked(st, c);
+    return `<div class="item"><div class="top"><span class="em">${c.emoji}</span><div><div class="en">${c.en} seeds</div><div class="zh">${c.zh}種子　有 <span class="n">${st.inv[k + "_seed"] || 0}</span>　${c.days || T.GROW_DAYS} 天熟、賣 ${C.SELL[k]}🪙</div></div></div>
+      ${open ? `<button class="btn" onclick="act(T.buy(st,'${k}_seed',1,C))">買 1 包 −${C.BUY[k + "_seed"]}🪙</button>` : `<span class="muted">🔒 ${lockNote(c)}</span>`}</div>`;
   }).join("");
   const decor = Object.keys(C.DECOR).map(k => {
-    const dd = C.DECOR[k];
+    const dd = C.DECOR[k], open = T.unlocked(st, dd);
     return `<div class="item"><div class="top"><span class="em">${dd.emoji}</span><div><div class="en">${dd.en}</div><div class="zh">${dd.zh}　背包 <span class="n">${st.decorOwned[k] || 0}</span></div></div></div>
-      <button class="btn" onclick="act(T.buy(st,'${k}',1,C))">買 −${C.BUY[k]}🪙</button></div>`;
+      ${open ? `<button class="btn" onclick="act(T.buy(st,'${k}',1,C))">買 −${C.BUY[k]}🪙</button>` : `<span class="muted">🔒 ${lockNote(dd)}</span>`}</div>`;
   }).join("");
   document.getElementById("p-shop").innerHTML = `
     <h2>📦 出貨</h2><p class="muted">作物賣掉換小鎮幣。稻米種子永遠免費，錢花光也能重新開始。</p><div class="grid2">${sellRows}</div>
     <h2 style="margin-top:16px">🌱 種子</h2><div class="grid2">${seeds}</div>
-    <h2 style="margin-top:16px">🌼 裝飾</h2><p class="muted">擺在農莊裡不會賺錢，純粹好看。買了可以隨時免費搬家或收回。</p><div class="grid2">${decor}</div>
+    <h2 style="margin-top:16px">🌼 裝飾</h2><p class="muted">擺在農莊裡不會賺錢，但每件會讓繁榮度 +${C.PROSPERITY.decor}（最多算 ${C.PROSPERITY.decorMax} 件），有些村民的任務也要用到。買了可以隨時免費搬家或收回。</p><div class="grid2">${decor}</div>
     <h2 style="margin-top:16px">🎒 材料</h2><p>🪵 wood <span class="n">${st.inv.wood}</span>　🪨 stone <span class="n">${st.inv.stone}</span></p>`;
 }
 
@@ -601,12 +605,13 @@ function openFolk(v) {
 }
 function closeFolk() { document.getElementById("folkModal").hidden = true; }
 function celebrate(r) {
-  const L = C.LANDMARKS.plaza, stage = st.town.plaza || 0, came = r.arrived || [];
+  const key = r.key || "plaza", L = C.LANDMARKS[key], stage = st.town[key] || 0, came = r.arrived || [];
   const m = document.getElementById("folkModal");
   m.classList.remove("showzh");
   let h = `<div class="cele">`;
   if (r.stageDone) h += `<h3>🎉 ${L.zh}第 ${stage} 階修好了！</h3><div class="big">${L.look[stage].split(" ")[0]}</div>
     <p>${esc(L.look[stage].split(" ").slice(1).join(" "))}</p><p class="muted">🏘️ 繁榮度現在是 ${T.prosperity(st, C)}</p>`;
+  (r.opened || []).forEach(k => h += `<h3>🆕 ${C.LANDMARKS[k].zh}開放了！</h3><p class="muted">到「小鎮」分頁看新的任務。</p>`);
   came.forEach(v => { const p = C.VILLAGERS[v];
     h += `<h3>🏠 ${v} 搬來小鎮了！</h3><div>${pic(v)}</div><p><b>${esc(p.role.en)}</b> <span class="muted">${esc(p.role.zh)}</span></p>
       <div class="en">${esc(p.welcome || p.intro)}</div><div class="zh">${esc(p.welcomeZh || p.introZh)}</div>
@@ -633,12 +638,13 @@ function prosperHtml() {
     <div class="residents">${residents().map(n => `<span onclick="openFolk('${n}')">${pic(n)}</span>`).join("")}${soonHtml()}</div>
     <div class="muted" style="font-size:.78rem">繁榮度怎麼來：完成任務 +${P.task}、修好一階 +${P.stage}、村民每顆 ❤️ +${P.heart}、農莊擺裝飾每件 +${P.decor}（最多算 ${P.decorMax} 件）</div></div>`;
 }
-function taskHtml(x) {
+const LM_ICON = { plaza: "🏛️", market: "🧺" };
+function taskHtml(x, key) {
   const t = x.task, id = t.id, k = t.need.item, enough = x.have >= x.need;
   let foot;
   if (x.done) foot = `<span>✅ 已經交給 ${t.by} 了</span>`;
   else if (!x.here) foot = `<span class="muted">🔒 ${t.by} 還沒搬來</span>`;
-  else foot = `<button class="btn go" ${x.ready ? "" : "disabled"} onclick="act(T.doTask(st,'plaza','${id}',today(),C))">交給 ${t.by}</button>`;
+  else foot = `<button class="btn go" ${x.ready ? "" : "disabled"} onclick="act(T.doTask(st,'${key}','${id}',today(),C))">交給 ${t.by}</button>`;
   return `<div class="task${x.done ? " done" : ""}${x.ready ? " ready" : ""}${zhOpen.has(id) ? " showzh" : ""}">
     <div class="who2"><span onclick="openFolk('${t.by}')">${pic(t.by, true)}</span> ${t.by}</div>
     <div class="en">${esc(t.en)}</div><div class="zh">${esc(t.zh)}</div>
@@ -646,18 +652,26 @@ function taskHtml(x) {
     ${x.done || enough ? "" : `<div class="where">👉 ${whereToGet(k)}</div>`}
     <div class="actions"><button class="btn" onclick="play(townAudio('task_${id}'))">🔊</button><button class="btn" onclick="showZh('${id}')">看中文</button>${foot}</div></div>`;
 }
-function renderTown(d) {
-  const L = C.LANDMARKS.plaza, stage = st.town.plaza || 0, g = T.stageView(st, "plaza", C);
-  let h = prosperHtml();
-  h += `<h2>🏛️ ${L.zh}</h2><div class="landmark"><div class="look">${L.look[stage].split(" ")[0]}</div><div><b>${L.look[stage].split(" ").slice(1).join(" ")}</b>
+// 修好的地標縮成一行、正在修的整個攤開、還沒開放的只寫開放條件
+function landmarkHtml(key) {
+  const L = C.LANDMARKS[key], stage = st.town[key] || 0, look = L.look[stage], icon = LM_ICON[key] || "🏠";
+  const head = `<div class="landmark"><div class="look">${look.split(" ")[0]}</div><div><b>${look.split(" ").slice(1).join(" ")}</b>
     <div class="muted">已修好 ${stage}/${L.stages.length} 階</div></div></div>`;
-  if (g) {
-    h += `<h3>第 ${stage + 1} 階「${esc(g.title)}」：任務完成 ${5 - g.left}/5</h3>
-      <p class="muted">5 個任務都交完，這一階就修好了：${esc(g.done)}。順序隨便你。</p>
-      <div class="sum"><b>還需要：</b>${g.parts.map(x => `<span class="${x.have >= x.need ? "ok" : ""}">${itemIcon(x.k)} ${itemName(x.k)} ${Math.min(x.have, x.need)}/${x.need}</span>`).join("")}</div>
-      <div class="tasks">${g.tasks.map(taskHtml).join("")}</div>`;
-    L.stages.slice(stage + 1).forEach((sg, j) => h += `<div class="later">🔒 第 ${stage + 2 + j} 階「${esc(sg.title)}」：上一階修好後開放</div>`);
-  } else h += `<p>✅ 廣場三階都修好了！下一個地標還在準備中。</p>`;
+  if (!T.landmarkOpen(st, key, C)) return `<div class="later">🔒 ${icon} ${L.zh}：${C.LANDMARKS[L.after].zh}全部修好後開放</div>`;
+  const g = T.stageView(st, key, C);
+  if (!g) return `<h2>${icon} ${L.zh} ✅</h2>${head}`;
+  let h = `<h2>${icon} ${L.zh}</h2>${head}
+    <h3>第 ${stage + 1} 階「${esc(g.title)}」：任務完成 ${5 - g.left}/5</h3>
+    <p class="muted">5 個任務都交完，這一階就修好了：${esc(g.done)}。順序隨便你。</p>
+    <div class="sum"><b>還需要：</b>${g.parts.map(x => `<span class="${x.have >= x.need ? "ok" : ""}">${itemIcon(x.k)} ${itemName(x.k)} ${Math.min(x.have, x.need)}/${x.need}</span>`).join("")}</div>
+    <div class="tasks">${g.tasks.map(x => taskHtml(x, key)).join("")}</div>`;
+  L.stages.slice(stage + 1).forEach((sg, j) => h += `<div class="later">🔒 第 ${stage + 2 + j} 階「${esc(sg.title)}」：上一階修好後開放</div>`);
+  return h;
+}
+function renderTown(d) {
+  let h = prosperHtml();
+  h += Object.keys(C.LANDMARKS).map(landmarkHtml).join("");
+  if (!T.nextGoal(st, C)) h += `<p>🎉 小鎮的地標都修好了！下一個地標還在準備中。</p>`;
   const weeks = Object.keys(st.book).sort().reverse();
   h += `<h2 style="margin-top:18px">📖 四季生活冊</h2>` + (weeks.length ? `<div class="book">` + weeks.map(w =>
     `<h3>${w.slice(5).replace("-", "/")} 那週（${T.season(w)}季）</h3><ul>${st.book[w].map(e =>

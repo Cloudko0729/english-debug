@@ -7,7 +7,8 @@
 // 定案規則見設計報告《四季小鎮》：
 //   體力只來自學習：完成一份 +10，每週最多 70（週六 00:00 換週），體力條上限 60，溢出進儲備。
 //   小鎮幣只來自出貨與委託；建築收益為零。
-//   作物：整片田一天照料一次 1 體力，3 個照料日成熟；當天照料的成長隔天才算；沒照料就停住，永不枯死。
+//   作物：種下後照天數成熟（多數 3 天），不照料也會熟，永不枯死。
+//         整片田一天照料一次 1 體力；每照料一天，收成時拿到 2 個的機率 +10%。
 //   一週一季：秋冬春夏四週一輪，跟課表週同步（週日開始），2026-09-20 那週是秋。
 (function (root) {
   "use strict";
@@ -58,7 +59,8 @@
       schemaVersion: SCHEMA, student: student, createdAt: today, rev: 0,
       energy: { wallet: 0, reserve: 0, week: apWeek(today), weekEarned: 0, receipts: {} },
       money: 0,
-      inv: { carrot_seed: 0, potato_seed: 0, rice: 0, carrot: 0, potato: 0, wood: 0, stone: 0 },
+      inv: { carrot_seed: 0, potato_seed: 0, corn_seed: 0, pumpkin_seed: 0,
+             rice: 0, carrot: 0, potato: 0, corn: 0, pumpkin: 0, wood: 0, stone: 0 },
       decorOwned: {},
       farm: {
         fields: [{ id: "f1", x: 4, y: 3, crop: null, plantedDate: null, careDates: [] }],
@@ -140,12 +142,31 @@
   }
 
   // ── 田地 ────────────────────────────────────────────────────────────────
+  // 成長看種下幾天（f.days，種的時候從作物表抄過來）；照料不影響成熟時間
+  function cropDays(f) { return f.days || GROW_DAYS; }
   function growth(f, today) {
-    if (!f.crop) return 0;
-    var n = f.careDates.filter(function (d) { return d < today; }).length;
-    return Math.min(n, GROW_DAYS);
+    if (!f.crop || !f.plantedDate) return 0;
+    return Math.max(0, Math.min(dayDiff(f.plantedDate, today), cropDays(f)));
   }
-  function isRipe(f, today) { return !!f.crop && growth(f, today) >= GROW_DAYS; }
+  function isRipe(f, today) { return !!f.crop && growth(f, today) >= cropDays(f); }
+  // 收成 2 個的機率（%）：成熟前每照料一天 +CARE_BONUS
+  function careDays(f) {
+    if (!f.crop || !f.plantedDate) return 0;
+    var ripeOn = addDays(f.plantedDate, cropDays(f));
+    return f.careDates.filter(function (d) { return d >= f.plantedDate && d < ripeOn; }).length;
+  }
+  function doubleChance(f, C) { return Math.min(100, careDays(f) * ((C && C.CARE_BONUS) || 10)); }
+  // 擲骰固定由「誰、哪片田、哪天種的」決定：重新整理頁面也不會變，不能重抽
+  function roll(st, f) {
+    var s = st.student + "|" + f.id + "|" + f.plantedDate, h = 2166136261;
+    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+    return h % 100;
+  }
+  // 種子／裝飾有沒有開賣：unlock 寫的每個地標都要修到那一階
+  function unlocked(st, thing) {
+    var u = thing && thing.unlock;
+    return !u || Object.keys(u).every(function (k) { return (st.town[k] || 0) >= u[k]; });
+  }
   function caredToday(f, today) { return f.careDates.indexOf(today) >= 0; }
 
   function occupied(st, x, y, ignoreId) {
@@ -190,11 +211,12 @@
     if (f.crop) return fail("這片田已經種了東西");
     var info = C.CROPS[crop];
     if (!info) return fail("沒有這種種子");
+    if (!unlocked(st, info)) return fail(info.zh + "還沒開賣");
     if (!info.freeSeed && (st.inv[crop + "_seed"] || 0) < 1) return fail("沒有" + info.zh + "種子，先去商店買");
     if (!spend(st, C.COST.plant)) return fail("體力不夠（播種要 " + C.COST.plant + "）");
     if (!info.freeSeed) st.inv[crop + "_seed"]--;
-    f.crop = crop; f.plantedDate = today; f.careDates = [];
-    return done(st, "種下了 " + info.en);
+    f.crop = crop; f.plantedDate = today; f.careDates = []; f.days = info.days || GROW_DAYS;
+    return done(st, "種下了 " + info.en + "，" + f.days + " 天後成熟");
   }
   // 照料：整座農莊一天一次。當天新種的也算進今天的照料。
   function care(st, today, C) {
@@ -206,18 +228,19 @@
     if (!spend(st, cost)) return fail("體力不夠（照料要 " + C.COST.care + "）");
     growing.forEach(function (f) { f.careDates.push(today); });
     st.farm.lastCare = today;
-    return done(st, "照料了 " + growing.length + " 片田，明天會長大" + (cost ? "" : "（今天已付過照料費）"));
+    return done(st, "照料了 " + growing.length + " 片田，收成 2 個的機率 +" + ((C && C.CARE_BONUS) || 10) + "%" + (cost ? "" : "（今天已付過照料費）"));
   }
   function harvest(st, fieldId, today, C) {
     var f = st.farm.fields.find(function (q) { return q.id === fieldId; });
     if (!f || !isRipe(f, today)) return fail("還沒成熟");
-    var crop = f.crop;
-    st.inv[crop] = (st.inv[crop] || 0) + 1;
-    f.crop = null; f.plantedDate = null; f.careDates = [];
+    var crop = f.crop, n = roll(st, f) < doubleChance(f, C) ? 2 : 1;
+    st.inv[crop] = (st.inv[crop] || 0) + n;
+    f.crop = null; f.plantedDate = null; f.careDates = []; delete f.days;
     var first = !st.firstHarvest;
     st.firstHarvest = st.firstHarvest || today;
-    note(st, today, (first ? "第一次收成！" : "收成了 ") + C.CROPS[crop].zh, "a " + C.CROPS[crop].en);
-    return done(st, "收成了 1 個 " + C.CROPS[crop].en);
+    note(st, today, (first ? "第一次收成！" : n > 1 ? "大豐收！" : "收成了 ") + C.CROPS[crop].zh + (n > 1 ? " ×2" : ""), "a " + C.CROPS[crop].en);
+    var r = done(st, n > 1 ? "🎉 大豐收！收成了 2 個 " + C.CROPS[crop].en : "收成了 1 個 " + C.CROPS[crop].en);
+    r.n = n; return r;
   }
 
   // ── 買賣與採集 ──────────────────────────────────────────────────────────
@@ -234,16 +257,24 @@
     if (!qty(n)) return fail("數量不對");
     var price = C.BUY[item];
     if (!price) return fail("商店沒有賣這個");
+    var thing = C.DECOR[item] || C.CROPS[item.replace(/_seed$/, "")];
+    if (!unlocked(st, thing)) return fail("還沒開賣");
     if (st.money < price * n) return fail("小鎮幣不夠");
     st.money -= price * n;
     if (C.DECOR[item]) st.decorOwned[item] = (st.decorOwned[item] || 0) + n;
     else st.inv[item] = (st.inv[item] || 0) + n;
     return done(st, "買好了");
   }
-  // 這一階還沒交的任務，總共還要多少某種材料（只算目前這一階，跟畫面上列出來的一致）
+  // 地標開放了沒：after 寫的前一個地標要全部修好
+  function landmarkOpen(st, key, C) {
+    var L = C.LANDMARKS[key];
+    return !!L && (!L.after || (st.town[L.after] || 0) >= C.LANDMARKS[L.after].stages.length);
+  }
+  // 這一階還沒交的任務，總共還要多少某種材料（只算開放中地標的目前這一階，跟畫面上列出來的一致）
   function materialNeed(st, item, C) {
     var need = 0;
     Object.keys(C.LANDMARKS).forEach(function (k) {
+      if (!landmarkOpen(st, k, C)) return;
       var sg = C.LANDMARKS[k].stages[st.town[k] || 0];
       if (sg) sg.tasks.forEach(function (t) { if (!st.tasks[t.id] && t.need.item === item) need += t.need.n; });
     });
@@ -251,12 +282,12 @@
   }
   // 下一個目標：第一個還沒修完的地標的這一階（給農莊頁的目標卡）
   function nextGoal(st, C) {
-    var key = Object.keys(C.LANDMARKS).find(function (k) { return (st.town[k] || 0) < C.LANDMARKS[k].stages.length; });
+    var key = Object.keys(C.LANDMARKS).find(function (k) { return landmarkOpen(st, k, C) && (st.town[k] || 0) < C.LANDMARKS[k].stages.length; });
     return key ? stageView(st, key, C) : null;
   }
   function gather(st, material, today, C) {
     if (material !== "wood" && material !== "stone") return fail("沒有這種材料");
-    if ((st.inv[material] || 0) >= materialNeed(st, material, C)) return fail((C.NAME[material] || material) + "已經夠了，先去修廣場吧");
+    if ((st.inv[material] || 0) >= materialNeed(st, material, C)) return fail((C.NAME[material] || material) + "已經夠了，先去小鎮交任務吧");
     if (!spend(st, C.COST.gather)) return fail("體力不夠（採集要 " + C.COST.gather + "）");
     st.inv[material]++;
     return done(st, "採到 1 份 " + material);
@@ -307,6 +338,7 @@
   function doTask(st, key, taskId, today, C) {
     var L = C.LANDMARKS[key];
     if (!L) return fail("沒有這個地方");
+    if (!landmarkOpen(st, key, C)) return fail(L.zh + "還沒開放");
     var i = st.town[key] || 0, sg = L.stages[i];
     if (!sg) return fail("已經全部修好了");
     var t = sg.tasks.find(function (q) { return q.id === taskId; });
@@ -323,9 +355,9 @@
     else st.inv[item] -= n;
     st.tasks[t.id] = { date: today };
     st.hearts[t.by] = Math.min(10, (st.hearts[t.by] || 0) + 1);
-    note(st, today, "幫 " + t.by + " 完成廣場任務", t.en);
+    note(st, today, "幫 " + t.by + " 完成" + L.zh + "任務", t.en);
     var msg = "交給 " + t.by + " 了！❤️ +1、繁榮度 +" + C.PROSPERITY.task;
-    var stageDone = sg.tasks.every(function (q) { return st.tasks[q.id]; });
+    var stageDone = sg.tasks.every(function (q) { return st.tasks[q.id]; }), opened = [];
     if (stageDone) {
       st.town[key] = i + 1;
       note(st, today, L.zh + "第 " + (i + 1) + " 階完成：" + sg.done, "");
@@ -333,8 +365,9 @@
     }
     var came = arrive(st, today, C);
     if (came.length) msg += "　🏠 " + came.join("、") + " 搬來小鎮了！";
+    if (stageDone) Object.keys(C.LANDMARKS).forEach(function (k) { if (C.LANDMARKS[k].after === key && landmarkOpen(st, k, C)) opened.push(k); });
     st.rev++;
-    return { ok: true, msg: msg, stageDone: stageDone, arrived: came };
+    return { ok: true, msg: msg, key: key, stageDone: stageDone, arrived: came, opened: opened };
   }
 
   // ── 繁榮度與新村民 ──────────────────────────────────────────────────────
@@ -456,8 +489,16 @@
     st.farm.fields = (Array.isArray(farm.fields) ? farm.fields : []).filter(function (f) {
       return f && /^f\d+$/.test(f.id) && !seen[f.id] && (seen[f.id] = 1);
     }).slice(0, MAX_FIELDS).map(function (f) {
-      return { id: f.id, x: int(f.x, W - 2), y: int(f.y, H - 2), crop: C.CROPS[f.crop] ? f.crop : null,
-               plantedDate: DATE_RE.test(f.plantedDate) ? f.plantedDate : null, careDates: dates(f.careDates) };
+      var crop = Object.prototype.hasOwnProperty.call(C.CROPS, f.crop) ? f.crop : null;
+      var g = { id: f.id, x: int(f.x, W - 2), y: int(f.y, H - 2), crop: crop,
+                plantedDate: crop ? (DATE_RE.test(f.plantedDate) ? f.plantedDate : today) : null, careDates: [] };
+      if (crop) {
+        // 成熟天數一律照作物表，不信匯入值；照料日期去重、只留生長期間內的
+        g.days = C.CROPS[crop].days || GROW_DAYS;
+        var end = addDays(g.plantedDate, g.days), seenD = {};
+        g.careDates = dates(f.careDates).filter(function (d) { return d >= g.plantedDate && d < end && !seenD[d] && (seenD[d] = 1); });
+      }
+      return g;
     });
     st.farm.decor = (Array.isArray(farm.decor) ? farm.decor : []).filter(function (d) {
       return d && /^d\d+$/.test(d.id) && C.DECOR[d.type] && !seen[d.id] && (seen[d.id] = 1);
@@ -483,8 +524,10 @@
       stages.forEach(function (sg) { sg.tasks.forEach(function (t) {
         if (own.call(tk, t.id)) st.tasks[t.id] = { date: DATE_RE.test(obj(tk[t.id]).date) ? tk[t.id].date : today };
       }); });
-      while (st.town[k] < stages.length && stages[st.town[k]].tasks.every(function (t) { return st.tasks[t.id]; })) st.town[k]++;
-      stages.forEach(function (sg, i) { if (i !== st.town[k]) sg.tasks.forEach(function (t) { delete st.tasks[t.id]; }); });
+      var open = landmarkOpen(st, k, C);
+      if (!open) st.town[k] = 0;
+      while (open && st.town[k] < stages.length && stages[st.town[k]].tasks.every(function (t) { return st.tasks[t.id]; })) st.town[k]++;
+      stages.forEach(function (sg, i) { if (!open || i !== st.town[k]) sg.tasks.forEach(function (t) { delete st.tasks[t.id]; }); });
     });
     var rs = obj(raw.residents);
     Object.keys(rs).forEach(function (v) { if (own.call(C.VILLAGERS, v) && C.VILLAGERS[v].arrive) st.residents[v] = DATE_RE.test(rs[v]) ? rs[v] : today; });
@@ -535,7 +578,8 @@
     ymd: ymd, addDays: addDays, apWeek: apWeek, contentWeek: contentWeek, season: season,
     terrainAt: terrainAt, occupied: occupied, areaFree: areaFree,
     newState: newState, apTotal: apTotal, grant: grant, spend: spend, syncFromProgress: syncFromProgress,
-    growth: growth, isRipe: isRipe, caredToday: caredToday,
+    growth: growth, isRipe: isRipe, caredToday: caredToday, cropDays: cropDays, careDays: careDays, doubleChance: doubleChance,
+    roll: roll, unlocked: unlocked, landmarkOpen: landmarkOpen,
     addField: addField, move: move, plant: plant, care: care, harvest: harvest,
     sell: sell, buy: buy, gather: gather, placeDecor: placeDecor, storeDecor: storeDecor,
     materialNeed: materialNeed, nextGoal: nextGoal, stageView: stageView, doTask: doTask, haveOf: haveOf,

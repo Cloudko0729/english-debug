@@ -53,30 +53,82 @@ console.log("\n── 從練習紀錄補發體力 ──");
   eq("總共 20", T.apTotal(st), 20);
 }
 
-console.log("\n── 作物：隔天才長、不枯死 ──");
+console.log("\n── 作物：照天數成熟、照料加豐收機率 ──");
 {
   const st = fresh(); give(st, 3);
   const f = st.farm.fields[0];
   ok("沒有付費種子不能種紅蘿蔔", !T.plant(st, f.id, "carrot", "2026-10-05", C).ok);
   ok("稻米種子免費", T.plant(st, f.id, "rice", "2026-10-05", C).ok);
   eq("播種花 2 體力", T.apTotal(st), 28);
+  eq("種下當天是第 0 天", T.growth(f, "2026-10-05"), 0);
+  eq("不照料也會長：隔天第 1 天", T.growth(f, "2026-10-06"), 1);
+  ok("第 2 天還沒熟", !T.isRipe(f, "2026-10-07"));
+  ok("種下 3 天後成熟（完全沒照料）", T.isRipe(f, "2026-10-08"));
+  ok("放一個月也不會枯掉", T.isRipe(f, "2026-11-20"));
+  eq("沒照料：收成 2 個的機率 0%", T.doubleChance(f, C), 0);
+  ok("成熟的不用再照料", !T.care(st, "2026-10-08", C).ok);
+  const before = T.apTotal(st);
+  const r = T.harvest(st, f.id, "2026-10-08", C);
+  ok("收成", r.ok && r.n === 1, r);
+  eq("收成不花體力", T.apTotal(st), before);
+  eq("沒照料就是 1 個", st.inv.rice, 1);
+  ok("第一次收成記進生活冊", Object.values(st.book).flat().some(e => /第一次收成/.test(e.text)));
+}
+{
+  const st = fresh(); give(st, 3);
+  const f = st.farm.fields[0];
+  T.plant(st, f.id, "rice", "2026-10-05", C);
   ok("照料一次", T.care(st, "2026-10-05", C).ok);
   ok("同一天不能再照料", !T.care(st, "2026-10-05", C).ok);
-  eq("當天照料，當天不長", T.growth(f, "2026-10-05"), 0);
-  eq("隔天長一階", T.growth(f, "2026-10-06"), 1);
-  // 週二、週三沒來
-  eq("沒照料就停住", T.growth(f, "2026-10-09"), 1);
-  T.care(st, "2026-10-09", C);
-  T.care(st, "2026-10-12", C);
-  ok("第三次照料當天還沒熟", !T.isRipe(f, "2026-10-12"));
-  ok("隔天成熟", T.isRipe(f, "2026-10-13"));
-  ok("放一個月也不會枯掉", T.isRipe(f, "2026-11-20"));
-  ok("成熟的不用再照料", !T.care(st, "2026-10-13", C).ok);
-  const before = T.apTotal(st);
-  ok("收成", T.harvest(st, f.id, "2026-10-13", C).ok);
-  eq("收成不花體力", T.apTotal(st), before);
-  eq("背包多一份稻米", st.inv.rice, 1);
-  ok("第一次收成記進生活冊", Object.values(st.book).flat().some(e => /第一次收成/.test(e.text)));
+  eq("照料 1 天：10%", T.doubleChance(f, C), 10);
+  T.care(st, "2026-10-06", C); T.care(st, "2026-10-07", C);
+  eq("照料 3 天：30%", T.doubleChance(f, C), 30);
+  ok("照料不會讓它早熟", !T.isRipe(f, "2026-10-07") && T.isRipe(f, "2026-10-08"));
+  ok("成熟那天起不能再照料", !T.care(st, "2026-10-08", C).ok);
+  eq("最多 30%", T.doubleChance(f, C), 30);
+}
+{
+  // 豐收是固定擲骰：機率 p% 的田，大約 p% 會收成 2 個；重新整理也不會變
+  const st = fresh();
+  let two = 0, N = 2000;
+  for (let i = 0; i < N; i++) {
+    const f = { id: "f" + i, crop: "rice", plantedDate: "2026-10-05", careDates: ["2026-10-05", "2026-10-06", "2026-10-07"], days: 3 };
+    if (T.roll(st, f) < T.doubleChance(f, C)) two++;
+  }
+  ok("30% 的田大約三成收 2 個（實際 " + (two / N * 100).toFixed(1) + "%）", Math.abs(two / N - 0.3) < 0.04);
+  const f = { id: "f9", crop: "rice", plantedDate: "2026-10-05", careDates: [], days: 3 };
+  ok("同一片田擲幾次都一樣", T.roll(st, f) === T.roll(st, f));
+  // 找一片會中的田，確認真的收 2 個
+  const s2 = fresh(); give(s2, 3);
+  const g = s2.farm.fields[0];
+  let day = 5;
+  for (; day < 60; day++) { g.crop = "rice"; g.plantedDate = "2026-10-" + String(day).padStart(2, "0"); if (T.roll(s2, g) < 30) break; }
+  g.crop = null;
+  const d0 = "2026-10-" + String(day).padStart(2, "0");
+  T.plant(s2, g.id, "rice", d0, C);
+  [0, 1, 2].forEach(k => { s2.farm.lastCare = null; T.care(s2, T.addDays(d0, k), C); });
+  const r = T.harvest(s2, g.id, T.addDays(d0, 3), C);
+  ok("骰中了：大豐收收 2 個", r.n === 2 && s2.inv.rice === 2 && /大豐收/.test(r.msg), r);
+}
+{
+  const st = fresh(); give(st, 3); st.inv.pumpkin_seed = 1;
+  ok("市集還沒修，南瓜不能種", !T.plant(st, st.farm.fields[0].id, "pumpkin", "2026-10-05", C).ok);
+  ok("也不能買種子", (st.money = 10, !T.buy(st, "pumpkin_seed", 1, C).ok));
+  st.town.plaza = 3; st.town.market = 1;
+  ok("市集第 1 階修好就能買", T.buy(st, "pumpkin_seed", 1, C).ok);
+  const f = st.farm.fields[0];
+  ok("南瓜種下去", T.plant(st, f.id, "pumpkin", "2026-10-05", C).ok);
+  ok("南瓜要 4 天", !T.isRipe(f, "2026-10-08") && T.isRipe(f, "2026-10-09"));
+  ["2026-10-05", "2026-10-06", "2026-10-07", "2026-10-08"].forEach(d => T.care(st, d, C));
+  eq("4 天作物照料滿是 40%", T.doubleChance(f, C), 40);
+  // 匯入的存檔塞了一堆重複或範圍外的照料日、亂寫成熟天數 → 整理掉
+  const raw = JSON.parse(JSON.stringify(st));
+  raw.farm.fields[0].careDates = Array(10).fill("2026-10-05").concat(["2026-10-01", "2026-10-20"]);
+  raw.farm.fields[0].days = 1;
+  const n = T.normalize(raw, "test", "2026-10-06", C), g = n.farm.fields[0];
+  ok("匯入：重複照料日去掉、範圍外的不算", g.careDates.length === 1 && T.doubleChance(g, C) === 10, g.careDates);
+  ok("匯入：成熟天數照作物表", g.days === 4 && !T.isRipe(g, "2026-10-06"));
+  ok("噴水池要市集第 2 階", !T.buy(st, "fountain", 1, C).ok);
 }
 
 console.log("\n── 照料是整片田一次 ──");
@@ -128,13 +180,17 @@ console.log("\n── 廣場任務：每階 5 個、同時開放 ──");
   ok("每個任務的人都是村民、東西都認得", L.stages.every(sg => sg.tasks.every(t => C.VILLAGERS[t.by] && t.need.n > 0 &&
     (t.need.item === "ap" || t.need.item in T.newState("x", "2026-10-05").inv || C.DECOR[t.need.item]))));
   // 照著任務做一定會搬來：某位村民第一次出任務的那一階之前，只靠任務拿到的繁榮度要過他的門檻
-  const P = C.PROSPERITY;
-  L.stages.forEach((sg, i) => sg.tasks.forEach(t => {
-    const a = C.VILLAGERS[t.by].arrive || 0, guaranteed = i * (5 * P.task + P.stage);
-    ok(`第 ${i + 1} 階 ${t.by} 的任務：前面的任務保證夠他搬來（${guaranteed} ≥ ${a}）`, guaranteed >= a);
+  const P = C.PROSPERITY, per = 5 * P.task + P.stage;
+  let before = 0;
+  Object.keys(C.LANDMARKS).forEach(k => C.LANDMARKS[k].stages.forEach((sg, i) => {
+    sg.tasks.forEach(t => {
+      const a = C.VILLAGERS[t.by].arrive || 0;
+      ok(`${k} 第 ${i + 1} 階 ${t.by} 的任務：前面的任務保證夠他搬來（${before} ≥ ${a}）`, before >= a);
+    });
+    before += per;
   }));
   const last = Object.keys(C.VILLAGERS).map(v => C.VILLAGERS[v].arrive || 0).sort((a, b) => b - a)[0];
-  ok("最後一位村民修完三階一定會來", L.stages.length * (5 * P.task + P.stage) >= last);
+  ok("所有地標修完，最後一位村民一定會來", before >= last);
 }
 {
   const st = fresh(); give(st, 7);
@@ -179,8 +235,12 @@ console.log("\n── 廣場任務：每階 5 個、同時開放 ──");
   ok("還沒搬來的村民不能交任務", !T.doTask(st, "plaza", "p2-rice", "2026-10-05", C).ok);
   T.arrive(st, "2026-10-05", C);
   ok("前一階修好就夠 Nora 搬來", T.isResident(st, "Nora", C));
+  ok("廣場沒修完，市集不能交", (st.inv.wood = 5, !T.doTask(st, "market", "m1-wood", "2026-10-05", C).ok));
+  ok("廣場沒修完，市集的材料不算進撿材料上限", T.materialNeed(st, "wood", C) === 0);
   st.town.plaza = 3;
-  ok("三階都修好就沒有下一個目標", T.nextGoal(st, C) === null && !T.doTask(st, "plaza", "p3-wood", "2026-10-05", C).ok);
+  ok("廣場三階修好：下一個目標換成市集", T.nextGoal(st, C).key === "market" && !T.doTask(st, "plaza", "p3-wood", "2026-10-05", C).ok);
+  st.town.market = 3;
+  ok("兩個地標都修好就沒有下一個目標", T.nextGoal(st, C) === null);
 }
 
 console.log("\n── 繁榮度與新村民 ──");
@@ -230,19 +290,26 @@ console.log("\n── 審查修正：匯入存檔的任務要對得上階段 ─
   ok("卡片只留認得的欄位", JSON.stringify(d.cards["w1-talk-mia"]) === JSON.stringify({ readAt: "2026-10-06" }));
 }
 
-console.log("\n── 經濟上限：每 1 體力最多賺 2 幣 ──");
+console.log("\n── 經濟：不照料每體力 2 幣，照料滿約 2.3 幣 ──");
 {
-  // 最有效率的種法：8 片田一起種、一起照料 3 天、收成全賣
-  const st = fresh(); give(st, 7); st.money = 8; st.inv.carrot_seed = 0;
-  for (let i = 0; i < 7; i++) T.addField(st, 2 + (i % 4) * 3 + 2, 6 + Math.floor(i / 4) * 2);
-  T.buy(st, "carrot_seed", 8, C);
-  const ap0 = T.apTotal(st), m0 = st.money + 8;      // 種子錢也算成本
-  st.farm.fields.forEach(f => T.plant(st, f.id, "carrot", "2026-10-05", C));
-  ["2026-10-05", "2026-10-06", "2026-10-07"].forEach(d => T.care(st, d, C));
-  st.farm.fields.forEach(f => T.harvest(st, f.id, "2026-10-08", C));
-  T.sell(st, "carrot", 8, C);
-  const apUsed = ap0 - T.apTotal(st), net = st.money - m0;
-  ok("淨收益 ≤ 2 幣／體力（實際 " + (net / apUsed).toFixed(2) + "）", net / apUsed <= 2, { net, apUsed });
+  // 8 片紅蘿蔔一起種、收成全賣，算每 1 體力淨賺多少幣（種子錢也算成本）
+  // 豐收用期望值算（固定擲骰的單次結果會跳），care＝照料幾天
+  const run = (crop, care) => {
+    const st = fresh(); give(st, 7); st.money = 8; st.town.plaza = 3; st.town.market = 3;
+    for (let i = 0; i < 7; i++) T.addField(st, 2 + (i % 4) * 3 + 2, 6 + Math.floor(i / 4) * 2);
+    const seed = C.CROPS[crop].freeSeed ? 0 : C.BUY[crop + "_seed"];
+    if (seed) T.buy(st, crop + "_seed", 8, C);
+    const ap0 = T.apTotal(st);
+    st.farm.fields.forEach(f => T.plant(st, f.id, crop, "2026-10-05", C));
+    for (let d = 0; d < care; d++) T.care(st, T.addDays("2026-10-05", d), C);
+    const crops = st.farm.fields.reduce((n, f) => n + 1 + T.doubleChance(f, C) / 100, 0);
+    return (crops * C.SELL[crop] - 8 * seed) / (ap0 - T.apTotal(st));
+  };
+  Object.keys(C.CROPS).forEach(k => {
+    const days = C.CROPS[k].days || T.GROW_DAYS, r0 = run(k, 0), rMax = run(k, days);
+    ok(k + " 不照料：每體力 ≤ 2 幣（實際 " + r0.toFixed(2) + "）", r0 <= 2.0001);
+    ok(k + " 照料滿 " + days + " 天比較划算，但不超過 2.4（實際 " + rMax.toFixed(2) + "）", rMax > r0 && rMax <= 2.4001);
+  });
 }
 
 console.log("\n── 心事件 ──");
