@@ -17,6 +17,8 @@
   var SELL = { rice: 4, carrot: 5, potato: 5, corn: 5, pumpkin: 5 };
   // 照料：每照料一天，收成時拿到 2 個的機率 +10%
   var CARE_BONUS = 10;
+  // 任務／委託要的作物不夠時，可以用小鎮幣補齊：每個＝賣價＋1（比自己種貴，也不能買低賣高）
+  var FILL_EXTRA = 1;
   var DECOR = {
     flowers: { en: "flowers",  zh: "花圃",   emoji: "🌼" },
     tree:    { en: "tree",     zh: "小樹",   emoji: "🌳" },
@@ -353,7 +355,7 @@
     WEEKS[wk].story.week = wk;
   });
 
-  var api = { CROPS: CROPS, SELL: SELL, BUY: BUY, DECOR: DECOR, COST: COST, NAME: NAME, CARE_BONUS: CARE_BONUS,
+  var api = { CROPS: CROPS, SELL: SELL, BUY: BUY, DECOR: DECOR, COST: COST, NAME: NAME, CARE_BONUS: CARE_BONUS, FILL_EXTRA: FILL_EXTRA,
               LANDMARKS: LANDMARKS, PROSPERITY: PROSPERITY, VILLAGERS: VILLAGERS, WEEKS: WEEKS };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.TownContent = api;

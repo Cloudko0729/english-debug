@@ -357,7 +357,22 @@
              left: tasks.filter(function (x) { return !x.done; }).length,
              ready: tasks.some(function (x) { return x.ready; }) };
   }
-  function doTask(st, key, taskId, today, C) {
+  // 作物不夠時用小鎮幣補齊的價錢：只補差的數量，每個＝賣價＋FILL_EXTRA。不是作物、還沒開賣就不能補。
+  function fillCost(st, item, n, C) {
+    var crop = C.CROPS[item];
+    if (!crop || !unlocked(st, crop)) return null;
+    var missing = Math.max(0, n - (st.inv[item] || 0));
+    return { missing: missing, each: (C.SELL[item] || 0) + (C.FILL_EXTRA || 0), cost: missing * ((C.SELL[item] || 0) + (C.FILL_EXTRA || 0)) };
+  }
+  // 照 fillCost 扣錢、把作物補進背包；錢不夠回傳失敗訊息
+  function fillUp(st, item, n, C) {
+    var f = fillCost(st, item, n, C);
+    if (!f) return "這個不能用小鎮幣補";
+    if (st.money < f.cost) return "小鎮幣不夠（補 " + f.missing + " 個要 " + f.cost + " 幣）";
+    st.money -= f.cost; st.inv[item] = (st.inv[item] || 0) + f.missing;
+    return "";
+  }
+  function doTask(st, key, taskId, today, C, opts) {
     var L = C.LANDMARKS[key];
     if (!L) return fail("沒有這個地方");
     if (!landmarkOpen(st, key, C)) return fail(L.zh + "還沒開放");
@@ -367,7 +382,13 @@
     if (!t) return fail("這個任務不在這一階");
     if (st.tasks[t.id]) return fail("這個任務已經完成了");
     if (!isResident(st, t.by, C)) return fail(t.by + " 還沒搬來");
-    var item = t.need.item, n = t.need.n, have = haveOf(st, item, C);
+    var item = t.need.item, n = t.need.n, have = haveOf(st, item, C), bought = null;
+    if (have < n && opts && opts.buy) {
+      bought = fillCost(st, item, n, C);
+      var err = fillUp(st, item, n, C);
+      if (err) return fail(err);
+      have = haveOf(st, item, C);
+    }
     if (have < n) {
       return fail("還差 " + (n - have) + " " + (C.NAME[item] || item) + (C.DECOR[item] ? "（擺在農莊的可以先收回背包）" : ""));
     }
@@ -378,7 +399,7 @@
     st.tasks[t.id] = { date: today };
     st.hearts[t.by] = Math.min(10, (st.hearts[t.by] || 0) + 1);
     note(st, today, "幫 " + t.by + " 完成" + L.zh + "任務", t.en);
-    var msg = "交給 " + t.by + " 了！❤️ +1、繁榮度 +" + C.PROSPERITY.task;
+    var msg = (bought && bought.missing ? "花 " + bought.cost + " 小鎮幣補了 " + bought.missing + " 個，" : "") + "交給 " + t.by + " 了！❤️ +1、繁榮度 +" + C.PROSPERITY.task;
     var stageDone = sg.tasks.every(function (q) { return st.tasks[q.id]; }), opened = [], capBefore = maxFields(st);
     if (stageDone) {
       st.town[key] = i + 1;
@@ -447,10 +468,16 @@
     return done(st, "");
   }
   // 委託：交物品得到小鎮幣，金額等於直接賣掉的價值，不加成（避免變成新的賺錢捷徑）
-  function deliver(st, card, today, C) {
+  function deliver(st, card, today, C, opts) {
     if (!weekOpen(card, today)) return fail("這個委託還沒開放");
     if (st.quests[card.id]) return fail("已經交過了");
-    var q = card.quest, have = st.inv[q.item] || 0;
+    var q = card.quest, have = st.inv[q.item] || 0, bought = null;
+    if (have < q.n && opts && opts.buy) {
+      bought = fillCost(st, q.item, q.n, C);
+      var err = fillUp(st, q.item, q.n, C);
+      if (err) return fail(err);
+      have = st.inv[q.item] || 0;
+    }
     if (have < q.n) return fail("需要 " + q.n + " 個 " + C.CROPS[q.item].en + "，你有 " + have + " 個");
     st.inv[q.item] -= q.n;
     var pay = (C.SELL[q.item] || 0) * q.n;
@@ -458,7 +485,7 @@
     st.quests[card.id] = { date: today };
     st.hearts[card.speaker] = st.hearts[card.speaker] || 0;
     note(st, today, "幫 " + card.speaker + " 完成委託", card.keep || "");
-    return done(st, "交給 " + card.speaker + " 了，得到 " + pay + " 小鎮幣");
+    return done(st, (bought && bought.missing ? "花 " + bought.cost + " 小鎮幣補了 " + bought.missing + " 個，" : "") + "交給 " + card.speaker + " 了，得到 " + pay + " 小鎮幣");
   }
   // 心事件：讀完、最後一句自己念出來，亮一顆心。只看有沒有完成，不看答對率。
   function weekOpen(item, today) { return !!item && !!item.week && item.week <= contentWeek(today); }
@@ -601,7 +628,7 @@
   var api = {
     SCHEMA: SCHEMA, AP_PER_TASK: AP_PER_TASK, AP_WEEKLY_CAP: AP_WEEKLY_CAP, AP_WALLET_CAP: AP_WALLET_CAP,
     GROW_DAYS: GROW_DAYS, MAX_FIELDS: MAX_FIELDS, FIELD_BONUS_MAX: FIELD_BONUS_MAX, CARE_GROUP: CARE_GROUP, W: W, H: H, TOWN_START: TOWN_START,
-    maxFields: maxFields, careCost: careCost,
+    maxFields: maxFields, careCost: careCost, fillCost: fillCost,
     ymd: ymd, addDays: addDays, apWeek: apWeek, contentWeek: contentWeek, season: season,
     terrainAt: terrainAt, occupied: occupied, areaFree: areaFree,
     newState: newState, apTotal: apTotal, grant: grant, spend: spend, syncFromProgress: syncFromProgress,

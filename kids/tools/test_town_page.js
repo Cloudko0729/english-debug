@@ -114,6 +114,8 @@ console.log("\n── 廣場任務與繁榮度 ──");
   ok("每個任務都有村民頭像和語音", ["p1-wood", "p1-weeds", "p1-stone", "p1-carrot", "p1-flowers"].every(id => html.includes(`task_${id}`)));
   ok("合計需求列出來", html.includes("還需要") && html.includes("🪨 石頭 0/3"));
   ok("不夠的會說去哪裡拿", html.includes("去商店買"));
+  ok("作物不夠：有「用小鎮幣補」按鈕和價錢", html.includes("🪙 補 2 個再交 −12") && html.includes("{buy:true}"));
+  ok("木材任務沒有補的按鈕", !/doTask\(st,'plaza','p1-wood',today\(\),C,\{buy:true\}\)/.test(html));
   ok("後面兩階有預告", html.includes("石板路與燈籠") && html.includes("小舞台"));
   ok("有繁榮度條和下一位村民的門檻", html.includes("繁榮度") && html.includes("繁榮度到 <b>60</b>"));
   ok("頂端也有繁榮度", el("hud").innerHTML.includes("繁榮度"));

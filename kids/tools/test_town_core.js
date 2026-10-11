@@ -303,6 +303,31 @@ console.log("\n── 廣場任務：每階 5 個、同時開放 ──");
   ok("兩個地標都修好就沒有下一個目標", T.nextGoal(st, C) === null);
 }
 
+console.log("\n── 作物不夠：用小鎮幣補齊（每個賣價＋1） ──");
+{
+  const st = fresh(); st.inv.carrot = 1; st.money = 5;
+  const fc = T.fillCost(st, "carrot", 2, C);
+  ok("只補差的 1 個，每個 5＋1＝6", fc.missing === 1 && fc.each === 6 && fc.cost === 6, fc);
+  const r = T.doTask(st, "plaza", "p1-carrot", "2026-10-05", C, { buy: true });
+  ok("錢不夠補不了", !r.ok && r.msg.includes("小鎮幣不夠"), r.msg);
+  ok("失敗時什麼都沒扣", st.money === 5 && st.inv.carrot === 1 && !st.tasks["p1-carrot"]);
+  ok("不帶 buy 不會自動花錢", (st.money = 20, !T.doTask(st, "plaza", "p1-carrot", "2026-10-05", C).ok && st.money === 20));
+  const r2 = T.doTask(st, "plaza", "p1-carrot", "2026-10-05", C, { buy: true });
+  ok("補齊後交出", r2.ok && st.tasks["p1-carrot"] && r2.msg.includes("花 6 小鎮幣補了 1 個"), r2.msg);
+  eq("扣 6 幣、自己的那根也用掉", [st.money, st.inv.carrot], [14, 0]);
+  ok("木材不能用錢補", T.fillCost(st, "wood", 4, C) === null && !T.doTask(st, "plaza", "p1-wood", "2026-10-05", C, { buy: true }).ok);
+  ok("裝飾不走這條（要去商店買）", T.fillCost(st, "flowers", 1, C) === null);
+  ok("市集還沒修，南瓜不能補", T.fillCost(st, "pumpkin", 2, C) === null);
+  // 委託也可以補：補的價錢比委託付的多 1，所以不能拿來賺錢
+  const card = C.WEEKS["2026-10-04"].cards.find(c => c.type === "quest");
+  const m0 = st.money;
+  const d = T.deliver(st, card, "2026-10-05", C, { buy: true });
+  ok("委託：全部用錢補也能交", d.ok && st.quests[card.id], d.msg);
+  eq("委託：每個淨虧 1 幣，補 2 個少 2", m0 - st.money, 2);
+  // 期望值：自己種一個要 2 體力（約 4 幣），補一個要 6 幣，所以種比較划算
+  ok("補的價錢永遠比賣價高", Object.keys(C.CROPS).every(k => C.SELL[k] + C.FILL_EXTRA > C.SELL[k]));
+}
+
 console.log("\n── 繁榮度與新村民 ──");
 {
   const st = fresh();

@@ -348,7 +348,7 @@ const itemName = k => C.NAME[k] || k;
 function whereToGet(k) {
   if (k === "ap") return "做英文練習換體力";
   if (k === "wood" || k === "stone") return "在農莊撿";
-  if (C.CROPS[k]) return C.CROPS[k].freeSeed ? "種田收成（種子免費）" : "去商店買種子，種田收成";
+  if (C.CROPS[k]) return (C.CROPS[k].freeSeed ? "種田收成（種子免費）" : "去商店買種子，種田收成") + `，或用小鎮幣補（每個 ${C.SELL[k] + C.FILL_EXTRA} 幣）`;
   if (C.DECOR[k]) return "去商店買（擺在農莊的可以收回再交）";
   return "";
 }
@@ -565,7 +565,7 @@ function cardHtml(c) {
   if (c.type === "quest") {
     const q = c.quest, cr = C.CROPS[q.item], have = st.inv[q.item] || 0, doneQ = st.quests[c.id];
     h += doneQ ? `<p>✅ 已經交給 ${c.speaker} 了</p>`
-      : `<div class="actions"><button class="btn go" ${have >= q.n ? "" : "disabled"} onclick="act(T.deliver(st,findCard('${c.id}'),today(),C))">交出 ${cr.emoji}×${q.n}（你有 ${have}）</button></div>`;
+      : `<div class="actions"><button class="btn go" ${have >= q.n ? "" : "disabled"} onclick="act(T.deliver(st,findCard('${c.id}'),today(),C))">交出 ${cr.emoji}×${q.n}（你有 ${have}）</button>${fillBtn(q.item, q.n, `act(T.deliver(st,findCard('${c.id}'),today(),C,{buy:true}))`)}</div>`;
   }
   return h + `</div>`;
 }
@@ -642,12 +642,21 @@ function prosperHtml() {
     <div class="muted" style="font-size:.78rem">繁榮度怎麼來：完成任務 +${P.task}、修好一階 +${P.stage}、村民每顆 ❤️ +${P.heart}、農莊擺裝飾每件 +${P.decor}（最多算 ${P.decorMax} 件）</div></div>`;
 }
 const LM_ICON = { plaza: "🏛️", market: "🧺" };
+// 作物不夠時：用小鎮幣補齊再交（每個＝賣價＋1）。夠了或不是作物就不顯示
+function fillBtn(item, n, onclick) {
+  const f = T.fillCost(st, item, n, C);
+  if (!f || !f.missing) return "";
+  return `<button class="btn" ${st.money >= f.cost ? "" : "disabled"} onclick="${onclick}" title="每個 ${f.each} 幣（賣價＋${C.FILL_EXTRA}）">🪙 補 ${f.missing} 個再交 −${f.cost}</button>`;
+}
 function taskHtml(x, key) {
   const t = x.task, id = t.id, k = t.need.item, enough = x.have >= x.need;
   let foot;
   if (x.done) foot = `<span>✅ 已經交給 ${t.by} 了</span>`;
   else if (!x.here) foot = `<span class="muted">🔒 ${t.by} 還沒搬來</span>`;
-  else foot = `<button class="btn go" ${x.ready ? "" : "disabled"} onclick="act(T.doTask(st,'${key}','${id}',today(),C))">交給 ${t.by}</button>`;
+  else {
+    foot = `<button class="btn go" ${x.ready ? "" : "disabled"} onclick="act(T.doTask(st,'${key}','${id}',today(),C))">交給 ${t.by}</button>`;
+    foot += fillBtn(k, x.need, `act(T.doTask(st,'${key}','${id}',today(),C,{buy:true}))`);
+  }
   return `<div class="task${x.done ? " done" : ""}${x.ready ? " ready" : ""}${zhOpen.has(id) ? " showzh" : ""}">
     <div class="who2"><span onclick="openFolk('${t.by}')">${pic(t.by, true)}</span> ${t.by}</div>
     <div class="en">${esc(t.en)}</div><div class="zh">${esc(t.zh)}</div>
