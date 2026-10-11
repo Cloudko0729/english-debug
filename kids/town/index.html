@@ -198,7 +198,7 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
         <button class="btn" id="stoneBtn" onclick="doGather('stone')"></button>
       </div>
       <div class="sheet" id="sheet" hidden></div>
-      <p class="muted">點空地可以開田或擺裝飾；點田可以播種、收成或搬家。作物種下後時間到就會成熟（多數 3 天），不照料也會長大，也不會枯掉。每天照料一次（全部的田只要 1 ⚡），每照料一天，收成時拿到 <b>2 個</b>的機率 +10%。</p>
+      <p class="muted">點空地可以開田或擺裝飾；點田可以播種、收成或搬家。作物種下後時間到就會成熟（多數 3 天），不照料也會長大，也不會枯掉。田一開始最多 8 片，小鎮每修好一階多 1 片（最多 16 片）。每天照料一次（每 8 片田 1 ⚡），每照料一天，收成時拿到 <b>2 個</b>的機率 +10%。</p>
     </section>
 
     <section class="pane" id="p-shop" hidden></section>
@@ -367,8 +367,8 @@ function renderHint() {
   const fresh = !st.firstHarvest && st.farm.fields.length < 2;
   el.hidden = !fresh;
   if (fresh) el.innerHTML = st.farm.fields.some(f => f.crop)
-    ? "👆 點<b>綠色空地</b>可以再開一片田，最多 8 片。田越多，一次收成越多。"
-    : "👆 先點<b>咖啡色的田</b>種稻米（種子免費）。再點<b>綠色空地</b>可以多開幾片田，最多 8 片。";
+    ? `👆 點<b>綠色空地</b>可以再開一片田，現在最多 ${T.maxFields(st)} 片。田越多，一次收成越多。`
+    : `👆 先點<b>咖啡色的田</b>種稻米（種子免費）。再點<b>綠色空地</b>可以多開幾片田，現在最多 ${T.maxFields(st)} 片。`;
 }
 // 撿材料：寫出用途和進度，夠了就不給撿
 function renderGather() {
@@ -414,7 +414,7 @@ function renderMap(d) {
   const growing = st.farm.fields.filter(f => f.crop && !T.isRipe(f, d) && !T.caredToday(f, d)).length;
   const btn = document.getElementById("careBtn");
   btn.disabled = !growing;
-  btn.innerHTML = growing ? `🚿 照料 ${growing} 片田（豐收機率 +${C.CARE_BONUS}%） <span class="cost">${st.farm.lastCare === d ? "今天付過了" : C.COST.care + "⚡"}</span>` : (st.farm.lastCare === d ? "🚿 今天照料過了，明天再來" : "🚿 沒有要照料的田");
+  btn.innerHTML = growing ? `🚿 照料 ${growing} 片田（豐收機率 +${C.CARE_BONUS}%） <span class="cost">${T.careCost(st, d, C) ? T.careCost(st, d, C) + "⚡" : "今天付過了"}</span>` : (st.farm.lastCare === d ? "🚿 今天照料過了，明天再來" : "🚿 沒有要照料的田");
   document.getElementById("moveBar").hidden = !moving;
   if (moving) document.getElementById("moveMsg").textContent = "點一塊空地放下" + (moving.type ? "：" + C.DECOR[moving.type].zh : "");
 }
@@ -445,7 +445,9 @@ function renderSheet(d) {
   if (typeof sel === "object") {
     const owned = Object.keys(st.decorOwned).filter(k => st.decorOwned[k] > 0);
     el.innerHTML = `<h2>這塊空地</h2><div class="actions">
-      <button class="btn" onclick="act(T.addField(st,${sel.x},${sel.y}));sel=null;render()">🟫 開一片田（2×2，免費）</button>
+      ${st.farm.fields.length < T.maxFields(st)
+        ? `<button class="btn" onclick="act(T.addField(st,${sel.x},${sel.y}));sel=null;render()">🟫 開一片田（2×2，免費，${st.farm.fields.length}/${T.maxFields(st)}）</button>`
+        : `<span class="muted">🟫 田已經 ${st.farm.fields.length}/${T.maxFields(st)} 片${T.maxFields(st) < T.MAX_FIELDS + T.FIELD_BONUS_MAX ? "，小鎮每修好一階可以多開一片" : ""}</span>`}
       ${owned.map(k => `<button class="btn" onclick="act(T.placeDecor(st,'${k}',${sel.x},${sel.y},today(),C));sel=null;render()">${C.DECOR[k].emoji} 擺${C.DECOR[k].zh}（${st.decorOwned[k]}）</button>`).join("")}
       <button class="btn" onclick="sel=null;render()">關閉</button></div>
       ${owned.length ? "" : '<p class="muted">裝飾可以在商店買。</p>'}`;
@@ -611,6 +613,7 @@ function celebrate(r) {
   let h = `<div class="cele">`;
   if (r.stageDone) h += `<h3>🎉 ${L.zh}第 ${stage} 階修好了！</h3><div class="big">${L.look[stage].split(" ")[0]}</div>
     <p>${esc(L.look[stage].split(" ").slice(1).join(" "))}</p><p class="muted">🏘️ 繁榮度現在是 ${T.prosperity(st, C)}</p>`;
+  if (r.moreFields) h += `<p>🟫 農莊可以多開一片田了！現在最多 <b>${T.maxFields(st)}</b> 片。</p>`;
   (r.opened || []).forEach(k => h += `<h3>🆕 ${C.LANDMARKS[k].zh}開放了！</h3><p class="muted">到「小鎮」分頁看新的任務。</p>`);
   came.forEach(v => { const p = C.VILLAGERS[v];
     h += `<h3>🏠 ${v} 搬來小鎮了！</h3><div>${pic(v)}</div><p><b>${esc(p.role.en)}</b> <span class="muted">${esc(p.role.zh)}</span></p>
