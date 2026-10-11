@@ -1249,7 +1249,7 @@ const WORDBANK = [
   { en: "underpass", zh: "地道、地下道", pos: "n", theme: "", level: "junior" },
   { en: "underwear", zh: "內衣", pos: "n", theme: "", level: "junior" },
   { en: "under-weight", zh: "重量不足", pos: "adj", theme: "", level: "junior" },
-  { en: "unfriendly", zh: "不友善地", pos: "adv", theme: "", level: "junior" },
+  { en: "unfriendly", zh: "不友善的", pos: "adj", theme: "", level: "junior" },
   { en: "unique", zh: "唯一的、獨特的、獨一無二的", pos: "adj", theme: "", level: "junior" },
   { en: "unit", zh: "個體(計量)單位(軍隊的)部隊單位、[數學]最小的整數", pos: "n", theme: "", level: "junior" },
   { en: "universe", zh: "宇宙", pos: "n", theme: "", level: "junior" },

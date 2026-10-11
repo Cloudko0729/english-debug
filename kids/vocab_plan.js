@@ -1621,7 +1621,7 @@ const VOCAB_PLAN = {
     },
     {
      "en": "fight",
-     "zh": "作戰",
+     "zh": "打架、吵架",
      "pos": "v"
     },
     {
@@ -1641,7 +1641,7 @@ const VOCAB_PLAN = {
     },
     {
      "en": "unfriendly",
-     "zh": "不友善地",
+     "zh": "不友善的",
      "pos": "adj"
     },
     {
@@ -1651,7 +1651,7 @@ const VOCAB_PLAN = {
     },
     {
      "en": "careless",
-     "zh": "不注意的",
+     "zh": "粗心的",
      "pos": "adj"
     },
     {
@@ -1706,7 +1706,7 @@ const VOCAB_PLAN = {
     },
     {
      "en": "pardon",
-     "zh": "原諒",
+     "zh": "原諒；（Pardon?）請再說一次",
      "pos": "v"
     },
     {
@@ -1716,12 +1716,12 @@ const VOCAB_PLAN = {
     },
     {
      "en": "bored",
-     "zh": "無聊的",
+     "zh": "（人）感到無聊的",
      "pos": "adj"
     },
     {
      "en": "boring",
-     "zh": "無聊的",
+     "zh": "（事物）令人無聊的",
      "pos": "adj"
     },
     {

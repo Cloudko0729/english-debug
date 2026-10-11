@@ -1411,6 +1411,104 @@ const WEEK_DRILLS = {
       },
     ]
   },
+  "2026-10-2": {            // 第2週 朋友與情緒 · 動名詞/不定詞
+    listenBlank: [
+      { full: "Don't be afraid. The dog is very friendly.", display: "Don't be ___. The dog is very friendly.", answer: "afraid", exclude: ["nervous","rude","impolite","unfriendly","angry","careless","crazy","sorry","unhappy","alone","bored"] },
+      { full: "Leo got angry when he saw the broken chair.", display: "Leo got ___ when he saw the broken chair.", answer: "angry", exclude: ["crazy","excited","unhappy","nervous","rude","afraid","bored","calm","impolite","unfriendly"] },
+      { full: "I don't like eating alone. Let's have lunch together.", display: "I don't like eating ___. Let's have lunch together.", answer: "alone", exclude: ["afraid","angry","bored","excited","nervous","unhappy"] },
+      { full: "I have a feeling that it will rain today.", display: "I have a ___ that it will rain today.", answer: "feeling", exclude: ["fear","joke"] },
+      { full: "My two cats always fight over the same toy.", display: "My two cats always ___ over the same toy.", answer: "fight", exclude: ["argue","shout","laugh","smile"] },
+      { full: "Please smile for the photo!", display: "Please ___ for the photo!", answer: "smile", exclude: ["laugh","shout","fight","argue"] },
+      { full: "I'm sorry I broke your cup.", display: "I'm ___ I broke your cup.", answer: "sorry", exclude: ["unhappy","glad","afraid","angry","nervous","excited","calm","careless"] },
+      { full: "He was unhappy because he lost his favorite cap.", display: "He was ___ because he lost his favorite cap.", answer: "unhappy", exclude: ["angry","sorry","crazy","nervous","afraid","bored","calm","careless","excited","glad","unfriendly","rude","impolite"] },
+      { full: "The new boy looked unfriendly, but he was just shy.", display: "The new boy looked ___, but he was just shy.", answer: "unfriendly", exclude: ["rude","impolite","angry","unhappy","nervous","bored","calm","afraid","careless","crazy","lovely","boring","sorry"] },
+      { full: "Grandma takes good care of her garden.", display: "Grandma takes good ___ of her garden.", answer: "care" },
+      { full: "I made a careless mistake on the math test.", display: "I made a ___ mistake on the math test.", answer: "careless", exclude: ["crazy","rude","boring","nervous","sorry"] },
+      { full: "Please don't shout. The baby is sleeping.", display: "Please don't ___. The baby is sleeping.", answer: "shout", exclude: ["laugh","argue","fight","joke"] },
+      { full: "She sings in a sweet voice.", display: "She sings in a sweet ___.", answer: "voice" },
+      { full: "I'm glad you came to my party!", display: "I'm ___ you came to my party!", answer: "glad", exclude: ["excited","sorry","afraid","angry","unhappy","nervous","calm"] },
+      { full: "Take a deep breath and stay calm.", display: "Take a deep breath and stay ___.", answer: "calm", exclude: ["alone","angry","excited","glad"] },
+      { full: "I always feel nervous before a big test.", display: "I always feel ___ before a big test.", answer: "nervous", exclude: ["afraid","excited","unhappy","calm","bored","angry","glad","sorry","crazy","alone"] },
+      { full: "What a lovely day for a picnic!", display: "What a ___ day for a picnic!", answer: "lovely", exclude: ["boring","crazy","calm","sorry"] },
+      { full: "It is rude to talk with your mouth full.", display: "It is ___ to talk with your mouth full.", answer: "rude", exclude: ["impolite","unfriendly","crazy","boring","careless"] },
+      { full: "Ben told a funny joke, and everyone laughed.", display: "Ben told a funny ___, and everyone laughed.", answer: "joke" },
+      { full: "Let's welcome the new student with a big smile.", display: "Let's ___ the new student with a big smile.", answer: "welcome", exclude: ["fight","pardon"] },
+      { full: "I beg your pardon? I didn't hear you.", display: "I beg your ___? I didn't hear you.", answer: "pardon", exclude: ["sorry"] },
+      { full: "My brother and I often argue about what to watch on TV.", display: "My brother and I often ___ about what to watch on TV.", answer: "argue", exclude: ["fight","shout","laugh","care","joke"] },
+      { full: "I'm bored. There is nothing to do.", display: "I'm ___. There is nothing to do.", answer: "bored", exclude: ["unhappy","alone","sorry","angry","crazy","nervous","calm","afraid","glad","excited","boring"] },
+      { full: "This movie is so boring that I fell asleep.", display: "This movie is so ___ that I fell asleep.", answer: "boring", exclude: ["calm"] },
+      { full: "We are so excited about the festival tomorrow!", display: "We are so ___ about the festival tomorrow!", answer: "excited", exclude: ["nervous","glad","crazy","calm","afraid","unhappy","sorry","angry","careless","impolite","rude","boring"] },
+    ],
+    reorder: [
+      { sentence: "I like making new friends.", chunks: ["I","like","making new friends."] },
+      { sentence: "She wants to say sorry.", chunks: ["She","wants","to say sorry."] },
+      { sentence: "Don't be afraid to ask questions.", chunks: ["Don't be afraid","to ask","questions."] },
+      { sentence: "Laughing makes me feel better.", chunks: ["Laughing","makes me","feel better."] },
+      { sentence: "He stopped shouting and smiled.", chunks: ["He stopped","shouting","and smiled."] },
+      { sentence: "We enjoy telling jokes.", chunks: ["We","enjoy","telling jokes."] },
+      { sentence: "Try to stay calm.", chunks: ["Try","to stay","calm."] },
+      { sentence: "I'm sorry for being rude.", chunks: ["I'm sorry","for being","rude."] },
+      { sentence: "Our friendship is very important to me.", chunks: ["Our friendship","is very important","to me."] },
+      { sentence: "It's impolite to shout in class.", chunks: ["It's impolite","to shout","in class."] },
+      { sentence: "He hates being alone at night.", chunks: ["He hates","being alone","at night."] },
+      { sentence: "Please remember to use a quiet voice.", chunks: ["Please remember","to use","a quiet voice."] },
+      { sentence: "They decided to stop arguing.", chunks: ["They decided","to stop","arguing."] },
+      { sentence: "You are welcome to join us!", chunks: ["You are welcome","to join","us!"] },
+      { sentence: "Fear can make you feel nervous.", chunks: ["Fear","can make you","feel nervous."] },
+      { sentence: "Don't forget to check for careless mistakes.", chunks: ["Don't forget","to check for","careless mistakes."] },
+      { sentence: "My dog goes crazy when I come home.", chunks: ["My dog","goes crazy","when I come home."] },
+      { sentence: "I care about my friends.", chunks: ["I","care about","my friends."] },
+      { sentence: "It's okay to feel angry sometimes.", chunks: ["It's okay","to feel angry","sometimes."] },
+      { sentence: "Giving gifts makes villagers glad.", chunks: ["Giving gifts","makes villagers","glad."] },
+    ],
+    reading: [
+      {
+        passage: "Last Friday, Kevin and I had a fight about a soccer game. He shouted at me, and I was very angry. On Saturday I felt unhappy and played alone. On Sunday, Kevin came to my house and said, \"I'm sorry.\" We laughed and played soccer again. Our friendship is stronger now.",
+        questions: [
+          { q: "What did they fight about?", choices: ["A soccer game","A video game","A book","Their lunch"], answer: "A soccer game" },
+          { q: "How did the writer feel on Saturday?", choices: ["Unhappy","Excited","Glad","Lovely"], answer: "Unhappy" },
+          { q: "What did Kevin say on Sunday?", choices: ["\"I'm sorry.\"","\"Welcome!\"","\"Pardon?\"","\"Go away!\""], answer: "\"I'm sorry.\"" },
+          { q: "What is true now?", choices: ["Their friendship is stronger","They never play together","Kevin moved away","The writer is still angry"], answer: "Their friendship is stronger" },
+        ]
+      },
+      {
+        passage: "Amy had to give a speech in front of her class. She felt nervous, and her voice was very quiet. Her teacher said, \"Take a deep breath and stay calm.\" Amy smiled at her best friend in the front row. Then she spoke slowly, and everyone clapped at the end.",
+        questions: [
+          { q: "Why was Amy nervous?", choices: ["She had to give a speech","She lost her bag","She was late for school","She had a fight"], answer: "She had to give a speech" },
+          { q: "How was her voice at first?", choices: ["Very quiet","Very loud","Angry","Funny"], answer: "Very quiet" },
+          { q: "What did the teacher tell her to do?", choices: ["Stay calm","Shout","Sit down","Go home"], answer: "Stay calm" },
+          { q: "What happened at the end?", choices: ["Everyone clapped","Everyone laughed at her","Amy cried","Amy forgot her speech"], answer: "Everyone clapped" },
+        ]
+      },
+      {
+        passage: "In our farm game, every villager has different feelings about gifts. One villager is glad when you give her flowers. Another one gets angry if you give him trash! My brother is careless, so he once gave a fish to the wrong person. Now I always check what each villager likes before I give a gift.",
+        questions: [
+          { q: "What makes one villager glad?", choices: ["Flowers","Trash","A fish","Nothing"], answer: "Flowers" },
+          { q: "When does another villager get angry?", choices: ["When you give him trash","When it rains","When you say hello","When you give him flowers"], answer: "When you give him trash" },
+          { q: "Why did the brother give a fish to the wrong person?", choices: ["He is careless","He is rude","He was bored","He was afraid"], answer: "He is careless" },
+          { q: "What does the writer do now?", choices: ["Checks what each villager likes","Gives everyone a fish","Stops playing the game","Gives trash to everyone"], answer: "Checks what each villager likes" },
+        ]
+      },
+      {
+        passage: "A new student, Daniel, joined our class this week. At first, some kids were unfriendly to him. One boy laughed at his accent, and that was very rude. Our teacher said, \"Let's welcome Daniel to our class.\" Now we eat lunch together, and Daniel tells the best jokes.",
+        questions: [
+          { q: "Who joined the class this week?", choices: ["A new student","A new teacher","A dog","A cook"], answer: "A new student" },
+          { q: "How were some kids at first?", choices: ["Unfriendly","Lovely","Excited","Calm"], answer: "Unfriendly" },
+          { q: "What did one boy do?", choices: ["Laughed at Daniel's accent","Gave Daniel a gift","Helped Daniel with homework","Sang a song"], answer: "Laughed at Daniel's accent" },
+          { q: "What does Daniel do now?", choices: ["Tells the best jokes","Eats lunch alone","Argues with everyone","Feels afraid"], answer: "Tells the best jokes" },
+        ]
+      },
+      {
+        passage: "My little sister has a fear of thunder. Last night there was a big storm, and she was so afraid that she couldn't sleep. I told her jokes until she laughed. Our dog went crazy at every loud sound. In the end, we all fell asleep on the sofa.",
+        questions: [
+          { q: "What is the sister afraid of?", choices: ["Thunder","Dogs","Jokes","The sofa"], answer: "Thunder" },
+          { q: "Why couldn't she sleep?", choices: ["She was afraid of the storm","She was hungry","She was bored","She was excited"], answer: "She was afraid of the storm" },
+          { q: "What did the writer do?", choices: ["Told her jokes","Went outside","Played games alone","Shouted at her"], answer: "Told her jokes" },
+          { q: "Where did they all fall asleep?", choices: ["On the sofa","In the car","In the garden","At school"], answer: "On the sofa" },
+        ]
+      },
+    ]
+  },
 };
 // 每篇短文的「沒教過的生字」中文解釋（index 對應該週 reading[]）
 const PASSAGE_GLOSSARY = {
@@ -1519,6 +1617,13 @@ const PASSAGE_GLOSSARY = {
     [{"en":"report","zh":"報告"},{"en":"due","zh":"到期、該交"},{"en":"fix","zh":"修理"},{"en":"by hand","zh":"用手寫"}],
     [{"en":"young","zh":"年輕的"},{"en":"typing","zh":"打字"},{"en":"smiling","zh":"微笑"}],
     [{"en":"museum","zh":"博物館"},{"en":"collecting","zh":"收集"}],
+  ],
+  "2026-10-2": [
+    [{"en":"soccer","zh":"足球"},{"en":"stronger","zh":"更深厚（此處形容友誼）"}],
+    [{"en":"speech","zh":"演講"},{"en":"deep breath","zh":"深呼吸"},{"en":"front row","zh":"第一排"},{"en":"clapped","zh":"拍手"}],
+    [{"en":"villager","zh":"村民"},{"en":"gifts","zh":"禮物"},{"en":"trash","zh":"垃圾"},{"en":"wrong","zh":"錯的"}],
+    [{"en":"joined","zh":"加入"},{"en":"accent","zh":"口音"},{"en":"laughed at","zh":"嘲笑"}],
+    [{"en":"thunder","zh":"雷"},{"en":"storm","zh":"暴風雨"},{"en":"sound","zh":"聲音"},{"en":"sofa","zh":"沙發"},{"en":"went crazy","zh":"變得很激動"},{"en":"fell asleep","zh":"睡著了"}],
   ],
 };
 function weekDrillFor(monthStr, weekN) { return WEEK_DRILLS[monthStr + "-" + weekN] || null; }
