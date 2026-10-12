@@ -28,6 +28,12 @@ Object.keys(C.VILLAGERS).forEach(v => {
   if (C.VILLAGERS[v].welcome) items["arrive_" + v] = C.VILLAGERS[v].welcome;
 });
 Object.values(C.LANDMARKS).forEach(L => L.stages.forEach(sg => sg.tasks.forEach(t => { items["task_" + t.id] = t.en; })));
+// 野外：釣到／挖到的那句話、魚跑掉、送禮道謝
+Object.keys(C.FISH).forEach(k => { items["catch_" + k] = C.FISH[k].say; });
+Object.keys(C.MINERALS).forEach(k => { items["catch_" + k] = C.MINERALS[k].say; });
+items.catch_stone = C.MINE_STONE_SAY;
+items.line_miss = C.LINES.miss;
+items.line_thanks = C.LINES.thanks;
 const out = path.join(__dirname, "audio_town.json");
 fs.writeFileSync(out, JSON.stringify({
   outdir: path.join(__dirname, "..", "audio", "town").replace(/\\/g, "/"),

@@ -75,6 +75,23 @@
   "task_m3-carry": "So many boxes! Help me carry them to the stalls.",
   "task_m3-pumpkin": "Big pumpkins make people stop and look. Please bring three.",
   "task_m3-tree": "A tree gives us shade. Can we plant one by the stalls?",
-  "task_m3-rice": "I'll make rice balls for the shoppers. I need four bags of rice."
+  "task_m3-rice": "I'll make rice balls for the shoppers. I need four bags of rice.",
+  "catch_sardine": "You caught a sardine!",
+  "catch_crab": "You caught a crab!",
+  "catch_shrimp": "You caught a shrimp!",
+  "catch_tuna": "You caught a tuna!",
+  "catch_eel": "You caught an eel!",
+  "catch_salmon": "You caught a salmon!",
+  "catch_squid": "You caught a squid!",
+  "catch_octopus": "You caught an octopus!",
+  "catch_pufferfish": "Wow! You caught a pufferfish!",
+  "catch_copper": "You found some copper ore!",
+  "catch_iron": "You found some iron ore!",
+  "catch_gold": "You found some gold ore!",
+  "catch_quartz": "You found a piece of quartz!",
+  "catch_amethyst": "Wow! You found an amethyst!",
+  "catch_stone": "You found a stone.",
+  "line_miss": "Oh no! It got away.",
+  "line_thanks": "Thank you! I love your gift!"
  }
 }

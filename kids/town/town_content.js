@@ -14,11 +14,51 @@
   // 售價：每片扣掉種子錢都是淨 4 幣，播種 2 體力 → 不照料時每體力 2 幣。
   // 照料一天 +10% 收成 2 個的機率（3 天作物最多 30%），8 片田全照料時期望值約每體力 2.3 幣。
   // 南瓜長 4 天、照料最多 40%，所以售價跟紅蘿蔔一樣，全照料才不會超過每體力 2.4 幣
-  var SELL = { rice: 4, carrot: 5, potato: 5, corn: 5, pumpkin: 5 };
+  var SELL = { rice: 4, carrot: 5, potato: 5, corn: 5, pumpkin: 5,
+               sardine: 3, shrimp: 3, eel: 3, squid: 3, crab: 5, tuna: 5, salmon: 5, octopus: 5, pufferfish: 7,
+               copper: 3, iron: 4, gold: 6, quartz: 6, amethyst: 10 };
   // 照料：每照料一天，收成時拿到 2 個的機率 +10%
   var CARE_BONUS = 10;
   // 任務／委託要的作物不夠時，可以用小鎮幣補齊：每個＝賣價＋1（比自己種貴，也不能買低賣高）
   var FILL_EXTRA = 1;
+
+  // ── 海邊釣魚 ──
+  // 每次 2 體力，小遊戲按中才有魚。季節照小鎮的一週一季；河豚四季都有。
+  // 機率 普通 60／少見 30／稀有 10，售價 3／5／7 → 每次按中期望 4 幣＝每體力 2 幣（跟不照料的田一樣）。
+  // say＝釣到時播的英文（語音 catch_<id>）
+  var FISH = {
+    sardine:    { en: "sardine",    zh: "沙丁魚", emoji: "🐟", seasons: ["春"], tier: "common",   say: "You caught a sardine!" },
+    crab:       { en: "crab",       zh: "螃蟹",   emoji: "🦀", seasons: ["春"], tier: "uncommon", say: "You caught a crab!" },
+    shrimp:     { en: "shrimp",     zh: "蝦子",   emoji: "🦐", seasons: ["夏"], tier: "common",   say: "You caught a shrimp!" },
+    tuna:       { en: "tuna",       zh: "鮪魚",   emoji: "🐟", seasons: ["夏"], tier: "uncommon", say: "You caught a tuna!" },
+    eel:        { en: "eel",        zh: "鰻魚",   emoji: "🐟", seasons: ["秋"], tier: "common",   say: "You caught an eel!" },
+    salmon:     { en: "salmon",     zh: "鮭魚",   emoji: "🐟", seasons: ["秋"], tier: "uncommon", say: "You caught a salmon!" },
+    squid:      { en: "squid",      zh: "魷魚",   emoji: "🦑", seasons: ["冬"], tier: "common",   say: "You caught a squid!" },
+    octopus:    { en: "octopus",    zh: "章魚",   emoji: "🐙", seasons: ["冬"], tier: "uncommon", say: "You caught an octopus!" },
+    pufferfish: { en: "pufferfish", zh: "河豚",   emoji: "🐡", seasons: ["春", "夏", "秋", "冬"], tier: "rare", say: "Wow! You caught a pufferfish!" },
+  };
+  var FISH_TIER = { common: 60, uncommon: 30, rare: 10 };
+
+  // ── 礦坑 ──
+  // 每次 2 體力。挖滿 10 次到第 2 層、25 次到第 3 層，越深越值錢。
+  // 每層期望值（石頭不算錢）：第 1 層約 2 幣、第 2 層約 3 幣、第 3 層約 4 幣 → 最多每體力 2 幣。
+  var MINERALS = {
+    copper:   { en: "copper ore", zh: "銅礦",   emoji: "🟠", say: "You found some copper ore!" },
+    iron:     { en: "iron ore",   zh: "鐵礦",   emoji: "⚙️", say: "You found some iron ore!" },
+    gold:     { en: "gold ore",   zh: "金礦",   emoji: "🟡", say: "You found some gold ore!" },
+    quartz:   { en: "quartz",     zh: "石英",   emoji: "💠", say: "You found a piece of quartz!" },
+    amethyst: { en: "amethyst",   zh: "紫水晶", emoji: "💎", say: "Wow! You found an amethyst!" },
+  };
+  var MINE_STONE_SAY = "You found a stone.";
+  var MINE_FLOORS = [
+    { at: 0,  zh: "第 1 層", table: { stone: 50, copper: 35, quartz: 15 } },
+    { at: 10, zh: "第 2 層", table: { stone: 30, copper: 30, iron: 30, amethyst: 10 } },
+    { at: 25, zh: "第 3 層", table: { stone: 30, iron: 35, gold: 25, amethyst: 10 } },
+  ];
+  var LINES = {
+    miss: "Oh no! It got away.",
+    thanks: "Thank you! I love your gift!",       // 送花（複數）也通，不用 it
+  };
   var DECOR = {
     flowers: { en: "flowers",  zh: "花圃",   emoji: "🌼" },
     tree:    { en: "tree",     zh: "小樹",   emoji: "🌳" },
@@ -30,11 +70,14 @@
   };
   var BUY = { carrot_seed: 1, potato_seed: 1, corn_seed: 1, pumpkin_seed: 1,
               flowers: 10, tree: 10, lantern: 10, bench: 10, mailbox: 10, rock: 10, fountain: 20 };
-  var COST = { plant: 2, care: 1, gather: 2 };
+  var COST = { plant: 2, care: 1, gather: 2, fish: 2, dig: 2 };
   var NAME = { wood: "木材", stone: "石頭", crop: "作物", carrot_seed: "紅蘿蔔種子", potato_seed: "馬鈴薯種子",
                corn_seed: "玉米種子", pumpkin_seed: "南瓜種子",
                rice: "稻米", carrot: "紅蘿蔔", potato: "馬鈴薯", corn: "玉米", pumpkin: "南瓜", ap: "體力", money: "小鎮幣",
                flowers: "花圃", tree: "小樹", lantern: "燈籠", bench: "長椅", mailbox: "信箱", rock: "石頭堆", fountain: "噴水池" };
+  // 魚和礦的中文名也放進 NAME（任務、送禮、背包都用得到）
+  Object.keys(FISH).forEach(function (k) { NAME[k] = FISH[k].zh; });
+  Object.keys(MINERALS).forEach(function (k) { NAME[k] = MINERALS[k].zh; });
 
   // 小鎮地標：每一階 5 個任務，同時列出來，順序隨意。5 個都交完，這一階就修好了。
   // 每個任務由一位村民提出（有英文語音 task_<id>），交完那位村民 +1 好感、小鎮繁榮度 +10。
@@ -160,7 +203,8 @@
         { emoji: "📚", en: "books", zh: "書" },
         { emoji: "🥕", en: "carrots", zh: "紅蘿蔔", item: "carrot" },
         { emoji: "🌼", en: "flowers", zh: "花", item: "flowers" },
-        { emoji: "🌧️", en: "rainy days", zh: "下雨天" } ],
+        { emoji: "🌧️", en: "rainy days", zh: "下雨天" },
+        { emoji: "🦐", en: "shrimp", zh: "蝦子", item: "shrimp" } ],
       dislikes: [{ emoji: "📢", en: "loud noise", zh: "很吵的聲音" }, { emoji: "📄", en: "torn pages", zh: "破掉的書頁" }],
       intro: "Hi, I'm Mia. I'm the town librarian. I love quiet rainy days and a good story. I'm a little shy, but I always want to hear about your day.",
       introZh: "嗨，我是 Mia，小鎮的圖書館員。我喜歡安靜的下雨天和好看的故事。我有點害羞，但我一直都很想聽你說說你的一天。",
@@ -174,8 +218,9 @@
       likes: [
         { emoji: "🪵", en: "wood", zh: "木材", item: "wood" },
         { emoji: "🥔", en: "potatoes", zh: "馬鈴薯", item: "potato" },
-        { emoji: "🪑", en: "making chairs", zh: "做椅子", item: "bench" },
-        { emoji: "😂", en: "jokes", zh: "笑話" } ],
+        { emoji: "🪑", en: "benches", zh: "長椅", item: "bench" },
+        { emoji: "😂", en: "jokes", zh: "笑話" },
+        { emoji: "⚙️", en: "iron ore", zh: "鐵礦", item: "iron" } ],
       dislikes: [{ emoji: "🔧", en: "broken tools", zh: "壞掉的工具" }, { emoji: "🍽️", en: "eating alone", zh: "一個人吃飯" }],
       intro: "Hello! I'm Leo, the town carpenter. I can fix almost anything with my hammer. I get angry fast, but I say sorry fast too!",
       introZh: "哈囉！我是 Leo，小鎮的木匠。我拿著鐵鎚幾乎什麼都修得好。我很容易生氣，但我道歉也很快！",
@@ -191,7 +236,8 @@
         { emoji: "🍞", en: "bread", zh: "麵包" },
         { emoji: "🌾", en: "rice", zh: "稻米", item: "rice" },
         { emoji: "🥔", en: "potatoes", zh: "馬鈴薯", item: "potato" },
-        { emoji: "🎶", en: "singing", zh: "唱歌" } ],
+        { emoji: "🎶", en: "singing", zh: "唱歌" },
+        { emoji: "🐟", en: "salmon", zh: "鮭魚", item: "salmon" } ],
       dislikes: [{ emoji: "🔥", en: "burnt bread", zh: "烤焦的麵包" }, { emoji: "⏰", en: "being late", zh: "遲到" }],
       intro: "Good morning! I'm Nora, the baker. I get up very early to make bread. Please come and eat with me!",
       introZh: "早安！我是 Nora，麵包師。我每天很早起來做麵包。歡迎來跟我一起吃！",
@@ -208,7 +254,8 @@
         { emoji: "⚽", en: "soccer", zh: "足球" },
         { emoji: "🥁", en: "playing the drums", zh: "打鼓" },
         { emoji: "🏮", en: "lanterns", zh: "燈籠", item: "lantern" },
-        { emoji: "🍙", en: "rice cakes", zh: "米糕", item: "rice" } ],
+        { emoji: "🌾", en: "rice", zh: "稻米", item: "rice" },
+        { emoji: "🦀", en: "crabs", zh: "螃蟹", item: "crab" } ],
       dislikes: [{ emoji: "🌧️", en: "rainy days", zh: "下雨天" }, { emoji: "🛏️", en: "going to bed early", zh: "早早上床睡覺" }],
       intro: "Hey! I'm Ben. I'm twelve years old. I love soccer and music. One day I want to play the drums on a big stage!",
       introZh: "嘿！我是 Ben，今年十二歲。我喜歡足球和音樂。總有一天，我要在大舞台上打鼓！",
@@ -224,7 +271,7 @@
       likes: [
         { emoji: "🗺️", en: "old maps", zh: "舊地圖" },
         { emoji: "🍵", en: "hot tea", zh: "熱茶" },
-        { emoji: "🪨", en: "pretty stones", zh: "漂亮的石頭", item: "stone" },
+        { emoji: "💎", en: "amethysts", zh: "紫水晶", item: "amethyst" },
         { emoji: "🌳", en: "trees", zh: "樹", item: "tree" } ],
       dislikes: [{ emoji: "📦", en: "messy shelves", zh: "亂七八糟的貨架" }, { emoji: "⌛", en: "waiting in line", zh: "排隊等候" }],
       intro: "Hello there. I'm Sam. I travel from town to town and sell things from far away. This town is lively now, so I want to stay a while.",
@@ -242,7 +289,8 @@
         { emoji: "🌼", en: "flowers", zh: "花", item: "flowers" },
         { emoji: "🌳", en: "trees", zh: "樹", item: "tree" },
         { emoji: "🎨", en: "drawing", zh: "畫畫" },
-        { emoji: "☀️", en: "sunny mornings", zh: "晴朗的早晨" } ],
+        { emoji: "☀️", en: "sunny mornings", zh: "晴朗的早晨" },
+        { emoji: "💠", en: "shiny quartz", zh: "亮晶晶的石英", item: "quartz" } ],
       dislikes: [{ emoji: "🌬️", en: "cold wind", zh: "冷風" }, { emoji: "👣", en: "people stepping on flowers", zh: "有人踩到花" }],
       intro: "Hi! I'm Lily. I sell flowers. I think every town needs more colors!",
       introZh: "嗨！我是 Lily，我賣花。我覺得每個小鎮都需要多一點顏色！",
@@ -258,8 +306,9 @@
       likes: [
         { emoji: "📮", en: "mailboxes", zh: "信箱", item: "mailbox" },
         { emoji: "🚶", en: "long walks", zh: "散步走很遠" },
-        { emoji: "🍙", en: "rice balls", zh: "飯糰", item: "rice" },
-        { emoji: "💬", en: "talking with everyone", zh: "跟大家聊天" } ],
+        { emoji: "🌾", en: "rice", zh: "稻米", item: "rice" },
+        { emoji: "💬", en: "talking with everyone", zh: "跟大家聊天" },
+        { emoji: "🐟", en: "sardines", zh: "沙丁魚", item: "sardine" } ],
       dislikes: [{ emoji: "✉️", en: "lost letters", zh: "寄丟的信" }, { emoji: "☔", en: "wet letters", zh: "被雨淋濕的信" }],
       intro: "Hi there! I'm Tom, the mail carrier. I walk all over town every day. I know everyone's name!",
       introZh: "你好！我是 Tom，郵差。我每天走遍整個小鎮，我知道每個人的名字！",
@@ -356,6 +405,7 @@
   });
 
   var api = { CROPS: CROPS, SELL: SELL, BUY: BUY, DECOR: DECOR, COST: COST, NAME: NAME, CARE_BONUS: CARE_BONUS, FILL_EXTRA: FILL_EXTRA,
+              FISH: FISH, FISH_TIER: FISH_TIER, MINERALS: MINERALS, MINE_FLOORS: MINE_FLOORS, MINE_STONE_SAY: MINE_STONE_SAY, LINES: LINES,
               LANDMARKS: LANDMARKS, PROSPERITY: PROSPERITY, VILLAGERS: VILLAGERS, WEEKS: WEEKS };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.TownContent = api;

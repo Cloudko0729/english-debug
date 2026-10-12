@@ -399,6 +399,109 @@ console.log("\n── 經濟：不照料每體力 2 幣，照料滿約 2.3 幣 �
   });
 }
 
+console.log("\n── 釣魚 ──");
+{
+  ok("每種魚都在背包欄位裡", Object.keys(C.FISH).concat(Object.keys(C.MINERALS)).every(k => k in fresh().inv));
+  ok("每一季都有普通、少見、稀有各一種", ["春", "夏", "秋", "冬"].every(s => {
+    const tiers = Object.keys(C.FISH).filter(k => C.FISH[k].seasons.includes(s)).map(k => C.FISH[k].tier).sort().join();
+    return tiers === "common,rare,uncommon";
+  }));
+  const st = fresh(); give(st, 1);
+  const d = "2026-10-12";                      // 10/11 那週是夏季
+  eq("10/12 是夏季", T.season(d), "夏");
+  ok("夏天釣得到蝦子、鮪魚、河豚", Object.keys(T.fishTable(d, C)).sort().join() === "pufferfish,shrimp,tuna");
+  const ap = T.apTotal(st);
+  ok("沒甩竿不能收竿", !T.fish(st, d, C, true, 0.1).ok);
+  ok("甩竿就扣 2 體力", T.cast(st, d, C).ok && T.apTotal(st) === ap - 2 && st.cast);
+  ok("竿子在水裡再甩不會再扣（關頁面再回來）", T.cast(st, d, C).resumed && T.apTotal(st) === ap - 2);
+  const miss = T.fish(st, d, C, false, 0.1);
+  ok("沒按中：沒有魚，竿子收回來", miss.ok && miss.caught === null && !st.cast && T.apTotal(st) === ap - 2);
+  ok("同一竿不能收兩次", !T.fish(st, d, C, true, 0.1).ok);
+  T.cast(st, d, C);
+  const ap2 = T.apTotal(st);
+  ok("放棄：不退體力", T.giveUp(st).ok && !st.cast && T.apTotal(st) === ap2);
+  T.cast(st, d, C);
+  const a = T.fish(st, d, C, true, 0.1);
+  ok("按中：r 小抽到普通的蝦子，第一次記圖鑑", a.caught === "shrimp" && a.first && st.inv.shrimp === 1 && st.dex.shrimp === 1, a);
+  ok("第一次釣到記進生活冊", Object.values(st.book).flat().some(e => /第一次釣到蝦子/.test(e.text)));
+  T.cast(st, d, C);
+  const b = T.fish(st, d, C, true, 0.95);
+  ok("r 大抽到稀有的河豚", b.caught === "pufferfish", b);
+  T.cast(st, d, C);
+  const c2 = T.fish(st, d, C, true, 0.1);
+  ok("第二次就不是新圖鑑", !c2.first && st.dex.shrimp === 2);
+  st.energy.wallet = 1; st.energy.reserve = 0;
+  ok("體力不夠不能甩竿", !T.cast(st, d, C).ok && st.energy.wallet === 1 && !st.cast);
+  // 期望值：每次按中 = Σ 機率 × 售價，每季都要 ≤ 4（每體力 ≤ 2）
+  ["春", "夏", "秋", "冬"].forEach(s => {
+    const day = { "秋": "2026-09-21", "冬": "2026-09-28", "春": "2026-10-05", "夏": "2026-10-12" }[s];
+    eq(day + " 是" + s, T.season(day), s);
+    const t = T.fishTable(day, C), tot = Object.values(t).reduce((x, y) => x + y, 0);
+    const ev = Object.keys(t).reduce((x, k) => x + t[k] / tot * C.SELL[k], 0);
+    ok(s + "季每次按中期望 " + ev.toFixed(2) + " 幣，每體力 ≤ 2", ev / C.COST.fish <= 2.0001);
+  });
+}
+
+console.log("\n── 礦坑 ──");
+{
+  const st = fresh(); give(st, 7);
+  eq("一開始在第 1 層", T.mineFloor(st, C), 0);
+  const r = T.dig(st, "2026-10-12", C, 0.1);
+  ok("r 小挖到石頭（石頭也進背包）", r.ok && r.found === "stone" && st.inv.stone === 1 && !r.first, r);
+  const r2 = T.dig(st, "2026-10-12", C, 0.9);
+  ok("r 大挖到石英、新圖鑑", r2.found === "quartz" && r2.first && st.dex.quartz === 1, r2);
+  for (let i = 0; i < 7; i++) T.dig(st, "2026-10-12", C, 0.6);
+  eq("挖了 9 次還在第 1 層", T.mineFloor(st, C), 0);
+  const r3 = T.dig(st, "2026-10-12", C, 0.6);
+  ok("第 10 次往下到第 2 層", r3.deeper && T.mineFloor(st, C) === 1, r3);
+  st.mine.digs = 25;
+  eq("25 次到第 3 層", T.mineFloor(st, C), 2);
+  st.mine.digs = 999;
+  eq("最多第 3 層", T.mineFloor(st, C), 2);
+  C.MINE_FLOORS.forEach((f, i) => {
+    const tot = Object.values(f.table).reduce((x, y) => x + y, 0);
+    const ev = Object.keys(f.table).reduce((x, k) => x + f.table[k] / tot * (C.SELL[k] || 0), 0);
+    ok(f.zh + "每次期望 " + ev.toFixed(2) + " 幣，每體力 ≤ 2", ev / C.COST.dig <= 2.0001);
+  });
+  ok("抽籤：r=0 拿第一個、r≈1 拿最後一個", T.pickWeighted({ a: 1, b: 1 }, 0) === "a" && T.pickWeighted({ a: 1, b: 1 }, 0.9999) === "b");
+}
+
+console.log("\n── 送禮 ──");
+{
+  const st = fresh();
+  ok("Sam 喜歡紫水晶、Ben 喜歡螃蟹、Leo 喜歡鐵礦", T.giftable("Sam", C).includes("amethyst") && T.giftable("Ben", C).includes("crab") && T.giftable("Leo", C).includes("iron"));
+  ok("每位村民至少有一樣可以送的", Object.keys(C.VILLAGERS).every(v => T.giftable(v, C).length >= 2));
+  ok("還沒搬來的不能送", (st.inv.amethyst = 1, !T.gift(st, "Sam", "amethyst", "2026-10-12", C).ok));
+  ok("不喜歡的不能送", (st.inv.squid = 1, !T.gift(st, "Leo", "squid", "2026-10-12", C).ok));
+  st.inv.iron = 2;
+  const g = T.gift(st, "Leo", "iron", "2026-10-12", C);
+  ok("送 Leo 鐵礦：好感 +1、扣一個", g.ok && st.hearts.Leo === 1 && st.inv.iron === 1, g);
+  ok("同一天不能再送", !T.gift(st, "Leo", "iron", "2026-10-12", C).ok && st.inv.iron === 1);
+  ok("隔天可以", T.gift(st, "Leo", "iron", "2026-10-13", C).ok && st.hearts.Leo === 2);
+  ok("背包沒有就不能送", !T.gift(st, "Leo", "iron", "2026-10-14", C).ok);
+  st.decorOwned.flowers = 1;
+  ok("裝飾也能送（花圃給 Mia）", T.gift(st, "Mia", "flowers", "2026-10-12", C).ok && st.decorOwned.flowers === 0);
+  st.hearts.Mia = 10; st.inv.carrot = 1;
+  const full = T.gift(st, "Mia", "carrot", "2026-10-13", C);
+  ok("好感滿 10 就不收，東西也不會被拿走", !full.ok && st.inv.carrot === 1 && /滿了/.test(full.msg), full.msg);
+  // 送禮讓好感上升 → 繁榮度夠了村民會搬來
+  const s2 = fresh(); s2.hearts.Mia = 10; s2.hearts.Leo = 3; s2.decorOwned.flowers = 30;     // 13 顆心 39＋裝飾 20＝59
+  for (let i = 0; i < 10; i++) T.placeDecor(s2, "flowers", 4 + i % 8, 6 + Math.floor(i / 8), "2026-10-12", C);
+  s2.inv.iron = 1;
+  const g2 = T.gift(s2, "Leo", "iron", "2026-10-12", C);
+  ok("送禮讓繁榮度到 60：Nora 搬來", g2.arrived.includes("Nora"), g2);
+}
+{
+  // 存檔整理：圖鑑、礦坑、送禮
+  const st = fresh(); st.dex.squid = 3; st.mine.digs = 12; st.gifts.Leo = "2026-10-12";
+  const raw = JSON.parse(JSON.stringify(st));
+  raw.dex.evil = 5; raw.gifts.Nobody = "2026-10-12"; raw.gifts.Mia = "<b>"; raw.gifts.Ben = ["2026-10-12"];
+  const n = T.normalize(raw, "test", "2026-10-12", C);
+  ok("存檔整理：圖鑑只留認得的", JSON.stringify(n.dex) === JSON.stringify({ squid: 3 }));
+  ok("存檔整理：礦坑次數留著", n.mine.digs === 12 && T.mineFloor(n, C) === 1);
+  ok("存檔整理：送禮只留村民與日期", JSON.stringify(n.gifts) === JSON.stringify({ Leo: "2026-10-12" }));
+}
+
 console.log("\n── 心事件 ──");
 {
   const st = fresh();

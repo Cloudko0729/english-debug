@@ -62,7 +62,14 @@
       energy: { wallet: 0, reserve: 0, week: apWeek(today), weekEarned: 0, receipts: {} },
       money: 0,
       inv: { carrot_seed: 0, potato_seed: 0, corn_seed: 0, pumpkin_seed: 0,
-             rice: 0, carrot: 0, potato: 0, corn: 0, pumpkin: 0, wood: 0, stone: 0 },
+             rice: 0, carrot: 0, potato: 0, corn: 0, pumpkin: 0, wood: 0, stone: 0,
+             // 魚（要跟 town_content.js 的 FISH 一致）
+             sardine: 0, crab: 0, shrimp: 0, tuna: 0, eel: 0, salmon: 0, squid: 0, octopus: 0, pufferfish: 0,
+             // 礦（MINERALS）
+             copper: 0, iron: 0, gold: 0, quartz: 0, amethyst: 0 },
+      dex: {},                   // 圖鑑：釣到／挖到過幾次 { 物品: 次數 }
+      mine: { digs: 0 },         // 礦坑挖了幾次（決定在第幾層）
+      gifts: {},                 // 送禮：{ 村民: 最後送的那天 }，一天一次
       decorOwned: {},
       farm: {
         fields: [{ id: "f1", x: 4, y: 3, crop: null, plantedDate: null, careDates: [] }],
@@ -341,6 +348,13 @@
     if (C.DECOR[item]) return st.decorOwned[item] || 0;
     return st.inv[item] || 0;
   }
+  // 把東西從手上拿走：ap 扣體力、money 扣錢、裝飾從背包、其他從背包（呼叫前要先確認夠）
+  function take(st, item, n, C) {
+    if (item === "ap") spend(st, n);
+    else if (item === "money") st.money -= n;
+    else if (C.DECOR[item]) st.decorOwned[item] -= n;
+    else st.inv[item] -= n;
+  }
   function isResident(st, v, C) { var p = C.VILLAGERS[v]; return !!p && (!p.arrive || !!st.residents[v]); }
   // 某個地標目前這一階的樣子：每個任務的進度，以及「還沒交的任務」合計要多少東西
   function stageView(st, key, C) {
@@ -392,10 +406,7 @@
     if (have < n) {
       return fail("還差 " + (n - have) + " " + (C.NAME[item] || item) + (C.DECOR[item] ? "（擺在農莊的可以先收回背包）" : ""));
     }
-    if (item === "ap") spend(st, n);
-    else if (item === "money") st.money -= n;
-    else if (C.DECOR[item]) st.decorOwned[item] -= n;
-    else st.inv[item] -= n;
+    take(st, item, n, C);
     st.tasks[t.id] = { date: today };
     st.hearts[t.by] = Math.min(10, (st.hearts[t.by] || 0) + 1);
     note(st, today, "幫 " + t.by + " 完成" + L.zh + "任務", t.en);
@@ -412,6 +423,91 @@
     if (stageDone) Object.keys(C.LANDMARKS).forEach(function (k) { if (C.LANDMARKS[k].after === key && landmarkOpen(st, k, C)) opened.push(k); });
     st.rev++;
     return { ok: true, msg: msg, key: key, stageDone: stageDone, arrived: came, opened: opened, moreFields: maxFields(st) > capBefore };
+  }
+
+  // ── 釣魚與挖礦 ──────────────────────────────────────────────────────────
+  // 機率表抽一個：table＝{ 東西: 權重 }，r＝0～1 的亂數（畫面用 Math.random，測試自己給）
+  function pickWeighted(table, r) {
+    var keys = Object.keys(table), total = 0;
+    keys.forEach(function (k) { total += table[k]; });
+    var x = r * total;
+    for (var i = 0; i < keys.length; i++) { x -= table[keys[i]]; if (x < 0) return keys[i]; }
+    return keys[keys.length - 1];
+  }
+  // 這一季釣得到的魚與權重
+  function fishTable(today, C) {
+    var s = season(today), t = {};
+    Object.keys(C.FISH).forEach(function (k) {
+      var f = C.FISH[k];
+      if (f.seasons.indexOf(s) >= 0) t[k] = C.FISH_TIER[f.tier];
+    });
+    return t;
+  }
+  function found(st, item) {
+    var first = !st.dex[item];
+    st.dex[item] = (st.dex[item] || 0) + 1;
+    st.inv[item] = (st.inv[item] || 0) + 1;
+    return first;
+  }
+  // 釣魚分兩步：甩竿（扣體力、記下「竿子在水裡」）→ 收竿（看小遊戲有沒有按中）。
+  // 甩竿就算錢，放棄不退；竿子還在水裡時再甩不會再扣（例如關掉頁面再回來）。
+  function cast(st, today, C) {
+    if (st.cast) return { ok: true, msg: "", resumed: true };
+    if (!spend(st, C.COST.fish)) return fail("體力不夠（釣魚要 " + C.COST.fish + "）");
+    st.cast = { on: today };
+    return done(st, "");
+  }
+  function giveUp(st) {
+    if (!st.cast) return fail("");
+    delete st.cast;
+    return done(st, "收線了，這次的體力已經用掉");
+  }
+  function fish(st, today, C, hit, r) {
+    if (!st.cast) return fail("先甩竿");
+    delete st.cast;
+    st.rev++;
+    if (!hit) return { ok: true, msg: "魚跑掉了，再試一次！", caught: null };
+    var k = pickWeighted(fishTable(today, C), r), f = C.FISH[k], first = found(st, k);
+    if (first) note(st, today, "第一次釣到" + f.zh, f.say);
+    return { ok: true, msg: (first ? "📖 新圖鑑！" : "") + "釣到了 " + f.en + "（" + f.zh + "）", caught: k, first: first };
+  }
+  function mineFloor(st, C) {
+    var d = st.mine.digs, i = 0;
+    while (i + 1 < C.MINE_FLOORS.length && d >= C.MINE_FLOORS[i + 1].at) i++;
+    return i;
+  }
+  function dig(st, today, C, r) {
+    if (!spend(st, C.COST.dig)) return fail("體力不夠（挖礦要 " + C.COST.dig + "）");
+    var fl = mineFloor(st, C), k = pickWeighted(C.MINE_FLOORS[fl].table, r);
+    var first = found(st, k);
+    st.mine.digs++;
+    var deeper = mineFloor(st, C) > fl, m = C.MINERALS[k];
+    if (first && m) note(st, today, "第一次挖到" + m.zh, m.say);
+    if (deeper) note(st, today, "礦坑下到" + C.MINE_FLOORS[mineFloor(st, C)].zh, "");
+    st.rev++;
+    var name = m ? m.en + "（" + m.zh + "）" : "stone（石頭）";
+    return { ok: true, msg: (first && m ? "📖 新圖鑑！" : "") + "挖到了 " + name + (deeper ? "　⛏️ 往下到" + C.MINE_FLOORS[mineFloor(st, C)].zh + "了！" : ""),
+             found: k, first: first && !!m, deeper: deeper };
+  }
+
+  // ── 送禮 ────────────────────────────────────────────────────────────────
+  // 只能送村民喜歡的東西（likes 裡有 item 的），每位一天一次，好感 +1（最多 10）
+  function giftable(v, C) { return (C.VILLAGERS[v].likes || []).filter(function (x) { return x.item; }).map(function (x) { return x.item; }); }
+  function gift(st, v, item, today, C) {
+    if (!isResident(st, v, C)) return fail(v + " 還沒搬來");
+    if (giftable(v, C).indexOf(item) < 0) return fail(v + " 不特別喜歡這個");
+    if (st.gifts[v] === today) return fail("今天已經送過 " + v + " 了，明天再來");
+    if ((st.hearts[v] || 0) >= 10) return fail(v + " 的好感已經滿了，留著送別人吧");
+    if (haveOf(st, item, C) < 1) return fail("背包裡沒有" + (C.NAME[item] || item) + (C.DECOR[item] ? "（擺在農莊的可以先收回）" : ""));
+    take(st, item, 1, C);
+    st.gifts[v] = today;
+    var before = st.hearts[v] || 0;
+    st.hearts[v] = Math.min(10, before + 1);
+    note(st, today, "送 " + v + " " + (C.NAME[item] || item), "");
+    var came = arrive(st, today, C);
+    st.rev++;
+    return { ok: true, msg: v + "：" + C.LINES.thanks + "　❤️ +1" +
+             (came.length ? "　🏠 " + came.join("、") + " 搬來小鎮了！" : ""), arrived: came };
   }
 
   // ── 繁榮度與新村民 ──────────────────────────────────────────────────────
@@ -507,6 +603,7 @@
   // 數字一律轉成非負整數、id 只接受 f12 / d3 這種格式、類型必須存在於內容表 ——
   // 這些值之後會被插進畫面，不能讓匯入檔夾帶文字或程式碼。
   var DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+  function isDate(v) { return typeof v === "string" && DATE_RE.test(v); }
   function int(v, max) { v = Math.floor(Number(v)); if (!isFinite(v) || v < 0) v = 0; return max != null ? Math.min(v, max) : v; }
   function str(v, max) { return String(v == null ? "" : v).slice(0, max || 200); }
   function dates(a) { return Array.isArray(a) ? a.filter(function (d) { return DATE_RE.test(d); }).slice(0, 400) : []; }
@@ -563,8 +660,8 @@
       // 只收認得的欄位：日期欄位要是日期、choice 只能是短代號（這些值會被插進畫面）
       Object.keys(src).forEach(function (id) {
         var v = obj(src[id]), o = {};
-        ["readAt", "done", "date"].forEach(function (f) { if (DATE_RE.test(v[f])) o[f] = v[f]; });
-        if (/^[a-z0-9]{1,8}$/.test(v.choice)) o.choice = v.choice;
+        ["readAt", "done", "date"].forEach(function (f) { if (isDate(v[f])) o[f] = v[f]; });
+        if (typeof v.choice === "string" && /^[a-z0-9]{1,8}$/.test(v.choice)) o.choice = v.choice;
         st[k][str(id, 60)] = o;
       });
     });
@@ -582,8 +679,14 @@
       stages.forEach(function (sg, i) { if (!open || i !== st.town[k]) sg.tasks.forEach(function (t) { delete st.tasks[t.id]; }); });
     });
     st.farm.fields = st.farm.fields.slice(0, maxFields(st));
+    var dx = obj(raw.dex);
+    Object.keys(dx).forEach(function (k) { if (Object.prototype.hasOwnProperty.call(st.inv, k)) st.dex[k] = int(dx[k], 100000); });
+    st.mine.digs = int(obj(raw.mine).digs, 1000000);
+    var gf = obj(raw.gifts);
+    Object.keys(gf).forEach(function (v) { if (Object.prototype.hasOwnProperty.call(C.VILLAGERS, v) && isDate(gf[v])) st.gifts[v] = gf[v]; });
+    if (raw.cast && typeof raw.cast === "object") st.cast = { on: isDate(raw.cast.on) ? raw.cast.on : today };
     var rs = obj(raw.residents);
-    Object.keys(rs).forEach(function (v) { if (own.call(C.VILLAGERS, v) && C.VILLAGERS[v].arrive) st.residents[v] = DATE_RE.test(rs[v]) ? rs[v] : today; });
+    Object.keys(rs).forEach(function (v) { if (own.call(C.VILLAGERS, v) && C.VILLAGERS[v].arrive) st.residents[v] = isDate(rs[v]) ? rs[v] : today; });
     var book = obj(raw.book);
     Object.keys(book).forEach(function (wk) {
       if (!DATE_RE.test(wk) || !Array.isArray(book[wk])) return;
@@ -629,6 +732,7 @@
     SCHEMA: SCHEMA, AP_PER_TASK: AP_PER_TASK, AP_WEEKLY_CAP: AP_WEEKLY_CAP, AP_WALLET_CAP: AP_WALLET_CAP,
     GROW_DAYS: GROW_DAYS, MAX_FIELDS: MAX_FIELDS, FIELD_BONUS_MAX: FIELD_BONUS_MAX, CARE_GROUP: CARE_GROUP, W: W, H: H, TOWN_START: TOWN_START,
     maxFields: maxFields, careCost: careCost, fillCost: fillCost,
+    pickWeighted: pickWeighted, fishTable: fishTable, cast: cast, giveUp: giveUp, fish: fish, mineFloor: mineFloor, dig: dig, giftable: giftable, gift: gift,
     ymd: ymd, addDays: addDays, apWeek: apWeek, contentWeek: contentWeek, season: season,
     terrainAt: terrainAt, occupied: occupied, areaFree: areaFree,
     newState: newState, apTotal: apTotal, grant: grant, spend: spend, syncFromProgress: syncFromProgress,

@@ -13,7 +13,7 @@ if (inline.length !== 1) throw new Error("預期一段內嵌 script，實際 " +
 
 const els = new Map();
 function el(id) {
-  if (!els.has(id)) els.set(id, { id, innerHTML: "", textContent: "", hidden: false, disabled: false,
+  if (!els.has(id)) els.set(id, { id, innerHTML: "", textContent: "", hidden: false, disabled: false, style: {},
     classList: { _s: new Set(), add(c) { this._s.add(c); }, remove(c) { this._s.delete(c); }, toggle(c, on) { on ? this._s.add(c) : this._s.delete(c); }, contains(c) { return this._s.has(c); } } });
   return els.get(id);
 }
@@ -176,6 +176,52 @@ ok("對話選擇被記住", el("p-mail").innerHTML.includes("choice picked"));
 day("2026-10-11"); run("tab('mail')");
 ok("換週後看得到下週的卡", el("p-mail").innerHTML.includes("朋友與情緒"));
 ok("季節換成夏", S.document.body.className === "s-夏");
+
+console.log("\n── 野外：釣魚、礦坑、送禮 ──");
+{
+  run("pick('test'); testBoost(50); tab('wild')");
+  ok("野外分頁打開", el("p-wild").hidden === false && el("wildBody").innerHTML.includes("海邊釣魚") && el("wildBody").innerHTML.includes("礦坑"));
+  ok("寫出這一季釣得到的魚", /這一季釣得到：/.test(el("wildBody").innerHTML));
+  ok("圖鑑有 9 種魚、5 種礦", (el("wildBody").innerHTML.match(/class="no"|<div><span class="em">/g) || []).length === 14);
+  // 小遊戲：按中
+  const ap0 = run("T.apTotal(st)");
+  run("startFish()");
+  ok("甩竿打開小遊戲、當下扣 2 體力", el("fishGame").hidden === false && run("T.apTotal(st)") === ap0 - 2);
+  run("startFish()");
+  ok("再按一次甩竿不會重開、不會再扣", run("T.apTotal(st)") === ap0 - 2);
+  run("tab('farm')");
+  ok("切到別的分頁小遊戲就關掉", el("fishGame").hidden === true && run("fishing === null"));
+  run("tab('wild')");
+  ok("回來看到竿子還在水裡", el("wildBody").innerHTML.includes("竿子還在水裡"));
+  run("startFish()");
+  ok("繼續釣不會再扣", run("T.apTotal(st)") === ap0 - 2);
+  run("fishing.pos = fishing.zone + 1; reel()");
+  ok("按中：背包多一條魚", run("Object.keys(C.FISH).some(k => st.inv[k] > 0)"));
+  ok("結果卡有整句英文和語音", el("wildBody").innerHTML.includes("You caught") && el("wildBody").innerHTML.includes("catch_"));
+  ok("小遊戲收起來", el("fishGame").hidden === true);
+  ok("最上面顯示釣到什麼，可以聽英文", el("wildBody").innerHTML.includes('class="find"') && el("wildBody").innerHTML.includes("wordAudio("));
+  // 按偏
+  run("startFish(); fishing.pos = (fishing.zone + 50) % 100 < fishing.zone ? 99 : (fishing.zone > 50 ? 0 : 100); reel()");
+  ok("沒按中：顯示魚跑掉了", el("wildBody").innerHTML.includes(run("C.LINES.miss")));
+  const ap1 = run("T.apTotal(st)");
+  run("startFish(); quitFish()");
+  ok("收線放棄：體力已經用掉、竿子收回", run("T.apTotal(st)") === ap1 - 2 && el("fishGame").hidden === true && !run("st.cast"));
+  // 挖礦
+  run("doDig()");
+  ok("挖礦：挖了一次", run("st.mine.digs") === 1 && el("wildBody").innerHTML.includes('class="find"'));
+  ok("背包也列出石頭", el("wildBody").innerHTML.includes("🪨 石頭 ×"));
+  ok("背包可以全部賣", /act\(T\.sell\(st,'[a-z]+',\d+,C\)\)/.test(el("wildBody").innerHTML));
+  // 送禮
+  run("st.inv.iron = 1; openFolk('Leo')");
+  ok("人物卡有送禮、列出鐵礦", el("folkBox").innerHTML.includes("送禮") && el("folkBox").innerHTML.includes("giveGift('Leo','iron')"));
+  const h0 = run("st.hearts.Leo || 0");
+  run("giveGift('Leo','iron')");
+  ok("送了之後好感 +1、卡片寫今天送過了", run("st.hearts.Leo") === h0 + 1 && el("folkBox").innerHTML.includes("今天已經送過了"));
+  run("globalThis._mh = st.hearts.Mia; st.hearts.Mia = 10; openFolk('Mia')");
+  ok("好感滿了：不給送", el("folkBox").innerHTML.includes("好感已經滿了") && !el("folkBox").innerHTML.includes("giveGift('Mia'"));
+  run("st.hearts.Mia = globalThis._mh");
+  run("closeFolk(); tab('farm')");
+}
 
 console.log("\n── 每顆 🔊 都有音檔 ──");
 const all = [...el("p-mail").innerHTML.matchAll(/townAudio\('([^']+)'\)/g)].map(m => m[1]);

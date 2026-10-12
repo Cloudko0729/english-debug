@@ -37,8 +37,8 @@ header a{color:#ffe08a;font-weight:700;text-decoration:none;font-size:.85rem}
 .bar i{display:block;height:100%;background:linear-gradient(#ffd25a,#e0a526)}
 .chip{font-size:.78rem;font-weight:900;padding:2px 9px;border-radius:4px;color:#fff;background:var(--wood)}
 .chip.s-秋{background:#b8742a}.chip.s-冬{background:#4f6f8f}.chip.s-春{background:#5e9a48}.chip.s-夏{background:#2e8c8a}
-.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:6px 0 10px}
-.tabs button{font-family:inherit;font-weight:900;font-size:.9rem;padding:9px 4px;border:3px solid var(--wood-d);background:var(--panel2);color:var(--ink);border-radius:8px 8px 4px 4px;cursor:pointer}
+.tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;margin:6px 0 10px}
+.tabs button{font-family:inherit;font-weight:900;font-size:clamp(.72rem,3.2vw,.9rem);padding:9px 2px;white-space:nowrap;overflow:hidden;border:3px solid var(--wood-d);background:var(--panel2);color:var(--ink);border-radius:8px 8px 4px 4px;cursor:pointer}
 .tabs button.on{background:var(--panel);transform:translateY(2px)}
 .tabs button .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--bad);margin-left:4px;vertical-align:middle}
 .pane{padding:12px}
@@ -126,6 +126,19 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 .modal:not(.showzh) .chips i{display:none}
 .lbl{font-weight:900;margin-top:10px;font-size:.9rem}
 
+/* 野外 */
+.fbar{position:relative;height:34px;background:#cfe8f7;border:3px solid var(--wood-d);border-radius:8px;overflow:hidden;margin:10px 0}
+.fzone{position:absolute;top:0;bottom:0;background:#8fd17a;border-left:2px solid #4f9a3c;border-right:2px solid #4f9a3c}
+.fmark{position:absolute;top:-2px;bottom:-2px;width:6px;margin-left:-3px;background:#c0392b;border-radius:3px}
+.find{display:flex;gap:12px;align-items:center;padding:10px 12px;margin:8px 0;background:#fff3cf;border:2px solid var(--ap);border-radius:8px}
+.find .big{font-size:2.4rem}
+.find .en{font-family:Georgia,serif;font-size:1.1rem;font-weight:900}
+.dex{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:6px;margin:6px 0}
+.dex div{background:#fffdf4;border:2px solid var(--wood-l);border-radius:8px;padding:6px;text-align:center;font-size:.85rem}
+.dex div.no{color:var(--muted);border-style:dashed}
+.dex .em{font-size:1.6rem;display:block}
+.gifts{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+
 /* 小鎮 */
 .prosper{padding:10px 12px;margin-bottom:12px;background:#fff3cf;border:2px solid var(--ap);border-radius:8px}
 .prosper .ttl{font-weight:900;font-size:1.05rem}
@@ -182,6 +195,7 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
     <button id="t-farm" class="on" onclick="tab('farm')">🌾 農莊</button>
     <button id="t-shop" onclick="tab('shop')">🛒 商店</button>
     <button id="t-mail" onclick="tab('mail')">📨 村民</button>
+    <button id="t-wild" onclick="tab('wild')">🎣 野外</button>
     <button id="t-town" onclick="tab('town')">🏛️ 小鎮</button>
   </div>
 
@@ -203,6 +217,16 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 
     <section class="pane" id="p-shop" hidden></section>
     <section class="pane" id="p-mail" hidden></section>
+    <section class="pane" id="p-wild" hidden>
+      <!-- 釣魚小遊戲：畫面重繪時不能被蓋掉，所以放在 wildBody 外面，而且放最上面，按甩竿就看得到 -->
+      <div class="sheet" id="fishGame" hidden>
+        <h2>🎣 游標跑進綠色區域時，按「收竿」！</h2>
+        <div class="fbar" id="fishBar"><div class="fzone" id="fishZone"></div><div class="fmark" id="fishMarker"></div></div>
+        <p class="muted" id="fishHint">游標會一直來回跑，沒把握就等下一次經過。</p>
+        <div class="actions"><button class="btn go" id="reelBtn" onclick="reel()">🎣 收竿！</button><button class="btn" onclick="quitFish()">收線放棄（體力已經用掉）</button></div>
+      </div>
+      <div id="wildBody"></div>
+    </section>
     <section class="pane" id="p-town" hidden></section>
   </div>
 </div>
@@ -249,6 +273,7 @@ function pushCloud(now) {
   cloudTimer = setTimeout(() => { cloudTimer = null; cloudSave(student); }, 4000);
 }
 function reload(msg) {
+  stopFish();
   const r = T.load(storage(), student, today(), C);
   st = r.st; sel = null; moving = null;
   T.syncFromProgress(st, progress());
@@ -294,6 +319,7 @@ function selectStudent(name) {
 }
 window.selectStudent = selectStudent;
 function pick(name) {
+  stopFish();
   student = name; try { storage().setItem("kidsCurrentStudent", name); } catch (e) {}
   const r = T.load(storage(), student, today(), C);
   st = r.st;
@@ -325,7 +351,7 @@ function render() {
   // 有新信的分頁加紅點
   const unread = visibleCards().some(c => !st.cards[c.id]);
   document.getElementById("t-mail").innerHTML = "📨 村民" + (unread ? '<span class="dot"></span>' : "");
-  renderToday(d); renderGoal(); renderHint(); renderGather(); renderMap(d); renderSheet(d); renderShop(); renderMail(d); renderTown(d);
+  renderToday(d); renderGoal(); renderHint(); renderGather(); renderMap(d); renderSheet(d); renderShop(); renderMail(d); renderWild(d); renderTown(d);
 }
 
 function renderToday(d) {
@@ -343,11 +369,14 @@ function renderToday(d) {
 
 // 東西的圖示、名字、去哪裡拿
 const ICON = { ap: "⚡", money: "🪙", wood: "🪵", stone: "🪨" };
-const itemIcon = k => ICON[k] || (C.CROPS[k] && C.CROPS[k].emoji) || (C.DECOR[k] && C.DECOR[k].emoji) || "📦";
+const thing = k => C.CROPS[k] || C.DECOR[k] || C.FISH[k] || C.MINERALS[k] || null;
+const itemIcon = k => ICON[k] || (thing(k) && thing(k).emoji) || "📦";
 const itemName = k => C.NAME[k] || k;
 function whereToGet(k) {
   if (k === "ap") return "做英文練習換體力";
   if (k === "wood" || k === "stone") return "在農莊撿";
+  if (C.FISH[k]) return `去野外釣魚（${C.FISH[k].seasons.length === 4 ? "四季都有" : C.FISH[k].seasons.join("、") + "季"}）`;
+  if (C.MINERALS[k]) return "去野外的礦坑挖";
   if (C.CROPS[k]) return (C.CROPS[k].freeSeed ? "種田收成（種子免費）" : "去商店買種子，種田收成") + `，或用小鎮幣補（每個 ${C.SELL[k] + C.FILL_EXTRA} 幣）`;
   if (C.DECOR[k]) return "去商店買（擺在農莊的可以收回再交）";
   return "";
@@ -380,6 +409,101 @@ function renderGather() {
     b.innerHTML = have >= need ? `${em} ${zh}夠了 ✓ <span class="cost">${have}/${need}</span>`
       : `${em} 撿${zh}（${(T.nextGoal(st, C) || {}).name || "小鎮"}任務用 ${have}/${need}） <span class="cost">2⚡</span>`;
   });
+}
+
+// ── 野外：釣魚、礦坑、圖鑑 ─────────────────────────────────────────
+let lastFind = null;         // 最近一次釣到／挖到的東西，顯示在最上面
+function findHtml() {
+  if (!lastFind) return "";
+  if (!lastFind.k) return `<div class="find"><span class="big">💨</span><div><div class="en">${esc(C.LINES.miss)}</div><div class="muted">魚跑掉了，體力還是用掉了。</div></div></div>`;
+  const k = lastFind.k, t = thing(k), en = t ? t.en : "stone", zh = t ? t.zh : "石頭", say = t ? t.say : C.MINE_STONE_SAY;
+  return `<div class="find"><span class="big">${itemIcon(k)}</span><div>
+    <div class="en">${esc(say)} <button class="btn" onclick="play(townAudio('catch_${k}'))">🔊</button></div>
+    <div><b>${esc(en)}</b> <button class="btn" onclick="play(wordAudio('${en}'))">🔊</button>　${esc(zh)}${lastFind.first ? "　📖 新圖鑑！" : ""}${C.SELL[k] ? `　賣 ${C.SELL[k]}🪙` : "　建設材料"}</div></div></div>`;
+}
+function dexHtml(keys, seasonOf) {
+  return `<div class="dex">${keys.map(k => {
+    const t = thing(k), n = st.dex[k] || 0;
+    return n ? `<div><span class="em">${t.emoji}</span><b>${esc(t.en)}</b><br>${esc(t.zh)} ×${n}</div>`
+             : `<div class="no"><span class="em">❔</span>${seasonOf ? seasonOf(k) : "還沒挖到"}</div>`;
+  }).join("")}</div>`;
+}
+function renderWild(d) {
+  const s = T.season(d), here = Object.keys(T.fishTable(d, C)), ap = T.apTotal(st);
+  const fl = T.mineFloor(st, C), F = C.MINE_FLOORS, next = F[fl + 1];
+  const bag = Object.keys(C.FISH).concat(Object.keys(C.MINERALS)).filter(k => st.inv[k]);
+  const stoneNeed = T.materialNeed(st, "stone", C);
+  let h = findHtml() + `<p class="muted">⚡ 釣魚、挖礦都會用掉體力，記得留一些給田和小鎮任務。</p>`;
+  h += `<h2>🎣 海邊釣魚 <span class="chip s-${s}">${s}季</span></h2>
+    <p class="muted">這一季釣得到：${here.map(k => `${C.FISH[k].emoji} ${C.FISH[k].en}`).join("、")}。每季的魚不一樣，下週換季就有新的魚。</p>
+    <div class="actions">${st.cast
+      ? `<button class="btn go" onclick="startFish()">🎣 竿子還在水裡，繼續釣</button>`
+      : `<button class="btn go" ${ap >= C.COST.fish ? "" : "disabled"} onclick="startFish()">🎣 甩竿 <span class="cost">${C.COST.fish}⚡</span></button>`}</div>
+    <h2 style="margin-top:16px">⛏️ 礦坑・${F[fl].zh}</h2>
+    <p class="muted">${next ? `再挖 ${next.at - st.mine.digs} 次可以往下到${next.zh}，越深越容易挖到值錢的礦。` : "已經挖到最深的一層了。"}</p>
+    <div class="actions"><button class="btn go" ${ap >= C.COST.dig ? "" : "disabled"} onclick="doDig()">⛏️ 挖一下 <span class="cost">${C.COST.dig}⚡</span></button></div>`;
+  h += `<h2 style="margin-top:16px">🎒 背包</h2>` + (bag.length
+    ? `<div class="actions">${bag.map(k => `<button class="btn" onclick="act(T.sell(st,'${k}',${st.inv[k]},C))">${itemIcon(k)} ${esc(thing(k).en)} ×${st.inv[k]}・全部賣 +${C.SELL[k] * st.inv[k]}🪙</button>`).join("")}</div>
+       <p class="muted">也可以留著送給喜歡的村民（村民分頁點頭像），好感 +1。</p>`
+    : `<p class="muted">釣到的魚、挖到的礦會放在這裡。</p>`)
+    + `<p>🪨 石頭 ×${st.inv.stone || 0}　<span class="muted">建設材料，不能賣${stoneNeed ? `；這一階任務還要 ${stoneNeed} 顆` : ""}</span></p>`;
+  h += `<h2 style="margin-top:16px">📖 圖鑑</h2><h3>魚</h3>` + dexHtml(Object.keys(C.FISH), k => C.FISH[k].seasons.length === 4 ? "四季" : C.FISH[k].seasons.join("、") + "季")
+     + `<h3>礦石</h3>` + dexHtml(Object.keys(C.MINERALS));
+  document.getElementById("wildBody").innerHTML = h;
+}
+function doDig() {
+  const r = act(T.dig(st, today(), C, Math.random()));
+  if (r && r.ok) { lastFind = { k: r.found, first: r.first }; play(townAudio("catch_" + r.found)); render(); }
+}
+// 釣魚小遊戲：游標來回跑，綠色區域每次位置不同。甩竿就扣體力（存檔），放棄不退。
+let fishing = null;
+function startFish() {
+  if (fishing) return;                                    // 已經在釣了，不要再開一條動畫
+  const r = T.cast(st, today(), C);
+  if (!r.ok) { toast(r.msg); return; }
+  if (!r.resumed) persist();
+  render();
+  const zone = 10 + Math.floor(Math.random() * 56), width = 26;
+  const session = fishing = { pos: 0, dir: 1, zone, width, t: null, startAt: null };
+  const z = document.getElementById("fishZone");
+  z.style.left = zone + "%"; z.style.width = width + "%";
+  const g = document.getElementById("fishGame");
+  g.hidden = false;
+  if (g.scrollIntoView) g.scrollIntoView({ behavior: "smooth", block: "center" });
+  const tick = now => {
+    if (fishing !== session) return;                        // 這一輪已經結束，舊的動畫自己停
+    if (session.startAt == null) session.startAt = now + 900;   // 先停 0.9 秒，捲動完、看清楚綠色區再開始跑
+    if (now >= session.startAt) {
+      if (session.t != null) {
+        const dt = Math.min(now - session.t, 50);           // 切到背景再回來不會一下跳到底
+        session.pos += session.dir * dt * 0.09;             // 每秒跑 90%
+        if (session.pos >= 100) { session.pos = 100; session.dir = -1; }
+        if (session.pos <= 0) { session.pos = 0; session.dir = 1; }
+      }
+      session.t = now;
+    }
+    document.getElementById("fishMarker").style.left = session.pos + "%";
+    session.raf = requestAnimationFrame(tick);
+  };
+  if (typeof requestAnimationFrame === "function") session.raf = requestAnimationFrame(tick);
+}
+// 只關掉畫面上的小遊戲（切分頁、換帳號）；竿子還在水裡，下次按甩竿不會再扣體力
+function stopFish() {
+  if (fishing && fishing.raf && typeof cancelAnimationFrame === "function") cancelAnimationFrame(fishing.raf);
+  fishing = null;
+  const g = document.getElementById("fishGame"); if (g) g.hidden = true;
+}
+function quitFish() { stopFish(); act(T.giveUp(st)); }
+function reel() {
+  if (!fishing) return;
+  const hit = fishing.pos >= fishing.zone && fishing.pos <= fishing.zone + fishing.width;
+  stopFish();
+  const r = act(T.fish(st, today(), C, hit, Math.random()));
+  if (r && r.ok) {
+    lastFind = { k: r.caught, first: r.first };
+    play(townAudio(r.caught ? "catch_" + r.caught : "line_miss"));
+    render();
+  }
 }
 
 function fieldAt(x, y) { return st.farm.fields.find(f => x >= f.x && x <= f.x + 1 && y >= f.y && y <= f.y + 1); }
@@ -489,8 +613,9 @@ function doGather(m) { act(T.gather(st, m, today(), C)); }
 
 // ── 商店與背包 ─────────────────────────────────────────────────────
 function renderShop() {
-  const sellRows = Object.keys(C.SELL).filter(k => T.unlocked(st, C.CROPS[k]) || st.inv[k]).map(k => {
-    const c = C.CROPS[k], n = st.inv[k] || 0;
+  // 作物一直列（還沒開賣的除外）；魚和礦有才列
+  const sellRows = Object.keys(C.SELL).filter(k => C.CROPS[k] ? (T.unlocked(st, C.CROPS[k]) || st.inv[k]) : st.inv[k]).map(k => {
+    const c = thing(k), n = st.inv[k] || 0;
     return `<div class="item"><div class="top"><span class="em">${c.emoji}</span><div><div class="en">${c.en}</div><div class="zh">${c.zh}　有 <span class="n">${n}</span></div></div></div>
       <button class="btn" ${n ? "" : "disabled"} onclick="act(T.sell(st,'${k}',1,C))">賣 1 個 +${C.SELL[k]}🪙</button>
       <button class="btn" ${n > 1 ? "" : "disabled"} onclick="act(T.sell(st,'${k}',${n},C))">全部賣</button></div>`;
@@ -599,6 +724,7 @@ function openFolk(v) {
     <div class="lbl">個性</div><div class="chips">${chips(p.traits.map(t => ({ emoji: "✨", en: t.en, zh: t.zh })))}</div>
     <div class="lbl">💛 喜歡</div><div class="chips">${chips(p.likes)}</div>
     <div class="lbl">💢 不喜歡</div><div class="chips">${chips(p.dislikes)}</div>
+    ${T.isResident(st, v, C) ? giftHtml(v) : ""}
     <div class="lbl">口頭禪</div><div class="en">“${esc(p.motto)}”</div><div class="zh">${esc(p.mottoZh)}</div>
     <div class="actions"><button class="btn" onclick="play(townAudio('villager_${v}_motto'))">🔊 聽口頭禪</button></div>
     <p class="muted" style="margin-top:10px">${esc(p.about)}</p>
@@ -606,6 +732,21 @@ function openFolk(v) {
   m.hidden = false;
 }
 function closeFolk() { document.getElementById("folkModal").hidden = true; }
+// 送禮：只列這位村民喜歡、而且背包裡有的東西；一天一次
+function giftHtml(v) {
+  const items = T.giftable(v, C), done = st.gifts[v] === today(), full = (st.hearts[v] || 0) >= 10;
+  if (full) return `<div class="lbl">🎁 送禮</div><p class="muted">❤️ ${v} 的好感已經滿了，喜歡的東西留著送別人吧。</p>`;
+  const btns = items.map(k => {
+    const n = T.haveOf(st, k, C);
+    return `<button class="btn" ${n && !done ? "" : "disabled"} onclick="giveGift('${v}','${k}')">${itemIcon(k)} ${esc(itemName(k))}（有 ${n}）</button>`;
+  }).join("");
+  return `<div class="lbl">🎁 送禮（一天一次，好感 +1）</div><div class="gifts">${btns}</div>
+    ${done ? `<p class="muted">今天已經送過了，明天再來。</p>` : `<p class="muted">送 ${v} 喜歡的東西。沒有的話：${items.map(k => itemName(k) + "→" + whereToGet(k)).join("；")}。</p>`}`;
+}
+function giveGift(v, k) {
+  const r = act(T.gift(st, v, k, today(), C));
+  if (r && r.ok) { play(townAudio("line_thanks")); if (!(r.arrived && r.arrived.length)) openFolk(v); }
+}
 function celebrate(r) {
   const key = r.key || "plaza", L = C.LANDMARKS[key], stage = st.town[key] || 0, came = r.arrived || [];
   const m = document.getElementById("folkModal");
@@ -712,7 +853,8 @@ function importSave(inp) {
 }
 
 function tab(name) {
-  ["farm", "shop", "mail", "town"].forEach(k => {
+  if (name !== "wild") stopFish();
+  ["farm", "shop", "mail", "wild", "town"].forEach(k => {
     document.getElementById("p-" + k).hidden = k !== name;
     document.getElementById("t-" + k).classList.toggle("on", k === name);
   });
