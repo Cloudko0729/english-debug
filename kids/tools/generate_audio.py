@@ -9,6 +9,7 @@ import sys
 import tempfile
 from pathlib import Path
 
+import numpy as np
 import soundfile as sf
 from kokoro_onnx import Kokoro
 
@@ -33,6 +34,7 @@ def main():
     outdir.mkdir(parents=True, exist_ok=True)
     voice = spec.get("voice", "af_heart")
     speed = spec.get("speed", 0.9)
+    lead = spec.get("lead", 0.2)      # 開頭空白秒數
     items = list(spec["items"].items())
     if "--prefix" in sys.argv:
         prefix = sys.argv[sys.argv.index("--prefix") + 1]
@@ -51,6 +53,9 @@ def main():
                 print(f"{name}.mp3 (skip, exists)")
                 continue
             samples, sr = kokoro.create(text, voice=voice, speed=speed, lang="en-us")
+            # 開頭補一小段空白：Kokoro 的聲音幾乎從第 0 秒就開始，手機播放時前幾十毫秒常被吃掉，
+            # 短字的開頭子音（tea 的 t、chair 的 ch）就不見了，tea 聽起來像 sea。
+            samples = np.concatenate([np.zeros(int(sr * lead), dtype=samples.dtype), samples])
             wav = Path(tmp) / f"{name}.wav"
             sf.write(wav, samples, sr)
             subprocess.run(

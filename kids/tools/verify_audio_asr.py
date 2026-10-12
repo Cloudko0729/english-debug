@@ -21,6 +21,8 @@ SAME_SOUND = {
     "the uk": {"the uk", "uk"}, "the usa": {"the usa", "usa"},
     "mrt": {"mrt", "m r t"},
     "ago": {"ago", "a go"},
+    # 同音字：辨識器只能寫成其中一個，或寫成字母 C
+    "sea": {"sea", "see", "c"}, "see": {"see", "sea", "c"}, "bee": {"bee", "be", "b"},
 }
 
 def norm(s):
