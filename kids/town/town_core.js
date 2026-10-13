@@ -6,6 +6,8 @@
 //
 // 定案規則見設計報告《四季小鎮》：
 //   體力只來自學習：完成一份 +10，每週最多 70（週六 00:00 換週），體力條上限 60，溢出進儲備。
+//   另有「本週加分」額度每週 40（2026-10-13 使用者決定另外給）：本月文法每課、本月單字每單元第一次完成 +10、
+//   每週綜合測驗 +10、本週作業每項 +2。
 //   小鎮幣只來自出貨與委託；建築收益為零。
 //   作物：種下後照天數成熟（多數 3 天），不照料也會熟，永不枯死。
 //         整片田一天照料一次 1 體力；每照料一天，收成時拿到 2 個的機率 +10%。
@@ -17,6 +19,8 @@
   var AP_PER_TASK = 10;
   var AP_WEEKLY_CAP = 70;
   var AP_WALLET_CAP = 60;
+  var AP_BONUS_CAP = 40;        // 本週加分：文法、單字、週測、作業，跟每日練習的 70 分開算
+  var BONUS = { grammar: 10, vocab: 10, test: 10, homework: 2 };
   var GROW_DAYS = 3;
   var MAX_FIELDS = 8;          // 一開始最多 8 片田
   var FIELD_BONUS_MAX = 8;     // 每修好一階（任何地標）多 1 片，最多再多 8 片
@@ -102,19 +106,20 @@
   }
   // 學習完成 → 體力。同一個 activityId 只發一次。週上限以「學習那天」所屬的週計，
   // 這樣上週做的練習這週才打開小鎮補發，也不會吃掉這週的額度。
-  function grant(st, activityId, amount, learnedOn) {
+  // bonus＝true 時算「本週加分」額度（40），否則算每日練習的 70
+  function grant(st, activityId, amount, learnedOn, bonus) {
     if (st.energy.receipts[activityId]) return fail("已經領過");
-    var e = st.energy, wk = apWeek(learnedOn);
-    e.byWeek = e.byWeek || {};
-    var used = e.byWeek[wk] || 0;
-    var give = Math.max(0, Math.min(amount, AP_WEEKLY_CAP - used));
-    e.byWeek[wk] = used + give;
+    var e = st.energy, wk = apWeek(learnedOn), key = bonus ? "bonusByWeek" : "byWeek", cap = bonus ? AP_BONUS_CAP : AP_WEEKLY_CAP;
+    e[key] = e[key] || {};
+    var used = e[key][wk] || 0;
+    var give = Math.max(0, Math.min(amount, cap - used));
+    e[key][wk] = used + give;
     e.receipts[activityId] = { on: learnedOn, amount: give };
     var room = Math.max(0, AP_WALLET_CAP - e.wallet);
     var toWallet = Math.min(give, room);
     e.wallet += toWallet;
     e.reserve += give - toWallet;
-    if (wk === e.week) e.weekEarned = e.byWeek[wk];
+    if (!bonus && wk === e.week) e.weekEarned = e.byWeek[wk];
     st.rev++;
     return { ok: true, amount: give, capped: give < amount };
   }
@@ -146,6 +151,24 @@
       if (on < TOWN_START) return;
       var r = grant(st, "daily:" + k, AP_PER_TASK, on);
       if (r.ok) got += r.amount;
+    });
+    // 本週加分：每一項只發一次，日期用紀錄上的完成日；小鎮上線前做的不算
+    var bonus = function (id, amount, on) {
+      if (!DATE_RE.test(on) || on < TOWN_START) return;
+      var r = grant(st, id, amount, on, true);
+      if (r.ok) got += r.amount;
+    };
+    var nodes = (progress && progress.grammar && progress.grammar.nodes) || {};
+    Object.keys(nodes).sort().forEach(function (id) { bonus("grammar:" + id, BONUS.grammar, String((nodes[id] || {}).lastAt || "")); });
+    var units = (progress && progress.vocab && progress.vocab.units) || {};
+    Object.keys(units).sort().forEach(function (id) { bonus("vocab:" + id, BONUS.vocab, String((units[id] || {}).lastAt || "")); });
+    ((progress && progress.weeklyTests) || []).forEach(function (t) { if (t && t.week) bonus("test:" + t.week, BONUS.test, String(t.at || "")); });
+    var hw = (progress && progress.homework && progress.homework.weeks) || {};
+    Object.keys(hw).sort().forEach(function (wk) {
+      ["write", "speak"].forEach(function (kind) {
+        var items = (hw[wk] && hw[wk][kind]) || {};
+        Object.keys(items).sort().forEach(function (id) { bonus("hw:" + wk + ":" + kind + ":" + id, BONUS.homework, String((items[id] || {}).at || "")); });
+      });
     });
     return got;
   }
@@ -623,6 +646,8 @@
     st.energy.weekEarned = int(e.weekEarned, AP_WEEKLY_CAP);
     st.energy.byWeek = {};
     Object.keys(obj(e.byWeek)).forEach(function (k) { if (DATE_RE.test(k)) st.energy.byWeek[k] = int(e.byWeek[k], AP_WEEKLY_CAP); });
+    st.energy.bonusByWeek = {};
+    Object.keys(obj(e.bonusByWeek)).forEach(function (k) { if (DATE_RE.test(k)) st.energy.bonusByWeek[k] = int(e.bonusByWeek[k], AP_BONUS_CAP); });
     Object.keys(obj(e.receipts)).forEach(function (k) {
       var r = obj(e.receipts[k]);
       st.energy.receipts[str(k, 80)] = { on: DATE_RE.test(r.on) ? r.on : today, amount: int(r.amount, AP_PER_TASK) };
@@ -730,6 +755,7 @@
 
   var api = {
     SCHEMA: SCHEMA, AP_PER_TASK: AP_PER_TASK, AP_WEEKLY_CAP: AP_WEEKLY_CAP, AP_WALLET_CAP: AP_WALLET_CAP,
+    AP_BONUS_CAP: AP_BONUS_CAP, BONUS: BONUS,
     GROW_DAYS: GROW_DAYS, MAX_FIELDS: MAX_FIELDS, FIELD_BONUS_MAX: FIELD_BONUS_MAX, CARE_GROUP: CARE_GROUP, W: W, H: H, TOWN_START: TOWN_START,
     maxFields: maxFields, careCost: careCost, fillCost: fillCost,
     pickWeighted: pickWeighted, fishTable: fishTable, cast: cast, giveUp: giveUp, fish: fish, mineFloor: mineFloor, dig: dig, giftable: giftable, gift: gift,

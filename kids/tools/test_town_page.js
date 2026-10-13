@@ -61,6 +61,7 @@ console.log("\n── 新手提示與目標卡 ──");
 ok("第一次玩有開田提示", el("hint").hidden === false && el("hint").innerHTML.includes("綠色空地"));
 ok("農莊頁的目標卡列出這一階要的東西", el("goal").innerHTML.includes("清理廣場") && el("goal").innerHTML.includes("🪵 木材 0/4") && el("goal").innerHTML.includes("🌼 花圃 0/1"));
 ok("目標卡說明體力會存起來", el("goal").innerHTML.includes("不會不見"));
+ok("今天卡片列出本週加分的四種來源", ["本週加分", "本月文法", "本月單字", "週測", "作業"].every(w => el("today").innerHTML.includes(w)));
 ok("撿木材按鈕寫出用途", el("woodBtn").innerHTML.includes("小鎮廣場任務用 0/4"));
 
 console.log("\n── 種田一輪 ──");

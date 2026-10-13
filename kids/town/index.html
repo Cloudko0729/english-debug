@@ -364,6 +364,11 @@ function renderToday(d) {
   else if (hasDrill) h = `<span>📝 做完今天的每日練習，就能 +${T.AP_PER_TASK} ⚡</span><a class="btn go" href="../drills/daily_${d}.html">去做練習 →</a>`;
   else if (dow === 6) h = `<span>🏁 週六沒有每日練習，可以去做本週總複習。體力用之前存的。</span><a class="btn" href="../weekly_review.html">本週總複習 →</a>`;
   else h = `<span>😴 今天沒有每日練習，體力用之前存的。</span><span class="muted">本週已拿 ${used}/${T.AP_WEEKLY_CAP}</span>`;
+  // 本週加分：文法、單字、週測、作業（另外算，不佔每日練習的 70）
+  const bonus = (st.energy.bonusByWeek || {})[T.apWeek(d)] || 0, B = T.BONUS;
+  h += `<div class="muted" style="flex-basis:100%;font-size:.82rem">⭐ 本週加分 ${bonus}/${T.AP_BONUS_CAP}：
+    <a href="../grammar_month.html">本月文法</a>每課 +${B.grammar}、<a href="../vocab_month.html">本月單字</a>每單元 +${B.vocab}、
+    <a href="../weekly_test.html">週測</a> +${B.test}、<a href="../homework.html">作業</a>每項 +${B.homework}（第一次完成才算，不佔每日練習的 ${T.AP_WEEKLY_CAP}）</div>`;
   document.getElementById("today").innerHTML = h;
 }
 

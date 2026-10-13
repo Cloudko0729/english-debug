@@ -53,6 +53,43 @@ console.log("\n── 從練習紀錄補發體力 ──");
   eq("總共 20", T.apTotal(st), 20);
 }
 
+console.log("\n── 本週加分：文法、單字、週測、作業 ──");
+{
+  const st = fresh();
+  const prog = {
+    coins: { claimedDrills: {} },
+    grammar: { nodes: { "F4.6": { best: 5, lastAt: "2026-10-13" }, "F0.1": { best: 4, lastAt: "2026-09-01" } } },
+    vocab: { units: { "l1-u01": { best: 6, lastAt: "2026-10-14" } } },
+    weeklyTests: [{ week: "2026-10-10", at: "2026-10-16", correct: 18, total: 20 }],
+    homework: { weeks: { "2026-10-10": { write: { w1: { text: "x", at: "2026-10-13" }, w2: { text: "y", at: "2026-10-14" } }, speak: { s1: { rate: 3, at: "2026-10-15" } } } } },
+  };
+  const got = T.syncFromProgress(st, prog);
+  eq("文法 10＋單字 10＋週測 10＋作業 3 項 6＝36（上線前那課不算）", got, 36);
+  eq("算在本週加分，不佔每日練習的額度", [st.energy.bonusByWeek["2026-10-10"], (st.energy.byWeek || {})["2026-10-10"] || 0], [36, 0]);
+  eq("再同步一次不會重複發", T.syncFromProgress(st, prog), 0);
+  ok("重做同一課（lastAt 變新）也不會再發", (prog.grammar.nodes["F4.6"].lastAt = "2026-10-15", T.syncFromProgress(st, prog) === 0));
+  // 加分額度 40：再多一課只能拿到剩下的 4
+  prog.grammar.nodes["F4.5"] = { best: 5, lastAt: "2026-10-15" };
+  prog.vocab.units["l1-u02"] = { best: 5, lastAt: "2026-10-15" };
+  eq("本週加分最多 40", T.syncFromProgress(st, prog), 4);
+  eq("加分額度用完", st.energy.bonusByWeek["2026-10-10"], 40);
+  // 每日練習的 70 還是自己算
+  const days = {};
+  ["2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-13b", "2026-10-14b", "2026-10-15b"].forEach((d, i) => {
+    days[d.slice(0, 10) + "::x" + i] = { claimedAt: d.slice(0, 10) + "T10:00:00" };
+  });
+  prog.coins.claimedDrills = days;
+  eq("每日練習照樣拿滿 70", T.syncFromProgress(st, prog), 70);
+  eq("一週最多 70＋40＝110", T.apTotal(st), 110);
+  // 下一週的週測、作業是新的額度
+  prog.weeklyTests.push({ week: "2026-10-17", at: "2026-10-23", correct: 15, total: 20 });
+  eq("下週的週測另外算", T.syncFromProgress(st, prog), 10);
+  ok("同一週的週測只算一次", (prog.weeklyTests.push({ week: "2026-10-17", at: "2026-10-23", correct: 20, total: 20 }), T.syncFromProgress(st, prog) === 0));
+  // 存檔整理保留加分額度
+  const n = T.normalize(JSON.parse(JSON.stringify(st)), "test", "2026-10-16", C);
+  eq("存檔整理：加分額度留著", n.energy.bonusByWeek["2026-10-10"], 40);
+}
+
 console.log("\n── 作物：照天數成熟、照料加豐收機率 ──");
 {
   const st = fresh(); give(st, 3);
