@@ -74,6 +74,7 @@
       dex: {},                   // 圖鑑：釣到／挖到過幾次 { 物品: 次數 }
       mine: { digs: 0 },         // 礦坑挖了幾次（決定在第幾層）
       gifts: {},                 // 送禮：{ 村民: 最後送的那天 }，一天一次
+      photos: {},                // 好感任務拿到的紀念照 { 任務id: 那天 }
       decorOwned: {},
       farm: {
         fields: [{ id: "f1", x: 4, y: 3, crop: null, plantedDate: null, careDates: [] }],
@@ -396,7 +397,7 @@
   }
   // 作物不夠時用小鎮幣補齊的價錢：只補差的數量，每個＝賣價＋FILL_EXTRA。不是作物、還沒開賣就不能補。
   function fillCost(st, item, n, C) {
-    var crop = C.CROPS[item];
+    var crop = C.CROPS[item] || (C.FISH && C.FISH[item]);
     if (!crop || !unlocked(st, crop)) return null;
     var missing = Math.max(0, n - (st.inv[item] || 0));
     return { missing: missing, each: (C.SELL[item] || 0) + (C.FILL_EXTRA || 0), cost: missing * ((C.SELL[item] || 0) + (C.FILL_EXTRA || 0)) };
@@ -533,6 +534,35 @@
              (came.length ? "　🏠 " + came.join("、") + " 搬來小鎮了！" : ""), arrived: came };
   }
 
+  // ── 好感任務 ────────────────────────────────────────────────────────────
+  // 狀態：locked（好感不夠或還沒搬來）、ready（可以做）、done（拿到紀念照）
+  function questOf(id, C) { return C.QUESTS.find(function (q) { return q.id === id; }) || null; }
+  function questState(st, q, C) {
+    if (st.photos[q.id]) return "done";
+    return isResident(st, q.by, C) && (st.hearts[q.by] || 0) >= q.at ? "ready" : "locked";
+  }
+  function doQuest(st, id, today, C, opts) {
+    var q = questOf(id, C);
+    if (!q) return fail("沒有這個任務");
+    var s = questState(st, q, C);
+    if (s === "done") return fail("這張紀念照已經拿到了");
+    if (s === "locked") return fail(q.by + " 的好感要 " + q.at + " 顆心才能做");
+    var item = q.need.item, n = q.need.n, have = haveOf(st, item, C);
+    if (have < n && opts && opts.buy) {
+      var err = fillUp(st, item, n, C);
+      if (err) return fail(err);
+      have = haveOf(st, item, C);
+    }
+    if (have < n) return fail("還差 " + (n - have) + " " + (C.NAME[item] || item) + (C.DECOR[item] ? "（擺在農莊的可以先收回背包）" : ""));
+    take(st, item, n, C);
+    st.photos[q.id] = today;
+    note(st, today, "和 " + q.by + "：" + q.title + "（拿到紀念照）", q.say);
+    var came = arrive(st, today, C);
+    st.rev++;
+    return { ok: true, msg: "📷 拿到紀念照「" + q.captionZh + "」！繁榮度 +" + C.PHOTO_PROSPERITY +
+             (came.length ? "　🏠 " + came.join("、") + " 搬來小鎮了！" : ""), photo: q.id, arrived: came };
+  }
+
   // ── 繁榮度與新村民 ──────────────────────────────────────────────────────
   // 繁榮度不存檔，每次從進度算：交過的任務、修好的階段、所有好感、擺在農莊的裝飾（有上限）
   function prosperity(st, C) {
@@ -546,7 +576,8 @@
     });
     Object.keys(st.hearts).forEach(function (v) { hearts += st.hearts[v] || 0; });
     var decor = Math.min(st.farm.decor.length, P.decorMax);
-    return tasks * P.task + stages * P.stage + hearts * P.heart + decor * P.decor;
+    var photos = Object.keys(st.photos || {}).length * (C.PHOTO_PROSPERITY || 0);
+    return tasks * P.task + stages * P.stage + hearts * P.heart + decor * P.decor + photos;
   }
   function prosperityLevel(st, C) {
     var score = prosperity(st, C), lv = C.PROSPERITY.levels, i = 0;
@@ -709,9 +740,15 @@
     st.mine.digs = int(obj(raw.mine).digs, 1000000);
     var gf = obj(raw.gifts);
     Object.keys(gf).forEach(function (v) { if (Object.prototype.hasOwnProperty.call(C.VILLAGERS, v) && isDate(gf[v])) st.gifts[v] = gf[v]; });
+    var ph = obj(raw.photos);
+    C.QUESTS.forEach(function (q) { if (isDate(ph[q.id])) st.photos[q.id] = ph[q.id]; });
     if (raw.cast && typeof raw.cast === "object") st.cast = { on: isDate(raw.cast.on) ? raw.cast.on : today };
     var rs = obj(raw.residents);
     Object.keys(rs).forEach(function (v) { if (own.call(C.VILLAGERS, v) && C.VILLAGERS[v].arrive) st.residents[v] = isDate(rs[v]) ? rs[v] : today; });
+    Object.keys(st.photos).forEach(function (id) {
+      var q = questOf(id, C);
+      if (!q || !isResident(st, q.by, C) || (st.hearts[q.by] || 0) < q.at) delete st.photos[id];
+    });
     var book = obj(raw.book);
     Object.keys(book).forEach(function (wk) {
       if (!DATE_RE.test(wk) || !Array.isArray(book[wk])) return;
@@ -758,6 +795,7 @@
     AP_BONUS_CAP: AP_BONUS_CAP, BONUS: BONUS,
     GROW_DAYS: GROW_DAYS, MAX_FIELDS: MAX_FIELDS, FIELD_BONUS_MAX: FIELD_BONUS_MAX, CARE_GROUP: CARE_GROUP, W: W, H: H, TOWN_START: TOWN_START,
     maxFields: maxFields, careCost: careCost, fillCost: fillCost,
+    questOf: questOf, questState: questState, doQuest: doQuest,
     pickWeighted: pickWeighted, fishTable: fishTable, cast: cast, giveUp: giveUp, fish: fish, mineFloor: mineFloor, dig: dig, giftable: giftable, gift: gift,
     ymd: ymd, addDays: addDays, apWeek: apWeek, contentWeek: contentWeek, season: season,
     terrainAt: terrainAt, occupied: occupied, areaFree: areaFree,

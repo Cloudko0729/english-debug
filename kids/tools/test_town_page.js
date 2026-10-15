@@ -224,6 +224,22 @@ console.log("\n── 野外：釣魚、礦坑、送禮 ──");
   run("closeFolk(); tab('farm')");
 }
 
+console.log("\n── 好感任務（畫面） ──");
+{
+  run("st.hearts.Leo = 5; st.inv.wood = 3; render(); tab('mail')");
+  ok("愛心顯示成 ❤️×N", el("p-mail").innerHTML.includes('❤️<span class="x">×5</span>') && !el("p-mail").innerHTML.includes("❤️❤️"));
+  ok("可以做任務的村民有標記", el("p-mail").innerHTML.includes("📷 任務"));
+  ok("有紀念相簿 0/14", el("p-mail").innerHTML.includes("紀念相簿") && el("p-mail").innerHTML.includes("0/14"));
+  run("openFolk('Leo')");
+  ok("人物卡列出好感任務、語音、要念的句子", el("folkBox").innerHTML.includes("一起做長椅") && el("folkBox").innerHTML.includes("quest_leo-5") && el("folkBox").innerHTML.includes("Let's build it together!"));
+  ok("10 顆心那個鎖著", el("folkBox").innerHTML.includes("🔒 ❤️×10"));
+  run("finishQuest('leo-5')");
+  ok("完成後跳出紀念照", run("!!st.photos['leo-5']") && el("folkBox").innerHTML.includes("img/photos/leo-5.png"));
+  run("closeFolk(); tab('mail')");
+  ok("相簿變 1/14", el("p-mail").innerHTML.includes("1/14") && el("p-mail").innerHTML.includes("openPhoto('leo-5')"));
+  run("tab('farm')");
+}
+
 console.log("\n── 每顆 🔊 都有音檔 ──");
 const all = [...el("p-mail").innerHTML.matchAll(/townAudio\('([^']+)'\)/g)].map(m => m[1]);
 const missing = [...new Set(all)].filter(k => !fs.existsSync(path.join(__dirname, "..", "audio", "town", k + ".mp3")));
@@ -231,6 +247,7 @@ ok("村民分頁 " + new Set(all).size + " 個音檔全部存在", all.length > 
 // 還沒輪到的任務、還沒搬來的村民也要先有音檔
 const later = [];
 Object.values(run("C.LANDMARKS")).forEach(L => L.stages.forEach(sg => sg.tasks.forEach(t => later.push("task_" + t.id))));
+run("C.QUESTS").forEach(q => later.push("quest_" + q.id, "quest_" + q.id + "_say"));
 Object.keys(run("C.VILLAGERS")).forEach(v => { later.push("villager_" + v, "villager_" + v + "_motto"); if (run(`C.VILLAGERS.${v}.welcome`)) later.push("arrive_" + v); });
 const miss2 = later.filter(k => !fs.existsSync(path.join(__dirname, "..", "audio", "town", k + ".mp3")));
 ok("廣場任務與所有村民 " + later.length + " 個音檔全部存在", !miss2.length, miss2);

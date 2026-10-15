@@ -539,6 +539,47 @@ console.log("\n── 送禮 ──");
   ok("存檔整理：送禮只留村民與日期", JSON.stringify(n.gifts) === JSON.stringify({ Leo: "2026-10-12" }));
 }
 
+console.log("\n── 好感任務與紀念照 ──");
+{
+  ok("每位村民兩個任務（5、10 顆心）", Object.keys(C.VILLAGERS).every(v => C.QUESTS.filter(q => q.by === v).map(q => q.at).join() === "5,10"));
+  ok("任務 id 不重複", new Set(C.QUESTS.map(q => q.id)).size === C.QUESTS.length);
+  ok("要的東西都認得", C.QUESTS.every(q => q.need.n > 0 && (q.need.item === "ap" || q.need.item in fresh().inv || C.DECOR[q.need.item])));
+  const st = fresh(); give(st, 1);
+  const q = T.questOf("leo-5", C);
+  eq("好感不夠：鎖著", T.questState(st, q, C), "locked");
+  ok("鎖著不能做", !T.doQuest(st, "leo-5", "2026-10-15", C).ok);
+  st.hearts.Leo = 5;
+  eq("5 顆心：可以做", T.questState(st, q, C), "ready");
+  eq("10 顆心那個還鎖著", T.questState(st, T.questOf("leo-10", C), C), "locked");
+  const r0 = T.doQuest(st, "leo-5", "2026-10-15", C);
+  ok("木材不夠不能交", !r0.ok && /還差 3/.test(r0.msg), r0.msg);
+  st.inv.wood = 3;
+  const p0 = T.prosperity(st, C);
+  const r = T.doQuest(st, "leo-5", "2026-10-15", C);
+  ok("交出去拿到紀念照", r.ok && st.photos["leo-5"] === "2026-10-15" && st.inv.wood === 0, r);
+  eq("紀念照讓繁榮度 +5", T.prosperity(st, C) - p0, 5);
+  eq("做完變 done", T.questState(st, q, C), "done");
+  ok("不能做第二次", !T.doQuest(st, "leo-5", "2026-10-15", C).ok);
+  st.hearts.Ben = 10;
+  ok("還沒搬來的村民不能做", T.questState(st, T.questOf("ben-5", C), C) === "locked");
+  const ap = T.apTotal(st); st.hearts.Lily = 0;
+  st.residents.Lily = "2026-10-15"; st.hearts.Lily = 5;
+  ok("出力任務扣體力", T.doQuest(st, "lily-5", "2026-10-15", C).ok && T.apTotal(st) === ap - 3);
+  const raw = JSON.parse(JSON.stringify(st)); raw.photos.evil = "2026-10-15"; raw.photos["mia-5"] = ["2026-10-15"];
+  const n = T.normalize(raw, "test", "2026-10-15", C);
+  ok("存檔整理：只留認得的紀念照、日期要是字串", Object.keys(n.photos).sort().join() === "leo-5,lily-5");
+}
+
+{
+  const st = fresh(); st.residents.Nora = "2026-10-15"; st.hearts.Nora = 10; st.money = 10;
+  ok("鮭魚不在季節也能用錢補（每個 6）", T.fillCost(st, "salmon", 1, C).cost === 6);
+  ok("好感任務用錢補完成", T.doQuest(st, "nora-10", "2026-10-15", C, { buy: true }).ok && st.money === 4 && st.photos["nora-10"]);
+  ok("第 2、3 層也挖得到石英", C.MINE_FLOORS.every(f => f.table.quartz > 0));
+  const raw = JSON.parse(JSON.stringify(fresh())); raw.photos = { "tom-10": "2026-10-15", "leo-5": "2026-10-15" };
+  const n = T.normalize(raw, "test", "2026-10-15", C);
+  ok("匯入：好感不夠、沒搬來的紀念照都不算", Object.keys(n.photos).length === 0);
+}
+
 console.log("\n── 心事件 ──");
 {
   const st = fresh();

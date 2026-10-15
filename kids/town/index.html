@@ -138,6 +138,18 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 .dex div.no{color:var(--muted);border-style:dashed}
 .dex .em{font-size:1.6rem;display:block}
 .gifts{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.hearts .x{font-family:var(--pixel);font-size:.85rem;margin-left:2px}
+.qbadge{margin-left:6px;font-size:.72rem;font-weight:900;background:var(--ap);color:var(--ink);border-radius:999px;padding:1px 7px}
+.quest{background:#fff8e6;border:2px solid var(--wood-l);border-radius:8px;padding:8px 10px;margin:6px 0}
+.quest.ready{border-color:var(--ap);box-shadow:0 0 0 2px #ffe08a}
+.quest .line{font-family:Georgia,serif;margin:3px 0}
+.modal:not(.showzh) .quest .zh{display:none}
+.album{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin:6px 0 14px}
+.album div{background:#fffdf4;border:2px solid var(--wood-l);border-radius:8px;padding:5px;text-align:center;font-size:.78rem;cursor:pointer}
+.album div.no{color:var(--muted);border-style:dashed;cursor:default}
+.album img{width:100%;aspect-ratio:1;object-fit:cover;image-rendering:pixelated;border-radius:4px;display:block}
+.album .ph{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:2rem;background:#f4ead2;border-radius:4px}
+.photo-big{width:100%;max-width:420px;image-rendering:pixelated;border-radius:6px;display:block;margin:8px auto}
 
 /* 小鎮 */
 .prosper{padding:10px 12px;margin-bottom:12px;background:#fff3cf;border:2px solid var(--ap);border-radius:8px}
@@ -349,7 +361,7 @@ function render() {
     ${student === "test" ? `<button class="btn" title="跟做一份練習一樣，算進每週 70 的上限" onclick="act(T.grant(st,'test:'+Date.now(),10,today()))">🧪 +10⚡</button>
       <button class="btn" title="只有測試帳號有，不算進每週上限" onclick="testBoost(50)">🧪 +50⚡ 不限</button>` : ""}`;
   // 有新信的分頁加紅點
-  const unread = visibleCards().some(c => !st.cards[c.id]);
+  const unread = visibleCards().some(c => !st.cards[c.id]) || C.QUESTS.some(q => T.questState(st, q, C) === "ready");
   document.getElementById("t-mail").innerHTML = "📨 村民" + (unread ? '<span class="dot"></span>' : "");
   renderToday(d); renderGoal(); renderHint(); renderGather(); renderMap(d); renderSheet(d); renderShop(); renderMail(d); renderWild(d); renderTown(d);
 }
@@ -380,7 +392,7 @@ const itemName = k => C.NAME[k] || k;
 function whereToGet(k) {
   if (k === "ap") return "做英文練習換體力";
   if (k === "wood" || k === "stone") return "在農莊撿";
-  if (C.FISH[k]) return `去野外釣魚（${C.FISH[k].seasons.length === 4 ? "四季都有" : C.FISH[k].seasons.join("、") + "季"}）`;
+  if (C.FISH[k]) return `去野外釣魚（${C.FISH[k].seasons.length === 4 ? "四季都有" : C.FISH[k].seasons.join("、") + "季"}），或用小鎮幣補（每個 ${C.SELL[k] + C.FILL_EXTRA} 幣）`;
   if (C.MINERALS[k]) return "去野外的礦坑挖";
   if (C.CROPS[k]) return (C.CROPS[k].freeSeed ? "種田收成（種子免費）" : "去商店買種子，種田收成") + `，或用小鎮幣補（每個 ${C.SELL[k] + C.FILL_EXTRA} 幣）`;
   if (C.DECOR[k]) return "去商店買（擺在農莊的可以收回再交）";
@@ -666,8 +678,9 @@ function renderMail(d) {
   if (!weeks.length) { document.getElementById("p-mail").innerHTML = "<p>村民還沒搬來，下週再來看看。</p>"; return; }
   let h = `<div class="folks">${residents().map(v => { const p = C.VILLAGERS[v];
     return `<button class="folk" onclick="openFolk('${v}')" aria-label="看 ${v} 的介紹">${pic(v)}<span><div class="nm">${v}</div>
-      <div class="sm">${p.role.zh}　<span class="hearts">${"❤️".repeat(st.hearts[v] || 0) || "🤍"}</span></div><div class="sm">點我看介紹</div></span></button>`; }).join("")}</div>
+      <div class="sm">${p.role.zh}　<span class="hearts">${heartsTxt(v)}</span>${questBadge(v)}</div><div class="sm">點我看介紹</div></span></button>`; }).join("")}</div>
     <div class="residents">${soonHtml()}</div>`;
+  h += albumHtml();
   const wel = welcomeCards();
   if (wel.length) { h += `<h2>🏠 新鄰居</h2>`; wel.slice().reverse().forEach(c => h += cardHtml(c)); }
   weeks.forEach(wk => {
@@ -722,14 +735,14 @@ function openFolk(v) {
   document.getElementById("folkBox").innerHTML = `
     <div class="head">${pic(v)}<div><h3>${v}</h3><div>${esc(p.role.en)} <span class="muted">${esc(p.role.zh)}</span></div>
       <div class="muted">📍 ${esc(p.place.en)}（${esc(p.place.zh)}）</div>
-      <div class="hearts">${"❤️".repeat(st.hearts[v] || 0) || "🤍"} <span class="muted">好感</span></div></div></div>
+      <div class="hearts">${heartsTxt(v)} <span class="muted">好感（5、10 顆心各有一個好感任務）</span></div></div></div>
     <div class="en">${esc(p.intro)}</div><div class="zh">${esc(p.introZh)}</div>
     <div class="actions"><button class="btn" onclick="play(townAudio('villager_${v}'))">🔊 聽自我介紹</button>
       <button class="btn" onclick="document.getElementById('folkModal').classList.add('showzh')">看中文</button></div>
     <div class="lbl">個性</div><div class="chips">${chips(p.traits.map(t => ({ emoji: "✨", en: t.en, zh: t.zh })))}</div>
     <div class="lbl">💛 喜歡</div><div class="chips">${chips(p.likes)}</div>
     <div class="lbl">💢 不喜歡</div><div class="chips">${chips(p.dislikes)}</div>
-    ${T.isResident(st, v, C) ? giftHtml(v) : ""}
+    ${T.isResident(st, v, C) ? questsHtml(v) + giftHtml(v) : ""}
     <div class="lbl">口頭禪</div><div class="en">“${esc(p.motto)}”</div><div class="zh">${esc(p.mottoZh)}</div>
     <div class="actions"><button class="btn" onclick="play(townAudio('villager_${v}_motto'))">🔊 聽口頭禪</button></div>
     <p class="muted" style="margin-top:10px">${esc(p.about)}</p>
@@ -737,6 +750,48 @@ function openFolk(v) {
   m.hidden = false;
 }
 function closeFolk() { document.getElementById("folkModal").hidden = true; }
+// ── 好感任務與紀念照 ──
+function heartsTxt(v) { const n = st.hearts[v] || 0; return n ? `❤️<span class="x">×${n}</span>` : `🤍<span class="x">×0</span>`; }
+function questBadge(v) { return C.QUESTS.some(q => q.by === v && T.questState(st, q, C) === "ready") ? `<span class="qbadge">📷 任務</span>` : ""; }
+const photoSrc = id => "img/photos/" + id + ".png";
+function questsHtml(v) {
+  const qs = C.QUESTS.filter(q => q.by === v);
+  return `<div class="lbl">📷 好感任務</div>` + qs.map(q => {
+    const s = T.questState(st, q, C), k = q.need.item, have = T.haveOf(st, k, C);
+    if (s === "locked") return `<div class="quest"><b>🔒 ❤️×${q.at}：${esc(q.title)}</b><div class="muted">好感到 ${q.at} 顆心開放（現在 ${st.hearts[v] || 0}）</div></div>`;
+    if (s === "done") return `<div class="quest"><b>✅ ${esc(q.title)}</b><div class="muted">紀念照「${esc(q.captionZh)}」已經收進相簿（${st.photos[q.id]}）</div>
+      <button class="btn" onclick="openPhoto('${q.id}')">📷 看照片</button></div>`;
+    return `<div class="quest ready"><b>⭐ ❤️×${q.at}：${esc(q.title)}</b>
+      ${q.lines.map(l => `<div class="line">${esc(l.en)}</div><div class="zh">${esc(l.zh)}</div>`).join("")}
+      <div class="actions"><button class="btn" onclick="play(townAudio('quest_${q.id}'))">🔊 聽</button>
+        <button class="btn" onclick="document.getElementById('folkModal').classList.add('showzh')">看中文</button></div>
+      <div>要帶：${itemIcon(k)} ${esc(itemName(k))} ×${q.need.n}（有 ${Math.min(have, q.need.n)}）${have >= q.need.n ? "" : `　<span class="muted">👉 ${whereToGet(k)}</span>`}</div>
+      <div class="say"><div>🗣️ 換你說，大聲念出來：</div><div class="line"><b>${esc(q.say)}</b></div><div class="zh">${esc(q.sayZh)}</div>
+        <div class="actions"><button class="btn" onclick="play(townAudio('quest_${q.id}_say'))">🔊 先聽一次</button>
+        <button class="btn go" ${have >= q.need.n ? "" : "disabled"} onclick="finishQuest('${q.id}')">我念好了，交出去 📷</button>
+        ${fillBtn(k, q.need.n, `finishQuest('${q.id}',true)`)}</div></div></div>`;
+  }).join("");
+}
+function finishQuest(id, buy) {
+  const r = act(T.doQuest(st, id, today(), C, buy ? { buy: true } : undefined));
+  if (r && r.ok && !(r.arrived && r.arrived.length)) openPhoto(id, true);
+}
+function openPhoto(id, fresh) {
+  const q = T.questOf(id, C); if (!q || !st.photos[id]) return;
+  const m = document.getElementById("folkModal"); m.classList.remove("showzh");
+  document.getElementById("folkBox").innerHTML = `<div class="cele">${fresh ? `<h3>📷 拿到紀念照了！</h3>` : ""}
+    <img class="photo-big" src="${photoSrc(id)}" alt="${esc(q.caption)}" onerror="this.outerHTML='<div class=&quot;big&quot;>📷</div>'">
+    <div class="en" style="font-family:Georgia,serif;font-size:1.1rem"><b>${esc(q.caption)}</b></div><div>${esc(q.captionZh)}　<span class="muted">${st.photos[id]}</span></div>
+    <div class="actions" style="justify-content:center"><button class="btn" onclick="openFolk('${q.by}')">回到 ${q.by}</button><button class="btn go" onclick="closeFolk()">關閉</button></div></div>`;
+  m.hidden = false;
+}
+function albumHtml() {
+  const got = C.QUESTS.filter(q => st.photos[q.id]).length;
+  return `<h2>📷 紀念相簿 <span class="muted" style="font-size:.85rem">${got}/${C.QUESTS.length}</span></h2><div class="album">${C.QUESTS.map(q =>
+    st.photos[q.id]
+      ? `<div onclick="openPhoto('${q.id}')"><img src="${photoSrc(q.id)}" alt="${esc(q.caption)}" onerror="this.outerHTML='<div class=&quot;ph&quot;>📷</div>'">${esc(q.captionZh)}</div>`
+      : `<div class="no"><div class="ph">❔</div>${T.isResident(st, q.by, C) ? q.by : "新村民"} ❤️×${q.at}</div>`).join("")}</div>`;
+}
 // 送禮：只列這位村民喜歡、而且背包裡有的東西；一天一次
 function giftHtml(v) {
   const items = T.giftable(v, C), done = st.gifts[v] === today(), full = (st.hearts[v] || 0) >= 10;
@@ -767,6 +822,7 @@ function celebrate(r) {
       <div class="actions" style="justify-content:center"><button class="btn" onclick="play(townAudio('${p.welcome ? "arrive_" + v : "villager_" + v}'))">🔊 聽 ${v} 說話</button>
       <button class="btn" onclick="document.getElementById('folkModal').classList.add('showzh')">看中文</button>
       <button class="btn" onclick="openFolk('${v}')">認識 ${v}</button></div>`; });
+  if (r.photo) h += `<p>📷 也拿到了一張紀念照！</p><div class="actions" style="justify-content:center"><button class="btn" onclick="openPhoto('${r.photo}', true)">📷 看紀念照</button></div>`;
   h += `<div class="actions" style="justify-content:center"><button class="btn go" onclick="closeFolk()">太好了！</button></div></div>`;
   document.getElementById("folkBox").innerHTML = h;
   m.hidden = false;

@@ -34,6 +34,8 @@ Object.keys(C.MINERALS).forEach(k => { items["catch_" + k] = C.MINERALS[k].say; 
 items.catch_stone = C.MINE_STONE_SAY;
 items.line_miss = C.LINES.miss;
 items.line_thanks = C.LINES.thanks;
+// 好感任務：對話整段、孩子要念的那句
+C.QUESTS.forEach(q => { items["quest_" + q.id] = q.lines.map(l => l.en).join(" "); items["quest_" + q.id + "_say"] = q.say; });
 const out = path.join(__dirname, "audio_town.json");
 fs.writeFileSync(out, JSON.stringify({
   outdir: path.join(__dirname, "..", "audio", "town").replace(/\\/g, "/"),
