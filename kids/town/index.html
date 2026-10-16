@@ -143,6 +143,7 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 .quest{background:#fff8e6;border:2px solid var(--wood-l);border-radius:8px;padding:8px 10px;margin:6px 0}
 .quest.ready{border-color:var(--ap);box-shadow:0 0 0 2px #ffe08a}
 .quest .line{font-family:Georgia,serif;margin:3px 0}
+.quest.recap{text-align:left;margin-top:10px}
 .modal:not(.showzh) .quest .zh{display:none}
 .album{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin:6px 0 14px}
 .album div{background:#fffdf4;border:2px solid var(--wood-l);border-radius:8px;padding:5px;text-align:center;font-size:.78rem;cursor:pointer}
@@ -188,6 +189,11 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 .toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#2f2416;color:#ffe08a;
   padding:10px 16px;border-radius:10px;font-weight:700;z-index:50;max-width:90vw;box-shadow:0 4px 0 rgba(0,0,0,.3)}
 .toast[hidden]{display:none}
+.earn{color:var(--ok);font-weight:900}
+.spend{color:var(--bad);font-weight:900}
+.btn:disabled .earn,.btn:disabled .spend{color:inherit}
+.toast .earn{color:#9be38f}
+.toast .spend{color:#ff8f80}
 :focus-visible{outline:3px solid #ffe08a;outline-offset:2px}
 @media (max-width:520px){.tabs button{font-size:.78rem;padding:8px 2px}.bar{width:60px}.wrap{padding:8px 8px 90px}.btn{font-size:.85rem;padding:7px 9px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -295,8 +301,13 @@ function reload(msg) {
 
 function toast(msg) {
   const t = document.getElementById("toast"); if (!msg) return;
-  t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => t.hidden = true, Math.max(2600, msg.length * 110));
+  t.innerHTML = moneyColor(esc(msg)); t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => t.hidden = true, Math.max(2600, msg.length * 110));
 }
+// 訊息裡的錢：得到＝綠、花掉＝紅
+function moneyColor(h) {
+  return h.replace(/得到 \d+ 小鎮幣/g, m => `<span class="earn">${m}</span>`).replace(/花 \d+ 小鎮幣/g, m => `<span class="spend">${m}</span>`);
+}
+const earn = n => `<span class="earn">+${n}🪙</span>`, spend = n => `<span class="spend">−${n}🪙</span>`;
 function play(path) { try { new Audio(path).play().catch(() => {}); } catch (e) {} }
 const wordAudio = en => "../audio/words/" + String(en).toLowerCase().replace(/[^a-z0-9]+/g, "") + ".mp3";
 const townAudio = key => "../audio/town/" + key + ".mp3";
@@ -460,7 +471,7 @@ function renderWild(d) {
     <p class="muted">${next ? `再挖 ${next.at - st.mine.digs} 次可以往下到${next.zh}，越深越容易挖到值錢的礦。` : "已經挖到最深的一層了。"}</p>
     <div class="actions"><button class="btn go" ${ap >= C.COST.dig ? "" : "disabled"} onclick="doDig()">⛏️ 挖一下 <span class="cost">${C.COST.dig}⚡</span></button></div>`;
   h += `<h2 style="margin-top:16px">🎒 背包</h2>` + (bag.length
-    ? `<div class="actions">${bag.map(k => `<button class="btn" onclick="act(T.sell(st,'${k}',${st.inv[k]},C))">${itemIcon(k)} ${esc(thing(k).en)} ×${st.inv[k]}・全部賣 +${C.SELL[k] * st.inv[k]}🪙</button>`).join("")}</div>
+    ? `<div class="actions">${bag.map(k => `<button class="btn" onclick="act(T.sell(st,'${k}',${st.inv[k]},C))">${itemIcon(k)} ${esc(thing(k).en)} ×${st.inv[k]}・全部賣 ${earn(C.SELL[k] * st.inv[k])}</button>`).join("")}</div>
        <p class="muted">也可以留著送給喜歡的村民（村民分頁點頭像），好感 +1。</p>`
     : `<p class="muted">釣到的魚、挖到的礦會放在這裡。</p>`)
     + `<p>🪨 石頭 ×${st.inv.stone || 0}　<span class="muted">建設材料，不能賣${stoneNeed ? `；這一階任務還要 ${stoneNeed} 顆` : ""}</span></p>`;
@@ -634,20 +645,20 @@ function renderShop() {
   const sellRows = Object.keys(C.SELL).filter(k => C.CROPS[k] ? (T.unlocked(st, C.CROPS[k]) || st.inv[k]) : st.inv[k]).map(k => {
     const c = thing(k), n = st.inv[k] || 0;
     return `<div class="item"><div class="top"><span class="em">${c.emoji}</span><div><div class="en">${c.en}</div><div class="zh">${c.zh}　有 <span class="n">${n}</span></div></div></div>
-      <button class="btn" ${n ? "" : "disabled"} onclick="act(T.sell(st,'${k}',1,C))">賣 1 個 +${C.SELL[k]}🪙</button>
-      <button class="btn" ${n > 1 ? "" : "disabled"} onclick="act(T.sell(st,'${k}',${n},C))">全部賣</button></div>`;
+      <button class="btn" ${n ? "" : "disabled"} onclick="act(T.sell(st,'${k}',1,C))">賣 1 個 ${earn(C.SELL[k])}</button>
+      <button class="btn" ${n > 1 ? "" : "disabled"} onclick="act(T.sell(st,'${k}',${n},C))">全部賣${n > 1 ? " " + earn(C.SELL[k] * n) : ""}</button></div>`;
   }).join("");
   // 還沒開賣的東西也列出來，寫清楚修到哪裡才會賣
   const lockNote = thing => Object.keys(thing.unlock || {}).map(k => `${C.LANDMARKS[k].zh}第 ${thing.unlock[k]} 階修好後開賣`).join("、");
   const seeds = Object.keys(C.CROPS).filter(k => !C.CROPS[k].freeSeed).map(k => {
     const c = C.CROPS[k], open = T.unlocked(st, c);
     return `<div class="item"><div class="top"><span class="em">${c.emoji}</span><div><div class="en">${c.en} seeds</div><div class="zh">${c.zh}種子　有 <span class="n">${st.inv[k + "_seed"] || 0}</span>　${c.days || T.GROW_DAYS} 天熟、賣 ${C.SELL[k]}🪙</div></div></div>
-      ${open ? `<button class="btn" onclick="act(T.buy(st,'${k}_seed',1,C))">買 1 包 −${C.BUY[k + "_seed"]}🪙</button>` : `<span class="muted">🔒 ${lockNote(c)}</span>`}</div>`;
+      ${open ? `<button class="btn" onclick="act(T.buy(st,'${k}_seed',1,C))">買 1 包 ${spend(C.BUY[k + "_seed"])}</button>` : `<span class="muted">🔒 ${lockNote(c)}</span>`}</div>`;
   }).join("");
   const decor = Object.keys(C.DECOR).map(k => {
     const dd = C.DECOR[k], open = T.unlocked(st, dd);
     return `<div class="item"><div class="top"><span class="em">${dd.emoji}</span><div><div class="en">${dd.en}</div><div class="zh">${dd.zh}　背包 <span class="n">${st.decorOwned[k] || 0}</span></div></div></div>
-      ${open ? `<button class="btn" onclick="act(T.buy(st,'${k}',1,C))">買 −${C.BUY[k]}🪙</button>` : `<span class="muted">🔒 ${lockNote(dd)}</span>`}</div>`;
+      ${open ? `<button class="btn" onclick="act(T.buy(st,'${k}',1,C))">買 ${spend(C.BUY[k])}</button>` : `<span class="muted">🔒 ${lockNote(dd)}</span>`}</div>`;
   }).join("");
   document.getElementById("p-shop").innerHTML = `
     <h2>📦 出貨</h2><p class="muted">作物賣掉換小鎮幣。稻米種子永遠免費，錢花光也能重新開始。</p><div class="grid2">${sellRows}</div>
@@ -782,6 +793,12 @@ function openPhoto(id, fresh) {
   document.getElementById("folkBox").innerHTML = `<div class="cele">${fresh ? `<h3>📷 拿到紀念照了！</h3>` : ""}
     <img class="photo-big" src="${photoSrc(id)}" alt="${esc(q.caption)}" onerror="this.outerHTML='<div class=&quot;big&quot;>📷</div>'">
     <div class="en" style="font-family:Georgia,serif;font-size:1.1rem"><b>${esc(q.caption)}</b></div><div>${esc(q.captionZh)}　<span class="muted">${st.photos[id]}</span></div>
+    ${fresh ? "" : `<div class="quest recap"><b>📜 當時的任務：${esc(q.title)}</b>
+      ${q.lines.map(l => `<div class="line">${esc(l.en)}</div><div class="zh">${esc(l.zh)}</div>`).join("")}
+      <div class="actions"><button class="btn" onclick="play(townAudio('quest_${q.id}'))">🔊 再聽一次</button>
+        <button class="btn" onclick="document.getElementById('folkModal').classList.add('showzh')">看中文</button></div>
+      <div>🗣️ 你當時念的：</div><div class="line"><b>${esc(q.say)}</b></div><div class="zh">${esc(q.sayZh)}</div>
+      <div class="actions"><button class="btn" onclick="play(townAudio('quest_${q.id}_say'))">🔊 聽這句</button></div></div>`}
     <div class="actions" style="justify-content:center"><button class="btn" onclick="openFolk('${q.by}')">回到 ${q.by}</button><button class="btn go" onclick="closeFolk()">關閉</button></div></div>`;
   m.hidden = false;
 }
@@ -848,7 +865,7 @@ const LM_ICON = { plaza: "🏛️", market: "🧺" };
 function fillBtn(item, n, onclick) {
   const f = T.fillCost(st, item, n, C);
   if (!f || !f.missing) return "";
-  return `<button class="btn" ${st.money >= f.cost ? "" : "disabled"} onclick="${onclick}" title="每個 ${f.each} 幣（賣價＋${C.FILL_EXTRA}）">🪙 補 ${f.missing} 個再交 −${f.cost}</button>`;
+  return `<button class="btn" ${st.money >= f.cost ? "" : "disabled"} onclick="${onclick}" title="每個 ${f.each} 幣（賣價＋${C.FILL_EXTRA}）">🪙 補 ${f.missing} 個再交 ${spend(f.cost)}</button>`;
 }
 function taskHtml(x, key) {
   const t = x.task, id = t.id, k = t.need.item, enough = x.have >= x.need;

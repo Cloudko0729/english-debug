@@ -316,7 +316,7 @@
     st.money -= price * n;
     if (C.DECOR[item]) st.decorOwned[item] = (st.decorOwned[item] || 0) + n;
     else st.inv[item] = (st.inv[item] || 0) + n;
-    return done(st, "買好了");
+    return done(st, "買好了，花 " + price * n + " 小鎮幣");
   }
   // 地標開放了沒：after 寫的前一個地標要全部修好
   function landmarkOpen(st, key, C) {

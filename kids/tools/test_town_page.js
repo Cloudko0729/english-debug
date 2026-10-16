@@ -115,7 +115,7 @@ console.log("\n── 廣場任務與繁榮度 ──");
   ok("每個任務都有村民頭像和語音", ["p1-wood", "p1-weeds", "p1-stone", "p1-carrot", "p1-flowers"].every(id => html.includes(`task_${id}`)));
   ok("合計需求列出來", html.includes("還需要") && html.includes("🪨 石頭 0/3"));
   ok("不夠的會說去哪裡拿", html.includes("去商店買"));
-  ok("作物不夠：有「用小鎮幣補」按鈕和價錢", html.includes("🪙 補 2 個再交 −12") && html.includes("{buy:true}"));
+  ok("作物不夠：有「用小鎮幣補」按鈕和價錢", html.includes("🪙 補 2 個再交 <span class=\"spend\">−12🪙</span>") && html.includes("{buy:true}"));
   ok("木材任務沒有補的按鈕", !/doTask\(st,'plaza','p1-wood',today\(\),C,\{buy:true\}\)/.test(html));
   ok("後面兩階有預告", html.includes("石板路與燈籠") && html.includes("小舞台"));
   ok("有繁榮度條和下一位村民的門檻", html.includes("繁榮度") && html.includes("繁榮度到 <b>60</b>"));
@@ -235,8 +235,17 @@ console.log("\n── 好感任務（畫面） ──");
   ok("10 顆心那個鎖著", el("folkBox").innerHTML.includes("🔒 ❤️×10"));
   run("finishQuest('leo-5')");
   ok("完成後跳出紀念照", run("!!st.photos['leo-5']") && el("folkBox").innerHTML.includes("img/photos/leo-5.png"));
+  ok("剛拿到時不重複列任務", !el("folkBox").innerHTML.includes("當時的任務"));
   run("closeFolk(); tab('mail')");
   ok("相簿變 1/14", el("p-mail").innerHTML.includes("1/14") && el("p-mail").innerHTML.includes("openPhoto('leo-5')"));
+  run("openPhoto('leo-5')");
+  ok("相簿點開有當時的任務、對話、念的句子和語音", ["當時的任務", "一起做長椅", "Let's build it together!", "quest_leo-5_say", "quest_leo-5'"].every(s => el("folkBox").innerHTML.includes(s)));
+  run("closeFolk(); st.money = 50; st.inv.rice = 2; tab('shop')");
+  ok("賣的金額綠色、買的金額紅色", el("p-shop").innerHTML.includes('<span class="earn">+') && el("p-shop").innerHTML.includes('<span class="spend">−'));
+  run("toast('賣出 2 個，得到 4 小鎮幣')");
+  ok("訊息裡得到的錢是綠色", el("toast").innerHTML.includes('<span class="earn">得到 4 小鎮幣</span>'));
+  run("toast('買好了，花 3 小鎮幣')");
+  ok("訊息裡花的錢是紅色", el("toast").innerHTML.includes('<span class="spend">花 3 小鎮幣</span>'));
   run("tab('farm')");
 }
 
