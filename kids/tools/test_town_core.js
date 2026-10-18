@@ -85,6 +85,12 @@ console.log("\n── 本週加分：文法、單字、週測、作業 ──");
   prog.weeklyTests.push({ week: "2026-10-17", at: "2026-10-23", correct: 15, total: 20 });
   eq("下週的週測另外算", T.syncFromProgress(st, prog), 10);
   ok("同一週的週測只算一次", (prog.weeklyTests.push({ week: "2026-10-17", at: "2026-10-23", correct: 20, total: 20 }), T.syncFromProgress(st, prog) === 0));
+  // 模擬考：第一次交卷 +20，重考不再給
+  const st2 = fresh();
+  const p2 = { exams: { "midterm-2026-g6a": { at: "2026-10-19", best: 80, tries: 1 } } };
+  eq("期中考模擬卷第一次交卷 +20", T.syncFromProgress(st2, p2), 20);
+  ok("重考（tries、best 變了）不再給", (p2.exams["midterm-2026-g6a"].tries = 2, p2.exams["midterm-2026-g6a"].best = 95, T.syncFromProgress(st2, p2) === 0));
+  eq("模擬考也算在本週加分", st2.energy.bonusByWeek["2026-10-17"], 20);
   // 存檔整理保留加分額度
   const n = T.normalize(JSON.parse(JSON.stringify(st)), "test", "2026-10-16", C);
   eq("存檔整理：加分額度留著", n.energy.bonusByWeek["2026-10-10"], 40);

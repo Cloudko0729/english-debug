@@ -20,7 +20,7 @@
   var AP_WEEKLY_CAP = 70;
   var AP_WALLET_CAP = 60;
   var AP_BONUS_CAP = 40;        // 本週加分：文法、單字、週測、作業，跟每日練習的 70 分開算
-  var BONUS = { grammar: 10, vocab: 10, test: 10, homework: 2 };
+  var BONUS = { grammar: 10, vocab: 10, test: 10, homework: 2, exam: 20 };
   var GROW_DAYS = 3;
   var MAX_FIELDS = 8;          // 一開始最多 8 片田
   var FIELD_BONUS_MAX = 8;     // 每修好一階（任何地標）多 1 片，最多再多 8 片
@@ -164,6 +164,9 @@
     var units = (progress && progress.vocab && progress.vocab.units) || {};
     Object.keys(units).sort().forEach(function (id) { bonus("vocab:" + id, BONUS.vocab, String((units[id] || {}).lastAt || "")); });
     ((progress && progress.weeklyTests) || []).forEach(function (t) { if (t && t.week) bonus("test:" + t.week, BONUS.test, String(t.at || "")); });
+    // 模擬考：每一份只算第一次交卷
+    var exams = (progress && progress.exams) || {};
+    Object.keys(exams).sort().forEach(function (id) { bonus("exam:" + id, BONUS.exam, String((exams[id] || {}).at || "")); });
     var hw = (progress && progress.homework && progress.homework.weeks) || {};
     Object.keys(hw).sort().forEach(function (wk) {
       ["write", "speak"].forEach(function (kind) {

@@ -20,6 +20,7 @@ SAME_SOUND = {
     "ink": {"ink", "inc"}, "t-shirt": {"t shirt", "tshirt"},
     "the uk": {"the uk", "uk"}, "the usa": {"the usa", "usa"},
     "mrt": {"mrt", "m r t"},
+    "gym": {"gym", "jim"}, "aloud": {"aloud", "allowed"},
     "ago": {"ago", "a go"},
     # 同音字：辨識器只能寫成其中一個，或寫成字母 C
     "sea": {"sea", "see", "c"}, "see": {"see", "sea", "c"}, "bee": {"bee", "be", "b"}, "quartz": {"quartz", "quarts"},

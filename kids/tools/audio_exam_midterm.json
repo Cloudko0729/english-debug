@@ -1,0 +1,22 @@
+{
+ "outdir": "D:/english/kids/audio/exam_midterm",
+ "voice": "af_heart",
+ "speed": 0.85,
+ "items": {
+  "a0": "Burn.",
+  "a1": "Park.",
+  "a2": "Hurt.",
+  "a3": "Bird.",
+  "a4": "Corn.",
+  "a5": "Skirt.",
+  "a6": "Farm.",
+  "a7": "Fork.",
+  "b0": "Where are you from?",
+  "b1": "Is Tommy from the USA?",
+  "b2": "What's wrong?",
+  "b3": "Does Ella have a cough?",
+  "b4": "Would you like some moon cakes?",
+  "b5": "Do you have a stomachache?",
+  "f": "Hi, I'm Mia. I'm from Canada. My friend Raj is from India. Today Raj is sick. He has a fever and a sore throat. The doctor tells him to take medicine and get some rest. I make some honey and lemon tea for him. I hope he feels better soon."
+ }
+}

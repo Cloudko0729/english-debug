@@ -109,4 +109,9 @@ const DRILLS = [
   { day: 104, date: "2026-10-14", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 朋友與情緒＋動名詞 / 不定詞", icon: "🙂" },
   { day: 105, date: "2026-10-15", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 朋友與情緒＋動名詞 / 不定詞", icon: "🙂" },
   { day: 106, date: "2026-10-16", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 朋友與情緒＋動名詞 / 不定詞", icon: "🙂" },
+  { day: 107, date: "2026-10-19", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 運動與比賽＋動名詞 / 不定詞", icon: "⚽" },
+  { day: 108, date: "2026-10-20", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 運動與比賽＋動名詞 / 不定詞", icon: "⚽" },
+  { day: 109, date: "2026-10-21", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 運動與比賽＋動名詞 / 不定詞", icon: "⚽" },
+  { day: 110, date: "2026-10-22", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 運動與比賽＋動名詞 / 不定詞", icon: "⚽" },
+  { day: 111, date: "2026-10-23", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 運動與比賽＋動名詞 / 不定詞", icon: "⚽" },
 ];

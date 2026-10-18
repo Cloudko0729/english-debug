@@ -1509,6 +1509,104 @@ const WEEK_DRILLS = {
       },
     ]
   },
+  "2026-10-3": {            // 第3週 運動與比賽 · 動名詞/不定詞
+    listenBlank: [
+      { full: "My dad and I watched a baseball game on TV last night.", display: "My dad and I watched a ___ game on TV last night.", answer: "baseball", exclude: ["football","softball","volleyball","tennis","table tennis","pingpong","dodge ball","dodgeball","frisbee","golf","badminton","bowling","jogging","running","roller skating","skating","skiing","team","gym","exercise","physical education","playground"] },
+      { full: "In England, people call soccer football.", display: "In England, people call soccer ___.", answer: "football", exclude: ["baseball","softball","volleyball","tennis","table tennis","pingpong","dodge ball","dodgeball","frisbee","golf","badminton","bowling","jogging","running","roller skating","skating","skiing"] },
+      { full: "My sister plays softball. The ball is bigger than a baseball.", display: "My sister plays ___. The ball is bigger than a baseball.", answer: "softball", exclude: ["baseball","football","volleyball","tennis","table tennis","pingpong","dodge ball","dodgeball","frisbee","golf","badminton","bowling","jogging","running","roller skating","skating","skiing","catch"] },
+      { full: "We played volleyball on the beach and hit the ball over the net.", display: "We played ___ on the beach and hit the ball over the net.", answer: "volleyball", exclude: ["baseball","football","softball","tennis","table tennis","pingpong","dodge ball","dodgeball","frisbee","golf","badminton","bowling","jogging","running","roller skating","skating","skiing"] },
+      { full: "Bring your racket. Let's play tennis this afternoon.", display: "Bring your racket. Let's play ___ this afternoon.", answer: "tennis", exclude: ["baseball","football","softball","volleyball","table tennis","pingpong","dodge ball","dodgeball","frisbee","golf","badminton","bowling","jogging","running","roller skating","skating","skiing"] },
+      { full: "We play table tennis on a small green table.", display: "We play ___ on a small green table.", answer: "table tennis", exclude: ["baseball","football","softball","volleyball","tennis","pingpong","dodge ball","dodgeball","frisbee","golf","badminton","bowling","jogging","running","roller skating","skating","skiing"] },
+      { full: "In dodgeball, you have to move fast so the ball doesn't hit you.", display: "In ___, you have to move fast so the ball doesn't hit you.", answer: "dodgeball", exclude: ["baseball","football","softball","volleyball","tennis","table tennis","pingpong","dodge ball","frisbee","golf","badminton","bowling","jogging","running","roller skating","skating","skiing","gym","physical education","exercise"] },
+      { full: "My dog loves to catch a frisbee in the park.", display: "My dog loves to catch a ___ in the park.", answer: "frisbee", exclude: ["baseball","football","softball","volleyball","tennis","table tennis","pingpong","dodge ball","dodgeball","golf","badminton","bowling","jogging","running","roller skating","skating","skiing","throw"] },
+      { full: "When Grandpa plays golf, he hits a tiny ball into a hole.", display: "When Grandpa plays ___, he hits a tiny ball into a hole.", answer: "golf", exclude: ["baseball","football","softball","volleyball","tennis","table tennis","pingpong","dodge ball","dodgeball","frisbee","badminton","bowling","jogging","running","roller skating","skating","skiing"] },
+      { full: "It was raining, so we had P.E. class in the gym.", display: "It was raining, so we had P.E. class in the ___.", answer: "gym", exclude: ["playground"] },
+      { full: "Dad goes jogging in the park every morning.", display: "Dad goes ___ in the park every morning.", answer: "jogging", exclude: ["baseball","football","softball","volleyball","tennis","table tennis","pingpong","dodge ball","dodgeball","frisbee","golf","badminton","bowling","running","roller skating","skating","skiing"] },
+      { full: "Ken is very fast. He came first in the running race.", display: "Ken is very fast. He came first in the ___ race.", answer: "running", exclude: ["baseball","football","softball","volleyball","tennis","table tennis","pingpong","dodge ball","dodgeball","frisbee","golf","badminton","bowling","jogging","roller skating","skating","skiing","ski","team","gym","playground","roller skate","skate"] },
+      { full: "I fell down a lot the first time I went roller skating.", display: "I fell down a lot the first time I went ___.", answer: "roller skating", exclude: ["baseball","football","softball","volleyball","tennis","table tennis","pingpong","dodge ball","dodgeball","frisbee","golf","badminton","bowling","jogging","running","skating","skiing"] },
+      { full: "Can you skate on ice?", display: "Can you ___ on ice?", answer: "skate", exclude: ["ski","throw","catch","exercise","roller skate"] },
+      { full: "We went skiing on a snowy mountain in Japan.", display: "We went ___ on a snowy mountain in Japan.", answer: "skiing", exclude: ["baseball","football","softball","volleyball","tennis","table tennis","pingpong","dodge ball","dodgeball","frisbee","golf","badminton","bowling","jogging","running","roller skating","skating"] },
+      { full: "Throw me the ball, and I'll catch it.", display: "Throw me the ball, and I'll ___ it.", answer: "catch", exclude: ["throw","skate","ski"] },
+      { full: "The winner of the race gets a prize.", display: "The ___ of the race gets a prize.", answer: "winner", exclude: ["team"] },
+      { full: "I play badminton with my sister after school.", display: "I play ___ with my sister after school.", answer: "badminton", exclude: ["baseball","football","softball","volleyball","tennis","table tennis","pingpong","dodge ball","dodgeball","frisbee","golf","bowling","jogging","running","roller skating","skating","skiing","catch"] },
+      { full: "We went bowling with Grandma on Sunday.", display: "We went ___ with Grandma on Sunday.", answer: "bowling", exclude: ["baseball","football","softball","volleyball","tennis","table tennis","pingpong","dodge ball","dodgeball","frisbee","golf","badminton","jogging","running","roller skating","skating","skiing"] },
+      { full: "Doctors say kids need an hour of exercise every day.", display: "Doctors say kids need an hour of ___ every day.", answer: "exercise", exclude: ["baseball","football","softball","volleyball","tennis","table tennis","pingpong","dodge ball","dodgeball","frisbee","golf","badminton","bowling","jogging","running","roller skating","skating","skiing","gym","physical education","catch"] },
+      { full: "My favorite class is physical education because we can play outside.", display: "My favorite class is ___ because we can play outside.", answer: "physical education", exclude: ["baseball","football","softball","volleyball","tennis","table tennis","pingpong","dodge ball","dodgeball","frisbee","golf","badminton","bowling","jogging","running","roller skating","skating","skiing","exercise","gym"] },
+      { full: "The kids are playing tag on the playground.", display: "The kids are playing tag on the ___.", answer: "playground", exclude: ["gym"] },
+      { full: "Our class team won the game.", display: "Our class ___ won the game.", answer: "team", exclude: ["winner"] },
+      { full: "Don't throw the ball too hard.", display: "Don't ___ the ball too hard.", answer: "throw", exclude: ["catch","skate","ski"] },
+      { full: "A victory is a win in a game or a race.", display: "A ___ is a win in a game or a race.", answer: "victory" },
+    ],
+    reorder: [
+      { sentence: "I enjoy playing badminton.", chunks: ["I","enjoy","playing badminton."] },
+      { sentence: "We want to join the baseball team.", chunks: ["We want","to join","the baseball team."] },
+      { sentence: "Running every morning keeps me healthy.", chunks: ["Running every morning","keeps","me healthy."] },
+      { sentence: "She is good at throwing the ball.", chunks: ["She is good at","throwing","the ball."] },
+      { sentence: "Let's go jogging after school.", chunks: ["Let's go","jogging","after school."] },
+      { sentence: "He learned to ski last winter.", chunks: ["He learned","to ski","last winter."] },
+      { sentence: "My brother hopes to be the winner.", chunks: ["My brother","hopes to be","the winner."] },
+      { sentence: "Playing dodgeball is so much fun.", chunks: ["Playing dodgeball","is","so much fun."] },
+      { sentence: "Don't forget to bring your tennis racket.", chunks: ["Don't forget","to bring","your tennis racket."] },
+      { sentence: "We practiced catching the frisbee.", chunks: ["We practiced","catching","the frisbee."] },
+      { sentence: "They decided to go bowling on Sunday.", chunks: ["They decided","to go bowling","on Sunday."] },
+      { sentence: "I like skating on the ice.", chunks: ["I like","skating","on the ice."] },
+      { sentence: "It's fun to play volleyball on the beach.", chunks: ["It's fun","to play volleyball","on the beach."] },
+      { sentence: "Our team practiced hard to win the game.", chunks: ["Our team","practiced hard","to win the game."] },
+      { sentence: "Kids need to get exercise every day.", chunks: ["Kids need","to get exercise","every day."] },
+      { sentence: "We have physical education on Tuesdays.", chunks: ["We have","physical education","on Tuesdays."] },
+      { sentence: "Please stop throwing sand on the playground.", chunks: ["Please stop","throwing sand","on the playground."] },
+      { sentence: "My dad taught me to play golf.", chunks: ["My dad","taught me","to play golf."] },
+      { sentence: "Watching baseball games is exciting.", chunks: ["Watching","baseball games","is exciting."] },
+      { sentence: "Ben loves playing football in the plaza.", chunks: ["Ben loves","playing football","in the plaza."] },
+    ],
+    reading: [
+      {
+        passage: "Our school had Sports Day last Friday. Our class team ran in the relay race. I was nervous, but I ran very fast. Our team won! After the race, we played dodgeball on the playground. It was the best day of the year.",
+        questions: [
+          { q: "When was Sports Day?", choices: ["Last Friday","Last Sunday","Next Friday","Next week"], answer: "Last Friday" },
+          { q: "Which race was the class team in?", choices: ["The relay race","The swimming race","The bike race","The skating race"], answer: "The relay race" },
+          { q: "Who was the winner?", choices: ["The writer's team","The teacher","Another class","Nobody"], answer: "The writer's team" },
+          { q: "What did they play after the race?", choices: ["Dodgeball","Golf","Tennis","Bowling"], answer: "Dodgeball" },
+        ]
+      },
+      {
+        passage: "Lisa loves playing badminton. Her brother Tom likes tennis better. A tennis ball is heavier than a badminton shuttlecock. The shuttlecock is very light. On weekends, they play together in the park. Lisa usually wins at badminton, and Tom usually wins at tennis.",
+        questions: [
+          { q: "What does Lisa love?", choices: ["Playing badminton","Playing golf","Skiing","Bowling"], answer: "Playing badminton" },
+          { q: "What sport does Tom like better?", choices: ["Tennis","Badminton","Baseball","Volleyball"], answer: "Tennis" },
+          { q: "What is very light?", choices: ["A badminton shuttlecock","A tennis ball","A baseball","A bowling ball"], answer: "A badminton shuttlecock" },
+          { q: "Who usually wins at tennis?", choices: ["Tom","Lisa","Their dad","Nobody"], answer: "Tom" },
+        ]
+      },
+      {
+        passage: "In our town game, Ben is a villager who loves playing football. Every morning, he goes jogging around the plaza. I wanted to make him happy, so I gave him a ball. He said, \"Let's play together!\" We kicked the ball until it got dark. Now he likes me more.",
+        questions: [
+          { q: "What sport does Ben love?", choices: ["Football","Golf","Skiing","Table tennis"], answer: "Football" },
+          { q: "What does Ben do every morning?", choices: ["He goes jogging","He goes skiing","He plays golf","He sleeps late"], answer: "He goes jogging" },
+          { q: "What did the writer give Ben?", choices: ["A ball","A fish","A flower","A book"], answer: "A ball" },
+          { q: "What did Ben say?", choices: ["\"Let's play together!\"","\"Go away!\"","\"I'm tired.\"","\"Pardon?\""], answer: "\"Let's play together!\"" },
+        ]
+      },
+      {
+        passage: "It rained on Tuesday, so we couldn't go to the playground. Our P.E. teacher took us to the gym. We played volleyball and table tennis there. I am not good at volleyball, but I really like table tennis. Exercise is fun, even on a rainy day.",
+        questions: [
+          { q: "Why couldn't they go to the playground?", choices: ["It rained","It was too hot","It was closed","They were sick"], answer: "It rained" },
+          { q: "Where did the teacher take them?", choices: ["To the gym","To the park","To the library","Home"], answer: "To the gym" },
+          { q: "What does the writer really like?", choices: ["Table tennis","Volleyball","Golf","Skiing"], answer: "Table tennis" },
+          { q: "What does the writer think about exercise?", choices: ["It is fun","It is boring","It is scary","It is too hard"], answer: "It is fun" },
+        ]
+      },
+      {
+        passage: "Last winter, my family went to Japan. It was my first time skiing. I fell down many times, but my dad helped me. On the last day, I could ski down the hill without falling. Next winter, I want to try skating on the ice.",
+        questions: [
+          { q: "Where did the family go?", choices: ["Japan","Canada","France","India"], answer: "Japan" },
+          { q: "What did the writer do for the first time?", choices: ["Skiing","Swimming","Bowling","Jogging"], answer: "Skiing" },
+          { q: "Who helped the writer?", choices: ["Dad","Mom","A teacher","A friend"], answer: "Dad" },
+          { q: "What does the writer want to try next winter?", choices: ["Skating","Golf","Baseball","Volleyball"], answer: "Skating" },
+        ]
+      },
+    ]
+  },
 };
 // 每篇短文的「沒教過的生字」中文解釋（index 對應該週 reading[]）
 const PASSAGE_GLOSSARY = {
@@ -1624,6 +1722,13 @@ const PASSAGE_GLOSSARY = {
     [{"en":"villager","zh":"村民"},{"en":"gifts","zh":"禮物"},{"en":"trash","zh":"垃圾"},{"en":"wrong","zh":"錯的"}],
     [{"en":"joined","zh":"加入"},{"en":"accent","zh":"口音"},{"en":"laughed at","zh":"嘲笑"}],
     [{"en":"thunder","zh":"雷"},{"en":"storm","zh":"暴風雨"},{"en":"sound","zh":"聲音"},{"en":"sofa","zh":"沙發"},{"en":"went crazy","zh":"變得很激動"},{"en":"fell asleep","zh":"睡著了"}],
+  ],
+  "2026-10-3": [
+    [{"en":"Sports Day","zh":"運動會"},{"en":"relay race","zh":"接力賽跑"},{"en":"race","zh":"賽跑、比賽"}],
+    [{"en":"shuttlecock","zh":"羽毛球（打的那顆球）"},{"en":"likes tennis better","zh":"更喜歡網球"},{"en":"heavier than","zh":"比……重"},{"en":"light","zh":"輕的"},{"en":"usually","zh":"通常"},{"en":"wins","zh":"贏"}],
+    [{"en":"villager","zh":"村民"},{"en":"plaza","zh":"廣場"},{"en":"kicked","zh":"踢"},{"en":"until","zh":"直到"},{"en":"got dark","zh":"天黑了"}],
+    [{"en":"couldn't","zh":"不能（can't 的過去式）"},{"en":"P.E.","zh":"體育（physical education 的簡稱）"},{"en":"took","zh":"帶（take 的過去式）"},{"en":"be good at","zh":"擅長"},{"en":"even on a rainy day","zh":"即使在下雨天也一樣"}],
+    [{"en":"my first time skiing","zh":"我第一次滑雪"},{"en":"fell down","zh":"跌倒（fall down 的過去式）"},{"en":"hill","zh":"山坡"},{"en":"without falling","zh":"沒有跌倒"},{"en":"try","zh":"嘗試"}],
   ],
 };
 function weekDrillFor(monthStr, weekN) { return WEEK_DRILLS[monthStr + "-" + weekN] || null; }
