@@ -343,7 +343,6 @@
   }
   function gather(st, material, today, C) {
     if (material !== "wood" && material !== "stone") return fail("沒有這種材料");
-    if ((st.inv[material] || 0) >= materialNeed(st, material, C)) return fail((C.NAME[material] || material) + "已經夠了，先去小鎮交任務吧");
     if (!spend(st, C.COST.gather)) return fail("體力不夠（採集要 " + C.COST.gather + "）");
     st.inv[material]++;
     return done(st, "採到 1 份 " + material);

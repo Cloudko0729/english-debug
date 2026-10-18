@@ -427,15 +427,15 @@ function renderHint() {
     ? `👆 點<b>綠色空地</b>可以再開一片田，現在最多 ${T.maxFields(st)} 片。田越多，一次收成越多。`
     : `👆 先點<b>咖啡色的田</b>種稻米（種子免費）。再點<b>綠色空地</b>可以多開幾片田，現在最多 ${T.maxFields(st)} 片。`;
 }
-// 撿材料：寫出用途和進度，夠了就不給撿
+// 撿材料：寫出用途和進度；不限量，多的留著以後的任務用
 function renderGather() {
   [["wood", "woodBtn", "🪵", "木材"], ["stone", "stoneBtn", "🪨", "石頭"]].forEach(([k, id, em, zh]) => {
     const need = T.materialNeed(st, k, C), have = st.inv[k] || 0, b = document.getElementById(id);
     b.hidden = false;
-    if (!need) { b.disabled = true; b.innerHTML = `${em} 這一階用不到${zh}`; return; }
-    b.disabled = have >= need;
-    b.innerHTML = have >= need ? `${em} ${zh}夠了 ✓ <span class="cost">${have}/${need}</span>`
-      : `${em} 撿${zh}（${(T.nextGoal(st, C) || {}).name || "小鎮"}任務用 ${have}/${need}） <span class="cost">2⚡</span>`;
+    b.disabled = T.apTotal(st) < C.COST.gather;
+    const note = !need ? `存著以後用，有 ${have}` : have >= need ? `任務夠了 ✓ ${have}/${need}，多的存著`
+      : `${(T.nextGoal(st, C) || {}).name || "小鎮"}任務用 ${have}/${need}`;
+    b.innerHTML = `${em} 撿${zh}（${note}） <span class="cost">${C.COST.gather}⚡</span>`;
   });
 }
 

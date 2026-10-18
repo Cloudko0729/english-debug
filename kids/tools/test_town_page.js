@@ -136,7 +136,7 @@ console.log("\n── 廣場任務與繁榮度 ──");
   ok("新信有紅點", el("t-mail").innerHTML.includes("dot"));
   run("tab('town')");
   ok("第 2 階的任務換上來（有 Nora 的）", el("p-town").innerHTML.includes("task_p2-rice") && !el("p-town").innerHTML.includes("task_p1-wood"));
-  ok("這一階用不到木材時按鈕會說", el("woodBtn").innerHTML.includes("用不到"));
+  ok("這一階用不到木材時還是可以撿、存著以後用", el("woodBtn").innerHTML.includes("存著以後用") && !el("woodBtn").disabled);
   ok("市集還鎖著，寫出開放條件", el("p-town").innerHTML.includes("週末市集：小鎮廣場全部修好後開放"));
   run("tab('shop')");
   ok("商店：南瓜種子還沒開賣、寫出條件", el("p-shop").innerHTML.includes("pumpkin seeds") && el("p-shop").innerHTML.includes("週末市集第 1 階修好後開賣"));
