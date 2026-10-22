@@ -23,6 +23,7 @@
   var BONUS = { grammar: 10, vocab: 10, test: 10, homework: 2, exam: 20 };
   var GROW_DAYS = 3;
   var MAX_FIELDS = 8;          // 一開始最多 8 片田
+  var HEART_MAX = 20;          // 好感最多 20 顆（5、10、15、20 各有一個好感任務）
   var FIELD_BONUS_MAX = 8;     // 每修好一階（任何地標）多 1 片，最多再多 8 片
   var CARE_GROUP = 8;          // 照料費：每 8 片田 1 體力（8 片以內就是 1）
   var MAX_DECOR = 48;
@@ -434,7 +435,7 @@
     }
     take(st, item, n, C);
     st.tasks[t.id] = { date: today };
-    st.hearts[t.by] = Math.min(10, (st.hearts[t.by] || 0) + 1);
+    st.hearts[t.by] = Math.min(HEART_MAX, (st.hearts[t.by] || 0) + 1);
     note(st, today, "幫 " + t.by + " 完成" + L.zh + "任務", t.en);
     var msg = (bought && bought.missing ? "花 " + bought.cost + " 小鎮幣補了 " + bought.missing + " 個，" : "") + "交給 " + t.by + " 了！❤️ +1、繁榮度 +" + C.PROSPERITY.task;
     var stageDone = sg.tasks.every(function (q) { return st.tasks[q.id]; }), opened = [], capBefore = maxFields(st);
@@ -517,18 +518,18 @@
   }
 
   // ── 送禮 ────────────────────────────────────────────────────────────────
-  // 只能送村民喜歡的東西（likes 裡有 item 的），每位一天一次，好感 +1（最多 10）
+  // 只能送村民喜歡的東西（likes 裡有 item 的），每位一天一次，好感 +1（最多 HEART_MAX）
   function giftable(v, C) { return (C.VILLAGERS[v].likes || []).filter(function (x) { return x.item; }).map(function (x) { return x.item; }); }
   function gift(st, v, item, today, C) {
     if (!isResident(st, v, C)) return fail(v + " 還沒搬來");
     if (giftable(v, C).indexOf(item) < 0) return fail(v + " 不特別喜歡這個");
     if (st.gifts[v] === today) return fail("今天已經送過 " + v + " 了，明天再來");
-    if ((st.hearts[v] || 0) >= 10) return fail(v + " 的好感已經滿了，留著送別人吧");
+    if ((st.hearts[v] || 0) >= HEART_MAX) return fail(v + " 的好感已經滿了，留著送別人吧");
     if (haveOf(st, item, C) < 1) return fail("背包裡沒有" + (C.NAME[item] || item) + (C.DECOR[item] ? "（擺在農莊的可以先收回）" : ""));
     take(st, item, 1, C);
     st.gifts[v] = today;
     var before = st.hearts[v] || 0;
-    st.hearts[v] = Math.min(10, before + 1);
+    st.hearts[v] = Math.min(HEART_MAX, before + 1);
     note(st, today, "送 " + v + " " + (C.NAME[item] || item), "");
     var came = arrive(st, today, C);
     st.rev++;
@@ -647,7 +648,7 @@
     st.stories[story.id] = st.stories[story.id] || {};
     if (st.stories[story.id].done) return fail("這段故事已經完成了");
     st.stories[story.id].done = today;
-    st.hearts[story.speaker] = (st.hearts[story.speaker] || 0) + 1;
+    st.hearts[story.speaker] = Math.min(HEART_MAX, (st.hearts[story.speaker] || 0) + 1);
     note(st, today, "和 " + story.speaker + " 的故事：" + story.title, story.speak);
     var came = C ? arrive(st, today, C) : [];
     var r = done(st, story.speaker + " 的心亮了一顆 ❤️" + (came.length ? "　🏠 " + came.join("、") + " 搬來小鎮了！" : ""));
@@ -723,7 +724,7 @@
         st[k][str(id, 60)] = o;
       });
     });
-    Object.keys(C.VILLAGERS).forEach(function (v) { var h = obj(raw.hearts)[v]; if (h != null) st.hearts[v] = int(h, 10); });
+    Object.keys(C.VILLAGERS).forEach(function (v) { var h = obj(raw.hearts)[v]; if (h != null) st.hearts[v] = int(h, HEART_MAX); });
     // 任務：只收這一階的；這一階 5 個都交了就升階（不重發獎勵）；還沒開放的階段一律不算
     var tk = obj(raw.tasks), own = Object.prototype.hasOwnProperty;
     Object.keys(C.LANDMARKS).forEach(function (k) {
@@ -795,7 +796,7 @@
   var api = {
     SCHEMA: SCHEMA, AP_PER_TASK: AP_PER_TASK, AP_WEEKLY_CAP: AP_WEEKLY_CAP, AP_WALLET_CAP: AP_WALLET_CAP,
     AP_BONUS_CAP: AP_BONUS_CAP, BONUS: BONUS,
-    GROW_DAYS: GROW_DAYS, MAX_FIELDS: MAX_FIELDS, FIELD_BONUS_MAX: FIELD_BONUS_MAX, CARE_GROUP: CARE_GROUP, W: W, H: H, TOWN_START: TOWN_START,
+    GROW_DAYS: GROW_DAYS, MAX_FIELDS: MAX_FIELDS, HEART_MAX: HEART_MAX, FIELD_BONUS_MAX: FIELD_BONUS_MAX, CARE_GROUP: CARE_GROUP, W: W, H: H, TOWN_START: TOWN_START,
     maxFields: maxFields, careCost: careCost, fillCost: fillCost,
     questOf: questOf, questState: questState, doQuest: doQuest,
     pickWeighted: pickWeighted, fishTable: fishTable, cast: cast, giveUp: giveUp, fish: fish, mineFloor: mineFloor, dig: dig, giftable: giftable, gift: gift,

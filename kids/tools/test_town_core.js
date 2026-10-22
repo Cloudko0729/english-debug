@@ -531,9 +531,12 @@ console.log("\n── 送禮 ──");
   ok("背包沒有就不能送", !T.gift(st, "Leo", "iron", "2026-10-14", C).ok);
   st.decorOwned.flowers = 1;
   ok("裝飾也能送（花圃給 Mia）", T.gift(st, "Mia", "flowers", "2026-10-12", C).ok && st.decorOwned.flowers === 0);
-  st.hearts.Mia = 10; st.inv.carrot = 1;
-  const full = T.gift(st, "Mia", "carrot", "2026-10-13", C);
-  ok("好感滿 10 就不收，東西也不會被拿走", !full.ok && st.inv.carrot === 1 && /滿了/.test(full.msg), full.msg);
+  st.hearts.Mia = 10; st.inv.carrot = 2;
+  ok("10 顆心還可以再送（上限 20）", T.gift(st, "Mia", "carrot", "2026-10-13", C).ok && st.hearts.Mia === 11);
+  st.hearts.Mia = 20;
+  const full = T.gift(st, "Mia", "carrot", "2026-10-14", C);
+  ok("好感滿 20 就不收，東西也不會被拿走", !full.ok && st.inv.carrot === 1 && /滿了/.test(full.msg), full.msg);
+  ok("存檔整理：好感最多 20", T.normalize(Object.assign({}, st, { hearts: { Mia: 99 } }), "test", "2026-10-14", C).hearts.Mia === 20);
   // 送禮讓好感上升 → 繁榮度夠了村民會搬來
   const s2 = fresh(); s2.hearts.Mia = 10; s2.hearts.Leo = 3; s2.decorOwned.flowers = 30;     // 13 顆心 39＋裝飾 20＝59
   for (let i = 0; i < 10; i++) T.placeDecor(s2, "flowers", 4 + i % 8, 6 + Math.floor(i / 8), "2026-10-12", C);
@@ -554,7 +557,9 @@ console.log("\n── 送禮 ──");
 
 console.log("\n── 好感任務與紀念照 ──");
 {
-  ok("每位村民兩個任務（5、10 顆心）", Object.keys(C.VILLAGERS).every(v => C.QUESTS.filter(q => q.by === v).map(q => q.at).join() === "5,10"));
+  ok("每位村民四個任務（5、10、15、20 顆心）", Object.keys(C.VILLAGERS).every(v => C.QUESTS.filter(q => q.by === v).map(q => q.at).join() === "5,10,15,20"));
+  ok("好感任務的門檻都在上限內", C.QUESTS.every(q => q.at <= T.HEART_MAX));
+  ok("好感任務不要銅礦（挖到第 3 層就回不去）", C.QUESTS.every(q => q.need.item !== "copper"));
   ok("任務 id 不重複", new Set(C.QUESTS.map(q => q.id)).size === C.QUESTS.length);
   ok("要的東西都認得", C.QUESTS.every(q => q.need.n > 0 && (q.need.item === "ap" || q.need.item in fresh().inv || C.DECOR[q.need.item])));
   const st = fresh(); give(st, 1);

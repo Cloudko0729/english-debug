@@ -753,7 +753,7 @@ function openFolk(v) {
   document.getElementById("folkBox").innerHTML = `
     <div class="head">${pic(v)}<div><h3>${v}</h3><div>${esc(p.role.en)} <span class="muted">${esc(p.role.zh)}</span></div>
       <div class="muted">📍 ${esc(p.place.en)}（${esc(p.place.zh)}）</div>
-      <div class="hearts">${heartsTxt(v)} <span class="muted">好感（5、10 顆心各有一個好感任務）</span></div></div></div>
+      <div class="hearts">${heartsTxt(v)} <span class="muted">好感 ${st.hearts[v] || 0}/${T.HEART_MAX}（5、10、15、20 顆心各有一個好感任務）</span></div></div></div>
     <div class="en">${esc(p.intro)}</div><div class="zh">${esc(p.introZh)}</div>
     <div class="actions"><button class="btn" onclick="play(townAudio('villager_${v}'))">🔊 聽自我介紹</button>
       <button class="btn" onclick="document.getElementById('folkModal').classList.add('showzh')">看中文</button></div>
@@ -818,7 +818,7 @@ function albumHtml() {
 }
 // 送禮：只列這位村民喜歡、而且背包裡有的東西；一天一次
 function giftHtml(v) {
-  const items = T.giftable(v, C), done = st.gifts[v] === today(), full = (st.hearts[v] || 0) >= 10;
+  const items = T.giftable(v, C), done = st.gifts[v] === today(), full = (st.hearts[v] || 0) >= T.HEART_MAX;
   if (full) return `<div class="lbl">🎁 送禮</div><p class="muted">❤️ ${v} 的好感已經滿了，喜歡的東西留著送別人吧。</p>`;
   const btns = items.map(k => {
     const n = T.haveOf(st, k, C);

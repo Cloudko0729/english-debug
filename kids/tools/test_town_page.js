@@ -226,7 +226,7 @@ console.log("\n── 野外：釣魚、礦坑、送禮 ──");
   const h0 = run("st.hearts.Leo || 0");
   run("giveGift('Leo','iron')");
   ok("送了之後好感 +1、卡片寫今天送過了", run("st.hearts.Leo") === h0 + 1 && el("folkBox").innerHTML.includes("今天已經送過了"));
-  run("globalThis._mh = st.hearts.Mia; st.hearts.Mia = 10; openFolk('Mia')");
+  run("globalThis._mh = st.hearts.Mia; st.hearts.Mia = 20; openFolk('Mia')");
   ok("好感滿了：不給送", el("folkBox").innerHTML.includes("好感已經滿了") && !el("folkBox").innerHTML.includes("giveGift('Mia'"));
   run("st.hearts.Mia = globalThis._mh");
   run("closeFolk(); tab('farm')");
@@ -276,6 +276,8 @@ ok("作物與裝飾的單字音檔都存在", !wm.length, wm);
 // 魚用畫好的圖：每種魚都要有圖，圖示走 <img>
 const fm = Object.keys(run("C.FISH")).filter(k => !fs.existsSync(path.join(DIR, "img", "fish", k + ".png")));
 ok("每種魚都有圖", !fm.length, fm);
+const pm = run("C.QUESTS").map(q => q.id).filter(id => !fs.existsSync(path.join(DIR, "img", "photos", id + ".png")));
+ok("每個好感任務都有紀念照", !pm.length, pm);
 ok("魚的圖示用圖片、圖載不到退回 emoji", run("itemIcon('salmon')").includes('src="img/fish/salmon.png"') && run("itemIcon('salmon')").includes("onerror") && run("itemIcon('carrot')") === "🥕");
 
 console.log("\n── 看中文會保持展開 ──");
