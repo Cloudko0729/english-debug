@@ -143,6 +143,42 @@
               { en: "Sardines are my favorite! Thank you, everyone!", zh: "沙丁魚是我的最愛！謝謝大家！" }],
       say: "Happy birthday, Tom!", sayZh: "Tom，生日快樂！",
       caption: "Tom's surprise party", captionZh: "Tom 的驚喜派對" },
+    { id: "jack-5", by: "Jack", at: 5, title: "第一次出海", need: { item: "ap", n: 4 },
+      lines: [{ en: "Do you want to go fishing on my boat?", zh: "你想坐我的船去釣魚嗎？" },
+              { en: "Hold the rope tight. Here comes a wave!", zh: "抓緊繩子。浪來了！" },
+              { en: "Look! You caught a big fish!", zh: "你看！你釣到一條大魚！" }],
+      say: "I caught a big fish!", sayZh: "我釣到一條大魚！",
+      caption: "Fishing on Jack's boat", captionZh: "坐 Jack 的船去釣魚" },
+    { id: "jack-10", by: "Jack", at: 10, title: "暴風雨之後", need: { item: "wood", n: 4 },
+      lines: [{ en: "There was a big storm last night.", zh: "昨天晚上有一場大暴風雨。" },
+              { en: "My boat is broken, but I'm not giving up.", zh: "我的船壞了，但我不會放棄。" },
+              { en: "With some wood, we can fix it together.", zh: "有一些木材，我們就可以一起把它修好。" }],
+      say: "Your boat looks as good as new!", sayZh: "你的船看起來跟新的一樣！",
+      caption: "Fixing Jack's boat", captionZh: "幫 Jack 修船" },
+    { id: "rosa-5", by: "Rosa", at: 5, title: "健康檢查", need: { item: "pumpkin", n: 2 },
+      lines: [{ en: "Time for a health check! Open your mouth and say \"Ah.\"", zh: "健康檢查時間到了！張開嘴巴說「啊」。" },
+              { en: "Good! You are very healthy.", zh: "很好！你非常健康。" },
+              { en: "Can you bring two pumpkins? I'll make pumpkin soup for my sick patients.", zh: "你可以帶兩顆南瓜來嗎？我要煮南瓜湯給生病的病人喝。" }],
+      say: "Thank you, Dr. Rosa!", sayZh: "謝謝 Rosa 醫生！",
+      caption: "A health check with Rosa", captionZh: "Rosa 幫我做健康檢查" },
+    { id: "rosa-10", by: "Rosa", at: 10, title: "醫生也會感冒", need: { item: "potato", n: 3 },
+      lines: [{ en: "Achoo! I have a bad cold and a sore throat.", zh: "哈啾！我得了重感冒，喉嚨也痛。" },
+              { en: "Doctors get sick too.", zh: "醫生也會生病。" },
+              { en: "Could you make me some hot potato soup?", zh: "你可以幫我煮一些熱熱的馬鈴薯湯嗎？" }],
+      say: "Take some medicine and get some rest.", sayZh: "吃點藥，好好休息。",
+      caption: "Hot soup for Rosa", captionZh: "給 Rosa 的熱湯" },
+    { id: "max-5", by: "Max", at: 5, title: "海灘賽跑", need: { item: "ap", n: 4 },
+      lines: [{ en: "Let's race to the lighthouse!", zh: "我們來比賽跑到燈塔吧！" },
+              { en: "Ready, set, go!", zh: "預備，開始！" },
+              { en: "Wow, you're fast! You almost beat me!", zh: "哇，你好快！你差點就贏我了！" }],
+      say: "I love running on the beach!", sayZh: "我好喜歡在海灘上跑步！",
+      caption: "A race on the beach", captionZh: "海灘賽跑" },
+    { id: "max-10", by: "Max", at: 10, title: "游泳課", need: { item: "corn", n: 3 },
+      lines: [{ en: "Today I'll teach you to swim.", zh: "今天我來教你游泳。" },
+              { en: "Kick your legs. Don't be scared. I'm right here!", zh: "踢腿。不要怕，我就在這裡！" },
+              { en: "You did it! Let's eat some grilled corn to celebrate!", zh: "你做到了！我們吃烤玉米來慶祝吧！" }],
+      say: "I can swim now!", sayZh: "我現在會游泳了！",
+      caption: "Swimming lessons with Max", captionZh: "跟 Max 學游泳" },
   ];
   var PHOTO_PROSPERITY = 5;
 
@@ -158,14 +194,17 @@
     mailbox: { en: "mailbox",  zh: "信箱",   emoji: "📮" },
     rock:    { en: "rock",     zh: "石頭堆", emoji: "🪨" },
     fountain: { en: "fountain", zh: "噴水池", emoji: "⛲", unlock: { market: 2 } },
+    parasol:  { en: "beach umbrella", zh: "海灘傘", emoji: "⛱️", unlock: { harbor: 1 } },
+    boat:     { en: "sailboat", zh: "小帆船", emoji: "⛵", unlock: { harbor: 2 } },
   };
   var BUY = { carrot_seed: 1, potato_seed: 1, corn_seed: 1, pumpkin_seed: 1,
-              flowers: 10, tree: 10, lantern: 10, bench: 10, mailbox: 10, rock: 10, fountain: 20 };
+              flowers: 10, tree: 10, lantern: 10, bench: 10, mailbox: 10, rock: 10, fountain: 20, parasol: 10, boat: 20 };
   var COST = { plant: 2, care: 1, gather: 2, fish: 2, dig: 2 };
   var NAME = { wood: "木材", stone: "石頭", crop: "作物", carrot_seed: "紅蘿蔔種子", potato_seed: "馬鈴薯種子",
                corn_seed: "玉米種子", pumpkin_seed: "南瓜種子",
                rice: "稻米", carrot: "紅蘿蔔", potato: "馬鈴薯", corn: "玉米", pumpkin: "南瓜", ap: "體力", money: "小鎮幣",
-               flowers: "花圃", tree: "小樹", lantern: "燈籠", bench: "長椅", mailbox: "信箱", rock: "石頭堆", fountain: "噴水池" };
+               flowers: "花圃", tree: "小樹", lantern: "燈籠", bench: "長椅", mailbox: "信箱", rock: "石頭堆", fountain: "噴水池",
+               parasol: "海灘傘", boat: "小帆船" };
   // 魚和礦的中文名也放進 NAME（任務、送禮、背包都用得到）
   Object.keys(FISH).forEach(function (k) { NAME[k] = FISH[k].zh; });
   Object.keys(MINERALS).forEach(function (k) { NAME[k] = MINERALS[k].zh; });
@@ -263,6 +302,50 @@
         ] },
       ],
     },
+    // 海邊碼頭：Sam 舊地圖上畫的東邊海灘（sam-5 的故事）。市集全部修好才開放。
+    // 第 1 階修好開賣海灘傘、第 2 階修好開賣小帆船。
+    harbor: {
+      zh: "海邊碼頭", en: "the harbor", after: "market",
+      look: ["🌊 東邊海灘上一座破舊的碼頭", "🪵 修好木棧道，停著 Jack 的漁船", "🗼 燈塔亮起來了", "🏖️ 熱鬧的海灘祭"],
+      stages: [
+        { title: "修好木棧道", done: "木棧道修好了，Jack 的漁船有了停靠的地方；商店開始賣海灘傘", tasks: [
+          { id: "h1-wood", by: "Jack", need: { item: "wood", n: 6 },
+            en: "The old pier is broken. Can you bring six pieces of wood?", zh: "舊碼頭壞掉了。你可以帶六塊木材來嗎？" },
+          { id: "h1-fix", by: "Leo", need: { item: "ap", n: 6 },
+            en: "The waves broke these boards. Let's fix them together!", zh: "海浪把這些木板打壞了。我們一起修好它們吧！" },
+          { id: "h1-stone", by: "Jack", need: { item: "stone", n: 5 },
+            en: "Big waves hit the pier every day. Five stones will make it strong.", zh: "大浪每天都打在碼頭上。五顆石頭可以讓它變堅固。" },
+          { id: "h1-nails", by: "Sam", need: { item: "money", n: 6 },
+            en: "My old map was right! We need nails for the pier. Can you give me six coins to buy some?", zh: "我的舊地圖是對的！碼頭需要釘子。你可以給我六枚小鎮幣去買一些嗎？" },
+          { id: "h1-potato", by: "Nora", need: { item: "potato", n: 3 },
+            en: "Jack gets up very early. I'll make potato soup for him. I need three potatoes.", zh: "Jack 很早起床。我要煮馬鈴薯湯給他，需要三顆馬鈴薯。" },
+        ] },
+        { title: "燈塔", done: "燈塔亮起來了，晚上出海的船也找得到回家的路；商店開始賣小帆船", tasks: [
+          { id: "h2-stone", by: "Leo", need: { item: "stone", n: 6 },
+            en: "A lighthouse needs strong walls. Please bring six stones.", zh: "燈塔需要堅固的牆。請帶六顆石頭來。" },
+          { id: "h2-iron", by: "Jack", need: { item: "iron", n: 2 },
+            en: "The big lamp needs an iron frame. Can you find two pieces of iron ore?", zh: "大燈需要一個鐵架子。你可以找到兩塊鐵礦嗎？" },
+          { id: "h2-carry", by: "Jack", need: { item: "ap", n: 8 },
+            en: "There are so many steps! Help me carry the lamp to the top.", zh: "樓梯好多階！幫我把大燈搬到最上面。" },
+          { id: "h2-carrot", by: "Rosa", need: { item: "carrot", n: 3 },
+            en: "Building a lighthouse is hard work. Let's have some carrot soup. Please bring three carrots.", zh: "蓋燈塔很辛苦。我們來喝點紅蘿蔔湯吧。請帶三根紅蘿蔔來。" },
+          { id: "h2-lantern", by: "Tom", need: { item: "lantern", n: 2 },
+            en: "I need to take letters to the lighthouse, but the path is too dark at night. Please bring two lanterns.", zh: "我需要送信到燈塔，可是晚上那條路太暗了。請帶兩個燈籠來。" },
+        ] },
+        { title: "第一次海灘祭", done: "第一次海灘祭！Max 帶大家比賽游泳，Ben 在沙灘上打鼓，Jack 的漁船掛滿了燈", tasks: [
+          { id: "h3-clean", by: "Max", need: { item: "ap", n: 8 },
+            en: "Let's clean the beach before the festival. Help me pick up the trash!", zh: "祭典前我們來清理海灘吧。幫我撿垃圾！" },
+          { id: "h3-medals", by: "Leo", need: { item: "wood", n: 2 },
+            en: "Let's make wooden medals for the swimming race. Please bring two pieces of wood.", zh: "我們來做游泳比賽的木製獎牌吧。請帶兩塊木材來。" },
+          { id: "h3-parasol", by: "Rosa", need: { item: "parasol", n: 2 },
+            en: "Too much sun is bad for your skin. Let's put up two beach umbrellas.", zh: "曬太多太陽對皮膚不好。我們來撐起兩把海灘傘吧。" },
+          { id: "h3-corn", by: "Nora", need: { item: "corn", n: 4 },
+            en: "I'll make grilled corn for everyone at the festival. Please bring four ears of corn.", zh: "我要在祭典上幫大家烤玉米。請帶四根玉米來。" },
+          { id: "h3-boat", by: "Jack", need: { item: "boat", n: 1 },
+            en: "Kids can ride in a little boat at the festival. Can we get a sailboat?", zh: "祭典上小朋友可以坐小船。我們可以弄一艘小帆船嗎？" },
+        ] },
+      ],
+    },
   };
 
   // 繁榮度：不存檔，每次從進度算出來（任務、修好的階段、好感、擺出來的裝飾）。
@@ -277,7 +360,10 @@
       { at: 200, zh: "繁榮的小鎮",   emoji: "🎪" },
       { at: 270, zh: "有市集的小鎮", emoji: "🛖" },
       { at: 340, zh: "人來人往的小鎮", emoji: "🏪" },
-      { at: 420, zh: "四季都熱鬧的小鎮", emoji: "🌟" },
+      { at: 420, zh: "充滿活力的小鎮",     emoji: "⚓" },
+      { at: 490, zh: "朋友越來越多的小鎮", emoji: "🗼" },
+      { at: 560, zh: "大家喜愛的小鎮",     emoji: "🏖️" },
+      { at: 630, zh: "四季都熱鬧的小鎮",   emoji: "🌟" },
     ],
   };
 
@@ -407,6 +493,60 @@
       about: "Tom 以前每個月才來小鎮送一次信。現在小鎮越來越熱鬧，信多到一個月送不完，他乾脆搬來住。他走路很快、話很多，送一封信常常要聊半小時。",
       welcome: "Good morning! I'm Tom. Your town gets so many letters now, so I moved here to help. I will bring your mail every day!",
       welcomeZh: "早安！我是 Tom。你們小鎮現在的信好多，所以我搬來幫忙。我每天都會幫你送信！",
+    },
+    Jack: {
+      emoji: "🎣", img: "img/jack.png", zh: "Jack，漁夫", arrive: 420,
+      role: { en: "fisherman", zh: "漁夫" }, place: { en: "his boat at the pier", zh: "碼頭邊的漁船" },
+      traits: [{ en: "brave", zh: "勇敢" }, { en: "patient", zh: "有耐心" }, { en: "a little stubborn", zh: "有點固執" }],
+      likes: [
+        { emoji: "🌊", en: "the sea", zh: "大海" },
+        { emoji: "🐟", en: "tuna", zh: "鮪魚", item: "tuna" },
+        { emoji: "🐙", en: "octopuses", zh: "章魚", item: "octopus" },
+        { emoji: "🥔", en: "potatoes", zh: "馬鈴薯", item: "potato" },
+        { emoji: "🌅", en: "early mornings", zh: "清晨" } ],
+      dislikes: [{ emoji: "⛈️", en: "storms", zh: "暴風雨" }, { emoji: "🕸️", en: "empty nets", zh: "空空的漁網" }],
+      intro: "Hello! I'm Jack. I'm a fisherman. I go out to sea every morning before the sun comes up. The sea is my best friend.",
+      introZh: "哈囉！我是 Jack，我是漁夫。我每天早上太陽出來前就出海。大海是我最好的朋友。",
+      motto: "Be patient, and the fish will come.", mottoZh: "要有耐心，魚就會來。",
+      about: "Jack 開著一艘舊漁船，沿著海岸一個港口一個港口地走。他在 Sam 的舊地圖上看到東邊有一片海灘，就把船開了過來。他很有耐心，可以坐一整天等魚上鉤；可是他決定的事情，誰勸都沒用。",
+      welcome: "Hello! I'm Jack, a fisherman. Sam showed me his old map, so I came to the east beach. My boat needs a safe home. Can we fix the old pier?",
+      welcomeZh: "哈囉！我是 Jack，我是漁夫。Sam 給我看了他的舊地圖，所以我來到東邊的海灘。我的船需要一個安全的家。我們可以把舊碼頭修好嗎？",
+    },
+    Rosa: {
+      emoji: "👩‍⚕️", img: "img/rosa.png", zh: "Rosa，醫生", arrive: 490,
+      role: { en: "doctor", zh: "醫生" }, place: { en: "the clinic by the harbor", zh: "碼頭旁的診所" },
+      traits: [{ en: "caring", zh: "很會照顧人" }, { en: "careful", zh: "細心" }, { en: "a little strict", zh: "有點嚴格" }],
+      likes: [
+        { emoji: "🍵", en: "hot tea", zh: "熱茶" },
+        { emoji: "🥕", en: "carrots", zh: "紅蘿蔔", item: "carrot" },
+        { emoji: "🎃", en: "pumpkins", zh: "南瓜", item: "pumpkin" },
+        { emoji: "🚶", en: "morning walks", zh: "早上散步" },
+        { emoji: "💠", en: "quartz", zh: "石英", item: "quartz" } ],
+      dislikes: [{ emoji: "🍬", en: "too much candy", zh: "吃太多糖果" }, { emoji: "🌙", en: "staying up late", zh: "熬夜" }],
+      intro: "Hello, I'm Rosa. I'm the town doctor. Do you have a fever or a cough? Come and see me. And don't forget to eat your vegetables!",
+      introZh: "你好，我是 Rosa，小鎮的醫生。你發燒或咳嗽了嗎？來找我吧。還有，別忘了吃蔬菜！",
+      motto: "Eat well, sleep well, and have fun.", mottoZh: "吃得好、睡得好、玩得開心。",
+      about: "Rosa 聽 Jack 說，這個小鎮越來越熱鬧，可是一間診所都沒有，就在碼頭旁邊開了一間。她很關心每個人，誰咳嗽一聲她都會注意到；但她也很嚴格，看到有人熬夜或吃太多糖果，一定會唸。",
+      welcome: "Hello! I'm Rosa, a doctor. Jack told me your town has no clinic. So I opened one by the harbor. Come and see me if you feel sick.",
+      welcomeZh: "你好！我是 Rosa，我是醫生。Jack 跟我說你們小鎮沒有診所，所以我在碼頭旁邊開了一間。覺得不舒服就來找我。",
+    },
+    Max: {
+      emoji: "🏊", img: "img/max.png", zh: "Max，救生員", arrive: 560,
+      role: { en: "lifeguard", zh: "救生員" }, place: { en: "the lifeguard tower on the beach", zh: "海灘上的救生員瞭望台" },
+      traits: [{ en: "sporty", zh: "很愛運動" }, { en: "cheerful", zh: "開朗" }, { en: "a little bit of a show-off", zh: "有點愛現" }],
+      likes: [
+        { emoji: "🏊", en: "swimming", zh: "游泳" },
+        { emoji: "🏃", en: "running on the beach", zh: "在海灘上跑步" },
+        { emoji: "🌽", en: "corn", zh: "玉米", item: "corn" },
+        { emoji: "🦀", en: "crabs", zh: "螃蟹", item: "crab" },
+        { emoji: "🟡", en: "gold ore", zh: "金礦", item: "gold" } ],
+      dislikes: [{ emoji: "🗑️", en: "trash on the beach", zh: "海灘上的垃圾" }, { emoji: "🛋️", en: "lazy days", zh: "懶洋洋的日子" }],
+      intro: "Hey! I'm Max. I'm a lifeguard. I keep everyone safe in the water. I love swimming and running. Do you want to race me?",
+      introZh: "嘿！我是 Max，我是救生員。我負責讓大家在水裡平安。我喜歡游泳和跑步。你想跟我比賽嗎？",
+      motto: "Let's get moving!", mottoZh: "我們動起來吧！",
+      about: "Max 以前是游泳選手，拿過好幾面獎牌，現在當救生員，也教小朋友游泳。他很愛現，常常在海灘上表演倒立；但只要有人在水裡需要幫忙，他一定第一個衝過去。",
+      welcome: "Hi! I'm Max, a lifeguard. Jack told me about the beach. I want to keep everyone safe in the water. Let's have a beach festival!",
+      welcomeZh: "嗨！我是 Max，我是救生員。Jack 跟我介紹了這片海灘。我想讓大家在水裡都平安。我們來辦一場海灘祭吧！",
     },
   };
 

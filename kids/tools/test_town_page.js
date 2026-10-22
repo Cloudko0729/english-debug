@@ -150,6 +150,14 @@ console.log("\n── 廣場任務與繁榮度 ──");
   ok("交市集任務的按鈕帶市集", el("p-town").innerHTML.includes("doTask(st,'market','m1-wood'"));
   ok("廣場縮成一行打勾", el("p-town").innerHTML.includes("小鎮廣場 ✅"));
   ok("農莊目標卡換成市集", el("goal").innerHTML.includes("週末市集") && el("goal").innerHTML.includes("搭起攤位"));
+  // 市集第 3 階交到剩最後一個 → 交完應該說海邊碼頭開放了，Jack 搬來
+  run("st.town.plaza = 3; st.town.market = 2; st.tasks = {}; ['m3-mailbox','m3-carry','m3-pumpkin','m3-tree'].forEach(id => st.tasks[id] = { date: today() }); ['Nora','Ben','Sam','Lily','Tom'].forEach(v => st.residents[v] = today()); st.inv.rice = 4; T.arrive(st, today(), C)");
+  run("act(T.doTask(st,'market','m3-rice',today(),C))");
+  ok("市集修完：慶祝卡說海邊碼頭開放了", G.st.town.market === 3 && el("folkBox").innerHTML.includes("海邊碼頭開放了"));
+  run("closeFolk(); st.money = 0; render(); tab('town')");
+  ok("小鎮分頁換成碼頭的 5 個任務", ["h1-wood", "h1-fix", "h1-stone", "h1-nails", "h1-potato"].every(id => el("p-town").innerHTML.includes("task_" + id)));
+  ok("交小鎮幣的任務寫出怎麼賺", el("p-town").innerHTML.includes("賣掉換小鎮幣"));
+  ok("Jack 的頭像出現在任務上", el("p-town").innerHTML.includes("img/jack.png"));
   run("st.town.plaza = 1; st.town.market = 0; st.tasks = {}; tab('farm')");
 }
 
@@ -229,7 +237,7 @@ console.log("\n── 好感任務（畫面） ──");
   run("st.hearts.Leo = 5; st.inv.wood = 3; render(); tab('mail')");
   ok("愛心顯示成 ❤️×N", el("p-mail").innerHTML.includes('❤️<span class="x">×5</span>') && !el("p-mail").innerHTML.includes("❤️❤️"));
   ok("可以做任務的村民有標記", el("p-mail").innerHTML.includes("📷 任務"));
-  ok("有紀念相簿 0/14", el("p-mail").innerHTML.includes("紀念相簿") && el("p-mail").innerHTML.includes("0/14"));
+  ok("有紀念相簿 0/14", el("p-mail").innerHTML.includes("紀念相簿") && el("p-mail").innerHTML.includes("0/" + run("C.QUESTS.length")));
   run("openFolk('Leo')");
   ok("人物卡列出好感任務、語音、要念的句子", el("folkBox").innerHTML.includes("一起做長椅") && el("folkBox").innerHTML.includes("quest_leo-5") && el("folkBox").innerHTML.includes("Let's build it together!"));
   ok("10 顆心那個鎖著", el("folkBox").innerHTML.includes("🔒 ❤️×10"));
@@ -237,7 +245,7 @@ console.log("\n── 好感任務（畫面） ──");
   ok("完成後跳出紀念照", run("!!st.photos['leo-5']") && el("folkBox").innerHTML.includes("img/photos/leo-5.png"));
   ok("剛拿到時不重複列任務", !el("folkBox").innerHTML.includes("當時的任務"));
   run("closeFolk(); tab('mail')");
-  ok("相簿變 1/14", el("p-mail").innerHTML.includes("1/14") && el("p-mail").innerHTML.includes("openPhoto('leo-5')"));
+  ok("相簿變 1/14", el("p-mail").innerHTML.includes("1/" + run("C.QUESTS.length")) && el("p-mail").innerHTML.includes("openPhoto('leo-5')"));
   run("openPhoto('leo-5')");
   ok("相簿點開有當時的任務、對話、念的句子和語音", ["當時的任務", "一起做長椅", "Let's build it together!", "quest_leo-5_say", "quest_leo-5'"].every(s => el("folkBox").innerHTML.includes(s)));
   run("closeFolk(); st.money = 50; st.inv.rice = 2; tab('shop')");

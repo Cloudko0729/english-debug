@@ -344,7 +344,13 @@ console.log("\n── 廣場任務：每階 5 個、同時開放 ──");
   st.town.plaza = 3;
   ok("廣場三階修好：下一個目標換成市集", T.nextGoal(st, C).key === "market" && !T.doTask(st, "plaza", "p3-wood", "2026-10-05", C).ok);
   st.town.market = 3;
-  ok("兩個地標都修好就沒有下一個目標", T.nextGoal(st, C) === null);
+  ok("市集修好：下一個目標換成海邊碼頭", T.nextGoal(st, C).key === "harbor" && T.landmarkOpen(st, "harbor", C));
+  ok("碼頭第 1 階有交小鎮幣的任務", T.stageView(st, "harbor", C).parts.some(x => x.k === "money" && x.need === 6));
+  ok("碼頭沒修好前買不到海灘傘", !T.buy((st.money = 100, st), "parasol", 1, C).ok);
+  st.town.harbor = 1;
+  ok("碼頭第 1 階修好開賣海灘傘、還不賣小帆船", T.buy(st, "parasol", 1, C).ok && !T.buy(st, "boat", 1, C).ok);
+  st.town.harbor = 3;
+  ok("三個地標都修好就沒有下一個目標", T.nextGoal(st, C) === null);
 }
 
 console.log("\n── 作物不夠：用小鎮幣補齊（每個賣價＋1） ──");

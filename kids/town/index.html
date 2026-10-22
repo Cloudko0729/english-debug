@@ -403,8 +403,12 @@ const itemName = k => C.NAME[k] || k;
 function whereToGet(k) {
   if (k === "ap") return "做英文練習換體力";
   if (k === "wood" || k === "stone") return "在農莊撿";
+  if (k === "money") return "把作物、魚、礦賣掉換小鎮幣";
   if (C.FISH[k]) return `去野外釣魚（${C.FISH[k].seasons.length === 4 ? "四季都有" : C.FISH[k].seasons.join("、") + "季"}），或用小鎮幣補（每個 ${C.SELL[k] + C.FILL_EXTRA} 幣）`;
-  if (C.MINERALS[k]) return "去野外的礦坑挖";
+  if (C.MINERALS[k]) {
+    const fl = C.MINE_FLOORS.findIndex(f => f.table[k]);
+    return "去野外的礦坑挖" + (fl > 0 ? `（${C.MINE_FLOORS[fl].zh}以下才挖得到，要先挖 ${C.MINE_FLOORS[fl].at} 次）` : "");
+  }
   if (C.CROPS[k]) return (C.CROPS[k].freeSeed ? "種田收成（種子免費）" : "去商店買種子，種田收成") + `，或用小鎮幣補（每個 ${C.SELL[k] + C.FILL_EXTRA} 幣）`;
   if (C.DECOR[k]) return "去商店買（擺在農莊的可以收回再交）";
   return "";
@@ -860,7 +864,7 @@ function prosperHtml() {
     <div class="residents">${residents().map(n => `<span onclick="openFolk('${n}')">${pic(n)}</span>`).join("")}${soonHtml()}</div>
     <div class="muted" style="font-size:.78rem">繁榮度怎麼來：完成任務 +${P.task}、修好一階 +${P.stage}、村民每顆 ❤️ +${P.heart}、農莊擺裝飾每件 +${P.decor}（最多算 ${P.decorMax} 件）</div></div>`;
 }
-const LM_ICON = { plaza: "🏛️", market: "🧺" };
+const LM_ICON = { plaza: "🏛️", market: "🧺", harbor: "⚓" };
 // 作物不夠時：用小鎮幣補齊再交（每個＝賣價＋1）。夠了或不是作物就不顯示
 function fillBtn(item, n, onclick) {
   const f = T.fillCost(st, item, n, C);
