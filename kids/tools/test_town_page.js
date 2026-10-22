@@ -127,10 +127,19 @@ console.log("\n── 廣場任務與繁榮度 ──");
   ok("交完第 5 個升到第 2 階", G.st.town.plaza === 1);
   ok("跳出慶祝卡：階段完成＋Nora 搬來", el("folkModal").hidden === false && el("folkBox").innerHTML.includes("第 1 階修好了") && el("folkBox").innerHTML.includes("Nora 搬來小鎮了"));
   ok("慶祝卡可以聽 Nora 的信", el("folkBox").innerHTML.includes("arrive_Nora"));
+  ok("慶祝卡直接秀出這一階的紀念照", el("folkBox").innerHTML.includes("img/photos/plaza-1.png") && el("folkBox").innerHTML.includes("A long table for the plaza"));
+  ok("修好那天記進階段照", G.st.stagePhotos["plaza-1"] === run("today()"));
   ok("慶祝卡說可以多開一片田（最多 9 片）", el("folkBox").innerHTML.includes("多開一片田") && el("folkBox").innerHTML.includes("<b>9</b>"));
   run("sel = { x: 12, y: 7 }; render()");
   ok("點空地看得到田的數量和上限", /開一片田（2×2，免費，\d+\/9）/.test(el("sheet").innerHTML), el("sheet").innerHTML.slice(0, 200));
   run("sel = null; render()");
+  run("closeFolk(); tab('mail')");
+  ok("相簿有小鎮建設一欄 1/9", el("p-mail").innerHTML.includes("小鎮建設 1/" + run("T.stageShots(st, C).length")) && el("p-mail").innerHTML.includes("openPhoto('plaza-1')"));
+  ok("還沒修的階段先寫地名", el("p-mail").innerHTML.includes("小鎮廣場第 2 階") && el("p-mail").innerHTML.includes("還沒開放的地方第 1 階"));
+  run("openPhoto('plaza-1')");
+  ok("點開階段照可以回顧那一階的任務和語音", ["清理廣場", "img/photos/plaza-1.png", "I need four pieces of wood.", "task_p1-carrot"].every(x => el("folkBox").innerHTML.includes(x)));
+  run("openPhoto('plaza-2')");
+  ok("還沒修好的階段照打不開", !el("folkBox").innerHTML.includes("plaza-2.png"));
   run("closeFolk(); tab('mail')");
   ok("村民分頁多了 Nora 和她的信", el("p-mail").innerHTML.includes("openFolk('Nora')") && el("p-mail").innerHTML.includes("新鄰居"));
   ok("新信有紅點", el("t-mail").innerHTML.includes("dot"));
@@ -278,6 +287,8 @@ const fm = Object.keys(run("C.FISH")).filter(k => !fs.existsSync(path.join(DIR, 
 ok("每種魚都有圖", !fm.length, fm);
 const pm = run("C.QUESTS").map(q => q.id).filter(id => !fs.existsSync(path.join(DIR, "img", "photos", id + ".png")));
 ok("每個好感任務都有紀念照", !pm.length, pm);
+const sm = run("T.stageShots(st, C)").map(s => s.id).filter(id => !fs.existsSync(path.join(DIR, "img", "photos", id + ".png")));
+ok("每一階都有紀念照", !sm.length, sm);
 ok("魚的圖示用圖片、圖載不到退回 emoji", run("itemIcon('salmon')").includes('src="img/fish/salmon.png"') && run("itemIcon('salmon')").includes("onerror") && run("itemIcon('carrot')") === "🥕");
 
 console.log("\n── 看中文會保持展開 ──");

@@ -795,6 +795,7 @@ function finishQuest(id, buy) {
   if (r && r.ok && !(r.arrived && r.arrived.length)) openPhoto(id, true);
 }
 function openPhoto(id, fresh) {
+  if (T.stageShot(st, id, C)) return openStagePhoto(id, fresh);
   const q = T.questOf(id, C); if (!q || !st.photos[id]) return;
   const m = document.getElementById("folkModal"); m.classList.remove("showzh");
   document.getElementById("folkBox").innerHTML = `<div class="cele">${fresh ? `<h3>📷 拿到紀念照了！</h3>` : ""}
@@ -809,9 +810,29 @@ function openPhoto(id, fresh) {
     <div class="actions" style="justify-content:center"><button class="btn" onclick="openFolk('${q.by}')">回到 ${q.by}</button><button class="btn go" onclick="closeFolk()">關閉</button></div></div>`;
   m.hidden = false;
 }
+// 階段紀念照：修好一階就有，回顧那一階的五個任務
+function openStagePhoto(id, fresh) {
+  const s = T.stageShot(st, id, C); if (!s || !s.got) return;
+  const L = C.LANDMARKS[s.key], sg = L.stages[s.stage - 1];
+  const m = document.getElementById("folkModal"); m.classList.remove("showzh");
+  document.getElementById("folkBox").innerHTML = `<div class="cele">${fresh ? `<h3>📷 拿到紀念照了！</h3>` : ""}
+    <img class="photo-big" src="${photoSrc(id)}" alt="${esc(s.caption)}" onerror="this.outerHTML='<div class=&quot;big&quot;>📷</div>'">
+    <div class="en" style="font-family:Georgia,serif;font-size:1.1rem"><b>${esc(s.caption)}</b></div><div>${esc(s.captionZh)}${s.date ? `　<span class="muted">${s.date}</span>` : ""}</div>
+    ${fresh ? "" : `<div class="quest recap"><b>📜 ${L.zh}第 ${s.stage} 階：${esc(s.title)}</b><div class="muted">${esc(s.done)}</div>
+      ${sg.tasks.map(t => `<div class="line">${esc(t.by)}: ${esc(t.en)}</div><div class="zh">${esc(t.zh)}</div>
+        <div class="actions"><button class="btn" onclick="play(townAudio('task_${t.id}'))">🔊 聽</button></div>`).join("")}
+      <div class="actions"><button class="btn" onclick="document.getElementById('folkModal').classList.add('showzh')">看中文</button></div></div>`}
+    <div class="actions" style="justify-content:center"><button class="btn go" onclick="closeFolk()">關閉</button></div></div>`;
+  m.hidden = false;
+}
 function albumHtml() {
-  const got = C.QUESTS.filter(q => st.photos[q.id]).length;
-  return `<h2>📷 紀念相簿 <span class="muted" style="font-size:.85rem">${got}/${C.QUESTS.length}</span></h2><div class="album">${C.QUESTS.map(q =>
+  const shots = T.stageShots(st, C), got = C.QUESTS.filter(q => st.photos[q.id]).length, gotS = shots.filter(s => s.got).length;
+  return `<h2>📷 紀念相簿 <span class="muted" style="font-size:.85rem">${got + gotS}/${C.QUESTS.length + shots.length}</span></h2>
+    <div class="lbl">🏘️ 小鎮建設 ${gotS}/${shots.length}</div><div class="album">${shots.map(s =>
+    s.got
+      ? `<div onclick="openPhoto('${s.id}')"><img src="${photoSrc(s.id)}" alt="${esc(s.caption)}" onerror="this.outerHTML='<div class=&quot;ph&quot;>📷</div>'">${esc(s.captionZh)}</div>`
+      : `<div class="no"><div class="ph">❔</div>${T.landmarkOpen(st, s.key, C) ? C.LANDMARKS[s.key].zh : "還沒開放的地方"}第 ${s.stage} 階</div>`).join("")}</div>
+    <div class="lbl">💞 村民好感 ${got}/${C.QUESTS.length}</div><div class="album">${C.QUESTS.map(q =>
     st.photos[q.id]
       ? `<div onclick="openPhoto('${q.id}')"><img src="${photoSrc(q.id)}" alt="${esc(q.caption)}" onerror="this.outerHTML='<div class=&quot;ph&quot;>📷</div>'">${esc(q.captionZh)}</div>`
       : `<div class="no"><div class="ph">❔</div>${T.isResident(st, q.by, C) ? q.by : "新村民"} ❤️×${q.at}</div>`).join("")}</div>`;
@@ -836,7 +857,11 @@ function celebrate(r) {
   const m = document.getElementById("folkModal");
   m.classList.remove("showzh");
   let h = `<div class="cele">`;
-  if (r.stageDone) h += `<h3>🎉 ${L.zh}第 ${stage} 階修好了！</h3><div class="big">${L.look[stage].split(" ")[0]}</div>
+  const shot = r.stagePhoto && T.stageShot(st, r.stagePhoto, C);
+  if (r.stageDone) h += `<h3>🎉 ${L.zh}第 ${stage} 階修好了！</h3>${shot
+      ? `<img class="photo-big" src="${photoSrc(shot.id)}" alt="${esc(shot.caption)}" onerror="this.outerHTML='<div class=&quot;big&quot;>${L.look[stage].split(" ")[0]}</div>'">
+    <div class="en" style="font-family:Georgia,serif;font-size:1.1rem"><b>${esc(shot.caption)}</b></div><div class="muted">📷 紀念照收進相簿了（${esc(shot.captionZh)}）</div>`
+      : `<div class="big">${L.look[stage].split(" ")[0]}</div>`}
     <p>${esc(L.look[stage].split(" ").slice(1).join(" "))}</p><p class="muted">🏘️ 繁榮度現在是 ${T.prosperity(st, C)}</p>`;
   if (r.moreFields) h += `<p>🟫 農莊可以多開一片田了！現在最多 <b>${T.maxFields(st)}</b> 片。</p>`;
   (r.opened || []).forEach(k => h += `<h3>🆕 ${C.LANDMARKS[k].zh}開放了！</h3><p class="muted">到「小鎮」分頁看新的任務。</p>`);

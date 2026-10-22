@@ -335,12 +335,13 @@
   // need.item：ap＝出力幫忙（直接扣體力）、wood/stone/rice/carrot/potato＝背包、花圃燈籠等＝背包裡還沒擺出去的裝飾。
   // 估算（Codex 從零模擬，含播種、照料、出售、買種子與裝飾）：8 片田一起種是 34／44／46 體力，合計約 124，
   // 一週約 50 體力的話要兩週半；只用一片田要 43／71／73，因為照料費沒有分攤。新手提示要鼓勵多開田。
+  // 每一階的 photo＝修好那一階拿到的紀念照（img/photos/地標-第幾階.png，例如 plaza-1）
   var LANDMARKS = {
     plaza: {
       zh: "小鎮廣場", en: "the plaza",
       look: ["🚧 雜草和破木板", "🧹 清乾淨了，有一張長桌", "🏮 鋪好石板路，掛上燈籠", "🎪 有一座小舞台，可以辦活動"],
       stages: [
-        { title: "清理廣場", done: "雜草清光了，Leo 做好一張長桌", tasks: [
+        { title: "清理廣場", photo: { caption: "A long table for the plaza", captionZh: "廣場的長桌" }, done: "雜草清光了，Leo 做好一張長桌", tasks: [
           { id: "p1-wood", by: "Leo", need: { item: "wood", n: 4 },
             en: "I need four pieces of wood. I will make a long table.", zh: "我需要四塊木材，我要做一張長桌。" },
           { id: "p1-weeds", by: "Leo", need: { item: "ap", n: 4 },
@@ -352,7 +353,7 @@
           { id: "p1-flowers", by: "Mia", need: { item: "flowers", n: 1 },
             en: "The plaza looks sad. Could we put some flowers here?", zh: "廣場看起來好冷清。我們可以在這裡放一些花嗎？" },
         ] },
-        { title: "石板路與燈籠", done: "鋪好石板路，晚上也有燈籠照亮", tasks: [
+        { title: "石板路與燈籠", photo: { caption: "Lanterns light up the plaza", captionZh: "燈籠照亮了廣場" }, done: "鋪好石板路，晚上也有燈籠照亮", tasks: [
           { id: "p2-stone", by: "Leo", need: { item: "stone", n: 5 },
             en: "Let's make a stone path. We need five stones.", zh: "我們來鋪一條石板路，需要五顆石頭。" },
           { id: "p2-carry", by: "Leo", need: { item: "ap", n: 6 },
@@ -364,7 +365,7 @@
           { id: "p2-lantern", by: "Mia", need: { item: "lantern", n: 2 },
             en: "At night the plaza is too dark. Two lanterns will help.", zh: "晚上廣場太暗了，兩個燈籠就會好很多。" },
         ] },
-        { title: "小舞台", done: "小舞台搭好了！Ben 在上面打鼓，大家都來看", tasks: [
+        { title: "小舞台", photo: { caption: "Ben's first show", captionZh: "Ben 的第一場表演" }, done: "小舞台搭好了！Ben 在上面打鼓，大家都來看", tasks: [
           { id: "p3-wood", by: "Leo", need: { item: "wood", n: 6 },
             en: "We need six pieces of wood to build a stage.", zh: "我們需要六塊木材來搭舞台。" },
           { id: "p3-drums", by: "Ben", need: { item: "ap", n: 6 },
@@ -384,7 +385,7 @@
       zh: "週末市集", en: "the market", after: "plaza",
       look: ["🌾 小鎮入口的空地", "🛖 搭好木頭攤位", "🪧 掛上大招牌，擺滿了花", "🏪 熱鬧的週末市集"],
       stages: [
-        { title: "搭起攤位", done: "木頭攤位搭好了，Sam 的推車有了固定的位子；商店開始賣玉米和南瓜種子", tasks: [
+        { title: "搭起攤位", photo: { caption: "A home for Sam's cart", captionZh: "Sam 的推車有家了" }, done: "木頭攤位搭好了，Sam 的推車有了固定的位子；商店開始賣玉米和南瓜種子", tasks: [
           { id: "m1-wood", by: "Sam", need: { item: "wood", n: 5 },
             en: "A market needs stalls. Can you bring five pieces of wood?", zh: "市集需要攤位。你可以帶五塊木材來嗎？" },
           { id: "m1-build", by: "Leo", need: { item: "ap", n: 6 },
@@ -396,7 +397,7 @@
           { id: "m1-lantern", by: "Ben", need: { item: "lantern", n: 1 },
             en: "Let's hang a lantern on the gate. Then people can find us at night.", zh: "我們在大門掛一個燈籠吧，這樣晚上大家也找得到我們。" },
         ] },
-        { title: "招牌與花", done: "掛上大招牌，攤位前擺滿了花；商店開始賣噴水池", tasks: [
+        { title: "招牌與花", photo: { caption: "A big sign for the market", captionZh: "市集的大招牌" }, done: "掛上大招牌，攤位前擺滿了花；商店開始賣噴水池", tasks: [
           { id: "m2-corn", by: "Sam", need: { item: "corn", n: 3 },
             // an ear of corn＝一根玉米
             en: "Can you grow some corn for me? I need three ears of corn for my stall.", zh: "你可以幫我種一些玉米嗎？我的攤位需要三根玉米。" },
@@ -409,7 +410,7 @@
           { id: "m2-wood", by: "Leo", need: { item: "wood", n: 6 },
             en: "The tables are too small. I need six more pieces of wood.", zh: "桌子太小了，我還需要六塊木材。" },
         ] },
-        { title: "第一次市集日", done: "第一次市集日！大家都來逛，Sam 說這是他見過最溫暖的小鎮", tasks: [
+        { title: "第一次市集日", photo: { caption: "Our first market day", captionZh: "我們的第一個市集日" }, done: "第一次市集日！大家都來逛，Sam 說這是他見過最溫暖的小鎮", tasks: [
           { id: "m3-mailbox", by: "Tom", need: { item: "mailbox", n: 1 },
             en: "People will send letters about the market. We need a mailbox here.", zh: "大家會寄信聊市集的事，這裡需要一個信箱。" },
           { id: "m3-carry", by: "Tom", need: { item: "ap", n: 8 },
@@ -429,7 +430,7 @@
       zh: "海邊碼頭", en: "the harbor", after: "market",
       look: ["🌊 東邊海灘上一座破舊的碼頭", "🪵 修好木棧道，停著 Jack 的漁船", "🗼 燈塔亮起來了", "🏖️ 熱鬧的海灘祭"],
       stages: [
-        { title: "修好木棧道", done: "木棧道修好了，Jack 的漁船有了停靠的地方；商店開始賣海灘傘", tasks: [
+        { title: "修好木棧道", photo: { caption: "Jack's boat at the pier", captionZh: "Jack 的船停在碼頭" }, done: "木棧道修好了，Jack 的漁船有了停靠的地方；商店開始賣海灘傘", tasks: [
           { id: "h1-wood", by: "Jack", need: { item: "wood", n: 6 },
             en: "The old pier is broken. Can you bring six pieces of wood?", zh: "舊碼頭壞掉了。你可以帶六塊木材來嗎？" },
           { id: "h1-fix", by: "Leo", need: { item: "ap", n: 6 },
@@ -441,7 +442,7 @@
           { id: "h1-potato", by: "Nora", need: { item: "potato", n: 3 },
             en: "Jack gets up very early. I'll make potato soup for him. I need three potatoes.", zh: "Jack 很早起床。我要煮馬鈴薯湯給他，需要三顆馬鈴薯。" },
         ] },
-        { title: "燈塔", done: "燈塔亮起來了，晚上出海的船也找得到回家的路；商店開始賣小帆船", tasks: [
+        { title: "燈塔", photo: { caption: "The lighthouse lights up", captionZh: "燈塔亮了" }, done: "燈塔亮起來了，晚上出海的船也找得到回家的路；商店開始賣小帆船", tasks: [
           { id: "h2-stone", by: "Leo", need: { item: "stone", n: 6 },
             en: "A lighthouse needs strong walls. Please bring six stones.", zh: "燈塔需要堅固的牆。請帶六顆石頭來。" },
           { id: "h2-iron", by: "Jack", need: { item: "iron", n: 2 },
@@ -453,7 +454,7 @@
           { id: "h2-lantern", by: "Tom", need: { item: "lantern", n: 2 },
             en: "I need to take letters to the lighthouse, but the path is too dark at night. Please bring two lanterns.", zh: "我需要送信到燈塔，可是晚上那條路太暗了。請帶兩個燈籠來。" },
         ] },
-        { title: "第一次海灘祭", done: "第一次海灘祭！Max 帶大家比賽游泳，Ben 在沙灘上打鼓，Jack 的漁船掛滿了燈", tasks: [
+        { title: "第一次海灘祭", photo: { caption: "Our first beach festival", captionZh: "我們的第一場海灘祭" }, done: "第一次海灘祭！Max 帶大家比賽游泳，Ben 在沙灘上打鼓，Jack 的漁船掛滿了燈", tasks: [
           { id: "h3-clean", by: "Max", need: { item: "ap", n: 8 },
             en: "Let's clean the beach before the festival. Help me pick up the trash!", zh: "祭典前我們來清理海灘吧。幫我撿垃圾！" },
           { id: "h3-medals", by: "Leo", need: { item: "wood", n: 2 },

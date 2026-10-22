@@ -327,8 +327,9 @@ console.log("\n── 廣場任務：每階 5 個、同時開放 ──");
   ok("Nora 還沒搬來", !T.isResident(st, "Nora", C));
   const fin = T.doTask(st, "plaza", "p1-carrot", "2026-10-05", C);
   ok("第 5 個交完：升到第 2 階", fin.stageDone && st.town.plaza === 1, fin);
+  ok("修好一階拿到階段紀念照", fin.stagePhoto === "plaza-1" && st.stagePhotos["plaza-1"] === "2026-10-05", fin);
   ok("繁榮度過 60，Nora 搬來", fin.arrived.includes("Nora") && T.isResident(st, "Nora", C), fin);
-  eq("繁榮度 = 5 任務 + 1 階 + 5 顆心", T.prosperity(st, C), 50 + 20 + 15);
+  eq("繁榮度 = 5 任務 + 1 階 + 5 顆心（階段照不另外加）", T.prosperity(st, C), 50 + 20 + 15);
   ok("第 2 階的需求換成石頭", T.materialNeed(st, "stone", C) === 5 && T.materialNeed(st, "wood", C) === 0);
   const g2 = T.nextGoal(st, C);
   ok("下一個目標是第 2 階", g2.stage === 1 && g2.left === 5 && g2.title === "石板路與燈籠", g2);
@@ -553,6 +554,25 @@ console.log("\n── 送禮 ──");
   ok("存檔整理：圖鑑只留認得的", JSON.stringify(n.dex) === JSON.stringify({ squid: 3 }));
   ok("存檔整理：礦坑次數留著", n.mine.digs === 12 && T.mineFloor(n, C) === 1);
   ok("存檔整理：送禮只留村民與日期", JSON.stringify(n.gifts) === JSON.stringify({ Leo: "2026-10-12" }));
+}
+
+console.log("\n── 階段紀念照 ──");
+{
+  const all = T.stageShots(fresh(), C), qid = new Set(C.QUESTS.map(q => q.id));
+  eq("每個地標每一階一張", all.length, Object.values(C.LANDMARKS).reduce((n, L) => n + L.stages.length, 0));
+  ok("id 不重複、也不跟好感任務撞名", new Set(all.map(s => s.id)).size === all.length && all.every(s => !qid.has(s.id)));
+  ok("每一張都有英文和中文說明", all.every(s => s.caption && s.captionZh), all.filter(s => !s.caption || !s.captionZh));
+  ok("新存檔一張都還沒有", all.every(s => !s.got && s.date === null));
+  const st = fresh(); st.inv.wood = 4; const r = T.doTask(st, "plaza", "p1-wood", "2026-10-05", C);
+  ok("沒交到最後一個不會給照片", r.ok && r.stagePhoto === null && !Object.keys(st.stagePhotos).length, r);
+  const raw = JSON.parse(JSON.stringify(fresh()));
+  raw.town = { plaza: 3, market: 1 };
+  raw.stagePhotos = { "plaza-1": "2026-10-08", "plaza-2": ["x"], "market-2": "2026-10-09", "harbor-1": "2026-10-09", evil: "2026-10-09" };
+  const n = T.normalize(raw, "test", "2026-10-15", C);
+  eq("存檔整理：只留修好的階段、日期要是字串", Object.keys(n.stagePhotos), ["plaza-1"]);
+  ok("舊存檔已經修好的階段也算有照片（沒日期）", T.stageShot(n, "plaza-2", C).got && T.stageShot(n, "plaza-2", C).date === null && T.stageShot(n, "market-1", C).got);
+  ok("沒修好的不算", !T.stageShot(n, "market-2", C).got && !T.stageShot(n, "harbor-1", C).got);
+  eq("修好 4 階 = 4 張", T.stageShots(n, C).filter(s => s.got).length, 4);
 }
 
 console.log("\n── 好感任務與紀念照 ──");

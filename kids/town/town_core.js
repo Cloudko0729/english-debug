@@ -76,6 +76,7 @@
       mine: { digs: 0 },         // 礦坑挖了幾次（決定在第幾層）
       gifts: {},                 // 送禮：{ 村民: 最後送的那天 }，一天一次
       photos: {},                // 好感任務拿到的紀念照 { 任務id: 那天 }
+      stagePhotos: {},           // 修好一階拿到的紀念照 { "plaza-1": 那天 }；照片本身看 town 修到第幾階
       decorOwned: {},
       farm: {
         fields: [{ id: "f1", x: 4, y: 3, crop: null, plantedDate: null, careDates: [] }],
@@ -441,6 +442,7 @@
     var stageDone = sg.tasks.every(function (q) { return st.tasks[q.id]; }), opened = [], capBefore = maxFields(st);
     if (stageDone) {
       st.town[key] = i + 1;
+      st.stagePhotos[stageShotId(key, i)] = today;
       note(st, today, L.zh + "第 " + (i + 1) + " 階完成：" + sg.done, "");
       msg += "　🎉 " + L.zh + "第 " + (i + 1) + " 階完成：" + sg.done;
       if (maxFields(st) > capBefore) msg += "　🟫 可以多開一片田了（最多 " + maxFields(st) + " 片）";
@@ -449,8 +451,24 @@
     if (came.length) msg += "　🏠 " + came.join("、") + " 搬來小鎮了！";
     if (stageDone) Object.keys(C.LANDMARKS).forEach(function (k) { if (C.LANDMARKS[k].after === key && landmarkOpen(st, k, C)) opened.push(k); });
     st.rev++;
-    return { ok: true, msg: msg, key: key, stageDone: stageDone, arrived: came, opened: opened, moreFields: maxFields(st) > capBefore };
+    return { ok: true, msg: msg, key: key, stageDone: stageDone, arrived: came, opened: opened, moreFields: maxFields(st) > capBefore,
+             stagePhoto: stageDone ? stageShotId(key, i) : null };
   }
+  // 階段紀念照：每個地標每修好一階一張，id＝地標-第幾階（plaza-1）
+  function stageShotId(key, i) { return key + "-" + (i + 1); }
+  // 全部階段照（照地標順序），got＝已經修好；date＝拿到那天（舊存檔沒記到就是 null）
+  function stageShots(st, C) {
+    var out = [];
+    Object.keys(C.LANDMARKS).forEach(function (k) {
+      C.LANDMARKS[k].stages.forEach(function (sg, i) {
+        var id = stageShotId(k, i);
+        out.push({ id: id, key: k, stage: i + 1, title: sg.title, done: sg.done, caption: sg.photo.caption, captionZh: sg.photo.captionZh,
+                   got: (st.town[k] || 0) > i, date: (st.town[k] || 0) > i ? (st.stagePhotos[id] || null) : null });
+      });
+    });
+    return out;
+  }
+  function stageShot(st, id, C) { return stageShots(st, C).find(function (s) { return s.id === id; }) || null; }
 
   // ── 釣魚與挖礦 ──────────────────────────────────────────────────────────
   // 機率表抽一個：table＝{ 東西: 權重 }，r＝0～1 的亂數（畫面用 Math.random，測試自己給）
@@ -752,6 +770,10 @@
       var q = questOf(id, C);
       if (!q || !isResident(st, q.by, C) || (st.hearts[q.by] || 0) < q.at) delete st.photos[id];
     });
+    var sp = obj(raw.stagePhotos);
+    Object.keys(C.LANDMARKS).forEach(function (k) {
+      for (var i = 0; i < (st.town[k] || 0); i++) { var id = stageShotId(k, i); if (isDate(sp[id])) st.stagePhotos[id] = sp[id]; }
+    });
     var book = obj(raw.book);
     Object.keys(book).forEach(function (wk) {
       if (!DATE_RE.test(wk) || !Array.isArray(book[wk])) return;
@@ -798,7 +820,7 @@
     AP_BONUS_CAP: AP_BONUS_CAP, BONUS: BONUS,
     GROW_DAYS: GROW_DAYS, MAX_FIELDS: MAX_FIELDS, HEART_MAX: HEART_MAX, FIELD_BONUS_MAX: FIELD_BONUS_MAX, CARE_GROUP: CARE_GROUP, W: W, H: H, TOWN_START: TOWN_START,
     maxFields: maxFields, careCost: careCost, fillCost: fillCost,
-    questOf: questOf, questState: questState, doQuest: doQuest,
+    questOf: questOf, questState: questState, doQuest: doQuest, stageShotId: stageShotId, stageShots: stageShots, stageShot: stageShot,
     pickWeighted: pickWeighted, fishTable: fishTable, cast: cast, giveUp: giveUp, fish: fish, mineFloor: mineFloor, dig: dig, giftable: giftable, gift: gift,
     ymd: ymd, addDays: addDays, apWeek: apWeek, contentWeek: contentWeek, season: season,
     terrainAt: terrainAt, occupied: occupied, areaFree: areaFree,
