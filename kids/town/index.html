@@ -87,6 +87,7 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 .item{background:#fff8e6;border:2px solid var(--wood-l);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:4px}
 .item .top{display:flex;align-items:center;gap:8px}
 .item .em{font-size:1.6rem}
+.fi{width:1.3em;height:1.3em;object-fit:contain;vertical-align:-.3em;image-rendering:pixelated}
 .item .en{font-weight:900}
 .item .zh{font-size:.8rem;color:var(--muted)}
 .item .n{font-family:var(--pixel);font-size:.85rem}
@@ -398,7 +399,9 @@ function renderToday(d) {
 // 東西的圖示、名字、去哪裡拿
 const ICON = { ap: "⚡", money: "🪙", wood: "🪵", stone: "🪨" };
 const thing = k => C.CROPS[k] || C.DECOR[k] || C.FISH[k] || C.MINERALS[k] || null;
-const itemIcon = k => ICON[k] || (thing(k) && thing(k).emoji) || "📦";
+// 魚用畫好的圖（img/fish/<id>.png），emoji 好幾種魚長一樣；圖載不到就退回 emoji
+const fishIcon = k => `<img class="fi" src="img/fish/${k}.png" alt="${C.FISH[k].en}" onerror="this.outerHTML='${C.FISH[k].emoji}'">`;
+const itemIcon = k => ICON[k] || (C.FISH[k] ? fishIcon(k) : (thing(k) && thing(k).emoji)) || "📦";
 const itemName = k => C.NAME[k] || k;
 function whereToGet(k) {
   if (k === "ap") return "做英文練習換體力";
@@ -456,7 +459,7 @@ function findHtml() {
 function dexHtml(keys, seasonOf) {
   return `<div class="dex">${keys.map(k => {
     const t = thing(k), n = st.dex[k] || 0;
-    return n ? `<div><span class="em">${t.emoji}</span><b>${esc(t.en)}</b><br>${esc(t.zh)} ×${n}</div>`
+    return n ? `<div><span class="em">${itemIcon(k)}</span><b>${esc(t.en)}</b><br>${esc(t.zh)} ×${n}</div>`
              : `<div class="no"><span class="em">❔</span>${seasonOf ? seasonOf(k) : "還沒挖到"}</div>`;
   }).join("")}</div>`;
 }
@@ -467,7 +470,7 @@ function renderWild(d) {
   const stoneNeed = T.materialNeed(st, "stone", C);
   let h = findHtml() + `<p class="muted">⚡ 釣魚、挖礦都會用掉體力，記得留一些給田和小鎮任務。</p>`;
   h += `<h2>🎣 海邊釣魚 <span class="chip s-${s}">${s}季</span></h2>
-    <p class="muted">這一季釣得到：${here.map(k => `${C.FISH[k].emoji} ${C.FISH[k].en}`).join("、")}。每季的魚不一樣，下週換季就有新的魚。</p>
+    <p class="muted">這一季釣得到：${here.map(k => `${itemIcon(k)} ${C.FISH[k].en}`).join("、")}。每季的魚不一樣，下週換季就有新的魚。</p>
     <div class="actions">${st.cast
       ? `<button class="btn go" onclick="startFish()">🎣 竿子還在水裡，繼續釣</button>`
       : `<button class="btn go" ${ap >= C.COST.fish ? "" : "disabled"} onclick="startFish()">🎣 甩竿 <span class="cost">${C.COST.fish}⚡</span></button>`}</div>
@@ -648,7 +651,7 @@ function renderShop() {
   // 作物一直列（還沒開賣的除外）；魚和礦有才列
   const sellRows = Object.keys(C.SELL).filter(k => C.CROPS[k] ? (T.unlocked(st, C.CROPS[k]) || st.inv[k]) : st.inv[k]).map(k => {
     const c = thing(k), n = st.inv[k] || 0;
-    return `<div class="item"><div class="top"><span class="em">${c.emoji}</span><div><div class="en">${c.en}</div><div class="zh">${c.zh}　有 <span class="n">${n}</span></div></div></div>
+    return `<div class="item"><div class="top"><span class="em">${itemIcon(k)}</span><div><div class="en">${c.en}</div><div class="zh">${c.zh}　有 <span class="n">${n}</span></div></div></div>
       <button class="btn" ${n ? "" : "disabled"} onclick="act(T.sell(st,'${k}',1,C))">賣 1 個 ${earn(C.SELL[k])}</button>
       <button class="btn" ${n > 1 ? "" : "disabled"} onclick="act(T.sell(st,'${k}',${n},C))">全部賣${n > 1 ? " " + earn(C.SELL[k] * n) : ""}</button></div>`;
   }).join("");
@@ -744,7 +747,7 @@ function pic(v, small) {
 // 人物卡：英文自我介紹（有語音）、個性、喜歡與討厭的東西
 function openFolk(v) {
   const p = C.VILLAGERS[v]; if (!p) return;
-  const chips = arr => arr.map(x => `<span>${x.emoji} ${esc(x.en)}<i>${esc(x.zh)}</i></span>`).join("");
+  const chips = arr => arr.map(x => `<span>${x.item && C.FISH[x.item] ? itemIcon(x.item) : x.emoji} ${esc(x.en)}<i>${esc(x.zh)}</i></span>`).join("");
   const m = document.getElementById("folkModal");
   m.classList.remove("showzh");
   document.getElementById("folkBox").innerHTML = `

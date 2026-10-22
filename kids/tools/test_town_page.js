@@ -273,6 +273,10 @@ const words = [...el("sheet").innerHTML.matchAll(/wordAudio\('([^']+)'\)/g)].map
 Object.values(run("C.CROPS")).concat(Object.values(run("C.DECOR"))).forEach(x => words.push(x.en));
 const wm = [...new Set(words)].filter(w => !fs.existsSync(path.join(__dirname, "..", "audio", "words", w.toLowerCase().replace(/[^a-z0-9]+/g, "") + ".mp3")));
 ok("作物與裝飾的單字音檔都存在", !wm.length, wm);
+// 魚用畫好的圖：每種魚都要有圖，圖示走 <img>
+const fm = Object.keys(run("C.FISH")).filter(k => !fs.existsSync(path.join(DIR, "img", "fish", k + ".png")));
+ok("每種魚都有圖", !fm.length, fm);
+ok("魚的圖示用圖片、圖載不到退回 emoji", run("itemIcon('salmon')").includes('src="img/fish/salmon.png"') && run("itemIcon('salmon')").includes("onerror") && run("itemIcon('carrot')") === "🥕");
 
 console.log("\n── 看中文會保持展開 ──");
 run("tab('mail')"); run("showZh('w1-mail-leo')");
