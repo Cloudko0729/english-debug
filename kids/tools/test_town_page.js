@@ -54,7 +54,7 @@ console.log("\n── 測試帳號加體力 ──");
 ok("測試帳號看得到不限量按鈕", el("hud").innerHTML.includes("testBoost(50)"));
 const ap0 = run("T.apTotal(st)");
 for (let i = 0; i < 4; i++) run("testBoost(50)");
-ok("連按 4 次 +200，不受每週 70 限制", run("T.apTotal(st)") === ap0 + 200, run("T.apTotal(st)"));
+ok("連按 4 次 +200，不受每週 100 限制", run("T.apTotal(st)") === ap0 + 200, run("T.apTotal(st)"));
 ok("體力條先補滿 60，其餘進儲備", G.st.energy.wallet === 60 && G.st.energy.reserve === ap0 + 200 - 60, G.st.energy);
 
 console.log("\n── 新手提示與目標卡 ──");

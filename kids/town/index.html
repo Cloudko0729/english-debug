@@ -372,7 +372,7 @@ function render() {
     <span class="stat" style="cursor:pointer" onclick="tab('town')" title="小鎮越繁榮，越多村民搬來">🏘️ <span class="num">${T.prosperity(st, C)}</span> <span class="muted">繁榮度</span></span>
     <span class="chip s-${season}">${season}季</span>
     <span class="muted">本週：${W ? W.theme : "（內容準備中）"}</span>
-    ${student === "test" ? `<button class="btn" title="跟做一份練習一樣，算進每週 70 的上限" onclick="act(T.grant(st,'test:'+Date.now(),10,today()))">🧪 +10⚡</button>
+    ${student === "test" ? `<button class="btn" title="跟做一份練習一樣，算進每週 100 的上限" onclick="act(T.grant(st,'test:'+Date.now(),10,today()))">🧪 +10⚡</button>
       <button class="btn" title="只有測試帳號有，不算進每週上限" onclick="testBoost(50)">🧪 +50⚡ 不限</button>` : ""}`;
   // 有新信的分頁加紅點
   const unread = visibleCards().some(c => !st.cards[c.id]) || C.QUESTS.some(q => T.questState(st, q, C) === "ready");
@@ -390,7 +390,7 @@ function renderToday(d) {
   else if (hasDrill) h = `<span>📝 做完今天的每日練習，就能 +${T.AP_PER_TASK} ⚡</span><a class="btn go" href="../drills/daily_${d}.html">去做練習 →</a>`;
   else if (dow === 6) h = `<span>🏁 週六沒有每日練習，可以去做本週總複習。體力用之前存的。</span><a class="btn" href="../weekly_review.html">本週總複習 →</a>`;
   else h = `<span>😴 今天沒有每日練習，體力用之前存的。</span><span class="muted">本週已拿 ${used}/${T.AP_WEEKLY_CAP}</span>`;
-  // 本週加分：文法、單字、週測、作業（另外算，不佔每日練習的 70）
+  // 本週加分：文法、單字、週測、作業（另外算，不佔每日練習的 100）
   const bonus = (st.energy.bonusByWeek || {})[T.apWeek(d)] || 0, B = T.BONUS;
   h += `<div class="muted" style="flex-basis:100%;font-size:.82rem">⭐ 本週加分 ${bonus}/${T.AP_BONUS_CAP}：
     <a href="../grammar_month.html">本月文法</a>每課 +${B.grammar}、<a href="../vocab_month.html">本月單字</a>每單元 +${B.vocab}、

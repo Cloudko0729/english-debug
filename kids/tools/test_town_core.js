@@ -30,15 +30,15 @@ console.log("\n── 體力：三條規則 ──");
   ok("同一份不能領兩次", !T.grant(st, "daily:2026-10-05", 10, "2026-10-05").ok);
   for (let d = 6; d <= 9; d++) T.grant(st, "daily:2026-10-0" + d, 10, "2026-10-0" + d);
   eq("5 份共 50", T.apTotal(st), 50);
-  T.grant(st, "a", 10, "2026-10-09"); T.grant(st, "b", 10, "2026-10-09");
-  eq("第 7 份到 70", T.apTotal(st), 70);
+  ["a", "b", "c2", "c3", "c4"].forEach(id => T.grant(st, id, 10, "2026-10-09"));
+  eq("第 10 份到 100", T.apTotal(st), 100);
   const r8 = T.grant(st, "c", 10, "2026-10-09");
-  ok("第 8 份超過週上限不給", r8.ok && r8.amount === 0 && r8.capped);
+  ok("第 11 份超過週上限不給", r8.ok && r8.amount === 0 && r8.capped);
   eq("體力條最多 60", st.energy.wallet, 60);
-  eq("超過的進儲備", st.energy.reserve, 10);
+  eq("超過的進儲備", st.energy.reserve, 40);
   const r9 = T.grant(st, "d", 10, "2026-10-10");
   ok("週六換週後又能拿", r9.amount === 10);
-  T.spend(st, 25);
+  T.spend(st, 55);
   eq("用掉之後從儲備補回體力條", [st.energy.wallet, st.energy.reserve], [55, 0]);
   ok("不夠就不能花", !T.spend(st, 999) && T.apTotal(st) === 55);
 }
@@ -73,14 +73,14 @@ console.log("\n── 本週加分：文法、單字、週測、作業 ──");
   prog.vocab.units["l1-u02"] = { best: 5, lastAt: "2026-10-15" };
   eq("本週加分最多 40", T.syncFromProgress(st, prog), 4);
   eq("加分額度用完", st.energy.bonusByWeek["2026-10-10"], 40);
-  // 每日練習的 70 還是自己算
+  // 每日練習的 100 還是自己算
   const days = {};
-  ["2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-13b", "2026-10-14b", "2026-10-15b"].forEach((d, i) => {
+  ["2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-13b", "2026-10-14b", "2026-10-15b", "2026-10-12b", "2026-10-16b", "2026-10-12c"].forEach((d, i) => {
     days[d.slice(0, 10) + "::x" + i] = { claimedAt: d.slice(0, 10) + "T10:00:00" };
   });
   prog.coins.claimedDrills = days;
-  eq("每日練習照樣拿滿 70", T.syncFromProgress(st, prog), 70);
-  eq("一週最多 70＋40＝110", T.apTotal(st), 110);
+  eq("每日練習照樣拿滿 100", T.syncFromProgress(st, prog), 100);
+  eq("一週最多 100＋40＝140", T.apTotal(st), 140);
   // 下一週的週測、作業是新的額度
   prog.weeklyTests.push({ week: "2026-10-17", at: "2026-10-23", correct: 15, total: 20 });
   eq("下週的週測另外算", T.syncFromProgress(st, prog), 10);
@@ -637,10 +637,10 @@ console.log("\n── 審查修正：體力按完成日 ──");
 {
   const st = fresh();
   const claimed = {};
-  ["05", "06", "07", "08", "09", "12", "13", "14"].forEach(d => {
+  ["05", "06", "07", "08", "09", "12", "13", "14", "15", "16", "02"].forEach(d => {
     claimed["2026-10-" + d + "::2026-10-" + d + "-vocab"] = { claimedAt: "2026-10-19T03:00:00.000Z" };
   });
-  eq("同一天補做 8 份舊題，只拿得到那週的 70", T.syncFromProgress(st, { coins: { claimedDrills: claimed } }), 70);
+  eq("同一天補做 11 份舊題，只拿得到那週的 100", T.syncFromProgress(st, { coins: { claimedDrills: claimed } }), 100);
   const st2 = fresh();
   eq("上線前的題目在上線後才做，照樣給", T.syncFromProgress(st2, { coins: { claimedDrills: {
     "2026-10-02::2026-10-02-vocab": { claimedAt: "2026-10-05T02:00:00.000Z" } } } }), 10);

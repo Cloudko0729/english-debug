@@ -17,9 +17,9 @@
 
   var SCHEMA = 1;
   var AP_PER_TASK = 10;
-  var AP_WEEKLY_CAP = 70;
+  var AP_WEEKLY_CAP = 100;     // 每日練習一週最多拿 100（一份 10）
   var AP_WALLET_CAP = 60;
-  var AP_BONUS_CAP = 40;        // 本週加分：文法、單字、週測、作業，跟每日練習的 70 分開算
+  var AP_BONUS_CAP = 40;        // 本週加分：文法、單字、週測、作業，跟每日練習的 100 分開算
   var BONUS = { grammar: 10, vocab: 10, test: 10, homework: 2, exam: 20 };
   var GROW_DAYS = 3;
   var MAX_FIELDS = 8;          // 一開始最多 8 片田
@@ -109,7 +109,7 @@
   }
   // 學習完成 → 體力。同一個 activityId 只發一次。週上限以「學習那天」所屬的週計，
   // 這樣上週做的練習這週才打開小鎮補發，也不會吃掉這週的額度。
-  // bonus＝true 時算「本週加分」額度（40），否則算每日練習的 70
+  // bonus＝true 時算「本週加分」額度（40），否則算每日練習的 100
   function grant(st, activityId, amount, learnedOn, bonus) {
     if (st.energy.receipts[activityId]) return fail("已經領過");
     var e = st.energy, wk = apWeek(learnedOn), key = bonus ? "bonusByWeek" : "byWeek", cap = bonus ? AP_BONUS_CAP : AP_WEEKLY_CAP;
