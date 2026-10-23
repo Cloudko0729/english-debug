@@ -37,7 +37,7 @@ header a{color:#ffe08a;font-weight:700;text-decoration:none;font-size:.85rem}
 .bar i{display:block;height:100%;background:linear-gradient(#ffd25a,#e0a526)}
 .chip{font-size:.78rem;font-weight:900;padding:2px 9px;border-radius:4px;color:#fff;background:var(--wood)}
 .chip.s-秋{background:#b8742a}.chip.s-冬{background:#4f6f8f}.chip.s-春{background:#5e9a48}.chip.s-夏{background:#2e8c8a}
-.tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;margin:6px 0 10px}
+.tabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin:6px 0 10px}
 .tabs button{font-family:inherit;font-weight:900;font-size:clamp(.72rem,3.2vw,.9rem);padding:9px 2px;white-space:nowrap;overflow:hidden;border:3px solid var(--wood-d);background:var(--panel2);color:var(--ink);border-radius:8px 8px 4px 4px;cursor:pointer}
 .tabs button.on{background:var(--panel);transform:translateY(2px)}
 .tabs button .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--bad);margin-left:4px;vertical-align:middle}
@@ -216,6 +216,7 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
     <button id="t-mail" onclick="tab('mail')">📨 村民</button>
     <button id="t-wild" onclick="tab('wild')">🎣 野外</button>
     <button id="t-town" onclick="tab('town')">🏛️ 小鎮</button>
+    <button id="t-album" onclick="tab('album')">📷 相簿</button>
   </div>
 
   <div class="frame">
@@ -236,6 +237,7 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 
     <section class="pane" id="p-shop" hidden></section>
     <section class="pane" id="p-mail" hidden></section>
+    <section class="pane" id="p-album" hidden></section>
     <section class="pane" id="p-wild" hidden>
       <!-- 釣魚小遊戲：畫面重繪時不能被蓋掉，所以放在 wildBody 外面，而且放最上面，按甩竿就看得到 -->
       <div class="sheet" id="fishGame" hidden>
@@ -375,7 +377,7 @@ function render() {
   // 有新信的分頁加紅點
   const unread = visibleCards().some(c => !st.cards[c.id]) || C.QUESTS.some(q => T.questState(st, q, C) === "ready");
   document.getElementById("t-mail").innerHTML = "📨 村民" + (unread ? '<span class="dot"></span>' : "");
-  renderToday(d); renderGoal(); renderHint(); renderGather(); renderMap(d); renderSheet(d); renderShop(); renderMail(d); renderWild(d); renderTown(d);
+  renderToday(d); renderGoal(); renderHint(); renderGather(); renderMap(d); renderSheet(d); renderShop(); renderMail(d); renderWild(d); renderTown(d); renderAlbum();
 }
 
 function renderToday(d) {
@@ -698,7 +700,6 @@ function renderMail(d) {
     return `<button class="folk" onclick="openFolk('${v}')" aria-label="看 ${v} 的介紹">${pic(v)}<span><div class="nm">${v}</div>
       <div class="sm">${p.role.zh}　<span class="hearts">${heartsTxt(v)}</span>${questBadge(v)}</div><div class="sm">點我看介紹</div></span></button>`; }).join("")}</div>
     <div class="residents">${soonHtml()}</div>`;
-  h += albumHtml();
   const wel = welcomeCards();
   if (wel.length) { h += `<h2>🏠 新鄰居</h2>`; wel.slice().reverse().forEach(c => h += cardHtml(c)); }
   weeks.forEach(wk => {
@@ -825,9 +826,11 @@ function openStagePhoto(id, fresh) {
     <div class="actions" style="justify-content:center"><button class="btn go" onclick="closeFolk()">關閉</button></div></div>`;
   m.hidden = false;
 }
+function renderAlbum() { document.getElementById("p-album").innerHTML = albumHtml(); }
 function albumHtml() {
   const shots = T.stageShots(st, C), got = C.QUESTS.filter(q => st.photos[q.id]).length, gotS = shots.filter(s => s.got).length;
   return `<h2>📷 紀念相簿 <span class="muted" style="font-size:.85rem">${got + gotS}/${C.QUESTS.length + shots.length}</span></h2>
+    <p class="muted">小鎮每修好一階、村民的好感任務每完成一個，都會拿到一張紀念照。點照片可以回顧當時的英文。</p>
     <div class="lbl">🏘️ 小鎮建設 ${gotS}/${shots.length}</div><div class="album">${shots.map(s =>
     s.got
       ? `<div onclick="openPhoto('${s.id}')"><img src="${photoSrc(s.id)}" alt="${esc(s.caption)}" onerror="this.outerHTML='<div class=&quot;ph&quot;>📷</div>'">${esc(s.captionZh)}</div>`
@@ -964,7 +967,7 @@ function importSave(inp) {
 
 function tab(name) {
   if (name !== "wild") stopFish();
-  ["farm", "shop", "mail", "wild", "town"].forEach(k => {
+  ["farm", "shop", "mail", "wild", "town", "album"].forEach(k => {
     document.getElementById("p-" + k).hidden = k !== name;
     document.getElementById("t-" + k).classList.toggle("on", k === name);
   });
