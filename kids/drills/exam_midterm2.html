@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>期中考模擬卷（二）</title>
+  <style>
+    :root {
+      --bg: #fff7dc; --panel: #fff; --primary: #e8563f; --primary-soft: #ffeae6;
+      --accent: #ffb703; --success: #2fbf71; --danger: #ef476f;
+      --text: #243042; --muted: #667085; --border: #e3d5b8;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, "Noto Sans TC", sans-serif; background: var(--bg); color: var(--text); padding-bottom: 60px; }
+    header { background: linear-gradient(135deg, #e8563f, #b8371f); color: #fff; text-align: center; padding: 20px 16px; }
+    header h1 { font-size: 1.45rem; }
+    header p { font-size: .85rem; opacity: .92; margin-top: 4px; }
+    header a { color: #ffe27a; font-size: .82rem; text-decoration: none; font-weight: 700; }
+    #studentBar { background: var(--accent); padding: 10px 16px; display: flex; align-items: center; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    #studentBar span { font-weight: 700; color: #3a2a00; }
+    .stu-btn { padding: 6px 18px; border: 2px solid #3a2a00; border-radius: 20px; background: transparent; font-size: .95rem; font-weight: 700; cursor: pointer; color: #3a2a00; }
+    .stu-btn.active { background: #3a2a00; color: #fff; }
+    #infoBar { background: var(--primary-soft); padding: 8px 16px; text-align: center; font-size: .84rem; color: #b8371f; font-weight: 700; display: none; }
+    main { max-width: 680px; margin: 0 auto; padding: 16px; }
+    #pickMsg { text-align: center; padding: 40px 20px; color: var(--muted); }
+    .intro { background: #fff; border: 2px dashed var(--border); border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; font-size: .88rem; line-height: 1.7; }
+    section { background: var(--panel); border: 2px solid var(--border); border-radius: 12px; padding: 18px 16px; margin-bottom: 16px; }
+    section h2 { font-size: 1.05rem; color: #b8371f; margin-bottom: 4px; }
+    .sec-hint { font-size: .82rem; color: var(--muted); margin-bottom: 14px; }
+    .q-block { border: 2px solid var(--border); border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+    .q-block.q-correct { border-color: var(--success); background: #f0fcf6; }
+    .q-block.q-wrong { border-color: var(--danger); background: #fef0f4; }
+    .q-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+    .q-num { font-weight: 700; color: #b8371f; }
+    .q-text { font-size: 1rem; line-height: 1.6; }
+    .dlg { font-size: .98rem; line-height: 1.8; margin-bottom: 8px; }
+    .dlg b { color: #b8371f; margin-right: 4px; }
+    .pic-card { display: flex; flex-direction: column; align-items: center; gap: 4px; background: var(--primary-soft); border-radius: 12px; padding: 10px; margin-bottom: 10px; }
+    .pic-card .name { font-weight: 800; color: #b8371f; font-size: .92rem; }
+    .pic-card .emoji { font-size: 3rem; line-height: 1; }
+    .pic-card .label { font-size: .82rem; color: var(--muted); }
+    .pic-emoji { font-size: 3rem; text-align: center; margin: 4px 0 6px; }
+    .pic-hint { text-align: center; font-size: .85rem; color: var(--muted); margin-bottom: 8px; }
+    .choices { display: flex; flex-direction: column; gap: 8px; }
+    .choice { border: 2px solid var(--border); border-radius: 8px; background: #fff; padding: 11px 12px; font-size: .98rem; cursor: pointer; text-align: left; color: var(--text); line-height: 1.45; }
+    .choice.sel { border-color: #2f80ed; background: #dbeafe; }
+    .choice.right { border-color: var(--success); background: #d9f7e8; }
+    .choice.wrongpick { border-color: var(--danger); background: #fde0e8; }
+    .btn-listen { background: #2f80ed; color: #fff; border: none; border-radius: 50%; width: 46px; height: 46px; font-size: 1.2rem; cursor: pointer; flex-shrink: 0; }
+    .btn-small { background: #fff; border: 2px solid #2f80ed; color: #2f80ed; border-radius: 16px; padding: 4px 12px; font-weight: 700; cursor: pointer; font-size: .85rem; }
+    .write-input { width: 100%; border: 2px solid var(--border); border-radius: 8px; padding: 11px 12px; font-size: 1.05rem; }
+    .write-input.right { border-color: var(--success); background: #e6faf0; }
+    .write-input.wrongpick { border-color: var(--danger); background: #fde8ee; }
+    .why { display: none; margin-top: 8px; font-size: .86rem; color: #8a2b14; background: #fff6ec; border-radius: 8px; padding: 7px 10px; line-height: 1.6; }
+    .q-wrong .why, .q-correct .why.always { display: block; }
+    .passage { background: #f6f9fd; border-radius: 10px; padding: 12px 14px; line-height: 1.9; font-size: 1rem; margin-bottom: 8px; }
+    .gloss { font-size: .82rem; color: var(--muted); margin-bottom: 12px; }
+    .btn-submit { display: block; width: 100%; padding: 15px; border: none; border-radius: 12px; background: var(--success); color: #fff; font-size: 1.15rem; font-weight: 800; cursor: pointer; }
+    #result { display: none; text-align: center; background: linear-gradient(135deg,#fff,#fff7dc); border: 2px solid var(--accent); border-radius: 14px; padding: 22px 18px; margin-bottom: 16px; }
+    #result .big { font-size: 2.3rem; font-weight: 800; margin: 8px 0; color: #b8371f; }
+    #result table { margin: 10px auto; border-collapse: collapse; font-size: .9rem; }
+    #result td { padding: 3px 10px; text-align: left; }
+    #result td.n { text-align: right; font-weight: 700; }
+    #result .ap { color: #9a6a00; font-weight: 800; margin: 10px 0; }
+    #result a, #result button { display: inline-block; margin: 10px 6px 0; color: #b8371f; font-weight: 700; text-decoration: none; background: none; border: 2px solid #e8563f; border-radius: 16px; padding: 6px 14px; cursor: pointer; font-size: .9rem; }
+    #toast { position: fixed; top: 16px; left: 50%; transform: translateX(-50%) translateY(-80px); background: #243042; color: #fff; padding: 10px 18px; border-radius: 20px; font-size: .9rem; font-weight: 600; transition: transform .3s; z-index: 100; max-width: 90vw; }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+    .pic-img { display: block; width: 100%; max-width: 170px; aspect-ratio: 1; object-fit: contain; margin: 0 auto 8px; border-radius: 10px; background: #fff; }
+    .pick-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .pick-grid .choice { padding: 4px; text-align: center; }
+    .pick-grid .choice img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 6px; }
+    .row2 { flex-direction: row; }
+    .row2 .choice { flex: 1; text-align: center; font-size: 1.25rem; padding: 10px 6px; }
+    .wrapc { flex-direction: row; flex-wrap: wrap; }
+    .wrapc .choice { flex: 1 0 28%; text-align: center; }
+    .clip { display: flex; align-items: center; gap: 10px; background: var(--primary-soft); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px; font-weight: 700; color: #b8371f; }
+    .clip-text { display: none; font-weight: 400; color: var(--text); font-size: .9rem; line-height: 1.6; }
+    .done .clip-text { display: block; }
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 14px; }
+    .idcard { border: 2px solid var(--border); border-radius: 10px; padding: 10px; font-size: .88rem; line-height: 1.7; background: #fffdf6; }
+    .idcard b { color: #b8371f; }
+    .bank { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 12px; }
+    .bank span { border: 2px dashed #e8563f; border-radius: 8px; padding: 3px 10px; font-weight: 700; color: #b8371f; background: #fff; }
+    .order-line { min-height: 48px; border: 2px dashed var(--border); border-radius: 8px; padding: 6px; display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; background: #fffdf6; }
+    .order-pool { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip { border: 2px solid #2f80ed; background: #fff; color: #1d4f9a; border-radius: 8px; padding: 7px 11px; font-size: 1rem; cursor: pointer; font-weight: 700; }
+    .chip.used { visibility: hidden; }
+    .order-line .chip { background: #dbeafe; }
+    .q-correct .order-line { border-color: var(--success); }
+    .q-wrong .order-line { border-color: var(--danger); }
+    @media (max-width: 420px) { .cards { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<header>
+  <h1>📝 期中考模擬卷（二）</h1>
+  <p>國小六上 · Unit 1、Unit 2、Review 1、中秋節 · 照考古題題型出的第二份</p>
+  <a href="../school_exam.html">← 學校課本</a>　<a href="exam_midterm.html">模擬卷（一）</a>　<a href="../index.html">回首頁</a>
+</header>
+<div id="studentBar">
+  <span>我是：</span>
+  <button class="stu-btn" onclick="selectStudent('albert')">Albert</button>
+  <button class="stu-btn" onclick="selectStudent('jonathan')">Jonathan</button>
+  <button class="stu-btn" onclick="selectStudent('ryder')">Ryder</button>
+  <button class="stu-btn" onclick="selectStudent('guest')">🎫 訪客</button>
+  <button class="stu-btn" style="opacity:.7" onclick="selectStudent('test')">🧪 測試</button>
+</div>
+<div id="infoBar"></div>
+<main>
+  <div id="pickMsg">👆 先選名字，再開始寫考卷</div>
+  <div id="examArea" style="display:none">
+    <div class="intro" id="intro"></div>
+    <div id="sections"></div>
+    <button class="btn-submit" id="submitBtn" onclick="submitExam()">📝 交卷看成績</button>
+  </div>
+  <div id="result"></div>
+</main>
+<div id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../cloud_sync.js?v=1"></script>
+<script src="../account_lock.js?v=1"></script>
+<script src="../supabase_auth.js?v=1"></script>
+<script src="exam_midterm2.js?v=1"></script>
+<script>
+const E = MIDTERM2;
+const AUDIO_DIR = "../audio/exam_midterm2/", IMG_DIR = "img/exam_midterm2/";
+const SECS = E.sections;
+const COUNT = SECS.reduce((n, s) => n + s.items.length, 0);
+let currentStudent = null, submitted = false;
+
+function today() { const d = new Date(); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); }
+function getProgress(s) {
+  let p = null;
+  try { p = JSON.parse(localStorage.getItem("kidsProgress." + s) || "null"); } catch (e) {}
+  p = p || { wrongCounts: {}, sessions: 0, totalCorrect: 0, totalWrong: 0 };
+  if (!p.wrongCounts) p.wrongCounts = {};
+  if (!p.exams) p.exams = {};
+  return p;
+}
+function saveProgress(s, p) { localStorage.setItem("kidsProgress." + s, JSON.stringify(p)); }
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const imgSrc = k => IMG_DIR + k + ".png";
+const img = (k, cls) => `<img class="${cls}" src="${imgSrc(k)}" alt="" onerror="this.style.visibility='hidden'">`;
+
+let curAudio = null;
+function playClip(key, text) {
+  if (curAudio) { curAudio.pause(); curAudio = null; }
+  const a = new Audio(AUDIO_DIR + key + ".mp3");
+  curAudio = a;
+  a.play().catch(() => {
+    if (!window.speechSynthesis || !text) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text); u.lang = "en-US"; u.rate = 0.85;
+    speechSynthesis.speak(u);
+  });
+}
+const listenBtn = (key, text) => `<button class="btn-listen" onclick="playClip('${key}',${esc(JSON.stringify(text))})">🔊</button>`;
+// 選項每次打亂，正解不會固定在第一個；O/X、T/F、字庫的順序固定
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const fixedOrder = q => q.choices.length === 2 || q.choices.length === 5;
+function pickChoice(btn) {
+  if (submitted) return;
+  const block = btn.closest(".q-block");
+  block.querySelectorAll(".choice").forEach(c => c.classList.remove("sel"));
+  btn.classList.add("sel");
+}
+function choicesHtml(q) {
+  const arr = fixedOrder(q) ? q.choices : shuffle(q.choices);
+  if (q.type === "pick") return `<div class="choices pick-grid">${arr.map(c => `<button class="choice" data-val="${esc(c)}" onclick="pickChoice(this)">${img(c, "")}</button>`).join("")}</div>`;
+  const cls = q.choices.every(c => c.length <= 3) ? " row2" : q.choices.length === 5 ? " wrapc" : "";
+  return `<div class="choices${cls}">${arr.map(c => `<button class="choice" data-val="${esc(c)}" onclick="pickChoice(this)">${esc(c)}</button>`).join("")}</div>`;
+}
+
+// 重組：點下面的詞塊放上去，點上面的退回去
+function orderHtml(id, q) {
+  return `<div class="order-line" id="ol_${id}"></div><div class="order-pool" id="op_${id}">${shuffle(q.chunks.map((c, k) => ({ c, k }))).map(({ c, k }) =>
+    `<button class="chip" data-k="${k}" onclick="moveChip('${id}',this)">${esc(c)}</button>`).join("")}</div>`;
+}
+function moveChip(id, btn) {
+  if (submitted) return;
+  const line = document.getElementById("ol_" + id), pool = document.getElementById("op_" + id);
+  if (btn.parentElement === pool) {
+    const c = btn.cloneNode(true); c.onclick = () => moveChip(id, c); line.appendChild(c); btn.classList.add("used");
+  } else {
+    pool.querySelector(`.chip[data-k="${btn.dataset.k}"]`).classList.remove("used"); btn.remove();
+  }
+}
+const orderValue = id => [...document.getElementById("ol_" + id).children].map(c => c.textContent).join(" ");
+
+function itemHtml(s, q, i) {
+  const id = `${s.key}_${i}`;
+  let h = `<div class="q-block" id="${id}">`;
+  if (q.pic) h += img(q.pic, "pic-img");
+  h += `<div class="q-head"><span class="q-num">${i + 1}.</span>`;
+  if (q.say) h += listenBtn(id, q.say);
+  if (q.q) h += `<span class="q-text">${esc(q.q)}</span>`;
+  h += `</div>`;
+  if (q.a) h += `<div class="dlg"><div><b>A:</b>${esc(q.a)}</div><div><b>B:</b>${esc(q.b)}</div></div>`;
+  if (q.type === "write") h += `<input class="write-input" id="in_${id}" type="text" placeholder="輸入英文" autocomplete="off" autocapitalize="off" spellcheck="false">`;
+  else if (q.type === "order") h += orderHtml(id, q);
+  else h += choicesHtml(q);
+  const told = q.say && s.key !== "d" ? `聽到的是：<b>${esc(q.say)}</b>${q.why ? "　" + esc(q.why) : ""}` : esc(q.why || "");
+  h += `<div class="why" id="why_${id}">${told ? "💡 " + told : ""}</div></div>`;
+  return h;
+}
+function sectionHtml(s) {
+  let h = `<section><h2>${s.title}</h2><p class="sec-hint">${s.hint}</p>`;
+  if (s.cards) h += `<div class="cards">${s.cards.map(c => `<div class="idcard"><div><b>Name:</b> ${c.name}</div><div><b>Age:</b> ${c.age}</div>
+    <div><b>Country:</b> ${esc(c.country)}</div><div><b>Symptoms:</b> ${esc(c.symptoms)}</div><div><b>How to get better:</b> ${esc(c.better)}</div></div>`).join("")}</div>`;
+  if (s.passage) h += `<div class="passage">${esc(s.passage).replace(/__(\d)__/g, "<b>（$1）＿＿</b>")}</div>
+    <div class="gloss">${s.key === "j" ? `<button class="btn-small" onclick="playClip('${s.key}',${esc(JSON.stringify(s.passage))})">🔊 聽短文</button>　` : ""}生字：${s.gloss.map(([en, zh]) => `${esc(en)} ${esc(zh)}`).join("、")}</div>`;
+  if (s.bank) h += `<div class="bank">字庫：${s.bank.map(w => `<span>${esc(w)}</span>`).join("")}</div>`;
+  if (s.clips) {
+    // 短文聽力：每段一個 🔊，題目接在那一段下面
+    s.clips.forEach((c, ci) => {
+      h += `<div class="clip" id="clip_${s.key}${ci}">${listenBtn(s.key + ci, c.say)}<div>第 ${ci + 1} 段<div class="clip-text">${esc(c.say)}</div></div></div>`;
+      s.items.forEach((q, i) => { if (q.clip === ci) h += itemHtml(s, q, i); });
+    });
+  } else h += s.items.map((q, i) => itemHtml(s, q, i)).join("");
+  return h + `</section>`;
+}
+
+function renderExam() {
+  submitted = false;
+  document.getElementById("submitBtn").disabled = false;
+  document.getElementById("intro").innerHTML = `📋 共 ${SECS.length} 大題、${COUNT} 題，大約 30 分鐘。題型照學校考古題，寫完再一起交卷。<br>
+    交卷後會告訴你哪幾題錯、為什麼錯。第一次交卷可以領小鎮體力 ⚡，之後可以一直重考練習。`;
+  document.getElementById("sections").innerHTML = SECS.map(sectionHtml).join("");
+  document.getElementById("result").style.display = "none";
+}
+
+// 寫字題：大小寫看 cap（國名要大寫），多的空白、句點不算錯
+function checkWrite(q, raw) {
+  const v = String(raw).trim().replace(/\s+/g, " ").replace(/[.。]$/, "").replace(/’/g, "'");
+  const hit = q.answers.find(a => a.toLowerCase() === v.toLowerCase());
+  if (!hit) return { ok: false, msg: v ? `答案是 <b>${esc(q.answers[0])}</b>` : `沒有寫。答案是 <b>${esc(q.answers[0])}</b>` };
+  if (q.cap && hit.replace(/^the /i, "") !== v.replace(/^the /i, "")) return { ok: false, msg: `拼對了，但國名大小寫要寫對：<b>${esc(hit)}</b>` };
+  return { ok: true };
+}
+function answered(s, q, i) {
+  const id = `${s.key}_${i}`;
+  if (q.type === "write") return !!document.getElementById("in_" + id).value.trim();
+  if (q.type === "order") return document.getElementById("ol_" + id).children.length > 0;
+  return !!document.querySelector(`#${id} .choice.sel`);
+}
+function grade(s, q, i, p) {
+  const id = `${s.key}_${i}`, block = document.getElementById(id);
+  let ok;
+  if (q.type === "write") {
+    const input = document.getElementById("in_" + id), r = checkWrite(q, input.value);
+    ok = r.ok; input.className = "write-input " + (ok ? "right" : "wrongpick");
+    if (!ok) document.getElementById("why_" + id).innerHTML = "💡 " + r.msg;
+  } else if (q.type === "order") {
+    ok = orderValue(id) === q.answer;
+    if (!ok) document.getElementById("why_" + id).innerHTML = `💡 正確的句子：<b>${esc(q.answer)}</b>`;
+  } else {
+    const sel = block.querySelector(".choice.sel");
+    ok = !!sel && sel.dataset.val === q.answer;
+    block.querySelectorAll(".choice").forEach(c => {
+      if (c.dataset.val === q.answer) c.classList.add("right");
+      else if (c.classList.contains("sel") && !ok) c.classList.add("wrongpick");
+    });
+  }
+  block.classList.add(ok ? "q-correct" : "q-wrong");
+  if (ok) p.totalCorrect = (p.totalCorrect || 0) + 1; else p.totalWrong = (p.totalWrong || 0) + 1;
+  return ok;
+}
+
+function submitExam() {
+  if (submitted) return;
+  const left = SECS.reduce((n, s) => n + s.items.filter((q, i) => !answered(s, q, i)).length, 0);
+  if (left && !confirm(`還有 ${left} 題沒寫，確定要交卷嗎？`)) return;
+  submitted = true;
+  document.getElementById("submitBtn").disabled = true;
+  document.querySelectorAll(".clip").forEach(c => c.classList.add("done"));
+  const p = getProgress(currentStudent), per = {};
+  SECS.forEach(s => { per[s.key] = s.items.filter((q, i) => grade(s, q, i, p)).length; });
+  const correct = Object.values(per).reduce((a, b) => a + b, 0);
+  const score = Math.round(correct / COUNT * 100);
+  // 第一次交卷才算數給體力；最高分、次數一直記
+  const rec = p.exams[E.id], first = !rec;
+  p.exams[E.id] = {
+    at: first ? today() : rec.at, firstScore: first ? score : rec.firstScore,
+    best: Math.max(score, rec ? rec.best || 0 : 0), last: score, lastAt: today(), tries: (rec ? rec.tries || 0 : 0) + 1,
+  };
+  saveProgress(currentStudent, p);
+  showResult(per, correct, score, first);
+  updateInfoBar();
+  if (typeof cloudSave === "function") cloudSave(currentStudent);
+}
+
+function showResult(per, correct, score, first) {
+  const rows = SECS.map(s => `<tr><td>${s.name}</td><td class="n">${per[s.key]} / ${s.items.length}</td></tr>`).join("");
+  const weak = SECS.filter(s => per[s.key] < s.items.length * 0.7).map(s => s.name.slice(2));
+  let h = `<div>📝 交卷了！</div><div class="big">${score} 分</div><div>答對 ${correct} / ${COUNT} 題</div><table>${rows}</table>`;
+  h += score === 100 ? `<div>🌟 全對！期中考準備好了。</div>`
+     : weak.length ? `<div>📌 再加強：${weak.join("、")}。往上滑看紅色的題目和說明。</div>`
+     : `<div>💪 每一大題都有七成以上，紅色的再看一次就好。</div>`;
+  h += first ? `<div class="ap">⚡ 第一次交卷，小鎮本週加分 +20 體力（本週加分滿 40 就不再加）</div>` : `<div class="ap">這是重考練習，體力只有第一次交卷會給。</div>`;
+  h += `<div><button onclick="retry()">🔁 再考一次（題目選項會重新排）</button><a href="exam_midterm.html">📝 模擬卷（一）</a><a href="../town/index.html">🏘️ 去小鎮</a></div>`;
+  const el = document.getElementById("result");
+  el.innerHTML = h; el.style.display = "block";
+  el.scrollIntoView({ behavior: "smooth" });
+}
+function retry() { renderExam(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+
+let toastTimer = null;
+function toast(msg) { const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2600); }
+
+function updateInfoBar() {
+  const r = getProgress(currentStudent).exams[E.id];
+  const bar = document.getElementById("infoBar");
+  bar.style.display = "block";
+  const name = currentStudent.charAt(0).toUpperCase() + currentStudent.slice(1);
+  bar.textContent = r ? `${name} · 第一次 ${r.firstScore} 分 · 最高 ${r.best} 分 · 考過 ${r.tries} 次` : `${name} · 還沒考過`;
+}
+
+function selectStudent(name) {
+  if (typeof requireUnlock === "function" && !requireUnlock(name)) return;
+  currentStudent = name;
+  localStorage.setItem("kidsCurrentStudent", name);
+  document.querySelectorAll(".stu-btn").forEach(b => b.classList.toggle("active", b.textContent.toLowerCase().includes(name)));
+  document.getElementById("pickMsg").style.display = "none";
+  document.getElementById("examArea").style.display = "block";
+  renderExam();
+  updateInfoBar();
+  if (getProgress(name).exams[E.id]) toast("你考過了，這次是重考練習（體力只給第一次）");
+  if (typeof cloudSyncOnOpen === "function") cloudSyncOnOpen(name, () => { updateInfoBar(); });
+}
+
+const last = localStorage.getItem("kidsCurrentStudent");
+if (!window.sbClient && last) selectStudent(last);
+</script>
+</body>
+</html>

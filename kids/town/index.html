@@ -394,7 +394,7 @@ function renderToday(d) {
   const bonus = (st.energy.bonusByWeek || {})[T.apWeek(d)] || 0, B = T.BONUS;
   h += `<div class="muted" style="flex-basis:100%;font-size:.82rem">⭐ 本週加分 ${bonus}/${T.AP_BONUS_CAP}：
     <a href="../grammar_month.html">本月文法</a>每課 +${B.grammar}、<a href="../vocab_month.html">本月單字</a>每單元 +${B.vocab}、
-    <a href="../weekly_test.html">週測</a> +${B.test}、<a href="../homework.html">作業</a>每項 +${B.homework}、<a href="../drills/exam_midterm.html">期中考模擬卷</a> +${B.exam}（第一次完成才算，不佔每日練習的 ${T.AP_WEEKLY_CAP}）</div>`;
+    <a href="../weekly_test.html">週測</a> +${B.test}、<a href="../homework.html">作業</a>每項 +${B.homework}、期中考模擬卷 <a href="../drills/exam_midterm.html">（一）</a>、<a href="../drills/exam_midterm2.html">（二）</a>每份 +${B.exam}（第一次完成才算，不佔每日練習的 ${T.AP_WEEKLY_CAP}）</div>`;
   document.getElementById("today").innerHTML = h;
 }
 

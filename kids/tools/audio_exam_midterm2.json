@@ -1,0 +1,30 @@
+{
+ "outdir": "D:/english/kids/audio/exam_midterm2",
+ "voice": "af_heart",
+ "speed": 0.85,
+ "items": {
+  "a_0": "nurse",
+  "a_1": "farm",
+  "a_2": "fork",
+  "a_3": "girl",
+  "a_4": "clerk",
+  "a_5": "party",
+  "a_6": "horse",
+  "a_7": "thirsty",
+  "b_0": "Amy has a fever.",
+  "b_1": "Ted has a stomachache.",
+  "b_2": "She's from France.",
+  "b_3": "Mr. Lin has a runny nose.",
+  "b_4": "He's from Canada.",
+  "b_5": "My grandma has a sore throat.",
+  "c_0": "Where is Raj from?",
+  "c_1": "Is Ella from the USA?",
+  "c_2": "Are you from Taiwan?",
+  "c_3": "Do you have a fever?",
+  "c_4": "What's wrong with Mary?",
+  "c_5": "Where are Mario and David from?",
+  "d0": "This is Ted. He's Amy's brother. Ted doesn't feel well today. He has a headache and a fever. He doesn't have a cough.",
+  "d1": "Hi, I'm Rachel. I'm from Australia. My friend Ross is from Canada. We're in Taiwan now. Today Ross has a sore throat, so he drinks some honey and lemon tea.",
+  "j": "Hello, I'm Emma. I'm from the USA. In the USA, many people eat chicken soup when they have a cold. My friend Kenji is from Japan. When he has a cold, he wears a mask and drinks warm water. This week, I have a runny nose and a cough, but I don't have a fever. Kenji makes some honey and lemon tea for me. It's sweet and warm. Let's stay healthy!"
+ }
+}
