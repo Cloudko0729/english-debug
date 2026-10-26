@@ -1607,6 +1607,104 @@ const WEEK_DRILLS = {
       },
     ]
   },
+  "2026-10-4": {            // 第4週 身體與健康 · 動名詞/不定詞
+    listenBlank: [
+      { full: "The baby is asleep, so please be quiet.", display: "The baby is ___, so please be quiet.", answer: "asleep", exclude: ["sleepy","sick","ill","healthy"] },
+      { full: "Grandpa has a long white beard.", display: "Grandpa has a long white ___.", answer: "beard", exclude: ["eyebrow","skin","tooth","toothbrush"] },
+      { full: "Cover your mouth when you cough.", display: "Cover your mouth when you ___.", answer: "cough" },
+      { full: "I have a fever, so Mom is taking me to the doctor.", display: "I have a fever, so Mom is taking me to the ___.", answer: "doctor", exclude: ["nurse","dentist"] },
+      { full: "Her face is very hot. I think she has a fever.", display: "Her face is very hot. I think she has a ___.", answer: "fever", exclude: ["headache","stomachache","toothache","sore throat","runny nose","cough","pain","illness"] },
+      { full: "Too much noise gives me a headache.", display: "Too much noise gives me a ___.", answer: "headache", exclude: ["pain","stomachache","toothache","fever"] },
+      { full: "Rosa teaches us how to stay in good health.", display: "Rosa teaches us how to stay in good ___.", answer: "health" },
+      { full: "Your heart beats faster when you run.", display: "Your ___ beats faster when you run.", answer: "heart" },
+      { full: "The school nurse gave me some ice for my ankle.", display: "The school ___ gave me some ice for my ankle.", answer: "nurse", exclude: ["doctor","dentist"] },
+      { full: "I fell down and felt a sharp pain in my ankle.", display: "I fell down and felt a sharp ___ in my ankle.", answer: "pain", exclude: ["fever"] },
+      { full: "I have a runny nose, so I need some tissues.", display: "I have a ___, so I need some tissues.", answer: "runny nose", exclude: ["cough","sore throat","fever","headache"] },
+      { full: "Tom is sick today, so he stayed home.", display: "Tom is ___ today, so he stayed home.", answer: "sick", exclude: ["ill","asleep","sleepy"] },
+      { full: "Wear a hat to keep the sun off your skin.", display: "Wear a hat to keep the sun off your ___.", answer: "skin", exclude: ["health","heart","eyebrow","beard","throat"] },
+      { full: "I stayed up late last night, so I feel sleepy in class.", display: "I stayed up late last night, so I feel ___ in class.", answer: "sleepy", exclude: ["sick","ill","asleep"] },
+      { full: "I can't sing today because I have a sore throat.", display: "I can't sing today because I have a ___.", answer: "sore throat", exclude: ["headache","stomachache","toothache","runny nose","cough","fever","pain","illness"] },
+      { full: "I ate too much ice cream, and now I have a stomachache.", display: "I ate too much ice cream, and now I have a ___.", answer: "stomachache", exclude: ["headache","toothache","pain","fever","sore throat","cough","runny nose"] },
+      { full: "Food goes down your throat when you swallow.", display: "Food goes down your ___ when you swallow.", answer: "throat" },
+      { full: "My little brother lost his first tooth today.", display: "My little brother lost his first ___ today.", answer: "tooth", exclude: ["toothbrush"] },
+      { full: "I have a toothache, so I'm going to see the dentist.", display: "I have a ___, so I'm going to see the dentist.", answer: "toothache", exclude: ["headache","stomachache","pain","fever","sore throat"] },
+      { full: "I brush my teeth with a toothbrush.", display: "I brush my teeth with a ___.", answer: "toothbrush", exclude: ["doctor","nurse","dentist"] },
+      { full: "Call an ambulance! Someone is hurt.", display: "Call an ___! Someone is hurt.", answer: "ambulance", exclude: ["doctor","nurse","dentist"] },
+      { full: "I hurt my ankle when I jumped off the wall.", display: "I hurt my ___ when I jumped off the wall.", answer: "ankle", exclude: ["beard","eyebrow","heart","skin","throat","tooth","blood","brain"] },
+      { full: "The nurse cleaned the blood off my knee.", display: "The nurse cleaned the ___ off my knee.", answer: "blood", exclude: ["medicine","skin"] },
+      { full: "Sleep helps your brain remember new words.", display: "Sleep helps your ___ remember new words.", answer: "brain", exclude: ["heart","doctor","nurse","dentist"] },
+      { full: "The doctor gave me some medicine to take after dinner.", display: "The doctor gave me some ___ to take after dinner.", answer: "medicine" },
+    ],
+    reorder: [
+      { sentence: "I need to see a dentist.", chunks: ["I need","to see","a dentist."] },
+      { sentence: "Brushing your teeth keeps them healthy.", chunks: ["Brushing your teeth","keeps them","healthy."] },
+      { sentence: "Remember to take your medicine after lunch.", chunks: ["Remember","to take your medicine","after lunch."] },
+      { sentence: "She stopped coughing after a few days.", chunks: ["She stopped","coughing","after a few days."] },
+      { sentence: "Drinking water is good for your health.", chunks: ["Drinking water","is good","for your health."] },
+      { sentence: "The doctor told me to stay in bed.", chunks: ["The doctor","told me","to stay in bed."] },
+      { sentence: "I don't feel like eating because I'm sick.", chunks: ["I don't feel like","eating","because I'm sick."] },
+      { sentence: "He wants to be a nurse in the future.", chunks: ["He wants","to be a nurse","in the future."] },
+      { sentence: "Try to go to bed before ten.", chunks: ["Try","to go to bed","before ten."] },
+      { sentence: "Eating too much candy can give you a toothache.", chunks: ["Eating too much candy","can give you","a toothache."] },
+      { sentence: "My sister enjoys reading before bed.", chunks: ["My sister enjoys","reading","before bed."] },
+      { sentence: "It's important to wash your hands.", chunks: ["It's important","to wash","your hands."] },
+      { sentence: "I hope to get well soon.", chunks: ["I hope","to get well","soon."] },
+      { sentence: "Exercising every day makes your heart strong.", chunks: ["Exercising every day","makes your heart","strong."] },
+      { sentence: "Grandpa decided to grow a beard.", chunks: ["Grandpa decided","to grow","a beard."] },
+      { sentence: "Mom is busy taking care of my sick brother.", chunks: ["Mom is busy","taking care of","my sick brother."] },
+      { sentence: "Don't forget to bring your toothbrush.", chunks: ["Don't forget","to bring","your toothbrush."] },
+      { sentence: "The dentist asked me to open my mouth.", chunks: ["The dentist","asked me","to open my mouth."] },
+      { sentence: "Getting enough sleep is good for your brain.", chunks: ["Getting enough sleep","is good","for your brain."] },
+      { sentence: "Rosa says eating well keeps us healthy.", chunks: ["Rosa says","eating well","keeps us healthy."] },
+    ],
+    reading: [
+      {
+        passage: "In Stardew Valley, my farmer fought monsters in the mine all day. He didn't eat any food, so his health went down to zero. He passed out and woke up in the clinic. The doctor, Harvey, said, \"Please be more careful.\" Now I always bring food to the mine.",
+        questions: [
+          { q: "Where did the farmer fight monsters?", choices: ["In the mine","On the farm","At the beach","At school"], answer: "In the mine" },
+          { q: "Why did his health go down to zero?", choices: ["He didn't eat any food","He ate too much candy","He stayed up late","He hurt his ankle"], answer: "He didn't eat any food" },
+          { q: "Where did he wake up?", choices: ["In the clinic","In his bed","In the mine","On the bus"], answer: "In the clinic" },
+          { q: "What does the writer always do now?", choices: ["Bring food to the mine","Stay in the mine all night","Eat more candy","Skip breakfast"], answer: "Bring food to the mine" },
+        ]
+      },
+      {
+        passage: "Last Monday, I had a sore throat and a fever, so I couldn't go to school. Mom took me to the doctor. The doctor said it was just a cold, not a serious illness. He gave me some medicine and told me to drink lots of warm water. After three days, I felt much better.",
+        questions: [
+          { q: "What was wrong with the writer last Monday?", choices: ["A sore throat and a fever","A toothache","A stomachache","A broken ankle"], answer: "A sore throat and a fever" },
+          { q: "Who took the writer to the doctor?", choices: ["Mom","Dad","A teacher","A nurse"], answer: "Mom" },
+          { q: "What did the doctor give the writer?", choices: ["Some medicine","Some candy","A toothbrush","A new book"], answer: "Some medicine" },
+          { q: "When did the writer feel much better?", choices: ["After three days","After one hour","After a month","The same day"], answer: "After three days" },
+        ]
+      },
+      {
+        passage: "Kevin loves eating candy, but he doesn't like brushing his teeth. Last week, he had a terrible toothache. His dad took him to the dentist. The dentist found a hole in one tooth. Now Kevin brushes his teeth twice a day with his new blue toothbrush.",
+        questions: [
+          { q: "What does Kevin love?", choices: ["Eating candy","Brushing his teeth","Going to the dentist","Drinking milk"], answer: "Eating candy" },
+          { q: "Why did Kevin go to the dentist?", choices: ["He had a toothache","He had a fever","He hurt his ankle","He had a runny nose"], answer: "He had a toothache" },
+          { q: "What did the dentist find?", choices: ["A hole in one tooth","A new toothbrush","Some candy","Blood on his skin"], answer: "A hole in one tooth" },
+          { q: "How often does Kevin brush his teeth now?", choices: ["Twice a day","Once a week","Never","Once a month"], answer: "Twice a day" },
+        ]
+      },
+      {
+        passage: "During P.E. class, Amy fell and hurt her ankle. It was very painful, and she couldn't walk. Our teacher called the school nurse. The nurse put some ice on Amy's ankle. After school, her dad took her to see a doctor. A week later, Amy could run again.",
+        questions: [
+          { q: "When did Amy hurt her ankle?", choices: ["During P.E. class","At lunch","On the way home","In music class"], answer: "During P.E. class" },
+          { q: "Who did the teacher call?", choices: ["The school nurse","An ambulance","Amy's mom","The dentist"], answer: "The school nurse" },
+          { q: "What did the nurse put on Amy's ankle?", choices: ["Some ice","Some medicine","A toothbrush","Warm water"], answer: "Some ice" },
+          { q: "Who took Amy to see a doctor?", choices: ["Her dad","Her teacher","The nurse","Her friend"], answer: "Her dad" },
+        ]
+      },
+      {
+        passage: "In our town game, Rosa is the town doctor. She always says, \"Eat well, sleep well, and have fun.\" Every morning, she goes for a walk to keep her heart healthy. When a villager is ill, she visits them with some medicine. Everybody in town loves her.",
+        questions: [
+          { q: "What is Rosa's job?", choices: ["She is a doctor","She is a nurse","She is a dentist","She is a farmer"], answer: "She is a doctor" },
+          { q: "What does Rosa do every morning?", choices: ["She goes for a walk","She eats candy","She sleeps late","She goes fishing"], answer: "She goes for a walk" },
+          { q: "Why does Rosa walk every morning?", choices: ["To keep her heart healthy","To find a toothbrush","To catch fish","To visit the dentist"], answer: "To keep her heart healthy" },
+          { q: "What does Rosa bring when a villager is ill?", choices: ["Some medicine","Some candy","A ball","A book"], answer: "Some medicine" },
+        ]
+      },
+    ]
+  },
 };
 // 每篇短文的「沒教過的生字」中文解釋（index 對應該週 reading[]）
 const PASSAGE_GLOSSARY = {
@@ -1729,6 +1827,13 @@ const PASSAGE_GLOSSARY = {
     [{"en":"villager","zh":"村民"},{"en":"plaza","zh":"廣場"},{"en":"kicked","zh":"踢"},{"en":"until","zh":"直到"},{"en":"got dark","zh":"天黑了"}],
     [{"en":"couldn't","zh":"不能（can't 的過去式）"},{"en":"P.E.","zh":"體育（physical education 的簡稱）"},{"en":"took","zh":"帶（take 的過去式）"},{"en":"be good at","zh":"擅長"},{"en":"even on a rainy day","zh":"即使在下雨天也一樣"}],
     [{"en":"my first time skiing","zh":"我第一次滑雪"},{"en":"fell down","zh":"跌倒（fall down 的過去式）"},{"en":"hill","zh":"山坡"},{"en":"without falling","zh":"沒有跌倒"},{"en":"try","zh":"嘗試"}],
+  ],
+  "2026-10-4": [
+    [{"en":"Stardew Valley","zh":"《星露谷物語》（遊戲名稱）"},{"en":"farmer","zh":"農夫"},{"en":"fought","zh":"打（fight 的過去式）"},{"en":"monsters","zh":"怪物"},{"en":"mine","zh":"礦坑"},{"en":"health went down to zero","zh":"生命值掉到零"},{"en":"passed out","zh":"昏倒了（pass out 的過去式）"},{"en":"woke up","zh":"醒來（wake up 的過去式）"},{"en":"clinic","zh":"診所"},{"en":"careful","zh":"小心的"},{"en":"bring","zh":"帶（東西）去"},{"en":"stayed up late","zh":"熬夜"},{"en":"skip breakfast","zh":"不吃早餐"}],
+    [{"en":"What was wrong with …?","zh":"……當時怎麼了？"},{"en":"couldn't","zh":"當時沒辦法（could not 的縮寫）"},{"en":"took","zh":"帶（take 的過去式）"},{"en":"just a cold","zh":"只是感冒"},{"en":"serious","zh":"嚴重的"},{"en":"gave","zh":"給了（give 的過去式）"},{"en":"told me to …","zh":"告訴我要……（told 是 tell 的過去式）"},{"en":"lots of","zh":"很多"},{"en":"felt much better","zh":"覺得好多了（felt 是 feel 的過去式）"},{"en":"broken ankle","zh":"骨折的腳踝"}],
+    [{"en":"candy","zh":"糖果"},{"en":"brushing his teeth","zh":"刷牙"},{"en":"terrible","zh":"嚴重的（這裡指牙痛很厲害）"},{"en":"took him to …","zh":"帶他去……（took 是 take 的過去式）"},{"en":"found","zh":"發現（find 的過去式）"},{"en":"hole","zh":"洞"},{"en":"How often …?","zh":"多久一次……？"},{"en":"twice a day","zh":"一天兩次"},{"en":"once a week","zh":"一週一次"},{"en":"once a month","zh":"一個月一次"}],
+    [{"en":"during","zh":"在……期間"},{"en":"P.E.","zh":"體育課（physical education 的簡稱）"},{"en":"fell","zh":"跌倒（fall 的過去式）"},{"en":"hurt","zh":"弄傷（此處為過去式，原形也是 hurt）"},{"en":"couldn't walk","zh":"當時沒辦法走路"},{"en":"painful","zh":"很痛的"},{"en":"put","zh":"放（過去式也是 put）"},{"en":"ice","zh":"冰塊"},{"en":"took her to see a doctor","zh":"帶她去看醫生"},{"en":"a week later","zh":"一週後"}],
+    [{"en":"villager","zh":"村民"},{"en":"go for a walk","zh":"去散步"},{"en":"keep … healthy","zh":"保持……健康"},{"en":"visits","zh":"探望"},{"en":"them","zh":"那位村民（指一個人，不分男女）"},{"en":"everybody","zh":"每個人"}],
   ],
 };
 function weekDrillFor(monthStr, weekN) { return WEEK_DRILLS[monthStr + "-" + weekN] || null; }
