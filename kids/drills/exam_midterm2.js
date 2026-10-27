@@ -64,7 +64,7 @@ const MIDTERM2 = {
         { type: "mc", pic: "girl_runny_nose", a: "What's wrong with Mia?", b: "______",
           choices: ["She has a runny nose.", "She has a toothache.", "Yes, she does."], answer: "She has a runny nose.", why: "Mia 拿衛生紙擦鼻子，是流鼻水。" },
         { type: "mc", pic: "whale", a: "What a big fish!", b: "A whale is not a fish. ______",
-          choices: ["It's a mammal.", "It's a dolphin.", "It's a big fish."], answer: "It's a mammal.", why: "鯨魚不是魚，是哺乳動物（mammal）。" },
+          choices: ["It's a mammal.", "It's a bird.", "It's a big fish."], answer: "It's a mammal.", why: "鯨魚不是魚，是哺乳動物（mammal）。" },
         { type: "mc", pic: "boy_stomachache", a: "Does Dennis have a toothache?", b: "______",
           choices: ["No, he doesn't. He has a stomachache.", "Yes, he does.", "No, she doesn't. She has a stomachache."],
           answer: "No, he doesn't. He has a stomachache.", why: "Dennis 抱著肚子，是肚子痛；Dennis 是男生，用 he。" },
