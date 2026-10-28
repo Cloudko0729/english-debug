@@ -5,6 +5,7 @@
  *   - Saves    分頁：每個學生一列，永遠是「最新」狀態（給 smart-sync / 預設還原用）。
  *   - History  分頁：每個學生每天一列，保留最近 10 天的每日快照（給「選日期還原」用）。
  *   - <名字>_熟練表 分頁：人類可讀的單字熟練表，每次覆蓋更新。
+ *   - 模擬考錯題 分頁：每次模擬考交卷的錯題，一題一列，只往下加不覆蓋。
  *
  * 部署步驟見同資料夾的 SETUP.md。
  * 改完這個檔後，要在 Apps Script 重新「部署 → 管理部署作業 → 編輯 → 新版本」才會生效。
@@ -31,6 +32,7 @@ function doPost(e) {
     saveRaw_(student, data);                                   // Saves：最新（欄位維持不變）
     saveHistory_(student, date, data, summary, serverTs);      // History：每日快照 + 修剪
     if (data.mastery) writeMastery_(student, data.mastery);
+    try { writeExamWrong_(student, data.progress && data.progress.exams); } catch (exErr) {}   // 錯題表出錯不影響存檔
 
     return json_({ ok: true, serverTs: serverTs, date: date, summary: summary });
   } catch (err) {
@@ -229,6 +231,32 @@ function writeMastery_(student, mastery) {
   const rows = mastery.map(m => [m.en, m.zh || "", m.wrong, m.status || "", now]);
   if (rows.length) sh.getRange(2, 1, rows.length, 5).setValues(rows);
   sh.setFrozenRows(1);
+}
+
+// ─── 模擬考錯題：每份卷每考一次，就把那次的錯題加到表尾（全對也記一列）────────────
+// 前端在 progress.exams[卷號] 存最近一次的 { title, tries, lastAt, last, wrong:[{sec,q,you,ans}] }；
+// 同一個「學生＋卷＋第幾次」只寫一次，所以重複同步不會重複加。
+function writeExamWrong_(student, exams) {
+  if (!exams) return;
+  const sh = sheet_("模擬考錯題");
+  if (sh.getLastRow() === 0) {
+    sh.appendRow(["學生", "卷別", "第幾次", "日期", "分數", "大題", "題目", "他的答案", "正確答案", "卷號"]);
+    sh.setFrozenRows(1);
+  }
+  sh.getRange("D:D").setNumberFormat("@");
+  const seen = {};
+  const values = sh.getDataRange().getValues();
+  for (let i = 1; i < values.length; i++) seen[values[i][0] + "|" + values[i][9] + "|" + values[i][2]] = true;
+  const rows = [];
+  Object.keys(exams).forEach(id => {
+    const r = exams[id];
+    if (!r || !Array.isArray(r.wrong) || !r.tries) return;   // 舊紀錄沒有錯題明細，跳過
+    if (seen[student + "|" + id + "|" + r.tries]) return;
+    const head = [student, r.title || id, r.tries, String(r.lastAt || ""), r.last];
+    if (!r.wrong.length) rows.push(head.concat(["", "全對 🌟", "", "", id]));
+    r.wrong.forEach(w => rows.push(head.concat([w.sec || "", w.q || "", w.you || "（沒寫）", w.ans || "", id])));
+  });
+  if (rows.length) sh.getRange(sh.getLastRow() + 1, 1, rows.length, 10).setValues(rows);
 }
 
 function json_(o) {

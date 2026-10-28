@@ -239,6 +239,15 @@ function gradeMC(prefix, list, ansOf) {
   return correct;
 }
 
+// 錯題回報用的題目文字
+function questionText(s, q) {
+  if (s.key === "a") return "🔊 " + q.word;
+  if (s.key === "e") return `${q.pic}（${q.zh}）`;
+  if (q.say) return "🔊 " + q.say;
+  if (q.b) return `A: ${q.a} / B: ${q.b}`;
+  return q.q || q.a || "";
+}
+
 function submitExam() {
   if (submitted) return;
   const unanswered = SECTIONS.filter(s => s.key !== "e").reduce((n, s) => n + s.list().filter((_, i) => !document.querySelector(`#${s.key}_${i} .choice.sel`)).length, 0)
@@ -267,12 +276,24 @@ function submitExam() {
   const total = SECTIONS.reduce((n, s) => n + s.list().length, 0);
   const correct = Object.values(per).reduce((a, b) => a + b, 0);
   const score = Math.round(correct / total * 100);
+  // 錯題明細：同步到家長試算表的「模擬考錯題」分頁
+  const wrong = [];
+  SECTIONS.forEach(s => s.list().forEach((q, i) => {
+    if (!document.getElementById(`${s.key}_${i}`).classList.contains("q-wrong")) return;
+    const sel = document.querySelector(`#${s.key}_${i} .choice.sel`);
+    wrong.push({
+      sec: s.name, q: questionText(s, q),
+      you: s.key === "e" ? document.getElementById(`ein_${i}`).value.trim() : sel ? sel.dataset.val : "",
+      ans: s.key === "e" ? q.answers[0] : s.ans ? s.ans(q) : q.answer,
+    });
+  }));
   // 第一次交卷才算數給體力；最高分、次數一直記
   const rec = p.exams[E.id];
   const first = !rec;
   p.exams[E.id] = {
     at: first ? today() : rec.at, firstScore: first ? score : rec.firstScore,
     best: Math.max(score, rec ? rec.best || 0 : 0), last: score, lastAt: today(), tries: (rec ? rec.tries || 0 : 0) + 1,
+    title: E.title, wrong,
   };
   saveProgress(currentStudent, p);
   showResult(per, correct, total, score, first);

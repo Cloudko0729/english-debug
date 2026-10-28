@@ -243,6 +243,20 @@ function answered(s, q, i) {
   if (q.type === "order") return document.getElementById("ol_" + id).children.length > 0;
   return !!document.querySelector(`#${id} .choice.sel`);
 }
+// 錯題回報用：題目文字、小孩的答案
+function questionText(q) {
+  let t = q.say ? "🔊 " + q.say : q.a ? `A: ${q.a} / B: ${q.b}` : q.type === "order" ? "重組：" + q.chunks.join(" / ") : q.q || "";
+  if (q.pic) t = `[圖 ${q.pic}] ` + t;
+  if (q.clip != null) t = `[第 ${q.clip + 1} 段] ` + t;
+  return t;
+}
+function yourAnswer(s, q, i) {
+  const id = `${s.key}_${i}`;
+  if (q.type === "write") return document.getElementById("in_" + id).value.trim();
+  if (q.type === "order") return orderValue(id);
+  const sel = document.querySelector(`#${id} .choice.sel`);
+  return sel ? sel.dataset.val : "";
+}
 function grade(s, q, i, p) {
   const id = `${s.key}_${i}`, block = document.getElementById(id);
   let ok;
@@ -273,8 +287,14 @@ function submitExam() {
   submitted = true;
   document.getElementById("submitBtn").disabled = true;
   document.querySelectorAll(".clip").forEach(c => c.classList.add("done"));
-  const p = getProgress(currentStudent), per = {};
-  SECS.forEach(s => { per[s.key] = s.items.filter((q, i) => grade(s, q, i, p)).length; });
+  const p = getProgress(currentStudent), per = {}, wrong = [];
+  SECS.forEach(s => {
+    per[s.key] = 0;
+    s.items.forEach((q, i) => {
+      if (grade(s, q, i, p)) per[s.key]++;
+      else wrong.push({ sec: s.name, q: questionText(q), you: yourAnswer(s, q, i), ans: q.type === "write" ? q.answers[0] : q.answer });
+    });
+  });
   const correct = Object.values(per).reduce((a, b) => a + b, 0);
   const score = Math.round(correct / COUNT * 100);
   // 第一次交卷才算數給體力；最高分、次數一直記
@@ -282,6 +302,7 @@ function submitExam() {
   p.exams[E.id] = {
     at: first ? today() : rec.at, firstScore: first ? score : rec.firstScore,
     best: Math.max(score, rec ? rec.best || 0 : 0), last: score, lastAt: today(), tries: (rec ? rec.tries || 0 : 0) + 1,
+    title: E.title, wrong,   // 最近一次的錯題，同步到家長試算表的「模擬考錯題」分頁
   };
   saveProgress(currentStudent, p);
   showResult(per, correct, score, first);
