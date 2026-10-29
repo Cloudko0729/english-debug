@@ -21,6 +21,7 @@
   var AP_WALLET_CAP = 60;
   var AP_BONUS_CAP = 40;        // 本週加分：文法、單字、週測、作業，跟每日練習的 100 分開算
   var BONUS = { grammar: 10, vocab: 10, test: 10, homework: 2, exam: 20 };
+  var CHAT_AP = 5, CHAT_SEEDS = 3;   // 每週聊天題答對：一半機會 ⚡5、一半機會種子 3 顆（不算在 100／40 的額度裡）
   var GROW_DAYS = 3;
   var MAX_FIELDS = 8;          // 一開始最多 8 片田
   var HEART_MAX = 20;          // 好感最多 20 顆（5、10、15、20 各有一個好感任務）
@@ -86,6 +87,7 @@
       tasks: {},                 // 這一階交過的任務 { 任務id: { date } }；更早的階段整階算完成
       residents: {},             // 後來搬來的村民 { 名字: 搬來那天 }；Mia、Leo 一開始就在
       cards: {}, stories: {}, hearts: {}, quests: {},
+      chats: {},         // 每週聊天題：{ 題目id: { date, choice, ok, got } }，每題只能答一次
       book: {},          // 生活冊：{ 週日日期: [ { date, text, en } ] }
       log: [],
       nextId: 2,
@@ -638,6 +640,48 @@
     note(st, today, "跟 " + card.speaker + " 聊天", c.en);
     return done(st, "");
   }
+  // ── 每週聊天題 ──
+  // 村民說一句話，選出最適合的回答。每題只能答一次；答對隨機拿體力或種子，答錯看解說。
+  // 抽獎用「學生＋題目」算雜湊，同一題在哪台裝置答都是同一個結果，重新整理也不會變。
+  function chatOf(id, C) {
+    var hit = null;
+    Object.keys(C.CHATS || {}).forEach(function (wk) { C.CHATS[wk].items.forEach(function (q) { if (q.id === id) hit = q; }); });
+    return hit;
+  }
+  // 出題的村民還沒搬來，就換成一開始就在的 Mia／Leo 來問
+  function chatSpeaker(st, q, C) { return isResident(st, q.speaker, C) ? q.speaker : (q.idx % 2 ? "Leo" : "Mia"); }
+  function chatSeedKinds(st, C) {
+    return Object.keys(C.CROPS).filter(function (k) { return !C.CROPS[k].freeSeed && unlocked(st, C.CROPS[k]); }).map(function (k) { return k + "_seed"; });
+  }
+  function chatPrize(st, id, C) {
+    var s = st.student + "|chat|" + id, h = 2166136261;
+    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+    if (h % 100 < 50) return { ap: CHAT_AP };
+    var kinds = chatSeedKinds(st, C);
+    return { item: kinds[Math.floor(h / 100) % kinds.length], n: CHAT_SEEDS };
+  }
+  // 體力直接加：先放隨身，滿了放儲備
+  function addEnergy(st, n) {
+    var e = st.energy, toWallet = Math.min(n, Math.max(0, AP_WALLET_CAP - e.wallet));
+    e.wallet += toWallet; e.reserve += n - toWallet;
+  }
+  // 只有這一週的題目能答（過了那週就看不到）
+  function chatAnswer(st, id, choiceId, today, C) {
+    var q = chatOf(id, C);
+    if (!q || q.week !== contentWeek(today)) return fail("這題不是這週的");
+    if (st.chats[id]) return fail("這題答過了");
+    var c = q.choices.find(function (o) { return o.id === choiceId; });
+    if (!c) return fail("沒有這個回答");
+    var ok = choiceId === q.answer, got = ok ? chatPrize(st, id, C) : null;
+    st.chats[id] = { date: today, choice: choiceId, ok: ok };
+    if (got && got.ap) { addEnergy(st, got.ap); st.chats[id].got = "ap"; }
+    if (got && got.item) { st.inv[got.item] += got.n; st.chats[id].got = got.item; }
+    note(st, today, "跟 " + chatSpeaker(st, q, C) + " 聊天" + (ok ? "，答對了" : ""), c.en);
+    var r = done(st, ok ? (got.ap ? "答對了！⚡+" + got.ap : "答對了！" + C.NAME[got.item] + " ×" + got.n) : "這題答錯了，看看解說");
+    r.chat = { ok: ok, got: got };
+    return r;
+  }
+
   // 委託：交物品得到小鎮幣，金額等於直接賣掉的價值，不加成（避免變成新的賺錢捷徑）
   function deliver(st, card, today, C, opts) {
     if (!weekOpen(card, today)) return fail("這個委託還沒開放");
@@ -742,6 +786,13 @@
         st[k][str(id, 60)] = o;
       });
     });
+    var ch = obj(raw.chats);
+    Object.keys(ch).forEach(function (id) {
+      var v = obj(ch[id]), q = chatOf(id, C);
+      if (!q || !isDate(v.date) || !q.choices.some(function (o) { return o.id === v.choice; })) return;
+      st.chats[id] = { date: v.date, choice: v.choice, ok: v.choice === q.answer };
+      if (st.chats[id].ok && (v.got === "ap" || Object.prototype.hasOwnProperty.call(st.inv, v.got))) st.chats[id].got = v.got;
+    });
     Object.keys(C.VILLAGERS).forEach(function (v) { var h = obj(raw.hearts)[v]; if (h != null) st.hearts[v] = int(h, HEART_MAX); });
     // 任務：只收這一階的；這一階 5 個都交了就升階（不重發獎勵）；還沒開放的階段一律不算
     var tk = obj(raw.tasks), own = Object.prototype.hasOwnProperty;
@@ -817,7 +868,7 @@
 
   var api = {
     SCHEMA: SCHEMA, AP_PER_TASK: AP_PER_TASK, AP_WEEKLY_CAP: AP_WEEKLY_CAP, AP_WALLET_CAP: AP_WALLET_CAP,
-    AP_BONUS_CAP: AP_BONUS_CAP, BONUS: BONUS,
+    AP_BONUS_CAP: AP_BONUS_CAP, BONUS: BONUS, CHAT_AP: CHAT_AP, CHAT_SEEDS: CHAT_SEEDS,
     GROW_DAYS: GROW_DAYS, MAX_FIELDS: MAX_FIELDS, HEART_MAX: HEART_MAX, FIELD_BONUS_MAX: FIELD_BONUS_MAX, CARE_GROUP: CARE_GROUP, W: W, H: H, TOWN_START: TOWN_START,
     maxFields: maxFields, careCost: careCost, fillCost: fillCost,
     questOf: questOf, questState: questState, doQuest: doQuest, stageShotId: stageShotId, stageShots: stageShots, stageShot: stageShot,
@@ -826,7 +877,7 @@
     terrainAt: terrainAt, occupied: occupied, areaFree: areaFree,
     newState: newState, apTotal: apTotal, grant: grant, spend: spend, syncFromProgress: syncFromProgress,
     growth: growth, isRipe: isRipe, caredToday: caredToday, cropDays: cropDays, careDays: careDays, doubleChance: doubleChance,
-    roll: roll, unlocked: unlocked, landmarkOpen: landmarkOpen,
+    roll: roll, unlocked: unlocked, landmarkOpen: landmarkOpen, chatOf: chatOf, chatSpeaker: chatSpeaker, chatPrize: chatPrize, chatSeedKinds: chatSeedKinds, chatAnswer: chatAnswer,
     addField: addField, move: move, plant: plant, care: care, harvest: harvest,
     sell: sell, buy: buy, gather: gather, placeDecor: placeDecor, storeDecor: storeDecor,
     materialNeed: materialNeed, nextGoal: nextGoal, stageView: stageView, doTask: doTask, haveOf: haveOf,

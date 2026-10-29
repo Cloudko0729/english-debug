@@ -751,6 +751,48 @@
     },
   };
 
+  // 每週聊天題（村民頁）：村民說一句，選最適合的回答；只有一個對，答對隨機拿 ⚡ 或種子。
+  // 週的 key 是週日（contentWeek）。speaker 還沒搬來時畫面換成 Mia／Leo 來問，所以台詞不要寫自己的職業。
+  // 正解位置要打散；語音檔 <id>.mp3、<id>_<選項>.mp3（build_town_audio_spec.js 會產生）
+  var CHATS = {
+    "2026-10-25": {
+      theme: "身體與健康",
+      items: [
+        { id: "c1025-leo", speaker: "Leo", en: "I stayed up late to fix the plaza. Now I feel so sleepy!", zh: "我為了修廣場熬夜，現在好想睡！",
+          choices: [
+            { id: "a", en: "You should eat more candy.", zh: "你應該多吃糖果。" },
+            { id: "b", en: "You should go to bed early tonight.", zh: "你今天晚上應該早點睡。" },
+            { id: "c", en: "Let's stay up late again!", zh: "我們再熬夜一次吧！" } ],
+          answer: "b", why: "sleepy 是想睡。stayed up late 是熬夜，熬夜之後要早點睡。" },
+        { id: "c1025-mia", speaker: "Mia", en: "I can't read aloud today. I have a sore throat.", zh: "我今天沒辦法朗讀，我喉嚨痛。",
+          choices: [
+            { id: "a", en: "Read louder, please!", zh: "請念大聲一點！" },
+            { id: "b", en: "Let's sing a lot of songs!", zh: "我們來唱很多歌吧！" },
+            { id: "c", en: "Drink some warm water and rest.", zh: "喝點溫水，休息一下。" } ],
+          answer: "c", why: "sore throat 是喉嚨痛。喝點水、休息、少說話會舒服一點，這時不適合叫她念更大聲或唱很多歌。" },
+        { id: "c1025-nora", speaker: "Nora", en: "Ben ate ten cookies this morning! Now his stomach hurts.", zh: "Ben 今天早上吃了十片餅乾！現在他肚子痛。",
+          choices: [
+            { id: "a", en: "Oh no! He has a stomachache.", zh: "糟糕！他肚子痛。" },
+            { id: "b", en: "Oh no! He has a toothache.", zh: "糟糕！他牙痛。" },
+            { id: "c", en: "Oh no! He has a runny nose.", zh: "糟糕！他流鼻水。" } ],
+          answer: "a", why: "His stomach hurts 就是肚子痛，也可以說 He has a stomachache。她沒有說牙痛或流鼻水。" },
+        { id: "c1025-ben", speaker: "Ben", en: "I fell down in the mine and hurt my ankle. Ouch!", zh: "我在礦坑跌倒，弄傷腳踝了。好痛！",
+          choices: [
+            { id: "a", en: "Let's run to the beach!", zh: "我們跑去海邊吧！" },
+            { id: "b", en: "Sit down. Let's use an ice pack.", zh: "坐下來，我們用冰袋冰敷一下。" },
+            { id: "c", en: "Let's jump off the wall!", zh: "我們從牆上跳下來吧！" } ],
+          answer: "b", why: "ankle 是腳踝。剛受傷要先休息、不要跑跳；用毛巾包著冰袋冰敷，可以減輕疼痛和腫脹。很痛或不能走路要告訴大人。" },
+        { id: "c1025-rosa", speaker: "Rosa", en: "How often do you brush your teeth?", zh: "你多久刷一次牙？",
+          choices: [
+            { id: "a", en: "With a toothbrush.", zh: "用牙刷。" },
+            { id: "b", en: "Yes, I do.", zh: "有，我有刷牙。" },
+            { id: "c", en: "Twice a day.", zh: "一天兩次。" } ],
+          answer: "c", why: "How often 問「多久一次」，要回答次數，例如 twice a day（一天兩次）。With a toothbrush 是回答用什麼刷；Yes, I do 是回答 Do you…? 這種問句。" },
+      ],
+    },
+  };
+  Object.keys(CHATS).forEach(function (wk) { CHATS[wk].items.forEach(function (q, i) { q.week = wk; q.idx = i; }); });
+
   // 每張卡、每段故事標上它所屬的週，規則用它判斷開放了沒
   Object.keys(WEEKS).forEach(function (wk) {
     WEEKS[wk].cards.forEach(function (x) { x.week = wk; });
@@ -760,7 +802,7 @@
   var api = { CROPS: CROPS, SELL: SELL, BUY: BUY, DECOR: DECOR, COST: COST, NAME: NAME, CARE_BONUS: CARE_BONUS, FILL_EXTRA: FILL_EXTRA,
               QUESTS: QUESTS, PHOTO_PROSPERITY: PHOTO_PROSPERITY,
               FISH: FISH, FISH_TIER: FISH_TIER, MINERALS: MINERALS, MINE_FLOORS: MINE_FLOORS, MINE_STONE_SAY: MINE_STONE_SAY, LINES: LINES,
-              LANDMARKS: LANDMARKS, PROSPERITY: PROSPERITY, VILLAGERS: VILLAGERS, WEEKS: WEEKS };
+              LANDMARKS: LANDMARKS, PROSPERITY: PROSPERITY, VILLAGERS: VILLAGERS, WEEKS: WEEKS, CHATS: CHATS };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.TownContent = api;
 })(typeof window !== "undefined" ? window : this);

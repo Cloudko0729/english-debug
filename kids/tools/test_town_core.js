@@ -710,5 +710,53 @@ Object.entries(C.WEEKS).forEach(([wk, w]) => {
   ok(wk + " 週次是週日", T.contentWeek(wk) === wk);
 });
 
+// ── 每週聊天題 ──
+{
+  const WK = "2026-10-25", day = "2026-10-29", items = C.CHATS[WK].items;
+  ok("聊天題每題 3 個選項、正解在選項裡、有解說", items.every(q => q.choices.length === 3 && q.choices.some(o => o.id === q.answer) && q.why));
+  ok("聊天題正解位置有打散", new Set(items.map(q => q.answer)).size > 1);
+  ok("聊天題 id 不重複", new Set(Object.values(C.CHATS).flatMap(w => w.items.map(q => q.id))).size === Object.values(C.CHATS).reduce((n, w) => n + w.items.length, 0));
+  const st = fresh(), q = items[0], wrongId = q.choices.find(o => o.id !== q.answer).id;
+  ok("下週才能答的、上週的都不行", !T.chatAnswer(st, q.id, q.answer, "2026-10-24", C).ok && !T.chatAnswer(st, q.id, q.answer, "2026-11-01", C).ok);
+  ok("不存在的選項不行", !T.chatAnswer(st, q.id, "z", day, C).ok);
+  const before = T.apTotal(st);
+  const r = T.chatAnswer(st, q.id, q.answer, day, C);
+  ok("答對有獎勵", r.ok && r.chat.ok && !!r.chat.got);
+  ok("獎勵是 ⚡5 或 3 顆種子", (r.chat.got.ap === T.CHAT_AP && T.apTotal(st) === before + T.CHAT_AP) || (r.chat.got.n === T.CHAT_SEEDS && st.inv[r.chat.got.item] === T.CHAT_SEEDS));
+  ok("同一題不能再答", !T.chatAnswer(st, q.id, q.answer, day, C).ok);
+  const st2 = fresh(), ap2 = T.apTotal(st2), inv2 = JSON.stringify(st2.inv);
+  const r2 = T.chatAnswer(st2, q.id, wrongId, day, C);
+  ok("答錯沒有獎勵，也不能重答", r2.ok && !r2.chat.ok && T.apTotal(st2) === ap2 && JSON.stringify(st2.inv) === inv2 && !T.chatAnswer(st2, q.id, q.answer, day, C).ok);
+  // 抽獎固定：同一個學生同一題，在哪台裝置答都一樣
+  eq("抽獎結果固定", JSON.stringify(T.chatPrize(fresh(), q.id, C)), JSON.stringify(T.chatPrize(fresh(), q.id, C)));
+  // 隨機：所有題目×幾個學生，兩種獎勵都會出現
+  const kinds = new Set();
+  ["albert", "jonathan", "test", "a", "b"].forEach(n => items.forEach(x => kinds.add(T.chatPrize(T.newState(n, day), x.id, C).ap ? "ap" : "seed")));
+  ok("體力和種子都抽得到", kinds.has("ap") && kinds.has("seed"));
+  ok("市集沒修好不會抽到玉米／南瓜種子", T.chatSeedKinds(fresh(), C).join() === "carrot_seed,potato_seed");
+  const st3 = fresh(); st3.town.market = 1;
+  ok("市集修好一階後玉米／南瓜種子也會出現", T.chatSeedKinds(st3, C).length === 4);
+  // 體力超過隨身上限放儲備
+  const st4 = fresh(); st4.energy.wallet = T.AP_WALLET_CAP - 2;
+  const pick = items.find(x => T.chatPrize(st4, x.id, C).ap);
+  T.chatAnswer(st4, pick.id, pick.answer, day, C);
+  ok("隨身滿了，多的放儲備", st4.energy.wallet === T.AP_WALLET_CAP && st4.energy.reserve === T.CHAT_AP - 2);
+  ok("聊天題不吃每週 100／加分 40 的額度", !(st4.energy.byWeek || {})[T.apWeek(day)] && !(st4.energy.bonusByWeek || {})[T.apWeek(day)]);
+  // 存檔整理：留下合法紀錄，ok 重新判斷，不重發獎勵
+  const raw = JSON.parse(JSON.stringify(st));
+  raw.chats["c1025-mia"] = { date: day, choice: "c", ok: false, got: "ap" };
+  raw.chats["nope"] = { date: day, choice: "a" };
+  raw.chats["c1025-nora"] = { date: day, choice: "<b>" };
+  const n = T.normalize(raw, "test", day, C);
+  ok("存檔保留答過的題目", !!n.chats[q.id] && n.chats[q.id].got === st.chats[q.id].got);
+  ok("存檔重新判斷對錯", n.chats["c1025-mia"].ok === true);
+  ok("不認得的題目、亂填的選項丟掉", !n.chats.nope && !n.chats["c1025-nora"]);
+  ok("答過的題目留在生活冊", (st.book[WK] || []).some(b => b.text.indexOf("聊天") >= 0));
+  // 出題的村民還沒搬來就換人
+  eq("Nora 沒搬來時換成 Mia／Leo", ["Mia", "Leo"].includes(T.chatSpeaker(fresh(), items[2], C)), true);
+  const st5 = fresh(); st5.residents.Nora = day;
+  eq("Nora 搬來了就是 Nora 問", T.chatSpeaker(st5, items[2], C), "Nora");
+}
+
 console.log(`\n${fail === 0 ? "✅" : "❌"} pass ${pass} / fail ${fail}\n`);
 process.exit(fail ? 1 : 0);

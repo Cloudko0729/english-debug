@@ -9,6 +9,7 @@
 //   <storyId>_say.mp3       孩子要自己念的最後一句
 //   villager_<名字>(_motto)、arrive_<名字>  村民自我介紹、口頭禪、搬來的信
 //   task_<任務id>.mp3       廣場任務
+//   <聊天題id>(_<選項>).mp3  每週聊天題
 const fs = require("fs");
 const path = require("path");
 const C = require("../town/town_content.js");
@@ -22,6 +23,11 @@ Object.values(C.WEEKS).forEach(w => {
   items[w.story.id] = w.story.lines.map(l => l.en).join(" ");
   items[w.story.id + "_say"] = w.story.speak;
 });
+// 每週聊天題：村民那句、每個回答
+Object.values(C.CHATS).forEach(w => w.items.forEach(q => {
+  items[q.id] = q.en;
+  q.choices.forEach(o => { items[q.id + "_" + o.id] = o.en; });
+}));
 Object.keys(C.VILLAGERS).forEach(v => {
   items["villager_" + v] = C.VILLAGERS[v].intro;
   items["villager_" + v + "_motto"] = C.VILLAGERS[v].motto;

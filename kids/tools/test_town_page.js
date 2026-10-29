@@ -275,6 +275,7 @@ ok("村民分頁 " + new Set(all).size + " 個音檔全部存在", all.length > 
 const later = [];
 Object.values(run("C.LANDMARKS")).forEach(L => L.stages.forEach(sg => sg.tasks.forEach(t => later.push("task_" + t.id))));
 run("C.QUESTS").forEach(q => later.push("quest_" + q.id, "quest_" + q.id + "_say"));
+Object.values(run("C.CHATS")).forEach(w => w.items.forEach(q => later.push(q.id, ...q.choices.map(o => q.id + "_" + o.id))));
 Object.keys(run("C.VILLAGERS")).forEach(v => { later.push("villager_" + v, "villager_" + v + "_motto"); if (run(`C.VILLAGERS.${v}.welcome`)) later.push("arrive_" + v); });
 const miss2 = later.filter(k => !fs.existsSync(path.join(__dirname, "..", "audio", "town", k + ".mp3")));
 ok("廣場任務與所有村民 " + later.length + " 個音檔全部存在", !miss2.length, miss2);
@@ -295,6 +296,30 @@ ok("魚的圖示用圖片、圖載不到退回 emoji", run("itemIcon('salmon')")
 console.log("\n── 看中文會保持展開 ──");
 run("tab('mail')"); run("showZh('w1-mail-leo')");
 ok("第一次按看中文就展開（不會被重繪收回）", /card[^"]*showzh[^>]*>[\s\S]*?Leo/.test(el("p-mail").innerHTML));
+
+console.log("\n── 每週聊天題 ──");
+{
+  const keep = S.location.search;
+  day("2026-10-29"); run("tab('mail')");
+  const q = run("C.CHATS['2026-10-25'].items[0]");
+  ok("村民分頁有本週聊天題", el("p-mail").innerHTML.includes("本週聊天題") && el("p-mail").innerHTML.includes(q.en));
+  ok("沒答的聊天題讓分頁有紅點", el("t-mail").innerHTML.includes("dot"));
+  const ap = run("T.apTotal(st)"), inv = JSON.stringify(G.st.inv);
+  run(`answerChat('${q.id}','${q.answer}')`);
+  const a = G.st.chats[q.id];
+  ok("答對有記錄、有獎勵", a && a.ok && (run("T.apTotal(st)") === ap + 5 || JSON.stringify(G.st.inv) !== inv), a);
+  ok("答完顯示拿到什麼和解說", el("p-mail").innerHTML.includes("答對了！拿到") && el("p-mail").innerHTML.includes(q.why));
+  ok("答過的三個選項都鎖住", (el("p-mail").innerHTML.split(`disabled onclick="answerChat('${q.id}'`).length - 1) === 3);
+  ok("存檔有寫進去", JSON.parse(store.get("kidsTown.v1.test")).chats[q.id].ok === true);
+  const q2 = run("C.CHATS['2026-10-25'].items[1]"), bad = q2.choices.find(o => o.id !== q2.answer).id;
+  run(`answerChat('${q2.id}','${bad}')`);
+  ok("答錯顯示正解綠色、選的紅色", el("p-mail").innerHTML.includes("❌ 答錯了") && el("p-mail").innerHTML.includes("choice wrongpick") && el("p-mail").innerHTML.includes("choice right"));
+  const q3 = run("C.CHATS['2026-10-25'].items[4]"), who3 = run(`T.chatSpeaker(st, C.CHATS['2026-10-25'].items[4], C)`);
+  ok("Rosa 還沒搬來時換成 " + who3 + " 問", who3 !== "Rosa" && el("p-mail").innerHTML.split('class="card chatq').some(c => c.includes(q3.en) && c.includes(`openFolk('${who3}')`)));
+  day("2026-11-02");
+  ok("沒有聊天題的週會說還在準備", el("p-mail").innerHTML.includes("這週的聊天題還在準備"));
+  S.location.search = keep; run("render()");
+}
 
 console.log("\n── 匯入 ──");
 const before = store.get("kidsTown.v1.test");

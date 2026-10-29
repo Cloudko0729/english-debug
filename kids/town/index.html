@@ -102,6 +102,11 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 .card:not(.showzh) .zh,.card:not(.showzh) .zhc{display:none}
 .zhc{font-family:'Noto Sans TC',sans-serif;font-size:.82rem;color:var(--muted);margin-left:6px}
 .choice.picked{background:#e7f5df;border-color:var(--ok)}
+.choice.right{background:#e7f5df;border-color:var(--ok)}
+.choice.wrongpick{background:#fde0e8;border-color:#d9534f}
+.choice:disabled{cursor:default;opacity:1}
+.card.chatq.done{border-style:dashed}
+.chat-res{margin-top:8px;font-weight:700}
 .story .line{font-family:Georgia,serif;font-size:1.05rem;margin:6px 0}
 .say{margin-top:10px;padding:10px;background:#fff3cf;border-radius:8px}
 .say .en{font-weight:900}
@@ -375,7 +380,7 @@ function render() {
     ${student === "test" ? `<button class="btn" title="跟做一份練習一樣，算進每週 100 的上限" onclick="act(T.grant(st,'test:'+Date.now(),10,today()))">🧪 +10⚡</button>
       <button class="btn" title="只有測試帳號有，不算進每週上限" onclick="testBoost(50)">🧪 +50⚡ 不限</button>` : ""}`;
   // 有新信的分頁加紅點
-  const unread = visibleCards().some(c => !st.cards[c.id]) || C.QUESTS.some(q => T.questState(st, q, C) === "ready");
+  const unread = visibleCards().some(c => !st.cards[c.id]) || C.QUESTS.some(q => T.questState(st, q, C) === "ready") || chatItems().some(q => !st.chats[q.id]);
   document.getElementById("t-mail").innerHTML = "📨 村民" + (unread ? '<span class="dot"></span>' : "");
   renderToday(d); renderGoal(); renderHint(); renderGather(); renderMap(d); renderSheet(d); renderShop(); renderMail(d); renderWild(d); renderTown(d); renderAlbum();
 }
@@ -700,6 +705,7 @@ function renderMail(d) {
     return `<button class="folk" onclick="openFolk('${v}')" aria-label="看 ${v} 的介紹">${pic(v)}<span><div class="nm">${v}</div>
       <div class="sm">${p.role.zh}　<span class="hearts">${heartsTxt(v)}</span>${questBadge(v)}</div><div class="sm">點我看介紹</div></span></button>`; }).join("")}</div>
     <div class="residents">${soonHtml()}</div>`;
+  h += chatHtml();
   const wel = welcomeCards();
   if (wel.length) { h += `<h2>🏠 新鄰居</h2>`; wel.slice().reverse().forEach(c => h += cardHtml(c)); }
   weeks.forEach(wk => {
@@ -710,6 +716,33 @@ function renderMail(d) {
     h += open ? storyHtml(s, doneS) : `<div class="card"><span class="muted">🔒 先讀 ${s.speaker} 的信，會解鎖一段小故事。</span></div>`;
   });
   document.getElementById("p-mail").innerHTML = h;
+}
+// ── 每週聊天題：答對隨機拿 ⚡ 或種子，每題只能答一次 ──
+const chatItems = () => { const W = C.CHATS[T.contentWeek(today())]; return W ? W.items : []; };
+function chatHtml() {
+  const W = C.CHATS[T.contentWeek(today())];
+  if (!W) return `<h2>💬 本週聊天題</h2><div class="card"><span class="muted">這週的聊天題還在準備，晚點再來看看。</span></div>`;
+  const left = W.items.filter(q => !st.chats[q.id]).length;
+  let h = `<h2>💬 本週聊天題・${W.theme}</h2><p class="muted">村民跟你聊天，選出最適合的回答。每題只能答一次，答對隨機拿到 ⚡${T.CHAT_AP} 體力或 ${T.CHAT_SEEDS} 顆種子。${left ? `還有 ${left} 題。` : "這週都答完了！"}</p>`;
+  W.items.forEach(q => {
+    const a = st.chats[q.id], who = T.chatSpeaker(st, q, C);
+    h += `<div class="card chatq${a ? " done" : " new"}${zhOpen.has(q.id) ? " showzh" : ""}"><div class="who2">💬 <span onclick="openFolk('${who}')">${pic(who, true)}</span> ${who}${a ? "" : ' <span class="chip">新</span>'}</div>
+      <div class="en">${esc(q.en)}</div>
+      <div class="actions"><button class="btn" onclick="play(townAudio('${q.id}'))">🔊 聽</button><button class="btn" onclick="showZh('${q.id}')">看中文</button></div>
+      <div class="zh">${esc(q.zh)}</div>`;
+    h += q.choices.map(o => {
+      const cls = !a ? "" : o.id === q.answer ? " right" : o.id === a.choice ? " wrongpick" : "";
+      return `<button class="btn choice${cls}" ${a ? "disabled" : ""} onclick="answerChat('${q.id}','${o.id}')">${esc(o.en)}<span class="zhc">${esc(o.zh)}</span></button>`;
+    }).join("");
+    if (a) h += `<div class="chat-res">${a.ok ? `✅ 答對了！拿到 ${a.got === "ap" ? `⚡${T.CHAT_AP} 體力` : `${itemIcon(a.got)} ${esc(itemName(a.got))} ×${T.CHAT_SEEDS}`}` : "❌ 答錯了，綠色的才是最適合的回答"}</div>
+      <div class="muted">💡 ${esc(q.why)}</div>`;
+    h += `</div>`;
+  });
+  return h;
+}
+function answerChat(id, choice) {
+  play(townAudio(id + "_" + choice));
+  act(T.chatAnswer(st, id, choice, today(), C));
 }
 function cardHtml(c) {
   const v = C.VILLAGERS[c.speaker], seen = st.cards[c.id], icon = { letter: "📨", talk: "💬", quest: "📋" }[c.type];
