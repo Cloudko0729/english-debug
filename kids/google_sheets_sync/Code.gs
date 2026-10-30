@@ -29,11 +29,15 @@ function doPost(e) {
     const date = String(data.date || serverTs.slice(0, 10));   // 前端本機日期；沒送就用 server 日期
     const summary = summarize_(data.progress, data.island);
 
-    saveRaw_(student, data);                                   // Saves：最新（欄位維持不變）
-    saveHistory_(student, date, data, summary, serverTs);      // History：每日快照 + 修剪
-    if (data.mastery) writeMastery_(student, data.mastery);
-    try { writeExamWrong_(student, data.progress && data.progress.exams); } catch (exErr) {}   // 錯題表出錯不影響存檔
+    // 每一步各自 try：一步出錯（例如舊版遇到儲存格 5 萬字上限）不會讓後面的都沒寫
+    const errs = [];
+    const step = (name, fn) => { try { fn(); } catch (stepErr) { errs.push(name + ": " + stepErr); } };
+    step("exam", () => writeExamWrong_(student, data.progress && data.progress.exams));
+    if (data.mastery) step("mastery", () => writeMastery_(student, data.mastery));
+    step("saves", () => saveRaw_(student, data));                                  // Saves：最新
+    step("history", () => saveHistory_(student, date, data, summary, serverTs));   // History：每日快照 + 修剪
 
+    if (errs.length) return json_({ ok: false, err: errs.join(" | "), serverTs: serverTs });
     return json_({ ok: true, serverTs: serverTs, date: date, summary: summary });
   } catch (err) {
     return json_({ ok: false, err: String(err) });
@@ -90,21 +94,50 @@ function toDateStr_(v) {
   return String(v);
 }
 
+// ─── 大存檔切段：一格最多 5 萬字，超過就切成好幾段放在列尾 ──────────────────────
+// 主欄位放第一段，meta 欄放 {"p":progress段數,"i":island段數}，其餘段依序接在 meta 後面。
+// 舊列沒有 meta，照舊整格讀，所以前後相容。
+const CELL_MAX = 45000;
+function split_(str) {
+  const parts = [];
+  for (let i = 0; i < str.length; i += CELL_MAX) parts.push(str.slice(i, i + CELL_MAX));
+  return parts.length ? parts : [""];
+}
+// 回傳 { first: [progress第一段, island第一段], meta, rest: [...其餘段] }
+function pack_(progStr, islStr) {
+  const p = split_(progStr), i = split_(islStr);
+  return { first: [p[0], i[0]], meta: JSON.stringify({ p: p.length, i: i.length }), rest: p.slice(1).concat(i.slice(1)) };
+}
+// row：整列 values；pIdx／iIdx：主欄位位置；mIdx：meta 欄位置（後面接其餘段）
+function unpack_(row, pIdx, iIdx, mIdx) {
+  let meta = null;
+  try { meta = row[mIdx] ? JSON.parse(row[mIdx]) : null; } catch (e) {}
+  if (!meta || !meta.p) return { progress: row[pIdx], island: row[iIdx] };
+  const rest = row.slice(mIdx + 1);
+  return {
+    progress: [row[pIdx]].concat(rest.slice(0, meta.p - 1)).join(""),
+    island: [row[iIdx]].concat(rest.slice(meta.p - 1, meta.p - 1 + meta.i - 1)).join(""),
+  };
+}
+// 寫一列：從 col 開始寫 values，並清掉這列後面上次留下、這次用不到的段
+function writeRow_(sh, r, col, values) {
+  sh.getRange(r, col, 1, values.length).setValues([values]);
+  const last = sh.getLastColumn(), from = col + values.length;
+  if (last >= from) sh.getRange(r, from, 1, last - from + 1).clearContent();
+}
+
 // ─── Saves：最新狀態（一個學生一列）────────────────────────────────────────────
 function saveRaw_(student, data) {
   const sh = sheet_("Saves");
-  if (sh.getLastRow() === 0) sh.appendRow(["student", "ts", "progress", "island"]);
+  if (sh.getLastRow() === 0) sh.appendRow(["student", "ts", "progress", "island", "parts"]);
   const values = sh.getDataRange().getValues();
-  const progStr = JSON.stringify(data.progress || null);
-  const islStr = JSON.stringify(data.island || null);
+  const pk = pack_(JSON.stringify(data.progress || null), JSON.stringify(data.island || null));
   const ts = data.ts || new Date().toISOString();
+  const row = [ts, pk.first[0], pk.first[1], pk.meta].concat(pk.rest);
   for (let i = 1; i < values.length; i++) {
-    if (String(values[i][0]).toLowerCase() === student) {
-      sh.getRange(i + 1, 2, 1, 3).setValues([[ts, progStr, islStr]]);
-      return;
-    }
+    if (String(values[i][0]).toLowerCase() === student) { writeRow_(sh, i + 1, 2, row); return; }
   }
-  sh.appendRow([student, ts, progStr, islStr]);
+  writeRow_(sh, values.length + 1, 1, [student].concat(row));
 }
 
 function findRaw_(student) {
@@ -113,7 +146,8 @@ function findRaw_(student) {
   const values = sh.getDataRange().getValues();
   for (let i = 1; i < values.length; i++) {
     if (String(values[i][0]).toLowerCase() === student) {
-      return { ts: values[i][1], progress: values[i][2], island: values[i][3] };
+      const u = unpack_(values[i], 2, 3, 4);
+      return { ts: values[i][1], progress: u.progress, island: u.island };
     }
   }
   return null;
@@ -123,7 +157,7 @@ function findRaw_(student) {
 function historySheet_() {
   const sh = sheet_("History");
   if (sh.getLastRow() === 0) {
-    sh.appendRow(["student", "date", "serverTs", "clientTs", "summary", "progress", "island"]);
+    sh.appendRow(["student", "date", "serverTs", "clientTs", "summary", "progress", "island", "parts"]);
     sh.setFrozenRows(1);
   }
   // 強制日期欄(B)為純文字，避免 Sheets 把 "2026-06-19" 自動轉成日期物件
@@ -134,19 +168,19 @@ function historySheet_() {
 function saveHistory_(student, date, data, summary, serverTs) {
   const sh = historySheet_();
   const values = sh.getDataRange().getValues();
-  const progStr = JSON.stringify(data.progress || null);
-  const islStr = JSON.stringify(data.island || null);
+  const pk = pack_(JSON.stringify(data.progress || null), JSON.stringify(data.island || null));
   const sumStr = JSON.stringify(summary || null);
   const clientTs = data.ts || serverTs;
+  const row = [date, serverTs, clientTs, sumStr, pk.first[0], pk.first[1], pk.meta].concat(pk.rest);
   for (let i = 1; i < values.length; i++) {
     if (String(values[i][0]).toLowerCase() === student && toDateStr_(values[i][1]) === date) {
       // 同一天重存 → 覆蓋那一列（連日期欄一起寫成純文字，順便修掉舊的 Date 格）
-      sh.getRange(i + 1, 2, 1, 6).setValues([[date, serverTs, clientTs, sumStr, progStr, islStr]]);
+      writeRow_(sh, i + 1, 2, row);
       pruneHistory_(student);
       return;
     }
   }
-  sh.appendRow([student, date, serverTs, clientTs, sumStr, progStr, islStr]);
+  writeRow_(sh, values.length + 1, 1, [student].concat(row));
   pruneHistory_(student);
 }
 
@@ -190,13 +224,14 @@ function findHistory_(student, date) {
   const values = sh.getDataRange().getValues();
   for (let i = 1; i < values.length; i++) {
     if (String(values[i][0]).toLowerCase() === student && toDateStr_(values[i][1]) === date) {
+      const u = unpack_(values[i], 5, 6, 7);
       return {
         date: toDateStr_(values[i][1]),
         serverTs: values[i][2],
         clientTs: values[i][3],
         summary: values[i][4],
-        progress: values[i][5],
-        island: values[i][6],
+        progress: u.progress,
+        island: u.island,
       };
     }
   }
