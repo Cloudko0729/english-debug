@@ -1705,6 +1705,109 @@ const WEEK_DRILLS = {
       },
     ]
   },
+  "2026-11-1": {            // 11 月第1週 食物與營養 · 食物句型（would like／some・any／a loaf of）
+    listenBlank: [
+      { full: "Red bean soup is a sweet dessert in Taiwan.", display: "Red ___ soup is a sweet dessert in Taiwan.", answer: "bean", exclude: ["tomato","onion"] },
+      { full: "A cabbage is big and round, with many green leaves.", display: "A ___ is big and round, with many green leaves.", answer: "cabbage", exclude: ["lettuce"] },
+      { full: "A carrot is long and orange. Rabbits love it.", display: "A ___ is long and orange. Rabbits love it.", answer: "carrot", exclude: ["mango"] },
+      { full: "Every morning, I pour milk on my cereal and eat it with a spoon.", display: "Every morning, I pour milk on my ___ and eat it with a spoon.", answer: "cereal", exclude: ["corn","honey","flour","tofu","fried rice","noodles","instant noodles","mango","guava"] },
+      { full: "Mice love cheese. It's yellow and has holes in it.", display: "Mice love ___. It's yellow and has holes in it.", answer: "cheese", exclude: ["corn","cereal"] },
+      { full: "In Stardew Valley, corn grows tall in summer and fall.", display: "In Stardew Valley, ___ grows tall in summer and fall.", answer: "corn" },
+      { full: "Hamburgers and French fries are fast food.", display: "Hamburgers and French fries are ___.", answer: "fast food" },
+      { full: "Grandma cooked chicken in hot oil. This dish is called fried chicken.", display: "Grandma cooked chicken in hot oil. This dish is called ___.", answer: "fried chicken", exclude: ["meat","fast food"] },
+      { full: "Mom used last night's rice to make fried rice with eggs.", display: "Mom used last night's rice to make ___ with eggs.", answer: "fried rice", exclude: ["noodles","fast food"] },
+      { full: "A grapefruit looks like a big orange, but it tastes a little sour.", display: "A ___ looks like a big orange, but it tastes a little sour.", answer: "grapefruit" },
+      { full: "A guava is green outside and white or pink inside.", display: "A ___ is green outside and white or pink inside.", answer: "guava", exclude: ["cabbage","lettuce","grapefruit"] },
+      { full: "A hamburger has meat, cheese and lettuce between two pieces of bread.", display: "A ___ has meat, cheese and lettuce between two pieces of bread.", answer: "hamburger" },
+      { full: "Add hot water to the instant noodles and wait three minutes.", display: "Add hot water to the ___ and wait three minutes.", answer: "instant noodles", exclude: ["noodles","cereal","flour"] },
+      { full: "We often eat lettuce in salads. It has soft green leaves.", display: "We often eat ___ in salads. It has soft green leaves.", answer: "lettuce", exclude: ["cabbage"] },
+      { full: "I bring my lunch to school in a lunch box.", display: "I bring my lunch to school in a ___.", answer: "lunch box" },
+      { full: "A mango is yellow and sweet inside. It's my favorite summer fruit.", display: "A ___ is yellow and sweet inside. It's my favorite summer fruit.", answer: "mango", exclude: ["grapefruit"] },
+      { full: "I'd like a chocolate milk shake to drink, please.", display: "I'd like a chocolate ___ to drink, please.", answer: "milk shake" },
+      { full: "You can eat noodles with chopsticks. They are long and thin.", display: "You can eat ___ with chopsticks. They are long and thin.", answer: "noodles", exclude: ["instant noodles"] },
+      { full: "Cutting an onion makes me cry.", display: "Cutting an ___ makes me cry.", answer: "onion" },
+      { full: "We cut a potato into long, thin pieces to make French fries.", display: "We cut a ___ into long, thin pieces to make French fries.", answer: "potato" },
+      { full: "My grandma makes tofu from beans. It's soft and white.", display: "My grandma makes ___ from beans. It's soft and white.", answer: "tofu", exclude: ["cheese"] },
+      { full: "A tomato is red and round. You can put it in a salad.", display: "A ___ is red and round. You can put it in a salad.", answer: "tomato" },
+      { full: "The food you usually eat is your diet.", display: "The food you usually eat is your ___.", answer: "diet", exclude: ["lunch box","menu"] },
+      { full: "Bread is made from flour. It is white and soft like snow.", display: "Bread is made from ___. It is white and soft like snow.", answer: "flour", exclude: ["corn","potato","bean","cheese","tofu","honey"] },
+      { full: "Bees make honey. It's sweet and golden.", display: "Bees make ___. It's sweet and golden.", answer: "honey" },
+      { full: "Nora baked a loaf of bread this morning.", display: "Nora baked a ___ of bread this morning.", answer: "loaf" },
+      { full: "Beef and chicken are kinds of meat.", display: "Beef and chicken are kinds of ___.", answer: "meat", exclude: ["fast food"] },
+      { full: "Look at the menu. It shows all the food and the prices.", display: "Look at the ___. It shows all the food and the prices.", answer: "menu", exclude: ["lunch box"] },
+      { full: "Don't drink the vinegar! It's very sour.", display: "Don't drink the ___! It's very sour.", answer: "vinegar", exclude: ["grapefruit","milk shake"] },
+      { full: "Babies cry because of hunger. They need milk.", display: "Babies cry because of ___. They need milk.", answer: "hunger" },
+    ],
+    reorder: [
+      { sentence: "What would you like to eat?", chunks: ["What","would you like","to eat?"] },
+      { sentence: "I'd like some fried rice, please.", chunks: ["I'd like","some fried rice,","please."] },
+      { sentence: "Would you like a milk shake?", chunks: ["Would you","like","a milk shake?"] },
+      { sentence: "We don't have any onions.", chunks: ["We don't have","any","onions."] },
+      { sentence: "Can I have some honey, please?", chunks: ["Can I have","some honey,","please?"] },
+      { sentence: "Nora bought a loaf of bread.", chunks: ["Nora bought","a loaf of","bread."] },
+      { sentence: "How many tomatoes do we need?", chunks: ["How many tomatoes","do we","need?"] },
+      { sentence: "How much flour is in the bag?", chunks: ["How much flour","is in","the bag?"] },
+      { sentence: "Fast food is not good for your health.", chunks: ["Fast food","is not good","for your health."] },
+      { sentence: "There is some cheese in the fridge.", chunks: ["There is","some cheese","in the fridge."] },
+      { sentence: "Are there any mangoes on the table?", chunks: ["Are there","any mangoes","on the table?"] },
+      { sentence: "My lunch box is full of fried chicken.", chunks: ["My lunch box","is full of","fried chicken."] },
+      { sentence: "I don't eat meat, so I eat tofu.", chunks: ["I don't eat meat,","so I eat","tofu."] },
+      { sentence: "Let's look at the menu first.", chunks: ["Let's look","at the menu","first."] },
+      { sentence: "Eating vegetables is good for you.", chunks: ["Eating vegetables","is good","for you."] },
+      { sentence: "Instant noodles are quick to cook.", chunks: ["Instant noodles","are quick","to cook."] },
+      { sentence: "Would you like some potatoes or some corn?", chunks: ["Would you like","some potatoes","or some corn?"] },
+      { sentence: "Put a little vinegar in the soup.", chunks: ["Put","a little vinegar","in the soup."] },
+      { sentence: "A healthy diet keeps you strong.", chunks: ["A healthy diet","keeps you","strong."] },
+      { sentence: "No, thank you. I'm not hungry.", chunks: ["No, thank you. I'm","not","hungry."] },
+    ],
+    reading: [
+      {
+        passage: "In Stardew Valley, my farmer grows potatoes in spring and corn in summer. Corn is great because it keeps growing in fall, too. When my farmer is tired, he eats some food to get his energy back. He sells most of his vegetables, but he always keeps some corn in his bag for a snack.",
+        questions: [
+          { q: "When does the farmer grow potatoes?", choices: ["In spring","In summer","In fall","In winter"], answer: "In spring" },
+          { q: "Why is corn great?", choices: ["It keeps growing in fall, too","It grows in winter","It is very cheap","It tastes sour"], answer: "It keeps growing in fall, too" },
+          { q: "What does the farmer do when he is tired?", choices: ["He eats some food","He sells his corn","He goes fishing","He plants potatoes"], answer: "He eats some food" },
+          { q: "What does he keep in his bag?", choices: ["Some corn","Some potatoes","A hamburger","Some cheese"], answer: "Some corn" },
+        ]
+      },
+      {
+        passage: "Every morning, I eat cereal with milk and a guava. My brother doesn't like cereal, so he eats a cheese sandwich. On Sundays, Mom makes pancakes with flour, eggs and milk. We put honey on them. They are soft and sweet. Sunday breakfast is the best!",
+        questions: [
+          { q: "What does the writer eat every morning?", choices: ["Cereal with milk and a guava","A cheese sandwich","Pancakes with honey","Fried rice"], answer: "Cereal with milk and a guava" },
+          { q: "Why does the brother eat a cheese sandwich?", choices: ["He doesn't like cereal","He is sick","He has no milk","He is very hungry"], answer: "He doesn't like cereal" },
+          { q: "What does Mom use to make pancakes?", choices: ["Flour, eggs and milk","Rice and eggs","Cheese and bread","Honey and vinegar"], answer: "Flour, eggs and milk" },
+          { q: "What do they put on the pancakes?", choices: ["Honey","Vinegar","Cheese","Onions"], answer: "Honey" },
+        ]
+      },
+      {
+        passage: "Kevin loves fast food. Last month, he ate fried chicken and hamburgers and drank milk shakes almost every day. He often felt tired and sleepy in class. The school nurse told him to change his diet. Now Kevin brings a lunch box from home with rice, tofu and vegetables. He feels much better.",
+        questions: [
+          { q: "What does Kevin love?", choices: ["Fast food","Vegetables","Tofu","Guavas"], answer: "Fast food" },
+          { q: "How did Kevin often feel in class last month?", choices: ["Tired and sleepy","Happy and excited","Cold and wet","Angry"], answer: "Tired and sleepy" },
+          { q: "Who told him to change his diet?", choices: ["The school nurse","His teacher","His mom","A cook"], answer: "The school nurse" },
+          { q: "What does Kevin bring now?", choices: ["A lunch box from home","A milk shake","Some fried chicken","Instant noodles"], answer: "A lunch box from home" },
+        ]
+      },
+      {
+        passage: "Last Saturday, my family went to a small restaurant. I looked at the menu and ordered beef noodles. My sister wanted fried rice, but they didn't have any. So she had dumplings. Dad put some vinegar on his dumplings. \"It makes them taste better,\" he said. After dinner, we were all very full.",
+        questions: [
+          { q: "Where did the family go?", choices: ["To a small restaurant","To a night market","To the farm","To school"], answer: "To a small restaurant" },
+          { q: "What did the writer order?", choices: ["Beef noodles","Fried rice","Dumplings","A hamburger"], answer: "Beef noodles" },
+          { q: "Why didn't the sister get fried rice?", choices: ["They didn't have any","She didn't like it","It was too expensive","She wasn't hungry"], answer: "They didn't have any" },
+          { q: "What did Dad put on his dumplings?", choices: ["Some vinegar","Some honey","Some cheese","Some flour"], answer: "Some vinegar" },
+        ]
+      },
+      {
+        passage: "In our town game, Nora is the baker. Every morning, she bakes ten loaves of bread with flour, milk and honey. Jack brings her fresh fish, and she gives him a loaf of warm bread. This week, the town is building a restaurant. Nora wants to write a menu with healthy food for everyone.",
+        questions: [
+          { q: "What is Nora's job?", choices: ["She is a baker","She is a doctor","She is a fisherman","She is a farmer"], answer: "She is a baker" },
+          { q: "How many loaves of bread does Nora bake every morning?", choices: ["Ten","Two","Five","Twenty"], answer: "Ten" },
+          { q: "What does Jack bring her?", choices: ["Fresh fish","Flour","Honey","Bread"], answer: "Fresh fish" },
+          { q: "What does Nora want to write?", choices: ["A menu with healthy food","A letter to Jack","A story about fish","A song for the town"], answer: "A menu with healthy food" },
+        ]
+      },
+    ]
+  },
 };
 // 每篇短文的「沒教過的生字」中文解釋（index 對應該週 reading[]）
 const PASSAGE_GLOSSARY = {
@@ -1834,6 +1937,13 @@ const PASSAGE_GLOSSARY = {
     [{"en":"candy","zh":"糖果"},{"en":"brushing his teeth","zh":"刷牙"},{"en":"terrible","zh":"嚴重的（這裡指牙痛很厲害）"},{"en":"took him to …","zh":"帶他去……（took 是 take 的過去式）"},{"en":"found","zh":"發現（find 的過去式）"},{"en":"hole","zh":"洞"},{"en":"How often …?","zh":"多久一次……？"},{"en":"twice a day","zh":"一天兩次"},{"en":"once a week","zh":"一週一次"},{"en":"once a month","zh":"一個月一次"}],
     [{"en":"during","zh":"在……期間"},{"en":"P.E.","zh":"體育課（physical education 的簡稱）"},{"en":"fell","zh":"跌倒（fall 的過去式）"},{"en":"hurt","zh":"弄傷（此處為過去式，原形也是 hurt）"},{"en":"couldn't walk","zh":"當時沒辦法走路"},{"en":"painful","zh":"很痛的"},{"en":"put","zh":"放（過去式也是 put）"},{"en":"ice","zh":"冰塊"},{"en":"took her to see a doctor","zh":"帶她去看醫生"},{"en":"a week later","zh":"一週後"}],
     [{"en":"villager","zh":"村民"},{"en":"go for a walk","zh":"去散步"},{"en":"keep … healthy","zh":"保持……健康"},{"en":"visits","zh":"探望"},{"en":"them","zh":"那位村民（指一個人，不分男女）"},{"en":"everybody","zh":"每個人"}],
+  ],
+  "2026-11-1": [
+    [{"en":"Stardew Valley","zh":"《星露谷物語》（遊戲名稱）"},{"en":"farmer","zh":"農夫"},{"en":"grows","zh":"種植"},{"en":"keeps growing","zh":"繼續生長"},{"en":"spring","zh":"春天"},{"en":"summer","zh":"夏天"},{"en":"fall","zh":"秋天"},{"en":"winter","zh":"冬天"},{"en":"tired","zh":"累的"},{"en":"get his energy back","zh":"把體力補回來"},{"en":"sells","zh":"賣"},{"en":"most of","zh":"大部分的"},{"en":"vegetables","zh":"蔬菜"},{"en":"keeps","zh":"留著"},{"en":"snack","zh":"點心"},{"en":"cheap","zh":"便宜的"},{"en":"sour","zh":"酸的"}],
+    [{"en":"writer","zh":"作者（寫這段文章的人）"},{"en":"sandwich","zh":"三明治"},{"en":"pancakes","zh":"美式鬆餅"},{"en":"soft","zh":"軟的"},{"en":"sweet","zh":"甜的"},{"en":"the best","zh":"最棒的"}],
+    [{"en":"ate","zh":"吃了（eat 的過去式）"},{"en":"drank","zh":"喝了（drink 的過去式）"},{"en":"almost","zh":"幾乎"},{"en":"felt","zh":"覺得（feel 的過去式）"},{"en":"sleepy","zh":"想睡的"},{"en":"school nurse","zh":"學校護理師"},{"en":"tired","zh":"累的"},{"en":"told him to …","zh":"告訴他要……（told 是 tell 的過去式）"},{"en":"change","zh":"改變"},{"en":"vegetables","zh":"蔬菜"},{"en":"feels much better","zh":"覺得好多了"},{"en":"excited","zh":"興奮的"},{"en":"cook","zh":"廚師"}],
+    [{"en":"restaurant","zh":"餐廳"},{"en":"ordered","zh":"點（餐）（order 的過去式）"},{"en":"beef","zh":"牛肉"},{"en":"didn't have any","zh":"沒有（炒飯）可以賣"},{"en":"had","zh":"吃了（have 的過去式）"},{"en":"dumplings","zh":"水餃"},{"en":"taste better","zh":"吃起來更好吃"},{"en":"full","zh":"飽的"},{"en":"night market","zh":"夜市"},{"en":"expensive","zh":"貴的"}],
+    [{"en":"job","zh":"工作"},{"en":"baker","zh":"麵包師"},{"en":"fisherman","zh":"漁夫"},{"en":"bakes","zh":"烤（麵包、蛋糕）"},{"en":"loaves","zh":"一條條（麵包）（loaf 的複數）"},{"en":"fresh","zh":"新鮮的"},{"en":"warm","zh":"溫熱的"},{"en":"is building","zh":"正在蓋"},{"en":"restaurant","zh":"餐廳"},{"en":"healthy food","zh":"健康的食物"},{"en":"everyone","zh":"每個人"}],
   ],
 };
 function weekDrillFor(monthStr, weekN) { return WEEK_DRILLS[monthStr + "-" + weekN] || null; }

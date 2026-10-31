@@ -119,4 +119,9 @@ const DRILLS = [
   { day: 114, date: "2026-10-28", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第4週 身體與健康＋動名詞 / 不定詞", icon: "💪" },
   { day: 115, date: "2026-10-29", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第4週 身體與健康＋動名詞 / 不定詞", icon: "💪" },
   { day: 116, date: "2026-10-30", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第4週 身體與健康＋動名詞 / 不定詞", icon: "💪" },
+  { day: 117, date: "2026-11-02", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 食物與營養＋期中考總複習", icon: "🍱" },
+  { day: 118, date: "2026-11-03", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 食物與營養＋期中考總複習", icon: "🍱" },
+  { day: 119, date: "2026-11-04", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 食物與營養＋期中考總複習", icon: "🍱" },
+  { day: 120, date: "2026-11-05", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 食物與營養＋期中考總複習", icon: "🍱" },
+  { day: 121, date: "2026-11-06", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 食物與營養＋期中考總複習", icon: "🍱" },
 ];

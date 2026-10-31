@@ -22,7 +22,7 @@ const WORD_EMOJI = {
   "Frisbee": "🥏", "frog": "🐸", "gas station": "⛽", "ghost": "👻", "glasses": "👓",
   "gloves": "🧤", "goal": "🥅", "golf": "⛳", "grape": "🍇", "guitar": "🎸",
   "gun": "🔫", "hammer": "🔨", "helicopter": "🚁", "hen": "🐔", "highway": "🛣️",
-  "hippo": "🦛", "hippopotamus": "🦛", "hole": "🕳️", "honey": "🍯", "instant noodle": "🍜",
+  "hippo": "🦛", "hippopotamus": "🦛", "hole": "🕳️", "honey": "🍯", "instant noodle": "🍜", "instant noodles": "🍜",
   "jeep": "🚙", "jogging": "🏃", "kangaroo": "🦘", "koala": "🐨", "lantern": "🏮",
   "leaf": "🍃", "lettuce": "🥬", "lightning": "⚡", "lock": "🔒", "loaf": "🍞",
   "lunch box": "🍱", "mango": "🥭", "mask": "😷", "melon": "🍈", "men's room": "🚹",
