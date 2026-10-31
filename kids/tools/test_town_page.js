@@ -316,7 +316,7 @@ console.log("\n── 每週聊天題 ──");
   ok("答錯顯示正解綠色、選的紅色", el("p-mail").innerHTML.includes("❌ 答錯了") && el("p-mail").innerHTML.includes("choice wrongpick") && el("p-mail").innerHTML.includes("choice right"));
   const q3 = run("C.CHATS['2026-10-25'].items[4]"), who3 = run(`T.chatSpeaker(st, C.CHATS['2026-10-25'].items[4], C)`);
   ok("Rosa 還沒搬來時換成 " + who3 + " 問", who3 !== "Rosa" && el("p-mail").innerHTML.split('class="card chatq').some(c => c.includes(q3.en) && c.includes(`openFolk('${who3}')`)));
-  day("2026-11-02");
+  day("2026-11-09");
   ok("沒有聊天題的週會說還在準備", el("p-mail").innerHTML.includes("這週的聊天題還在準備"));
   S.location.search = keep; run("render()");
 }

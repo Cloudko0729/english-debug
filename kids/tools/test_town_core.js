@@ -351,7 +351,14 @@ console.log("\n── 廣場任務：每階 5 個、同時開放 ──");
   st.town.harbor = 1;
   ok("碼頭第 1 階修好開賣海灘傘、還不賣小帆船", T.buy(st, "parasol", 1, C).ok && !T.buy(st, "boat", 1, C).ok);
   st.town.harbor = 3;
-  ok("三個地標都修好就沒有下一個目標", T.nextGoal(st, C) === null);
+  ok("碼頭修好：下一個目標換成小鎮餐廳", T.nextGoal(st, C).key === "restaurant" && T.landmarkOpen(st, "restaurant", C));
+  ok("餐廳沒修好前買不到番茄種子", !T.buy(st, "tomato_seed", 1, C).ok);
+  ok("餐廳第 1 階要鐵礦", T.stageView(st, "restaurant", C).parts.some(x => x.k === "iron" && x.need === 2));
+  st.town.restaurant = 1;
+  ok("餐廳第 1 階修好開賣番茄種子", T.buy(st, "tomato_seed", 1, C).ok);
+  ok("餐廳第 2 階的需求有番茄", T.stageView(st, "restaurant", C).parts.some(x => x.k === "tomato" && x.need === 3));
+  st.town.restaurant = 3;
+  ok("四個地標都修好就沒有下一個目標", T.nextGoal(st, C) === null);
 }
 
 console.log("\n── 作物不夠：用小鎮幣補齊（每個賣價＋1） ──");
@@ -431,7 +438,7 @@ console.log("\n── 經濟：不照料每體力 2 幣，照料滿約 2.3 幣 �
   // 8 片紅蘿蔔一起種、收成全賣，算每 1 體力淨賺多少幣（種子錢也算成本）
   // 豐收用期望值算（固定擲骰的單次結果會跳），care＝照料幾天
   const run = (crop, care, nf = 8) => {
-    const st = fresh(); give(st, 7); st.money = 16; st.town.plaza = 3; st.town.market = 3; st.town.more = 2;
+    const st = fresh(); give(st, 7); st.money = 16; st.town.plaza = 3; st.town.market = 3; st.town.harbor = 3; st.town.restaurant = 1; st.town.more = 2;
     for (let y = 1; y <= 8 && st.farm.fields.length < nf; y += 2) for (let x = 2; x <= 14 && st.farm.fields.length < nf; x += 2) T.addField(st, x, y);
     const seed = C.CROPS[crop].freeSeed ? 0 : C.BUY[crop + "_seed"];
     if (seed) T.buy(st, crop + "_seed", nf, C);

@@ -399,7 +399,7 @@ function renderToday(d) {
   const bonus = (st.energy.bonusByWeek || {})[T.apWeek(d)] || 0, B = T.BONUS;
   h += `<div class="muted" style="flex-basis:100%;font-size:.82rem">⭐ 本週加分 ${bonus}/${T.AP_BONUS_CAP}：
     <a href="../grammar_month.html">本月文法</a>每課 +${B.grammar}、<a href="../vocab_month.html">本月單字</a>每單元 +${B.vocab}、
-    <a href="../weekly_test.html">週測</a> +${B.test}、<a href="../homework.html">作業</a>每項 +${B.homework}、期中考模擬卷 <a href="../drills/exam_midterm.html">（一）</a>、<a href="../drills/exam_midterm2.html">（二）</a>每份 +${B.exam}（第一次完成才算，不佔每日練習的 ${T.AP_WEEKLY_CAP}）</div>`;
+    <a href="../weekly_test.html">週測</a> +${B.test}、<a href="../homework.html">作業</a>每項 +${B.homework}、期中考模擬卷 <a href="../drills/exam_midterm.html">（一）</a>、<a href="../drills/exam_midterm2.html">（二）</a>、<a href="../drills/exam_midterm3.html">（三）</a>每份 +${B.exam}（第一次完成才算，不佔每日練習的 ${T.AP_WEEKLY_CAP}）</div>`;
   document.getElementById("today").innerHTML = h;
 }
 
@@ -928,7 +928,7 @@ function prosperHtml() {
     <div class="residents">${residents().map(n => `<span onclick="openFolk('${n}')">${pic(n)}</span>`).join("")}${soonHtml()}</div>
     <div class="muted" style="font-size:.78rem">繁榮度怎麼來：完成任務 +${P.task}、修好一階 +${P.stage}、村民每顆 ❤️ +${P.heart}、農莊擺裝飾每件 +${P.decor}（最多算 ${P.decorMax} 件）</div></div>`;
 }
-const LM_ICON = { plaza: "🏛️", market: "🧺", harbor: "⚓" };
+const LM_ICON = { plaza: "🏛️", market: "🧺", harbor: "⚓", restaurant: "🍳" };
 // 作物不夠時：用小鎮幣補齊再交（每個＝賣價＋1）。夠了或不是作物就不顯示
 function fillBtn(item, n, onclick) {
   const f = T.fillCost(st, item, n, C);

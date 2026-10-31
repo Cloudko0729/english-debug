@@ -67,8 +67,8 @@
       schemaVersion: SCHEMA, student: student, createdAt: today, rev: 0,
       energy: { wallet: 0, reserve: 0, week: apWeek(today), weekEarned: 0, receipts: {} },
       money: 0,
-      inv: { carrot_seed: 0, potato_seed: 0, corn_seed: 0, pumpkin_seed: 0,
-             rice: 0, carrot: 0, potato: 0, corn: 0, pumpkin: 0, wood: 0, stone: 0,
+      inv: { carrot_seed: 0, potato_seed: 0, corn_seed: 0, pumpkin_seed: 0, tomato_seed: 0,
+             rice: 0, carrot: 0, potato: 0, corn: 0, pumpkin: 0, tomato: 0, wood: 0, stone: 0,
              // 魚（要跟 town_content.js 的 FISH 一致）
              sardine: 0, crab: 0, shrimp: 0, tuna: 0, eel: 0, salmon: 0, squid: 0, octopus: 0, pufferfish: 0,
              // 礦（MINERALS）

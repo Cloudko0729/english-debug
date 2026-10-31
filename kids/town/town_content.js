@@ -10,11 +10,12 @@
     potato:  { en: "potato",  zh: "馬鈴薯", emoji: "🥔" },
     corn:    { en: "corn",    zh: "玉米",   emoji: "🌽", unlock: { market: 1 } },
     pumpkin: { en: "pumpkin", zh: "南瓜",   emoji: "🎃", unlock: { market: 1 }, days: 4 },
+    tomato:  { en: "tomato",  zh: "番茄",   emoji: "🍅", unlock: { restaurant: 1 } },
   };
   // 售價：每片扣掉種子錢都是淨 4 幣，播種 2 體力 → 不照料時每體力 2 幣。
   // 照料一天 +10% 收成 2 個的機率（3 天作物最多 30%），8 片田全照料時期望值約每體力 2.3 幣。
   // 南瓜長 4 天、照料最多 40%，所以售價跟紅蘿蔔一樣，全照料才不會超過每體力 2.4 幣
-  var SELL = { rice: 4, carrot: 5, potato: 5, corn: 5, pumpkin: 5,
+  var SELL = { rice: 4, carrot: 5, potato: 5, corn: 5, pumpkin: 5, tomato: 5,
                sardine: 3, shrimp: 3, eel: 3, squid: 3, crab: 5, tuna: 5, salmon: 5, octopus: 5, pufferfish: 7,
                copper: 3, iron: 4, gold: 6, quartz: 6, amethyst: 10 };
   // 照料：每照料一天，收成時拿到 2 個的機率 +10%
@@ -318,12 +319,12 @@
     parasol:  { en: "beach umbrella", zh: "海灘傘", emoji: "⛱️", unlock: { harbor: 1 } },
     boat:     { en: "sailboat", zh: "小帆船", emoji: "⛵", unlock: { harbor: 2 } },
   };
-  var BUY = { carrot_seed: 1, potato_seed: 1, corn_seed: 1, pumpkin_seed: 1,
+  var BUY = { carrot_seed: 1, potato_seed: 1, corn_seed: 1, pumpkin_seed: 1, tomato_seed: 1,
               flowers: 10, tree: 10, lantern: 10, bench: 10, mailbox: 10, rock: 10, fountain: 20, parasol: 10, boat: 20 };
   var COST = { plant: 2, care: 1, gather: 2, fish: 2, dig: 2 };
   var NAME = { wood: "木材", stone: "石頭", crop: "作物", carrot_seed: "紅蘿蔔種子", potato_seed: "馬鈴薯種子",
-               corn_seed: "玉米種子", pumpkin_seed: "南瓜種子",
-               rice: "稻米", carrot: "紅蘿蔔", potato: "馬鈴薯", corn: "玉米", pumpkin: "南瓜", ap: "體力", money: "小鎮幣",
+               corn_seed: "玉米種子", pumpkin_seed: "南瓜種子", tomato_seed: "番茄種子",
+               rice: "稻米", carrot: "紅蘿蔔", potato: "馬鈴薯", corn: "玉米", pumpkin: "南瓜", tomato: "番茄", ap: "體力", money: "小鎮幣",
                flowers: "花圃", tree: "小樹", lantern: "燈籠", bench: "長椅", mailbox: "信箱", rock: "石頭堆", fountain: "噴水池",
                parasol: "海灘傘", boat: "小帆船" };
   // 魚和礦的中文名也放進 NAME（任務、送禮、背包都用得到）
@@ -468,6 +469,50 @@
         ] },
       ],
     },
+    // 小鎮餐廳：Nora 的麵包店太小，大家想要一個能一起吃飯的地方。碼頭全部修好才開放。
+    // 第 1 階修好開賣番茄種子（第 2、3 階都有番茄任務）。不帶新村民，任務分給已經住在鎮上的人。
+    restaurant: {
+      zh: "小鎮餐廳", en: "the town restaurant", after: "harbor",
+      look: ["🏚️ 小鎮北邊一間空的舊木屋", "🍳 廚房有了石頭爐灶和大鐵鍋", "📋 門口掛上菜單，擺好長椅", "🍲 大家圍著長桌一起吃晚餐"],
+      stages: [
+        { title: "蓋好廚房", photo: { caption: "A big stove for our kitchen", captionZh: "廚房有了大爐灶" }, done: "廚房蓋好了，石頭爐灶上放著一口大鐵鍋；商店開始賣番茄種子", tasks: [
+          { id: "r1-wood", by: "Leo", need: { item: "wood", n: 8 },
+            en: "A restaurant needs a big kitchen. Can you bring eight pieces of wood?", zh: "餐廳需要一個大廚房。你可以帶八塊木材來嗎？" },
+          { id: "r1-stone", by: "Leo", need: { item: "stone", n: 6 },
+            en: "Let's build a stone stove. We need six stones.", zh: "我們來蓋一座石頭爐灶，需要六顆石頭。" },
+          { id: "r1-iron", by: "Jack", need: { item: "iron", n: 2 },
+            en: "Every kitchen needs a big iron pot. Can you find two pieces of iron ore?", zh: "每個廚房都需要一口大鐵鍋。你可以找到兩塊鐵礦嗎？" },
+          { id: "r1-roof", by: "Ben", need: { item: "ap", n: 8 },
+            en: "The kitchen is almost done! Help me put up the roof.", zh: "廚房快好了！幫我把屋頂架上去。" },
+          { id: "r1-potato", by: "Nora", need: { item: "potato", n: 4 },
+            en: "Let's try the new stove! I'll make potato pancakes. Please bring four potatoes.", zh: "來試試新爐灶吧！我要做馬鈴薯煎餅，請帶四顆馬鈴薯來。" },
+        ] },
+        { title: "菜單與座位", photo: { caption: "Our first menu", captionZh: "我們的第一份菜單" }, done: "門口掛上 Mia 畫的菜單，擺好長椅和花；每個人都看得懂今天有什麼好吃的", tasks: [
+          { id: "r2-menu", by: "Mia", need: { item: "ap", n: 6 },
+            en: "Let's make a menu with pictures. Then everyone can see what we have. Can you help me draw?", zh: "我們來做一份有圖的菜單，這樣大家都看得懂我們有什麼。你可以幫我畫嗎？" },
+          { id: "r2-board", by: "Tom", need: { item: "wood", n: 4 },
+            en: "I'll put a big menu board by the road. Please bring four pieces of wood.", zh: "我要在路邊放一塊大菜單板。請帶四塊木材來。" },
+          { id: "r2-tomato", by: "Rosa", need: { item: "tomato", n: 3 },
+            en: "A healthy diet includes lots of vegetables. Please bring three tomatoes for a salad.", zh: "健康的飲食包含很多蔬菜。請帶三顆番茄來做沙拉。" },
+          { id: "r2-bench", by: "Max", need: { item: "bench", n: 2 },
+            en: "Hungry people need a place to sit. Can we get two benches?", zh: "肚子餓的人需要地方坐。我們可以弄兩張長椅嗎？" },
+          { id: "r2-flowers", by: "Lily", need: { item: "flowers", n: 2 },
+            en: "Let's add two flower beds by the door. The flowers will make our guests happy.", zh: "我們在門口加兩個花圃吧。這些花會讓客人很開心。" },
+        ] },
+        { title: "開幕晚餐", photo: { caption: "Our first dinner together", captionZh: "我們的第一頓晚餐" }, done: "餐廳開幕了！大家圍著長桌吃晚餐：Nora 烤南瓜派、Jack 煮魚湯、Sam 煮了他旅行時學會的番茄湯", tasks: [
+          { id: "r3-pumpkin", by: "Nora", need: { item: "pumpkin", n: 3 },
+            en: "I'll bake pumpkin pies for the dinner. Please bring three pumpkins.", zh: "我要為晚餐烤南瓜派。請帶三顆南瓜來。" },
+          { id: "r3-net", by: "Jack", need: { item: "ap", n: 8 },
+            en: "Let's catch fish for the dinner! Help me pull the net.", zh: "我們來為晚餐捕魚吧！幫我拉漁網。" },
+          { id: "r3-tomato", by: "Sam", need: { item: "tomato", n: 4 },
+            en: "I learned to make great tomato soup on a trip. Please bring four tomatoes.", zh: "我有一次旅行時學會煮很好喝的番茄湯。請帶四顆番茄來。" },
+          { id: "r3-lantern", by: "Tom", need: { item: "lantern", n: 2 },
+            en: "The dinner is at night. Let's hang two lanterns over the table.", zh: "晚餐在晚上。我們在餐桌上方掛兩個燈籠吧。" },
+          { id: "r3-rice", by: "Mia", need: { item: "rice", n: 5 },
+            en: "Rice goes well with every dish. Please bring five bags of rice.", zh: "每道菜配白飯都好吃。請帶五袋稻米來。" },
+        ] },
+      ],
+    },
   };
 
   // 繁榮度：不存檔，每次從進度算出來（任務、修好的階段、好感、擺出來的裝飾）。
@@ -486,6 +531,9 @@
       { at: 490, zh: "朋友越來越多的小鎮", emoji: "🗼" },
       { at: 560, zh: "大家喜愛的小鎮",     emoji: "🏖️" },
       { at: 630, zh: "四季都熱鬧的小鎮",   emoji: "🌟" },
+      { at: 700, zh: "飄著飯菜香的小鎮",   emoji: "🍳" },
+      { at: 770, zh: "大家常聚在一起的小鎮", emoji: "📋" },
+      { at: 840, zh: "像一家人的小鎮",     emoji: "🍲" },
     ],
   };
 
@@ -788,6 +836,41 @@
             { id: "b", en: "Yes, I do.", zh: "有，我有刷牙。" },
             { id: "c", en: "Twice a day.", zh: "一天兩次。" } ],
           answer: "c", why: "How often 問「多久一次」，要回答次數，例如 twice a day（一天兩次）。With a toothbrush 是回答用什麼刷；Yes, I do 是回答 Do you…? 這種問句。" },
+      ],
+    },
+    "2026-11-01": {
+      theme: "食物與營養",
+      items: [
+        { id: "c1101-nora", speaker: "Nora", en: "Good morning! Would you like some honey on your bread?", zh: "早安！你的麵包要不要加一點蜂蜜？",
+          choices: [
+            { id: "a", en: "Yes, I am.", zh: "是的，我是。" },
+            { id: "b", en: "Yes, please.", zh: "好，麻煩你。" },
+            { id: "c", en: "Yes, I'm from Taiwan.", zh: "是的，我來自台灣。" } ],
+          answer: "b", why: "Would you like…? 是問「要不要」，想要就說 Yes, please.，不要就說 No, thank you.。Yes, I am. 是回答 Are you…?。" },
+        { id: "c1101-sam", speaker: "Sam", en: "On my trip, I ate instant noodles every day. Now I always feel tired.", zh: "旅行的時候我每天都吃泡麵，現在一直覺得很累。",
+          choices: [
+            { id: "a", en: "You should eat more vegetables and fruit.", zh: "你應該多吃蔬菜和水果。" },
+            { id: "b", en: "Let's eat more instant noodles!", zh: "我們再多吃一點泡麵吧！" },
+            { id: "c", en: "You should drink more milk shakes.", zh: "你應該多喝奶昔。" } ],
+          answer: "a", why: "Sam 每天只吃泡麵。三個回答裡，只有 a 建議他多吃蔬菜和水果，讓飲食（diet）更健康。" },
+        { id: "c1101-max", speaker: "Max", en: "I'm going swimming this afternoon. What should I eat for lunch?", zh: "我今天下午要去游泳，午餐該吃什麼？",
+          choices: [
+            { id: "a", en: "Eat ten bags of candy.", zh: "吃十包糖果。" },
+            { id: "b", en: "Don't eat anything all day.", zh: "一整天什麼都別吃。" },
+            { id: "c", en: "Some rice, fish and vegetables.", zh: "一些米飯、魚和蔬菜。" } ],
+          answer: "c", why: "他問午餐吃什麼。c 有飯、魚和蔬菜，是三個選項裡最合理的一餐。" },
+        { id: "c1101-tom", speaker: "Tom", en: "I want to make tomato soup. How many tomatoes do I need?", zh: "我想煮番茄湯。我需要幾顆番茄？",
+          choices: [
+            { id: "a", en: "Some flour, please.", zh: "請給我一些麵粉。" },
+            { id: "b", en: "Four tomatoes.", zh: "四顆番茄。" },
+            { id: "c", en: "It's very sour.", zh: "它很酸。" } ],
+          answer: "b", why: "How many…? 問「幾個」，要回答數量：Four tomatoes.。" },
+        { id: "c1101-lily", speaker: "Lily", en: "This cake needs flour, but we don't have any. What should we do?", zh: "做這個蛋糕需要麵粉，可是我們沒有。該怎麼辦？",
+          choices: [
+            { id: "a", en: "Let's buy some flour at the market.", zh: "我們去市集買一些麵粉吧。" },
+            { id: "b", en: "Let's use some vinegar.", zh: "我們用一些醋吧。" },
+            { id: "c", en: "Let's put onions in it.", zh: "我們放洋蔥進去吧。" } ],
+          answer: "a", why: "don't have any flour 是一點麵粉都沒有。這個蛋糕需要麵粉，a 是去買麵粉；醋和洋蔥都解決不了沒有麵粉的問題。" },
       ],
     },
   };
