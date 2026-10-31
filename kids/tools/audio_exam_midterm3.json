@@ -1,0 +1,30 @@
+{
+ "outdir": "D:/english/kids/audio/exam_midterm3",
+ "voice": "af_heart",
+ "speed": 0.85,
+ "items": {
+  "a_0": "dirt",
+  "a_1": "pork",
+  "a_2": "purse",
+  "a_3": "car",
+  "a_4": "serve",
+  "a_5": "short",
+  "a_6": "church",
+  "a_7": "mark",
+  "b_0": "He's from Japan.",
+  "b_1": "Lucy has a toothache.",
+  "b_2": "They're having a barbecue.",
+  "b_3": "She's from the UK.",
+  "b_4": "Mr. Wang has a runny nose.",
+  "b_5": "This is a pomelo.",
+  "c_0": "Where is your mother from?",
+  "c_1": "Are you from the UK?",
+  "c_2": "Does your brother have a toothache?",
+  "c_3": "What's wrong, Joe?",
+  "c_4": "Would you like some pomelos?",
+  "c_5": "Do Ken and Amy have a cold?",
+  "d0": "This is Lisa. She's from Canada. Lisa is sick today. She has a fever and a runny nose. She doesn't have a cough. Her dad makes some chicken soup for her.",
+  "d1": "It's Moon Festival. My family is having a barbecue in the park. Look! The full moon is big. Grandma gives us some moon cakes. My little brother eats too fast. Now he has a stomachache.",
+  "j": "Hi, I'm Nina. I'm from India. In India, many people drink golden milk when they have a cold. My classmate Tom is from the UK. Today Tom doesn't feel well. He has a sore throat and a headache. He doesn't have a fever. I make some golden milk for him. He likes it. We both like whales. I hope Tom feels better!"
+ }
+}
