@@ -54,7 +54,7 @@
   var MINE_FLOORS = [
     { at: 0,  zh: "第 1 層", table: { stone: 50, copper: 35, quartz: 15 } },
     { at: 10, zh: "第 2 層", table: { stone: 25, copper: 30, iron: 30, amethyst: 10, quartz: 5 } },
-    { at: 25, zh: "第 3 層", table: { stone: 30, iron: 35, gold: 20, amethyst: 10, quartz: 5 } },
+    { at: 25, zh: "第 3 層", table: { stone: 25, copper: 10, iron: 30, gold: 20, amethyst: 10, quartz: 5 } },
   ];
   // ── 好感任務與紀念照 ──
   // 每位村民好感 5、10、15、20 顆心各開一個任務：聽一小段對話、交一樣東西（ap＝出力幫忙）、自己念最後一句，

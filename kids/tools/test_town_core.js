@@ -620,6 +620,7 @@ console.log("\n── 好感任務與紀念照 ──");
   ok("鮭魚不在季節也能用錢補（每個 6）", T.fillCost(st, "salmon", 1, C).cost === 6);
   ok("好感任務用錢補完成", T.doQuest(st, "nora-10", "2026-10-15", C, { buy: true }).ok && st.money === 4 && st.photos["nora-10"]);
   ok("第 2、3 層也挖得到石英", C.MINE_FLOORS.every(f => f.table.quartz > 0));
+  ok("每一層都挖得到銅礦（第 3 層回不去，不能把銅礦挖斷）", C.MINE_FLOORS.every(f => f.table.copper > 0));
   const raw = JSON.parse(JSON.stringify(fresh())); raw.photos = { "tom-10": "2026-10-15", "leo-5": "2026-10-15" };
   const n = T.normalize(raw, "test", "2026-10-15", C);
   ok("匯入：好感不夠、沒搬來的紀念照都不算", Object.keys(n.photos).length === 0);
