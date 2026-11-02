@@ -516,6 +516,19 @@ console.log("\n── 礦坑 ──");
   eq("25 次到第 3 層", T.mineFloor(st, C), 2);
   st.mine.digs = 999;
   eq("最多第 3 層", T.mineFloor(st, C), 2);
+  eq("沒選樓層就挖最深那層", T.digFloor(st, C), 2);
+  ok("可以回到第 1 層", T.chooseFloor(st, 0, C).ok && T.digFloor(st, C) === 0 && st.mine.floor === 0);
+  const rc = T.dig(st, "2026-10-12", C, 0.6);
+  ok("回第 1 層挖：照第 1 層的機率表（r=0.6 是銅礦）、不算往下", rc.found === "copper" && !rc.deeper && T.digFloor(st, C) === 0, rc);
+  ok("選最深那層存成 null", T.chooseFloor(st, 2, C).ok && st.mine.floor === null);
+  ok("還沒開的層不能選", !T.chooseFloor(st, 3, C).ok && !T.chooseFloor(st, -1, C).ok && !T.chooseFloor(st, 1.5, C).ok);
+  { const s2 = fresh(); give(s2, 2); s2.mine.digs = 12; ok("第 2 層時不能選第 3 層", !T.chooseFloor(s2, 2, C).ok && T.chooseFloor(s2, 0, C).ok);
+    s2.mine.floor = 0; s2.mine.digs = 24; T.dig(s2, "2026-10-12", C, 0.1);
+    ok("在第 1 層挖到開了第 3 層：說往下開了，人還留在第 1 層", T.mineFloor(s2, C) === 2 && T.digFloor(s2, C) === 0); }
+  { const raw = JSON.parse(JSON.stringify(fresh())); raw.mine = { digs: 30, floor: 1 };
+    eq("存檔整理：選的樓層留著", T.normalize(raw, "test", "2026-10-12", C).mine.floor, 1);
+    raw.mine = { digs: 5, floor: 2 }; eq("存檔整理：還沒開的樓層丟掉", T.normalize(raw, "test", "2026-10-12", C).mine.floor, null);
+    raw.mine = { digs: 30, floor: "x" }; eq("存檔整理：亂填的樓層丟掉", T.normalize(raw, "test", "2026-10-12", C).mine.floor, null); }
   C.MINE_FLOORS.forEach((f, i) => {
     const tot = Object.values(f.table).reduce((x, y) => x + y, 0);
     const ev = Object.keys(f.table).reduce((x, k) => x + f.table[k] / tot * (C.SELL[k] || 0), 0);

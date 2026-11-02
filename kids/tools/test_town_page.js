@@ -113,7 +113,7 @@ console.log("\n── 廣場任務與繁榮度 ──");
   const shown = (html.match(/class="task[ "]/g) || []).length;
   ok("5 個任務同時列出來", shown === 5, shown);
   ok("每個任務都有村民頭像和語音", ["p1-wood", "p1-weeds", "p1-stone", "p1-carrot", "p1-flowers"].every(id => html.includes(`task_${id}`)));
-  ok("合計需求列出來", html.includes("還需要") && html.includes("🪨 石頭 0/3"));
+  ok("合計需求列出來", html.includes("還需要") && html.includes(`src="img/ore/stone.png" alt="stone" onerror="this.outerHTML='🪨'"> 石頭 0/3`));
   ok("不夠的會說去哪裡拿", html.includes("去商店買"));
   ok("作物不夠：有「用小鎮幣補」按鈕和價錢", html.includes("🪙 補 2 個再交 <span class=\"spend\">−12🪙</span>") && html.includes("{buy:true}"));
   ok("木材任務沒有補的按鈕", !/doTask\(st,'plaza','p1-wood',today\(\),C,\{buy:true\}\)/.test(html));
@@ -227,7 +227,16 @@ console.log("\n── 野外：釣魚、礦坑、送禮 ──");
   // 挖礦
   run("doDig()");
   ok("挖礦：挖了一次", run("st.mine.digs") === 1 && el("wildBody").innerHTML.includes('class="find"'));
-  ok("背包也列出石頭", el("wildBody").innerHTML.includes("🪨 石頭 ×"));
+  ok("背包也列出石頭（用圖）", el("wildBody").innerHTML.includes('src="img/ore/stone.png"') && el("wildBody").innerHTML.includes(" 石頭 ×"));
+  run("st.inv.copper = 2; render()");
+  ok("背包裡的銅礦用圖", el("wildBody").innerHTML.includes('src="img/ore/copper.png"'));
+  ok("只開第 1 層時不顯示選層", !el("wildBody").innerHTML.includes("pickFloor("));
+  run("st.mine.digs = 30; render()");
+  ok("開到第 3 層：三層都能選", [0, 1, 2].every(i => el("wildBody").innerHTML.includes("pickFloor(" + i + ")")) && el("wildBody").innerHTML.includes("⛏️ 礦坑・第 3 層"));
+  run("pickFloor(0)");
+  ok("選第 1 層：標題換了、狀態記住", el("wildBody").innerHTML.includes("⛏️ 礦坑・第 1 層") && run("st.mine.floor") === 0);
+  run("pickFloor(2)");
+  ok("選回最深那層", run("st.mine.floor") === null && el("wildBody").innerHTML.includes("⛏️ 礦坑・第 3 層"));
   ok("背包可以全部賣", /act\(T\.sell\(st,'[a-z]+',\d+,C\)\)/.test(el("wildBody").innerHTML));
   // 送禮
   run("st.inv.iron = 1; openFolk('Leo')");

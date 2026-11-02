@@ -65,6 +65,9 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 .decor{background:var(--grass);display:flex;align-items:center;justify-content:center;font-size:clamp(14px,3.6vw,24px);cursor:pointer;z-index:1}
 .sel{outline:3px solid #fff;outline-offset:-3px;z-index:2}
 .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.floors .btn{text-align:center;line-height:1.5}
+.floors .btn.on{outline:3px solid #2f7d4f;font-weight:700}
+.fl-has .fi{width:22px;height:22px}
 .btn{font-family:inherit;font-weight:700;font-size:.92rem;border:3px solid var(--wood-d);background:#fff6e0;color:var(--ink);border-radius:8px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
 .btn:hover{background:#fff}
 .btn:disabled{opacity:.45;cursor:not-allowed}
@@ -408,7 +411,10 @@ const ICON = { ap: "⚡", money: "🪙", wood: "🪵", stone: "🪨" };
 const thing = k => C.CROPS[k] || C.DECOR[k] || C.FISH[k] || C.MINERALS[k] || null;
 // 魚用畫好的圖（img/fish/<id>.png），emoji 好幾種魚長一樣；圖載不到就退回 emoji
 const fishIcon = k => `<img class="fi" src="img/fish/${k}.png" alt="${C.FISH[k].en}" onerror="this.outerHTML='${C.FISH[k].emoji}'">`;
-const itemIcon = k => ICON[k] || (C.FISH[k] ? fishIcon(k) : (thing(k) && thing(k).emoji)) || "📦";
+// 礦石和石頭也用畫好的圖（img/ore/<id>.png）
+const oreEmoji = k => k === "stone" ? "🪨" : C.MINERALS[k].emoji;
+const oreIcon = k => `<img class="fi" src="img/ore/${k}.png" alt="${k === "stone" ? "stone" : C.MINERALS[k].en}" onerror="this.outerHTML='${oreEmoji(k)}'">`;
+const itemIcon = k => (k === "stone" || C.MINERALS[k]) ? oreIcon(k) : ICON[k] || (C.FISH[k] ? fishIcon(k) : (thing(k) && thing(k).emoji)) || "📦";
 const itemName = k => C.NAME[k] || k;
 function whereToGet(k) {
   if (k === "ap") return "做英文練習換體力";
@@ -472,7 +478,9 @@ function dexHtml(keys, seasonOf) {
 }
 function renderWild(d) {
   const s = T.season(d), here = Object.keys(T.fishTable(d, C)), ap = T.apTotal(st);
-  const fl = T.mineFloor(st, C), F = C.MINE_FLOORS, next = F[fl + 1];
+  const fl = T.mineFloor(st, C), cur = T.digFloor(st, C), F = C.MINE_FLOORS, next = F[fl + 1];
+  // 每層挖得到什麼（照機率由多到少，石頭不列）
+  const has = i => Object.keys(F[i].table).filter(k => C.MINERALS[k]).sort((a, b) => F[i].table[b] - F[i].table[a]);
   const bag = Object.keys(C.FISH).concat(Object.keys(C.MINERALS)).filter(k => st.inv[k]);
   const stoneNeed = T.materialNeed(st, "stone", C);
   let h = findHtml() + `<p class="muted">⚡ 釣魚、挖礦都會用掉體力，記得留一些給田和小鎮任務。</p>`;
@@ -481,18 +489,21 @@ function renderWild(d) {
     <div class="actions">${st.cast
       ? `<button class="btn go" onclick="startFish()">🎣 竿子還在水裡，繼續釣</button>`
       : `<button class="btn go" ${ap >= C.COST.fish ? "" : "disabled"} onclick="startFish()">🎣 甩竿 <span class="cost">${C.COST.fish}⚡</span></button>`}</div>
-    <h2 style="margin-top:16px">⛏️ 礦坑・${F[fl].zh}</h2>
-    <p class="muted">${next ? `再挖 ${next.at - st.mine.digs} 次可以往下到${next.zh}，越深越容易挖到值錢的礦。` : "已經挖到最深的一層了。"}</p>
+    <h2 style="margin-top:16px">⛏️ 礦坑・${F[cur].zh}</h2>
+    ${fl > 0 ? `<div class="actions floors">${F.slice(0, fl + 1).map((f, i) => `<button class="btn${i === cur ? " on" : ""}" onclick="pickFloor(${i})">${f.zh}<br><span class="fl-has">${has(i).map(itemIcon).join("")}</span></button>`).join("")}</div>
+    <p class="muted">選一層來挖。上面的層銅礦比較多，越深越容易挖到金礦和紫水晶。</p>` : ""}
+    <p class="muted">${next ? `再挖 ${next.at - st.mine.digs} 次可以往下開到${next.zh}。` : "最深的一層已經開了。"}</p>
     <div class="actions"><button class="btn go" ${ap >= C.COST.dig ? "" : "disabled"} onclick="doDig()">⛏️ 挖一下 <span class="cost">${C.COST.dig}⚡</span></button></div>`;
   h += `<h2 style="margin-top:16px">🎒 背包</h2>` + (bag.length
     ? `<div class="actions">${bag.map(k => `<button class="btn" onclick="act(T.sell(st,'${k}',${st.inv[k]},C))">${itemIcon(k)} ${esc(thing(k).en)} ×${st.inv[k]}・全部賣 ${earn(C.SELL[k] * st.inv[k])}</button>`).join("")}</div>
        <p class="muted">也可以留著送給喜歡的村民（村民分頁點頭像），好感 +1。</p>`
     : `<p class="muted">釣到的魚、挖到的礦會放在這裡。</p>`)
-    + `<p>🪨 石頭 ×${st.inv.stone || 0}　<span class="muted">建設材料，不能賣${stoneNeed ? `；這一階任務還要 ${stoneNeed} 顆` : ""}</span></p>`;
+    + `<p>${itemIcon("stone")} 石頭 ×${st.inv.stone || 0}　<span class="muted">建設材料，不能賣${stoneNeed ? `；這一階任務還要 ${stoneNeed} 顆` : ""}</span></p>`;
   h += `<h2 style="margin-top:16px">📖 圖鑑</h2><h3>魚</h3>` + dexHtml(Object.keys(C.FISH), k => C.FISH[k].seasons.length === 4 ? "四季" : C.FISH[k].seasons.join("、") + "季")
      + `<h3>礦石</h3>` + dexHtml(Object.keys(C.MINERALS));
   document.getElementById("wildBody").innerHTML = h;
 }
+function pickFloor(i) { act(T.chooseFloor(st, i, C)); }
 function doDig() {
   const r = act(T.dig(st, today(), C, Math.random()));
   if (r && r.ok) { lastFind = { k: r.found, first: r.first }; play(townAudio("catch_" + r.found)); render(); }
@@ -678,7 +689,7 @@ function renderShop() {
     <h2>📦 出貨</h2><p class="muted">作物賣掉換小鎮幣。稻米種子永遠免費，錢花光也能重新開始。</p><div class="grid2">${sellRows}</div>
     <h2 style="margin-top:16px">🌱 種子</h2><div class="grid2">${seeds}</div>
     <h2 style="margin-top:16px">🌼 裝飾</h2><p class="muted">擺在農莊裡不會賺錢，但每件會讓繁榮度 +${C.PROSPERITY.decor}（最多算 ${C.PROSPERITY.decorMax} 件），有些村民的任務也要用到。買了可以隨時免費搬家或收回。</p><div class="grid2">${decor}</div>
-    <h2 style="margin-top:16px">🎒 材料</h2><p>🪵 wood <span class="n">${st.inv.wood}</span>　🪨 stone <span class="n">${st.inv.stone}</span></p>`;
+    <h2 style="margin-top:16px">🎒 材料</h2><p>🪵 wood <span class="n">${st.inv.wood}</span>　${itemIcon("stone")} stone <span class="n">${st.inv.stone}</span></p>`;
 }
 
 // ── 村民與信件 ─────────────────────────────────────────────────────

@@ -74,7 +74,7 @@
              // 礦（MINERALS）
              copper: 0, iron: 0, gold: 0, quartz: 0, amethyst: 0 },
       dex: {},                   // 圖鑑：釣到／挖到過幾次 { 物品: 次數 }
-      mine: { digs: 0 },         // 礦坑挖了幾次（決定在第幾層）
+      mine: { digs: 0, floor: null }, // digs＝挖了幾次（決定最深開到第幾層）；floor＝現在選在哪一層（null＝最深那層）
       gifts: {},                 // 送禮：{ 村民: 最後送的那天 }，一天一次
       photos: {},                // 好感任務拿到的紀念照 { 任務id: 那天 }
       stagePhotos: {},           // 修好一階拿到的紀念照 { "plaza-1": 那天 }；照片本身看 town 修到第幾階
@@ -518,17 +518,29 @@
     if (first) note(st, today, "第一次釣到" + f.zh, f.say);
     return { ok: true, msg: (first ? "📖 新圖鑑！" : "") + "釣到了 " + f.en + "（" + f.zh + "）", caught: k, first: first };
   }
+  // 最深開到第幾層（0 起算）：挖越多次開越深，開了就一直開著
   function mineFloor(st, C) {
     var d = st.mine.digs, i = 0;
     while (i + 1 < C.MINE_FLOORS.length && d >= C.MINE_FLOORS[i + 1].at) i++;
     return i;
   }
+  // 現在挖哪一層：可以回到上面的層（例如回第 1 層挖銅礦），沒選就是最深那層
+  function digFloor(st, C) {
+    var deep = mineFloor(st, C), f = st.mine.floor;
+    return typeof f === "number" && f >= 0 && f < deep ? f : deep;
+  }
+  function chooseFloor(st, f, C) {
+    var deep = mineFloor(st, C);
+    if (typeof f !== "number" || f < 0 || f > deep || f !== Math.floor(f)) return fail("還沒開到這一層");
+    st.mine.floor = f === deep ? null : f;
+    return done(st, "");
+  }
   function dig(st, today, C, r) {
     if (!spend(st, C.COST.dig)) return fail("體力不夠（挖礦要 " + C.COST.dig + "）");
-    var fl = mineFloor(st, C), k = pickWeighted(C.MINE_FLOORS[fl].table, r);
+    var deep = mineFloor(st, C), k = pickWeighted(C.MINE_FLOORS[digFloor(st, C)].table, r);
     var first = found(st, k);
     st.mine.digs++;
-    var deeper = mineFloor(st, C) > fl, m = C.MINERALS[k];
+    var deeper = mineFloor(st, C) > deep, m = C.MINERALS[k];
     if (first && m) note(st, today, "第一次挖到" + m.zh, m.say);
     if (deeper) note(st, today, "礦坑下到" + C.MINE_FLOORS[mineFloor(st, C)].zh, "");
     st.rev++;
@@ -810,6 +822,8 @@
     var dx = obj(raw.dex);
     Object.keys(dx).forEach(function (k) { if (Object.prototype.hasOwnProperty.call(st.inv, k)) st.dex[k] = int(dx[k], 100000); });
     st.mine.digs = int(obj(raw.mine).digs, 1000000);
+    var mf = obj(raw.mine).floor;
+    st.mine.floor = typeof mf === "number" && mf >= 0 && mf < mineFloor(st, C) && mf === Math.floor(mf) ? mf : null;
     var gf = obj(raw.gifts);
     Object.keys(gf).forEach(function (v) { if (Object.prototype.hasOwnProperty.call(C.VILLAGERS, v) && isDate(gf[v])) st.gifts[v] = gf[v]; });
     var ph = obj(raw.photos);
@@ -872,7 +886,7 @@
     GROW_DAYS: GROW_DAYS, MAX_FIELDS: MAX_FIELDS, HEART_MAX: HEART_MAX, FIELD_BONUS_MAX: FIELD_BONUS_MAX, CARE_GROUP: CARE_GROUP, W: W, H: H, TOWN_START: TOWN_START,
     maxFields: maxFields, careCost: careCost, fillCost: fillCost,
     questOf: questOf, questState: questState, doQuest: doQuest, stageShotId: stageShotId, stageShots: stageShots, stageShot: stageShot,
-    pickWeighted: pickWeighted, fishTable: fishTable, cast: cast, giveUp: giveUp, fish: fish, mineFloor: mineFloor, dig: dig, giftable: giftable, gift: gift,
+    pickWeighted: pickWeighted, fishTable: fishTable, cast: cast, giveUp: giveUp, fish: fish, mineFloor: mineFloor, digFloor: digFloor, chooseFloor: chooseFloor, dig: dig, giftable: giftable, gift: gift,
     ymd: ymd, addDays: addDays, apWeek: apWeek, contentWeek: contentWeek, season: season,
     terrainAt: terrainAt, occupied: occupied, areaFree: areaFree,
     newState: newState, apTotal: apTotal, grant: grant, spend: spend, syncFromProgress: syncFromProgress,
