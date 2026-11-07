@@ -1,0 +1,170 @@
+{
+  "week": "2026-11-09",
+  "title": "期末考練習・第 1 週",
+  "focus": "Unit 3 食物單字、oi / oy、What would you like to eat?",
+  "days": [
+    {
+      "date": "2026-11-09", "label": "星期一",
+      "sections": [
+        { "type": "spell", "title": "看圖寫單字", "note": "先看一次拼法，再自己寫兩次。",
+          "items": [
+            { "em": "🍕", "zh": "披薩", "en": "pizza" },
+            { "em": "🍚", "zh": "米飯", "en": "rice" },
+            { "em": "🍲", "zh": "湯", "en": "soup" },
+            { "em": "🥩", "zh": "牛排", "en": "steak" },
+            { "em": "🍜", "zh": "麵", "en": "noodles" },
+            { "em": "🌽", "zh": "玉米", "en": "corn" } ] },
+        { "type": "vowel", "title": "oi 還是 oy？", "opts": ["oi", "oy"], "note": "小提示：oy 常在字的最後面，oi 常在字的中間。",
+          "items": [
+            { "em": "🪙", "zh": "硬幣", "pre": "c", "post": "n", "ans": "oi" },
+            { "em": "👦", "zh": "男孩", "pre": "b", "post": "", "ans": "oy" },
+            { "em": "🌱", "zh": "泥土", "pre": "s", "post": "l", "ans": "oi" },
+            { "em": "🧸", "zh": "玩具", "pre": "t", "post": "", "ans": "oy" },
+            { "em": "📢", "zh": "噪音", "pre": "n", "post": "se", "ans": "oi" },
+            { "em": "😄", "zh": "喜悅", "pre": "j", "post": "", "ans": "oy" } ] },
+        { "type": "lines", "title": "看圖完成句子",
+          "head": "A: What would you like to eat?",
+          "items": [
+            { "em": "🍜", "text": "B: I'd like some {{noodles}}, please." },
+            { "em": "🍲", "text": "B: I'd like some {{soup}}, please." },
+            { "em": "🍚", "text": "B: I'd like some {{rice}}, please." } ] },
+        { "type": "copy", "title": "抄寫句子",
+          "items": [ "What would you like to eat?", "I'd like some pizza, please." ] },
+        { "type": "spell", "title": "期中考錯字複習", "note": "期中考寫錯的字。看一次、蓋起來、寫兩次，再打開對一下。", "review": true,
+          "items": [
+            { "em": "🧋", "zh": "臺灣", "en": "Taiwan", "tip": "Tai + wan，ai 在 T 後面" },
+            { "em": "😣", "zh": "喉嚨痛", "en": "sore throat", "tip": "throat 的 oa 跟 boat 一樣" } ] }
+      ]
+    },
+    {
+      "date": "2026-11-10", "label": "星期二",
+      "sections": [
+        { "type": "spell", "title": "看圖寫單字", "note": "先看一次拼法，再自己寫兩次。",
+          "items": [
+            { "em": "🥟", "zh": "水餃", "en": "dumplings" },
+            { "em": "🥪", "zh": "三明治", "en": "sandwiches" },
+            { "em": "🍟", "zh": "薯條", "en": "French fries" },
+            { "em": "🥔", "zh": "馬鈴薯", "en": "potato" },
+            { "em": "🍽️", "zh": "盤子", "en": "plate" },
+            { "em": "😋", "zh": "餓的", "en": "hungry" } ] },
+        { "type": "recall", "title": "昨天的字（只看中文，不要偷看）",
+          "items": [
+            { "zh": "牛排", "en": "steak" },
+            { "zh": "麵（複數）", "en": "noodles" },
+            { "zh": "湯", "en": "soup" } ] },
+        { "type": "lines", "title": "一個 → 很多", "note": "字尾是 ch、sh、s、x 的加 es；potato、tomato 也加 es，其他大多加 s。",
+          "items": [
+            { "text": "one sandwich → two {{sandwiches}}" },
+            { "text": "one dumpling → five {{dumplings}}" },
+            { "text": "one potato → three {{potatoes}}" },
+            { "text": "one tomato → four {{tomatoes}}" } ] },
+        { "type": "lines", "title": "看圖完成對話", "note": "✔ 是想要，✘ 是不想要。B 用課本句子回答：Yes, please. 或 No, thank you.",
+          "items": [
+            { "em": "🥟 ✔", "text": "A: Would you like some {{dumplings}}?　B: {{Yes, please.}}" },
+            { "em": "🍲 ✘", "text": "A: Would you like some {{soup}}?　B: {{No, thank you.}}" } ] },
+        { "type": "copy", "title": "抄寫句子",
+          "items": [ "No, thank you. My plate is full." ] },
+        { "type": "spell", "title": "期中考錯字複習", "note": "看一次、蓋起來、寫兩次，再打開對一下。", "review": true,
+          "items": [
+            { "em": "🍁", "zh": "加拿大", "en": "Canada", "tip": "Ca-na-da，三個 a" },
+            { "em": "🦘", "zh": "澳洲", "en": "Australia", "tip": "Au 開頭，Aus-tra-li-a" } ] }
+      ]
+    },
+    {
+      "date": "2026-11-11", "label": "星期三",
+      "sections": [
+        { "type": "spell", "title": "看圖寫單字（oi / oy）", "note": "邊寫邊唸，oi 和 oy 唸法一樣。",
+          "items": [
+            { "em": "🪙", "zh": "硬幣", "en": "coin" },
+            { "em": "🌱", "zh": "泥土", "en": "soil" },
+            { "em": "📢", "zh": "噪音", "en": "noise" },
+            { "em": "👦", "zh": "男孩", "en": "boy" },
+            { "em": "🧸", "zh": "玩具", "en": "toy" },
+            { "em": "😄", "zh": "喜悅", "en": "joy" } ] },
+        { "type": "recall", "title": "前兩天的字（只看中文）",
+          "items": [
+            { "zh": "水餃（複數）", "en": "dumplings" },
+            { "zh": "三明治（複數）", "en": "sandwiches" },
+            { "zh": "薯條", "en": "French fries" },
+            { "zh": "披薩", "en": "pizza" } ] },
+        { "type": "sort", "title": "把字寫進正確的格子", "note": "每個字寫一次，格子不用填滿。", "cols": ["oi", "oy"],
+          "words": [ ["oil", "油", "oi"], ["Roy", "人名", "oy"], ["point", "指", "oi"], ["soy", "黃豆", "oy"], ["join", "加入", "oi"], ["boil", "煮沸", "oi"] ] },
+        { "type": "circle", "title": "圈出正確的字",
+          "items": [
+            { "text": "I'd like ( a / some ) noodles.", "ans": "some" },
+            { "text": "We'd like some ( sandwich / sandwiches ).", "ans": "sandwiches" },
+            { "text": "Tony would like ( a / some ) dumplings.", "ans": "some" },
+            { "text": "I'd like ( a / some ) sandwich, please.", "ans": "a" } ] },
+        { "type": "copy", "title": "抄寫句子",
+          "items": [ "There is a coin in the soil." ] },
+        { "type": "spell", "title": "期中考錯字複習", "note": "看一次、蓋起來、寫兩次，再打開對一下。", "review": true,
+          "items": [
+            { "em": "🤕", "zh": "頭痛", "en": "headache", "tip": "head + ache" },
+            { "em": "🤢", "zh": "肚子痛", "en": "stomachache", "tip": "stomach + ache，ache 是 a-c-h-e" } ] }
+      ]
+    },
+    {
+      "date": "2026-11-12", "label": "星期四",
+      "sections": [
+        { "type": "spell", "title": "看圖寫單字", "note": "先看一次拼法，再自己寫兩次。",
+          "items": [
+            { "em": "🥬", "zh": "新鮮的", "en": "fresh" },
+            { "em": "🍽️", "zh": "滿的", "en": "full" },
+            { "em": "👃", "zh": "聞起來", "en": "smell" },
+            { "em": "🧀", "zh": "起司", "en": "cheese" },
+            { "em": "🍅", "zh": "番茄（很多個）", "en": "tomatoes" },
+            { "em": "✅", "zh": "準備好的", "en": "ready" } ] },
+        { "type": "recall", "title": "這週的字（只看中文）",
+          "items": [
+            { "zh": "玉米", "en": "corn" },
+            { "zh": "米飯", "en": "rice" },
+            { "zh": "硬幣", "en": "coin" },
+            { "zh": "玩具", "en": "toy" } ] },
+        { "type": "lines", "title": "課本故事填空", "note": "I could eat a horse. 是「我餓極了」的誇張說法。", "box": ["fresh", "potatoes", "smells", "hungry", "full"],
+          "items": [
+            { "text": "The corn is {{fresh}}." },
+            { "text": "I like {{potatoes}}. I can make some French fries." },
+            { "text": "I'm done. It {{smells}} so good." },
+            { "text": "I'm so {{hungry}}. I could eat a horse." },
+            { "text": "No, thank you. My plate is {{full}}." } ] },
+        { "type": "reorder", "title": "把句子排好，寫在格子裡",
+          "items": [
+            { "chunks": ["eat?", "would", "What", "to", "you", "like"], "ans": "What would you like to eat?" },
+            { "chunks": ["some", "please.", "I'd", "dumplings,", "like"], "ans": "I'd like some dumplings, please." } ] },
+        { "type": "recall", "title": "期中考錯字複習（看中文和第一個字母）", "review": true,
+          "items": [
+            { "zh": "臺灣", "en": "Taiwan", "first": true },
+            { "zh": "加拿大", "en": "Canada", "first": true },
+            { "zh": "澳洲", "en": "Australia", "first": true },
+            { "zh": "喉嚨痛", "en": "sore throat", "first": true } ] }
+      ]
+    },
+    {
+      "date": "2026-11-13", "label": "星期五",
+      "test": true,
+      "sections": [
+        { "type": "recall", "title": "本週小考：看中文寫英文", "cols": 3,
+          "items": [
+            { "zh": "披薩", "en": "pizza" }, { "zh": "餓的", "en": "hungry" }, { "zh": "盤子", "en": "plate" },
+            { "zh": "牛排", "en": "steak" }, { "zh": "麵（複數）", "en": "noodles" }, { "zh": "水餃（複數）", "en": "dumplings" },
+            { "zh": "三明治（複數）", "en": "sandwiches" }, { "zh": "薯條", "en": "French fries" }, { "zh": "馬鈴薯（一顆）", "en": "potato" },
+            { "zh": "新鮮的", "en": "fresh" }, { "zh": "滿的", "en": "full" }, { "zh": "聞起來", "en": "smell" } ] },
+        { "type": "vowel", "title": "oi 還是 oy？", "opts": ["oi", "oy"],
+          "items": [
+            { "em": "📢", "zh": "噪音", "pre": "n", "post": "se", "ans": "oi" },
+            { "em": "😄", "zh": "喜悅", "pre": "j", "post": "", "ans": "oy" },
+            { "em": "🌱", "zh": "泥土", "pre": "s", "post": "l", "ans": "oi" },
+            { "em": "👦", "zh": "男孩", "pre": "b", "post": "", "ans": "oy" } ] },
+        { "type": "lines", "title": "完成對話",
+          "items": [
+            { "em": "🥪", "text": "A: What would you like to eat?　B: I'd like some {{sandwiches}}, please." },
+            { "em": "🍟 ✘", "text": "A: Would you like some French fries?　B: No, {{thank}} {{you}}." } ] },
+        { "type": "recall", "title": "期中考錯字複習（只看中文）", "review": true, "cols": 3,
+          "items": [
+            { "zh": "臺灣", "en": "Taiwan" }, { "zh": "加拿大", "en": "Canada" }, { "zh": "澳洲", "en": "Australia" },
+            { "zh": "喉嚨痛", "en": "sore throat" }, { "zh": "頭痛", "en": "headache" }, { "zh": "肚子痛", "en": "stomachache" } ] },
+        { "type": "retry", "title": "對完答案：挑最多 3 個錯字，各寫三次", "rows": 6 }
+      ]
+    }
+  ]
+}
