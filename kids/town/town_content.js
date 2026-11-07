@@ -873,6 +873,41 @@
           answer: "a", why: "don't have any flour 是一點麵粉都沒有。這個蛋糕需要麵粉，a 是去買麵粉；醋和洋蔥都解決不了沒有麵粉的問題。" },
       ],
     },
+    "2026-11-08": {
+      theme: "動物與棲地",
+      items: [
+        { id: "c1108-ben", speaker: "Ben", en: "Look! A bird made a nest in my mailbox. What should I do?", zh: "你看！有隻鳥在我的信箱裡築巢了。我該怎麼辦？",
+          choices: [
+            { id: "a", en: "Let's throw the nest away.", zh: "我們把鳥巢丟掉吧。" },
+            { id: "b", en: "Leave it there and don't touch it.", zh: "留著它，不要去碰。" },
+            { id: "c", en: "Let's put the bird in a cage.", zh: "我們把鳥關進籠子吧。" } ],
+          answer: "b", why: "nest 是鳥巢，裡面可能有鳥蛋或小鳥。不要碰它，等小鳥長大飛走；野鳥也不該關進籠子（cage）。" },
+        { id: "c1108-lily", speaker: "Lily", en: "Does a bat sleep at night?", zh: "蝙蝠晚上睡覺嗎？",
+          choices: [
+            { id: "a", en: "No, it doesn't. It sleeps during the day.", zh: "不，牠晚上不睡。牠白天睡覺。" },
+            { id: "b", en: "Yes, I do.", zh: "是的，我會。" },
+            { id: "c", en: "No, it isn't.", zh: "不，牠不是。" } ],
+          answer: "a", why: "Does a bat…? 要用 it does／it doesn't 回答。蝙蝠白天睡覺、晚上出來活動。Yes, I do. 是回答 Do you…?；No, it isn't. 是回答 Is it…?。" },
+        { id: "c1108-tom", speaker: "Tom", en: "Where does a hippopotamus live?", zh: "河馬住在哪裡？",
+          choices: [
+            { id: "a", en: "It lives in the sky.", zh: "牠住在天空。" },
+            { id: "b", en: "It eats grass.", zh: "牠吃草。" },
+            { id: "c", en: "It lives near rivers and lakes in Africa.", zh: "牠住在非洲的河流和湖泊附近。" } ],
+          answer: "c", why: "Where 問「在哪裡」，要回答地點。河馬住在非洲的河邊和湖邊。It eats grass. 回答的是「吃什麼」。" },
+        { id: "c1108-sam", speaker: "Sam", en: "I found a puppy in the rain. It's cold and wet.", zh: "我在雨中發現一隻小狗，牠又冷又濕。",
+          choices: [
+            { id: "a", en: "Let's leave it in the rain.", zh: "我們把牠留在雨裡吧。" },
+            { id: "b", en: "Let's dry it with a towel.", zh: "我們用毛巾把牠擦乾吧。" },
+            { id: "c", en: "Let's put it in the river.", zh: "我們把牠放進河裡吧。" } ],
+          answer: "b", why: "puppy 是小狗。牠又冷又濕，先用毛巾擦乾、讓牠保暖。留在雨裡或放進河裡都會讓牠更冷。" },
+        { id: "c1108-max", speaker: "Max", en: "A wild deer is eating the flowers in my garden!", zh: "有一隻野生的鹿在吃我花園裡的花！",
+          choices: [
+            { id: "a", en: "Let's give it some candy.", zh: "我們給牠一些糖果吧。" },
+            { id: "b", en: "Let's catch it and keep it at home.", zh: "我們抓住牠，養在家裡吧。" },
+            { id: "c", en: "Don't get too close. Give it space to leave.", zh: "不要靠太近，留出空間讓牠離開。" } ],
+          answer: "c", why: "wild 是野生的。野生動物不要餵、不要抓，也不要靠太近，牠受到驚嚇可能會踢人。退開一點，讓牠有路可以自己離開。" },
+      ],
+    },
   };
   Object.keys(CHATS).forEach(function (wk) { CHATS[wk].items.forEach(function (q, i) { q.week = wk; q.idx = i; }); });
 

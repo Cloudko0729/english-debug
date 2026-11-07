@@ -124,4 +124,9 @@ const DRILLS = [
   { day: 119, date: "2026-11-04", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 食物與營養＋期中考總複習", icon: "🍱" },
   { day: 120, date: "2026-11-05", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 食物與營養＋期中考總複習", icon: "🍱" },
   { day: 121, date: "2026-11-06", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第1週 食物與營養＋期中考總複習", icon: "🍱" },
+  { day: 122, date: "2026-11-09", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 動物與棲地＋文法根基", icon: "🦉" },
+  { day: 123, date: "2026-11-10", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 動物與棲地＋文法根基", icon: "🦉" },
+  { day: 124, date: "2026-11-11", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 動物與棲地＋文法根基", icon: "🦉" },
+  { day: 125, date: "2026-11-12", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 動物與棲地＋文法根基", icon: "🦉" },
+  { day: 126, date: "2026-11-13", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 動物與棲地＋文法根基", icon: "🦉" },
 ];

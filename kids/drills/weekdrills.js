@@ -1808,6 +1808,109 @@ const WEEK_DRILLS = {
       },
     ]
   },
+  "2026-11-2": {            // 11 月第2週 動物與棲地 · 第三人稱（lives／has／does）、Does it…? Yes, it does.
+    listenBlank: [
+      { full: "Dogs bark when strangers come near the house.", display: "Dogs ___ when strangers come near the house.", answer: "bark" },
+      { full: "A crab walks sideways on the beach. Watch out for its claws!", display: "A ___ walks sideways on the beach. Watch out for its claws!", answer: "crab", exclude: ["spider"] },
+      { full: "In the forest, a deer is quietly eating grass.", display: "In the forest, a ___ is quietly eating grass.", answer: "deer", exclude: ["goat","donkey","zebra","kangaroo","hippopotamus","goose","bug","insect","puppy"] },
+      { full: "The dinosaur in this museum is a T. rex.", display: "The ___ in this museum is a T. rex.", answer: "dinosaur" },
+      { full: "A dolphin is a smart sea animal. It likes to jump out of the water and play.", display: "A ___ is a smart sea animal. It likes to jump out of the water and play.", answer: "dolphin", exclude: ["whale","shark"] },
+      { full: "A donkey looks like a small horse with long ears.", display: "A ___ looks like a small horse with long ears.", answer: "donkey", exclude: ["zebra"] },
+      { full: "The eagle is a big bird. It flies high in the sky and catches fish with its sharp claws.", display: "The ___ is a big bird. It flies high in the sky and catches fish with its sharp claws.", answer: "eagle" },
+      { full: "Grandpa has a farm with cows, pigs and chickens.", display: "Grandpa has a ___ with cows, pigs and chickens.", answer: "farm", exclude: ["field","cage"] },
+      { full: "A goat can climb rocks, and it gives us milk.", display: "A ___ can climb rocks, and it gives us milk.", answer: "goat", exclude: ["deer","donkey"] },
+      { full: "A goose is a big white bird. It honks loudly at people.", display: "A ___ is a big white bird. It honks loudly at people.", answer: "goose", exclude: ["pigeon","parrot","eagle"] },
+      { full: "The hippopotamus is very big and spends most of the day in the river.", display: "The ___ is very big and spends most of the day in the river.", answer: "hippopotamus", exclude: ["crab","whale","dolphin","shark"] },
+      { full: "A bee is an insect. It has six legs.", display: "A bee is an ___. It has six legs.", answer: "insect", exclude: ["bug"] },
+      { full: "A kangaroo carries its baby in a pouch on its belly.", display: "A ___ carries its baby in a pouch on its belly.", answer: "kangaroo" },
+      { full: "The bird made a nest in the tree with small sticks.", display: "The bird made a ___ in the tree with small sticks.", answer: "nest", exclude: ["cage"] },
+      { full: "My parrot can say \"Hello!\" It has bright green feathers.", display: "My ___ can say \"Hello!\" It has bright green feathers.", answer: "parrot" },
+      { full: "A trained pigeon can carry a message back to its home.", display: "A trained ___ can carry a message back to its home.", answer: "pigeon", exclude: ["parrot","eagle","goose","puppy"] },
+      { full: "A puppy is a baby dog.", display: "A ___ is a baby dog.", answer: "puppy" },
+      { full: "Swim away fast! A shark has hundreds of sharp teeth.", display: "Swim away fast! A ___ has hundreds of sharp teeth.", answer: "shark", exclude: ["whale","dolphin","hippopotamus","crab","wolf"] },
+      { full: "This spider has eight legs and makes a web to catch bugs.", display: "This ___ has eight legs and makes a web to catch bugs.", answer: "spider", exclude: ["bug"] },
+      { full: "My dog wags its tail when it's happy.", display: "My dog wags its ___ when it's happy.", answer: "tail" },
+      { full: "The blue whale is the biggest animal in the world.", display: "The blue ___ is the biggest animal in the world.", answer: "whale", exclude: ["shark","dinosaur","dolphin"] },
+      { full: "At night, the wolf howls to other wolves.", display: "At night, the ___ howls to other wolves.", answer: "wolf" },
+      { full: "In the Stardew Valley mines, a bat flies out of the dark.", display: "In the Stardew Valley mines, a ___ flies out of the dark.", answer: "bat", exclude: ["bug","insect","cockroach","pigeon","eagle","parrot","goose"] },
+      { full: "There is a little bug on my sandwich. Is it an ant?", display: "There is a little ___ on my sandwich. Is it an ant?", answer: "bug", exclude: ["insect","spider","cockroach"] },
+      { full: "Our hamster lives in a cage in my bedroom.", display: "Our hamster lives in a ___ in my bedroom.", answer: "cage", exclude: ["nest"] },
+      { full: "I saw a big brown cockroach in the kitchen! It has six legs and two long antennae.", display: "I saw a big brown ___ in the kitchen! It has six legs and two long antennae.", answer: "cockroach", exclude: ["bug","insect"] },
+      { full: "This bird lost a feather. It's soft and light.", display: "This bird lost a ___. It's soft and light.", answer: "feather" },
+      { full: "The cows are eating grass in the field.", display: "The cows are eating grass in the ___.", answer: "field", exclude: ["farm","cage"] },
+      { full: "Lions and tigers are wild animals. They don't live with people.", display: "Lions and tigers are ___ animals. They don't live with people.", answer: "wild", exclude: ["farm"] },
+      { full: "A zebra looks like a horse with black and white stripes.", display: "A ___ looks like a horse with black and white stripes.", answer: "zebra", exclude: ["donkey"] },
+    ],
+    reorder: [
+      { sentence: "Where does a whale live?", chunks: ["Where does","a whale","live?"] },
+      { sentence: "It lives in the sea.", chunks: ["It lives","in","the sea."] },
+      { sentence: "Does a bat sleep during the day?", chunks: ["Does a bat","sleep","during the day?"] },
+      { sentence: "Yes, it does.", chunks: ["Yes,","it","does."] },
+      { sentence: "A kangaroo can jump very far.", chunks: ["A kangaroo","can jump","very far."] },
+      { sentence: "The eagle builds its nest in a tall tree.", chunks: ["The eagle builds","its nest","in a tall tree."] },
+      { sentence: "My puppy wags its tail when it sees me.", chunks: ["My puppy wags","its tail","when it sees me."] },
+      { sentence: "Don't feed the wild animals.", chunks: ["Don't feed","the wild","animals."] },
+      { sentence: "A spider is not an insect.", chunks: ["A spider","is not","an insect."] },
+      { sentence: "A zebra doesn't eat meat.", chunks: ["A zebra","doesn't eat","meat."] },
+      { sentence: "There are some goats on the farm.", chunks: ["There are","some goats","on the farm."] },
+      { sentence: "The parrot doesn't live in a cage.", chunks: ["The parrot","doesn't live","in a cage."] },
+      { sentence: "Does a dolphin breathe air?", chunks: ["Does a dolphin","breathe","air?"] },
+      { sentence: "No, it doesn't. It eats grass.", chunks: ["No, it doesn't.","It eats","grass."] },
+      { sentence: "What does a hippopotamus eat?", chunks: ["What does","a hippopotamus","eat?"] },
+      { sentence: "The goose is chasing my little brother!", chunks: ["The goose","is chasing","my little brother!"] },
+      { sentence: "Dinosaurs lived on Earth a long time ago.", chunks: ["Dinosaurs lived","on Earth","a long time ago."] },
+      { sentence: "A wolf has a long tail and sharp teeth.", chunks: ["A wolf has","a long tail","and sharp teeth."] },
+      { sentence: "Pigeons are flying over the field.", chunks: ["Pigeons","are flying","over the field."] },
+      { sentence: "My uncle has a donkey on his farm.", chunks: ["My uncle","has a donkey","on his farm."] },
+    ],
+    reading: [
+      {
+        passage: "In Stardew Valley, my farmer has two goats and a puppy on his farm. Every morning, he gives the goats some hay. His goats give him milk every other day. The puppy follows him to the field. At night, he goes into the mines. Bats fly out of the dark, so he always brings his sword.",
+        questions: [
+          { q: "What animals does the farmer have?", choices: ["Two goats and a puppy","Two cows and a cat","A donkey and a parrot","Three chickens"], answer: "Two goats and a puppy" },
+          { q: "What do the goats give him?", choices: ["Milk","Eggs","Feathers","Hay"], answer: "Milk" },
+          { q: "Where does the puppy follow him?", choices: ["To the field","To the mines","To the beach","To school"], answer: "To the field" },
+          { q: "Why does he always bring his sword to the mines?", choices: ["Bats fly out of the dark","He wants to cut hay","He wants to catch fish","The puppy likes it"], answer: "Bats fly out of the dark" },
+        ]
+      },
+      {
+        passage: "Last Friday, our class went to the zoo. First, we saw a big hippopotamus. It stayed in the water most of the time. Then we watched the kangaroos. A baby kangaroo was in its mother's pouch. My favorite animal was the zebra. Its black and white stripes are so beautiful. I want to go again!",
+        questions: [
+          { q: "Where did the class go last Friday?", choices: ["To the zoo","To a farm","To the beach","To a museum"], answer: "To the zoo" },
+          { q: "Where did the hippopotamus stay most of the time?", choices: ["In the water","In a tree","In a cage","In the field"], answer: "In the water" },
+          { q: "Where was the baby kangaroo?", choices: ["In its mother's pouch","In the water","Next to the zebra","In a nest"], answer: "In its mother's pouch" },
+          { q: "What was the writer's favorite animal?", choices: ["The zebra","The hippopotamus","The kangaroo","The eagle"], answer: "The zebra" },
+        ]
+      },
+      {
+        passage: "Whales, dolphins and sharks all live in the sea, but they are different. A shark is a fish. A whale and a dolphin are not fish. They have to come up to breathe air. Dolphins are very smart. They live in groups and talk to each other with clicks and whistles.",
+        questions: [
+          { q: "Where do whales, dolphins and sharks live?", choices: ["In the sea","In rivers","On the farm","In the forest"], answer: "In the sea" },
+          { q: "Which one is a fish?", choices: ["The shark","The whale","The dolphin","All of them"], answer: "The shark" },
+          { q: "Why do whales and dolphins come up?", choices: ["To breathe air","To eat grass","To sleep","To find sharks"], answer: "To breathe air" },
+          { q: "How do dolphins talk to each other?", choices: ["With clicks and whistles","With letters","By writing words","They don't talk"], answer: "With clicks and whistles" },
+        ]
+      },
+      {
+        passage: "Last night, my sister screamed. There was a big cockroach in the kitchen! Dad caught it with a paper cup and put it outside. Then I saw a spider in the corner of my room. I didn't kill it. Spiders eat bugs, so they help us. Now I call my spider Mr. Eight Legs.",
+        questions: [
+          { q: "Why did the sister scream?", choices: ["There was a cockroach in the kitchen","She saw a spider","Dad broke a cup","She lost her puppy"], answer: "There was a cockroach in the kitchen" },
+          { q: "How did Dad catch the cockroach?", choices: ["With a paper cup","With his hands","With a cage","With a book"], answer: "With a paper cup" },
+          { q: "Why didn't the writer kill the spider?", choices: ["Spiders eat bugs","It was too big","Dad said no","It was outside"], answer: "Spiders eat bugs" },
+          { q: "What does the writer call the spider?", choices: ["Mr. Eight Legs","Mr. Bug","Little Cockroach","Mr. Web"], answer: "Mr. Eight Legs" },
+        ]
+      },
+      {
+        passage: "In our town game, Jack saw a whale near the harbor this morning. Max told everyone to stay out of the water. \"Whales are wild animals, and they are very big,\" he said. Mia took a photo of the whale from the beach. Now the photo is on the library wall, and everyone stops to look at it.",
+        questions: [
+          { q: "What did Jack see this morning?", choices: ["A whale","A shark","A dolphin","An eagle"], answer: "A whale" },
+          { q: "What did Max tell everyone to do?", choices: ["Stay out of the water","Swim with the whale","Feed the whale","Go fishing"], answer: "Stay out of the water" },
+          { q: "What did Max say about whales?", choices: ["They are wild animals, and they are very big","They have sharp teeth","They are fish","They are small"], answer: "They are wild animals, and they are very big" },
+          { q: "Where is the photo now?", choices: ["On the library wall","In Jack's boat","At the harbor","In Max's bag"], answer: "On the library wall" },
+        ]
+      },
+    ]
+  },
 };
 // 每篇短文的「沒教過的生字」中文解釋（index 對應該週 reading[]）
 const PASSAGE_GLOSSARY = {
@@ -1944,6 +2047,13 @@ const PASSAGE_GLOSSARY = {
     [{"en":"ate","zh":"吃了（eat 的過去式）"},{"en":"drank","zh":"喝了（drink 的過去式）"},{"en":"almost","zh":"幾乎"},{"en":"felt","zh":"覺得（feel 的過去式）"},{"en":"sleepy","zh":"想睡的"},{"en":"school nurse","zh":"學校護理師"},{"en":"tired","zh":"累的"},{"en":"told him to …","zh":"告訴他要……（told 是 tell 的過去式）"},{"en":"change","zh":"改變"},{"en":"vegetables","zh":"蔬菜"},{"en":"feels much better","zh":"覺得好多了"},{"en":"excited","zh":"興奮的"},{"en":"cook","zh":"廚師"}],
     [{"en":"restaurant","zh":"餐廳"},{"en":"ordered","zh":"點（餐）（order 的過去式）"},{"en":"beef","zh":"牛肉"},{"en":"didn't have any","zh":"沒有（炒飯）可以賣"},{"en":"had","zh":"吃了（have 的過去式）"},{"en":"dumplings","zh":"水餃"},{"en":"taste better","zh":"吃起來更好吃"},{"en":"full","zh":"飽的"},{"en":"night market","zh":"夜市"},{"en":"expensive","zh":"貴的"}],
     [{"en":"job","zh":"工作"},{"en":"baker","zh":"麵包師"},{"en":"fisherman","zh":"漁夫"},{"en":"bakes","zh":"烤（麵包、蛋糕）"},{"en":"loaves","zh":"一條條（麵包）（loaf 的複數）"},{"en":"fresh","zh":"新鮮的"},{"en":"warm","zh":"溫熱的"},{"en":"is building","zh":"正在蓋"},{"en":"restaurant","zh":"餐廳"},{"en":"healthy food","zh":"健康的食物"},{"en":"everyone","zh":"每個人"}],
+  ],
+  "2026-11-2": [
+    [{"en":"Stardew Valley","zh":"《星露谷物語》（遊戲名稱）"},{"en":"farmer","zh":"農夫"},{"en":"hay","zh":"乾草"},{"en":"follows","zh":"跟著"},{"en":"mines","zh":"礦坑"},{"en":"dark","zh":"黑暗的地方"},{"en":"brings","zh":"帶著"},{"en":"sword","zh":"劍"},{"en":"cows","zh":"乳牛"},{"en":"chickens","zh":"雞"},{"en":"eggs","zh":"蛋"},{"en":"cut","zh":"割、切"},{"en":"catch fish","zh":"抓魚"},{"en":"every other day","zh":"每隔一天"},{"en":"beach","zh":"海灘"}],
+    [{"en":"went","zh":"去了（go 的過去式）"},{"en":"zoo","zh":"動物園"},{"en":"saw","zh":"看到（see 的過去式）"},{"en":"stayed","zh":"待著（stay 的過去式）"},{"en":"most of the time","zh":"大部分時間"},{"en":"watched","zh":"看（watch 的過去式）"},{"en":"pouch","zh":"（袋鼠的）育兒袋"},{"en":"favorite","zh":"最喜歡的"},{"en":"stripes","zh":"條紋"},{"en":"beautiful","zh":"美麗的"},{"en":"again","zh":"再一次"},{"en":"writer","zh":"作者（寫這段文章的人）"},{"en":"museum","zh":"博物館"},{"en":"next to","zh":"在……旁邊"}],
+    [{"en":"different","zh":"不一樣的"},{"en":"fish","zh":"魚類"},{"en":"have to","zh":"必須"},{"en":"come up","zh":"浮上來"},{"en":"breathe","zh":"呼吸"},{"en":"air","zh":"空氣"},{"en":"smart","zh":"聰明的"},{"en":"groups","zh":"群體（一群一群）"},{"en":"each other","zh":"彼此"},{"en":"clicks","zh":"喀喀聲"},{"en":"whistles","zh":"口哨聲"},{"en":"rivers","zh":"河流"},{"en":"forest","zh":"森林"},{"en":"All of them","zh":"全部都是"},{"en":"letters","zh":"信件"},{"en":"writing words","zh":"寫字"}],
+    [{"en":"screamed","zh":"尖叫（scream 的過去式）"},{"en":"kitchen","zh":"廚房"},{"en":"caught","zh":"抓到（catch 的過去式）"},{"en":"paper cup","zh":"紙杯"},{"en":"outside","zh":"外面"},{"en":"corner","zh":"角落"},{"en":"kill","zh":"殺死"},{"en":"help","zh":"幫助"},{"en":"call","zh":"叫……（名字）"},{"en":"broke","zh":"打破（break 的過去式）"},{"en":"lost","zh":"弄丟（lose 的過去式）"},{"en":"web","zh":"蜘蛛網"},{"en":"saw","zh":"看到（see 的過去式）"},{"en":"writer","zh":"作者（寫這段文章的人）"},{"en":"said","zh":"說（say 的過去式）"}],
+    [{"en":"harbor","zh":"港口、碼頭"},{"en":"this morning","zh":"今天早上"},{"en":"told everyone to …","zh":"叫大家要……（told 是 tell 的過去式）"},{"en":"stay out of the water","zh":"不要下水"},{"en":"saw","zh":"看到（see 的過去式）"},{"en":"said","zh":"說（say 的過去式）"},{"en":"wild animals","zh":"野生動物"},{"en":"feed","zh":"餵食"},{"en":"sharp teeth","zh":"尖利的牙齒"},{"en":"took a photo","zh":"拍了一張照片（took 是 take 的過去式）"},{"en":"beach","zh":"海灘"},{"en":"library","zh":"圖書館"},{"en":"wall","zh":"牆"},{"en":"stops to look at it","zh":"停下來看它"},{"en":"go fishing","zh":"去釣魚"},{"en":"boat","zh":"船"}],
   ],
 };
 function weekDrillFor(monthStr, weekN) { return WEEK_DRILLS[monthStr + "-" + weekN] || null; }
