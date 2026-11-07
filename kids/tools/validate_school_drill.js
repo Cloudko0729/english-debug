@@ -73,7 +73,9 @@ function main() {
       }
       // 課文填空：把選項填回去，只有正解能還原成原句
       if (q.kind === "sentence" && q.full) {
-        const fits = q.choices.filter(c => q.q.replace("＿＿＿", c) === q.full);
+        // 題目前面有「先聽句子，選出課文說的字：」提示，比對前拿掉
+        const stem = q.q.replace(/^先聽句子，選出課文說的字：/, "");
+        const fits = q.choices.filter(c => stem.replace("＿＿＿", c) === q.full);
         if (fits.length > 1) { bad(`${at} 有 ${fits.length} 個選項填進去都對`); multi++; }
         if (fits.length === 0) { bad(`${at} 正解填回去跟原句對不起來`); multi++; }
       }
@@ -119,7 +121,11 @@ function main() {
   if (before.phase !== "midterm") bad(`10/20 應該在準備期中，實際 ${before.phase}`);
   else if (after.phase !== "final") bad(`11/10 應該在準備期末，實際 ${after.phase}`);
   else console.log("  ✓ 11/5 前後自動換場（期中 → 期末）");
-  if (after.days !== null) bad("期末日期未公布，倒數不該有數字");
+  // 期末 2027-01-12～13 考兩天：11/10 還有 63 天；1/13 第二天也算考試日；1/14 之後就不再出期末題
+  if (after.days !== 63) bad("11/10 到期末 1/12 應該 63 天，實際 " + after.days);
+  if (nextExamFor("2027-01-13").days !== 0) bad("1/13 是期末第二天，倒數應為 0");
+  if (examFocusFor("2027-01-14") !== null) bad("期末考完（1/14）不該再排練習");
+  if (!examFocusFor("2027-01-11")) bad("考前一天 1/11 應該有考前總複習");
   // 期中考在週四，那一週到週日才結束 —— 11/06 不該還在複習考完的東西
   const d6 = examFocusFor("2026-11-06");
   if (!d6 || d6.phase !== "final") bad("11/06 沒有換到期末範圍：" + (d6 ? d6.label : "無"));

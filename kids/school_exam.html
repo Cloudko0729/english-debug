@@ -32,14 +32,27 @@ header a{color:#ffe27a;text-decoration:none;font-weight:700}
 .missing{font-size:.8rem;color:#b3621a;background:#fff6ec;border:1px dashed #f0c9a0;border-radius:8px;padding:8px 11px;margin-top:8px}
 .pgrid{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
 .pgrid span{background:#f6f9fd;border:1px solid #dbe6f2;border-radius:6px;padding:3px 8px;font-size:.8rem;cursor:pointer}
+.mock{background:#fff;border-radius:12px;padding:9px 13px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.mock summary{font-weight:800;color:#b8371f;cursor:pointer;font-size:.9rem}
+.mock a{display:block;text-align:center;background:#e8563f;color:#fff;font-weight:800;border-radius:10px;padding:9px;margin-top:8px;text-decoration:none;font-size:.88rem}
+#tips .card{background:#eef5ff;border:2px solid #2f80ed;border-radius:14px;padding:11px 15px;margin-bottom:12px}
+#tips h3{font-size:.92rem;color:#1d5fbf;margin-bottom:6px}
+#tips li{font-size:.84rem;line-height:1.7;margin-left:18px;color:#2c4a68}
+#tips .sub{font-size:.76rem;color:#6a7c8f;margin-top:6px}
+.pairs{display:flex;flex-wrap:wrap;gap:6px}
+.pairs span{background:#fff;border:1px solid #f2c4b8;border-radius:8px;padding:3px 9px;font-size:.85rem}
+.pairs b{cursor:pointer;color:#b8371f} .pairs i{color:#bbb;font-style:normal;margin:0 4px}
 </style></head><body>
 <header><h1>📕 學校課本</h1>
 <p><a href="index.html">← 回首頁</a> · 國小六上 · 點單字或句子發音</p></header>
 
 <div id="cd"></div>
-<a href="drills/exam_midterm.html" style="display:block;text-align:center;background:#e8563f;color:#fff;font-weight:800;border-radius:12px;padding:11px;margin-bottom:12px;text-decoration:none">📝 寫一份期中考模擬卷 →</a>
-<a href="drills/exam_midterm2.html" style="display:block;text-align:center;background:#e8563f;color:#fff;font-weight:800;border-radius:12px;padding:11px;margin-bottom:12px;text-decoration:none">📝 期中考模擬卷（二）：照考古題題型 →</a>
-<a href="drills/exam_midterm3.html" style="display:block;text-align:center;background:#e8563f;color:#fff;font-weight:800;border-radius:12px;padding:11px;margin-bottom:12px;text-decoration:none">📝 期中考模擬卷（三）：考前最後一份 →</a>
+<div id="tips"></div>
+<details id="midmock" class="mock"><summary>📕 期中考模擬卷（三份，可拿來複習）</summary>
+<a href="drills/exam_midterm.html">📝 期中考模擬卷（一）→</a>
+<a href="drills/exam_midterm2.html">📝 期中考模擬卷（二）：照考古題題型 →</a>
+<a href="drills/exam_midterm3.html">📝 期中考模擬卷（三）：考前最後一份 →</a>
+</details>
 <div id="bar"></div>
 <div id="main"></div>
 
@@ -47,6 +60,9 @@ header a{color:#ffe27a;text-decoration:none;font-weight:700}
 <script src="school_db/exam_plan.js?v=202608282100"></script>
 <script>
 var T=TEXTBOOK_G6A, fc="all";
+function todayStr(){var d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+// 期中考考完就先看期末範圍（分頁還是可以切回全部）
+if(todayStr()>EXAMS.midterm.date) fc="fin";
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){
   return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
 function akey(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,"_").replace(/^_|_$/g,"");}
@@ -57,10 +73,16 @@ function akey(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,"_").repla
   var t=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
   var el=document.getElementById("cd");
   var ex=nextExamFor(t);
+  var when=ex.end?ex.date+"～"+ex.end.slice(5):ex.date;
+  if(ex.tips&&ex.tips.length&&ex.days!==null&&ex.days>=0){
+    document.getElementById("tips").innerHTML='<div class="card"><h3>📗 '+esc(ex.name)+'常考的地方</h3><ul>'+
+      ex.tips.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+
+      '</ul><div class="sub">整理自兩份同版本課本的他校考卷，還有習作。</div></div>';
+  }
   if(ex.days===null)
     el.innerHTML='<div class="big">'+esc(ex.name)+'</div><div class="sub">日期未定　·　'+esc(ex.scope)+'</div>';
   else if(ex.days>0)
-    el.innerHTML='<div class="big">還有 '+ex.days+' 天</div><div class="sub">'+esc(ex.name)+' '+ex.date+'　·　'+esc(ex.scope)+'</div>';
+    el.innerHTML='<div class="big">還有 '+ex.days+' 天</div><div class="sub">'+esc(ex.name)+' '+when+'　·　'+esc(ex.scope)+'</div>';
   else if(ex.days===0)
     el.innerHTML='<div class="big">今天考試！</div><div class="sub">'+esc(ex.name)+'　·　加油 💪</div>';
   else
@@ -99,6 +121,11 @@ function unitHtml(u){
       });
     });
     h+='</div>';
+    if((u.phonics.pairs||[]).length){
+      h+='<div class="lab">易混字（長得像、音不同）</div><div class="pairs">'+u.phonics.pairs.map(function(pr){
+        return '<span>'+pr.map(function(w){return '<b onclick="say(\''+akey(w)+'\')">'+esc(w)+'</b>';}).join('<i>／</i>')+'</span>';
+      }).join("")+'</div>';
+    }
     if((u.phonics.chant||[]).length)
       h+='<div class="story">'+u.phonics.chant.map(function(c){return '<div>'+esc(c)+'</div>';}).join("")+'</div>';
   }
@@ -108,6 +135,10 @@ function unitHtml(u){
        u.story.map(function(s,i){return '<div onclick="say(\''+akey(u.id+"_st"+i)+'\')">'+esc(s)+'</div>';}).join("")+'</div>';
   }
   if(u.reading) h+='<div class="lab">Reading — '+esc(u.reading.title)+'</div><div class="story">'+esc(u.reading.text)+'</div>';
+  if((u.workbook||[]).length){
+    h+='<div class="lab">習作句子 '+u.workbook.length+' 句</div><div class="story">'+
+       u.workbook.map(function(s,i){return '<div onclick="say(\''+akey(u.id+"_wb"+i)+'\')">'+esc(s)+'</div>';}).join("")+'</div>';
+  }
   if(u.moreToLearn){
     h+='<div class="lab">More to Learn — '+esc(u.moreToLearn.title)+'</div><div class="story">'+esc(u.moreToLearn.text)+'</div>'+
        '<div class="vv" style="margin-top:6px">'+u.moreToLearn.items.map(function(x){
@@ -142,12 +173,15 @@ function draw(){
       if(r.passages.length){
         h+='<div class="lab">短文</div>';
         r.passages.forEach(function(p,i){
-          h+='<div class="story" style="margin-bottom:6px" onclick="say(\''+akey("r1_p"+i)+'\')">'+esc(p.text)+
-             '<div style="font-size:.76rem;color:#8a949e;margin-top:5px">'+esc(p.country)+'　症狀：'+p.symptoms.join("、")+'　→ '+esc(p.remedy)+'</div></div>';
+          var body=p.lines?p.lines.map(function(x){return '<div>'+esc(x)+'</div>';}).join(""):esc(p.text);
+          var meta=p.country?'<div style="font-size:.76rem;color:#8a949e;margin-top:5px">'+esc(p.country)+'　症狀：'+p.symptoms.join("、")+'　→ '+esc(p.remedy)+'</div>':"";
+          h+=(p.title?'<div style="font-size:.84rem;font-weight:700;color:#2c4a68;margin-top:4px">'+esc(p.title)+'</div>':"")+
+             '<div class="story" style="margin-bottom:6px" onclick="say(\''+akey(r.id+"_p"+i)+'\')">'+body+meta+'</div>';
         });
       }
+      if((r.words||[]).length) h+='<div class="lab">生字</div>'+vlist(r.words);
       if(r.phonicsGrid.length){
-        h+='<div class="lab">Four in a Row（'+r.phonicsGrid.length+' 字混合辨音）</div><div class="pgrid">'+
+        h+='<div class="lab">'+(r.n===1?"Four in a Row":"Play and Say")+'（'+r.phonicsGrid.length+' 字混合辨音）</div><div class="pgrid">'+
            r.phonicsGrid.map(function(w){return '<span onclick="say(\''+akey(w)+'\')">'+esc(w)+'</span>';}).join("")+'</div>';
       }
       if(r._note) h+='<div class="missing">⚠️ '+esc(r._note)+'</div>';

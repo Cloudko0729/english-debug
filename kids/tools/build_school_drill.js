@@ -57,18 +57,23 @@ function unitQuestions(u, allVocab) {
   });
 
   // ③ phonics：哪一個字是這一組的音
+  // oi／oy、ou／ow 兩組唸起來一樣（sameSound），只能問「用哪個拼」，問「哪個有 oi 的音」會有兩個對。
+  // 干擾項先用同課另一組（考的就是分辨這兩組），不夠再用別課的字。
   (phonics.groups || []).forEach(g => {
     const mine = (phonics.words || []).filter(w => w.g === g).map(w => w.w);
     if (!mine.length) return;
-    const others = T.units.flatMap(x => (x.phonics.words || []))
-      .filter(w => w.g !== g).map(w => w.w);
-    mine.forEach(w => {
-      const ch = order([w, ...others.slice(0, 3)], w);
-      if (ch && ch.length >= 3) qs.push({ kind: "phonics", q: `哪一個字有 ${g} 的音？`, choices: ch, answer: w, audio: akey(w) });
+    const sameUnit = (phonics.words || []).filter(w => w.g !== g).map(w => w.w);
+    const others = sameUnit.concat(T.units.filter(x => x !== u).flatMap(x => (x.phonics.words || [])).map(w => w.w));
+    const q = phonics.sameSound ? `哪一個字是用 ${g} 拼的？` : `哪一個字有 ${g} 的音？`;
+    mine.forEach((w, i) => {
+      const pick = others.slice(i % 2, i % 2 + 3);
+      const ch = order([w, ...pick], w);
+      if (ch && ch.length >= 3) qs.push({ kind: "phonics", q, choices: ch, answer: w, audio: akey(w) });
     });
   });
 
   // ④ 課文句子填空：挖掉本課單字
+  // 只看句子常常不只一個答案（I'd like some ___ 填哪種食物都通），所以題目明講要先聽音檔、選課文說的那個字
   (u.story || []).forEach((s, i) => {
     const hit = u.vocab.find(v => new RegExp("\\b" + v.en.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "i").test(s));
     if (!hit) return;
@@ -76,7 +81,7 @@ function unitQuestions(u, allVocab) {
     const others = u.vocab.filter(v => v.en !== hit.en).map(v => v.en);
     const ch = order([hit.en, ...others.slice(0, 3)], hit.en);
     if (ch && ch.length >= 3) {
-      qs.push({ kind: "sentence", q: display, choices: ch, answer: hit.en, audio: akey(u.id + "_st" + i), full: s });
+      qs.push({ kind: "sentence", q: "先聽句子，選出課文說的字：" + display, choices: ch, answer: hit.en, audio: akey(u.id + "_st" + i), full: s });
     }
   });
 
@@ -130,7 +135,28 @@ function main() {
     });
   });
   bank.r1 = r1;
-  bank.r2 = [];
+
+  // Review 2：短文題目直接寫在資料裡（不是 Review 1 那種國家＋症狀的固定結構）
+  const R2 = T.reviews[1], r2 = [];
+  (R2.passages || []).forEach((p, i) => {
+    const text = (p.lines || []).join(" ") || p.text;
+    (p.questions || []).forEach(x => {
+      const ch = order(x.choices, x.answer);
+      if (ch && ch.length >= 3) r2.push({ kind: "reading", passage: text, q: x.q, choices: ch, answer: x.answer, audio: akey("r2_p" + i) });
+    });
+  });
+  // Play and Say：oi／oy／ou／ow 混合。同音的兩組一樣問「用哪個拼」
+  const G2 = w => (/oi/.test(w) ? "oi" : /oy/i.test(w) ? "oy" : /ou/.test(w) ? "ou" : /ow/.test(w) ? "ow" : null);
+  const by2 = {};
+  (R2.phonicsGrid || []).forEach(w => { const g = G2(w); if (g) (by2[g] = by2[g] || []).push(w); });
+  Object.entries(by2).forEach(([g, ws]) => {
+    const others = Object.entries(by2).filter(([x]) => x !== g).flatMap(([, w]) => w);
+    ws.slice(0, 5).forEach((w, i) => {
+      const ch = order([w, ...others.slice(i * 2, i * 2 + 3)], w);
+      if (ch && ch.length >= 3) r2.push({ kind: "phonics", q: `哪一個字是用 ${g} 拼的？`, choices: ch, answer: w, audio: akey(w) });
+    });
+  });
+  bank.r2 = r2;
 
   // 中秋節：跟各單元用同一支產生器（它現在也有 patterns 與 story），
   // 再加上課本 p.85「圈出不屬於中秋的東西」那個活動改成的辨識題。

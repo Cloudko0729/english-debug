@@ -1,7 +1,7 @@
 // 學校考試範圍與考前每週進度表。
 //
 // 期中考 2026-11-05（四）：Unit 1、Unit 2、Review 1、中秋節（補充教材）
-// 期末考 日期未定：       Unit 3、Unit 4、Review 2
+// 期末考 2027-01-12（二）、01-13（三）：Unit 3、Unit 4、Review 2
 //
 // 每日練習的第 ⑨ 段「學校課本」會依 DRILL_DATE 查這張表，決定今天要練哪一課。
 // 週次沿用既有規則：週日起算，跟 curriculum.js 一致。
@@ -22,9 +22,20 @@ const EXAMS = {
     units: ["u1", "u2", "r1", "moon"],
   },
   final: {
-    name: "期末考", date: null,          // 學校還沒公布
+    name: "期末考", date: "2027-01-12", end: "2027-01-13",   // 考兩天
     scope: "Unit 3、Unit 4、Review 2",
     units: ["u3", "u4", "r2"],
+    // 從兩份同版本他校考卷（高雄永安 114 期末、新北安和 114 第二次段考）看出來常考的地方
+    tips: [
+      "時間要會用英文字寫：seven fifty、six forty-five、four twenty、eleven fifteen",
+      "他／她要寫完整句：He gets up at… / She has breakfast at… / No, he doesn't.",
+      "my／his／her／their homework 要配主詞",
+      "at six、at the park；on Saturdays、on weekdays、on weekends",
+      "I'd／He'd／We'd／They'd like some…",
+      "聽音選字：shout／short／shoot、boy／bow／born、cloud／clown、owl／oil／eel",
+      "課文句子英翻中：You're an early bird.、I could eat a horse.、Sorry for waking you up.",
+      "看答句寫問句：___? → He does his homework at eight fifty.",
+    ],
   },
 };
 
@@ -47,14 +58,17 @@ const EXAM_PLAN = {
     { start: "2026-11-01", phase: "midterm", focus: ["u1", "u2", "r1", "moon"], label: "期中考總複習（11/5 考）" },
 
     // ── 期末考範圍（Unit 3、4、Review 2）───────────────────────────
-    { start: "2026-11-08", phase: "final", focus: ["u3"],             label: "Unit 3 食物單字＋What would you like to eat?" },
-    { start: "2026-11-15", phase: "final", focus: ["u3"],             label: "Unit 3 Would you like…?＋oi／oy" },
-    { start: "2026-11-22", phase: "final", focus: ["u3"],             label: "Unit 3 課文複習" },
-    { start: "2026-11-29", phase: "final", focus: ["u4"],             label: "Unit 4 作息單字＋What time do you…?" },
-    { start: "2026-12-06", phase: "final", focus: ["u4"],             label: "Unit 4 時間唸法＋ou／ow" },
-    { start: "2026-12-13", phase: "final", focus: ["u3", "u4"],       label: "Unit 3＋4 混合（跨課辨別）" },
-    { start: "2026-12-20", phase: "final", focus: ["u4", "r2"],       label: "Unit 4 收尾＋Review 2" },
-    { start: "2026-12-27", phase: "final", focus: ["u3", "u4", "r2"], label: "期末考總複習" },
+    // 跟期末練習卷（kids/tools/final_practice）同一份進度
+    { start: "2026-11-08", phase: "final", focus: ["u3"],             label: "Unit 3 食物單字＋I'd like／Would you like…?＋oi／oy" },
+    { start: "2026-11-15", phase: "final", focus: ["u3"],             label: "Unit 3 披薩短文（First／Next／Then／Lastly）＋some 可數／不可數" },
+    { start: "2026-11-22", phase: "final", focus: ["u4"],             label: "Unit 4 作息片語＋What time do you…?＋時間唸法" },
+    { start: "2026-11-29", phase: "final", focus: ["u4"],             label: "Unit 4 does／gets／has／goes＋ou／ow" },
+    { start: "2026-12-06", phase: "final", focus: ["u4", "r2"],       label: "Unit 4 Building Good Habits＋Review 2" },
+    { start: "2026-12-13", phase: "final", focus: ["u3", "r2"],       label: "Unit 3 總複習" },
+    { start: "2026-12-20", phase: "final", focus: ["u4", "r2"],       label: "Unit 4 總複習" },
+    { start: "2026-12-27", phase: "final", focus: ["u3", "u4", "r2"], label: "模擬卷（一）：照他校考卷題型" },
+    { start: "2027-01-03", phase: "final", focus: ["u3", "u4", "r2"], label: "模擬卷（二）＋錯字清零" },
+    { start: "2027-01-10", phase: "final", focus: ["u3", "u4", "r2"], label: "考前總複習（1/12、1/13 考）" },
   ],
 };
 
@@ -67,7 +81,7 @@ function examFocusFor(dateStr) {
   if (!hit) return null;
   // 考完就別再複習那一場 —— 期中考在 11/5（週四），但那一週到 11/7 才結束，
   // 只看週界的話 11/6、11/7 還會出「期中考總複習」。考完隔天直接跳到下一場的第一週。
-  const exDate = EXAMS[hit.phase].date;
+  const exDate = EXAMS[hit.phase].end || EXAMS[hit.phase].date;
   if (exDate && dateStr > exDate) {
     const next = ws.find(w => w.phase !== hit.phase && w.start > exDate);
     if (!next) return null;
@@ -75,17 +89,21 @@ function examFocusFor(dateStr) {
   }
   // 最後一週之後就停 —— 排程沒排到的日子不要硬出題
   const last = ws[ws.length - 1];
-  const lastEnd = (() => { const p = last.start.split("-"); const d = new Date(+p[0], +p[1] - 1, +p[2]); d.setDate(d.getDate() + 6); return d.toISOString().slice(0, 10); })();
+  // 本地時間自組字串：toISOString() 是 UTC，在 UTC+8 會少一天
+  const lastEnd = (() => { const p = last.start.split("-"); const d = new Date(+p[0], +p[1] - 1, +p[2]); d.setDate(d.getDate() + 6);
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); })();
   if (dateStr > lastEnd) return null;
   return hit;
 }
 
-// 那一天正在準備哪一場考試，還有幾天。期末日期未定時 days 為 null。
+// 那一天正在準備哪一場考試，還有幾天。日期未定時 days 為 null；考試期間（date～end）days 為 0。
 function nextExamFor(dateStr) {
   const wk = examFocusFor(dateStr);
   const phase = wk ? wk.phase : (dateStr <= EXAMS.midterm.date ? "midterm" : "final");
   const ex = EXAMS[phase];
-  return { phase, name: ex.name, date: ex.date, scope: ex.scope, days: ex.date ? diffDays(dateStr, ex.date) : null };
+  let days = ex.date ? diffDays(dateStr, ex.date) : null;
+  if (days !== null && days < 0 && ex.end && dateStr <= ex.end) days = 0;
+  return { phase, name: ex.name, date: ex.date, end: ex.end || null, scope: ex.scope, tips: ex.tips || [], days };
 }
 
 function diffDays(from, to) {

@@ -44,14 +44,21 @@ function main() {
 
   console.log("school_exam.html：");
   t("內嵌 script 跑得起來", !err, err && err.message);
+  const finMain = byId.get("main").innerHTML;
+  // 期中考考完，預設先看期末範圍
+  t("期中考完預設顯示期末（U3、U4、Review 2）", (finMain.match(/<h2>Unit /g) || []).length === 2 && /Unit 3/.test(finMain) && /Review 2/.test(finMain));
+  t("期末常考提示有畫出來", /常考的地方/.test(byId.get("tips").innerHTML));
+  vm.runInContext('fc="all";draw()', sb);
   const main = byId.get("main").innerHTML, cd = byId.get("cd").innerHTML, bar = byId.get("bar").innerHTML;
   t("倒數有算出來", /還有 \d+ 天|今天考試|考完了/.test(cd), cd.replace(/<[^>]+>/g, "").slice(0, 60));
   t("4 個 Unit 都畫出來", (main.match(/<h2>Unit /g) || []).length === 4);
   t("Review 有 2 個", (main.match(/<h2>Review /g) || []).length === 2);
   t("中秋與 Task 有出現", /Moon Festival/.test(main) && /Country Guessing/.test(main));
   t("分頁鈕 9 個", (bar.match(/<button/g) || []).length === 9);
-  // 未拍照的三處（U3、U4、Review 2）要標出來，不要讓人以為那裡本來就是空的
-  t("未拍照的單元有標註", (main.match(/⚠️/g) || []).length === 3, (main.match(/⚠️/g) || []).length);
+  // 2026-11 補拍後 U3、U4、Review 2 都齊了，不該再有「未拍照」的標註
+  t("沒有未拍照的標註", (main.match(/⚠️/g) || []).length === 0, (main.match(/⚠️/g) || []).length);
+  t("U3、U4 有課文、習作句子、易混字", /Let's Make a Pizza/.test(main) && /Building Good Habits/.test(main) && /習作句子/.test(main) && /易混字/.test(main));
+  t("Review 2 有對話與 Play and Say", /A Call from Mom/.test(main) && /Play and Say（36/.test(main));
 
   const keys = [...new Set([...main.matchAll(/say\('([^']+)'\)/g)].map(m => m[1]))];
   const miss = keys.filter(k => !fs.existsSync(path.join(AUDIO, k + ".mp3")));
