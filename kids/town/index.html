@@ -305,9 +305,18 @@ function reload(msg) {
   stopFish();
   const r = T.load(storage(), student, today(), C);
   st = r.st; sel = null; moving = null;
-  T.syncFromProgress(st, progress());
-  if (msg) toast(msg);
+  const got = T.syncFromProgress(st, progress());
+  const aw = T.claimAwards(st, C);
+  // 這裡不存檔（跟原本一樣）：reload 常在存檔衝突後被叫，存了可能又衝突；下一個動作就會存
+  if (msg || got || aw.ap) toast([msg, (got || aw.ap) ? gainMsg(got, aw) : ""].filter(Boolean).join("；"));
   render();
+}
+
+// 打開小鎮時領到的體力：家長獎勵寫出原因，每日練習等合在一起
+function gainMsg(got, aw) {
+  const parts = (aw && aw.items || []).map(a => "🎁 " + a.note + "：+" + a.ap + " ⚡");
+  if (got) parts.push("做英文換來的體力：+" + got + " ⚡");
+  return parts.join("；");
 }
 
 function toast(msg) {
@@ -358,9 +367,10 @@ function pick(name) {
   const r = T.load(storage(), student, today(), C);
   st = r.st;
   const got = T.syncFromProgress(st, progress());
+  const aw = T.claimAwards(st, C);
   persist();
   if (r.problem) toast("原本的存檔讀不懂（" + r.problem + "），已經另存備份，先開一份新的");
-  else if (got) toast("做英文換來的體力：+" + got + " ⚡");
+  else if (aw.ap || got) toast(gainMsg(got, aw));
   sel = null; moving = null; render();
 }
 
@@ -1023,7 +1033,8 @@ function refresh() {
   try { cur = JSON.parse(storage().getItem(T.key(student)) || "null"); } catch (e) {}
   if (cur && cur.rev > st._baseRev && st._baseRev >= 0) return reload("另一個分頁更新了進度，已經重新載入");
   const got = T.syncFromProgress(st, progress());
-  if (got) { persist(); toast("做英文換來的體力：+" + got + " ⚡"); }
+  const aw = T.claimAwards(st, C);
+  if (got || aw.ap) { persist(); toast(gainMsg(got, aw)); }
   render();
 }
 document.addEventListener && document.addEventListener("visibilitychange", () => {

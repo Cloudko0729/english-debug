@@ -911,6 +911,17 @@
   };
   Object.keys(CHATS).forEach(function (wk) { CHATS[wk].items.forEach(function (q, i) { q.week = wk; q.idx = i; }); });
 
+  // 家長發的體力獎勵（網站以外的學習：紙本練習卷、訂正）。打開小鎮時自動領，每個 id 只發一次，
+  // 不算在每週上限裡。note 會顯示給孩子看。
+  var AWARDS = {
+    albert: [
+      { id: "final-w1", on: "2026-11-09", ap: 30, note: "期末考練習第 1 週：五天提早寫完，也訂正了" },
+    ],
+    jonathan: [
+      { id: "final-w1", on: "2026-11-09", ap: 30, note: "期末考練習第 1 週：五天提早寫完，也訂正了" },
+    ],
+  };
+
   // 每張卡、每段故事標上它所屬的週，規則用它判斷開放了沒
   Object.keys(WEEKS).forEach(function (wk) {
     WEEKS[wk].cards.forEach(function (x) { x.week = wk; });
@@ -920,7 +931,7 @@
   var api = { CROPS: CROPS, SELL: SELL, BUY: BUY, DECOR: DECOR, COST: COST, NAME: NAME, CARE_BONUS: CARE_BONUS, FILL_EXTRA: FILL_EXTRA,
               QUESTS: QUESTS, PHOTO_PROSPERITY: PHOTO_PROSPERITY,
               FISH: FISH, FISH_TIER: FISH_TIER, MINERALS: MINERALS, MINE_FLOORS: MINE_FLOORS, MINE_STONE_SAY: MINE_STONE_SAY, LINES: LINES,
-              LANDMARKS: LANDMARKS, PROSPERITY: PROSPERITY, VILLAGERS: VILLAGERS, WEEKS: WEEKS, CHATS: CHATS };
+              LANDMARKS: LANDMARKS, PROSPERITY: PROSPERITY, VILLAGERS: VILLAGERS, WEEKS: WEEKS, CHATS: CHATS, AWARDS: AWARDS };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.TownContent = api;
 })(typeof window !== "undefined" ? window : this);

@@ -677,6 +677,23 @@
     var e = st.energy, toWallet = Math.min(n, Math.max(0, AP_WALLET_CAP - e.wallet));
     e.wallet += toWallet; e.reserve += n - toWallet;
   }
+  // 家長發的獎勵：網站以外的學習（紙本練習卷、訂正）。清單在 TownContent.AWARDS[學生]，
+  // 每筆 id 只發一次（收據 award:<id>），不算在每日 100／加分 40 的週上限裡。
+  function claimAwards(st, C) {
+    var list = (C && C.AWARDS && C.AWARDS[st.student]) || [];
+    var got = 0, items = [];
+    list.forEach(function (a) {
+      if (!a || typeof a.id !== "string" || !(a.ap > 0)) return;
+      var key = "award:" + a.id;
+      if (st.energy.receipts[key]) return;
+      st.energy.receipts[key] = { on: DATE_RE.test(a.on) ? a.on : st.createdAt, amount: a.ap };
+      addEnergy(st, a.ap);
+      got += a.ap; items.push(a);
+    });
+    if (got) st.rev++;
+    return { ap: got, items: items };
+  }
+
   // 只有這一週的題目能答（過了那週就看不到）
   function chatAnswer(st, id, choiceId, today, C) {
     var q = chatOf(id, C);
@@ -891,7 +908,7 @@
     terrainAt: terrainAt, occupied: occupied, areaFree: areaFree,
     newState: newState, apTotal: apTotal, grant: grant, spend: spend, syncFromProgress: syncFromProgress,
     growth: growth, isRipe: isRipe, caredToday: caredToday, cropDays: cropDays, careDays: careDays, doubleChance: doubleChance,
-    roll: roll, unlocked: unlocked, landmarkOpen: landmarkOpen, chatOf: chatOf, chatSpeaker: chatSpeaker, chatPrize: chatPrize, chatSeedKinds: chatSeedKinds, chatAnswer: chatAnswer,
+    roll: roll, unlocked: unlocked, landmarkOpen: landmarkOpen, chatOf: chatOf, chatSpeaker: chatSpeaker, chatPrize: chatPrize, chatSeedKinds: chatSeedKinds, chatAnswer: chatAnswer, claimAwards: claimAwards,
     addField: addField, move: move, plant: plant, care: care, harvest: harvest,
     sell: sell, buy: buy, gather: gather, placeDecor: placeDecor, storeDecor: storeDecor,
     materialNeed: materialNeed, nextGoal: nextGoal, stageView: stageView, doTask: doTask, haveOf: haveOf,

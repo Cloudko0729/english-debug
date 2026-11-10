@@ -779,5 +779,24 @@ Object.entries(C.WEEKS).forEach(([wk, w]) => {
   eq("Nora 搬來了就是 Nora 問", T.chatSpeaker(st5, items[2], C), "Nora");
 }
 
+console.log("\n── 家長獎勵 ──");
+{
+  ["albert", "jonathan"].forEach(kid => (C.AWARDS[kid] || []).forEach(a => {
+    ok(kid + " " + a.id + " 格式正確", typeof a.id === "string" && /^\d{4}-\d{2}-\d{2}$/.test(a.on) && a.ap > 0 && a.ap <= 100 && !!a.note);
+  }));
+  const CC = { AWARDS: { test: [{ id: "w1", on: "2026-11-09", ap: 30, note: "紙本" }, { id: "bad", ap: 0 }] } };
+  const st = fresh();
+  // 先把這週的每日練習額度用滿，獎勵還是要拿得到
+  for (let i = 0; i < 10; i++) T.grant(st, "daily:x" + i, 10, "2026-10-05");
+  const before = T.apTotal(st);
+  const r = T.claimAwards(st, CC);
+  eq("獎勵 +30、不受週上限", [r.ap, T.apTotal(st) - before], [30, 30]);
+  eq("ap 0 的不發", r.items.map(a => a.id), ["w1"]);
+  ok("同一筆不能領兩次", T.claimAwards(st, CC).ap === 0);
+  const n = T.normalize(JSON.parse(JSON.stringify(st)), "test", "2026-11-10", C);
+  ok("存檔重開後還記得領過", T.claimAwards(n, CC).ap === 0);
+  ok("別人的獎勵不會發給這個帳號", T.claimAwards(fresh(), { AWARDS: { albert: CC.AWARDS.test } }).ap === 0);
+}
+
 console.log(`\n${fail === 0 ? "✅" : "❌"} pass ${pass} / fail ${fail}\n`);
 process.exit(fail ? 1 : 0);

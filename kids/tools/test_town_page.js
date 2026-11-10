@@ -340,6 +340,8 @@ console.log("\n── 存檔 ──");
 const saved = JSON.parse(store.get("kidsTown.v1.test"));
 ok("存檔寫進 localStorage", saved.schemaVersion === 1 && saved.hearts.Mia === miaH0 + 1);
 run("pick('albert')"); ok("換帳號是另一份存檔", G.st.student === "albert" && G.st.hearts.Mia === undefined);
+ok("家長獎勵：打開就領，訊息寫出原因", G.st.energy.receipts["award:final-w1"] && el("toast").innerHTML.includes("🎁 期末考練習第 1 週"));
+{ const ap0 = run("T.apTotal(st)"); run("refresh()"); ok("家長獎勵不會重複領", run("T.apTotal(st)") === ap0); }
 ok("一般帳號沒有不限量按鈕", !el("hud").innerHTML.includes("testBoost"));
 const apA = run("T.apTotal(st)"); run("testBoost(50)");
 ok("一般帳號就算呼叫也不會加", run("T.apTotal(st)") === apA);
