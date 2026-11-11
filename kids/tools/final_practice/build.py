@@ -79,7 +79,7 @@ def sec_circle(s, show):
             return "( " + " / ".join(f'<span class="{"ring" if show and p == it["ans"] else ""}">{E(p)}</span>' for p in parts) + " )"
         body = re.sub(r"\(\s*([^)]+?)\s*\)", opt, E(it["text"]))
         h += f'<div class="ln">{i}. {body}</div>'
-    return f'<div class="grid c2 circ">{h}</div>'
+    return f'<div class="grid c{s.get("cols", 2)} circ">{h}</div>'
 
 
 def sec_sort(s, show):
@@ -117,10 +117,10 @@ def page(wk, d, n, show):
     m, dd = d["date"][5:7].lstrip("0"), d["date"][8:].lstrip("0")
     key = '<span class="key">解答</span>' if show else ""
     return f'''<div class="page"><div class="inner">
-      <header><div><div class="t">{E(wk["title"])}　Day {n}　{m}/{dd}（{E(d["label"][-1])}）{key}</div><div class="f">{E(wk["focus"])}</div></div>
+      <header><div><div class="t">{E(wk["title"])}　{E(d.get("tag") or f"Day {n}")}　{m}/{dd}（{E(d["label"][-1])}）{key}</div><div class="f">{E(wk["focus"])}</div></div>
         <div class="who">姓名 ＿＿＿＿＿＿　開始 ＿＿:＿＿　結束 ＿＿:＿＿</div></header>
       {body}
-      <footer>{"錯的字圈起來，明天再寫一次。" if not d.get("test") else "對完答案，把錯的字寫在 E 欄。"}　家長簽名 ＿＿＿＿＿＿</footer>
+      <footer>{E(d["footer"]) if d.get("footer") else "錯的字圈起來，明天再寫一次。" if not d.get("test") else "對完答案，把錯的字寫在 E 欄。"}　家長簽名 ＿＿＿＿＿＿</footer>
     </div></div>'''
 
 
@@ -178,7 +178,8 @@ section { display: flex; flex-direction: column }
 def build(path, out_dir):
     wk = json.load(open(path, encoding="utf-8"))
     os.makedirs(out_dir, exist_ok=True)
-    base = os.path.join(out_dir, f'{wk["week"]}_{wk["title"].replace("・", "_").replace(" ", "")}')
+    # file：自訂檔名（例如個人化的週末複習卷），不給就用「週一日期_標題」
+    base = os.path.join(out_dir, wk.get("file") or f'{wk["week"]}_{wk["title"].replace("・", "_").replace(" ", "")}')
     with sync_playwright() as pw:
         b = pw.chromium.launch()
         for show, suffix in ((False, ""), (True, "_解答")):

@@ -1,0 +1,256 @@
+{
+ "week": "2026-11-14",
+ "file": "jonathan-2026-11-14_期末考練習_第1週_週末複習",
+ "title": "期末考・第 1 週週末複習",
+ "focus": "本週沒想起來的字、Would you like some…? 對話、句尾標點",
+ "days": [
+  {
+   "date": "2026-11-14",
+   "label": "星期六",
+   "tag": "複習 1",
+   "sections": [
+    {
+     "type": "spell",
+     "title": "看一次、蓋起來、寫兩次",
+     "note": "把英文和小提示一起蓋住再寫，寫完打開對一下。",
+     "items": [
+      {
+       "em": "🍽️",
+       "zh": "盤子",
+       "en": "plate",
+       "tip": "pl-a-t-e，a 唸自己的名字"
+      },
+      {
+       "em": "🥬",
+       "zh": "新鮮的",
+       "en": "fresh",
+       "tip": "sh 結尾"
+      },
+      {
+       "em": "😌",
+       "zh": "滿的",
+       "en": "full",
+       "tip": "兩個 l"
+      },
+      {
+       "em": "👃",
+       "zh": "聞起來",
+       "en": "smell",
+       "tip": "sm + ell，兩個 l"
+      },
+      {
+       "em": "🥟",
+       "zh": "水餃（複數）",
+       "en": "dumplings",
+       "tip": "很多個，加 s"
+      },
+      {
+       "em": "🥪",
+       "zh": "三明治（複數）",
+       "en": "sandwiches",
+       "tip": "ch 後面加 es"
+      },
+      {
+       "em": "🍟",
+       "zh": "薯條",
+       "en": "French fries",
+       "tip": "F 大寫"
+      }
+     ]
+    },
+    {
+     "type": "circle",
+     "title": "a 還是 some？一個還是很多個？",
+     "note": "a 是一個；some 是一些，可以接複數（some dumplings）或湯、飯（some soup）。",
+     "items": [
+      {
+       "text": "I'd like ( a / some ) sandwich（一個）, please.",
+       "ans": "a"
+      },
+      {
+       "text": "We'd like some ( sandwich / sandwiches ).（好幾個）",
+       "ans": "sandwiches"
+      },
+      {
+       "text": "I'd like some ( dumpling / dumplings ).",
+       "ans": "dumplings"
+      },
+      {
+       "text": "I'd like ( a / some ) French fries.",
+       "ans": "some"
+      }
+     ],
+     "cols": 1
+    },
+    {
+     "type": "lines",
+     "title": "看圖完成對話",
+     "note": "✓ 是想要，✘ 是不想要。B 用 Yes, please. 或 No, thank you. 兩個圖＝很多個。",
+     "items": [
+      {
+       "em": "🥟🥟 ✓",
+       "text": "A: Would you like some {{dumplings}}?　B: {{Yes, please}}."
+      },
+      {
+       "em": "🍲 湯 ✘",
+       "text": "A: Would you like some {{soup}}?　B: {{No, thank you}}."
+      },
+      {
+       "em": "🥪🥪",
+       "text": "A: What would you like to eat?　B: I'd like some {{sandwiches}}, please."
+      }
+     ]
+    },
+    {
+     "type": "lines",
+     "title": "課本句子填空",
+     "box": [
+      "fresh",
+      "full",
+      "smells",
+      "plate"
+     ],
+     "items": [
+      {
+       "text": "The corn is {{fresh}}."
+      },
+      {
+       "text": "It {{smells}} so good."
+      },
+      {
+       "text": "No, thank you. My {{plate}} is {{full}}."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-11-15",
+   "label": "星期日",
+   "tag": "複習 2",
+   "test": true,
+   "sections": [
+    {
+     "type": "recall",
+     "title": "只看中文，不要偷看",
+     "cols": 3,
+     "items": [
+      {
+       "zh": "盤子",
+       "en": "plate"
+      },
+      {
+       "zh": "新鮮的",
+       "en": "fresh"
+      },
+      {
+       "zh": "滿的",
+       "en": "full"
+      },
+      {
+       "zh": "聞起來",
+       "en": "smell"
+      },
+      {
+       "zh": "水餃（複數）",
+       "en": "dumplings"
+      },
+      {
+       "zh": "薯條",
+       "en": "French fries"
+      },
+      {
+       "zh": "三明治（一個）",
+       "en": "sandwich"
+      },
+      {
+       "zh": "三明治（複數）",
+       "en": "sandwiches"
+      },
+      {
+       "zh": "餓的",
+       "en": "hungry"
+      }
+     ]
+    },
+    {
+     "type": "reorder",
+     "title": "把句子排好，寫在格子裡",
+     "note": "句尾的 . 或 ? 也要寫。第 2 題用 No, thank you. 開頭。",
+     "items": [
+      {
+       "chunks": [
+        "some",
+        "Would",
+        "dumplings?",
+        "you",
+        "like"
+       ],
+       "ans": "Would you like some dumplings?"
+      },
+      {
+       "chunks": [
+        "My",
+        "No, thank you.",
+        "is",
+        "full.",
+        "plate"
+       ],
+       "ans": "No, thank you. My plate is full."
+      },
+      {
+       "chunks": [
+        "French fries,",
+        "I'd",
+        "please.",
+        "some",
+        "like"
+       ],
+       "ans": "I'd like some French fries, please."
+      }
+     ]
+    },
+    {
+     "type": "lines",
+     "title": "自己寫回答",
+     "note": "✓ 是想要，✘ 是不想要。",
+     "items": [
+      {
+       "em": "🍕 ✓",
+       "text": "A: Would you like some pizza?　B: {{Yes, please.}}"
+      },
+      {
+       "em": "🍜 ✘",
+       "text": "A: Would you like some noodles?　B: {{No, thank you.}}"
+      }
+     ]
+    },
+    {
+     "type": "recall",
+     "title": "期中考錯字：保持住（只看中文）",
+     "review": true,
+     "cols": 3,
+     "items": [
+      {
+       "zh": "臺灣",
+       "en": "Taiwan"
+      },
+      {
+       "zh": "澳洲",
+       "en": "Australia"
+      },
+      {
+       "zh": "肚子痛",
+       "en": "stomachache"
+      }
+     ]
+    },
+    {
+     "type": "retry",
+     "title": "對完答案：最多挑 3 個錯字，各蓋住重寫一次",
+     "rows": 3
+    }
+   ]
+  }
+ ]
+}
