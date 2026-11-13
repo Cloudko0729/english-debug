@@ -159,6 +159,19 @@ console.log("\n── 廣場任務與繁榮度 ──");
   ok("交市集任務的按鈕帶市集", el("p-town").innerHTML.includes("doTask(st,'market','m1-wood'"));
   ok("廣場縮成一行打勾", el("p-town").innerHTML.includes("小鎮廣場 ✅"));
   ok("農莊目標卡換成市集", el("goal").innerHTML.includes("週末市集") && el("goal").innerHTML.includes("搭起攤位"));
+  {
+    const h = el("p-town").innerHTML;
+    ok("廣場番外收在可展開的區塊裡（主線沒修完不自動展開）", h.includes('<details class="extra">') && h.includes("番外「鐘塔」") && h.includes("task_p4-stone"));
+    ok("番外寫出故事和限定裝飾", h.includes("Ben 的表演七點半開始") && h.includes("img/decor/clocktower.png") && h.includes("clock tower"));
+    // 把廣場番外做完 → 慶祝卡秀出裝飾，商店的限定裝飾區顯示已拿到
+    run("['p4-stone','p4-wood','p4-copper','p4-carry'].forEach(id => st.tasks[id] = { date: today() }); st.decorOwned.bench = 1; act(T.doTask(st,'plaza','p4-bench',today(),C))");
+    ok("番外做完：慶祝卡秀出限定裝飾", G.st.town.plaza === 4 && G.st.decorOwned.clocktower === 1 && el("folkBox").innerHTML.includes("拿到限定裝飾") && el("folkBox").innerHTML.includes("img/decor/clocktower.png"));
+    run("closeFolk(); tab('shop')");
+    const shop = el("p-shop").innerHTML;
+    ok("商店：限定裝飾另外列、沒拿到的顯示 ???、沒有購買按鈕", shop.includes("限定裝飾") && shop.includes("???") && !shop.includes("T.buy(st,'clocktower'") && !shop.includes("T.buy(st,'oven'"));
+    run("tab('town')");
+    ok("廣場番外做完後整個縮成一行", el("p-town").innerHTML.includes("小鎮廣場 ✅") && !el("p-town").innerHTML.includes("task_p4-stone"));
+  }
   // 市集第 3 階交到剩最後一個 → 交完應該說海邊碼頭開放了，Jack 搬來
   run("st.town.plaza = 3; st.town.market = 2; st.tasks = {}; ['m3-mailbox','m3-carry','m3-pumpkin','m3-tree'].forEach(id => st.tasks[id] = { date: today() }); ['Nora','Ben','Sam','Lily','Tom'].forEach(v => st.residents[v] = today()); st.inv.rice = 4; T.arrive(st, today(), C)");
   run("act(T.doTask(st,'market','m3-rice',today(),C))");

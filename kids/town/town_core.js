@@ -325,10 +325,12 @@
     else st.inv[item] = (st.inv[item] || 0) + n;
     return done(st, "買好了，花 " + price * n + " 小鎮幣");
   }
-  // 地標開放了沒：after 寫的前一個地標要全部修好
+  // 主線階段數：extra＝true 的是修好之後才加的番外階段（有限定裝飾），不擋下一個地標
+  function coreStages(L) { return L.stages.filter(function (sg) { return !sg.extra; }).length; }
+  // 地標開放了沒：after 寫的前一個地標主線要全部修好（番外不算）
   function landmarkOpen(st, key, C) {
     var L = C.LANDMARKS[key];
-    return !!L && (!L.after || (st.town[L.after] || 0) >= C.LANDMARKS[L.after].stages.length);
+    return !!L && (!L.after || (st.town[L.after] || 0) >= coreStages(C.LANDMARKS[L.after]));
   }
   // 這一階還沒交的任務，總共還要多少某種材料（只算開放中地標的目前這一階，跟畫面上列出來的一致）
   function materialNeed(st, item, C) {
@@ -342,7 +344,10 @@
   }
   // 下一個目標：第一個還沒修完的地標的這一階（給農莊頁的目標卡）
   function nextGoal(st, C) {
-    var key = Object.keys(C.LANDMARKS).find(function (k) { return landmarkOpen(st, k, C) && (st.town[k] || 0) < C.LANDMARKS[k].stages.length; });
+    var keys = Object.keys(C.LANDMARKS).filter(function (k) { return landmarkOpen(st, k, C); });
+    // 主線還沒修完的優先；主線都好了才輪到番外階段
+    var key = keys.find(function (k) { return (st.town[k] || 0) < coreStages(C.LANDMARKS[k]); }) ||
+              keys.find(function (k) { return (st.town[k] || 0) < C.LANDMARKS[k].stages.length; });
     return key ? stageView(st, key, C) : null;
   }
   function gather(st, material, today, C) {
@@ -375,6 +380,7 @@
   function haveOf(st, item, C) {
     if (item === "ap") return apTotal(st);
     if (item === "money") return st.money;
+    if (item === "fish") return Object.keys(C.FISH).reduce(function (n, k) { return n + (st.inv[k] || 0); }, 0);
     if (C.DECOR[item]) return st.decorOwned[item] || 0;
     return st.inv[item] || 0;
   }
@@ -382,6 +388,12 @@
   function take(st, item, n, C) {
     if (item === "ap") spend(st, n);
     else if (item === "money") st.money -= n;
+    else if (item === "fish") {
+      // 任何魚都收：先拿最便宜的，稀有的留在背包
+      Object.keys(C.FISH).sort(function (a, b) { return (C.SELL[a] || 0) - (C.SELL[b] || 0) || (a < b ? -1 : 1); }).forEach(function (k) {
+        var use = Math.min(n, st.inv[k] || 0); st.inv[k] -= use; n -= use;
+      });
+    }
     else if (C.DECOR[item]) st.decorOwned[item] -= n;
     else st.inv[item] -= n;
   }
@@ -391,13 +403,16 @@
     var L = C.LANDMARKS[key], i = st.town[key] || 0, sg = L.stages[i];
     if (!sg) return null;
     var sum = {};
-    var tasks = sg.tasks.map(function (t) {
+    var tasks = sg.tasks.map(function (t, ti) {
       var have = haveOf(st, t.need.item, C), doneT = !!st.tasks[t.id], here = isResident(st, t.by, C);
+      // inOrder 的階段：前面的任務都交了，這個才開
+      var locked = !!sg.inOrder && !doneT && sg.tasks.slice(0, ti).some(function (q) { return !st.tasks[q.id]; });
       if (!doneT) sum[t.need.item] = (sum[t.need.item] || 0) + t.need.n;
-      return { task: t, done: doneT, have: have, need: t.need.n, here: here, ready: !doneT && here && have >= t.need.n };
+      return { task: t, done: doneT, have: have, need: t.need.n, here: here, locked: locked, ready: !doneT && here && !locked && have >= t.need.n };
     });
     var parts = Object.keys(sum).map(function (k) { return { k: k, need: sum[k], have: haveOf(st, k, C) }; });
     return { key: key, name: L.zh, stage: i, total: L.stages.length, title: sg.title, done: sg.done, tasks: tasks, parts: parts,
+             extra: !!sg.extra, inOrder: !!sg.inOrder, reward: sg.reward || null, story: sg.story || null,
              left: tasks.filter(function (x) { return !x.done; }).length,
              ready: tasks.some(function (x) { return x.ready; }) };
   }
@@ -426,6 +441,7 @@
     if (!t) return fail("這個任務不在這一階");
     if (st.tasks[t.id]) return fail("這個任務已經完成了");
     if (!isResident(st, t.by, C)) return fail(t.by + " 還沒搬來");
+    if (sg.inOrder && sg.tasks.slice(0, sg.tasks.indexOf(t)).some(function (q) { return !st.tasks[q.id]; })) return fail("這一階要照順序，先完成前面的任務");
     var item = t.need.item, n = t.need.n, have = haveOf(st, item, C), bought = null;
     if (have < n && opts && opts.buy) {
       bought = fillCost(st, item, n, C);
@@ -447,6 +463,10 @@
       st.stagePhotos[stageShotId(key, i)] = today;
       note(st, today, L.zh + "第 " + (i + 1) + " 階完成：" + sg.done, "");
       msg += "　🎉 " + L.zh + "第 " + (i + 1) + " 階完成：" + sg.done;
+      if (sg.reward && C.DECOR[sg.reward]) {
+        st.decorOwned[sg.reward] = (st.decorOwned[sg.reward] || 0) + 1;
+        msg += "　🎁 得到限定裝飾「" + C.DECOR[sg.reward].zh + "」，在背包裡，可以擺在農莊";
+      }
       if (maxFields(st) > capBefore) msg += "　🟫 可以多開一片田了（最多 " + maxFields(st) + " 片）";
     }
     var came = arrive(st, today, C);
@@ -454,7 +474,7 @@
     if (stageDone) Object.keys(C.LANDMARKS).forEach(function (k) { if (C.LANDMARKS[k].after === key && landmarkOpen(st, k, C)) opened.push(k); });
     st.rev++;
     return { ok: true, msg: msg, key: key, stageDone: stageDone, arrived: came, opened: opened, moreFields: maxFields(st) > capBefore,
-             stagePhoto: stageDone ? stageShotId(key, i) : null };
+             stagePhoto: stageDone ? stageShotId(key, i) : null, reward: (stageDone && sg.reward) || null };
   }
   // 階段紀念照：每個地標每修好一階一張，id＝地標-第幾階（plaza-1）
   function stageShotId(key, i) { return key + "-" + (i + 1); }
@@ -836,6 +856,15 @@
       stages.forEach(function (sg, i) { if (!open || i !== st.town[k]) sg.tasks.forEach(function (t) { delete st.tasks[t.id]; }); });
     });
     st.farm.fields = st.farm.fields.slice(0, maxFields(st));
+    // 限定裝飾：那一階修好了就剛好有一個（背包＋農莊），沒修好就沒有。存檔壞掉或被改也會自己修回來
+    Object.keys(C.LANDMARKS).forEach(function (k) {
+      C.LANDMARKS[k].stages.forEach(function (sg, i) {
+        if (!sg.reward || !C.DECOR[sg.reward]) return;
+        var want = st.town[k] > i ? 1 : 0, placed = 0;
+        st.farm.decor = st.farm.decor.filter(function (d) { return d.type !== sg.reward || ++placed <= want; });
+        st.decorOwned[sg.reward] = Math.max(0, want - Math.min(placed, want));
+      });
+    });
     var dx = obj(raw.dex);
     Object.keys(dx).forEach(function (k) { if (Object.prototype.hasOwnProperty.call(st.inv, k)) st.dex[k] = int(dx[k], 100000); });
     st.mine.digs = int(obj(raw.mine).digs, 1000000);
@@ -906,7 +935,7 @@
     pickWeighted: pickWeighted, fishTable: fishTable, cast: cast, giveUp: giveUp, fish: fish, mineFloor: mineFloor, digFloor: digFloor, chooseFloor: chooseFloor, dig: dig, giftable: giftable, gift: gift,
     ymd: ymd, addDays: addDays, apWeek: apWeek, contentWeek: contentWeek, season: season,
     terrainAt: terrainAt, occupied: occupied, areaFree: areaFree,
-    newState: newState, apTotal: apTotal, grant: grant, spend: spend, syncFromProgress: syncFromProgress,
+    coreStages: coreStages, newState: newState, apTotal: apTotal, grant: grant, spend: spend, syncFromProgress: syncFromProgress,
     growth: growth, isRipe: isRipe, caredToday: caredToday, cropDays: cropDays, careDays: careDays, doubleChance: doubleChance,
     roll: roll, unlocked: unlocked, landmarkOpen: landmarkOpen, chatOf: chatOf, chatSpeaker: chatSpeaker, chatPrize: chatPrize, chatSeedKinds: chatSeedKinds, chatAnswer: chatAnswer, claimAwards: claimAwards,
     addField: addField, move: move, plant: plant, care: care, harvest: harvest,

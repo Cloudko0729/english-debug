@@ -318,6 +318,11 @@
     fountain: { en: "fountain", zh: "噴水池", emoji: "⛲", unlock: { market: 2 } },
     parasol:  { en: "beach umbrella", zh: "海灘傘", emoji: "⛱️", unlock: { harbor: 1 } },
     boat:     { en: "sailboat", zh: "小帆船", emoji: "⛵", unlock: { harbor: 2 } },
+    // 限定裝飾：不在商店賣（BUY 沒有價錢），地標番外階段修好才拿到，每種只有一個。img＝img/decor/<id>.png，emoji 是圖載不到時的後備
+    clocktower: { en: "clock tower", zh: "小鐘塔",   emoji: "🕰️", img: "img/decor/clocktower.png", reward: "plaza" },
+    tent:       { en: "striped tent", zh: "條紋帳篷", emoji: "🎪", img: "img/decor/tent.png", reward: "market" },
+    anchor:     { en: "old anchor",  zh: "老船錨",   emoji: "⚓", img: "img/decor/anchor.png", reward: "harbor" },
+    oven:       { en: "pizza oven",  zh: "披薩石窯", emoji: "🍕", img: "img/decor/oven.png", reward: "restaurant" },
   };
   var BUY = { carrot_seed: 1, potato_seed: 1, corn_seed: 1, pumpkin_seed: 1, tomato_seed: 1,
               flowers: 10, tree: 10, lantern: 10, bench: 10, mailbox: 10, rock: 10, fountain: 20, parasol: 10, boat: 20 };
@@ -326,7 +331,8 @@
                corn_seed: "玉米種子", pumpkin_seed: "南瓜種子", tomato_seed: "番茄種子",
                rice: "稻米", carrot: "紅蘿蔔", potato: "馬鈴薯", corn: "玉米", pumpkin: "南瓜", tomato: "番茄", ap: "體力", money: "小鎮幣",
                flowers: "花圃", tree: "小樹", lantern: "燈籠", bench: "長椅", mailbox: "信箱", rock: "石頭堆", fountain: "噴水池",
-               parasol: "海灘傘", boat: "小帆船" };
+               parasol: "海灘傘", boat: "小帆船", clocktower: "小鐘塔", tent: "條紋帳篷", anchor: "老船錨", oven: "披薩石窯",
+               fish: "魚（任何一種）" };
   // 魚和礦的中文名也放進 NAME（任務、送禮、背包都用得到）
   Object.keys(FISH).forEach(function (k) { NAME[k] = FISH[k].zh; });
   Object.keys(MINERALS).forEach(function (k) { NAME[k] = MINERALS[k].zh; });
@@ -340,7 +346,7 @@
   var LANDMARKS = {
     plaza: {
       zh: "小鎮廣場", en: "the plaza",
-      look: ["🚧 雜草和破木板", "🧹 清乾淨了，有一張長桌", "🏮 鋪好石板路，掛上燈籠", "🎪 有一座小舞台，可以辦活動"],
+      look: ["🚧 雜草和破木板", "🧹 清乾淨了，有一張長桌", "🏮 鋪好石板路，掛上燈籠", "🎪 有一座小舞台，可以辦活動", "🕰️ 舞台旁邊立著一座鐘塔，整點會響"],
       stages: [
         { title: "清理廣場", photo: { caption: "A long table for the plaza", captionZh: "廣場的長桌" }, done: "雜草清光了，Leo 做好一張長桌", tasks: [
           { id: "p1-wood", by: "Leo", need: { item: "wood", n: 4 },
@@ -378,13 +384,28 @@
           { id: "p3-flowers", by: "Mia", need: { item: "flowers", n: 2 },
             en: "Flowers make everyone smile. Can you bring two more flowers for the stage?", zh: "花會讓大家微笑。你可以再帶兩個花圃來布置舞台嗎？" },
         ] },
+        // 番外：鐘塔。句子用 Unit 4 的時間和作息（at six、seven thirty、get up）
+        { title: "鐘塔", extra: true, reward: "clocktower",
+          story: "Ben 的表演七點半開始，可是 Leo 六點就到，Sam 八點才來。廣場沒有鐘，誰也不知道現在幾點。大家決定蓋一座鐘塔。",
+          photo: { caption: "The clock tower rings", captionZh: "鐘塔響了" }, done: "鐘塔蓋好了，每個整點都會響。Ben 的表演七點半準時開始，這次沒有人遲到", tasks: [
+          { id: "p4-stone", by: "Nora", need: { item: "stone", n: 6 },
+            en: "My bread is ready at six every morning, but nobody knows the time! The plaza needs a clock tower. Please bring six stones.", zh: "我的麵包每天早上六點出爐，可是沒有人知道現在幾點！廣場需要一座鐘塔。請帶六顆石頭來。" },
+          { id: "p4-wood", by: "Leo", need: { item: "wood", n: 6 },
+            en: "I'll build the tower. I need six pieces of wood.", zh: "我來蓋塔，我需要六塊木材。" },
+          { id: "p4-copper", by: "Sam", need: { item: "copper", n: 3 },
+            en: "The clock tower needs a bell. Can you find three pieces of copper ore?", zh: "鐘塔需要一口鐘。你可以找到三塊銅礦嗎？" },
+          { id: "p4-carry", by: "Ben", need: { item: "ap", n: 8 },
+            en: "My show starts at seven thirty. Help me carry the clock to the top!", zh: "我的表演七點半開始。幫我把鐘搬到最上面！" },
+          { id: "p4-bench", by: "Mia", need: { item: "bench", n: 1 },
+            en: "I get up at six and read every morning. Let's put a bench under the clock.", zh: "我每天早上六點起床看書。我們在鐘下面放一張長椅吧。" },
+        ] },
       ],
     },
     // 市集：Sam 的推車停下來的地方。after＝前一個地標全部修好才開放。
     // 第 1 階修好開賣玉米、南瓜種子；第 2 階修好開賣噴水池。
     market: {
       zh: "週末市集", en: "the market", after: "plaza",
-      look: ["🌾 小鎮入口的空地", "🛖 搭好木頭攤位", "🪧 掛上大招牌，擺滿了花", "🏪 熱鬧的週末市集"],
+      look: ["🌾 小鎮入口的空地", "🛖 搭好木頭攤位", "🪧 掛上大招牌，擺滿了花", "🏪 熱鬧的週末市集", "🎪 多了一個點心攤，逛累了可以吃東西"],
       stages: [
         { title: "搭起攤位", photo: { caption: "A home for Sam's cart", captionZh: "Sam 的推車有家了" }, done: "木頭攤位搭好了，Sam 的推車有了固定的位子；商店開始賣玉米和南瓜種子", tasks: [
           { id: "m1-wood", by: "Sam", need: { item: "wood", n: 5 },
@@ -423,13 +444,28 @@
           { id: "m3-rice", by: "Nora", need: { item: "rice", n: 4 },
             en: "I'll make rice balls for the shoppers. I need four bags of rice.", zh: "我要幫來逛的人做飯糰，需要四袋稻米。" },
         ] },
+        // 番外：點心攤。句子用 Unit 3 的 would like、I'd like、I could eat a horse
+        { title: "點心攤", extra: true, reward: "tent",
+          story: "市集日大家逛到肚子餓，想吃更多不同的點心。Sam 想開一個點心攤，讓客人自己點想吃的東西。",
+          photo: { caption: "What would you like?", captionZh: "你想吃什麼？" }, done: "點心攤開張了！Sam 問每個客人 What would you like?，Ben 一口氣點了三份薯條", tasks: [
+          { id: "m4-wood", by: "Sam", need: { item: "wood", n: 5 },
+            en: "Shoppers get hungry! Let's open a snack stall. Please bring five pieces of wood.", zh: "逛街的人會肚子餓！我們來開一個點心攤吧。請帶五塊木材來。" },
+          { id: "m4-potato", by: "Nora", need: { item: "potato", n: 4 },
+            en: "I'd like to make French fries. Please bring four potatoes.", zh: "我想做薯條。請帶四顆馬鈴薯來。" },
+          { id: "m4-corn", by: "Rosa", need: { item: "corn", n: 4 },
+            en: "Some people would like corn soup. I need four ears of corn.", zh: "有些人想喝玉米湯。我需要四根玉米。" },
+          { id: "m4-tables", by: "Ben", need: { item: "ap", n: 6 },
+            en: "I'm so hungry. I could eat a horse! But first, help me set up the tables.", zh: "我好餓，餓到可以吃下一匹馬！不過先幫我把桌子擺好。" },
+          { id: "m4-plates", by: "Tom", need: { item: "money", n: 8 },
+            en: "We need plates and cups for the stall. Can you give me eight coins to buy some?", zh: "點心攤需要盤子和杯子。你可以給我八枚小鎮幣去買一些嗎？" },
+        ] },
       ],
     },
     // 海邊碼頭：Sam 舊地圖上畫的東邊海灘（sam-5 的故事）。市集全部修好才開放。
     // 第 1 階修好開賣海灘傘、第 2 階修好開賣小帆船。
     harbor: {
       zh: "海邊碼頭", en: "the harbor", after: "market",
-      look: ["🌊 東邊海灘上一座破舊的碼頭", "🪵 修好木棧道，停著 Jack 的漁船", "🗼 燈塔亮起來了", "🏖️ 熱鬧的海灘祭"],
+      look: ["🌊 東邊海灘上一座破舊的碼頭", "🪵 修好木棧道，停著 Jack 的漁船", "🗼 燈塔亮起來了", "🏖️ 熱鬧的海灘祭", "⚓ 老船錨擺在碼頭上，紀念第一艘來到小鎮的船"],
       stages: [
         { title: "修好木棧道", photo: { caption: "Jack's boat at the pier", captionZh: "Jack 的船停在碼頭" }, done: "木棧道修好了，Jack 的漁船有了停靠的地方；商店開始賣海灘傘", tasks: [
           { id: "h1-wood", by: "Jack", need: { item: "wood", n: 6 },
@@ -467,13 +503,28 @@
           { id: "h3-boat", by: "Jack", need: { item: "boat", n: 1 },
             en: "Kids can ride in a little boat at the festival. Can we get a sailboat?", zh: "祭典上小朋友可以坐小船。我們可以弄一艘小帆船嗎？" },
         ] },
+        // 番外：老船錨。fish＝任何一種魚都收（魚分季節，指定魚種會卡好幾週）
+        { title: "老船錨", extra: true, reward: "anchor",
+          story: "Jack 的漁網撈到一個瓶子，裡面的紙條說海灣底下沉著一個老船錨，是很久以前第一艘來到小鎮的船留下的。大家決定把它拉上來。",
+          photo: { caption: "The old anchor comes home", captionZh: "老船錨回家了" }, done: "老船錨拉上來了，擺在碼頭上。Jack 說，這是第一艘來到小鎮的船留下的", tasks: [
+          { id: "h4-fish", by: "Jack", need: { item: "fish", n: 3 },
+            en: "Let's look for the old anchor. Please bring three fish for our lunch. Any kind is fine.", zh: "我們來找老船錨吧。請帶三條魚來當午餐，什麼魚都可以。" },
+          { id: "h4-raft", by: "Leo", need: { item: "wood", n: 6 },
+            en: "We need a strong raft. Please bring six pieces of wood.", zh: "我們需要一艘堅固的木筏。請帶六塊木材來。" },
+          { id: "h4-chain", by: "Sam", need: { item: "iron", n: 3 },
+            en: "The old chain is broken. Can you find three pieces of iron ore?", zh: "舊的鐵鍊斷了。你可以找到三塊鐵礦嗎？" },
+          { id: "h4-rope", by: "Max", need: { item: "ap", n: 8 },
+            en: "I can swim down and tie the rope. Help me pull!", zh: "我可以游下去綁繩子。幫我一起拉！" },
+          { id: "h4-soup", by: "Rosa", need: { item: "carrot", n: 4 },
+            en: "Everyone is cold and wet. I'll make hot carrot soup. Please bring four carrots.", zh: "大家又冷又濕。我來煮熱的紅蘿蔔湯。請帶四根紅蘿蔔來。" },
+        ] },
       ],
     },
     // 小鎮餐廳：Nora 的麵包店太小，大家想要一個能一起吃飯的地方。碼頭全部修好才開放。
     // 第 1 階修好開賣番茄種子（第 2、3 階都有番茄任務）。不帶新村民，任務分給已經住在鎮上的人。
     restaurant: {
       zh: "小鎮餐廳", en: "the town restaurant", after: "harbor",
-      look: ["🏚️ 小鎮北邊一間空的舊木屋", "🍳 廚房有了石頭爐灶和大鐵鍋", "📋 門口掛上菜單，擺好長椅", "🍲 大家圍著長桌一起吃晚餐"],
+      look: ["🏚️ 小鎮北邊一間空的舊木屋", "🍳 廚房有了石頭爐灶和大鐵鍋", "📋 門口掛上菜單，擺好長椅", "🍲 大家圍著長桌一起吃晚餐", "🍕 後院多了一座石窯，有披薩之夜"],
       stages: [
         { title: "蓋好廚房", photo: { caption: "A big stove for our kitchen", captionZh: "廚房有了大爐灶" }, done: "廚房蓋好了，石頭爐灶上放著一口大鐵鍋；商店開始賣番茄種子", tasks: [
           { id: "r1-wood", by: "Leo", need: { item: "wood", n: 8 },
@@ -511,6 +562,21 @@
           { id: "r3-rice", by: "Mia", need: { item: "rice", n: 5 },
             en: "Rice goes well with every dish. Please bring five bags of rice.", zh: "每道菜配白飯都好吃。請帶五袋稻米來。" },
         ] },
+        // 番外：披薩之夜。inOrder＝照順序一個一個開；後四句照課本 Let's Make a Pizza! 的 First／Next／Then／Lastly
+        { title: "披薩之夜", extra: true, reward: "oven", inOrder: true,
+          story: "Sam 旅行時吃過披薩，Nora 想學著做，可是餐廳還沒有披薩石窯。大家先蓋一座石窯，再照步驟做出小鎮的第一個披薩。",
+          photo: { caption: "Our first pizza night", captionZh: "我們的第一個披薩之夜" }, done: "石窯蓋好了，小鎮的第一個披薩出爐！大家一人一片，Nora 說下次要做更大的", tasks: [
+          { id: "r4-oven", by: "Leo", need: { item: "stone", n: 8 },
+            en: "We want to make a pizza, but we don't have a pizza oven. Please bring eight stones.", zh: "我們想做披薩，可是還沒有披薩烤爐。請帶八顆石頭來。" },
+          { id: "r4-slice", by: "Rosa", need: { item: "tomato", n: 4 },
+            en: "First, slice the tomatoes. Please bring four tomatoes.", zh: "首先，把番茄切片。請帶四顆番茄來。" },
+          { id: "r4-sauce", by: "Nora", need: { item: "ap", n: 6 },
+            en: "Next, spread some tomato sauce on the dough. Can you help me?", zh: "接著，在麵團上抹一些番茄醬。你可以幫我嗎？" },
+          { id: "r4-cheese", by: "Sam", need: { item: "money", n: 8 },
+            en: "Then, add cheese and tomato slices on top. Can you give me eight coins to buy some cheese?", zh: "然後，在上面加起司和番茄片。你可以給我八枚小鎮幣去買起司嗎？" },
+          { id: "r4-bake", by: "Ben", need: { item: "wood", n: 4 },
+            en: "Lastly, bake the pizza in the oven. We need four pieces of wood for the fire.", zh: "最後，把披薩放進烤爐烤。我們需要四塊木材來生火。" },
+        ] },
       ],
     },
   };
@@ -534,6 +600,10 @@
       { at: 700, zh: "飄著飯菜香的小鎮",   emoji: "🍳" },
       { at: 770, zh: "大家常聚在一起的小鎮", emoji: "📋" },
       { at: 840, zh: "像一家人的小鎮",     emoji: "🍲" },
+      { at: 910,  zh: "有故事的小鎮",       emoji: "🕰️" },
+      { at: 980,  zh: "遠近馳名的小鎮",     emoji: "🎪" },
+      { at: 1050, zh: "大家都想來的小鎮",   emoji: "⚓" },
+      { at: 1120, zh: "四季小鎮・傳奇",     emoji: "🍕" },
     ],
   };
 

@@ -275,7 +275,7 @@ console.log("\n── 買賣與委託不加成 ──");
 console.log("\n── 廣場任務：每階 5 個、同時開放 ──");
 {
   const L = C.LANDMARKS.plaza;
-  eq("廣場有 3 階", L.stages.length, 3);
+  eq("廣場主線 3 階、加一個番外", [T.coreStages(L), L.stages.length, L.stages[3].extra], [3, 4, true]);
   ok("每階剛好 5 個任務", L.stages.every(sg => sg.tasks.length === 5));
   ok("外觀比階段多一張（含還沒修）", L.look.length === L.stages.length + 1);
   const ids = L.stages.flatMap(sg => sg.tasks.map(t => t.id));
@@ -358,7 +358,72 @@ console.log("\n── 廣場任務：每階 5 個、同時開放 ──");
   ok("餐廳第 1 階修好開賣番茄種子", T.buy(st, "tomato_seed", 1, C).ok);
   ok("餐廳第 2 階的需求有番茄", T.stageView(st, "restaurant", C).parts.some(x => x.k === "tomato" && x.need === 3));
   st.town.restaurant = 3;
-  ok("四個地標都修好就沒有下一個目標", T.nextGoal(st, C) === null);
+  ok("主線都修好：下一個目標是番外（從廣場開始）", T.nextGoal(st, C).key === "plaza" && T.nextGoal(st, C).extra);
+  Object.keys(C.LANDMARKS).forEach(k => st.town[k] = C.LANDMARKS[k].stages.length);
+  ok("番外也都做完就沒有下一個目標", T.nextGoal(st, C) === null);
+}
+
+console.log("\n── 番外階段：不擋主線、任何魚、照順序、限定裝飾 ──");
+{
+  const day = "2026-11-13";
+  const all = () => { const s = fresh(); Object.keys(C.VILLAGERS).forEach(v => { if (C.VILLAGERS[v].arrive) s.residents[v] = day; }); return s; };
+  Object.keys(C.LANDMARKS).forEach(k => {
+    const L = C.LANDMARKS[k], ex = L.stages.filter(sg => sg.extra);
+    ok(k + "：剛好一個番外、排在最後、有獎勵裝飾和故事", ex.length === 1 && L.stages[L.stages.length - 1].extra && !!C.DECOR[ex[0].reward] && C.DECOR[ex[0].reward].reward === k && !!ex[0].story);
+    ok(k + "：限定裝飾商店不賣", !C.BUY[ex[0].reward] && !T.buy(Object.assign(all(), { money: 999 }), ex[0].reward, 1, C).ok);
+  });
+  // 主線修完，番外還沒做，下一個地標照樣開放；主線沒修完的優先當目標
+  let st = all(); st.town.plaza = 3;
+  ok("廣場番外沒做，市集照樣開放", T.landmarkOpen(st, "market", C) && T.nextGoal(st, C).key === "market");
+  ok("廣場番外同時可以做", T.stageView(st, "plaza", C).extra && T.stageView(st, "plaza", C).reward === "clocktower");
+  // 舊存檔（廣場 3、市集做到一半）讀進來不會被打回去
+  st.town.market = 1; st.tasks["m2-corn"] = { date: day };
+  let n = T.normalize(JSON.parse(JSON.stringify(st)), "test", day, C);
+  eq("舊進度讀進來不變", [n.town.plaza, n.town.market, !!n.tasks["m2-corn"]], [3, 1, true]);
+  // 做完番外：拿到裝飾，只有一個
+  st = all(); st.town.plaza = 3; st.inv.stone = 6; st.inv.wood = 6; st.inv.copper = 3; st.decorOwned.bench = 1; give(st, 6, day);
+  let r;
+  ["p4-stone", "p4-wood", "p4-copper", "p4-carry", "p4-bench"].forEach(id => { r = T.doTask(st, "plaza", id, day, C); if (!r.ok) console.log("   ", id, r.msg); });
+  eq("廣場番外做完：第 4 階、拿到小鐘塔、有紀念照", [st.town.plaza, st.decorOwned.clocktower, r.reward, r.stagePhoto], [4, 1, "clocktower", "plaza-4"]);
+  let spot = null;
+  for (let y = 0; y < T.H && !spot; y++) for (let x = 0; x < T.W && !spot; x++) if (T.areaFree(st, x, y, 1, 1)) spot = [x, y];
+  ok("限定裝飾可以擺在農莊", T.placeDecor(st, "clocktower", spot[0], spot[1], day, C).ok && st.decorOwned.clocktower === 0);
+  n = T.normalize(JSON.parse(JSON.stringify(st)), "test", day, C);
+  eq("存檔重開：擺著的還在、背包不會多一個", [n.farm.decor.filter(d => d.type === "clocktower").length, n.decorOwned.clocktower], [1, 0]);
+  const lost = JSON.parse(JSON.stringify(st)); lost.farm.decor = []; lost.decorOwned = {};
+  eq("裝飾不見了會補回一個", T.normalize(lost, "test", day, C).decorOwned.clocktower, 1);
+  const cheat = JSON.parse(JSON.stringify(fresh())); cheat.decorOwned = { clocktower: 5, oven: 2 };
+  n = T.normalize(cheat, "test", day, C);
+  eq("沒做番外的存檔不會有限定裝飾", [n.decorOwned.clocktower, n.decorOwned.oven], [0, 0]);
+  // 任何魚：合計算數量，先收便宜的
+  st = all(); st.town.plaza = st.town.market = st.town.harbor = 3;
+  st.inv.pufferfish = 1; st.inv.sardine = 1;
+  ok("魚不夠 3 條不能交", !T.doTask(st, "harbor", "h4-fish", day, C).ok && T.haveOf(st, "fish", C) === 2);
+  st.inv.tuna = 2;
+  ok("不同種的魚合起來 3 條就能交", T.doTask(st, "harbor", "h4-fish", day, C).ok);
+  eq("先收最便宜的：沙丁魚和鮪魚交出去，河豚留著", [st.inv.sardine, st.inv.tuna, st.inv.pufferfish], [0, 0, 1]);
+  ok("任何魚不能用小鎮幣補", T.fillCost(st, "fish", 3, C) === null);
+  // 披薩之夜：照順序
+  st = all(); Object.keys(C.LANDMARKS).forEach(k => st.town[k] = 3);
+  st.inv.stone = 8; st.inv.tomato = 4; st.inv.wood = 4; st.money = 8; give(st, 6, day);
+  let v = T.stageView(st, "restaurant", C);
+  eq("披薩之夜：只有第一步開著", v.tasks.map(x => x.locked), [false, true, true, true, true]);
+  ok("跳著做不行", !T.doTask(st, "restaurant", "r4-bake", day, C).ok && !T.doTask(st, "restaurant", "r4-slice", day, C).ok);
+  const order = ["r4-oven", "r4-slice", "r4-sauce", "r4-cheese", "r4-bake"];
+  eq("步驟的英文照 First／Next／Then／Lastly", C.LANDMARKS.restaurant.stages[3].tasks.slice(1).map(t => t.en.split(",")[0]), ["First", "Next", "Then", "Lastly"]);
+  ok("照順序一個一個交", order.every(id => (r = T.doTask(st, "restaurant", id, day, C)).ok));
+  eq("做完拿到披薩石窯", [st.town.restaurant, st.decorOwned.oven, r.reward], [4, 1, "oven"]);
+  // 番外任務的村民：做到那個地標主線修完時一定已經搬來（只靠任務和任務送的好感）
+  const keys = Object.keys(C.LANDMARKS);
+  keys.forEach((k, i) => {
+    const s2 = fresh();
+    // 只算任務本身送的好感（每個任務給出題的村民 +1，封頂 20）
+    keys.slice(0, i + 1).forEach(kk => { s2.town[kk] = 3;
+      C.LANDMARKS[kk].stages.slice(0, 3).forEach(sg => sg.tasks.forEach(t => { s2.hearts[t.by] = Math.min(T.HEART_MAX, (s2.hearts[t.by] || 0) + 1); })); });
+    T.arrive(s2, day, C);
+    const missing = C.LANDMARKS[k].stages[3].tasks.map(t => t.by).filter(v2 => !T.isResident(s2, v2, C));
+    ok(k + " 番外的村民都已經搬來", !missing.length, missing);
+  });
 }
 
 console.log("\n── 作物不夠：用小鎮幣補齊（每個賣價＋1） ──");
