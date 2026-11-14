@@ -986,9 +986,11 @@
   var AWARDS = {
     albert: [
       { id: "final-w1", on: "2026-11-09", ap: 30, note: "期末考練習第 1 週：五天提早寫完，也訂正了" },
+      { id: "final-w1-weekend", on: "2026-11-14", ap: 20, note: "第 1 週週末複習寫完了" },
     ],
     jonathan: [
       { id: "final-w1", on: "2026-11-09", ap: 30, note: "期末考練習第 1 週：五天提早寫完，也訂正了" },
+      { id: "final-w1-weekend", on: "2026-11-14", ap: 20, note: "第 1 週週末複習寫完了" },
     ],
   };
 
