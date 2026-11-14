@@ -77,7 +77,11 @@ def sec_circle(s, show):
         def opt(m):
             parts = [p.strip() for p in m.group(1).split("/")]
             return "( " + " / ".join(f'<span class="{"ring" if show and p == it["ans"] else ""}">{E(p)}</span>' for p in parts) + " )"
-        body = re.sub(r"\(\s*([^)]+?)\s*\)", opt, E(it["text"]))
+        # 先切出括號裡的選項再各自跳脫（整句先跳脫的話，He'd 會變成 &#x27; 再被跳脫一次）
+        text, body, last = it["text"], "", 0
+        for m in re.finditer(r"\(\s*([^)]+?)\s*\)", text):
+            body += E(text[last:m.start()]) + opt(m); last = m.end()
+        body += E(text[last:])
         h += f'<div class="ln">{i}. {body}</div>'
     return f'<div class="grid c{s.get("cols", 2)} circ">{h}</div>'
 
@@ -167,7 +171,7 @@ h2 b { background: #2f7d4f; color: #fff; border-radius: 50%; width: 6mm; height:
 .box { border: .4mm dashed #2f7d4f; border-radius: 2mm; padding: 1.2mm 3mm; font-size: 13pt; display: inline-block; margin-bottom: 1mm; align-self: flex-start }
 .ring { outline: .5mm solid #c0392b; outline-offset: .3mm; border-radius: 50%; color: #c0392b }
 .words { font-size: 11pt; margin-bottom: 1.5mm } .words b { font-size: 14pt; font-weight: 400 } .words small { color: #777 }
-.scol { border: .3mm solid #bbb; border-radius: 2mm; padding: 1mm 3mm 0 } .sh { width: 12mm; flex: none; text-align: center; font-size: 15pt; color: #2f7d4f }
+.scol { border: .3mm solid #bbb; border-radius: 2mm; padding: 1mm 3mm 0 } .sh { min-width: 12mm; white-space: nowrap; flex: none; text-align: center; font-size: 15pt; color: #2f7d4f }
 .scol .fl { flex: none; width: 100%; margin-bottom: 1.5mm }
 .chunks { font-size: 13pt; margin: 1mm 0 }
 .circ .ln { font-size: 12pt }

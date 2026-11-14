@@ -1,0 +1,203 @@
+{
+ "week": "2026-11-21",
+ "file": "albert-2026-11-21_期末考練習_第2週_週末複習",
+ "title": "期末考・第 2 週週末複習",
+ "focus": "披薩步驟、可數／不可數、完整句",
+ "days": [
+  {
+   "date": "2026-11-21",
+   "label": "星期六",
+   "tag": "複習 1",
+   "sections": [
+    {
+     "type": "recall",
+     "title": "這週的字（只看中文）",
+     "items": [
+      {
+       "zh": "番茄（很多個）",
+       "en": "tomatoes"
+      },
+      {
+       "zh": "起司",
+       "en": "cheese"
+      },
+      {
+       "zh": "麵團",
+       "en": "dough"
+      },
+      {
+       "zh": "烤箱",
+       "en": "oven"
+      },
+      {
+       "zh": "切片",
+       "en": "slice"
+      },
+      {
+       "zh": "抹、塗",
+       "en": "spread"
+      },
+      {
+       "zh": "烤",
+       "en": "bake"
+      },
+      {
+       "zh": "最後",
+       "en": "lastly"
+      },
+      {
+       "zh": "羅勒",
+       "en": "basil"
+      }
+     ],
+     "cols": 3
+    },
+    {
+     "type": "lines",
+     "title": "做披薩的步驟（不看課本）",
+     "note": "依課文的用字和順序，用 First、Next、Then、Lastly 開頭。",
+     "items": [
+      {
+       "text": "{{First}}, {{slice}} the tomatoes."
+      },
+      {
+       "text": "{{Next}}, {{spread}} some tomato sauce on the {{dough}}."
+      },
+      {
+       "text": "{{Then}}, add {{cheese}}, tomato slices, and basil on top."
+      },
+      {
+       "text": "{{Lastly}}, {{bake}} the pizza in the {{oven}}."
+      }
+     ]
+    },
+    {
+     "type": "circle",
+     "title": "圈出正確的",
+     "cols": 1,
+     "items": [
+      {
+       "text": "We'd like some ( tea / teas ).",
+       "ans": "tea"
+      },
+      {
+       "text": "I'd like two ( sandwich / sandwiches ), please.",
+       "ans": "sandwiches"
+      },
+      {
+       "text": "( He'd / He ) like some noodles.",
+       "ans": "He'd"
+      }
+     ]
+    },
+    {
+     "type": "recall",
+     "title": "錯字複習（只看中文）",
+     "items": [
+      {
+       "zh": "肚子痛",
+       "en": "stomachache"
+      },
+      {
+       "zh": "頭痛",
+       "en": "headache"
+      },
+      {
+       "zh": "聞起來",
+       "en": "smell"
+      },
+      {
+       "zh": "薯條",
+       "en": "French fries"
+      }
+     ],
+     "cols": 2,
+     "review": true
+    }
+   ]
+  },
+  {
+   "date": "2026-11-22",
+   "label": "星期日",
+   "tag": "複習 2",
+   "test": true,
+   "sections": [
+    {
+     "type": "lines",
+     "title": "看圖寫完整的句子",
+     "note": "用 He'd、They'd 開頭，整句寫完，句尾加句點。",
+     "items": [
+      {
+       "em": "🥟🥟",
+       "text": "What would Ben like to eat?　{{He'd like some dumplings.}}"
+      },
+      {
+       "em": "🍚",
+       "text": "What would they like to eat?　{{They'd like some rice.}}"
+      },
+      {
+       "em": "🍟 ✘",
+       "text": "Would you like some French fries?　{{No, thank you.}}"
+      }
+     ]
+    },
+    {
+     "type": "reorder",
+     "title": "把句子排好，寫在格子裡",
+     "items": [
+      {
+       "chunks": [
+        "slice",
+        "First,",
+        "the tomatoes."
+       ],
+       "ans": "First, slice the tomatoes."
+      },
+      {
+       "chunks": [
+        "some pizza,",
+        "I'd",
+        "please.",
+        "like"
+       ],
+       "ans": "I'd like some pizza, please."
+      }
+     ]
+    },
+    {
+     "type": "recall",
+     "title": "錯字複習（看中文和第一個字母）",
+     "items": [
+      {
+       "zh": "肚子痛",
+       "en": "stomachache",
+       "first": true
+      },
+      {
+       "zh": "頭痛",
+       "en": "headache",
+       "first": true
+      },
+      {
+       "zh": "聞起來",
+       "en": "smell",
+       "first": true
+      },
+      {
+       "zh": "薯條",
+       "en": "French fries",
+       "first": true
+      }
+     ],
+     "cols": 2,
+     "review": true
+    },
+    {
+     "type": "retry",
+     "title": "對完答案：最多挑 3 個錯字，各蓋住重寫一次",
+     "rows": 3
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,602 @@
+{
+ "week": "2026-11-16",
+ "file": "albert-2026-11-16_期末考練習_第2週",
+ "title": "期末考練習・第 2 週",
+ "focus": "Unit 3 披薩短文、some + 可數／不可數、He'd / They'd、寫完整句",
+ "days": [
+  {
+   "date": "2026-11-16",
+   "label": "星期一",
+   "sections": [
+    {
+     "type": "spell",
+     "title": "看圖寫單字（披薩要用的東西）",
+     "note": "先看一次拼法，再自己寫兩次。",
+     "items": [
+      {
+       "em": "🍅",
+       "zh": "番茄（很多個）",
+       "en": "tomatoes",
+       "tip": "tomato + es"
+      },
+      {
+       "em": "🧀",
+       "zh": "起司",
+       "en": "cheese",
+       "tip": "ch + ee + se"
+      },
+      {
+       "em": "",
+       "zh": "麵團",
+       "en": "dough",
+       "tip": "這個字的 ough 跟 go 的 o 同音"
+      },
+      {
+       "em": "🌿",
+       "zh": "羅勒",
+       "en": "basil"
+      },
+      {
+       "em": "🥫",
+       "zh": "番茄醬",
+       "en": "tomato sauce",
+       "tip": "sauce：s-a-u-c-e"
+      },
+      {
+       "em": "",
+       "zh": "烤箱",
+       "en": "oven",
+       "tip": "o 的聲音跟 love 的 o 一樣"
+      }
+     ]
+    },
+    {
+     "type": "lines",
+     "title": "課本短文填空",
+     "box": [
+      "red",
+      "pick",
+      "pizza",
+      "tomatoes"
+     ],
+     "items": [
+      {
+       "text": "Look at the {{tomatoes}}. They're {{red}} now."
+      },
+      {
+       "text": "Let's {{pick}} some and make a {{pizza}}."
+      }
+     ]
+    },
+    {
+     "type": "copy",
+     "title": "抄寫材料清單（課本）",
+     "note": "時間不夠可以跳過。",
+     "items": [
+      "What We Need: basil, cheese, dough, tomatoes, tomato sauce"
+     ]
+    },
+    {
+     "type": "recall",
+     "title": "上週的字（只看中文）",
+     "items": [
+      {
+       "zh": "米飯",
+       "en": "rice"
+      },
+      {
+       "zh": "牛排",
+       "en": "steak"
+      },
+      {
+       "zh": "麵（複數）",
+       "en": "noodles"
+      },
+      {
+       "zh": "玉米",
+       "en": "corn"
+      }
+     ],
+     "cols": 2
+    },
+    {
+     "type": "spell",
+     "title": "錯字複習",
+     "note": "上週末寫錯的字。看一次、蓋起來、寫兩次。",
+     "items": [
+      {
+       "em": "🤢",
+       "zh": "肚子痛",
+       "en": "stomachache",
+       "tip": "stomach + ache，ache 是 a-c-h-e"
+      },
+      {
+       "em": "🤕",
+       "zh": "頭痛",
+       "en": "headache",
+       "tip": "head + ache"
+      },
+      {
+       "em": "👃",
+       "zh": "聞起來",
+       "en": "smell",
+       "tip": "s-m-e-l-l"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "label": "星期二",
+   "sections": [
+    {
+     "type": "spell",
+     "title": "看圖寫單字（做披薩的動作）",
+     "note": "先看一次拼法，再自己寫兩次。",
+     "items": [
+      {
+       "em": "🔪",
+       "zh": "切片",
+       "en": "slice",
+       "tip": "sl + ice"
+      },
+      {
+       "em": "🥄",
+       "zh": "抹、塗",
+       "en": "spread",
+       "tip": "拼字拆開看：sp + read"
+      },
+      {
+       "em": "➕",
+       "zh": "加上",
+       "en": "add",
+       "tip": "兩個 d"
+      },
+      {
+       "em": "🔥",
+       "zh": "烤",
+       "en": "bake",
+       "tip": "b-a-k-e，a 唸自己的名字"
+      },
+      {
+       "em": "🔚",
+       "zh": "最後",
+       "en": "lastly",
+       "tip": "last + ly"
+      }
+     ]
+    },
+    {
+     "type": "recall",
+     "title": "昨天的字（只看中文）",
+     "items": [
+      {
+       "zh": "番茄（很多個）",
+       "en": "tomatoes"
+      },
+      {
+       "zh": "起司",
+       "en": "cheese"
+      },
+      {
+       "zh": "麵團",
+       "en": "dough"
+      },
+      {
+       "zh": "烤箱",
+       "en": "oven"
+      }
+     ],
+     "cols": 2
+    },
+    {
+     "type": "lines",
+     "title": "做披薩的四個步驟",
+     "box": [
+      "First",
+      "Next",
+      "Then",
+      "Lastly"
+     ],
+     "note": "依課文的用字和順序填。",
+     "items": [
+      {
+       "text": "{{First}}, slice the tomatoes."
+      },
+      {
+       "text": "{{Next}}, spread some tomato sauce on the dough."
+      },
+      {
+       "text": "{{Then}}, add cheese, tomato slices, and basil on top."
+      },
+      {
+       "text": "{{Lastly}}, bake the pizza in the oven."
+      }
+     ]
+    },
+    {
+     "type": "copy",
+     "title": "抄寫句子（課本）",
+     "items": [
+      "Lastly, bake the pizza in the oven."
+     ]
+    },
+    {
+     "type": "recall",
+     "title": "錯字複習（只看中文）",
+     "items": [
+      {
+       "zh": "肚子痛",
+       "en": "stomachache"
+      },
+      {
+       "zh": "頭痛",
+       "en": "headache"
+      },
+      {
+       "zh": "薯條",
+       "en": "French fries"
+      },
+      {
+       "zh": "聞起來",
+       "en": "smell"
+      }
+     ],
+     "cols": 2
+    }
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "label": "星期三",
+   "sections": [
+    {
+     "type": "lines",
+     "title": "一個 → 很多",
+     "note": "字尾是 ch、sh、s、x 的加 es；tomato、potato 也加 es；其他大多加 s。",
+     "items": [
+      {
+       "text": "one tomato → three {{tomatoes}}"
+      },
+      {
+       "text": "one sandwich → two {{sandwiches}}"
+      },
+      {
+       "text": "one hamburger → five {{hamburgers}}"
+      },
+      {
+       "text": "one slice → four {{slices}}"
+      }
+     ]
+    },
+    {
+     "type": "sort",
+     "title": "可數還是不可數？",
+     "note": "直接抄進去，不用再加字尾。可以一個一個數的，some 後面用複數；湯、飯、牛奶這種不能數的，不加 s。",
+     "cols": [
+      "可數",
+      "不可數"
+     ],
+     "words": [
+      [
+       "dumplings",
+       "水餃",
+       "可數"
+      ],
+      [
+       "rice",
+       "飯",
+       "不可數"
+      ],
+      [
+       "sandwiches",
+       "三明治",
+       "可數"
+      ],
+      [
+       "milk",
+       "牛奶",
+       "不可數"
+      ],
+      [
+       "tomatoes",
+       "番茄",
+       "可數"
+      ],
+      [
+       "tea",
+       "茶",
+       "不可數"
+      ],
+      [
+       "hamburgers",
+       "漢堡",
+       "可數"
+      ],
+      [
+       "soup",
+       "湯",
+       "不可數"
+      ]
+     ]
+    },
+    {
+     "type": "circle",
+     "title": "圈出正確的",
+     "cols": 1,
+     "items": [
+      {
+       "text": "I'd like some ( milk / milks ), please.",
+       "ans": "milk"
+      },
+      {
+       "text": "We'd like some ( hamburger / hamburgers ).",
+       "ans": "hamburgers"
+      },
+      {
+       "text": "Tony would like ( a / some ) dumplings.",
+       "ans": "some"
+      },
+      {
+       "text": "Would you like some ( rice / rices )?",
+       "ans": "rice"
+      }
+     ]
+    },
+    {
+     "type": "copy",
+     "title": "抄寫句子（課本）",
+     "items": [
+      "I'd like some pizza, please. Sure! Here you are."
+     ]
+    },
+    {
+     "type": "recall",
+     "title": "錯字複習（看中文和第一個字母）",
+     "items": [
+      {
+       "zh": "肚子痛",
+       "en": "stomachache",
+       "first": true
+      },
+      {
+       "zh": "頭痛",
+       "en": "headache",
+       "first": true
+      },
+      {
+       "zh": "三明治（複數）",
+       "en": "sandwiches",
+       "first": true
+      },
+      {
+       "zh": "水餃（複數）",
+       "en": "dumplings",
+       "first": true
+      }
+     ],
+     "cols": 2
+    }
+   ]
+  },
+  {
+   "date": "2026-11-19",
+   "label": "星期四",
+   "sections": [
+    {
+     "type": "lines",
+     "title": "縮寫",
+     "note": "would 縮成 'd。",
+     "items": [
+      {
+       "text": "I would like → {{I'd}} like　　He would like → {{He'd}} like"
+      },
+      {
+       "text": "We would like → {{We'd}} like　　They would like → {{They'd}} like"
+      }
+     ]
+    },
+    {
+     "type": "lines",
+     "title": "看圖寫完整的句子",
+     "note": "考試常考：要寫整句，像課本一樣用 He'd、They'd、I'd 開頭；第 3 題句尾加 please。",
+     "items": [
+      {
+       "em": "🍜",
+       "text": "What would Tim like to eat?　{{He'd like some noodles.}}"
+      },
+      {
+       "em": "🍲 湯",
+       "text": "What would they like to eat?　{{They'd like some soup.}}"
+      },
+      {
+       "em": "🥩",
+       "text": "What would you like to eat?　{{I'd like some steak, please.}}"
+      }
+     ]
+    },
+    {
+     "type": "reorder",
+     "title": "把句子排好，寫在格子裡",
+     "note": "句首大寫，句尾的 . 也要寫。第 2 題時間不夠可以跳過。",
+     "items": [
+      {
+       "chunks": [
+        "the pizza",
+        "Lastly,",
+        "in the oven.",
+        "bake"
+       ],
+       "ans": "Lastly, bake the pizza in the oven."
+      },
+      {
+       "chunks": [
+        "on the dough.",
+        "Next,",
+        "some tomato sauce",
+        "spread"
+       ],
+       "ans": "Next, spread some tomato sauce on the dough."
+      }
+     ]
+    },
+    {
+     "type": "circle",
+     "title": "圈出正確的（習作）",
+     "cols": 1,
+     "items": [
+      {
+       "text": "A: Would you like some dumplings?　B: No, thank you. I'm ( full / hungry ).",
+       "ans": "full"
+      },
+      {
+       "text": "Jane ( would / is ) like some rice.",
+       "ans": "would"
+      },
+      {
+       "text": "( They'd / They're ) like some soup.",
+       "ans": "They'd"
+      }
+     ]
+    },
+    {
+     "type": "lines",
+     "title": "錯字複習：寫完整的回答",
+     "note": "I'd like some ___, please. 整句寫完，注意逗號和句點。",
+     "items": [
+      {
+       "em": "🥟🥟",
+       "text": "A: What would you like to eat?　B: {{I'd like some dumplings, please.}}"
+      },
+      {
+       "em": "🍟",
+       "text": "A: What would you like to eat?　B: {{I'd like some French fries, please.}}"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-11-20",
+   "label": "星期五",
+   "test": true,
+   "sections": [
+    {
+     "type": "recall",
+     "title": "本週小考：看中文寫英文",
+     "items": [
+      {
+       "zh": "番茄（很多個）",
+       "en": "tomatoes"
+      },
+      {
+       "zh": "起司",
+       "en": "cheese"
+      },
+      {
+       "zh": "麵團",
+       "en": "dough"
+      },
+      {
+       "zh": "烤箱",
+       "en": "oven"
+      },
+      {
+       "zh": "切片",
+       "en": "slice"
+      },
+      {
+       "zh": "抹、塗",
+       "en": "spread"
+      },
+      {
+       "zh": "烤",
+       "en": "bake"
+      },
+      {
+       "zh": "最後",
+       "en": "lastly"
+      },
+      {
+       "zh": "羅勒",
+       "en": "basil"
+      }
+     ],
+     "cols": 3
+    },
+    {
+     "type": "lines",
+     "title": "做披薩要先做哪一步？寫 1～4",
+     "note": "依課文的步驟順序，在前面寫數字。",
+     "items": [
+      {
+       "text": "{{4}}　We bake the pizza."
+      },
+      {
+       "text": "{{2}}　We spread tomato sauce on the dough."
+      },
+      {
+       "text": "{{3}}　We put cheese, tomato slices, and basil on top."
+      },
+      {
+       "text": "{{1}}　We slice the tomatoes."
+      }
+     ]
+    },
+    {
+     "type": "lines",
+     "title": "寫完整的句子",
+     "note": "用 She'd 開頭；不想要用 No, thank you.",
+     "items": [
+      {
+       "em": "🍕",
+       "text": "What would Amy like to eat?　{{She'd like some pizza.}}"
+      },
+      {
+       "em": "🥛",
+       "text": "Would you like some milk? (✘)　{{No, thank you.}}"
+      }
+     ]
+    },
+    {
+     "type": "recall",
+     "title": "錯字複習（只看中文）",
+     "items": [
+      {
+       "zh": "肚子痛",
+       "en": "stomachache"
+      },
+      {
+       "zh": "頭痛",
+       "en": "headache"
+      },
+      {
+       "zh": "聞起來",
+       "en": "smell"
+      },
+      {
+       "zh": "薯條",
+       "en": "French fries"
+      },
+      {
+       "zh": "三明治（複數）",
+       "en": "sandwiches"
+      },
+      {
+       "zh": "水餃（複數）",
+       "en": "dumplings"
+      }
+     ],
+     "cols": 3,
+     "review": true
+    },
+    {
+     "type": "retry",
+     "title": "對完答案：挑最多 3 個錯字，各寫三次",
+     "rows": 3
+    }
+   ]
+  }
+ ]
+}
