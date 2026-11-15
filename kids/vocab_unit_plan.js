@@ -340,7 +340,7 @@
       } else if (dPlan < dNow) {
         drift = { kind: "behind", now: nowLevel,
           msg: "你的程度已經前進到 " + nowLevel + " 了，這個月的課表還停在 " + pl.level +
-               "。想換成新的也可以，已經拿到的金幣不會被扣掉。" };
+               "。想換成新的也可以，已經拿到的小鎮體力不會被扣掉。" };
       }
     }
 

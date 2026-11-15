@@ -287,7 +287,7 @@ function renderUnit(unit, wordMap, confusions, prev, next, levelWords, gloss) {
     <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
     <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
     <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button></span>
-    <span class="coin" id="coinBox">🪙 —</span>
+    <span class="coin" id="coinBox" title="小鎮體力">⚡ —</span>
   </div>
 
   <div id="offPlan" style="display:none;background:#fff8e1;border:2px solid #f2d38a;border-radius:12px;margin:13px 0;padding:11px 14px;font-size:.85rem;color:#8a6d1a"></div>
@@ -317,13 +317,13 @@ function renderUnit(unit, wordMap, confusions, prev, next, levelWords, gloss) {
 ${conBlock}
   <div class="card">
     <h2>${stepNo} 小測驗</h2>
-    <p class="hint">${quiz.length} 題。答對越多，金幣越多（這一單元最多 🪙 ${COIN_CAP}）。</p>
+    <p class="hint">${quiz.length} 題。第一次做完可以換小鎮體力 ⚡</p>
     <div id="quizBox"></div>
     <div id="quizScore"></div>
   </div>
 
   <div class="card" id="finishCard">
-    <button class="fin" onclick="finishUnit()">我學完這一單元了 🪙</button>
+    <button class="fin" onclick="finishUnit()">我學完這一單元了 ⚡</button>
     <div id="finishMsg" class="hint" style="margin:9px 0 0"></div>
   </div>
 
@@ -385,7 +385,7 @@ function flip(el) { el.classList.toggle("open"); }
 function refreshCoin(bump) {
   var el = document.getElementById("coinBox");
   if (!el) return;          // 登入列可能把它換掉了；少顯示金幣不該讓整頁停擺
-  el.textContent = currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
+  el.textContent = currentStudent ? "⚡ " + (function () { try { var t = JSON.parse(localStorage.getItem("kidsTown.v1." + currentStudent) || "null"); return t && t.energy ? (t.energy.wallet || 0) + (t.energy.reserve || 0) : "—"; } catch (e) { return "—"; } })() : "⚡ —";
   if (bump) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
 }
 var _tt = null;
@@ -424,8 +424,8 @@ function ans(qi, oi) {
     chose: q.options[oi], answer: q.answer });
   if (done === QUIZ.length) {
     document.getElementById("quizScore").innerHTML = "🎉 答對 " + ok + " / " + QUIZ.length +
-      "　<span style='font-weight:400;color:#667085'>↓ 按下面的按鈕領金幣</span>";
-    toast("✍️ 測驗完成！捲到最下面領金幣 🪙");
+      "　<span style='font-weight:400;color:#667085'>↓ 按下面的按鈕換小鎮體力</span>";
+    toast("✍️ 測驗完成！捲到最下面按完成 ⚡");
     if (window.AIReview) AIReview.render("aiBox", {
       subject: "單字", topic: UNIT_TITLE, goal: UNIT_GOAL,
       wrong: wrongList, correct: ok, total: QUIZ.length,
@@ -441,10 +441,12 @@ function coinsFor(correct, total) {
 }
 
 function finishUnit() {
-  if (!currentStudent) { toast("先選上面的名字，才知道金幣要給誰"); return; }
+  if (!currentStudent) { toast("先選上面的名字，才知道體力要給誰"); return; }
   if (done < QUIZ.length) { toast("小測驗還有 " + (QUIZ.length - done) + " 題沒做完"); return; }
   var p = getProgress(currentStudent);
   var isFirst = !p.vocab.units[UNIT_ID];
+  // 小鎮體力只算第一次（town_core 的 vocab:<id> 收據）；小鎮上線（2026-10-05）前做的，重做一次才會算
+  var apNew = isFirst || String((p.vocab.units[UNIT_ID] || {}).lastAt || "") < "2026-10-05";
   var prev = p.vocab.units[UNIT_ID] || { best:0, total:QUIZ.length, coins:0, attempts:0 };
   var bestCorrect = Math.max(prev.best || 0, ok);
   var should = coinsFor(bestCorrect, QUIZ.length);
@@ -465,13 +467,12 @@ function finishUnit() {
   saveProgress(currentStudent, p);
   if (typeof cloudSave === "function") cloudSave(currentStudent);
   refreshCoin(delta > 0);
-  toast(delta > 0 ? "🪙 +" + delta + " 金幣！　共 " + p.coins.balance
-                  : "這一單元已經領滿 🪙 " + p.vocab.units[UNIT_ID].coins + " 了");
+  toast(apNew ? "⚡ 小鎮體力 +10" : "✅ 複習完成");
   var msg = document.getElementById("finishMsg");
-  msg.innerHTML = delta > 0
-    ? "🎉 這一單元完成！領到 <b>🪙 +" + delta + "</b>（這一單元共 " + p.vocab.units[UNIT_ID].coins + " ／ 上限 ${COIN_CAP}）<br>" +
-      "<a href='../../island.html' style='color:#2f80ed;font-weight:700'>👉 去蓋我的島嶼</a>"
-    : "這一單元的金幣已經領滿了（🪙 " + p.vocab.units[UNIT_ID].coins + "）。答對更多題才會再補發喔！";
+  msg.innerHTML = (apNew
+      ? "🎉 這一單元完成！小鎮體力 <b>+10 ⚡</b>（本週加分，一週最多 40）"
+      : "🎉 這一單元完成！小鎮體力只算第一次，這次是複習 👍") + "<br>" +
+    "<a href='../../town/index.html' style='color:#2f80ed;font-weight:700'>👉 去四季小鎮</a>";
   msg.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
@@ -482,7 +483,7 @@ function drawOffPlan() {
   var pl = VocabPlan.activePlan(getProgress(currentStudent));
   if (!pl || (pl.units || []).indexOf(UNIT_ID) >= 0) { el.style.display = "none"; return; }
   el.style.display = "block";
-  el.innerHTML = "📌 這個單元不在你這個月的課表裡。想先看完全可以，金幣一樣會給，" +
+  el.innerHTML = "📌 這個單元不在你這個月的課表裡。想先看完全可以，小鎮體力一樣會給，" +
     "只是它不算進這個月的進度。<br>" +
     "<a href='../../vocab_month.html' style='color:#2f80ed;font-weight:700'>← 回本月課表</a>";
 }
@@ -592,7 +593,7 @@ function renderIndex(units) {
       <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
       <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
     </span>
-    <span class="coin" id="coinBox">🪙 —</span>
+    <span class="coin" id="coinBox" title="小鎮體力">⚡ —</span>
   </div>
   <div class="overall" id="overall">先選名字，就會顯示你每個單元的進度。</div>
   <div id="monthBox"></div>
@@ -658,7 +659,7 @@ function draw() {
   if (!currentStudent) {
     for (var i = 0; i < links.length; i++) { links[i].classList.remove("done"); links[i].querySelector(".st").textContent = "›"; }
     document.getElementById("overall").textContent = "先選名字，就會顯示你每個單元的進度。";
-    document.getElementById("coinBox").textContent = "🪙 —";
+    document.getElementById("coinBox").textContent = "⚡ —";
     drawMonth(null);
     return;
   }
@@ -683,12 +684,12 @@ function draw() {
     if (r) {
       doneN++; coinN += r.coins || 0;
       a.classList.add("done");
-      a.querySelector(".st").textContent = "✅ " + r.best + "/" + r.total + "　🪙" + r.coins;
+      a.querySelector(".st").textContent = "✅ " + r.best + "/" + r.total;
     } else { a.classList.remove("done"); a.querySelector(".st").textContent = "›"; }
   }
-  document.getElementById("coinBox").textContent = "🪙 " + p.coins.balance;
+  document.getElementById("coinBox").textContent = "⚡ " + (function () { try { var t = JSON.parse(localStorage.getItem("kidsTown.v1." + currentStudent) || "null"); return t && t.energy ? (t.energy.wallet || 0) + (t.energy.reserve || 0) : "—"; } catch (e) { return "—"; } })();
   document.getElementById("overall").textContent =
-    "已完成 " + doneN + " / " + links.length + " 單元　·　單字課累積 🪙 " + coinN;
+    "已完成 " + doneN + " / " + links.length + " 單元";
   var note = document.getElementById("offNote");
   if (note) note.style.display = planIds.length ? "block" : "none";
   drawMonth(p);

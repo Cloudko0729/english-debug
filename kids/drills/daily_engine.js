@@ -303,8 +303,8 @@
   function render() {
     const w = DRILL.week, m = DRILL.month;
     const retakeNote = !_isRetake() ? ""
-      : (_isShortWeek() ? "<br>📚 短週補題 第 2 輪：全新題組（金幣今天已領過）"
-                        : "<br>🔁 練習模式：今天金幣已領過，題目改成隨機出");
+      : (_isShortWeek() ? "<br>📚 短週補題 第 2 輪：全新題組（今天的小鎮體力已經算過）"
+                        : "<br>🔁 練習模式：今天的小鎮體力已經算過，題目改成隨機出");
     const gramNote = DRILL.s8 ? `文法課程：${DRILL.s8.current.icon} ${DRILL.s8.current.name}` : `文法：${m.grammar.map(g => g.topic).join("、")}`;
     let h = `<div class="meta">📒 ${m.label} 第 ${w.n} 週 · ${w.theme} · ${gramNote}${retakeNote}</div>`;
     // ①
@@ -476,12 +476,15 @@
     document.getElementById('totalBox').scrollIntoView({ behavior: "smooth" });
   };
 
+  // 金幣照記：claimedDrills 是小鎮發體力的依據（town_core.syncFromProgress 每份 +10，一週最多 100），
+  // 畫面上只講小鎮體力。小島 2026-11 起是紀念館。
+  const TOWN_LINK = `<a href="../town/index.html" style="color:#2f80ed;font-weight:700">👉 去四季小鎮</a>`;
   function awardCoins(correct, perfect) {
-    if (!currentStudent) return "登入後才能拿金幣喔";
+    if (!currentStudent) return "登入後才能換小鎮體力喔";
     const p = getProgress(currentStudent);
     if (!p.coins) p.coins = { balance: 0, lifetimeEarned: 0, lifetimeSpent: 0, transactions: [], claimedDrills: {} };
     const ID = DRILL_DATE + "-" + DRILL_THEME, claimKey = DRILL_DATE + "::" + ID;
-    if (p.coins.claimedDrills[claimKey]) return `🪙 今天這份的金幣已經領過囉（共 ${p.coins.balance} 金幣）`;
+    if (p.coins.claimedDrills[claimKey]) return `✅ 這份已經完成過囉，小鎮體力只算第一次<br>${TOWN_LINK}`;
     const earned = correct * 5 + perfect * 10 + 30;
     p.coins.balance += earned; p.coins.lifetimeEarned += earned;
     p.coins.transactions.push({ type: "earn", source: "dailyDrill", amount: earned, balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { drillId: ID, date: DRILL_DATE, correct } });
@@ -489,7 +492,7 @@
     saveProgress(currentStudent, p);
     if (typeof cloudSave === "function") cloudSave(currentStudent);
     const extra = _isShortWeek() ? "<br>📚 短週補題：再開一次這份測驗，會有第 2 輪全新題目！" : "";
-    return `🪙 +${earned} 金幣！${extra}（共 ${p.coins.balance} 金幣）<br><a href="../island.html" style="color:#2f80ed;font-weight:700">👉 去蓋我的島嶼</a>`;
+    return `🎉 小鎮體力 <b>+10 ⚡</b>${extra}<br>${TOWN_LINK}`;
   }
 
   function showLock() { const a = document.getElementById("app"); a.innerHTML = `<div class="lock"><div style="font-size:3rem">🔒</div><h2>這份測驗還沒開放</h2><p>${DRILL_DATE} 才開始喔！</p><a href="../index.html">← 回首頁</a></div>`; a.style.display = "block"; }

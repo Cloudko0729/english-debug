@@ -81,7 +81,7 @@ textarea{width:100%;min-height:62px;border:1px solid #cfd8e3;border-radius:10px;
     <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
     <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
     <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button></span>
-    <span class="coin" id="coinBox">🪙 —</span>
+    <span class="coin" id="coinBox" title="小鎮體力">⚡ —</span>
   </div>
   <div id="main"><div class="card note">先選上面的名字。</div></div>
 </div>
@@ -89,14 +89,14 @@ textarea{width:100%;min-height:62px;border:1px solid #cfd8e3;border-radius:10px;
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202611150826"></script>
-<script src="account_lock.js?v=202611150826"></script>
-<script src="supabase_auth.js?v=202611150826"></script>
-<script src="ai_review.js?v=202611150826"></script>
-<script src="week_key.js?v=202611150826"></script>
-<script src="grammar_nodes.js?v=202611150826"></script>
-<script src="grammar_plan.js?v=202611150826"></script>
-<script src="homework_tasks.js?v=202611150826"></script>
+<script src="cloud_sync.js?v=202611150941"></script>
+<script src="account_lock.js?v=202611150941"></script>
+<script src="supabase_auth.js?v=202611150941"></script>
+<script src="ai_review.js?v=202611150941"></script>
+<script src="week_key.js?v=202611150941"></script>
+<script src="grammar_nodes.js?v=202611150941"></script>
+<script src="grammar_plan.js?v=202611150941"></script>
+<script src="homework_tasks.js?v=202611150941"></script>
 <script>
 var currentStudent = null, curAudio = null;
 var WRITE_N = 3, SPEAK_N = 2;      // 每週配額：手寫 3、口說 2
@@ -130,7 +130,7 @@ function play(src) {
 function refreshCoin(bump) {
   var el = document.getElementById("coinBox");
   if (!el) return;          // 登入列可能把它換掉了；少顯示金幣不該讓整頁停擺
-  el.textContent = currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
+  el.textContent = currentStudent ? "⚡ " + (function () { try { var t = JSON.parse(localStorage.getItem("kidsTown.v1." + currentStudent) || "null"); return t && t.energy ? (t.energy.wallet || 0) + (t.energy.reserve || 0) : "—"; } catch (e) { return "—"; } })() : "⚡ —";
   if (bump) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
 }
 var _tt = null;
@@ -247,17 +247,18 @@ function render() {
   var h = '<div class="card"><b>這一週：手寫 ' + doneW + '/' + PLAN.write.length +
     '　·　口說 ' + doneS + '/' + PLAN.speak.length + '</b>' +
     '<div class="bar"><i style="width:' + Math.round(done / total * 100) + '%"></i></div>' +
-    '<p class="note" style="margin:0">哪一天做都可以，這一週做完就好。每做完一項 🪙 ' + COIN_PER_TASK + '。</p></div>';
+    '<p class="note" style="margin:0">哪一天做都可以，這一週做完就好。每做完一項，小鎮體力 +2 ⚡。</p></div>';
 
   PLAN.write.forEach(function (id, i) { h += writeCard(p, rec, id, i); });
   PLAN.speak.forEach(function (id, i) { h += speakCard(p, rec, id, i); });
 
-  var owed = done * COIN_PER_TASK - (rec.coinsPaid || 0);
-  if (owed > 0) {
-    h += '<div class="bonus"><div style="font-size:1.5rem">🪙</div><b>有 ' + owed + ' 金幣還沒領</b>' +
-      '<br><button onclick="claimCoins()">領金幣</button></div>';
-  } else if (done === total) {
-    h += '<div class="card note">🎉 這一週的作業全部做完了，金幣也領完了。下週六會出新的。</div>';
+  // 小鎮體力直接看每項的完成紀錄（town_core：hw:<週>:<種類>:<id> 每項 +2），不用按鈕領
+  if (done > 0) {
+    h += '<div class="bonus"><div style="font-size:1.5rem">⚡</div><b>做了 ' + done + ' 項，小鎮體力 +' + (done * 2) + '</b>' +
+      '<br><a href="town/index.html" style="color:#2f80ed;font-weight:700">👉 去四季小鎮</a></div>';
+  }
+  if (done === total) {
+    h += '<div class="card note">🎉 這一週的作業全部做完了！下週六會出新的。</div>';
   }
   box.innerHTML = h;
   refreshCoin();
@@ -343,7 +344,7 @@ window.doCheck = function (i, id) {
   rec.write[id] = { text: text.trim().slice(0, 300), ok: res.ok, at: WeekKey.ymd(new Date()) };
   saveProgress(currentStudent, p);
   if (typeof cloudSave === "function") cloudSave(currentStudent);
-  if (isNew) toast("✍️ 記錄下來了！記得去領金幣 🪙");
+  if (isNew) toast("✍️ 記錄下來了！小鎮體力 +2 ⚡");
   render();
 };
 
@@ -353,7 +354,7 @@ window.rateSpeak = function (i, id, rate) {
   rec.speak[id] = { rate: rate, at: WeekKey.ymd(new Date()) };
   saveProgress(currentStudent, p);
   if (typeof cloudSave === "function") cloudSave(currentStudent);
-  if (isNew) toast("🎤 記錄下來了！記得去領金幣 🪙");
+  if (isNew) toast("🎤 記錄下來了！小鎮體力 +2 ⚡");
   render();
 };
 

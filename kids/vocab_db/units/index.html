@@ -120,7 +120,7 @@ header a{color:#2f80ed;text-decoration:none}
       <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
       <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button>
     </span>
-    <span class="coin" id="coinBox">🪙 —</span>
+    <span class="coin" id="coinBox" title="小鎮體力">⚡ —</span>
   </div>
   <div class="overall" id="overall">先選名字，就會顯示你每個單元的進度。</div>
   <div id="monthBox"></div>
@@ -185,12 +185,12 @@ header a{color:#2f80ed;text-decoration:none}
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../cloud_sync.js?v=202611150826"></script>
-<script src="../../account_lock.js?v=202611150826"></script>
-<script src="../../supabase_auth.js?v=202611150826"></script>
-<script src="../../ai_review.js?v=202611150826"></script>
-<script src="../../vocab_units.js?v=202611150826"></script>
-<script src="../../vocab_unit_plan.js?v=202611150826"></script>
+<script src="../../cloud_sync.js?v=202611150941"></script>
+<script src="../../account_lock.js?v=202611150941"></script>
+<script src="../../supabase_auth.js?v=202611150941"></script>
+<script src="../../ai_review.js?v=202611150941"></script>
+<script src="../../vocab_units.js?v=202611150941"></script>
+<script src="../../vocab_unit_plan.js?v=202611150941"></script>
 <script>
 var currentStudent = null;
 function getProgress(s) {
@@ -233,7 +233,7 @@ function draw() {
   if (!currentStudent) {
     for (var i = 0; i < links.length; i++) { links[i].classList.remove("done"); links[i].querySelector(".st").textContent = "›"; }
     document.getElementById("overall").textContent = "先選名字，就會顯示你每個單元的進度。";
-    document.getElementById("coinBox").textContent = "🪙 —";
+    document.getElementById("coinBox").textContent = "⚡ —";
     drawMonth(null);
     return;
   }
@@ -258,12 +258,12 @@ function draw() {
     if (r) {
       doneN++; coinN += r.coins || 0;
       a.classList.add("done");
-      a.querySelector(".st").textContent = "✅ " + r.best + "/" + r.total + "　🪙" + r.coins;
+      a.querySelector(".st").textContent = "✅ " + r.best + "/" + r.total;
     } else { a.classList.remove("done"); a.querySelector(".st").textContent = "›"; }
   }
-  document.getElementById("coinBox").textContent = "🪙 " + p.coins.balance;
+  document.getElementById("coinBox").textContent = "⚡ " + (function () { try { var t = JSON.parse(localStorage.getItem("kidsTown.v1." + currentStudent) || "null"); return t && t.energy ? (t.energy.wallet || 0) + (t.energy.reserve || 0) : "—"; } catch (e) { return "—"; } })();
   document.getElementById("overall").textContent =
-    "已完成 " + doneN + " / " + links.length + " 單元　·　單字課累積 🪙 " + coinN;
+    "已完成 " + doneN + " / " + links.length + " 單元";
   var note = document.getElementById("offNote");
   if (note) note.style.display = planIds.length ? "block" : "none";
   drawMonth(p);

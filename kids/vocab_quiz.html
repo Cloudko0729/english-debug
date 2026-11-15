@@ -102,15 +102,15 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202611150826"></script>
-<script src="worddex.js?v=202611150826"></script>
-<script src="curriculum.js?v=202611150826"></script>
-<script src="word_emoji.js?v=202611150826"></script>
-<script src="word_image.js?v=202611150826"></script>
+<script src="wordbank.js?v=202611150941"></script>
+<script src="worddex.js?v=202611150941"></script>
+<script src="curriculum.js?v=202611150941"></script>
+<script src="word_emoji.js?v=202611150941"></script>
+<script src="word_image.js?v=202611150941"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202611150826"></script>
-<script src="account_lock.js?v=202611150826"></script>
-<script src="supabase_auth.js?v=202611150826"></script>
+<script src="cloud_sync.js?v=202611150941"></script>
+<script src="account_lock.js?v=202611150941"></script>
+<script src="supabase_auth.js?v=202611150941"></script>
 <script>
 const QUIZ_SIZE = 20;
 const DRILL_ID = "vocab-quiz";
@@ -345,7 +345,7 @@ function showResult() {
   } else {
     html += `<div class="weak-list" style="background:#e6faf0;color:var(--success)">全部答對！太強了 🌟</div>`;
   }
-  html += `<a href="island.html">🏝️ 用金幣去蓋島嶼</a>`;
+  html += `<a href="town/index.html">🌾 去四季小鎮</a>`;
   document.getElementById("result").innerHTML = html;
   document.getElementById("result").style.display = "block";
   updateInfoBar();
@@ -356,7 +356,7 @@ function awardCoins(correct) {
   const p = getProgress(currentStudent);
   const claimKey = todayStr() + "::" + DRILL_ID;
   if (p.coins.claimedDrills[claimKey]) {
-    return `🪙 今天的單字測驗金幣已領過（共 ${p.coins.balance} 金幣）`;
+    return `✅ 今天的單字測驗已經做過囉，小鎮體力只算第一次`;
   }
   const earned = correct * 5 + 30; // 每題5 + 完成30
   p.coins.balance += earned;
@@ -366,7 +366,7 @@ function awardCoins(correct) {
     meta: { drillId: DRILL_ID, date: todayStr(), correct } });
   p.coins.claimedDrills[claimKey] = { claimedAt: new Date().toISOString(), earned, correct };
   saveProgress(currentStudent, p);
-  return `🪙 +${earned} 金幣！（共 ${p.coins.balance} 金幣）`;
+  return `🎉 小鎮體力 <b>+10 ⚡</b>`;
 }
 
 // ─── Toast / info ────────────────────────────────────────────────────────────
@@ -383,7 +383,7 @@ function updateInfoBar() {
   const weak = Object.values(p.wrongCounts || {}).filter(c => c >= 2).length;
   const bar = document.getElementById("infoBar");
   bar.style.display = "block";
-  bar.textContent = `${currentStudent.charAt(0).toUpperCase() + currentStudent.slice(1)} · 🪙 ${p.coins.balance} · 加強中單字：${weak} 個${_quizRetake() ? " · 🔁 練習模式(隨機出題)" : ""}`;
+  bar.textContent = `${currentStudent.charAt(0).toUpperCase() + currentStudent.slice(1)} · 加強中單字：${weak} 個${_quizRetake() ? " · 🔁 練習模式(隨機出題)" : ""}`;
 }
 
 // ─── Student select / start ──────────────────────────────────────────────────
@@ -406,7 +406,7 @@ function selectStudent(name) {
   updateInfoBar();
 
   if (alreadyDone) {
-    toast("今天已經測驗過囉，這次不再給金幣");
+    toast("今天已經測驗過囉，這次是練習（小鎮體力只算第一次）");
   }
   // 本機空 → 從雲端拉回（新/測試平板自動載入真實進度）；本機有 → 上傳備份
   if (typeof cloudSyncOnOpen === "function") cloudSyncOnOpen(name, () => selectStudent(name));

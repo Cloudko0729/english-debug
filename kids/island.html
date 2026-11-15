@@ -321,8 +321,8 @@
 <main>
   <!-- 2026-10 改玩四季小鎮：舊島月底轉成紀念館 -->
   <div style="background:#fff3cf;border:2px solid #d9a441;border-radius:12px;padding:9px 12px;margin-bottom:12px;font-size:.9rem;line-height:1.6">
-    📢 小島 <b>10/31</b> 之後會變成紀念館：蓋好的東西都留著可以看，但不能再蓋。金幣不會搬到新遊戲。
-    新遊戲是 <a href="town/index.html" style="font-weight:700">🌾 四季小鎮</a>，做英文換體力，兩個人從同一個起點開始。
+    🏛️ 小島已經變成<b>紀念館</b>：蓋好的東西都留著可以看，但不能再蓋、也不會再生產金幣。
+    現在做英文是換 <a href="town/index.html" style="font-weight:700">🌾 四季小鎮</a> 的體力，去小鎮種田、修地標吧！
   </div>
   <div id="notice"></div>
   <!-- 合併模式的常駐提示。toast 兩秒就消失，小孩看不到自己還在合併模式，
@@ -366,15 +366,15 @@
 
 <div id="toast"></div>
 
-<script src="wordbank.js?v=202611150826"></script>
-<script src="curriculum.js?v=202611150826"></script>
-<script src="word_roots.js?v=202611150826"></script>
-<script src="worddex.js?v=202611150826"></script>
-<script src="city_data.js?v=202611150826"></script>
+<script src="wordbank.js?v=202611150941"></script>
+<script src="curriculum.js?v=202611150941"></script>
+<script src="word_roots.js?v=202611150941"></script>
+<script src="worddex.js?v=202611150941"></script>
+<script src="city_data.js?v=202611150941"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202611150826"></script>
-<script src="account_lock.js?v=202611150826"></script>
-<script src="supabase_auth.js?v=202611150826"></script>
+<script src="cloud_sync.js?v=202611150941"></script>
+<script src="account_lock.js?v=202611150941"></script>
+<script src="supabase_auth.js?v=202611150941"></script>
 <script>
 // ─── Building catalog ─────────────────────────────────────────────────────────
 // terrain: 可蓋的地形碼；maxLevel: 最高等級；max: 數量上限；
@@ -2429,6 +2429,24 @@ function openRestoreModal(items) {
       });
     };
   });
+}
+
+// ─── 紀念館（2026-11-01 起）───────────────────────────────────────────────────
+// 改玩四季小鎮之後，小島只留著看：地圖、建築詳情、相簿、信箱、說明都能開，
+// 但蓋、拆、升級、合併、領產出、旅行與問答、寵物、送禮、匯入還原全部擋下來。
+// 擋的是全域函式本身，所以畫面上的按鈕和地圖格子點下去都會走到這裡。
+// test_island_tick.js 在沙盒裡設 ISLAND_LIVE = true 才測得到原本的結算。
+const MEMORIAL_FROM = "2026-11-01";
+const MEMORIAL = !(typeof ISLAND_LIVE !== "undefined" && ISLAND_LIVE) && todayStr() >= MEMORIAL_FROM;
+function memorialBlock() { closeSheet(); toast("🏛️ 小島已經變成紀念館，只能看不能改囉！去 🌾 四季小鎮玩吧"); }
+if (MEMORIAL) {
+  ["openBuild", "build", "openReclaim", "reclaimTile", "upgradeCenter", "directUpgrade", "startMerge",
+   "demolish", "openTravel", "openRoots", "openBoard", "openVisitor", "donateWonder", "adoptPet", "feedPet",
+   "playPet", "doGift", "doGreet", "doActivity", "claimGift", "sendSibGift", "sendMail", "importSave",
+   "restoreFromGoogle"].forEach(n => { if (typeof globalThis[n] === "function") globalThis[n] = memorialBlock; });
+  globalThis.tapDog = b => openDetail(b);                     // 看得到小狗，但不能再收
+  globalThis.runDailyTick = () => { lastTickDays = 0; return 0; };   // 不再生產、不再補算
+  globalThis.tickIslandInBackground = () => 0;
 }
 
 // 自動選學生由 supabase_auth.js 的 auto-gate 處理；沒 Supabase 時才走舊的本機還原

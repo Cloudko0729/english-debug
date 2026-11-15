@@ -70,9 +70,9 @@
 <main id="examMain"></main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../cloud_sync.js?v=202611150826"></script>
-<script src="../account_lock.js?v=202611150826"></script>
-<script src="../supabase_auth.js?v=202611150826"></script>
+<script src="../cloud_sync.js?v=202611150941"></script>
+<script src="../account_lock.js?v=202611150941"></script>
+<script src="../supabase_auth.js?v=202611150941"></script>
 <script>
 const EXAM = {
   "basic": {
@@ -416,9 +416,7 @@ function gradeAll(){
     `聽力 ${sh(lsh)} ${lsh}/5<br>閱讀 ${sh(rsh)} ${rsh}/5`;
   document.getElementById("resultScore").textContent = `答對 ${correct} / ${total}`;
   const earned = awardComprehensive(correct, total);
-  document.getElementById("resultCoin").textContent = earned > 0
-    ? `🪙 +${earned} 金幣！`
-    : `（這份綜合測驗的獎勵已經領過囉）`;
+  document.getElementById("resultCoin").textContent = "📦 舊版測驗：成績有記下來，但不換小鎮體力";
   const res = document.getElementById("result");
   res.style.display = "block";
   res.scrollIntoView({behavior:"smooth"});
@@ -455,7 +453,7 @@ function selectStudent(name){
   const pct=total>0?Math.round(p.totalCorrect/total*100):0;
   const bar=document.getElementById("statsBar");
   bar.style.display="block";
-  bar.textContent=`${name.charAt(0).toUpperCase()+name.slice(1)} · 🪙 ${(p.coins&&p.coins.balance)||0} · 正確率 ${pct}%`;
+  bar.textContent=`${name.charAt(0).toUpperCase()+name.slice(1)} · 正確率 ${pct}%`;
   if(typeof cloudSyncOnOpen==="function")cloudSyncOnOpen(name,()=>selectStudent(name));
 }
 

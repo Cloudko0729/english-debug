@@ -98,7 +98,7 @@ h2{font-size:1rem;margin:22px 0 8px}
     <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
     <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
     <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button></span>
-    <span class="coin" id="coinBox">🪙 —</span>
+    <span class="coin" id="coinBox" title="小鎮體力">⚡ —</span>
   </div>
 
   <div id="main"><div class="card note">先選上面的名字，就會看到給你的建議。</div></div>
@@ -107,11 +107,11 @@ h2{font-size:1rem;margin:22px 0 8px}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202611150826"></script>
-<script src="account_lock.js?v=202611150826"></script>
-<script src="supabase_auth.js?v=202611150826"></script>
-<script src="vocab_units.js?v=202611150826"></script>
-<script src="vocab_unit_plan.js?v=202611150826"></script>
+<script src="cloud_sync.js?v=202611150941"></script>
+<script src="account_lock.js?v=202611150941"></script>
+<script src="supabase_auth.js?v=202611150941"></script>
+<script src="vocab_units.js?v=202611150941"></script>
+<script src="vocab_unit_plan.js?v=202611150941"></script>
 <script>
 var currentStudent = null;
 var GP = window.VocabPlan;
@@ -131,7 +131,7 @@ function esc(s) { return String(s).replace(/[&<>"]/g, function (c) {
 function refreshCoin(bump) {
   var el = document.getElementById("coinBox");
   if (!el) return;          // 登入列可能把它換掉了；少顯示金幣不該讓整頁停擺
-  el.textContent = currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
+  el.textContent = currentStudent ? "⚡ " + (function () { try { var t = JSON.parse(localStorage.getItem("kidsTown.v1." + currentStudent) || "null"); return t && t.energy ? (t.energy.wallet || 0) + (t.energy.reserve || 0) : "—"; } catch (e) { return "—"; } })() : "⚡ —";
   if (bump) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
 }
 var _tt = null;
@@ -149,7 +149,7 @@ function nodeLine(p, id) {
   var st = "尚未開始", cls = "";
   if (r) {
     var pct = Math.round(GP.scoreOf(r) * 100);
-    if (GP.isSolid(p, id)) { st = "✅ " + pct + "%　🪙" + r.coins; cls = "ok"; }
+    if (GP.isSolid(p, id)) { st = "✅ " + pct + "%"; cls = "ok"; }
     else { st = "🔁 " + pct + "%　再練一次"; cls = "no"; }
   }
   return '<li><a href="' + lessonHref(id) + '">' + esc(n.titleZh) +
@@ -179,10 +179,10 @@ function renderPlan(p) {
 
   if (s.bonusReady) {
     h += '<div class="bonus"><div style="font-size:1.6rem">🎁</div>' +
-      '<b>整份課表都完成了！</b><br><span class="note">領取本月完成獎勵 🪙 ' + s.bonus + '</span><br>' +
-      '<button onclick="claimBonus()">領獎勵</button></div>';
+      '<b>整份課表都完成了！</b><br><span class="note">按下面的按鈕，把這個月記錄下來</span><br>' +
+      '<button onclick="claimBonus()">記錄完成 🎉</button></div>';
   } else if (pl.bonusClaimed) {
-    h += '<div class="card note">🎁 本月的完成獎勵已經領過了（🪙 ' + s.bonus + '）。</div>';
+    h += '<div class="card note">🎉 這個月的課表已經全部完成了。</div>';
   }
 
   // 直接進「下一課」而不是 48 課的地圖 —— 選了課表卻被丟回全部攤開的列表，
@@ -193,7 +193,7 @@ function renderPlan(p) {
     : '<a class="big" href="vocab_db/units/index.html" style="background:#2fbf71;color:#fff">🗺️ 這個月的都學完了，去看看其他課</a>';
 
   h += '<div class="card"><b style="font-size:.92rem">想換一條路線嗎？</b>' +
-    '<p class="note" style="margin:4px 0 0">可以隨時換，<b>已經拿到的金幣不會被扣掉</b>，' +
+    '<p class="note" style="margin:4px 0 0">可以隨時換，<b>已經拿到的小鎮體力不會被扣掉</b>，' +
     '已經做過的單元也會留在新課表裡。' +
     (pl.switches ? '（這個月已經換過 ' + pl.switches + ' 次）' : '') + '</p>' +
     '<button class="mini" onclick="showChooser()">🔄 重新選一次</button></div>';
@@ -241,7 +241,7 @@ function renderChooser(p, forceOpen) {
         '<span>' + r.wordCount + ' 個字</span>' +
         '<span>新的 ' + r.newCount + ' 單元</span>' +
         '<span>' + esc(r.level) + ' 為主</span>' +
-        '<span>最多可拿 🪙 ' + r.coins + '</span></div>' +
+        '<span>每課第一次 +10 ⚡</span></div>' +
       (r.blocked ? '<div class="warn">⚠️ ' + esc(r.blocked) + '</div>' : "") +
       '<ol>' + items + '</ol>' +
       '<button class="pick" style="background:' + r.tone + '" onclick="pick(\'' + r.key + '\')">' +
@@ -252,8 +252,7 @@ function renderChooser(p, forceOpen) {
     ? '<button class="mini" onclick="draw()">← 先不要換，回本月課表</button>' : "";
 
   return head + cards +
-    '<p class="note" style="margin:14px 0 0">🪙 金幣算法：每課最多 40（答對率越高越多），' +
-    '整份課表全部完成再加 ' + GP.MONTH_BONUS + '。三條路線的完成獎勵一樣多——' +
+    '<p class="note" style="margin:14px 0 0">⚡ 小鎮體力：每個單元第一次完成 +10（本週加分，一週最多 40）。三條路線的獎勵一樣多——' +
     '獎勵的是你把計畫走完，不是選比較難的那條。</p>' + back;
 }
 
@@ -298,7 +297,7 @@ window.claimBonus = function () {
     meta:{ month:s.plan.month, route:s.plan.route, units:s.plan.units.length } });
   saveProgress(currentStudent, p);
   if (typeof cloudSave === "function") cloudSave(currentStudent);
-  toast("🎁 +" + s.bonus + " 金幣！整個月的課表都完成了");
+  toast("🎉 整個月的課表都完成了！");
   refreshCoin(true);
   draw();
 };

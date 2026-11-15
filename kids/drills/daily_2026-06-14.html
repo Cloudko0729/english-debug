@@ -332,9 +332,9 @@
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../cloud_sync.js?v=202611150826"></script>
-<script src="../account_lock.js?v=202611150826"></script>
-<script src="../supabase_auth.js?v=202611150826"></script>
+<script src="../cloud_sync.js?v=202611150941"></script>
+<script src="../account_lock.js?v=202611150941"></script>
+<script src="../supabase_auth.js?v=202611150941"></script>
 <script>
 // ─── Drill Data (Day 3 · Food) ───────────────────────────────────────────────
 const DRILL = {
@@ -718,7 +718,7 @@ function awardCoins(correct, perfectSections) {
   if (!p.coins) p.coins = { balance: 0, lifetimeEarned: 0, lifetimeSpent: 0, transactions: [], claimedDrills: {} };
   const claimKey = DRILL.date + "::" + DRILL_ID;
   if (p.coins.claimedDrills[claimKey]) {
-    return `🪙 今天這份的金幣已經領過囉（目前 ${p.coins.balance} 金幣）`;
+    return `✅ 這份已經完成過囉，小鎮體力只算第一次`;
   }
   const earned = correct * 5 + perfectSections * 10 + 30; // 每題5 + 每大題全對10 + 完成30
   p.coins.balance += earned;
@@ -731,7 +731,7 @@ function awardCoins(correct, perfectSections) {
   p.coins.claimedDrills[claimKey] = { claimedAt: new Date().toISOString(), earned, correct, perfectSections };
   saveProgress(currentStudent, p);
   if (typeof cloudSave === "function") cloudSave(currentStudent);  // 自動存到 Google 試算表
-  return `🪙 +${earned} 金幣！（共 ${p.coins.balance} 金幣）<br><a href="../island.html" style="color:#ffe27a;font-weight:700">👉 去蓋我的島嶼</a>`;
+  return `🎉 小鎮體力 <b>+10 ⚡</b><br><a href="../town/index.html" style="color:#ffe27a;font-weight:700">👉 去四季小鎮</a>`;
 }
 
 // ─── Init ────────────────────────────────────────────────────────────────────

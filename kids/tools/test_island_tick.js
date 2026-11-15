@@ -67,12 +67,14 @@ const sandbox = {
   WORLD_CITIES: [], WORDBANK: [], CURRICULUM: [], WORD_ROOTS: {},
 };
 sandbox.window = sandbox;
+sandbox.ISLAND_LIVE = true;   // 2026-11 起島嶼是紀念館；前面測原本的結算，最後另外測紀念館模式
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
 // const/let 不會掛到 sandbox 上（function 宣告會），所以補一組取值器把它們接出來。
 // 用 getter/setter 而不是快照，才拿得到 island 被改動後的即時值。
 const bridge = `;globalThis.__T = {
   get BUILDINGS(){return BUILDINGS},
+  get MEMORIAL(){return MEMORIAL},
   get OFFLINE_DAYS_MAX(){return OFFLINE_DAYS_MAX},
   get lastTickDays(){return lastTickDays},
   get island(){return island}, set island(v){island=v},
@@ -377,6 +379,31 @@ console.log("── 同一格不能蓋兩棟 ──");
   S.selectedTile = nb;
   S.build("forest");
   eq("隔壁空格照樣蓋得起來", S.island.buildings.length, 2);
+}
+
+// ── 紀念館模式：不設 ISLAND_LIVE 時，蓋、拆、結算都要被擋下來 ──
+{
+  console.log("\n── 紀念館模式 ──");
+  const mstore = new Map();
+  const msb = { ...sandbox, localStorage: {
+    getItem: k => (mstore.has(k) ? mstore.get(k) : null),
+    setItem: (k, v) => mstore.set(k, String(v)),
+    removeItem: k => mstore.delete(k) } };
+  delete msb.ISLAND_LIVE;
+  delete msb.__T;
+  msb.window = msb; msb.globalThis = msb;
+  vm.createContext(msb);
+  vm.runInContext(code + bridge, msb, { filename: "island.html<script>" });
+  let toasted = "";
+  msb.toast = m => { toasted = m; };
+  eq("紀念館旗標打開", msb.__T.MEMORIAL, true);
+  eq("每日結算不產出", msb.runDailyTick(), 0);
+  eq("背景結算不產出", msb.tickIslandInBackground(2), 0);
+  msb.build("forest");
+  eq("按蓋房子只跳提示", /紀念館/.test(toasted), true);
+  toasted = "";
+  msb.demolish("x");
+  eq("按拆除只跳提示", /紀念館/.test(toasted), true);
 }
 
 console.log(`\n${fail === 0 ? "✅" : "❌"} pass ${pass} / fail ${fail}\n`);

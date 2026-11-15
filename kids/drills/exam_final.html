@@ -88,7 +88,7 @@
 <div id="infoBar"></div>
 
 <main>
-  <div id="pickMsg">👆 先選名字,開始期末考！全部答對有大獎 🪙🪙</div>
+  <div id="pickMsg">👆 先選名字,開始期末考！</div>
 
   <div id="examArea" style="display:none">
     <section>
@@ -130,9 +130,9 @@
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../cloud_sync.js?v=202611150826"></script>
-<script src="../account_lock.js?v=202611150826"></script>
-<script src="../supabase_auth.js?v=202611150826"></script>
+<script src="../cloud_sync.js?v=202611150941"></script>
+<script src="../account_lock.js?v=202611150941"></script>
+<script src="../supabase_auth.js?v=202611150941"></script>
 <script>
 const AUDIO_DIR = "audio/exam/";
 const EXAM_ID = "final-exam";
@@ -310,7 +310,7 @@ function submitExam() {
   html += pct === 100 ? `<div>🌟 滿分！太厲害了，${currentStudent}！</div>`
         : pct >= 80 ? `<div>💪 很棒，${currentStudent}！紅色的再看一次。</div>`
         : `<div>📚 加油，${currentStudent}！錯的單字會進加強清單。</div>`;
-  html += `<br><a href="../island.html">🏝️ 用獎勵金幣去蓋島嶼</a>`;
+  html += `<br><a href="../town/index.html">🌾 去四季小鎮</a>`;
   document.getElementById("result").innerHTML = html;
   document.getElementById("result").style.display = "block";
   document.getElementById("result").scrollIntoView({ behavior: "smooth" });
@@ -327,7 +327,7 @@ function recordResult(wordEn, correct) {
 
 function awardCoins(correct, total) {
   const p = getProgress(currentStudent);
-  if (p.coins.claimedDrills[EXAM_ID]) return `🪙 期末考獎勵已領過（共 ${p.coins.balance} 金幣）`;
+  if (p.coins.claimedDrills[EXAM_ID]) return `📦 舊版測驗：成績有記下來，但不換小鎮體力`;
   const pct = correct / total;
   const bonus = pct === 1 ? 300 : pct >= 0.8 ? 150 : 60;
   const earned = correct * 10 + bonus;
@@ -336,7 +336,7 @@ function awardCoins(correct, total) {
   p.coins.transactions.push({ type: "earn", source: "finalExam", amount: earned, balanceAfter: p.coins.balance, createdAt: new Date().toISOString(), meta: { correct, total } });
   p.coins.claimedDrills[EXAM_ID] = { claimedAt: new Date().toISOString(), earned, correct, total };
   saveProgress(currentStudent, p);
-  return `🪙 +${earned} 金幣大獎！（共 ${p.coins.balance} 金幣）`;
+  return `📦 舊版測驗：成績有記下來，但不換小鎮體力`;
 }
 
 let toastTimer = null;
@@ -348,7 +348,7 @@ function updateInfoBar() {
   const done = !!p.coins.claimedDrills[EXAM_ID];
   const bar = document.getElementById("infoBar");
   bar.style.display = "block";
-  bar.textContent = `${currentStudent.charAt(0).toUpperCase()+currentStudent.slice(1)} · 🪙 ${p.coins.balance} · 加強中單字：${weak}${done ? " · 期末考已完成 ✅" : ""}`;
+  bar.textContent = `${currentStudent.charAt(0).toUpperCase()+currentStudent.slice(1)} · 加強中單字：${weak}${done ? " · 期末考已完成 ✅" : ""}`;
 }
 
 function selectStudent(name) {
@@ -362,7 +362,7 @@ function selectStudent(name) {
   renderExam();
   updateInfoBar();
   const p = getProgress(name);
-  if (p.coins.claimedDrills[EXAM_ID]) toast("你已經考過期末考囉，這次重做不再給獎勵金幣");
+  if (p.coins.claimedDrills[EXAM_ID]) toast("你已經考過期末考囉，這次是練習");
   if (typeof cloudSyncOnOpen === "function") cloudSyncOnOpen(name, () => { updateInfoBar(); });
 }
 

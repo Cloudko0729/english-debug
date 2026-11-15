@@ -61,7 +61,7 @@ header a{color:#2f80ed;text-decoration:none}
     <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
     <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
     <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button></span>
-    <span class="coin" id="coinBox">🪙 —</span>
+    <span class="coin" id="coinBox" title="小鎮體力">⚡ —</span>
   </div>
   <div id="main"><div class="card note">先選上面的名字。</div></div>
 </div>
@@ -69,16 +69,16 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202611150826"></script>
-<script src="account_lock.js?v=202611150826"></script>
-<script src="supabase_auth.js?v=202611150826"></script>
-<script src="ai_review.js?v=202611150826"></script>
-<script src="week_key.js?v=202611150826"></script>
-<script src="curriculum.js?v=202611150826"></script>
-<script src="grammar_nodes.js?v=202611150826"></script>
-<script src="grammar_plan.js?v=202611150826"></script>
-<script src="vocab_units.js?v=202611150826"></script>
-<script src="vocab_unit_plan.js?v=202611150826"></script>
+<script src="cloud_sync.js?v=202611150941"></script>
+<script src="account_lock.js?v=202611150941"></script>
+<script src="supabase_auth.js?v=202611150941"></script>
+<script src="ai_review.js?v=202611150941"></script>
+<script src="week_key.js?v=202611150941"></script>
+<script src="curriculum.js?v=202611150941"></script>
+<script src="grammar_nodes.js?v=202611150941"></script>
+<script src="grammar_plan.js?v=202611150941"></script>
+<script src="vocab_units.js?v=202611150941"></script>
+<script src="vocab_unit_plan.js?v=202611150941"></script>
 <script>
 var currentStudent = null;
 
@@ -99,7 +99,7 @@ function refreshCoin() {
   var el = document.getElementById("coinBox");
   if (!el) return;
   el.textContent =
-    currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
+    currentStudent ? "⚡ " + (function () { try { var t = JSON.parse(localStorage.getItem("kidsTown.v1." + currentStudent) || "null"); return t && t.energy ? (t.energy.wallet || 0) + (t.energy.reserve || 0) : "—"; } catch (e) { return "—"; } })() : "⚡ —";
 }
 var _tt = null;
 function toast(msg) {

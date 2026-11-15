@@ -73,7 +73,7 @@ header a{color:#2f80ed;text-decoration:none}
     <button class="stu-btn" onclick="pickStudent('jonathan')">Jonathan</button>
     <button class="stu-btn" onclick="pickStudent('ryder')">Ryder</button>
     <button class="stu-btn" style="opacity:.7" onclick="pickStudent('test')">🧪 測試</button></span>
-    <span class="coin" id="coinBox">🪙 —</span>
+    <span class="coin" id="coinBox" title="小鎮體力">⚡ —</span>
   </div>
   <div id="main"><div class="card note">先選上面的名字。</div></div>
 </div>
@@ -81,16 +81,16 @@ header a{color:#2f80ed;text-decoration:none}
 <div id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="cloud_sync.js?v=202611150826"></script>
-<script src="account_lock.js?v=202611150826"></script>
-<script src="supabase_auth.js?v=202611150826"></script>
-<script src="ai_review.js?v=202611150826"></script>
-<script src="week_key.js?v=202611150826"></script>
-<script src="grammar_nodes.js?v=202611150826"></script>
-<script src="grammar_plan.js?v=202611150826"></script>
-<script src="vocab_units.js?v=202611150826"></script>
-<script src="vocab_unit_plan.js?v=202611150826"></script>
-<script src="weekly_bank.js?v=202611150826"></script>
+<script src="cloud_sync.js?v=202611150941"></script>
+<script src="account_lock.js?v=202611150941"></script>
+<script src="supabase_auth.js?v=202611150941"></script>
+<script src="ai_review.js?v=202611150941"></script>
+<script src="week_key.js?v=202611150941"></script>
+<script src="grammar_nodes.js?v=202611150941"></script>
+<script src="grammar_plan.js?v=202611150941"></script>
+<script src="vocab_units.js?v=202611150941"></script>
+<script src="vocab_unit_plan.js?v=202611150941"></script>
+<script src="weekly_bank.js?v=202611150941"></script>
 <script>
 var currentStudent = null, curAudio = null;
 var TEST = null, answers = {}, graded = false, wrongForAI = [];
@@ -130,7 +130,7 @@ function play(src) {
 function refreshCoin(bump) {
   var el = document.getElementById("coinBox");
   if (!el) return;          // 登入列可能把它換掉了；少顯示金幣不該讓整頁停擺
-  el.textContent = currentStudent ? "🪙 " + getProgress(currentStudent).coins.balance : "🪙 —";
+  el.textContent = currentStudent ? "⚡ " + (function () { try { var t = JSON.parse(localStorage.getItem("kidsTown.v1." + currentStudent) || "null"); return t && t.energy ? (t.energy.wallet || 0) + (t.energy.reserve || 0) : "—"; } catch (e) { return "—"; } })() : "⚡ —";
   if (bump) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
 }
 var _tt = null;
@@ -214,7 +214,7 @@ function render(practice) {
 
   var h = '<div class="card"><b>' + TEST.questions.length + ' 題　·　大約 10 分鐘</b>' +
     '<p class="note" style="margin:4px 0 0">這些都是你這陣子學過的。答完按最下面的按鈕看結果，' +
-    '一週可以領一次金幣。</p></div><div class="card">';
+    '每週第一次做完，小鎮體力 +10 ⚡。</p></div><div class="card">';
   TEST.questions.forEach(function (item, i) {
     var q = item.q;
     h += '<div class="q" id="q' + i + '"><div class="ask">' + (i + 1) + ". " + q.ask +
@@ -225,7 +225,7 @@ function render(practice) {
     });
     h += '<div class="why" id="w' + i + '"></div></div>';
   });
-  h += '</div><div class="card"><button class="fin" id="finBtn" onclick="grade()">看結果並領金幣 🪙</button></div>';
+  h += '</div><div class="card"><button class="fin" id="finBtn" onclick="grade()">看結果 ⚡</button></div>';
   box.innerHTML = h;
   refreshCoin();
 }
@@ -293,11 +293,11 @@ function grade() {
   var btn = document.getElementById("finBtn");
   btn.disabled = true;
   btn.textContent = practice ? ("練習：答對 " + correct + " / " + total)
-                            : ("答對 " + correct + " / " + total + "　🪙 +" + earned);
+                            : ("答對 " + correct + " / " + total + "　⚡ +10");
   btn.classList.add("scored");
   refreshCoin(true);
   toast(practice ? ("練習完成：答對 " + correct + " / " + total + "（不計分）")
-                 : ("🪙 +" + earned + " 金幣！答對 " + correct + " / " + total));
+                 : ("⚡ 小鎮體力 +10！答對 " + correct + " / " + total));
 
   // 結果接在按鈕正下方。
   // 原本插在 #main 之前（整份 12 題的最上方），小孩在長頁面的最底部按下按鈕，
@@ -338,8 +338,9 @@ function renderResult(p, byItem, correct, total, earned) {
         '<span class="dot ' + rag.cls + '">' + rag.txt + ' ' + s.correct + '/' + s.total + '</span></div>';
     });
   });
-  return '<div class="bonus"><div style="font-size:1.6rem">🪙</div>' +
-      '<b>答對 ' + correct + ' / ' + total + '　領到 ' + earned + ' 金幣</b></div>' +
+  return '<div class="bonus"><div style="font-size:1.6rem">⚡</div>' +
+      '<b>答對 ' + correct + ' / ' + total + '　小鎮體力 +10</b>' +
+      '<br><a href="town/index.html" style="color:#2f80ed;font-weight:700">👉 去四季小鎮</a></div>' +
     '<div class="card"><h2>哪些還記得，哪些忘了</h2>' +
     '<p class="note">🔴 的那幾課點進去重看一次。下個月選課時，系統也會把它們排進「修復」路線。</p>' +
     rows + '</div>';
@@ -365,7 +366,7 @@ function renderDone(p) {
     // 一週一次是為了讓分數代表「隔一週還記得多少」。想多練不該被擋，
     // 但練習不能蓋掉那個量測，所以分開兩條路，並各自講清楚後果。
     '<div class="card"><h2>還想再做一次嗎？</h2>' +
-      '<p class="note">「再練一次」會出<b>另一批題目</b>，不記錄成績也不給金幣，純粹練習。' +
+      '<p class="note">「再練一次」會出<b>另一批題目</b>，不記錄成績也不給體力，純粹練習。' +
       '如果上面那筆成績不對（例如不是你考的），才用「重考」把它換掉。</p>' +
       '<button class="fin" style="background:#2f80ed" onclick="startPractice()">🔁 再練一次（不計分）</button>' +
       '<button class="fin" style="background:#fff;color:#c0392b;border:2px solid #e8a0a0;margin-top:8px" ' +
@@ -379,7 +380,7 @@ window.startPractice = function () {
   toast("🔁 這次是練習，不會記錄成績");
 };
 window.retake = function () {
-  if (!confirm("確定要重考嗎？上面那筆成績會被刪掉，金幣不會退回。")) return;
+  if (!confirm("確定要重考嗎？上面那筆成績會被刪掉，這週的小鎮體力不會再給一次。")) return;
   var p = getProgress(currentStudent);
   var k = testWeekKey();
   p.weeklyTests = (p.weeklyTests || []).filter(function (t) { return t.week !== k; });
