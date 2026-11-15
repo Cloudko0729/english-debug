@@ -129,4 +129,9 @@ const DRILLS = [
   { day: 124, date: "2026-11-11", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 動物與棲地＋文法根基", icon: "🦉" },
   { day: 125, date: "2026-11-12", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 動物與棲地＋文法根基", icon: "🦉" },
   { day: 126, date: "2026-11-13", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第2週 動物與棲地＋文法根基", icon: "🦉" },
+  { day: 127, date: "2026-11-16", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 家事與幫忙＋文法根基", icon: "🧹" },
+  { day: 128, date: "2026-11-17", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 家事與幫忙＋文法根基", icon: "🧹" },
+  { day: 129, date: "2026-11-18", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 家事與幫忙＋文法根基", icon: "🧹" },
+  { day: 130, date: "2026-11-19", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 家事與幫忙＋文法根基", icon: "🧹" },
+  { day: 131, date: "2026-11-20", theme: "vocab", kind: "vocab", eng: "每日測驗", zh: "第3週 家事與幫忙＋文法根基", icon: "🧹" },
 ];

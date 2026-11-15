@@ -978,6 +978,41 @@
           answer: "c", why: "wild 是野生的。野生動物不要餵、不要抓，也不要靠太近，牠受到驚嚇可能會踢人。退開一點，讓牠有路可以自己離開。" },
       ],
     },
+    "2026-11-15": {
+      theme: "家事與幫忙",
+      items: [
+        { id: "c1115-nora", speaker: "Nora", en: "Can you help me carry this heavy bucket?", zh: "你可以幫我搬這個很重的水桶嗎？",
+          choices: [
+            { id: "a", en: "Yes, it does.", zh: "是的，它會。" },
+            { id: "b", en: "It's on the shelf.", zh: "它在架子上。" },
+            { id: "c", en: "Sure! Let's carry it together.", zh: "當然！我們一起搬吧。" } ],
+          answer: "c", why: "Can you help me…? 是請你幫忙，要回答好或不好：Sure! 或 Sorry, I can't.。Yes, it does. 是回答 Does it…?；It's on the shelf. 是回答 Where…?。" },
+        { id: "c1115-tom", speaker: "Tom", en: "What time do you take out the garbage?", zh: "你幾點倒垃圾？",
+          choices: [
+            { id: "a", en: "I take it out at seven thirty.", zh: "我七點半倒垃圾。" },
+            { id: "b", en: "Yes, I do.", zh: "是的，我會。" },
+            { id: "c", en: "It's in the trash can.", zh: "它在垃圾桶裡。" } ],
+          answer: "a", why: "What time 問「幾點」，可以用 at＋時間回答，例如 I take it out at seven thirty.，也可以只說 At seven thirty.。Yes, I do. 是回答 Do you…?；It's in the trash can. 回答的是「在哪裡」。" },
+        { id: "c1115-ben", speaker: "Ben", en: "Oops! I spilled my juice on the carpet.", zh: "糟糕！我把果汁灑在地毯上了。",
+          choices: [
+            { id: "a", en: "Let's put more juice on it.", zh: "我們再倒多一點果汁上去吧。" },
+            { id: "b", en: "Let's clean it with a towel right now.", zh: "我們現在馬上用毛巾把它擦乾淨吧。" },
+            { id: "c", en: "Let's hide it behind the couch.", zh: "我們把它藏到沙發後面吧。" } ],
+          answer: "b", why: "果汁灑在地毯（carpet）上要馬上擦，等它乾了就很難清。藏到沙發（couch）後面，髒的地方還是在那裡。" },
+        { id: "c1115-mia", speaker: "Mia", en: "My room is a mess. Where should I start?", zh: "我的房間好亂，我該從哪裡開始？",
+          choices: [
+            { id: "a", en: "Throw everything behind the bed.", zh: "把東西全部丟到床後面。" },
+            { id: "b", en: "I get up at seven thirty.", zh: "我七點半起床。" },
+            { id: "c", en: "Put your books back on the shelf first.", zh: "先把書放回架子上。" } ],
+          answer: "c", why: "房間亂，先把東西一樣一樣放回原位，像書放回架子（shelf），房間就會變整齊（tidy）。丟到床後面只是藏起來；I get up at seven thirty. 說的是起床時間，沒有回答問題。" },
+        { id: "c1115-leo", speaker: "Leo", en: "Does your brother help with the chores?", zh: "你哥哥（弟弟）會幫忙做家事嗎？",
+          choices: [
+            { id: "a", en: "Yes, he does. He clears the table after dinner.", zh: "會，他晚餐後會收拾餐桌。" },
+            { id: "b", en: "Yes, I do.", zh: "是的，我會。" },
+            { id: "c", en: "No, he isn't.", zh: "不，他不是。" } ],
+          answer: "a", why: "Does your brother…? 短答用 Yes, he does.／No, he doesn't.；接著自己說一句時動詞加 s：He clears the table.（問句和否定句裡 does／doesn't 後面用原形 clear）。Yes, I do. 是回答 Do you…?；No, he isn't. 是回答 Is he…?。" },
+      ],
+    },
   };
   Object.keys(CHATS).forEach(function (wk) { CHATS[wk].items.forEach(function (q, i) { q.week = wk; q.idx = i; }); });
 

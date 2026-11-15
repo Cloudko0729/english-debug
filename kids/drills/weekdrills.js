@@ -1911,6 +1911,109 @@ const WEEK_DRILLS = {
       },
     ]
   },
+  "2026-11-3": {            // 11 月第3週 家事與幫忙 · 作息與時間（What time do you…? / at six forty-five）、have to、Can you help me…?
+    listenBlank: [
+      { full: "I take a bath every night before bed.", display: "I take a ___ every night before bed.", answer: "bath" },
+      { full: "We have a soft red carpet on the living room floor.", display: "We have a soft red ___ on the living room floor.", answer: "carpet", exclude: ["couch","towel","curtain"] },
+      { full: "I use a comb for my hair every morning.", display: "I use a ___ for my hair every morning.", answer: "comb", exclude: ["towel","soap"] },
+      { full: "Dad is sleeping on the couch in the living room.", display: "Dad is sleeping on the ___ in the living room.", answer: "couch", exclude: ["carpet","floor","furniture","towel","toilet"] },
+      { full: "Please open the curtain and let some sunlight in.", display: "Please open the ___ and let some sunlight in.", answer: "curtain", exclude: ["cabinet"] },
+      { full: "Mom cleans the floor with a mop and a bucket of water.", display: "Mom cleans the ___ with a mop and a bucket of water.", answer: "floor", exclude: ["carpet","toilet","restroom","sink","couch","furniture","cabinet","shelf","bath","washing machine","trash can"] },
+      { full: "We bought some new furniture: a bed, a desk and two chairs.", display: "We bought some new ___: a bed, a desk and two chairs.", answer: "furniture" },
+      { full: "Please take out the garbage after dinner.", display: "Please take out the ___ after dinner.", answer: "garbage", exclude: ["trash can","bucket","towel","carpet","comb","couch","curtain","furniture","shelf","soap","washing machine","cabinet"] },
+      { full: "Excuse me, where is the restroom? I need to wash my hands.", display: "Excuse me, where is the ___? I need to wash my hands.", answer: "restroom", exclude: ["sink","soap","towel","toilet","bath","bucket"] },
+      { full: "Put the books back on the shelf, please.", display: "Put the books back on the ___, please.", answer: "shelf", exclude: ["cabinet","couch","floor","carpet","furniture","towel","washing machine","sink","toilet","bucket","trash can"] },
+      { full: "Put your dirty dishes in the kitchen sink.", display: "Put your dirty dishes in the kitchen ___.", answer: "sink", exclude: ["bucket","cabinet","washing machine","trash can"] },
+      { full: "Wash your hands with soap and water.", display: "Wash your hands with ___ and water.", answer: "soap" },
+      { full: "Keep your room tidy, and you can find things easily.", display: "Keep your room ___, and you can find things easily.", answer: "tidy", exclude: ["clear"] },
+      { full: "After you use the toilet, wash your hands.", display: "After you use the ___, wash your hands.", answer: "toilet", exclude: ["restroom","sink","bath","soap","towel","washing machine","trash can","bucket","comb","carpet","couch","curtain","floor","furniture","shelf","cabinet"] },
+      { full: "Throw the empty bottle into the trash can.", display: "Throw the empty bottle into the ___.", answer: "trash can", exclude: ["bucket","garbage","sink","bath","toilet","cabinet","washing machine","restroom"] },
+      { full: "Put your dirty clothes in the washing machine.", display: "Put your dirty clothes in the ___.", answer: "washing machine", exclude: ["bucket","cabinet","bath","sink","trash can","restroom"] },
+      { full: "Grandpa carries a bucket of water to the garden.", display: "Grandpa carries a ___ of water to the garden.", answer: "bucket", exclude: ["trash can"] },
+      { full: "The cups and plates are in the kitchen cabinet.", display: "The cups and plates are in the kitchen ___.", answer: "cabinet", exclude: ["sink","bucket","trash can"] },
+      { full: "Please don't bother your sister. She is doing her homework.", display: "Please don't ___ your sister. She is doing her homework.", answer: "bother", exclude: ["avoid","aid","carry","collect","bring"] },
+      { full: "My brother and I want to build a tree house this summer.", display: "My brother and I want to ___ a tree house this summer.", answer: "build", exclude: ["tidy","clear"] },
+      { full: "After a bath, dry your body with a towel.", display: "After a bath, dry your body with a ___.", answer: "towel" },
+      { full: "This box is too heavy. Can you help me carry it?", display: "This box is too heavy. Can you help me ___ it?", answer: "carry", exclude: ["bring","collect","clear"] },
+      { full: "After dinner, I help my mom clear the table.", display: "After dinner, I help my mom ___ the table.", answer: "clear", exclude: ["tidy","carry","bring","build","collect"] },
+      { full: "My little brother likes to collect pretty rocks.", display: "My little brother likes to ___ pretty rocks.", answer: "collect", exclude: ["bring","carry"] },
+      { full: "Don't forget to bring your umbrella. It's going to rain.", display: "Don't forget to ___ your umbrella. It's going to rain.", answer: "bring", exclude: ["carry","collect"] },
+      { full: "My parents don't allow me to play games before I finish my homework.", display: "My parents don't ___ me to play games before I finish my homework.", answer: "allow", exclude: ["aid"] },
+      { full: "Wash your hands often to avoid getting sick.", display: "Wash your hands often to ___ getting sick.", answer: "avoid" },
+      { full: "My cat is hiding behind the curtain.", display: "My cat is hiding ___ the curtain.", answer: "behind" },
+      { full: "We keep a first aid kit in the bathroom cabinet.", display: "We keep a first ___ kit in the bathroom cabinet.", answer: "aid" },
+      { full: "It's my duty to feed the fish every morning.", display: "It's my ___ to feed the fish every morning.", answer: "duty" },
+    ],
+    reorder: [
+      { sentence: "What time do you take out the garbage?", chunks: ["What time do you","take out","the garbage?"] },
+      { sentence: "I take out the garbage at seven thirty.", chunks: ["I take out","the garbage","at seven thirty."] },
+      { sentence: "Does your brother clear the table?", chunks: ["Does your brother","clear","the table?"] },
+      { sentence: "Yes, he does. He clears it after dinner.", chunks: ["Yes, he does. He","clears it","after dinner."] },
+      { sentence: "Can you help me carry the bucket?", chunks: ["Can you","help me carry","the bucket?"] },
+      { sentence: "I have to tidy my room before dinner.", chunks: ["I have to","tidy my room","before dinner."] },
+      { sentence: "She puts the towels in the washing machine.", chunks: ["She puts","the towels","in the washing machine."] },
+      { sentence: "My mom doesn't allow pets on the couch.", chunks: ["My mom","doesn't allow","pets on the couch."] },
+      { sentence: "Put the soap next to the sink.", chunks: ["Put the soap","next to","the sink."] },
+      { sentence: "The trash can is behind the door.", chunks: ["The trash can","is behind","the door."] },
+      { sentence: "What time does Dad do the dishes?", chunks: ["What time does","Dad","do the dishes?"] },
+      { sentence: "He does the dishes at eight o'clock.", chunks: ["He does","the dishes","at eight o'clock."] },
+      { sentence: "Please don't bother me. I'm doing my homework.", chunks: ["Please don't","bother me. I'm","doing my homework."] },
+      { sentence: "Every Saturday, we clean the house together.", chunks: ["Every Saturday,","we clean","the house together."] },
+      { sentence: "It's my duty to feed the dog.", chunks: ["It's my duty","to feed","the dog."] },
+      { sentence: "Do you make your bed every morning?", chunks: ["Do you make","your bed","every morning?"] },
+      { sentence: "No, I don't. I make it on weekends.", chunks: ["No, I don't. I","make it","on weekends."] },
+      { sentence: "Bring your dirty clothes to the washing machine.", chunks: ["Bring","your dirty clothes","to the washing machine."] },
+      { sentence: "My sister cleans the bathroom at four fifteen.", chunks: ["My sister","cleans the bathroom","at four fifteen."] },
+      { sentence: "Thank you for your help!", chunks: ["Thank you","for","your help!"] },
+    ],
+    reading: [
+      {
+        passage: "In Stardew Valley, my farmhouse was very small, so Robin built a bigger one for me. Now I have a kitchen with a sink and a cabinet. I put a shelf behind my bed for my books. Every morning, I collect eggs from the chickens and carry them to the kitchen. My house is tidy now, and my cat sleeps on the carpet.",
+        questions: [
+          { q: "Who built a bigger house for the farmer?", choices: ["Robin","Pierre","Gus","Lewis"], answer: "Robin" },
+          { q: "Where is the shelf?", choices: ["Behind the bed","In the kitchen","Next to the sink","Under the bed"], answer: "Behind the bed" },
+          { q: "What does the farmer collect every morning?", choices: ["Eggs","Books","Fish","Milk"], answer: "Eggs" },
+          { q: "Where does the cat sleep?", choices: ["On the carpet","In the sink","On the shelf","In the chicken house"], answer: "On the carpet" },
+        ]
+      },
+      {
+        passage: "Our family has a chore chart. I get up at six thirty and make my bed. My brother takes out the garbage at seven fifteen. After dinner, at six forty-five, I clear the table. Dad does the dishes, and Mom puts our clothes in the washing machine. On Sundays, we clean the house together. Then we go to the park.",
+        questions: [
+          { q: "What time does the brother take out the garbage?", choices: ["At seven fifteen","At six thirty","At six forty-five","At eight o'clock"], answer: "At seven fifteen" },
+          { q: "What does the writer do at six forty-five?", choices: ["Clears the table","Makes the bed","Does the dishes","Goes to the park"], answer: "Clears the table" },
+          { q: "Who does the dishes?", choices: ["Dad","Mom","The brother","The writer"], answer: "Dad" },
+          { q: "What does the family do on Sundays?", choices: ["They clean the house together","They go to school","They buy new furniture","They wash the car"], answer: "They clean the house together" },
+        ]
+      },
+      {
+        passage: "At our school, every class has a cleaning duty. This week, our class cleans the restroom on the second floor. We bring buckets of water and some soap. We clean the sinks and the toilets. Our teacher says, \"Don't forget to wash your hands when you finish!\" It's not fun, but everyone uses the restroom, so we all have to help.",
+        questions: [
+          { q: "What does the class clean this week?", choices: ["The restroom on the second floor","The classroom","The playground","The library"], answer: "The restroom on the second floor" },
+          { q: "What do they bring?", choices: ["Buckets of water and some soap","Towels and combs","Books and pencils","Garbage bags"], answer: "Buckets of water and some soap" },
+          { q: "What does the teacher tell them?", choices: ["Wash your hands when you finish","Go home early","Don't clean the toilets","Bring your own towel"], answer: "Wash your hands when you finish" },
+          { q: "Why do they all have to help?", choices: ["Everyone uses the restroom","The teacher is angry","It's fun","They want a prize"], answer: "Everyone uses the restroom" },
+        ]
+      },
+      {
+        passage: "My grandma is eighty years old. Her back hurts, so she can't carry heavy things. Every Saturday, I visit her and help. I carry her shopping bags and take out the garbage. Grandma doesn't allow me to climb on chairs, so I don't clean the high shelves. She always says, \"Thank you, my little helper!\" and gives me a big hug.",
+        questions: [
+          { q: "Why can't Grandma carry heavy things?", choices: ["Her back hurts","She is busy","She is at work","She doesn't like bags"], answer: "Her back hurts" },
+          { q: "When does the writer visit Grandma?", choices: ["Every Saturday","Every morning","On Mondays","After school every day"], answer: "Every Saturday" },
+          { q: "Why doesn't the writer clean the high shelves?", choices: ["Grandma doesn't allow climbing on chairs","The shelves are clean","There is no time","Grandma cleans them"], answer: "Grandma doesn't allow climbing on chairs" },
+          { q: "What does Grandma call the writer?", choices: ["My little helper","My early bird","My best friend","My little farmer"], answer: "My little helper" },
+        ]
+      },
+      {
+        passage: "In our town game, Lily's flower shop was a mess after market day. There was garbage on the floor, and there were empty boxes behind the door. Mia collected the garbage and put it in the trash can. Ben carried the boxes outside. Leo built a new shelf for the flower pots. In one hour, the shop was tidy again. To say thank you, Lily gave everyone a flower.",
+        questions: [
+          { q: "What was on the floor?", choices: ["Garbage","Flowers","Water","Books"], answer: "Garbage" },
+          { q: "Who carried the boxes outside?", choices: ["Ben","Mia","Leo","Lily"], answer: "Ben" },
+          { q: "What did Leo build?", choices: ["A new shelf for the flower pots","A new door","A trash can","A flower shop"], answer: "A new shelf for the flower pots" },
+          { q: "What did Lily give everyone?", choices: ["A flower","Some tea","A box","Some money"], answer: "A flower" },
+        ]
+      },
+    ]
+  },
 };
 // 每篇短文的「沒教過的生字」中文解釋（index 對應該週 reading[]）
 const PASSAGE_GLOSSARY = {
@@ -2054,6 +2157,13 @@ const PASSAGE_GLOSSARY = {
     [{"en":"different","zh":"不一樣的"},{"en":"fish","zh":"魚類"},{"en":"have to","zh":"必須"},{"en":"come up","zh":"浮上來"},{"en":"breathe","zh":"呼吸"},{"en":"air","zh":"空氣"},{"en":"smart","zh":"聰明的"},{"en":"groups","zh":"群體（一群一群）"},{"en":"each other","zh":"彼此"},{"en":"clicks","zh":"喀喀聲"},{"en":"whistles","zh":"口哨聲"},{"en":"rivers","zh":"河流"},{"en":"forest","zh":"森林"},{"en":"All of them","zh":"全部都是"},{"en":"letters","zh":"信件"},{"en":"writing words","zh":"寫字"}],
     [{"en":"screamed","zh":"尖叫（scream 的過去式）"},{"en":"kitchen","zh":"廚房"},{"en":"caught","zh":"抓到（catch 的過去式）"},{"en":"paper cup","zh":"紙杯"},{"en":"outside","zh":"外面"},{"en":"corner","zh":"角落"},{"en":"kill","zh":"殺死"},{"en":"help","zh":"幫助"},{"en":"call","zh":"叫……（名字）"},{"en":"broke","zh":"打破（break 的過去式）"},{"en":"lost","zh":"弄丟（lose 的過去式）"},{"en":"web","zh":"蜘蛛網"},{"en":"saw","zh":"看到（see 的過去式）"},{"en":"writer","zh":"作者（寫這段文章的人）"},{"en":"said","zh":"說（say 的過去式）"}],
     [{"en":"harbor","zh":"港口、碼頭"},{"en":"this morning","zh":"今天早上"},{"en":"told everyone to …","zh":"叫大家要……（told 是 tell 的過去式）"},{"en":"stay out of the water","zh":"不要下水"},{"en":"saw","zh":"看到（see 的過去式）"},{"en":"said","zh":"說（say 的過去式）"},{"en":"wild animals","zh":"野生動物"},{"en":"feed","zh":"餵食"},{"en":"sharp teeth","zh":"尖利的牙齒"},{"en":"took a photo","zh":"拍了一張照片（took 是 take 的過去式）"},{"en":"beach","zh":"海灘"},{"en":"library","zh":"圖書館"},{"en":"wall","zh":"牆"},{"en":"stops to look at it","zh":"停下來看它"},{"en":"go fishing","zh":"去釣魚"},{"en":"boat","zh":"船"}],
+  ],
+  "2026-11-3": [
+    [{"en":"Stardew Valley","zh":"《星露谷物語》（遊戲名稱）"},{"en":"farmhouse","zh":"農舍"},{"en":"was","zh":"是（is 的過去式）"},{"en":"Robin","zh":"Robin（遊戲裡的木匠）"},{"en":"built","zh":"蓋了（build 的過去式）"},{"en":"bigger","zh":"比較大的"},{"en":"kitchen","zh":"廚房"},{"en":"eggs","zh":"蛋"},{"en":"chickens","zh":"雞"},{"en":"chicken house","zh":"雞舍"},{"en":"Pierre","zh":"Pierre（遊戲裡的雜貨店老闆）"},{"en":"Gus","zh":"Gus（遊戲裡的酒館老闆）"},{"en":"Lewis","zh":"Lewis（遊戲裡的鎮長）"}],
+    [{"en":"chore chart","zh":"家事分工表"},{"en":"make my bed","zh":"整理床鋪"},{"en":"takes out the garbage","zh":"倒垃圾"},{"en":"clear the table","zh":"收拾餐桌"},{"en":"does the dishes","zh":"洗碗"},{"en":"clothes","zh":"衣服"},{"en":"together","zh":"一起"},{"en":"park","zh":"公園"},{"en":"writer","zh":"作者（寫這段文章的人）"},{"en":"wash the car","zh":"洗車"}],
+    [{"en":"cleaning duty","zh":"打掃工作（掃區）"},{"en":"second floor","zh":"二樓"},{"en":"buckets","zh":"水桶（複數）"},{"en":"toilets","zh":"馬桶（複數）"},{"en":"forget","zh":"忘記"},{"en":"finish","zh":"完成、做完"},{"en":"everyone","zh":"每個人"},{"en":"have to","zh":"必須"},{"en":"playground","zh":"操場"},{"en":"library","zh":"圖書館"},{"en":"angry","zh":"生氣的"},{"en":"prize","zh":"獎品"},{"en":"garbage bags","zh":"垃圾袋"}],
+    [{"en":"eighty","zh":"八十"},{"en":"back","zh":"背、腰背"},{"en":"hurts","zh":"痛"},{"en":"heavy","zh":"重的"},{"en":"visit","zh":"拜訪、去看"},{"en":"shopping bags","zh":"購物袋"},{"en":"climb on","zh":"爬上"},{"en":"high","zh":"高的"},{"en":"helper","zh":"小幫手"},{"en":"hug","zh":"擁抱"},{"en":"shelves","zh":"架子（shelf 的複數）"},{"en":"busy","zh":"忙碌的"},{"en":"early bird","zh":"早起的人"}],
+    [{"en":"flower shop","zh":"花店"},{"en":"mess","zh":"一團亂"},{"en":"market day","zh":"市集日"},{"en":"there was","zh":"有（there is 的過去式）"},{"en":"there were","zh":"有（there are 的過去式）"},{"en":"empty","zh":"空的"},{"en":"boxes","zh":"箱子（複數）"},{"en":"collected","zh":"收集了（collect 的過去式）"},{"en":"carried","zh":"搬了（carry 的過去式）"},{"en":"outside","zh":"外面"},{"en":"built","zh":"做了、蓋了（build 的過去式）"},{"en":"flower pots","zh":"花盆"},{"en":"In one hour","zh":"花了一個小時"},{"en":"gave","zh":"給了（give 的過去式）"}],
   ],
 };
 function weekDrillFor(monthStr, weekN) { return WEEK_DRILLS[monthStr + "-" + weekN] || null; }

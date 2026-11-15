@@ -7,7 +7,7 @@ const WORD_EMOJI = {
   "aircraft": "✈️", "alarm": "🚨", "alarm clock": "⏰", "ambulance": "🚑", "angel": "👼",
   "ant": "🐜", "badminton": "🏸", "balloon": "🎈", "bat": "🦇", "beer": "🍺",
   "bicycle riding": "🚴", "blood": "🩸", "bomb": "💣", "bone": "🦴", "bowling": "🎳",
-  "brain": "🧠", "brick": "🧱", "bucket": "🪣", "bug": "🐛", "building": "🏢",
+  "brain": "🧠", "brick": "🧱", "bucket": "🪣", "bath": "🛁", "couch": "🛋️", "bug": "🐛", "building": "🏢",
   "burger": "🍔", "bus stop": "🚏", "butterfly": "🦋", "calendar": "📅", "camping": "🏕️",
   "candle": "🕯️", "carrot": "🥕", "cassette": "📼", "castle": "🏰", "CD": "💿",
   "cereal": "🥣", "chart": "📊", "chess": "♟️", "climbing": "🧗", "cockroach": "🪳",
