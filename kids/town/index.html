@@ -85,6 +85,20 @@ h2{font-size:1.05rem;margin:4px 0 10px;font-weight:900}
 .hint{padding:9px 12px;margin-bottom:10px;background:#e8f4ff;border:2px dashed #6aa9e0;border-radius:8px;font-weight:700}
 .today{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 12px;margin-bottom:10px;background:#fff8e6;border:2px solid var(--wood-l);border-radius:8px}
 
+/* 屋內 */
+.viewbar{display:flex;gap:6px;margin-bottom:8px}
+.viewbar .btn.on{background:#ffe08a;box-shadow:inset 0 -3px 0 var(--wood-d)}
+.room{display:grid;width:100%;max-width:540px;margin:0 auto;border:6px solid var(--wood-d);border-top-width:16px;border-radius:6px;background:#c99a62;user-select:none}
+.room .rc{min-width:0;min-height:0;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:clamp(20px,7vw,42px);background:#dcae72;box-shadow:inset 0 0 0 1px rgba(90,55,25,.22)}
+.room .rc.alt{background:#d2a265}
+.room .rc.target{outline:2px dashed #fff;outline-offset:-4px}
+.room .rc.sel{outline:3px solid #fff;outline-offset:-4px}
+.room .rc .di{width:88%;height:88%}
+.dex div.rdy{border-color:var(--ap);box-shadow:0 0 0 2px #ffe08a;cursor:pointer}
+.dex .em .di{width:44px;height:44px}
+.quest .di{width:30px;height:30px}
+.bigdi .di{width:120px;height:120px}
+
 /* 商店 */
 .grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .item{background:#fff8e6;border:2px solid var(--wood-l);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;gap:4px}
@@ -237,6 +251,9 @@ details.extra summary{font-weight:700;cursor:pointer}
       <div class="today" id="today"></div>
       <div id="goal"></div>
       <div class="hint" id="hint" hidden></div>
+      <div class="viewbar"><button class="btn on" id="vb-farm" onclick="setView('farm')">🌾 農莊</button><button class="btn" id="vb-home" onclick="setView('home')">🏠 屋內</button></div>
+      <div id="homeView" hidden></div>
+      <div id="farmView">
       <div class="map" id="map" aria-label="農莊地圖"></div>
       <div class="banner" id="moveBar" hidden><span id="moveMsg"></span><button class="btn" onclick="cancelMove()">✕ 取消</button></div>
       <div class="actions">
@@ -246,6 +263,7 @@ details.extra summary{font-weight:700;cursor:pointer}
       </div>
       <div class="sheet" id="sheet" hidden></div>
       <p class="muted">點空地可以開田或擺裝飾；點田可以播種、收成或搬家。作物種下後時間到就會成熟（多數 3 天），不照料也會長大，也不會枯掉。田一開始最多 8 片，小鎮每修好一階多 1 片（最多 16 片）。每天照料一次（每 8 片田 1 ⚡），每照料一天，收成時拿到 <b>2 個</b>的機率 +10%。</p>
+      </div>
     </section>
 
     <section class="pane" id="p-shop" hidden></section>
@@ -278,6 +296,7 @@ details.extra summary{font-weight:700;cursor:pointer}
 const T = TownCore, C = TownContent;
 const STUDENTS = [["albert", "Albert"], ["jonathan", "Jonathan"], ["test", "🧪 測試"]];
 let student = null, st = null, sel = null, moving = null;
+let view = "farm", hsel = null, hmoving = null;   // 農莊分頁看的是外面還是屋內；屋內選到的家具、正在搬的家具
 let authed = null;             // 有登入時＝帳號名，畫面上就不給切換學生
 const zhOpen = new Set();      // 按過「看中文」的卡片，重繪時保持展開
 
@@ -309,7 +328,7 @@ function pushCloud(now) {
 function reload(msg) {
   stopFish();
   const r = T.load(storage(), student, today(), C);
-  st = r.st; sel = null; moving = null;
+  st = r.st; sel = null; moving = null; hsel = null; hmoving = null;
   const got = T.syncFromProgress(st, progress());
   const aw = T.claimAwards(st, C);
   // 這裡不存檔（跟原本一樣）：reload 常在存檔衝突後被叫，存了可能又衝突；下一個動作就會存
@@ -376,7 +395,7 @@ function pick(name) {
   persist();
   if (r.problem) toast("原本的存檔讀不懂（" + r.problem + "），已經另存備份，先開一份新的");
   else if (aw.ap || got) toast(gainMsg(got, aw));
-  sel = null; moving = null; render();
+  sel = null; moving = null; hsel = null; hmoving = null; render();
 }
 
 // ── 畫面 ─────────────────────────────────────────────────────────────
@@ -398,9 +417,9 @@ function render() {
     ${student === "test" ? `<button class="btn" title="跟做一份練習一樣，算進每週 100 的上限" onclick="act(T.grant(st,'test:'+Date.now(),10,today()))">🧪 +10⚡</button>
       <button class="btn" title="只有測試帳號有，不算進每週上限" onclick="testBoost(50)">🧪 +50⚡ 不限</button>` : ""}`;
   // 有新信的分頁加紅點
-  const unread = visibleCards().some(c => !st.cards[c.id]) || C.QUESTS.some(q => T.questState(st, q, C) === "ready") || chatItems().some(q => !st.chats[q.id]);
+  const unread = visibleCards().some(c => !st.cards[c.id]) || C.QUESTS.some(q => T.questState(st, q, C) === "ready") || C.CRAFTS.some(q => T.craftState(st, q, C) === "ready") || chatItems().some(q => !st.chats[q.id]);
   document.getElementById("t-mail").innerHTML = "📨 村民" + (unread ? '<span class="dot"></span>' : "");
-  renderToday(d); renderGoal(); renderHint(); renderGather(); renderMap(d); renderSheet(d); renderShop(); renderMail(d); renderWild(d); renderTown(d); renderAlbum();
+  renderToday(d); renderGoal(); renderHint(); renderGather(); renderMap(d); renderSheet(d); renderHome(); renderShop(); renderMail(d); renderWild(d); renderTown(d); renderAlbum();
 }
 
 function renderToday(d) {
@@ -444,6 +463,7 @@ function whereToGet(k) {
     return "去野外的礦坑挖" + (fl > 0 ? `（${C.MINE_FLOORS[fl].zh}以下才挖得到，要先挖 ${C.MINE_FLOORS[fl].at} 次）` : "");
   }
   if (C.CROPS[k]) return (C.CROPS[k].freeSeed ? "種田收成（種子免費）" : "去商店買種子，種田收成") + `，或用小鎮幣補（每個 ${C.SELL[k] + C.FILL_EXTRA} 幣）`;
+  if (C.DECOR[k] && C.DECOR[k].craft) return `跟 ${C.DECOR[k].craft} 一起做（村民分頁點 ${C.DECOR[k].craft}）`;
   if (C.DECOR[k] && C.DECOR[k].reward) return `修好${C.LANDMARKS[C.DECOR[k].reward].zh}的番外任務就會拿到`;
   if (C.DECOR[k]) return "去商店買（擺在農莊的可以收回再交）";
   return "";
@@ -635,11 +655,11 @@ function renderSheet(d) {
   if (!sel) { el.hidden = true; return; }
   el.hidden = false;
   if (sel === "house") {
-    el.innerHTML = `<h2>🏠 我的家</h2><p class="muted">做英文就像吃早餐，吃飽了才有體力下田。</p>
-      <button class="btn" onclick="sel=null;render()">關閉</button>`; return;
+    el.innerHTML = `<h2>🏠 我的家</h2><p class="muted">做英文就像吃早餐，吃飽了才有體力下田。屋子裡可以擺跟村民一起做的家具。</p>
+      <div class="actions"><button class="btn go" onclick="setView('home')">🚪 進屋</button><button class="btn" onclick="sel=null;render()">關閉</button></div>`; return;
   }
   if (typeof sel === "object") {
-    const owned = Object.keys(st.decorOwned).filter(k => st.decorOwned[k] > 0);
+    const owned = Object.keys(st.decorOwned).filter(k => st.decorOwned[k] > 0 && !C.DECOR[k].indoor);
     el.innerHTML = `<h2>這塊空地</h2><div class="actions">
       ${st.farm.fields.length < T.maxFields(st)
         ? `<button class="btn" onclick="act(T.addField(st,${sel.x},${sel.y}));sel=null;render()">🟫 開一片田（2×2，免費，${st.farm.fields.length}/${T.maxFields(st)}）</button>`
@@ -678,6 +698,66 @@ function renderSheet(d) {
     return;
   }
   sel = null; el.hidden = true;
+}
+
+// ── 我的家（屋內） ─────────────────────────────────────────────────
+function setView(v) { view = v; sel = null; moving = null; hsel = null; hmoving = null; render(); }
+const needTxt = nd => nd.item === "ap" ? `⚡ 一起動手 ${nd.n}` : `${itemIcon(nd.item)} ${esc(itemName(nd.item))} ×${nd.n}`;
+function renderHome() {
+  const home = view === "home";
+  document.getElementById("farmView").hidden = home;
+  document.getElementById("homeView").hidden = !home;
+  document.getElementById("vb-farm").classList.toggle("on", !home);
+  document.getElementById("vb-home").classList.toggle("on", home);
+  if (!home) return;
+  const L = T.houseLevel(st, C), nx = T.nextHouse(st, C);
+  const bag = Object.keys(st.decorOwned).filter(k => st.decorOwned[k] > 0 && C.DECOR[k].indoor);
+  let h = `<h2>🏠 我的家・${esc(L.zh)} <span class="muted">${L.w}×${L.h} 格，擺了 ${st.home.items.length} 件</span></h2>`;
+  if (hmoving) h += `<div class="banner" style="margin:0 0 8px"><span>點一格空地放下${hmoving.type ? "：" + esc(C.DECOR[hmoving.type].zh) : ""}</span><button class="btn" onclick="hmoving=null;render()">✕ 取消</button></div>`;
+  h += `<div class="room" style="grid-template-columns:repeat(${L.w},minmax(0,1fr));grid-template-rows:repeat(${L.h},minmax(0,1fr));aspect-ratio:${L.w}/${L.h}" aria-label="屋內">`;
+  for (let y = 0; y < L.h; y++) for (let x = 0; x < L.w; x++) {
+    const it = st.home.items.find(q => q.x === x && q.y === y);
+    h += `<div class="rc${(x + y) % 2 ? " alt" : ""}${it && hsel === it.id ? " sel" : ""}${hmoving && !it ? " target" : ""}" onclick="tapRoom(${x},${y})">${it ? decorIcon(it.type) : ""}</div>`;
+  }
+  h += `</div>`;
+  const it = hsel && st.home.items.find(q => q.id === hsel);
+  if (it) {
+    const dd = C.DECOR[it.type];
+    h += `<div class="sheet"><h2>${decorIcon(it.type)} ${esc(dd.en)} <span class="muted">${esc(dd.zh)}</span> <button class="btn" onclick="play(wordAudio('${dd.en}'))">🔊</button></h2>
+      ${dd.craft ? `<p class="muted">跟 ${dd.craft} 一起做的。</p>` : ""}
+      <div class="actions"><button class="btn" onclick="hmoving={id:'${it.id}'};hsel=null;render()">↔ 搬家</button>
+      <button class="btn" onclick="act(T.storeHome(st,'${it.id}'));hsel=null;render()">🎒 收回背包</button>
+      <button class="btn" onclick="hsel=null;render()">關閉</button></div></div>`;
+  }
+  if (bag.length) h += `<div class="lbl">🎒 還沒擺的家具（點一下，再點一格空地）</div><div class="actions">${bag.map(k =>
+    `<button class="btn${hmoving && hmoving.type === k ? " go" : ""}" onclick="hmoving={type:'${k}'};hsel=null;render()">${decorIcon(k)} ${esc(C.DECOR[k].zh)}</button>`).join("")}</div>`;
+  else if (!st.home.items.length) h += `<p class="muted">屋子還空空的。到「📨 村民」點村民的頭像，跟他們一起做家具吧！</p>`;
+  // 擴建：下一級寫了 cost 才能按，沒寫就是準備中
+  h += `<div class="lbl">🔨 擴建</div>` + (!nx ? `<p class="muted">已經是最大的家了。</p>`
+    : nx.cost ? `<div class="later" style="color:inherit">下一級：<b>${esc(nx.zh)}</b>（${nx.w}×${nx.h} 格）　要：${nx.cost.map(needTxt).join("、")}
+        <div class="actions"><button class="btn go" ${nx.cost.every(c => T.haveOf(st, c.item, C) >= c.n) ? "" : "disabled"} onclick="act(T.expandHouse(st,today(),C))">🔨 擴建</button></div></div>`
+    : `<div class="later">下一級：<b>${esc(nx.zh)}</b>（${nx.w}×${nx.h} 格）　🚧 準備中，之後開放。擺不下的家具可以先收在背包裡。</div>`);
+  const doneN = C.CRAFTS.filter(q => st.crafts[q.id]).length;
+  h += `<div class="lbl">🛋️ 跟村民一起做的家具 ${doneN}/${C.CRAFTS.length}</div>
+    <p class="muted">每位村民可以跟你一起做 2 件家具：好感 ${C.CRAFT_HEARTS[0]} 顆心開始做第 1 件，做完、好感 ${C.CRAFT_HEARTS[1]} 顆心再做第 2 件。點 ⭐ 的就能看要帶什麼。</p>
+    <div class="dex">${C.CRAFTS.map(q => {
+      const s = T.craftState(st, q, C), dd = C.DECOR[q.item];
+      if (s === "done") return `<div onclick="play(wordAudio('${dd.en}'))"><span class="em">${decorIcon(q.item)}</span><b>${esc(dd.en)}</b><br>${esc(dd.zh)}<br><span class="muted">${q.by}</span></div>`;
+      if (s === "ready") return `<div class="rdy" onclick="openFolk('${q.by}')"><span class="em">${decorIcon(q.item)}</span><b>⭐ ${esc(dd.zh)}</b><br>跟 ${q.by} 一起做</div>`;
+      const here = T.isResident(st, q.by, C);
+      return `<div class="no"><span class="em">❔</span>${here ? `${q.by} ❤️×${q.at}${q.after && !st.crafts[q.after] ? "<br>先做第 1 件" : ""}` : "還沒搬來的村民"}</div>`;
+    }).join("")}</div>`;
+  document.getElementById("homeView").innerHTML = h;
+}
+function tapRoom(x, y) {
+  const it = st.home.items.find(q => q.x === x && q.y === y);
+  if (hmoving) {
+    if (it && it.id !== hmoving.id) return toast("這格有東西了，換一格");
+    const r = hmoving.type ? T.placeHome(st, hmoving.type, x, y, C) : T.moveHome(st, hmoving.id, x, y, C);
+    if (r.ok) { hmoving = null; hsel = null; }
+    return act(r);
+  }
+  hsel = it ? it.id : null; render();
 }
 
 function doCare() { act(T.care(st, today(), C)); }
@@ -830,7 +910,7 @@ function openFolk(v) {
     <div class="lbl">個性</div><div class="chips">${chips(p.traits.map(t => ({ emoji: "✨", en: t.en, zh: t.zh })))}</div>
     <div class="lbl">💛 喜歡</div><div class="chips">${chips(p.likes)}</div>
     <div class="lbl">💢 不喜歡</div><div class="chips">${chips(p.dislikes)}</div>
-    ${T.isResident(st, v, C) ? questsHtml(v) + giftHtml(v) : ""}
+    ${T.isResident(st, v, C) ? questsHtml(v) + craftsHtml(v) + giftHtml(v) : ""}
     <div class="lbl">口頭禪</div><div class="en">“${esc(p.motto)}”</div><div class="zh">${esc(p.mottoZh)}</div>
     <div class="actions"><button class="btn" onclick="play(townAudio('villager_${v}_motto'))">🔊 聽口頭禪</button></div>
     <p class="muted" style="margin-top:10px">${esc(p.about)}</p>
@@ -840,7 +920,10 @@ function openFolk(v) {
 function closeFolk() { document.getElementById("folkModal").hidden = true; }
 // ── 好感任務與紀念照 ──
 function heartsTxt(v) { const n = st.hearts[v] || 0; return n ? `❤️<span class="x">×${n}</span>` : `🤍<span class="x">×0</span>`; }
-function questBadge(v) { return C.QUESTS.some(q => q.by === v && T.questState(st, q, C) === "ready") ? `<span class="qbadge">📷 任務</span>` : ""; }
+function questBadge(v) {
+  return (C.QUESTS.some(q => q.by === v && T.questState(st, q, C) === "ready") ? `<span class="qbadge">📷 任務</span>` : "")
+    + (C.CRAFTS.some(q => q.by === v && T.craftState(st, q, C) === "ready") ? `<span class="qbadge">🔨 家具</span>` : "");
+}
 const photoSrc = id => "img/photos/" + id + ".png";
 function questsHtml(v) {
   const qs = C.QUESTS.filter(q => q.by === v);
@@ -859,6 +942,46 @@ function questsHtml(v) {
         <button class="btn go" ${have >= q.need.n ? "" : "disabled"} onclick="finishQuest('${q.id}')">我念好了，交出去 📷</button>
         ${fillBtn(k, q.need.n, `finishQuest('${q.id}',true)`)}</div></div></div>`;
   }).join("");
+}
+// 一起做家具：帶東西來、念一句，做好的家具放進背包，到屋內擺
+function craftsHtml(v) {
+  const qs = C.CRAFTS.filter(q => q.by === v);
+  if (!qs.length) return "";
+  return `<div class="lbl">🔨 一起做家具</div>` + qs.map(q => {
+    const s = T.craftState(st, q, C), dd = C.DECOR[q.item];
+    if (s === "done") {
+      const placed = st.home.items.some(i => i.type === q.item);
+      return `<div class="quest"><b>✅ ${decorIcon(q.item)} ${esc(dd.en)}（${esc(dd.zh)}）</b><div class="muted">${st.crafts[q.id]} 一起做好的，${placed ? "擺在屋子裡" : "在背包裡，到農莊的 🏠 屋內就能擺"}。</div></div>`;
+    }
+    if (s === "locked") return `<div class="quest"><b>🔒 ❤️×${q.at}：${esc(dd.zh)}</b><div class="muted">${q.after && !st.crafts[q.after] ? `先一起做完${esc(C.DECOR[T.craftOf(q.after, C).item].zh)}，` : ""}好感到 ${q.at} 顆心開放（現在 ${st.hearts[v] || 0}）</div></div>`;
+    const okAll = q.needs.every(nd => T.haveOf(st, nd.item, C) >= nd.n), f = T.craftFill(st, q, C);
+    const coins = q.needs.filter(nd => nd.item === "money").reduce((a, nd) => a + nd.n, 0);
+    const miss = q.needs.filter(nd => T.haveOf(st, nd.item, C) < nd.n);
+    return `<div class="quest ready"><b>⭐ ${decorIcon(q.item)} ${esc(dd.en)}（${esc(dd.zh)}）</b> <button class="btn" onclick="play(wordAudio('${dd.en}'))">🔊</button>
+      <div class="line">${esc(q.en)}</div><div class="zh">${esc(q.zh)}</div>
+      <div class="actions"><button class="btn" onclick="play(townAudio('craft_${q.id}'))">🔊 聽</button>
+        <button class="btn" onclick="document.getElementById('folkModal').classList.add('showzh')">看中文</button></div>
+      <div>要帶：${q.needs.map(nd => `${needTxt(nd)}（有 ${Math.min(T.haveOf(st, nd.item, C), nd.n)}）`).join("　")}</div>
+      ${miss.map(nd => `<div class="muted">👉 ${esc(itemName(nd.item))}：${whereToGet(nd.item)}</div>`).join("")}
+      <div class="say"><div>🗣️ 換你說，大聲念出來：</div><div class="line"><b>${esc(q.say)}</b></div><div class="zh">${esc(q.sayZh)}</div>
+        <div class="actions"><button class="btn" onclick="play(townAudio('craft_${q.id}_say'))">🔊 先聽一次</button>
+        <button class="btn go" ${okAll ? "" : "disabled"} onclick="finishCraft('${q.id}')">我念好了，一起做！🔨</button>
+        ${f ? `<button class="btn" ${st.money >= f.cost + coins ? "" : "disabled"} onclick="finishCraft('${q.id}',true)">🪙 補齊再做 ${spend(f.cost)}</button>` : ""}</div></div></div>`;
+  }).join("");
+}
+function finishCraft(id, buy) {
+  const r = act(T.doCraft(st, id, today(), C, buy ? { buy: true } : undefined));
+  if (r && r.ok && !(r.arrived && r.arrived.length)) openCraftDone(id);
+}
+function openCraftDone(id) {
+  const q = T.craftOf(id, C), dd = C.DECOR[q.item];
+  const m = document.getElementById("folkModal"); m.classList.remove("showzh");
+  document.getElementById("folkBox").innerHTML = `<div class="cele"><h3>🔨 跟 ${q.by} 一起做好了！</h3>
+    <div class="bigdi">${decorIcon(q.item)}</div>
+    <div class="en" style="font-family:Georgia,serif;font-size:1.2rem"><b>${esc(dd.en)}</b> <button class="btn" onclick="play(wordAudio('${dd.en}'))">🔊</button></div><div>${esc(dd.zh)}　<span class="muted">${q.by} ❤️ +1</span></div>
+    <div class="quest recap"><div>🗣️ 你念的：</div><div class="line"><b>${esc(q.say)}</b></div><div class="zh">${esc(q.sayZh)}</div></div>
+    <div class="actions" style="justify-content:center"><button class="btn go" onclick="closeFolk();tab('farm');setView('home')">🏠 去屋內擺</button><button class="btn" onclick="closeFolk()">關閉</button></div></div>`;
+  m.hidden = false;
 }
 function finishQuest(id, buy) {
   const r = act(T.doQuest(st, id, today(), C, buy ? { buy: true } : undefined));

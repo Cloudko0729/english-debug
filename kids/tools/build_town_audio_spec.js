@@ -9,6 +9,7 @@
 //   <storyId>_say.mp3       孩子要自己念的最後一句
 //   villager_<名字>(_motto)、arrive_<名字>  村民自我介紹、口頭禪、搬來的信
 //   task_<任務id>.mp3       廣場任務
+//   craft_<id>(_say).mp3    跟村民一起做家具
 //   <聊天題id>(_<選項>).mp3  每週聊天題
 const fs = require("fs");
 const path = require("path");
@@ -42,6 +43,8 @@ items.line_miss = C.LINES.miss;
 items.line_thanks = C.LINES.thanks;
 // 好感任務：對話整段、孩子要念的那句
 C.QUESTS.forEach(q => { items["quest_" + q.id] = q.lines.map(l => l.en).join(" "); items["quest_" + q.id + "_say"] = q.say; });
+// 跟村民一起做家具：村民那段話、孩子要念的那句
+C.CRAFTS.forEach(q => { items["craft_" + q.id] = q.en; items["craft_" + q.id + "_say"] = q.say; });
 const out = path.join(__dirname, "audio_town.json");
 fs.writeFileSync(out, JSON.stringify({
   outdir: path.join(__dirname, "..", "audio", "town").replace(/\\/g, "/"),

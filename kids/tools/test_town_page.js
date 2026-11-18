@@ -315,6 +315,40 @@ const sm = run("T.stageShots(st, C)").map(s => s.id).filter(id => !fs.existsSync
 ok("每一階都有紀念照", !sm.length, sm);
 ok("魚的圖示用圖片、圖載不到退回 emoji", run("itemIcon('salmon')").includes('src="img/fish/salmon.png"') && run("itemIcon('salmon')").includes("onerror") && run("itemIcon('carrot')") === "🥕");
 
+console.log("\n── 屋內與一起做家具 ──");
+{
+  run("tab('farm')"); run("setView('home')");
+  ok("切到屋內：農莊地圖藏起來、屋內出現", el("farmView").hidden && !el("homeView").hidden && el("homeView").innerHTML.includes('class="room"'));
+  ok("屋內畫了 6×4 格", (el("homeView").innerHTML.match(/class="rc/g) || []).length === 24);
+  ok("擴建寫準備中", el("homeView").innerHTML.includes("準備中"));
+  ok("家具收藏列出 20 件", el("homeView").innerHTML.includes("0/20"));
+  G.st.hearts.Mia = 3; G.st.inv.wood = 5; run("testBoost(10)");
+  run("render()");
+  ok("可以做的家具在收藏裡標 ⭐", el("homeView").innerHTML.includes("⭐ 書架"));
+  run("openFolk('Mia')");
+  ok("村民卡有一起做家具", el("folkBox").innerHTML.includes("一起做家具") && el("folkBox").innerHTML.includes("craft_mia-shelf"));
+  ok("村民頭像有家具徽章", run("questBadge('Mia')").includes("家具"));
+  run("finishCraft('mia-shelf')");
+  ok("做好跳出完成畫面", el("folkBox").innerHTML.includes("一起做好了") && G.st.decorOwned.bookshelf === 1);
+  run("closeFolk();tab('farm');setView('home')");
+  ok("背包裡的家具列在屋內", el("homeView").innerHTML.includes("還沒擺的家具"));
+  run("hmoving={type:'bookshelf'}"); run("tapRoom(2,1)");
+  ok("點一格就擺好", G.st.home.items.length === 1 && G.st.home.items[0].x === 2 && el("homeView").innerHTML.includes("bookshelf.png"));
+  run("tapRoom(2,1)");
+  ok("點家具打開選單（搬家、收回）", el("homeView").innerHTML.includes("收回背包"));
+  run(`hmoving={id:'${G.st.home.items[0].id}'}`); run("tapRoom(5,3)");
+  ok("屋內搬家", G.st.home.items[0].x === 5 && G.st.home.items[0].y === 3);
+  run("sel={x:6,y:6};setView('farm');sel={x:6,y:6};render()");
+  ok("農莊空地不會列出家具", !el("sheet").innerHTML.includes("書架"));
+  run("sel='house';render()");
+  ok("點房子可以進屋", el("sheet").innerHTML.includes("setView('home')"));
+  run("sel=null;setView('farm')");
+  const cm = run("C.CRAFTS").flatMap(q => ["craft_" + q.id, "craft_" + q.id + "_say"]).filter(k => !fs.existsSync(path.join(__dirname, "..", "audio", "town", k + ".mp3")));
+  ok("家具任務的音檔都在", !cm.length, cm);
+  const im = run("C.CRAFTS").map(q => run("C.DECOR")[q.item].img).filter(f => !fs.existsSync(path.join(DIR, f)));
+  ok("家具都有圖", !im.length, im);
+}
+
 console.log("\n── 看中文會保持展開 ──");
 run("tab('mail')"); run("showZh('w1-mail-leo')");
 ok("第一次按看中文就展開（不會被重繪收回）", /card[^"]*showzh[^>]*>[\s\S]*?Leo/.test(el("p-mail").innerHTML));

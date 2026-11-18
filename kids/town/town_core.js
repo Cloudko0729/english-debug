@@ -83,6 +83,8 @@
         fields: [{ id: "f1", x: 4, y: 3, crop: null, plantedDate: null, careDates: [] }],
         decor: [], lastCare: null,
       },
+      home: { level: 1, items: [] },   // 屋內：level＝房子第幾級（HOUSE），items＝擺著的家具 { id: "h3", type, x, y }
+      crafts: {},                // 跟村民一起做的家具 { 任務id: 那天 }
       town: { plaza: 0 },        // 每個地標修好了幾階
       tasks: {},                 // 這一階交過的任務 { 任務id: { date } }；更早的階段整階算完成
       residents: {},             // 後來搬來的村民 { 名字: 搬來那天 }；Mia、Leo 一開始就在
@@ -358,6 +360,7 @@
   }
   function placeDecor(st, type, x, y, today, C) {
     if ((st.decorOwned[type] || 0) < 1) return fail("背包裡沒有這個裝飾");
+    if (C && C.DECOR[type] && C.DECOR[type].indoor) return fail("這是家具，要擺在屋子裡");
     if (st.farm.decor.length >= MAX_DECOR) return fail("裝飾最多 " + MAX_DECOR + " 件");
     if (!areaFree(st, x, y, 1, 1)) return fail("這裡放不下");
     st.decorOwned[type]--;
@@ -372,6 +375,116 @@
     var d = st.farm.decor.splice(i, 1)[0];
     st.decorOwned[d.type] = (st.decorOwned[d.type] || 0) + 1;
     return done(st, "收回背包了");
+  }
+
+  // ── 我的家：屋內家具 ────────────────────────────────────────────────────
+  // 屋子大小看 home.level（C.HOUSE 第幾級），每格放一件家具。只有 indoor 的家具能擺進來。
+  function houseLevel(st, C) { return C.HOUSE[Math.max(1, Math.min(st.home.level, C.HOUSE.length)) - 1]; }
+  function homeAt(st, x, y, ignoreId) {
+    var hit = null;
+    st.home.items.forEach(function (d) { if (d.id !== ignoreId && d.x === x && d.y === y) hit = d.id; });
+    return hit;
+  }
+  function homeFree(st, x, y, C, ignoreId) {
+    var L = houseLevel(st, C);
+    return x >= 0 && y >= 0 && x < L.w && y < L.h && x === Math.floor(x) && y === Math.floor(y) && !homeAt(st, x, y, ignoreId);
+  }
+  function placeHome(st, type, x, y, C) {
+    var dd = C.DECOR[type];
+    if (!dd) return fail("沒有這個東西");
+    if (!dd.indoor) return fail("這個要擺在外面的農莊");
+    if ((st.decorOwned[type] || 0) < 1) return fail("背包裡沒有" + dd.zh);
+    if (!homeFree(st, x, y, C)) return fail("這裡放不下");
+    st.decorOwned[type]--;
+    st.home.items.push({ id: "h" + (st.nextId++), type: type, x: x, y: y });
+    return done(st, "把" + dd.zh + "擺好了");
+  }
+  function moveHome(st, id, x, y, C) {
+    var d = st.home.items.find(function (q) { return q.id === id; });
+    if (!d) return fail("找不到要搬的家具");
+    if (!homeFree(st, x, y, C, id)) return fail("這裡放不下");
+    d.x = x; d.y = y;
+    return done(st, "搬好了");
+  }
+  function storeHome(st, id) {
+    var i = st.home.items.findIndex(function (q) { return q.id === id; });
+    if (i < 0) return fail("找不到");
+    var d = st.home.items.splice(i, 1)[0];
+    st.decorOwned[d.type] = (st.decorOwned[d.type] || 0) + 1;
+    return done(st, "收回背包了");
+  }
+  // 擴建：下一級要寫了 cost 才開放（現在還沒寫，畫面顯示「準備中」）。變大不會動到已經擺好的家具。
+  function nextHouse(st, C) { return C.HOUSE[st.home.level] || null; }
+  function expandHouse(st, today, C) {
+    var nx = nextHouse(st, C);
+    if (!nx) return fail("已經是最大的家了");
+    if (!Array.isArray(nx.cost) || !nx.cost.length) return fail("擴建還在準備中，之後會開放");
+    var miss = nx.cost.filter(function (c) { return haveOf(st, c.item, C) < c.n; });
+    if (miss.length) return fail("還差 " + miss.map(function (c) { return (c.n - haveOf(st, c.item, C)) + " " + (C.NAME[c.item] || c.item); }).join("、"));
+    nx.cost.forEach(function (c) { take(st, c.item, c.n, C); });
+    st.home.level++;
+    note(st, today, "家擴建了：" + nx.zh, "");
+    return done(st, "🏠 家擴建好了：" + nx.zh + "（" + nx.w + "×" + nx.h + "）");
+  }
+
+  // ── 跟村民一起做家具 ────────────────────────────────────────────────────
+  // 狀態：done（做好了）、ready（可以做）、locked（還沒搬來、好感不夠，或第 1 件還沒做）
+  function craftOf(id, C) { return (C.CRAFTS || []).find(function (q) { return q.id === id; }) || null; }
+  function craftState(st, q, C) {
+    if (st.crafts[q.id]) return "done";
+    if (!isResident(st, q.by, C) || (st.hearts[q.by] || 0) < q.at || (q.after && !st.crafts[q.after])) return "locked";
+    return "ready";
+  }
+  // 缺的作物和魚（指定魚種）用小鎮幣補齊要多少錢；沒有缺、或缺的東西有補不了的就回傳 null
+  function craftFill(st, q, C) {
+    var cost = 0, any = false;
+    for (var i = 0; i < q.needs.length; i++) {
+      var nd = q.needs[i];
+      if (haveOf(st, nd.item, C) >= nd.n) continue;
+      var f = fillCost(st, nd.item, nd.n, C);
+      if (!f) return null;
+      cost += f.cost; any = true;
+    }
+    return any ? { cost: cost } : null;
+  }
+  function doCraft(st, id, today, C, opts) {
+    var q = craftOf(id, C);
+    if (!q) return fail("沒有這件家具");
+    var s = craftState(st, q, C);
+    if (s === "done") return fail("這件已經做好了");
+    if (s === "locked") {
+      if (!isResident(st, q.by, C)) return fail(q.by + " 還沒搬來");
+      if (q.after && !st.crafts[q.after]) return fail("先跟 " + q.by + " 做完" + C.DECOR[craftOf(q.after, C).item].zh);
+      return fail(q.by + " 的好感要 " + q.at + " 顆心才能一起做");
+    }
+    var bought = 0;
+    if (opts && opts.buy) {
+      var f = craftFill(st, q, C);
+      if (!f) return fail("缺的東西不能用小鎮幣補");
+      // 要交的東西裡也有小鎮幣的話，補完之後錢還要夠交
+      var moneyNeed = q.needs.filter(function (nd) { return nd.item === "money"; }).reduce(function (a, nd) { return a + nd.n; }, 0);
+      if (st.money < f.cost + moneyNeed) return fail("小鎮幣不夠（補齊要 " + f.cost + " 幣" + (moneyNeed ? "，還要交 " + moneyNeed + " 幣" : "") + "）");
+      // 補之前先確認其他東西都夠，免得錢花了還是交不出去
+      var other = q.needs.filter(function (nd) { return haveOf(st, nd.item, C) < nd.n && !fillCost(st, nd.item, nd.n, C); });
+      if (other.length) return fail("還差 " + other.map(function (nd) { return (nd.n - haveOf(st, nd.item, C)) + " " + (C.NAME[nd.item] || nd.item); }).join("、"));
+      q.needs.forEach(function (nd) {
+        if (haveOf(st, nd.item, C) >= nd.n) return;
+        bought += fillCost(st, nd.item, nd.n, C).cost;
+        fillUp(st, nd.item, nd.n, C);
+      });
+    }
+    var miss = q.needs.filter(function (nd) { return haveOf(st, nd.item, C) < nd.n; });
+    if (miss.length) return fail("還差 " + miss.map(function (nd) { return (nd.n - haveOf(st, nd.item, C)) + " " + (C.NAME[nd.item] || nd.item); }).join("、"));
+    q.needs.forEach(function (nd) { take(st, nd.item, nd.n, C); });
+    st.crafts[q.id] = today;
+    st.decorOwned[q.item] = (st.decorOwned[q.item] || 0) + 1;
+    st.hearts[q.by] = Math.min(HEART_MAX, (st.hearts[q.by] || 0) + 1);
+    var dd = C.DECOR[q.item];
+    note(st, today, "跟 " + q.by + " 一起做了" + dd.zh, q.say);
+    var came = arrive(st, today, C);
+    st.rev++;
+    return { ok: true, msg: (bought ? "花 " + bought + " 小鎮幣補齊，" : "") + "跟 " + q.by + " 一起做好了 " + dd.en + "（" + dd.zh + "）！❤️ +1　到農莊的 🏠 屋內就能擺",
+             craft: q.id, item: q.item, arrived: came };
   }
 
   // ── 小鎮任務 ────────────────────────────────────────────────────────────
@@ -818,7 +931,7 @@
       return g;
     });
     st.farm.decor = (Array.isArray(farm.decor) ? farm.decor : []).filter(function (d) {
-      return d && /^d\d+$/.test(d.id) && C.DECOR[d.type] && !seen[d.id] && (seen[d.id] = 1);
+      return d && /^d\d+$/.test(d.id) && C.DECOR[d.type] && !C.DECOR[d.type].indoor && !seen[d.id] && (seen[d.id] = 1);
     }).slice(0, MAX_DECOR).map(function (d) { return { id: d.id, type: d.type, x: int(d.x, W - 1), y: int(d.y, H - 1) }; });
     st.farm.lastCare = DATE_RE.test(farm.lastCare) ? farm.lastCare : null;
     var cp = obj(farm.carePaid);
@@ -864,6 +977,24 @@
         st.farm.decor = st.farm.decor.filter(function (d) { return d.type !== sg.reward || ++placed <= want; });
         st.decorOwned[sg.reward] = Math.max(0, want - Math.min(placed, want));
       });
+    });
+    // 屋內：等級夾在 HOUSE 範圍內；家具只收 indoor、在屋子裡、不重疊的
+    var hm = obj(raw.home);
+    st.home.level = Math.max(1, Math.min(int(hm.level) || 1, C.HOUSE.length));
+    var HL = houseLevel(st, C), cellUsed = {};
+    st.home.items = (Array.isArray(hm.items) ? hm.items : []).filter(function (d) {
+      if (!d || !/^h\d+$/.test(d.id) || seen[d.id] || !C.DECOR[d.type] || !C.DECOR[d.type].indoor) return false;
+      var x = int(d.x), y = int(d.y), c = x + "," + y;
+      if (x >= HL.w || y >= HL.h || cellUsed[c]) return false;
+      seen[d.id] = 1; cellUsed[c] = 1; return true;
+    }).map(function (d) { return { id: d.id, type: d.type, x: int(d.x), y: int(d.y) }; });
+    var cf = obj(raw.crafts);
+    (C.CRAFTS || []).forEach(function (q) { if (isDate(cf[q.id])) st.crafts[q.id] = cf[q.id]; });
+    // 家具：做好了就剛好有一個（背包＋屋內），沒做就沒有。存檔壞掉或被改也會自己修回來
+    (C.CRAFTS || []).forEach(function (q) {
+      var want = st.crafts[q.id] ? 1 : 0, placed = 0;
+      st.home.items = st.home.items.filter(function (d) { return d.type !== q.item || ++placed <= want; });
+      st.decorOwned[q.item] = Math.max(0, want - Math.min(placed, want));
     });
     var dx = obj(raw.dex);
     Object.keys(dx).forEach(function (k) { if (Object.prototype.hasOwnProperty.call(st.inv, k)) st.dex[k] = int(dx[k], 100000); });
@@ -931,7 +1062,9 @@
     AP_BONUS_CAP: AP_BONUS_CAP, BONUS: BONUS, CHAT_AP: CHAT_AP, CHAT_SEEDS: CHAT_SEEDS,
     GROW_DAYS: GROW_DAYS, MAX_FIELDS: MAX_FIELDS, HEART_MAX: HEART_MAX, FIELD_BONUS_MAX: FIELD_BONUS_MAX, CARE_GROUP: CARE_GROUP, W: W, H: H, TOWN_START: TOWN_START,
     maxFields: maxFields, careCost: careCost, fillCost: fillCost,
-    questOf: questOf, questState: questState, doQuest: doQuest, stageShotId: stageShotId, stageShots: stageShots, stageShot: stageShot,
+    questOf: questOf, questState: questState, doQuest: doQuest,
+    houseLevel: houseLevel, nextHouse: nextHouse, expandHouse: expandHouse, homeAt: homeAt, homeFree: homeFree, placeHome: placeHome, moveHome: moveHome, storeHome: storeHome,
+    craftOf: craftOf, craftState: craftState, craftFill: craftFill, doCraft: doCraft, stageShotId: stageShotId, stageShots: stageShots, stageShot: stageShot,
     pickWeighted: pickWeighted, fishTable: fishTable, cast: cast, giveUp: giveUp, fish: fish, mineFloor: mineFloor, digFloor: digFloor, chooseFloor: chooseFloor, dig: dig, giftable: giftable, gift: gift,
     ymd: ymd, addDays: addDays, apWeek: apWeek, contentWeek: contentWeek, season: season,
     terrainAt: terrainAt, occupied: occupied, areaFree: areaFree,

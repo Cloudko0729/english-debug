@@ -863,5 +863,115 @@ console.log("\n── 家長獎勵 ──");
   ok("別人的獎勵不會發給這個帳號", T.claimAwards(fresh(), { AWARDS: { albert: CC.AWARDS.test } }).ap === 0);
 }
 
+console.log("\n── 我的家（屋內）與擴建預留 ──");
+{
+  const day = "2026-11-18";
+  const st = fresh();
+  eq("新存檔：小木屋第 1 級、空的", [st.home.level, st.home.items.length], [1, 0]);
+  const L = T.houseLevel(st, C);
+  eq("小木屋 6×4", [L.w, L.h], [6, 4]);
+  ok("HOUSE 至少預留一級擴建", C.HOUSE.length >= 2 && C.HOUSE.every((h, i) => i === 0 || (h.w * h.h > C.HOUSE[i - 1].w * C.HOUSE[i - 1].h)));
+  ok("擴建還沒開放：下一級沒有 cost", !C.HOUSE[1].cost && !T.expandHouse(st, day, C).ok && st.home.level === 1);
+  ok("擴建失敗訊息寫準備中", /準備中/.test(T.expandHouse(st, day, C).msg));
+  // 之後補上 cost 就能擴建（用複製的內容表測，不改正式表）
+  const CC = Object.assign({}, C, { HOUSE: [C.HOUSE[0], Object.assign({}, C.HOUSE[1], { cost: [{ item: "wood", n: 3 }, { item: "money", n: 5 }] })] });
+  ok("材料不夠不能擴建", !T.expandHouse(st, day, CC).ok);
+  st.inv.wood = 3; st.money = 5;
+  const r = T.expandHouse(st, day, CC);
+  ok("補上 cost 後可以擴建、扣材料", r.ok && st.home.level === 2 && st.inv.wood === 0 && st.money === 0, r);
+  ok("最大了就不能再擴", !T.expandHouse(st, day, CC).ok);
+  st.home.level = 1;
+  st.decorOwned.bookshelf = 1; st.decorOwned.flowers = 1;
+  ok("家具可以擺進屋", T.placeHome(st, "bookshelf", 0, 0, C).ok && st.decorOwned.bookshelf === 0 && st.home.items.length === 1);
+  ok("戶外裝飾不能擺進屋", !T.placeHome(st, "flowers", 1, 0, C).ok);
+  st.decorOwned.lamp = 1;
+  ok("同一格不能放兩件", !T.placeHome(st, "lamp", 0, 0, C).ok);
+  ok("屋子外面放不下", !T.placeHome(st, "lamp", 6, 0, C).ok && !T.placeHome(st, "lamp", 0, 4, C).ok && !T.placeHome(st, "lamp", -1, 0, C).ok);
+  ok("家具不能擺在農莊", !T.placeDecor(st, "lamp", 6, 5, day, C).ok && st.decorOwned.lamp === 1);
+  const id = st.home.items[0].id;
+  ok("屋內搬家", T.moveHome(st, id, 5, 3, C).ok && st.home.items[0].x === 5 && st.home.items[0].y === 3);
+  ok("收回背包", T.storeHome(st, id).ok && st.decorOwned.bookshelf === 1 && !st.home.items.length);
+}
+
+console.log("\n── 跟村民一起做家具 ──");
+{
+  const day = "2026-11-18";
+  const everyone = () => { const s = fresh(); Object.keys(C.VILLAGERS).forEach(v => { if (C.VILLAGERS[v].arrive) s.residents[v] = day; }); return s; };
+  const vs = Object.keys(C.VILLAGERS);
+  eq("20 件家具", C.CRAFTS.length, 20);
+  ok("每位村民剛好 2 件", vs.every(v => C.CRAFTS.filter(q => q.by === v).length === 2));
+  ok("家具都不重複", new Set(C.CRAFTS.map(q => q.item)).size === C.CRAFTS.length && new Set(C.CRAFTS.map(q => q.id)).size === C.CRAFTS.length);
+  ok("家具都是 indoor、商店不賣、有圖", C.CRAFTS.every(q => C.DECOR[q.item] && C.DECOR[q.item].indoor && C.DECOR[q.item].craft === q.by && !C.BUY[q.item] && /^img\/decor\//.test(C.DECOR[q.item].img)));
+  ok("家具不跟限定裝飾或商店裝飾撞名", C.CRAFTS.every(q => !C.DECOR[q.item].reward && !C.DECOR[q.item].unlock));
+  ok("indoor 的都是一起做的家具", Object.keys(C.DECOR).filter(k => C.DECOR[k].indoor).length === C.CRAFTS.length);
+  const inv = Object.keys(fresh().inv);
+  ok("要的東西都認得（ap、money、fish、背包物品）", C.CRAFTS.every(q => q.needs.length >= 1 && q.needs.every(nd => nd.n > 0 && (["ap", "money", "fish"].includes(nd.item) || inv.includes(nd.item)))));
+  ok("不要金礦和紫水晶（太難挖）", C.CRAFTS.every(q => q.needs.every(nd => nd.item !== "gold" && nd.item !== "amethyst")));
+  ok("每件都有英文、中文、要念的句子", C.CRAFTS.every(q => q.en && q.zh && q.say && q.sayZh));
+  ok("第 1 件 3 顆心、第 2 件 8 顆心且要先做第 1 件", vs.every(v => { const [a, b] = C.CRAFTS.filter(q => q.by === v); return a.at === 3 && !a.after && b.at === 8 && b.after === a.id; }));
+  // 成本：照估算換算成體力，每件 7～18、全部 260 以內
+  const AP = { ap: 1, wood: 2, stone: 2, money: 0.5, fish: 2.5, rice: 1.5, carrot: 1.5, tomato: 1.5, copper: 6, iron: 7, quartz: 13 };
+  const cost = q => q.needs.reduce((a, nd) => a + (AP[nd.item] || 99) * nd.n, 0);
+  ok("每件約 7～18 體力", C.CRAFTS.every(q => cost(q) >= 7 && cost(q) <= 18), C.CRAFTS.map(q => q.id + ":" + cost(q)));
+  ok("全部加起來 260 體力以內", C.CRAFTS.reduce((a, q) => a + cost(q), 0) <= 260, C.CRAFTS.reduce((a, q) => a + cost(q), 0));
+
+  const st = everyone();
+  const shelf = T.craftOf("mia-shelf", C), lamp = T.craftOf("mia-lamp", C);
+  eq("好感不夠是 locked", T.craftState(st, shelf, C), "locked");
+  ok("好感不夠不能做", !T.doCraft(st, "mia-shelf", day, C).ok);
+  st.hearts.Mia = 3;
+  eq("3 顆心開放第 1 件", T.craftState(st, shelf, C), "ready");
+  ok("材料不夠不能做", !T.doCraft(st, "mia-shelf", day, C).ok);
+  st.hearts.Mia = 9;
+  eq("第 1 件沒做，第 2 件還是 locked", T.craftState(st, lamp, C), "locked");
+  ok("第 2 件的訊息說先做第 1 件", /先跟 Mia 做完書架/.test(T.doCraft(st, "mia-lamp", day, C).msg));
+  st.inv.wood = 5; T.grant(st, "x1", 10, day);
+  const r = T.doCraft(st, "mia-shelf", day, C);
+  ok("做好書架：扣木材和體力、背包多一個、❤️+1", r.ok && st.inv.wood === 0 && T.apTotal(st) === 7 && st.decorOwned.bookshelf === 1 && st.hearts.Mia === 10 && st.crafts["mia-shelf"] === day, r);
+  ok("做好的不能再做", !T.doCraft(st, "mia-shelf", day, C).ok);
+  eq("做完第 1 件、好感夠，第 2 件開放", T.craftState(st, lamp, C), "ready");
+  ok("生活冊記下來了", (st.book[T.contentWeek(day)] || []).some(e => /書架/.test(e.text)));
+  // 還沒搬來的村民
+  const st2 = fresh(); st2.hearts.Max = 10;
+  ok("還沒搬來的村民不能一起做", T.craftState(st2, T.craftOf("max-trophy", C), C) === "locked" && /還沒搬來/.test(T.doCraft(st2, "max-trophy", day, C).msg));
+  // 用小鎮幣補作物：Lily 的畫要紅蘿蔔 2、番茄 2、體力 3
+  const st3 = everyone(); st3.town.restaurant = 1; st3.hearts.Lily = 8; st3.crafts["lily-vase"] = day; st3.decorOwned.vase = 1;
+  T.grant(st3, "x2", 10, day);
+  const pf = T.craftFill(st3, T.craftOf("lily-painting", C), C);
+  eq("補 2 紅蘿蔔 2 番茄要 24 幣", pf && pf.cost, 24);
+  st3.money = 23;
+  ok("錢不夠不能補", !T.doCraft(st3, "lily-painting", day, C, { buy: true }).ok && st3.money === 23 && !st3.crafts["lily-painting"]);
+  st3.money = 30;
+  const r3 = T.doCraft(st3, "lily-painting", day, C, { buy: true });
+  ok("用錢補齊再做", r3.ok && st3.money === 6 && st3.decorOwned.painting === 1 && st3.inv.carrot === 0 && st3.inv.tomato === 0, r3);
+  // 要交錢的：補完以後錢還要夠交（Tom 的沙發要 8 幣）
+  const st4 = everyone(); st4.hearts.Tom = 8; st4.crafts["tom-desk"] = day; st4.decorOwned.desk = 1; st4.inv.wood = 3; T.grant(st4, "x3", 10, day); st4.money = 7;
+  ok("錢不夠交就不能做", !T.doCraft(st4, "tom-sofa", day, C).ok && st4.money === 7);
+  st4.money = 8;
+  ok("錢夠就能做、錢扣掉", T.doCraft(st4, "tom-sofa", day, C).ok && st4.money === 0);
+  // 任何魚：Jack 的魚缸
+  const st5 = everyone(); st5.hearts.Jack = 3; st5.inv.tuna = 1; st5.inv.sardine = 1; st5.inv.stone = 2;
+  ok("魚缸收任何魚", T.doCraft(st5, "jack-tank", day, C).ok && st5.inv.tuna === 0 && st5.inv.sardine === 0);
+
+  // 存檔：做好的家具剛好一個（背包＋屋內），亂改會修回來
+  T.placeHome(st, "bookshelf", 2, 1, C);
+  const n = T.normalize(JSON.parse(JSON.stringify(st)), "test", day, C);
+  eq("存檔重開：書架還擺著、背包沒有多", [n.home.items.length, n.home.items[0].type, n.decorOwned.bookshelf, n.crafts["mia-shelf"]], [1, "bookshelf", 0, day]);
+  const cheat = JSON.parse(JSON.stringify(fresh())); cheat.decorOwned = { bookshelf: 3, trophy: 1 };
+  cheat.home = { level: 9, items: [{ id: "h5", type: "bed", x: 0, y: 0 }] };
+  const nc = T.normalize(cheat, "test", day, C);
+  eq("沒做過的家具會被拿掉、等級夾回範圍", [nc.decorOwned.bookshelf, nc.decorOwned.trophy, nc.home.items.length, nc.home.level], [0, 0, 0, C.HOUSE.length]);
+  const lost = JSON.parse(JSON.stringify(st)); lost.home.items = []; lost.decorOwned = {};
+  eq("做過的家具不見了會補回背包", T.normalize(lost, "test", day, C).decorOwned.bookshelf, 1);
+  const evil = JSON.parse(JSON.stringify(st));
+  evil.home.items.push({ id: "h99", type: "bookshelf", x: 2, y: 1 }, { id: "h98", type: "flowers", x: 3, y: 3 }, { id: "<b>", type: "lamp", x: 1, y: 1 }, { id: "h97", type: "lamp", x: 40, y: 1 });
+  evil.farm.decor.push({ id: "d77", type: "lamp", x: 6, y: 6 });
+  const ne = T.normalize(evil, "test", day, C);
+  ok("屋內：重疊、戶外裝飾、壞 id、超出範圍都丟掉；家具不會出現在農莊", ne.home.items.length === 1 && !ne.farm.decor.some(d => d.type === "lamp"), ne.home.items);
+  const old = JSON.parse(JSON.stringify(fresh())); delete old.home; delete old.crafts;
+  const no = T.normalize(old, "test", day, C);
+  ok("舊存檔沒有 home／crafts 也讀得進來", no.home.level === 1 && Array.isArray(no.home.items) && typeof no.crafts === "object");
+}
+
 console.log(`\n${fail === 0 ? "✅" : "❌"} pass ${pass} / fail ${fail}\n`);
 process.exit(fail ? 1 : 0);

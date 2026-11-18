@@ -323,7 +323,123 @@
     tent:       { en: "striped tent", zh: "條紋帳篷", emoji: "🎪", img: "img/decor/tent.png", reward: "market" },
     anchor:     { en: "old anchor",  zh: "老船錨",   emoji: "⚓", img: "img/decor/anchor.png", reward: "harbor" },
     oven:       { en: "pizza oven",  zh: "披薩石窯", emoji: "🍕", img: "img/decor/oven.png", reward: "restaurant" },
+    // 屋內家具：跟村民一起做（CRAFTS），只能擺在屋子裡（indoor），商店不賣，每種只有一個。craft＝哪位村民
+    bookshelf:  { en: "bookshelf",     zh: "書架",     emoji: "📚", img: "img/decor/bookshelf.png", indoor: true, craft: "Mia" },
+    lamp:       { en: "lamp",          zh: "檯燈",     emoji: "💡", img: "img/decor/lamp.png", indoor: true, craft: "Mia" },
+    table:      { en: "table",         zh: "餐桌",     emoji: "🍽️", img: "img/decor/table.png", indoor: true, craft: "Leo" },
+    bed:        { en: "bed",           zh: "床",       emoji: "🛏️", img: "img/decor/bed.png", indoor: true, craft: "Leo" },
+    clock:      { en: "clock",         zh: "掛鐘",     emoji: "🕰️", img: "img/decor/clock.png", indoor: true, craft: "Nora" },
+    cabinet:    { en: "cabinet",       zh: "廚房櫥櫃", emoji: "🗄️", img: "img/decor/cabinet.png", indoor: true, craft: "Nora" },
+    drum:       { en: "drum",          zh: "鼓",       emoji: "🥁", img: "img/decor/drum.png", indoor: true, craft: "Ben" },
+    toybox:     { en: "toy box",       zh: "玩具箱",   emoji: "🧸", img: "img/decor/toybox.png", indoor: true, craft: "Ben" },
+    teapot:     { en: "teapot",        zh: "銅茶壺",   emoji: "🫖", img: "img/decor/teapot.png", indoor: true, craft: "Sam" },
+    globe:      { en: "globe",         zh: "地球儀",   emoji: "🌍", img: "img/decor/globe.png", indoor: true, craft: "Sam" },
+    vase:       { en: "vase",          zh: "玻璃花瓶", emoji: "🏺", img: "img/decor/vase.png", indoor: true, craft: "Lily" },
+    painting:   { en: "painting",      zh: "一幅畫",   emoji: "🖼️", img: "img/decor/painting.png", indoor: true, craft: "Lily" },
+    desk:       { en: "desk",          zh: "書桌",     emoji: "✏️", img: "img/decor/desk.png", indoor: true, craft: "Tom" },
+    sofa:       { en: "sofa",          zh: "沙發",     emoji: "🛋️", img: "img/decor/sofa.png", indoor: true, craft: "Tom" },
+    fishtank:   { en: "fish tank",     zh: "魚缸",     emoji: "🐠", img: "img/decor/fishtank.png", indoor: true, craft: "Jack" },
+    rockingchair: { en: "rocking chair", zh: "搖椅",   emoji: "🪑", img: "img/decor/rockingchair.png", indoor: true, craft: "Jack" },
+    firstaid:   { en: "first-aid kit", zh: "急救箱",   emoji: "🩹", img: "img/decor/firstaid.png", indoor: true, craft: "Rosa" },
+    curtains:   { en: "curtains",      zh: "窗簾",     emoji: "🪟", img: "img/decor/curtains.png", indoor: true, craft: "Rosa" },
+    trophy:     { en: "trophy",        zh: "獎盃",     emoji: "🏆", img: "img/decor/trophy.png", indoor: true, craft: "Max" },
+    bathtub:    { en: "bathtub",       zh: "浴缸",     emoji: "🛁", img: "img/decor/bathtub.png", indoor: true, craft: "Max" },
   };
+  // ── 我的家（屋內） ──
+  // 從農莊左上角的房子進去。level 從 1 開始，w×h 是能擺家具的格子。
+  // 擴建先預留：下一級沒有 cost 就顯示「準備中」。之後要開放，只要在那一級補上 cost: [{ item, n }, ...]（跟任務一樣的東西）。
+  var HOUSE = [
+    { zh: "小木屋",     w: 6,  h: 4 },
+    { zh: "加蓋一間房", w: 8,  h: 5 },
+    { zh: "兩層樓的家", w: 10, h: 6 },
+  ];
+  // ── 跟村民一起做家具 ──
+  // 每位村民 2 件（不重複），做好的家具擺在屋子裡。第 1 件好感 3 顆心開放，第 2 件要先做完第 1 件、好感 8 顆心。
+  // needs＝要帶的東西（ap＝一起動手做，直接扣體力；作物和魚不夠可以用小鎮幣補）。做完那位村民 ❤️ +1。
+  // 語音：craft_<id>（村民那段話）、craft_<id>_say（孩子念的那句）。家具名字的單字音檔在 audio/words/。
+  var CRAFT_HEARTS = [3, 8];
+  var CRAFTS = [
+    { id: "mia-shelf", by: "Mia", item: "bookshelf", needs: [{ item: "wood", n: 5 }, { item: "ap", n: 3 }],
+      en: "Your books are all over the floor! Let's make a bookshelf together. Please bring five pieces of wood.",
+      zh: "你的書散了一地！我們一起做一個書架吧。請帶五塊木材來。",
+      say: "Let's put the books on the shelf.", sayZh: "我們把書放到架子上吧。" },
+    { id: "mia-lamp", by: "Mia", item: "lamp", needs: [{ item: "copper", n: 1 }, { item: "ap", n: 3 }],
+      en: "I love reading on rainy nights, but your room is too dark. Let's make a reading lamp. Please bring one piece of copper ore.",
+      zh: "我喜歡在下雨的晚上看書，可是你的房間太暗了。我們來做一盞檯燈吧。請帶一塊銅礦來。",
+      say: "Now I can read at night.", sayZh: "現在我晚上也能看書了。" },
+    { id: "leo-table", by: "Leo", item: "table", needs: [{ item: "wood", n: 6 }, { item: "ap", n: 2 }],
+      en: "Eating alone is no fun. Let's make a big table for your house. Then your friends can come and eat with you! Please bring six pieces of wood.",
+      zh: "一個人吃飯一點都不好玩。我們幫你家做一張大桌子吧，這樣朋友就能來跟你一起吃飯！請帶六塊木材來。",
+      say: "Come and eat with me!", sayZh: "來跟我一起吃飯吧！" },
+    { id: "leo-bed", by: "Leo", item: "bed", needs: [{ item: "wood", n: 5 }, { item: "ap", n: 4 }],
+      en: "A good bed helps you sleep well. Let's build one! Please bring five pieces of wood. Then hold them for me while I use my hammer.",
+      zh: "好的床讓你睡得好。我們來做一張吧！請帶五塊木材來，然後在我用鐵鎚的時候幫我扶著。",
+      say: "It's time for bed. Good night!", sayZh: "該睡覺了，晚安！" },
+    { id: "nora-clock", by: "Nora", item: "clock", needs: [{ item: "iron", n: 1 }, { item: "ap", n: 3 }],
+      en: "I don't like being late. Let's make a clock for your wall. Please bring one piece of iron ore.",
+      zh: "我不喜歡遲到。我們幫你做一個掛鐘吧。請帶一塊鐵礦來。",
+      say: "It's seven o'clock. Time for breakfast!", sayZh: "七點了，該吃早餐了！" },
+    { id: "nora-cabinet", by: "Nora", item: "cabinet", needs: [{ item: "wood", n: 4 }, { item: "rice", n: 3 }],
+      en: "Let's make a kitchen cabinet for your bowls and plates. Please bring four pieces of wood and three bags of rice. We can keep the rice in it, too!",
+      zh: "我們來做一個廚房櫥櫃，放你的碗和盤子。請帶四塊木材和三袋稻米來，米也可以放在裡面！",
+      say: "The bowls are in the cabinet.", sayZh: "碗在櫥櫃裡。" },
+    { id: "ben-drum", by: "Ben", item: "drum", needs: [{ item: "wood", n: 3 }, { item: "ap", n: 4 }],
+      en: "Let's make a drum for your house! Then we can play music together. Please bring three pieces of wood.",
+      zh: "我們幫你家做一個鼓吧！這樣我們就能一起玩音樂。請帶三塊木材來。",
+      say: "I can play the drum!", sayZh: "我會打鼓！" },
+    { id: "ben-toybox", by: "Ben", item: "toybox", needs: [{ item: "wood", n: 4 }, { item: "ap", n: 2 }],
+      en: "Oops! I left my toys all over your floor. Let's make a toy box. Then we can keep the room tidy! Please bring four pieces of wood.",
+      zh: "糟糕！我把玩具丟得你家滿地都是。我們來做一個玩具箱吧，這樣房間就能保持整齊！請帶四塊木材來。",
+      say: "Let's keep the room tidy.", sayZh: "我們讓房間保持整齊吧。" },
+    { id: "sam-teapot", by: "Sam", item: "teapot", needs: [{ item: "copper", n: 2 }, { item: "ap", n: 2 }],
+      en: "Hot tea is the best on a cold day. Let's make a copper teapot. Please bring two pieces of copper ore.",
+      zh: "冷天喝熱茶最棒了。我們來做一個銅茶壺吧。請帶兩塊銅礦來。",
+      say: "Would you like some tea?", sayZh: "你想喝點茶嗎？" },
+    { id: "sam-globe", by: "Sam", item: "globe", needs: [{ item: "wood", n: 3 }, { item: "money", n: 10 }],
+      en: "I love traveling! Let's make a globe. Please bring three pieces of wood and ten coins for the paint.",
+      zh: "我喜歡旅行！我們來做一個地球儀吧。請帶三塊木材，再給我十枚小鎮幣買顏料。",
+      say: "Where is Taiwan? It's right here!", sayZh: "台灣在哪裡？就在這裡！" },
+    { id: "lily-vase", by: "Lily", item: "vase", needs: [{ item: "quartz", n: 1 }, { item: "ap", n: 2 }],
+      en: "Your house needs some color! Let's make a glass vase for my flowers. We can make glass from quartz. Please bring one piece of quartz.",
+      zh: "你家需要一點顏色！我們來做一個玻璃花瓶，插我的花。石英可以做成玻璃。請帶一塊石英來。",
+      say: "Let's put the flowers in the vase.", sayZh: "我們把花放進花瓶裡吧。" },
+    { id: "lily-painting", by: "Lily", item: "painting", needs: [{ item: "carrot", n: 2 }, { item: "tomato", n: 2 }, { item: "ap", n: 3 }],
+      en: "Let's paint a picture for your wall! We can make orange and red paint from vegetables. Please bring two carrots and two tomatoes.",
+      zh: "我們畫一幅畫，掛在你家的牆上吧！我們可以用蔬菜做出橘色和紅色的顏料。請帶兩根紅蘿蔔和兩顆番茄來。",
+      say: "I like this painting. It's so colorful!", sayZh: "我喜歡這幅畫，顏色好豐富！" },
+    { id: "tom-desk", by: "Tom", item: "desk", needs: [{ item: "wood", n: 5 }, { item: "ap", n: 2 }],
+      en: "I write lots of letters, so I need a good desk. Let's make one for you, too! Then you can write to your friends. Please bring five pieces of wood.",
+      zh: "我寫很多信，所以需要一張好書桌。我們也幫你做一張吧！這樣你就能寫信給朋友。請帶五塊木材來。",
+      say: "I'm writing a letter to my friend.", sayZh: "我正在寫信給我的朋友。" },
+    { id: "tom-sofa", by: "Tom", item: "sofa", needs: [{ item: "wood", n: 3 }, { item: "money", n: 8 }, { item: "ap", n: 2 }],
+      en: "After a long walk, I like to sit on a soft sofa. Let's make one for your house! Please bring three pieces of wood and eight coins for the cloth.",
+      zh: "走了很遠的路之後，我喜歡坐在軟軟的沙發上。我們幫你家做一張吧！請帶三塊木材，再給我八枚小鎮幣買布。",
+      say: "This sofa is so soft!", sayZh: "這張沙發好軟！" },
+    { id: "jack-tank", by: "Jack", item: "fishtank", needs: [{ item: "fish", n: 2 }, { item: "stone", n: 2 }],
+      en: "Let's make a fish tank for your house. You can watch the fish every day! Please bring two fish. Any kind is fine. And bring two stones for the bottom.",
+      zh: "我們幫你家做一個魚缸吧，你每天都能看魚！請帶兩條魚來，什麼魚都可以。再帶兩顆石頭鋪在底下。",
+      say: "Look! The fish are swimming.", sayZh: "看！魚在游泳。" },
+    { id: "jack-chair", by: "Jack", item: "rockingchair", needs: [{ item: "wood", n: 5 }, { item: "ap", n: 3 }],
+      en: "When I'm not fishing, I like to sit and look at the sea. Let's make a rocking chair for you. Please bring five pieces of wood.",
+      zh: "不釣魚的時候，我喜歡坐著看海。我們幫你做一張搖椅吧。請帶五塊木材來。",
+      say: "This chair is so comfortable!", sayZh: "這張椅子好舒服！" },
+    { id: "rosa-kit", by: "Rosa", item: "firstaid", needs: [{ item: "wood", n: 2 }, { item: "money", n: 6 }, { item: "ap", n: 2 }],
+      en: "Every home needs a first-aid kit. Let's make one together. Please bring two pieces of wood for the box and six coins for bandages.",
+      zh: "每個家都需要一個急救箱。我們一起做一個吧。請帶兩塊木材做箱子，再給我六枚小鎮幣買繃帶。",
+      say: "Where is the first-aid kit?", sayZh: "急救箱在哪裡？" },
+    { id: "rosa-curtains", by: "Rosa", item: "curtains", needs: [{ item: "money", n: 10 }, { item: "ap", n: 4 }],
+      en: "Staying up late is bad for you. Let's make curtains for your bedroom. They keep your room dark, so you can sleep well. Can you give me ten coins for the cloth?",
+      zh: "熬夜對身體不好。我們幫你的房間做窗簾吧。窗簾讓房間暗暗的，你就能睡得好。你可以給我十枚小鎮幣買布嗎？",
+      say: "Please close the curtains. It's time to sleep.", sayZh: "請把窗簾拉上，該睡覺了。" },
+    { id: "max-trophy", by: "Max", item: "trophy", needs: [{ item: "copper", n: 1 }, { item: "iron", n: 1 }, { item: "ap", n: 2 }],
+      en: "You work so hard for our town. You should get a trophy! Let's make one. Please bring one piece of copper ore and one piece of iron ore.",
+      zh: "你為小鎮這麼努力，應該拿一座獎盃！我們來做一座吧。請帶一塊銅礦和一塊鐵礦來。",
+      say: "I did my best!", sayZh: "我盡力了！" },
+    { id: "max-bath", by: "Max", item: "bathtub", needs: [{ item: "stone", n: 6 }, { item: "ap", n: 3 }],
+      en: "After swimming, a warm bath feels great. Let's build a bathtub for your house! Please bring six stones.",
+      zh: "游完泳，泡個溫水澡好舒服。我們幫你家做一個浴缸吧！請帶六顆石頭來。",
+      say: "I'm taking a bath. It feels great!", sayZh: "我正在泡澡，好舒服！" },
+  ];
   var BUY = { carrot_seed: 1, potato_seed: 1, corn_seed: 1, pumpkin_seed: 1, tomato_seed: 1,
               flowers: 10, tree: 10, lantern: 10, bench: 10, mailbox: 10, rock: 10, fountain: 20, parasol: 10, boat: 20 };
   var COST = { plant: 2, care: 1, gather: 2, fish: 2, dig: 2 };
@@ -336,6 +452,16 @@
   // 魚和礦的中文名也放進 NAME（任務、送禮、背包都用得到）
   Object.keys(FISH).forEach(function (k) { NAME[k] = FISH[k].zh; });
   Object.keys(MINERALS).forEach(function (k) { NAME[k] = MINERALS[k].zh; });
+  Object.keys(DECOR).forEach(function (k) { if (DECOR[k].indoor) NAME[k] = DECOR[k].zh; });
+  // 第 n 件（0 起算）：同一位村民的第 2 件要先做完第 1 件
+  (function () {
+    var nth = {};
+    CRAFTS.forEach(function (q) {
+      var i = nth[q.by] = (nth[q.by] || 0) + 1;
+      q.at = CRAFT_HEARTS[i - 1];
+      if (i > 1) q.after = CRAFTS.filter(function (p) { return p.by === q.by; })[0].id;
+    });
+  })();
 
   // 小鎮地標：每一階 5 個任務，同時列出來，順序隨意。5 個都交完，這一階就修好了。
   // 每個任務由一位村民提出（有英文語音 task_<id>），交完那位村民 +1 好感、小鎮繁榮度 +10。
@@ -1038,6 +1164,7 @@
   var api = { CROPS: CROPS, SELL: SELL, BUY: BUY, DECOR: DECOR, COST: COST, NAME: NAME, CARE_BONUS: CARE_BONUS, FILL_EXTRA: FILL_EXTRA,
               QUESTS: QUESTS, PHOTO_PROSPERITY: PHOTO_PROSPERITY,
               FISH: FISH, FISH_TIER: FISH_TIER, MINERALS: MINERALS, MINE_FLOORS: MINE_FLOORS, MINE_STONE_SAY: MINE_STONE_SAY, LINES: LINES,
+              HOUSE: HOUSE, CRAFTS: CRAFTS, CRAFT_HEARTS: CRAFT_HEARTS,
               LANDMARKS: LANDMARKS, PROSPERITY: PROSPERITY, VILLAGERS: VILLAGERS, WEEKS: WEEKS, CHATS: CHATS, AWARDS: AWARDS };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.TownContent = api;
