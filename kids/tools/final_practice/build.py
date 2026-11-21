@@ -116,7 +116,7 @@ def page(wk, d, n, show):
     body = ""
     for i, s in enumerate(d["sections"]):
         note = f'<span class="note">{E(s["note"])}</span>' if s.get("note") else ""
-        tag = ' <span class="rv">複習</span>' if s.get("review") else ""
+        tag = ' <span class="rv">複習</span>' if s.get("review") else ' <span class="rv tr">先試試</span>' if s.get("try") else ""
         body += f'<section><h2><b>{chr(65 + i)}</b> {E(s["title"])}{tag}{note}</h2>{SECS[s["type"]](s, show)}</section>'
     m, dd = d["date"][5:7].lstrip("0"), d["date"][8:].lstrip("0")
     key = '<span class="key">解答</span>' if show else ""
@@ -141,7 +141,7 @@ header .who { font-size: 10pt; white-space: nowrap }
 footer { margin-top: auto; font-size: 9.5pt; color: #555; border-top: .3mm solid #ccc; padding-top: 1.5mm }
 h2 { font-size: 11.5pt; margin: 0 0 1.5mm; display: flex; align-items: baseline; gap: 2mm; flex-wrap: wrap }
 h2 b { background: #2f7d4f; color: #fff; border-radius: 50%; width: 6mm; height: 6mm; display: inline-flex; align-items: center; justify-content: center; font-size: 9.5pt }
-.rv { background: #f39c12; color: #fff; font-size: 8.5pt; border-radius: 1.5mm; padding: 0 1.5mm }
+.rv { background: #f39c12; color: #fff; font-size: 8.5pt; border-radius: 1.5mm; padding: 0 1.5mm } .rv.tr { background: #2e86c1 }
 .note { font-size: 8.5pt; color: #666; font-weight: 400 }
 .en, .model, .ans, .ln, .chunks, .words b, .vw .word, .box, .opts, .first, .sh { font-family: "Andika", "Comic Sans MS", sans-serif }
 .fl { position: relative; height: 9.5mm; border-top: .25mm solid #888; border-bottom: .25mm solid #888; flex: 1; min-width: 0 }

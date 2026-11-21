@@ -2,53 +2,31 @@
  "week": "2026-11-23",
  "file": "jonathan-2026-11-23_期末考練習_第3週",
  "title": "期末考練習・第 3 週",
- "focus": "Unit 4 作息片語、時間用英文寫、What time / Do you",
+ "focus": "Unit 3 故事句、不可數、寫問句、oi/oy；Unit 4 先試試",
  "days": [
   {
    "date": "2026-11-23",
    "label": "星期一",
    "sections": [
     {
-     "type": "spell",
-     "title": "看圖寫片語（課本 My Daily Routine）",
-     "note": "先看一次拼法，再自己寫兩次。",
-     "items": [
-      {
-       "em": "⏰",
-       "zh": "起床",
-       "en": "get up",
-       "tip": "get + up，兩個字"
-      },
-      {
-       "em": "🍳",
-       "zh": "吃早餐",
-       "en": "have breakfast",
-       "tip": "break + fast"
-      },
-      {
-       "em": "🏫",
-       "zh": "上學",
-       "en": "go to school",
-       "tip": "school：s-ch-oo-l"
-      },
-      {
-       "em": "🍱",
-       "zh": "吃午餐",
-       "en": "have lunch",
-       "tip": "lunch：l-u-n-ch"
-      }
-     ]
-    },
-    {
      "type": "lines",
-     "title": "時間用英文寫",
-     "note": "考試的時間要寫英文字，不寫數字。整點寫 seven 或 seven o'clock 都可以。",
+     "title": "課本故事填空",
+     "box": [
+      "done",
+      "smells",
+      "full",
+      "hungry",
+      "horse"
+     ],
      "items": [
       {
-       "text": "6:30 → {{six thirty}}　　7:00 → {{seven o'clock}}"
+       "text": "I'm {{done}}. It {{smells}} so good."
       },
       {
-       "text": "7:30 → {{seven thirty}}　　12:00 → {{twelve (o'clock)}}"
+       "text": "No, thank you. My plate is {{full}}."
+      },
+      {
+       "text": "I'm so {{hungry}}.　Me too. I could eat a {{horse}}."
       }
      ]
     },
@@ -56,32 +34,35 @@
      "type": "copy",
      "title": "抄寫句子（課本）",
      "items": [
-      "What time do you get up? I get up at six thirty."
+      "I'd like a sandwich, please. Sure! Here you are."
      ]
     },
     {
-     "type": "recall",
-     "title": "上週的字（只看中文）",
+     "type": "lines",
+     "title": "這句是什麼意思？（考試有英翻中）",
+     "note": "寫意思就好。",
      "items": [
       {
-       "zh": "切片",
-       "en": "slice"
+       "text": "I could eat a horse. → {{我好餓。}}"
       },
       {
-       "zh": "抹、塗",
-       "en": "spread"
-      },
-      {
-       "zh": "烤",
-       "en": "bake"
-      },
-      {
-       "zh": "最後",
-       "en": "lastly"
+       "text": "My plate is full. → {{我的盤子滿了。}}"
       }
-     ],
-     "cols": 2,
-     "note": "寫課本用的字。"
+     ]
+    },
+    {
+     "type": "lines",
+     "title": "英文數字",
+     "try": true,
+     "note": "Unit 4 還沒教：會的就寫，不會的空著，不要查。",
+     "items": [
+      {
+       "text": "12 → {{twelve}}　　15 → {{fifteen}}"
+      },
+      {
+       "text": "20 → {{twenty}}　　30 → {{thirty}}"
+      }
+     ]
     },
     {
      "type": "spell",
@@ -115,82 +96,85 @@
    "label": "星期二",
    "sections": [
     {
-     "type": "spell",
-     "title": "看圖寫片語（課本 My Daily Routine）",
-     "note": "先看一次拼法，再自己寫兩次。",
+     "type": "circle",
+     "title": "圈出正確的（課本 Learn with Boka）",
+     "note": "照課本：coffee、ice cream、milk、tea 跟 some 用時不加 s。",
+     "cols": 1,
      "items": [
       {
-       "em": "🏠",
-       "zh": "回家",
-       "en": "go home",
-       "tip": "home 的 e 不發音"
+       "text": "I'd like some ( coffee / coffees ).",
+       "ans": "coffee"
       },
       {
-       "em": "🍽️",
-       "zh": "吃晚餐",
-       "en": "have dinner",
-       "tip": "din-ner，兩個 n"
+       "text": "Would you like some ( ice cream / ice creams )?",
+       "ans": "ice cream"
       },
       {
-       "em": "📝",
-       "zh": "寫功課",
-       "en": "do my homework",
-       "tip": "home + work"
+       "text": "一整個：I'd like ( a / some ) pizza.",
+       "ans": "a"
       },
       {
-       "em": "🛏️",
-       "zh": "上床睡覺",
-       "en": "go to bed"
+       "text": "一兩片：I'd like ( a / some ) pizza.",
+       "ans": "some"
+      },
+      {
+       "text": "一個：I'd like ( a / some ) sandwich, please.",
+       "ans": "a"
+      }
+     ]
+    },
+    {
+     "type": "lines",
+     "title": "看回答，寫問句",
+     "note": "考試題型。第 1 題問對方想吃什麼，第 2 題用 Would you like 開頭。問句句尾要有問號。",
+     "items": [
+      {
+       "text": "A: {{What would you like to eat?}}"
+      },
+      {
+       "text": "B: I'd like some noodles, please."
+      },
+      {
+       "em": "🍲 問要不要湯",
+       "text": "A: {{Would you like some soup?}}"
+      },
+      {
+       "text": "B: Yes, please."
       }
      ]
     },
     {
      "type": "recall",
-     "title": "昨天的片語（只看中文）",
+     "title": "上週以前的字（只看中文）",
      "items": [
       {
-       "zh": "起床",
-       "en": "get up"
+       "zh": "披薩",
+       "en": "pizza"
       },
       {
-       "zh": "吃早餐",
-       "en": "have breakfast"
+       "zh": "湯",
+       "en": "soup"
       },
       {
-       "zh": "上學",
-       "en": "go to school"
+       "zh": "牛排",
+       "en": "steak"
       },
       {
-       "zh": "吃午餐",
-       "en": "have lunch"
+       "zh": "麵（複數）",
+       "en": "noodles"
       }
      ],
      "cols": 2
     },
     {
      "type": "lines",
-     "title": "看時間寫句子",
-     "note": "用 I ___ at ___. 時間寫英文字。",
+     "title": "時間",
+     "try": true,
+     "note": "Unit 4 還沒教：會的就寫，不會的空著，不要查。",
      "items": [
       {
-       "em": "🍽️ 吃晚餐",
-       "text": "6:30　I {{have dinner}} at {{six thirty}}."
-      },
-      {
-       "em": "📝 寫功課",
-       "text": "8:00　I {{do my homework}} at {{eight (o'clock)}}."
-      },
-      {
-       "em": "🛏️ 睡覺",
-       "text": "9:30　I {{go to bed}} at {{nine thirty}}."
+       "text": "6:00 → {{six o'clock}}　　7:30 → {{seven thirty}}"
       }
-     ]
-    },
-    {
-     "type": "copy",
-     "title": "抄寫句子（課本）",
-     "items": [
-      "I have dinner at six thirty."
      ]
     },
     {
@@ -223,59 +207,81 @@
    "label": "星期三",
    "sections": [
     {
-     "type": "spell",
-     "title": "寫時間要用的數字",
-     "note": "先看一次拼法，再自己寫兩次。",
+     "type": "vowel",
+     "title": "填 oi 或 oy（課本 Phonics）",
+     "opts": [
+      "oi",
+      "oy"
+     ],
      "items": [
       {
-       "em": "",
-       "zh": "十二",
-       "en": "twelve",
-       "tip": "twel + ve"
+       "em": "🪙",
+       "zh": "硬幣",
+       "pre": "c",
+       "ans": "oi",
+       "post": "n"
       },
       {
-       "em": "",
-       "zh": "十五",
-       "en": "fifteen",
-       "tip": "fif + teen，不是 five"
+       "em": "👦",
+       "zh": "男孩",
+       "pre": "b",
+       "ans": "oy",
+       "post": ""
       },
       {
-       "em": "",
-       "zh": "三十",
-       "en": "thirty",
-       "tip": "thir + ty"
+       "em": "🧸",
+       "zh": "玩具",
+       "pre": "t",
+       "ans": "oy",
+       "post": ""
       },
       {
-       "em": "",
-       "zh": "四十",
-       "en": "forty",
-       "tip": "for + ty，沒有 u"
+       "em": "🌱",
+       "zh": "泥土",
+       "pre": "s",
+       "ans": "oi",
+       "post": "l"
       },
       {
-       "em": "",
-       "zh": "五十",
-       "en": "fifty",
-       "tip": "fif + ty"
+       "em": "🔊",
+       "zh": "噪音",
+       "pre": "n",
+       "ans": "oi",
+       "post": "se"
+      },
+      {
+       "em": "😊",
+       "zh": "喜悅",
+       "pre": "j",
+       "ans": "oy",
+       "post": ""
       }
      ]
     },
     {
-     "type": "lines",
-     "title": "有分鐘的時間（習作）",
-     "note": "先說幾點，再說幾分。",
+     "type": "circle",
+     "title": "圈出正確的字（易混字）",
+     "note": "coin 硬幣、corn 玉米、boy 男孩、bay 海灣。",
+     "cols": 1,
      "items": [
       {
-       "text": "4:15 → {{four fifteen}}　　7:20 → {{seven twenty}}"
+       "text": "There is a ( coin / corn ) in the soil.",
+       "ans": "coin"
       },
       {
-       "text": "6:45 → {{six forty-five}}　　7:50 → {{seven fifty}}"
+       "text": "The ( bay / boy ) is playing with a toy.",
+       "ans": "boy"
+      },
+      {
+       "text": "The ( coin / corn ) is fresh.",
+       "ans": "corn"
       }
      ]
     },
     {
      "type": "lines",
      "title": "上週的披薩步驟（只看中文填）",
-     "note": "連接詞和動詞都要寫。",
+     "note": "照課文的用字和順序，連接詞和動詞都要寫。",
      "items": [
       {
        "em": "首先・切片",
@@ -296,17 +302,16 @@
      ]
     },
     {
-     "type": "circle",
-     "title": "圈出正確的（上週）",
-     "cols": 2,
+     "type": "lines",
+     "title": "這是什麼？寫英文",
+     "try": true,
+     "note": "Unit 4 還沒教：會的就寫，不會的空著，不要查。",
      "items": [
       {
-       "text": "Tony would like ( a / some ) dumplings.",
-       "ans": "some"
+       "text": "⏰ 起床 {{get up}}　　🛏️ 上床睡覺 {{go to bed}}"
       },
       {
-       "text": "I'd like ( a / some ) sandwich, please.",
-       "ans": "a"
+       "text": "🍳 吃早餐 {{have breakfast}}　　🏫 上學 {{go to school}}"
       }
      ]
     },
@@ -334,81 +339,76 @@
    "sections": [
     {
      "type": "lines",
-     "title": "課本故事填空",
-     "note": "第 2 句先填「平日」，再填「週末」。",
+     "title": "選字填空（他校考卷題型）",
      "box": [
-      "every day",
-      "early bird",
-      "weekdays",
-      "weekends"
+      "at",
+      "We'd",
+      "horse",
+      "Here you are"
      ],
      "items": [
       {
-       "text": "I get up at six o'clock {{every day}}. You're an {{early bird}}."
+       "text": "Look {{at}} the tomatoes. They're red now."
       },
       {
-       "text": "I get up at six thirty on {{weekdays}}. On {{weekends}}, I get up at eight."
-      }
-     ]
-    },
-    {
-     "type": "lines",
-     "title": "回答問題",
-     "note": "照課本用 Yes, I do. / No, I don't. 回答，句尾加句點，不用加 please。",
-     "items": [
-      {
-       "em": "🍱 12:00 吃",
-       "text": "Do you have lunch at twelve?　{{Yes, I do.}}"
+       "text": "B and C: {{We'd}} like some rice."
       },
       {
-       "em": "🍱 其實 12:30 吃",
-       "text": "Do you have lunch at twelve?　{{No, I don't.}}"
+       "text": "I'm so hungry. I could eat a {{horse}}."
       },
       {
-       "text": "　　　　I have lunch at {{twelve thirty}}."
+       "text": "I'd like some steak, please.　Sure! {{Here you are}}."
       }
      ]
     },
     {
      "type": "reorder",
      "title": "把句子排好，寫在格子裡",
-     "note": "句首大寫，句尾的 ? 或 . 也要寫。",
+     "note": "句首大寫，逗號、句點、問號都要寫。",
      "items": [
       {
        "chunks": [
-        "up?",
-        "What time",
-        "get",
-        "do you"
+        "please.",
+        "I'd like",
+        "some tea,"
        ],
-       "ans": "What time do you get up?"
+       "ans": "I'd like some tea, please."
       },
       {
        "chunks": [
-        "at six thirty.",
-        "have dinner",
-        "I"
+        "some French fries?",
+        "Would you",
+        "like"
        ],
-       "ans": "I have dinner at six thirty."
+       "ans": "Would you like some French fries?"
       }
      ]
     },
     {
-     "type": "circle",
-     "title": "圈出正確的",
-     "cols": 1,
+     "type": "lines",
+     "title": "看圖寫完整的回答",
+     "note": "像課本一樣，兩樣東西用 and 連起來。",
      "items": [
       {
-       "text": "I get up at six thirty ( on / at ) weekdays.",
-       "ans": "on"
+       "em": "🍟 + 🥟",
+       "text": "What would you like to eat?"
       },
       {
-       "text": "Do you go to bed at nine?　No, I ( don't / do ).",
-       "ans": "don't"
+       "text": "{{I'd like some French fries and dumplings, please.}}"
+      }
+     ]
+    },
+    {
+     "type": "lines",
+     "title": "數字和時間",
+     "try": true,
+     "note": "Unit 4 還沒教：會的就寫，不會的空著，不要查。",
+     "items": [
+      {
+       "text": "40 → {{forty}}　　50 → {{fifty}}"
       },
       {
-       "text": "What time ( do / are ) you have dinner?",
-       "ans": "do"
+       "text": "6:45 → {{six forty-five}}　　7:15 → {{seven fifteen}}"
       }
      ]
     },
@@ -448,70 +448,74 @@
    "sections": [
     {
      "type": "recall",
-     "title": "本週小考：看中文寫英文片語",
+     "title": "本週小考：看中文寫英文",
      "items": [
       {
-       "zh": "起床",
-       "en": "get up"
+       "zh": "披薩",
+       "en": "pizza"
       },
       {
-       "zh": "吃早餐",
-       "en": "have breakfast"
+       "zh": "米飯",
+       "en": "rice"
       },
       {
-       "zh": "上學",
-       "en": "go to school"
+       "zh": "湯",
+       "en": "soup"
       },
       {
-       "zh": "吃午餐",
-       "en": "have lunch"
+       "zh": "牛排",
+       "en": "steak"
       },
       {
-       "zh": "回家",
-       "en": "go home"
+       "zh": "麵（複數）",
+       "en": "noodles"
       },
       {
-       "zh": "吃晚餐",
-       "en": "have dinner"
+       "zh": "三明治（複數）",
+       "en": "sandwiches"
       },
       {
-       "zh": "寫功課",
-       "en": "do my homework"
+       "zh": "番茄（很多個）",
+       "en": "tomatoes"
       },
       {
-       "zh": "上床睡覺",
-       "en": "go to bed"
+       "zh": "起司",
+       "en": "cheese"
+      },
+      {
+       "zh": "麵團",
+       "en": "dough"
       }
      ],
-     "cols": 2
+     "cols": 3
     },
     {
      "type": "lines",
-     "title": "時間用英文寫",
+     "title": "寫問句或完整的回答",
+     "note": "問句要有問號；回答句尾要有句點。",
      "items": [
       {
-       "text": "6:30 → {{six thirty}}　　7:15 → {{seven fifteen}}"
+       "em": "🍕 問想吃什麼",
+       "text": "A: {{What would you like to eat?}}　B: I'd like some pizza, please."
       },
       {
-       "text": "12:00 → {{twelve (o'clock)}}　　6:45 → {{six forty-five}}"
+       "em": "🥛 不要",
+       "text": "A: Would you like some milk?　B: {{No, thank you.}}"
+      },
+      {
+       "em": "🍜",
+       "text": "A: What would Amy like to eat?　B: {{She'd like some noodles.}}"
       }
      ]
     },
     {
      "type": "lines",
-     "title": "寫完整的回答",
-     "note": "時間寫英文字，句尾加句點。",
+     "title": "時間和作息",
+     "try": true,
+     "note": "還沒教，不算分，不用訂正。",
      "items": [
       {
-       "em": "⏰ 6:30",
-       "text": "What time do you get up?　{{I get up at six thirty.}}"
-      },
-      {
-       "em": "🛏️ 其實 10:00 睡",
-       "text": "Do you go to bed at nine?　{{No, I don't.}}"
-      },
-      {
-       "text": "　　　　{{I go to bed at ten.}}"
+       "text": "8:30 → {{eight thirty}}　　回家 {{go home}}　　吃晚餐 {{have dinner}}"
       }
      ]
     },
@@ -532,16 +536,16 @@
        "en": "hungry"
       },
       {
-       "zh": "番茄（很多個）",
-       "en": "tomatoes"
-      },
-      {
-       "zh": "麵團",
-       "en": "dough"
-      },
-      {
        "zh": "切片",
        "en": "slice"
+      },
+      {
+       "zh": "抹、塗",
+       "en": "spread"
+      },
+      {
+       "zh": "盤子",
+       "en": "plate"
       }
      ],
      "cols": 3,
@@ -549,7 +553,7 @@
     },
     {
      "type": "retry",
-     "title": "對完答案：挑最多 3 個錯字，各寫三次",
+     "title": "對完答案：挑最多 3 個錯字，各蓋住重寫一次",
      "note": "先照解答一個字母一個字母對好，再寫。",
      "rows": 3
     }
