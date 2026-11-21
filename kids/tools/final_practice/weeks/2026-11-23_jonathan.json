@@ -1,0 +1,559 @@
+{
+ "week": "2026-11-23",
+ "file": "jonathan-2026-11-23_期末考練習_第3週",
+ "title": "期末考練習・第 3 週",
+ "focus": "Unit 4 作息片語、時間用英文寫、What time / Do you",
+ "days": [
+  {
+   "date": "2026-11-23",
+   "label": "星期一",
+   "sections": [
+    {
+     "type": "spell",
+     "title": "看圖寫片語（課本 My Daily Routine）",
+     "note": "先看一次拼法，再自己寫兩次。",
+     "items": [
+      {
+       "em": "⏰",
+       "zh": "起床",
+       "en": "get up",
+       "tip": "get + up，兩個字"
+      },
+      {
+       "em": "🍳",
+       "zh": "吃早餐",
+       "en": "have breakfast",
+       "tip": "break + fast"
+      },
+      {
+       "em": "🏫",
+       "zh": "上學",
+       "en": "go to school",
+       "tip": "school：s-ch-oo-l"
+      },
+      {
+       "em": "🍱",
+       "zh": "吃午餐",
+       "en": "have lunch",
+       "tip": "lunch：l-u-n-ch"
+      }
+     ]
+    },
+    {
+     "type": "lines",
+     "title": "時間用英文寫",
+     "note": "考試的時間要寫英文字，不寫數字。整點寫 seven 或 seven o'clock 都可以。",
+     "items": [
+      {
+       "text": "6:30 → {{six thirty}}　　7:00 → {{seven o'clock}}"
+      },
+      {
+       "text": "7:30 → {{seven thirty}}　　12:00 → {{twelve (o'clock)}}"
+      }
+     ]
+    },
+    {
+     "type": "copy",
+     "title": "抄寫句子（課本）",
+     "items": [
+      "What time do you get up? I get up at six thirty."
+     ]
+    },
+    {
+     "type": "recall",
+     "title": "上週的字（只看中文）",
+     "items": [
+      {
+       "zh": "切片",
+       "en": "slice"
+      },
+      {
+       "zh": "抹、塗",
+       "en": "spread"
+      },
+      {
+       "zh": "烤",
+       "en": "bake"
+      },
+      {
+       "zh": "最後",
+       "en": "lastly"
+      }
+     ],
+     "cols": 2,
+     "note": "寫課本用的字。"
+    },
+    {
+     "type": "spell",
+     "title": "錯字複習",
+     "note": "上週寫錯的字。看一次、蓋起來、寫兩次。",
+     "items": [
+      {
+       "em": "",
+       "zh": "臺灣",
+       "en": "Taiwan",
+       "tip": "Tai + wan，w 不是 m"
+      },
+      {
+       "em": "👃",
+       "zh": "聞起來",
+       "en": "smell",
+       "tip": "s-m-e-l-l，這裡寫原形，不加 s"
+      },
+      {
+       "em": "😋",
+       "zh": "餓的",
+       "en": "hungry",
+       "tip": "hun-gry，n 不要掉"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-11-24",
+   "label": "星期二",
+   "sections": [
+    {
+     "type": "spell",
+     "title": "看圖寫片語（課本 My Daily Routine）",
+     "note": "先看一次拼法，再自己寫兩次。",
+     "items": [
+      {
+       "em": "🏠",
+       "zh": "回家",
+       "en": "go home",
+       "tip": "home 的 e 不發音"
+      },
+      {
+       "em": "🍽️",
+       "zh": "吃晚餐",
+       "en": "have dinner",
+       "tip": "din-ner，兩個 n"
+      },
+      {
+       "em": "📝",
+       "zh": "寫功課",
+       "en": "do my homework",
+       "tip": "home + work"
+      },
+      {
+       "em": "🛏️",
+       "zh": "上床睡覺",
+       "en": "go to bed"
+      }
+     ]
+    },
+    {
+     "type": "recall",
+     "title": "昨天的片語（只看中文）",
+     "items": [
+      {
+       "zh": "起床",
+       "en": "get up"
+      },
+      {
+       "zh": "吃早餐",
+       "en": "have breakfast"
+      },
+      {
+       "zh": "上學",
+       "en": "go to school"
+      },
+      {
+       "zh": "吃午餐",
+       "en": "have lunch"
+      }
+     ],
+     "cols": 2
+    },
+    {
+     "type": "lines",
+     "title": "看時間寫句子",
+     "note": "用 I ___ at ___. 時間寫英文字。",
+     "items": [
+      {
+       "em": "🍽️ 吃晚餐",
+       "text": "6:30　I {{have dinner}} at {{six thirty}}."
+      },
+      {
+       "em": "📝 寫功課",
+       "text": "8:00　I {{do my homework}} at {{eight (o'clock)}}."
+      },
+      {
+       "em": "🛏️ 睡覺",
+       "text": "9:30　I {{go to bed}} at {{nine thirty}}."
+      }
+     ]
+    },
+    {
+     "type": "copy",
+     "title": "抄寫句子（課本）",
+     "items": [
+      "I have dinner at six thirty."
+     ]
+    },
+    {
+     "type": "recall",
+     "title": "錯字複習（只看中文）",
+     "items": [
+      {
+       "zh": "臺灣",
+       "en": "Taiwan"
+      },
+      {
+       "zh": "聞起來",
+       "en": "smell"
+      },
+      {
+       "zh": "餓的",
+       "en": "hungry"
+      },
+      {
+       "zh": "番茄（很多個）",
+       "en": "tomatoes"
+      }
+     ],
+     "cols": 2
+    }
+   ]
+  },
+  {
+   "date": "2026-11-25",
+   "label": "星期三",
+   "sections": [
+    {
+     "type": "spell",
+     "title": "寫時間要用的數字",
+     "note": "先看一次拼法，再自己寫兩次。",
+     "items": [
+      {
+       "em": "",
+       "zh": "十二",
+       "en": "twelve",
+       "tip": "twel + ve"
+      },
+      {
+       "em": "",
+       "zh": "十五",
+       "en": "fifteen",
+       "tip": "fif + teen，不是 five"
+      },
+      {
+       "em": "",
+       "zh": "三十",
+       "en": "thirty",
+       "tip": "thir + ty"
+      },
+      {
+       "em": "",
+       "zh": "四十",
+       "en": "forty",
+       "tip": "for + ty，沒有 u"
+      },
+      {
+       "em": "",
+       "zh": "五十",
+       "en": "fifty",
+       "tip": "fif + ty"
+      }
+     ]
+    },
+    {
+     "type": "lines",
+     "title": "有分鐘的時間（習作）",
+     "note": "先說幾點，再說幾分。",
+     "items": [
+      {
+       "text": "4:15 → {{four fifteen}}　　7:20 → {{seven twenty}}"
+      },
+      {
+       "text": "6:45 → {{six forty-five}}　　7:50 → {{seven fifty}}"
+      }
+     ]
+    },
+    {
+     "type": "lines",
+     "title": "上週的披薩步驟（只看中文填）",
+     "note": "連接詞和動詞都要寫。",
+     "items": [
+      {
+       "em": "首先・切片",
+       "text": "{{First}}, {{slice}} the tomatoes."
+      },
+      {
+       "em": "接著・抹",
+       "text": "{{Next}}, {{spread}} some tomato sauce on the dough."
+      },
+      {
+       "em": "然後・加上",
+       "text": "{{Then}}, {{add}} cheese, tomato slices, and basil on top."
+      },
+      {
+       "em": "最後・烤",
+       "text": "{{Lastly}}, {{bake}} the pizza in the oven."
+      }
+     ]
+    },
+    {
+     "type": "circle",
+     "title": "圈出正確的（上週）",
+     "cols": 2,
+     "items": [
+      {
+       "text": "Tony would like ( a / some ) dumplings.",
+       "ans": "some"
+      },
+      {
+       "text": "I'd like ( a / some ) sandwich, please.",
+       "ans": "a"
+      }
+     ]
+    },
+    {
+     "type": "reorder",
+     "title": "錯字複習：把句子排好",
+     "note": "動詞 spread 要緊接在 Next, 後面。",
+     "items": [
+      {
+       "chunks": [
+        "some tomato sauce",
+        "Next,",
+        "on the dough.",
+        "spread"
+       ],
+       "ans": "Next, spread some tomato sauce on the dough."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-11-26",
+   "label": "星期四",
+   "sections": [
+    {
+     "type": "lines",
+     "title": "課本故事填空",
+     "note": "第 2 句先填「平日」，再填「週末」。",
+     "box": [
+      "every day",
+      "early bird",
+      "weekdays",
+      "weekends"
+     ],
+     "items": [
+      {
+       "text": "I get up at six o'clock {{every day}}. You're an {{early bird}}."
+      },
+      {
+       "text": "I get up at six thirty on {{weekdays}}. On {{weekends}}, I get up at eight."
+      }
+     ]
+    },
+    {
+     "type": "lines",
+     "title": "回答問題",
+     "note": "照課本用 Yes, I do. / No, I don't. 回答，句尾加句點，不用加 please。",
+     "items": [
+      {
+       "em": "🍱 12:00 吃",
+       "text": "Do you have lunch at twelve?　{{Yes, I do.}}"
+      },
+      {
+       "em": "🍱 其實 12:30 吃",
+       "text": "Do you have lunch at twelve?　{{No, I don't.}}"
+      },
+      {
+       "text": "　　　　I have lunch at {{twelve thirty}}."
+      }
+     ]
+    },
+    {
+     "type": "reorder",
+     "title": "把句子排好，寫在格子裡",
+     "note": "句首大寫，句尾的 ? 或 . 也要寫。",
+     "items": [
+      {
+       "chunks": [
+        "up?",
+        "What time",
+        "get",
+        "do you"
+       ],
+       "ans": "What time do you get up?"
+      },
+      {
+       "chunks": [
+        "at six thirty.",
+        "have dinner",
+        "I"
+       ],
+       "ans": "I have dinner at six thirty."
+      }
+     ]
+    },
+    {
+     "type": "circle",
+     "title": "圈出正確的",
+     "cols": 1,
+     "items": [
+      {
+       "text": "I get up at six thirty ( on / at ) weekdays.",
+       "ans": "on"
+      },
+      {
+       "text": "Do you go to bed at nine?　No, I ( don't / do ).",
+       "ans": "don't"
+      },
+      {
+       "text": "What time ( do / are ) you have dinner?",
+       "ans": "do"
+      }
+     ]
+    },
+    {
+     "type": "recall",
+     "title": "錯字複習（看中文和第一個字母）",
+     "items": [
+      {
+       "zh": "臺灣",
+       "en": "Taiwan",
+       "first": true
+      },
+      {
+       "zh": "聞起來",
+       "en": "smell",
+       "first": true
+      },
+      {
+       "zh": "餓的",
+       "en": "hungry",
+       "first": true
+      },
+      {
+       "zh": "麵團",
+       "en": "dough",
+       "first": true
+      }
+     ],
+     "cols": 2
+    }
+   ]
+  },
+  {
+   "date": "2026-11-27",
+   "label": "星期五",
+   "test": true,
+   "sections": [
+    {
+     "type": "recall",
+     "title": "本週小考：看中文寫英文片語",
+     "items": [
+      {
+       "zh": "起床",
+       "en": "get up"
+      },
+      {
+       "zh": "吃早餐",
+       "en": "have breakfast"
+      },
+      {
+       "zh": "上學",
+       "en": "go to school"
+      },
+      {
+       "zh": "吃午餐",
+       "en": "have lunch"
+      },
+      {
+       "zh": "回家",
+       "en": "go home"
+      },
+      {
+       "zh": "吃晚餐",
+       "en": "have dinner"
+      },
+      {
+       "zh": "寫功課",
+       "en": "do my homework"
+      },
+      {
+       "zh": "上床睡覺",
+       "en": "go to bed"
+      }
+     ],
+     "cols": 2
+    },
+    {
+     "type": "lines",
+     "title": "時間用英文寫",
+     "items": [
+      {
+       "text": "6:30 → {{six thirty}}　　7:15 → {{seven fifteen}}"
+      },
+      {
+       "text": "12:00 → {{twelve (o'clock)}}　　6:45 → {{six forty-five}}"
+      }
+     ]
+    },
+    {
+     "type": "lines",
+     "title": "寫完整的回答",
+     "note": "時間寫英文字，句尾加句點。",
+     "items": [
+      {
+       "em": "⏰ 6:30",
+       "text": "What time do you get up?　{{I get up at six thirty.}}"
+      },
+      {
+       "em": "🛏️ 其實 10:00 睡",
+       "text": "Do you go to bed at nine?　{{No, I don't.}}"
+      },
+      {
+       "text": "　　　　{{I go to bed at ten.}}"
+      }
+     ]
+    },
+    {
+     "type": "recall",
+     "title": "錯字複習（只看中文）",
+     "items": [
+      {
+       "zh": "臺灣",
+       "en": "Taiwan"
+      },
+      {
+       "zh": "聞起來",
+       "en": "smell"
+      },
+      {
+       "zh": "餓的",
+       "en": "hungry"
+      },
+      {
+       "zh": "番茄（很多個）",
+       "en": "tomatoes"
+      },
+      {
+       "zh": "麵團",
+       "en": "dough"
+      },
+      {
+       "zh": "切片",
+       "en": "slice"
+      }
+     ],
+     "cols": 3,
+     "review": true
+    },
+    {
+     "type": "retry",
+     "title": "對完答案：挑最多 3 個錯字，各寫三次",
+     "note": "先照解答一個字母一個字母對好，再寫。",
+     "rows": 3
+    }
+   ]
+  }
+ ]
+}
